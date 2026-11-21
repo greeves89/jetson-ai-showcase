@@ -105,7 +105,9 @@ def scheibe(seed, fehler=None):
         dd = np.hypot(xs - fx, ys - fy)
         mulde = np.exp(-(dd / s) ** 4)                       # flache Mulde mit steilem Rand
         seite = ((xs - fx) * math.cos(licht) + (ys - fy) * math.sin(licht)) / s
-        scheibe_rgb = scheibe_rgb - (150 * mulde)[..., None] + (70 * mulde * np.clip(seite, -1, 1))[..., None]
+        rand = np.exp(-((dd - s * 1.15) / 3.5) ** 2)                # heller Rand der Mulde
+        scheibe_rgb = (scheibe_rgb - (150 * mulde)[..., None] + (70 * mulde * np.clip(seite, -1, 1))[..., None]
+                       + (70 * rand)[..., None])
     elif fehler == "kantenbruch":
         a = rng.uniform(0.1, 0.9) * math.pi              # Ausbruch an der unteren Kante
         px, py = cx + math.cos(a) * R * 0.98, cy + math.sin(a) * R * 0.98

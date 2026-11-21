@@ -1,0 +1,131 @@
+{
+ "version": 1,
+ "verfahren": "MobileNetV2-Merkmale, 3 nächste Nachbarn (wie Labor Anlernen); YOLOX-tiny bei Schwelle 0,5",
+ "ort": "Entwicklungsrechner mit denselben ONNX-Modellen wie das Labor, nicht auf dem Jetson selbst",
+ "klassifikation": {
+  "fertigung-sichtpruefung": {
+   "test_richtig": 11,
+   "test_gesamt": 12,
+   "stichprobe_richtig": 60,
+   "stichprobe_gesamt": 60,
+   "fehler": [
+    {
+     "bild": "fertigung-sichtpruefung/test/10.jpg",
+     "erwartet": "Ausschuss",
+     "erkannt": "Gut"
+    }
+   ]
+  },
+  "fertigung-sortieren": {
+   "test_richtig": 12,
+   "test_gesamt": 12,
+   "stichprobe_richtig": 90,
+   "stichprobe_gesamt": 90,
+   "fehler": []
+  },
+  "gesundheit-auffaellig": {
+   "test_richtig": 12,
+   "test_gesamt": 12,
+   "stichprobe_richtig": 59,
+   "stichprobe_gesamt": 60,
+   "fehler": []
+  }
+ },
+ "objekte": {
+  "baustelle-halle-montage.jpg": {
+   "original": {
+    "person": 16,
+    "train": 1
+   },
+   "stabil": {
+    "person": 16,
+    "train": 1
+   }
+  },
+  "baustelle-metro-pause.jpg": {
+   "original": {
+    "person": 5
+   },
+   "stabil": {
+    "person": 5
+   }
+  },
+  "baustelle-neubau-ferne.jpg": {
+   "original": {
+    "person": 2,
+    "car": 5
+   },
+   "stabil": {
+    "person": 2,
+    "car": 4
+   }
+  },
+  "handel-getraenkeregal.jpg": {
+   "original": {
+    "refrigerator": 1,
+    "bottle": 42
+   },
+   "stabil": {
+    "refrigerator": 1,
+    "bottle": 38
+   }
+  },
+  "handel-regal-luecken.jpg": {
+   "original": {
+    "bottle": 18,
+    "refrigerator": 1
+   },
+   "stabil": {
+    "bottle": 18,
+    "refrigerator": 1
+   }
+  },
+  "handel-tassen-tisch.jpg": {
+   "original": {
+    "cup": 7,
+    "dining table": 1,
+    "bottle": 1
+   },
+   "stabil": {
+    "cup": 7,
+    "bottle": 1
+   }
+  },
+  "logistik-hafenhof-container.jpg": {
+   "original": {
+    "truck": 3
+   },
+   "stabil": {
+    "truck": 2
+   }
+  },
+  "logistik-kleintransporter-strasse.jpg": {
+   "original": {
+    "truck": 1,
+    "bicycle": 4
+   },
+   "stabil": {
+    "truck": 1,
+    "bicycle": 4
+   }
+  },
+  "logistik-lieferwagen-fahrrad.jpg": {
+   "original": {
+    "bicycle": 1,
+    "truck": 1
+   },
+   "stabil": {
+    "bicycle": 1,
+    "truck": 1
+   }
+  },
+  "logistik-sattelzug-ladung.jpg": {
+   "original": {
+    "truck": 1
+   },
+   "stabil": {
+    "truck": 1
+   }
+  }
+ }
+}

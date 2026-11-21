@@ -1,0 +1,15 @@
+Betriebsvereinbarung mobiles Arbeiten (erfundenes Beispiel)
+
+Diese Vereinbarung ist frei erfunden und gilt für das fiktive Unternehmen Musterwerk. Sie regelt, wann und wie Beschäftigte von zu Hause aus arbeiten dürfen. Sie dient nur zur Demonstration.
+
+Geltungsbereich. Die Vereinbarung gilt für alle Beschäftigten im Büro und in der Verwaltung. Für Beschäftigte in der Produktion gilt sie nicht, weil ihre Arbeit an die Anlagen gebunden ist. In den ersten drei Monaten nach Eintritt ist mobiles Arbeiten nicht möglich.
+
+Umfang. Beschäftigte können bis zu zwei Tage pro Woche mobil arbeiten. Dienstag und Donnerstag sind Kerntage, an denen alle im Büro anwesend sind. Mobiles Arbeiten ist deshalb nur montags, mittwochs und freitags vorgesehen.
+
+Antrag. Wer mobil arbeiten möchte, stellt den Antrag mindestens zwei Wochen vorher bei der Führungskraft. Die Führungskraft entscheidet innerhalb einer Woche. Eine Ablehnung wird begründet. Die Genehmigung gilt für sechs Monate und kann verlängert werden.
+
+Ausstattung. Das Unternehmen stellt einen Laptop und einen Monitor zur Verfügung. Für Strom und Internet zahlt das Unternehmen eine Pauschale von 25 Euro pro Monat. Eigene Geräte dürfen für dienstliche Daten nicht verwendet werden.
+
+Erreichbarkeit. Während der Kernzeit von 9 bis 15 Uhr sind alle Beschäftigten telefonisch und per Chat erreichbar. Außerhalb dieser Zeit besteht keine Pflicht zur Erreichbarkeit.
+
+Datenschutz. Dienstliche Daten dürfen nur über die Firmen-VPN-Verbindung abgerufen werden. Auf öffentlichen Netzen ohne VPN ist die Arbeit mit vertraulichen Daten nicht erlaubt. Unterlagen werden zu Hause nicht ausgedruckt.

@@ -42,8 +42,6 @@ FOTOS = {
     "handel-regal-luecken.jpg": "File:Covid - P1630413.jpg",
     "baustelle-metro-pause.jpg": "File:A break for the construction workers at the Rokin at the building site of the "
                                  "future metro station underground; free photo of Amsterdam streets by Fons Heijnsbroek, 2007.jpg",
-    "baustelle-spundwand.jpg": "File:Two construction workers are busy with sheet piling on a building site of the new "
-                               "metro at the Rokin; free street photography of Amsterdam by Fons Heijnsbroek, 2007.tif",
     "baustelle-halle-montage.jpg": "File:Mockup - Shuttle Mid-Body - JSC (s76-21336).jpg",
     "baustelle-neubau-ferne.jpg": "File:Moscow, new construction on the site of Olimpiysky hall September 2024 04.jpg",
 }
@@ -82,7 +80,7 @@ def main():
         bild = Image.open(io.BytesIO(roh)).convert("RGB")
         if bild.width > MAX_BREITE:
             bild = bild.resize((MAX_BREITE, round(bild.height * MAX_BREITE / bild.width)), Image.LANCZOS)
-        bild.save(ZIEL / datei, "JPEG", quality=82, optimize=True)
+        bild.save(ZIEL / datei, "JPEG", quality=78, optimize=True)
         meta[datei] = {
             "titel": titel.replace("File:", "", 1),
             "urheber": text_ohne_html(m.get("Artist", {}).get("value", "")) or "unbekannt",

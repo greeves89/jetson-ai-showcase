@@ -1,0 +1,13 @@
+Wartungsanleitung Verpackungsanlage VP-200 (erfundenes Beispiel)
+
+Diese Anleitung beschreibt die regelmäßige Wartung der fiktiven Verpackungsanlage VP-200 des Musterwerks. Sie gilt für das Wartungspersonal der Instandhaltung. Alle Angaben sind frei erfunden und dienen nur zur Demonstration.
+
+Sicherheit vor jeder Arbeit. Schalte den Hauptschalter aus und sichere ihn mit einem persönlichen Vorhängeschloss. Warte nach dem Ausschalten fünf Minuten, bis die Siegelbacken abgekühlt sind. Prüfe danach, dass die Anlage spannungsfrei ist. Arbeiten bei laufender Anlage sind nicht erlaubt.
+
+Wartungsintervalle. Die Sichtprüfung auf lose Schrauben und Verschmutzung erfolgt täglich vor Schichtbeginn. Die Förderkette wird alle 250 Betriebsstunden mit Fett der Sorte Typ 2 geschmiert. Das Siegelband wird alle sechs Monate ausgetauscht. Der Not-Aus-Taster wird monatlich getestet und das Ergebnis im Wartungsbuch eingetragen.
+
+Siegelband wechseln. Öffne die seitliche Haube und löse die beiden Rändelschrauben der Bandführung. Ziehe das alte Band nach vorn heraus und entsorge es im Restmüll. Lege das neue Band mit der glatten Seite nach oben ein und ziehe die Rändelschrauben handfest an. Starte danach einen Probelauf mit drei leeren Verpackungen.
+
+Fehlercodes. Der Code E14 bedeutet, dass die Siegeltemperatur zu niedrig ist. Prüfe zuerst das Heizelement und danach den Temperaturfühler. Der Code E27 meldet einen Stau am Einlauf. Schalte die Anlage aus, entferne das blockierende Teil und starte neu. Tritt E27 mehr als dreimal pro Schicht auf, informiere die Schichtleitung.
+
+Ersatzteile. Das Siegelband hat die Artikelnummer SB-4411 und liegt im Regal 3 des Ersatzteillagers. Das Heizelement hat die Nummer HE-2090 und wird bei Bedarf beim Hersteller bestellt. Die Lieferzeit beträgt in der Regel fünf Werktage.

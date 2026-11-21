@@ -1,0 +1,269 @@
+{
+ "hinweis": "Frei erfundene Beispieldaten.",
+ "bestellungen": [
+  {
+   "nummer": "B-10231",
+   "kunde": "Kunde K-1042",
+   "datum": "2026-02-02",
+   "status": "zugestellt",
+   "positionen": [
+    {
+     "artikel": "Sensorhalter",
+     "menge": 4,
+     "einzelpreis": 12.9
+    },
+    {
+     "artikel": "Kabelbinder-Set",
+     "menge": 2,
+     "einzelpreis": 4.5
+    }
+   ],
+   "lieferdatum": "2026-02-06",
+   "lieferdatum_art": "tatsächlich",
+   "tracking": "TRK-4F7K21"
+  },
+  {
+   "nummer": "B-10232",
+   "kunde": "Kunde K-2210",
+   "datum": "2026-02-03",
+   "status": "zugestellt",
+   "positionen": [
+    {
+     "artikel": "Werkzeugkoffer",
+     "menge": 1,
+     "einzelpreis": 79.0
+    }
+   ],
+   "lieferdatum": "2026-02-09",
+   "lieferdatum_art": "tatsächlich",
+   "tracking": "TRK-9B2M07"
+  },
+  {
+   "nummer": "B-10233",
+   "kunde": "Kunde K-1042",
+   "datum": "2026-02-09",
+   "status": "versendet",
+   "positionen": [
+    {
+     "artikel": "Netzteil 24 V",
+     "menge": 2,
+     "einzelpreis": 29.9
+    },
+    {
+     "artikel": "Steckverbinder M12",
+     "menge": 6,
+     "einzelpreis": 8.4
+    }
+   ],
+   "lieferdatum": "2026-02-12",
+   "lieferdatum_art": "voraussichtlich",
+   "tracking": "TRK-7H3Q55"
+  },
+  {
+   "nummer": "B-10234",
+   "kunde": "Kunde K-3307",
+   "datum": "2026-02-10",
+   "status": "storniert",
+   "positionen": [
+    {
+     "artikel": "Schaltschrankleuchte",
+     "menge": 2,
+     "einzelpreis": 34.0
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10235",
+   "kunde": "Kunde K-2210",
+   "datum": "2026-02-11",
+   "status": "zugestellt",
+   "positionen": [
+    {
+     "artikel": "Kugellager 6204",
+     "menge": 10,
+     "einzelpreis": 7.2
+    },
+    {
+     "artikel": "Dichtungsring-Set",
+     "menge": 1,
+     "einzelpreis": 15.6
+    }
+   ],
+   "lieferdatum": "2026-02-16",
+   "lieferdatum_art": "tatsächlich",
+   "tracking": "TRK-2D8L90"
+  },
+  {
+   "nummer": "B-10236",
+   "kunde": "Kunde K-4018",
+   "datum": "2026-02-12",
+   "status": "versendet",
+   "positionen": [
+    {
+     "artikel": "Temperaturfühler PT100",
+     "menge": 3,
+     "einzelpreis": 18.5
+    }
+   ],
+   "lieferdatum": "2026-02-17",
+   "lieferdatum_art": "voraussichtlich",
+   "tracking": "TRK-6P1R42"
+  },
+  {
+   "nummer": "B-10237",
+   "kunde": "Kunde K-1042",
+   "datum": "2026-02-13",
+   "status": "storniert",
+   "positionen": [
+    {
+     "artikel": "Relais 24 V",
+     "menge": 5,
+     "einzelpreis": 11.3
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10238",
+   "kunde": "Kunde K-5123",
+   "datum": "2026-02-13",
+   "status": "versendet",
+   "positionen": [
+    {
+     "artikel": "Werkzeugkoffer",
+     "menge": 1,
+     "einzelpreis": 79.0
+    },
+    {
+     "artikel": "Kabelbinder-Set",
+     "menge": 3,
+     "einzelpreis": 4.5
+    }
+   ],
+   "lieferdatum": "2026-02-18",
+   "lieferdatum_art": "voraussichtlich",
+   "tracking": "TRK-3X9C18"
+  },
+  {
+   "nummer": "B-10239",
+   "kunde": "Kunde K-3307",
+   "datum": "2026-02-16",
+   "status": "zugestellt",
+   "positionen": [
+    {
+     "artikel": "Sensorhalter",
+     "menge": 2,
+     "einzelpreis": 12.9
+    }
+   ],
+   "lieferdatum": "2026-02-19",
+   "lieferdatum_art": "tatsächlich",
+   "tracking": "TRK-8N5V63"
+  },
+  {
+   "nummer": "B-10240",
+   "kunde": "Kunde K-4018",
+   "datum": "2026-02-17",
+   "status": "in Bearbeitung",
+   "positionen": [
+    {
+     "artikel": "Netzteil 24 V",
+     "menge": 1,
+     "einzelpreis": 29.9
+    },
+    {
+     "artikel": "Relais 24 V",
+     "menge": 4,
+     "einzelpreis": 11.3
+    },
+    {
+     "artikel": "Kabelbinder-Set",
+     "menge": 1,
+     "einzelpreis": 4.5
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10241",
+   "kunde": "Kunde K-2210",
+   "datum": "2026-02-18",
+   "status": "bestellt",
+   "positionen": [
+    {
+     "artikel": "Schaltschrankleuchte",
+     "menge": 1,
+     "einzelpreis": 34.0
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10242",
+   "kunde": "Kunde K-5123",
+   "datum": "2026-02-18",
+   "status": "in Bearbeitung",
+   "positionen": [
+    {
+     "artikel": "Dichtungsring-Set",
+     "menge": 2,
+     "einzelpreis": 15.6
+    },
+    {
+     "artikel": "Steckverbinder M12",
+     "menge": 4,
+     "einzelpreis": 8.4
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10243",
+   "kunde": "Kunde K-6094",
+   "datum": "2026-02-19",
+   "status": "bestellt",
+   "positionen": [
+    {
+     "artikel": "Kugellager 6204",
+     "menge": 4,
+     "einzelpreis": 7.2
+    }
+   ],
+   "lieferdatum": null,
+   "lieferdatum_art": null,
+   "tracking": null
+  },
+  {
+   "nummer": "B-10244",
+   "kunde": "Kunde K-6094",
+   "datum": "2026-02-19",
+   "status": "versendet",
+   "positionen": [
+    {
+     "artikel": "Temperaturfühler PT100",
+     "menge": 1,
+     "einzelpreis": 18.5
+    },
+    {
+     "artikel": "Sensorhalter",
+     "menge": 1,
+     "einzelpreis": 12.9
+    }
+   ],
+   "lieferdatum": "2026-02-24",
+   "lieferdatum_art": "voraussichtlich",
+   "tracking": "TRK-1G6T77"
+  }
+ ]
+}

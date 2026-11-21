@@ -1,0 +1,871 @@
+{
+ "version": 1,
+ "usecases": [
+  {
+   "id": "fertigung-sichtpruefung",
+   "bereich": "Fertigung",
+   "titel": "Sichtprüfung: Gutteil oder Ausschuss",
+   "lab": "anlernen",
+   "beschreibung": "Am Bandende einer Stanzerei werden runde Metallscheiben von Hand angesehen. Gesucht sind Kratzer, Dellen und ausgebrochene Kanten. Das ermüdet, und was noch als gut gilt, schwankt von Schicht zu Schicht.",
+   "ziel": "Du zeigst, dass ein vortrainiertes Netz aus wenigen Beispielen lernt, Gutteile von Ausschuss zu trennen, und wo diese Methode an Grenzen stößt.",
+   "ablauf": [
+    "Starte den Use-Case. Der Jetson nimmt je 20 Beispielbilder der Klassen Gut und Ausschuss auf.",
+    "Wähle eines der Testbilder, die das Modell noch nie gesehen hat.",
+    "Lass es zuordnen und lies die Balken: Die Klasse mit dem längsten Balken gewinnt.",
+    "Vergleiche mit der erwarteten Klasse und probiere weitere Testbilder, auch solche mit Delle oder Ausbruch."
+   ],
+   "daten": {
+    "klassen": [
+     {
+      "name": "Gut",
+      "bilder": [
+       "fertigung-sichtpruefung/gut/01.jpg",
+       "fertigung-sichtpruefung/gut/02.jpg",
+       "fertigung-sichtpruefung/gut/03.jpg",
+       "fertigung-sichtpruefung/gut/04.jpg",
+       "fertigung-sichtpruefung/gut/05.jpg",
+       "fertigung-sichtpruefung/gut/06.jpg",
+       "fertigung-sichtpruefung/gut/07.jpg",
+       "fertigung-sichtpruefung/gut/08.jpg",
+       "fertigung-sichtpruefung/gut/09.jpg",
+       "fertigung-sichtpruefung/gut/10.jpg",
+       "fertigung-sichtpruefung/gut/11.jpg",
+       "fertigung-sichtpruefung/gut/12.jpg",
+       "fertigung-sichtpruefung/gut/13.jpg",
+       "fertigung-sichtpruefung/gut/14.jpg",
+       "fertigung-sichtpruefung/gut/15.jpg",
+       "fertigung-sichtpruefung/gut/16.jpg",
+       "fertigung-sichtpruefung/gut/17.jpg",
+       "fertigung-sichtpruefung/gut/18.jpg",
+       "fertigung-sichtpruefung/gut/19.jpg",
+       "fertigung-sichtpruefung/gut/20.jpg"
+      ]
+     },
+     {
+      "name": "Ausschuss",
+      "bilder": [
+       "fertigung-sichtpruefung/ausschuss/01.jpg",
+       "fertigung-sichtpruefung/ausschuss/02.jpg",
+       "fertigung-sichtpruefung/ausschuss/03.jpg",
+       "fertigung-sichtpruefung/ausschuss/04.jpg",
+       "fertigung-sichtpruefung/ausschuss/05.jpg",
+       "fertigung-sichtpruefung/ausschuss/06.jpg",
+       "fertigung-sichtpruefung/ausschuss/07.jpg",
+       "fertigung-sichtpruefung/ausschuss/08.jpg",
+       "fertigung-sichtpruefung/ausschuss/09.jpg",
+       "fertigung-sichtpruefung/ausschuss/10.jpg",
+       "fertigung-sichtpruefung/ausschuss/11.jpg",
+       "fertigung-sichtpruefung/ausschuss/12.jpg",
+       "fertigung-sichtpruefung/ausschuss/13.jpg",
+       "fertigung-sichtpruefung/ausschuss/14.jpg",
+       "fertigung-sichtpruefung/ausschuss/15.jpg",
+       "fertigung-sichtpruefung/ausschuss/16.jpg",
+       "fertigung-sichtpruefung/ausschuss/17.jpg",
+       "fertigung-sichtpruefung/ausschuss/18.jpg",
+       "fertigung-sichtpruefung/ausschuss/19.jpg",
+       "fertigung-sichtpruefung/ausschuss/20.jpg"
+      ]
+     }
+    ],
+    "test": [
+     {
+      "bild": "fertigung-sichtpruefung/test/01.jpg",
+      "erwartet": "Ausschuss"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/02.jpg",
+      "erwartet": "Ausschuss"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/03.jpg",
+      "erwartet": "Ausschuss"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/04.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/05.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/06.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/07.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/08.jpg",
+      "erwartet": "Ausschuss"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/09.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/10.jpg",
+      "erwartet": "Ausschuss"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/11.jpg",
+      "erwartet": "Gut"
+     },
+     {
+      "bild": "fertigung-sichtpruefung/test/12.jpg",
+      "erwartet": "Ausschuss"
+     }
+    ]
+   },
+   "erwartung": "Mit genau diesen Bildern und dem Verfahren des Labors (MobileNet-Merkmale, 3 nächste Nachbarn) wurden 11 von 12 Testbildern richtig zugeordnet. Bei 60 weiteren, frisch erzeugten Bildern waren es 100 Prozent (60 richtig). Die Balken liegen oft eng beieinander. Entscheidend ist, welche Klasse vorn liegt. Gemessen auf einem Entwicklungsrechner mit denselben Modelldateien, nicht auf dem Jetson selbst.",
+   "hinweis": "Synthetische Bilder, per Code gezeichnet. Die Fehlerarten sitzen immer ähnlich (Delle oben, Ausbruch unten), damit 20 Beispiele reichen. Echte Teile brauchen mehr und vielfältigere Beispiele, vor allem wenn Fehler an beliebiger Stelle auftreten."
+  },
+  {
+   "id": "fertigung-sortieren",
+   "bereich": "Fertigung",
+   "titel": "Bauteile nach Typ sortieren",
+   "lab": "anlernen",
+   "beschreibung": "In der Kommissionierung landen Schrauben, Muttern und Scheiben gemischt in einer Kiste. Bisher sortiert jemand sie von Hand, bevor sie in die richtigen Fächer gehen. Eine Kamera über dem Tisch könnte das übernehmen.",
+   "ziel": "Du zeigst, dass sich Teile mit klar verschiedener Form schon mit wenigen Beispielen je Typ zuverlässig sortieren lassen.",
+   "ablauf": [
+    "Starte den Use-Case. Der Jetson nimmt je 20 Beispielbilder der Klassen Schraube, Mutter und Scheibe auf.",
+    "Wähle ein Testbild und lass es zuordnen.",
+    "Achte darauf, dass die Teile in jeder Lage und Drehung richtig erkannt werden.",
+    "Vergleiche die drei Balken: Bei klar verschiedenen Formen ist der Abstand groß."
+   ],
+   "daten": {
+    "klassen": [
+     {
+      "name": "Schraube",
+      "bilder": [
+       "fertigung-sortieren/schraube/01.jpg",
+       "fertigung-sortieren/schraube/02.jpg",
+       "fertigung-sortieren/schraube/03.jpg",
+       "fertigung-sortieren/schraube/04.jpg",
+       "fertigung-sortieren/schraube/05.jpg",
+       "fertigung-sortieren/schraube/06.jpg",
+       "fertigung-sortieren/schraube/07.jpg",
+       "fertigung-sortieren/schraube/08.jpg",
+       "fertigung-sortieren/schraube/09.jpg",
+       "fertigung-sortieren/schraube/10.jpg",
+       "fertigung-sortieren/schraube/11.jpg",
+       "fertigung-sortieren/schraube/12.jpg",
+       "fertigung-sortieren/schraube/13.jpg",
+       "fertigung-sortieren/schraube/14.jpg",
+       "fertigung-sortieren/schraube/15.jpg",
+       "fertigung-sortieren/schraube/16.jpg",
+       "fertigung-sortieren/schraube/17.jpg",
+       "fertigung-sortieren/schraube/18.jpg",
+       "fertigung-sortieren/schraube/19.jpg",
+       "fertigung-sortieren/schraube/20.jpg"
+      ]
+     },
+     {
+      "name": "Mutter",
+      "bilder": [
+       "fertigung-sortieren/mutter/01.jpg",
+       "fertigung-sortieren/mutter/02.jpg",
+       "fertigung-sortieren/mutter/03.jpg",
+       "fertigung-sortieren/mutter/04.jpg",
+       "fertigung-sortieren/mutter/05.jpg",
+       "fertigung-sortieren/mutter/06.jpg",
+       "fertigung-sortieren/mutter/07.jpg",
+       "fertigung-sortieren/mutter/08.jpg",
+       "fertigung-sortieren/mutter/09.jpg",
+       "fertigung-sortieren/mutter/10.jpg",
+       "fertigung-sortieren/mutter/11.jpg",
+       "fertigung-sortieren/mutter/12.jpg",
+       "fertigung-sortieren/mutter/13.jpg",
+       "fertigung-sortieren/mutter/14.jpg",
+       "fertigung-sortieren/mutter/15.jpg",
+       "fertigung-sortieren/mutter/16.jpg",
+       "fertigung-sortieren/mutter/17.jpg",
+       "fertigung-sortieren/mutter/18.jpg",
+       "fertigung-sortieren/mutter/19.jpg",
+       "fertigung-sortieren/mutter/20.jpg"
+      ]
+     },
+     {
+      "name": "Scheibe",
+      "bilder": [
+       "fertigung-sortieren/scheibe/01.jpg",
+       "fertigung-sortieren/scheibe/02.jpg",
+       "fertigung-sortieren/scheibe/03.jpg",
+       "fertigung-sortieren/scheibe/04.jpg",
+       "fertigung-sortieren/scheibe/05.jpg",
+       "fertigung-sortieren/scheibe/06.jpg",
+       "fertigung-sortieren/scheibe/07.jpg",
+       "fertigung-sortieren/scheibe/08.jpg",
+       "fertigung-sortieren/scheibe/09.jpg",
+       "fertigung-sortieren/scheibe/10.jpg",
+       "fertigung-sortieren/scheibe/11.jpg",
+       "fertigung-sortieren/scheibe/12.jpg",
+       "fertigung-sortieren/scheibe/13.jpg",
+       "fertigung-sortieren/scheibe/14.jpg",
+       "fertigung-sortieren/scheibe/15.jpg",
+       "fertigung-sortieren/scheibe/16.jpg",
+       "fertigung-sortieren/scheibe/17.jpg",
+       "fertigung-sortieren/scheibe/18.jpg",
+       "fertigung-sortieren/scheibe/19.jpg",
+       "fertigung-sortieren/scheibe/20.jpg"
+      ]
+     }
+    ],
+    "test": [
+     {
+      "bild": "fertigung-sortieren/test/01.jpg",
+      "erwartet": "Schraube"
+     },
+     {
+      "bild": "fertigung-sortieren/test/02.jpg",
+      "erwartet": "Schraube"
+     },
+     {
+      "bild": "fertigung-sortieren/test/03.jpg",
+      "erwartet": "Schraube"
+     },
+     {
+      "bild": "fertigung-sortieren/test/04.jpg",
+      "erwartet": "Schraube"
+     },
+     {
+      "bild": "fertigung-sortieren/test/05.jpg",
+      "erwartet": "Scheibe"
+     },
+     {
+      "bild": "fertigung-sortieren/test/06.jpg",
+      "erwartet": "Scheibe"
+     },
+     {
+      "bild": "fertigung-sortieren/test/07.jpg",
+      "erwartet": "Scheibe"
+     },
+     {
+      "bild": "fertigung-sortieren/test/08.jpg",
+      "erwartet": "Scheibe"
+     },
+     {
+      "bild": "fertigung-sortieren/test/09.jpg",
+      "erwartet": "Mutter"
+     },
+     {
+      "bild": "fertigung-sortieren/test/10.jpg",
+      "erwartet": "Mutter"
+     },
+     {
+      "bild": "fertigung-sortieren/test/11.jpg",
+      "erwartet": "Mutter"
+     },
+     {
+      "bild": "fertigung-sortieren/test/12.jpg",
+      "erwartet": "Mutter"
+     }
+    ]
+   },
+   "erwartung": "Mit genau diesen Bildern und dem Verfahren des Labors (MobileNet-Merkmale, 3 nächste Nachbarn) wurden 12 von 12 Testbildern richtig zugeordnet. Bei 90 weiteren, frisch erzeugten Bildern waren es 100 Prozent (90 richtig). Die Formen unterscheiden sich so deutlich, dass das Verfahren hier sehr sicher ist. Gemessen auf einem Entwicklungsrechner mit denselben Modelldateien, nicht auf dem Jetson selbst.",
+   "hinweis": "Synthetische Bilder, per Code gezeichnet. Echte Teile glänzen, spiegeln und liegen übereinander, das macht es schwerer."
+  },
+  {
+   "id": "logistik-zaehlen",
+   "bereich": "Logistik und Lager",
+   "titel": "Fahrzeuge und Fahrräder auf dem Hof zählen",
+   "lab": "objekt",
+   "beschreibung": "Auf dem Betriebshof und an der Rampe stehen Lieferfahrzeuge, dazwischen Fahrräder. Die Torkontrolle möchte wissen, wie viele Fahrzeuge gerade da sind, ohne jedes Mal hinzusehen.",
+   "ziel": "Du zeigst, wie Objekterkennung Fahrzeuge findet und zählt, und wo sie bei kleinen oder verdeckten Objekten ungenau wird.",
+   "ablauf": [
+    "Wähle eines der vier Fotos.",
+    "Der Jetson zeichnet Rahmen mit Klasse und Sicherheit ein.",
+    "Zähle die Rahmen je Klasse und vergleiche mit dem Foto.",
+    "Ziehe den Regler Schwelle nach unten: Es kommen mehr Treffer, aber auch Fehlalarme."
+   ],
+   "daten": {
+    "bilder": [
+     {
+      "datei": "fotos/logistik-lieferwagen-fahrrad.jpg",
+      "titel": "Lieferwagen am Straßenrand mit Fahrrad",
+      "erwartet": "ungefähr: 1 LKW, 1 Fahrrad",
+      "quelle": "Syced, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Yamato_delivery_electrick_truck,_Hino_(72411).jpg"
+     },
+     {
+      "datei": "fotos/logistik-hafenhof-container.jpg",
+      "titel": "Hof mit Containern und Lastwagen",
+      "erwartet": "ungefähr: 2 LKW",
+      "quelle": "Yinan Chen, Public Domain, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Gfp-loading-dock.jpg",
+      "bemerkung": "Das kleine Fahrzeug im Hintergrund wird mitgezählt, Container selbst kennt das Modell nicht."
+     },
+     {
+      "datei": "fotos/logistik-sattelzug-ladung.jpg",
+      "titel": "Sattelzug mit Ladung vor einem Schiff",
+      "erwartet": "ungefähr: 1 LKW",
+      "quelle": "Shane Cuomo, U.S. Air Force, Public domain, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Kenworth_truck_of_the_US_Air_Force.JPEG"
+     },
+     {
+      "datei": "fotos/logistik-kleintransporter-strasse.jpg",
+      "titel": "Kleintransporter und abgestellte Fahrräder",
+      "erwartet": "ungefähr: 1 LKW, 4 Fahrräder",
+      "quelle": "Syced, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:US-type_small_delivery_truck_in_Tokyo.jpeg",
+      "bemerkung": "Es stehen mehr Fahrräder im Bild, als erkannt werden. Kleine und verdeckte Objekte fehlen."
+     }
+    ]
+   },
+   "erwartung": "Unter \"erwartet\" steht je Foto, was bei der Voreinstellung (Schwelle 50 Prozent) erkannt wird. Die Zahlen können um einen Treffer abweichen. Gemessen mit demselben Modell auf einem Entwicklungsrechner, stabil auch nach erneuter JPEG-Kompression.",
+   "hinweis": "Echte Fotos von Wikimedia Commons (CC0 oder gemeinfrei), Quellen im Eintrag und in QUELLEN.md."
+  },
+  {
+   "id": "handel-regal",
+   "bereich": "Handel",
+   "titel": "Regal und Tisch: Was steht da?",
+   "lab": "objekt",
+   "beschreibung": "Ein Händler möchte automatisch sehen, ob ein Regal gut gefüllt ist. Eine Kamera am Gang soll Flaschen und andere Gegenstände im Regal finden und die Lücken sichtbar machen.",
+   "ziel": "Du zeigst, was Objekterkennung im Regal leistet (Dinge finden und zählen) und was sie nicht kann (Produkte unterscheiden, Lücken verstehen).",
+   "ablauf": [
+    "Wähle eines der drei Fotos.",
+    "Der Jetson zeichnet Rahmen mit Klasse und Sicherheit ein.",
+    "Prüfe, ob die Klassen stimmen: Das Modell sagt Flasche, nicht Cola oder Waschmittel.",
+    "Vergleiche das volle mit dem lückenhaften Regal: Zählt das Modell die Lücken?"
+   ],
+   "daten": {
+    "bilder": [
+     {
+      "datei": "fotos/handel-getraenkeregal.jpg",
+      "titel": "Regal mit Getränkeflaschen",
+      "erwartet": "ungefähr: mehr als 35 Flaschen",
+      "quelle": "SMC at English Wikipedia, Public domain, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Soft_drink_shelf.JPG",
+      "fehlmeldung": "Fehlmeldung: 1 Kühlschrank"
+     },
+     {
+      "datei": "fotos/handel-tassen-tisch.jpg",
+      "titel": "Tassen auf einem Holztisch",
+      "erwartet": "ungefähr: 7 Tassen, 1 Flasche",
+      "quelle": "André Freitas andrekerygma, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Enamel_cups_on_a_table_(Unsplash).jpg",
+      "bemerkung": "Der Krug im Hintergrund wird als Flasche erkannt."
+     },
+     {
+      "datei": "fotos/handel-regal-luecken.jpg",
+      "titel": "Regal mit Waschmitteln und Lücken",
+      "erwartet": "ungefähr: mehr als 15 Flaschen",
+      "quelle": "citytransportinfo, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Covid_-_P1630413.jpg",
+      "fehlmeldung": "Fehlmeldung: 1 Kühlschrank",
+      "bemerkung": "Das Modell erkennt Flaschen, aber nicht, dass es Waschmittel sind und dass Plätze leer sind."
+     }
+    ]
+   },
+   "erwartung": "Flaschen und Tassen werden gefunden. Bei vollen Regalen ist die Zahl der Flaschen groß, bei Lücken kleiner, aber das Modell weiß nicht, was fehlt. Es kommen auch Fehlmeldungen vor, zum Beispiel ein Regal als Kühlschrank.",
+   "hinweis": "COCO kennt keine Handelsprodukte: Das Modell erkennt Flasche, Tasse oder Schale, aber keine Marken und keine Artikelnummern. Für eigene Produkte braucht man ein eigenes Modell oder, für wenige Klassen, das Labor Anlernen. Echte Fotos von Wikimedia Commons (CC0 oder gemeinfrei)."
+  },
+  {
+   "id": "sicherheit-baustelle",
+   "bereich": "Sicherheit und Zutritt",
+   "titel": "Personen auf Baustelle und in der Werkhalle",
+   "lab": "objekt",
+   "beschreibung": "Auf Baustellen und in Werkhallen halten sich Menschen in Bereichen auf, in denen Fahrzeuge und Lasten bewegt werden. Eine Kamera könnte melden, wenn jemand im Gefahrenbereich steht.",
+   "ziel": "Du zeigst, dass die Objekterkennung Personen findet, und besprichst, was sie dabei nicht kann.",
+   "ablauf": [
+    "Wähle eines der drei Fotos.",
+    "Der Jetson markiert erkannte Personen mit einem Rahmen.",
+    "Suche Personen, die nicht erkannt werden, und überlege warum (Größe, Verdeckung).",
+    "Prüfe, ob das Modell Schutzhelme oder Warnwesten unterscheidet: Es tut es nicht."
+   ],
+   "daten": {
+    "bilder": [
+     {
+      "datei": "fotos/baustelle-metro-pause.jpg",
+      "titel": "Straßenbaustelle mit Arbeitern in Warnkleidung",
+      "erwartet": "ungefähr: 5 Personen",
+      "quelle": "Fons Heijnsbroek, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:A_break_for_the_construction_workers_at_the_Rokin_at_the_building_site_of_the_future_metro_station_underground;_free_photo_of_Amsterdam_streets_by_Fons_Heijnsbroek,_2007.jpg"
+     },
+     {
+      "datei": "fotos/baustelle-halle-montage.jpg",
+      "titel": "Werkhalle bei der Montage eines großen Bauteils (Schwarzweißfoto)",
+      "erwartet": "ungefähr: mehr als 15 Personen",
+      "quelle": "NASA Johnson Space Center, Public domain, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Mockup_-_Shuttle_Mid-Body_-_JSC_(s76-21336).jpg",
+      "fehlmeldung": "Fehlmeldung: 1 Zug",
+      "bemerkung": "Es sind mehr Menschen im Bild, als erkannt werden. Viele sind klein oder verdeckt."
+     },
+     {
+      "datei": "fotos/baustelle-neubau-ferne.jpg",
+      "titel": "Großbaustelle am Straßenrand, Personen weit entfernt",
+      "erwartet": "ungefähr: 2 Personen, 4 Autos",
+      "quelle": "Retired electrician, CC0, Wikimedia Commons: https://commons.wikimedia.org/wiki/File:Moscow,_new_construction_on_the_site_of_Olimpiysky_hall_September_2024_04.jpg",
+      "bemerkung": "Die meisten Personen sind zu klein und werden nicht erkannt."
+     }
+    ]
+   },
+   "erwartung": "Personen werden erkannt, wenn sie groß genug und nicht verdeckt sind. Kleine und weit entfernte Personen fehlen. Die Klasse ist immer nur \"Person\", ohne Auskunft über Helm oder Weste.",
+   "hinweis": "Dieses Modell erkennt Personen, aber keinen Schutzhelm und keine Warnweste. Für Nahaufnahmen kannst du im Labor Anlernen zwei Klassen (mit Helm, ohne Helm) aufnehmen. Für Personen im Gesamtbild braucht man ein eigens trainiertes Erkennungsmodell. Personenerkennung am Arbeitsplatz braucht außerdem Datenschutz und Mitbestimmung. Echte Fotos von Wikimedia Commons (CC0 oder gemeinfrei)."
+  },
+  {
+   "id": "gesundheit-auffaellig",
+   "bereich": "Gesundheit",
+   "titel": "Zweitmeinung: Zellprobe auffällig oder unauffällig",
+   "lab": "anlernen",
+   "beschreibung": "Im Labor werden Proben unter dem Mikroskop angesehen. Bei sehr vielen Proben soll eine Software vorsortieren und Proben mit einer Ansammlung dunkler, vergrößerter Zellen zur genaueren Prüfung nach vorn legen.",
+   "ziel": "Du zeigst das Prinzip einer Zweitmeinung: Das Modell entscheidet nicht, es lenkt den Blick auf Proben, die ein Mensch prüfen sollte.",
+   "ablauf": [
+    "Starte den Use-Case. Der Jetson nimmt je 20 Beispielbilder der Klassen Unauffällig und Auffällig auf.",
+    "Wähle ein Testbild und lass es zuordnen.",
+    "Lies die Balken und vergleiche mit der erwarteten Klasse.",
+    "Überlege, welcher Fehler schlimmer wäre: eine auffällige Probe zu übersehen oder eine unauffällige zu melden."
+   ],
+   "daten": {
+    "klassen": [
+     {
+      "name": "Unauffällig",
+      "bilder": [
+       "gesundheit-auffaellig/unauffaellig/01.jpg",
+       "gesundheit-auffaellig/unauffaellig/02.jpg",
+       "gesundheit-auffaellig/unauffaellig/03.jpg",
+       "gesundheit-auffaellig/unauffaellig/04.jpg",
+       "gesundheit-auffaellig/unauffaellig/05.jpg",
+       "gesundheit-auffaellig/unauffaellig/06.jpg",
+       "gesundheit-auffaellig/unauffaellig/07.jpg",
+       "gesundheit-auffaellig/unauffaellig/08.jpg",
+       "gesundheit-auffaellig/unauffaellig/09.jpg",
+       "gesundheit-auffaellig/unauffaellig/10.jpg",
+       "gesundheit-auffaellig/unauffaellig/11.jpg",
+       "gesundheit-auffaellig/unauffaellig/12.jpg",
+       "gesundheit-auffaellig/unauffaellig/13.jpg",
+       "gesundheit-auffaellig/unauffaellig/14.jpg",
+       "gesundheit-auffaellig/unauffaellig/15.jpg",
+       "gesundheit-auffaellig/unauffaellig/16.jpg",
+       "gesundheit-auffaellig/unauffaellig/17.jpg",
+       "gesundheit-auffaellig/unauffaellig/18.jpg",
+       "gesundheit-auffaellig/unauffaellig/19.jpg",
+       "gesundheit-auffaellig/unauffaellig/20.jpg"
+      ]
+     },
+     {
+      "name": "Auffällig",
+      "bilder": [
+       "gesundheit-auffaellig/auffaellig/01.jpg",
+       "gesundheit-auffaellig/auffaellig/02.jpg",
+       "gesundheit-auffaellig/auffaellig/03.jpg",
+       "gesundheit-auffaellig/auffaellig/04.jpg",
+       "gesundheit-auffaellig/auffaellig/05.jpg",
+       "gesundheit-auffaellig/auffaellig/06.jpg",
+       "gesundheit-auffaellig/auffaellig/07.jpg",
+       "gesundheit-auffaellig/auffaellig/08.jpg",
+       "gesundheit-auffaellig/auffaellig/09.jpg",
+       "gesundheit-auffaellig/auffaellig/10.jpg",
+       "gesundheit-auffaellig/auffaellig/11.jpg",
+       "gesundheit-auffaellig/auffaellig/12.jpg",
+       "gesundheit-auffaellig/auffaellig/13.jpg",
+       "gesundheit-auffaellig/auffaellig/14.jpg",
+       "gesundheit-auffaellig/auffaellig/15.jpg",
+       "gesundheit-auffaellig/auffaellig/16.jpg",
+       "gesundheit-auffaellig/auffaellig/17.jpg",
+       "gesundheit-auffaellig/auffaellig/18.jpg",
+       "gesundheit-auffaellig/auffaellig/19.jpg",
+       "gesundheit-auffaellig/auffaellig/20.jpg"
+      ]
+     }
+    ],
+    "test": [
+     {
+      "bild": "gesundheit-auffaellig/test/01.jpg",
+      "erwartet": "Auffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/02.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/03.jpg",
+      "erwartet": "Auffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/04.jpg",
+      "erwartet": "Auffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/05.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/06.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/07.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/08.jpg",
+      "erwartet": "Auffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/09.jpg",
+      "erwartet": "Auffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/10.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/11.jpg",
+      "erwartet": "Unauffällig"
+     },
+     {
+      "bild": "gesundheit-auffaellig/test/12.jpg",
+      "erwartet": "Auffällig"
+     }
+    ]
+   },
+   "erwartung": "Mit genau diesen Bildern und dem Verfahren des Labors (MobileNet-Merkmale, 3 nächste Nachbarn) wurden 12 von 12 Testbildern richtig zugeordnet. Bei 60 weiteren, frisch erzeugten Bildern waren es 98 Prozent (59 richtig). Der Unterschied ist deutlich gezeichnet, deshalb ist die Trennung leicht. Gemessen auf einem Entwicklungsrechner mit denselben Modelldateien, nicht auf dem Jetson selbst.",
+   "hinweis": "Synthetische Bilder, keine medizinischen Daten. Zeigt nur das Prinzip einer Zweitmeinung, kein Medizinprodukt."
+  },
+  {
+   "id": "buero-dokumente",
+   "bereich": "Büro und Wissen",
+   "titel": "Fragen an vier Dokumente",
+   "lab": "rag",
+   "beschreibung": "In einem Unternehmen liegen Wartungsanleitung, Vertrag, Betriebsvereinbarung und Produkt-FAQ in verschiedenen Ordnern. Wer eine Antwort braucht, blättert lange. Hier sind vier erfundene Beispieldokumente, an die du Fragen stellst.",
+   "ziel": "Du zeigst, dass das System erst passende Textstellen sucht und nur damit antwortet, und wie du an den Scores siehst, ob die Suche richtig lag.",
+   "ablauf": [
+    "Starte den Use-Case. Die vier Dokumente werden eingelesen und in Abschnitte zerlegt.",
+    "Stelle eine der Beispielfragen.",
+    "Sieh dir zuerst die Treffer und ihre Scores an.",
+    "Lies die Antwort und prüfe, ob sie das erwartete Stichwort enthält und die Quelle nennt.",
+    "Stelle zum Schluss die Fangfrage nach dem Urlaub: Sie steht in keinem Dokument."
+   ],
+   "daten": {
+    "dokumente": [
+     {
+      "titel": "Wartungsanleitung Verpackungsanlage VP-200",
+      "datei": "buero-dokumente/wartungsanleitung.txt"
+     },
+     {
+      "titel": "Auszug Dienstleistungsvertrag",
+      "datei": "buero-dokumente/dienstleistungsvertrag.txt"
+     },
+     {
+      "titel": "Betriebsvereinbarung mobiles Arbeiten",
+      "datei": "buero-dokumente/betriebsvereinbarung_homeoffice.txt"
+     },
+     {
+      "titel": "Produkt-FAQ Schreibtischlampe Modell L3",
+      "datei": "buero-dokumente/produkt_faq.txt"
+     }
+    ],
+    "fragen": [
+     {
+      "frage": "Wie lang ist die Kündigungsfrist im Dienstleistungsvertrag?",
+      "antwort_enthaelt": "drei Monate",
+      "oder": [
+       "3 Monate"
+      ],
+      "quelle_dokument": "buero-dokumente/dienstleistungsvertrag.txt"
+     },
+     {
+      "frage": "Wie hoch ist die monatliche Pauschale im Dienstleistungsvertrag?",
+      "antwort_enthaelt": "4.800",
+      "oder": [
+       "4800"
+      ],
+      "quelle_dokument": "buero-dokumente/dienstleistungsvertrag.txt"
+     },
+     {
+      "frage": "Alle wie viele Betriebsstunden wird die Förderkette der Verpackungsanlage geschmiert?",
+      "antwort_enthaelt": "250",
+      "quelle_dokument": "buero-dokumente/wartungsanleitung.txt"
+     },
+     {
+      "frage": "Was bedeutet der Fehlercode E14?",
+      "antwort_enthaelt": "Siegeltemperatur",
+      "oder": [
+       "Temperatur"
+      ],
+      "quelle_dokument": "buero-dokumente/wartungsanleitung.txt"
+     },
+     {
+      "frage": "Wie viele Tage pro Woche dürfen Beschäftigte mobil arbeiten?",
+      "antwort_enthaelt": "zwei",
+      "oder": [
+       "2 Tage",
+       "bis zu 2"
+      ],
+      "quelle_dokument": "buero-dokumente/betriebsvereinbarung_homeoffice.txt"
+     },
+     {
+      "frage": "Wie früh muss ich den Antrag auf mobiles Arbeiten stellen?",
+      "antwort_enthaelt": "zwei Wochen",
+      "oder": [
+       "2 Wochen"
+      ],
+      "quelle_dokument": "buero-dokumente/betriebsvereinbarung_homeoffice.txt"
+     },
+     {
+      "frage": "Wie lange gilt die Garantie für die Schreibtischlampe?",
+      "antwort_enthaelt": "drei Jahre",
+      "oder": [
+       "3 Jahre"
+      ],
+      "quelle_dokument": "buero-dokumente/produkt_faq.txt"
+     },
+     {
+      "frage": "Wie viel Urlaub steht Beschäftigten im Musterwerk zu?",
+      "antwort_enthaelt": "",
+      "quelle_dokument": null,
+      "im_text": false,
+      "erklaerung": "Fangfrage: Davon steht nichts in den Dokumenten. Ein gutes System sagt das, statt eine Zahl zu erfinden."
+     }
+    ]
+   },
+   "erwartung": "Jede Antwort steht wörtlich in einem der Dokumente. Bei einem reinen Stichwortvergleich (ohne das Embedding-Modell) liegt der richtige Abschnitt bei allen sieben Fragen unter den ersten zwei von zwölf. Ob die Suche mit nomic-embed-text auf dem Jetson genauso gut trifft, wurde bei der Erstellung nicht geprüft (kein Zugang). Das geht mit scripts/beispiele_bauen.py --jetson. Die Fangfrage soll mit \"steht nicht im Text\" oder Ähnlichem enden.",
+   "hinweis": "Alle Dokumente sind frei erfunden. Es gibt weder die Firmen noch die Produkte, und die Angaben haben keinen Rechtswert."
+  },
+  {
+   "id": "buero-protokoll",
+   "bereich": "Büro und Wissen",
+   "titel": "Besprechungsprotokoll aus Sprache",
+   "lab": "whisper",
+   "beschreibung": "Nach einer Besprechung soll jemand das Protokoll schreiben. Das kostet Zeit und gerät oft zu kurz. Hier liegt eine kurze Sprachaufnahme einer fiktiven Besprechung mit zwei Entscheidungen und einer Aufgabe.",
+   "ziel": "Du zeigst, dass der Jetson Sprache lokal in Text umwandelt, und prüfst, was bei Namen, Zahlen und Datumsangaben schiefgeht.",
+   "ablauf": [
+    "Spiele die Beispielaufnahme ab: Sie dauert etwa 28 Sekunden.",
+    "Lass sie vom Jetson in Text umwandeln.",
+    "Vergleiche das Ergebnis mit dem Originaltext.",
+    "Achte auf Datumsangaben, Zahlen und Fachwörter wie Zweischichtbetrieb."
+   ],
+   "daten": {
+    "audio": "audio/besprechung.mp3",
+    "text_datei": "audio/besprechung.txt",
+    "dauer_sekunden": 28,
+    "originaltext": "Protokoll der Wochenbesprechung vom zwölften März. Erstens: Die Montagelinie drei arbeitet ab dem siebzehnten März im Zweischichtbetrieb. Zweitens: Das Team bestellt bis Freitag zwanzig neue Greifer für die Verpackungsanlage. Aufgabe: Die Instandhaltung prüft bis zum neunzehnten März, ob das Ersatzteillager die Greifer liefern kann. Die nächste Besprechung findet am sechsundzwanzigsten März um neun Uhr statt."
+   },
+   "erwartung": "Der Jetson schreibt den Text im Großen und Ganzen mit. Bei Zahlen und Datumsangaben kann die Schreibweise abweichen (Ziffern statt Wörter), und Fachwörter werden mitunter getrennt oder anders geschrieben. Die Datei wurde bei der Erstellung nicht auf dem Jetson transkribiert, der Originaltext dient dir als Vergleich.",
+   "hinweis": "Die Aufnahme ist eine synthetische Stimme (ElevenLabs, Modell eleven_v4, Stimme George). Der Inhalt ist frei erfunden, es gibt keine echte Besprechung."
+  },
+  {
+   "id": "service-bestellung",
+   "bereich": "Kundenservice",
+   "titel": "Bestellfragen mit Werkzeugen beantworten",
+   "lab": "agent",
+   "beschreibung": "Im Kundenservice fragen viele nach dem Stand ihrer Bestellung, dem Gesamtpreis oder einer Stornierung. Die Antworten stehen im Bestellsystem, und jemand muss sie nachschlagen und nachrechnen. Hier schlägt ein Agent selbst nach.",
+   "ziel": "Du zeigst, dass ein Modell mit Werkzeugen Bestellungen nachschlägt, rechnen lässt und anhand einer Regel entscheidet, statt zu raten.",
+   "ablauf": [
+    "Starte den Use-Case. Der Agent bekommt die vier Bestellwerkzeuge und einen erfundenen Bestand von 14 Bestellungen.",
+    "Stelle eine der Beispielfragen.",
+    "Sieh dir jeden Schritt an: welches Werkzeug der Agent wählt und welche Daten zurückkommen.",
+    "Stelle die Fangfrage nach einer Bestellung, die es nicht gibt, und prüfe, ob der Agent ehrlich bleibt."
+   ],
+   "daten": {
+    "bestellungen": "daten/bestellungen.json",
+    "regeln": {
+     "stornierung": "Eine Bestellung kann nur storniert werden, solange ihr Status \"bestellt\" oder \"in Bearbeitung\" ist. Ab \"versendet\" ist keine Stornierung mehr möglich, dann hilft nur eine Rücksendung.",
+     "versandkosten": "Versandkosten 4,90 Euro, wenn die Zwischensumme unter 50 Euro liegt. Ab 50 Euro ist der Versand kostenlos.",
+     "lieferzeit": "Die Lieferung dauert 2 bis 4 Werktage nach dem Versand. Bei Status \"versendet\" steht das voraussichtliche Lieferdatum in der Bestellung, bei \"zugestellt\" das tatsächliche.",
+     "preise": "Alle Preise sind Endpreise in Euro inklusive Mehrwertsteuer."
+    },
+    "fragen": [
+     {
+      "frage": "Wie ist der Status der Bestellung B-10233?",
+      "antwort_enthaelt": "versendet",
+      "erklaerung": "Werkzeug bestellstatus. Die Antwort nennt außerdem das Tracking-Kürzel TRK-7H3Q55.",
+      "werkzeug": "bestellstatus"
+     },
+     {
+      "frage": "Wann kommt die Bestellung B-10236 voraussichtlich an?",
+      "antwort_enthaelt": "17.02.2026",
+      "oder": [
+       "17. Februar 2026",
+       "2026-02-17"
+      ],
+      "erklaerung": "Werkzeug bestellstatus. Voraussichtliches Lieferdatum aus der Bestellung.",
+      "werkzeug": "bestellstatus"
+     },
+     {
+      "frage": "Was kostet die Bestellung B-10243 insgesamt, mit Versand?",
+      "antwort_enthaelt": "33,70",
+      "oder": [
+       "33.70"
+      ],
+      "erklaerung": "Werkzeug preis_berechnen. Zwischensumme 28,80 Euro plus 4,90 Euro Versandkosten (unter 50 Euro).",
+      "werkzeug": "preis_berechnen"
+     },
+     {
+      "frage": "Wie hoch ist der Gesamtpreis der Bestellung B-10240?",
+      "antwort_enthaelt": "79,60",
+      "oder": [
+       "79.60"
+      ],
+      "erklaerung": "Werkzeug preis_berechnen. Zwischensumme 79,60 Euro, Versand kostenlos (ab 50 Euro).",
+      "werkzeug": "preis_berechnen"
+     },
+     {
+      "frage": "Kann ich die Bestellung B-10242 noch stornieren?",
+      "antwort_enthaelt": "in Bearbeitung",
+      "erklaerung": "Werkzeug stornierung_pruefen. Ja, Status \"in Bearbeitung\" erlaubt die Stornierung.",
+      "werkzeug": "stornierung_pruefen",
+      "stornierbar": true
+     },
+     {
+      "frage": "Kann ich die Bestellung B-10233 noch stornieren?",
+      "antwort_enthaelt": "versendet",
+      "erklaerung": "Werkzeug stornierung_pruefen. Nein, die Bestellung ist schon versendet.",
+      "werkzeug": "stornierung_pruefen",
+      "stornierbar": false
+     },
+     {
+      "frage": "Welche Bestellung von Kunde K-1042 wurde storniert?",
+      "antwort_enthaelt": "B-10237",
+      "erklaerung": "Werkzeug bestellungen_suchen mit dem Kunden K-1042 (drei Bestellungen, eine davon storniert).",
+      "werkzeug": "bestellungen_suchen"
+     },
+     {
+      "frage": "Wie lautet das Tracking-Kürzel der Bestellung B-10238?",
+      "antwort_enthaelt": "TRK-3X9C18",
+      "erklaerung": "Werkzeug bestellstatus.",
+      "werkzeug": "bestellstatus"
+     },
+     {
+      "frage": "Wie ist der Status der Bestellung B-10299?",
+      "antwort_enthaelt": "",
+      "erklaerung": "Fangfrage: Diese Bestellung gibt es nicht. Ein gutes System sagt das ehrlich und erfindet keinen Status.",
+      "werkzeug": "bestellstatus",
+      "im_bestand": false
+     }
+    ],
+    "werkzeuge": [
+     {
+      "name": "bestellstatus",
+      "beschreibung": "Gibt Status, Lieferdatum, Tracking-Kürzel und Positionen einer Bestellung zurück. Bei unbekannter Nummer kommt {\"fehler\": \"Bestellung nicht gefunden\"}.",
+      "parameter": {
+       "type": "object",
+       "properties": {
+        "nummer": {
+         "type": "string",
+         "description": "Bestellnummer, z. B. B-10233"
+        }
+       },
+       "required": [
+        "nummer"
+       ]
+      },
+      "rueckgabe_beispiel": {
+       "nummer": "B-10233",
+       "status": "versendet",
+       "lieferdatum": "2026-02-12",
+       "lieferdatum_art": "voraussichtlich",
+       "tracking": "TRK-7H3Q55",
+       "positionen": [
+        {
+         "artikel": "Netzteil 24 V",
+         "menge": 2,
+         "einzelpreis": 29.9
+        },
+        {
+         "artikel": "Steckverbinder M12",
+         "menge": 6,
+         "einzelpreis": 8.4
+        }
+       ]
+      }
+     },
+     {
+      "name": "preis_berechnen",
+      "beschreibung": "Berechnet Zwischensumme, Versandkosten und Gesamtpreis einer Bestellung nach den Regeln (Versand 4,90 Euro unter 50 Euro, sonst kostenlos). Rechnet im Werkzeug, nicht im Modell.",
+      "parameter": {
+       "type": "object",
+       "properties": {
+        "nummer": {
+         "type": "string",
+         "description": "Bestellnummer, z. B. B-10240"
+        }
+       },
+       "required": [
+        "nummer"
+       ]
+      },
+      "rueckgabe_beispiel": {
+       "nummer": "B-10240",
+       "zwischensumme": 79.6,
+       "versandkosten": 0.0,
+       "gesamt": 79.6,
+       "waehrung": "EUR"
+      }
+     },
+     {
+      "name": "stornierung_pruefen",
+      "beschreibung": "Prüft, ob eine Bestellung noch storniert werden kann (nur Status \"bestellt\" oder \"in Bearbeitung\"). Storniert nicht selbst, sondern liefert nur Antwort und Grund.",
+      "parameter": {
+       "type": "object",
+       "properties": {
+        "nummer": {
+         "type": "string",
+         "description": "Bestellnummer, z. B. B-10242"
+        }
+       },
+       "required": [
+        "nummer"
+       ]
+      },
+      "rueckgabe_beispiel": {
+       "nummer": "B-10242",
+       "status": "in Bearbeitung",
+       "stornierbar": true,
+       "grund": "Status \"in Bearbeitung\" erlaubt die Stornierung."
+      }
+     },
+     {
+      "name": "bestellungen_suchen",
+      "beschreibung": "Listet alle Bestellungen eines Kunden mit Nummer, Datum und Status. Der Kunde wird als Kürzel angegeben.",
+      "parameter": {
+       "type": "object",
+       "properties": {
+        "kunde": {
+         "type": "string",
+         "description": "Kundenkürzel, z. B. K-1042"
+        }
+       },
+       "required": [
+        "kunde"
+       ]
+      },
+      "rueckgabe_beispiel": {
+       "kunde": "K-1042",
+       "bestellungen": [
+        {
+         "nummer": "B-10231",
+         "datum": "2026-02-02",
+         "status": "zugestellt"
+        },
+        {
+         "nummer": "B-10233",
+         "datum": "2026-02-09",
+         "status": "versendet"
+        },
+        {
+         "nummer": "B-10237",
+         "datum": "2026-02-13",
+         "status": "storniert"
+        }
+       ]
+      }
+     }
+    ]
+   },
+   "erwartung": "Der Agent soll für jede Frage das passende Werkzeug aufrufen und die Antwort aus dem Ergebnis ablesen. Kleine Modelle wählen manchmal das falsche Werkzeug oder rechnen selbst falsch. Dann siehst du es im Schrittverlauf. Die Werkzeuge existieren erst, wenn das Backend sie umsetzt.",
+   "hinweis": "Alle Bestellungen, Kundenkürzel, Artikel und Preise sind frei erfunden."
+  },
+  {
+   "id": "sicherheit-zutritt",
+   "bereich": "Sicherheit und Zutritt",
+   "titel": "Zutritt: Ist jemand an der Tür?",
+   "lab": "gesicht",
+   "live": true,
+   "beschreibung": "Ein Türsystem soll erkennen, ob jemand vor dem Eingang steht, bevor es etwas auslöst, zum Beispiel das Licht oder eine Klingel. Wer das ist, soll es dabei nicht erfahren.",
+   "ziel": "Du zeigst den Unterschied zwischen Gesicht erkennen und Person identifizieren und besprichst Datenschutz und Rechtsgrundlage.",
+   "ablauf": [
+    "Öffne das Labor Gesichter und erlaube der Seite den Zugriff auf deine Kamera.",
+    "Stelle dich in den Bildausschnitt: Der Jetson markiert dein Gesicht mit einem Rahmen.",
+    "Neige den Kopf, geh weiter weg oder setze eine Maske auf und beobachte, wann der Rahmen verschwindet.",
+    "Lass eine zweite Person ins Bild kommen: Der Jetson findet beide Gesichter, weiß aber nicht, wer wer ist."
+   ],
+   "daten": {},
+   "erwartung": "Der Rahmen folgt deinem Gesicht, solange es gut beleuchtet und nicht stark verdeckt ist. Es wird nur erkannt, dass ein Gesicht da ist, nicht wessen. Der Jetson speichert nichts.",
+   "hinweis": "Dieses Labor wertet dein Kamerabild nur aus, um den Rahmen einzuzeichnen, und speichert nichts. In einem echten Zutrittssystem sind Gesichter biometrische Daten und besonders geschützt. Du brauchst eine Rechtsgrundlage, Beteiligung von Datenschutz und Betriebsrat, klare Löschfristen und eine Alternative ohne Gesichtserkennung. Zeige die Demo nur Personen, die einverstanden sind, und richte die Kamera nicht auf Unbeteiligte."
+  }
+ ]
+}

@@ -1,0 +1,15 @@
+Auszug aus einem Dienstleistungsvertrag (erfundenes Beispiel)
+
+Dies ist ein frei erfundener Auszug aus einem fiktiven Dienstleistungsvertrag zwischen der Musterfirma Alpha GmbH als Auftraggeberin und der Musterfirma Beta GmbH als Auftragnehmerin. Er dient nur zur Demonstration und ist keine Rechtsberatung.
+
+Gegenstand. Die Auftragnehmerin betreut die IT-Arbeitsplätze der Auftraggeberin. Dazu gehören die Einrichtung neuer Geräte, die Installation von Updates und die Hilfe bei Störungen. Der Umfang ergibt sich aus der Leistungsbeschreibung in Anlage 1.
+
+Laufzeit und Kündigung. Der Vertrag beginnt am 1. Januar und läuft 24 Monate. Danach verlängert er sich jeweils um 12 Monate, wenn er nicht gekündigt wird. Die Kündigungsfrist beträgt drei Monate zum Ende der jeweiligen Laufzeit. Die Kündigung muss in Textform erfolgen.
+
+Vergütung. Die Auftraggeberin zahlt eine monatliche Pauschale von 4.800 Euro netto. Rechnungen sind innerhalb von 30 Tagen nach Zugang zu bezahlen. Arbeiten außerhalb der Leistungsbeschreibung werden mit einem Stundensatz von 95 Euro netto berechnet.
+
+Reaktionszeiten. Bei Störungen, die einen Arbeitsplatz lahmlegen, meldet sich die Auftragnehmerin innerhalb von vier Stunden an Werktagen. Geplante Wartungsarbeiten werden mindestens fünf Werktage vorher angekündigt.
+
+Haftung. Die Haftung der Auftragnehmerin für leicht fahrlässig verursachte Schäden ist auf die Vergütung der letzten zwölf Monate begrenzt. Bei Vorsatz und grober Fahrlässigkeit haftet sie unbeschränkt. Für den Verlust von Daten haftet sie nur, wenn die Auftraggeberin ihre Daten regelmäßig gesichert hat.
+
+Vertraulichkeit. Beide Seiten behandeln alle Informationen der anderen Seite vertraulich. Die Pflicht gilt auch nach Vertragsende für weitere fünf Jahre.
