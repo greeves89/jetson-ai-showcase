@@ -18,12 +18,20 @@ import time
 from pathlib import Path
 
 import base64
+import os
+import socket
+
+# Schutz vor Dekompressionsbomben: OpenCV lehnt Bilder mit mehr Pixeln als 1920x1080 ab.
+# Muss VOR dem Import von cv2 gesetzt sein.
+os.environ.setdefault("OPENCV_IO_MAX_IMAGE_PIXELS", str(1920 * 1080))
 
 import cv2
 import numpy as np
 import httpx
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 
 HIER = Path(__file__).resolve().parent
 OLLAMA = "http://127.0.0.1:11434"
@@ -34,19 +42,45 @@ MAX_NACHRICHT = 4000          # Zeichen pro Chat-Anfrage
 MAX_FRAME_BYTES = 2_000_000   # ~2 MB pro Webcam-Frame (480x360 JPEG ist weit darunter)
 
 
+def _erlaubte_hosts():
+    """Hostnamen, unter denen die App erreichbar sein darf (Schutz vor DNS-Rebinding).
+    Eigene IPs und Name werden beim Start ermittelt; weitere per SHOWCASE_ALLOWED_HOSTS (kommagetrennt)."""
+    hosts = {"localhost", "127.0.0.1", "[::1]", "testserver"}
+    name = socket.gethostname()
+    hosts.update({name, name + ".local"})
+    try:
+        aus = subprocess.run(["hostname", "-I"], capture_output=True, text=True, timeout=3).stdout
+        hosts.update(aus.split())
+    except Exception:
+        pass
+    hosts.update(h.strip() for h in os.environ.get("SHOWCASE_ALLOWED_HOSTS", "").split(",") if h.strip())
+    return sorted(hosts)
+
+
 def _origin_ok(headers) -> bool:
-    """Einfacher Schutz gegen fremde Seiten: Origin muss zum eigenen Host passen (oder fehlen, z. B. curl)."""
+    """Zustandsaendernde Endpunkte verlangen einen Origin-Header, der zum Host passt.
+    Fehlt der Origin, wird abgelehnt (Browser senden ihn bei POST und WebSocket immer).
+    Der Host selbst ist per TrustedHostMiddleware auf die Allowlist begrenzt."""
     origin = headers.get("origin")
-    if not origin:
-        return True
     host = headers.get("host", "")
+    if not origin or not host:
+        return False
     try:
         from urllib.parse import urlparse
         return urlparse(origin).netloc == host
     except Exception:
         return False
 
+
+def _ist_jpeg_dataurl(s) -> bool:
+    return isinstance(s, str) and s.startswith("data:image/jpeg;base64,")
+
+
 app = FastAPI(title="Jetson Demo-Hub")
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=_erlaubte_hosts())
+_VIDEO_DIR = HIER / "static" / "videos"
+_VIDEO_DIR.mkdir(parents=True, exist_ok=True)
+app.mount("/videos", StaticFiles(directory=str(_VIDEO_DIR)), name="videos")
 
 # Gesichtserkennung: YuNet (robust bei geneigten/seitlichen Gesichtern, liefert Landmarks),
 # Haar-Cascade nur als Rueckfall, falls das YuNet-Modell fehlt.
@@ -299,10 +333,14 @@ async def chat(req: Request):
 
 
 # ---------- Modell laden mit Fortschritt (Ollama pull) ----------
-@app.get("/api/pull")
-async def pull(request: Request, modell: str = CHAT_MODELL):
+@app.post("/api/pull")
+async def pull(request: Request):
     if not _origin_ok(request.headers):
         return JSONResponse({"fehler": "ungueltiger Origin"}, status_code=403)
+    try:
+        modell = (await request.json()).get("modell") or CHAT_MODELL
+    except Exception:
+        modell = CHAT_MODELL
     if modell not in ERLAUBTE_MODELLE:
         return JSONResponse({"fehler": "Modell nicht erlaubt"}, status_code=400)
 
@@ -340,7 +378,7 @@ async def ws_vision(ws: WebSocket):
     try:
         while True:
             daten = await ws.receive_text()      # dataURL "data:image/jpeg;base64,...."
-            if len(daten) > MAX_FRAME_BYTES:
+            if len(daten) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(daten):
                 continue
             roh = base64.b64decode(daten.split(",", 1)[-1])
             ergebnis = await asyncio.to_thread(_verarbeite_frame, roh, modus)
@@ -421,8 +459,8 @@ async def teach_sample(req: Request):
     label = (d.get("label") or "").strip()[:40]
     if not label or not d.get("bild"):
         return JSONResponse({"fehler": "label/bild fehlt"}, status_code=400)
-    if len(d["bild"]) > MAX_FRAME_BYTES:
-        return JSONResponse({"fehler": "Bild zu gross"}, status_code=413)
+    if len(d["bild"]) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(d["bild"]):
+        return JSONResponse({"fehler": "nur JPEG bis 2 MB"}, status_code=413)
     counts = await asyncio.to_thread(_teach_sample, d["bild"], label)
     return JSONResponse({"counts": counts or {}})
 
@@ -436,8 +474,8 @@ async def teach_classify(req: Request):
     d = await req.json()
     if not d.get("bild"):
         return JSONResponse({"fehler": "bild fehlt"}, status_code=400)
-    if len(d["bild"]) > MAX_FRAME_BYTES:
-        return JSONResponse({"fehler": "Bild zu gross"}, status_code=413)
+    if len(d["bild"]) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(d["bild"]):
+        return JSONResponse({"fehler": "nur JPEG bis 2 MB"}, status_code=413)
     return JSONResponse(await asyncio.to_thread(_teach_classify, d["bild"]))
 
 
