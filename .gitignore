@@ -1,0 +1,12 @@
+certs/
+app/models/
+__pycache__/
+*.pyc
+.venv/
+.DS_Store
+.impeccable/hook.cache.json
+.impeccable/*.cache.json
+server.log
+server.pid
+videos/arbeit/
+*.mp3

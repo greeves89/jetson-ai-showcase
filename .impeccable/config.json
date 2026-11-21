@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "app/index.html"
+        ],
+        "createdAt": "2026-11-21T21:02:48.373Z",
+        "reason": "Fortschritts-/Ladebalken animieren bewusst width (Progressbar-Pattern); kleine Elemente, kein Layout-Thrash"
+      }
+    ]
+  }
+}
