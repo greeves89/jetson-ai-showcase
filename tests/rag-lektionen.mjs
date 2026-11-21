@@ -4,6 +4,7 @@
 import { starte, oeffneSeite } from "./browser.mjs";
 const ids = ["rag-ueberblick", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "rag-bewertung"];
 const t = await starte({ kamera: false });
+await t.page.addInitScript(() => { try { localStorage.setItem("kl-lesemodus", "ausfuehrlich"); } catch (e) {} });
 let ok = true;
 for (const id of ids) {
   await oeffneSeite(t.page, id);

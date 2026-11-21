@@ -1,11 +1,17 @@
 <div class="seitenbreite"><p class="ueber">Wissen und RAG</p><h1>RAG: Fragen an eigene Dokumente</h1><p class="lead">Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit.</p>
 <div class="text">
 <h2 class="abs">Das Problem</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Ohne RAG: Modell kennt Dokumente nicht, Es rät</li><li>Rechts: Mit RAG: Erst nachschlagen, Antwort mit Quelle</li></ul></figure>
+<p class="kurz">Deine Dokumente stecken nicht im Modell. Ohne Nachschlagen würde es raten.</p>
 <p>Ein Sprachmodell weiß nur, was es im Training gesehen hat. Deine Verträge, Handbücher und Notizen gehören nicht dazu. Würdest du trotzdem fragen, würde es raten.</p>
 <h2 class="abs">Die Lösung in vier Schritten</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Zerlegen (etwa 800 Zeichen)</li><li>Einbetten (Zahlenliste)</li><li>Suchen (größte Ähnlichkeit)</li><li>Antworten (nur mit Treffern)</li></ul></figure>
+<p class="kurz">Zerlegen, einbetten, suchen, antworten. Das Modell sieht nur die passenden Stellen.</p>
 
 <ul><li><strong>Zerlegen:</strong> Der Text wird in Abschnitte von etwa 800 Zeichen geteilt.</li><li><strong>Einbetten:</strong> Jeder Abschnitt wird zu einer Zahlenliste (Embedding), hier mit dem Modell nomic-embed-text.</li><li><strong>Suchen:</strong> Deine Frage wird genauso eingebettet. Die Abschnitte mit der größten Ähnlichkeit (Kosinus) sind die Treffer.</li><li><strong>Antworten:</strong> Die Treffer und deine Frage gehen an das Sprachmodell, mit der Anweisung, nur damit zu antworten und die Quelle zu nennen.</li></ul>
 <h2 class="abs">Schau auf die Scores</h2>
+<figure class="visual"><figcaption>Skala</figcaption><ul><li>0 unverwandt bis 1 sehr ähnlich, Marker bei 80 Prozent: Score eines Treffers (Beispiel)</li></ul></figure>
+<p class="kurz">Ein hoher Score heißt ähnlich. Ist die Antwort falsch, standen meist die falschen Abschnitte oben.</p>
 <p>Jeder Treffer hat einen Wert zwischen 0 und 1. Je höher, desto ähnlicher ist der Abschnitt zur Frage. Ist die Antwort falsch, liegt es meistens an der Suche und nicht am Modell: Dann standen die falschen Abschnitte oben. Genau deshalb zeigt dir das Labor die Treffer, bevor es antwortet.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Fragen an Verträge, Handbücher und Wissensbasen mit Quellenangabe. Vertrauliche Dokumente bleiben auf dem Gerät.</p><ul><li>Wo steht die Kündigungsfrist?</li><li>Welche Schritte hat die Wartungsanleitung?</li></ul></div></section>

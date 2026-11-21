@@ -11,20 +11,29 @@ daten: {
   widget: "datenqualitaet",
   videos: ["daten-rohstoff"],
   abschnitte: [
-    {h: "Was für eine KI als Datum gilt", p: [
+    {h: "Was für eine KI als Datum gilt",
+     kurz: "Alles, was sich festhalten lässt, kann ein Datum sein. Für das Modell wird es am Ende zu Zahlen.",
+     visual: {"typ":"raster","spalten":3,"zellen":[{"icon":"table","text":"Tabelle","sub":"Zahlen in Spalten"},{"icon":"image","text":"Bild","sub":"Helligkeitswerte"},{"icon":"file-text","text":"Text","sub":"Wortstücke"},{"icon":"audio-lines","text":"Ton","sub":"Schwingungen"},{"icon":"activity","text":"Messreihe","sub":"Werte in Folge"}]},
+     p: [
       "Fast alles, was sich festhalten lässt, kann ein Datum sein: eine Tabellenzeile, ein Foto, ein Satz, eine Tonaufnahme, die Temperatur einer Maschine im Sekundentakt. Für ein Modell ist all das am Ende eine Menge Zahlen. Ein Foto besteht aus Helligkeitswerten, ein Text aus Wortstücken, ein Ton aus Schwingungen.",
       "Die Daten sind deshalb der eigentliche Rohstoff. Das [[ml|Verfahren]] ist oft fertig aus dem Regal. Was ein Projekt unverwechselbar macht und gelingen oder scheitern lässt, sind die Daten, die du hineingibst.",
     ], alltag: [
       "Denk an eine Karteikarte beim Hausarzt. Auf ihr stehen Name, Alter, Gewicht, Blutdruck und handschriftliche Notizen. Das sind verschiedene Arten von Daten auf einem Blatt: Zahlen, Kategorien und freier Text.",
       "Der Vergleich trägt, bis es um Menge geht. Eine Karteikarte beschreibt einen Menschen. Ein Modell braucht viele Karten, damit es Muster findet statt Einzelfälle.",
     ]},
-    {h: "Merkmale und Etiketten", p: [
+    {h: "Merkmale und Etiketten",
+     kurz: "Merkmale gehen hinein, das Etikett ist die gesuchte Antwort, etwa der Preis eines Gebrauchtwagens.",
+     visual: {"typ":"ablauf","schritte":[{"icon":"list-checks","text":"Merkmale","sub":"Baujahr, Kilometer, Zustand"},{"icon":"brain-circuit","text":"Modell","sub":"lernt den Zusammenhang"},{"icon":"tag","text":"Etikett","sub":"Preis","farbe":"gruen"}],"paket":true},
+     p: [
       "Jedes Beispiel wird durch [[merkmal|Merkmale]] beschrieben. Das sind die Eigenschaften, an denen sich das Modell orientiert. Beim überwachten Lernen kommt das [[label|Etikett]] dazu: die richtige Antwort, die das Modell vorhersagen soll.",
     ], alltag: [
       "Ein Gebrauchtwagen-Inserat zeigt beides. Baujahr, Kilometerstand, Marke und Zustand sind die Merkmale. Der Verkaufspreis ist das Etikett. Wer viele Inserate mit Preis gesehen hat, kann bei einem neuen Auto den Preis schätzen. Ein Modell macht dasselbe, nur mit sehr vielen Inseraten und ohne Bauchgefühl.",
       "Der Vergleich hinkt an einer Stelle: Ein Mensch weiß, dass ein Unfallschaden wichtig ist, auch wenn er nicht im Inserat steht. Ein Modell kennt nur die Merkmale, die ihm vorliegen.",
     ], merke: "Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Ohne passende Merkmale kann auch das beste Verfahren nichts finden."},
-    {h: "Strukturierte und unstrukturierte Daten", p: [
+    {h: "Strukturierte und unstrukturierte Daten",
+     kurz: "Tabellen haben ein festes Raster. Bilder, Texte und Töne tragen ihre Information im Inhalt.",
+     visual: {"typ":"vergleich","links":{"titel":"Strukturiert","icon":"table","farbe":"akzent","punkte":["Spalten mit Namen","Zeilen mit Werten","Einfache Verfahren reichen"]},"rechts":{"titel":"Unstrukturiert","icon":"image","farbe":"orange","punkte":["Bild, Text, Ton","Information im Inhalt","Meist tiefe Netze"]}},
+     p: [
       "[[strukturiert|Strukturierte Daten]] haben ein festes Raster: Spalten mit Namen, Zeilen mit Werten, wie in einer Tabelle. [[unstrukturiert|Unstrukturierte Daten]] haben keines. Bei Bildern, Texten und Tönen steckt die Information im Inhalt selbst.",
       "Für Tabellen reichen oft einfache Verfahren. Bei Bildern, Sprache und Ton setzt man meist [[dl|tiefe Netze]] ein. Sie leiten die Merkmale selbst aus den Rohdaten ab.",
     ], tabelle: {
@@ -38,7 +47,10 @@ daten: {
         ["Messreihe", "Temperatur einer Maschine", "Werte in zeitlicher Folge", "Ausfälle früh erkennen"],
       ],
     }},
-    {h: "Datenqualität: Müll hinein, Müll heraus", p: [
+    {h: "Datenqualität: Müll hinein, Müll heraus",
+     kurz: "Ein Modell prüft nicht, ob seine Daten stimmen. Es lernt, was da ist, auch Fehler.",
+     visual: {"typ":"vergleich","links":{"titel":"Saubere Daten","icon":"circle-check","farbe":"gruen","punkte":["Werte stimmen","Keine Lücken","Keine Dubletten","Vielfältig"]},"rechts":{"titel":"Schmutzige Daten","icon":"triangle-alert","farbe":"rot","punkte":["Falsche Werte","Lücken","Dubletten","Einseitig"]},"urteil":"Müll hinein, Müll heraus."},
+     p: [
       "Ein Modell kann nicht prüfen, ob seine Daten stimmen. Es lernt, was da ist. Vier Probleme begegnen dir dabei immer wieder:",
     ], liste: [
       "**Fehler:** falsch erfasste Werte, vertauschte Spalten, ein Preis in der falschen Einheit, ein falsches Etikett.",
@@ -46,11 +58,17 @@ daten: {
       "**[[dublette|Dubletten]]:** dasselbe Beispiel mehrfach. Das Modell gewichtet es dadurch zu stark. Steckt dieselbe Zeile in Training und Test, sieht das Testergebnis besser aus, als es ist.",
       "**[[verzerrung|Verzerrung]]:** Die Daten bilden die Wirklichkeit einseitig ab. Mehr dazu auf der Seite {{verzerrung-ethik|Fairness und Verzerrung}}.",
     ], alltag: "Stell dir ein Rezept vor, bei dem jemand Salz und Zucker verwechselt hat. Der beste Koch bekommt daraus keinen guten Kuchen. Das Modell ist der Koch, die Daten sind die Zutaten. Der Fehler liegt nicht im Handwerk, sondern in dem, was auf dem Tisch steht."},
-    {h: "Wie viel Daten reichen?", p: [
+    {h: "Wie viel Daten reichen?",
+     kurz: "Vielfalt zählt mehr als Menge. Hundert verschiedene Fotos helfen oft mehr als tausend fast gleiche.",
+     visual: {"typ":"skala","links":"Nur Menge","rechts":"Vielfalt","marker":0.78,"label":"Was dem Modell mehr nützt"},
+     p: [
       "Eine feste Zahl gibt es nicht. Sie hängt von der Aufgabe, vom Verfahren und von der Streuung der Fälle ab. Eine brauchbare Faustregel lautet: Vielfalt vor Menge. Tausend fast gleiche Fotos bringen weniger als hundert, die verschiedene Lichtverhältnisse, Blickwinkel und Hintergründe zeigen.",
       "Teste deshalb früh mit wenigen Daten, schau dir die Fehler an und sammle gezielt das, was fehlt. Das ist meist billiger als blind mehr vom Gleichen zu sammeln.",
     ], alltag: "Wer Autofahren lernt und tausendmal dieselbe leere Straße bei Sonne abfährt, besteht trotzdem keine Prüfung bei Nebel, Regen und Stadtverkehr. Zehn Fahrstunden mit wechselnden Bedingungen helfen mehr."},
-    {h: "Trainings-, Validierungs- und Testdaten", p: [
+    {h: "Trainings-, Validierungs- und Testdaten",
+     kurz: "Drei Töpfe für drei Zwecke: lernen, einstellen, ehrlich prüfen. Der Test bleibt bis zum Schluss unberührt.",
+     visual: [{"typ":"ablauf","paket":false,"schritte":[{"icon":"graduation-cap","text":"Training","sub":"lernen"},{"icon":"sliders-horizontal","text":"Validierung","sub":"einstellen"},{"icon":"flag","text":"Test","sub":"Endnote, einmal","farbe":"gruen"}]},{"typ":"balken","titel":"Aufteilung (Beispielwerte)","einheit":"%","max":100,"zeilen":[{"label":"Training","wert":70,"farbe":"akzent"},{"label":"Validierung","wert":15,"farbe":"orange"},{"label":"Test","wert":15,"farbe":"gruen"}]}],
+     p: [
       "Man teilt die Daten in drei Teile. Mit den [[trainingsdaten|Trainingsdaten]] lernt das Modell. Die [[validierung|Validierungsdaten]] dienen zum Einstellen und Vergleichen. Die [[testdaten|Testdaten]] bleiben bis zum Schluss unberührt und zeigen, wie gut das Modell bei Neuem ist.",
       "Würde man auf den Trainingsdaten messen, könnte das Modell die Beispiele einfach auswendig gelernt haben. Das nennt man [[ueberanpassung|Überanpassung]]. Erst Daten, die es nie gesehen hat, verraten die Wahrheit.",
     ], alltag: "Üben heißt: Aufgaben aus dem Buch rechnen und die Lösungen nachsehen. Die Probeklausur zeigt dir, wo du stehst, und du darfst danach noch nachlernen. Die echte Klausur zählt einmal. Hättest du ihre Fragen vorher gekannt, wäre die Note wertlos.",
@@ -63,14 +81,20 @@ daten: {
           ["Test", "Echte Klausur", "Ehrliche Endnote vor dem Einsatz", "Einmal"],
         ],
       }},
-    {h: "Datenschutz-Basics", p: [
+    {h: "Datenschutz-Basics",
+     kurz: "Personenbezogene Daten brauchen einen Zweck, sparsame Erhebung und Kontrolle über den Verbleib.",
+     visual: {"typ":"raster","spalten":3,"zellen":[{"icon":"target","text":"Zweck","sub":"nicht still umwidmen"},{"icon":"scissors","text":"Sparsamkeit","sub":"nur das Nötige"},{"icon":"shield-check","text":"Kontrolle","sub":"wo, wer, wie lange"}]},
+     p: [
       "Sobald Daten sich auf eine Person beziehen lassen, sind sie [[personenbezogen|personenbezogen]]: Namen, Fotos, Stimmen, aber auch Kombinationen wie Wohnort, Alter und Beruf. Dafür gelten Regeln. Drei Grundgedanken helfen bei jedem Projekt:",
     ], liste: [
       "**Zweck:** Du sammelst Daten für einen bestimmten Zweck und nutzt sie nicht still für etwas anderes.",
       "**Sparsamkeit:** Du erhebst nur, was du wirklich brauchst. Was du nicht hast, kann nicht verloren gehen.",
       "**Kontrolle:** Du weißt, wo die Daten liegen, wer sie sieht und wann sie gelöscht werden.",
     ], alltag: "Ein Sportverein hat eine Mitgliederliste, um Beiträge einzuziehen. Dieselbe Liste an einen Händler zu geben, der Werbung schicken will, ist etwas anderes. Der Zweck ist ein anderer, und die Mitglieder haben dem nicht zugestimmt. Die Grundzüge der Regeln findest du auf der Seite {{recht|Recht und Regeln}}."},
-    {h: "Datenpflege ist Dauerarbeit", p: [
+    {h: "Datenpflege ist Dauerarbeit",
+     kurz: "Die Welt ändert sich, die Daten altern. Ohne Pflege wird das Modell schleichend schlechter.",
+     visual: {"typ":"kreis","mitte":"Datenpflege","knoten":[{"icon":"search","text":"Qualität prüfen"},{"icon":"plus","text":"Neue Fälle ergänzen"},{"icon":"trash-2","text":"Altes löschen"},{"icon":"eye","text":"Modell beobachten"}]},
+     p: [
       "Mit dem ersten Training ist die Arbeit nicht fertig. Die Welt ändert sich: Neue Produkte erscheinen, Kunden verhalten sich anders, ein Sensor wird getauscht. Daten, die gestern gut waren, passen nach einem Jahr womöglich nicht mehr zur Wirklichkeit. Das Modell wird dann schleichend schlechter, ohne dass jemand eine Fehlermeldung sieht.",
       "Darum gehören zu jedem Einsatz klare Zuständigkeiten: Wer prüft die Qualität, wer ergänzt neue Fälle, wer löscht Altes? Eine Datenpflege, die nebenbei läuft, fällt bei Zeitdruck als Erstes weg.",
     ], alltag: "Ein Adressbuch, das zehn Jahre niemand angefasst hat, ist voller alter Nummern und Umzüge. Es sieht noch vollständig aus und führt trotzdem ins Leere."},
@@ -106,22 +130,34 @@ daten: {
   widget: "netz-spielplatz",
   videos: ["neuronale-netze-erklaert"],
   abschnitte: [
-    {h: "Ein Neuron ist ein kleiner Entscheider", p: [
+    {h: "Ein Neuron ist ein kleiner Entscheider",
+     kurz: "Ein künstliches Neuron ist nur eine kleine Rechenstelle: mehrere Zahlen hinein, eine Zahl heraus.",
+     visual: {"typ":"vergleich","links":{"titel":"Nervenzelle","icon":"brain","farbe":"orange","punkte":["Zelle im Gehirn","Chemie und Strom","Sehr komplex"]},"rechts":{"titel":"Künstliches Neuron","icon":"cpu","farbe":"akzent","punkte":["Rechenstelle","Zahlen hinein, Zahl heraus","Sehr einfach"]},"urteil":"Nur die Grundidee ist gleich."},
+     p: [
       "Ein künstliches [[neuron|Neuron]] hat mit einer Nervenzelle nur die Grundidee gemeinsam. Es ist eine kleine Rechenstelle: Sie bekommt mehrere Zahlen herein, rechnet damit und gibt eine Zahl heraus. Mehr nicht. Die Leistung entsteht erst, wenn man sehr viele davon zusammenschaltet.",
     ], alltag: [
       "Ein Team stimmt ab, ob ihr abends grillt. Jede Person gibt eine Stimme: Wetter gut, Zeit da, Lust da. Nicht alle Stimmen zählen gleich. Wer den Grill besitzt und einkauft, hat mehr Gewicht als jemand, dem es egal ist.",
       "Genau das macht ein Neuron. Die Stimmen sind die Eingaben, das Gewicht je Stimme ist der Einfluss. Am Ende steht eine Entscheidung. Der Vergleich hinkt bei der Zahlenform: Ein Neuron gibt nicht nur Ja oder Nein aus, sondern oft einen Wert dazwischen.",
     ]},
-    {h: "Eingaben, Gewichte, Summe, Schwelle", p: [
+    {h: "Eingaben, Gewichte, Summe, Schwelle",
+     kurz: "Eingaben mal Gewichte, Summe bilden, Schwelle prüfen. Die Gewichte stellt das Training ein.",
+     visual: {"typ":"ablauf","paket":true,"schritte":[{"icon":"arrow-right","text":"Eingaben","sub":"Zahlen"},{"icon":"scale","text":"Gewichte","sub":"mal"},{"icon":"sigma","text":"Summe","sub":"plus Verschiebung"},{"icon":"flag","text":"Schwelle","sub":"ja oder nein","farbe":"gruen"}]},
+     p: [
       "Der Ablauf ist immer gleich. Jede Eingabe wird mit ihrem [[gewicht|Gewicht]] multipliziert. Alle Ergebnisse werden addiert. Zur Summe kommt eine feste Zahl, die Verschiebung, hinzu. Dann folgt die [[aktivierung|Aktivierung]]: Sie legt fest, wie stark das Neuron meldet.",
       "Die einfachste Aktivierung ist eine Schwelle. Liegt die Summe darüber, meldet das Neuron „ja“, sonst „nein“. Weiche Formen geben stattdessen einen gleitenden Wert aus. Wichtig ist: Gewichte und Verschiebung sind die Zahlen, die beim [[training|Training]] eingestellt werden.",
     ], alltag: "Eine Fußgängerampel zeigt Grün, sobald genug Wartezeit abgelaufen ist und kein Auto kommt. Es gibt eine Schwelle: Unter ihr bleibt es rot, darüber wird es grün. Die Schwelle zu verschieben ändert, wie schnell die Ampel umspringt. Im Neuron übernimmt die Verschiebung genau diese Rolle.",
       merke: "Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden."},
-    {h: "Schichten: Merkmale aus Merkmalen", p: [
+    {h: "Schichten: Merkmale aus Merkmalen",
+     kurz: "Die Ausgaben einer Schicht sind die Eingaben der nächsten. So entstehen Merkmale aus Merkmalen.",
+     visual: {"typ":"netz","knoten":[{"id":"e1","text":"Eingabe 1","x":6,"y":14},{"id":"e2","text":"Eingabe 2","x":6,"y":50},{"id":"e3","text":"Eingabe 3","x":6,"y":86},{"id":"h1","text":"Neuron A","x":50,"y":20,"farbe":"orange"},{"id":"h2","text":"Neuron B","x":50,"y":50,"farbe":"orange"},{"id":"h3","text":"Neuron C","x":50,"y":80,"farbe":"orange"},{"id":"a","text":"Ausgabe","x":94,"y":50,"farbe":"gruen"}],"kanten":[["e1","h1"],["e1","h2"],["e1","h3"],["e2","h1"],["e2","h2"],["e2","h3"],["e3","h1"],["e3","h2"],["e3","h3"],["h1","a"],["h2","a"],["h3","a"]]},
+     p: [
       "Ein einzelnes Neuron kann nur eine gerade Trennlinie ziehen. Viele Aufgaben brauchen mehr. Deshalb ordnet man Neuronen in [[schicht|Schichten]]: Die Ausgaben einer Schicht sind die Eingaben der nächsten.",
       "So baut die zweite Schicht auf dem auf, was die erste gefunden hat. Das ist der Kern der Sache: Merkmale entstehen aus Merkmalen. Bei einem Foto erkennen frühe Schichten oft einfache Dinge wie Kanten, spätere setzen daraus Formen zusammen, noch spätere ganze Gegenstände.",
     ], alltag: "Ein Postsortierzentrum arbeitet in Stufen. Erst wird nach Größe getrennt, dann nach Postleitzahlbereich, dann nach Straße. Keine Stufe kennt das ganze Ziel. Jede macht einen einfachen Schritt auf dem Ergebnis der vorigen."},
-    {h: "Warum mehrere Schichten mehr können", p: [
+    {h: "Warum mehrere Schichten mehr können",
+     kurz: "Ein Neuron zieht nur eine gerade Linie. Mit Zwischenschicht und Aktivierung entstehen gebogene Grenzen.",
+     visual: [{"typ":"punkte","grenze":"linie","unter":"Ein Neuron: gerade Linie","klassen":[{"name":"Klasse A","farbe":"gruen","n":24,"mitte":[28,64],"streu":9},{"name":"Klasse B","farbe":"rot","n":22,"mitte":[72,34],"streu":9}]},{"typ":"punkte","grenze":"kreis","unter":"Mehrere Schichten: gebogene Grenze","klassen":[{"name":"Innen","farbe":"akzent","n":34,"mitte":[48,48],"streu":8},{"name":"Außen","farbe":"orange","n":8,"mitte":[84,80],"streu":5}]}],
+     p: [
       "Würde jede Schicht nur multiplizieren und addieren, ließen sich alle Schichten zu einer einzigen zusammenfassen. Erst die Aktivierung dazwischen macht mehrere Schichten sinnvoll. Sie bricht die Geradlinigkeit auf, und das Netz kann gebogene, verschlungene Grenzen zwischen Klassen ziehen.",
       "Ein bekanntes Beispiel: Zwei Gruppen von Punkten liegen so, dass keine Gerade sie trennt. Ein Neuron scheitert. Mit einer Zwischenschicht aus zwei Neuronen klappt es. Probiere das im Baustein oben aus.",
     ], tabelle: {
@@ -133,20 +169,32 @@ daten: {
         ["Viele Schichten", "Verschachtelte, sehr feine Muster", "Gesichter, Sprache, Schrift"],
       ],
     }},
-    {h: "Parameter zählen und was „tief“ heißt", p: [
+    {h: "Parameter zählen und was „tief“ heißt",
+     kurz: "Parameter sind alle Gewichte und Verschiebungen. Tief heißt: viele Schichten hintereinander.",
+     visual: {"typ":"skala","links":"Flach: eine Schicht","rechts":"Tief: viele Schichten","marker":0.86,"label":"Millionen bis Milliarden Parameter"},
+     p: [
       "Alle Gewichte und Verschiebungen zusammen heißen [[parameter|Parameter]]. Ein winziges Netz mit 3 Eingaben, einer Schicht aus 4 Neuronen und einem Ausgabeneuron hat 21 davon: 12 Gewichte und 4 Verschiebungen in der ersten Schicht, 4 Gewichte und 1 Verschiebung in der zweiten.",
       "Das wächst schnell. Eine einzige Schicht aus 100 Neuronen, die ein Bild von 28 mal 28 Punkten bekommt, hat schon 78 500 Parameter. Echte Bildmodelle haben Millionen, große Sprachmodelle viele Milliarden.",
       "„Tief“ in [[dl|Deep Learning]] heißt einfach: viele Schichten hintereinander. Mehr Schichten erlauben feinere Muster, brauchen aber mehr Daten und mehr Rechenzeit.",
     ], alltag: "Ein Mosaik aus 100 Steinen zeigt grob ein Bild. Eines aus 100 000 Steinen zeigt Gesichter. Mit mehr einstellbaren Teilen steigt, wie fein das Netz sein Muster zeichnen kann. Der Vergleich hinkt: Mehr Teile helfen nur, wenn genug Beispiele da sind, sie sinnvoll einzustellen."},
-    {h: "Warum sie wie Blackboxes wirken", p: [
+    {h: "Warum sie wie Blackboxes wirken",
+     kurz: "Das Wissen steckt verteilt in Millionen Gewichten. Eine einzelne Zahl bedeutet nichts Greifbares.",
+     visual: {"typ":"skala","links":"Regel, nachvollziehbar","rechts":"Blackbox","marker":0.9,"label":"Neuronales Netz"},
+     p: [
       "Wenn du auf ein Netz schaust, siehst du Millionen Zahlen. Keine einzelne davon bedeutet „Katze“ oder „Fehler“. Das Wissen ist über viele Gewichte verteilt. Darum lässt sich oft nur schwer sagen, warum ein Netz so entschieden hat. Man nennt das eine [[blackbox|Blackbox]].",
       "Es gibt Werkzeuge, die zeigen, worauf das Netz geachtet hat, etwa welche Bildbereiche eine Entscheidung geprägt haben. Sie geben Hinweise, aber keine vollständige Erklärung.",
     ], alltag: "Ein erfahrener Handwerker hört am Klang eines Motors, was kaputt ist. Fragst du ihn, warum, sagt er: „Klingt falsch.“ Das Wissen ist da, aber nicht in Regeln zerlegt. Ein Netz verhält sich ähnlich, nur ohne Erfahrung im Umgang mit Überraschungen."},
-    {h: "Stärken, Schwächen und die Verbindung zu den Modellen", p: [
+    {h: "Stärken, Schwächen und die Verbindung zu den Modellen",
+     kurz: "Netze glänzen bei Bildern, Sprache und Ton. Bei wenigen Daten oder Begründungspflicht sind sie oft die falsche Wahl.",
+     visual: {"typ":"vergleich","links":{"titel":"Stark bei","icon":"circle-check","farbe":"gruen","punkte":["Vielen Beispielen","Bild, Sprache, Ton","Mustern ohne Regeln"]},"rechts":{"titel":"Schwach bei","icon":"triangle-alert","farbe":"orange","punkte":["Wenigen Daten","Begründungspflicht","Fremden Fällen"]},"urteil":"Fremdes beantwortet es trotzdem, oft falsch."},
+     p: [
       "Netze sind stark, wenn es viele Beispiele gibt und die Muster sich schwer als Regeln aufschreiben lassen: Bilder, Sprache, Ton. Sie sind schwach, wenn Daten knapp sind, wenn man jede Entscheidung begründen muss oder wenn ein Fall weit von den Trainingsdaten abweicht. Bei Tabellen mit wenigen Merkmalen sind einfache Verfahren oft besser und billiger.",
       "Ein Netz kennt nur, was in den Trainingsdaten vorkam. Zeigst du ihm etwas völlig Fremdes, antwortet es trotzdem, oft mit hoher Sicherheit und falsch. Es sagt nicht „das kenne ich nicht“, solange man ihm das nicht eigens beibringt.",
     ], alltag: "Ein Fahrschüler, der nur auf einer Übungsstrecke gefahren ist, steht vor einer Kreuzung im Stadtverkehr. Er handelt nach dem, was er kennt, und merkt nicht, dass die Lage anders ist. Ein Netz verhält sich bei fremden Eingaben ähnlich."},
-    {h: "Die Verbindung zu den Modellen im Labor", p: [
+    {h: "Die Verbindung zu den Modellen im Labor",
+     kurz: "Auch Chat, Objekt- und Gesichtserkennung im Labor sind Netze. Das Auswerten läuft einmal vorwärts durch alle Schichten.",
+     visual: {"typ":"schichten","richtung":"verschachtelt","ebenen":[{"icon":"chart-scatter","text":"Maschinelles Lernen","sub":"Modell aus Zahlen"},{"icon":"network","text":"Neuronales Netz","sub":"Schichten aus Neuronen"},{"icon":"message-square","text":"Sprachmodell im Chat","sub":"sagt das nächste Wortstück vor"}]},
+     p: [
       "Die Seite {{ml|Maschinelles Lernen}} hat gezeigt, dass ein Modell aus Zahlen besteht. Ein neuronales Netz ist eine Bauart davon. Auch das Sprachmodell im {{chat|Chat}} ist ein sehr großes Netz, das im Kern das nächste Wortstück vorhersagt. Wie die Gewichte eingestellt werden, steht auf der Seite {{training|Wie ein Modell lernt}}.",
       "Auch die Objekt- und Gesichtserkennung im Labor laufen auf Netzen. Dort siehst du, wie schnell ein fertiges Netz auf dem Jetson rechnet, obwohl es Millionen Parameter hat. Die Rechenarbeit passiert beim Auswerten nur einmal vorwärts durch alle Schichten.",
     ], alltag: "Ein gelernter Handwerker braucht für den Handgriff Sekunden, obwohl die Ausbildung Jahre gedauert hat. Training ist die Ausbildung, das Auswerten der Handgriff."},
@@ -182,23 +230,35 @@ training: {
   widget: "gradient-abstieg",
   videos: ["training-gradientenabstieg"],
   abschnitte: [
-    {h: "Zuerst muss man den Fehler messen", p: [
+    {h: "Zuerst muss man den Fehler messen",
+     kurz: "Der Verlust ist eine Zahl für den Fehler. Null heißt perfekt, je größer, desto schlechter.",
+     visual: {"typ":"skala","links":"Null: perfekt","rechts":"Weit daneben","marker":0.62,"label":"Verlust"},
+     p: [
       "Lernen braucht eine Rückmeldung: Wie falsch lag das Modell? Dafür gibt es eine Zahl, den [[verlust|Verlust]]. Er wird aus den Vorhersagen und den richtigen Antworten berechnet. Null heißt perfekt, je größer, desto schlechter.",
       "Das Ziel des Trainings ist dann klar und rechenbar: die Gewichte so einstellen, dass der Verlust über alle Trainingsbeispiele möglichst klein wird.",
     ], alltag: [
       "Beim Darts zählt die Entfernung zur Mitte. Ein Pfeil knapp daneben ist besser als einer an der Wand. Der Verlust ist diese Entfernung, gemittelt über viele Würfe.",
       "Der Vergleich hat eine Grenze: Beim Darts siehst du, in welche Richtung du korrigieren musst. Das Modell muss das für Millionen Gewichte gleichzeitig herausfinden.",
     ]},
-    {h: "Der Kreislauf: vorhersagen, messen, nachjustieren", p: [
+    {h: "Der Kreislauf: vorhersagen, messen, nachjustieren",
+     kurz: "Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann beginnt die nächste.",
+     visual: {"typ":"kreis","mitte":"Eine Runde","knoten":[{"icon":"brain-circuit","text":"Vorhersagen"},{"icon":"ruler","text":"Fehler messen"},{"icon":"sliders-horizontal","text":"Gewichte anpassen"}]},
+     p: [
       "Jede Trainingsrunde läuft gleich ab. Das Modell sagt für Beispiele etwas voraus. Der Verlust zeigt, wie weit es daneben lag. Dann wird jedes Gewicht ein kleines Stück in die Richtung verschoben, die den Verlust senkt. Danach beginnt die nächste Runde.",
       "Wie man diese Richtung für alle Gewichte effizient bekommt, regelt ein Rechenverfahren namens Rückpropagierung. Es rechnet vom Fehler am Ausgang rückwärts durch die Schichten und stellt fest, wie viel jedes Gewicht dazu beigetragen hat. Du musst die Mathematik nicht kennen, um das Prinzip zu nutzen.",
     ], alltag: "Beim Abschmecken einer Suppe probierst du, merkst „zu fade“, gibst eine Prise Salz zu und probierst wieder. Du machst keinen großen Sprung, sondern kleine Korrekturen, bis es passt. Training ist dasselbe, nur mit sehr vielen Zutaten gleichzeitig."},
-    {h: "Gradientenabstieg: im Nebel ins Tal", p: [
+    {h: "Gradientenabstieg: im Nebel ins Tal",
+     kurz: "Wie im Nebel spürt das Modell nur das Gefälle unter den Füßen und geht Schritt für Schritt bergab.",
+     visual: {"typ":"balken","titel":"Verlust nach jeder Runde (Beispielwerte)","max":100,"zeilen":[{"label":"Runde 1","wert":90,"farbe":"rot"},{"label":"Runde 2","wert":55,"farbe":"orange"},{"label":"Runde 3","wert":30,"farbe":"orange"},{"label":"Runde 4","wert":15,"farbe":"gruen"},{"label":"Runde 5","wert":8,"farbe":"gruen"}]},
+     p: [
       "Stell dir den Verlust als Landschaft vor. Jede Kombination von Gewichten ist ein Ort, die Höhe ist der Verlust. Das Ziel liegt im tiefsten Tal. Das Modell sieht die Landschaft nicht, es spürt nur das Gefälle direkt unter seinen Füßen. Dieses Gefälle heißt [[gradient|Gradient]]. Er zeigt bergauf, also geht man in die Gegenrichtung.",
       "Dieses Verfahren heißt Gradientenabstieg. Es braucht keine Karte. Es braucht nur an jedem Ort die Frage: Wo geht es hier bergab?",
     ], alltag: "Du wanderst im dichten Nebel und willst ins Tal. Du siehst nichts, spürst aber mit den Füßen, wohin der Boden abfällt. Du machst einen kleinen Schritt bergab, prüfst wieder und gehst weiter. Irgendwann steht der Boden flach, und du bist unten.",
       merke: "Gradientenabstieg heißt: Schritt für Schritt in die Richtung gehen, in der der Fehler am stärksten sinkt."},
-    {h: "Die Lernrate: wie groß ist der Schritt?", p: [
+    {h: "Die Lernrate: wie groß ist der Schritt?",
+     kurz: "Zu kleine Schritte kommen nie an, zu große springen über das Tal. Die Lernrate wählst du vor dem Training.",
+     visual: {"typ":"balken","titel":"Schrittweite (Beispielwerte)","max":12,"zeilen":[{"label":"Zu klein","wert":1,"farbe":"orange"},{"label":"Passend","wert":4,"farbe":"gruen"},{"label":"Zu groß","wert":11,"farbe":"rot"}],"unter":"Zu klein dauert ewig, zu groß springt über das Ziel."},
+     p: [
       "Die [[lernrate|Lernrate]] bestimmt die Schrittweite. Sie ist eine Einstellung, die du vor dem Training wählst, kein Ergebnis des Lernens. Sie entscheidet oft, ob das Training überhaupt klappt.",
     ], tabelle: {
       beschriftung: "Lernrate im Nebel-Bild",
@@ -209,19 +269,31 @@ training: {
         ["Viel zu klein", "Es sinkt, aber extrem langsam", "Du setzt Zentimeterschritte und kommst nie an"],
       ],
     }},
-    {h: "Epochen und Päckchen", p: [
+    {h: "Epochen und Päckchen",
+     kurz: "Eine Epoche ist ein Durchlauf durch alle Daten. Pro kleinem Päckchen gibt es einen Schritt.",
+     visual: {"typ":"schichten","richtung":"verschachtelt","ebenen":[{"icon":"repeat","text":"Training","sub":"viele Epochen"},{"icon":"rotate-cw","text":"Epoche","sub":"alle Daten einmal"},{"icon":"package","text":"Päckchen","sub":"ein Schritt je Päckchen"}]},
+     p: [
       "Eine [[epoche|Epoche]] ist ein vollständiger Durchlauf durch alle Trainingsdaten. Meist braucht ein Modell viele davon. Es sieht jedes Beispiel mehrmals und verbessert sich jedes Mal ein wenig.",
       "Bei großen Datenmengen rechnet man nicht alles auf einmal. Man nimmt kleine Päckchen, schätzt daraus das Gefälle und macht einen Schritt. Das ist ungenauer als ein Blick auf alles, aber viel schneller und funktioniert gut. Der Zufall der Päckchen hilft sogar, nicht in kleinen Mulden hängen zu bleiben.",
     ], alltag: "Vokabeln lernst du nicht, indem du das ganze Buch einmal liest. Du gehst Kartenstapel immer wieder durch. Jede Runde ist eine Epoche, jeder kleine Stapel ein Päckchen."},
-    {h: "Überanpassung und Frühstopp", p: [
+    {h: "Überanpassung und Frühstopp",
+     kurz: "Sinkt der Verlust auf den Übungsdaten weiter, aber steigt er auf den Validierungsdaten, ist es Zeit zu stoppen.",
+     visual: {"typ":"vergleich","links":{"titel":"Trainingsdaten","icon":"trending-down","farbe":"gruen","punkte":["Verlust sinkt weiter","Auswendig gelernt"]},"rechts":{"titel":"Validierungsdaten","icon":"trending-up","farbe":"rot","punkte":["Verlust steigt wieder","Neues klappt schlechter"]},"urteil":"Frühstopp: besten Stand nehmen."},
+     p: [
       "Der Verlust auf den Trainingsdaten sinkt fast immer weiter. Das heißt nicht, dass das Modell besser wird. Irgendwann lernt es Zufälle und Eigenheiten der Beispiele auswendig. Das ist [[ueberanpassung|Überanpassung]]. Auf neuen Daten wird es dann wieder schlechter.",
       "Deshalb beobachtet man den Verlust auf den Validierungsdaten, die nicht zum Lernen dienen. Steigt er, während der Trainingsverlust weiter fällt, ist der Punkt erreicht. Man hält an und nimmt den besten Stand. Das nennt man [[fruehstopp|Frühstopp]].",
     ], alltag: "Wer für eine Klausur alle alten Aufgaben samt Lösungen auswendig lernt, ist bei diesen perfekt. Kommt eine neue Aufgabe, fehlt das Verständnis. Die Übungsaufgaben sind das Training, die neue Aufgabe zeigt, ob du gelernt oder nur gepaukt hast."},
-    {h: "Rechenaufwand und warum GPUs helfen", p: [
+    {h: "Rechenaufwand und warum GPUs helfen",
+     kurz: "Training sind Millionen gleichartiger Rechnungen. Eine GPU erledigt sie parallel.",
+     visual: {"typ":"vergleich","links":{"titel":"Prozessor","icon":"cpu","farbe":"orange","punkte":["Wenige Kerne","Flexibel","Eins nach dem anderen"]},"rechts":{"titel":"GPU","icon":"microchip","farbe":"gruen","punkte":["Tausende Rechenwerke","Einfach","Alles gleichzeitig"]}},
+     p: [
       "Jede Runde besteht aus sehr vielen einfachen Rechnungen: Zahlen multiplizieren und addieren, millionenfach. Sie hängen kaum voneinander ab und lassen sich gleichzeitig erledigen. Genau dafür ist eine [[gpu|GPU]] gebaut, die tausende Rechenwerke parallel nutzt. Ein normaler Prozessor hat wenige, dafür flexible Kerne.",
       "Darum läuft Training meist auf GPUs, und deshalb kann auch der Jetson Netze flott auswerten. Beim Auswerten, der [[inferenz|Inferenz]], ist der Aufwand viel kleiner als beim Training.",
     ], alltag: "Eine Pizzeria mit einem Meisterkoch, der jede Pizza komplett zubereitet, ist langsamer als eine Küche mit hundert Helfern, die je einen Handgriff machen. Die Helfer sind einfach, aber es sind viele. So arbeitet eine GPU."},
-    {h: "Vortraining, Feinabstimmung, Kosten und Energie", p: [
+    {h: "Vortraining, Feinabstimmung, Kosten und Energie",
+     kurz: "Große Modelle startet man nicht bei null: erst breit vortrainieren, dann gezielt feinabstimmen. Im Einsatz läuft nur die Auswertung.",
+     visual: {"typ":"zeitachse","punkte":[{"t":"Zuerst","text":"Vortraining auf großen Datenmengen","icon":"library"},{"t":"Danach","text":"Feinabstimmung mit gezielten Beispielen","icon":"target"},{"t":"Im Einsatz","text":"Auswerten, einmal vorwärts","icon":"zap"}]},
+     p: [
       "Große Modelle trainiert man selten von null. Beim [[vortraining|Vortraining]] lernt ein Modell auf riesigen, allgemeinen Datenmengen die Grundlagen. Bei der [[feinabstimmung|Feinabstimmung]] passt man es mit wenigen, gezielten Beispielen an eine Aufgabe an. Das spart Zeit, Daten und Rechenleistung.",
       "Training kostet Rechenzeit und damit Strom. Je größer das Modell und je mehr Daten, desto mehr. Das Vortraining sehr großer Modelle ist aufwendig und liegt bei wenigen Anbietern. Eine Feinabstimmung kleinerer Modelle ist dagegen oft mit überschaubarem Aufwand machbar. Konkrete Zahlen hängen stark von Modell und Hardware ab und sollten für jedes Projekt neu geschätzt werden.",
     ], alltag: "Ein gelernter Koch muss für ein neues Restaurant nicht noch einmal Kochen lernen. Er lernt die Speisekarte. Vortraining ist die Ausbildung, Feinabstimmung die Einarbeitung."},
@@ -257,14 +329,20 @@ bewertung: {
   widget: "konfusionsmatrix",
   videos: ["bewertung-konfusionsmatrix"],
   abschnitte: [
-    {h: "Warum „95 Prozent richtig“ täuschen kann", p: [
+    {h: "Warum „95 Prozent richtig“ täuschen kann",
+     kurz: "Bei seltenen Ereignissen ist ein Modell, das nie Alarm schlägt, fast immer richtig und trotzdem wertlos.",
+     visual: {"typ":"zahlen","kacheln":[{"wert":"99 %","label":"richtig, ohne je Alarm","icon":"percent"},{"wert":"0 von 10","label":"Auffällige gefunden","icon":"search"},{"wert":"1000","label":"Fälle geprüft","icon":"files"}]},
+     p: [
       "Die [[genauigkeit|Genauigkeit]] gibt den Anteil richtiger Antworten an. Sie ist leicht zu verstehen, aber sie wird unbrauchbar, wenn ein Ereignis selten ist. Ein Modell, das immer „alles in Ordnung“ sagt, liegt dann fast immer richtig und ist trotzdem wertlos.",
       "Rechenbeispiel: Von 1000 geprüften Fällen sind 10 echt auffällig. Ein Modell, das nie Alarm schlägt, hat 990 von 1000 richtig, also 99 Prozent. Gefunden hat es nichts.",
     ], alltag: [
       "Ein Rauchmelder, der nie piept, ist an 364 von 365 Tagen im Jahr „richtig“, weil es nur an einem Tag brennt. Du würdest ihn trotzdem nicht aufhängen.",
       "Ähnlich bei der Sicherheitskontrolle am Flughafen. Fast alle Koffer sind harmlos. Eine Anlage, die alles durchwinkt, hat nahezu 100 Prozent Genauigkeit und ist unbrauchbar.",
     ]},
-    {h: "Die Konfusionsmatrix: vier Fälle", p: [
+    {h: "Die Konfusionsmatrix: vier Fälle",
+     kurz: "Zwei Fragen, vier Felder: Was war es wirklich, und was sagte das Modell? Hier am Spamfilter.",
+     visual: {"typ":"matrix","xtitel":"Modell sagt","ytitel":"Wirklich","x":["Spam","Kein Spam"],"y":["Spam","Kein Spam"],"zellen":[[{"text":"Treffer","ton":"gut"},{"text":"Übersehen","ton":"schlecht"}],[{"text":"Fehlalarm","ton":"schlecht"},{"text":"Richtig durch","ton":"gut"}]]},
+     p: [
       "Wer wissen will, wie ein Modell wirklich liegt, zählt die Fälle nach zwei Fragen: Was war es wirklich, und was hat das Modell gesagt? Daraus entstehen vier Felder. Das ist die [[konfusionsmatrix|Konfusionsmatrix]].",
     ], tabelle: {
       beschriftung: "Vier Felder am Beispiel Spamfilter",
@@ -277,11 +355,17 @@ bewertung: {
       ],
     }, merke: "„Positiv“ heißt nur: Das Modell schlägt an. Ob das gut oder schlecht ist, hängt von der Aufgabe ab.",
       alltag: "Ein medizinischer Schnelltest kennt dieselben vier Fälle: positiv und richtig, positiv und falsch, negativ und richtig, negativ und falsch. Wer sich nur einen Prozentwert merkt, übersieht, welcher Fehler wie oft vorkommt."},
-    {h: "Durchgerechnet: ein Spamfilter", p: [
+    {h: "Durchgerechnet: ein Spamfilter",
+     kurz: "97,2 Prozent klingen hervorragend. Doch 18 gute Mails sind weg und 10 Spammails kamen durch.",
+     visual: {"typ":"zahlen","kacheln":[{"wert":"97,2 %","label":"Genauigkeit","icon":"percent"},{"wert":"18","label":"gute Mails aussortiert","icon":"mail"},{"wert":"10","label":"Spammails übersehen","icon":"triangle-alert"}]},
+     p: [
       "Beispielzahlen, die nur zum Rechnen dienen: Ein Filter prüft 1000 Mails. 100 sind Spam, 900 sind gute Mails. Er erwischt 90 der Spammails (richtig positiv) und übersieht 10 (falsch negativ). Von den guten Mails stuft er 18 fälschlich als Spam ein (falsch positiv), 882 gehen richtig durch (richtig negativ).",
       "Die Genauigkeit beträgt (90 + 882) von 1000, also 97,2 Prozent. Das klingt hervorragend. Die Matrix zeigt aber, dass 18 gute Mails weggefiltert wurden und 10 Spammails durchkamen.",
     ], alltag: "Stell dir vor, die 18 aussortierten Mails enthalten eine Bewerbung und eine Rechnung mit Frist. Der Prozentwert sagt nichts darüber, wie schlimm das ist. Erst die Matrix zeigt, wo die Fehler stecken, und deine Aufgabe zeigt, welche davon weh tun."},
-    {h: "Precision und Recall in Worten", p: [
+    {h: "Precision und Recall in Worten",
+     kurz: "Precision: Wie viele Alarme stimmen? Recall: Wie viele echte Fälle werden gefunden?",
+     visual: {"typ":"balken","titel":"Kennzahlen im Spamfilter (Beispielwerte)","einheit":"%","max":100,"zeilen":[{"label":"Genauigkeit","wert":97.2,"farbe":"akzent"},{"label":"Precision","wert":83.3,"farbe":"orange"},{"label":"Recall","wert":90,"farbe":"gruen"}]},
+     p: [
       "Zwei Fragen lassen sich getrennt beantworten.",
     ], liste: [
       "**[[precision|Precision]]:** Wenn das Modell anschlägt, wie oft stimmt das? Im Beispiel 90 von 108 Alarmen, also gut 83 Prozent. Niedrig bedeutet viele Fehlalarme.",
@@ -296,22 +380,34 @@ bewertung: {
           ["Recall", "Wie viele echte Fälle werden gefunden?", "90 Prozent"],
         ],
       }},
-    {h: "Die Schwelle: Fehlalarme gegen Übersehenes", p: [
+    {h: "Die Schwelle: Fehlalarme gegen Übersehenes",
+     kurz: "Eine niedrige Schwelle findet mehr, schlägt aber öfter grundlos an. Was ein Fehler kostet, entscheidet.",
+     visual: {"typ":"skala","links":"Niedrige Schwelle","rechts":"Hohe Schwelle","marker":0.3,"label":"Mehr Funde, mehr Fehlalarme"},
+     p: [
       "Viele Modelle geben keine feste Antwort, sondern einen Wert, etwa „Schimmel zu 70 Prozent wahrscheinlich“. Wo du die Grenze für „Alarm“ ziehst, ist die [[schwelle|Schwelle]]. Senkst du sie, schlägt das Modell öfter an: Recall steigt, Precision sinkt. Hebst du sie, ist es umgekehrt.",
       "Es gibt keine allgemein richtige Schwelle. Sie hängt davon ab, was ein Fehler kostet.",
     ], alltag: [
       "Ein Prüfdienst bewertet Fotos von Wänden auf Schimmel. Beispielzahlen: 20 von 200 Wänden sind betroffen. Bei niedriger Schwelle findet das Modell 19 davon, schlägt aber bei 30 gesunden Wänden grundlos an. Bei hoher Schwelle findet es nur 14 und warnt bei 3 gesunden Wänden.",
       "Welche Einstellung passt? Ist ein Prüfbesuch billig und übersehener Schimmel teuer, wählst du die niedrige Schwelle. Ist jeder Besuch aufwendig, nimmst du die höhere. Die Technik liefert nur die Auswahl, die Folgen bewertest du.",
     ]},
-    {h: "Nur mit ungesehenen Daten testen", p: [
+    {h: "Nur mit ungesehenen Daten testen",
+     kurz: "Kennzahlen zählen nur auf Daten, die das Modell nie gesehen hat und die dem echten Einsatz ähneln.",
+     visual: {"typ":"vergleich","links":{"titel":"Auf Trainingsdaten","icon":"book-open","farbe":"orange","punkte":["Modell kennt sie","Zu gutes Ergebnis"]},"rechts":{"titel":"Auf ungesehenen Daten","icon":"shield-check","farbe":"gruen","punkte":["Ehrliche Note","Ähnlich dem Einsatz"]}},
+     p: [
       "Jede Kennzahl sagt nur etwas, wenn sie auf Daten berechnet wird, die das Modell nie gesehen hat. Auf Trainingsdaten sehen fast alle Modelle gut aus, weil sie die Beispiele kennen. Darum bleiben Testdaten bis zum Schluss unberührt (siehe {{daten|Daten, der Rohstoff}}).",
       "Achte außerdem darauf, dass die Testdaten dem echten Einsatz ähneln. Ein Modell, das mit Fotos aus dem Labor getestet wurde, kann in der Halle mit schlechtem Licht deutlich schlechter sein.",
     ], alltag: "Wer die Fahrprüfung nur auf dem leeren Übungsplatz ablegt, weiß danach nicht, wie er im Berufsverkehr fährt. Die Prüfung muss dem echten Einsatz ähneln."},
-    {h: "Der Vergleich mit dem heutigen Ablauf", p: [
+    {h: "Der Vergleich mit dem heutigen Ablauf",
+     kurz: "Eine Kennzahl nützt erst im Vergleich mit der Baseline: dem heutigen Ablauf oder einem einfachen Verfahren.",
+     visual: {"typ":"balken","titel":"Trefferquote (Beispielwerte)","einheit":"%","max":100,"zeilen":[{"label":"Zwei Menschen heute","wert":85,"farbe":"grau"},{"label":"Einfacher Zähler","wert":88,"farbe":"orange"},{"label":"Modell","wert":90,"farbe":"gruen"}],"unter":"Kleiner Abstand: Der Aufwand lohnt womöglich nicht."},
+     p: [
       "Eine Zahl wie „90 Prozent Recall“ ist erst nützlich, wenn du weißt, was ohne Modell passiert. Diese Vergleichsmarke heißt [[baseline|Baseline]]. Das kann ein einfaches Verfahren sein, eine feste Regel oder der heutige Ablauf mit Menschen.",
       "Prüfen zwei Menschen heute 85 von 100 Fällen richtig, ist ein Modell mit 90 interessant. Schafft ein einfacher Zähler schon 88, lohnt der Aufwand womöglich nicht. Miss den Vergleich auf denselben Daten und mit denselben Kennzahlen.",
     ], alltag: "Ein neues Navi mit „95 Prozent pünktlich“ klingt gut. Wenn du aber mit der alten Landkarte genauso pünktlich ankommst, hat sich nichts verbessert."},
-    {h: "Der Mensch in der Schleife", p: [
+    {h: "Der Mensch in der Schleife",
+     kurz: "Das Modell erledigt klare Fälle, unklare gehen an eine Person. Ihre Korrekturen werden neue Trainingsdaten.",
+     visual: {"typ":"kreis","mitte":"Mensch in der Schleife","knoten":[{"icon":"brain-circuit","text":"Modell prüft"},{"icon":"user-check","text":"Mensch klärt"},{"icon":"pencil","text":"Korrektur"},{"icon":"database","text":"Neue Trainingsdaten"}]},
+     p: [
       "Kein Modell trifft immer. Deshalb entscheidet man, was mit unsicheren Fällen passiert. Ein verbreitetes Muster: Das Modell erledigt klare Fälle selbst, unklare gehen an eine Person ([[mensch-schleife|Mensch in der Schleife]]). Die Personen werten die Ergebnisse aus, und aus ihren Korrekturen entstehen neue Trainingsdaten.",
       "Die Gesamtleistung des Ablaufs zählt, nicht nur die des Modells: Wie viele Fälle gehen an Menschen, wie viele Fehler schlüpfen durch, und wie schnell fällt Schlechtes auf?",
     ], alltag: "An einer Selbstbedienungskasse läuft der Einkauf meist von allein. Bei Alkohol oder einem Fehler kommt eine Mitarbeiterin dazu und entscheidet. Der Ablauf funktioniert, weil klar ist, wann sie gerufen wird."},
@@ -346,11 +442,17 @@ bewertung: {
   kurz: "Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire. Wie entsteht das, wie erkennst du es, und wer trägt die Verantwortung?",
   videos: ["verzerrung-fairness"],
   abschnitte: [
-    {h: "Was Verzerrung bedeutet", p: [
+    {h: "Was Verzerrung bedeutet",
+     kurz: "Ein Modell kann Muster nicht in erwünscht und unfair trennen. Einseitige Daten ergeben schiefe Entscheidungen.",
+     visual: {"typ":"ablauf","paket":true,"schritte":[{"icon":"database","text":"Einseitige Daten","sub":"manche fehlen","farbe":"orange"},{"icon":"brain-circuit","text":"Modell","sub":"lernt das Muster"},{"icon":"scale","text":"Schiefe Entscheidung","sub":"trifft Gruppen ungleich","farbe":"rot"}]},
+     p: [
       "Ein Modell lernt Muster aus Beispielen. Es kann nicht unterscheiden, welche Muster erwünscht und welche unfair sind. Bilden die Beispiele die Wirklichkeit einseitig ab oder haben Menschen früher unfair entschieden, übernimmt das Modell das. Diese Schlagseite heißt [[verzerrung|Verzerrung]]. Im Englischen sagt man Bias.",
       "Wichtig: Ein Modell hat keine Absicht. Das Problem liegt in den Daten, in der Aufgabe und im Einsatz, also an Stellen, die Menschen gestalten.",
     ], alltag: "Eine Umfrage, die nur morgens vor einem Bahnhof stattfindet, erreicht Pendler. Wer abends arbeitet oder zu Hause bleibt, kommt nicht vor. Die Ergebnisse sind sauber ausgezählt und trotzdem schief. Das Zählen war korrekt, die Auswahl nicht."},
-    {h: "Vier Wege, auf denen Verzerrung entsteht", p: [
+    {h: "Vier Wege, auf denen Verzerrung entsteht",
+     kurz: "Meist wirken mehrere Quellen zusammen: Daten, Auswahl, Etiketten und Rückkopplung.",
+     visual: {"typ":"raster","spalten":2,"zellen":[{"icon":"database","text":"Daten","sub":"Gruppen ungleich vertreten"},{"icon":"filter","text":"Auswahl","sub":"manche ausgeschlossen"},{"icon":"tag","text":"Etiketten","sub":"Urteile mit Vorurteil"},{"icon":"repeat","text":"Rückkopplung","sub":"Ausgabe prägt neue Daten"}]},
+     p: [
       "Die Quellen lassen sich grob in vier Gruppen sortieren. Meist wirken mehrere zusammen.",
     ], tabelle: {
       beschriftung: "Quellen von Verzerrung",
@@ -362,28 +464,46 @@ bewertung: {
         ["Rückkopplung", "Die Ausgabe des Modells beeinflusst, welche Daten später entstehen", "Mehr Kontrollen in einem Viertel führen zu mehr Funden dort, was wieder mehr Kontrollen auslöst"],
       ],
     }, merke: "Ein Modell, das auf der Vergangenheit lernt, schreibt die Vergangenheit fort. Das ist ohne Gegensteuern nicht neutral."},
-    {h: "Beispiel Bewerberauswahl", p: [
+    {h: "Beispiel Bewerberauswahl",
+     kurz: "Lernt ein Modell aus früheren Einstellungen, schreibt es deren Muster fort und das tausendfach.",
+     visual: {"typ":"kreis","mitte":"Altes Muster","knoten":[{"icon":"history","text":"Frühere Einstellungen"},{"icon":"tag","text":"Als Etikett"},{"icon":"brain-circuit","text":"Modell lernt"},{"icon":"list-filter","text":"Neue Vorauswahl"}]},
+     p: [
       "Ein Unternehmen lässt ein Modell Bewerbungen vorsortieren. Als Etikett dienen frühere Einstellungen: „eingeladen“ oder „abgelehnt“. Waren frühere Entscheidungen einseitig, lernt das Modell diese Einseitigkeit. Es erkennt Muster in Lebensläufen, die mit früheren Auswahlen zusammenhingen, etwa bestimmte Hochschulen, Berufswege oder Lücken im Lebenslauf.",
       "Das Modell nimmt dann Menschen aus dem Rennen, ohne dass jemand es so wollte. Weil es schnell und in Menge arbeitet, wiederholt sich der Fehler tausendfach.",
     ], alltag: "Ein Personalchef, der seit Jahren Menschen einstellt, die ihm ähnlich sind, bildet ein Muster. Gibt man einem Neuling seine Akten und sagt „lerne daraus“, übernimmt der Neuling das Muster samt Vorurteil."},
-    {h: "Beispiel Kreditscoring und Stellvertretermerkmale", p: [
+    {h: "Beispiel Kreditscoring und Stellvertretermerkmale",
+     kurz: "Wer ein sensibles Merkmal weglässt, hat es nicht los. Stellvertreter wie die Postleitzahl bringen es zurück.",
+     visual: {"typ":"netz","knoten":[{"id":"herkunft","text":"Herkunft (weggelassen)","icon":"user","x":8,"y":16,"farbe":"orange"},{"id":"plz","text":"Postleitzahl","icon":"map-pin","x":46,"y":56},{"id":"name","text":"Vorname","icon":"user","x":8,"y":90},{"id":"score","text":"Score","icon":"gauge","x":92,"y":50,"farbe":"rot"}],"kanten":[["herkunft","plz","hängt zusammen"],["name","herkunft","verrät"],["plz","score","fließt ein"],["name","score","fließt ein"]]},
+     p: [
       "Auch wenn man ein sensibles Merkmal wie Herkunft oder Geschlecht weglässt, kann ein Modell es über Stellvertreter rekonstruieren. Postleitzahl, Vorname oder Einkaufsverhalten hängen oft mit solchen Merkmalen zusammen. Das Modell nutzt sie, weil sie in den Daten Vorhersagekraft haben.",
       "Das Weglassen eines Merkmals genügt also nicht. Man muss die Ergebnisse nach Gruppen ansehen und fragen, ob einzelne Gruppen systematisch schlechter wegkommen.",
     ], alltag: "Ein Versicherer verzichtet darauf, nach der Herkunft zu fragen, rechnet aber mit der Wohngegend. Wenn bestimmte Gruppen in bestimmten Gegenden wohnen, kommt die Information durch die Hintertür herein."},
-    {h: "Beispiel Gesichtserkennung", p: [
+    {h: "Beispiel Gesichtserkennung",
+     kurz: "Eine hohe Gesamtgenauigkeit kann verdecken, dass eine kleine Gruppe oft falsch erkannt wird.",
+     visual: {"typ":"balken","titel":"Fehlerquote je Gruppe (Beispielwerte)","einheit":"%","max":12,"zeilen":[{"label":"Gruppe A","wert":1,"farbe":"gruen"},{"label":"Gruppe B","wert":2,"farbe":"gruen"},{"label":"Gruppe C","wert":9,"farbe":"rot"}],"unter":"Nur die Auswertung nach Gruppen zeigt es."},
+     p: [
       "Untersuchungen zu Gesichtserkennung haben gezeigt, dass die Fehlerquote zwischen Personengruppen unterschiedlich ausfallen kann, zum Beispiel nach Hautfarbe und Geschlecht. Eine häufige Ursache sind Trainingsdaten, in denen manche Gruppen deutlich seltener vorkommen.",
       "Eine Gesamtgenauigkeit verdeckt das. Liegt sie hoch, aber eine kleine Gruppe wird oft falsch erkannt, merkt es nur, wer die Ergebnisse getrennt nach Gruppen auswertet. Hat eine Fehlentscheidung Folgen, etwa eine falsche Verdächtigung, trifft sie diese Gruppe überproportional.",
     ]},
-    {h: "Erklärbarkeit und Transparenz", p: [
+    {h: "Erklärbarkeit und Transparenz",
+     kurz: "Je folgenreicher eine Entscheidung, desto mehr Begründung braucht sie.",
+     visual: {"typ":"skala","links":"Geringe Folgen","rechts":"Große Folgen","marker":0.85,"label":"Mehr Begründung nötig"},
+     p: [
       "Wer von einer Entscheidung betroffen ist, will wissen, warum. Bei Netzen ist das schwer, weil sie [[blackbox|Blackboxes]] sind. Die Anforderung bleibt trotzdem bestehen: Je folgenreicher die Entscheidung, desto mehr Begründung braucht sie.",
       "Mehrere Hebel helfen. Bei wichtigen Entscheidungen kann man einfachere, besser erklärbare Verfahren wählen. Man kann festhalten, welche Daten und welche Version eines Modells entschieden haben. Und man kann Betroffenen sagen, dass ein Modell beteiligt war und an wen sie sich wenden können.",
     ], alltag: "Ein Arzt, der „Sie haben das, weil das Gerät es sagt“ antwortet, überzeugt niemanden. Er nennt Messwerte und Gründe. Ähnlich erwartet man von einem System, dass sich Entscheidungen nachvollziehen lassen."},
-    {h: "Verantwortung und menschliche Entscheidung", p: [
+    {h: "Verantwortung und menschliche Entscheidung",
+     kurz: "Ein Modell kann nicht haften. Es bereitet vor, Menschen und Organisationen verantworten.",
+     visual: {"typ":"schichten","richtung":"stapel","ebenen":[{"icon":"user-check","text":"Mensch mit Befugnis","sub":"kann überstimmen"},{"icon":"building-2","text":"Organisation","sub":"trägt die Verantwortung"},{"icon":"brain-circuit","text":"Modell","sub":"bereitet nur vor"}]},
+     p: [
       "Ein Modell kann nicht haften. Verantwortlich sind Menschen und Organisationen: die, die es einsetzen, und die, die es liefern. Wer ein Modell in einen Ablauf einbaut, trägt Verantwortung für die Folgen, auch wenn er das Modell nicht selbst gebaut hat.",
       "Deshalb gehört vor den Einsatz die Klärung: Wer wird informiert, wenn etwas schiefgeht? Wer darf ein Ergebnis überstimmen? Wo wird festgehalten, was entschieden wurde? Ohne diese Antworten bleibt bei einem Fehler unklar, wer ihn beheben muss.",
       "Hat eine Entscheidung Folgen für Menschen, etwa bei Einstellung, Kredit, Leistung oder Überwachung, sollte ein Modell vorbereiten und nicht allein entscheiden. Die Person, die es überstimmen kann, braucht dazu Zeit, Wissen und die Erlaubnis. Sonst drückt sie nur auf „Bestätigen“. Für bestimmte Entscheidungen verlangt das Recht sogar menschliche Beteiligung. Mehr dazu auf der Seite {{recht|Recht und Regeln}}.",
     ], alltag: "In einem Flugzeug steuert der Autopilot, doch die Pilotin trägt die Verantwortung und kann jederzeit eingreifen. Sie ist geschult und hat die Befugnis. Genau so sollte es beim Einsatz von Modellen sein, die über Menschen mitentscheiden."},
-    {h: "Prüfen vor dem Einsatz: eine Fragenliste", p: [
+    {h: "Prüfen vor dem Einsatz: eine Fragenliste",
+     kurz: "Sieben Fragen klären Folgen, Datenherkunft, Gruppenunterschiede, Einspruch und Aufsicht.",
+     visual: {"typ":"raster","spalten":4,"zellen":[{"icon":"target","text":"Folgen","sub":"wer trägt den Fehler?"},{"icon":"database","text":"Datenherkunft","sub":"wer fehlt?"},{"icon":"users","text":"Gruppen","sub":"Unterschiede?"},{"icon":"link","text":"Stellvertreter","sub":"versteckte Merkmale?"},{"icon":"message-square","text":"Einspruch","sub":"widersprechen?"},{"icon":"user-check","text":"Überstimmen","sub":"wirklich möglich?"},{"icon":"eye","text":"Beobachtung","sub":"wer greift ein?"}]},
+     p: [
       "Diese Fragen helfen vor jedem Einsatz, besonders bei Entscheidungen über Menschen:",
     ], liste: [
       "Wofür genau wird das Modell eingesetzt, und welche Folgen hat ein Fehler für wen?",
@@ -425,14 +545,22 @@ recht: {
   kurz: "Welche Regeln gelten, wenn du KI einsetzt? Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.",
   videos: ["recht-ueberblick"],
   abschnitte: [
-    {h: "Wichtig vorab: keine Rechtsberatung", p: [
+    {h: "Wichtig vorab: keine Rechtsberatung",
+     kurz: "Diese Seite erklärt Begriffe und Grundgedanken. Für echte Projekte fragst du Fachleute und prüfst aktuelle Quellen.",
+     p: [
       "Diese Seite erklärt Begriffe und Grundgedanken. Sie ersetzt keine Rechtsberatung. Gesetze ändern sich, Auslegungen ebenfalls, und im Einzelfall kommt es auf die Umstände an. Für ein echtes Projekt sprichst du mit der Datenschutzbeauftragten oder einer Anwältin, und du prüfst aktuelle, offizielle Quellen.",
     ], merke: "Diese Seite ist keine Rechtsberatung. Verbindlich sind nur die Gesetzestexte und die Auskunft von Fachleuten."},
-    {h: "Datenschutz-Grundverordnung in Grundzügen", p: [
+    {h: "Datenschutz-Grundverordnung in Grundzügen",
+     kurz: "Personenbezogene Daten darf nur verarbeiten, wer dafür eine Rechtsgrundlage hat, auch beim Training.",
+     visual: {"typ":"ablauf","paket":true,"schritte":[{"icon":"user","text":"Personenbezogene Daten","sub":"Name, Foto, Stimme"},{"icon":"scale","text":"Rechtsgrundlage","sub":"Einwilligung, Vertrag, Interesse"},{"icon":"circle-check","text":"Verarbeitung","sub":"erlaubt","farbe":"gruen"}]},
+     p: [
       "Die [[dsgvo|Datenschutz-Grundverordnung]] gilt in der Europäischen Union für den Umgang mit [[personenbezogen|personenbezogenen Daten]]. Das sind Angaben, die sich auf eine Person beziehen lassen: Name, Foto, Stimme, Kennzahl, auch Kombinationen von Merkmalen. Sie gilt, sobald solche Daten verarbeitet werden, auch beim Training oder Betrieb eines Modells.",
       "Die Grundidee: Du darfst solche Daten nur verarbeiten, wenn du dafür eine Rechtsgrundlage hast, etwa eine Einwilligung, einen Vertrag oder ein berechtigtes Interesse. Ohne Grundlage ist die Verarbeitung nicht erlaubt.",
     ], alltag: "Ein Handwerksbetrieb darf die Adresse eines Kunden speichern, um die Rechnung zu schicken. Das ist durch den Vertrag gedeckt. Derselbe Betrieb darf die Adresse nicht einfach an Werbefirmen weitergeben."},
-    {h: "Die zentralen Grundsätze", p: [
+    {h: "Die zentralen Grundsätze",
+     kurz: "Sechs Grundsätze ziehen sich durch jedes Projekt, vom Zweck bis zur Sicherheit.",
+     visual: {"typ":"raster","spalten":3,"zellen":[{"icon":"target","text":"Zweckbindung","sub":"nur für den Zweck"},{"icon":"scissors","text":"Datenminimierung","sub":"nur das Nötige"},{"icon":"eye","text":"Transparenz","sub":"Betroffene wissen Bescheid"},{"icon":"circle-check","text":"Richtigkeit","sub":"Daten stimmen"},{"icon":"clock","text":"Speicherbegrenzung","sub":"nicht länger als nötig"},{"icon":"lock","text":"Sicherheit","sub":"Schutz vor Zugriff"}]},
+     p: [
       "Ein paar Grundsätze ziehen sich durch alle Projekte:",
     ], tabelle: {
       beschriftung: "Datenschutzgrundsätze in einfacher Sprache",
@@ -446,11 +574,17 @@ recht: {
         ["Sicherheit", "Schutz vor Verlust und fremdem Zugriff", "Zugriffsrechte, Verschlüsselung"],
       ],
     }, alltag: "Du gibst dem Handwerker den Wohnungsschlüssel, damit er die Heizung repariert. Er soll nur diese Wohnung betreten (Zweck), nur das Nötige anfassen (Minimierung), und den Schlüssel danach zurückgeben (Speicherbegrenzung). Genau so gehst du mit Daten um."},
-    {h: "Dienstleister und Rechte Betroffener", p: [
+    {h: "Dienstleister und Rechte Betroffener",
+     kurz: "Externe Dienste brauchen einen Vertrag. Du bleibst für die Daten verantwortlich.",
+     visual: {"typ":"ablauf","paket":false,"schritte":[{"icon":"building-2","text":"Du","sub":"bleibst verantwortlich"},{"icon":"file-text","text":"Vertrag","sub":"legt fest, was erlaubt ist"},{"icon":"server","text":"Dienstleister","sub":"arbeitet nach Weisung"}]},
+     p: [
       "Setzt du einen externen Dienst ein, der in deinem Auftrag Daten verarbeitet, liegt eine [[auftragsverarbeitung|Auftragsverarbeitung]] vor. Dafür braucht es einen Vertrag, der festlegt, was der Dienstleister darf. Du bleibst für die Daten verantwortlich. Werden Daten außerhalb der EU verarbeitet, gelten zusätzliche Anforderungen.",
       "Betroffene haben Rechte. Dazu gehören grob: Auskunft, was über sie gespeichert ist, Berichtigung falscher Daten, Löschung unter bestimmten Bedingungen und Widerspruch. Außerdem gibt es einen Schutz davor, dass Entscheidungen mit erheblicher Wirkung ausschließlich automatisiert fallen, mit Ausnahmen. Für riskante Verarbeitungen kann eine Datenschutz-Folgenabschätzung nötig sein.",
     ], alltag: "Gibst du Wäsche in eine Reinigung, bleibt es deine Wäsche. Die Reinigung darf sie nur so behandeln, wie ihr es abgesprochen habt. Mit Auftragsverarbeitern ist es ähnlich: Sie arbeiten nach deiner Weisung, du haftest für das Ergebnis mit."},
-    {h: "Die EU-KI-Verordnung: Risiko bestimmt die Pflichten", p: [
+    {h: "Die EU-KI-Verordnung: Risiko bestimmt die Pflichten",
+     kurz: "Je größer das Risiko für Menschen, desto strenger die Regeln. Vier Stufen, vom Verbot bis zum Freiraum.",
+     visual: {"typ":"schichten","richtung":"stapel","ebenen":[{"icon":"ban","text":"Verboten","sub":"unannehmbar"},{"icon":"triangle-alert","text":"Hochrisiko","sub":"strenge Pflichten"},{"icon":"eye","text":"Transparenz","sub":"KI kenntlich machen"},{"icon":"circle-check","text":"Minimales Risiko","sub":"kaum Pflichten"}]},
+     p: [
       "Die EU-KI-Verordnung regelt den Einsatz von KI-Systemen mit einem risikobasierten Ansatz. Je größer das Risiko für Menschen und Grundrechte, desto strenger die Regeln. Sie unterscheidet grob vier Stufen.",
     ], tabelle: {
       beschriftung: "Risikostufen im Überblick",
@@ -462,15 +596,24 @@ recht: {
         ["Minimales Risiko", "Kaum zusätzliche Pflichten", "Spamfilter, einfache Spielelemente"],
       ],
     }},
-    {h: "Pflichten wachsen mit dem Risiko", p: [
+    {h: "Pflichten wachsen mit dem Risiko",
+     kurz: "Die Pflichten wachsen mit dem möglichen Schaden. Einzelheiten und Fristen ändern sich, prüfe aktuelle Quellen.",
+     visual: {"typ":"skala","links":"Kleines Risiko","rechts":"Großes Risiko","marker":0.82,"label":"Pflichten wachsen"},
+     p: [
       "Bei Hochrisiko-Systemen verlangt die Verordnung unter anderem ein Risikomanagement, geprüfte Datenqualität, Dokumentation, Protokollierung, menschliche Aufsicht und Genauigkeit sowie Robustheit. Für Anbieter kommen weitere Pflichten hinzu als für Betreiber, die ein Produkt nur einsetzen. Auch für sehr große, vielseitige Modelle gibt es eigene Vorgaben.",
       "Fristen, Einzelheiten und ergänzende Leitlinien ändern sich noch. Deshalb steht hier nur das Prinzip. Für ein Projekt prüfst du die aktuelle Fassung und aktuelle Hinweise der zuständigen Stellen. Dazu zählt auch, ob dein Einsatz überhaupt unter eine Stufe fällt und ob die Beschäftigten ausreichend geschult sind.",
     ], alltag: "Ein Elektriker braucht für eine Steckdose weniger Prüfungen als für einen Aufzug oder eine Hochspannungsleitung. Je größer der mögliche Schaden, desto strenger die Vorschriften. Die KI-Verordnung folgt demselben Gedanken."},
-    {h: "Urheberrecht: offene Fragen", p: [
+    {h: "Urheberrecht: offene Fragen",
+     kurz: "Zwei Fragen sind offen: Darf geschütztes Material ins Training, und wem gehört, was ein Modell erzeugt?",
+     visual: {"typ":"ablauf","paket":false,"schritte":[{"icon":"book-open","text":"Geschützte Werke"},{"icon":"graduation-cap","text":"Training","sub":"Frage 1: erlaubt?","farbe":"orange"},{"icon":"brain-circuit","text":"Modell"},{"icon":"file-text","text":"Ausgabe","sub":"Frage 2: wem gehört sie?","farbe":"orange"}]},
+     p: [
       "Zwei Fragen sind noch nicht überall geklärt. Erstens: Dürfen urheberrechtlich geschützte Werke zum Training von Modellen genutzt werden, und unter welchen Bedingungen? Zweitens: Wem gehören Inhalte, die ein Modell erzeugt, und wann entsteht überhaupt ein Schutz? Dazu kommen Fälle, in denen Ausgaben geschützten Werken ähneln.",
       "Gerichte und Gesetzgeber beschäftigen sich damit, und die Lage kann je nach Land verschieden sein. Für den Alltag heißt das: Prüfe bei geschützten Inhalten, woher die Daten stammen und welche Lizenzen gelten. Kennzeichne erzeugte Inhalte, wo es gefordert wird, und lass Wichtiges prüfen.",
     ], alltag: "Ein Koch lernt aus hundert Kochbüchern und entwickelt eigene Rezepte. Das ist erlaubt. Ob dasselbe gilt, wenn ein Modell Millionen Bücher verarbeitet und Texte im Stil bestimmter Autoren schreibt, ist genau die offene Frage. Der Vergleich hinkt, weil ein Modell Texte in einem Umfang aufnimmt, den kein Mensch schaffen würde."},
-    {h: "Im Betrieb: Dokumentation und Zuständigkeiten", p: [
+    {h: "Im Betrieb: Dokumentation und Zuständigkeiten",
+     kurz: "Halte fest, was das System tut und wer es betreut. Wichtig ist auch, wer es abschalten darf.",
+     visual: {"typ":"raster","spalten":3,"zellen":[{"icon":"file-text","text":"Zweck","sub":"wofür eingesetzt"},{"icon":"database","text":"Daten","sub":"welche genutzt"},{"icon":"git-branch","text":"Version","sub":"welche läuft"},{"icon":"user-round","text":"Betreuer","sub":"wer ist zuständig"},{"icon":"bell","text":"Fehler melden","sub":"an wen"},{"icon":"power","text":"Abschalten","sub":"wer darf es"}]},
+     p: [
       "Gute Ordnung hilft bei Recht und Praxis gleichermaßen. Halte fest, wofür ein System eingesetzt wird, welche Daten es nutzt, welche Version läuft, wer es betreut und wie Fehler gemeldet werden. Ein Verzeichnis der Verarbeitungen, eine kurze Beschreibung je Modell und klare Ansprechpartner reichen für den Anfang weit.",
       "Lege fest, wer Auskunftsanfragen beantwortet, wer Vorfälle meldet und wer ein Modell abschalten darf. Das Abschalten ist wichtig: Ein System, das man nicht stoppen kann, ist ein Risiko.",
     ], alltag: "Ein Hausmeister weiß, wo der Hauptschalter und das Wasserventil sind. Das steht in einem Plan an der Tür. Bei einem Rohrbruch sucht niemand erst."},

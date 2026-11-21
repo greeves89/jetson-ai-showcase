@@ -185,14 +185,14 @@
   "rag-embedding": {
    "titel": "Vektorisieren und Embeddings · KI-Labor",
    "ueberschrift": "Vektorisieren und Embeddings",
-   "beschreibung": "Wie bringt man einen Computer dazu, Bedeutung zu vergleichen?",
+   "beschreibung": "Wie vergleicht ein Computer Bedeutung?",
    "typ": "seite",
    "datei": "content-rag.js"
   },
   "rag-chunking": {
    "titel": "Chunking: Text in sinnvolle Stücke teilen · KI-Labor",
    "ueberschrift": "Chunking: Text in sinnvolle Stücke teilen",
-   "beschreibung": "Ein Dokument ist zu groß, um es als Ganzes zu suchen.",
+   "beschreibung": "Ein Dokument ist zu groß für die Suche am Stück.",
    "typ": "seite",
    "datei": "content-rag.js"
   },
@@ -206,14 +206,14 @@
   "rag-reranking": {
    "titel": "Reranking: erst grob, dann genau · KI-Labor",
    "ueberschrift": "Reranking: erst grob, dann genau",
-   "beschreibung": "Die erste Suche muss schnell sein und sortiert deshalb grob.",
+   "beschreibung": "Die erste Suche sortiert grob, aber schnell.",
    "typ": "seite",
    "datei": "content-rag.js"
   },
   "rag-bewertung": {
    "titel": "RAG messen und verbessern · KI-Labor",
    "ueberschrift": "RAG messen und verbessern",
-   "beschreibung": "Ein RAG-System, das bei drei Beispielfragen gut klingt, ist noch nicht gut.",
+   "beschreibung": "Drei gute Beispielantworten beweisen nichts.",
    "typ": "seite",
    "datei": "content-rag.js"
   },
@@ -353,7 +353,7 @@
   "uc-gesundheit-auffaellig": {
    "titel": "Zweitmeinung: Zellprobe auffällig oder unauffällig · KI-Labor",
    "ueberschrift": "Zweitmeinung: Zellprobe auffällig oder unauffällig",
-   "beschreibung": "Bei sehr vielen Proben soll eine Software vorsortieren und auffällige nach vorn legen.",
+   "beschreibung": "Eine Software sortiert viele Proben vor und legt Auffälliges nach vorn.",
    "typ": "seite",
    "datei": "content-usecases.js"
   },

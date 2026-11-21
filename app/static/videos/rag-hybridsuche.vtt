@@ -1,0 +1,59 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.890
+Du sagst im Restaurant: Ich
+suche etwas Italienisches.
+
+00:00:05.040 --> 00:00:10.070
+Der Kellner empfiehlt Pizza und Pasta,
+obwohl du keins dieser Wörter genannt hast.
+
+00:00:10.220 --> 00:00:12.530
+Das ist Suche nach Bedeutung.
+
+00:00:13.780 --> 00:00:21.290
+Beide Methoden haben ihre Stärken. Die Stichwortsuche
+trifft genaue Wörter. Die Vektorsuche trifft den Sinn.
+
+00:00:21.440 --> 00:00:26.310
+Bei der Hybridsuche laufen beide, und
+jede liefert eine eigene Rangliste.
+
+00:00:27.560 --> 00:00:30.670
+Die Punkte beider Listen
+kann man nicht addieren.
+
+00:00:30.820 --> 00:00:35.370
+Die eine rechnet in Zehnern, die
+andere in Bruchteilen von eins.
+
+00:00:35.520 --> 00:00:38.150
+Also schaut man nur auf die Platzierung.
+
+00:00:39.400 --> 00:00:46.670
+Jede Platzierung bringt Punkte, oben mehr, unten
+weniger. Die Punkte aus beiden Listen werden addiert.
+
+00:00:46.820 --> 00:00:53.290
+Steht ein Text in beiden Listen weit oben, bekommt
+er zweimal ordentlich Punkte, und der gewinnt.
+
+00:00:54.540 --> 00:00:57.890
+Du kannst festlegen,
+welche Methode mehr zählt.
+
+00:00:58.040 --> 00:01:04.750
+Viele Codes und Namen: mehr Stichwort.
+Fragen in Alltagssprache: mehr Vektor.
+
+00:01:04.900 --> 00:01:08.410
+Und du bestimmst, wie viele
+Treffer ans Modell gehen.
+
+00:01:09.660 --> 00:01:14.770
+Mit Filtern grenzt du vorher ein, etwa
+auf ein Jahr oder eine Abteilung.
+
+00:01:14.920 --> 00:01:20.110
+Wie du das misst, zeigt die Seite Suchen
+und später die Seite zur Bewertung.

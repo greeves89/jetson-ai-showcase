@@ -1,0 +1,60 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.890
+Ein Auto-Inserat zeigt, was
+Daten für eine KI sind.
+
+00:00:05.040 --> 00:00:12.390
+Baujahr, Kilometer und Zustand sind die Merkmale.
+Der Preis ist das Etikett, die gesuchte Antwort.
+
+00:00:12.540 --> 00:00:17.810
+Aus vielen Inseraten lernt das Modell,
+welcher Preis zu welchen Merkmalen passt.
+
+00:00:19.060 --> 00:00:25.610
+Für ein Modell ist alles am Ende Zahlen:
+Tabellen, Fotos, Text, Ton, Messwerte.
+
+00:00:25.760 --> 00:00:31.110
+Ein Foto sind Helligkeitswerte. Ein
+Ton ist eine Folge von Messwerten.
+
+00:00:32.360 --> 00:00:35.630
+Das Modell kann nicht
+prüfen, ob Daten stimmen.
+
+00:00:35.780 --> 00:00:40.090
+Fehler, Lücken und doppelte
+Zeilen lernt es einfach mit.
+
+00:00:40.240 --> 00:00:45.830
+Ein Tippfehler im Preis wird so zur Regel.
+Prüfe die Daten, bevor du trainierst.
+
+00:00:47.080 --> 00:00:50.750
+Wie viele Daten reichen? Vielfalt vor Menge.
+
+00:00:50.900 --> 00:00:54.890
+Zehn verschiedene Fälle helfen
+mehr als tausend gleiche.
+
+00:00:55.040 --> 00:01:01.350
+Ein Modell kennt nur, was es gesehen hat.
+Fehlen ganze Gruppen, versagt es genau dort.
+
+00:01:02.600 --> 00:01:08.350
+Teile die Daten in drei Töpfe.
+Üben, Probeklausur, echte Klausur.
+
+00:01:08.500 --> 00:01:14.730
+Der Test bleibt bis zum Schluss unberührt. Er
+zeigt ehrlich, wie gut das Modell wirklich ist.
+
+00:01:15.980 --> 00:01:20.290
+Personenbezogene Daten brauchen
+einen Zweck und Sparsamkeit.
+
+00:01:20.440 --> 00:01:26.190
+Und Daten altern. Wer sie nicht pflegt, merkt
+es erst, wenn das Modell schlechter wird.

@@ -1,12 +1,24 @@
 <div class="seitenbreite"><p class="ueber">Sehen</p><h1>Objekterkennung</h1><p class="lead">Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.</p>
 <div class="text">
 <h2 class="abs">Ein Blick reicht</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Ganzes Bild (ein Durchgang)</li><li>YOLOX</li><li>Ort und Klasse (gleichzeitig)</li></ul></figure>
+<p class="kurz">Das Netz betrachtet das ganze Bild einmal und sagt zugleich, wo etwas ist und was es ist.</p>
 <p>Hier läuft YOLOX, ein Verfahren aus der YOLO-Familie. Das Netz betrachtet das ganze Bild einmal und sagt gleichzeitig, wo Objekte sind und was sie sind. Deshalb ist es schnell genug für Video.</p>
 <h2 class="abs">Rahmen, Klasse, Sicherheit</h2>
-<p>Für jedes Objekt liefert das Netz einen Rahmen, eine Klasse aus 80 Alltagsklassen (Person, Tasse, Laptop, Stuhl und so weiter) und eine Konfidenz: wie sicher es sich ist.</p><p>Der Regler <strong>Schwelle</strong> legt fest, ab welcher Konfidenz ein Rahmen angezeigt wird. Niedrig: mehr Treffer, aber auch mehr Fehlalarme. Hoch: weniger Fehlalarme, dafür werden Objekte übersehen. Diese Abwägung gibt es bei jeder Erkennung, auch in der Fertigung. Probiere es live aus.</p>
+<figure class="visual"><img src="/static/beispiele/fotos/handel-tassen-tisch.jpg" alt="Mehrere Tassen auf einem Tisch"><figcaption>Beispielfoto: Pro Objekt entstehen Rahmen, Klasse und Konfidenz</figcaption></figure>
+<p class="kurz">Jedes Objekt bekommt einen Rahmen, eine von 80 Klassen und eine Konfidenz zwischen 0 und 1.</p>
+<p>Für jedes Objekt liefert das Netz einen Rahmen, eine Klasse aus 80 Alltagsklassen (Person, Tasse, Laptop, Stuhl und so weiter) und eine Konfidenz: wie sicher es sich ist.</p>
+<h2 class="abs">Die Schwelle: Treffer gegen Fehlalarme</h2>
+<figure class="visual"><figcaption>Skala</figcaption><ul><li>Mehr Treffer, mehr Fehlalarme bis Weniger Fehlalarme, mehr übersehen, Marker bei 50 Prozent: Regler Schwelle</li></ul></figure>
+<p class="kurz">Ab welcher Konfidenz ein Rahmen erscheint, bestimmst du. Niedrig findet mehr, hoch irrt weniger.</p>
+<p>Der Regler <strong>Schwelle</strong> legt fest, ab welcher Konfidenz ein Rahmen angezeigt wird. Niedrig: mehr Treffer, aber auch mehr Fehlalarme. Hoch: weniger Fehlalarme, dafür werden Objekte übersehen. Diese Abwägung gibt es bei jeder Erkennung, auch in der Fertigung. Probiere es live aus.</p>
 <h2 class="abs">Doppelte Rahmen aufräumen</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Vorher: Mehrere Rahmen je Objekt, Leicht versetzt</li><li>Rechts: Nach NMS: Sicherster Rahmen bleibt, Überlappende fallen weg</li></ul></figure>
+<p class="kurz">Das Netz meldet ein Objekt oft mehrfach. Die Aufräumung behält nur den sichersten Rahmen.</p>
 <p>Das Netz meldet dasselbe Objekt oft mehrfach mit leicht versetzten Rahmen. Ein Aufräumschritt, die Non-Maximum Suppression, behält den sichersten und wirft überlappende weg.</p>
 <h2 class="abs">Wie schnell ist das</h2>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Labor im Browser</li><li>YOLOX (Modell)</li><li>OpenCV (heute genutzt)</li><li>Prozessor (GPU mit TensorRT möglich)</li></ul></figure>
+<p class="kurz">Hier rechnet der Prozessor mit OpenCV. Das Erkennen braucht den größten Teil der Zeit.</p>
 <p>Das Modell läuft hier bewusst einfach über OpenCV auf dem Prozessor. Der Streifen über dem Bild zeigt, dass das Erkennen den größten Teil der Zeit braucht. Auf der GPU des Jetson ließe sich das mit TensorRT deutlich beschleunigen.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Zählen und Prüfen am Band, Lager- und Regalkontrolle, Flächen- und Verkehrsmonitoring, Sicherheit auf Baustellen.</p><ul><li>Paletten im Lager zählen</li><li>Prüfen, ob Schutzausrüstung getragen wird</li></ul></div></section>

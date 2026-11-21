@@ -1,10 +1,16 @@
 <div class="seitenbreite"><p class="ueber">Sehen</p><h1>Bildmodell anlernen</h1><p class="lead">Zeige dem Jetson Beispiele, und er erkennt sie danach selbst. In einer halben Minute, ohne Training.</p>
 <div class="text">
 <h2 class="abs">Was beim Aufnehmen passiert</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Beispielbild (mehrmals pro Sekunde)</li><li>MobileNet (vortrainiert)</li><li>1000 Zahlen (Embedding)</li><li>Speichern (mit Klassenname)</li></ul></figure>
+<p class="kurz">Jedes Beispiel wird zu 1000 Zahlen und mit dem Klassennamen gespeichert. Mehr geschieht nicht.</p>
 <p>Halte den Knopf einer Klasse gedrückt, dann nimmt der Jetson mehrmals pro Sekunde Beispiele auf. Jedes Bild geht durch ein vortrainiertes neuronales Netz (MobileNet). Heraus kommt eine Liste von 1000 Zahlen, ein Embedding. Sie wird mit dem Namen deiner Klasse gespeichert. Mehr passiert nicht.</p>
 <h2 class="abs">Was beim Erkennen passiert</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>1000 Zahlen je Bild</li><li>3 ähnlichste Beispiele stimmen ab</li><li>0 Änderungen am Netz</li></ul></figure>
+<p class="kurz">Ein neues Bild wird verglichen, die drei ähnlichsten Beispiele stimmen ab. Das Netz bleibt unverändert.</p>
 <p>Ein neues Bild wird ebenfalls zu 1000 Zahlen. Der Jetson misst den Abstand zu allen gespeicherten Beispielen und lässt die drei ähnlichsten abstimmen (k nächste Nachbarn). Die Balken zeigen, wie ähnlich das aktuelle Bild jeder Klasse ist. Nichts im Netz wird dabei verändert. Deshalb ist es sofort einsatzbereit.</p>
 <h2 class="abs">So werden die Ergebnisse besser</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>10 bis 20 (Beispiele je Klasse)</li><li>Variieren (Winkel, Abstand, Licht)</li><li>Klasse „nichts“ (leerer Hintergrund)</li></ul></figure>
+<p class="kurz">Vielfalt schlägt Menge: wenige Beispiele aus vielen Lagen helfen mehr als viele gleiche.</p>
 
 <ul><li>10 bis 20 Beispiele pro Klasse reichen für den Anfang.</li><li>Variiere Winkel, Abstand und Licht, sonst lernt das Modell nur diese eine Haltung.</li><li>Eine Klasse „nichts“ mit leerem Hintergrund hilft, Fehlalarme zu vermeiden.</li></ul>
 </div>

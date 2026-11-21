@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.570
+Drei Fragen, drei gute Antworten. Fertig?
+
+00:00:04.720 --> 00:00:09.590
+Nein. Dann fragt jemand etwas
+anderes, und die Antwort ist falsch.
+
+00:00:09.740 --> 00:00:13.730
+Mit wenigen Beispielen siehst du
+nur, dass es manchmal klappt.
+
+00:00:14.980 --> 00:00:21.530
+Darum baust du ein Testset. Du sammelst echte Fragen
+und notierst bei jeder, wo die Antwort steht.
+
+00:00:21.680 --> 00:00:24.070
+Einige Dutzend reichen für den Anfang.
+
+00:00:24.220 --> 00:00:27.730
+Nimm auch Fragen auf, auf
+die es keine Antwort gibt.
+
+00:00:28.980 --> 00:00:34.490
+Dann misst du die Suche. Wie oft liegt die
+richtige Stelle unter den ersten fünf Treffern?
+
+00:00:34.640 --> 00:00:40.630
+Vierzig von fünfzig Fragen heißt achtzig
+Prozent. Je weiter oben, desto besser.
+
+00:00:41.880 --> 00:00:44.590
+Dann misst du die Antwort. Stimmt sie?
+
+00:00:44.740 --> 00:00:48.090
+Steht jede Aussage wirklich
+im vorgelegten Text?
+
+00:00:48.240 --> 00:00:52.950
+Eine Aussage ohne Beleg heißt:
+Das Modell hat etwas erfunden.
+
+00:00:54.200 --> 00:00:56.750
+Beim Verbessern fängst du vorn an.
+
+00:00:56.900 --> 00:01:02.970
+Erst Daten und Stücke, dann die Suche,
+dann der Reranker, zuletzt das Modell.
+
+00:01:03.120 --> 00:01:09.830
+Wie in der Werkstatt: erst die Reifen prüfen,
+dann den Motor. Ändere immer nur eine Sache.
+
+00:01:11.080 --> 00:01:17.070
+Und denk an die Rechte. Wer was finden darf,
+wird vor der Suche geprüft, nicht danach.
+
+00:01:17.220 --> 00:01:22.810
+Halte die Dokumente aktuell und lies die
+Protokolle. Sie liefern deine nächsten Testfragen.

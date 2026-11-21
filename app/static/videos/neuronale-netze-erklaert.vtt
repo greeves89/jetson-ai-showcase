@@ -1,0 +1,62 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.650
+Ein Team stimmt ab. Manche
+Stimmen zählen mehr.
+
+00:00:04.800 --> 00:00:06.630
+Das ist ein Neuron.
+
+00:00:06.780 --> 00:00:10.930
+Jeder gibt eine Stimme ab, aber
+nicht jede zählt gleich viel.
+
+00:00:12.180 --> 00:00:15.530
+Jede Eingabe wird mit einem
+Gewicht multipliziert.
+
+00:00:15.680 --> 00:00:17.350
+Alles wird addiert.
+
+00:00:17.500 --> 00:00:24.770
+Ein dickes Gewicht heißt: Diese Eingabe ist
+wichtig. Ein dünnes heißt: kaum von Bedeutung.
+
+00:00:26.020 --> 00:00:29.210
+Eine Schwelle entscheidet,
+ob das Neuron meldet.
+
+00:00:29.360 --> 00:00:31.190
+Wie bei der Fußgängerampel.
+
+00:00:31.340 --> 00:00:37.410
+Liegt die Summe unter der Schwelle, bleibt es
+still. Darüber gibt das Neuron ein Signal weiter.
+
+00:00:38.660 --> 00:00:41.130
+Viele Neuronen bilden Schichten.
+
+00:00:41.280 --> 00:00:46.710
+Die erste findet Kanten, die nächste
+Formen, die letzte ein Gesicht.
+
+00:00:46.860 --> 00:00:49.650
+Das Signal wandert von Schicht zu Schicht.
+
+00:00:50.900 --> 00:00:53.290
+Eine Gerade trennt nicht alles.
+
+00:00:53.440 --> 00:00:56.630
+Mehrere Schichten ziehen gebogene Grenzen.
+
+00:00:56.780 --> 00:01:04.530
+Ein einzelnes Neuron zieht nur eine gerade Linie. Das reicht
+für einfache Fälle, aber nicht für Bilder oder Sprache.
+
+00:01:05.780 --> 00:01:11.290
+Die Gewichte heißen Parameter. Echte
+Netze haben Millionen bis Milliarden.
+
+00:01:11.440 --> 00:01:18.230
+Das Wissen steckt verteilt in den Zahlen. Darum lässt
+sich schwer erklären, warum ein Netz so entscheidet.

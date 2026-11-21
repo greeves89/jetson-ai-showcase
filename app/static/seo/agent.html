@@ -1,11 +1,17 @@
 <div class="seitenbreite"><p class="ueber">Agenten</p><h1>Agent mit Werkzeugen</h1><p class="lead">Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.</p>
 <div class="text">
 <h2 class="abs">Ein Agent ist ein Modell mit Werkzeugen</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>rechne (Zahlen, einfache Zeichen)</li><li>uhrzeit (aktuelle Zeit)</li><li>dokumentsuche (in den Dokumenten)</li></ul></figure>
+<p class="kurz">Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet.</p>
 <p>Ein Agent bekommt zusätzlich zur Frage eine Liste von Werkzeugen beschrieben, hier: <strong>rechne</strong>, <strong>uhrzeit</strong> und <strong>dokumentsuche</strong>. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.</p>
 <h2 class="abs">Die Schleife</h2>
+<figure class="visual"><figcaption>Kreislauf</figcaption><ul><li>Modell entscheidet</li><li>Werkzeug läuft</li><li>Ergebnis zurück</li><li>Mitte: max. 5 Runden</li></ul></figure>
+<p class="kurz">Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.</p>
 
 <ul><li>Frage und Werkzeugliste gehen an das Modell.</li><li>Das Modell antwortet entweder mit einem Werkzeugaufruf oder mit dem Ergebnis.</li><li>Bei einem Aufruf führt der Jetson das Werkzeug aus und hängt das Ergebnis an die Unterhaltung.</li><li>Das Modell sieht das Ergebnis und entscheidet neu. Nach höchstens fünf Runden endet die Schleife.</li></ul>
 <h2 class="abs">Worauf du achten solltest</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Risiko: Falsches Werkzeug, Erfundene Eingaben</li><li>Rechts: Schutz: Jeder Schritt sichtbar, Rechner nur für Zahlen</li></ul></figure>
+<p class="kurz">Kleine Modelle greifen manchmal daneben. Darum zeigt das Labor jeden Schritt und begrenzt den Rechner.</p>
 <p>Kleine Modelle wählen manchmal das falsche Werkzeug oder erfinden Eingaben. Darum zeigt das Labor jeden Schritt. Werkzeuge sind der Punkt, an dem ein Agent echten Schaden anrichten könnte. Deshalb ist der Rechner hier streng begrenzt: Er versteht nur Zahlen und einfache Rechenzeichen.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Abläufe, bei denen mehrere Systeme nacheinander gefragt werden müssen: Auftragsstatus nachschlagen, Preis berechnen, Antwort formulieren.</p><ul><li>Ticket vorsortieren</li><li>Bestellstatus abfragen und Kunden informieren</li></ul></div></section>

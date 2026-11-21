@@ -1,8 +1,16 @@
 <div class="seitenbreite"><p class="ueber">Erzeugen</p><h1>Bilder erzeugen</h1><p class="lead">Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam.</p>
 <div class="text">
 <h2 class="abs">Wie Diffusion funktioniert</h2>
-<p>Beim Training nimmt man echte Bilder und fügt ihnen Schritt für Schritt Rauschen hinzu, bis nur noch Rauschen übrig ist. Das Modell lernt die Umkehrung: aus einem verrauschten Bild ein etwas weniger verrauschtes zu machen. Eine Textbeschreibung steuert, in welche Richtung das Rauschen verschwindet.</p><p>Beim Erzeugen startet man mit reinem Rauschen und wiederholt den Schritt, oft 4 bis 50 Mal. Dabei zeichnet sich Schritt für Schritt ein Bild ab.</p>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Training: Echtes Bild, Rauschen kommt dazu, Modell lernt die Umkehr</li><li>Rechts: Erzeugen: Reines Rauschen, Rauschen schrittweise weg, Text lenkt das Bild</li></ul></figure>
+<p class="kurz">Das Training verrauscht echte Bilder und lernt die Umkehrung. Die Beschreibung lenkt, wohin das Rauschen verschwindet.</p>
+<p>Beim Training nimmt man echte Bilder und fügt ihnen Schritt für Schritt Rauschen hinzu, bis nur noch Rauschen übrig ist. Das Modell lernt die Umkehrung: aus einem verrauschten Bild ein etwas weniger verrauschtes zu machen. Eine Textbeschreibung steuert, in welche Richtung das Rauschen verschwindet.</p>
+<h2 class="abs">Erzeugen in Schritten</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Rauschen (plus Beschreibung)</li><li>Schritt 1 (etwas weniger Rauschen)</li><li>Schritt n (Umrisse erscheinen)</li><li>Bild</li></ul></figure>
+<p class="kurz">Derselbe Entrauschungsschritt läuft 4 bis 50 Mal, bis ein Bild dasteht.</p>
+<p>Beim Erzeugen startet man mit reinem Rauschen und wiederholt den Schritt, oft 4 bis 50 Mal. Dabei zeichnet sich Schritt für Schritt ein Bild ab.</p>
 <h2 class="abs">Warum hier noch keine Demo läuft</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>8 GB gemeinsamer Speicher für alles</li><li>4 bis 50 Rechenschritte je Bild</li></ul></figure>
+<p class="kurz">Bildmodelle brauchen viel Speicher, und der ist auf dem Jetson geteilt.</p>
 <p>Bildmodelle brauchen PyTorch in einer Jetson-Fassung und viel Speicher. Auf dem Jetson mit 8 GB gemeinsamem Speicher teilen sich Modell und System den Platz. Diese Demo ist noch nicht eingebaut. Der Text hier erklärt das Prinzip, damit du es nachvollziehen kannst.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Produktbilder, Varianten und Entwürfe für Marketing und Design, ohne Bilddaten an einen Dienst zu geben.</p><ul><li>Moodboards</li><li>Produktvarianten</li></ul></div></section>

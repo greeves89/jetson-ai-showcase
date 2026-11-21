@@ -1,13 +1,21 @@
 <div class="seitenbreite"><p class="ueber">Der Jetson</p><h1>Der Jetson und seine Hardware</h1><p class="lead">Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.</p>
 <div class="text">
 <h2 class="abs">Was ist ein Jetson</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>6 Prozessorkerne</li><li>8 GB gemeinsamer Speicher</li><li>wenige W Stromaufnahme</li></ul></figure>
+<p class="kurz">Ein Computer im Kartenformat mit sechs Kernen und einer GPU, die wenige Watt braucht.</p>
 <p>Der NVIDIA Jetson Orin Nano ist ein Computer im Kartenformat. Er hat einen Prozessor mit sechs Kernen und eine GPU, die viele einfache Rechnungen gleichzeitig ausführt. Genau das brauchen neuronale Netze. Er nimmt dabei nur wenige Watt auf.</p>
 <h2 class="abs">Gemeinsamer Speicher</h2>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Geladenes Modell (immer nur eins)</li><li>CPU und GPU (rechnen im selben Speicher)</li><li>Gemeinsamer Speicher (8 GB für alles)</li></ul></figure>
+<p class="kurz">CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.</p>
 <p>CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen und immer nur eins zur Zeit geladen ist. Der Speicher in der Anzeige oben ist die wichtigste Grenze.</p>
 <h2 class="abs">Was die Anzeigen bedeuten</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>GPU (Auslastung)</li><li>Speicher (belegt)</li><li>CPU (sechs Kerne)</li><li>Leistung (Stromaufnahme)</li><li>Temperatur (heißester Punkt)</li></ul></figure>
+<p class="kurz">Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.</p>
 
 <ul><li><strong>GPU:</strong> wie ausgelastet der Grafikprozessor ist. Er steigt, wenn ein Modell rechnet.</li><li><strong>Arbeitsspeicher:</strong> belegt von Betriebssystem, Programmen und geladenen Modellen.</li><li><strong>CPU:</strong> Auslastung der sechs Prozessorkerne, im Mittel.</li><li><strong>Leistung:</strong> Strom, den das Board gerade aufnimmt, ohne Netzteilverluste.</li><li><strong>Temperatur:</strong> der heißeste Messpunkt des Chips. Bei zu hoher Temperatur taktet er herunter.</li></ul>
 <h2 class="abs">Warum Edge-Geräte wichtig sind</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Sensor (Daten entstehen)</li><li>Jetson (rechnet vor Ort)</li><li>Ergebnis (kurze Wege)</li></ul></figure>
+<p class="kurz">Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.</p>
 <p>Wer Kamerabilder, Sprache oder Maschinendaten direkt am Entstehungsort auswertet, spart Netzwerk, Wartezeit und kann sensible Daten vor Ort lassen. Das ist die Idee hinter Edge-Computing.</p>
 </div>
 <section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Der Jetson rechnet neuronale Netze effizient auf einer GPU.</li><li>Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.</li><li>Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.</li></ul></section>

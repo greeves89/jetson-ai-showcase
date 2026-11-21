@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.650
+Ein Rauchmelder, der nie
+piept, hat fast immer recht.
+
+00:00:04.800 --> 00:00:06.630
+Trotzdem hilft er nicht.
+
+00:00:06.780 --> 00:00:13.810
+Genauigkeit allein sagt bei seltenen Ereignissen fast
+nichts. Man muss schauen, welche Fehler passieren.
+
+00:00:15.060 --> 00:00:18.010
+Die Konfusionsmatrix zählt vier Fälle.
+
+00:00:18.160 --> 00:00:23.030
+Treffer, Fehlalarm, übersehen,
+richtig durchgelassen.
+
+00:00:23.180 --> 00:00:28.130
+Ein Fehlalarm ärgert dich. Ein
+übersehener Fall kann teuer werden.
+
+00:00:29.380 --> 00:00:38.090
+Ein Spamfilter prüft tausend Mails. Er findet 90 von
+100 Spammails und sortiert 18 gute fälschlich aus.
+
+00:00:38.240 --> 00:00:43.590
+Die Genauigkeit sieht großartig aus.
+Precision und Recall zeigen mehr.
+
+00:00:44.840 --> 00:00:48.510
+Recall fragt: Wie viele
+Forellen hast du gefangen?
+
+00:00:48.660 --> 00:00:52.970
+Precision fragt: Wie viele
+Fische im Netz sind Forellen?
+
+00:00:54.220 --> 00:00:58.370
+Mit der Schwelle stellst du ein, wie
+schnell das Modell Alarm schlägt.
+
+00:00:58.520 --> 00:01:02.350
+Niedrig: mehr Funde, mehr Fehlalarme.
+
+00:01:02.500 --> 00:01:06.730
+Hoch: weniger Fehlalarme,
+aber mehr übersehen.
+
+00:01:07.980 --> 00:01:11.090
+Welche Schwelle passt,
+hängt von den Folgen ab.
+
+00:01:11.240 --> 00:01:16.670
+Vergleiche mit dem heutigen Ablauf, und lass
+bei unklaren Fällen einen Menschen entscheiden.

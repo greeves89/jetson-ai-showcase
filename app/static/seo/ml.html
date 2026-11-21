@@ -1,15 +1,25 @@
 <div class="seitenbreite"><p class="ueber">Grundlagen · Lektion 2</p><h1>Maschinelles Lernen</h1><p class="lead">Statt Regeln zu schreiben, zeigst du Beispiele. Das Verfahren findet das Muster selbst.</p>
 <div class="text">
 <h2 class="abs">Lernen statt programmieren</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Beispiele (Spam oder nicht)</li><li>Verfahren (sucht Unterschiede)</li><li>Modell (Muster als Zahlen)</li></ul></figure>
+<p class="kurz">Du zeigst Beispiele mit Etikett, das Verfahren findet das Muster. Es steckt danach als Zahlen im Modell.</p>
 <p>Ein Spamfilter mit festen Regeln („enthält das Wort Gewinn, dann Spam“) ist schnell überholt. Ein lernendes Verfahren bekommt stattdessen viele E-Mails, jede mit dem Etikett „Spam“ oder „kein Spam“, und findet selbst heraus, woran man beide unterscheidet. Die Regeln stecken danach im Modell, als eine große Menge Zahlen.</p>
 <h2 class="abs">Zwei Phasen: Training und Inferenz</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Training: Viele Beispiele, Rechenintensiv, Einmal, im Rechenzentrum</li><li>Rechts: Inferenz: Neue Daten rein, Vorhersage raus, Ständig, auch auf dem Jetson</li></ul></figure>
+<p class="kurz">Training passiert einmal und ist teuer. Inferenz passiert ständig und ist günstig.</p>
 <p>Beim Training sieht das Verfahren viele Beispiele und stellt sein Modell so ein, dass es sie möglichst oft richtig trifft. Das ist rechenintensiv und passiert einmal, meist in einem Rechenzentrum.</p><p>Bei der Inferenz bekommt das fertige Modell neue Daten und liefert eine Vorhersage. Das ist vergleichsweise billig und passiert ständig, zum Beispiel hier auf dem Jetson, wenn er dein Kamerabild auswertet.</p>
 <h2 class="abs">Drei Arten zu lernen</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>Überwacht (Beispiel mit Etikett)</li><li>Unüberwacht (Gruppen selbst finden)</li><li>Bestärkend (Belohnung oder Strafe)</li></ul></figure>
+<p class="kurz">Mit Antworten, ohne Antworten oder durch Belohnung: Das Verfahren hängt von den Daten ab.</p>
 
 <ul><li><strong>Überwachtes Lernen:</strong> Die Beispiele kommen mit der richtigen Antwort, etwa ein Foto mit dem Etikett „Katze“. Daraus lernt das Modell, neue Fotos zuzuordnen. Das Spielfeld oben arbeitet so.</li><li><strong>Unüberwachtes Lernen:</strong> Es gibt nur Daten, keine Antworten. Das Verfahren sucht selbst Gruppen und Auffälligkeiten, etwa Kundengruppen mit ähnlichem Verhalten.</li><li><strong>Bestärkendes Lernen:</strong> Ein Agent probiert Dinge aus und bekommt Belohnung oder Strafe. So lernen Systeme Spiele und die Steuerung von Robotern.</li></ul>
 <h2 class="abs">Ähnlichkeit als Rechnung</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>2 Zahlen je Punkt im Spielfeld</li><li>1000 Zahlen je Bild im Anlern-Labor</li></ul></figure>
+<p class="kurz">Jedes Bild wird zu einer Zahlenliste. Ähnliche Bilder liegen im Zahlenraum nah beieinander.</p>
 <p>Damit ein Computer Bilder vergleichen kann, wird jedes Bild in eine Liste von Zahlen übersetzt, ein Embedding. Ähnliche Bilder bekommen ähnliche Zahlen und liegen im Zahlenraum nah beieinander.</p><p>Das Spielfeld oben zeigt das mit zwei Zahlen pro Punkt, also auf einer Fläche. Ein neuer Punkt bekommt die Klasse, die unter seinen nächsten Nachbarn am häufigsten vorkommt (k nächste Nachbarn). Im Labor <a href="/anlernen">Bildmodell anlernen</a> passiert dasselbe, nur mit 1000 Zahlen pro Bild statt zwei.</p>
 <h2 class="abs">Wo es schiefgeht</h2>
+<figure class="visual"><figcaption>Matrix</figcaption><ul><li>Versteht Muster, Bekannt: gut</li><li>Versteht Muster, Neu: gut</li><li>Lernt auswendig, Bekannt: gut</li><li>Lernt auswendig, Neu: schlecht</li></ul></figure>
+<p class="kurz">Ein Modell, das Beispiele auswendig lernt, versagt bei neuen Daten. Darum wird mit ungesehenen Daten geprüft.</p>
 <p>Daten sind das Produkt. Ein Modell lernt nur, was in den Beispielen steckt. Sind sie einseitig, ist es das Modell auch.</p><p>Überanpassung heißt, dass ein Modell die Beispiele auswendig lernt, statt das Muster zu verstehen. Dann ist es bei bekannten Daten perfekt und bei neuen schlecht. Darum prüft man immer mit Daten, die das Modell vorher nie gesehen hat. Du kannst das oben nachstellen: Stelle k auf 1 und setze einzelne Ausreißer. Die Grenze wird zackig und folgt jedem Zufall.</p>
 </div>
 <section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen.</li><li>Training passiert einmal und ist teuer, Inferenz passiert ständig und ist günstig.</li><li>Die Qualität der Beispiele bestimmt die Qualität des Modells.</li></ul></section>

@@ -1,0 +1,64 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.050
+Zuerst misst man den Fehler.
+
+00:00:03.200 --> 00:00:07.910
+Wie weit liegt der Pfeil neben der
+Mitte? Diese Zahl heißt Verlust.
+
+00:00:08.060 --> 00:00:13.810
+Je weiter daneben, desto größer der Verlust.
+Ziel ist ein möglichst kleiner Wert.
+
+00:00:15.060 --> 00:00:16.810
+Dann kommt die Schleife.
+
+00:00:16.960 --> 00:00:21.670
+Vorhersagen, Fehler messen, die
+Gewichte ein Stück verschieben.
+
+00:00:21.820 --> 00:00:26.290
+Das wiederholt sich viele tausend
+Mal, mit immer neuen Beispielen.
+
+00:00:27.540 --> 00:00:33.210
+Stell dir den Fehler als Landschaft vor.
+Du stehst im Nebel und willst ins Tal.
+
+00:00:33.360 --> 00:00:35.990
+Du spürst nur das Gefälle unter dir.
+
+00:00:36.140 --> 00:00:41.250
+Du gehst einen Schritt bergab und prüfst
+wieder. So wird der Fehler kleiner.
+
+00:00:42.500 --> 00:00:45.370
+Die Lernrate legt die Schrittweite fest.
+
+00:00:45.520 --> 00:00:51.830
+Zu groß: Du springst über das
+Tal. Zu klein: Es dauert ewig.
+
+00:00:51.980 --> 00:00:56.850
+Ein guter Wert liegt dazwischen. Man
+probiert ihn aus und beobachtet.
+
+00:00:58.100 --> 00:01:00.570
+Beobachte die Validierungsdaten.
+
+00:01:00.720 --> 00:01:05.750
+Steigt der Fehler dort, passt sich
+das Modell zu sehr an. Dann halte an.
+
+00:01:05.900 --> 00:01:10.370
+Das Training schreibt dir die
+Fehlerkurve mit. Danach entscheidest du.
+
+00:01:11.620 --> 00:01:16.970
+GPUs rechnen sehr viel gleichzeitig,
+deshalb eignen sie sich fürs Training.
+
+00:01:17.120 --> 00:01:21.030
+Mit Vortraining und Feinabstimmung
+startest du nicht bei null.

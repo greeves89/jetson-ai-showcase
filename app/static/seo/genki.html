@@ -1,14 +1,24 @@
 <div class="seitenbreite"><p class="ueber">Grundlagen · Lektion 3</p><h1>Generative KI</h1><p class="lead">Ein Sprachmodell wählt Wort für Wort das nächste Stück. Aus vielen kleinen Würfen entsteht ein Text.</p>
 <div class="text">
 <h2 class="abs">Ein Sprachmodell rät das nächste Stück</h2>
+<figure class="visual"><figcaption>Tokens</figcaption><ul><li>8 Stücke: Der | Him | mel | ist | heute | kla | r | .</li></ul></figure>
+<p class="kurz">Das Modell wählt immer nur das nächste Token und wiederholt das, bis die Antwort steht.</p>
 <p>Ein großes Sprachmodell macht im Kern eines: Es berechnet, welches Token als nächstes am wahrscheinlichsten folgt, wählt eines aus und wiederholt das. Ganze Antworten entstehen so Stück für Stück. Dass dabei sinnvolle Texte herauskommen, liegt daran, dass das Modell im Training riesige Textmengen gesehen hat und die Zusammenhänge der Sprache abbildet.</p>
 <h2 class="abs">Wie zufällig darf es sein</h2>
+<figure class="visual"><figcaption>Skala</figcaption><ul><li>Vorhersehbar bis Abwechslungsreich, Marker bei 20 Prozent: Fakten: niedrige Temperatur</li></ul></figure>
+<p class="kurz">Die Temperatur legt fest, wie stark das wahrscheinlichste Token bevorzugt wird.</p>
 <p>Das Modell liefert keine einzelne Antwort, sondern für jedes Token eine Wahrscheinlichkeit. Die Temperatur bestimmt, wie stark der Favorit bevorzugt wird. Niedrig: vorhersehbar und wiederholbar, gut für Fakten. Hoch: abwechslungsreich, aber auch fehleranfälliger.</p><p>Oben kannst du das mit Beispielwerten durchspielen. Danach probierst du es im <a href="/chat">Chat-Labor</a> mit einem echten Modell.</p>
 <h2 class="abs">Das Gedächtnis hat ein Limit</h2>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Kontextfenster (begrenzt)</li><li>Mitgeschickte Dokumente</li><li>Bisherige Unterhaltung</li><li>Deine Frage</li></ul></figure>
+<p class="kurz">Das Modell sieht nur, was im Kontextfenster steht. Alles andere gibt es für es nicht.</p>
 <p>Das Modell sieht nur, was im Kontextfenster steht: die bisherige Unterhaltung und alles, was mitgeschickt wird. Was draußen bleibt, existiert für das Modell nicht. Deshalb fügt man gezielt Wissen in den Kontext ein, statt zu hoffen, dass es im Modell steckt.</p>
 <h2 class="abs">Plausibel ist nicht wahr</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Frage</li><li>Suche (in eigenen Dokumenten)</li><li>Fundstellen</li><li>Antwort (mit Quelle)</li></ul></figure>
+<p class="kurz">Gegen erfundene Antworten hilft RAG: erst nachschlagen, dann antworten und die Quelle nennen.</p>
 <p>Weil das Modell Wahrscheinliches fortsetzt, kann es Falsches überzeugend formulieren, eine Halluzination. Ein Gegenmittel ist RAG: Erst wird in eigenen Dokumenten nachgeschlagen, dann antwortet das Modell auf Grundlage der Fundstellen und nennt sie als Quelle. Das probierst du im <a href="/rag">RAG-Labor</a>.</p>
 <h2 class="abs">Bilder aus Rauschen</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Rauschen (plus Beschreibung)</li><li>Schritt 1 (etwas weniger Rauschen)</li><li>Schritt n (Umrisse erscheinen)</li><li>Bild</li></ul></figure>
+<p class="kurz">Diffusion startet mit Rauschen und entfernt es Schritt für Schritt, gelenkt von deiner Beschreibung.</p>
 <p>Bildgeneratoren arbeiten meist mit Diffusion. Das Modell hat gelernt, aus verrauschten Bildern das Rauschen Schritt für Schritt zu entfernen. Startet man mit reinem Rauschen und einer Textbeschreibung, entsteht daraus Schritt für Schritt ein neues Bild.</p>
 </div>
 <section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Ein Sprachmodell sagt immer nur das nächste Token voraus.</li><li>Die Temperatur steuert, wie mutig es wählt.</li><li>Was nicht im Kontext steht, weiß das Modell nicht. Darum gibt es RAG.</li></ul></section>

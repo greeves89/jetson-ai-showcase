@@ -1,11 +1,17 @@
 <div class="seitenbreite"><p class="ueber">Sehen</p><h1>Gesichtserkennung</h1><p class="lead">Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.</p>
 <div class="text">
 <h2 class="abs">Drei Stufen, die man oft verwechselt</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Erkennen (Gesicht im Bild)</li><li>Identifizieren (wer ist es)</li><li>Ausdruck deuten</li></ul></figure>
+<p class="kurz">Dieses Labor erkennt nur, dass ein Gesicht da ist. Wer es ist, weiß es nicht.</p>
 <p>Erstens: erkennen, dass ein Gesicht im Bild ist (Detektion). Zweitens: das Gesicht einer bestimmten Person wiedererkennen (Identifikation). Drittens: den Ausdruck deuten. Dieses Labor macht nur die erste Stufe. Es findet Gesichter und markiert sie. Es speichert nichts und weiß nicht, wer du bist.</p>
 <h2 class="abs">Was im Hintergrund passiert</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Kamerabild (480 mal 360, JPEG)</li><li>WebSocket (zum Jetson)</li><li>YuNet (Rahmen, Landmarken)</li><li>Eingezeichnet (zurück zum Browser)</li></ul></figure>
+<p class="kurz">Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück.</p>
 
 <ul><li>Dein Browser macht ein Bild aus der Kamera, verkleinert es auf 480 mal 360 Pixel und verpackt es als JPEG.</li><li>Das Bild reist über eine WebSocket-Verbindung zum Jetson.</li><li>Der Jetson entpackt es und gibt es an das Modell YuNet, ein kleines neuronales Netz für Gesichter.</li><li>Das Netz liefert Rahmen, eine Konfidenz und fünf Landmarken: beide Augen, die Nase und die Mundwinkel.</li><li>Der Jetson zeichnet das ein und schickt das Bild zurück. Die farbigen Streifen über dem Bild zeigen, wie lange jeder Schritt dauert.</li></ul>
 <h2 class="abs">Warum Neigen früher Probleme machte</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Ältere Verfahren: Feste Helligkeitsmuster, Nur von vorn</li><li>Rechts: Neuronales Netz: Viele Lagen gelernt, Kopf neigen ist ok</li></ul></figure>
+<p class="kurz">Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.</p>
 <p>Ältere Verfahren suchen feste Helligkeitsmuster und sehen nur Gesichter von vorn. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt und kommt damit besser zurecht. Genau das siehst du, wenn du den Kopf drehst oder neigst.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Zutritt und Anwesenheit ohne Cloud, Personenzählung im Laden oder Foyer, Aufmerksamkeitsmessung an Displays.</p><ul><li>Türsystem, das erkennt, ob jemand davorsteht</li><li>Besucherzählung ohne Identifikation</li></ul></div></section>

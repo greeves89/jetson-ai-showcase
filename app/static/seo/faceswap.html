@@ -1,10 +1,16 @@
 <div class="seitenbreite"><p class="ueber">Erzeugen</p><h1>Face-Swap und Deepfakes</h1><p class="lead">Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich.</p>
 <div class="text">
 <h2 class="abs">So funktioniert es</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Erkennen (Gesicht, Landmarken)</li><li>Merkmale (der Quellperson)</li><li>Einsetzen (Pose, Licht des Ziels)</li><li>Angleichen (Farbe, Rand)</li></ul></figure>
+<p class="kurz">Erst Gesicht und Landmarken finden, dann die Merkmale der Quellperson einsetzen und angleichen.</p>
 <p>Ein Gesichtsdetektor findet das Gesicht und seine Landmarken. Ein zweites Netz (zum Beispiel inswapper) erhält die Identitätsmerkmale der Quellperson und setzt sie in die Pose und Beleuchtung der Zielperson. Ein Nachbearbeitungsschritt gleicht Farbe und Rand an.</p>
 <h2 class="abs">Chancen und Risiken</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Chancen: Avatare für Schulungen, Gesichter anonymisieren, Lippen bei Übersetzung</li><li>Rechts: Risiken: Gefälschte Aufnahmen, Schaden für Betroffene</li><li>Urteil: Nur mit Einwilligung, Inhalte kennzeichnen.</li></ul></figure>
+<p class="kurz">Dieselbe Technik trägt Avatare und Fälschungen. Darum nur mit Einwilligung und mit Kennzeichnung.</p>
 <p>Dieselbe Technik ermöglicht Avatare und Anonymisierung in Videos, aber auch gefälschte Aufnahmen echter Personen. Darum gilt: nur mit Einwilligung der gezeigten Person, und erzeugte Inhalte kennzeichnen.</p>
 <h2 class="abs">Stand in diesem Labor</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>Noch keine Demo</li><li>GPU-Laufzeit nötig (onnxruntime)</li><li>Foto würde gespeichert (ohne Regeln: nein)</li></ul></figure>
+<p class="kurz">Die Demo ist noch nicht eingebaut. Es fehlen Technik und klare Regeln für gespeicherte Fotos.</p>
 <p>Die Demo ist noch nicht eingebaut. Sie bräuchte onnxruntime mit GPU-Unterstützung für den Jetson und würde, anders als die übrigen Labore, ein Foto einer Person speichern. Das tun wir hier nicht ohne klare Regeln. Die Erklärung dient dem Verständnis der Technik.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Anonymisierung von Gesichtern in Videos, Avatare für Schulungsclips, synchronisierte Lippenbewegungen bei Übersetzungen.</p><ul><li>Unkenntlich machen von Personen in Aufnahmen</li></ul></div></section>
