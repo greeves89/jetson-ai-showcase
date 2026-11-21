@@ -1,0 +1,131 @@
+{
+ "id": "was-ist-ki",
+ "titel": "Was ist KI?",
+ "untertitel": "Der Überblick: Begriffe, Methoden und die Landkarte der KI",
+ "gesamt": 83.76,
+ "szenen": [
+  {
+   "id": "einstieg",
+   "kapitel": "Was ist KI?",
+   "start": 0,
+   "dauer": 10.18,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.96,
+     "text": "KI steht für künstliche Intelligenz."
+    },
+    {
+     "t": 4.16,
+     "d": 5.12,
+     "text": "Gemeint sind Maschinen, die Aufgaben lösen, für die sonst Intelligenz nötig wäre."
+    }
+   ]
+  },
+  {
+   "id": "faehigkeiten",
+   "kapitel": "Vier Fähigkeiten",
+   "start": 10.18,
+   "dauer": 14.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Dazu gehören vier Fähigkeiten: wahrnehmen, verstehen, entscheiden und erzeugen."
+    },
+    {
+     "t": 7.28,
+     "d": 6.16,
+     "text": "Ein Foto erkennen, einen Satz verstehen, einen Zug wählen, einen Text schreiben."
+    }
+   ]
+  },
+  {
+   "id": "regeln",
+   "kapitel": "Regelbasierte KI",
+   "start": 24.52,
+   "dauer": 14.56,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Die älteste Form arbeitet mit festen Regeln: wenn dies, dann das."
+    },
+    {
+     "t": 5.84,
+     "d": 4.4,
+     "text": "Das funktioniert, solange ein Mensch alle Fälle vorher aufschreiben kann."
+    },
+    {
+     "t": 10.54,
+     "d": 3.12,
+     "text": "Bei Bildern oder Sprache sind es viel zu viele."
+    }
+   ]
+  },
+  {
+   "id": "kreise",
+   "kapitel": "Ineinander gesetzt",
+   "start": 39.08,
+   "dauer": 21.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.96,
+     "text": "Moderne KI steckt deshalb in Schichten."
+    },
+    {
+     "t": 3.76,
+     "d": 5.6,
+     "text": "Maschinelles Lernen heißt: Das System lernt aus Beispielen, statt Regeln zu bekommen."
+    },
+    {
+     "t": 9.66,
+     "d": 4.56,
+     "text": "Deep Learning ist ein Teil davon und nutzt große neuronale Netze."
+    },
+    {
+     "t": 14.52,
+     "d": 5.92,
+     "text": "Generative KI ist wieder ein Teil davon und erzeugt neue Texte, Bilder oder Töne."
+    }
+   ]
+  },
+  {
+   "id": "robotik",
+   "kapitel": "KI mit Körper",
+   "start": 60.42,
+   "dauer": 10.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Bekommt KI einen Körper mit Sensoren und Motoren, sprechen wir von Robotik."
+    },
+    {
+     "t": 6.24,
+     "d": 3.12,
+     "text": "Sie nimmt die Welt wahr und greift in sie ein."
+    }
+   ]
+  },
+  {
+   "id": "landkarte",
+   "kapitel": "Die Landkarte",
+   "start": 70.68,
+   "dauer": 13.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.2,
+     "text": "Zum Einordnen hilft diese Landkarte: Sehen, Sprache, Erzeugen, Wissen und Handeln."
+    },
+    {
+     "t": 8,
+     "d": 3.28,
+     "text": "In den nächsten Videos gehen wir Schritt für Schritt hinein."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,57 @@
+{
+  "id": "robotik",
+  "titel": "Robotik",
+  "untertitel": "Wahrnehmen, entscheiden, handeln: wie KI einen Körper bekommt",
+  "szenen": [
+    {
+      "id": "einstieg",
+      "kapitel": "KI mit Körper",
+      "saetze": [
+        "Ein Roboter ist KI mit Körper.",
+        "Er muss wahrnehmen, entscheiden und handeln, immer wieder."
+      ]
+    },
+    {
+      "id": "regelkreis",
+      "kapitel": "Der Regelkreis",
+      "saetze": [
+        "Das läuft als Regelkreis.",
+        "Sensoren messen die Welt.",
+        "Die Planung, oft eine KI, entscheidet, was als Nächstes passiert.",
+        "Aktoren, also Motoren, führen es aus.",
+        "Dann misst der Sensor erneut, und der Kreis schließt sich.",
+        "Ein Beispiel: Ein Greifarm sieht ein Teil, plant den Griff und schließt die Finger."
+      ]
+    },
+    {
+      "id": "jetson",
+      "kapitel": "Der Jetson als Gehirn",
+      "saetze": [
+        "Als Gehirn eines Roboters taugt ein kleiner Rechner wie der Jetson.",
+        "Er hat eine Grafikkarte für KI und braucht nur wenig Strom.",
+        "Alles läuft direkt am Gerät."
+      ]
+    },
+    {
+      "id": "lokal",
+      "kapitel": "Warum lokal?",
+      "saetze": [
+        "Warum lokal?",
+        "Ein Roboter kann nicht warten, bis eine Antwort aus dem Internet zurückkommt.",
+        "Der kurze Weg im Gerät ist schneller und funktioniert auch ohne Netz."
+      ]
+    },
+    {
+      "id": "arten",
+      "kapitel": "Roboterarten",
+      "saetze": [
+        "Roboter gibt es in vielen Formen.",
+        "Industrieroboter schweißen und montieren.",
+        "Lagerroboter fahren Regale und Kisten.",
+        "Drohnen fliegen und kartieren.",
+        "Serviceroboter helfen im Alltag, humanoide Roboter bauen den menschlichen Körper nach.",
+        "Allen gemeinsam ist derselbe Kreis aus Wahrnehmen, Entscheiden und Handeln."
+      ]
+    }
+  ]
+}

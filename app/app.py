@@ -19,6 +19,7 @@ from pathlib import Path
 
 import base64
 import os
+import secrets
 import socket
 
 # Schutz vor Dekompressionsbomben: OpenCV lehnt Bilder mit mehr Pixeln als 1920x1080 ab.
@@ -33,11 +34,15 @@ from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 
+from app import speicher
+from app.sicherheit import Sitzungen, begrenzt, sitzungs_kennung
+
 HIER = Path(__file__).resolve().parent
 OLLAMA = "http://127.0.0.1:11434"
 CHAT_MODELL = "llama3.2:3b"
 # Nur diese Modelle duerfen geladen/angesprochen werden (verhindert beliebige Ollama-Pulls / SSRF)
-ERLAUBTE_MODELLE = {"llama3.2:3b", "qwen3:4b", "qwen3:8b", "qwen2.5:7b-instruct", "nomic-embed-text"}
+ERLAUBTE_MODELLE = {"llama3.2:3b", "nomic-embed-text"}
+TOKEN_TRENNER = "\u2063"        # unsichtbares Zeichen zwischen Tokens, damit die Oberflaeche sie einzeln zeigen kann
 MAX_NACHRICHT = 4000          # Zeichen pro Chat-Anfrage
 MAX_FRAME_BYTES = 2_000_000   # ~2 MB pro Webcam-Frame (480x360 JPEG ist weit darunter)
 
@@ -78,9 +83,54 @@ def _ist_jpeg_dataurl(s) -> bool:
 
 app = FastAPI(title="Jetson Demo-Hub")
 app.add_middleware(TrustedHostMiddleware, allowed_hosts=_erlaubte_hosts())
-_VIDEO_DIR = HIER / "static" / "videos"
-_VIDEO_DIR.mkdir(parents=True, exist_ok=True)
-app.mount("/videos", StaticFiles(directory=str(_VIDEO_DIR)), name="videos")
+
+# Oeffentlicher Betrieb (OEFFENTLICH=1): zusaetzlich Ratenbegrenzung je Besucher. Intern aus, damit Tests nicht bremsen.
+_OEFFENTLICH = os.environ.get("OEFFENTLICH") == "1"
+_sitzungen = Sitzungen(ttl_s=1800, maximal=200)
+CHAT_MAX_PARALLEL = 2          # gleichzeitige Chat-Antworten (Speicher und GPU sind knapp)
+WS_MAX = 6                     # gleichzeitige Kameraverbindungen
+_chat_aktiv = 0
+_ws_aktiv = 0
+
+
+def _zustand(request):
+    """Zustand dieses Besuchers (Anlern-Beispiele, RAG-Abschnitte): getrennt je Cookie-Sitzung, Ablauf nach 30 Minuten."""
+    return _sitzungen.holen(sitzungs_kennung(request))
+
+
+def _zu_viele(request, name, maximal, fenster=60.0):
+    return _OEFFENTLICH and begrenzt(request, name, maximal, fenster)
+
+
+ZU_VIELE = {"fehler": "Zu viele Anfragen. Bitte warte kurz."}
+
+
+def _ollama_fehler(text):
+    """Macht eine Fehlermeldung von Ollama fuer Besucher verstaendlich."""
+    t = (text or "").lower()
+    if "allocate" in t or "cuda" in t or "out of memory" in t:
+        return "Dem Jetson fehlt gerade freier Speicher, um das Sprachmodell zu laden. Versuch es in einem Moment noch einmal."
+    if "not found" in t:
+        return "Das Modell ist auf dem Jetson nicht vorhanden."
+    return "Das Sprachmodell antwortet gerade nicht."
+
+
+async def _speicher_bereit():
+    """Vor dem Laden eines Modells genug freien RAM sicherstellen (Dateicache freigeben, falls noetig)."""
+    await asyncio.to_thread(speicher.sicherstellen, 2800)
+_STATIC_DIR = HIER / "static"
+(_STATIC_DIR / "videos").mkdir(parents=True, exist_ok=True)
+app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
+
+# Labor-Erweiterungen: jede Datei app/lab_*.py mit einem Objekt `router` (FastAPI APIRouter) wird eingebunden.
+# Ein fehlerhaftes Modul darf den Start nicht verhindern.
+import importlib
+for _modul in sorted(_f.stem for _f in HIER.glob("lab_*.py")):
+    try:
+        app.include_router(importlib.import_module("app." + _modul).router)
+        print("Labor-Modul geladen:", _modul)
+    except Exception as _e:                                   # noqa: BLE001
+        print("Labor-Modul fehlgeschlagen:", _modul, repr(_e))
 
 # Gesichtserkennung: YuNet (robust bei geneigten/seitlichen Gesichtern, liefert Landmarks),
 # Haar-Cascade nur als Rueckfall, falls das YuNet-Modell fehlt.
@@ -142,7 +192,7 @@ def _yolox_gitter():
     return _YX_GRIDS
 
 
-def _erkenne_objekte(img):
+def _erkenne_objekte(img, schwelle=0.5):
     if _yolox is None:
         return 0
     H, W = img.shape[:2]
@@ -160,13 +210,13 @@ def _erkenne_objekte(img):
     cls = scores.argmax(1)
     conf = scores.max(1)
     boxes, confs, clss = [], [], []
-    for i in np.where(conf > 0.5)[0]:
+    for i in np.where(conf > schwelle)[0]:
         cx, cy = xy[i]
         bw, bh = wh[i]
         boxes.append([int((cx - bw / 2) / r), int((cy - bh / 2) / r), int(bw / r), int(bh / r)])
         confs.append(float(conf[i]))
         clss.append(int(cls[i]))
-    idx = cv2.dnn.NMSBoxes(boxes, confs, 0.5, 0.45) if boxes else []
+    idx = cv2.dnn.NMSBoxes(boxes, confs, schwelle, 0.45) if boxes else []
     anzahl = 0
     for i in np.array(idx).flatten():
         x, y, w, h = boxes[i]
@@ -184,8 +234,9 @@ def _erkenne_objekte(img):
 _inferenz_lock = threading.Lock()
 
 
-def _verarbeite_frame(roh, modus):
-    """Dekodiert, begrenzt die Groesse, erkennt und kodiert zurueck. Laeuft im Threadpool."""
+def _verarbeite_frame(roh, modus, schwelle=0.5):
+    """Dekodiert, begrenzt die Groesse, erkennt und kodiert zurueck. Laeuft im Threadpool.
+    Misst jeden Schritt einzeln, damit die Oberflaeche zeigen kann, wo die Zeit bleibt."""
     t0 = time.time()
     arr = np.frombuffer(roh, np.uint8)
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
@@ -195,14 +246,23 @@ def _verarbeite_frame(roh, modus):
     if w > 1280 or h > 720:                         # Schutz gegen zu grosse Frames
         s = min(1280 / w, 720 / h)
         img = cv2.resize(img, (int(w * s), int(h * s)))
+        h, w = img.shape[:2]
+    t1 = time.time()
     with _inferenz_lock:
-        anzahl = _erkenne_objekte(img) if modus == "objekt" else _erkenne_gesichter(img)
+        t2 = time.time()
+        anzahl = _erkenne_objekte(img, schwelle) if modus == "objekt" else _erkenne_gesichter(img)
+    t3 = time.time()
     ok, jpg = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 70])
+    t4 = time.time()
     return json.dumps({
         "bild": "data:image/jpeg;base64," + base64.b64encode(jpg).decode(),
         "anzahl": int(anzahl),
-        "ms": round((time.time() - t0) * 1000),
+        "ms": round((t4 - t0) * 1000),
         "modus": modus,
+        "zeiten": {"dekodieren": round((t1 - t0) * 1000, 1), "warten": round((t2 - t1) * 1000, 1),
+                   "erkennen": round((t3 - t2) * 1000, 1), "kodieren": round((t4 - t3) * 1000, 1)},
+        "bytes_ein": len(roh), "bytes_aus": int(len(jpg)), "breite": int(w), "hoehe": int(h),
+        "schwelle": schwelle,
     })
 
 # ---------- Live-Systemwerte aus tegrastats ----------
@@ -277,6 +337,8 @@ def models():
 async def chat(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "ungueltiger Origin"}, status_code=403)
+    if _zu_viele(req, "chat", 20):
+        return JSONResponse(ZU_VIELE, status_code=429)
     daten = await req.json()
     nachricht = (daten.get("nachricht") or "").strip()
     modell = daten.get("modell") or CHAT_MODELL
@@ -287,17 +349,21 @@ async def chat(req: Request):
     if modell not in ERLAUBTE_MODELLE:
         return JSONResponse({"fehler": "Modell nicht erlaubt"}, status_code=400)
 
-    async def strom():
+    try:
+        temperatur = max(0.0, min(2.0, float(daten.get("temperatur", 0.7))))
+    except (TypeError, ValueError):
+        temperatur = 0.7
+
+    async def strom_innen():
+        await _speicher_bereit()
         start = time.time()
         tokens = 0
         payload = {
             "model": modell,
             "messages": [{"role": "user", "content": nachricht}],
             "stream": True,
-            "think": False,
+            "options": {"temperature": temperatur},
         }
-        puffer = ""          # fuer das Herausfiltern der <think>-Bloecke
-        denk_fertig = False
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(300.0, connect=10.0)) as c:
                 async with c.stream("POST", f"{OLLAMA}/api/chat", json=payload) as r:
@@ -305,29 +371,31 @@ async def chat(req: Request):
                         if not zeile.strip():
                             continue
                         obj = json.loads(zeile)
+                        if obj.get("error"):
+                            yield "\n[" + _ollama_fehler(obj["error"]) + "]"
+                            return
                         stueck = obj.get("message", {}).get("content", "")
                         if stueck:
                             tokens += 1
-                            if denk_fertig:
-                                yield stueck
-                            else:
-                                puffer += stueck
-                                if "</think>" in puffer:
-                                    rest = puffer.split("</think>", 1)[1].lstrip()
-                                    denk_fertig = True
-                                    if rest:
-                                        yield rest
-                                elif "<think>" not in puffer and len(puffer) > 16:
-                                    denk_fertig = True
-                                    yield puffer
+                            yield stueck + TOKEN_TRENNER
                         if obj.get("done"):
-                            if not denk_fertig and puffer:
-                                yield puffer.replace("<think>", "").replace("</think>", "").strip()
                             dauer = time.time() - start
                             rate = tokens / dauer if dauer > 0 else 0
-                            yield f"\n\n---\n{tokens} Tokens in {dauer:.1f}s ({rate:.1f} Tok/s)"
+                            yield f"\n\n---\n{tokens} Tokens in {dauer:.1f}s ({rate:.1f} Tok/s), Temperatur {temperatur:g}"
         except Exception as e:
             yield f"\n[Fehler: {e}]"
+
+    async def strom():
+        global _chat_aktiv
+        if _chat_aktiv >= CHAT_MAX_PARALLEL:
+            yield "[Gerade belegt: Der Jetson beantwortet schon zwei Fragen. Versuch es in einer halben Minute noch einmal.]"
+            return
+        _chat_aktiv += 1
+        try:
+            async for stueck in strom_innen():
+                yield stueck
+        finally:
+            _chat_aktiv -= 1
 
     return StreamingResponse(strom(), media_type="text/plain; charset=utf-8")
 
@@ -374,14 +442,28 @@ async def ws_vision(ws: WebSocket):
     modus = ws.query_params.get("modus", "gesicht")
     if modus not in ("gesicht", "objekt"):
         modus = "gesicht"
+    global _ws_aktiv
+    if _ws_aktiv >= WS_MAX:
+        await ws.close(code=1013)      # Server ausgelastet, spaeter erneut versuchen
+        return
+    _ws_aktiv += 1
     await ws.accept()
+    schwelle = 0.5
     try:
         while True:
-            daten = await ws.receive_text()      # dataURL "data:image/jpeg;base64,...."
-            if len(daten) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(daten):
+            daten = await ws.receive_text()      # dataURL "data:image/jpeg;base64,..." oder Steuer-JSON
+            if len(daten) > MAX_FRAME_BYTES:
+                continue
+            if daten.startswith("{"):            # Steuernachricht, z. B. {"schwelle": 0.35}
+                try:
+                    schwelle = max(0.1, min(0.9, float(json.loads(daten).get("schwelle", schwelle))))
+                except Exception:
+                    pass
+                continue
+            if not _ist_jpeg_dataurl(daten):
                 continue
             roh = base64.b64decode(daten.split(",", 1)[-1])
-            ergebnis = await asyncio.to_thread(_verarbeite_frame, roh, modus)
+            ergebnis = await asyncio.to_thread(_verarbeite_frame, roh, modus, schwelle)
             if ergebnis:
                 await ws.send_text(ergebnis)
     except WebSocketDisconnect:
@@ -391,12 +473,14 @@ async def ws_vision(ws: WebSocket):
             await ws.close()
         except Exception:
             pass
+    finally:
+        _ws_aktiv -= 1
 
 
 # ---------- Bildmodell anlernen (Teachable Machine: Embeddings + kNN) ----------
 _embed_pfad = HIER / "models" / "mobilenet_embed.onnx"
 _embed_net = cv2.dnn.readNetFromONNX(str(_embed_pfad)) if _embed_pfad.exists() else None
-_teach = {}                      # label -> Liste von Embeddings (np.array), geteilter Demo-Zustand
+# Anlern-Beispiele liegen je Besucher in _zustand(request)["teach"]
 _teach_lock = threading.Lock()
 MAX_LABELS = 10                  # Obergrenzen gegen Speicher-DoS
 MAX_SAMPLES = 50
@@ -417,27 +501,27 @@ def _embedding(img):
     return v / n if n > 0 else v
 
 
-def _teach_sample(dataurl, label):
+def _teach_sample(dataurl, label, teach):
     img = _decode_dataurl(dataurl)
     if img is None:
         return None
     vec = _embedding(img)
     with _teach_lock:
-        if label not in _teach and len(_teach) >= MAX_LABELS:
-            return {k: len(v) for k, v in _teach.items()}      # Label-Limit erreicht
-        lst = _teach.setdefault(label, [])
+        if label not in teach and len(teach) >= MAX_LABELS:
+            return {k: len(v) for k, v in teach.items()}      # Label-Limit erreicht
+        lst = teach.setdefault(label, [])
         if len(lst) < MAX_SAMPLES:
             lst.append(vec)
-        return {k: len(v) for k, v in _teach.items()}
+        return {k: len(v) for k, v in teach.items()}
 
 
-def _teach_classify(dataurl, k=3):
+def _teach_classify(dataurl, teach, k=3):
     img = _decode_dataurl(dataurl)
     if img is None:
         return {"label": None, "conf": 0.0}
     vec = _embedding(img)
     with _teach_lock:
-        paare = [(float(np.dot(vec, s)), label) for label, vs in _teach.items() for s in vs]
+        paare = [(float(np.dot(vec, s)), label) for label, vs in teach.items() for s in vs]
     if not paare:
         return {"label": None, "conf": 0.0}
     paare.sort(reverse=True)
@@ -446,7 +530,11 @@ def _teach_classify(dataurl, k=3):
     counts = Counter(l for _, l in top)
     label, cnt = counts.most_common(1)[0]
     sims = [s for s, l in top if l == label]
-    return {"label": label, "conf": round(sum(sims) / len(sims), 3), "stimmen": cnt, "k": len(top)}
+    scores = {}
+    for sim, l in paare:                              # beste Aehnlichkeit je Klasse fuer die Balkenanzeige
+        scores[l] = max(scores.get(l, -1.0), sim)
+    return {"label": label, "conf": round(sum(sims) / len(sims), 3), "stimmen": cnt, "k": len(top),
+            "scores": {l: round(v, 3) for l, v in scores.items()}, "dimension": int(len(vec))}
 
 
 @app.post("/api/teach/sample")
@@ -461,7 +549,7 @@ async def teach_sample(req: Request):
         return JSONResponse({"fehler": "label/bild fehlt"}, status_code=400)
     if len(d["bild"]) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(d["bild"]):
         return JSONResponse({"fehler": "nur JPEG bis 2 MB"}, status_code=413)
-    counts = await asyncio.to_thread(_teach_sample, d["bild"], label)
+    counts = await asyncio.to_thread(_teach_sample, d["bild"], label, _zustand(req)["teach"])
     return JSONResponse({"counts": counts or {}})
 
 
@@ -476,7 +564,7 @@ async def teach_classify(req: Request):
         return JSONResponse({"fehler": "bild fehlt"}, status_code=400)
     if len(d["bild"]) > MAX_FRAME_BYTES or not _ist_jpeg_dataurl(d["bild"]):
         return JSONResponse({"fehler": "nur JPEG bis 2 MB"}, status_code=413)
-    return JSONResponse(await asyncio.to_thread(_teach_classify, d["bild"]))
+    return JSONResponse(await asyncio.to_thread(_teach_classify, d["bild"], _zustand(req)["teach"]))
 
 
 @app.post("/api/teach/reset")
@@ -484,12 +572,12 @@ async def teach_reset(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
     with _teach_lock:
-        _teach.clear()
+        _zustand(req)["teach"].clear()
     return JSONResponse({"ok": True})
 
 
 # ---------- RAG: Fragen an eigene Dokumente (nomic-embed + llama3.2, alles lokal) ----------
-_rag = []                        # Liste (text, vec), geteilter Demo-Zustand
+# RAG-Abschnitte liegen je Besucher in _zustand(request)["rag"] als Liste (text, vektor)
 _rag_lock = threading.Lock()
 RAG_MAX_TEXT = 300_000
 RAG_MAX_CHUNKS = 300
@@ -518,6 +606,8 @@ def _chunk(text, groesse=800):
 
 async def _embed_async(client, text):
     r = await client.post(f"{OLLAMA}/api/embeddings", json={"model": EMBED_MODELL, "prompt": text})
+    if r.status_code != 200:
+        raise RuntimeError(_ollama_fehler(r.text))
     v = np.array(r.json().get("embedding", []), dtype=np.float32)
     n = np.linalg.norm(v)
     return v / n if n > 0 else v
@@ -527,6 +617,8 @@ async def _embed_async(client, text):
 async def rag_upload(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
+    if _zu_viele(req, "rag-upload", 10):
+        return JSONResponse(ZU_VIELE, status_code=429)
     d = await req.json()
     text = d.get("text") or ""
     if not text.strip():
@@ -534,33 +626,82 @@ async def rag_upload(req: Request):
     if len(text) > RAG_MAX_TEXT:
         return JSONResponse({"fehler": "Text zu gross"}, status_code=413)
     stuecke = _chunk(text)[:RAG_MAX_CHUNKS]
-    async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as c:
-        neu = [(s, await _embed_async(c, s)) for s in stuecke]
+    await _speicher_bereit()
+    try:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as c:
+            neu = [(s, await _embed_async(c, s)) for s in stuecke]
+    except RuntimeError as e:
+        return JSONResponse({"fehler": str(e)}, status_code=503)
+    rag = _zustand(req)["rag"]
     with _rag_lock:
-        frei = max(0, RAG_MAX_CHUNKS - len(_rag))
-        _rag.extend(neu[:frei])
-        gesamt = len(_rag)
-    return JSONResponse({"chunks": min(len(neu), frei), "gesamt": gesamt})
+        frei = max(0, RAG_MAX_CHUNKS - len(rag))
+        rag.extend(neu[:frei])
+        gesamt = len(rag)
+    return JSONResponse({"chunks": min(len(neu), frei), "gesamt": gesamt,
+                         "dimension": int(len(neu[0][1])) if neu else 0,
+                         "vorschau": [t[:110] for t, _ in neu[:12]]})
 
 
-@app.post("/api/rag/ask")
-async def rag_ask(req: Request):
+async def _rag_suche(c, frage, rag, k=4):
+    t0 = time.time()
+    qv = await _embed_async(c, frage)
+    embed_ms = round((time.time() - t0) * 1000)
+    with _rag_lock:
+        treffer = sorted(((float(np.dot(qv, v)), t) for t, v in rag), reverse=True)[:k]
+        gesamt = len(rag)
+    return qv, treffer, embed_ms, gesamt
+
+
+@app.post("/api/rag/search")
+async def rag_search(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
     d = await req.json()
     frage = (d.get("frage") or "").strip()[:1000]
     if not frage:
         return JSONResponse({"fehler": "keine Frage"}, status_code=400)
+    rag = _zustand(req)["rag"]
     with _rag_lock:
-        leer = not _rag
+        leer = not rag
+    if leer:
+        return JSONResponse({"fehler": "noch keine Dokumente eingelesen"}, status_code=400)
+    await _speicher_bereit()
+    try:
+        async with httpx.AsyncClient(timeout=httpx.Timeout(60.0, connect=10.0)) as c:
+            qv, treffer, embed_ms, gesamt = await _rag_suche(c, frage, rag)
+    except RuntimeError as e:
+        return JSONResponse({"fehler": str(e)}, status_code=503)
+    return JSONResponse({"dimension": int(len(qv)), "embed_ms": embed_ms, "abschnitte": gesamt,
+                         "treffer": [{"rang": i + 1, "score": round(sc, 3), "text": t}
+                                     for i, (sc, t) in enumerate(treffer)]})
+
+
+@app.post("/api/rag/ask")
+async def rag_ask(req: Request):
+    if not _origin_ok(req.headers):
+        return JSONResponse({"fehler": "Origin"}, status_code=403)
+    if _zu_viele(req, "rag-ask", 15):
+        return JSONResponse(ZU_VIELE, status_code=429)
+    d = await req.json()
+    frage = (d.get("frage") or "").strip()[:1000]
+    if not frage:
+        return JSONResponse({"fehler": "keine Frage"}, status_code=400)
+    rag = _zustand(req)["rag"]
+    with _rag_lock:
+        leer = not rag
     if leer:
         return JSONResponse({"fehler": "noch keine Dokumente eingelesen"}, status_code=400)
 
     async def strom():
         async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as c:
-            qv = await _embed_async(c, frage)
+            await _speicher_bereit()
+            try:
+                qv = await _embed_async(c, frage)
+            except RuntimeError as e:
+                yield "[" + str(e) + "]"
+                return
             with _rag_lock:
-                treffer = sorted(((float(np.dot(qv, v)), t) for t, v in _rag), reverse=True)[:4]
+                treffer = sorted(((float(np.dot(qv, v)), t) for t, v in rag), reverse=True)[:4]
             kontext = "\n\n".join("[%d] %s" % (i + 1, t) for i, (_, t) in enumerate(treffer))
             system = ("Beantworte die Frage ausschliesslich mit dem gegebenen Kontext und zitiere "
                       "Belege als [Nummer]. Reicht der Kontext nicht, sage das ehrlich. Antworte auf Deutsch.")
@@ -572,7 +713,11 @@ async def rag_ask(req: Request):
                     async for zeile in r.aiter_lines():
                         if not zeile.strip():
                             continue
-                        st = json.loads(zeile).get("message", {}).get("content", "")
+                        o = json.loads(zeile)
+                        if o.get("error"):
+                            yield "\n[" + _ollama_fehler(o["error"]) + "]"
+                            return
+                        st = o.get("message", {}).get("content", "")
                         if st:
                             yield st
                 quellen = " · ".join("[%d] %s…" % (i + 1, t[:60].strip()) for i, (_, t) in enumerate(treffer))
@@ -588,7 +733,7 @@ async def rag_reset(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
     with _rag_lock:
-        _rag.clear()
+        _zustand(req)["rag"].clear()
     return JSONResponse({"ok": True})
 
 
@@ -628,7 +773,7 @@ def _safe_calc(expr):
     return ev(ast.parse(expr, mode="eval").body)
 
 
-def _tool_ausfuehren(name, args):
+def _tool_ausfuehren(name, args, rag):
     if name == "rechne":
         try:
             return str(_safe_calc(str(args.get("ausdruck", ""))))
@@ -642,7 +787,7 @@ def _tool_ausfuehren(name, args):
     if name == "dokumentsuche":
         begriff = str(args.get("begriff", "")).lower()
         with _rag_lock:
-            treffer = [t for t, _ in _rag if begriff in t.lower()][:2]
+            treffer = [t for t, _ in rag if begriff in t.lower()][:2]
         return "\n".join(treffer) if treffer else "nichts gefunden (keine Dokumente eingelesen?)"
     return "unbekanntes Werkzeug"
 
@@ -651,10 +796,14 @@ def _tool_ausfuehren(name, args):
 async def agent_ask(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
+    if _zu_viele(req, "agent", 15):
+        return JSONResponse(ZU_VIELE, status_code=429)
     d = await req.json()
     frage = (d.get("frage") or "").strip()[:1000]
     if not frage:
         return JSONResponse({"fehler": "keine Frage"}, status_code=400)
+
+    rag = _zustand(req)["rag"]
 
     async def strom():
         messages = [
@@ -662,9 +811,17 @@ async def agent_ask(req: Request):
              "Nutze Werkzeuge, wenn sie helfen, und antworte am Ende knapp auf Deutsch."},
             {"role": "user", "content": frage}]
         async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as c:
+            await _speicher_bereit()
             for _ in range(5):
                 r = await c.post(f"{OLLAMA}/api/chat",
                                  json={"model": CHAT_MODELL, "messages": messages, "tools": _AGENT_TOOLS, "stream": False})
+                if r.status_code != 200:
+                    try:
+                        fehler = r.json().get("error", "")
+                    except Exception:                                        # noqa: BLE001
+                        fehler = ""
+                    yield "\n[Fehler] " + _ollama_fehler(fehler)
+                    return
                 m = r.json().get("message", {})
                 tcs = m.get("tool_calls") or []
                 if tcs:
@@ -673,7 +830,7 @@ async def agent_ask(req: Request):
                         fn = tc["function"]["name"]
                         args = tc["function"].get("arguments", {}) or {}
                         yield "[Werkzeug] %s(%s)" % (fn, json.dumps(args, ensure_ascii=False))
-                        erg = _tool_ausfuehren(fn, args)
+                        erg = _tool_ausfuehren(fn, args, rag)
                         yield "  ->  %s\n" % erg.replace("\n", " ")[:160]
                         messages.append({"role": "tool", "content": erg})
                     continue
@@ -684,11 +841,142 @@ async def agent_ask(req: Request):
     return StreamingResponse(strom(), media_type="text/plain; charset=utf-8")
 
 
+# ============================================================ Whisper (Sprache zu Text)
+# Modell: faster-whisper (CTranslate2) auf der CPU mit int8. CTranslate2 aus pip hat auf dem Jetson keine
+# CUDA-Unterstuetzung (get_cuda_device_count() == 0), deshalb CPU. "base" rechnet auf dem Orin Nano deutlich
+# schneller als Echtzeit; per Umgebungsvariable WHISPER_MODELL=small laesst sich ein genaueres Modell waehlen.
+WHISPER_MODELL = os.environ.get("WHISPER_MODELL", "base")
+WHISPER_MAX_BYTES = 2_000_000        # ~2 MB: eine Minute Opus/AAC liegt weit darunter
+WHISPER_MAX_SEKUNDEN = 60.0
+WHISPER_MIN_FREI_MB = 700            # darunter wird das Modell nicht geladen (Chat-Modell belegt den Speicher)
+WHISPER_TYPEN = {"audio/webm", "audio/ogg", "audio/mp4", "audio/x-m4a", "audio/aac", "audio/wav", "audio/x-wav", "audio/mpeg"}
+_whisper_modell = None
+_whisper_lade_s = None
+_whisper_sperre = asyncio.Lock()     # nur eine Transkription zur selben Zeit (Speicher, 6 Kerne)
+
+
+def _mem_frei_mb() -> int:
+    try:
+        for zeile in open("/proc/meminfo"):
+            if zeile.startswith("MemAvailable:"):
+                return int(zeile.split()[1]) // 1024
+    except Exception:
+        pass
+    return 10_000
+
+
+def _whisper_laden():
+    global _whisper_modell, _whisper_lade_s
+    if _whisper_modell is None:
+        if _mem_frei_mb() < WHISPER_MIN_FREI_MB:
+            raise MemoryError("zu wenig freier Speicher")
+        from faster_whisper import WhisperModel
+        t0 = time.time()
+        _whisper_modell = WhisperModel(WHISPER_MODELL, device="cpu", compute_type="int8", cpu_threads=4)
+        _whisper_lade_s = round(time.time() - t0, 2)
+        return _whisper_lade_s
+    return None
+
+
+def _whisper_rechnen(daten: bytes, sprache):
+    """Laeuft im Arbeitsthread. Gibt (ergebnis, fehlertext) zurueck. Audio bleibt im Arbeitsspeicher."""
+    import io
+    t0 = time.time()
+    try:
+        lade_s = _whisper_laden()
+    except MemoryError:
+        return None, ("Zu wenig freier Speicher für das Sprachmodell. Beende zuerst ein anderes Labor "
+                      "(zum Beispiel den Chat) und versuch es erneut.", 503)
+    except Exception:
+        return None, ("Das Sprachmodell konnte nicht geladen werden. Beim ersten Start braucht der Jetson "
+                      "eine Internetverbindung, um es herunterzuladen.", 503)
+    try:
+        from faster_whisper.audio import decode_audio
+        audio = decode_audio(io.BytesIO(daten), sampling_rate=16000)
+    except Exception:
+        return None, ("Die Aufnahme konnte nicht gelesen werden. Versuch es noch einmal.", 415)
+    audio_s = len(audio) / 16000.0
+    if audio_s > WHISPER_MAX_SEKUNDEN + 0.5:
+        return None, ("Die Aufnahme ist zu lang. Erlaubt sind %d Sekunden." % WHISPER_MAX_SEKUNDEN, 413)
+    if audio_s < 0.3:
+        return None, ("Die Aufnahme ist zu kurz.", 400)
+    try:
+        t1 = time.time()
+        segs, info = _whisper_modell.transcribe(audio, language=sprache, beam_size=1, vad_filter=True,
+                                                condition_on_previous_text=False)
+        segmente = [{"start": round(s.start, 2), "ende": round(s.end, 2), "text": s.text.strip()} for s in segs]
+        rechen_s = time.time() - t1
+    except Exception:
+        return None, ("Die Erkennung ist fehlgeschlagen. Versuch es noch einmal.", 500)
+    return {
+        "text": " ".join(s["text"] for s in segmente if s["text"]).strip(),
+        "sprache": info.language,
+        "sprache_wahrscheinlichkeit": round(float(info.language_probability), 3),
+        "audio_s": round(audio_s, 2),
+        "rechen_s": round(rechen_s, 2),
+        "lade_s": lade_s,                 # nur gesetzt, wenn das Modell bei dieser Anfrage erst geladen wurde
+        "modell": "whisper-" + WHISPER_MODELL + " (int8, CPU)",
+        "segmente": segmente,
+    }, None
+
+
+@app.post("/api/whisper")
+async def whisper_api(req: Request, sprache: str = "auto"):
+    """Rohe Audio-Bytes im Body (Content-Type z. B. audio/webm oder audio/mp4), optional ?sprache=de|en|auto."""
+    if not _origin_ok(req.headers):
+        return JSONResponse({"fehler": "Origin"}, status_code=403)
+    typ = (req.headers.get("content-type") or "").split(";")[0].strip().lower()
+    if typ not in WHISPER_TYPEN:
+        return JSONResponse({"fehler": "Dieses Audioformat wird nicht unterstützt."}, status_code=415)
+    if sprache not in ("auto", "de", "en"):
+        return JSONResponse({"fehler": "Unbekannte Sprache."}, status_code=400)
+    try:
+        if int(req.headers.get("content-length") or 0) > WHISPER_MAX_BYTES:
+            raise ValueError
+        teile, gesamt = [], 0
+        async for stueck in req.stream():
+            gesamt += len(stueck)
+            if gesamt > WHISPER_MAX_BYTES:
+                raise ValueError
+            teile.append(stueck)
+    except ValueError:
+        return JSONResponse({"fehler": "Die Aufnahme ist zu groß (höchstens 2 MB)."}, status_code=413)
+    daten = b"".join(teile)
+    if not daten:
+        return JSONResponse({"fehler": "Keine Audiodaten empfangen."}, status_code=400)
+    async with _whisper_sperre:
+        ergebnis, fehler = await asyncio.to_thread(_whisper_rechnen, daten, None if sprache == "auto" else sprache)
+    if fehler:
+        return JSONResponse({"fehler": fehler[0]}, status_code=fehler[1])
+    ergebnis["bytes"] = len(daten)
+    return JSONResponse(ergebnis)
+
+
+@app.get("/api/videos")
+def api_videos():
+    """Manifest der Erklaervideos; ohne gebaute Videos eine leere Liste (statt 404)."""
+    ordner = _STATIC_DIR / "videos"
+    try:
+        manifest = json.loads((ordner / "manifest.json").read_text(encoding="utf-8"))
+    except Exception:
+        return JSONResponse({"videos": []})
+    # nur Videos anbieten, deren Datei wirklich da ist (das Manifest kann dem Rendern vorauslaufen)
+    fertig = [v for v in manifest.get("videos", []) if (ordner / f"{v.get('id', '')}.mp4").is_file()]
+    return JSONResponse({"videos": fertig})
+
+
 @app.get("/", response_class=HTMLResponse)
-def index():
-    return (HIER / "index.html").read_text(encoding="utf-8")
+def index(request: Request):
+    # Versionsstempel aus den Dateizeiten: Browser laden nach einem Deploy sofort die neuen Dateien
+    stamp = max((int(f.stat().st_mtime) for f in _STATIC_DIR.glob("*") if f.is_file()), default=0)
+    html = (HIER / "index.html").read_text(encoding="utf-8").replace("__V__", str(stamp))
+    antwort = HTMLResponse(html, headers={"Cache-Control": "no-cache"})
+    if not request.cookies.get("kl_s"):
+        antwort.set_cookie("kl_s", secrets.token_hex(16), httponly=True, samesite="lax", secure=True, max_age=86400)
+    return antwort
 
 
 @app.on_event("startup")
 def _start():
     threading.Thread(target=_tegrastats_leser, daemon=True).start()
+    threading.Thread(target=speicher.waechter, daemon=True).start()

@@ -4,3 +4,5 @@ websockets
 httpx
 # cv2, numpy, Pillow kommen aus JetPack (System-Python), bewusst nicht hier
 numpy<2
+faster-whisper
+piper-tts

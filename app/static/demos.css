@@ -1,0 +1,106 @@
+/* Live-Labore: Gestaltung. Nutzt die Variablen aus style.css (--akzent, --flaeche, ...). Eigene Klassen mit Praefix d-. */
+
+.flaeche [hidden]{display:none!important}
+
+/* ---------- gemeinsam ---------- */
+.d-steuer{margin-bottom:14px}
+.d-steuer .chip{font-variant-numeric:tabular-nums}
+.d-platz{aspect-ratio:4/3;display:grid;place-content:center;justify-items:center;gap:8px;padding:18px;text-align:center;
+  border-radius:var(--r2);background:var(--flaeche2);border:.5px solid var(--linie);color:var(--leise);font-size:14px;line-height:1.4}
+.d-meldung{display:flex;gap:10px;align-items:flex-start;margin:0 0 14px;padding:12px 14px;border-radius:var(--r2);
+  background:color-mix(in srgb,var(--orange) 14%,var(--flaeche));border:.5px solid color-mix(in srgb,var(--orange) 40%,transparent);font-size:14.5px;line-height:1.5}
+.d-meldung .ic{margin-top:2px;color:var(--orange)}
+.d-hinweis{margin:10px 0 0;font-size:14px;line-height:1.5;color:var(--leise)}
+.d-leise{color:var(--leise)}
+.d-live{margin-top:20px;padding:18px 0 0;border-top:.5px solid var(--linie2)}
+.d-sw{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--flaeche3)}
+.d-sw.s1{background:#5e5ce6}.d-sw.s2{background:#64748b}.d-sw.s3{background:#0a84ff}.d-sw.s4{background:#30a14e}.d-sw.s5{background:#e08600}.d-sw.s6{background:#8e8e93}
+.pipeleg .d-sw{margin-right:0}
+.pipeleg span{display:inline-flex;align-items:center;gap:6px}
+.pipe:empty{min-height:34px}
+.d-regler{margin-top:16px;padding:14px 16px;border-radius:var(--r2);background:var(--flaeche2)}
+.d-regler .d-hinweis{margin-top:8px}
+.d-frage input[type=text]{flex:1;min-width:0}
+.d-zeile{margin-top:10px}
+.d-steuer .btn,.d-frage .btn{white-space:nowrap}
+
+/* ---------- Webcam: Messwerte ruhig halten ---------- */
+.messwert{min-width:120px}
+.d-steuer + .d-meldung{margin-top:-2px}
+
+/* ---------- Anlernen ---------- */
+.d-teachkopf{align-items:start}
+.d-ergebnis{aspect-ratio:4/3;border-radius:var(--r2);background:var(--flaeche2);padding:16px;display:flex;flex-direction:column;gap:6px;overflow:hidden;border:.5px solid var(--linie)}
+.d-gross{font-size:clamp(24px,3.4vw,34px);font-weight:700;letter-spacing:-.03em;line-height:1.1;overflow-wrap:anywhere}
+.d-sicher{font-size:14px;color:var(--leise);line-height:1.4}
+.d-balken{display:grid;gap:8px;margin-top:auto}
+.d-balkenzeile{display:grid;grid-template-columns:minmax(70px,.9fr) 2fr 38px;gap:8px;align-items:center;font-size:13px}
+.d-bname{display:flex;align-items:center;gap:6px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.d-punkt{display:inline-block;width:11px;height:11px;border-radius:50%;flex:none}
+.d-bar{height:12px;border-radius:6px;background:var(--flaeche3);overflow:hidden}
+.d-bar i{display:block;height:100%;width:0;border-radius:6px;transition:width .25s}
+.d-wert{font-family:var(--mono);font-size:12px;text-align:right;color:var(--leise)}
+.d-klassenkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 8px}
+.d-klassenkopf h3{margin:0;font-size:15px}
+.d-klassen{display:grid;gap:8px}
+.d-klasse{display:grid;grid-template-columns:auto minmax(120px,1fr) auto auto;gap:12px;align-items:center;padding:8px 10px;border-radius:var(--r2);background:var(--flaeche2)}
+.d-klasse input[type=text]{padding:7px 10px}
+.d-klasse input[readonly]{opacity:.85}
+.d-zahl{font-size:13px;color:var(--leise);min-width:7.5em;font-variant-numeric:tabular-nums}
+.d-zahl.d-wenig{color:var(--orange)}
+.d-halten{touch-action:manipulation;-webkit-user-select:none;user-select:none;min-width:200px}
+.d-halten.aktiv{background:var(--rot);color:#fff}
+.d-frage-reset,.d-frage{align-items:center}
+span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--leise)}
+@media(max-width:700px){
+  .d-klasse{grid-template-columns:auto 1fr auto}
+  .d-klasse .d-halten{grid-column:1/-1;width:100%}
+}
+
+/* ---------- Chat ---------- */
+.d-modell{padding-bottom:14px;margin-bottom:14px;border-bottom:.5px solid var(--linie2)}
+.d-modell .zeile{gap:10px}
+.d-chatbox{min-height:80px}
+.d-chatbox .verlauf{min-height:60px}
+.d-chatbox .d-hinweis{margin-top:0}
+.d-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.msg.ki .meta{font-size:12px;opacity:1;color:var(--leise)}
+.msg.ki .meta:empty{display:none}
+.d-einst{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:16px;padding:12px 16px;border-radius:var(--r2);background:var(--flaeche2)}
+.d-einst .regler{flex:1;min-width:240px}
+.d-schalter{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
+.d-schalter input{position:absolute;opacity:0;width:1px;height:1px}
+.d-sw-bahn{width:38px;height:22px;border-radius:99px;background:var(--flaeche3);position:relative;transition:background .15s;flex:none}
+.d-sw-bahn i{position:absolute;top:2px;left:2px;width:18px;height:18px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .15s}
+.d-schalter input:checked + .d-sw-bahn{background:var(--akzent)}
+.d-schalter input:checked + .d-sw-bahn i{transform:translateX(16px)}
+.d-schalter input:focus-visible + .d-sw-bahn{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
+.verlauf:focus-visible{outline-offset:4px}
+
+/* ---------- RAG ---------- */
+.d-schrittinhalt{min-width:0}
+.d-schrittinhalt textarea{margin-top:10px;min-height:120px}
+.d-vorschau{margin:8px 0 0;padding-left:20px;font-size:13.5px;color:var(--leise);display:grid;gap:3px}
+.d-treffer{padding:11px 13px;border-radius:11px;background:var(--flaeche2);font-size:14.5px;position:relative;overflow:hidden;transition:box-shadow .15s,background .15s}
+.d-treffer.d-hl{background:color-mix(in srgb,var(--akzent) 14%,var(--flaeche2));box-shadow:0 0 0 2px var(--akzent)}
+.d-treffer .sc{display:flex;justify-content:space-between;font-family:var(--mono);font-size:12px;color:var(--leise);margin-bottom:4px}
+.d-treffer .bal{position:absolute;left:0;bottom:0;height:3px;background:var(--akzent)}
+.d-ttext{white-space:pre-wrap;overflow-wrap:anywhere;padding-bottom:4px}
+.treffer{margin-bottom:4px}
+.d-antwort{font-size:17px;margin-top:10px;white-space:pre-wrap;overflow-wrap:anywhere;min-height:0}
+.d-ref{appearance:none;border:0;background:color-mix(in srgb,var(--akzent) 16%,transparent);color:var(--akzent);font:inherit;font-weight:600;padding:0 5px;margin:0 1px;border-radius:6px;cursor:pointer}
+.d-ref:hover{background:color-mix(in srgb,var(--akzent) 28%,transparent)}
+.schritt .eingabe{margin-top:10px}
+
+/* ---------- Agent ---------- */
+.d-status{margin:14px 0 0;font-size:14px;color:var(--leise)}
+.d-karten{display:grid;gap:0}
+.d-zeilek{display:grid;grid-template-columns:76px 1fr;gap:10px;align-items:baseline;font-size:14.5px;padding:3px 0}
+.d-pars{display:flex;flex-wrap:wrap;gap:6px 14px}
+.d-par code{overflow-wrap:anywhere}
+.d-ergtext{white-space:pre-wrap;overflow-wrap:anywhere}
+.karte-w.antwort .d-ergtext{font-size:16.5px;line-height:1.5}
+.d-erkl{margin:8px 0 0;padding-top:8px;border-top:.5px solid var(--linie2);font-size:14px;line-height:1.5;color:var(--leise)}
+.d-karten .karte-w:first-child{margin-top:14px}
+
+@media (prefers-reduced-motion:reduce){.d-bar i,.d-treffer,.d-sw-bahn,.d-sw-bahn i{transition:none!important}}

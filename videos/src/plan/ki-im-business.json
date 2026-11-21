@@ -1,0 +1,133 @@
+{
+ "id": "ki-im-business",
+ "titel": "KI im Business",
+ "untertitel": "Wo KI heute arbeitet und welche drei Fragen vor jedem Einsatz stehen",
+ "gesamt": 76.04,
+ "szenen": [
+  {
+   "id": "einstieg",
+   "kapitel": "Wo KI arbeitet",
+   "start": 0,
+   "dauer": 13.44,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.04,
+     "text": "KI arbeitet längst in vielen Bereichen."
+    },
+    {
+     "t": 4.24,
+     "d": 3.28,
+     "text": "Meist unterstützt sie Menschen, statt sie zu ersetzen."
+    },
+    {
+     "t": 7.82,
+     "d": 4.72,
+     "text": "Wir gehen sechs Bereiche durch und enden mit drei Fragen, die immer passen."
+    }
+   ]
+  },
+  {
+   "id": "fertigung",
+   "kapitel": "Fertigung und Logistik",
+   "start": 13.44,
+   "dauer": 12.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.68,
+     "text": "In der Fertigung prüft eine Kamera Teile auf Fehler."
+    },
+    {
+     "t": 4.48,
+     "d": 1.92,
+     "text": "Das ist Sichtprüfung."
+    },
+    {
+     "t": 6.7,
+     "d": 4.8,
+     "text": "In der Logistik hilft KI, Lager zu steuern und Routen zu planen."
+    }
+   ]
+  },
+  {
+   "id": "handel",
+   "kapitel": "Handel und Gesundheit",
+   "start": 25.84,
+   "dauer": 13.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Im Handel erkennt sie leere Regale und schätzt den Bedarf."
+    },
+    {
+     "t": 4.64,
+     "d": 2.8,
+     "text": "In der Gesundheit wertet sie Bilder aus."
+    },
+    {
+     "t": 7.74,
+     "d": 5.04,
+     "text": "Sie ist dort eine Assistenz, die Ärztinnen und Ärzte auf Auffälliges hinweist."
+    }
+   ]
+  },
+  {
+   "id": "wissen",
+   "kapitel": "Büro, Wissen, Sicherheit",
+   "start": 39.52,
+   "dauer": 11.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Im Büro beantwortet sie Fragen zu Dokumenten und fasst Protokolle zusammen."
+    },
+    {
+     "t": 5.6,
+     "d": 3.2,
+     "text": "Bei der Sicherheit regelt sie zum Beispiel den Zutritt."
+    }
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Drei Fragen vor dem Einsatz",
+   "start": 50.72,
+   "dauer": 25.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.68,
+     "text": "Bevor du KI einsetzt, stelle drei Fragen."
+    },
+    {
+     "t": 4.48,
+     "d": 4.32,
+     "text": "Erstens: Welche Entscheidung soll sie treffen oder vorbereiten?"
+    },
+    {
+     "t": 9.1,
+     "d": 4.48,
+     "text": "Zweitens: Welche Daten braucht sie, und darf sie diese nutzen?"
+    },
+    {
+     "t": 13.88,
+     "d": 2.8,
+     "text": "Drittens: Wer prüft das Ergebnis?"
+    },
+    {
+     "t": 16.98,
+     "d": 3.68,
+     "text": "Wo diese drei Antworten klar sind, lohnt sich der Einsatz."
+    },
+    {
+     "t": 20.96,
+     "d": 2.56,
+     "text": "Und wenn nicht, bleibt der Mensch am Steuer."
+    }
+   ]
+  }
+ ]
+}

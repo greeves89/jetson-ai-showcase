@@ -1,0 +1,44 @@
+/* demo-tts: Gestaltung des Labors "Text zu Sprache". Nutzt die Variablen aus style.css (--akzent, --flaeche, ...). */
+.tts [hidden]{display:none!important}
+.tts-buehne{display:flex;flex-direction:column;gap:12px}
+.tts-label{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise);margin-right:2px}
+.tts-feld{min-height:92px;font-size:17px;line-height:1.5;resize:vertical}
+.tts-feldfuss{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-top:-4px}
+.tts-lern{margin:0;font-size:14px;line-height:1.5;color:var(--leise);min-height:1.5em;flex:1}
+.tts-zaehler{flex:none;font-size:12.5px;color:var(--leise)}
+.tts-zaehler.warn{color:var(--orange)}
+.tts-zeile{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tts-chip,.tts-stimme{color:var(--text);font-size:14px;padding:6px 13px}
+.tts-chip:hover,.tts-stimme:hover{background:var(--flaeche3)}
+.tts-chip[aria-pressed=true]{background:color-mix(in srgb,var(--akzent) 14%,var(--flaeche2));color:var(--text);box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--akzent) 55%,transparent)}
+.tts-stimme[aria-pressed=true]{background:var(--akzent);color:#fff}
+.tts-stimmentext{margin:-4px 0 0;font-size:14px;color:var(--leise);min-height:1.4em}
+.tts-tempo{max-width:520px}
+.tts-knoepfe{display:flex;flex-wrap:wrap;gap:10px;margin-top:4px}
+.tts-status{margin:0;font-size:14.5px;color:var(--leise);min-height:1.5em}
+.tts-hinweis{padding:11px 14px;border-radius:var(--r2);font-size:14.5px;line-height:1.45;background:color-mix(in srgb,var(--orange) 14%,var(--flaeche));border:.5px solid color-mix(in srgb,var(--orange) 40%,transparent)}
+.tts-ergebnisse{margin-top:22px;padding-top:20px;border-top:.5px solid var(--linie);display:flex;flex-direction:column;gap:16px}
+.tts-karte{display:flex;flex-direction:column;gap:10px;padding:14px 16px;border-radius:var(--r2);background:var(--flaeche2)}
+.tts-kartenkopf{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.tts-name{font-size:16px;letter-spacing:-.01em;margin-right:4px}
+.tts-karte .chip{background:var(--flaeche)}
+.tts-welle{display:block;width:100%;height:72px;cursor:pointer;border-radius:8px}
+.tts-player{display:block;width:100%;height:40px}
+.tts-live{margin-top:22px;padding:18px 0 0;border-top:.5px solid var(--linie)}
+.tts-pipezeile{margin-bottom:14px}
+.tts-pipename{font-size:13px;font-weight:600;margin-bottom:6px}
+.tts-live .pipe .s6{background:var(--flaeche3);color:var(--leise)}
+.tts-live .pipeleg i{border-radius:3px}
+.tts-laut{margin-top:16px;padding:14px 16px;border-radius:var(--r2);background:var(--flaeche2)}
+.tts-laut-kopf{display:flex;flex-wrap:wrap;align-items:baseline;gap:4px 12px}
+.tts-laut-sub{font-size:13px;color:var(--leise)}
+.tts-laut-liste{list-style:none;margin:10px 0 0;padding:0;display:flex;flex-direction:column;gap:6px}
+.tts-laut-satz{font-size:19px;line-height:1.5;letter-spacing:.01em;overflow-wrap:anywhere}
+.tts-normal{margin:10px 0 0;font-size:14.5px}
+.tts-laut-hinweis{margin:10px 0 0;font-size:13.5px;color:var(--leise)}
+.tts-erkl p{margin:0 0 8px}
+.tts-erkl p:last-child{margin-bottom:0}
+.tts-missbrauch{display:flex;gap:10px;align-items:flex-start;margin:18px 0 0;font-size:13.5px;line-height:1.5;color:var(--leise)}
+.tts-missbrauch .ic{flex:none;width:18px;height:18px;margin-top:1px}
+@media(max-width:560px){.tts-feldfuss{flex-direction:column;gap:4px}.tts-laut-satz{font-size:17px}}
+@media(prefers-reduced-motion:reduce){.tts .btn,.tts .btn:active{transition:none;transform:none}.tts-live .pipe>div{transition:none}}

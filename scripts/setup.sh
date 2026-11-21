@@ -32,6 +32,19 @@ if [ ! -f app/models/mobilenet_embed.onnx ]; then
   curl -sS -m 90 -L -o app/models/mobilenet_embed.onnx \
     https://github.com/opencv/opencv_zoo/raw/main/models/image_classification_mobilenet/image_classification_mobilenetv2_2022apr.onnx
 fi
+echo "== whisper (sprache zu text, laedt das Modell vorab in den Huggingface-Cache) =="
+python3 -c "from faster_whisper import WhisperModel; WhisperModel('${WHISPER_MODELL:-base}', device='cpu', compute_type='int8')" \
+  || echo "Whisper-Modell nicht geladen; es wird beim ersten Gebrauch nachgeladen."
+echo "== piper (text zu sprache, laedt die freien deutschen Stimmen vorab, siehe docs/lizenzen.md) =="
+PV="${PIPER_VOICE_DIR:-$HOME/.local/share/piper-voices}"
+mkdir -p "$PV"
+for V in thorsten/medium/de_DE-thorsten-medium thorsten/high/de_DE-thorsten-high kerstin/low/de_DE-kerstin-low; do
+  for E in onnx onnx.json; do
+    F="$PV/$(basename "$V").$E"
+    [ -s "$F" ] || curl -sSL -m 300 --retry 3 -o "$F" "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/$V.$E" \
+      || { rm -f "$F"; echo "Stimme $(basename "$V") nicht geladen; sie fehlt dann im Labor."; }
+  done
+done
 echo "== cert =="
 mkdir -p certs
 if [ ! -f certs/key.pem ]; then

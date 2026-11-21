@@ -1,0 +1,7 @@
+{
+  "name": "ki-labor-tests",
+  "private": true,
+  "type": "module",
+  "description": "Browser-Pruefungen fuer das KI-Labor (Chrome, Fake-Webcam, Screenshots)",
+  "dependencies": { "playwright-core": "^1.50.0" }
+}

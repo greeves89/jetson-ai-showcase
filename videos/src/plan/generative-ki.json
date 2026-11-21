@@ -1,0 +1,154 @@
+{
+ "id": "generative-ki",
+ "titel": "Generative KI",
+ "untertitel": "Wie Sprachmodelle Text erzeugen, warum sie irren und was RAG dagegen tut",
+ "gesamt": 83.36,
+ "szenen": [
+  {
+   "id": "tokens",
+   "kapitel": "Text in Tokens",
+   "start": 0,
+   "dauer": 11.78,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 5.2,
+     "text": "Ein Sprachmodell macht im Kern nur eines: Es sagt das nächste Token voraus."
+    },
+    {
+     "t": 6.4,
+     "d": 4.48,
+     "text": "Ein Token ist ein Textstück, oft ein Wort oder ein Wortteil."
+    }
+   ]
+  },
+  {
+   "id": "naechstes",
+   "kapitel": "Das nächste Token",
+   "start": 11.78,
+   "dauer": 10.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.96,
+     "text": "Zu jedem Satzanfang berechnet das Modell Wahrscheinlichkeiten für das nächste Token."
+    },
+    {
+     "t": 5.76,
+     "d": 3.84,
+     "text": "Eines wird gewählt und angehängt, dann beginnt es von vorn."
+    }
+   ]
+  },
+  {
+   "id": "temperatur",
+   "kapitel": "Temperatur",
+   "start": 22.28,
+   "dauer": 13.6,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.28,
+     "text": "Die Temperatur steuert, wie mutig gewählt wird."
+    },
+    {
+     "t": 4.08,
+     "d": 3.76,
+     "text": "Niedrig heißt: fast immer das wahrscheinlichste Token."
+    },
+    {
+     "t": 8.14,
+     "d": 4.56,
+     "text": "Hoch heißt: Auch unwahrscheinliche Kandidaten bekommen eine Chance."
+    }
+   ]
+  },
+  {
+   "id": "kontext",
+   "kapitel": "Kontextfenster",
+   "start": 35.88,
+   "dauer": 11.36,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Das Kontextfenster ist das Gedächtnis einer Anfrage."
+    },
+    {
+     "t": 4.32,
+     "d": 2.72,
+     "text": "Nur was hineinpasst, sieht das Modell."
+    },
+    {
+     "t": 7.34,
+     "d": 3.12,
+     "text": "Was hinausrutscht, ist für die Antwort vergessen."
+    }
+   ]
+  },
+  {
+   "id": "halluzination",
+   "kapitel": "Halluzination",
+   "start": 47.24,
+   "dauer": 13.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.4,
+     "text": "Das Modell prüft keine Fakten, es wählt plausible Fortsetzungen."
+    },
+    {
+     "t": 5.2,
+     "d": 2.4,
+     "text": "Plausibel ist nicht gleich wahr."
+    },
+    {
+     "t": 7.9,
+     "d": 4.88,
+     "text": "So entstehen Antworten, die überzeugend klingen und trotzdem erfunden sind."
+    }
+   ]
+  },
+  {
+   "id": "rag",
+   "kapitel": "RAG: erst nachschlagen",
+   "start": 60.92,
+   "dauer": 13.28,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.56,
+     "text": "Ein Gegenmittel ist RAG: erst nachschlagen, dann antworten."
+    },
+    {
+     "t": 5.36,
+     "d": 3.6,
+     "text": "Passende Stellen aus deinen Dokumenten kommen in den Kontext."
+    },
+    {
+     "t": 9.26,
+     "d": 3.12,
+     "text": "Die Antwort stützt sich darauf und nennt die Quelle."
+    }
+   ]
+  },
+  {
+   "id": "bilder",
+   "kapitel": "Bilder aus Rauschen",
+   "start": 74.2,
+   "dauer": 9.16,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.16,
+     "text": "Bildmodelle arbeiten anders."
+    },
+    {
+     "t": 2.96,
+     "d": 4.4,
+     "text": "Sie starten mit Rauschen und machen daraus Schritt für Schritt ein Bild."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,161 @@
+{
+ "id": "maschinelles-lernen",
+ "titel": "Maschinelles Lernen",
+ "untertitel": "Wie ein System aus Beispielen lernt: Training, Inferenz und Lernarten",
+ "gesamt": 89.32,
+ "szenen": [
+  {
+   "id": "umkehr",
+   "kapitel": "Programmieren oder Lernen",
+   "start": 0,
+   "dauer": 14.48,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.72,
+     "text": "Normalerweise schreibt man ein Programm: Regeln rein, Ergebnis raus."
+    },
+    {
+     "t": 5.92,
+     "d": 2.64,
+     "text": "Beim maschinellen Lernen ist es umgekehrt."
+    },
+    {
+     "t": 8.86,
+     "d": 4.72,
+     "text": "Du gibst Beispiele mit Antworten, und das System findet die Regeln selbst."
+    }
+   ]
+  },
+  {
+   "id": "training",
+   "kapitel": "Training",
+   "start": 14.48,
+   "dauer": 14.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 1.68,
+     "text": "Das nennt man Training."
+    },
+    {
+     "t": 2.48,
+     "d": 4.4,
+     "text": "Jedes Beispiel trägt ein Etikett, hier Katze oder Hund."
+    },
+    {
+     "t": 7.18,
+     "d": 3.76,
+     "text": "Das System verändert sich so lange, bis seine Treffer stimmen."
+    },
+    {
+     "t": 11.24,
+     "d": 2.24,
+     "text": "Das Ergebnis heißt Modell."
+    }
+   ]
+  },
+  {
+   "id": "inferenz",
+   "kapitel": "Inferenz",
+   "start": 28.86,
+   "dauer": 11.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2,
+     "text": "Danach folgt die Inferenz."
+    },
+    {
+     "t": 2.8,
+     "d": 3.76,
+     "text": "Du zeigst dem Modell ein neues Bild, das es nie gesehen hat."
+    },
+    {
+     "t": 6.86,
+     "d": 3.76,
+     "text": "Es sagt voraus, was darauf zu sehen ist, samt Sicherheit."
+    }
+   ]
+  },
+  {
+   "id": "lernarten",
+   "kapitel": "Drei Lernarten",
+   "start": 40.38,
+   "dauer": 15.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.6,
+     "text": "Überwacht: Die Beispiele haben richtige Antworten."
+    },
+    {
+     "t": 4.4,
+     "d": 4.96,
+     "text": "Unüberwacht: Das System sucht selbst Gruppen in Daten ohne Etikett."
+    },
+    {
+     "t": 9.66,
+     "d": 5.28,
+     "text": "Bestärkend: Ein Agent probiert aus und bekommt Belohnung für gute Züge."
+    }
+   ]
+  },
+  {
+   "id": "ueberanpassung",
+   "kapitel": "Die Falle: Überanpassung",
+   "start": 56.22,
+   "dauer": 15.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.32,
+     "text": "Eine Falle ist die Überanpassung."
+    },
+    {
+     "t": 3.12,
+     "d": 4.8,
+     "text": "Das Modell lernt die Trainingsbeispiele auswendig, statt das Muster zu verstehen."
+    },
+    {
+     "t": 8.22,
+     "d": 2.4,
+     "text": "Bei neuen Daten versagt es dann."
+    },
+    {
+     "t": 10.92,
+     "d": 3.6,
+     "text": "Deshalb prüft man mit Beispielen, die es nie gesehen hat."
+    }
+   ]
+  },
+  {
+   "id": "merkmalsraum",
+   "kapitel": "Im Merkmalsraum",
+   "start": 71.64,
+   "dauer": 17.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.6,
+     "text": "In der Demo Bildmodell anlernen kannst du das ausprobieren."
+    },
+    {
+     "t": 4.4,
+     "d": 3.6,
+     "text": "Das Modell macht aus jedem Bild eine Reihe von Zahlen."
+    },
+    {
+     "t": 8.3,
+     "d": 3.6,
+     "text": "Ähnliche Bilder liegen im Merkmalsraum nah beieinander."
+    },
+    {
+     "t": 12.2,
+     "d": 3.68,
+     "text": "Ein neues Bild wird danach eingeordnet, wo es landet."
+    }
+   ]
+  }
+ ]
+}

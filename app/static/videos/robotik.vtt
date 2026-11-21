@@ -1,0 +1,71 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.770
+Ein Roboter ist KI mit Körper.
+
+00:00:03.920 --> 00:00:07.990
+Er muss wahrnehmen, entscheiden
+und handeln, immer wieder.
+
+00:00:09.240 --> 00:00:11.390
+Das läuft als Regelkreis.
+
+00:00:11.540 --> 00:00:13.690
+Sensoren messen die Welt.
+
+00:00:13.840 --> 00:00:19.190
+Die Planung, oft eine KI, entscheidet,
+was als Nächstes passiert.
+
+00:00:19.340 --> 00:00:23.090
+Aktoren, also Motoren, führen es aus.
+
+00:00:23.240 --> 00:00:26.910
+Dann misst der Sensor erneut,
+und der Kreis schließt sich.
+
+00:00:27.060 --> 00:00:32.970
+Ein Beispiel: Ein Greifarm sieht ein Teil,
+plant den Griff und schließt die Finger.
+
+00:00:34.220 --> 00:00:38.530
+Als Gehirn eines Roboters taugt ein
+kleiner Rechner wie der Jetson.
+
+00:00:38.680 --> 00:00:42.910
+Er hat eine Grafikkarte für KI
+und braucht nur wenig Strom.
+
+00:00:43.060 --> 00:00:45.370
+Alles läuft direkt am Gerät.
+
+00:00:46.620 --> 00:00:48.050
+Warum lokal?
+
+00:00:48.200 --> 00:00:52.670
+Ein Roboter kann nicht warten, bis eine
+Antwort aus dem Internet zurückkommt.
+
+00:00:52.820 --> 00:00:57.210
+Der kurze Weg im Gerät ist schneller
+und funktioniert auch ohne Netz.
+
+00:00:58.460 --> 00:01:00.850
+Roboter gibt es in vielen Formen.
+
+00:01:01.000 --> 00:01:04.190
+Industrieroboter schweißen und montieren.
+
+00:01:04.340 --> 00:01:07.450
+Lagerroboter fahren Regale und Kisten.
+
+00:01:07.600 --> 00:01:10.070
+Drohnen fliegen und kartieren.
+
+00:01:10.220 --> 00:01:16.210
+Serviceroboter helfen im Alltag, humanoide
+Roboter bauen den menschlichen Körper nach.
+
+00:01:16.360 --> 00:01:21.630
+Allen gemeinsam ist derselbe Kreis aus
+Wahrnehmen, Entscheiden und Handeln.

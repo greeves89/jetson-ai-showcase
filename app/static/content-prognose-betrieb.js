@@ -1,0 +1,673 @@
+/* Strang "Daten und Prognosen" und "KI im Betrieb": sieben Lektionen.
+   Registrierung siehe Kommentar am Ende von content.js. */
+window.INHALT.registriere({
+
+gruppen: [
+  {name: "Daten und Prognosen", seiten: ["tabellen-ml", "zeitreihen", "anomalien", "empfehlungen"]},
+  {name: "KI im Betrieb", seiten: ["mlops", "kosten-energie", "ki-einfuehrung"]},
+],
+
+seiten: {
+
+/* ------------------------------------------------------------------ Daten und Prognosen */
+
+"tabellen-ml": {
+  nav: "Entscheidungsbäume", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Entscheidungsbäume und Tabellendaten", symbol: "ml",
+  widget: "baum-spiel", videos: ["entscheidungsbaeume"],
+  kurz: "Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?",
+  abschnitte: [
+    {h: "Das Ratespiel mit den Ja-Nein-Fragen", p: [
+      "Du kennst das Spiel: Jemand denkt sich ein Ding aus, du darfst nur Fragen stellen, die man mit Ja oder Nein beantwortet. „Ist es ein Tier?“ „Hat es vier Beine?“ „Lebt es im Wasser?“ Mit wenigen klugen Fragen landest du bei der Lösung.",
+      "Genau so arbeitet ein [[entscheidungsbaum|Entscheidungsbaum]]. Er ist eine Kette von Ja-Nein-Fragen an die Daten, und am Ende steht eine Antwort. Er gehört zum [[ml|maschinellen Lernen]], weil die Fragen nicht von Hand geschrieben, sondern aus Beispielen gefunden werden.",
+    ], alltag: [
+      "Beim Ratespiel lohnt sich eine gute erste Frage. „Ist es ein Tier?“ teilt die Möglichkeiten grob in zwei Hälften. „Ist es ein Dackel?“ trifft fast nie. Ein Entscheidungsbaum sucht also nicht irgendwelche Fragen, sondern die, die am meisten aussortieren. Der Vergleich hinkt an einer Stelle: Beim Spiel gibt es eine feste Lösung, bei Daten bleibt manchmal ein Rest Unsicherheit.",
+    ]},
+    {h: "Ein Baum ist ein Fragebogen", p: [
+      "Stell dir vor, eine Bank prüft einen Kreditantrag. Ein Baum könnte so aussehen: Gibt es Zahlungsrückstände? Wenn ja, prüfe die Höhe der Rate im Verhältnis zum Einkommen. Wenn nein, prüfe, wie lange das Konto besteht. Jede Frage ist ein Verzweigungspunkt, jede Antwort ein Ast, und das Ende ist ein Blatt mit dem Ergebnis, etwa „Antrag annehmen“.",
+      "Dieselbe Form passt zu vielen Aufgaben mit Tabellen: Bewerbungen vorsortieren, Reparaturaufträge priorisieren, Kundinnen und Kunden einer Gruppe zuordnen. Jede Zeile der Tabelle ist ein Fall, jede Spalte ein [[merkmal|Merkmal]], also eine Eigenschaft des Falls, nach der der Baum fragen darf.",
+    ], alltag: [
+      "Eine Checkliste in der Autowerkstatt funktioniert genauso: Springt der Motor an? Nein: Ist die Batterie geladen? Nein: Batterie laden oder tauschen. Du folgst dem Pfad vom Anfang bis zum Blatt. Wichtig: Ein Baum darf nur nach Dingen fragen, die man auch weiß und die man nutzen darf. Alter oder Herkunft einer Person sind bei Entscheidungen über Menschen heikel, mehr dazu auf der Seite {{verzerrung-ethik|Fairness und Verzerrung}}.",
+    ]},
+    {h: "Wie ein Baum aus Daten lernt: die beste Frage zuerst", p: [
+      "Beim Lernen geht der Baum alle möglichen Fragen durch und prüft, welche die Fälle am saubersten trennt. „Sauber“ heißt: In jeder der beiden Gruppen sollen möglichst gleichartige Fälle landen. Dieses Maß nennt man [[reinheit|Reinheit]]. Dann macht er mit jeder Gruppe dasselbe noch einmal, bis die Gruppen rein genug sind oder eine Grenze erreicht ist.",
+      "Ein kleines Rechenbeispiel zeigt das: Von zehn Kreditanträgen wurden sechs zurückgezahlt und vier nicht. Die Frage „Gibt es Zahlungsrückstände?“ teilt sie in vier Anträge mit Rückständen (einer zurückgezahlt, drei nicht) und sechs ohne (fünf zurückgezahlt, einer nicht). Beide Gruppen sind deutlich einheitlicher als die Ausgangsmenge. Die Frage „Ist die Hausnummer gerade?“ ergäbe zwei Gruppen mit je ungefähr demselben Mischungsverhältnis wie vorher. Sie trennt nichts und wird verworfen.",
+    ], merke: "Ein Baum wählt bei jedem Schritt die Frage, nach der die Gruppen am einheitlichsten werden. Mehr steckt im Lernen nicht dahinter.",
+    },
+    {h: "Warum Bäume beliebt sind: man kann sie lesen", p: [
+      "Der größte Vorteil: Du kannst jeden Entscheidungsweg nachlesen. Wenn der Baum einen Antrag ablehnt, siehst du die drei Fragen, die dazu geführt haben. Bei einem {{neuronale-netze|neuronalen Netz}} mit Millionen Zahlen geht das nicht so einfach.",
+      "Dazu kommt: Bäume brauchen wenig Vorbereitung. Sie kommen mit Zahlen wie Alter und mit Kategorien wie „Branche“ zurecht, und sie lernen auf einem normalen Rechner in Sekunden. Für Fachabteilungen, die ihre Entscheidungen begründen müssen, ist das oft ausschlaggebend.",
+    ], alltag: [
+      "Ein Arzt, der sagt „Fieber über 39 Grad und Husten, deshalb Röntgenbild“, kann seine Entscheidung erklären. Einer, der nur sagt „Ich habe so ein Gefühl“, kann es nicht, auch wenn er oft richtig liegt. Bäume sind die Variante mit der Begründung.",
+    ]},
+    {h: "Die Grenze: Überanpassung", p: [
+      "Lässt man einen Baum ungebremst wachsen, fragt er so lange weiter, bis jedes Blatt nur noch einen einzigen Fall enthält. Dann hat er die Trainingstabelle perfekt gelernt, aber nichts verstanden. Das ist die [[ueberanpassung|Überanpassung]], die du schon aus {{ml|Maschinelles Lernen}} kennst.",
+      "Dagegen helfen drei Dinge: die Tiefe begrenzen (zum Beispiel auf fünf Fragen hintereinander), ein Blatt nur zulassen, wenn es eine Mindestzahl Fälle enthält, und das Ergebnis immer an Daten prüfen, die der Baum nie gesehen hat. Wie man das sauber misst, steht auf der Seite {{bewertung|Wie gut ist ein Modell?}}.",
+    ], alltag: [
+      "Ein Schüler lernt alte Klausuren auswendig, samt Zahlen und Formulierungen. Bekommt er dieselben Aufgaben, ist er perfekt. Ändert der Lehrer die Zahlen, scheitert er. Ein überangepasster Baum ist dieser Schüler. Der Vergleich hinkt, weil der Baum nichts „lernt“ im Sinne von Üben: Er speichert Zufälle der Trainingsdaten als Regeln.",
+    ]},
+    {h: "Der Wald: viele Bäume, eine Mehrheit", p: [
+      "Ein einzelner Baum reagiert empfindlich auf kleine Änderungen der Daten. Deshalb trainiert man oft viele Bäume, jeden auf einer zufälligen Auswahl von Zeilen und Spalten, und lässt sie abstimmen. Das Ergebnis heißt [[zufallswald|Zufallswald]]. Die Mehrheit gewinnt. Einzelne Ausreißer-Bäume werden überstimmt.",
+      "Der Preis ist die Lesbarkeit: Hunderte Bäume lesen sich nicht mehr wie ein Fragebogen. Man bekommt dafür meist die genauere Vorhersage. Eine Verwandte davon baut Bäume nacheinander, wobei jeder die Fehler der vorherigen ausbessert. Solche Verfahren gewinnen auf Tabellen häufig Vergleiche.",
+    ], alltag: [
+      "Ein Glas voller Bohnen: Jeder Einzelne rät schlecht, mal zu hoch, mal zu niedrig. Der Durchschnitt vieler Schätzungen liegt oft erstaunlich nah an der Wahrheit, weil sich die Fehler gegenseitig aufheben. Das klappt aber nur, wenn die Schätzenden unabhängig voneinander raten. Deshalb sieht jeder Baum andere Daten.",
+    ]},
+    {h: "Bei Tabellen genügt oft das Einfache", p: [
+      "Tabellendaten sind Zeilen und Spalten wie in einer Kalkulation: Kunden, Maschinen, Aufträge, Messwerte. Für sie gilt grob: Baumverfahren und einfache Rechenmodelle sind meist ebenso gut wie neuronale Netze, oft besser, und sie sind billiger, schneller und leichter zu erklären. Neuronale Netze spielen ihre Stärke bei Bildern, Ton und Text aus, wo die Merkmale nicht schon fertig in Spalten stehen.",
+      "Ein guter Arbeitsablauf beginnt deshalb mit der einfachsten Lösung: erst eine feste Regel, dann ein kleiner Baum, dann ein Wald. Erst wenn das nicht reicht, lohnt der Aufwand für etwas Größeres. So weißt du auch, wie viel das Größere wirklich bringt.",
+    ], tabelle: {
+      beschriftung: "Welches Verfahren passt zu welchen Daten (grobe Faustregel)",
+      kopf: ["Daten", "Gute erste Wahl", "Warum"],
+      zeilen: [
+        ["Tabelle mit Spalten (Kunden, Maschinen, Aufträge)", "Entscheidungsbaum oder Zufallswald", "Merkmale sind schon fertig, Ergebnis ist erklärbar"],
+        ["Bilder", "Neuronales Netz (Faltungsnetz)", "Aus Pixeln müssen erst Merkmale entstehen"],
+        ["Text und Sprache", "Sprachmodell", "Bedeutung steckt im Zusammenhang der Wörter"],
+        ["Wenige Beispiele, klare Regel", "Feste Regel von Hand", "Kein Lernen nötig, jederzeit prüfbar"],
+      ],
+    }},
+  ],
+  mitnehmen: [
+    "Ein Entscheidungsbaum ist ein Fragebogen, dessen beste Fragen aus Beispielen gelernt werden.",
+    "Bäume sind nachvollziehbar, wachsen aber leicht zu weit und lernen dann Zufälle auswendig. Ein Wald aus vielen Bäumen gleicht das aus.",
+    "Bei Tabellen genügen oft Bäume und einfache Verfahren. Ein neuronales Netz brauchst du meist erst bei Bildern, Ton und Text.",
+  ],
+  quiz: [
+    {frage: "Wie wählt ein Entscheidungsbaum beim Lernen seine Fragen?",
+     optionen: ["Er nimmt die Fragen in der Reihenfolge der Spalten", "Er wählt die Fragen zufällig und prüft danach", "Er wählt die Frage, nach der die Gruppen am einheitlichsten werden", "Ein Mensch gibt alle Fragen vor"],
+     richtig: 2, erklaerung: "Der Baum probiert die möglichen Fragen durch und nimmt die mit der besten Trennung, also der höchsten Reinheit der entstehenden Gruppen."},
+    {frage: "Ein Baum erreicht auf den Trainingsdaten 100 Prozent, bei neuen Daten aber deutlich weniger. Was liegt vor?",
+     optionen: ["Überanpassung", "Zu wenig Training", "Ein Fehler im Datenschutz", "Der Baum ist zu klein"],
+     richtig: 0, erklaerung: "Er hat die Trainingsfälle samt Zufall auswendig gelernt. Tiefe begrenzen und mit ungesehenen Daten prüfen hilft."},
+    {frage: "Warum stimmt ein Zufallswald oft besser als ein einzelner Baum?",
+     optionen: ["Weil jeder Baum größer ist", "Weil er weniger Daten braucht", "Weil er sich leichter lesen lässt", "Weil die Fehler einzelner Bäume sich durch die Mehrheit teilweise aufheben"],
+     richtig: 3, erklaerung: "Jeder Baum sieht andere Daten und macht andere Fehler. Die Abstimmung gleicht sie aus. Die Lesbarkeit leidet dabei sogar."},
+    {frage: "Eine Firma will aus einer Kundentabelle vorhersagen, wer kündigt. Was ist ein sinnvoller Start?",
+     optionen: ["Ein großes neuronales Netz mit Millionen Parametern", "Ein einfacher Baum oder Wald als erster Versuch", "Ein Sprachmodell, das die Tabelle liest", "Erst ein Jahr Daten sammeln und nichts probieren"],
+     richtig: 1, erklaerung: "Bei Tabellen sind Bäume oft schon sehr gut. Sie sind schnell trainiert und erklärbar. Das Größere lohnt erst, wenn der einfache Versuch nicht reicht."},
+    {frage: "Was spricht für einen einzelnen Entscheidungsbaum statt eines Waldes?",
+     optionen: ["Er ist fast immer genauer", "Man kann jeden Entscheidungsweg nachlesen und begründen", "Er braucht keine Daten", "Er ist gegen Überanpassung immun"],
+     richtig: 1, erklaerung: "Die Nachvollziehbarkeit ist sein Hauptvorteil. Der Wald tauscht sie gegen meist höhere Genauigkeit."},
+  ],
+  weiter: ["ml", "daten", "bewertung", "zeitreihen"],
+},
+
+zeitreihen: {
+  nav: "Zeitreihen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Prognosen aus Zeitreihen", symbol: "ml",
+  widget: "prognose-labor", videos: ["zeitreihen-prognose"],
+  kurz: "Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?",
+  abschnitte: [
+    {h: "Der Wetterbericht als Zeitreihe", p: [
+      "Eine [[zeitreihe|Zeitreihe]] sind Messwerte in der Reihenfolge, in der sie entstanden: die Tagestemperatur, der Stromverbrauch pro Stunde, die Verkäufe pro Woche. Anders als bei einer normalen Tabelle ist die Reihenfolge selbst eine Information. Der Wert von heute hängt vom Wert von gestern ab.",
+      "Das macht Vorhersagen möglich. Wenn du weißt, wie sich eine Größe bisher entwickelt hat, kannst du begründet vermuten, wie es weitergeht.",
+    ], alltag: [
+      "Die einfachste Wettervorhersage lautet: „Morgen wird es so wie heute.“ Sie stimmt erstaunlich oft. Ein Wetterdienst rechnet viel genauer, schlägt diese Faustregel aber nur um einen Teil. Solche einfachen Faustregeln sind in der Prognose wichtig, weil sie den Maßstab liefern: Ein Modell, das nicht besser ist als „wie gestern“, hat sich seinen Aufwand nicht verdient.",
+    ]},
+    {h: "Trend, Saison und Zufall", p: [
+      "Fast jede Zeitreihe lässt sich aus drei Bestandteilen zusammensetzen. Wer sie getrennt betrachtet, versteht den Verlauf viel besser.",
+    ], tabelle: {
+      beschriftung: "Die drei Bestandteile einer Zeitreihe",
+      kopf: ["Bestandteil", "Bedeutung", "Beispiel Stromverbrauch einer Werkhalle"],
+      zeilen: [
+        ["[[trend|Trend]]", "langfristige Richtung nach oben oder unten", "Über Jahre kommen neue Maschinen dazu, der Verbrauch steigt"],
+        ["[[saisonmuster|Saison]]", "sich wiederholendes Muster zu festen Zeiten", "Tagsüber viel, nachts wenig, am Wochenende weniger, im Winter mehr Heizung"],
+        ["Zufall (Rauschen)", "Schwankungen ohne erkennbare Ursache", "Eine Maschine läuft zufällig etwas länger"],
+      ],
+    }, alltag: [
+      "Ein Eiscafé: Über die Jahre wird der Laden bekannter, die Umsätze wachsen (Trend). Jeden Sommer läuft es besser als im Winter (Saison). Ein einzelner Regentag drückt den Umsatz, ohne dass sich etwas geändert hätte (Zufall). Wer nur den Wochenumsatz ansieht, hält den Sommer für einen großen Erfolg. Wer die Saison herausrechnet, sieht, ob das Geschäft wirklich wächst.",
+    ]},
+    {h: "Wie ein Modell Muster fortschreibt", p: [
+      "Der Grundgedanke ist immer derselbe: Das Modell lernt aus der Vergangenheit Trend und Saison und führt sie weiter. Den Zufall kann es nicht vorhersagen, er bleibt als Streuung übrig. Einfache Verfahren mitteln die letzten Werte oder wiederholen die Woche davor mit einem Zuschlag. Anspruchsvollere machen aus den letzten Werten Spalten („gestern“, „vor einer Woche“) und lassen einen Baum oder ein Netz daraus lernen.",
+      "Gute Modelle bekommen auch Zusatzwissen, das die Zukunft schon kennt: Feiertage, geplante Aktionen, die Wettervorhersage. So erkennt das Modell, warum die Nachfrage am Freitag vor einem langen Wochenende anders ausfällt.",
+    ], alltag: [
+      "Ein Haushalt verbraucht jeden Morgen und Abend viel Strom (Kochen, Licht) und mittags wenig. Wer eine Woche lang aufschreibt, kann den nächsten Dienstag ziemlich gut schätzen. Fährt die Familie in den Urlaub, stimmt die Schätzung nicht mehr, außer der Rechner weiß vom Urlaub. Das Muster war richtig, das Zusatzwissen fehlte.",
+    ]},
+    {h: "Die Grenze: was es noch nie gab", p: [
+      "Ein Modell kennt nur die Vergangenheit. Ein Streik, eine neue Konkurrenz, eine Gesetzesänderung, ein Lieferengpass: Was in den Daten nie vorkam, kann das Modell nicht vorhersehen. Es schreibt dann einfach das alte Muster fort.",
+      "Dazu kommt: Je weiter du in die Zukunft schaust, desto größer wird der Fehler. Die Prognose für morgen ist meist gut, die für nächstes Jahr bestenfalls eine Richtung. Das ist keine Schwäche der Technik, sondern ein Merkmal der Zukunft.",
+    ], alltag: [
+      "Das Navi schätzt die Ankunftszeit anhand von Karte und gewohntem Verkehr. Ein Unfall auf der Strecke ändert alles, und es muss neu rechnen. Je länger die Fahrt, desto mehr Unvorhersehbares passiert. Auch hier gilt: Das Modell ist nicht dumm, ihm fehlt die Nachricht von heute.",
+    ]},
+    {h: "Wartungsvorhersage: Maschinen zeigen Vorboten", p: [
+      "Ein wichtiger Einsatz im Betrieb ist die vorausschauende Wartung. Viele Maschinen kündigen einen Ausfall an: Die Schwingungen eines Lagers nehmen zu, ein Motor wird wärmer, der Stromverbrauch steigt langsam. Ein Modell lernt aus früheren Ausfällen, wie solche Verläufe aussehen, und warnt, wenn eine Maschine einem ähnlichen Verlauf folgt.",
+      "Der Nutzen ist planbar: Statt auf den Ausfall zu warten oder nach festem Kalender zu tauschen, wartest du, wenn es nötig wird. Die Schwierigkeit: Ausfälle sind selten, also gibt es wenige Lernbeispiele. Deshalb arbeitet man oft zusätzlich mit der Methode der nächsten Seite {{anomalien|Auffälliges finden}}.",
+    ], alltag: [
+      "Beim Auto gibt es Vorboten: Die Bremse quietscht, die Reifen haben weniger Profil, der Motor braucht beim Kaltstart länger. Ein guter Mechaniker hört das und sagt: „Das hält noch ein paar Wochen, plane den Termin ein.“ Wartungsvorhersage macht das mit Sensoren und Zahlen. Wer zu früh tauscht, verschwendet Teile. Wer zu spät tauscht, zahlt den Stillstand.",
+    ]},
+    {h: "Prognosefehler messen", p: [
+      "Ob eine Prognose gut ist, merkst du erst später, wenn der echte Wert vorliegt. Dann vergleichst du beide. Ein einfaches Maß ist der mittlere [[prognosefehler|Prognosefehler]]: die Abweichungen ohne Vorzeichen, gemittelt.",
+      "Beispiel: Vorhergesagt wurden an drei Tagen 100, 120 und 90 verkaufte Stück, tatsächlich waren es 110, 100 und 95. Die Abweichungen sind 10, 20 und 5. Zusammen 35, geteilt durch drei, ergibt rund 11,7 Stück im Mittel. Entscheidend ist der Vergleich mit der Faustregel „wie letzte Woche“. Nur wenn das Modell sie schlägt, lohnt es sich.",
+      "Eine Falle gibt es beim Prüfen: Du darfst Trainings- und Prüfdaten nicht zufällig mischen. Das Modell würde dann Werte „vorhersagen“, deren Nachbarn es schon kannte. Trenne nach Zeit: trainiere mit der Vergangenheit, prüfe mit dem, was danach kam.",
+    ]},
+    {h: "Unsicherheit zeigen und Daten frisch halten", p: [
+      "Eine einzelne Zahl täuscht Genauigkeit vor. Besser ist ein Bereich: „Der Verbrauch liegt morgen wahrscheinlich zwischen 410 und 480 Kilowattstunden.“ Dieses [[prognoseband|Unsicherheitsband]] wird mit dem Abstand zur Gegenwart breiter. Es sagt dir, wie viel Puffer du einplanen musst. Ein Bereich, der „in vier von fünf Fällen“ gilt, heißt: In einem von fünf Fällen liegt der Wert auch außerhalb.",
+      "Außerdem altern Prognosen. Fällt ein Sensor aus, kommen Werte verspätet an oder ändert sich der Prozess, rechnet das Modell mit Daten, die nicht mehr stimmen. Prüfe deshalb, wie aktuell die Eingaben sind, und lass das Modell regelmäßig mit neuen Daten nachlernen. Das behandelt die Lektion {{mlops|Vom Prototyp in den Betrieb}}.",
+    ], alltag: [
+      "Die Regenwahrscheinlichkeit „40 Prozent“ ist ehrlicher als „es regnet“ oder „es regnet nicht“. Du nimmst den Schirm mit, wenn der Schaden hoch ist, und lässt ihn zu Hause, wenn dir ein bisschen Regen nichts ausmacht. Mit einem Bereich kann man entscheiden, mit einer einzelnen Zahl nur hoffen.",
+    ]},
+  ],
+  mitnehmen: [
+    "Eine Zeitreihe besteht aus Trend, Saison und Zufall. Ein Modell schreibt Trend und Saison fort, den Zufall nicht.",
+    "Prognosen brauchen einen Maßstab (zum Beispiel „wie letzte Woche“), einen Fehlerwert und einen Unsicherheitsbereich statt einer einzelnen Zahl.",
+    "Ereignisse, die es noch nie gab, und veraltete Daten kann ein Modell nicht ausgleichen. Mensch und Überwachung bleiben nötig.",
+  ],
+  quiz: [
+    {frage: "Der Umsatz eines Eiscafés steigt jeden Sommer und fällt jeden Winter. Welcher Bestandteil der Zeitreihe ist das?",
+     optionen: ["Trend", "Zufall", "Prognosefehler", "Saison"],
+     richtig: 3, erklaerung: "Ein Muster, das sich zu festen Zeiten wiederholt, ist Saison. Der Trend ist die langfristige Richtung über die Jahre, der Zufall die Schwankung ohne Ursache."},
+    {frage: "Ein Modell sagt für nächsten Dienstag 200 voraus, später sind es 230. Wie nennt man die Abweichung?",
+     optionen: ["Prognosefehler", "Überanpassung", "Drift", "Trend"],
+     richtig: 0, erklaerung: "Die Differenz zwischen Vorhersage und tatsächlichem Wert ist der Prognosefehler. Er wird über viele Tage gemittelt, um ein Modell zu bewerten."},
+    {frage: "Warum sollte man Trainings- und Prüfdaten bei Zeitreihen nach Zeit trennen und nicht zufällig mischen?",
+     optionen: ["Weil das schneller geht", "Weil Zufall in Zeitreihen verboten ist", "Weil sonst das Modell Werte vorhersagt, deren Nachbarn es schon kannte, und zu gut aussieht", "Weil sonst der Trend verschwindet"],
+     richtig: 2, erklaerung: "Im Einsatz kennt das Modell nur die Vergangenheit. Der Test muss das nachstellen, sonst überschätzt du die Güte."},
+    {frage: "Was ist der Vorteil eines Unsicherheitsbands gegenüber einer einzelnen Prognosezahl?",
+     optionen: ["Es ist immer richtig", "Es macht das Modell genauer", "Es zeigt, wie viel Puffer du einplanen musst", "Es ersetzt die Messung"],
+     richtig: 2, erklaerung: "Das Band macht die Streuung sichtbar. Du kannst abwägen, was ein Fehler nach oben oder unten kostet. Genauer wird die Prognose dadurch nicht."},
+    {frage: "Ein Modell wurde auf Daten bis zum Vorjahr trainiert. Dieses Jahr eröffnet ein starker Konkurrent. Was passiert mit der Prognose?",
+     optionen: ["Das Modell schreibt das alte Muster fort und liegt wahrscheinlich daneben", "Das Modell erkennt den Konkurrenten von selbst", "Das Modell sagt die Verkäufe automatisch korrekt voraus", "Das Modell hört auf zu rechnen"],
+     richtig: 0, erklaerung: "Was in den Daten nie vorkam, kennt das Modell nicht. Man muss solche Ereignisse als Zusatzwissen einspeisen oder die Prognose von Menschen korrigieren lassen."},
+  ],
+  weiter: ["tabellen-ml", "anomalien", "mlops"],
+},
+
+anomalien: {
+  nav: "Auffälliges finden", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Auffälliges finden", symbol: "ml",
+  widget: "anomalie-labor", videos: ["anomalieerkennung"],
+  kurz: "Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?",
+  abschnitte: [
+    {h: "Die seltsame Abbuchung", p: [
+      "Du blätterst durch deinen Kontoauszug und bleibst bei einer Zeile hängen: 89 Euro an einen Shop, bei dem du nie warst. Du hast kein Handbuch für Betrug gelesen. Du kennst nur sehr gut, was auf deinem Konto normalerweise passiert, und siehst, was nicht dazu passt.",
+      "Genau das machen Verfahren zur [[anomalie|Anomalieerkennung]]. Sie lernen, wie „normal“ aussieht, und melden alles, was davon deutlich abweicht. Das Wissen über das Ungewöhnliche steckt nicht in Beispielen, sondern im Gegenteil: im gut verstandenen Normalen.",
+    ], alltag: [
+      "Ein Fieberthermometer zeigt 38,2 Grad. Ist das auffällig? Für dich in Ruhe ja, nach einem heißen Bad oder dem Sport nicht. Auffällig hängt immer vom Zusammenhang ab. Das gilt auch für Maschinen: Eine Temperatur, die im Dauerbetrieb normal ist, kann beim Anlauf ein Alarmzeichen sein.",
+    ]},
+    {h: "Was eine Anomalie ist und was nicht", p: [
+      "Eine Anomalie ist etwas Seltenes, das vom Gewohnten abweicht. Sie ist nicht automatisch ein Fehler. Ein plötzlicher Spitzenverbrauch kann ein Defekt sein, aber auch eine Sonderschicht. Das Verfahren sagt dir nur: „Schau hier hin.“ Was es bedeutet, entscheidet jemand mit Fachwissen.",
+      "Man unterscheidet grob drei Arten: den einzelnen Ausreißer (ein Messwert weit außerhalb), die Auffälligkeit im Zusammenhang (35 Grad im Januar) und das auffällige Muster (jeder Wert ist normal, aber die Reihenfolge nicht, wie bei einem unregelmäßigen Herzschlag).",
+    ], alltag: [
+      "Deine Badezimmerwaage zeigt plötzlich zwei Kilo mehr als gestern. Ist das ein Defekt der Waage, hast du viel Wasser getrunken, oder bist du wirklich schwerer? Der Sprung allein sagt es nicht. Du schaust, ob es sich morgen wiederholt, und erst dann handelst du. Eine Anomaliemeldung ist so ein Sprung: ein Anlass nachzusehen, noch keine Diagnose.",
+    ]},
+    {h: "Wie ein Modell Normal lernt", p: [
+      "Die einfachste Form: Du berechnest Mittelwert und Streuung der Messwerte. Ein neuer Wert, der um ein Mehrfaches der üblichen Streuung vom Mittelwert entfernt liegt, gilt als auffällig. Das geht mit einer Spalte. Für viele Spalten gleichzeitig braucht man Verfahren, die auf andere Weise vorgehen:",
+    ], liste: [
+      "**Abstand zu bekannten Fällen:** Wer weit weg von allen normalen Fällen liegt, ist auffällig.",
+      "**Isolation:** Auffälliges lässt sich mit wenigen Fragen aus der Menge herauslösen, Normales braucht viele. Das nutzt Bäume, wie auf der Seite {{tabellen-ml|Entscheidungsbäume}}.",
+      "**Rekonstruktion:** Ein neuronales Netz lernt, normale Daten zusammenzufassen und wiederherzustellen. Bei Auffälligem misslingt die Wiederherstellung, und der Fehler dabei ist das Warnsignal.",
+    ], alltag: [
+      "Du fährst seit Jahren dasselbe Auto und hörst sofort, wenn etwas anders klingt. Du kannst nicht sagen, was es ist, und hast keine Liste aller möglichen Defekte im Kopf. Du merkst die Abweichung vom Gewohnten. Genauso lernt ein Modell das Normale aus Messungen im ungestörten Betrieb.",
+    ]},
+    {h: "Gute Daten für das Normale", p: [
+      "Ein Modell für das Normale ist nur so gut wie das, was du ihm als normal zeigst. Stecken in den Trainingsdaten unbemerkt schon Defekte, lernt es sie als normal. Sammle deshalb Daten aus Zeiten, in denen die Maschine nachweislich gut lief, und nimm alle üblichen Betriebszustände mit: Anlauf, Volllast, Leerlauf, Wochenende, Sommer und Winter.",
+      "Was heute normal ist, kann nächstes Jahr anders sein. Eine neue Charge Material oder eine gewechselte Einstellung verschiebt das Normale. Dann melden sich plötzlich viele Alarme, ohne dass etwas kaputt ist. Das Modell muss mit der Zeit nachgeführt werden, siehe {{mlops|Vom Prototyp in den Betrieb}}.",
+    ], alltag: [
+      "Wer die Bremsgeräusche seines Autos erst nach einem Defekt kennenlernt, hält das Schleifen für normal. Du brauchst die Referenz aus gesunden Zeiten. Der Vergleich hinkt in einem Punkt: Beim Auto kennst du die gesunden Zeiten von selbst, bei Daten musst du sie bewusst auswählen.",
+    ]},
+    {h: "Warum man Fehler nicht einfach als Klasse lernt", p: [
+      "Man könnte versuchen, wie beim [[ml|überwachten Lernen]] zwei Klassen zu trainieren: „normal“ und „Fehler“. Das scheitert oft an drei Dingen. Erstens gibt es von Fehlern sehr wenige Beispiele. Zweitens sind die vorhandenen Fehler nur die, die bisher auftraten, ein neuer Fehler sieht anders aus. Drittens muss jemand jeden Fehlerfall von Hand etikettieren.",
+      "Ein Modell für „normal“ braucht nur Daten aus dem ungestörten Betrieb und erkennt auch Fehlerarten, die noch niemand gesehen hat. Dafür kann es dir nicht sagen, welcher Fehler vorliegt, nur dass etwas ungewöhnlich ist.",
+    ], tabelle: {
+      beschriftung: "Zwei Wege im Vergleich",
+      kopf: ["", "Fehler als Klasse lernen", "Normal lernen und Abweichung melden"],
+      zeilen: [
+        ["Braucht", "Viele etikettierte Fehlerbeispiele", "Viele Daten aus dem Normalbetrieb"],
+        ["Findet", "Bekannte Fehlerarten", "Auch neue, unbekannte Auffälligkeiten"],
+        ["Sagt dir", "Welcher Fehler es ist", "Dass etwas abweicht, und wo"],
+        ["Gut bei", "Häufigen, gut erfassten Fehlern", "Seltenen Fehlern und neuen Fehlerarten"],
+      ],
+    }},
+    {h: "Schwellenwert und Fehlalarme", p: [
+      "Das Modell gibt für jeden Fall einen Auffälligkeitswert aus. Ab welchem Wert meldest du? Das legt der [[schwellenwert|Schwellenwert]] fest. Stellst du ihn niedrig, meldet das System viel, und es gibt viele [[fehlalarm|Fehlalarme]]. Stellst du ihn hoch, bleiben echte Fälle unentdeckt. Einen richtigen Wert gibt es nicht, nur einen, der zu den Kosten beider Fehler passt.",
+      "Eine Rechnung zeigt, wie stark seltene Ereignisse die Lage verschieben. Angenommen, an einem Tag gibt es 10 000 Buchungen. Eine von tausend ist wirklich auffällig, also 10. Das Verfahren findet davon 9 und schlägt bei 1 Prozent der normalen Buchungen an, das sind rund 100. Es kommen etwa 109 Meldungen, aber nur 9 davon sind echt. Das sind grob 8 von 100. Das Verfahren ist gut, und trotzdem sind die meisten Meldungen falsch. Das liegt an der Seltenheit. Mehr dazu auf der Seite {{bewertung|Wie gut ist ein Modell?}}.",
+    ], alltag: [
+      "Ein Rauchmelder, der schon bei Toastdampf anschlägt, wird irgendwann abgeschaltet oder ignoriert. Dann ist er nutzlos, auch wenn er technisch alles erkannt hätte. Ein zu träger Melder dagegen warnt zu spät. Bei Anomalien suchst du denselben Mittelweg, und du musst entscheiden, wer die Meldungen bearbeitet.",
+    ]},
+    {h: "Wo das im Betrieb gebraucht wird", p: [], liste: [
+      "**Fertigung:** Vibration, Temperatur oder Stromaufnahme einer Maschine weichen vom Üblichen ab, oft lange bevor etwas ausfällt. Auf einem kleinen Gerät wie dem Jetson lassen sich solche Sensordaten direkt an der Maschine auswerten.",
+      "**Betrugserkennung:** ungewöhnliche Zahlungen, Orte oder Uhrzeiten bei einem Konto.",
+      "**IT-Betrieb:** plötzlich viele Anmeldeversuche, ungewöhnlicher Datenverkehr, ein Server mit auffälliger Last.",
+      "**Qualität:** ein Teil auf dem Band, das anders aussieht als tausend vorherige.",
+    ]},
+    {h: "Der Mensch prüft die Verdachtsfälle", p: [
+      "Ein Verdachtsfall ist kein Urteil. Sinnvoll ist eine Warteschlange: Das System sortiert nach Auffälligkeit, zeigt, welcher Wert abweicht, und eine Person entscheidet. Bei hohen Folgen, etwa einer Kontosperre für einen Menschen, entscheidet nie die Maschine allein.",
+      "Aus den Entscheidungen lernst du weiter: Jeder bestätigte Fehlalarm und jeder bestätigte Fund ist ein Etikett. Nach einer Weile kannst du den Schwellenwert besser einstellen oder zusätzlich ein Modell für bekannte Fälle trainieren. Wer prüft, wie schnell und mit welchem Ergebnis, gehört vor dem Start geklärt, siehe {{ki-einfuehrung|KI im Unternehmen einführen}}.",
+    ], alltag: [
+      "An der Flughafenkontrolle piept der Bogen bei vielen Menschen, meist wegen Gürtelschnalle oder Schlüsseln. Niemand verhaftet deshalb jemanden. Eine Person tastet kurz ab und prüft, was los ist. Der Bogen ist empfindlich eingestellt, damit nichts durchrutscht, und der Mensch räumt die Fehlalarme ab. So sollte auch ein Anomaliesystem im Betrieb eingebettet sein.",
+    ], merke: "Anomalieerkennung liefert Hinweise, keine Urteile. Der Wert liegt im Zusammenspiel aus Modell, Schwellenwert und einem Menschen, der die Meldungen prüft."},
+  ],
+  mitnehmen: [
+    "Ein Modell lernt, wie Normal aussieht, und meldet, was davon abweicht. Dafür braucht es keine Fehlerbeispiele.",
+    "Der Schwellenwert bestimmt das Verhältnis aus Fehlalarmen und übersehenen Fällen. Bei seltenen Ereignissen sind selbst bei guten Verfahren die meisten Meldungen falsch.",
+    "Eine Meldung ist ein Verdacht. Ein Mensch prüft und entscheidet, vor allem wenn die Folgen für Personen groß sind.",
+  ],
+  quiz: [
+    {frage: "Warum lernt man Anomalieerkennung meist über das Normale und nicht über Fehlerbeispiele?",
+     optionen: ["Normale Daten sind teurer", "Fehler sind selten und es gibt immer wieder neue Fehlerarten", "Fehler lassen sich nicht messen", "Es ist gesetzlich so vorgeschrieben"],
+     richtig: 1, erklaerung: "Von Fehlern gibt es wenige Beispiele, und der nächste Fehler sieht anders aus. Wer das Normale kennt, erkennt auch Unbekanntes."},
+    {frage: "Du stellst den Schwellenwert niedriger. Was passiert im Normalfall?",
+     optionen: ["Weniger Fehlalarme, mehr übersehene Fälle", "Beides wird weniger", "Das Modell lernt neu", "Mehr Fehlalarme, weniger übersehene Fälle"],
+     richtig: 3, erklaerung: "Ein niedriger Schwellenwert macht das System empfindlicher. Es meldet mehr, darunter mehr Falsches, und übersieht weniger."},
+    {frage: "Von 10 000 Buchungen sind 10 auffällig. Das Verfahren findet 9 und schlägt zusätzlich bei rund 100 normalen an. Was stimmt?",
+     optionen: ["Fast alle Meldungen sind echt", "Etwa die Hälfte der Meldungen ist echt", "Die meisten Meldungen sind falsch, obwohl das Verfahren gut ist", "Das Verfahren ist unbrauchbar"],
+     richtig: 2, erklaerung: "Weil auffällige Fälle so selten sind, überwiegen selbst bei 1 Prozent Fehlalarmrate die falschen Meldungen. Darum braucht es einen Prüfschritt."},
+    {frage: "Die Temperatur einer Maschine steigt beim Anlauf stark an, das ist jedes Mal so. Was bedeutet das für die Erkennung?",
+     optionen: ["Das Modell muss den Anlauf als eigenen Zusammenhang kennen", "Das Modell darf nie warnen", "Man sollte den Sensor tauschen", "Es handelt sich immer um einen Defekt"],
+     richtig: 0, erklaerung: "Auffälligkeit hängt vom Zusammenhang ab. Ein Wert, der im Dauerbetrieb alarmiert, ist beim Anlauf normal. Das Modell braucht diese Information."},
+    {frage: "Wer sollte bei einem Verdachtsfall mit großen Folgen für eine Person entscheiden?",
+     optionen: ["Das Modell allein", "Der Zufall", "Ein zweites Modell allein", "Eine Person, die die Meldung prüft"],
+     richtig: 3, erklaerung: "Ein Verdacht ist kein Urteil. Bei hohen Folgen entscheidet ein Mensch, der die Meldung mit Fachwissen prüft."},
+  ],
+  weiter: ["zeitreihen", "bewertung", "mlops"],
+},
+
+empfehlungen: {
+  nav: "Empfehlungen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Empfehlungssysteme", symbol: "ml",
+  widget: "empfehlungs-labor", videos: ["empfehlungssysteme"],
+  kurz: "Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?",
+  abschnitte: [
+    {h: "Die Buchhändlerin, die dich kennt", p: [
+      "In einer kleinen Buchhandlung sagt die Inhaberin: „Du hast die letzten beiden Krimis geliebt. Das hier ist von derselben Autorin, und eine Stammkundin mit ähnlichem Geschmack hat es gerade verschlungen.“ Sie nutzt zwei Quellen: das, was du magst, und das, was Menschen mögen, die dir ähneln.",
+      "Ein Empfehlungssystem macht diese Arbeit für Tausende Kunden gleichzeitig. Es sucht aus einer großen Auswahl wenige Dinge heraus, die zu dir passen könnten, ohne dass du sie suchen musst.",
+    ]},
+    {h: "Zwei Grundideen", p: [
+      "Die erste Idee: Nutzer, die sich bisher ähnlich verhalten haben, mögen auch künftig ähnliche Dinge. Das ist das [[kollaborativ|kollaborative Filtern]]. Du schaust, wer dir ähnelt (die „Nachbarschaft der Geschmäcker“), und empfiehlst, was diese Nachbarn hatten und du noch nicht.",
+      "Die zweite Idee: Dinge, die sich ähneln, passen zum selben Nutzer. Wer ein Ersatzteil für Maschine A bestellt hat, braucht wahrscheinlich die zugehörige Dichtung. Hier vergleichst du Dinge, entweder über ihre Eigenschaften oder darüber, wer sie gemeinsam gekauft hat.",
+    ], alltag: [
+      "Du und eine Freundin habt beide Filme A, B und C gesehen und gemocht. Sie erzählt von Film D, den du nicht kennst. Du siehst ihn dir an, weil sie dir ähnlich ist. Das ist die erste Idee. Die zweite: Du magst Film A, und D ist ein ganz ähnlicher Film, also schaust du auch ihn. Der Vergleich hinkt, weil ein System nur Zahlen vergleicht und nicht weiß, warum etwas gefällt.",
+    ]},
+    {h: "Ähnlichkeit als Rechnung", p: [
+      "Die Daten sehen aus wie eine Tabelle: Zeilen sind Nutzer, Spalten sind Produkte, in den Zellen steht, ob oder wie gut jemand sie bewertet oder gekauft hat. Die meisten Zellen sind leer, weil niemand alles kauft.",
+      "Jeder Nutzer ist damit eine Zeile Zahlen, und zwei Zeilen kannst du auf Ähnlichkeit vergleichen, zum Beispiel mit der [[cosinus|Kosinus-Ähnlichkeit]]. Hier ein kleines Beispiel mit erfundenen Daten: Welches Teil sollte man Anna als Nächstes empfehlen?",
+      "In der Praxis steht in den Zellen oft eine Bewertung von 1 bis 5 oder die Zahl der Käufe. Das Prinzip bleibt dasselbe: Zeilen mit ähnlichen Einträgen gehören zu ähnlichen Nutzern.",
+    ], tabelle: {
+      beschriftung: "Wer hat welches Ersatzteil bestellt (Entwurfsdaten zur Veranschaulichung)",
+      kopf: ["Person", "Teil A", "Teil B", "Teil C", "Teil D"],
+      zeilen: [
+        ["Anna", "ja", "ja", "ja", "nein"],
+        ["Ben", "ja", "ja", "nein", "ja"],
+        ["Cem", "nein", "nein", "ja", "nein"],
+      ],
+    }, merke: "Anna und Ben haben zwei Teile gemeinsam, Anna und Cem nur eines, und Cem hat nichts, was Anna nicht schon hat. Ben ist Annas Nachbar, und er hat Teil D. Also: Teil D für Anna."},
+    {h: "Versteckte Vorlieben: Embeddings", p: [
+      "Bei großen Tabellen wird der direkte Vergleich langsam und lückenhaft. Deshalb berechnet man für jeden Nutzer und jedes Produkt eine kurze Zahlenliste, ein [[embedding|Embedding]] (siehe {{rag-embedding|Embeddings}}). Die Zahlen fassen versteckte Vorlieben zusammen, etwa „mag Spannung“, „mag Technik“, „kauft eher günstig“. Niemand legt diese Eigenschaften fest. Sie entstehen im Training, weil sich damit die vorhandenen Käufe am besten erklären lassen.",
+      "Eine Empfehlung ist dann einfach: Nimm die Zahlenliste des Nutzers und suche die Produkte, deren Liste am besten passt. Dieselbe Technik steckt in der Suche nach Dokumenten.",
+      "Aus den besten Treffern wird meist eine kurze Liste. Dabei greifen oft noch Regeln des Geschäfts: Nur Lieferbares zeigen, nichts empfehlen, was die Person schon gekauft hat, und nicht zehnmal dasselbe Produkt in verschiedenen Farben.",
+    ], alltag: [
+      "Ein Kellner schlägt dir ein Gericht vor. Er hat im Kopf, was dir geschmeckt hat (Nutzerseite) und was die Küche heute besonders gut kann (Produktseite). Er empfiehlt nicht, was ausgegangen ist, und nicht das Gericht, das du eben gegessen hast. Dieser Abgleich mit Bedingungen ist auch beim System ein eigener Schritt nach der Ähnlichkeit.",
+    ]},
+    {h: "Der Kaltstart", p: [
+      "Das System braucht Verhalten, um ähnliche Nutzer zu finden. Bei einer neuen Person oder einem neuen Produkt gibt es noch keins. Das ist das Kaltstartproblem. Typische Auswege: ein paar Fragen zu Beginn stellen, zunächst Beliebtes zeigen, bei neuen Produkten auf Eigenschaften wie Kategorie oder Beschreibung setzen.",
+    ], alltag: [
+      "Eine neue Kundin betritt die Buchhandlung. Die Inhaberin kennt sie nicht und fragt erst einmal: „Was hast du zuletzt gern gelesen?“ Ohne diese Frage würde sie das empfehlen, was alle kaufen. Beide Wege sind ein vernünftiger Start, aber persönlich wird es erst mit der Zeit.",
+    ]},
+    {h: "Filterblasen und Verzerrung", p: [
+      "Empfehlungen verändern das, was sie messen. Was empfohlen wird, wird öfter gekauft, wird deshalb noch öfter empfohlen. Populäres wird immer populärer, Nischen verschwinden, und jede Person bekommt immer mehr vom Gleichen, eine [[filterblase|Filterblase]]. Dazu kommt: Das System lernt aus dem, was Menschen angeklickt haben, und das war schon durch frühere Empfehlungen beeinflusst.",
+      "Dagegen hilft Absicht: bewusst Vielfalt beimischen, gelegentlich Neues zeigen, nicht nur Klicks als Ziel nehmen. Auch Fairness spielt hinein, wenn Anbieter oder Gruppen systematisch seltener auftauchen. Siehe {{verzerrung-ethik|Fairness und Verzerrung}}.",
+    ], alltag: [
+      "Ein Radiosender, der nur noch deine drei Lieblingslieder spielt, ist erst angenehm und nach einer Woche langweilig. Du lernst nichts Neues, und der Sender erfährt nie, was dir sonst noch gefallen könnte.",
+    ]},
+    {h: "Messen, ob die Empfehlung etwas bringt", p: [
+      "Die entscheidende Frage lautet: Wird das Empfohlene tatsächlich genutzt, und hat es einen Wert? Offline prüfst du, ob das System bei Verläufen aus der Vergangenheit das verborgene nächste Produkt unter den ersten Vorschlägen hatte. Online vergleichst du im Betrieb zwei Gruppen, eine mit und eine ohne die neue Empfehlung (A/B-Test).",
+      "Pass auf, was du zählst. Ein Klick ist noch kein Nutzen. Wenn Kunden das Teil zurückschicken, hat die Empfehlung nichts gebracht. Eine gute Messung schaut auf das, was du eigentlich willst: Käufe, die bleiben, gefundene Antworten, kürzere Suchzeiten.",
+    ], alltag: [
+      "Die Buchhändlerin merkt es an einem Satz, wenn die Kundin zurückkommt: „Das Buch war großartig, haben Sie noch mehr davon?“ Ein Buch, das nur in die Hand genommen und wieder weggelegt wurde, zählt nicht als Erfolg. Genau diesen Unterschied musst du auch in Zahlen sichtbar machen.",
+    ]},
+    {h: "Datenschutz und Einsatz im Betrieb", alltag: [
+      "Eine Verkäuferin, die dich seit Jahren kennt, ist angenehm. Eine Fremde, die ein Heft über deine Einkäufe führt und es an Dritte weitergibt, ist es nicht. Der Unterschied liegt darin, wer es weiß, wofür es dient und ob du damit rechnest. Daran orientieren sich auch die Regeln für Verhaltensdaten.",
+    ], p: [
+      "Wer sich wofür interessiert, sind personenbezogene Daten. Du brauchst eine Rechtsgrundlage, solltest nur sammeln, was du brauchst, und Nutzern die Wahl lassen. Oft reicht es, mit zusammengefassten oder pseudonymisierten Daten zu arbeiten. Das ist ein Überblick und keine Rechtsberatung, mehr dazu auf der Seite {{recht|Recht und Regeln}}.",
+      "Im Betrieb steckt viel Nutzen jenseits von Online-Shops:",
+    ], liste: [
+      "**Ersatzteile:** „Wer diese Maschine hat, bestellt oft auch diese Teile.“",
+      "**Wissensartikel:** Für eine Störung die Anleitungen vorschlagen, die Kolleginnen und Kollegen bei ähnlichen Fällen genutzt haben.",
+      "**Produkte und Angebote:** passende Ergänzungen im Vertrieb vorschlagen.",
+    ]},
+  ],
+  mitnehmen: [
+    "Empfehlungen entstehen aus Ähnlichkeit: von Nutzern, die sich ähnlich verhalten, und von Dingen, die sich ähneln.",
+    "Ohne Verhalten gibt es den Kaltstart, und mit Rückkopplung drohen Filterblasen. Beides lässt sich bewusst ausgleichen.",
+    "Gemessen wird, ob Empfohlenes genutzt wird und etwas bringt, nicht nur, ob es angeklickt wurde. Die Daten sind personenbezogen und brauchen Schutz.",
+  ],
+  quiz: [
+    {frage: "Was meint „Nachbarschaft der Geschmäcker“?",
+     optionen: ["Die Läden in deiner Nähe", "Nutzer, die sich bisher ähnlich verhalten haben, und deren Auswahl für Empfehlungen dient", "Produkte der gleichen Marke", "Die Reihenfolge der Suchergebnisse"],
+     richtig: 1, erklaerung: "Das System sucht Nutzer mit ähnlichem Verhalten und empfiehlt, was diese Nachbarn hatten und du noch nicht."},
+    {frage: "Eine neue Person registriert sich, das System kennt noch nichts von ihr. Wie heißt das Problem?",
+     optionen: ["Überanpassung", "Kaltstart", "Drift", "Filterblase"],
+     richtig: 1, erklaerung: "Ohne bisheriges Verhalten gibt es keine Ähnlichkeit. Fragen am Anfang oder Beliebtes helfen."},
+    {frage: "Was ist eine Filterblase?",
+     optionen: ["Ein Datenschutzfilter", "Ein Fehler in der Datenbank", "Ein Verfahren zum Löschen von Daten", "Das System zeigt immer mehr vom Gleichen, weil Empfohlenes häufiger genutzt wird"],
+     richtig: 3, erklaerung: "Rückkopplung: Empfohlenes wird genutzt, deshalb wieder empfohlen. Vielfalt beimischen ist das Gegenmittel."},
+    {frage: "Welche Kennzahl sagt am besten, ob eine Empfehlung etwas nützt?",
+     optionen: ["Ob das Empfohlene danach tatsächlich genutzt oder behalten wird", "Wie oft sie angezeigt wurde", "Wie oft sie angeklickt wurde, ohne weitere Prüfung", "Wie viele Nutzer das System hat"],
+     richtig: 0, erklaerung: "Anzeigen und Klicks sind nur Vorstufen. Nutzen zeigt sich an Käufen, die bleiben, oder an Antworten, die weiterhelfen."},
+    {frage: "Warum sind Daten für Empfehlungen datenschutzrelevant?",
+     optionen: ["Sie enthalten immer Passwörter", "Sie sind zu groß", "Sie zeigen Interessen und Verhalten einzelner Personen", "Sie sind immer öffentlich"],
+     richtig: 2, erklaerung: "Wer wofür sich interessiert, ist personenbezogen. Du brauchst eine Grundlage, solltest sparsam sammeln und Wahlmöglichkeiten geben."},
+  ],
+  weiter: ["rag-embedding", "verzerrung-ethik", "recht"],
+},
+
+/* ------------------------------------------------------------------ KI im Betrieb */
+
+mlops: {
+  nav: "Prototyp zu Betrieb", typ: "lektion", gruppe: "KI im Betrieb", titel: "Vom Prototyp in den Betrieb", symbol: "hardware",
+  videos: ["mlops-betrieb"],
+  kurz: "Ein Modell, das im Versuch funktioniert, ist erst der Anfang. Was braucht es, damit es jeden Tag zuverlässig arbeitet?",
+  abschnitte: [
+    {h: "Die Küche eines Restaurants", p: [
+      "Zu Hause kochst du ein Gericht für vier Personen. Du probierst, du korrigierst, es darf auch mal schiefgehen. In der Küche eines Restaurants muss dasselbe Gericht jeden Abend hundertmal gleich gut herauskommen, auch wenn ein Koch fehlt, die Tomaten anders schmecken oder es plötzlich voll wird.",
+      "Dafür gibt es Einkauf, Vorbereitung, feste Rezepte, Temperaturkontrolle und jemanden, der probiert, bevor der Teller rausgeht. Mit KI ist es genauso. Der Prototyp ist das Kochen zu Hause, der Betrieb die Restaurantküche. Die Arbeit dazwischen heißt [[mlops|MLOps]]: Abläufe, die ein Modell zuverlässig laufen lassen.",
+    ]},
+    {h: "Was sich zwischen Versuch und Alltag ändert", p: [
+      "Im Prototyp laufen Daten aus einer Datei, ein Fachmann bedient alles, und ein Fehler kostet eine Wiederholung. Im Betrieb kommen Daten laufend und unsauber, viele Menschen verlassen sich auf das Ergebnis, und ein Ausfall kostet Zeit und Geld.",
+    ], tabelle: {
+      beschriftung: "Prototyp und Betrieb im Vergleich",
+      kopf: ["", "Prototyp", "Betrieb"],
+      zeilen: [
+        ["Daten", "Aufbereitete Beispieldatei", "Laufend, unvollständig, manchmal fehlerhaft"],
+        ["Nutzung", "Einmal, durch Fachleute", "Täglich, durch viele Personen"],
+        ["Fehler", "Kostet eine Wiederholung", "Kostet Zeit, Geld oder Vertrauen"],
+        ["Verantwortung", "Unklar, oft eine Person", "Benannt und vertreten"],
+        ["Veränderung", "Nach Lust und Laune", "Geplant, nachvollziehbar, mit Rückweg"],
+      ],
+    }},
+    {h: "Die Stationen im Kreislauf", p: [
+      "Ein Modell im Betrieb durchläuft immer wieder dieselben Schritte. Es ist ein Kreis, kein einmaliger Weg:",
+    ], liste: [
+      "**Daten sammeln:** Woher kommen sie, wie sauber sind sie, dürfen wir sie nutzen? ({{daten|Daten}})",
+      "**Trainieren:** Aus den Daten entsteht ein Modell ({{training|Wie ein Modell lernt}}).",
+      "**Prüfen:** Das Modell muss an Daten, die es nie sah, gut genug sein ({{bewertung|Wie gut ist ein Modell?}}).",
+      "**Ausliefern:** Das Modell zieht auf das Gerät oder den Server um, wo es im Alltag arbeitet.",
+      "**Überwachen:** Läuft es, ist es schnell genug, liegt es noch richtig?",
+      "**Nachlernen:** Neue Daten und Rückmeldungen fließen ein, und das nächste Modell entsteht.",
+    ], alltag: [
+      "Im Restaurant: Waren bestellen, vorbereiten, kochen, Teller prüfen, servieren, Rückmeldungen der Gäste sammeln und das Rezept anpassen. Wer nur kocht und das Feedback ignoriert, serviert nach einem halben Jahr Gerichte, die niemand mehr mag.",
+    ]},
+    {h: "Drift: die Welt ändert sich, das Modell nicht", p: [
+      "Ein Modell ist ein Foto vom Zustand der Welt zur Trainingszeit. Ändert sich die Welt, passt das Foto nicht mehr, und die Qualität sinkt, oft schleichend. Das heißt [[drift|Drift]]. Zwei Arten tauchen häufig auf: Die Eingaben ändern sich (neue Beleuchtung an der Kamera, ein neuer Lieferant mit anderer Verpackung), oder der Zusammenhang selbst ändert sich (Kunden kaufen anders als früher).",
+      "Du erkennst Drift an zwei Stellen: Die Eingaben von heute sehen anders aus als die der Trainingszeit, und die Trefferquote sinkt, sobald die richtige Antwort bekannt ist, zum Beispiel wenn der Maschinenausfall später doch eintrat oder nicht.",
+    ], alltag: [
+      "Ein Stadtplan von vor zehn Jahren ist nicht falsch gezeichnet. Er zeigt nur nicht, dass seitdem Straßen gesperrt und Kreisverkehre gebaut wurden. Wer ihm blind folgt, landet falsch. Der Plan muss neu gedruckt werden. Bei Modellen heißt das: neu trainieren, mit Daten von heute.",
+    ]},
+    {h: "Überwachung: das Armaturenbrett", p: [
+      "Im Auto siehst du Tank, Temperatur und Warnleuchten, ohne die Motorhaube zu öffnen. Ein KI-Betrieb braucht dasselbe. Du legst vorher fest, welche Werte du beobachtest und ab wann jemand Bescheid bekommt.",
+    ], tabelle: {
+      beschriftung: "Was man bei einem laufenden Modell beobachtet",
+      kopf: ["Was", "Frage dahinter", "Warnzeichen"],
+      zeilen: [
+        ["Qualität", "Liegt es noch richtig?", "Trefferquote sinkt, mehr Beschwerden"],
+        ["Eingaben", "Sehen die Daten noch aus wie beim Training?", "Neue Wertebereiche, fehlende Werte"],
+        ["Antwortzeit", "Ist es schnell genug?", "Wartezeit steigt"],
+        ["Auslastung", "Reicht die Hardware?", "Speicher voll, Gerät zu heiß"],
+        ["Verfügbarkeit", "Läuft es überhaupt?", "Ausfälle, Neustarts"],
+      ],
+    }},
+    {h: "Versionen und Rückfall", p: [
+      "Jedes Modell, das du auslieferst, bekommt eine Version, und du notierst, mit welchen Daten und welchem Code es entstand. So findest du später, warum es sich so verhalten hat. Neue Versionen laufen zuerst bei einem kleinen Teil der Nutzer, am besten parallel zur alten. Wird es schlechter, gehst du zur vorherigen zurück. Dieser Rückfall muss vorher ausprobiert sein, nicht erst im Notfall.",
+      "Plane auch den Fall, dass das Modell ganz ausfällt: Gibt es eine einfache Regel als Notlösung oder eine Handarbeit, die einspringt?",
+    ], alltag: [
+      "Ein Restaurant ändert die Speisekarte nicht über Nacht. Zuerst gibt es das neue Gericht als Tagesangebot, und das alte bleibt auf der Karte. Läuft es schlecht, wird es gestrichen, ohne dass der Laden stillsteht. Und wenn der Ofen ausfällt, gibt es kalte Platten statt gar nichts.",
+    ]},
+    {h: "Verantwortung und Dokumentation", alltag: [
+      "Eine Restaurantküche führt Listen: Wann wurde welche Ware geliefert, welche Temperatur hatte der Kühlraum, wer hat wann geputzt? Das wirkt lästig, bis es ein Problem gibt. Dann lässt sich damit nachweisen, was passiert ist, und ein Fehler wird nicht zweimal gemacht. Der Steckbrief und die Protokolle eines Modells haben dieselbe Aufgabe.",
+    ], p: [
+      "Jemand muss wissen, was das Modell tut, und ist gerufen, wenn es ausfällt oder daneben liegt. Lege dafür fest: Wer besitzt das Modell (fachlich), wer betreibt es (technisch), wer darf Änderungen freigeben?",
+      "Schreibe einen Steckbrief dazu: Zweck, Trainingsdaten und ihr Stand, Grenzen, gemessene Qualität, bekannte Schwächen, Version und Datum. Er hilft neuen Kolleginnen und Kollegen und bei Rückfragen von Datenschutz und Prüfern. Je nach Einsatz verlangt auch das Recht Nachweise, mehr auf der Seite {{recht|Recht und Regeln}}.",
+    ]},
+    {h: "Was auf einem kleinen Gerät wie dem Jetson anders ist", p: [
+      "Auf dem Jetson Orin Nano teilen sich CPU und GPU 8 GB Speicher, und das Gerät nimmt nur wenige Watt auf. Das prägt den Betrieb: Das Modell muss klein genug sein (oft verkleinert, zum Beispiel mit geringerer Zahlengenauigkeit), meist läuft nur ein Modell zur Zeit, und Wärme und Stromversorgung zählen mit. Die Seite {{hardware|Hardware}} zeigt live Speicher, Auslastung, Leistung und Temperatur, also genau die Werte, die du im Betrieb beobachten würdest.",
+      "Ein Vorteil: Die Daten bleiben am Gerät, und es gibt keinen Netzweg. Dafür musst du Updates, Zugriff und Ausfälle vor Ort selbst regeln. Wie das mit Kosten und Strom zusammenhängt, steht auf der Seite {{kosten-energie|Kosten und Energie}}.",
+    ], alltag: [
+      "Ein Imbisswagen ist keine Restaurantküche. Er hat einen Herd, wenig Platz und Strom aus einem begrenzten Anschluss. Wer dort arbeitet, plant die Speisekarte nach diesen Grenzen und prüft öfter, ob alles läuft, weil kein zweiter Koch einspringt. Der Jetson ist der Imbisswagen: Er kann viel, aber du musst haushalten.",
+    ], merke: "Ein Modell ist erst im Betrieb, wenn jemand es überwacht, es sich zurückrollen lässt und es einen benannten Verantwortlichen gibt."},
+  ],
+  mitnehmen: [
+    "Zwischen Prototyp und Betrieb liegen Datenpflege, Prüfung, Auslieferung, Überwachung und Nachlernen. Das ist ein Kreislauf.",
+    "Die Welt ändert sich, das Modell nicht. Drift erkennst du an veränderten Eingaben und sinkender Qualität.",
+    "Plane Versionen, einen Rückfall, einen benannten Verantwortlichen und einen Steckbrief ein. Auf kleinen Geräten gelten dazu enge Grenzen bei Speicher, Leistung und Wärme.",
+  ],
+  quiz: [
+    {frage: "Was bedeutet Drift?",
+     optionen: ["Das Modell wird schneller", "Das Gerät verbraucht mehr Strom", "Die Wirklichkeit ändert sich, und das Modell passt nicht mehr dazu", "Die Version ändert sich automatisch"],
+     richtig: 2, erklaerung: "Das Modell spiegelt die Welt zur Trainingszeit. Ändern sich Eingaben oder Zusammenhänge, sinkt die Qualität, oft unbemerkt."},
+    {frage: "Welche Überwachung zeigt am direktesten, ob das Modell noch richtig liegt?",
+     optionen: ["Der Vergleich seiner Vorhersagen mit später bekannten richtigen Antworten", "Die Temperatur des Geräts", "Die Antwortzeit", "Die Dateigröße des Modells"],
+     richtig: 0, erklaerung: "Temperatur und Antwortzeit sagen etwas über die Technik, nicht über die Güte. Die Qualität misst man an der Wahrheit, sobald sie bekannt ist."},
+    {frage: "Wozu dient ein Rückfall auf die vorherige Version?",
+     optionen: ["Er spart Speicher", "Er erlaubt, bei einer schlechteren neuen Version schnell zum funktionierenden Stand zurückzukehren", "Er ersetzt das Training", "Er macht das Modell genauer"],
+     richtig: 1, erklaerung: "Neue Versionen können schlechter sein. Ein erprobter Rückweg begrenzt den Schaden."},
+    {frage: "Was ändert sich auf einem kleinen Gerät wie dem Jetson gegenüber einem Server?",
+     optionen: ["Nichts, es ist dasselbe", "Man braucht keine Überwachung", "Man braucht keine Daten", "Speicher, Leistung und Wärme setzen enge Grenzen, und Updates und Ausfälle regelst du vor Ort"],
+     richtig: 3, erklaerung: "Der gemeinsame Speicher von 8 GB und die geringe Leistungsaufnahme prägen die Modellwahl. Dafür bleiben die Daten am Gerät."},
+    {frage: "Wozu dient ein Steckbrief zum Modell?",
+     optionen: ["Er ersetzt die Tests", "Er trainiert das Modell", "Er hält Zweck, Daten, Grenzen und Qualität fest, damit andere das Modell richtig einordnen", "Er ist nur für Werbung gedacht"],
+     richtig: 2, erklaerung: "Der Steckbrief macht das Modell nachvollziehbar, für das Team, den Datenschutz und spätere Prüfungen."},
+  ],
+  weiter: ["kosten-energie", "ki-einfuehrung", "hardware"],
+},
+
+"kosten-energie": {
+  nav: "Kosten und Energie", typ: "lektion", gruppe: "KI im Betrieb", titel: "Kosten und Energie", symbol: "hardware",
+  widget: "kosten-rechner", videos: ["kosten-und-energie"],
+  kurz: "Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?",
+  abschnitte: [
+    {h: "Kaufen, mieten, Taxi fahren", p: [
+      "Wer ein Auto braucht, kann es kaufen, leasen oder bei Bedarf ein Taxi rufen. Das Taxi kostet nichts, solange du es nicht nutzt, aber jede Fahrt kostet. Das gekaufte Auto kostet am Anfang viel, dafür ist es danach immer da. Mit KI ist die Wahl ähnlich.",
+      "**Lokal** heißt: eigener Rechner oder Server im Haus. **Cloud** heißt: Rechenleistung eines Anbieters, nach Nutzung bezahlt. **Edge** ([[edge|Edge-Computing]]) heißt: ein kleines Gerät direkt dort, wo die Daten entstehen, etwa an der Maschine oder an der Kamera. Der Jetson in diesem Labor ist so ein Gerät.",
+    ]},
+    {h: "Die drei Wege im Vergleich", p: [
+      "Die Tabelle zeigt die typische Lage. Konkrete Preise hängen von Angebot, Größe und Zeitpunkt ab, deshalb stehen hier nur Richtungen.",
+    ], tabelle: {
+      beschriftung: "Lokal, Cloud und Edge im Überblick (grobe Tendenzen)",
+      kopf: ["Merkmal", "Lokal (eigener Server)", "Cloud", "Edge (kleines Gerät)"],
+      zeilen: [
+        ["Anschaffung", "Hoch, einmalig", "Keine oder gering", "Niedrig bis mittel, einmalig"],
+        ["Laufende Kosten", "Strom, Raum, Betreuung", "Nach Nutzung, wächst mit der Menge", "Sehr wenig Strom, Betreuung vor Ort"],
+        ["Leistung", "Hoch, aber fest", "Sehr hoch und flexibel, große Modelle möglich", "Begrenzt, kleine Modelle"],
+        ["Datenschutz", "Daten bleiben im Haus", "Vertrag und Prüfung nötig, Daten verlassen das Haus", "Daten bleiben am Gerät"],
+        ["Reaktionszeit", "Kurz im eigenen Netz", "Abhängig vom Netz", "Sehr kurz, kein Netzweg"],
+        ["Wartung", "Selbst, Updates und Ausfälle", "Beim Anbieter", "Selbst, aber viele Geräte verteilt"],
+      ],
+    }, merke: "Es gibt nicht den besten Weg. Entscheidend sind Datenmenge, Datenschutz, Reaktionszeit und wie gleichmäßig die Last ist."},
+    {h: "Woraus Kosten bestehen", p: [
+      "Wer nur auf den Preis der Hardware oder der Cloud schaut, übersieht die Hälfte. Bei einem laufenden KI-Einsatz kommen mehrere Blöcke zusammen:",
+    ], liste: [
+      "**Rechenzeit:** Training und Betrieb, bei der Cloud nach Stunden oder Anfragen bezahlt, lokal als Strom und Abnutzung.",
+      "**Speicher:** Daten, Modelle, Sicherungen, auch für Aufbewahrungsfristen.",
+      "**Personal:** Wer baut, betreibt, überwacht und nimmt Rückmeldungen auf? Das ist oft der größte Block und wird häufig unterschätzt.",
+      "**Datenpflege:** Sammeln, Bereinigen, Etikettieren, Aktualisieren. Das ist keine einmalige Arbeit, siehe {{mlops|Vom Prototyp in den Betrieb}}.",
+    ], alltag: [
+      "Beim Auto ist der Kaufpreis nur ein Teil. Dazu kommen Versicherung, Reifen, Werkstatt, Tanken und ein Stellplatz. Wer vor dem Kauf nur den Listenpreis vergleicht, wundert sich später über die Summe. Genauso bei KI: Die Rechnung gehört über die gesamte Laufzeit gemacht, nicht nur für den ersten Monat.",
+    ]},
+    {h: "Energie: Training und Betrieb", p: [
+      "Beim Training laufen viele leistungsstarke Rechner über Stunden bis Wochen. Das ist einmalig, aber für große Modelle sehr aufwendig, und die meisten Firmen übernehmen fertige Modelle statt sie selbst zu trainieren. Beim Betrieb ist jede einzelne Anfrage billig, aber sie wiederholt sich oft. Bei vielen Anfragen am Tag summiert sich der Betrieb, und wer ein Modell selbst betreibt, zahlt diese Energie laufend.",
+      "Ein kleines Gerät wie der Jetson nimmt nur wenige Watt auf. Wie viele genau, hängt von der Last ab. Die Seite {{hardware|Hardware}} zeigt dir die Leistung des Jetson live, während er rechnet. Alle Zahlen in diesem Strang sind Annahmen zum Rechnen, keine Messwerte.",
+      "Du kannst den Verbrauch senken: ein kleineres oder verkleinertes Modell wählen, Anfragen bündeln, das Gerät nur laufen lassen, wenn es gebraucht wird, und Dauerläufer ohne Nutzen abschalten.",
+    ], alltag: [
+      "Watt ist eine Leistung, also wie viel Energie pro Zeit. Multiplizierst du mit der Zeit, erhältst du die verbrauchte Energie: Eine Lampe mit 10 Watt, die 100 Stunden brennt, braucht 1000 Wattstunden, das ist 1 Kilowattstunde. Diese Einheit steht auf deiner Stromrechnung. Ein Wasserkocher nimmt grob 2000 Watt auf, läuft aber nur wenige Minuten.",
+    ]},
+    {h: "Ein Rechenbeispiel mit offenen Annahmen", p: [
+      "Wir rechnen die Stromkosten eines kleinen Geräts aus. Die Annahmen stehen vorab, damit du sie durch deine eigenen ersetzen kannst:",
+    ], liste: [
+      "Das Gerät nimmt im Mittel **15 Watt** auf.",
+      "Es läuft **24 Stunden am Tag**.",
+      "Eine Kilowattstunde kostet **0,30 Euro** (nur zum Rechnen, nimm den Wert deiner Stromrechnung).",
+    ]},
+    {h: "Die Rechnung und der Vergleich mit der Cloud", p: [
+      "15 Watt mal 24 Stunden sind 360 Wattstunden, also 0,36 Kilowattstunden pro Tag. Mal 0,30 Euro sind rund 0,11 Euro pro Tag, also gut 11 Cent. Auf ein Jahr gerechnet (365 Tage) sind das etwa 39 Euro. Würde das Gerät im Mittel 30 Watt aufnehmen, verdoppelte sich der Betrag.",
+      "Jetzt der Vergleich mit einem Cloud-Dienst. Auch hier nur angenommene Zahlen: Der Dienst kostet 50 Euro im Monat, das Gerät in der Anschaffung 500 Euro. Der Strom kostet monatlich etwa 3,30 Euro (39 Euro durch 12). Ersparnis pro Monat: 50 minus 3,30, rund 46,70 Euro. Anschaffung geteilt durch Ersparnis ergibt rund 10,7 Monate. Nach knapp einem Jahr hätte sich das Gerät in dieser Rechnung bezahlt gemacht. Personal, Wartung und Ersatz sind dabei nicht eingerechnet. Rechne sie bei einer echten Entscheidung mit ein.",
+    ]},
+    {h: "Was man gern vergisst", alltag: [
+      "Ein Fitnessstudio-Vertrag kostet jeden Monat, auch wenn du nie hingehst. Ein Gerät, das kaum ausgelastet ist, ist genauso eine laufende Ausgabe. Wer selten trainiert, fährt mit einer Zehnerkarte besser. Es kommt auf die tatsächliche Nutzung an, nicht auf die Absicht.",
+    ], p: [], liste: [
+      "**Auslastung:** Ein Gerät, das wenig genutzt wird, verbraucht trotzdem Strom und kostet Betreuung. Ein Cloud-Dienst rechnet dann nach Nutzung genauer ab.",
+      "**Spitzen:** Wenn ein Tag zehnmal so viele Anfragen bringt wie sonst, ist ein festes Gerät zu klein und die Cloud flexibel.",
+      "**Nebenkosten:** Kühlung, Netzteil, Ersatzgerät, Datenübertragung, bei Cloud auch Preisänderungen und Vertragsbindung.",
+      "**Ausfall:** Was kostet ein Tag ohne das System? Wer das weiß, kann Ersatz und Rückfall sinnvoll planen.",
+    ]},
+    {h: "Entscheidungsfragen", alltag: [
+      "Für den täglichen Arbeitsweg von fünf Kilometern lohnt ein eigenes Fahrrad. Für eine Fahrt im Jahr in eine andere Stadt nimmst du die Bahn oder ein Taxi. Die richtige Antwort hängt davon ab, wie oft, wie weit und wie dringend. Bei KI gelten dieselben Fragen.",
+    ], p: [
+      "Bevor du dich festlegst, beantworte ein paar Fragen in dieser Reihenfolge. Sie ordnen die Wahl besser als ein Preisvergleich:",
+    ], liste: [
+      "Dürfen die Daten das Haus verlassen? Wenn nein, scheidet die Cloud meist aus.",
+      "Wie schnell muss die Antwort da sein? Millisekunden sprechen für Edge.",
+      "Wie gleichmäßig ist die Last? Gleichmäßig spricht für eigenes Gerät, stark schwankend für die Cloud.",
+      "Wie groß muss das Modell sein? Sehr große Modelle laufen nicht auf kleinen Geräten.",
+      "Wer betreut das Ganze, und was kostet seine Zeit?",
+      "Was passiert beim Ausfall, und wie lange darf er dauern?",
+    ], merke: "Rechne über die gesamte Laufzeit, nenne deine Annahmen offen, und zähle Personal und Datenpflege mit. Zur Entscheidung gehören auch Datenschutz und Reaktionszeit, nicht nur der Preis."},
+  ],
+  mitnehmen: [
+    "Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung. Einen besten Weg gibt es nicht.",
+    "Kosten bestehen aus Rechenzeit, Speicher, Personal und Datenpflege. Das Personal ist oft der größte Block.",
+    "Stromkosten rechnest du selbst: Watt mal Stunden durch 1000 ergibt Kilowattstunden, mal Preis ergibt Euro. Mache die Annahmen sichtbar.",
+  ],
+  quiz: [
+    {frage: "Ein Gerät nimmt 20 Watt auf und läuft 10 Stunden. Wie viel Energie ist das?",
+     optionen: ["0,2 Kilowattstunden", "2 Kilowattstunden", "200 Kilowattstunden", "20 Kilowattstunden"],
+     richtig: 0, erklaerung: "20 Watt mal 10 Stunden sind 200 Wattstunden, also 0,2 Kilowattstunden."},
+    {frage: "Welcher Kostenblock wird bei KI-Projekten oft am stärksten unterschätzt?",
+     optionen: ["Der Strom des kleinen Geräts", "Das Netzkabel", "Die Verpackung", "Das Personal für Betrieb, Überwachung und Datenpflege"],
+     richtig: 3, erklaerung: "Die Hardware ist sichtbar. Die laufende Arbeit von Menschen an Betrieb und Datenpflege wird oft vergessen."},
+    {frage: "Die Daten dürfen das Haus nicht verlassen und die Antwort muss in Millisekunden da sein. Was liegt nahe?",
+     optionen: ["Ein großer Cloud-Dienst", "Ein Gerät vor Ort, etwa Edge oder ein eigener Server", "Gar keine KI", "Ein Dienst im Ausland"],
+     richtig: 1, erklaerung: "Datenschutz und Reaktionszeit sprechen für lokale Verarbeitung. Der Preis ist dann nur die dritte Frage."},
+    {frage: "Was ist an der Rechnung „Gerät kostet 500 Euro, Cloud 50 Euro im Monat, also nach rund zehn Monaten gleichauf“ wichtig?",
+     optionen: ["Die Zahlen stimmen immer", "Es sind Annahmen, und Personal, Wartung und Ersatz fehlen noch", "Sie gilt nur für große Firmen", "Cloud ist immer teurer"],
+     richtig: 1, erklaerung: "Die Rechnung ist nur so gut wie ihre Annahmen. Bei einer echten Entscheidung setzt du eigene Zahlen ein und nimmst die übrigen Kosten dazu."},
+    {frage: "Wann ist die Cloud gegenüber einem festen Gerät oft im Vorteil?",
+     optionen: ["Bei gleichbleibender Dauerlast", "Bei streng vertraulichen Daten", "Bei Anforderungen an kürzeste Reaktionszeit", "Bei stark schwankender Last und sehr großen Modellen"],
+     richtig: 3, erklaerung: "Die Cloud rechnet nach Nutzung ab und kann sehr große Modelle betreiben. Bei Dauerlast, vertraulichen Daten und kurzer Reaktionszeit sprechen die anderen Wege dafür."},
+  ],
+  weiter: ["hardware", "mlops", "business"],
+},
+
+"ki-einfuehrung": {
+  nav: "KI einführen", typ: "lektion", gruppe: "KI im Betrieb", titel: "KI im Unternehmen einführen", symbol: "business",
+  videos: ["ki-einfuehren"],
+  kurz: "Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?",
+  abschnitte: [
+    {h: "Erst das Problem, dann die Technik", p: [
+      "Viele Projekte starten mit dem Satz „Wir brauchen auch KI.“ Besser ist: „Wir verlieren jede Woche zwei Stunden mit dem Suchen von Unterlagen.“ Wer vom Problem ausgeht, kann am Ende messen, ob es besser wurde.",
+    ], alltag: [
+      "Du kaufst auch keine Bohrmaschine, weil sie gerade angeboten wird, sondern weil du Löcher in die Wand brauchst. Und für zwei Bilder reicht vielleicht ein Nagel. Auch bei KI kann die richtige Lösung eine einfache Regel oder eine Tabellenformel sein. Die KI muss ihren Platz erst verdienen.",
+    ]},
+    {h: "Den Einsatz auswählen: Nutzen, Machbarkeit, Daten, Risiko", p: [
+      "Sammle Ideen und bewerte jede mit denselben vier Fragen. Ein einfaches Raster mit Werten von niedrig bis hoch reicht. Starte mit dem Fall, der viel Nutzen bringt, machbar ist, gute Daten hat und wenig Risiko trägt.",
+    ], tabelle: {
+      beschriftung: "Raster für die Auswahl von Einsatzfällen",
+      kopf: ["Kriterium", "Frage", "Gutes Zeichen"],
+      zeilen: [
+        ["Nutzen", "Was bringt es, und für wen?", "Häufige Aufgabe, spürbarer Aufwand, klarer Wert"],
+        ["Machbarkeit", "Kann das Verfahren das heute?", "Ähnliche Aufgaben sind gelöst, Ergebnis darf unvollkommen sein"],
+        ["Daten", "Gibt es genug brauchbare Daten, und dürfen wir sie nutzen?", "Vorhanden, sauber genug, Rechtsgrundlage geklärt"],
+        ["Risiko", "Was passiert bei einem Fehler?", "Fehler sind klein, auffindbar und ein Mensch prüft"],
+      ],
+    }, alltag: [
+      "Bei einem Umzug packst du nicht zuerst das Klavier. Du fängst mit den leichten Kartons an, lernst dabei, wie es läuft, und gewinnst Schwung. Ein erstes KI-Projekt sollte ein leichter Karton sein: sichtbar, begrenzt, mit geringem Risiko.",
+    ]},
+    {h: "Der Pilot als Probefahrt", p: [
+      "Bevor du ein Auto kaufst, machst du eine Probefahrt. Du fährst eine bekannte Strecke und vergleichst mit deinem jetzigen Wagen. Ein Pilot ist das für KI: ein zeitlich und inhaltlich begrenzter Versuch mit echten Daten.",
+      "Lege vorher fest, woran du Erfolg misst. Wie sieht der heutige Ablauf in Zahlen aus (Dauer, Fehlerquote, Aufwand)? Was ist das Ziel? Wie lange läuft der Pilot, mit welcher Stichprobe? Wann brichst du ab? Ohne diesen Maßstab entscheidet am Ende die Stimmung statt der Befund.",
+      "Eine bewährte Form ist der Schattenbetrieb: Die KI läuft mit, aber Menschen entscheiden weiter wie bisher. Du vergleichst beide Ergebnisse, ohne dass ein Fehler Folgen hat.",
+    ], merke: "Ein Pilot ohne vorher festgelegten Maßstab beweist nichts. Schreibe Ausgangswert, Ziel, Dauer und Abbruchbedingung auf, bevor es losgeht."},
+    {h: "Menschen mitnehmen", p: [
+      "Technik arbeitet nur, wenn Menschen sie nutzen. Beschäftigte haben oft berechtigte Fragen: Wird meine Arbeit überflüssig? Werde ich überwacht? Wer haftet, wenn die KI sich irrt? Ausweichende Antworten verstärken die Sorge. Offenheit hilft: Was soll sich ändern, was nicht, und welche Entscheidungen bleiben bei Menschen?",
+    ], liste: [
+      "**Früh einbinden:** Die Menschen, die die Arbeit kennen, wissen am besten, wo es hakt. Sie gehören in die Auswahl und in den Pilot.",
+      "**Rollen klären:** Wer pflegt Daten, wer prüft Ergebnisse, wer ist Ansprechpartner?",
+      "**Schulen:** Zeige, was das System kann und wo es irrt. Wer die Grenzen kennt, verlässt sich richtig darauf.",
+      "**Rückmeldung ermöglichen:** Ein einfacher Weg, Fehler zu melden, macht das System besser und die Menschen zu Beteiligten.",
+    ], alltag: [
+      "Eine neue Maschine in der Werkstatt: Wenn die Kollegen sie nur vor die Nase gestellt bekommen, laufen sie am ersten Tag um sie herum und nutzen weiter die alte. Wenn sie vorher mitprobieren durften, ihre Fragen beantwortet wurden und eine Kollegin sie eingewiesen hat, wird sie angenommen.",
+    ]},
+    {h: "Wer muss zusammenarbeiten", p: [
+      "Eine KI-Einführung ist kein reines IT-Projekt. Mehrere Gruppen sehen jeweils einen Teil des Problems.",
+      "In Deutschland berührt die Einführung technischer Systeme, mit denen sich Verhalten oder Leistung von Beschäftigten überwachen lässt, oft die Mitbestimmung. Kläre das früh und gemeinsam, das erspart Verzögerungen. Das ist ein Hinweis und keine Rechtsberatung. Einen Überblick gibt die Seite {{recht|Recht und Regeln}}.",
+    ], tabelle: {
+      beschriftung: "Rollen bei einer KI-Einführung",
+      kopf: ["Rolle", "Bringt ein", "Fragt zum Beispiel"],
+      zeilen: [
+        ["Fachbereich", "Kenntnis der Aufgabe und des Nutzens", "Löst es unser Problem im Alltag?"],
+        ["IT", "Betrieb, Sicherheit, Anbindung", "Wo läuft es, wer betreut es, wie sichern wir es?"],
+        ["Datenschutz", "Prüfung der Daten und der Rechtsgrundlage", "Welche personenbezogenen Daten, wie lange, wozu?"],
+        ["Betriebsrat", "Sicht der Beschäftigten, Mitbestimmung", "Kann damit Verhalten oder Leistung erfasst werden?"],
+      ],
+    }},
+    {h: "Entscheidungspunkte: stoppen, ändern, ausrollen", p: [
+      "Ein Pilot endet mit einer Entscheidung, und es gibt drei Möglichkeiten. Lege vorher fest, was bei welchem Ergebnis geschieht:",
+    ], liste: [
+      "**Stoppen:** Das Ziel wurde klar verfehlt oder die Risiken sind zu hoch. Auch das ist ein Erfolg, weil du viel gelernt und wenig ausgegeben hast.",
+      "**Ändern:** Die Richtung stimmt, aber etwas fehlt: bessere Daten, ein engerer Zuschnitt, mehr Prüfung. Der Pilot geht in eine zweite Runde.",
+      "**Ausrollen:** Das Ziel ist erreicht. Jetzt folgt der Betrieb mit Überwachung, Rückfall und Verantwortlichen, siehe {{mlops|Vom Prototyp in den Betrieb}}. Rolle es schrittweise aus, nicht an einem Tag.",
+    ], alltag: [
+      "Eine Ampel ist ein guter Gedanke dafür: Rot heißt stoppen, Gelb heißt nachbessern und erneut prüfen, Grün heißt fahren. Wichtig ist, dass die Farbe an Kriterien hängt, die vorher feststanden, und nicht am Bauchgefühl des Tages.",
+    ]},
+    {h: "Typische Fehler und eine Checkliste", p: [
+      "Viele Projekte scheitern an denselben Stellen:",
+    ], liste: [
+      "Technik zuerst, Problem später.",
+      "Kein Maßstab: Niemand weiß, was „besser“ heißt.",
+      "Daten unterschätzt: Sie sind unvollständig, schlecht gepflegt oder dürfen nicht genutzt werden.",
+      "Menschen vergessen: Sie erfahren erst bei der Einführung davon.",
+      "Pilot ohne Weg in den Betrieb: Er beeindruckt, aber niemand betreibt ihn danach.",
+      "Zu groß gestartet: ein Jahr Planung statt eines kleinen, prüfbaren Anfangs.",
+    ]},
+    {h: "Checkliste für den Start", p: [
+      "Gehe diese Fragen durch, bevor du loslegst. Jedes Nein ist eine Aufgabe, die du zuerst erledigst.",
+    ], liste: [
+      "Ist das Problem in einem Satz beschrieben?",
+      "Gibt es einen Ausgangswert und ein Ziel?",
+      "Sind Daten und Rechtsgrundlage geklärt?",
+      "Ist ein Verantwortlicher benannt, und prüft jemand die Ergebnisse?",
+      "Sind Betroffene, Datenschutz und Betriebsrat informiert?",
+      "Gibt es einen Rückfall, und weißt du, wann du stoppst?",
+    ], merke: "Mehr zu Einsatzfeldern steht auf der Seite {{business|KI im Business}}, zur Messung auf {{bewertung|Wie gut ist ein Modell?}}, zu den Regeln auf {{recht|Recht und Regeln}}."},
+  ],
+  mitnehmen: [
+    "Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.",
+    "Ein Pilot braucht einen vorher festgelegten Maßstab. Er endet mit der Entscheidung: stoppen, ändern oder ausrollen.",
+    "Nimm die Menschen früh mit und binde Fachbereich, IT, Datenschutz und Betriebsrat von Anfang an ein.",
+  ],
+  quiz: [
+    {frage: "Was ist ein guter erster Einsatzfall?",
+     optionen: ["Ein begrenzter Fall mit klarem Nutzen, guten Daten und geringem Risiko", "Der größte und riskanteste, damit sich der Aufwand lohnt", "Der, über den am meisten gesprochen wird", "Einer, für den es noch gar keine Daten gibt"],
+     richtig: 0, erklaerung: "Ein leichter Karton zuerst: Du lernst im kleinen Rahmen und kannst den Erfolg messen."},
+    {frage: "Wozu dient ein Schattenbetrieb im Pilot?",
+     optionen: ["Er versteckt das System vor den Beschäftigten", "Er ersetzt den Datenschutz", "Die KI läuft mit, Menschen entscheiden weiter, und man vergleicht beide Ergebnisse ohne Folgen eines Fehlers", "Er spart Training"],
+     richtig: 2, erklaerung: "So siehst du, wie gut die KI im echten Ablauf wäre, ohne dass ein Fehler etwas anrichtet."},
+    {frage: "Was gehört vor den Start eines Pilots?",
+     optionen: ["Die Pressemitteilung", "Der Kauf der teuersten Hardware", "Ein Messwert für den heutigen Ablauf, ein Ziel und eine Abbruchbedingung", "Die Entlassung der Betroffenen"],
+     richtig: 2, erklaerung: "Ohne Ausgangswert, Ziel und Abbruchregel entscheidet am Ende die Stimmung statt der Befund."},
+    {frage: "Warum bindet man Datenschutz und Betriebsrat früh ein?",
+     optionen: ["Weil sie Aspekte sehen, die Verzögerungen oder Stopps verursachen können, wenn sie erst spät auffallen", "Aus reiner Höflichkeit", "Weil sie das Modell trainieren", "Damit sie die Verantwortung übernehmen"],
+     richtig: 0, erklaerung: "Rechtsgrundlage, Beschäftigtendaten und Mitbestimmung betreffen den Zuschnitt. Frühe Klärung spart späteres Umbauen."},
+    {frage: "Ein Pilot erreicht sein Ziel nur teilweise. Es fehlen bessere Daten. Was ist die passende Entscheidung?",
+     optionen: ["Ausrollen, weil es fast reicht", "Ändern und eine zweite Runde mit besseren Daten machen", "Alle Daten löschen", "Nichts tun"],
+     richtig: 1, erklaerung: "Die Richtung stimmt, aber etwas fehlt. Die Entscheidung heißt: ändern und neu prüfen, nicht blind ausrollen."},
+  ],
+  weiter: ["business", "recht", "bewertung"],
+},
+
+},
+
+glossar: {
+  entscheidungsbaum: ["Entscheidungsbaum", "Eine Kette von Ja-Nein-Fragen an die Daten, an deren Ende eine Antwort steht. Die Fragen werden aus Beispielen gelernt."],
+  merkmal: ["Merkmal", "Eine Eigenschaft eines Falls, nach der ein Verfahren fragen darf, etwa eine Spalte in der Tabelle wie Alter, Betrag oder Branche."],
+  reinheit: ["Reinheit", "Maß dafür, wie einheitlich eine Gruppe von Fällen ist. Eine Gruppe, in der alle dasselbe Ergebnis haben, ist ganz rein."],
+  zufallswald: ["Zufallswald", "Viele Entscheidungsbäume, jeder auf zufälligen Zeilen und Spalten trainiert. Die Mehrheit der Bäume entscheidet."],
+  zeitreihe: ["Zeitreihe", "Messwerte in der Reihenfolge ihrer Entstehung, etwa Tagesumsatz oder Stromverbrauch pro Stunde."],
+  trend: ["Trend", "Die langfristige Richtung einer Zeitreihe, nach oben oder unten, über Wochen, Monate oder Jahre."],
+  saisonmuster: ["Saison", "Ein Muster, das sich zu festen Zeiten wiederholt: im Tagesverlauf, in der Woche oder im Jahr."],
+  prognosefehler: ["Prognosefehler", "Der Abstand zwischen vorhergesagtem und später gemessenem Wert. Über viele Zeitpunkte gemittelt bewertet er ein Prognosemodell."],
+  prognoseband: ["Unsicherheitsband", "Ein Bereich um die Prognose, in dem der echte Wert mit angegebener Wahrscheinlichkeit liegt. Er wird mit dem Blick in die Zukunft breiter."],
+  anomalie: ["Anomalie", "Ein seltener Fall, der deutlich vom Gewohnten abweicht. Das ist nicht automatisch ein Fehler, sondern ein Grund hinzusehen."],
+  schwellenwert: ["Schwellenwert", "Die Grenze, ab der ein Wert als Treffer oder Auffälligkeit gilt. Er bestimmt, wie viel das System meldet."],
+  fehlalarm: ["Fehlalarm", "Eine Meldung, obwohl nichts vorliegt. Ein Fall ohne Meldung, obwohl etwas vorliegt, ist ein übersehener Fall."],
+  kollaborativ: ["Kollaboratives Filtern", "Empfehlungsverfahren, das Nutzer mit ähnlichem Verhalten sucht und empfiehlt, was diese bekommen haben und du noch nicht."],
+  filterblase: ["Filterblase", "Ein Zustand, in dem man durch Empfehlungen immer mehr vom Gleichen sieht und anderes kaum noch."],
+  mlops: ["MLOps", "Abläufe und Werkzeuge, die ein Modell zuverlässig in den Betrieb bringen und dort halten: Daten, Training, Prüfung, Auslieferung, Überwachung, Nachlernen."],
+  drift: ["Drift", "Die Wirklichkeit oder die Eingabedaten ändern sich, das Modell nicht. Die Qualität sinkt, oft schleichend."],
+},
+
+});

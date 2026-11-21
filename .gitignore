@@ -10,3 +10,14 @@ server.log
 server.pid
 videos/arbeit/
 *.mp3
+videos/node_modules/
+videos/out/
+videos/stimme-cache/
+videos/stimme/
+videos/ton/
+app/static/videos/*.mp4
+app/static/videos/*.jpg
+tests/node_modules/
+tests/fixtures/*.y4m
+tests/fixtures/*.jpg
+tests/ausgabe/

@@ -1,0 +1,70 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:06.250
+Ein Sprachmodell macht im Kern nur
+eines: Es sagt das nächste Token voraus.
+
+00:00:06.400 --> 00:00:11.030
+Ein Token ist ein Textstück,
+oft ein Wort oder ein Wortteil.
+
+00:00:12.280 --> 00:00:17.390
+Zu jedem Satzanfang berechnet das Modell
+Wahrscheinlichkeiten für das nächste Token.
+
+00:00:17.540 --> 00:00:21.530
+Eines wird gewählt und angehängt,
+dann beginnt es von vorn.
+
+00:00:22.780 --> 00:00:26.210
+Die Temperatur steuert,
+wie mutig gewählt wird.
+
+00:00:26.360 --> 00:00:30.270
+Niedrig heißt: fast immer
+das wahrscheinlichste Token.
+
+00:00:30.420 --> 00:00:35.130
+Hoch heißt: Auch unwahrscheinliche
+Kandidaten bekommen eine Chance.
+
+00:00:36.380 --> 00:00:40.050
+Das Kontextfenster ist das
+Gedächtnis einer Anfrage.
+
+00:00:40.200 --> 00:00:43.070
+Nur was hineinpasst, sieht das Modell.
+
+00:00:43.220 --> 00:00:46.490
+Was hinausrutscht, ist für
+die Antwort vergessen.
+
+00:00:47.740 --> 00:00:52.290
+Das Modell prüft keine Fakten, es
+wählt plausible Fortsetzungen.
+
+00:00:52.440 --> 00:00:54.990
+Plausibel ist nicht gleich wahr.
+
+00:00:55.140 --> 00:01:00.170
+So entstehen Antworten, die überzeugend
+klingen und trotzdem erfunden sind.
+
+00:01:01.420 --> 00:01:06.130
+Ein Gegenmittel ist RAG: erst
+nachschlagen, dann antworten.
+
+00:01:06.280 --> 00:01:10.030
+Passende Stellen aus deinen
+Dokumenten kommen in den Kontext.
+
+00:01:10.180 --> 00:01:13.450
+Die Antwort stützt sich
+darauf und nennt die Quelle.
+
+00:01:14.700 --> 00:01:17.010
+Bildmodelle arbeiten anders.
+
+00:01:17.160 --> 00:01:21.710
+Sie starten mit Rauschen und machen
+daraus Schritt für Schritt ein Bild.

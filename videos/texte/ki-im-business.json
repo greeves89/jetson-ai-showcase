@@ -1,0 +1,55 @@
+{
+  "id": "ki-im-business",
+  "titel": "KI im Business",
+  "untertitel": "Wo KI heute arbeitet und welche drei Fragen vor jedem Einsatz stehen",
+  "szenen": [
+    {
+      "id": "einstieg",
+      "kapitel": "Wo KI arbeitet",
+      "saetze": [
+        "KI arbeitet längst in vielen Bereichen.",
+        "Meist unterstützt sie Menschen, statt sie zu ersetzen.",
+        "Wir gehen sechs Bereiche durch und enden mit drei Fragen, die immer passen."
+      ]
+    },
+    {
+      "id": "fertigung",
+      "kapitel": "Fertigung und Logistik",
+      "saetze": [
+        "In der Fertigung prüft eine Kamera Teile auf Fehler.",
+        "Das ist Sichtprüfung.",
+        "In der Logistik hilft KI, Lager zu steuern und Routen zu planen."
+      ]
+    },
+    {
+      "id": "handel",
+      "kapitel": "Handel und Gesundheit",
+      "saetze": [
+        "Im Handel erkennt sie leere Regale und schätzt den Bedarf.",
+        "In der Gesundheit wertet sie Bilder aus.",
+        "Sie ist dort eine Assistenz, die Ärztinnen und Ärzte auf Auffälliges hinweist."
+      ]
+    },
+    {
+      "id": "wissen",
+      "kapitel": "Büro, Wissen, Sicherheit",
+      "saetze": [
+        "Im Büro beantwortet sie Fragen zu Dokumenten und fasst Protokolle zusammen.",
+        "Bei der Sicherheit regelt sie zum Beispiel den Zutritt."
+      ],
+      "nachlauf": 2.4
+    },
+    {
+      "id": "fragen",
+      "kapitel": "Drei Fragen vor dem Einsatz",
+      "saetze": [
+        "Bevor du KI einsetzt, stelle drei Fragen.",
+        "Erstens: Welche Entscheidung soll sie treffen oder vorbereiten?",
+        "Zweitens: Welche Daten braucht sie, und darf sie diese nutzen?",
+        "Drittens: Wer prüft das Ergebnis?",
+        "Wo diese drei Antworten klar sind, lohnt sich der Einsatz.",
+        "Und wenn nicht, bleibt der Mensch am Steuer."
+      ]
+    }
+  ]
+}

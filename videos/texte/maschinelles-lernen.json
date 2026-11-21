@@ -1,0 +1,64 @@
+{
+  "id": "maschinelles-lernen",
+  "titel": "Maschinelles Lernen",
+  "untertitel": "Wie ein System aus Beispielen lernt: Training, Inferenz und Lernarten",
+  "szenen": [
+    {
+      "id": "umkehr",
+      "kapitel": "Programmieren oder Lernen",
+      "saetze": [
+        "Normalerweise schreibt man ein Programm: Regeln rein, Ergebnis raus.",
+        "Beim maschinellen Lernen ist es umgekehrt.",
+        "Du gibst Beispiele mit Antworten, und das System findet die Regeln selbst."
+      ]
+    },
+    {
+      "id": "training",
+      "kapitel": "Training",
+      "saetze": [
+        "Das nennt man Training.",
+        "Jedes Beispiel trägt ein Etikett, hier Katze oder Hund.",
+        "Das System verändert sich so lange, bis seine Treffer stimmen.",
+        "Das Ergebnis heißt Modell."
+      ]
+    },
+    {
+      "id": "inferenz",
+      "kapitel": "Inferenz",
+      "saetze": [
+        "Danach folgt die Inferenz.",
+        "Du zeigst dem Modell ein neues Bild, das es nie gesehen hat.",
+        "Es sagt voraus, was darauf zu sehen ist, samt Sicherheit."
+      ]
+    },
+    {
+      "id": "lernarten",
+      "kapitel": "Drei Lernarten",
+      "saetze": [
+        "Überwacht: Die Beispiele haben richtige Antworten.",
+        "Unüberwacht: Das System sucht selbst Gruppen in Daten ohne Etikett.",
+        "Bestärkend: Ein Agent probiert aus und bekommt Belohnung für gute Züge."
+      ]
+    },
+    {
+      "id": "ueberanpassung",
+      "kapitel": "Die Falle: Überanpassung",
+      "saetze": [
+        "Eine Falle ist die Überanpassung.",
+        "Das Modell lernt die Trainingsbeispiele auswendig, statt das Muster zu verstehen.",
+        "Bei neuen Daten versagt es dann.",
+        "Deshalb prüft man mit Beispielen, die es nie gesehen hat."
+      ]
+    },
+    {
+      "id": "merkmalsraum",
+      "kapitel": "Im Merkmalsraum",
+      "saetze": [
+        "In der Demo Bildmodell anlernen kannst du das ausprobieren.",
+        "Das Modell macht aus jedem Bild eine Reihe von Zahlen.",
+        "Ähnliche Bilder liegen im Merkmalsraum nah beieinander.",
+        "Ein neues Bild wird danach eingeordnet, wo es landet."
+      ]
+    }
+  ]
+}

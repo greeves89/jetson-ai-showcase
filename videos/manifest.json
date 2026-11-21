@@ -1,0 +1,160 @@
+{
+  "videos": [
+    {
+      "id": "was-ist-ki",
+      "titel": "Was ist KI?",
+      "untertitel": "Der Überblick: Begriffe, Methoden und die Landkarte der KI",
+      "dauer_s": 83.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Was ist KI?"
+        },
+        {
+          "t": 10.2,
+          "titel": "Vier Fähigkeiten"
+        },
+        {
+          "t": 24.5,
+          "titel": "Regelbasierte KI"
+        },
+        {
+          "t": 39.1,
+          "titel": "Ineinander gesetzt"
+        },
+        {
+          "t": 60.4,
+          "titel": "KI mit Körper"
+        },
+        {
+          "t": 70.7,
+          "titel": "Die Landkarte"
+        }
+      ]
+    },
+    {
+      "id": "maschinelles-lernen",
+      "titel": "Maschinelles Lernen",
+      "untertitel": "Wie ein System aus Beispielen lernt: Training, Inferenz und Lernarten",
+      "dauer_s": 89.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Programmieren oder Lernen"
+        },
+        {
+          "t": 14.5,
+          "titel": "Training"
+        },
+        {
+          "t": 28.9,
+          "titel": "Inferenz"
+        },
+        {
+          "t": 40.4,
+          "titel": "Drei Lernarten"
+        },
+        {
+          "t": 56.2,
+          "titel": "Die Falle: Überanpassung"
+        },
+        {
+          "t": 71.6,
+          "titel": "Im Merkmalsraum"
+        }
+      ]
+    },
+    {
+      "id": "generative-ki",
+      "titel": "Generative KI",
+      "untertitel": "Wie Sprachmodelle Text erzeugen, warum sie irren und was RAG dagegen tut",
+      "dauer_s": 83.4,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Text in Tokens"
+        },
+        {
+          "t": 11.8,
+          "titel": "Das nächste Token"
+        },
+        {
+          "t": 22.3,
+          "titel": "Temperatur"
+        },
+        {
+          "t": 35.9,
+          "titel": "Kontextfenster"
+        },
+        {
+          "t": 47.2,
+          "titel": "Halluzination"
+        },
+        {
+          "t": 60.9,
+          "titel": "RAG: erst nachschlagen"
+        },
+        {
+          "t": 74.2,
+          "titel": "Bilder aus Rauschen"
+        }
+      ]
+    },
+    {
+      "id": "robotik",
+      "titel": "Robotik",
+      "untertitel": "Wahrnehmen, entscheiden, handeln: wie KI einen Körper bekommt",
+      "dauer_s": 83.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "KI mit Körper"
+        },
+        {
+          "t": 8.7,
+          "titel": "Der Regelkreis"
+        },
+        {
+          "t": 33.7,
+          "titel": "Der Jetson als Gehirn"
+        },
+        {
+          "t": 46.1,
+          "titel": "Warum lokal?"
+        },
+        {
+          "t": 58,
+          "titel": "Roboterarten"
+        }
+      ]
+    },
+    {
+      "id": "ki-im-business",
+      "titel": "KI im Business",
+      "untertitel": "Wo KI heute arbeitet und welche drei Fragen vor jedem Einsatz stehen",
+      "dauer_s": 76,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Wo KI arbeitet"
+        },
+        {
+          "t": 13.4,
+          "titel": "Fertigung und Logistik"
+        },
+        {
+          "t": 25.8,
+          "titel": "Handel und Gesundheit"
+        },
+        {
+          "t": 39.5,
+          "titel": "Büro, Wissen, Sicherheit"
+        },
+        {
+          "t": 50.7,
+          "titel": "Drei Fragen vor dem Einsatz"
+        }
+      ]
+    }
+  ]
+}

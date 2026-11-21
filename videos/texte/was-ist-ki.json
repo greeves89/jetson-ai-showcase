@@ -1,0 +1,34 @@
+{
+  "id": "was-ist-ki",
+  "titel": "Was ist KI?",
+  "untertitel": "Der Überblick: Begriffe, Methoden und die Landkarte der KI",
+  "szenen": [
+    {"id": "einstieg", "kapitel": "Was ist KI?", "saetze": [
+      "KI steht für künstliche Intelligenz.",
+      "Gemeint sind Maschinen, die Aufgaben lösen, für die sonst Intelligenz nötig wäre."
+    ]},
+    {"id": "faehigkeiten", "kapitel": "Vier Fähigkeiten", "saetze": [
+      "Dazu gehören vier Fähigkeiten: wahrnehmen, verstehen, entscheiden und erzeugen.",
+      "Ein Foto erkennen, einen Satz verstehen, einen Zug wählen, einen Text schreiben."
+    ]},
+    {"id": "regeln", "kapitel": "Regelbasierte KI", "saetze": [
+      "Die älteste Form arbeitet mit festen Regeln: wenn dies, dann das.",
+      "Das funktioniert, solange ein Mensch alle Fälle vorher aufschreiben kann.",
+      "Bei Bildern oder Sprache sind es viel zu viele."
+    ]},
+    {"id": "kreise", "kapitel": "Ineinander gesetzt", "saetze": [
+      "Moderne KI steckt deshalb in Schichten.",
+      "Maschinelles Lernen heißt: Das System lernt aus Beispielen, statt Regeln zu bekommen.",
+      "Deep Learning ist ein Teil davon und nutzt große neuronale Netze.",
+      "Generative KI ist wieder ein Teil davon und erzeugt neue Texte, Bilder oder Töne."
+    ]},
+    {"id": "robotik", "kapitel": "KI mit Körper", "saetze": [
+      "Bekommt KI einen Körper mit Sensoren und Motoren, sprechen wir von Robotik.",
+      "Sie nimmt die Welt wahr und greift in sie ein."
+    ]},
+    {"id": "landkarte", "kapitel": "Die Landkarte", "saetze": [
+      "Zum Einordnen hilft diese Landkarte: Sehen, Sprache, Erzeugen, Wissen und Handeln.",
+      "In den nächsten Videos gehen wir Schritt für Schritt hinein."
+    ]}
+  ]
+}

@@ -1,0 +1,133 @@
+/* KI-Labor: Gestaltung der Lernbausteine (widgets.js).
+   Nutzt die Variablen und Klassen aus style.css. Eigene Klassen beginnen mit w-. */
+
+.w-wid{--w-auf-akzent:#fff;--w-gedaempft:var(--leise)}
+@media (prefers-color-scheme:dark){.w-wid{--w-auf-akzent:#00162e}}
+.w-wid .btn.primary,.w-wid .btn.aktiv{color:var(--w-auf-akzent)}
+.w-null{padding:0;overflow:hidden}
+.w-leise{color:var(--leise);font-size:15px;margin:0}
+.w-hinweis{display:flex;gap:9px;align-items:flex-start;margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--leise)}
+.w-hinweis .ic{margin-top:2px}
+.w-hinweis[hidden]{display:none}
+.w-reihe{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
+.w-reihe .regler{flex:1 1 320px}
+.w-feld{width:100%;min-width:0}
+.w-ueber{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise)}
+.w-abschnitt{margin-top:26px}
+
+/* Schalter */
+.w-schalter{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14.5px;position:relative;min-height:32px}
+.w-schalter input{position:absolute;opacity:0;width:44px;height:26px;margin:0;cursor:pointer}
+.w-sw{width:44px;height:26px;border-radius:13px;background:var(--flaeche3);position:relative;flex:none;transition:background .2s}
+.w-sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
+.w-schalter input:checked+.w-sw{background:var(--akzent)}
+.w-schalter input:checked+.w-sw::after{transform:translateX(18px)}
+.w-schalter input:focus-visible+.w-sw{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
+
+/* Filterchips und Pflichtkontrast fuer gedrueckte Chips */
+.w-wid button.chip{min-height:32px;padding:5px 13px}
+.w-wid button.chip[aria-pressed=true]{background:var(--akzent);color:var(--w-auf-akzent)}
+.w-wid .chip.w-link{color:var(--akzent);text-decoration:none;background:color-mix(in srgb,var(--akzent) 10%,transparent);min-height:32px}
+.w-wid .chip.w-link:hover{background:color-mix(in srgb,var(--akzent) 18%,transparent);text-decoration:none}
+.w-wid .chip.w-link .ic{width:14px;height:14px}
+
+/* ---------- Landkarte ---------- */
+.w-wid .lk .bereich:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
+.w-wid .lk .bereich>span.n{color:var(--text)}
+.w-wid .lk .w-regel{flex:0 0 27%;min-width:0}
+.w-wid .lk .w-ml{flex:1 1 0;min-width:0}
+.w-wid .lk .l2,.w-wid .lk .l3{margin-top:0}
+.w-wid .lk .l2>span.n,.w-wid .lk .l3>span.n{margin-bottom:10px}
+.w-wid .lk .l3>span.n{margin-bottom:0}
+.w-wid .lk .neben .bereich{padding:14px 16px}
+.w-wid .lk .neben small{margin-top:-4px}
+.w-wid .lk .detail{background:var(--flaeche2);border-radius:var(--r2);min-height:240px}
+.w-wid .lk .detail .btn{margin-top:4px;text-decoration:none}
+@media(max-width:560px){.w-wid .lk .innen{flex-direction:column}.w-wid .lk .w-regel{flex:none}}
+
+/* ---------- kNN ---------- */
+.w-knn .klasse-btn:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
+.w-knn .klasse-btn{min-height:40px}
+.w-knn .klasse-btn i.w-f0{background:var(--k1)}
+.w-knn .klasse-btn i.w-f1{background:var(--k2);border-radius:2px}
+.w-knn .klasse-btn i.w-f2{background:var(--k3);clip-path:polygon(50% 0,100% 100%,0 100%);border-radius:0}
+.w-knn canvas.spiel{cursor:crosshair}
+.w-knn canvas.spiel:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:3px}
+.w-knn .erklaerung{min-height:4.6em}
+
+/* ---------- Token-Wuerfel ---------- */
+.w-tokens .satz{margin-bottom:6px}
+.w-tokens .satz .w-offen{color:var(--leise)}
+.w-tokens .kandidaten{margin:14px 0 18px}
+.w-tokens .kand{grid-template-columns:112px minmax(0,1fr) 62px;border-radius:8px;padding:2px 4px;margin:0 -4px}
+.w-tokens .kand.gewaehlt{background:color-mix(in srgb,var(--gruen) 14%,transparent)}
+.w-tokens .kand .tk{white-space:nowrap}
+.w-tokens .regler{margin-top:4px}
+.w-skala{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--leise);margin:2px 0 16px;padding:0 0 0 0}
+.w-tokens .erklaerung{min-height:5.2em}
+.w-tokens .btn:focus-visible,.w-regel .btn:focus-visible{outline-offset:2px}
+@media(max-width:520px){.w-tokens .kand{grid-template-columns:92px minmax(0,1fr) 58px}.w-skala{display:none}}
+
+/* ---------- Regelkreis ---------- */
+.w-regel canvas.w-sim{cursor:pointer;aspect-ratio:16/9}
+.w-reglerpaar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:0 0 14px}
+.w-reglerpaar .regler{grid-template-columns:auto minmax(60px,1fr) auto}
+.w-reglerpaar .regler output{min-width:4.8em}
+@media(max-width:760px){.w-reglerpaar{grid-template-columns:1fr}}
+.w-stand{margin:14px 0 4px;min-height:34px}
+.w-stand .chip{font-variant-numeric:tabular-nums}
+.w-stand .chip.w-ok{background:color-mix(in srgb,var(--gruen) 20%,transparent);color:var(--text)}
+.w-stand .chip.warn{color:var(--text)}
+.w-meldung{font-size:14px;color:var(--text);font-weight:500}
+.w-phasen{display:grid;gap:6px;margin-top:10px;background:var(--flaeche2);border-radius:var(--r2);padding:8px}
+.w-phase{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:baseline;padding:9px 12px;border-radius:9px;font-size:15px;line-height:1.45;transition:background .25s}
+.w-phase.an{background:color-mix(in srgb,var(--akzent) 16%,transparent)}
+.w-pk{display:flex;gap:9px;align-items:center;font-weight:600;font-size:13px;letter-spacing:.03em;color:var(--leise)}
+.w-pk b{width:22px;height:22px;border-radius:50%;background:var(--flaeche);display:grid;place-items:center;font-size:12px;color:var(--text);flex:none}
+.w-phase.an .w-pk{color:var(--text)}
+.w-phase.an .w-pk b{background:var(--akzent);color:var(--w-auf-akzent)}
+.w-pt{min-height:1.45em;font-variant-numeric:tabular-nums}
+@media(max-width:620px){.w-phase{grid-template-columns:1fr;gap:4px}}
+
+/* ---------- Bereiche ---------- */
+.w-bz details.bz summary:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:-3px;border-radius:12px}
+.w-bz details.bz summary:hover{background:var(--flaeche2)}
+.w-bz details.bz[hidden]{display:none}
+.w-bz details.bz summary .a{color:var(--leise)}
+.w-faehig{grid-column:1;display:flex;gap:6px;flex-wrap:wrap;margin-top:6px}
+.w-faehig .chip{font-size:12px;padding:2px 9px}
+.w-labore{display:flex;gap:8px;flex-wrap:wrap;margin-top:6px}
+.filter .w-zahl{margin-left:auto;align-self:center;font-size:13px;color:var(--leise)}
+
+/* ---------- Hardware ---------- */
+.w-hw .ringe{align-items:start}
+.w-hw .ring small{display:block;font-size:12px;color:var(--leise);margin-top:1px;min-height:1.4em}
+.w-hw .ring span{display:block;font-weight:600;color:var(--text);font-size:14px}
+.w-temp{text-align:center}
+.w-temp .w-tempz{width:104px;height:104px;margin:0 auto 8px;border-radius:50%;border:11px solid var(--flaeche2);display:grid;place-items:center}
+.w-temp .w-tempz b{font-size:19px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.w-temp.warn .w-tempz{border-color:var(--rot)}
+.w-temp span{display:block;font-weight:600;font-size:14px}
+.w-temp small{display:block;font-size:12px;color:var(--leise);margin-top:1px}
+.w-hw .ring.warn .kreis b{color:var(--rot)}
+.w-chart{width:100%;height:auto;display:block;overflow:visible}
+.w-chart text{fill:var(--leise);font:12px -apple-system,BlinkMacSystemFont,system-ui,sans-serif}
+.w-chart .w-gitter{stroke:var(--linie2);stroke-width:1}
+.w-chart .w-achse{stroke:var(--linie);stroke-width:1}
+.w-chart path{fill:none;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.w-chart .w-linie-g{stroke:var(--akzent)}
+.w-chart .w-linie-w{stroke:var(--orange);stroke-dasharray:6 4}
+.w-chart .w-punkt-g{fill:var(--akzent)}
+.w-chart .w-punkt-w{fill:var(--orange)}
+.w-legende{display:flex;gap:8px 22px;flex-wrap:wrap;margin-top:8px;font-size:13px;color:var(--leise)}
+.w-legende span{display:inline-flex;align-items:center;gap:8px}
+.w-legende i{display:inline-block;width:26px;height:0;border-top:3px solid var(--akzent);border-radius:2px}
+.w-legende i.w-sw-w{border-top:3px dashed var(--orange)}
+.w-modelle{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.w-modelle li{display:grid;gap:2px;padding:12px 14px;border-radius:12px;background:var(--flaeche2);font-size:14.5px}
+.w-modelle li b{font-family:var(--mono);font-size:14px;font-weight:600;overflow-wrap:anywhere}
+.w-modelle li span{color:var(--leise)}
+.w-modelle li.w-leer{color:var(--leise);display:block}
+@media(max-width:520px){.w-chart text{font-size:14px}}
+
+@media (prefers-reduced-motion:reduce){.w-sw,.w-sw::after,.w-phase{transition:none}}

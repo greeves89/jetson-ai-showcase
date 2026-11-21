@@ -1,0 +1,148 @@
+{
+ "id": "robotik",
+ "titel": "Robotik",
+ "untertitel": "Wahrnehmen, entscheiden, handeln: wie KI einen Körper bekommt",
+ "gesamt": 83.28,
+ "szenen": [
+  {
+   "id": "einstieg",
+   "kapitel": "KI mit Körper",
+   "start": 0,
+   "dauer": 8.74,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.72,
+     "text": "Ein Roboter ist KI mit Körper."
+    },
+    {
+     "t": 3.92,
+     "d": 3.92,
+     "text": "Er muss wahrnehmen, entscheiden und handeln, immer wieder."
+    }
+   ]
+  },
+  {
+   "id": "regelkreis",
+   "kapitel": "Der Regelkreis",
+   "start": 8.74,
+   "dauer": 24.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2,
+     "text": "Das läuft als Regelkreis."
+    },
+    {
+     "t": 2.8,
+     "d": 2,
+     "text": "Sensoren messen die Welt."
+    },
+    {
+     "t": 5.1,
+     "d": 5.2,
+     "text": "Die Planung, oft eine KI, entscheidet, was als Nächstes passiert."
+    },
+    {
+     "t": 10.6,
+     "d": 3.6,
+     "text": "Aktoren, also Motoren, führen es aus."
+    },
+    {
+     "t": 14.5,
+     "d": 3.52,
+     "text": "Dann misst der Sensor erneut, und der Kreis schließt sich."
+    },
+    {
+     "t": 18.32,
+     "d": 5.76,
+     "text": "Ein Beispiel: Ein Greifarm sieht ein Teil, plant den Griff und schließt die Finger."
+    }
+   ]
+  },
+  {
+   "id": "jetson",
+   "kapitel": "Der Jetson als Gehirn",
+   "start": 33.72,
+   "dauer": 12.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.16,
+     "text": "Als Gehirn eines Roboters taugt ein kleiner Rechner wie der Jetson."
+    },
+    {
+     "t": 4.96,
+     "d": 4.08,
+     "text": "Er hat eine Grafikkarte für KI und braucht nur wenig Strom."
+    },
+    {
+     "t": 9.34,
+     "d": 2.16,
+     "text": "Alles läuft direkt am Gerät."
+    }
+   ]
+  },
+  {
+   "id": "lokal",
+   "kapitel": "Warum lokal?",
+   "start": 46.12,
+   "dauer": 11.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 1.28,
+     "text": "Warum lokal?"
+    },
+    {
+     "t": 2.08,
+     "d": 4.32,
+     "text": "Ein Roboter kann nicht warten, bis eine Antwort aus dem Internet zurückkommt."
+    },
+    {
+     "t": 6.7,
+     "d": 4.24,
+     "text": "Der kurze Weg im Gerät ist schneller und funktioniert auch ohne Netz."
+    }
+   ]
+  },
+  {
+   "id": "arten",
+   "kapitel": "Roboterarten",
+   "start": 57.96,
+   "dauer": 25.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.24,
+     "text": "Roboter gibt es in vielen Formen."
+    },
+    {
+     "t": 3.04,
+     "d": 3.04,
+     "text": "Industrieroboter schweißen und montieren."
+    },
+    {
+     "t": 6.38,
+     "d": 2.96,
+     "text": "Lagerroboter fahren Regale und Kisten."
+    },
+    {
+     "t": 9.64,
+     "d": 2.32,
+     "text": "Drohnen fliegen und kartieren."
+    },
+    {
+     "t": 12.26,
+     "d": 5.84,
+     "text": "Serviceroboter helfen im Alltag, humanoide Roboter bauen den menschlichen Körper nach."
+    },
+    {
+     "t": 18.4,
+     "d": 5.12,
+     "text": "Allen gemeinsam ist derselbe Kreis aus Wahrnehmen, Entscheiden und Handeln."
+    }
+   ]
+  }
+ ]
+}

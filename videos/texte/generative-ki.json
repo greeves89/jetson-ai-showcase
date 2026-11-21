@@ -1,0 +1,39 @@
+{
+  "id": "generative-ki",
+  "titel": "Generative KI",
+  "untertitel": "Wie Sprachmodelle Text erzeugen, warum sie irren und was RAG dagegen tut",
+  "szenen": [
+    {"id": "tokens", "kapitel": "Text in Tokens", "saetze": [
+      "Ein Sprachmodell macht im Kern nur eines: Es sagt das nächste Token voraus.",
+      "Ein Token ist ein Textstück, oft ein Wort oder ein Wortteil."
+    ]},
+    {"id": "naechstes", "kapitel": "Das nächste Token", "saetze": [
+      "Zu jedem Satzanfang berechnet das Modell Wahrscheinlichkeiten für das nächste Token.",
+      "Eines wird gewählt und angehängt, dann beginnt es von vorn."
+    ]},
+    {"id": "temperatur", "kapitel": "Temperatur", "saetze": [
+      "Die Temperatur steuert, wie mutig gewählt wird.",
+      "Niedrig heißt: fast immer das wahrscheinlichste Token.",
+      "Hoch heißt: Auch unwahrscheinliche Kandidaten bekommen eine Chance."
+    ]},
+    {"id": "kontext", "kapitel": "Kontextfenster", "saetze": [
+      "Das Kontextfenster ist das Gedächtnis einer Anfrage.",
+      "Nur was hineinpasst, sieht das Modell.",
+      "Was hinausrutscht, ist für die Antwort vergessen."
+    ]},
+    {"id": "halluzination", "kapitel": "Halluzination", "saetze": [
+      "Das Modell prüft keine Fakten, es wählt plausible Fortsetzungen.",
+      "Plausibel ist nicht gleich wahr.",
+      "So entstehen Antworten, die überzeugend klingen und trotzdem erfunden sind."
+    ]},
+    {"id": "rag", "kapitel": "RAG: erst nachschlagen", "saetze": [
+      "Ein Gegenmittel ist RAG: erst nachschlagen, dann antworten.",
+      "Passende Stellen aus deinen Dokumenten kommen in den Kontext.",
+      "Die Antwort stützt sich darauf und nennt die Quelle."
+    ]},
+    {"id": "bilder", "kapitel": "Bilder aus Rauschen", "saetze": [
+      "Bildmodelle arbeiten anders.",
+      "Sie starten mit Rauschen und machen daraus Schritt für Schritt ein Bild."
+    ]}
+  ]
+}
