@@ -1,0 +1,131 @@
+{
+ "id": "verzerrung-fairness",
+ "titel": "Fairness",
+ "untertitel": "Verzerrung erkennen und begrenzen",
+ "gesamt": 68.16,
+ "szenen": [
+  {
+   "id": "umfrage",
+   "kapitel": "Umfrage",
+   "start": 0,
+   "dauer": 11.76,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4,
+     "text": "Eine Umfrage nur morgens am Bahnhof erreicht nur Pendler."
+    },
+    {
+     "t": 5.2,
+     "d": 2.72,
+     "text": "Sauber gezählt und trotzdem schief."
+    },
+    {
+     "t": 8.22,
+     "d": 2.64,
+     "text": "Das Modell merkt nicht, dass etwas fehlt."
+    }
+   ]
+  },
+  {
+   "id": "quellen",
+   "kapitel": "Vier Quellen",
+   "start": 11.76,
+   "dauer": 14.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.6,
+     "text": "So entsteht Verzerrung: durch einseitige Daten, einseitige Auswahl, einseitige Etiketten und Rückkopplung."
+    },
+    {
+     "t": 8.4,
+     "d": 4.8,
+     "text": "Lernt ein Modell aus alten Einstellungen, übernimmt es deren Einseitigkeit."
+    }
+   ]
+  },
+  {
+   "id": "plz",
+   "kapitel": "Verstecktes Merkmal",
+   "start": 25.86,
+   "dauer": 11.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Ein sensibles Merkmal wegzulassen reicht nicht."
+    },
+    {
+     "t": 3.84,
+     "d": 2.16,
+     "text": "Die Postleitzahl kann es ersetzen."
+    },
+    {
+     "t": 6.3,
+     "d": 4,
+     "text": "Andere Merkmale können dasselbe verraten, ohne es zu nennen."
+    }
+   ]
+  },
+  {
+   "id": "gruppen",
+   "kapitel": "Gruppen",
+   "start": 37.06,
+   "dauer": 10.8,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Eine Gesamtzahl verdeckt Unterschiede."
+    },
+    {
+     "t": 3.36,
+     "d": 2.4,
+     "text": "Werte Ergebnisse nach Gruppen aus."
+    },
+    {
+     "t": 6.06,
+     "d": 3.84,
+     "text": "Ein Modell kann im Schnitt gut sein und bei einer Gruppe schlecht."
+    }
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Prüffragen",
+   "start": 47.86,
+   "dauer": 10.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.68,
+     "text": "Prüfe vor dem Einsatz: Woher kommen die Daten, wer fehlt, wer kann widersprechen?"
+    },
+    {
+     "t": 6.48,
+     "d": 3.6,
+     "text": "Halte die Antworten fest, damit du sie später belegen kannst."
+    }
+   ]
+  },
+  {
+   "id": "mensch",
+   "kapitel": "Mensch entscheidet",
+   "start": 58.84,
+   "dauer": 9.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.16,
+     "text": "Menschen tragen die Verantwortung."
+    },
+    {
+     "t": 2.96,
+     "d": 4.56,
+     "text": "Bei Folgen für Menschen entscheidet ein Mensch, der wirklich eingreifen kann."
+    }
+   ]
+  }
+ ]
+}

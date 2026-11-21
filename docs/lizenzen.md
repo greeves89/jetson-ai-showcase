@@ -28,3 +28,9 @@ Modellquelle: https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE
 
 Hinweis: Stimmen sind Aufnahmen echter Menschen. Das Labor erzeugt keine geklonten Stimmen.
 Vor einem Einsatz außerhalb des Labors Lizenz und Einwilligung der Sprecherin oder des Sprechers prüfen.
+
+# Icons der Oberfläche
+
+- lucide (npm-Paket `lucide-static` 1.77.0, https://lucide.dev), ISC-Lizenz, Copyright Lucide Icons and Contributors.
+  `scripts/icons_bauen.mjs` übernimmt eine Auswahl von rund 340 Icons als `app/static/icons.json` (nur der innere SVG-Inhalt).
+  Der Lizenztext der ISC-Lizenz steht im Paket (`LICENSE`) und erlaubt Nutzung und Weitergabe unter Beibehaltung des Hinweises.

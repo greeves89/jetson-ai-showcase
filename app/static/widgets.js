@@ -680,10 +680,11 @@
       if (!wahrnehmung) pw.t.textContent = "Aus. Der Roboter sieht keine Hindernisse und kennt nur das Ziel.";
       else if (info.sens) {
         const s = info.sens;
-        if (s.min >= RANGE - 1) pw.t.textContent = "Nichts in Reichweite (" + RANGE + " px).";
+        const alt = s.alt > 0 ? " Die Messung ist " + s.alt + " Frames alt." : "";
+        if (s.min >= RANGE - 1) pw.t.textContent = "Nichts in Reichweite (" + RANGE + " px)." + alt;
         else {
           const wo = Math.abs(s.winkel) < 0.2 ? "vor mir" : s.winkel < 0 ? "links von mir" : "rechts von mir";
-          pw.t.textContent = "Nächstes Hindernis oder nächster Rand " + Math.max(0, Math.round(s.min - R)) + " px " + wo + "." + (s.alt > 0 ? " Die Messung ist " + s.alt + " Frames alt." : "");
+          pw.t.textContent = "Nächstes Hindernis oder nächster Rand " + Math.max(0, Math.round(s.min - R)) + " px " + wo + "." + alt;
         }
       } else pw.t.textContent = "Wartet auf die erste Messung.";
       if (info.dec) {

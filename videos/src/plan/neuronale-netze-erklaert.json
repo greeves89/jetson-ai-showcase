@@ -1,0 +1,141 @@
+{
+ "id": "neuronale-netze-erklaert",
+ "titel": "Neuronale Netze",
+ "untertitel": "Gewichte, Schwellen und Schichten",
+ "gesamt": 79.88,
+ "szenen": [
+  {
+   "id": "abstimmung",
+   "kapitel": "Abstimmung",
+   "start": 0,
+   "dauer": 11.68,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.6,
+     "text": "Ein Team stimmt ab. Manche Stimmen zählen mehr."
+    },
+    {
+     "t": 4.8,
+     "d": 1.68,
+     "text": "Das ist ein Neuron."
+    },
+    {
+     "t": 6.78,
+     "d": 4,
+     "text": "Jeder gibt eine Stimme ab, aber nicht jede zählt gleich viel."
+    }
+   ]
+  },
+  {
+   "id": "summe",
+   "kapitel": "Gewichte",
+   "start": 11.68,
+   "dauer": 13.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.2,
+     "text": "Jede Eingabe wird mit einem Gewicht multipliziert."
+    },
+    {
+     "t": 4,
+     "d": 1.52,
+     "text": "Alles wird addiert."
+    },
+    {
+     "t": 5.82,
+     "d": 7.12,
+     "text": "Ein dickes Gewicht heißt: Diese Eingabe ist wichtig. Ein dünnes heißt: kaum von Bedeutung."
+    }
+   ]
+  },
+  {
+   "id": "ampel",
+   "kapitel": "Schwelle",
+   "start": 25.52,
+   "dauer": 12.64,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Eine Schwelle entscheidet, ob das Neuron meldet."
+    },
+    {
+     "t": 3.84,
+     "d": 1.68,
+     "text": "Wie bei der Fußgängerampel."
+    },
+    {
+     "t": 5.82,
+     "d": 5.92,
+     "text": "Liegt die Summe unter der Schwelle, bleibt es still. Darüber gibt das Neuron ein Signal weiter."
+    }
+   ]
+  },
+  {
+   "id": "schichten",
+   "kapitel": "Schichten",
+   "start": 38.16,
+   "dauer": 12.24,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.32,
+     "text": "Viele Neuronen bilden Schichten."
+    },
+    {
+     "t": 3.12,
+     "d": 5.28,
+     "text": "Die erste findet Kanten, die nächste Formen, die letzte ein Gesicht."
+    },
+    {
+     "t": 8.7,
+     "d": 2.64,
+     "text": "Das Signal wandert von Schicht zu Schicht."
+    }
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Gebogene Grenze",
+   "start": 50.4,
+   "dauer": 14.88,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.24,
+     "text": "Eine Gerade trennt nicht alles."
+    },
+    {
+     "t": 3.04,
+     "d": 3.04,
+     "text": "Mehrere Schichten ziehen gebogene Grenzen."
+    },
+    {
+     "t": 6.38,
+     "d": 7.6,
+     "text": "Ein einzelnes Neuron zieht nur eine gerade Linie. Das reicht für einfache Fälle, aber nicht für Bilder oder Sprache."
+    }
+   ]
+  },
+  {
+   "id": "blackbox",
+   "kapitel": "Black Box",
+   "start": 65.28,
+   "dauer": 14.6,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.36,
+     "text": "Die Gewichte heißen Parameter. Echte Netze haben Millionen bis Milliarden."
+    },
+    {
+     "t": 6.16,
+     "d": 6.64,
+     "text": "Das Wissen steckt verteilt in den Zahlen. Darum lässt sich schwer erklären, warum ein Netz so entscheidet."
+    }
+   ]
+  }
+ ]
+}

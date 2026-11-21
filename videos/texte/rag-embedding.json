@@ -1,0 +1,60 @@
+{
+ "id": "rag-embedding",
+ "titel": "Aus Text Zahlen",
+ "untertitel": "Embeddings setzen Text als Punkte auf eine Karte",
+ "szenen": [
+  {
+   "id": "stadtplan",
+   "kapitel": "Stadtplan",
+   "saetze": [
+    "Auf einem Stadtplan hat jeder Ort zwei Zahlen: wie weit nach Osten, wie weit nach Norden.",
+    "Bahnhof und Busbahnhof liegen nah beieinander. Der Friedhof liegt weit weg.",
+    "Dafür muss der Plan nichts über Bahnhöfe wissen."
+   ]
+  },
+  {
+   "id": "eis",
+   "kapitel": "Eissorten",
+   "saetze": [
+    "Das geht auch mit Eis. Jede Sorte bekommt drei Werte: süß, fruchtig, cremig.",
+    "Zitrone und Himbeere sind fast gleich. Nuss ist ganz anders.",
+    "Eine Liste von Zahlen, die etwas beschreibt, heißt Vektor."
+   ]
+  },
+  {
+   "id": "satz",
+   "kapitel": "Satz zu Zahlen",
+   "saetze": [
+    "Bei Text kann niemand die Werte von Hand festlegen.",
+    "Das macht ein Embedding-Modell. Es bekommt einen Satz und gibt eine lange Liste von Zahlen zurück."
+   ]
+  },
+  {
+   "id": "karte",
+   "kapitel": "Bedeutungskarte",
+   "saetze": [
+    "Gelernt hat das Modell aus riesigen Textmengen.",
+    "Wer in ähnlichen Zusammenhängen vorkommt, bekommt ähnliche Zahlen.",
+    "So entsteht eine Karte der Bedeutung. Was ähnlich klingt, liegt nah beieinander, auch mit ganz anderen Wörtern."
+   ]
+  },
+  {
+   "id": "winkel",
+   "kapitel": "Winkel",
+   "saetze": [
+    "Wie nah zwei Punkte sind, misst man oft mit dem Kosinus.",
+    "Er schaut auf die Richtung der Pfeile.",
+    "Gleiche Richtung ergibt eins. Ein rechter Winkel ergibt null."
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Nächste Nachbarn",
+   "saetze": [
+    "Deine Frage wird genauso zum Punkt.",
+    "Die nächsten Nachbarn sind die Treffer.",
+    "Mehr dazu auf der Seite Vektorisieren und Embeddings."
+   ]
+  }
+ ]
+}

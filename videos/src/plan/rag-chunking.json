@@ -1,0 +1,136 @@
+{
+ "id": "rag-chunking",
+ "titel": "Stücke schneiden",
+ "untertitel": "Text sinnvoll für die Suche teilen",
+ "gesamt": 78.3,
+ "szenen": [
+  {
+   "id": "kochbuch",
+   "kapitel": "Kochbuch",
+   "start": 0,
+   "dauer": 13.2,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.56,
+     "text": "Ein Kochbuch ist in Rezepte geteilt."
+    },
+    {
+     "t": 3.76,
+     "d": 4.72,
+     "text": "Wer Carbonara sucht, liest nicht das ganze Buch, sondern ein Rezept."
+    },
+    {
+     "t": 8.78,
+     "d": 3.52,
+     "text": "Genau so teilt man Dokumente für die Suche in Stücke."
+    }
+   ]
+  },
+  {
+   "id": "feste",
+   "kapitel": "Feste Länge",
+   "start": 13.2,
+   "dauer": 10.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.64,
+     "text": "Der einfachste Weg ist die feste Länge. Alle paar hundert Zeichen ein Schnitt."
+    },
+    {
+     "t": 5.44,
+     "d": 4.16,
+     "text": "Das ist schnell, aber es schneidet mitten durch Sätze und Gedanken."
+    }
+   ]
+  },
+  {
+   "id": "absatz",
+   "kapitel": "Absätze",
+   "start": 23.7,
+   "dauer": 9.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.68,
+     "text": "Besser ist es, an Absätzen und Überschriften zu schneiden."
+    },
+    {
+     "t": 4.48,
+     "d": 4.56,
+     "text": "Das folgt der Gliederung des Textes. Die Stücke passen zu den Themen."
+    }
+   ]
+  },
+  {
+   "id": "groesse",
+   "kapitel": "Größe",
+   "start": 33.64,
+   "dauer": 14.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.56,
+     "text": "Die Größe zählt. Zu kleine Stücke tragen nur einen Halbsatz."
+    },
+    {
+     "t": 5.36,
+     "d": 4.56,
+     "text": "Zu große Stücke enthalten viel anderes, und der Treffer wird ungenau."
+    },
+    {
+     "t": 10.22,
+     "d": 3.84,
+     "text": "Gut ist eine Karteikarte, die für sich allein verständlich ist."
+    }
+   ]
+  },
+  {
+   "id": "ueberlappung",
+   "kapitel": "Überlappung",
+   "start": 48.6,
+   "dauer": 13.6,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.08,
+     "text": "Liegt eine Aussage genau auf der Grenze, hilft die Überlappung."
+    },
+    {
+     "t": 4.88,
+     "d": 4,
+     "text": "Das Ende des einen Stücks wiederholt sich am Anfang des nächsten."
+    },
+    {
+     "t": 9.18,
+     "d": 3.52,
+     "text": "So steht der Gedanke mindestens einmal ganz da."
+    }
+   ]
+  },
+  {
+   "id": "etiketten",
+   "kapitel": "Etiketten",
+   "start": 62.2,
+   "dauer": 16.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Bei Tabellen gehört die Kopfzeile zu jeder Zeile."
+    },
+    {
+     "t": 4.16,
+     "d": 5.28,
+     "text": "Und jedes Stück merkt sich, woher es kommt: Dokument, Kapitel, Datum."
+    },
+    {
+     "t": 9.74,
+     "d": 4.56,
+     "text": "So kannst du später die Quelle nennen. Mehr dazu auf der Seite Chunking."
+    }
+   ]
+  }
+ ]
+}

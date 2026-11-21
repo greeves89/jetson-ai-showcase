@@ -2,76 +2,89 @@ import React from "react";
 import { Szene, useCues, sp, ease, lin, lerp, Rv, Txt, Icon, Badge, Pill, Pfeil, Pfad, C, rnd, spitze } from "../lib.jsx";
 
 const softmax = (l, T) => { const e = l.map((x) => Math.exp(x / T)); const s = e.reduce((a, b) => a + b, 0); return e.map((x) => x / s); };
-const Balken = ({ x, y, label, p, farbe = C.blue, hell = false, breite = 640, size = 40, lw = 300 }) => (
-  <div style={{ position: "absolute", left: x, top: y, display: "flex", alignItems: "center", gap: 28, height: 56 }}>
-    <div style={{ width: lw, textAlign: "right", fontSize: size, fontWeight: hell ? 700 : 500, color: hell ? C.text : C.mute }}>{label}</div>
-    <div style={{ width: breite, height: 36, borderRadius: 18, background: C.panel2 }}>
-      <div style={{ width: Math.max(8, breite * p), height: 36, borderRadius: 18, background: farbe }} />
-    </div>
+
+// Balken (Spur + Füllung) und Etikett getrennt: die Balken sind Match-Cut-Anker
+const mixc = (a, b, k) => { const h = (c) => [1, 3, 5].map((i) => parseInt(c.slice(i, i + 2), 16)); const x = h(a), y = h(b); return `rgb(${x.map((v, i) => Math.round(v + (y[i] - v) * k)).join(",")})`; };
+const Spur = ({ y, p, farbe = C.blue, x = 120, lw = 390, bw = 760, h = 60, a = 1 }) => (
+  <div style={{ position: "absolute", left: x + lw + 30, top: y, width: bw, height: h, borderRadius: h / 2, background: C.panel2, opacity: a }}>
+    <div style={{ width: Math.max(12, bw * p), height: h, borderRadius: h / 2, background: farbe }} />
   </div>
+);
+const Etikett = ({ y, label, hell = false, x = 120, lw = 390, h = 60 }) => (
+  <div style={{ position: "absolute", left: x, top: y, width: lw, height: h, display: "flex", alignItems: "center", justifyContent: "flex-end", fontSize: 56, fontWeight: hell ? 700 : 500, color: hell ? C.text : C.mute, whiteSpace: "nowrap" }}>{label}</div>
+);
+
+// ---- Token-Kette (Match-Cut zwischen "Text in Tokens" und "Das nächste Token")
+const KETTE = ["Der", "Himmel", "ist", "blau", "."];
+const KFARBEN = [C.blue, "#64d2ff", C.green, C.orange, C.mute];
+const kw = (w) => w.length * 54 + 84;
+const kx = (i) => 200 + KETTE.slice(0, i).reduce((a, w) => a + kw(w) + 26, 0);
+const KY = 290;
+const Chip = ({ i, a = 1, x, y = KY, farbe }) => (
+  <div style={{ position: "absolute", left: x ?? kx(i), top: y, width: kw(KETTE[i]), height: 130, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 92, fontWeight: 600, borderRadius: 28, background: (farbe ?? KFARBEN[i]) + "26", border: `5px solid ${farbe ?? KFARBEN[i]}`, opacity: a, color: C.text }}>{KETTE[i]}</div>
 );
 
 const Tokens = () => {
-  const { t, cue, word } = useCues();
-  const satz = "Der Himmel ist heute klar";
-  const tipp = Math.floor(lin(t, cue(0) + 0.5, cue(0) + 2.6, 0, satz.length));
-  const toks = ["Der", "Himmel", "ist", "heute", "klar", "."];
-  const farben = [C.blue, "#64d2ff", C.green, C.orange, "#bf5af2", C.mute];
-  const teile = ["un", "glaub", "lich"];
+  const { t, cue, word, dur } = useCues();
+  const satz = "Der Himmel ist blau.";
+  const tipp = Math.floor(lin(t, cue(0) + 0.5, cue(0) + 2.4, 0, satz.length));
+  const zerl = ease(t, cue(1) + 0.1, cue(1) + 0.5);
+  const weg = ease(t, dur - 0.7, dur - 0.25); // "blau" und "." lösen sich, die ersten drei Chips bleiben
+  const kette = (
+    <>
+      {KETTE.map((k, i) => <Chip key={i} i={i} a={sp(t, cue(1) + 0.15 + i * 0.22, 0.6) * (i >= 3 ? 1 - weg : 1)} />)}
+    </>
+  );
   return (
-    <Szene titel="Text in Tokens" sub="Das Modell liest keine Wörter, sondern Tokens">
-      <div style={{ position: "absolute", left: 120, top: 370, fontSize: 76, fontWeight: 600, letterSpacing: -1 }}>
-        {satz.slice(0, tipp)}<span style={{ display: "inline-block", width: 6, height: 70, background: C.blue, marginLeft: 6, verticalAlign: "middle", opacity: Math.floor(t * 2) % 2 ? 0.2 : 1 }} />
+    <Szene titel="Text in Tokens" sub="Das Modell liest keine Wörter, sondern Tokens" tiefe={["message", 1330, 640, 900]} anker={kette}>
+      <div style={{ position: "absolute", left: 200, top: KY, height: 130, display: "flex", alignItems: "center", fontSize: 92, fontWeight: 600, opacity: 1 - zerl }}>
+        {satz.slice(0, tipp)}<span style={{ display: "inline-block", width: 8, height: 100, background: C.blue, marginLeft: 8, opacity: Math.floor(t * 2) % 2 ? 0.2 : 1 }} />
       </div>
-      <Txt at={cue(0) + 0.3} x={120} y={470} w={900} size={38} color={C.mute}>Das Modell sagt voraus, was als Nächstes kommt</Txt>
-      <div style={{ position: "absolute", left: 120, top: 590, display: "flex", gap: 14 }}>
-        {toks.map((k, i) => (
-          <Rv key={i} at={cue(1) + 0.2 + i * 0.28} dy={14} s0={0.9}>
-            <div style={{ fontSize: 56, fontWeight: 600, padding: "10px 24px", borderRadius: 16, background: farben[i] + "26", border: `3px solid ${farben[i]}`, color: C.text }}>{k}</div>
-          </Rv>
-        ))}
-      </div>
-      <Txt at={cue(1) + 0.4} x={120} y={725} w={1000} size={38} color={C.mute}>Jedes Stück ist ein Token</Txt>
-      <Rv at={word(1, "Wortteil")} dy={14} style={{ position: "absolute", left: 120, top: 810 }}>
-        <div style={{ fontSize: 36, color: C.mute, marginBottom: 14 }}>Lange oder seltene Wörter werden oft in Teile zerlegt (Beispiel)</div>
-        <div style={{ display: "flex", alignItems: "center", gap: 20 }}>
-          <div style={{ fontSize: 48, fontWeight: 600 }}>unglaublich</div>
-          <div style={{ fontSize: 40, color: C.mute }}>wird zu</div>
-          {teile.map((x, i) => <div key={i} style={{ fontSize: 48, fontWeight: 600, padding: "6px 20px", borderRadius: 14, background: C.panel2, border: `3px solid ${C.line}` }}>{x}</div>)}
+      <Txt at={cue(0) + 0.3} x={200} y={445} w={1500} size={44} color={C.mute}>Das Modell sagt voraus, was als Nächstes kommt</Txt>
+      <Txt at={cue(1) + 1.2} x={200} y={560} w={1500} size={64} weight={700}>Jedes Stück ist ein Token</Txt>
+      <Rv at={word(1, "Wortteil")} dy={14} style={{ position: "absolute", left: 200, top: 700, width: 1560 }}>
+        <div style={{ fontSize: 44, color: C.mute, marginBottom: 18 }}>Lange oder seltene Wörter werden oft in Teile zerlegt (Beispiel)</div>
+        <div style={{ display: "flex", alignItems: "center", gap: 30 }}>
+          <div style={{ fontSize: 92, fontWeight: 600 }}>unglaublich</div>
+          <div style={{ fontSize: 70, color: C.mute }}>→</div>
+          {["un", "glaub", "lich"].map((x, i) => <div key={i} style={{ fontSize: 92, fontWeight: 600, padding: "0 28px 6px", borderRadius: 22, background: C.panel2, border: `4px solid ${C.line}` }}>{x}</div>)}
         </div>
       </Rv>
     </Szene>
   );
 };
 
-const R1 = { prompt: "Der Himmel ist", kand: ["blau", "grau", "bewölkt", "heute", "Kühlschrank"], l: [3.3, 2.2, 1.9, 0.9, -2.2] };
-const R2 = { prompt: "Der Himmel ist blau", kand: [".", ",", "und", "heute", "Auto"], l: [3.1, 2.6, 1.7, 0.6, -2.4] };
+const R1 = { kand: ["blau", "grau", "bewölkt", "heute", "Kühlschrank"], l: [3.3, 2.2, 1.9, 0.9, -2.2] };
+const R2 = { kand: ["Punkt .", "Komma ,", "und", "heute", "Auto"], l: [3.1, 2.6, 1.7, 0.6, -2.4] };
 const Naechstes = () => {
   const { t, cue, end } = useCues();
   const wahl1 = cue(1) + 0.3, wechsel = cue(1) + 2.2;
   const runde = t < wechsel ? R1 : R2;
   const p = softmax(runde.l, 1);
   const grow = t < wechsel ? ease(t, cue(0) + 0.8, cue(0) + 2.2) : ease(t, wechsel, wechsel + 1.2);
-  const gew = t < wechsel ? (t > wahl1 ? 0 : -1) : (t > wechsel + 2.0 ? 1 : -1);
+  const gew = t < wechsel ? (t > wahl1 ? 0 : -1) : (t > wechsel + 2.0 ? 0 : -1);
+  const fl = ease(t, wahl1 + 0.2, wahl1 + 1.0);
+  const kette = (
+    <>
+      {runde.kand.map((k, i) => <Spur key={i} y={500 + i * 94} p={p[i] * grow} farbe={gew === i ? C.green : C.blue} a={Math.min(1, grow * 4)} />)}
+      {[0, 1, 2].map((i) => <Chip key={i} i={i} a={1} />)}
+      {/* gewähltes Token fliegt aus der Balkenzeile in die Kette */}
+      {t > wahl1 + 0.2 && <Chip i={3} a={1} x={lerp(540, kx(3), fl)} y={lerp(500, KY, fl)} />}
+    </>
+  );
   return (
-    <Szene titel="Das nächste Token" sub="Wahrscheinlichkeiten für jede Fortsetzung">
-      <div style={{ position: "absolute", left: 120, top: 360, fontSize: 80, fontWeight: 600, letterSpacing: -1 }}>
-        {R1.prompt}
-        {t > wechsel - 0.3 && <span style={{ color: C.blue, opacity: sp(t, wechsel - 0.3, 0.5) }}> blau</span>}
-        {t > wechsel + 2.0 && <span style={{ color: C.blue, opacity: sp(t, wechsel + 2.0, 0.5) }}>,</span>}
-        <span style={{ display: "inline-block", width: 6, height: 74, background: C.blue, marginLeft: 8, verticalAlign: "middle", opacity: Math.floor(t * 2) % 2 ? 0.2 : 1 }} />
-      </div>
-      <Txt at={cue(0) + 0.6} x={500} y={500} w={800} size={38} color={C.mute}>Wahrscheinlichkeit des nächsten Tokens</Txt>
+    <Szene titel="Das nächste Token" sub="Wahrscheinlichkeiten für jede Fortsetzung" tiefe={["list", 1380, 660, 900]} anker={kette}>
+      <Txt at={cue(0) + 0.6} x={530} y={440} w={800} size={40} color={C.mute}>Wahrscheinlichkeit des nächsten Tokens</Txt>
       {runde.kand.map((k, i) => (
-        <Balken key={t < wechsel ? "a" + k : "b" + k} x={120} y={560 + i * 76} label={k === "." ? "Punkt ." : k === "," ? "Komma ," : k} p={p[i] * grow} hell={gew === i} farbe={gew === i ? C.green : C.blue} />
+        <Etikett key={(t < wechsel ? "a" : "b") + k} y={500 + i * 94} label={k} hell={gew === i} />
       ))}
-      <Rv at={cue(1) + 0.2} dx={30} dy={0} style={{ position: "absolute", left: 1330, top: 560 }}>
-        <div style={{ fontSize: 36, fontWeight: 700, color: C.green }}>Eines wird gewählt</div>
-        <div style={{ fontSize: 36, color: C.mute, marginTop: 8, width: 440, lineHeight: 1.3 }}>und an den Text angehängt.</div>
+      <Rv at={cue(1) + 0.2} dx={30} dy={0} style={{ position: "absolute", left: 1340, top: 520, width: 484 }}>
+        <div style={{ fontSize: 52, fontWeight: 700, color: C.green, lineHeight: 1.1 }}>Eines wird gewählt</div>
+        <div style={{ fontSize: 44, color: C.mute, marginTop: 10 }}>und angehängt.</div>
       </Rv>
-      <Rv at={wechsel + 0.2} dx={30} dy={0} style={{ position: "absolute", left: 1330, top: 700 }}>
-        <div style={{ fontSize: 36, fontWeight: 700, color: C.blue }}>Dann von vorn</div>
-        <div style={{ fontSize: 36, color: C.mute, marginTop: 8, width: 440, lineHeight: 1.3 }}>mit dem verlängerten Text.</div>
+      <Rv at={wechsel + 0.2} dx={30} dy={0} style={{ position: "absolute", left: 1340, top: 760, width: 484 }}>
+        <div style={{ fontSize: 52, fontWeight: 700, color: C.blue, lineHeight: 1.1 }}>Dann von vorn</div>
+        <div style={{ fontSize: 44, color: C.mute, marginTop: 10 }}>mit dem längeren Text.</div>
       </Rv>
     </Szene>
   );
@@ -80,33 +93,39 @@ const Naechstes = () => {
 const KAND = ["blau", "grau", "bewölkt", "heute", "Kühlschrank"];
 const LOG = [3.3, 2.2, 1.9, 0.9, -2.2];
 const Temperatur = () => {
-  const { t, cue, end } = useCues();
+  const { t, cue } = useCues();
   const T = t < cue(1) ? lerp(1.0, 0.25, ease(t, cue(0) + 1.0, cue(1) + 0.3)) : lerp(0.25, 2.2, ease(t, cue(2) + 0.2, cue(2) + 2.6));
   const pos = (T - 0.2) / 2.2;
   const p = softmax(LOG, T);
-  const SX = 560, SW = 1000;
+  const SX = 760, SW = 1000;
   const hoch = T > 1.4;
+  const p2 = softmax(R2.l, 1), m = ease(t, 0.15, 1.1);
+  const balken = (
+    <>
+      {KAND.map((k, i) => <Spur key={i} y={500 + i * 94} p={lerp(p2[i], p[i], m)} farbe={i === 4 && hoch ? C.orange : i === 0 ? mixc(C.green, C.blue, m) : C.blue} />)}
+    </>
+  );
   return (
-    <Szene titel="Temperatur" sub="Wie mutig wählt das Modell?">
-      <div style={{ position: "absolute", left: 120, top: 360, fontSize: 36, fontWeight: 600 }}>Der Himmel ist …</div>
+    <Szene titel="Temperatur" sub="Wie mutig wählt das Modell?" tiefe={["zap", 1400, 650, 900]} anker={balken}>
+      <div style={{ position: "absolute", left: 120, top: 290, fontSize: 64, fontWeight: 600 }}>Der Himmel ist …</div>
       <Rv at={0.5} dy={0}>
-        <div style={{ position: "absolute", left: SX, top: 398, width: SW, height: 10, borderRadius: 5, background: `linear-gradient(90deg, ${C.blue}, ${C.orange})` }} />
-        <div style={{ position: "absolute", left: SX + pos * SW - 22, top: 380, width: 44, height: 44, borderRadius: 22, background: "#fff", boxShadow: "0 4px 20px #0008" }} />
-        <div style={{ position: "absolute", left: SX, top: 438, fontSize: 36, color: C.blue, fontWeight: 600 }}>niedrig</div>
-        <div style={{ position: "absolute", left: SX + SW - 100, top: 438, width: 100, textAlign: "right", fontSize: 36, color: C.orange, fontWeight: 600 }}>hoch</div>
+        <div style={{ position: "absolute", left: SX, top: 322, width: SW, height: 16, borderRadius: 8, background: `linear-gradient(90deg, ${C.blue}, ${C.orange})` }} />
+        <div style={{ position: "absolute", left: SX + pos * SW - 40, top: 290, width: 80, height: 80, borderRadius: 40, background: "#fff", boxShadow: "0 4px 20px #0008" }} />
+        <div style={{ position: "absolute", left: SX - 10, top: 384, fontSize: 44, color: C.blue, fontWeight: 600 }}>niedrig</div>
+        <div style={{ position: "absolute", left: SX + SW - 190, top: 384, width: 200, textAlign: "right", fontSize: 44, color: C.orange, fontWeight: 600 }}>hoch</div>
       </Rv>
       {KAND.map((k, i) => (
-        <Balken key={k} x={120} y={540 + i * 76} label={k} p={p[i]} hell={i === 0 || (hoch && i === 4)} farbe={i === 4 && hoch ? C.orange : C.blue} breite={560} lw={300} />
+        <Etikett key={k} y={500 + i * 94} label={k} hell={i === 0 || (hoch && i === 4)} />
       ))}
-      <Rv at={cue(1) + 0.3} dx={30} dy={0} style={{ position: "absolute", left: 1090, top: 560, opacity: undefined }}>
+      <Rv at={cue(1) + 0.3} dx={30} dy={0} style={{ position: "absolute", left: 1340, top: 510, width: 484 }}>
         <div style={{ opacity: 1 - sp(t, cue(2) + 0.2, 0.5) }}>
-          <div style={{ fontSize: 40, fontWeight: 700, color: C.blue }}>Niedrig</div>
-          <div style={{ fontSize: 36, color: C.mute, marginTop: 8, width: 640, lineHeight: 1.3 }}>fast immer das wahrscheinlichste Token. Sicher, aber gleichförmig.</div>
+          <div style={{ fontSize: 60, fontWeight: 700, color: C.blue }}>Niedrig</div>
+          <div style={{ fontSize: 44, color: C.mute, marginTop: 8, lineHeight: 1.2 }}>fast immer das wahrscheinlichste Token. Sicher, aber gleichförmig.</div>
         </div>
       </Rv>
-      <Rv at={cue(2) + 0.6} dx={30} dy={0} style={{ position: "absolute", left: 1090, top: 560 }}>
-        <div style={{ fontSize: 40, fontWeight: 700, color: C.orange }}>Hoch</div>
-        <div style={{ fontSize: 36, color: C.mute, marginTop: 8, width: 640, lineHeight: 1.3 }}>auch unwahrscheinliche Kandidaten bekommen eine Chance. Abwechslungsreich, aber riskanter.</div>
+      <Rv at={cue(2) + 0.6} dx={30} dy={0} style={{ position: "absolute", left: 1340, top: 510, width: 484 }}>
+        <div style={{ fontSize: 60, fontWeight: 700, color: C.orange }}>Hoch</div>
+        <div style={{ fontSize: 44, color: C.mute, marginTop: 8, lineHeight: 1.2 }}>auch unwahrscheinliche Kandidaten bekommen eine Chance.</div>
       </Rv>
     </Szene>
   );
@@ -114,111 +133,111 @@ const Temperatur = () => {
 
 const KT = ["Ich", "habe", "gestern", "ein", "Buch", "über", "Roboter", "gelesen", "und", "frage", "mich", "jetzt", "wie", "sie", "lernen", "können", "heute", "schon"];
 const Kontext = () => {
-  const { t, cue, end } = useCues();
-  const WX = 900, WR = 1800;
-  const breit = (w) => w.length * 22 + 54;
+  const { t, cue } = useCues();
+  const WX = 640, WR = 1814;
+  const breit = (w) => w.length * 40 + 84;
   let xs = []; let acc = 0;
-  KT.forEach((w) => { xs.push(acc); acc += breit(w) + 14; });
-  const off = -170 * Math.max(0, t - (cue(2) - 0.3));
-  const anz = (() => { let n = 0; KT.forEach((w, i) => { const x = WX + xs[i] + off; if (x >= WX - 2 && x + breit(w) <= WR + 2) n++; }); return n; })();
+  KT.forEach((w) => { xs.push(acc); acc += breit(w) + 18; });
+  const off = -200 * Math.max(0, t - (cue(2) - 0.3));
   return (
-    <Szene titel="Kontextfenster" sub="Das Gedächtnis einer Anfrage">
+    <Szene titel="Kontextfenster" sub="Das Gedächtnis einer Anfrage" tiefe={["book", 1360, 650, 900]}>
       <Rv at={cue(1) - 0.3} dy={0}>
-        <div style={{ position: "absolute", left: WX - 14, top: 470, width: WR - WX + 28, height: 200, borderRadius: 28, border: `4px solid ${C.blue}`, background: C.blue + "10" }} />
-        <div style={{ position: "absolute", left: WX - 14, top: 420, fontSize: 36, fontWeight: 700, color: C.blue }}>Kontextfenster: hier liest das Modell mit</div>
+        <div style={{ position: "absolute", left: WX - 20, top: 420, width: WR - WX + 40, height: 270, borderRadius: 36, border: `5px solid ${C.blue}`, background: C.blue + "10" }} />
+        <div style={{ position: "absolute", left: WX - 20, top: 340, fontSize: 48, fontWeight: 700, color: C.blue }}>Kontextfenster: hier liest das Modell mit</div>
       </Rv>
-      <div style={{ position: "absolute", left: 120, top: 500, width: 1700, height: 140, overflow: "hidden", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 60px)" }}>
+      <div style={{ position: "absolute", left: 96, top: 420, width: 1728, height: 270, overflow: "hidden", WebkitMaskImage: "linear-gradient(90deg, transparent 0, #000 70px)" }}>
         {KT.map((w, i) => {
-          const x = WX + xs[i] + off - 120;
-          const innen = x + 120 >= WX - 2;
-          const a = sp(t, 0.4 + Math.min(i, 8) * 0.12, 0.6) * Math.max(0, Math.min(1, (WR - 4 - (x + 120 + breit(w))) / 50));
+          const x = WX + xs[i] + off - 96;
+          const innen = x + 96 >= WX - 2;
+          const a = sp(t, 0.4 + Math.min(i, 8) * 0.12, 0.6) * Math.max(0, Math.min(1, (WR - 6 - (x + 96 + breit(w))) / 40));
           return (
-            <div key={i} style={{ position: "absolute", left: x, top: 34, fontSize: 40, width: breit(w), boxSizing: "border-box", textAlign: "center", padding: "10px 0", fontWeight: 600, borderRadius: 14, background: innen ? C.panel2 : "#111", border: `3px solid ${innen ? C.blue + "99" : "#2a2a2c"}`, color: innen ? C.text : "#58585d", opacity: a, whiteSpace: "nowrap" }}>{w}</div>
+            <div key={i} style={{ position: "absolute", left: x, top: 75, width: breit(w), height: 120, boxSizing: "border-box", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 72, fontWeight: 600, borderRadius: 24, background: innen ? C.panel2 : "#111", border: `4px solid ${innen ? C.blue + "99" : "#2a2a2c"}`, color: innen ? C.text : "#58585d", opacity: a, whiteSpace: "nowrap" }}>{w}</div>
           );
         })}
       </div>
       <Rv at={cue(2) + 0.4} dy={0}>
-        <div style={{ position: "absolute", left: 120, top: 700, display: "flex", alignItems: "center", gap: 14, fontSize: 36, color: C.orange, fontWeight: 600 }}><Icon name="x" size={36} color={C.orange} />Außerhalb des Fensters: vergessen</div>
+        <div style={{ position: "absolute", left: 110, top: 730, display: "flex", alignItems: "center", gap: 16, fontSize: 52, color: C.orange, fontWeight: 600 }}><Icon name="x" size={56} color={C.orange} />Außerhalb des Fensters: vergessen</div>
       </Rv>
-      <Txt at={cue(1)} x={120} y={820} w={1500} size={38} color={C.text} weight={500}>Nur was in das Fenster passt, fließt in die Antwort ein.</Txt>
-      <Txt at={cue(2) + 1.2} x={120} y={880} w={1500} size={38} color={C.mute}>Neue Tokens schieben alte hinaus.</Txt>
+      <Txt at={cue(1)} x={110} y={820} w={1700} size={62} weight={600}>Nur was in das Fenster passt, fließt in die Antwort ein.</Txt>
+      <Txt at={cue(2) + 1.2} x={110} y={915} w={1700} size={52} color={C.mute}>Neue Tokens schieben alte hinaus.</Txt>
     </Szene>
   );
 };
 
 const Halluzination = () => {
-  const { t, cue, end } = useCues();
+  const { t, cue } = useCues();
   const antwort = "Die Hauptstadt von Atlantis heißt Aquaria.";
   const n = Math.floor(lin(t, cue(0) + 1.8, cue(0) + 4.2, 0, antwort.length));
+  const erf = t > cue(2) + 0.4;
+  const w = sp(t, cue(2) + 0.3, 0.8);
   return (
-    <Szene titel="Halluzination" sub="Plausibel ist nicht gleich wahr">
-      <Rv at={cue(0) + 0.4} dx={40} dy={0} style={{ position: "absolute", left: 960, top: 350, width: 840 }}>
-        <div style={{ background: C.blue, borderRadius: 30, padding: "22px 34px", fontSize: 38, fontWeight: 500, float: "right" }}>Wie heißt die Hauptstadt von Atlantis?</div>
+    <Szene titel="Halluzination" sub="Plausibel ist nicht gleich wahr" tiefe={["message", 1400, 640, 900]}>
+      <Rv at={cue(0) + 0.4} dx={40} dy={0} style={{ position: "absolute", left: 110, top: 290, width: 1700 }}>
+        <div style={{ background: C.blue, borderRadius: 48, padding: "28px 56px", fontSize: 62, fontWeight: 500, float: "right" }}>Wie heißt die Hauptstadt von Atlantis?</div>
       </Rv>
-      <Rv at={cue(0) + 1.4} dx={-40} dy={0} style={{ position: "absolute", left: 120, top: 480, width: 1100 }}>
-        <div style={{ background: C.panel2, borderRadius: 30, padding: "22px 34px", fontSize: 38, minHeight: 60, border: `3px solid ${t > cue(2) + 0.4 ? C.orange : "transparent"}` }}>{antwort.slice(0, n)}<span style={{ opacity: 0.3 }}>{n < antwort.length ? "|" : ""}</span></div>
+      <Rv at={cue(0) + 1.4} dx={-40} dy={0} style={{ position: "absolute", left: 110, top: 470, width: 1280 }}>
+        <div style={{ background: C.panel2, borderRadius: 48, padding: "28px 56px", fontSize: 62, minHeight: 170, border: `5px solid ${erf ? C.orange : "transparent"}`, lineHeight: 1.2 }}>{antwort.slice(0, n)}<span style={{ opacity: 0.3 }}>{n < antwort.length ? "|" : ""}</span></div>
       </Rv>
-      <Txt at={cue(0) + 4.6} x={120} y={600} w={900} size={38} color={C.mute}>Beispielantwort, frei erfunden</Txt>
-      {/* Zwei Anzeigen */}
-      <Rv at={cue(1) + 0.2} dy={0} style={{ position: "absolute", left: 120, top: 700, width: 1300 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <div style={{ width: 360, fontSize: 36, fontWeight: 600 }}>klingt plausibel</div>
-          <div style={{ width: 700, height: 34, borderRadius: 17, background: C.panel2 }}><div style={{ width: 700 * ease(t, cue(1) + 0.4, cue(1) + 1.4), height: 34, borderRadius: 17, background: C.green }} /></div>
-          <Icon name="check" size={46} color={C.green} />
+      <div style={{ position: "absolute", left: 1440, top: 395, width: 380, textAlign: "center", opacity: w, transform: `scale(${lerp(0.7, 1, w)})` }}>
+        <Icon name="alert" size={230} color={C.orange} sw={1.4} />
+        <div style={{ fontSize: 44, fontWeight: 700, color: C.orange, lineHeight: 1.1, marginTop: 6 }}>erfunden, aber überzeugend</div>
+      </div>
+      <Rv at={cue(1) + 0.2} dy={0} style={{ position: "absolute", left: 110, top: 790, width: 1700 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+          <div style={{ width: 640, fontSize: 56, fontWeight: 600 }}>klingt plausibel</div>
+          <div style={{ width: 860, height: 56, borderRadius: 28, background: C.panel2 }}><div style={{ width: 860 * ease(t, cue(1) + 0.4, cue(1) + 1.4), height: 56, borderRadius: 28, background: C.green }} /></div>
+          <Icon name="check" size={72} color={C.green} />
         </div>
       </Rv>
-      <Rv at={cue(1) + 1.0} dy={0} style={{ position: "absolute", left: 120, top: 790, width: 1300 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 28 }}>
-          <div style={{ width: 360, fontSize: 36, fontWeight: 600 }}>durch Fakten belegt</div>
-          <div style={{ width: 700, height: 34, borderRadius: 17, background: C.panel2 }}><div style={{ width: 14, height: 34, borderRadius: 17, background: C.orange }} /></div>
-          <Icon name="x" size={46} color={C.orange} />
+      <Rv at={cue(1) + 1.0} dy={0} style={{ position: "absolute", left: 110, top: 890, width: 1700 }}>
+        <div style={{ display: "flex", alignItems: "center", gap: 36 }}>
+          <div style={{ width: 640, fontSize: 56, fontWeight: 600 }}>durch Fakten belegt</div>
+          <div style={{ width: 860, height: 56, borderRadius: 28, background: C.panel2 }}><div style={{ width: 22, height: 56, borderRadius: 28, background: C.orange }} /></div>
+          <Icon name="x" size={72} color={C.orange} />
         </div>
-      </Rv>
-      <Rv at={cue(2) + 0.4} dx={0} s0={0.9} style={{ position: "absolute", left: 1250, top: 500 }}>
-        <Pill color={C.orange} size={36}><Icon name="help" size={36} color={C.orange} />erfunden, aber überzeugend</Pill>
       </Rv>
     </Szene>
   );
 };
 
 const Rag = () => {
-  const { t, cue, word, end } = useCues();
-  const X = [260, 700, 1140, 1580], Y = 640;
+  const { t, cue, word } = useCues();
+  const X = [290, 735, 1180, 1620], Y = 570;
   const stufen = [
-    { n: "Frage", i: "message", at: cue(0) + 0.3 },
-    { n: "Suche", i: "search", at: cue(0) + 1.6 },
-    { n: "Kontext", i: "list", at: cue(1) },
-    { n: "Antwort", i: "sparkles", at: cue(2) },
+    { n: "Frage", i: "message", at: cue(0) + 0.3, s: "„Was steht im Handbuch?“" },
+    { n: "Suche", i: "search", at: cue(0) + 1.6, s: "in deinen Dokumenten" },
+    { n: "Treffer", i: "list", at: cue(1), s: "passende Stellen im Kontext" },
+    { n: "Antwort", i: "sparkles", at: cue(2), s: "stützt sich auf die Treffer" },
   ];
+  const erreicht = stufen.reduce((a, s, i) => (t > s.at + 0.3 ? i : a), 0);
+  const q = ((t - cue(0)) * 0.28) % 1;
+  const px = lerp(X[0], X[erreicht], q);
   return (
-    <Szene titel="RAG" sub="Erst nachschlagen, dann antworten">
-      {/* Klammern */}
-      <Rv at={word(0, "nachschlagen")} dy={0} style={{ position: "absolute", left: 120, top: 400 }}>
-        <div style={{ width: 840, height: 6, borderRadius: 3, background: C.blue, marginBottom: 14 }} /><div style={{ fontSize: 38, fontWeight: 700, color: C.blue }}>1  Nachschlagen</div>
+    <Szene titel="RAG" sub="Erst nachschlagen, dann antworten" tiefe={["search", 1380, 650, 900]}>
+      <Rv at={word(0, "nachschlagen")} dy={0} style={{ position: "absolute", left: 110, top: 310 }}>
+        <div style={{ width: 880, height: 8, borderRadius: 4, background: C.blue, marginBottom: 14 }} /><div style={{ fontSize: 56, fontWeight: 700, color: C.blue }}>1  Nachschlagen</div>
       </Rv>
-      <Rv at={word(0, "antworten")} dy={0} style={{ position: "absolute", left: 1000, top: 400 }}>
-        <div style={{ width: 800, height: 6, borderRadius: 3, background: C.green, marginBottom: 14 }} /><div style={{ fontSize: 38, fontWeight: 700, color: C.green }}>2  Antworten</div>
+      <Rv at={word(0, "antworten")} dy={0} style={{ position: "absolute", left: 1010, top: 310 }}>
+        <div style={{ width: 800, height: 8, borderRadius: 4, background: C.green, marginBottom: 14 }} /><div style={{ fontSize: 56, fontWeight: 700, color: C.green }}>2  Antworten</div>
       </Rv>
       {stufen.map((s, i) => (
         <React.Fragment key={s.n}>
-          <Rv at={s.at} s0={0.85} style={{ position: "absolute", left: X[i] - 90, top: Y - 90 }}><Badge name={s.i} size={180} color={i < 2 ? C.blue : C.green} /></Rv>
-          <Txt at={s.at + 0.1} x={X[i] - 180} y={Y + 110} w={360} size={42} weight={700} align="center">{s.n}</Txt>
-          {i > 0 && <Pfeil x1={X[i - 1] + 120} y1={Y} x2={X[i] - 120} y2={Y} p={sp(t, s.at - 0.2, 0.6)} color={C.mute} />}
+          <Rv at={s.at} s0={0.85} style={{ position: "absolute", left: X[i] - 125, top: Y - 125 }}><Badge name={s.i} size={250} color={i < 2 ? C.blue : C.green} /></Rv>
+          <Txt at={s.at + 0.1} x={X[i] - 205} y={Y + 150} w={410} size={64} weight={700} align="center">{s.n}</Txt>
+          <Txt at={s.at + 0.3} x={X[i] - 205} y={Y + 235} w={410} size={42} color={C.mute} align="center">{s.s}</Txt>
+          {i > 0 && <Pfeil x1={X[i - 1] + 150} y1={Y} x2={X[i] - 150} y2={Y} p={sp(t, s.at - 0.2, 0.6)} color={C.mute} w={7} />}
         </React.Fragment>
       ))}
-      <Txt at={cue(0) + 0.4} x={X[0] - 180} y={Y + 170} w={360} size={38} color={C.mute} align="center">„Was steht im Handbuch?“</Txt>
-      <Txt at={cue(0) + 1.7} x={X[1] - 180} y={Y + 170} w={360} size={38} color={C.mute} align="center">in deinen Dokumenten</Txt>
-      <Txt at={cue(1) + 0.4} x={X[2] - 180} y={Y + 170} w={360} size={38} color={C.mute} align="center">passende Stellen kommen in den Kontext</Txt>
-      <Txt at={cue(2) + 0.4} x={X[3] - 180} y={Y + 170} w={360} size={38} color={C.mute} align="center">stützt sich auf diese Stellen</Txt>
-      <Rv at={cue(2) + 1.4} dy={10} s0={0.9} style={{ position: "absolute", left: X[3] - 150, top: Y + 280 }}>
-        <Pill color={C.green} size={36}><Icon name="file" size={32} color={C.green} />Quelle: Handbuch</Pill>
+      {t > cue(0) + 1.8 && <div style={{ position: "absolute", left: px - 34, top: Y - 24, width: 68, height: 48, borderRadius: 10, background: erreicht >= 3 ? C.green : C.blue, boxShadow: "0 3px 14px #0009" }}><div style={{ position: "absolute", left: 8, top: 22, width: 52, height: 4, background: "#0007" }} /></div>}
+      <Rv at={cue(2) + 1.4} dy={10} s0={0.9} style={{ position: "absolute", left: X[3] - 300, top: Y + 345 }}>
+        <Pill color={C.green} size={40}><Icon name="file" size={48} color={C.green} />Quelle: Handbuch</Pill>
       </Rv>
     </Szene>
   );
 };
 
-// Mosaik aus Rauschen und Bild
-const GW = 30, GH = 20, CZ = 10;
+// Mosaik aus Rauschen und Bild: ein grosses Bild, das Schritt für Schritt entrauscht
+const GW = 44, GH = 28, CZ = 25;
 const ziel = (x, y) => {
   const u = x / GW, v = y / GH;
   const sonne = Math.hypot(u - 0.72, (v - 0.3) * (GH / GW)) < 0.12;
@@ -228,32 +247,28 @@ const ziel = (x, y) => {
   return `hsl(${208 + v * 20} 85% ${48 + v * 28}%)`;
 };
 const rausch = (n) => { const g = Math.floor(40 + rnd(n) * 190); return `rgb(${g}, ${Math.floor(40 + rnd(n + 3) * 190)}, ${Math.floor(40 + rnd(n + 7) * 190)})`; };
-const STUFEN = [1, 0.75, 0.5, 0.25, 0];
-const RAHMEN = STUFEN.map((n, k) => Array.from({ length: GW * GH }).map((_, c) => {
-  const x = c % GW, y = Math.floor(c / GW);
-  return rnd(c * 1.7 + 5) >= n ? ziel(x, y) : rausch(c + k * 31);
-}));
 const Bilder = () => {
   const { t, cue, end } = useCues();
+  const k = Math.max(0, Math.min(5, Math.floor(lin(t, cue(1) + 0.3, end(1) + 0.6, 0, 6))));
+  const nl = 1 - k / 5;
+  const zellen = Array.from({ length: GW * GH }).map((_, c) => (rnd(c * 1.7 + 5) >= nl ? ziel(c % GW, Math.floor(c / GW)) : rausch(c + k * 31)));
+  const fertig = k === 5;
   return (
-    <Szene titel="Bilder aus Rauschen" sub="Bildmodelle entrauschen in vielen kleinen Schritten">
-      {STUFEN.map((n, k) => {
-        const x = 120 + k * 345, at = k === 0 ? cue(0) + 0.5 : cue(1) + 0.2 + (k - 1) * 0.7;
-        return (
-          <React.Fragment key={k}>
-            <Rv at={at} s0={0.92} style={{ position: "absolute", left: x, top: 470 }}>
-              <svg width={GW * CZ} height={GH * CZ} style={{ borderRadius: 16, display: "block", border: `2px solid ${C.line}` }} shapeRendering="crispEdges">
-                {RAHMEN[k].map((c, i) => <rect key={i} x={(i % GW) * CZ} y={Math.floor(i / GW) * CZ} width={CZ} height={CZ} fill={c} />)}
-              </svg>
-            </Rv>
-            {k > 0 && <Pfeil x1={x - 38} y1={570} x2={x - 8} y2={570} p={sp(t, at, 0.5)} color={C.mute} w={4} />}
-          </React.Fragment>
-        );
-      })}
-      <Txt at={cue(0) + 0.8} x={120} y={710} w={300} size={38} weight={700} color={C.mute}>Rauschen</Txt>
-      <Txt at={cue(1) + 3.2} x={1500} y={710} w={300} size={38} weight={700} color={C.green}>Bild</Txt>
-      <Txt at={cue(1) + 1.0} x={520} y={710} w={900} size={38} weight={600} color={C.blue} align="center">Schritt für Schritt weniger Rauschen</Txt>
-      <Txt at={cue(1) + 3.4} x={120} y={900} w={1000} size={38} color={C.mute}>Vereinfachte Darstellung</Txt>
+    <Szene titel="Bilder aus Rauschen" sub="Bildmodelle entrauschen in vielen kleinen Schritten" tiefe={["image", 1380, 650, 900]}>
+      <Rv at={cue(0) + 0.3} s0={0.96} style={{ position: "absolute", left: 110, top: 300 }}>
+        <svg width={GW * CZ} height={GH * CZ} style={{ display: "block", borderRadius: 24, border: `3px solid ${C.line}` }} shapeRendering="crispEdges">
+          {zellen.map((c, i) => <rect key={i} x={(i % GW) * CZ} y={Math.floor(i / GW) * CZ} width={CZ} height={CZ} fill={c} />)}
+        </svg>
+      </Rv>
+      <Txt at={cue(0) + 0.6} x={1270} y={330} w={560} size={64} weight={700} color={fertig ? C.green : k === 0 ? C.mute : C.blue}>{fertig ? "Bild" : k === 0 ? "Rauschen" : "weniger Rauschen"}</Txt>
+      <Rv at={cue(1) + 0.2} dy={10} style={{ position: "absolute", left: 1270, top: 470, width: 560 }}>
+        <div style={{ fontSize: 56, fontWeight: 600, marginBottom: 22 }}>Schritt {k + 1} von 6</div>
+        <div style={{ display: "flex", gap: 14 }}>
+          {[0, 1, 2, 3, 4, 5].map((i) => <div key={i} style={{ width: 76, height: 28, borderRadius: 14, background: i <= k ? (fertig ? C.green : C.blue) : C.panel2 }} />)}
+        </div>
+      </Rv>
+      <Txt at={cue(1) + 1.2} x={1270} y={640} w={540} size={44} color={C.mute}>Aus jedem Schritt entsteht ein klareres Bild.</Txt>
+      <Txt at={cue(1) + 1.2} x={1270} y={900} w={540} size={38} color={C.mute}>Vereinfachte Darstellung</Txt>
     </Szene>
   );
 };

@@ -33,31 +33,31 @@ export function Tier({ art, farbe = C.orange, size = 140, rahmen = C.line, frage
 const KATZEN = [C.orange, "#c7c7cc", "#8e8e93", "#ffd60a"];
 const HUNDE = ["#a2845e", "#e5e5ea", "#636366", "#bf9b6a"];
 
-const Chip = ({ children, color = C.text, bg = C.panel, size = 36, border }) => (
-  <div style={{ display: "inline-block", fontSize: size, fontWeight: 600, color, background: bg, border: border ?? `2px solid ${color}55`, borderRadius: 14, padding: "10px 22px", whiteSpace: "nowrap" }}>{children}</div>
+const Chip = ({ children, color = C.text, bg = C.panel, size = 50, border }) => (
+  <div style={{ display: "inline-block", fontSize: size, fontWeight: 600, color, background: bg, border: border ?? `3px solid ${color}66`, borderRadius: 18, padding: "8px 26px", whiteSpace: "nowrap" }}>{children}</div>
 );
 
 const Umkehr = () => {
   const { t, cue, word } = useCues();
   const zeile = (y, aus, farben, beschr, name, icon, t0, t1) => (
     <>
-      <Txt at={t0} x={120} y={y} w={700} size={38} weight={700} color={C.blue}>{aus}</Txt>
+      <Txt at={t0} x={120} y={y} w={800} size={50} weight={700} color={C.blue}>{aus}</Txt>
       {beschr.ein.map((e, i) => (
-        <Rv key={e} at={t0 + 0.3 + i * 0.3} dx={-30} dy={0} style={{ position: "absolute", left: 120, top: y + 64 + i * 78 }}><Chip color={farben[e]}>{e}</Chip></Rv>
+        <Rv key={e} at={t0 + 0.3 + i * 0.3} dx={-30} dy={0} style={{ position: "absolute", left: 120, top: y + 72 + i * 88 }}><Chip color={farben[e]}>{e}</Chip></Rv>
       ))}
-      <Pfeil x1={420} y1={y + 128} x2={560} y2={y + 128} p={sp(t, t0 + 0.9, 0.6)} color={C.mute} />
-      <Rv at={t0 + 1.0} s0={0.8} style={{ position: "absolute", left: 590, top: y + 56 }}>
-        <div style={{ textAlign: "center", width: 200 }}><Badge name={icon} size={130} /><div style={{ fontSize: 36, fontWeight: 600, marginTop: 10 }}>{name}</div></div>
+      <Pfeil x1={450} y1={y + 150} x2={600} y2={y + 150} p={sp(t, t0 + 0.9, 0.6)} color={C.mute} w={6} />
+      <Rv at={t0 + 1.0} s0={0.8} style={{ position: "absolute", left: 630, top: y + 60 }}>
+        <div style={{ textAlign: "center", width: 220 }}><Badge name={icon} size={170} /><div style={{ fontSize: 42, fontWeight: 600, marginTop: 8 }}>{name}</div></div>
       </Rv>
-      <Pfeil x1={820} y1={y + 128} x2={960} y2={y + 128} p={sp(t, t0 + 1.4, 0.6)} color={C.mute} />
-      <Rv at={t0 + 1.6} dx={-30} dy={0} style={{ position: "absolute", left: 990, top: y + 100 }}><Chip color={farben[beschr.aus]}>{beschr.aus}</Chip></Rv>
-      <Txt at={t1} x={1290} y={y + 96} w={510} size={38} color={C.text} weight={500}>{beschr.text}</Txt>
+      <Pfeil x1={870} y1={y + 150} x2={1010} y2={y + 150} p={sp(t, t0 + 1.4, 0.6)} color={C.mute} w={6} />
+      <Rv at={t0 + 1.6} dx={-30} dy={0} style={{ position: "absolute", left: 1040, top: y + 118 }}><Chip color={farben[beschr.aus]}>{beschr.aus}</Chip></Rv>
+      <Txt at={t1} x={1400} y={y + 96} w={400} size={44} color={C.text} weight={500}>{beschr.text}</Txt>
     </>
   );
   const F = { Regeln: C.blue, Daten: C.mute, Antworten: C.green };
   return (
-    <Szene titel="Programmieren oder Lernen" sub="Zwei Wege zum gleichen Ziel">
-      {zeile(340, "Programmieren", F, { ein: ["Regeln", "Daten"], aus: "Antworten", text: "Der Mensch schreibt die Regeln." }, "Programm", "cpu", cue(0) + 0.3, cue(0) + 3.0)}
+    <Szene titel="Programmieren oder Lernen" tiefe={["cpu",1400,660,900]} sub="Zwei Wege zum gleichen Ziel">
+      {zeile(350, "Programmieren", F, { ein: ["Regeln", "Daten"], aus: "Antworten", text: "Der Mensch schreibt die Regeln." }, "Programm", "cpu", cue(0) + 0.3, cue(0) + 3.0)}
       {zeile(680, "Maschinelles Lernen", F, { ein: ["Daten", "Antworten"], aus: "Regeln", text: "Das System findet die Regeln selbst." }, "Lernen", "network", cue(1) + 0.2, cue(2) + 1.2)}
     </Szene>
   );
@@ -66,35 +66,38 @@ const Umkehr = () => {
 const Training = () => {
   const { t, cue, end, word } = useCues();
   const arten = ["katze", "hund", "katze", "hund", "hund", "katze", "hund", "katze"];
-  const treffer = lerp(0.2, 0.92, ease(t, cue(2) + 0.3, end(2) + 0.3));
+  const lernt = ease(t, cue(2) + 0.3, end(2) + 0.3);
+  const treffer = lerp(0.2, 0.92, lernt);
+  const durchgang = 1 + Math.floor(lernt * 11.99);
+  const fertig = sp(t, cue(3), 0.6) > 0.5;
   return (
-    <Szene titel="Training" sub="Aus Beispielen mit Etikett wird ein Modell">
+    <Szene titel="Training" tiefe={["network",1400,660,900]} sub="Aus Beispielen mit Etikett wird ein Modell">
       {arten.map((a, i) => {
         const col = i % 4, row = Math.floor(i / 4);
-        const x = 120 + col * 200, y = 400 + row * 270;
+        const x = 120 + col * 220, y = 380 + row * 300;
         return (
           <React.Fragment key={i}>
             <Rv at={cue(1) + 0.1 + i * 0.12} s0={0.85} style={{ position: "absolute", left: x, top: y }}>
-              <Tier art={a} farbe={(a === "katze" ? KATZEN : HUNDE)[i % 4]} size={160} />
+              <Tier art={a} farbe={(a === "katze" ? KATZEN : HUNDE)[i % 4]} size={190} />
             </Rv>
-            <Rv at={word(1, "Etikett") + 0.2 + i * 0.1} dy={8} style={{ position: "absolute", left: x, top: y + 172 }}>
-              <div style={{ width: 160, textAlign: "center", fontSize: 36, fontWeight: 600, color: a === "katze" ? C.orange : C.blue }}>{a === "katze" ? "Katze" : "Hund"}</div>
+            <Rv at={word(1, "Etikett") + 0.2 + i * 0.1} dy={8} style={{ position: "absolute", left: x, top: y + 198 }}>
+              <div style={{ width: 190, textAlign: "center", fontSize: 44, fontWeight: 600, color: a === "katze" ? C.orange : C.blue }}>{a === "katze" ? "Katze" : "Hund"}</div>
             </Rv>
           </React.Fragment>
         );
       })}
-      <Pfeil x1={940} y1={620} x2={1130} y2={620} p={sp(t, cue(2), 0.8)} color={C.mute} />
-      <Txt at={cue(2) + 0.2} x={930} y={560} w={220} size={38} color={C.mute} align="center">anpassen</Txt>
-      <Rv at={cue(2) + 0.2} s0={0.85} style={{ position: "absolute", left: 1160, top: 440 }}>
-        <div style={{ textAlign: "center", width: 330 }}>
-          <Badge name="network" size={190} color={sp(t, cue(3), 0.6) > 0.5 ? C.green : C.blue} glow={sp(t, cue(3), 1)} />
-          <div style={{ fontSize: 46, fontWeight: 700, marginTop: 14, color: sp(t, cue(3), 0.6) > 0.5 ? C.green : C.text }}>{sp(t, cue(3), 0.6) > 0.5 ? "Modell" : "wird angepasst"}</div>
+      <Pfeil x1={1020} y1={640} x2={1200} y2={640} p={sp(t, cue(2), 0.8)} color={C.mute} w={6} />
+      {t > cue(2) + 0.6 && !fertig && [0, 1, 2].map((k) => { const q = ((t - cue(2)) * 0.9 + k / 3) % 1; return <div key={k} style={{ position: "absolute", left: 1030 + q * 150, top: 628, width: 24, height: 24, borderRadius: 12, background: k % 2 ? C.orange : C.blue, opacity: Math.sin(q * Math.PI) }} />; })}
+      <Rv at={cue(2) + 0.2} s0={0.85} style={{ position: "absolute", left: 1230, top: 380 }}>
+        <div style={{ textAlign: "center", width: 520 }}>
+          <Badge name="network" size={240} color={fertig ? C.green : C.blue} />
+          <div style={{ fontSize: 60, fontWeight: 700, marginTop: 16, color: fertig ? C.green : C.text }}>{fertig ? "Modell" : "wird angepasst"}</div>
         </div>
       </Rv>
-      <Rv at={cue(2) + 0.5} dy={14} style={{ position: "absolute", left: 1100, top: 760 }}>
-        <div style={{ fontSize: 36, color: C.mute, marginBottom: 12 }}>Treffer</div>
-        <div style={{ width: 600, height: 26, borderRadius: 13, background: C.panel2 }}>
-          <div style={{ width: 600 * treffer, height: 26, borderRadius: 13, background: treffer > 0.8 ? C.green : C.blue }} />
+      <Rv at={cue(2) + 0.5} dy={14} style={{ position: "absolute", left: 1230, top: 780, width: 520 }}>
+        <div style={{ display: "flex", justifyContent: "space-between", fontSize: 42, color: C.mute, marginBottom: 14 }}><span>Treffer</span><span>Durchgang {durchgang}</span></div>
+        <div style={{ width: 520, height: 36, borderRadius: 18, background: C.panel2 }}>
+          <div style={{ width: 520 * treffer, height: 36, borderRadius: 18, background: treffer > 0.8 ? C.green : C.blue }} />
         </div>
       </Rv>
     </Szene>
@@ -104,30 +107,33 @@ const Training = () => {
 const Inferenz = () => {
   const { t, cue, end } = useCues();
   const bal = [["Katze", 0.86, C.green], ["Hund", 0.09, C.mute], ["Vogel", 0.05, C.mute]];
+  const fl = sp(t, cue(1) + 0.9, 0.7);
+  const fl2 = sp(t, cue(2), 0.7);
   return (
-    <Szene titel="Inferenz" sub="Das trainierte Modell wird angewendet">
-      <Rv at={cue(1) + 0.1} dx={-60} style={{ position: "absolute", left: 120, top: 420 }}>
-        <Tier art="katze" farbe="#d1a15b" size={260} rahmen={C.blue} fragezeichen />
-        <div style={{ marginTop: 18, fontSize: 36, fontWeight: 600, color: C.blue, width: 260, textAlign: "center" }}>neues Bild</div>
-        <div style={{ fontSize: 36, color: C.mute, width: 260, textAlign: "center", marginTop: 4 }}>nie gesehen</div>
+    <Szene titel="Inferenz" tiefe={["search",1400,660,900]} sub="Das trainierte Modell wird angewendet">
+      <Rv at={cue(1) + 0.1} dx={-60} style={{ position: "absolute", left: 120, top: 400 }}>
+        <Tier art="katze" farbe="#d1a15b" size={340} rahmen={C.blue} fragezeichen />
+        <div style={{ marginTop: 14, fontSize: 48, fontWeight: 600, color: C.blue, width: 340, textAlign: "center" }}>neues Bild</div>
+        <div style={{ fontSize: 40, color: C.mute, width: 340, textAlign: "center", marginTop: 2 }}>nie gesehen</div>
       </Rv>
-      <Pfeil x1={420} y1={550} x2={600} y2={550} p={sp(t, cue(1) + 0.9, 0.7)} color={C.mute} />
-      <Rv at={cue(0) + 0.3} s0={0.8} style={{ position: "absolute", left: 640, top: 460 }}>
-        <div style={{ textAlign: "center", width: 220 }}><Badge name="network" size={170} color={C.green} /><div style={{ fontSize: 38, fontWeight: 700, marginTop: 12 }}>Modell</div></div>
+      <Pfeil x1={490} y1={570} x2={640} y2={570} p={fl} color={C.mute} w={6} />
+      {t > cue(1) + 1.2 && fl2 < 0.5 && <div style={{ position: "absolute", left: 500 + ((t * 1.2) % 1) * 130, top: 558, width: 24, height: 24, borderRadius: 12, background: C.blue }} />}
+      <Rv at={cue(0) + 0.3} s0={0.8} style={{ position: "absolute", left: 660, top: 450 }}>
+        <div style={{ textAlign: "center", width: 280 }}><Badge name="network" size={230} color={C.green} /><div style={{ fontSize: 52, fontWeight: 700, marginTop: 14 }}>Modell</div></div>
       </Rv>
-      <Pfeil x1={890} y1={550} x2={1040} y2={550} p={sp(t, cue(2), 0.7)} color={C.mute} />
-      <Txt at={cue(2) + 0.2} x={1080} y={370} w={700} size={38} color={C.mute}>Vorhersage mit Sicherheit</Txt>
+      <Pfeil x1={950} y1={570} x2={1090} y2={570} p={fl2} color={C.mute} w={6} />
+      <Txt at={cue(2) + 0.2} x={1130} y={360} w={700} size={42} color={C.mute}>Vorhersage mit Sicherheit</Txt>
       {bal.map(([n, v, f], i) => (
-        <div key={n} style={{ position: "absolute", left: 1080, top: 450 + i * 120 }}>
+        <div key={n} style={{ position: "absolute", left: 1130, top: 440 + i * 124 }}>
           <Rv at={cue(2) + 0.5 + i * 0.25} dy={0}>
-            <div style={{ fontSize: 40, fontWeight: 700, color: i === 0 ? C.green : C.mute, marginBottom: 10 }}>{n}</div>
-            <div style={{ width: 640, height: 30, borderRadius: 15, background: C.panel2 }}>
-              <div style={{ width: 640 * v * ease(t, cue(2) + 0.7 + i * 0.25, cue(2) + 1.8 + i * 0.25), height: 30, borderRadius: 15, background: f }} />
+            <div style={{ fontSize: 52, fontWeight: 700, color: i === 0 ? C.green : C.mute, marginBottom: 8 }}>{n}</div>
+            <div style={{ width: 670, height: 38, borderRadius: 19, background: C.panel2 }}>
+              <div style={{ width: 670 * v * ease(t, cue(2) + 0.7 + i * 0.25, cue(2) + 1.8 + i * 0.25), height: 38, borderRadius: 19, background: f }} />
             </div>
           </Rv>
         </div>
       ))}
-      <Txt at={cue(2) + 2.4} x={1080} y={830} w={700} size={44} weight={700} color={C.green}>Vorhersage: Katze</Txt>
+      <Txt at={cue(2) + 2.4} x={1130} y={840} w={700} size={56} weight={700} color={C.green}>Vorhersage: Katze</Txt>
     </Szene>
   );
 };
@@ -149,12 +155,12 @@ const Lernarten = () => {
   const idx = wegT * (weg.length - 1), i0 = Math.min(weg.length - 2, Math.floor(idx)), fr = idx - i0;
   const ag = [lerp(weg[i0][0], weg[i0 + 1][0], fr), lerp(weg[i0][1], weg[i0 + 1][1], fr)];
   return (
-    <Szene titel="Drei Lernarten" sub="Je nachdem, welche Rückmeldung es gibt">
+    <Szene titel="Drei Lernarten" tiefe={["fork",1400,660,900]} fokus={[1,960,640]} sub="Je nachdem, welche Rückmeldung es gibt">
       {spalten.map((s, i) => (
         <React.Fragment key={s.n}>
           {i > 0 && <div style={{ position: "absolute", left: s.x - 50, top: 360, width: 2, height: 560, background: C.line, opacity: sp(t, s.at, 0.8) }} />}
           <Txt at={s.at} x={s.x} y={350} w={500} size={46} weight={700} color={s.f}>{s.n}</Txt>
-          <Txt at={s.at + 0.2} x={s.x} y={424} w={500} size={38} color={C.mute}>{s.b}</Txt>
+          <Txt at={s.at + 0.2} x={s.x} y={424} w={500} size={42} color={C.mute}>{s.b}</Txt>
         </React.Fragment>
       ))}
       {/* 1 überwacht */}
@@ -162,7 +168,7 @@ const Lernarten = () => {
         {pts.map((q, i) => <circle key={i} cx={q.p[0]} cy={q.p[1]} r={15} fill={q.k ? C.orange : C.blue} opacity={sp(t, cue(0) + 0.2 + i * 0.12, 0.5)} />)}
         <Pfad d="M120 330 C 220 250, 300 100, 420 20" p={sp(t, cue(0) + 2.6, 1.2)} color={C.text} w={4} dash="0.03 0.025" />
       </svg>
-      <Txt at={cue(0) + 1.0} x={120} y={915} w={500} size={38} color={C.mute}>jeder Punkt trägt seine Antwort</Txt>
+      <Txt at={cue(0) + 1.0} x={120} y={908} w={520} size={38} color={C.mute}>Antwort je Punkt bekannt</Txt>
       {/* 2 unüberwacht */}
       <svg style={{ position: "absolute", left: 710, top: 540, width: 500, height: 360, overflow: "visible" }}>
         {pts.map((q, i) => {
@@ -172,7 +178,7 @@ const Lernarten = () => {
         <circle cx={130} cy={120} r={110} fill="none" stroke={C.green} strokeWidth={3} strokeDasharray="10 10" opacity={sp(t, cue(1) + 2.4, 0.8)} />
         <circle cx={370} cy={250} r={110} fill="none" stroke="#64d2ff" strokeWidth={3} strokeDasharray="10 10" opacity={sp(t, cue(1) + 2.6, 0.8)} />
       </svg>
-      <Txt at={cue(1) + 2.4} x={710} y={915} w={500} size={38} color={C.mute}>das System findet Gruppen selbst</Txt>
+      <Txt at={cue(1) + 2.4} x={710} y={908} w={520} size={38} color={C.mute}>System findet Gruppen</Txt>
       {/* 3 bestärkend */}
       <svg style={{ position: "absolute", left: 1300, top: 540, width: 500, height: 360, overflow: "visible" }}>
         {Array.from({ length: 24 }).map((_, k) => <rect key={k} x={(k % 6) * 80 + 4} y={Math.floor(k / 6) * 90 + 4} width={72} height={82} rx={10} fill={C.panel} stroke={C.line} strokeWidth={2} opacity={sp(t, cue(2) + 0.1 + k * 0.03, 0.6)} />)}
@@ -180,7 +186,7 @@ const Lernarten = () => {
         <path d="M440 26 l7 15 16 2 -12 11 3 16 -14-8 -14 8 3-16 -12-11 16-2z" fill={C.green} opacity={sp(t, cue(2) + 0.9, 0.6)} transform="translate(-4 -5)" />
         <circle cx={ag[0] + 0} cy={ag[1] + 20} r={20} fill={C.blue} opacity={sp(t, cue(2) + 0.9, 0.5)} />
       </svg>
-      <Txt at={cue(2) + 3.0} x={1300} y={915} w={500} size={38} color={C.green}>erreicht es das Ziel, gibt es Belohnung</Txt>
+      <Txt at={cue(2) + 3.0} x={1300} y={908} w={520} size={38} color={C.green}>Ziel erreicht: Belohnung</Txt>
     </Szene>
   );
 };
@@ -191,12 +197,12 @@ const lag = (x) => TRAIN.reduce((s, [xi, yi], i) => s + yi * TRAIN.reduce((p, [x
 const TEST = [[0.115, 0.45], [0.375, 0.5], [0.635, 0.58], [0.89, 0.64]];
 const Ueberanpassung = () => {
   const { t, cue, end } = useCues();
-  const X0 = 140, Y0 = 350, W = 960, H = 560;
+  const X0 = 110, Y0 = 290, W = 1100, H = 680;
   const px = (x) => X0 + x * W, py = (y) => Y0 + H - y * H;
   const kurve = Array.from({ length: 160 }).map((_, i) => { const x = i / 159; return `${i ? "L" : "M"}${px(x)} ${py(Math.max(-0.2, Math.min(1.2, lag(x))))}`; }).join(" ");
   const gerade = `M${px(0)} ${py(0.38)} L${px(1)} ${py(0.7)}`;
   return (
-    <Szene titel="Überanpassung" sub="Auswendig gelernt ist nicht verstanden">
+    <Szene titel="Überanpassung" tiefe={["network",1400,660,900]} fokus={[1,960,640]} sub="Auswendig gelernt ist nicht verstanden">
       <svg style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080 }}>
         <defs><clipPath id="plot"><rect x={X0} y={Y0} width={W} height={H} /></clipPath></defs>
         <rect x={X0} y={Y0} width={W} height={H} rx={20} fill={C.panel} opacity={0.6} stroke={C.line} strokeWidth={2} />
@@ -214,19 +220,19 @@ const Ueberanpassung = () => {
           </g>;
         })}
       </svg>
-      <div style={{ position: "absolute", left: 1220, top: 380, width: 580 }}>
-        <Rv at={0.5} dy={0}><div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 36 }}><div style={{ width: 24, height: 24, borderRadius: 12, background: C.blue }} />Trainingsbeispiele</div></Rv>
+      <div style={{ position: "absolute", left: 1260, top: 310, width: 560 }}>
+        <Rv at={0.5} dy={0}><div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 24, height: 24, borderRadius: 12, background: C.blue }} />Trainingsbeispiele</div></Rv>
         <Rv at={cue(1) + 0.4} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 36, color: C.orange }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.orange }} />Auswendig gelernt</div>
-          <div style={{ fontSize: 36, color: C.mute, marginTop: 8, marginLeft: 56 }}>trifft jedes Trainingsbeispiel</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.orange }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.orange }} />Auswendig gelernt</div>
+          <div style={{ fontSize: 40, color: C.mute, marginTop: 8, marginLeft: 56 }}>trifft jedes Trainingsbeispiel</div>
         </Rv>
         <Rv at={cue(2) + 0.2} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 36 }}><div style={{ width: 24, height: 24, borderRadius: 12, border: `5px solid ${C.green}` }} />Neue Daten</div>
-          <div style={{ fontSize: 36, color: C.red, marginTop: 8, marginLeft: 56 }}>große Abweichung: das Modell versagt</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 24, height: 24, borderRadius: 12, border: `5px solid ${C.green}` }} />Neue Daten</div>
+          <div style={{ fontSize: 40, color: C.red, marginTop: 8, marginLeft: 56 }}>große Abweichung: das Modell versagt</div>
         </Rv>
         <Rv at={cue(3) + 0.6} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 36, color: C.green }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.green }} />Muster verstanden</div>
-          <div style={{ fontSize: 36, color: C.mute, marginTop: 8, marginLeft: 56 }}>passt auch zu ungesehenen Testdaten</div>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.green }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.green }} />Muster verstanden</div>
+          <div style={{ fontSize: 40, color: C.mute, marginTop: 8, marginLeft: 56 }}>passt auch zu ungesehenen Testdaten</div>
         </Rv>
       </div>
     </Szene>
@@ -243,7 +249,7 @@ const Merkmalsraum = () => {
   const np = [lerp(start[0], neu[0], flug), lerp(start[1], neu[1], flug)];
   const nachbarn = PUNKTE.map((p, i) => ({ ...p, i, d: Math.hypot(p.x - neu[0], p.y - neu[1]) })).sort((a, b) => a.d - b.d).slice(0, 3);
   return (
-    <Szene titel="Im Merkmalsraum" sub="Ähnliche Bilder liegen nah beieinander">
+    <Szene titel="Im Merkmalsraum" tiefe={["grid",1400,660,900]} fokus={[1,960,640]} sub="Ähnliche Bilder liegen nah beieinander">
       <Rv at={cue(0) + 0.2} dx={-30} dy={0} style={{ position: "absolute", left: 120, top: 380 }}>
         <Pill color={C.blue} size={36}><Icon name="camera" size={32} color={C.blue} />Demo: Bildmodell anlernen</Pill>
       </Rv>
@@ -257,10 +263,10 @@ const Merkmalsraum = () => {
           return <rect key={i} x={i * 36 + 4} y={200 - h * a} width={24} height={h * a} rx={6} fill={C.blue} />;
         })}
       </svg>
-      <Txt at={cue(1) + 1.2} x={120} y={745} w={680} size={38} color={C.mute}>Das Bild wird zu einer Reihe von Zahlen</Txt>
+      <Txt at={cue(1) + 1.2} x={120} y={745} w={680} size={42} color={C.mute}>Das Bild wird zu einer Reihe von Zahlen</Txt>
       <Rv at={cue(2)} dy={0} style={{ position: "absolute", left: 880, top: 330, width: 920, height: 600 }}>
         <div style={{ position: "absolute", inset: 0, borderRadius: 28, background: C.panel, opacity: 0.55, border: `2px solid ${C.line}` }} />
-        <div style={{ position: "absolute", left: 28, top: 20, fontSize: 36, color: C.mute }}>Merkmalsraum</div>
+        <div style={{ position: "absolute", left: 28, top: 20, fontSize: 40, color: C.mute }}>Merkmalsraum</div>
       </Rv>
       <svg style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080 }}>
         {KL.map((k, ki) => <circle key={k.n} cx={k.c[0]} cy={k.c[1]} r={125} fill={k.f + "14"} stroke={k.f} strokeWidth={2} strokeDasharray="8 8" opacity={sp(t, cue(2) + 1.8, 0.8) * (ki === 0 ? 1 + 0 * ease(t, cue(3) + 1.8, cue(3) + 2.2, 0, 1) : 1)} />)}
@@ -268,8 +274,8 @@ const Merkmalsraum = () => {
         {t > cue(3) + 1.5 && nachbarn.map((n) => <line key={n.i} x1={neu[0]} y1={neu[1]} x2={n.x} y2={n.y} stroke={C.text} strokeWidth={2.5} strokeDasharray="6 6" opacity={ease(t, cue(3) + 1.5, cue(3) + 2.1)} />)}
         <circle cx={np[0]} cy={np[1]} r={16} fill="#000" stroke={C.text} strokeWidth={5} opacity={sp(t, cue(3) - 0.1, 0.5)} />
       </svg>
-      {KL.map((k) => <Txt key={k.n} at={cue(2) + 1.9} x={k.c[0] - 100} y={k.c[1] + 130} w={200} size={38} weight={700} color={k.f} align="center">{k.n}</Txt>)}
-      <div style={{ position: "absolute", left: np[0] - 70, top: np[1] + 26, width: 140, textAlign: "center", fontSize: 36, fontWeight: 600, opacity: sp(t, cue(3), 0.5) }}>neues Bild</div>
+      {KL.map((k) => <Txt key={k.n} at={cue(2) + 1.9} x={k.c[0] - 100} y={k.c[1] + 130} w={200} size={42} weight={700} color={k.f} align="center">{k.n}</Txt>)}
+      <div style={{ position: "absolute", left: np[0] - 70, top: np[1] + 26, width: 140, textAlign: "center", fontSize: 40, fontWeight: 600, opacity: sp(t, cue(3), 0.5) }}>neues Bild</div>
       <Rv at={cue(3) + 2.4} dy={0} style={{ position: "absolute", left: 120, top: 830 }}>
         <Pill color={C.orange} size={36}><Icon name="check" size={32} color={C.orange} />Landet bei den Katzen</Pill>
       </Rv>

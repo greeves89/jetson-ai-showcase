@@ -1,0 +1,53 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:05.690
+Im Telefonbuch suchst du einen Namen
+und findest genau diesen Namen.
+
+00:00:05.840 --> 00:00:11.990
+Das ist Stichwortsuche. Sie ist schnell und
+exakt, solange du das richtige Wort kennst.
+
+00:00:13.240 --> 00:00:17.950
+Die Grundidee ist einfach: Kommen
+die Wörter der Frage im Text vor?
+
+00:00:18.100 --> 00:00:23.210
+Die Suche zählt sie. Ein Text mit
+vielen passenden Wörtern steht oben.
+
+00:00:24.460 --> 00:00:26.850
+Aber nicht jedes Wort zählt gleich.
+
+00:00:27.000 --> 00:00:34.270
+Das Wort der steht überall und sagt nichts. Das
+Wort Dichtungsring ist selten und sagt viel.
+
+00:00:34.420 --> 00:00:41.210
+Die Suche gibt seltenen Wörtern mehr
+Gewicht. Das gängige Verfahren heißt BM25.
+
+00:00:42.460 --> 00:00:50.850
+Zwei weitere Regeln: Ein Wort, das zwanzigmal vorkommt, ist
+nicht zwanzigmal wichtiger als eins, das fünfmal vorkommt.
+
+00:00:51.000 --> 00:00:55.150
+Und lange Texte werden nicht
+bevorzugt, nur weil sie lang sind.
+
+00:00:56.400 --> 00:01:00.390
+Stark ist diese Suche bei
+Fehlercodes, Namen und Zahlen.
+
+00:01:00.540 --> 00:01:02.770
+Schwach ist sie bei Umschreibungen.
+
+00:01:02.920 --> 00:01:08.270
+Wer Auto abstellen fragt, findet nicht den
+Absatz über das Parken von Fahrzeugen.
+
+00:01:09.520 --> 00:01:12.150
+Dafür gibt es die Suche nach Bedeutung.
+
+00:01:12.300 --> 00:01:15.010
+Beide zusammen sehen wir im nächsten Video.

@@ -177,7 +177,7 @@
     const status = h("span", { class: "chip", role: "status" }, "Kamera aus");
     const meld = meldungBox();
 
-    const mTreffer = h("b", null, "–"), mRunde = h("b", null, "–"), mFps = h("b", null, "–");
+    const mTreffer = h("b", null, "·"), mRunde = h("b", null, "·"), mFps = h("b", null, "·");
     const messwerte = h("div", { class: "messwerte" },
       h("div", { class: "messwert" }, dingMehr + " im Bild", mTreffer),
       h("div", { class: "messwert" }, "Runde gesamt", mRunde),
@@ -215,9 +215,10 @@
       if (objekt && ws && ws.readyState === 1) ws.send(JSON.stringify({ schwelle: schwelle / 100 }));
     }
 
-    root.append(
+    // regler gibt es nur im Objekt-Modus; Element.append(null) wuerde sonst das Wort "null" in die Seite schreiben
+    root.append(...[
       h("div", { class: "zeile d-steuer" }, btn, status),
-      meld.el, kameras, regler, messwerte, live.el);
+      meld.el, kameras, regler, messwerte, live.el].filter(Boolean));
 
     /* Zustand */
     let stream = null, ws = null, laeuft = false, startet = false, wartet = false;
@@ -238,7 +239,7 @@
       mRunde.textContent = msText(t);
       let fps = 0;
       if (stempel.length > 1) fps = (stempel.length - 1) / ((stempel[stempel.length - 1] - stempel[0]) / 1000);
-      mFps.textContent = fps ? de(fps, 1) : "–";
+      mFps.textContent = fps ? de(fps, 1) : "·";
       const segs = [
         { k: "b", cls: "s1", wert: b, text: msText(b), name: "1 Browser: Bild aufnehmen und packen" },
         { k: "n", cls: "s2", wert: n, text: msText(n), name: "2 Netz" },
@@ -848,6 +849,7 @@
       m.tokens = z.tokens;
       const fe = /\[Fehler: ([^\]]*)\]/.exec(roh);
       if (fe) fehler = "Das Modell meldet einen Fehler: " + fe[1];
+      else if (!z.meta && z.tokens.length === 1 && /^\[(?!\d+\])[^\]]+\]$/.test(z.tokens[0])) { fehler = z.tokens[0].slice(1, -1); z.tokens = []; m.tokens = []; }
       if (fehler && z.tokens.length === 0) m.platz = fehler;
       fuelle(m);
       if (z.meta) m.meta.textContent = metaText(z.meta);
@@ -1035,6 +1037,7 @@
         antwort.replaceChildren(...antwortMitVerweisen(roh || "Das Modell hat keine Antwort geliefert.", karten));
         const fe = /\[Fehler: ([^\]]*)\]/.exec(roh);
         if (fe) throw new Error("Das Sprachmodell meldet einen Fehler: " + fe[1]);
+        if (/^\[(?!\d+\])[^\]]+\]$/.test(roh)) throw new Error(roh.slice(1, -1));
         ok(s3, !!roh);
         const warte = (tErst || tEnde) - tAsk, schreib = tEnde - (tErst || tEnde);
         live.pipe([
@@ -1046,7 +1049,7 @@
         live.text(fett("Fertig. "), "Suchen: " + msText(tSuche) + ". Bis zum ersten Wort der Antwort: " + sekText(warte) + ". Schreiben: " + sekText(schreib) + ". Fahre mit der Maus über einen Verweis wie [1], dann siehst du, auf welchen Treffer er zeigt.");
       } catch (e) {
         const m = netzFehler(e);
-        if (m) { meld.zeige(m); if (!karten.length) sucheSatz.textContent = ""; antwort.textContent = "Keine Antwort."; }
+        if (m) { meld.zeige(m); live.text("Das hat diesmal nicht geklappt. Du kannst es gleich noch einmal versuchen."); if (!karten.length) sucheSatz.textContent = ""; antwort.textContent = "Keine Antwort."; }
       }
       finally { setBusy(false); }
     }

@@ -1,96 +1,76 @@
-# Jetson AI-Showcase
+# KI-Labor auf dem Jetson
 
-Eine lokale Demo-Webapp für den **NVIDIA Jetson Orin Nano Super** (JetPack 6, CUDA 12.6),
-die die Bandbreite dessen zeigt, was die kleine Edge-GPU kann — klassisches ML, generative KI,
-RAG und Agenten. Jede Demo lädt ihr Modell selbst (mit Fortschrittsanzeige), bringt eine
-Schritt-für-Schritt-Anleitung mit und läuft **komplett offline** auf dem Gerät.
+Ein Lernsystem für künstliche Intelligenz, das komplett auf einem **NVIDIA Jetson Orin Nano** läuft. Man liest nicht
+nur, wie KI funktioniert, man probiert es aus und sieht dabei, was der Rechner gerade tut. Alles lokal, ohne Cloud.
 
-Gedacht als **interne Demo-Einheit im eigenen Netz** — mehrere Besucher öffnen die Seite im
-Browser, nutzen ihre **eigene Webcam**, und die Bilder werden zum Jetson geschickt, dort
-gerechnet und das Ergebnis zurückgespielt. Clients brauchen nichts außer einem Browser.
+- **Lektionen** erklären die Grundlagen von null, mit Beispielen aus dem Alltag, Vergleichstabellen, Merksätzen und
+  einem Selbsttest. Siehe [`docs/lehrplan.md`](docs/lehrplan.md).
+- **Labore** laufen live auf dem Jetson: Gesichts- und Objekterkennung über die eigene Webcam, Bildmodell anlernen,
+  Sprachmodell, RAG, Agent mit Werkzeugen, Sprache zu Text, Text zu Sprache. Jedes Labor zeigt die Verarbeitung in
+  Schritten mit ihren Zeiten und erklärt sie in einfachen Sätzen.
+- **Interaktive Bausteine** machen Konzepte greifbar: neuronales Netz im Browser, Gradientenabstieg, k nächste
+  Nachbarn, Token-Würfel, Regelkreis-Simulator, Konfusionsmatrix, Bedeutungskarte der Embeddings und mehr.
+- **Videoreihen** (Remotion mit Stimme) erklären die Themen in 70 bis 100 Sekunden, siehe [`videos/`](videos/README.md).
+- **Business-Use-Cases** mit fertigen Beispieldaten zum Starten per Klick.
 
-> Kein Produktionssystem, keine Härtung für das öffentliche Internet — bewusst LAN-only.
+Es ist ein Lernprojekt. Es läuft intern im Heimnetz. Zur Veröffentlichung siehe
+[`docs/veroeffentlichung.md`](docs/veroeffentlichung.md).
 
-## Warum der Jetson (und nicht Mac mini / Pi)
+## Warum der Jetson
+Echte CUDA-GPU bei wenigen Watt, 24 Stunden am Tag. Die Grenze ist der Speicher: CPU und GPU teilen sich 8 GB.
+Deshalb laufen kleine Modelle, und der Dateicache wird aktiv freigegeben (`app/speicher.py`). Der Jetson spielt seine
+Stärke als Vision-, Audio- und Edge-Knoten aus, nicht als Rechner für große Sprachmodelle.
 
-- **Echte CUDA-GPU** bei ~7–25 W, läuft 24/7 — ideal für Dauer-Inferenz am Rand.
-- **8 GB geteilter Speicher** ist der Begrenzer: Modelle laufen **nacheinander**, eins zur Zeit.
-- **829 GB NVMe frei** — Speicherplatz ist reichlich, nur RAM ist knapp.
-- Nicht geeignet für große agentische LLMs (dafür steht ein Mac mini bereit); der Jetson
-  spielt seine Stärke als **Vision-/Audio-/Edge-Knoten** aus.
-
-## Use-Case-Katalog
-
-Status: **live** = in dieser App lauffähig · **geplant** = Anleitung vorhanden, wird schrittweise scharfgeschaltet.
-
-### 1 — Klassisches ML (Vision & Audio)
-| Use Case | Modell/Stack | Speicher | Status |
-|---|---|---|---|
-| Gesichtserkennung über Browser-Webcam | OpenCV Haar | ~0 (CPU) | **live** |
-| Objekterkennung | YOLOX-tiny (OpenCV-DNN) | ~0 (CPU) | **live** |
-| Pose-/Hand-Tracking | YOLOv8-pose / MediaPipe | ~0,5 GB | geplant |
-| Sprache zu Text | faster-whisper (small/base) | ~1 GB | geplant |
-| Bildklassifikation | MobileNet/ResNet (onnx) | ~0,2 GB | geplant |
-
-### 2 — Generative KI
-| Use Case | Modell/Stack | Speicher | Status |
-|---|---|---|---|
-| LLM-Chat | llama3.2:3b via Ollama | 2 GB | **live** |
-| Vision-Sprachmodell (Bild beschreiben) | llava / qwen2.5-vl via Ollama | ~4–6 GB | geplant |
-| Bildgenerierung | SDXL-Turbo / SD1.5 (diffusers) | ~4–6 GB | geplant |
-| Text zu Sprache | Piper TTS | ~0,1 GB | geplant |
-| Face-Swap (live, über Webcam-Pipeline) | insightface + inswapper_128 (onnxruntime-gpu) | ~1 GB | geplant (experimentell) |
-
-### 3 — RAG & Agenten
-| Use Case | Modell/Stack | Speicher | Status |
-|---|---|---|---|
-| RAG über eigene Dokumente | nomic-embed-text + llama3.2:3b | ~3 GB | **live** |
-| Agent mit Werkzeugen | LangGraph + langchain-ollama (qwen3 Tool-Calling) | 2,5 GB | geplant |
-
-### 4 — Edge-Dauerbetrieb (der eigentliche Langzeitwert)
-| Use Case | Nutzen |
-|---|---|
-| 24/7 Präsenz-/Personenerkennung | Kamera-Node ohne Cloud |
-| Lokaler Embedding-Server | Dauerdienst fürs Second Brain |
-| Wake-Word / Voice-Node | immer-an Aufnahme für die Sprachschicht |
-
-## Architektur
-
+## Aufbau
 ```
-Browser (eigene Webcam, getUserMedia)
-   │  JPEG-Frames über WebSocket (wss)
-   ▼
-Jetson — FastAPI (HTTPS, selbstsigniert)
-   ├─ /api/stats     Live-Systemwerte aus tegrastats (RAM/GPU/Strom/Temp)
-   ├─ /api/pull      Modell laden mit Fortschritt (Ollama pull, SSE)
-   ├─ /api/chat      LLM-Antwort im Stream (Ollama)
-   └─ /ws/vision     Frame rein → OpenCV → annotiert zurück
-   │
-   └─ Ollama (127.0.0.1:11434), lokale Modelle
+app/app.py            FastAPI-Backend: Live-Werte, Chat, Modell laden, Webcam-WebSocket, Anlernen, RAG, Agent, Whisper
+app/lab_*.py          weitere Labor-Module (Router), werden beim Start automatisch eingebunden
+app/sicherheit.py     Origin-Prüfung, Ratenbegrenzung, Sitzungen je Besucher
+app/speicher.py       Speicherwächter für den gemeinsamen CPU/GPU-Speicher
+app/index.html        schlanke Hülle der Oberfläche
+app/static/           app.js (Kern, Router, Glossar), content*.js (Lerninhalte), widgets*.js, demos*.js, module.json
+app/static/beispiele/ fertige Beispieldaten der Business-Use-Cases
+videos/               Remotion-Projekt für die Erklärvideos
+docs/                 Lehrplan, Schreibleitfaden, Baustein- und Videoskizzen, Veröffentlichungsplan, Lizenzen
+scripts/              Einrichtung (setup.sh), Autostart (systemd), Hilfsprogramme
+tests/                Browser-Tests (Chrome, Fake-Webcam), Rauchtest über alle Seiten
 ```
-
-HTTPS ist Pflicht, weil Browser die Webcam nur in einem sicheren Kontext freigeben
-(`https://` oder `localhost`, nicht `http://LAN-IP`).
+Neue Seiten kommen als Datei `app/static/content-<thema>.js` dazu und werden in `app/static/module.json`
+eingetragen. Die Schnittstelle für Bausteine steht im Kopfkommentar von `app/static/app.js`.
 
 ## Einrichten (auf dem Jetson)
+Voraussetzungen: JetPack 6 (CUDA 12.6, Python 3.10, OpenCV aus JetPack), Ollama mit `llama3.2:3b` und
+`nomic-embed-text`. Es ist kein Root nötig, pip wird per `get-pip.py --user` eingerichtet.
 
 ```bash
 git clone <repo> ~/jetson-ai-showcase && cd ~/jetson-ai-showcase
-bash scripts/setup.sh      # pip (user), FastAPI-Stack, Haar-Cascade, selbstsigniertes Cert
-bash scripts/start.sh      # startet uvicorn auf https://0.0.0.0:8443
+bash scripts/setup.sh            # Pakete, Gesichts-/Objekt-/Merkmalsmodelle, Whisper, Piper-Stimmen, Zertifikat
+bash scripts/install-service.sh  # Autostart als systemd-Benutzerdienst
 ```
+Dann im Netz öffnen: `https://<jetson-ip>:8443` (selbstsigniertes Zertifikat, die Warnung einmal bestätigen; Browser
+geben die Kamera nur bei HTTPS frei).
 
-Dann im Netz öffnen: `https://<jetson-ip>:8443` (einmalige Zertifikatswarnung bestätigen).
+Hinweis zu numpy: Es muss `numpy<2` bleiben, sonst bricht das OpenCV aus JetPack.
 
-## Voraussetzungen
-
-- JetPack 6 / CUDA 12.6, Python 3.10, OpenCV (aus JetPack), Ollama mit `qwen3:4b`.
-- Keine Systempakete nötig: pip wird per `get-pip.py --user` gebootstrappt.
-
-## Aufbau
-
+## Entwickeln
+```bash
+cd tests && npm install && cd ..
+export LABOR_URL=https://<jetson-ip>:8443
+tests/deploy.sh                       # Arbeitskopie auf den Jetson spielen (rsync)
+node tests/smoke.mjs                  # alle Seiten öffnen: Konsolenfehler, tote Links, leere Seiten
+node tests/screenshot.mjs rag         # Screenshot einer Seite nach tests/ausgabe/
 ```
-app/app.py        FastAPI-Backend (Monitor, Chat, Modell-Laden, Webcam-WebSocket)
-app/index.html    Showcase-Oberfläche (eine Datei, keine Build-Kette)
-scripts/          Setup und Start
-```
+Weitere Tests unter `tests/` bedienen die Labore und Bausteine wirklich (Fake-Webcam über `FAKE_VIDEO`,
+Fake-Mikrofon über `FAKE_AUDIO`).
+
+## Sicherheit
+- POST und WebSocket verlangen einen passenden `Origin`; der `Host` ist auf bekannte Adressen begrenzt.
+- Größen- und Mengenlimits an allen Eingängen, nur JPEG für Bilder, feste Modell-Allowlist.
+- Zustand (Anlern-Beispiele, RAG-Texte) ist je Besucher getrennt und läuft nach 30 Minuten ab.
+- Mit `OEFFENTLICH=1` kommt eine Ratenbegrenzung je Besucher dazu. Gleichzeitige Chats und Kameraverbindungen sind
+  immer begrenzt.
+- Kamerabilder, Audio und Texte werden nur im Arbeitsspeicher verarbeitet und nicht gespeichert.
+
+## Lizenzen
+Stimmen und Beispielfotos mit Quellen und Lizenzen: [`docs/lizenzen.md`](docs/lizenzen.md) und
+`app/static/beispiele/QUELLEN.md`.

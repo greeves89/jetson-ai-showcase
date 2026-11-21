@@ -1,0 +1,58 @@
+{
+ "id": "rag-hybridsuche",
+ "titel": "Hybridsuche",
+ "untertitel": "Stichwort und Bedeutung zusammen",
+ "szenen": [
+  {
+   "id": "kellner",
+   "kapitel": "Kellner",
+   "saetze": [
+    "Du sagst im Restaurant: Ich suche etwas Italienisches.",
+    "Der Kellner empfiehlt Pizza und Pasta, obwohl du keins dieser Wörter genannt hast.",
+    "Das ist Suche nach Bedeutung."
+   ]
+  },
+  {
+   "id": "listen",
+   "kapitel": "Zwei Listen",
+   "saetze": [
+    "Beide Methoden haben ihre Stärken. Die Stichwortsuche trifft genaue Wörter. Die Vektorsuche trifft den Sinn.",
+    "Bei der Hybridsuche laufen beide, und jede liefert eine eigene Rangliste."
+   ]
+  },
+  {
+   "id": "punkte",
+   "kapitel": "Nicht addieren",
+   "saetze": [
+    "Die Punkte beider Listen kann man nicht addieren.",
+    "Die eine rechnet in Zehnern, die andere in Bruchteilen von eins.",
+    "Also schaut man nur auf die Platzierung."
+   ]
+  },
+  {
+   "id": "tafel",
+   "kapitel": "Punktetafel",
+   "saetze": [
+    "Jede Platzierung bringt Punkte, oben mehr, unten weniger. Die Punkte aus beiden Listen werden addiert.",
+    "Steht ein Text in beiden Listen weit oben, bekommt er zweimal ordentlich Punkte, und der gewinnt."
+   ]
+  },
+  {
+   "id": "regler",
+   "kapitel": "Regler",
+   "saetze": [
+    "Du kannst festlegen, welche Methode mehr zählt.",
+    "Viele Codes und Namen: mehr Stichwort. Fragen in Alltagssprache: mehr Vektor.",
+    "Und du bestimmst, wie viele Treffer ans Modell gehen."
+   ]
+  },
+  {
+   "id": "filter",
+   "kapitel": "Filter",
+   "saetze": [
+    "Mit Filtern grenzt du vorher ein, etwa auf ein Jahr oder eine Abteilung.",
+    "Wie du das misst, zeigt die Seite Suchen und später die Seite zur Bewertung."
+   ]
+  }
+ ]
+}

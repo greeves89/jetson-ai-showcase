@@ -1,0 +1,66 @@
+<div class="seitenbreite"><p class="ueber">Bildsprache</p><h1>Bildsprache: ein Beispiel je Bildtyp</h1><p class="lead">Jeder Abschnitt dieser Seite zeigt einen Bildtyp mit KI-Inhalt. Die Seite dient als Vorlage und als Test für Autorinnen und Autoren.</p>
+<div class="text">
+<h2 class="abs">Ablauf: vom Kamerabild zum Ergebnis</h2>
+<figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Kamera (liefert ein Bild)</li><li>Vorverarbeitung (Größe, Helligkeit)</li><li>Modell (erkennt Objekte)</li><li>Ergebnis (Name und Ort)</li></ul></figure>
+<p class="kurz">Ein Datenpaket wandert durch die Stationen. Jede Station leuchtet kurz auf, wenn das Paket sie erreicht.</p>
+<p>Felder: <code>schritte</code> mit <code>icon</code>, <code>text</code>, optional <code>sub</code> und <code>farbe</code>. Mit <code>paket: false</code> entfällt das wandernde Paket.</p><p>Auf schmalen Bildschirmen steht der Ablauf senkrecht.</p>
+<h2 class="abs">Kreislauf: wahrnehmen, entscheiden, handeln</h2>
+<figure class="visual"><figcaption>Kreislauf</figcaption><ul><li>Wahrnehmen</li><li>Entscheiden</li><li>Handeln</li><li>Lernen</li><li>Mitte: Agentenschleife</li></ul></figure>
+<p class="kurz">Ein Agent läuft im Kreis: Er nimmt wahr, entscheidet, handelt und lernt aus dem Ergebnis.</p>
+<p>Felder: <code>knoten</code> mit <code>icon</code> und <code>text</code> (zwei bis sechs), optional <code>mitte</code>. Ein Punkt umrundet den Kreis, die Station im Takt leuchtet auf.</p>
+<h2 class="abs">Vergleich: lokal gegen Cloud</h2>
+<figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Lokal auf dem Jetson: Daten bleiben im Haus, Antwort in Millisekunden, Feste Hardwarekosten, Modellgröße begrenzt</li><li>Rechts: Cloud-Dienst: Sehr große Modelle, Kosten pro Anfrage, Daten verlassen das Haus, Netz nötig</li><li>Urteil: Für Kamerabilder im Betrieb zählen meist Tempo und Datenschutz.</li></ul></figure>
+<p class="kurz">Zwei Wege, ein Modell zu betreiben. Entscheidend ist, wo die Daten entstehen und wie schnell die Antwort kommen muss.</p>
+<p>Felder: <code>links</code> und <code>rechts</code> mit <code>titel</code>, <code>icon</code>, <code>farbe</code> und <code>punkte</code>, optional <code>urteil</code>. Kurze Stichworte statt Sätze.</p>
+<h2 class="abs">Balken: Wartezeit im Netz und am Gerät</h2>
+<figure class="visual"><figcaption>Balkendiagramm</figcaption><ul><li>Cloud über Mobilfunk: 420 ms</li><li>Cloud über Glasfaser: 180 ms</li><li>Jetson im Haus: 35 ms</li></ul></figure>
+<p class="kurz">Die Balken wachsen beim Sichtbarwerden. So lässt sich auf einen Blick sehen, was kürzer dauert.</p>
+<p>Felder: <code>zeilen</code> mit <code>label</code>, <code>wert</code>, optional <code>max</code>, <code>einheit</code> und <code>farbe</code>; <code>titel</code> und <code>einheit</code> gelten für das ganze Bild. Dezimalzahlen erscheinen mit Komma.</p>
+<h2 class="abs">Schichten: KI, Lernen, Tiefes Lernen</h2>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Künstliche Intelligenz (alles, was Aufgaben intelligent löst)</li><li>Maschinelles Lernen (lernt aus Beispielen)</li><li>Deep Learning (viele Schichten künstlicher Neuronen)</li><li>Generative KI (erzeugt Text, Bild, Ton)</li></ul></figure>
+<p class="kurz">Ineinander gelegte Ebenen zeigen, was in was steckt: Jedes Feld ist eine Teilmenge des äußeren.</p>
+<p>Felder: <code>ebenen</code> mit <code>text</code>, <code>sub</code>, <code>icon</code>; <code>richtung</code> ist <code>verschachtelt</code> (die erste Ebene ist die äußerste) oder <code>stapel</code>.</p>
+<h2 class="abs">Stapel: von der Hardware bis zur Anwendung</h2>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Anwendung (Oberfläche)</li><li>Modell (Gewichte)</li><li>Laufzeit (Framework)</li><li>Treiber (CUDA)</li><li>Hardware (GPU und Speicher)</li></ul></figure>
+<p class="kurz">Als Stapel gezeichnet liegt oben, was der Mensch sieht, und unten, worauf alles ruht.</p>
+<p>Gleicher Bildtyp, andere <code>richtung</code>. Die untere Ebene ist breiter, weil sie trägt.</p>
+<h2 class="abs">Raster: Einsatzfelder im Betrieb</h2>
+<figure class="visual"><figcaption>Übersicht</figcaption><ul><li>Qualität (Sichtprüfung am Band)</li><li>Lager (Bestand zählen)</li><li>Verkehr (Fahrzeuge zählen)</li><li>Gesundheit (Bilder vorsortieren)</li><li>Handel (Regale prüfen)</li><li>Büro (Dokumente sortieren)</li></ul></figure>
+<p class="kurz">Gleichrangige Beispiele nebeneinander. Das Raster passt seine Spalten der Breite an.</p>
+<p>Felder: <code>zellen</code> mit <code>icon</code>, <code>text</code>, optional <code>sub</code>; <code>spalten</code> legt die Spaltenzahl fest.</p>
+<h2 class="abs">Zahlen: Kennzahlen eines Tests</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>99,2 % Trefferquote im Testsatz (Beispiel)</li><li>35 ms Antwortzeit je Bild</li><li>0 Byte Bilddaten, die das Haus verlassen</li></ul></figure>
+<p class="kurz">Große Zahlen zählen beim Sichtbarwerden hoch. Die erste Kachel ist die wichtigste und fällt größer aus.</p>
+<p>Felder: <code>kacheln</code> mit <code>wert</code> (Text samt Einheit), <code>label</code>, optional <code>icon</code>. Zahlen der Form <code>12</code>, <code>1,5</code> oder <code>99,5 %</code> zählen hoch.</p>
+<h2 class="abs">Zeitachse: Meilensteine der KI</h2>
+<figure class="visual"><figcaption>Zeitachse</figcaption><ul><li>1956: Der Begriff Künstliche Intelligenz entsteht</li><li>1997: Ein Schachcomputer schlägt den Weltmeister</li><li>2012: Tiefe Netze gewinnen die Bilderkennung</li><li>2017: Die Transformer-Architektur erscheint</li><li>2022: Chatbots erreichen ein breites Publikum</li></ul></figure>
+<p class="kurz">Fünf Stationen in der Reihenfolge der Zeit. Die Linie zieht sich, die Punkte erscheinen nacheinander.</p>
+<p>Felder: <code>punkte</code> mit <code>t</code> (Jahr oder Zeitpunkt), <code>text</code>, optional <code>icon</code>.</p>
+<h2 class="abs">Netz: eine kleine Wissensgraph-Skizze</h2>
+<figure class="visual"><figcaption>Netz</figcaption><ul><li>Kundin</li><li>Auftrag</li><li>Produkt</li><li>Lager</li><li>Lieferant</li><li>Kundin verbunden mit Auftrag (bestellt)</li><li>Auftrag verbunden mit Produkt (enthält)</li><li>Produkt verbunden mit Lager (liegt in)</li><li>Produkt verbunden mit Lieferant (kommt von)</li></ul></figure>
+<p class="kurz">Knoten und Beziehungen. Die Linien zeichnen sich nacheinander, danach läuft ein Impuls durch das Netz.</p>
+<p>Felder: <code>knoten</code> mit <code>id</code>, <code>text</code>, <code>icon</code>, <code>x</code> und <code>y</code> (0 bis 100), <code>kanten</code> als Paare <code>[von, nach, Beschriftung]</code>.</p>
+<h2 class="abs">Punkte: zwei Klassen und eine Grenze</h2>
+<figure class="visual"><figcaption>Punktwolke</figcaption><ul><li>Gutteil: 26 Punkte</li><li>Ausschuss: 22 Punkte</li><li>Trennung: Linie zwischen den Gruppen</li></ul></figure><figure class="visual"><figcaption>Punktwolke</figcaption><ul><li>Normal: 40 Punkte</li><li>Auffällig: 7 Punkte</li><li>Trennung: Kreis um die erste Gruppe</li></ul></figure>
+<p class="kurz">Punktwolken fliegen ein, dann zieht sich die Grenze. Formen und Farben unterscheiden die Klassen.</p>
+<p>Felder: <code>klassen</code> mit <code>name</code>, <code>farbe</code>, <code>n</code>, <code>mitte</code> als <code>[x, y]</code> (0 bis 100, y wächst nach oben) und <code>streu</code>; <code>grenze</code> ist <code>linie</code> oder <code>kreis</code>.</p><p>Die Punkte sind zufällig, aber bei gleicher Spezifikation immer gleich. Das Bild veranschaulicht nur, es zeigt keine Messdaten.</p><p><code>visual</code> darf eine Liste sein: Die Bilder stehen dann nebeneinander, wenn der Platz reicht.</p>
+<h2 class="abs">Matrix: eine Konfusionsmatrix</h2>
+<figure class="visual"><figcaption>Matrix</figcaption><ul><li>Defekt, Defekt: 46 erkannt</li><li>Defekt, Ok: 4 übersehen</li><li>Ok, Defekt: 6 Fehlalarme</li><li>Ok, Ok: 144 richtig ok</li></ul></figure>
+<p class="kurz">Vier Felder zeigen, wo ein Prüfmodell richtig und wo es falsch liegt. Symbole ergänzen die Farben.</p>
+<p>Felder: <code>x</code>, <code>y</code> (Beschriftungen), <code>zellen</code> als Zeilen von Zellen mit <code>text</code> und <code>ton</code> (<code>gut</code>, <code>schlecht</code>, <code>neutral</code>), optional <code>xtitel</code> und <code>ytitel</code>.</p>
+<h2 class="abs">Skala: ein Spektrum mit Marker</h2>
+<figure class="visual"><figcaption>Skala</figcaption><ul><li>Sachlich und vorhersehbar bis Kreativ und überraschend, Marker bei 28 Prozent: Zusammenfassung eines Berichts</li></ul></figure>
+<p class="kurz">Der Marker gleitet an seine Stelle. So zeigt sich, wo etwas zwischen zwei Polen liegt.</p>
+<p>Felder: <code>links</code>, <code>rechts</code>, <code>marker</code> (0 bis 1), optional <code>label</code> über dem Marker.</p>
+<h2 class="abs">Token: ein Satz in Stücken</h2>
+<figure class="visual"><figcaption>Tokens</figcaption><ul><li>8 Stücke: Der | Him | mel | ist | heute | kla | r | .</li></ul></figure>
+<p class="kurz">Ein Sprachmodell liest keine Wörter, sondern Stücke. Der Satz zerfällt, die Stücke lösen sich nacheinander.</p>
+<p>Felder: <code>stuecke</code> als Liste. Ein Punkt vor einem Stück steht für das Leerzeichen, das zum Token gehört.</p>
+<h2 class="abs">Quelle: ein Bild aus den Beispieldaten</h2>
+<figure class="visual"><img src="/static/beispiele/fertigung-sichtpruefung/ausschuss/01.jpg" alt="Graue Metallscheibe mit mehreren Kratzern, aufgenommen von oben"><figcaption>Ausschuss aus dem Beispielsatz der Sichtprüfung (künstlich erzeugt)</figcaption></figure>
+<p class="kurz">Ein echtes Bild aus dem Beispielordner, mit Bildunterschrift und Textalternative.</p>
+<p>Felder: <code>src</code> (nur Dateien unter <code>/static/</code>), <code>alt</code> (Pflicht), optional <code>unter</code>.</p>
+</div>
+<section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Jedes Bild hat einen Typ und kurze Beschriftungen statt Sätzen.</li><li>Animationen starten beim Sichtbarwerden und stehen still, wenn der Besucher weniger Bewegung wünscht.</li></ul></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/karte">Was ist KI?</a></li></ul></section>
+</div>

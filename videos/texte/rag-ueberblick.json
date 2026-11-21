@@ -1,0 +1,62 @@
+{
+ "id": "rag-ueberblick",
+ "titel": "RAG in einer Minute",
+ "untertitel": "Erst nachschlagen, dann mit Quelle antworten",
+ "szenen": [
+  {
+   "id": "raten",
+   "kapitel": "Das Problem",
+   "saetze": [
+    "Ein Sprachmodell hat sehr viel gelesen.",
+    "Aber nicht dein Handbuch. Nicht deinen Vertrag. Nicht das Protokoll von gestern.",
+    "Fragst du danach, rät es."
+   ]
+  },
+  {
+   "id": "buch",
+   "kapitel": "Open Book",
+   "saetze": [
+    "Stell dir eine Prüfung vor, bei der du ins Buch schauen darfst.",
+    "Du musst nicht alles wissen. Du musst die richtige Seite finden und richtig lesen.",
+    "Genau das macht RAG."
+   ]
+  },
+  {
+   "id": "vorbereiten",
+   "kapitel": "Vorbereiten",
+   "saetze": [
+    "Zuerst bereitest du die Dokumente vor.",
+    "Der Text wird in kleine Stücke geteilt.",
+    "Jedes Stück wird zu einer Liste von Zahlen, die seine Bedeutung beschreibt.",
+    "Alle Stücke landen im Index, der durchsuchbaren Ablage."
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Fragen",
+   "saetze": [
+    "Dann stellst du eine Frage.",
+    "Auch sie wird zu Zahlen.",
+    "Die Stücke, die der Frage am nächsten liegen, sind die Treffer."
+   ]
+  },
+  {
+   "id": "antwort",
+   "kapitel": "Antworten",
+   "saetze": [
+    "Die Treffer gehen mit deiner Frage an das Modell.",
+    "Es antwortet nur mit diesen Stücken und nennt die Quelle.",
+    "Du kannst jede Aussage nachschlagen."
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Grenzen",
+   "saetze": [
+    "RAG ist kein Wundermittel.",
+    "Sind die Quellen schlecht oder findet die Suche die falschen Stellen, wird auch die Antwort schlecht.",
+    "Darum schauen wir uns jeden Schritt einzeln an. Fang auf der Seite RAG im Überblick an."
+   ]
+  }
+ ]
+}

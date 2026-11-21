@@ -21,6 +21,7 @@ import base64
 import os
 import secrets
 import socket
+from urllib.parse import urlparse
 
 # Schutz vor Dekompressionsbomben: OpenCV lehnt Bilder mit mehr Pixeln als 1920x1080 ab.
 # Muss VOR dem Import von cv2 gesetzt sein.
@@ -31,10 +32,11 @@ import numpy as np
 import httpx
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
-from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse
+from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
+from starlette.datastructures import MutableHeaders
 
-from app import speicher
+from app import agent_werkzeuge, speicher
 from app.sicherheit import Sitzungen, begrenzt, sitzungs_kennung
 
 HIER = Path(__file__).resolve().parent
@@ -45,6 +47,21 @@ ERLAUBTE_MODELLE = {"llama3.2:3b", "nomic-embed-text"}
 TOKEN_TRENNER = "\u2063"        # unsichtbares Zeichen zwischen Tokens, damit die Oberflaeche sie einzeln zeigen kann
 MAX_NACHRICHT = 4000          # Zeichen pro Chat-Anfrage
 MAX_FRAME_BYTES = 2_000_000   # ~2 MB pro Webcam-Frame (480x360 JPEG ist weit darunter)
+
+
+def _oeffentliche_url():
+    """Basisadresse fuer canonical, og:url und Sitemap (Umgebungsvariable OEFFENTLICHE_URL), sonst leer."""
+    roh = os.environ.get("OEFFENTLICHE_URL", "").strip().rstrip("/")
+    try:
+        u = urlparse(roh)
+        if u.scheme in ("http", "https") and u.hostname and not u.path and not u.query:
+            return roh
+    except ValueError:
+        pass
+    return ""
+
+
+_OEFFENTLICHE_URL = _oeffentliche_url()
 
 
 def _erlaubte_hosts():
@@ -59,6 +76,8 @@ def _erlaubte_hosts():
     except Exception:
         pass
     hosts.update(h.strip() for h in os.environ.get("SHOWCASE_ALLOWED_HOSTS", "").split(",") if h.strip())
+    if _OEFFENTLICHE_URL:
+        hosts.add(urlparse(_OEFFENTLICHE_URL).hostname)
     return sorted(hosts)
 
 
@@ -605,12 +624,17 @@ def _chunk(text, groesse=800):
 
 
 async def _embed_async(client, text):
-    r = await client.post(f"{OLLAMA}/api/embeddings", json={"model": EMBED_MODELL, "prompt": text})
+    # num_gpu 0: Auf dem Jetson liefert nomic-embed-text (F16) auf der GPU fuer manche Saetze nur Nullvektoren,
+    # dann findet die Suche stillschweigend nichts. Auf der CPU sind die Vektoren zuverlaessig.
+    r = await client.post(f"{OLLAMA}/api/embeddings",
+                          json={"model": EMBED_MODELL, "prompt": text, "options": {"num_gpu": 0}})
     if r.status_code != 200:
         raise RuntimeError(_ollama_fehler(r.text))
     v = np.array(r.json().get("embedding", []), dtype=np.float32)
     n = np.linalg.norm(v)
-    return v / n if n > 0 else v
+    if n == 0:
+        raise RuntimeError("Das Embedding-Modell hat für diesen Text keinen Vektor geliefert. Versuch einen anderen Satz.")
+    return v / n
 
 
 @app.post("/api/rag/upload")
@@ -773,7 +797,7 @@ def _safe_calc(expr):
     return ev(ast.parse(expr, mode="eval").body)
 
 
-def _tool_ausfuehren(name, args, rag):
+def _tool_ausfuehren(name, args, rag, szenario=None):
     if name == "rechne":
         try:
             return str(_safe_calc(str(args.get("ausdruck", ""))))
@@ -789,6 +813,9 @@ def _tool_ausfuehren(name, args, rag):
         with _rag_lock:
             treffer = [t for t, _ in rag if begriff in t.lower()][:2]
         return "\n".join(treffer) if treffer else "nichts gefunden (keine Dokumente eingelesen?)"
+    zusatz = agent_werkzeuge.ausfuehren(szenario, name, args)
+    if zusatz is not None:
+        return zusatz
     return "unbekanntes Werkzeug"
 
 
@@ -804,17 +831,23 @@ async def agent_ask(req: Request):
         return JSONResponse({"fehler": "keine Frage"}, status_code=400)
 
     rag = _zustand(req)["rag"]
+    # Szenarien bringen eigene Werkzeuge und einen eigenen Systemtext mit (Beispiel-Katalog), nur aus der Allowlist
+    szenario = d.get("szenario") if d.get("szenario") in agent_werkzeuge.SZENARIEN else None
+    # Szenario: NUR dessen Werkzeuge (ein 3B-Modell verheddert sich bei sieben Werkzeugen), sonst die Standardwerkzeuge
+    werkzeuge = agent_werkzeuge.definitionen(szenario) if szenario else _AGENT_TOOLS
 
     async def strom():
         messages = [
-            {"role": "system", "content": "Du bist ein Agent mit Werkzeugen (rechne, uhrzeit, dokumentsuche). "
+            {"role": "system", "content": agent_werkzeuge.system(szenario) or
+             "Du bist ein Agent mit Werkzeugen (rechne, uhrzeit, dokumentsuche). "
              "Nutze Werkzeuge, wenn sie helfen, und antworte am Ende knapp auf Deutsch."},
             {"role": "user", "content": frage}]
         async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as c:
             await _speicher_bereit()
             for _ in range(5):
                 r = await c.post(f"{OLLAMA}/api/chat",
-                                 json={"model": CHAT_MODELL, "messages": messages, "tools": _AGENT_TOOLS, "stream": False})
+                                 json={"model": CHAT_MODELL, "messages": messages, "tools": werkzeuge, "stream": False,
+                                       "options": {"temperature": 0}})      # Werkzeugwahl soll reproduzierbar sein
                 if r.status_code != 200:
                     try:
                         fehler = r.json().get("error", "")
@@ -830,7 +863,7 @@ async def agent_ask(req: Request):
                         fn = tc["function"]["name"]
                         args = tc["function"].get("arguments", {}) or {}
                         yield "[Werkzeug] %s(%s)" % (fn, json.dumps(args, ensure_ascii=False))
-                        erg = _tool_ausfuehren(fn, args, rag)
+                        erg = _tool_ausfuehren(fn, args, rag, szenario)
                         yield "  ->  %s\n" % erg.replace("\n", " ")[:160]
                         messages.append({"role": "tool", "content": erg})
                     continue
@@ -965,15 +998,219 @@ def api_videos():
     return JSONResponse({"videos": fertig})
 
 
-@app.get("/", response_class=HTMLResponse)
-def index(request: Request):
-    # Versionsstempel aus den Dateizeiten: Browser laden nach einem Deploy sofort die neuen Dateien
+# ---------------------------------------------------------------------------------------------------------
+# Seiten unter echten Adressen (/<id>), Fragmente fuer Suchmaschinen, robots.txt, sitemap.xml.
+# Die Fragmente erzeugt scripts/seo_bauen.mjs nach app/static/seo/. Der Server setzt sie in die Oberflaeche ein;
+# die JavaScript-Oberflaeche ersetzt sie beim Start. Intern (ohne OEFFENTLICH=1) steht ueberall "nicht indexieren".
+# ---------------------------------------------------------------------------------------------------------
+_SEO_DIR = _STATIC_DIR / "seo"
+_seo_stand = {"stamp": None, "daten": None}
+_FREIE_ADRESSEN = ("http://", "https://")
+
+
+class _RobotsKopf:
+    """Reiner ASGI-Wrapper: setzt X-Robots-Tag, wo die Antwort keinen eigenen hat (intern ueberall, sonst nur /api/)."""
+
+    def __init__(self, anwendung):
+        self.anwendung = anwendung
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.anwendung(scope, receive, send)
+        pfad = scope.get("path", "")
+
+        async def senden(nachricht):
+            if nachricht["type"] == "http.response.start":
+                kopf = MutableHeaders(scope=nachricht)
+                if "x-robots-tag" not in kopf and (not _OEFFENTLICH or pfad.startswith(("/api/", "/ws/"))):
+                    kopf["X-Robots-Tag"] = "noindex, nofollow"
+            await send(nachricht)
+
+        await self.anwendung(scope, receive, senden)
+
+
+app.add_middleware(_RobotsKopf)
+
+
+def _seo_daten():
+    """Index, Navigation, Fragmente und Autorenangaben; neu gelesen, wenn sich eine Datei geaendert hat."""
+    dateien = list(_SEO_DIR.glob("*")) + [_STATIC_DIR / "module.json"]
+    stamp = max((int(f.stat().st_mtime_ns) for f in dateien if f.is_file()), default=0)
+    if _seo_stand["stamp"] == stamp and _seo_stand["daten"] is not None:
+        return _seo_stand["daten"]
+    def lesen(name, standard):
+        try:
+            return json.loads((_SEO_DIR / name).read_text(encoding="utf-8"))
+        except Exception:
+            return standard
+    index = lesen("index.json", {"seiten": {}, "reihenfolge": []})
+    try:
+        seite = json.loads((_STATIC_DIR / "module.json").read_text(encoding="utf-8")).get("seite", {})
+    except Exception:
+        seite = {}
+    def text(name):
+        try:
+            return (_SEO_DIR / name).read_text(encoding="utf-8")
+        except Exception:
+            return ""
+    fragmente = {i: text(i + ".html") for i in index.get("seiten", {}) if re.fullmatch(r"[a-z0-9-]+", i)}
+    daten = {"index": index, "nav": text("nav.html"), "fragmente": fragmente, "seite": seite if isinstance(seite, dict) else {}}
+    _seo_stand.update(stamp=stamp, daten=daten)
+    return daten
+
+
+def _basis_url(request):
+    """Basis fuer canonical und Sitemap: OEFFENTLICHE_URL, sonst die (per Host-Allowlist geprueft) aufgerufene Adresse."""
+    return _OEFFENTLICHE_URL or str(request.base_url).rstrip("/")
+
+
+def _frei(url):
+    return url if isinstance(url, str) and url.startswith(_FREIE_ADRESSEN) else ""
+
+
+def _datum(datei):
+    try:
+        t = (_STATIC_DIR / datei).stat().st_mtime
+        return time.strftime("%Y-%m-%d", time.gmtime(t))
+    except Exception:
+        return ""
+
+
+def _fuss_html(seite):
+    from html import escape
+    autor = escape(str(seite.get("autor") or "").strip())
+    url = _frei(seite.get("autor_url"))
+    teile = []
+    if autor:
+        name = f'<a href="{escape(url)}" rel="author">{autor}</a>' if url else autor
+        links = []
+        for schluessel, beschriftung in (("impressum_url", "Impressum"), ("datenschutz_url", "Datenschutz")):
+            ziel = _frei(seite.get(schluessel))
+            if ziel:
+                links.append(f'<a href="{escape(ziel)}">{beschriftung}</a>')
+        teile.append("<p>Ein Projekt von " + name + ("".join(" <span aria-hidden=\"true\">·</span> " + l for l in links)) + "</p>")
+    teile.append(
+        '<p class="fuss-klein">Dies ist ein Lernprojekt. Kamerabilder, Mikrofonaufnahmen und eingegebene Texte werden nur im '
+        "Arbeitsspeicher verarbeitet und nicht dauerhaft gespeichert. Technisch notwendig sind das Sitzungs-Cookie "
+        "<code>kl_s</code> (ordnet Beispiele und Texte deiner Sitzung zu, die Daten verfallen nach 30 Minuten) und der im Browser gemerkte Lernfortschritt.</p>"
+    )
+    return "".join(teile)
+
+
+def _json_ld(obj):
+    """JSON fuer ein script-Element: <, > und & maskieren, damit nichts das Element verlassen kann."""
+    return json.dumps(obj, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+
+
+def _oberflaeche(request, seiten_id, status=200):
+    """Die Oberflaeche fuer eine Seite: Titel, Meta-Angaben, JSON-LD, Navigation und Inhalt als Rohtext eingesetzt."""
+    from html import escape
+    daten = _seo_daten()
+    info = daten["index"].get("seiten", {}).get(seiten_id)
+    seite = daten["seite"]
+    gefunden = info is not None
+    if gefunden:
+        titel, beschr, ueberschrift = info["titel"], info["beschreibung"], info["ueberschrift"]
+        inhalt = daten["fragmente"].get(seiten_id, "")
+    else:
+        titel, beschr, ueberschrift = "Seite nicht gefunden · KI-Labor", "Diese Seite gibt es im KI-Labor nicht.", "Seite nicht gefunden"
+        inhalt = ('<div class="seitenbreite"><h1>Seite nicht gefunden</h1><p class="lead">Diese Adresse gibt es im KI-Labor nicht.</p>'
+                  '<p><a href="/">Zur Startseite</a></p></div>')
+    basis = _basis_url(request)
+    adresse = basis + ("/" if seiten_id == "start" or not gefunden else "/" + seiten_id)
+    indexieren = _OEFFENTLICH and gefunden
+    robots = "index, follow" if indexieren else "noindex, nofollow"
+    autor = str(seite.get("autor") or "").strip()
+    kopf = [f'<meta name="description" content="{escape(beschr)}">', f'<meta name="robots" content="{robots.replace(", ", ",")}">']
+    if autor:
+        kopf.append(f'<meta name="author" content="{escape(autor)}">')
+    if gefunden:
+        kopf.append(f'<link rel="canonical" href="{escape(adresse)}">')
+        og = [("og:title", titel), ("og:description", beschr), ("og:type", "website" if seiten_id == "start" else "article"),
+              ("og:url", adresse), ("og:locale", "de_DE"), ("og:site_name", "KI-Labor")]
+        kopf += [f'<meta property="{k}" content="{escape(v)}">' for k, v in og]
+        kopf.append('<meta name="twitter:card" content="summary">')
+        person = {"@type": "Person", "name": autor}
+        if _frei(seite.get("autor_url")):
+            person["url"] = seite["autor_url"]
+        ld = {"@context": "https://schema.org", "@type": "WebSite" if seiten_id == "start" else "Article",
+              "inLanguage": "de", "url": adresse, "description": beschr}
+        if seiten_id == "start":
+            ld["name"] = "KI-Labor"
+        else:
+            ld["headline"] = ueberschrift
+            ld["mainEntityOfPage"] = adresse
+            if _datum(info.get("datei", "")):
+                ld["dateModified"] = _datum(info["datei"])
+        if autor:
+            ld["author"] = person
+        kopf.append('<script type="application/ld+json">' + _json_ld(ld) + "</script>")
     stamp = max((int(f.stat().st_mtime) for f in _STATIC_DIR.glob("*") if f.is_file()), default=0)
-    html = (HIER / "index.html").read_text(encoding="utf-8").replace("__V__", str(stamp))
-    antwort = HTMLResponse(html, headers={"Cache-Control": "no-cache"})
+    werte = {
+        "V": str(stamp), "TITEL": escape(titel), "KOPF": "\n".join(kopf),
+        "SEITE": '<div class="marke"><div class="logo"></div><div><b>KI-Labor</b><span>läuft auf dem Jetson</span></div></div>' + daten["nav"],
+        "INHALT": inhalt + '\n<noscript><p class="noscript-hinweis">Die interaktiven Teile des KI-Labors brauchen JavaScript.</p></noscript>',
+        "FUSS": _fuss_html(seite),
+    }
+    html = re.sub(r"__(V|TITEL|KOPF|SEITE|INHALT|FUSS)__", lambda m: werte[m.group(1)],
+                  (HIER / "index.html").read_text(encoding="utf-8"))
+    antwort = HTMLResponse(html, status_code=status, headers={"Cache-Control": "no-cache", "X-Robots-Tag": robots})
     if not request.cookies.get("kl_s"):
         antwort.set_cookie("kl_s", secrets.token_hex(16), httponly=True, samesite="lax", secure=True, max_age=86400)
     return antwort
+
+
+@app.get("/robots.txt")
+def robots_txt(request: Request):
+    if _OEFFENTLICH:
+        text = f"User-agent: *\nDisallow: /api/\nDisallow: /ws/\nAllow: /\n\nSitemap: {_basis_url(request)}/sitemap.xml\n"
+    else:
+        text = "User-agent: *\nDisallow: /\n"
+    from fastapi.responses import PlainTextResponse
+    return PlainTextResponse(text, headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/sitemap.xml")
+def sitemap_xml(request: Request):
+    from html import escape
+    from fastapi.responses import Response
+    if not _OEFFENTLICH:
+        return JSONResponse({"fehler": "Nicht gefunden"}, status_code=404)
+    basis = _basis_url(request)
+    sm = {}
+    try:
+        sm = json.loads((_SEO_DIR / "sitemap.json").read_text(encoding="utf-8"))
+    except Exception:
+        pass
+    zeilen = []
+    for e in sm.get("seiten", []):
+        pfad = e.get("pfad", "")
+        if not re.fullmatch(r"/[a-z0-9-]*", pfad):
+            continue
+        datum = _datum(e.get("datei", ""))
+        zeilen.append(f"<url><loc>{escape(basis + pfad)}</loc>" + (f"<lastmod>{datum}</lastmod>" if datum else "") + "</url>")
+    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+           + "\n".join(zeilen) + "\n</urlset>\n")
+    return Response(xml, media_type="application/xml", headers={"Cache-Control": "no-cache"})
+
+
+@app.get("/", response_class=HTMLResponse)
+def index(request: Request):
+    return _oberflaeche(request, "start")
+
+
+@app.api_route("/{pfad:path}", methods=["GET", "HEAD"], include_in_schema=False)
+def seitenadresse(pfad: str, request: Request):
+    """Jede bekannte Seiten-ID unter /<id>; alles andere 404. /api/, /ws/ und /static/ bleiben unberuehrt (JSON-404)."""
+    if pfad.startswith(("api/", "ws/", "static/")):
+        return JSONResponse({"fehler": "Nicht gefunden"}, status_code=404)
+    kennung = pfad[:-1] if pfad.endswith("/") else pfad
+    if re.fullmatch(r"[a-z0-9-]+", kennung) and kennung in _seo_daten()["index"].get("seiten", {}):
+        if kennung == "start" or kennung != pfad:      # /start und /id/ gehen auf die saubere Adresse
+            ziel = "/" if kennung == "start" else "/" + kennung
+            return RedirectResponse(ziel + (("?" + request.url.query) if request.url.query else ""), status_code=301)
+        return _oberflaeche(request, kennung)
+    return _oberflaeche(request, "", status=404)
 
 
 @app.on_event("startup")

@@ -1,0 +1,126 @@
+{
+ "id": "rag-keywordsuche",
+ "titel": "Stichwortsuche",
+ "untertitel": "Wörter zählen, seltene Wörter wiegen mehr",
+ "gesamt": 76.66,
+ "szenen": [
+  {
+   "id": "telefonbuch",
+   "kapitel": "Telefonbuch",
+   "start": 0,
+   "dauer": 12.74,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.64,
+     "text": "Im Telefonbuch suchst du einen Namen und findest genau diesen Namen."
+    },
+    {
+     "t": 5.84,
+     "d": 6,
+     "text": "Das ist Stichwortsuche. Sie ist schnell und exakt, solange du das richtige Wort kennst."
+    }
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "kapitel": "Wörter zählen",
+   "start": 12.74,
+   "dauer": 11.22,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.56,
+     "text": "Die Grundidee ist einfach: Kommen die Wörter der Frage im Text vor?"
+    },
+    {
+     "t": 5.36,
+     "d": 4.96,
+     "text": "Die Suche zählt sie. Ein Text mit vielen passenden Wörtern steht oben."
+    }
+   ]
+  },
+  {
+   "id": "gewicht",
+   "kapitel": "Seltene Wörter",
+   "start": 23.96,
+   "dauer": 18,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.24,
+     "text": "Aber nicht jedes Wort zählt gleich."
+    },
+    {
+     "t": 3.04,
+     "d": 7.12,
+     "text": "Das Wort der steht überall und sagt nichts. Das Wort Dichtungsring ist selten und sagt viel."
+    },
+    {
+     "t": 10.46,
+     "d": 6.64,
+     "text": "Die Suche gibt seltenen Wörtern mehr Gewicht. Das gängige Verfahren heißt BM25."
+    }
+   ]
+  },
+  {
+   "id": "saettigung",
+   "kapitel": "Sättigung",
+   "start": 41.96,
+   "dauer": 13.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.24,
+     "text": "Zwei weitere Regeln: Ein Wort, das zwanzigmal vorkommt, ist nicht zwanzigmal wichtiger als eins, das fünfmal vorkommt."
+    },
+    {
+     "t": 9.04,
+     "d": 4,
+     "text": "Und lange Texte werden nicht bevorzugt, nur weil sie lang sind."
+    }
+   ]
+  },
+  {
+   "id": "staerken",
+   "kapitel": "Stärken",
+   "start": 55.9,
+   "dauer": 13.12,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Stark ist diese Suche bei Fehlercodes, Namen und Zahlen."
+    },
+    {
+     "t": 4.64,
+     "d": 2.08,
+     "text": "Schwach ist sie bei Umschreibungen."
+    },
+    {
+     "t": 7.02,
+     "d": 5.2,
+     "text": "Wer Auto abstellen fragt, findet nicht den Absatz über das Parken von Fahrzeugen."
+    }
+   ]
+  },
+  {
+   "id": "sinn",
+   "kapitel": "Bedeutung",
+   "start": 69.02,
+   "dauer": 7.64,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.48,
+     "text": "Dafür gibt es die Suche nach Bedeutung."
+    },
+    {
+     "t": 3.28,
+     "d": 2.56,
+     "text": "Beide zusammen sehen wir im nächsten Video."
+    }
+   ]
+  }
+ ]
+}

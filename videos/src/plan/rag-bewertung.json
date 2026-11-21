@@ -1,0 +1,136 @@
+{
+ "id": "rag-bewertung",
+ "titel": "Gut ist, was du misst",
+ "untertitel": "Testfragen, Trefferquote, Beleg",
+ "gesamt": 84.46,
+ "szenen": [
+  {
+   "id": "chat",
+   "kapitel": "Drei von vier",
+   "start": 0,
+   "dauer": 14.48,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.52,
+     "text": "Drei Fragen, drei gute Antworten. Fertig?"
+    },
+    {
+     "t": 4.72,
+     "d": 4.72,
+     "text": "Nein. Dann fragt jemand etwas anderes, und die Antwort ist falsch."
+    },
+    {
+     "t": 9.74,
+     "d": 3.84,
+     "text": "Mit wenigen Beispielen siehst du nur, dass es manchmal klappt."
+    }
+   ]
+  },
+  {
+   "id": "testset",
+   "kapitel": "Testset",
+   "start": 14.48,
+   "dauer": 14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.4,
+     "text": "Darum baust du ein Testset. Du sammelst echte Fragen und notierst bei jeder, wo die Antwort steht."
+    },
+    {
+     "t": 7.2,
+     "d": 2.24,
+     "text": "Einige Dutzend reichen für den Anfang."
+    },
+    {
+     "t": 9.74,
+     "d": 3.36,
+     "text": "Nimm auch Fragen auf, auf die es keine Antwort gibt."
+    }
+   ]
+  },
+  {
+   "id": "treffer",
+   "kapitel": "Trefferquote",
+   "start": 28.48,
+   "dauer": 12.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.36,
+     "text": "Dann misst du die Suche. Wie oft liegt die richtige Stelle unter den ersten fünf Treffern?"
+    },
+    {
+     "t": 6.16,
+     "d": 5.84,
+     "text": "Vierzig von fünfzig Fragen heißt achtzig Prozent. Je weiter oben, desto besser."
+    }
+   ]
+  },
+  {
+   "id": "beleg",
+   "kapitel": "Beleg",
+   "start": 41.38,
+   "dauer": 12.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Dann misst du die Antwort. Stimmt sie?"
+    },
+    {
+     "t": 3.36,
+     "d": 3.2,
+     "text": "Steht jede Aussage wirklich im vorgelegten Text?"
+    },
+    {
+     "t": 6.86,
+     "d": 4.56,
+     "text": "Eine Aussage ohne Beleg heißt: Das Modell hat etwas erfunden."
+    }
+   ]
+  },
+  {
+   "id": "kette",
+   "kapitel": "Von vorn nach hinten",
+   "start": 53.7,
+   "dauer": 16.88,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.4,
+     "text": "Beim Verbessern fängst du vorn an."
+    },
+    {
+     "t": 3.2,
+     "d": 5.92,
+     "text": "Erst Daten und Stücke, dann die Suche, dann der Reranker, zuletzt das Modell."
+    },
+    {
+     "t": 9.42,
+     "d": 6.56,
+     "text": "Wie in der Werkstatt: erst die Reifen prüfen, dann den Motor. Ändere immer nur eine Sache."
+    }
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Rechte",
+   "start": 70.58,
+   "dauer": 13.88,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.84,
+     "text": "Und denk an die Rechte. Wer was finden darf, wird vor der Suche geprüft, nicht danach."
+    },
+    {
+     "t": 6.64,
+     "d": 5.44,
+     "text": "Halte die Dokumente aktuell und lies die Protokolle. Sie liefern deine nächsten Testfragen."
+    }
+   ]
+  }
+ ]
+}

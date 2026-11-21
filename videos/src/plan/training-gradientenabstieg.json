@@ -1,0 +1,141 @@
+{
+ "id": "training-gradientenabstieg",
+ "titel": "Wie ein Modell lernt",
+ "untertitel": "Fehler messen, bergab gehen",
+ "gesamt": 82.68,
+ "szenen": [
+  {
+   "id": "dart",
+   "kapitel": "Fehler messen",
+   "start": 0,
+   "dauer": 14.56,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2,
+     "text": "Zuerst misst man den Fehler."
+    },
+    {
+     "t": 3.2,
+     "d": 4.56,
+     "text": "Wie weit liegt der Pfeil neben der Mitte? Diese Zahl heißt Verlust."
+    },
+    {
+     "t": 8.06,
+     "d": 5.6,
+     "text": "Je weiter daneben, desto größer der Verlust. Ziel ist ein möglichst kleiner Wert."
+    }
+   ]
+  },
+  {
+   "id": "schleife",
+   "kapitel": "Die Schleife",
+   "start": 14.56,
+   "dauer": 12.48,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 1.6,
+     "text": "Dann kommt die Schleife."
+    },
+    {
+     "t": 2.4,
+     "d": 4.56,
+     "text": "Vorhersagen, Fehler messen, die Gewichte ein Stück verschieben."
+    },
+    {
+     "t": 7.26,
+     "d": 4.32,
+     "text": "Das wiederholt sich viele tausend Mal, mit immer neuen Beispielen."
+    }
+   ]
+  },
+  {
+   "id": "huegel",
+   "kapitel": "Bergab",
+   "start": 27.04,
+   "dauer": 14.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.52,
+     "text": "Stell dir den Fehler als Landschaft vor. Du stehst im Nebel und willst ins Tal."
+    },
+    {
+     "t": 6.32,
+     "d": 2.48,
+     "text": "Du spürst nur das Gefälle unter dir."
+    },
+    {
+     "t": 9.1,
+     "d": 4.96,
+     "text": "Du gehst einen Schritt bergab und prüfst wieder. So wird der Fehler kleiner."
+    }
+   ]
+  },
+  {
+   "id": "lernrate",
+   "kapitel": "Lernrate",
+   "start": 42,
+   "dauer": 15.6,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.72,
+     "text": "Die Lernrate legt die Schrittweite fest."
+    },
+    {
+     "t": 3.52,
+     "d": 6.16,
+     "text": "Zu groß: Du springst über das Tal. Zu klein: Es dauert ewig."
+    },
+    {
+     "t": 9.98,
+     "d": 4.72,
+     "text": "Ein guter Wert liegt dazwischen. Man probiert ihn aus und beobachtet."
+    }
+   ]
+  },
+  {
+   "id": "kurven",
+   "kapitel": "Rechtzeitig stoppen",
+   "start": 57.6,
+   "dauer": 13.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.32,
+     "text": "Beobachte die Validierungsdaten."
+    },
+    {
+     "t": 3.12,
+     "d": 4.88,
+     "text": "Steigt der Fehler dort, passt sich das Modell zu sehr an. Dann halte an."
+    },
+    {
+     "t": 8.3,
+     "d": 4.32,
+     "text": "Das Training schreibt dir die Fehlerkurve mit. Danach entscheidest du."
+    }
+   ]
+  },
+  {
+   "id": "gpu",
+   "kapitel": "Viel gleichzeitig",
+   "start": 71.12,
+   "dauer": 11.56,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.2,
+     "text": "GPUs rechnen sehr viel gleichzeitig, deshalb eignen sie sich fürs Training."
+    },
+    {
+     "t": 6,
+     "d": 3.76,
+     "text": "Mit Vortraining und Feinabstimmung startest du nicht bei null."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,126 @@
+{
+ "id": "rag-reranking",
+ "titel": "Erst grob, dann genau",
+ "untertitel": "Reranking sortiert die besten Treffer neu",
+ "gesamt": 77.62,
+ "szenen": [
+  {
+   "id": "trichter",
+   "kapitel": "Vorauswahl",
+   "start": 0,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 5.36,
+     "text": "Zweihundert Bewerbungen, eine Stelle. Niemand führt zweihundert Gespräche."
+    },
+    {
+     "t": 6.56,
+     "d": 4.96,
+     "text": "Also sortiert man zuerst nach den Unterlagen aus. Fünfzehn bleiben übrig."
+    }
+   ]
+  },
+  {
+   "id": "gespraech",
+   "kapitel": "Gespräche",
+   "start": 12.42,
+   "dauer": 10.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.72,
+     "text": "Mit diesen fünfzehn führst du Gespräche."
+    },
+    {
+     "t": 3.52,
+     "d": 6.56,
+     "text": "Das dauert, aber es zeigt, wer wirklich passt. Genau so arbeitet eine zweistufige Suche."
+    }
+   ]
+  },
+  {
+   "id": "grob",
+   "kapitel": "Grobe Suche",
+   "start": 23.4,
+   "dauer": 15.92,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6,
+     "text": "Die erste Suche vergleicht nur fertige Zahlenlisten. Text und Frage begegnen sich nie."
+    },
+    {
+     "t": 6.8,
+     "d": 4.72,
+     "text": "Das ist schnell, auch bei Millionen Stücken. Aber es ist grob."
+    },
+    {
+     "t": 11.82,
+     "d": 3.2,
+     "text": "Die richtige Stelle liegt oft nur auf Platz neun."
+    }
+   ]
+  },
+  {
+   "id": "reranker",
+   "kapitel": "Gemeinsam lesen",
+   "start": 39.32,
+   "dauer": 14.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Ein Reranker liest die Frage und den Text gemeinsam."
+    },
+    {
+     "t": 4.32,
+     "d": 3.68,
+     "text": "Er sieht, wie sie zusammenpassen, und vergibt einen Punktwert."
+    },
+    {
+     "t": 8.3,
+     "d": 4.88,
+     "text": "Das ist genauer, braucht aber für jeden Kandidaten einen eigenen Durchgang."
+    }
+   ]
+  },
+  {
+   "id": "sortieren",
+   "kapitel": "Neu sortiert",
+   "start": 53.4,
+   "dauer": 14.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.16,
+     "text": "Darum holt die Suche erst zwanzig oder fünfzig Kandidaten. Der Reranker sortiert sie neu."
+    },
+    {
+     "t": 6.96,
+     "d": 6.4,
+     "text": "Die besten drei bis fünf gehen an das Sprachmodell. Die Stelle von Platz neun steht jetzt ganz oben."
+    }
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Abwägen",
+   "start": 67.66,
+   "dauer": 9.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2,
+     "text": "Das kostet Wartezeit."
+    },
+    {
+     "t": 2.8,
+     "d": 5.36,
+     "text": "Ob es sich lohnt, zeigt ein Test mit echten Fragen. Dazu mehr im nächsten Video."
+    }
+   ]
+  }
+ ]
+}

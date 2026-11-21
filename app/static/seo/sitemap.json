@@ -1,0 +1,289 @@
+{
+ "seiten": [
+  {
+   "id": "start",
+   "pfad": "/",
+   "datei": "content.js"
+  },
+  {
+   "id": "karte",
+   "pfad": "/karte",
+   "datei": "content.js"
+  },
+  {
+   "id": "ml",
+   "pfad": "/ml",
+   "datei": "content.js"
+  },
+  {
+   "id": "genki",
+   "pfad": "/genki",
+   "datei": "content.js"
+  },
+  {
+   "id": "robotik",
+   "pfad": "/robotik",
+   "datei": "content.js"
+  },
+  {
+   "id": "business",
+   "pfad": "/business",
+   "datei": "content.js"
+  },
+  {
+   "id": "daten",
+   "pfad": "/daten",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "neuronale-netze",
+   "pfad": "/neuronale-netze",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "training",
+   "pfad": "/training",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "bewertung",
+   "pfad": "/bewertung",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "verzerrung-ethik",
+   "pfad": "/verzerrung-ethik",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "recht",
+   "pfad": "/recht",
+   "datei": "content-grundlagen.js"
+  },
+  {
+   "id": "bild-als-zahlen",
+   "pfad": "/bild-als-zahlen",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "cnn-intuition",
+   "pfad": "/cnn-intuition",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "vision-aufgaben",
+   "pfad": "/vision-aufgaben",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "gesicht",
+   "pfad": "/gesicht",
+   "datei": "content.js"
+  },
+  {
+   "id": "objekt",
+   "pfad": "/objekt",
+   "datei": "content.js"
+  },
+  {
+   "id": "anlernen",
+   "pfad": "/anlernen",
+   "datei": "content.js"
+  },
+  {
+   "id": "chat",
+   "pfad": "/chat",
+   "datei": "content.js"
+  },
+  {
+   "id": "whisper",
+   "pfad": "/whisper",
+   "datei": "content.js"
+  },
+  {
+   "id": "tokens-sprachmodelle",
+   "pfad": "/tokens-sprachmodelle",
+   "datei": "content-sprache.js"
+  },
+  {
+   "id": "prompting",
+   "pfad": "/prompting",
+   "datei": "content-sprache.js"
+  },
+  {
+   "id": "llm-grenzen",
+   "pfad": "/llm-grenzen",
+   "datei": "content-sprache.js"
+  },
+  {
+   "id": "finetuning-oder-rag",
+   "pfad": "/finetuning-oder-rag",
+   "datei": "content-sprache.js"
+  },
+  {
+   "id": "sprachausgabe",
+   "pfad": "/sprachausgabe",
+   "datei": "content-sprache.js"
+  },
+  {
+   "id": "rag-ueberblick",
+   "pfad": "/rag-ueberblick",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag-embedding",
+   "pfad": "/rag-embedding",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag-chunking",
+   "pfad": "/rag-chunking",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag-suche",
+   "pfad": "/rag-suche",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag-reranking",
+   "pfad": "/rag-reranking",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag-bewertung",
+   "pfad": "/rag-bewertung",
+   "datei": "content-rag.js"
+  },
+  {
+   "id": "rag",
+   "pfad": "/rag",
+   "datei": "content.js"
+  },
+  {
+   "id": "agenten-grundlagen",
+   "pfad": "/agenten-grundlagen",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "agenten-planung",
+   "pfad": "/agenten-planung",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "agent",
+   "pfad": "/agent",
+   "datei": "content.js"
+  },
+  {
+   "id": "agenten-sicherheit",
+   "pfad": "/agenten-sicherheit",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "mcp-werkzeuge",
+   "pfad": "/mcp-werkzeuge",
+   "datei": "content-sehen-agenten.js"
+  },
+  {
+   "id": "bild",
+   "pfad": "/bild",
+   "datei": "content.js"
+  },
+  {
+   "id": "faceswap",
+   "pfad": "/faceswap",
+   "datei": "content.js"
+  },
+  {
+   "id": "tabellen-ml",
+   "pfad": "/tabellen-ml",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "zeitreihen",
+   "pfad": "/zeitreihen",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "anomalien",
+   "pfad": "/anomalien",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "empfehlungen",
+   "pfad": "/empfehlungen",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "mlops",
+   "pfad": "/mlops",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "kosten-energie",
+   "pfad": "/kosten-energie",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "ki-einfuehrung",
+   "pfad": "/ki-einfuehrung",
+   "datei": "content-prognose-betrieb.js"
+  },
+  {
+   "id": "uc-fertigung-sichtpruefung",
+   "pfad": "/uc-fertigung-sichtpruefung",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-fertigung-sortieren",
+   "pfad": "/uc-fertigung-sortieren",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-logistik-zaehlen",
+   "pfad": "/uc-logistik-zaehlen",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-handel-regal",
+   "pfad": "/uc-handel-regal",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-gesundheit-auffaellig",
+   "pfad": "/uc-gesundheit-auffaellig",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-buero-dokumente",
+   "pfad": "/uc-buero-dokumente",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-buero-protokoll",
+   "pfad": "/uc-buero-protokoll",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-service-bestellung",
+   "pfad": "/uc-service-bestellung",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-sicherheit-zutritt",
+   "pfad": "/uc-sicherheit-zutritt",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "uc-sicherheit-baustelle",
+   "pfad": "/uc-sicherheit-baustelle",
+   "datei": "content-usecases.js"
+  },
+  {
+   "id": "hardware",
+   "pfad": "/hardware",
+   "datei": "content.js"
+  }
+ ]
+}

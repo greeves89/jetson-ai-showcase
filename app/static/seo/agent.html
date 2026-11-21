@@ -1,0 +1,14 @@
+<div class="seitenbreite"><p class="ueber">Agenten</p><h1>Agent mit Werkzeugen</h1><p class="lead">Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.</p>
+<div class="text">
+<h2 class="abs">Ein Agent ist ein Modell mit Werkzeugen</h2>
+<p>Ein Agent bekommt zusätzlich zur Frage eine Liste von Werkzeugen beschrieben, hier: <strong>rechne</strong>, <strong>uhrzeit</strong> und <strong>dokumentsuche</strong>. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.</p>
+<h2 class="abs">Die Schleife</h2>
+
+<ul><li>Frage und Werkzeugliste gehen an das Modell.</li><li>Das Modell antwortet entweder mit einem Werkzeugaufruf oder mit dem Ergebnis.</li><li>Bei einem Aufruf führt der Jetson das Werkzeug aus und hängt das Ergebnis an die Unterhaltung.</li><li>Das Modell sieht das Ergebnis und entscheidet neu. Nach höchstens fünf Runden endet die Schleife.</li></ul>
+<h2 class="abs">Worauf du achten solltest</h2>
+<p>Kleine Modelle wählen manchmal das falsche Werkzeug oder erfinden Eingaben. Darum zeigt das Labor jeden Schritt. Werkzeuge sind der Punkt, an dem ein Agent echten Schaden anrichten könnte. Deshalb ist der Rechner hier streng begrenzt: Er versteht nur Zahlen und einfache Rechenzeichen.</p>
+</div>
+<section class="block"><h2>Im Business</h2><div class="text"><p>Abläufe, bei denen mehrere Systeme nacheinander gefragt werden müssen: Auftragsstatus nachschlagen, Preis berechnen, Antwort formulieren.</p><ul><li>Ticket vorsortieren</li><li>Bestellstatus abfragen und Kunden informieren</li></ul></div></section>
+<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Je mächtiger die Werkzeuge, desto wichtiger sind Grenzen und Freigaben durch einen Menschen.</li><li>Mehrere Schritte multiplizieren Fehler: Ein falscher Zwischenschritt zieht die Antwort mit.</li></ul></div></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/rag">RAG: Fragen an eigene Dokumente</a></li><li><a href="/robotik">Robotik</a></li></ul></section>
+</div>

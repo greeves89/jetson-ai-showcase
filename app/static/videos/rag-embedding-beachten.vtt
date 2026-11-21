@@ -1,0 +1,59 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.690
+Erster Stolperstein: das Modell.
+
+00:00:03.840 --> 00:00:08.630
+Zwei Stadtpläne von verschiedenen
+Verlagen haben verschiedene Koordinaten.
+
+00:00:08.780 --> 00:00:12.050
+Dieselbe Zahl heißt auf jedem etwas anderes.
+
+00:00:13.300 --> 00:00:18.650
+Darum brauchen Dokumente und Fragen immer
+dasselbe Modell, in derselben Version.
+
+00:00:18.800 --> 00:00:24.470
+Wechselst du das Modell, passt der alte Index
+nicht mehr. Dann musst du alles neu einbetten.
+
+00:00:25.720 --> 00:00:28.430
+Zweiter Stolperstein: die Länge.
+
+00:00:28.580 --> 00:00:33.130
+Ein Embedding fasst einen ganzen
+Text in einer Zahlenliste zusammen.
+
+00:00:33.280 --> 00:00:39.510
+Je länger und bunter der Text, desto verwaschener
+wird sie. Darum teilt man ihn vorher in Stücke.
+
+00:00:40.760 --> 00:00:44.510
+Dritter Stolperstein:
+Sprache und Fachgebiet.
+
+00:00:44.660 --> 00:00:51.450
+Ein Modell versteht gut, was es oft gesehen hat.
+Seltene Sprachen und Fachjargon liegen ungenauer.
+
+00:00:51.600 --> 00:00:53.590
+Teste mit eigenen Fragen.
+
+00:00:54.840 --> 00:00:58.110
+Vierter Stolperstein: genaue Zeichen.
+
+00:00:58.260 --> 00:01:03.050
+Zwei Teilenummern mit einer anderen
+Ziffer sind für das Modell fast dasselbe.
+
+00:01:03.200 --> 00:01:06.310
+Hier hilft zusätzlich eine Stichwortsuche.
+
+00:01:07.560 --> 00:01:11.950
+Und noch etwas: Zum Einbetten
+geht dein Text an ein Modell.
+
+00:01:12.100 --> 00:01:17.370
+Läuft es bei dir, bleibt er im Haus. Läuft
+es in der Cloud, musst du das klären.

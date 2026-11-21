@@ -1,0 +1,141 @@
+{
+ "id": "rag-embedding",
+ "titel": "Aus Text Zahlen",
+ "untertitel": "Embeddings setzen Text als Punkte auf eine Karte",
+ "gesamt": 86.28,
+ "szenen": [
+  {
+   "id": "stadtplan",
+   "kapitel": "Stadtplan",
+   "start": 0,
+   "dauer": 16.96,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6,
+     "text": "Auf einem Stadtplan hat jeder Ort zwei Zahlen: wie weit nach Osten, wie weit nach Norden."
+    },
+    {
+     "t": 7.2,
+     "d": 5.6,
+     "text": "Bahnhof und Busbahnhof liegen nah beieinander. Der Friedhof liegt weit weg."
+    },
+    {
+     "t": 13.1,
+     "d": 2.96,
+     "text": "Dafür muss der Plan nichts über Bahnhöfe wissen."
+    }
+   ]
+  },
+  {
+   "id": "eis",
+   "kapitel": "Eissorten",
+   "start": 16.96,
+   "dauer": 17.28,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.24,
+     "text": "Das geht auch mit Eis. Jede Sorte bekommt drei Werte: süß, fruchtig, cremig."
+    },
+    {
+     "t": 7.04,
+     "d": 4.8,
+     "text": "Zitrone und Himbeere sind fast gleich. Nuss ist ganz anders."
+    },
+    {
+     "t": 12.14,
+     "d": 4.24,
+     "text": "Eine Liste von Zahlen, die etwas beschreibt, heißt Vektor."
+    }
+   ]
+  },
+  {
+   "id": "satz",
+   "kapitel": "Satz zu Zahlen",
+   "start": 34.24,
+   "dauer": 10.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.28,
+     "text": "Bei Text kann niemand die Werte von Hand festlegen."
+    },
+    {
+     "t": 4.08,
+     "d": 6,
+     "text": "Das macht ein Embedding-Modell. Es bekommt einen Satz und gibt eine lange Liste von Zahlen zurück."
+    }
+   ]
+  },
+  {
+   "id": "karte",
+   "kapitel": "Bedeutungskarte",
+   "start": 45.22,
+   "dauer": 16.8,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Gelernt hat das Modell aus riesigen Textmengen."
+    },
+    {
+     "t": 3.84,
+     "d": 4.24,
+     "text": "Wer in ähnlichen Zusammenhängen vorkommt, bekommt ähnliche Zahlen."
+    },
+    {
+     "t": 8.38,
+     "d": 7.52,
+     "text": "So entsteht eine Karte der Bedeutung. Was ähnlich klingt, liegt nah beieinander, auch mit ganz anderen Wörtern."
+    }
+   ]
+  },
+  {
+   "id": "winkel",
+   "kapitel": "Winkel",
+   "start": 62.02,
+   "dauer": 12.48,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.76,
+     "text": "Wie nah zwei Punkte sind, misst man oft mit dem Kosinus."
+    },
+    {
+     "t": 4.56,
+     "d": 2.24,
+     "text": "Er schaut auf die Richtung der Pfeile."
+    },
+    {
+     "t": 7.1,
+     "d": 4.48,
+     "text": "Gleiche Richtung ergibt eins. Ein rechter Winkel ergibt null."
+    }
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Nächste Nachbarn",
+   "start": 74.5,
+   "dauer": 11.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Deine Frage wird genauso zum Punkt."
+    },
+    {
+     "t": 3.36,
+     "d": 2.48,
+     "text": "Die nächsten Nachbarn sind die Treffer."
+    },
+    {
+     "t": 6.14,
+     "d": 3.84,
+     "text": "Mehr dazu auf der Seite Vektorisieren und Embeddings."
+    }
+   ]
+  }
+ ]
+}

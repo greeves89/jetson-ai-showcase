@@ -1,0 +1,59 @@
+{
+ "id": "rag-embedding-beachten",
+ "titel": "Vier Stolpersteine",
+ "untertitel": "Wann Embeddings danebenliegen",
+ "szenen": [
+  {
+   "id": "verlag",
+   "kapitel": "Modell",
+   "saetze": [
+    "Erster Stolperstein: das Modell.",
+    "Zwei Stadtpläne von verschiedenen Verlagen haben verschiedene Koordinaten.",
+    "Dieselbe Zahl heißt auf jedem etwas anderes."
+   ]
+  },
+  {
+   "id": "gleich",
+   "kapitel": "Gleiches Modell",
+   "saetze": [
+    "Darum brauchen Dokumente und Fragen immer dasselbe Modell, in derselben Version.",
+    "Wechselst du das Modell, passt der alte Index nicht mehr. Dann musst du alles neu einbetten."
+   ]
+  },
+  {
+   "id": "laenge",
+   "kapitel": "Länge",
+   "saetze": [
+    "Zweiter Stolperstein: die Länge.",
+    "Ein Embedding fasst einen ganzen Text in einer Zahlenliste zusammen.",
+    "Je länger und bunter der Text, desto verwaschener wird sie. Darum teilt man ihn vorher in Stücke."
+   ]
+  },
+  {
+   "id": "sprache",
+   "kapitel": "Sprache",
+   "saetze": [
+    "Dritter Stolperstein: Sprache und Fachgebiet.",
+    "Ein Modell versteht gut, was es oft gesehen hat. Seltene Sprachen und Fachjargon liegen ungenauer.",
+    "Teste mit eigenen Fragen."
+   ]
+  },
+  {
+   "id": "zeichen",
+   "kapitel": "Genaue Zeichen",
+   "saetze": [
+    "Vierter Stolperstein: genaue Zeichen.",
+    "Zwei Teilenummern mit einer anderen Ziffer sind für das Modell fast dasselbe.",
+    "Hier hilft zusätzlich eine Stichwortsuche."
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Checkliste",
+   "saetze": [
+    "Und noch etwas: Zum Einbetten geht dein Text an ein Modell.",
+    "Läuft es bei dir, bleibt er im Haus. Läuft es in der Cloud, musst du das klären."
+   ]
+  }
+ ]
+}

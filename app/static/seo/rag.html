@@ -1,0 +1,14 @@
+<div class="seitenbreite"><p class="ueber">Wissen und RAG</p><h1>RAG: Fragen an eigene Dokumente</h1><p class="lead">Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit.</p>
+<div class="text">
+<h2 class="abs">Das Problem</h2>
+<p>Ein Sprachmodell weiß nur, was es im Training gesehen hat. Deine Verträge, Handbücher und Notizen gehören nicht dazu. Würdest du trotzdem fragen, würde es raten.</p>
+<h2 class="abs">Die Lösung in vier Schritten</h2>
+
+<ul><li><strong>Zerlegen:</strong> Der Text wird in Abschnitte von etwa 800 Zeichen geteilt.</li><li><strong>Einbetten:</strong> Jeder Abschnitt wird zu einer Zahlenliste (Embedding), hier mit dem Modell nomic-embed-text.</li><li><strong>Suchen:</strong> Deine Frage wird genauso eingebettet. Die Abschnitte mit der größten Ähnlichkeit (Kosinus) sind die Treffer.</li><li><strong>Antworten:</strong> Die Treffer und deine Frage gehen an das Sprachmodell, mit der Anweisung, nur damit zu antworten und die Quelle zu nennen.</li></ul>
+<h2 class="abs">Schau auf die Scores</h2>
+<p>Jeder Treffer hat einen Wert zwischen 0 und 1. Je höher, desto ähnlicher ist der Abschnitt zur Frage. Ist die Antwort falsch, liegt es meistens an der Suche und nicht am Modell: Dann standen die falschen Abschnitte oben. Genau deshalb zeigt dir das Labor die Treffer, bevor es antwortet.</p>
+</div>
+<section class="block"><h2>Im Business</h2><div class="text"><p>Fragen an Verträge, Handbücher und Wissensbasen mit Quellenangabe. Vertrauliche Dokumente bleiben auf dem Gerät.</p><ul><li>Wo steht die Kündigungsfrist?</li><li>Welche Schritte hat die Wartungsanleitung?</li></ul></div></section>
+<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Die Antwort ist nur so gut wie die gefundenen Abschnitte. Fehlt etwas im Text, kann das Modell es nicht belegen.</li><li>Dieses Labor hält höchstens 300 Abschnitte im Speicher und vergisst alles beim Neustart.</li></ul></div></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/agent">Agent mit Werkzeugen</a></li><li><a href="/genki">Generative KI</a></li></ul></section>
+</div>

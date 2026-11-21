@@ -1,0 +1,136 @@
+{
+ "id": "rag-embedding-beachten",
+ "titel": "Vier Stolpersteine",
+ "untertitel": "Wann Embeddings danebenliegen",
+ "gesamt": 79.02,
+ "szenen": [
+  {
+   "id": "verlag",
+   "kapitel": "Modell",
+   "start": 0,
+   "dauer": 12.8,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.64,
+     "text": "Erster Stolperstein: das Modell."
+    },
+    {
+     "t": 3.84,
+     "d": 4.64,
+     "text": "Zwei Stadtpläne von verschiedenen Verlagen haben verschiedene Koordinaten."
+    },
+    {
+     "t": 8.78,
+     "d": 3.12,
+     "text": "Dieselbe Zahl heißt auf jedem etwas anderes."
+    }
+   ]
+  },
+  {
+   "id": "gleich",
+   "kapitel": "Gleiches Modell",
+   "start": 12.8,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.2,
+     "text": "Darum brauchen Dokumente und Fragen immer dasselbe Modell, in derselben Version."
+    },
+    {
+     "t": 6,
+     "d": 5.52,
+     "text": "Wechselst du das Modell, passt der alte Index nicht mehr. Dann musst du alles neu einbetten."
+    }
+   ]
+  },
+  {
+   "id": "laenge",
+   "kapitel": "Länge",
+   "start": 25.22,
+   "dauer": 15.04,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Zweiter Stolperstein: die Länge."
+    },
+    {
+     "t": 3.36,
+     "d": 4.4,
+     "text": "Ein Embedding fasst einen ganzen Text in einer Zahlenliste zusammen."
+    },
+    {
+     "t": 8.06,
+     "d": 6.08,
+     "text": "Je länger und bunter der Text, desto verwaschener wird sie. Darum teilt man ihn vorher in Stücke."
+    }
+   ]
+  },
+  {
+   "id": "sprache",
+   "kapitel": "Sprache",
+   "start": 40.26,
+   "dauer": 14.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.6,
+     "text": "Dritter Stolperstein: Sprache und Fachgebiet."
+    },
+    {
+     "t": 4.4,
+     "d": 6.64,
+     "text": "Ein Modell versteht gut, was es oft gesehen hat. Seltene Sprachen und Fachjargon liegen ungenauer."
+    },
+    {
+     "t": 11.34,
+     "d": 1.84,
+     "text": "Teste mit eigenen Fragen."
+    }
+   ]
+  },
+  {
+   "id": "zeichen",
+   "kapitel": "Genaue Zeichen",
+   "start": 54.34,
+   "dauer": 12.72,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Vierter Stolperstein: genaue Zeichen."
+    },
+    {
+     "t": 3.92,
+     "d": 4.64,
+     "text": "Zwei Teilenummern mit einer anderen Ziffer sind für das Modell fast dasselbe."
+    },
+    {
+     "t": 8.86,
+     "d": 2.96,
+     "text": "Hier hilft zusätzlich eine Stichwortsuche."
+    }
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Checkliste",
+   "start": 67.06,
+   "dauer": 11.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.24,
+     "text": "Und noch etwas: Zum Einbetten geht dein Text an ein Modell."
+    },
+    {
+     "t": 5.04,
+     "d": 5.12,
+     "text": "Läuft es bei dir, bleibt er im Haus. Läuft es in der Cloud, musst du das klären."
+    }
+   ]
+  }
+ ]
+}

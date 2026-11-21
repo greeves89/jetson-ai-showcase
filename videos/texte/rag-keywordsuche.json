@@ -1,0 +1,57 @@
+{
+ "id": "rag-keywordsuche",
+ "titel": "Stichwortsuche",
+ "untertitel": "Wörter zählen, seltene Wörter wiegen mehr",
+ "szenen": [
+  {
+   "id": "telefonbuch",
+   "kapitel": "Telefonbuch",
+   "saetze": [
+    "Im Telefonbuch suchst du einen Namen und findest genau diesen Namen.",
+    "Das ist Stichwortsuche. Sie ist schnell und exakt, solange du das richtige Wort kennst."
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "kapitel": "Wörter zählen",
+   "saetze": [
+    "Die Grundidee ist einfach: Kommen die Wörter der Frage im Text vor?",
+    "Die Suche zählt sie. Ein Text mit vielen passenden Wörtern steht oben."
+   ]
+  },
+  {
+   "id": "gewicht",
+   "kapitel": "Seltene Wörter",
+   "saetze": [
+    "Aber nicht jedes Wort zählt gleich.",
+    "Das Wort der steht überall und sagt nichts. Das Wort Dichtungsring ist selten und sagt viel.",
+    "Die Suche gibt seltenen Wörtern mehr Gewicht. Das gängige Verfahren heißt BM25."
+   ]
+  },
+  {
+   "id": "saettigung",
+   "kapitel": "Sättigung",
+   "saetze": [
+    "Zwei weitere Regeln: Ein Wort, das zwanzigmal vorkommt, ist nicht zwanzigmal wichtiger als eins, das fünfmal vorkommt.",
+    "Und lange Texte werden nicht bevorzugt, nur weil sie lang sind."
+   ]
+  },
+  {
+   "id": "staerken",
+   "kapitel": "Stärken",
+   "saetze": [
+    "Stark ist diese Suche bei Fehlercodes, Namen und Zahlen.",
+    "Schwach ist sie bei Umschreibungen.",
+    "Wer Auto abstellen fragt, findet nicht den Absatz über das Parken von Fahrzeugen."
+   ]
+  },
+  {
+   "id": "sinn",
+   "kapitel": "Bedeutung",
+   "saetze": [
+    "Dafür gibt es die Suche nach Bedeutung.",
+    "Beide zusammen sehen wir im nächsten Video."
+   ]
+  }
+ ]
+}

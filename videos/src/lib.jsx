@@ -9,7 +9,7 @@ export const C = {
 };
 export const FONT = '-apple-system, "SF Pro Display", "SF Pro Text", system-ui, "Helvetica Neue", Arial, sans-serif';
 
-const Ctx = createContext({ saetze: [], dur: 6, label: "", kapitel: "" });
+const Ctx = createContext({ saetze: [], dur: 6, label: "", kapitel: "", start: 0 });
 export const SceneProvider = Ctx.Provider;
 
 // Zeit in der Szene (Sekunden) + Satzmarken der Stimme
@@ -54,37 +54,64 @@ export const Abs = ({ x, y, w, h, children, style }) => (
 );
 
 // Grundgerüst jeder Szene: Hintergrund, Kopfzeile, Ein- und Ausblenden
-export function Szene({ titel, sub, children, kopf = true, fokus }) {
+// Ruhiger Grund: feines Punktfeld, driftet langsam (laeuft ueber Szenengrenzen hinweg weiter)
+function Grund({ T }) {
+  return (
+    <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.09) 1.6px, transparent 2.2px)", backgroundSize: "64px 64px", backgroundPosition: `${(T * 5) % 64}px ${(T * 2.5) % 64}px`, opacity: 0.55 }} />
+  );
+}
+
+// Zweite Ebene: grosser, stark abgedunkelter Umriss des Motivs
+function Tiefe({ icon, x, y, size, T }) {
+  return (
+    <div style={{ position: "absolute", left: x - size / 2 + Math.sin(T / 9) * 14, top: y - size / 2 + Math.cos(T / 11) * 10, opacity: 0.07 }}>
+      <Icon name={icon} size={size} color="#ffffff" sw={0.45} />
+    </div>
+  );
+}
+
+// Grundgeruest jeder Szene: kleine Kopfzeile oben links, Motiv in der Bildmitte.
+// anker: Element, das an der Szenengrenze NICHT ein- und ausgeblendet wird (Match-Cut)
+export function Szene({ titel, sub, children, kopf = true, fokus, tiefe, anker }) {
   const { t, dur } = useCues();
   const c = useContext(Ctx);
-  const rein = ease(t, 0, 0.45), raus = ease(t, dur - 0.45, dur);
+  const rein = ease(t, 0, 0.3), raus = ease(t, dur - 0.3, dur);
   const o = Math.min(rein, 1 - raus);
-  // Kamera: Inhalt wird auf die Bildmitte gesetzt und zoomt langsam heran
-  const [fs, ox, oy] = fokus ?? [1, 960, 670];
-  const z = fs * (1 + 0.05 * (t / dur));
-  const tf = `translate(${960 - ox}px, ${670 - oy}px) scale(${z})`;
-  const hub = `scale(${lerp(0.97, 1, rein) * lerp(1, 1.025, raus)})`;
+  const [fs, ox, oy] = fokus ?? [1, 960, 640];
+  const z = fs * (1 + 0.04 * (t / dur));
+  const tf = `translate(${960 - ox}px, ${640 - oy}px) scale(${z})`;
+  const T = (c.start ?? 0) + t;
   return (
-    <AbsoluteFill style={{ background: "radial-gradient(1400px 900px at 78% 12%, #121216 0%, #000 70%)", fontFamily: FONT, color: C.text, opacity: o, transform: hub }}>
-      {kopf && (
-        <div style={{ position: "absolute", left: 120, top: 70, width: 1680 }}>
-          <Rv at={0.1} dy={14}>
-            <div style={{ fontSize: 36, fontWeight: 600, color: C.blue, letterSpacing: 0.2 }}>{c.label}</div>
-          </Rv>
-          <Rv at={0.2} dy={24}>
-            <div style={{ fontSize: 100, fontWeight: 700, letterSpacing: -2.5, lineHeight: 1.05, marginTop: 6 }}>{titel}</div>
-          </Rv>
-          {sub && (
-            <Rv at={0.45} dy={16}>
-              <div style={{ fontSize: 44, color: C.mute, marginTop: 10, fontWeight: 400 }}>{sub}</div>
+    <AbsoluteFill style={{ background: "#000", fontFamily: FONT, color: C.text }}>
+      <Grund T={T} />
+      {tiefe && <Tiefe icon={tiefe[0]} x={tiefe[1]} y={tiefe[2]} size={tiefe[3] ?? 820} T={T} />}
+      {anker}
+      <div style={{ position: "absolute", inset: 0, opacity: o }}>
+        {kopf && (
+          <div style={{ position: "absolute", left: 110, top: 56, width: 1700 }}>
+            <Rv at={0.1} dy={10}>
+              <div style={{ fontSize: 30, fontWeight: 600, color: C.blue }}>{c.label}</div>
             </Rv>
-          )}
-        </div>
-      )}
-      <div style={{ position: "absolute", inset: 0, transformOrigin: `${ox}px ${oy}px`, transform: tf }}>{children}</div>
+            <Rv at={0.15} dy={14}>
+              <div style={{ fontSize: 72, fontWeight: 700, letterSpacing: -1.5, lineHeight: 1.05, marginTop: 4 }}>{titel}</div>
+            </Rv>
+            {sub && (
+              <Rv at={0.3} dy={10}>
+                <div style={{ fontSize: 38, color: C.mute, marginTop: 6, fontWeight: 400 }}>{sub}</div>
+              </Rv>
+            )}
+          </div>
+        )}
+        <div style={{ position: "absolute", inset: 0, transformOrigin: `${ox}px ${oy}px`, transform: tf }}>{children}</div>
+      </div>
     </AbsoluteFill>
   );
 }
+
+// Teilbild skalieren (um den Punkt ox, oy)
+export const Zoom = ({ s, ox, oy, children }) => (
+  <div style={{ position: "absolute", inset: 0, transformOrigin: `${ox}px ${oy}px`, transform: `scale(${s})` }}>{children}</div>
+);
 
 // Zeilenstütze: Text, der an einer Satzmarke erscheint
 export function Txt({ at, x, y, w, size = 36, color = C.text, weight = 500, align = "left", children, dy = 16, style }) {
@@ -161,6 +188,14 @@ const I = {
   network: <><circle cx="5" cy="6" r="2" /><circle cx="5" cy="18" r="2" /><circle cx="12" cy="12" r="2" /><circle cx="19" cy="6" r="2" /><circle cx="19" cy="18" r="2" /><path d="M7 6l3.5 5M7 18l3.5-5M14 11l3.5-4M14 13l3.5 4" /></>,
   list: <path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01" />,
   box: <><path d="M21 8l-9-5-9 5v8l9 5 9-5z" /><path d="M3 8l9 5 9-5M12 13v8" /></>,
+  alert: <><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z" /><path d="M12 9v4M12 17h.01" /></>,
+  lock: <><rect x="4" y="11" width="16" height="10" rx="2" /><path d="M8 11V7a4 4 0 0 1 8 0v4M12 15v2" /></>,
+  calendar: <><rect x="3" y="5" width="18" height="16" rx="2" /><path d="M3 10h18M8 3v4M16 3v4" /></>,
+  bell: <><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9M10 21a2 2 0 0 0 4 0" /></>,
+  trash: <><path d="M3 6h18M8 6V4h8v2M6 6l1 15h10l1-15M10 11v6M14 11v6" /></>,
+  users: <><circle cx="9" cy="8" r="4" /><path d="M2 21a7 7 0 0 1 14 0M17 4a4 4 0 0 1 0 8M22 21a7 7 0 0 0-4-6" /></>,
+  target: <><circle cx="12" cy="12" r="9" /><circle cx="12" cy="12" r="5" /><circle cx="12" cy="12" r="1.2" /></>,
+  edit: <><path d="M12 20h9M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4z" /></>,
   help: <><circle cx="12" cy="12" r="9" /><path d="M9.5 9a2.5 2.5 0 1 1 3.5 2.3c-.6.3-1 .9-1 1.7M12 17h.01" /></>,
   grid: <path d="M3 3h7v7H3zM14 3h7v7h-7zM3 14h7v7H3zM14 14h7v7h-7z" />,
   repeat: <path d="M17 2l4 4-4 4M3 11V9a3 3 0 0 1 3-3h15M7 22l-4-4 4-4M21 13v2a3 3 0 0 1-3 3H3" />,

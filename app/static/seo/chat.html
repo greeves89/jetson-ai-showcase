@@ -1,0 +1,13 @@
+<div class="seitenbreite"><p class="ueber">Sprache</p><h1>Sprachmodell im Chat</h1><p class="lead">Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.</p>
+<div class="text">
+<h2 class="abs">Was du hier steuern kannst</h2>
+<p><strong>Tokens zeigen</strong> färbt die Antwort Stück für Stück ein. Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Wörter bestehen oft aus mehreren Tokens, häufige Wörter aus einem.</p><p>Die <strong>Temperatur</strong> wirkt auf die nächste Antwort. Stelle sie auf 0 und stelle dieselbe Frage zweimal: Die Antworten sind fast gleich. Stelle sie auf 1,5, dann weichen sie ab und werden unzuverlässiger.</p>
+<h2 class="abs">Was auf dem Jetson passiert</h2>
+<p>Beim ersten Start wird das Modell von der SSD in den Arbeitsspeicher geladen. Das Modell hat etwa drei Milliarden Parameter und belegt rund 2 GB auf der Platte. Danach rechnet die GPU jedes Token. In der Seitenleiste steigen dabei GPU-Last und Leistung.</p>
+<h2 class="abs">Warum es kleiner ist als bekannte Chatbots</h2>
+<p>Die großen Dienste nutzen Modelle mit sehr viel mehr Parametern auf Rechenzentren. Ein kleines Modell auf dem Jetson ist sofort verfügbar und privat, weiß aber weniger und macht mehr Fehler. Frag es nach etwas Speziellem, dann siehst du die Grenze. Beispiel: Frag nach dem „Jetson“. Das Modell hält ihn gern für die Zeichentrickserie.</p>
+</div>
+<section class="block"><h2>Im Business</h2><div class="text"><p>Ein interner Assistent für Entwürfe, Zusammenfassungen und Fragen, ohne dass Firmeninhalte das Haus verlassen.</p><ul><li>Mail-Entwürfe</li><li>Zusammenfassung eines langen Textes</li></ul></div></section>
+<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Kleine Modelle erfinden häufiger Fakten (Halluzination). Prüfe wichtige Aussagen.</li><li>Der Kontext ist begrenzt. Dieses Labor merkt sich keine frühere Unterhaltung.</li></ul></div></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/genki">Generative KI</a></li><li><a href="/rag">RAG: Fragen an eigene Dokumente</a></li><li><a href="/agent">Agent mit Werkzeugen</a></li></ul></section>
+</div>

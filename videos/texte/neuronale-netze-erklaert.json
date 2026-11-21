@@ -1,0 +1,60 @@
+{
+ "id": "neuronale-netze-erklaert",
+ "titel": "Neuronale Netze",
+ "untertitel": "Gewichte, Schwellen und Schichten",
+ "szenen": [
+  {
+   "id": "abstimmung",
+   "kapitel": "Abstimmung",
+   "saetze": [
+    "Ein Team stimmt ab. Manche Stimmen zählen mehr.",
+    "Das ist ein Neuron.",
+    "Jeder gibt eine Stimme ab, aber nicht jede zählt gleich viel."
+   ]
+  },
+  {
+   "id": "summe",
+   "kapitel": "Gewichte",
+   "saetze": [
+    "Jede Eingabe wird mit einem Gewicht multipliziert.",
+    "Alles wird addiert.",
+    "Ein dickes Gewicht heißt: Diese Eingabe ist wichtig. Ein dünnes heißt: kaum von Bedeutung."
+   ]
+  },
+  {
+   "id": "ampel",
+   "kapitel": "Schwelle",
+   "saetze": [
+    "Eine Schwelle entscheidet, ob das Neuron meldet.",
+    "Wie bei der Fußgängerampel.",
+    "Liegt die Summe unter der Schwelle, bleibt es still. Darüber gibt das Neuron ein Signal weiter."
+   ]
+  },
+  {
+   "id": "schichten",
+   "kapitel": "Schichten",
+   "saetze": [
+    "Viele Neuronen bilden Schichten.",
+    "Die erste findet Kanten, die nächste Formen, die letzte ein Gesicht.",
+    "Das Signal wandert von Schicht zu Schicht."
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Gebogene Grenze",
+   "saetze": [
+    "Eine Gerade trennt nicht alles.",
+    "Mehrere Schichten ziehen gebogene Grenzen.",
+    "Ein einzelnes Neuron zieht nur eine gerade Linie. Das reicht für einfache Fälle, aber nicht für Bilder oder Sprache."
+   ]
+  },
+  {
+   "id": "blackbox",
+   "kapitel": "Black Box",
+   "saetze": [
+    "Die Gewichte heißen Parameter. Echte Netze haben Millionen bis Milliarden.",
+    "Das Wissen steckt verteilt in den Zahlen. Darum lässt sich schwer erklären, warum ein Netz so entscheidet."
+   ]
+  }
+ ]
+}

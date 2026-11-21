@@ -29,7 +29,7 @@ assert.equal(await titel(), "Robotik");
 assert.equal(await page.getAttribute(".lk .detail a.btn", "href"), "#/robotik");
 // Klick auf den Link wechselt die Seite
 await page.click(".lk .detail a.btn");
-await page.waitForFunction(() => location.hash === "#/robotik");
+await page.waitForFunction(() => location.pathname === "/robotik");
 t.fehler = t.fehler.filter((f) => !f.includes("ERR_ABORTED"));
 console.log("landkarte: ok", t.fehler.length ? "FEHLER " + t.fehler : "keine Konsolenfehler");
 await t.schliessen();

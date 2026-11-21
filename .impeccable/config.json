@@ -11,6 +11,42 @@
         ],
         "createdAt": "2026-11-21T21:02:48.373Z",
         "reason": "Fortschritts-/Ladebalken animieren bewusst width (Progressbar-Pattern); kleine Elemente, kein Layout-Thrash"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "app/static/style.css"
+        ],
+        "createdAt": "2026-11-21T22:08:02.192Z",
+        "reason": "Fortschritts- und Fuellbalken (.balken, .ladebar, .kand .bar) animieren bewusst die Breite; kleine Elemente, kein Layout-Thrash"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "app/static/demos.css"
+        ],
+        "createdAt": "2026-11-21T22:08:02.257Z",
+        "reason": "Fortschrittsbalken (.d-bar) animiert bewusst die Breite; kleines Element, kein Layout-Thrash"
+      },
+      {
+        "rule": "border-accent-on-rounded",
+        "value": "*",
+        "files": [
+          "app/static/widgets.css"
+        ],
+        "createdAt": "2026-11-21T22:08:02.340Z",
+        "reason": "Legendenstrich (.w-legende i) ist ein Linienmuster der Diagrammserie, keine Karte mit Akzentrahmen"
+      },
+      {
+        "rule": "layout-transition",
+        "value": "*",
+        "files": [
+          "app/static/widgets-rag.css"
+        ],
+        "createdAt": "2026-11-21T22:27:00.934Z",
+        "reason": "Score-Balken (.rr-score-bar) animiert bewusst die Breite; kleines Fuellelement, kein Layout-Thrash"
       }
     ]
   }

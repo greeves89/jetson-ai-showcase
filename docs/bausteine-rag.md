@@ -169,3 +169,32 @@ Seite: `rag-bewertung`.
 **Technik.** Vollständig im Browser, wenn Vektoren und BM25 aus dem Baustein `rag-suche-vergleich` wiederverwendet werden (gemeinsame Hilfsfunktionen, keine zweite Implementierung). Eigene Fragen brauchen den Jetson. Antworttreue wird bewusst nicht gemessen, das braucht ein Modell als Bewerter und ist auf der Seite im Text erklärt.
 
 **Aufwand.** Gering bis mittel, etwa ein Arbeitstag, sobald `rag-suche-vergleich` steht.
+
+---
+
+## Messungen (Stand des Baus)
+
+Die Bausteine sind gebaut (`app/static/widgets-rag.js`, Server `app/lab_rag.py`, Daten `app/static/daten/rag-korpus.json`, erzeugt mit `scripts/rag_korpus_bauen.py`). Abweichungen vom Entwurf oben, gemessen mit den echten Vektoren von `nomic-embed-text` auf dem Jetson:
+
+- **Embeddings laufen auf der CPU** (`num_gpu: 0`). Auf der GPU liefert das Modell (F16) für manche Sätze nur Nullen, zum Beispiel für „Das Auto steht auf dem Parkplatz“. Der Server prüft zusätzlich auf Nullvektoren.
+- **Korpus:** 23 Absätze statt 14. Dazu Gegenspieler: weitere Fehlercodes, mehrere Absätze zu Pumpe 3, Zephyr-3 neben Zephyr-2, Fristen mit anderen Zahlen. Ohne sie hätte der Vektor kaum je verloren.
+- **Fragen geändert**, weil die Messung es verlangte. „Wo darf ich mein Auto abstellen?“ fand der Vektor nur auf Platz 12, jetzt „Wo darf ich mit dem Wagen parken?“. „Urlaup beantragen“ fand das Stichwort über „beantragen“, jetzt „Ich möchte Urlaup nehmen“. Der Garantieabsatz und der Wasserschaden-Absatz sind umformuliert. Der Vektor ist bei Deutsch empfindlich: Kleine Wortänderungen verschieben Plätze stark.
+- **Rang der richtigen Stelle (Stichwort, Vektor, Hybrid), ohne Filter, Gewicht 50:50**
+
+| Frage | Stichwort | Vektor | Hybrid |
+|---|---|---|---|
+| Wagen parken | kein Rang | 1 | 1 |
+| E-4711 | 1 | 2 | 1 |
+| Gewährleistung | kein Rang | 1 | 1 |
+| Urlaup | kein Rang | 1 | 1 |
+| Lieferung Samstag | kein Rang | 1 | 2 |
+| Frist 14 Tage | 1 | 1 | 1 |
+| Wo steht Pumpe 3 | 1 | 3 | 1 |
+| Wasserschäden Pumpe 3 | kein Rang | 7 | 7 |
+| Dichtungsring wechseln und einbauen | 1 | 1 | 1 |
+| Zephyr-2 | 1 | 1 | 1 |
+
+- **Treffer unter den ersten k (10 Fragen mit Antwort):** Stichwort 5, 5, 5, 5 bei k gleich 1, 3, 5, 10. Vektor 7, 9, 9, 10. Hybrid 8, 9, 9, 10. Stichwort scheitert an Synonymen und Beugung, der Vektor an Codes und Namen, Hybrid fängt beide bei k gleich 1 am besten ab. Bei der Lieferungsfrage verliert Hybrid einen Platz, weil das Stichwort „Reklamation nach Lieferung“ nach vorn zieht.
+- **Zwei Fragen ohne Antwort:** Stichwort findet nichts (richtig), Vektor liefert trotzdem Platz 1 (Kosinus 0,66 und 0,65).
+- **Reranking mit `llama3.2:3b`** (strenger Prüf-Prompt, Temperatur 0, Wert 0 bis 10) für die Top 10 der Hybridsuche: Die richtige Stelle landet bei 9 von 11 Fragen auf Platz 1 (bei „Lieferung“ und „Heizung“ steigt sie von 2 auf 1), bei „Urlaup“ auf Platz 2, und bei **„Wasserschäden Pumpe 3“ bleibt sie auf Platz 7**: Das kleine Modell erkennt die richtige Stelle nicht und mag das Thema „Pumpe 3“ lieber. Ein Absturz von Platz 9 auf Platz 1 ließ sich mit diesem Modell nicht ehrlich zeigen. Der Baustein zeigt Gewinn und Fehlgriff. Die Bewertung kostet im Mittel rund 1 Sekunde je Kandidat. Mit Zufall (Temperatur 0,7) ändern sich einzelne Werte, bei Temperatur 0 meist nicht.
+- Chunk-Labor: Beim Standard (feste Länge, 300 Zeichen, 0 Prozent) ist die Reinigungsantwort zerrissen, mit 20 Prozent Überlappung liegt sie ganz in einem Stück. Die Fehlertabelle wird vom festen Schnitt zerlegt, der Schnitt nach Überschrift hält sie zusammen.

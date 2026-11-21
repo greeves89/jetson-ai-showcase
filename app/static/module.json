@@ -1,21 +1,41 @@
 {
   "css": [
+    "visuals.css",
     "widgets.css",
     "demos.css",
     "demo-whisper.css",
-    "demo-tts.css"
+    "demo-tts.css",
+    "widgets-grundlagen.css",
+    "widgets-sprache.css",
+    "widgets-prognose.css",
+    "widgets-sehen.css",
+    "widgets-rag.css"
   ],
   "content": [
     "content-sprache.js",
     "content-grundlagen.js",
     "content-rag.js",
     "content-sehen-agenten.js",
-    "content-prognose-betrieb.js"
+    "content-prognose-betrieb.js",
+    "content-usecases.js",
+    "content-visual-demo.js"
   ],
   "module": [
+    "visuals.js",
     "widgets.js",
     "demos.js",
     "demo-whisper.js",
-    "demo-tts.js"
-  ]
+    "demo-tts.js",
+    "widgets-grundlagen.js",
+    "widgets-sprache.js",
+    "widgets-prognose.js",
+    "widgets-sehen.js",
+    "widgets-rag.js"
+  ],
+  "seite": {
+    "autor": "Daniel Alisch",
+    "autor_url": "https://daniel-alisch.site",
+    "impressum_url": "",
+    "datenschutz_url": ""
+  }
 }

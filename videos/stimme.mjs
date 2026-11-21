@@ -143,7 +143,7 @@ const wahl = args.filter((a) => a !== "schaetzen");
 const ids = wahl.length ? wahl : alleIds();
 mkdirSync(CACHE, { recursive: true });
 mkdirSync("src/plan", { recursive: true });
-const reihenfolge = ["was-ist-ki", "maschinelles-lernen", "generative-ki", "robotik", "ki-im-business"];
+const reihenfolge = ["was-ist-ki", "maschinelles-lernen", "generative-ki", "robotik", "ki-im-business", "rag-ueberblick", "rag-embedding", "rag-embedding-beachten", "rag-chunking", "rag-keywordsuche", "rag-hybridsuche", "rag-reranking", "rag-bewertung", "daten-rohstoff", "neuronale-netze-erklaert", "training-gradientenabstieg", "bewertung-konfusionsmatrix", "verzerrung-fairness", "recht-ueberblick"];
 for (const id of ids) {
   const plan = await planen(id, schaetzen);
   const speicher = JSON.parse(JSON.stringify(plan));

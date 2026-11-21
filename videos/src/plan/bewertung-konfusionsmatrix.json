@@ -1,0 +1,131 @@
+{
+ "id": "bewertung-konfusionsmatrix",
+ "titel": "Wie gut ist es?",
+ "untertitel": "Konfusionsmatrix, Precision, Recall",
+ "gesamt": 78.32,
+ "szenen": [
+  {
+   "id": "melder",
+   "kapitel": "Rauchmelder",
+   "start": 0,
+   "dauer": 14.56,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.6,
+     "text": "Ein Rauchmelder, der nie piept, hat fast immer recht."
+    },
+    {
+     "t": 4.8,
+     "d": 1.68,
+     "text": "Trotzdem hilft er nicht."
+    },
+    {
+     "t": 6.78,
+     "d": 6.88,
+     "text": "Genauigkeit allein sagt bei seltenen Ereignissen fast nichts. Man muss schauen, welche Fehler passieren."
+    }
+   ]
+  },
+  {
+   "id": "matrix",
+   "kapitel": "Vier Fälle",
+   "start": 14.56,
+   "dauer": 14.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.8,
+     "text": "Die Konfusionsmatrix zählt vier Fälle."
+    },
+    {
+     "t": 3.6,
+     "d": 4.72,
+     "text": "Treffer, Fehlalarm, übersehen, richtig durchgelassen."
+    },
+    {
+     "t": 8.62,
+     "d": 4.8,
+     "text": "Ein Fehlalarm ärgert dich. Ein übersehener Fall kann teuer werden."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Spamfilter",
+   "start": 28.88,
+   "dauer": 15.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.56,
+     "text": "Ein Spamfilter prüft tausend Mails. Er findet 90 von 100 Spammails und sortiert 18 gute fälschlich aus."
+    },
+    {
+     "t": 9.36,
+     "d": 5.2,
+     "text": "Die Genauigkeit sieht großartig aus. Precision und Recall zeigen mehr."
+    }
+   ]
+  },
+  {
+   "id": "netz",
+   "kapitel": "Fischernetz",
+   "start": 44.34,
+   "dauer": 9.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Recall fragt: Wie viele Forellen hast du gefangen?"
+    },
+    {
+     "t": 4.32,
+     "d": 4.16,
+     "text": "Precision fragt: Wie viele Fische im Netz sind Forellen?"
+    }
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Schwelle",
+   "start": 53.72,
+   "dauer": 13.76,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4,
+     "text": "Mit der Schwelle stellst du ein, wie schnell das Modell Alarm schlägt."
+    },
+    {
+     "t": 4.8,
+     "d": 3.68,
+     "text": "Niedrig: mehr Funde, mehr Fehlalarme."
+    },
+    {
+     "t": 8.78,
+     "d": 4.08,
+     "text": "Hoch: weniger Fehlalarme, aber mehr übersehen."
+    }
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Abwägen",
+   "start": 67.48,
+   "dauer": 10.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.96,
+     "text": "Welche Schwelle passt, hängt von den Folgen ab."
+    },
+    {
+     "t": 3.76,
+     "d": 5.28,
+     "text": "Vergleiche mit dem heutigen Ablauf, und lass bei unklaren Fällen einen Menschen entscheiden."
+    }
+   ]
+  }
+ ]
+}

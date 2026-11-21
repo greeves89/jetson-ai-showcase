@@ -67,6 +67,18 @@ code{font-family:var(--mono);font-size:.88em;background:var(--flaeche2);padding:
 
 main{min-width:0;padding:54px clamp(22px,5vw,72px) 96px;outline:none}
 .seitenbreite{max-width:900px;margin:0 auto}
+.haupt{min-width:0;display:flex;flex-direction:column;min-height:100vh}
+.haupt>main{flex:1 0 auto;overflow-anchor:none}
+.navgruppe ul{list-style:none;margin:0;padding:0}
+
+/* ---------- Fusszeile ---------- */
+.fuss{padding:22px clamp(22px,5vw,72px) 34px;border-top:.5px solid var(--linie);font-size:13.5px;line-height:1.5;color:var(--leise)}
+.fuss>*{max-width:900px;margin:0 auto 6px}
+.fuss p{margin:0 auto 6px}
+.fuss a{color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px}
+.fuss a:hover{text-decoration-color:currentColor}
+.fuss-klein{font-size:12.5px}
+.fuss code{font-size:.92em}
 
 /* ---------- Seitenkopf ---------- */
 .ueber{margin:0 0 10px;font-size:13px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--akzent)}
@@ -293,3 +305,40 @@ table.vergleich tbody th{font-weight:650;white-space:nowrap}
 .quiz-frage label.falsch{border-color:var(--rot);background:color-mix(in srgb,var(--rot) 12%,var(--flaeche2))}
 .quiz-rueck{margin:8px 0 0;font-size:15px;color:var(--leise);min-height:1.2em}
 .quiz-ergebnis{margin:0;font-weight:650;font-size:17px}
+
+/* ---------- Navigation: einklappbare Gruppen und Suche ---------- */
+.navsuche{padding:0 4px 8px}
+.navsuche input{width:100%;background:var(--flaeche2);color:var(--text);border:.5px solid transparent;border-radius:10px;padding:8px 12px;font:inherit;font-size:14px;outline:none}
+.navsuche input:focus{border-color:var(--akzent);background:var(--flaeche)}
+.navsuche input::placeholder{color:var(--leise)}
+.navgruppe h2{margin:0;padding:0}
+.navkopf{display:flex;align-items:center;justify-content:space-between;width:100%;padding:7px 10px;margin:0;border:0;border-radius:8px;background:none;cursor:pointer;font:inherit;font-size:11.5px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise)}
+.navkopf:hover{background:var(--flaeche2);color:var(--text)}
+.navkopf svg{width:13px;height:13px;transition:transform .15s}
+.navkopf[aria-expanded=true] svg{transform:rotate(90deg)}
+.navliste[hidden],.nav[hidden],.navgruppe[hidden]{display:none}
+.nav-leer{margin:12px 10px;font-size:13.5px;color:var(--leise)}
+
+/* ---------- Lesemodus (Kompakt | Ausfuehrlich) und "Mehr dazu" ---------- */
+.lesezeile{display:flex;align-items:center;gap:12px;margin:0 0 6px;font-size:14px;color:var(--leise)}
+.lesemodus{display:inline-flex;padding:3px;border-radius:11px;background:var(--flaeche2)}
+.lesemodus button{appearance:none;border:0;background:none;padding:6px 15px;border-radius:8px;font-size:14px;font-weight:600;color:var(--leise);cursor:pointer;min-height:32px;transition:background .15s,color .15s}
+.lesemodus button:hover{color:var(--text)}
+.lesemodus button[aria-pressed=true]{background:var(--flaeche);color:var(--text);box-shadow:0 1px 3px rgba(0,0,0,.16),0 0 0 .5px var(--linie)}
+.abschnitt{margin-top:46px}
+.abschnitt>h2.abs{margin:0 0 12px}
+.text .kurz{margin:14px 0 6px;max-width:58ch;font-size:19px;line-height:1.5;letter-spacing:-.014em}
+[data-lesemodus=ausfuehrlich] .kurz.auto{display:none}
+details.mehr{margin:6px 0 0}
+details.mehr>summary{display:inline-flex;align-items:center;gap:6px;cursor:pointer;list-style:none;padding:8px 14px 8px 8px;margin-left:-8px;border-radius:10px;font-size:15px;font-weight:600;color:var(--akzent);user-select:none}
+details.mehr>summary::-webkit-details-marker{display:none}
+details.mehr>summary:hover{background:color-mix(in srgb,var(--akzent) 9%,transparent)}
+details.mehr>summary svg.ic{width:16px;height:16px;stroke-width:2.2;transition:transform .2s}
+details.mehr[open]>summary svg.ic{transform:rotate(90deg)}
+details.mehr>.mehr-in{padding-top:12px}
+details.mehr>.mehr-in>:first-child{margin-top:0}
+[data-lesemodus=ausfuehrlich] details.mehr>summary{display:none}
+[data-lesemodus=ausfuehrlich] details.mehr>.mehr-in{padding-top:0}
+.biz{display:flex;flex-direction:column;gap:6px}
+[data-lesemodus=ausfuehrlich] .biz details.mehr{order:-1}
+[data-lesemodus=ausfuehrlich] .biz .zeile{margin-top:8px}

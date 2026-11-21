@@ -104,3 +104,4 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-karten .karte-w:first-child{margin-top:14px}
 
 @media (prefers-reduced-motion:reduce){.d-bar i,.d-treffer,.d-sw-bahn,.d-sw-bahn i{transition:none!important}}
+.d-meldung + .schritt{border-top:0}

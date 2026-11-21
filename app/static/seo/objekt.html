@@ -1,0 +1,15 @@
+<div class="seitenbreite"><p class="ueber">Sehen</p><h1>Objekterkennung</h1><p class="lead">Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.</p>
+<div class="text">
+<h2 class="abs">Ein Blick reicht</h2>
+<p>Hier läuft YOLOX, ein Verfahren aus der YOLO-Familie. Das Netz betrachtet das ganze Bild einmal und sagt gleichzeitig, wo Objekte sind und was sie sind. Deshalb ist es schnell genug für Video.</p>
+<h2 class="abs">Rahmen, Klasse, Sicherheit</h2>
+<p>Für jedes Objekt liefert das Netz einen Rahmen, eine Klasse aus 80 Alltagsklassen (Person, Tasse, Laptop, Stuhl und so weiter) und eine Konfidenz: wie sicher es sich ist.</p><p>Der Regler <strong>Schwelle</strong> legt fest, ab welcher Konfidenz ein Rahmen angezeigt wird. Niedrig: mehr Treffer, aber auch mehr Fehlalarme. Hoch: weniger Fehlalarme, dafür werden Objekte übersehen. Diese Abwägung gibt es bei jeder Erkennung, auch in der Fertigung. Probiere es live aus.</p>
+<h2 class="abs">Doppelte Rahmen aufräumen</h2>
+<p>Das Netz meldet dasselbe Objekt oft mehrfach mit leicht versetzten Rahmen. Ein Aufräumschritt, die Non-Maximum Suppression, behält den sichersten und wirft überlappende weg.</p>
+<h2 class="abs">Wie schnell ist das</h2>
+<p>Das Modell läuft hier bewusst einfach über OpenCV auf dem Prozessor. Der Streifen über dem Bild zeigt, dass das Erkennen den größten Teil der Zeit braucht. Auf der GPU des Jetson ließe sich das mit TensorRT deutlich beschleunigen.</p>
+</div>
+<section class="block"><h2>Im Business</h2><div class="text"><p>Zählen und Prüfen am Band, Lager- und Regalkontrolle, Flächen- und Verkehrsmonitoring, Sicherheit auf Baustellen.</p><ul><li>Paletten im Lager zählen</li><li>Prüfen, ob Schutzausrüstung getragen wird</li></ul></div></section>
+<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Das Modell kennt nur seine 80 Klassen. Alles andere wird übersehen oder falsch benannt.</li><li>Ungewöhnliche Blickwinkel, Verdeckung und Gegenlicht erhöhen Fehler.</li></ul></div></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/anlernen">Bildmodell anlernen</a></li><li><a href="/robotik">Robotik</a></li></ul></section>
+</div>

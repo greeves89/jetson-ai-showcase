@@ -1,0 +1,126 @@
+{
+ "id": "recht-ueberblick",
+ "titel": "Recht im Überblick",
+ "untertitel": "Datenschutz und KI-Verordnung, kurz",
+ "gesamt": 72.26,
+ "szenen": [
+  {
+   "id": "hinweis",
+   "kapitel": "Wegweiser",
+   "start": 0,
+   "dauer": 11.36,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.64,
+     "text": "Dieses Video ist keine Rechtsberatung."
+    },
+    {
+     "t": 3.84,
+     "d": 2.08,
+     "text": "Es zeigt nur die Grundgedanken."
+    },
+    {
+     "t": 6.22,
+     "d": 4.24,
+     "text": "Die Einzelheiten hängen vom Land, vom Fall und von der Zeit ab."
+    }
+   ]
+  },
+  {
+   "id": "daten",
+   "kapitel": "Personendaten",
+   "start": 11.36,
+   "dauer": 12.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.6,
+     "text": "Personenbezogene Daten brauchen eine Rechtsgrundlage, einen festen Zweck, und es dürfen nur so viele sein wie nötig."
+    },
+    {
+     "t": 8.4,
+     "d": 3.04,
+     "text": "Das gilt auch für Texte, die du in ein Modell gibst."
+    }
+   ]
+  },
+  {
+   "id": "vertrag",
+   "kapitel": "Vertrag",
+   "start": 23.7,
+   "dauer": 7.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.4,
+     "text": "Arbeitet ein Dienstleister in deinem Auftrag, braucht es einen Vertrag."
+    },
+    {
+     "t": 5.2,
+     "d": 1.84,
+     "text": "Verantwortlich bleibst du."
+    }
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Betroffenenrechte",
+   "start": 31.64,
+   "dauer": 10.66,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.76,
+     "text": "Betroffene haben Rechte: Auskunft, Berichtigung, Löschung und Widerspruch."
+    },
+    {
+     "t": 6.56,
+     "d": 3.2,
+     "text": "Du musst diese Wünsche prüfen und beantworten können."
+    }
+   ]
+  },
+  {
+   "id": "pyramide",
+   "kapitel": "Risikostufen",
+   "start": 42.3,
+   "dauer": 15.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.28,
+     "text": "Die EU-KI-Verordnung sortiert nach Risiko."
+    },
+    {
+     "t": 4.08,
+     "d": 2.72,
+     "text": "Je höher es ist, desto mehr Pflichten."
+    },
+    {
+     "t": 7.1,
+     "d": 7.52,
+     "text": "Manches ist verboten, vieles streng geregelt, einiges braucht nur einen Hinweis, das meiste nichts."
+    }
+   ]
+  },
+  {
+   "id": "doku",
+   "kapitel": "Dokumentieren",
+   "start": 57.82,
+   "dauer": 14.44,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.2,
+     "text": "Beim Urheberrecht sind Fragen offen: Trainingsdaten und erzeugte Inhalte."
+    },
+    {
+     "t": 6,
+     "d": 6.64,
+     "text": "Dokumentiere, wer wofür zuständig ist, und prüfe aktuelle Quellen, denn Einzelheiten ändern sich."
+    }
+   ]
+  }
+ ]
+}

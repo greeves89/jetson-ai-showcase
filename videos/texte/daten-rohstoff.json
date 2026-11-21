@@ -1,0 +1,58 @@
+{
+ "id": "daten-rohstoff",
+ "titel": "Daten, der Rohstoff",
+ "untertitel": "Ein Modell lernt nur, was in den Daten steckt",
+ "szenen": [
+  {
+   "id": "inserat",
+   "kapitel": "Inserat",
+   "saetze": [
+    "Ein Auto-Inserat zeigt, was Daten für eine KI sind.",
+    "Baujahr, Kilometer und Zustand sind die Merkmale. Der Preis ist das Etikett, die gesuchte Antwort.",
+    "Aus vielen Inseraten lernt das Modell, welcher Preis zu welchen Merkmalen passt."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Alles Zahlen",
+   "saetze": [
+    "Für ein Modell ist alles am Ende Zahlen: Tabellen, Fotos, Text, Ton, Messwerte.",
+    "Ein Foto sind Helligkeitswerte. Ein Ton ist eine Folge von Messwerten."
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler",
+   "saetze": [
+    "Das Modell kann nicht prüfen, ob Daten stimmen.",
+    "Fehler, Lücken und doppelte Zeilen lernt es einfach mit.",
+    "Ein Tippfehler im Preis wird so zur Regel. Prüfe die Daten, bevor du trainierst."
+   ]
+  },
+  {
+   "id": "vielfalt",
+   "kapitel": "Vielfalt",
+   "saetze": [
+    "Wie viele Daten reichen? Vielfalt vor Menge.",
+    "Zehn verschiedene Fälle helfen mehr als tausend gleiche.",
+    "Ein Modell kennt nur, was es gesehen hat. Fehlen ganze Gruppen, versagt es genau dort."
+   ]
+  },
+  {
+   "id": "toepfe",
+   "kapitel": "Drei Töpfe",
+   "saetze": [
+    "Teile die Daten in drei Töpfe. Üben, Probeklausur, echte Klausur.",
+    "Der Test bleibt bis zum Schluss unberührt. Er zeigt ehrlich, wie gut das Modell wirklich ist."
+   ]
+  },
+  {
+   "id": "pflege",
+   "kapitel": "Pflege",
+   "saetze": [
+    "Personenbezogene Daten brauchen einen Zweck und Sparsamkeit.",
+    "Und Daten altern. Wer sie nicht pflegt, merkt es erst, wenn das Modell schlechter wird."
+   ]
+  }
+ ]
+}

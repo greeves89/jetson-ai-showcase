@@ -1,0 +1,58 @@
+{
+ "id": "bewertung-konfusionsmatrix",
+ "titel": "Wie gut ist es?",
+ "untertitel": "Konfusionsmatrix, Precision, Recall",
+ "szenen": [
+  {
+   "id": "melder",
+   "kapitel": "Rauchmelder",
+   "saetze": [
+    "Ein Rauchmelder, der nie piept, hat fast immer recht.",
+    "Trotzdem hilft er nicht.",
+    "Genauigkeit allein sagt bei seltenen Ereignissen fast nichts. Man muss schauen, welche Fehler passieren."
+   ]
+  },
+  {
+   "id": "matrix",
+   "kapitel": "Vier Fälle",
+   "saetze": [
+    "Die Konfusionsmatrix zählt vier Fälle.",
+    "Treffer, Fehlalarm, übersehen, richtig durchgelassen.",
+    "Ein Fehlalarm ärgert dich. Ein übersehener Fall kann teuer werden."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Spamfilter",
+   "saetze": [
+    "Ein Spamfilter prüft tausend Mails. Er findet 90 von 100 Spammails und sortiert 18 gute fälschlich aus.",
+    "Die Genauigkeit sieht großartig aus. Precision und Recall zeigen mehr."
+   ]
+  },
+  {
+   "id": "netz",
+   "kapitel": "Fischernetz",
+   "saetze": [
+    "Recall fragt: Wie viele Forellen hast du gefangen?",
+    "Precision fragt: Wie viele Fische im Netz sind Forellen?"
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Schwelle",
+   "saetze": [
+    "Mit der Schwelle stellst du ein, wie schnell das Modell Alarm schlägt.",
+    "Niedrig: mehr Funde, mehr Fehlalarme.",
+    "Hoch: weniger Fehlalarme, aber mehr übersehen."
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Abwägen",
+   "saetze": [
+    "Welche Schwelle passt, hängt von den Folgen ab.",
+    "Vergleiche mit dem heutigen Ablauf, und lass bei unklaren Fällen einen Menschen entscheiden."
+   ]
+  }
+ ]
+}

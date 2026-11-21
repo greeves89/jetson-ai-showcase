@@ -1,0 +1,59 @@
+{
+ "id": "rag-chunking",
+ "titel": "Stücke schneiden",
+ "untertitel": "Text sinnvoll für die Suche teilen",
+ "szenen": [
+  {
+   "id": "kochbuch",
+   "kapitel": "Kochbuch",
+   "saetze": [
+    "Ein Kochbuch ist in Rezepte geteilt.",
+    "Wer Carbonara sucht, liest nicht das ganze Buch, sondern ein Rezept.",
+    "Genau so teilt man Dokumente für die Suche in Stücke."
+   ]
+  },
+  {
+   "id": "feste",
+   "kapitel": "Feste Länge",
+   "saetze": [
+    "Der einfachste Weg ist die feste Länge. Alle paar hundert Zeichen ein Schnitt.",
+    "Das ist schnell, aber es schneidet mitten durch Sätze und Gedanken."
+   ]
+  },
+  {
+   "id": "absatz",
+   "kapitel": "Absätze",
+   "saetze": [
+    "Besser ist es, an Absätzen und Überschriften zu schneiden.",
+    "Das folgt der Gliederung des Textes. Die Stücke passen zu den Themen."
+   ]
+  },
+  {
+   "id": "groesse",
+   "kapitel": "Größe",
+   "saetze": [
+    "Die Größe zählt. Zu kleine Stücke tragen nur einen Halbsatz.",
+    "Zu große Stücke enthalten viel anderes, und der Treffer wird ungenau.",
+    "Gut ist eine Karteikarte, die für sich allein verständlich ist."
+   ]
+  },
+  {
+   "id": "ueberlappung",
+   "kapitel": "Überlappung",
+   "saetze": [
+    "Liegt eine Aussage genau auf der Grenze, hilft die Überlappung.",
+    "Das Ende des einen Stücks wiederholt sich am Anfang des nächsten.",
+    "So steht der Gedanke mindestens einmal ganz da."
+   ]
+  },
+  {
+   "id": "etiketten",
+   "kapitel": "Etiketten",
+   "saetze": [
+    "Bei Tabellen gehört die Kopfzeile zu jeder Zeile.",
+    "Und jedes Stück merkt sich, woher es kommt: Dokument, Kapitel, Datum.",
+    "So kannst du später die Quelle nennen. Mehr dazu auf der Seite Chunking."
+   ]
+  }
+ ]
+}

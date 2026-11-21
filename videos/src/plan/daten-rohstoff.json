@@ -1,0 +1,131 @@
+{
+ "id": "daten-rohstoff",
+ "titel": "Daten, der Rohstoff",
+ "untertitel": "Ein Modell lernt nur, was in den Daten steckt",
+ "gesamt": 87.84,
+ "szenen": [
+  {
+   "id": "inserat",
+   "kapitel": "Inserat",
+   "start": 0,
+   "dauer": 18.56,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.84,
+     "text": "Ein Auto-Inserat zeigt, was Daten für eine KI sind."
+    },
+    {
+     "t": 5.04,
+     "d": 7.2,
+     "text": "Baujahr, Kilometer und Zustand sind die Merkmale. Der Preis ist das Etikett, die gesuchte Antwort."
+    },
+    {
+     "t": 12.54,
+     "d": 5.12,
+     "text": "Aus vielen Inseraten lernt das Modell, welcher Preis zu welchen Merkmalen passt."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Alles Zahlen",
+   "start": 18.56,
+   "dauer": 13.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.4,
+     "text": "Für ein Modell ist alles am Ende Zahlen: Tabellen, Fotos, Text, Ton, Messwerte."
+    },
+    {
+     "t": 7.2,
+     "d": 5.2,
+     "text": "Ein Foto sind Helligkeitswerte. Ein Ton ist eine Folge von Messwerten."
+    }
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler",
+   "start": 31.86,
+   "dauer": 14.72,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Das Modell kann nicht prüfen, ob Daten stimmen."
+    },
+    {
+     "t": 3.92,
+     "d": 4.16,
+     "text": "Fehler, Lücken und doppelte Zeilen lernt es einfach mit."
+    },
+    {
+     "t": 8.38,
+     "d": 5.44,
+     "text": "Ein Tippfehler im Preis wird so zur Regel. Prüfe die Daten, bevor du trainierst."
+    }
+   ]
+  },
+  {
+   "id": "vielfalt",
+   "kapitel": "Vielfalt",
+   "start": 46.58,
+   "dauer": 15.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Wie viele Daten reichen? Vielfalt vor Menge."
+    },
+    {
+     "t": 4.32,
+     "d": 3.84,
+     "text": "Zehn verschiedene Fälle helfen mehr als tausend gleiche."
+    },
+    {
+     "t": 8.46,
+     "d": 6.16,
+     "text": "Ein Modell kennt nur, was es gesehen hat. Fehlen ganze Gruppen, versagt es genau dort."
+    }
+   ]
+  },
+  {
+   "id": "toepfe",
+   "kapitel": "Drei Töpfe",
+   "start": 62.1,
+   "dauer": 13.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.6,
+     "text": "Teile die Daten in drei Töpfe. Üben, Probeklausur, echte Klausur."
+    },
+    {
+     "t": 6.4,
+     "d": 6.08,
+     "text": "Der Test bleibt bis zum Schluss unberührt. Er zeigt ehrlich, wie gut das Modell wirklich ist."
+    }
+   ]
+  },
+  {
+   "id": "pflege",
+   "kapitel": "Pflege",
+   "start": 75.48,
+   "dauer": 12.36,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.16,
+     "text": "Personenbezogene Daten brauchen einen Zweck und Sparsamkeit."
+    },
+    {
+     "t": 4.96,
+     "d": 5.6,
+     "text": "Und Daten altern. Wer sie nicht pflegt, merkt es erst, wenn das Modell schlechter wird."
+    }
+   ]
+  }
+ ]
+}

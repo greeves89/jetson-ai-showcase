@@ -1,0 +1,584 @@
+{
+ "seiten": {
+  "start": {
+   "titel": "KI verstehen, indem du sie ausprobierst · KI-Labor",
+   "ueberschrift": "KI verstehen, indem du sie ausprobierst",
+   "beschreibung": "Dieses Labor läuft auf einem kleinen Computer in diesem Netz, dem Jetson.",
+   "typ": "start",
+   "datei": "content.js"
+  },
+  "karte": {
+   "titel": "Was ist KI? · KI-Labor",
+   "ueberschrift": "Was ist KI?",
+   "beschreibung": "Ein Oberbegriff, unter dem sehr verschiedene Verfahren stecken.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "ml": {
+   "titel": "Maschinelles Lernen · KI-Labor",
+   "ueberschrift": "Maschinelles Lernen",
+   "beschreibung": "Statt Regeln zu schreiben, zeigst du Beispiele.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "genki": {
+   "titel": "Generative KI · KI-Labor",
+   "ueberschrift": "Generative KI",
+   "beschreibung": "Ein Sprachmodell wählt Wort für Wort das nächste Stück.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "robotik": {
+   "titel": "Robotik · KI-Labor",
+   "ueberschrift": "Robotik",
+   "beschreibung": "Eine Maschine mit Körper: Sie misst, entscheidet und bewegt sich, und das viele Male pro Sekunde.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "business": {
+   "titel": "KI im Business · KI-Labor",
+   "ueberschrift": "KI im Business",
+   "beschreibung": "Wo KI heute Arbeit abnimmt, wann lokal sinnvoll ist und welche Fragen vor dem Einsatz stehen.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "daten": {
+   "titel": "Daten, der Rohstoff · KI-Labor",
+   "ueberschrift": "Daten, der Rohstoff",
+   "beschreibung": "Ein Modell kann nur lernen, was in seinen Daten steckt.",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "neuronale-netze": {
+   "titel": "Neuronale Netze von Grund auf · KI-Labor",
+   "ueberschrift": "Neuronale Netze von Grund auf",
+   "beschreibung": "Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen.",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "training": {
+   "titel": "Wie ein Modell lernt · KI-Labor",
+   "ueberschrift": "Wie ein Modell lernt",
+   "beschreibung": "Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht.",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "bewertung": {
+   "titel": "Wie gut ist ein Modell? · KI-Labor",
+   "ueberschrift": "Wie gut ist ein Modell?",
+   "beschreibung": "„95 Prozent richtig“ klingt nach einem guten Modell.",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "verzerrung-ethik": {
+   "titel": "Fairness, Verzerrung und Verantwortung · KI-Labor",
+   "ueberschrift": "Fairness, Verzerrung und Verantwortung",
+   "beschreibung": "Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire.",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "recht": {
+   "titel": "Recht und Regeln im Überblick · KI-Labor",
+   "ueberschrift": "Recht und Regeln im Überblick",
+   "beschreibung": "Welche Regeln gelten, wenn du KI einsetzt?",
+   "typ": "seite",
+   "datei": "content-grundlagen.js"
+  },
+  "bild-als-zahlen": {
+   "titel": "Wie ein Computer ein Bild sieht · KI-Labor",
+   "ueberschrift": "Wie ein Computer ein Bild sieht",
+   "beschreibung": "Du siehst ein Foto, ein Computer sieht eine Tabelle voller Zahlen.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "cnn-intuition": {
+   "titel": "Wie Netze Bilder verstehen · KI-Labor",
+   "ueberschrift": "Wie Netze Bilder verstehen",
+   "beschreibung": "Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "vision-aufgaben": {
+   "titel": "Fünf Fragen an ein Bild · KI-Labor",
+   "ueberschrift": "Fünf Fragen an ein Bild",
+   "beschreibung": "Was ist das?",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "gesicht": {
+   "titel": "Gesichtserkennung · KI-Labor",
+   "ueberschrift": "Gesichtserkennung",
+   "beschreibung": "Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "objekt": {
+   "titel": "Objekterkennung · KI-Labor",
+   "ueberschrift": "Objekterkennung",
+   "beschreibung": "Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "anlernen": {
+   "titel": "Bildmodell anlernen · KI-Labor",
+   "ueberschrift": "Bildmodell anlernen",
+   "beschreibung": "Zeige dem Jetson Beispiele, und er erkennt sie danach selbst.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "chat": {
+   "titel": "Sprachmodell im Chat · KI-Labor",
+   "ueberschrift": "Sprachmodell im Chat",
+   "beschreibung": "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "whisper": {
+   "titel": "Sprache zu Text · KI-Labor",
+   "ueberschrift": "Sprache zu Text",
+   "beschreibung": "Sprich in dein Mikrofon, und der Jetson schreibt mit.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "tokens-sprachmodelle": {
+   "titel": "Wie ein Sprachmodell gebaut ist · KI-Labor",
+   "ueberschrift": "Wie ein Sprachmodell gebaut ist",
+   "beschreibung": "Wie wird aus einem Stapel Text ein Modell, das Fragen beantwortet?",
+   "typ": "seite",
+   "datei": "content-sprache.js"
+  },
+  "prompting": {
+   "titel": "Gut fragen: Prompts schreiben · KI-Labor",
+   "ueberschrift": "Gut fragen: Prompts schreiben",
+   "beschreibung": "Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn.",
+   "typ": "seite",
+   "datei": "content-sprache.js"
+  },
+  "llm-grenzen": {
+   "titel": "Grenzen und Risiken von Sprachmodellen · KI-Labor",
+   "ueberschrift": "Grenzen und Risiken von Sprachmodellen",
+   "beschreibung": "Sprachmodelle schreiben überzeugend, auch wenn sie falsch liegen.",
+   "typ": "seite",
+   "datei": "content-sprache.js"
+  },
+  "finetuning-oder-rag": {
+   "titel": "Wissen ins Modell oder ins Dokument? · KI-Labor",
+   "ueberschrift": "Wissen ins Modell oder ins Dokument?",
+   "beschreibung": "Das Modell kennt deine Firma nicht.",
+   "typ": "seite",
+   "datei": "content-sprache.js"
+  },
+  "sprachausgabe": {
+   "titel": "Text zu Sprache · KI-Labor",
+   "ueberschrift": "Text zu Sprache",
+   "beschreibung": "Wie wird aus einem geschriebenen Satz eine Stimme?",
+   "typ": "seite",
+   "datei": "content-sprache.js"
+  },
+  "rag-ueberblick": {
+   "titel": "RAG im Überblick · KI-Labor",
+   "ueberschrift": "RAG im Überblick",
+   "beschreibung": "Ein Sprachmodell kennt deine Dokumente nicht.",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag-embedding": {
+   "titel": "Vektorisieren und Embeddings · KI-Labor",
+   "ueberschrift": "Vektorisieren und Embeddings",
+   "beschreibung": "Wie bringt man einen Computer dazu, Bedeutung zu vergleichen?",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag-chunking": {
+   "titel": "Chunking: Text in sinnvolle Stücke teilen · KI-Labor",
+   "ueberschrift": "Chunking: Text in sinnvolle Stücke teilen",
+   "beschreibung": "Ein Dokument ist zu groß, um es als Ganzes zu suchen.",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag-suche": {
+   "titel": "Suchen: Stichwort, Vektor und Hybrid · KI-Labor",
+   "ueberschrift": "Suchen: Stichwort, Vektor und Hybrid",
+   "beschreibung": "Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung.",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag-reranking": {
+   "titel": "Reranking: erst grob, dann genau · KI-Labor",
+   "ueberschrift": "Reranking: erst grob, dann genau",
+   "beschreibung": "Die erste Suche muss schnell sein und sortiert deshalb grob.",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag-bewertung": {
+   "titel": "RAG messen und verbessern · KI-Labor",
+   "ueberschrift": "RAG messen und verbessern",
+   "beschreibung": "Ein RAG-System, das bei drei Beispielfragen gut klingt, ist noch nicht gut.",
+   "typ": "seite",
+   "datei": "content-rag.js"
+  },
+  "rag": {
+   "titel": "RAG: Fragen an eigene Dokumente · KI-Labor",
+   "ueberschrift": "RAG: Fragen an eigene Dokumente",
+   "beschreibung": "Das Modell kennt deine Dokumente nicht.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "agenten-grundlagen": {
+   "titel": "Was ist ein Agent? · KI-Labor",
+   "ueberschrift": "Was ist ein Agent?",
+   "beschreibung": "Ein Chat antwortet.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "agenten-planung": {
+   "titel": "Planen, Schritte, Speicher und Fehler · KI-Labor",
+   "ueberschrift": "Planen, Schritte, Speicher und Fehler",
+   "beschreibung": "Je länger die Kette der Schritte, desto mehr kann schiefgehen.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "agent": {
+   "titel": "Agent mit Werkzeugen · KI-Labor",
+   "ueberschrift": "Agent mit Werkzeugen",
+   "beschreibung": "Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "agenten-sicherheit": {
+   "titel": "Rechte, Prompt-Injection und Freigaben · KI-Labor",
+   "ueberschrift": "Rechte, Prompt-Injection und Freigaben",
+   "beschreibung": "Ein Agent handelt.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "mcp-werkzeuge": {
+   "titel": "Werkzeuge standardisiert anbinden (MCP) · KI-Labor",
+   "ueberschrift": "Werkzeuge standardisiert anbinden (MCP)",
+   "beschreibung": "Das Model Context Protocol ist ein gemeinsamer Stecker zwischen KI-Assistenten und den Systemen, die sie nutzen sollen.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js"
+  },
+  "bild": {
+   "titel": "Bilder erzeugen · KI-Labor",
+   "ueberschrift": "Bilder erzeugen",
+   "beschreibung": "Aus einer Beschreibung entsteht ein Bild.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "faceswap": {
+   "titel": "Face-Swap und Deepfakes · KI-Labor",
+   "ueberschrift": "Face-Swap und Deepfakes",
+   "beschreibung": "Ein Gesicht in einem Bild durch ein anderes ersetzen.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "tabellen-ml": {
+   "titel": "Entscheidungsbäume und Tabellendaten · KI-Labor",
+   "ueberschrift": "Entscheidungsbäume und Tabellendaten",
+   "beschreibung": "Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "zeitreihen": {
+   "titel": "Prognosen aus Zeitreihen · KI-Labor",
+   "ueberschrift": "Prognosen aus Zeitreihen",
+   "beschreibung": "Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "anomalien": {
+   "titel": "Auffälliges finden · KI-Labor",
+   "ueberschrift": "Auffälliges finden",
+   "beschreibung": "Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "empfehlungen": {
+   "titel": "Empfehlungssysteme · KI-Labor",
+   "ueberschrift": "Empfehlungssysteme",
+   "beschreibung": "Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "mlops": {
+   "titel": "Vom Prototyp in den Betrieb · KI-Labor",
+   "ueberschrift": "Vom Prototyp in den Betrieb",
+   "beschreibung": "Ein Modell, das im Versuch funktioniert, ist erst der Anfang.",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "kosten-energie": {
+   "titel": "Kosten und Energie · KI-Labor",
+   "ueberschrift": "Kosten und Energie",
+   "beschreibung": "Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "ki-einfuehrung": {
+   "titel": "KI im Unternehmen einführen · KI-Labor",
+   "ueberschrift": "KI im Unternehmen einführen",
+   "beschreibung": "Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?",
+   "typ": "seite",
+   "datei": "content-prognose-betrieb.js"
+  },
+  "uc-fertigung-sichtpruefung": {
+   "titel": "Sichtprüfung: Gutteil oder Ausschuss · KI-Labor",
+   "ueberschrift": "Sichtprüfung: Gutteil oder Ausschuss",
+   "beschreibung": "Am Bandende sieht jemand jede Metallscheibe an und sucht Kratzer, Dellen und ausgebrochene Kanten.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-fertigung-sortieren": {
+   "titel": "Bauteile nach Typ sortieren · KI-Labor",
+   "ueberschrift": "Bauteile nach Typ sortieren",
+   "beschreibung": "Schrauben, Muttern und Scheiben liegen gemischt in einer Kiste.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-logistik-zaehlen": {
+   "titel": "Fahrzeuge und Fahrräder auf dem Hof zählen · KI-Labor",
+   "ueberschrift": "Fahrzeuge und Fahrräder auf dem Hof zählen",
+   "beschreibung": "Die Torkontrolle möchte wissen, wie viele Fahrzeuge gerade auf dem Hof stehen, ohne jedes Mal hinzusehen.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-handel-regal": {
+   "titel": "Regal und Tisch: Was steht da? · KI-Labor",
+   "ueberschrift": "Regal und Tisch: Was steht da?",
+   "beschreibung": "Eine Kamera am Gang soll Flaschen im Regal finden und Lücken sichtbar machen.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-gesundheit-auffaellig": {
+   "titel": "Zweitmeinung: Zellprobe auffällig oder unauffällig · KI-Labor",
+   "ueberschrift": "Zweitmeinung: Zellprobe auffällig oder unauffällig",
+   "beschreibung": "Bei sehr vielen Proben soll eine Software vorsortieren und auffällige nach vorn legen.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-buero-dokumente": {
+   "titel": "Fragen an vier Dokumente · KI-Labor",
+   "ueberschrift": "Fragen an vier Dokumente",
+   "beschreibung": "Wartungsanleitung, Vertrag, Betriebsvereinbarung und Produkt-FAQ liegen in verschiedenen Ordnern.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-buero-protokoll": {
+   "titel": "Besprechungsprotokoll aus Sprache · KI-Labor",
+   "ueberschrift": "Besprechungsprotokoll aus Sprache",
+   "beschreibung": "Nach der Besprechung soll jemand das Protokoll schreiben.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-service-bestellung": {
+   "titel": "Bestellfragen mit Werkzeugen beantworten · KI-Labor",
+   "ueberschrift": "Bestellfragen mit Werkzeugen beantworten",
+   "beschreibung": "Viele Kundinnen fragen nach dem Stand ihrer Bestellung, dem Preis oder einer Stornierung.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-sicherheit-zutritt": {
+   "titel": "Zutritt: Ist jemand an der Tür? · KI-Labor",
+   "ueberschrift": "Zutritt: Ist jemand an der Tür?",
+   "beschreibung": "Ein Türsystem soll merken, ob jemand vor dem Eingang steht, und dann etwa das Licht einschalten.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "uc-sicherheit-baustelle": {
+   "titel": "Personen auf Baustelle und in der Werkhalle · KI-Labor",
+   "ueberschrift": "Personen auf Baustelle und in der Werkhalle",
+   "beschreibung": "Eine Kamera soll melden, wenn jemand im Gefahrenbereich steht.",
+   "typ": "seite",
+   "datei": "content-usecases.js"
+  },
+  "hardware": {
+   "titel": "Der Jetson und seine Hardware · KI-Labor",
+   "ueberschrift": "Der Jetson und seine Hardware",
+   "beschreibung": "Ein kleiner Computer mit GPU, gebaut für KI am Gerät.",
+   "typ": "seite",
+   "datei": "content.js"
+  },
+  "visual-demo": {
+   "titel": "Bildsprache: ein Beispiel je Bildtyp · KI-Labor",
+   "ueberschrift": "Bildsprache: ein Beispiel je Bildtyp",
+   "beschreibung": "Jeder Abschnitt dieser Seite zeigt einen Bildtyp mit KI-Inhalt.",
+   "typ": "seite",
+   "datei": "content-visual-demo.js",
+   "versteckt": true
+  }
+ },
+ "reihenfolge": [
+  "start",
+  "karte",
+  "ml",
+  "genki",
+  "robotik",
+  "business",
+  "daten",
+  "neuronale-netze",
+  "training",
+  "bewertung",
+  "verzerrung-ethik",
+  "recht",
+  "bild-als-zahlen",
+  "cnn-intuition",
+  "vision-aufgaben",
+  "gesicht",
+  "objekt",
+  "anlernen",
+  "chat",
+  "whisper",
+  "tokens-sprachmodelle",
+  "prompting",
+  "llm-grenzen",
+  "finetuning-oder-rag",
+  "sprachausgabe",
+  "rag-ueberblick",
+  "rag-embedding",
+  "rag-chunking",
+  "rag-suche",
+  "rag-reranking",
+  "rag-bewertung",
+  "rag",
+  "agenten-grundlagen",
+  "agenten-planung",
+  "agent",
+  "agenten-sicherheit",
+  "mcp-werkzeuge",
+  "bild",
+  "faceswap",
+  "tabellen-ml",
+  "zeitreihen",
+  "anomalien",
+  "empfehlungen",
+  "mlops",
+  "kosten-energie",
+  "ki-einfuehrung",
+  "uc-fertigung-sichtpruefung",
+  "uc-fertigung-sortieren",
+  "uc-logistik-zaehlen",
+  "uc-handel-regal",
+  "uc-gesundheit-auffaellig",
+  "uc-buero-dokumente",
+  "uc-buero-protokoll",
+  "uc-service-bestellung",
+  "uc-sicherheit-zutritt",
+  "uc-sicherheit-baustelle",
+  "hardware"
+ ],
+ "gruppen": [
+  {
+   "name": "Start",
+   "seiten": [
+    "start"
+   ]
+  },
+  {
+   "name": "Grundlagen",
+   "seiten": [
+    "karte",
+    "ml",
+    "genki",
+    "robotik",
+    "business",
+    "daten",
+    "neuronale-netze",
+    "training",
+    "bewertung",
+    "verzerrung-ethik",
+    "recht"
+   ]
+  },
+  {
+   "name": "Sehen",
+   "seiten": [
+    "bild-als-zahlen",
+    "cnn-intuition",
+    "vision-aufgaben",
+    "gesicht",
+    "objekt",
+    "anlernen"
+   ]
+  },
+  {
+   "name": "Sprache",
+   "seiten": [
+    "chat",
+    "whisper",
+    "tokens-sprachmodelle",
+    "prompting",
+    "llm-grenzen",
+    "finetuning-oder-rag",
+    "sprachausgabe"
+   ]
+  },
+  {
+   "name": "Wissen und RAG",
+   "seiten": [
+    "rag-ueberblick",
+    "rag-embedding",
+    "rag-chunking",
+    "rag-suche",
+    "rag-reranking",
+    "rag-bewertung",
+    "rag"
+   ]
+  },
+  {
+   "name": "Agenten",
+   "seiten": [
+    "agenten-grundlagen",
+    "agenten-planung",
+    "agent",
+    "agenten-sicherheit",
+    "mcp-werkzeuge"
+   ]
+  },
+  {
+   "name": "Erzeugen",
+   "seiten": [
+    "bild",
+    "faceswap"
+   ]
+  },
+  {
+   "name": "Daten und Prognosen",
+   "seiten": [
+    "tabellen-ml",
+    "zeitreihen",
+    "anomalien",
+    "empfehlungen"
+   ]
+  },
+  {
+   "name": "KI im Betrieb",
+   "seiten": [
+    "mlops",
+    "kosten-energie",
+    "ki-einfuehrung"
+   ]
+  },
+  {
+   "name": "Business-Use-Cases",
+   "seiten": [
+    "uc-fertigung-sichtpruefung",
+    "uc-fertigung-sortieren",
+    "uc-logistik-zaehlen",
+    "uc-handel-regal",
+    "uc-gesundheit-auffaellig",
+    "uc-buero-dokumente",
+    "uc-buero-protokoll",
+    "uc-service-bestellung",
+    "uc-sicherheit-zutritt",
+    "uc-sicherheit-baustelle"
+   ]
+  },
+  {
+   "name": "Der Jetson",
+   "seiten": [
+    "hardware"
+   ]
+  }
+ ]
+}

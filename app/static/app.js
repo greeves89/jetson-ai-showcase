@@ -1,5 +1,5 @@
 /* KI-Labor: Kern der Oberflaeche.
-   Aufgaben: Router (#/seite), Seitenleiste mit Live-Werten, Seitenaufbau aus content.js,
+   Aufgaben: Router (echte Adressen /seite per History-API), Seitenleiste mit Live-Werten, Seitenaufbau aus content.js,
    Glossar-Erklaerungen, Video-Spieler mit Kapiteln.
 
    SCHNITTSTELLE FUER BAUSTEINE (widgets.js, demos.js, demo-whisper.js)
@@ -20,10 +20,15 @@
      KL.stats.letzte                          zuletzt empfangene Werte oder null
      KL.zeit(ms)                              Millisekunden als "12 ms" bzw. "1,2 s"
      KL.beispiele()                           Promise auf /static/beispiele/manifest.json ({usecases:[...]}), gecacht
-     seite.query                              Abfrage aus dem Hash, z. B. #/anlernen?beispiel=fertigung-teile -> {beispiel:"fertigung-teile"}
+     seite.query                              Abfrage der Adresse, z. B. /anlernen?beispiel=fertigung-teile -> {beispiel:"fertigung-teile"}
+   ADRESSEN: Seiten liegen unter /<id> (Startseite /). Links der Form href="#/<id>" oder "#/<id>?beispiel=x" funktionieren
+     weiter: Klicks darauf werden abgefangen und ohne Neuladen auf die echte Adresse gelegt; ein gesetztes
+     location.hash = "#/id" und alte Lesezeichen werden per replaceState auf die saubere Adresse umgeleitet.
    SICHERHEIT: Server-, Modell- und Nutzertexte NUR per textContent oder h(...) mit Text einsetzen, nie ueber
    html: oder innerHTML. KL.md() ist nur fuer eigene, statische Texte aus content.js gedacht.
-   CSS-Klassen stehen in style.css (flaeche, pad, btn, chip, regler, live, pipe, erklaerung, ...). */
+   CSS-Klassen stehen in style.css (flaeche, pad, btn, chip, regler, live, pipe, erklaerung, ...).
+   BILDER UND LESEMODUS (docs/visuals.md): KL.visual(spec) baut ein Bild (visuals.js), KL.montiere({destroy}) haengt Aufraeumer an die Seite,
+     KL.lesemodus ist "kompakt" (Standard) oder "ausfuehrlich" (Zuweisung wechselt und merkt sich die Wahl), KL.hatIcon(name) prueft Icon-Namen. */
 (function () {
   "use strict";
   const INHALT = window.INHALT;
@@ -73,9 +78,19 @@
     info: '<circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/>',
     arrow: '<path d="M5 12h14M13 6l6 6-6 6"/>',
   };
+  // Grosse lucide-Auswahl aus icons.json (scripts/icons_bauen.mjs), einmal beim Start nachgeladen. Ohne Datei bleibt es beim kleinen Set.
+  // Die Pfade stammen aus der eigenen, eingecheckten Datei (nie aus Spezifikationen oder Nutzertexten).
+  let LUCIDE = {};
+  function iconsLaden() {
+    return fetch("/static/icons.json" + V, { cache: "no-cache" }).then((r) => (r.ok ? r.json() : {}))
+      .then((j) => { if (j && typeof j === "object") LUCIDE = j; }).catch(() => { /* bleibt beim kleinen Set */ });
+  }
+  const eigen = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const hatIcon = (name) => eigen(ICON, name) || eigen(LUCIDE, name);
   function icon(name) {
     const w = document.createElement("span");
-    w.innerHTML = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + (ICON[name] || ICON.info) + "</svg>";
+    const innen = eigen(ICON, name) ? ICON[name] : eigen(LUCIDE, name) ? LUCIDE[name] : ICON.info;
+    w.innerHTML = '<svg class="ic" viewBox="0 0 24 24" aria-hidden="true">' + innen + "</svg>";
     return w.firstChild;
   }
 
@@ -88,7 +103,8 @@
       if (!g) return anzeige || k;
       return '<button type="button" class="gl" data-gl="' + k + '">' + (anzeige || g[0]) + "</button>";
     });
-    s = s.replace(/\{\{([a-z0-9-]+)\|([^}]+)\}\}/g, (m, id, text) => '<a href="#/' + id + '">' + text + "</a>");
+    // {{seite|Text}} oder {{seite?beispiel=id|Text}} (Abfrage erlaubt: Buchstaben, Ziffern, - _ = &)
+    s = s.replace(/\{\{([a-z0-9-]+)(\?[a-z0-9_=&-]+)?\|([^}]+)\}\}/g, (m, id, abfrage, text) => '<a href="#/' + id + (abfrage || "") + '">' + text + "</a>");
     s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
     return s;
@@ -238,19 +254,80 @@
     besucht.add(id);
     try { localStorage.setItem("kl-besucht", JSON.stringify([...besucht])); } catch (e) { /* egal */ }
   }
+  let navGruppen = [];
+  function navOffenLesen() {
+    try { return new Set(JSON.parse(localStorage.getItem("kl-nav-offen") || "[]")); } catch (e) { return new Set(); }
+  }
+  function navOffenSchreiben(menge) {
+    try { localStorage.setItem("kl-nav-offen", JSON.stringify([...menge])); } catch (e) { /* ohne Speicher */ }
+  }
+  function gruppeOeffnen(gr, offen, merken) {
+    gr.kopf.setAttribute("aria-expanded", offen ? "true" : "false");
+    gr.liste.hidden = !offen;
+    if (merken) {
+      const m = navOffenLesen();
+      if (offen) m.add(gr.name); else m.delete(gr.name);
+      navOffenSchreiben(m);
+    }
+  }
+  function navSuche(text) {
+    const q = text.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    const gespeichert = navOffenLesen();
+    let treffer = 0;
+    for (const gr of navGruppen) {
+      let inGruppe = 0;
+      for (const a of gr.eintraege) {
+        const ok = !q.length || q.every((t) => a.haystack.includes(t));
+        a.el.hidden = !ok;
+        if (ok) inGruppe++;
+      }
+      treffer += inGruppe;
+      if (q.length) {
+        gr.sec.hidden = inGruppe === 0;
+        gr.liste.hidden = inGruppe === 0;
+        gr.kopf.setAttribute("aria-expanded", inGruppe ? "true" : "false");
+      } else {
+        gr.sec.hidden = false;
+        const aktiv = gr.eintraege.some((x) => x.el.getAttribute("aria-current") === "page");
+        const offen = gespeichert.has(gr.name) || aktiv;
+        gr.liste.hidden = !offen;
+        gr.kopf.setAttribute("aria-expanded", offen ? "true" : "false");
+      }
+    }
+    const leer = $("#nav-leer");
+    if (leer) leer.hidden = !(q.length && treffer === 0);
+  }
   function navBauen() {
+    const suche = h("div", { class: "navsuche" },
+      h("input", { type: "search", id: "nav-suche", placeholder: "Seiten suchen", "aria-label": "Seiten suchen", autocomplete: "off",
+        oninput: (e) => navSuche(e.target.value),
+        onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
     const nav = h("nav", { class: "navscroll", "aria-label": "Lernpfad" });
+    navGruppen = [];
+    const gespeichert = navOffenLesen();
     for (const g of INHALT.gruppen) {
       if (!g.seiten.length) continue;
-      const sec = h("div", { class: "navgruppe" }, h("h2", null, g.name));
+      const liste = h("div", { class: "navliste" });
+      const kopf = h("button", { type: "button", class: "navkopf", "aria-expanded": "true" }, h("span", null, g.name), icon("chevron"));
+      const sec = h("div", { class: "navgruppe" }, h("h2", null, kopf), liste);
+      const gr = { name: g.name, sec, kopf, liste, eintraege: [] };
       for (const id of g.seiten) {
         const s = INHALT.seiten[id];
-        sec.append(h("a", { class: "nav", href: "#/" + id, dataset: { id } }, icon(s.symbol), h("span", null, s.nav || s.titel),
-          s.status === "bald" ? h("span", { class: "bald" }, "bald") : h("span", { class: "ok", hidden: true }, icon("check"))));
+        const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", null, s.nav || s.titel),
+          s.status === "bald" ? h("span", { class: "bald" }, "bald") : h("span", { class: "ok", hidden: true }, icon("check")));
+        liste.append(el);
+        gr.eintraege.push({ el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() });
       }
+      kopf.addEventListener("click", () => gruppeOeffnen(gr, kopf.getAttribute("aria-expanded") !== "true", true));
+      // Voreinstellung: nur die Gruppen offen, die der Besucher geoeffnet hat; Start immer offen; die der aktuellen Seite folgt in navMarkieren
+      gruppeOeffnen(gr, gespeichert.has(g.name) || g.name === "Start", false);
       nav.append(sec);
+      navGruppen.push(gr);
     }
-    return nav;
+    nav.append(h("p", { id: "nav-leer", class: "nav-leer", hidden: true }, "Keine Seite gefunden."));
+    const f = document.createDocumentFragment();
+    f.append(suche, nav);
+    return f;
   }
   function navMarkieren(id) {
     $$(".nav").forEach((a) => {
@@ -259,6 +336,12 @@
       const ok = $(".ok", a);
       if (ok) ok.hidden = !(besucht.has(a.dataset.id) && a.dataset.id !== "start");
     });
+    const suche = $("#nav-suche");
+    for (const gr of navGruppen) {
+      if (gr.eintraege.some((x) => x.id === id) && !(suche && suche.value.trim())) gruppeOeffnen(gr, true, false);
+    }
+    const ak = $('.nav[aria-current="page"]');
+    if (ak && ak.scrollIntoView) ak.scrollIntoView({ block: "nearest" });
   }
 
   /* ------------------------------------------------------------ Seiten */
@@ -313,16 +396,83 @@
     });
     return h("section", { class: "block quiz" }, h("h2", null, icon("check"), "Teste dich"), h("div", { class: "flaeche pad" }, felder, ergebnis));
   }
+  /* ------------------------------------------------------------ Lesemodus (Kompakt | Ausfuehrlich) */
+  const MODI = ["kompakt", "ausfuehrlich"];
+  let lesemodus = "kompakt";
+  try { const m = localStorage.getItem("kl-lesemodus"); if (MODI.includes(m)) lesemodus = m; } catch (e) { /* ohne Speicher */ }
+  document.documentElement.dataset.lesemodus = lesemodus;
+  function lesemodusSetzen(m) {
+    if (!MODI.includes(m)) return;
+    lesemodus = m;
+    document.documentElement.dataset.lesemodus = m;
+    try { localStorage.setItem("kl-lesemodus", m); } catch (e) { /* egal */ }
+    for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich";
+    for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
+  }
+  function lesemodusSchalter() {
+    const knopf = (m, text) => h("button", { type: "button", dataset: { modus: m }, "aria-pressed": lesemodus === m ? "true" : "false", onclick: () => lesemodusSetzen(m) }, text);
+    const gruppe = h("div", { class: "lesemodus", role: "group", "aria-label": "Lesemodus" }, knopf("kompakt", "Kompakt"), knopf("ausfuehrlich", "Ausführlich"));
+    gruppe.addEventListener("keydown", (e) => {
+      if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
+      e.preventDefault();
+      const ziel = e.key === "ArrowRight" ? "ausfuehrlich" : "kompakt";
+      lesemodusSetzen(ziel);
+      const b = $('button[data-modus="' + ziel + '"]', gruppe); if (b) b.focus();
+    });
+    return h("div", { class: "lesezeile" }, h("span", null, "Lesemodus"), gruppe);
+  }
+  /** Markierungen aus content.js in reinen Text wandeln. */
+  function klar(t) {
+    return String(t)
+      .replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g, (m, k, a) => a || (INHALT.glossar[k] ? INHALT.glossar[k][0] : k))
+      .replace(/\{\{([a-z0-9-]+)(?:\?[a-z0-9_=&-]+)?\|([^}]+)\}\}/g, "$2")
+      .replace(/\*\*([^*]+)\*\*/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/\s+/g, " ").trim();
+  }
+  const KUERZEL = new Set(["z", "b", "h", "d", "u", "a", "o", "s", "v", "bzw", "ca", "ggf", "usw", "vgl", "nr", "abb", "evtl", "etc", "inkl", "max", "min", "sog", "dr", "prof", "bspw"]);
+  /** Erster Satz (ohne Abkuerzungspunkte) als reiner Text, hoechstens 140 Zeichen. */
+  function ersterSatz(text, grenze = 140) {
+    const t = klar(text);
+    let ende = t.length;
+    const re = /[.!?](?=\s|$)/g;
+    let m;
+    while ((m = re.exec(t))) {
+      const wort = (t.slice(0, m.index).match(/([A-Za-zÄÖÜäöüß]+|\d+)$/) || [""])[0].toLowerCase();
+      if (m[0] === "." && (KUERZEL.has(wort) || /^\d+$/.test(wort))) continue;
+      ende = m.index + 1; break;
+    }
+    let satz = t.slice(0, ende);
+    if (satz.length > grenze) {
+      const k = satz.slice(0, grenze - 1);
+      satz = k.slice(0, Math.max(k.lastIndexOf(" "), 40)).replace(/[,;:.\s]+$/, "") + "…";
+    }
+    return satz;
+  }
+  /** Aufklapper "Mehr dazu": in Kompakt zu, in Ausfuehrlich offen und ohne sichtbare Zusammenfassung. */
+  function mehrBlock(kinder, titel) {
+    const d = h("details", { class: "mehr" }, h("summary", null, icon("chevron"), titel || "Mehr dazu"), h("div", { class: "mehr-in" }, kinder));
+    d.open = lesemodus === "ausfuehrlich";
+    return d;
+  }
   function abschnitte(seite) {
     const out = h("div", { class: "text" });
     for (const a of seite.abschnitte || []) {
-      out.append(h("h2", { class: "abs" }, a.h));
-      for (const p of a.p || []) out.append(h("p", { html: md(p) }));
-      if (a.liste) out.append(h("ul", null, a.liste.map((l) => h("li", { html: md(l) }))));
-      if (a.tabelle) out.append(tabelleBlock(a.tabelle));
-      if (a.alltag) out.append(h("aside", { class: "alltag" }, h("b", null, "Beispiel aus dem Alltag"),
+      const sec = h("section", { class: "abschnitt" }, h("h2", { class: "abs" }, a.h));
+      if (a.visual && window.KL.visual) {
+        const bild = window.KL.visual(a.visual);
+        if (bild) sec.append(bild);
+      }
+      const quelle = (a.p && a.p[0]) || (a.alltag && [].concat(a.alltag)[0]) || a.merke || (a.liste && a.liste[0]) || "";
+      if (a.kurz) sec.append(h("p", { class: "kurz", html: md(a.kurz) }));
+      else if (quelle) sec.append(h("p", { class: "kurz auto" }, ersterSatz(quelle)));
+      const mehr = [];
+      for (const p of a.p || []) mehr.push(h("p", { html: md(p) }));
+      if (a.liste) mehr.push(h("ul", null, a.liste.map((l) => h("li", { html: md(l) }))));
+      if (a.tabelle) mehr.push(tabelleBlock(a.tabelle));
+      if (a.alltag) mehr.push(h("aside", { class: "alltag" }, h("b", null, "Beispiel aus dem Alltag"),
         [].concat(a.alltag).map((t) => h("p", { html: md(t) }))));
-      if (a.merke) out.append(h("aside", { class: "merke" }, h("b", null, "Merke"), h("p", { html: md(a.merke) })));
+      if (a.merke) mehr.push(h("aside", { class: "merke" }, h("b", null, "Merke"), h("p", { html: md(a.merke) })));
+      if (mehr.length) sec.append(mehrBlock(mehr));
+      out.append(sec);
     }
     return out;
   }
@@ -353,6 +503,7 @@
     const ueber = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
     const out = h("div", { class: "seitenbreite" },
       h("p", { class: "ueber" }, ueber), h("h1", null, seite.titel), h("p", { class: "lead" }, seite.kurz));
+    out.append(lesemodusSchalter());
     if (seite.status === "bald") out.append(h("p", null, h("span", { class: "chip warn" }, "Demo folgt"), " Die Erklärung steht schon, die Demo wird noch eingebaut."));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
     if (vids.length) out.append(videoBlock(vids));
@@ -362,32 +513,95 @@
     if (seite.mitnehmen) out.append(h("section", { class: "block mitnehmen" }, h("h2", null, "Das nimmst du mit"), h("ul", null, seite.mitnehmen.map((m) => h("li", null, m)))));
     if (seite.quiz && seite.quiz.length) out.append(quizBlock(seite.quiz));
     if (seite.business) {
+      const b = seite.business;
+      const chips = b.beispiele && b.beispiele.length ? h("div", { class: "zeile" }, b.beispiele.map((c) => h("span", { class: "chip" }, c))) : null;
       out.append(h("section", { class: "block" }, h("h2", null, icon("business"), "Im Business"),
-        h("div", { class: "flaeche pad text" }, h("p", { html: md(seite.business.text) }),
-          seite.business.beispiele ? h("div", { class: "zeile" }, seite.business.beispiele.map((b) => h("span", { class: "chip" }, b))) : null)));
+        h("div", { class: "flaeche pad text biz" }, chips || h("p", { class: "kurz auto" }, ersterSatz(b.text)), mehrBlock([h("p", { html: md(b.text) })]))));
     }
     if (seite.grenzen) {
       out.append(h("section", { class: "block" }, h("h2", null, icon("info"), "Grenzen"),
-        h("div", { class: "flaeche pad text" }, h("ul", null, seite.grenzen.map((g) => h("li", { html: md(g) }))))));
+        h("div", { class: "flaeche pad text" }, mehrBlock([h("ul", null, seite.grenzen.map((g) => h("li", { html: md(g) })))], "Grenzen ansehen (" + seite.grenzen.length + ")"))));
     }
     const w = weiterBlock(seite.weiter); if (w) out.append(w);
     return out;
   }
 
-  function route() {
-    const m = location.hash.match(/^#\/([a-z0-9-]+)(?:\?(.*))?$/) || [];
-    const id = m[1];
-    const gueltig = id && INHALT.seiten[id] ? id : "start";
-    aktuelleAbfrage = Object.fromEntries(new URLSearchParams(m[2] || ""));
+  /* ------------------------------------------------------------ Router (History-API) */
+  const gibt = (id) => !!id && Object.prototype.hasOwnProperty.call(INHALT.seiten, id);
+  const adresse = (id, query) => (id === "start" ? "/" : "/" + id) + (query ? "?" + query : "");
+  function ausHash(hash) {           // alte Form #/id oder #/id?abfrage
+    const m = String(hash).match(/^#\/([a-z0-9-]+)(?:\?(.*))?$/);
+    return m ? { id: m[1], query: m[2] || "" } : null;
+  }
+  function ausPfad(pfad, suche) {    // echte Adresse /id oder /
+    const query = String(suche || "").replace(/^\?/, "");
+    if (pfad === "/") return { id: "start", query };
+    const m = pfad.match(/^\/([a-z0-9-]+)\/?$/);
+    return { id: m ? m[1] : null, query };
+  }
+  function nichtGefunden() {
+    return h("div", { class: "seitenbreite" }, h("h1", null, "Seite nicht gefunden"),
+      h("p", { class: "lead" }, "Diese Adresse gibt es im KI-Labor nicht."),
+      h("p", null, h("a", { href: "/" }, "Zur Startseite")));
+  }
+  function route(y) {
+    const alt = ausHash(location.hash);
+    if (alt) history.replaceState(history.state, "", adresse(gibt(alt.id) ? alt.id : "start", alt.query));
+    const { id, query } = ausPfad(location.pathname, location.search);
+    const gueltig = gibt(id) ? id : null;
+    // saubere Schreibweise: /start und /id/ gehen auf /id bzw. /
+    if (gueltig && location.pathname !== adresse(gueltig)) history.replaceState(history.state, "", adresse(gueltig, query));
+    aktuelleAbfrage = Object.fromEntries(new URLSearchParams(query));
     tipAus(); aufraeumen();
     const main = $("#inhalt");
-    main.replaceChildren(seiteBauen(gueltig));
-    document.title = INHALT.seiten[gueltig].titel + " · KI-Labor";
-    besuchtMerken(gueltig); navMarkieren(gueltig);
-    window.scrollTo(0, 0);
+    if (gueltig) {
+      main.replaceChildren(seiteBauen(gueltig));
+      document.title = INHALT.seiten[gueltig].titel + " · KI-Labor";
+      besuchtMerken(gueltig);
+    } else {
+      main.replaceChildren(nichtGefunden());
+      document.title = "Seite nicht gefunden · KI-Labor";
+    }
+    navMarkieren(gueltig);
+    window.scrollTo({ top: y || 0, left: 0, behavior: "instant" });
   }
+  function navigiere(ziel) {         // ziel: { id, query }, ohne Neuladen
+    const url = adresse(ziel.id, ziel.query);
+    if (url === location.pathname + location.search) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); $("#inhalt").focus({ preventScroll: true }); return; }
+    history.replaceState({ y: window.scrollY }, "", location.href);
+    history.pushState({ y: 0 }, "", url);
+    route();
+    $("#inhalt").focus({ preventScroll: true });
+  }
+  /** Ziel eines Links, wenn es eine Seite des Labors ist (#/id oder /id), sonst null. */
+  function linkZiel(a) {
+    const href = a.getAttribute("href") || "";
+    const alt = ausHash(href);
+    if (alt) return { id: gibt(alt.id) ? alt.id : "start", query: alt.query };
+    let u;
+    try { u = new URL(href, location.href); } catch (e) { return null; }
+    if (u.origin !== location.origin || u.hash) return null;
+    const p = ausPfad(u.pathname, u.search);
+    return gibt(p.id) ? p : null;
+  }
+  document.addEventListener("click", (e) => {
+    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    const a = e.target.closest && e.target.closest("a[href]");
+    if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
+    const ziel = linkZiel(a);
+    if (!ziel) return;
+    e.preventDefault();
+    navigiere(ziel);
+  });
+  history.scrollRestoration = "manual";
+  window.addEventListener("popstate", () => route(history.state && history.state.y));
+  window.addEventListener("hashchange", () => { if (ausHash(location.hash)) route(); });
 
-  window.KL = { $, $$, h, md, icon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT };
+  window.KL = { $, $$, h, md, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
+    /** Haengt ein Objekt mit destroy() an die aktuelle Seite: wird beim Seitenwechsel aufgeraeumt (wie ein Baustein). */
+    montiere(m) { montiert.push(m); return m; },
+    ersterSatz, klar };
+  Object.defineProperty(window.KL, "lesemodus", { enumerable: true, get: () => lesemodus, set: lesemodusSetzen });
 
   function ladeSkript(src) {
     return new Promise((ok) => {
@@ -404,13 +618,16 @@
     for (const f of m.module || []) await ladeSkript("/static/" + f);
   }
   async function start() {
+    const iconsP = iconsLaden();
     await ladeModule();
+    await iconsP;          // vor dem ersten Rendern, damit lucide-Namen aus icons.json schon da sind
+    // Der vom Server vorab eingesetzte Inhalt (id "vorab") wird jetzt zum Hauptbereich der Oberflaeche.
+    const vorab = $("#vorab"); if (vorab) vorab.id = "inhalt";
     const seitenleiste = $("#seite");
-    seitenleiste.append(
+    seitenleiste.replaceChildren(
       h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "läuft auf dem Jetson"))),
       navBauen(), liveBauen(), tip);
-    window.addEventListener("hashchange", route);
-    route();
+    route(history.state && history.state.y);
     poll(); setInterval(poll, 1500);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

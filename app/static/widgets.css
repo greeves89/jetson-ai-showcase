@@ -74,6 +74,7 @@
 .w-reglerpaar .regler{grid-template-columns:auto minmax(60px,1fr) auto}
 .w-reglerpaar .regler output{min-width:4.8em}
 @media(max-width:760px){.w-reglerpaar{grid-template-columns:1fr}}
+@media(max-width:520px){.w-reglerpaar .regler{grid-template-columns:minmax(0,1fr) auto}.w-reglerpaar .regler label{grid-column:1/-1;white-space:normal}.w-reglerpaar .regler output{min-width:0}}
 .w-stand{margin:14px 0 4px;min-height:34px}
 .w-stand .chip{font-variant-numeric:tabular-nums}
 .w-stand .chip.w-ok{background:color-mix(in srgb,var(--gruen) 20%,transparent);color:var(--text)}

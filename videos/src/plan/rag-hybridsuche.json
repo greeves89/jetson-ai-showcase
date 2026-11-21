@@ -1,0 +1,131 @@
+{
+ "id": "rag-hybridsuche",
+ "titel": "Hybridsuche",
+ "untertitel": "Stichwort und Bedeutung zusammen",
+ "gesamt": 81.76,
+ "szenen": [
+  {
+   "id": "kellner",
+   "kapitel": "Kellner",
+   "start": 0,
+   "dauer": 13.28,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.84,
+     "text": "Du sagst im Restaurant: Ich suche etwas Italienisches."
+    },
+    {
+     "t": 5.04,
+     "d": 4.88,
+     "text": "Der Kellner empfiehlt Pizza und Pasta, obwohl du keins dieser Wörter genannt hast."
+    },
+    {
+     "t": 10.22,
+     "d": 2.16,
+     "text": "Das ist Suche nach Bedeutung."
+    }
+   ]
+  },
+  {
+   "id": "listen",
+   "kapitel": "Zwei Listen",
+   "start": 13.28,
+   "dauer": 13.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.36,
+     "text": "Beide Methoden haben ihre Stärken. Die Stichwortsuche trifft genaue Wörter. Die Vektorsuche trifft den Sinn."
+    },
+    {
+     "t": 8.16,
+     "d": 4.72,
+     "text": "Bei der Hybridsuche laufen beide, und jede liefert eine eigene Rangliste."
+    }
+   ]
+  },
+  {
+   "id": "punkte",
+   "kapitel": "Nicht addieren",
+   "start": 27.06,
+   "dauer": 11.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.96,
+     "text": "Die Punkte beider Listen kann man nicht addieren."
+    },
+    {
+     "t": 3.76,
+     "d": 4.4,
+     "text": "Die eine rechnet in Zehnern, die andere in Bruchteilen von eins."
+    },
+    {
+     "t": 8.46,
+     "d": 2.48,
+     "text": "Also schaut man nur auf die Platzierung."
+    }
+   ]
+  },
+  {
+   "id": "tafel",
+   "kapitel": "Punktetafel",
+   "start": 38.9,
+   "dauer": 15.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.12,
+     "text": "Jede Platzierung bringt Punkte, oben mehr, unten weniger. Die Punkte aus beiden Listen werden addiert."
+    },
+    {
+     "t": 7.92,
+     "d": 6.32,
+     "text": "Steht ein Text in beiden Listen weit oben, bekommt er zweimal ordentlich Punkte, und der gewinnt."
+    }
+   ]
+  },
+  {
+   "id": "regler",
+   "kapitel": "Regler",
+   "start": 54.04,
+   "dauer": 15.12,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.2,
+     "text": "Du kannst festlegen, welche Methode mehr zählt."
+    },
+    {
+     "t": 4,
+     "d": 6.56,
+     "text": "Viele Codes und Namen: mehr Stichwort. Fragen in Alltagssprache: mehr Vektor."
+    },
+    {
+     "t": 10.86,
+     "d": 3.36,
+     "text": "Und du bestimmst, wie viele Treffer ans Modell gehen."
+    }
+   ]
+  },
+  {
+   "id": "filter",
+   "kapitel": "Filter",
+   "start": 69.16,
+   "dauer": 12.6,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.96,
+     "text": "Mit Filtern grenzt du vorher ein, etwa auf ein Jahr oder eine Abteilung."
+    },
+    {
+     "t": 5.76,
+     "d": 5.04,
+     "text": "Wie du das misst, zeigt die Seite Suchen und später die Seite zur Bewertung."
+    }
+   ]
+  }
+ ]
+}

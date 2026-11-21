@@ -10,10 +10,10 @@ async function messwerte() {
 for (const [id, modus] of [["gesicht", "gesicht"], ["objekt", "objekt"]]) {
   await oeffneSeite(page, id);
   await page.click("text=Kamera starten");
-  await page.waitForFunction(() => { const b = document.querySelectorAll(".messwerte .messwert b"); return b.length === 3 && b[1].textContent !== "–"; }, null, { timeout: 20000 });
+  await page.waitForFunction(() => { const b = document.querySelectorAll(".messwerte .messwert b"); return b.length === 3 && b[1].textContent !== "·"; }, null, { timeout: 20000 });
   await page.waitForTimeout(3000);
   const m = await messwerte();
-  pruefe(m[1] !== "–" && m[2] !== "–", `${id}: Messwerte ${m.join(" | ")}`);
+  pruefe(m[1] !== "·" && m[2] !== "·", `${id}: Messwerte ${m.join(" | ")}`);
   const segs = await page.$$eval(".pipe > div", (d) => d.map((x) => x.textContent));
   pruefe(segs.length >= 5 && segs.every((s) => /ms/.test(s)), `${id}: Pipeline ${segs.join(" | ")}`);
   const satz = await page.textContent(".live .erklaerung");

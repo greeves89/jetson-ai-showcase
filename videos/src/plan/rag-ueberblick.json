@@ -1,0 +1,151 @@
+{
+ "id": "rag-ueberblick",
+ "titel": "RAG in einer Minute",
+ "untertitel": "Erst nachschlagen, dann mit Quelle antworten",
+ "gesamt": 76.64,
+ "szenen": [
+  {
+   "id": "raten",
+   "kapitel": "Das Problem",
+   "start": 0,
+   "dauer": 12.64,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.64,
+     "text": "Ein Sprachmodell hat sehr viel gelesen."
+    },
+    {
+     "t": 3.84,
+     "d": 5.44,
+     "text": "Aber nicht dein Handbuch. Nicht deinen Vertrag. Nicht das Protokoll von gestern."
+    },
+    {
+     "t": 9.58,
+     "d": 2.16,
+     "text": "Fragst du danach, rät es."
+    }
+   ]
+  },
+  {
+   "id": "buch",
+   "kapitel": "Open Book",
+   "start": 12.64,
+   "dauer": 12.56,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.6,
+     "text": "Stell dir eine Prüfung vor, bei der du ins Buch schauen darfst."
+    },
+    {
+     "t": 4.4,
+     "d": 5.12,
+     "text": "Du musst nicht alles wissen. Du musst die richtige Seite finden und richtig lesen."
+    },
+    {
+     "t": 9.82,
+     "d": 1.84,
+     "text": "Genau das macht RAG."
+    }
+   ]
+  },
+  {
+   "id": "vorbereiten",
+   "kapitel": "Vorbereiten",
+   "start": 25.2,
+   "dauer": 15.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.48,
+     "text": "Zuerst bereitest du die Dokumente vor."
+    },
+    {
+     "t": 3.28,
+     "d": 2.56,
+     "text": "Der Text wird in kleine Stücke geteilt."
+    },
+    {
+     "t": 6.14,
+     "d": 4.32,
+     "text": "Jedes Stück wird zu einer Liste von Zahlen, die seine Bedeutung beschreibt."
+    },
+    {
+     "t": 10.76,
+     "d": 3.84,
+     "text": "Alle Stücke landen im Index, der durchsuchbaren Ablage."
+    }
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Fragen",
+   "start": 40.7,
+   "dauer": 9.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 1.84,
+     "text": "Dann stellst du eine Frage."
+    },
+    {
+     "t": 2.64,
+     "d": 1.76,
+     "text": "Auch sie wird zu Zahlen."
+    },
+    {
+     "t": 4.7,
+     "d": 3.6,
+     "text": "Die Stücke, die der Frage am nächsten liegen, sind die Treffer."
+    }
+   ]
+  },
+  {
+   "id": "antwort",
+   "kapitel": "Antworten",
+   "start": 49.9,
+   "dauer": 10.72,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.88,
+     "text": "Die Treffer gehen mit deiner Frage an das Modell."
+    },
+    {
+     "t": 3.68,
+     "d": 3.44,
+     "text": "Es antwortet nur mit diesen Stücken und nennt die Quelle."
+    },
+    {
+     "t": 7.42,
+     "d": 2.4,
+     "text": "Du kannst jede Aussage nachschlagen."
+    }
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Grenzen",
+   "start": 60.62,
+   "dauer": 16.02,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 1.92,
+     "text": "RAG ist kein Wundermittel."
+    },
+    {
+     "t": 2.72,
+     "d": 5.6,
+     "text": "Sind die Quellen schlecht oder findet die Suche die falschen Stellen, wird auch die Antwort schlecht."
+    },
+    {
+     "t": 8.62,
+     "d": 5.6,
+     "text": "Darum schauen wir uns jeden Schritt einzeln an. Fang auf der Seite RAG im Überblick an."
+    }
+   ]
+  }
+ ]
+}

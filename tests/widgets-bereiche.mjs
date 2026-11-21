@@ -31,7 +31,7 @@ await page.focus("details.bz:nth-of-type(2) summary");
 await page.keyboard.press("Enter");
 assert.notEqual(await page.locator("details.bz").nth(1).getAttribute("open"), null);
 await page.click("a.w-link >> nth=0");
-await page.waitForFunction(() => location.hash === "#/anlernen");
+await page.waitForFunction(() => location.pathname === "/anlernen");
 console.log("bereiche: ok", t.fehler.length ? "FEHLER " + t.fehler : "keine Konsolenfehler");
 await t.schliessen();
 process.exit(t.fehler.length ? 1 : 0);

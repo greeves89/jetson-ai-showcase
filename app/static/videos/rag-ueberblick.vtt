@@ -1,0 +1,68 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.690
+Ein Sprachmodell hat sehr viel gelesen.
+
+00:00:03.840 --> 00:00:09.430
+Aber nicht dein Handbuch. Nicht deinen
+Vertrag. Nicht das Protokoll von gestern.
+
+00:00:09.580 --> 00:00:11.890
+Fragst du danach, rät es.
+
+00:00:13.140 --> 00:00:16.890
+Stell dir eine Prüfung vor, bei
+der du ins Buch schauen darfst.
+
+00:00:17.040 --> 00:00:22.310
+Du musst nicht alles wissen. Du musst die
+richtige Seite finden und richtig lesen.
+
+00:00:22.460 --> 00:00:24.450
+Genau das macht RAG.
+
+00:00:25.700 --> 00:00:28.330
+Zuerst bereitest du die Dokumente vor.
+
+00:00:28.480 --> 00:00:31.190
+Der Text wird in kleine Stücke geteilt.
+
+00:00:31.340 --> 00:00:35.810
+Jedes Stück wird zu einer Liste von
+Zahlen, die seine Bedeutung beschreibt.
+
+00:00:35.960 --> 00:00:39.950
+Alle Stücke landen im Index,
+der durchsuchbaren Ablage.
+
+00:00:41.200 --> 00:00:43.190
+Dann stellst du eine Frage.
+
+00:00:43.340 --> 00:00:45.250
+Auch sie wird zu Zahlen.
+
+00:00:45.400 --> 00:00:49.150
+Die Stücke, die der Frage am
+nächsten liegen, sind die Treffer.
+
+00:00:50.400 --> 00:00:53.430
+Die Treffer gehen mit
+deiner Frage an das Modell.
+
+00:00:53.580 --> 00:00:57.170
+Es antwortet nur mit diesen
+Stücken und nennt die Quelle.
+
+00:00:57.320 --> 00:00:59.870
+Du kannst jede Aussage nachschlagen.
+
+00:01:01.120 --> 00:01:03.190
+RAG ist kein Wundermittel.
+
+00:01:03.340 --> 00:01:09.090
+Sind die Quellen schlecht oder findet die Suche die
+falschen Stellen, wird auch die Antwort schlecht.
+
+00:01:09.240 --> 00:01:14.990
+Darum schauen wir uns jeden Schritt einzeln
+an. Fang auf der Seite RAG im Überblick an.

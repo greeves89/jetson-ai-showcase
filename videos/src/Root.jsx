@@ -2,20 +2,8 @@ import React from "react";
 import { Composition, Sequence } from "remotion";
 import { FPS, SceneProvider, C, FONT, useCues, lin } from "./lib.jsx";
 import { AbsoluteFill, useCurrentFrame } from "remotion";
-import wasIstKi from "./plan/was-ist-ki.json";
-import ml from "./plan/maschinelles-lernen.json";
-import gen from "./plan/generative-ki.json";
-import robotik from "./plan/robotik.json";
-import biz from "./plan/ki-im-business.json";
-import S1 from "./szenen/was-ist-ki.jsx";
-import S2 from "./szenen/maschinelles-lernen.jsx";
-import S3 from "./szenen/generative-ki.jsx";
-import S4 from "./szenen/robotik.jsx";
-import S5 from "./szenen/ki-im-business.jsx";
+import { VIDEOS } from "./registry.js";
 
-const VIDEOS = [
-  [wasIstKi, S1], [ml, S2], [gen, S3], [robotik, S4], [biz, S5],
-];
 
 function Fortschritt({ plan }) {
   const f = useCurrentFrame();
@@ -39,7 +27,7 @@ function Film({ plan, szenen }) {
         const Comp = szenen[s.id];
         return (
           <Sequence key={s.id} from={Math.round(s.start * FPS)} durationInFrames={Math.round(s.dauer * FPS)} premountFor={FPS}>
-            <SceneProvider value={{ saetze: s.saetze, dur: s.dauer, label: plan.titel, kapitel: s.kapitel }}>
+            <SceneProvider value={{ saetze: s.saetze, dur: s.dauer, label: plan.titel, kapitel: s.kapitel, start: s.start }}>
               <Comp />
             </SceneProvider>
           </Sequence>

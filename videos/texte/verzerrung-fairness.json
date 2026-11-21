@@ -1,0 +1,58 @@
+{
+ "id": "verzerrung-fairness",
+ "titel": "Fairness",
+ "untertitel": "Verzerrung erkennen und begrenzen",
+ "szenen": [
+  {
+   "id": "umfrage",
+   "kapitel": "Umfrage",
+   "saetze": [
+    "Eine Umfrage nur morgens am Bahnhof erreicht nur Pendler.",
+    "Sauber gezählt und trotzdem schief.",
+    "Das Modell merkt nicht, dass etwas fehlt."
+   ]
+  },
+  {
+   "id": "quellen",
+   "kapitel": "Vier Quellen",
+   "saetze": [
+    "So entsteht Verzerrung: durch einseitige Daten, einseitige Auswahl, einseitige Etiketten und Rückkopplung.",
+    "Lernt ein Modell aus alten Einstellungen, übernimmt es deren Einseitigkeit."
+   ]
+  },
+  {
+   "id": "plz",
+   "kapitel": "Verstecktes Merkmal",
+   "saetze": [
+    "Ein sensibles Merkmal wegzulassen reicht nicht.",
+    "Die Postleitzahl kann es ersetzen.",
+    "Andere Merkmale können dasselbe verraten, ohne es zu nennen."
+   ]
+  },
+  {
+   "id": "gruppen",
+   "kapitel": "Gruppen",
+   "saetze": [
+    "Eine Gesamtzahl verdeckt Unterschiede.",
+    "Werte Ergebnisse nach Gruppen aus.",
+    "Ein Modell kann im Schnitt gut sein und bei einer Gruppe schlecht."
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Prüffragen",
+   "saetze": [
+    "Prüfe vor dem Einsatz: Woher kommen die Daten, wer fehlt, wer kann widersprechen?",
+    "Halte die Antworten fest, damit du sie später belegen kannst."
+   ]
+  },
+  {
+   "id": "mensch",
+   "kapitel": "Mensch entscheidet",
+   "saetze": [
+    "Menschen tragen die Verantwortung.",
+    "Bei Folgen für Menschen entscheidet ein Mensch, der wirklich eingreifen kann."
+   ]
+  }
+ ]
+}

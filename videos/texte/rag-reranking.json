@@ -1,0 +1,57 @@
+{
+ "id": "rag-reranking",
+ "titel": "Erst grob, dann genau",
+ "untertitel": "Reranking sortiert die besten Treffer neu",
+ "szenen": [
+  {
+   "id": "trichter",
+   "kapitel": "Vorauswahl",
+   "saetze": [
+    "Zweihundert Bewerbungen, eine Stelle. Niemand führt zweihundert Gespräche.",
+    "Also sortiert man zuerst nach den Unterlagen aus. Fünfzehn bleiben übrig."
+   ]
+  },
+  {
+   "id": "gespraech",
+   "kapitel": "Gespräche",
+   "saetze": [
+    "Mit diesen fünfzehn führst du Gespräche.",
+    "Das dauert, aber es zeigt, wer wirklich passt. Genau so arbeitet eine zweistufige Suche."
+   ]
+  },
+  {
+   "id": "grob",
+   "kapitel": "Grobe Suche",
+   "saetze": [
+    "Die erste Suche vergleicht nur fertige Zahlenlisten. Text und Frage begegnen sich nie.",
+    "Das ist schnell, auch bei Millionen Stücken. Aber es ist grob.",
+    "Die richtige Stelle liegt oft nur auf Platz neun."
+   ]
+  },
+  {
+   "id": "reranker",
+   "kapitel": "Gemeinsam lesen",
+   "saetze": [
+    "Ein Reranker liest die Frage und den Text gemeinsam.",
+    "Er sieht, wie sie zusammenpassen, und vergibt einen Punktwert.",
+    "Das ist genauer, braucht aber für jeden Kandidaten einen eigenen Durchgang."
+   ]
+  },
+  {
+   "id": "sortieren",
+   "kapitel": "Neu sortiert",
+   "saetze": [
+    "Darum holt die Suche erst zwanzig oder fünfzig Kandidaten. Der Reranker sortiert sie neu.",
+    "Die besten drei bis fünf gehen an das Sprachmodell. Die Stelle von Platz neun steht jetzt ganz oben."
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Abwägen",
+   "saetze": [
+    "Das kostet Wartezeit.",
+    "Ob es sich lohnt, zeigt ein Test mit echten Fragen. Dazu mehr im nächsten Video."
+   ]
+  }
+ ]
+}

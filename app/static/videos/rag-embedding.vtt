@@ -1,0 +1,66 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:07.050
+Auf einem Stadtplan hat jeder Ort zwei Zahlen:
+wie weit nach Osten, wie weit nach Norden.
+
+00:00:07.200 --> 00:00:12.950
+Bahnhof und Busbahnhof liegen nah
+beieinander. Der Friedhof liegt weit weg.
+
+00:00:13.100 --> 00:00:16.210
+Dafür muss der Plan nichts
+über Bahnhöfe wissen.
+
+00:00:17.460 --> 00:00:23.850
+Das geht auch mit Eis. Jede Sorte bekommt
+drei Werte: süß, fruchtig, cremig.
+
+00:00:24.000 --> 00:00:28.950
+Zitrone und Himbeere sind fast
+gleich. Nuss ist ganz anders.
+
+00:00:29.100 --> 00:00:33.490
+Eine Liste von Zahlen, die
+etwas beschreibt, heißt Vektor.
+
+00:00:34.740 --> 00:00:38.170
+Bei Text kann niemand die
+Werte von Hand festlegen.
+
+00:00:38.320 --> 00:00:44.470
+Das macht ein Embedding-Modell. Es bekommt einen
+Satz und gibt eine lange Liste von Zahlen zurück.
+
+00:00:45.720 --> 00:00:48.910
+Gelernt hat das Modell
+aus riesigen Textmengen.
+
+00:00:49.060 --> 00:00:53.450
+Wer in ähnlichen Zusammenhängen
+vorkommt, bekommt ähnliche Zahlen.
+
+00:00:53.600 --> 00:01:01.270
+So entsteht eine Karte der Bedeutung. Was ähnlich klingt,
+liegt nah beieinander, auch mit ganz anderen Wörtern.
+
+00:01:02.520 --> 00:01:06.430
+Wie nah zwei Punkte sind,
+misst man oft mit dem Kosinus.
+
+00:01:06.580 --> 00:01:08.970
+Er schaut auf die Richtung der Pfeile.
+
+00:01:09.120 --> 00:01:13.750
+Gleiche Richtung ergibt eins.
+Ein rechter Winkel ergibt null.
+
+00:01:15.000 --> 00:01:17.710
+Deine Frage wird genauso zum Punkt.
+
+00:01:17.860 --> 00:01:20.490
+Die nächsten Nachbarn sind die Treffer.
+
+00:01:20.640 --> 00:01:24.630
+Mehr dazu auf der Seite
+Vektorisieren und Embeddings.

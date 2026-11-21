@@ -155,6 +155,454 @@
           "titel": "Drei Fragen vor dem Einsatz"
         }
       ]
+    },
+    {
+      "id": "rag-ueberblick",
+      "titel": "RAG in einer Minute",
+      "untertitel": "Erst nachschlagen, dann mit Quelle antworten",
+      "dauer_s": 76.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Das Problem"
+        },
+        {
+          "t": 12.6,
+          "titel": "Open Book"
+        },
+        {
+          "t": 25.2,
+          "titel": "Vorbereiten"
+        },
+        {
+          "t": 40.7,
+          "titel": "Fragen"
+        },
+        {
+          "t": 49.9,
+          "titel": "Antworten"
+        },
+        {
+          "t": 60.6,
+          "titel": "Grenzen"
+        }
+      ]
+    },
+    {
+      "id": "rag-embedding",
+      "titel": "Aus Text Zahlen",
+      "untertitel": "Embeddings setzen Text als Punkte auf eine Karte",
+      "dauer_s": 86.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Stadtplan"
+        },
+        {
+          "t": 17,
+          "titel": "Eissorten"
+        },
+        {
+          "t": 34.2,
+          "titel": "Satz zu Zahlen"
+        },
+        {
+          "t": 45.2,
+          "titel": "Bedeutungskarte"
+        },
+        {
+          "t": 62,
+          "titel": "Winkel"
+        },
+        {
+          "t": 74.5,
+          "titel": "Nächste Nachbarn"
+        }
+      ]
+    },
+    {
+      "id": "rag-embedding-beachten",
+      "titel": "Vier Stolpersteine",
+      "untertitel": "Wann Embeddings danebenliegen",
+      "dauer_s": 79,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Modell"
+        },
+        {
+          "t": 12.8,
+          "titel": "Gleiches Modell"
+        },
+        {
+          "t": 25.2,
+          "titel": "Länge"
+        },
+        {
+          "t": 40.3,
+          "titel": "Sprache"
+        },
+        {
+          "t": 54.3,
+          "titel": "Genaue Zeichen"
+        },
+        {
+          "t": 67.1,
+          "titel": "Checkliste"
+        }
+      ]
+    },
+    {
+      "id": "rag-chunking",
+      "titel": "Stücke schneiden",
+      "untertitel": "Text sinnvoll für die Suche teilen",
+      "dauer_s": 78.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Kochbuch"
+        },
+        {
+          "t": 13.2,
+          "titel": "Feste Länge"
+        },
+        {
+          "t": 23.7,
+          "titel": "Absätze"
+        },
+        {
+          "t": 33.6,
+          "titel": "Größe"
+        },
+        {
+          "t": 48.6,
+          "titel": "Überlappung"
+        },
+        {
+          "t": 62.2,
+          "titel": "Etiketten"
+        }
+      ]
+    },
+    {
+      "id": "rag-keywordsuche",
+      "titel": "Stichwortsuche",
+      "untertitel": "Wörter zählen, seltene Wörter wiegen mehr",
+      "dauer_s": 76.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Telefonbuch"
+        },
+        {
+          "t": 12.7,
+          "titel": "Wörter zählen"
+        },
+        {
+          "t": 24,
+          "titel": "Seltene Wörter"
+        },
+        {
+          "t": 42,
+          "titel": "Sättigung"
+        },
+        {
+          "t": 55.9,
+          "titel": "Stärken"
+        },
+        {
+          "t": 69,
+          "titel": "Bedeutung"
+        }
+      ]
+    },
+    {
+      "id": "rag-hybridsuche",
+      "titel": "Hybridsuche",
+      "untertitel": "Stichwort und Bedeutung zusammen",
+      "dauer_s": 81.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Kellner"
+        },
+        {
+          "t": 13.3,
+          "titel": "Zwei Listen"
+        },
+        {
+          "t": 27.1,
+          "titel": "Nicht addieren"
+        },
+        {
+          "t": 38.9,
+          "titel": "Punktetafel"
+        },
+        {
+          "t": 54,
+          "titel": "Regler"
+        },
+        {
+          "t": 69.2,
+          "titel": "Filter"
+        }
+      ]
+    },
+    {
+      "id": "rag-reranking",
+      "titel": "Erst grob, dann genau",
+      "untertitel": "Reranking sortiert die besten Treffer neu",
+      "dauer_s": 77.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Vorauswahl"
+        },
+        {
+          "t": 12.4,
+          "titel": "Gespräche"
+        },
+        {
+          "t": 23.4,
+          "titel": "Grobe Suche"
+        },
+        {
+          "t": 39.3,
+          "titel": "Gemeinsam lesen"
+        },
+        {
+          "t": 53.4,
+          "titel": "Neu sortiert"
+        },
+        {
+          "t": 67.7,
+          "titel": "Abwägen"
+        }
+      ]
+    },
+    {
+      "id": "rag-bewertung",
+      "titel": "Gut ist, was du misst",
+      "untertitel": "Testfragen, Trefferquote, Beleg",
+      "dauer_s": 84.5,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Drei von vier"
+        },
+        {
+          "t": 14.5,
+          "titel": "Testset"
+        },
+        {
+          "t": 28.5,
+          "titel": "Trefferquote"
+        },
+        {
+          "t": 41.4,
+          "titel": "Beleg"
+        },
+        {
+          "t": 53.7,
+          "titel": "Von vorn nach hinten"
+        },
+        {
+          "t": 70.6,
+          "titel": "Rechte"
+        }
+      ]
+    },
+    {
+      "id": "daten-rohstoff",
+      "titel": "Daten, der Rohstoff",
+      "untertitel": "Ein Modell lernt nur, was in den Daten steckt",
+      "dauer_s": 87.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Inserat"
+        },
+        {
+          "t": 18.6,
+          "titel": "Alles Zahlen"
+        },
+        {
+          "t": 31.9,
+          "titel": "Fehler"
+        },
+        {
+          "t": 46.6,
+          "titel": "Vielfalt"
+        },
+        {
+          "t": 62.1,
+          "titel": "Drei Töpfe"
+        },
+        {
+          "t": 75.5,
+          "titel": "Pflege"
+        }
+      ]
+    },
+    {
+      "id": "neuronale-netze-erklaert",
+      "titel": "Neuronale Netze",
+      "untertitel": "Gewichte, Schwellen und Schichten",
+      "dauer_s": 79.9,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Abstimmung"
+        },
+        {
+          "t": 11.7,
+          "titel": "Gewichte"
+        },
+        {
+          "t": 25.5,
+          "titel": "Schwelle"
+        },
+        {
+          "t": 38.2,
+          "titel": "Schichten"
+        },
+        {
+          "t": 50.4,
+          "titel": "Gebogene Grenze"
+        },
+        {
+          "t": 65.3,
+          "titel": "Black Box"
+        }
+      ]
+    },
+    {
+      "id": "training-gradientenabstieg",
+      "titel": "Wie ein Modell lernt",
+      "untertitel": "Fehler messen, bergab gehen",
+      "dauer_s": 82.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Fehler messen"
+        },
+        {
+          "t": 14.6,
+          "titel": "Die Schleife"
+        },
+        {
+          "t": 27,
+          "titel": "Bergab"
+        },
+        {
+          "t": 42,
+          "titel": "Lernrate"
+        },
+        {
+          "t": 57.6,
+          "titel": "Rechtzeitig stoppen"
+        },
+        {
+          "t": 71.1,
+          "titel": "Viel gleichzeitig"
+        }
+      ]
+    },
+    {
+      "id": "bewertung-konfusionsmatrix",
+      "titel": "Wie gut ist es?",
+      "untertitel": "Konfusionsmatrix, Precision, Recall",
+      "dauer_s": 78.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Rauchmelder"
+        },
+        {
+          "t": 14.6,
+          "titel": "Vier Fälle"
+        },
+        {
+          "t": 28.9,
+          "titel": "Spamfilter"
+        },
+        {
+          "t": 44.3,
+          "titel": "Fischernetz"
+        },
+        {
+          "t": 53.7,
+          "titel": "Schwelle"
+        },
+        {
+          "t": 67.5,
+          "titel": "Abwägen"
+        }
+      ]
+    },
+    {
+      "id": "verzerrung-fairness",
+      "titel": "Fairness",
+      "untertitel": "Verzerrung erkennen und begrenzen",
+      "dauer_s": 68.2,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Umfrage"
+        },
+        {
+          "t": 11.8,
+          "titel": "Vier Quellen"
+        },
+        {
+          "t": 25.9,
+          "titel": "Verstecktes Merkmal"
+        },
+        {
+          "t": 37.1,
+          "titel": "Gruppen"
+        },
+        {
+          "t": 47.9,
+          "titel": "Prüffragen"
+        },
+        {
+          "t": 58.8,
+          "titel": "Mensch entscheidet"
+        }
+      ]
+    },
+    {
+      "id": "recht-ueberblick",
+      "titel": "Recht im Überblick",
+      "untertitel": "Datenschutz und KI-Verordnung, kurz",
+      "dauer_s": 72.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Wegweiser"
+        },
+        {
+          "t": 11.4,
+          "titel": "Personendaten"
+        },
+        {
+          "t": 23.7,
+          "titel": "Vertrag"
+        },
+        {
+          "t": 31.6,
+          "titel": "Betroffenenrechte"
+        },
+        {
+          "t": 42.3,
+          "titel": "Risikostufen"
+        },
+        {
+          "t": 57.8,
+          "titel": "Dokumentieren"
+        }
+      ]
     }
   ]
 }

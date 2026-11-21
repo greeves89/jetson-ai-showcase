@@ -1,0 +1,60 @@
+{
+ "id": "training-gradientenabstieg",
+ "titel": "Wie ein Modell lernt",
+ "untertitel": "Fehler messen, bergab gehen",
+ "szenen": [
+  {
+   "id": "dart",
+   "kapitel": "Fehler messen",
+   "saetze": [
+    "Zuerst misst man den Fehler.",
+    "Wie weit liegt der Pfeil neben der Mitte? Diese Zahl heißt Verlust.",
+    "Je weiter daneben, desto größer der Verlust. Ziel ist ein möglichst kleiner Wert."
+   ]
+  },
+  {
+   "id": "schleife",
+   "kapitel": "Die Schleife",
+   "saetze": [
+    "Dann kommt die Schleife.",
+    "Vorhersagen, Fehler messen, die Gewichte ein Stück verschieben.",
+    "Das wiederholt sich viele tausend Mal, mit immer neuen Beispielen."
+   ]
+  },
+  {
+   "id": "huegel",
+   "kapitel": "Bergab",
+   "saetze": [
+    "Stell dir den Fehler als Landschaft vor. Du stehst im Nebel und willst ins Tal.",
+    "Du spürst nur das Gefälle unter dir.",
+    "Du gehst einen Schritt bergab und prüfst wieder. So wird der Fehler kleiner."
+   ]
+  },
+  {
+   "id": "lernrate",
+   "kapitel": "Lernrate",
+   "saetze": [
+    "Die Lernrate legt die Schrittweite fest.",
+    "Zu groß: Du springst über das Tal. Zu klein: Es dauert ewig.",
+    "Ein guter Wert liegt dazwischen. Man probiert ihn aus und beobachtet."
+   ]
+  },
+  {
+   "id": "kurven",
+   "kapitel": "Rechtzeitig stoppen",
+   "saetze": [
+    "Beobachte die Validierungsdaten.",
+    "Steigt der Fehler dort, passt sich das Modell zu sehr an. Dann halte an.",
+    "Das Training schreibt dir die Fehlerkurve mit. Danach entscheidest du."
+   ]
+  },
+  {
+   "id": "gpu",
+   "kapitel": "Viel gleichzeitig",
+   "saetze": [
+    "GPUs rechnen sehr viel gleichzeitig, deshalb eignen sie sich fürs Training.",
+    "Mit Vortraining und Feinabstimmung startest du nicht bei null."
+   ]
+  }
+ ]
+}
