@@ -1,4 +1,5 @@
 import React from "react";
+import { Panel, Lbl } from "../bausteine.jsx";
 import { Szene, useCues, sp, ease, lin, lerp, Rv, Txt, Icon, Badge, Pill, Pfeil, Pfad, C, spitze } from "../lib.jsx";
 
 const Einstieg = () => {
@@ -64,38 +65,21 @@ const Faehigkeiten = () => {
 const REGELN = ["wenn Tür offen, dann melden", "wenn Wert zu hoch, dann Alarm", "wenn Kunde neu, dann grüßen", "wenn Lager leer, dann ordern", "wenn Name fehlt, dann fragen"];
 const Regeln = () => {
   const { t, cue, end } = useCues();
-  const kw = (s) => s.split(/(wenn|dann)/).map((p, i) => p === "wenn" ? <span key={i} style={{ color: C.blue }}>wenn</span> : p === "dann" ? <span key={i} style={{ color: C.green }}>dann</span> : p);
+  const R = ["Tür offen", "Wert zu hoch", "Kunde neu", "Lager leer", "Name fehlt"];
+  const A = ["melden", "Alarm", "grüßen", "ordern", "fragen"];
+  const n = Math.floor(lin(t, cue(0) + 0.5, end(1) - 0.5, 0, 5.99)) + 1;
+  const q = sp(t, cue(2), 0.8);
+  const dicht = ease(t, cue(2) + 0.3, cue(2) + 2.0);
   return (
-    <Szene titel="Regelbasierte KI" tiefe={["list",1400,660,900]} fokus={[1,960,690]} sub="Wenn dies, dann das">
-      {/* eine Regel */}
-      {REGELN.map((r, i) => {
-        const at = i === 0 ? cue(0) + 0.5 : lerp(cue(1), end(1) - 0.8, (i - 1) / 4) ;
-        return (
-          <Rv key={r} at={at} dx={-30} dy={0} style={{ position: "absolute", left: 120, top: 350 + i * 118 }}>
-            <div style={{ display: "flex", alignItems: "center", gap: 20, background: C.panel, borderRadius: 18, padding: "16px 28px", width: 900, fontSize: 46, fontWeight: 500, border: `2px solid ${i === 0 ? C.blue + "99" : C.line}` }}>
-              <Icon name="list" size={34} color={C.mute} />{kw(r)}
-            </div>
-          </Rv>
-        );
-      })}
-      <Rv at={cue(1)} dy={0} style={{ position: "absolute", left: 120, top: 945 }}>
-        <div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 40, color: C.mute }}><Icon name="user" size={36} color={C.mute} />Ein Mensch schreibt jede Regel selbst</div>
-      </Rv>
-      {/* Bild: zu viele Fälle */}
-      <Rv at={cue(2)} dx={50} style={{ position: "absolute", left: 1040, top: 380 }}>
-        <div style={{ width: 360, height: 250, borderRadius: 24, background: C.panel, border: `2px solid ${C.line}`, display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 12 }}>
-          <Icon name="image" size={110} color={C.mute} />
-          <div style={{ fontSize: 40, color: C.mute }}>Foto einer Katze</div>
+    <Szene titel="Regelbasierte KI" tiefe={["list", 1400, 660, 900]}>
+      {R.map((r, i) => (
+        <div key={r} style={{ position: "absolute", left: 110, top: 290 + i * 135, width: 1000, height: 112, borderRadius: 28, background: C.panel, border: `4px solid ${i === 0 ? C.blue : C.line}`, display: "flex", alignItems: "center", gap: 24, padding: "0 36px", boxSizing: "border-box", fontSize: 58, fontWeight: 600, opacity: sp(t, i === 0 ? cue(0) + 0.5 : lerp(cue(0) + 0.5, end(1) - 0.5, i / 5), 0.6), transform: `scale(${1 - dicht * 0.0})` }}>
+          <span style={{ color: C.blue }}>wenn</span>{r}<span style={{ color: C.green }}>dann</span>{A[i]}
         </div>
-      </Rv>
-      <Txt at={cue(2) + 0.6} x={1440} y={430} w={360} size={42} weight={700} color={C.orange}>Welche Regel erkennt sie?</Txt>
-      {Array.from({ length: 40 }).map((_, k) => {
-        const col = k % 8, row = Math.floor(k / 8);
-        return <Rv key={k} at={cue(2) + 0.9 + k * 0.045} dy={8} d={0.5} style={{ position: "absolute", left: 1040 + col * 96, top: 690 + row * 52 }}>
-          <div style={{ width: 84, height: 34, borderRadius: 10, background: k % 7 === 3 ? C.orange + "66" : "#2c2c2e", border: `1px solid ${C.line}` }} />
-        </Rv>;
-      })}
-      <Txt at={cue(2) + 2.8} x={1040} y={965} w={760} size={42} color={C.orange} weight={600}>Zu viele Fälle für feste Regeln</Txt>
+      ))}
+      <Rv at={cue(1)} dy={0} style={{ position: "absolute", left: 110, top: 975 }}><div style={{ display: "flex", alignItems: "center", gap: 14, fontSize: 44, color: C.mute }}><Icon name="user" size={50} color={C.mute} />Ein Mensch schreibt jede Regel</div></Rv>
+      <Panel x={1190} y={290} w={620} h={420} r={34} a={q} rand={C.orange}><div style={{ position: "absolute", left: 160, top: 40 }}><Icon name="image" size={300} color={C.mute} sw={1.2} /></div><div style={{ position: "absolute", left: 0, top: 340, width: 620, textAlign: "center", fontSize: 60, fontWeight: 800, color: C.orange }}>Katze?</div></Panel>
+      {Array.from({ length: 24 }).map((_, k) => <div key={k} style={{ position: "absolute", left: 1190 + (k % 6) * 104, top: 750 + Math.floor(k / 6) * 62, width: 92, height: 44, borderRadius: 12, background: k % 7 === 3 ? C.orange + "88" : "#2c2c2e", opacity: ease(t, cue(2) + 0.6 + k * 0.05, cue(2) + 1.0 + k * 0.05) }} />)}
     </Szene>
   );
 };
@@ -155,25 +139,24 @@ const Kreise = () => {
 };
 
 const Robotik = () => {
-  const { t, cue, end } = useCues();
+  const { t, cue } = useCues();
   const rahmen = sp(t, cue(0) + 0.3, 1.0);
+  const p1 = ease(t, cue(1), cue(1) + 1.0), p2 = ease(t, cue(1) + 1.2, cue(1) + 2.2);
   return (
-    <Szene titel="KI mit Körper" tiefe={["bot",1400,660,900]} fokus={[1.0,960,610]} sub="Das ist Robotik">
-      <Rv at={cue(0) + 0.2} style={{ position: "absolute", left: 120, top: 560 }}><div style={{ fontSize: 40, fontWeight: 700 }}>Welt</div></Rv>
+    <Szene titel="KI mit Körper" tiefe={["bot", 1400, 660, 900]}>
       <svg style={{ position: "absolute", left: 0, top: 0, width: 1920, height: 1080 }}>
-        <rect x={380} y={400} width={1160} height={330} rx={40} fill="none" stroke={C.blue} strokeWidth={4} strokeDasharray="14 12" opacity={rahmen} />
-        <Pfad d="M260 580 L450 580" p={sp(t, cue(1), 0.8)} color={C.green} w={6} head={spitze(260, 580, 450, 580, 20)} />
-        <Pfad d="M690 580 L800 580" p={sp(t, cue(0) + 1.4, 0.6)} color={C.mute} w={5} head={spitze(690, 580, 800, 580, 18)} />
-        <Pfad d="M1120 580 L1230 580" p={sp(t, cue(0) + 1.8, 0.6)} color={C.mute} w={5} head={spitze(1120, 580, 1230, 580, 18)} />
-        <Pfad d="M1470 580 L1660 580" p={sp(t, cue(1) + 1.2, 0.8)} color={C.green} w={6} head={spitze(1470, 580, 1660, 580, 20)} />
+        <rect x={480} y={300} width={1000} height={600} rx={50} fill="none" stroke={C.blue} strokeWidth={6} strokeDasharray="18 14" opacity={rahmen} />
+        <Pfad d="M130 600 L460 600" p={p1} color={C.green} w={10} head={spitze(130, 600, 460, 600, 28)} />
+        <Pfad d="M1500 600 L1790 600" p={p2} color={C.green} w={10} head={spitze(1500, 600, 1790, 600, 28)} />
       </svg>
-      <Txt at={cue(0) + 0.3} x={410} y={338} w={600} size={42} color={C.blue} weight={700}>Roboter = KI + Körper</Txt>
-      <Rv at={cue(0) + 0.6} style={{ position: "absolute", left: 450, top: 480 }}><div style={{ textAlign: "center", width: 240 }}><Badge name="camera" size={130} color={C.mute} /><div style={{ fontSize: 40, fontWeight: 600, marginTop: 12 }}>Sensoren</div></div></Rv>
-      <Rv at={cue(0) + 1.0} s0={0.8} style={{ position: "absolute", left: 800, top: 450 }}><div style={{ textAlign: "center", width: 320 }}><div style={{ width: 190, height: 190, borderRadius: 95, background: C.blue + "22", border: `4px solid ${C.blue}`, margin: "0 auto", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 80, fontWeight: 800 }}>KI</div><div style={{ fontSize: 40, fontWeight: 600, marginTop: 12 }}>Entscheiden</div></div></Rv>
-      <Rv at={cue(0) + 1.4} style={{ position: "absolute", left: 1230, top: 480 }}><div style={{ textAlign: "center", width: 240 }}><Badge name="zap" size={130} color={C.mute} /><div style={{ fontSize: 40, fontWeight: 600, marginTop: 12 }}>Motoren</div></div></Rv>
-      <Rv at={cue(1) + 1.2} style={{ position: "absolute", left: 1670, top: 560 }}><div style={{ fontSize: 40, fontWeight: 700 }}>Welt</div></Rv>
-      <Txt at={cue(1)} x={120} y={790} w={500} size={42} color={C.green} weight={600}>nimmt wahr</Txt>
-      <Txt at={cue(1) + 1.2} x={1300} y={790} w={500} size={42} color={C.green} weight={600} align="right">greift ein</Txt>
+      <Lbl x={500} y={230} w={900} t="Roboter = KI + Körper" size={56} color={C.blue} a={rahmen} />
+      <Rv at={cue(0) + 0.6} style={{ position: "absolute", left: 520, top: 460 }}><div style={{ textAlign: "center", width: 280 }}><Badge name="camera" size={240} color={C.mute} /><div style={{ fontSize: 52, fontWeight: 700, marginTop: 14 }}>Sensoren</div></div></Rv>
+      <Rv at={cue(0) + 1.0} s0={0.85} style={{ position: "absolute", left: 800, top: 420 }}><div style={{ width: 340, height: 340, borderRadius: 170, background: C.blue + "22", border: `8px solid ${C.blue}`, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 170, fontWeight: 800 }}>KI</div></Rv>
+      <Rv at={cue(0) + 1.4} style={{ position: "absolute", left: 1180, top: 460 }}><div style={{ textAlign: "center", width: 280 }}><Badge name="zap" size={240} color={C.mute} /><div style={{ fontSize: 52, fontWeight: 700, marginTop: 14 }}>Motoren</div></div></Rv>
+      <Lbl x={110} y={480} w={340} t="Welt" size={64} a={sp(t, cue(0) + 0.2, 0.6)} align="center" />
+      <Lbl x={1560} y={480} w={300} t="Welt" size={64} a={p2} align="center" />
+      <Lbl x={110} y={700} w={380} t="nimmt wahr" size={52} color={C.green} a={p1} align="center" />
+      <Lbl x={1470} y={700} w={380} t="greift ein" size={52} color={C.green} a={p2} align="center" />
     </Szene>
   );
 };

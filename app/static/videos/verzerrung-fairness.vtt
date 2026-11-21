@@ -1,0 +1,55 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:05.050
+Eine Umfrage nur morgens am
+Bahnhof erreicht nur Pendler.
+
+00:00:05.200 --> 00:00:08.070
+Sauber gezählt und trotzdem schief.
+
+00:00:08.220 --> 00:00:11.010
+Das Modell merkt nicht, dass etwas fehlt.
+
+00:00:12.260 --> 00:00:20.010
+So entsteht Verzerrung: durch einseitige Daten, einseitige
+Auswahl, einseitige Etiketten und Rückkopplung.
+
+00:00:20.160 --> 00:00:25.110
+Lernt ein Modell aus alten Einstellungen,
+übernimmt es deren Einseitigkeit.
+
+00:00:26.360 --> 00:00:29.550
+Ein sensibles Merkmal
+wegzulassen reicht nicht.
+
+00:00:29.700 --> 00:00:32.010
+Die Postleitzahl kann es ersetzen.
+
+00:00:32.160 --> 00:00:36.310
+Andere Merkmale können dasselbe
+verraten, ohne es zu nennen.
+
+00:00:37.560 --> 00:00:40.270
+Eine Gesamtzahl verdeckt Unterschiede.
+
+00:00:40.420 --> 00:00:42.970
+Werte Ergebnisse nach Gruppen aus.
+
+00:00:43.120 --> 00:00:47.110
+Ein Modell kann im Schnitt gut sein
+und bei einer Gruppe schlecht.
+
+00:00:48.360 --> 00:00:54.190
+Prüfe vor dem Einsatz: Woher kommen die
+Daten, wer fehlt, wer kann widersprechen?
+
+00:00:54.340 --> 00:00:58.090
+Halte die Antworten fest, damit
+du sie später belegen kannst.
+
+00:00:59.340 --> 00:01:01.650
+Menschen tragen die Verantwortung.
+
+00:01:01.800 --> 00:01:06.510
+Bei Folgen für Menschen entscheidet ein
+Mensch, der wirklich eingreifen kann.

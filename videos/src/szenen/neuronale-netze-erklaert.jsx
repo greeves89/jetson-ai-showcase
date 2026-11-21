@@ -2,7 +2,7 @@ import React from "react";
 import { Szene, useCues, sp, ease, lin, lerp, Rv, Icon, Badge, C, rnd } from "../lib.jsx";
 import { Panel, Lbl, Skel, Zahlen, Dot, Chip, Lin, Karte, Fig } from "../bausteine.jsx";
 
-const NX = 1080, NY = 640;
+const NX = 1030, NY = 640;
 const Eingaben = [150, 280, 410, 540, 670].map((d, i) => [330, 300 + i * 150]);
 const W = [0.9, 0.3, 0.7, 0.15, 0.5];
 const Neuron = ({ t, a = 1, gew = 1, summe = 0, farbe = C.blue, schw }) => (
@@ -20,7 +20,7 @@ const Abstimmung = () => {
   return (
     <Szene titel="Abstimmung" tiefe={["users", 1380, 650, 900]}>
       {H.map((v, i) => {
-        const x = 200 + i * 340, a = sp(t, 0.3 + i * 0.25, 0.7), h = 90 + v * 290, hand = sp(t, cue(0) + 0.8 + i * 0.3, 0.6);
+        const x = 220 + i * 290, a = sp(t, 0.3 + i * 0.25, 0.7), h = 90 + v * 290, hand = sp(t, cue(0) + 0.8 + i * 0.3, 0.6);
         return (
           <React.Fragment key={i}>
             <Fig x={x - 100} y={560} s={200} f={C.blue} a={a} />
@@ -29,8 +29,8 @@ const Abstimmung = () => {
           </React.Fragment>
         );
       })}
-      <div style={{ position: "absolute", left: 1480, top: 300, opacity: sp(t, cue(1) + 0.1, 0.7) }}><Icon name="network" size={280} color={C.blue} /></div>
-      <Lbl x={1380} y={600} w={440} t="Ein Neuron" size={60} color={C.blue} align="center" a={sp(t, cue(1) + 0.3, 0.6)} />
+      <div style={{ position: "absolute", left: 1500, top: 300, opacity: sp(t, cue(1) + 0.1, 0.7) }}><Icon name="network" size={280} color={C.blue} /></div>
+      <Lbl x={1400} y={640} w={440} t="Ein Neuron" size={60} color={C.blue} align="center" a={sp(t, cue(1) + 0.3, 0.6)} />
     </Szene>
   );
 };
@@ -44,7 +44,7 @@ const Gewichte = () => {
       <Lbl x={NX - 130} y={NY - 70} w={260} t="Σ" size={130} color="#fff" align="center" a={s} />
       <Lbl x={NX - 130} y={NY + 30} w={260} t="Summe" size={44} color={C.mute} align="center" a={s} />
       <Lin x1={NX + 160} y1={NY} x2={NX + 500} y2={NY} p={s} f={C.mute} w={8} />
-      <div style={{ position: "absolute", left: NX + 540, top: NY - 160, width: 280, height: 320, borderRadius: 30, background: C.panel, border: `5px solid ${C.blue}`, opacity: s, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 40, boxSizing: "border-box" }}><div style={{ width: 120, height: 230 * s, background: C.blue, borderRadius: 14 }} /></div>
+      <div style={{ position: "absolute", left: NX + 520, top: NY - 160, width: 240, height: 320, borderRadius: 30, background: C.panel, border: `5px solid ${C.blue}`, opacity: s, display: "flex", alignItems: "flex-end", justifyContent: "center", padding: 40, boxSizing: "border-box" }}><div style={{ width: 120, height: 230 * s, background: C.blue, borderRadius: 14 }} /></div>
       {W.map((w, i) => <Lbl key={i} x={420} y={Eingaben[i][1] - 40 + 0} w={250} t={w > 0.6 ? "dick" : w < 0.25 ? "dünn" : ""} size={40} color={C.mute} a={g} />)}
     </Szene>
   );
@@ -79,7 +79,7 @@ const Schichten = () => {
         {[0, 1, 2].map((c) => Array.from({ length: L[c] }).flatMap((_, i) => Array.from({ length: L[c + 1] }).map((__, j) => { const [x1, y1] = node(c, i), [x2, y2] = node(c + 1, j); return <line key={`${c}${i}${j}`} x1={x1} y1={y1} x2={x2} y2={y2} stroke={C.blue} strokeWidth={2.5} opacity={0.35 * lay[c + 1]} />; })))}
         {L.map((n, c) => Array.from({ length: n }).map((_, i) => { const [x, y] = node(c, i); return <circle key={`${c}${i}`} cx={x} cy={y} r={34} fill={C.panel2} stroke={[C.mute, C.blue, C.green, C.orange][c]} strokeWidth={6} opacity={lay[c]} />; }))}
       </svg>
-      {["Kanten", "Formen", "Gesicht"].map((n, i) => <Lbl key={n} x={X[i + 1] - 200} y={900} w={400} t={n} size={56} color={[C.blue, C.green, C.orange][i]} align="center" a={lay[i + 1]} />)}
+      {["Kanten", "Formen", "Gesicht"].map((n, i) => <Lbl key={n} x={X[i + 1] - 200} y={968} w={400} t={n} size={50} color={[C.blue, C.green, C.orange][i]} align="center" a={lay[i + 1]} />)}
       <svg style={{ position: "absolute", left: X[1] - 90, top: 290, opacity: lay[1] }} width="180" height="120"><path d="M10 100 L90 20 L170 100" fill="none" stroke={C.blue} strokeWidth="10" strokeLinecap="round" /></svg>
       <svg style={{ position: "absolute", left: X[2] - 90, top: 270, opacity: lay[2] }} width="180" height="140"><circle cx="90" cy="70" r="55" fill="none" stroke={C.green} strokeWidth="10" /></svg>
       <div style={{ position: "absolute", left: X[3] - 80, top: 290, opacity: lay[3] }}><Icon name="user" size={160} color={C.orange} /></div>

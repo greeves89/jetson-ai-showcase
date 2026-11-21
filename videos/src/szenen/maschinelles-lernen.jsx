@@ -165,20 +165,20 @@ const Lernarten = () => {
       ))}
       {/* 1 überwacht */}
       <svg style={{ position: "absolute", left: 120, top: 540, width: 500, height: 360, overflow: "visible" }}>
-        {pts.map((q, i) => <circle key={i} cx={q.p[0]} cy={q.p[1]} r={15} fill={q.k ? C.orange : C.blue} opacity={sp(t, cue(0) + 0.2 + i * 0.12, 0.5)} />)}
+        {pts.map((q, i) => <circle key={i} cx={q.p[0]} cy={q.p[1]} r={24} fill={q.k ? C.orange : C.blue} opacity={sp(t, cue(0) + 0.2 + i * 0.12, 0.5)} />)}
         <Pfad d="M120 330 C 220 250, 300 100, 420 20" p={sp(t, cue(0) + 2.6, 1.2)} color={C.text} w={4} dash="0.03 0.025" />
       </svg>
-      <Txt at={cue(0) + 1.0} x={120} y={908} w={520} size={38} color={C.mute}>Antwort je Punkt bekannt</Txt>
+      <Txt at={cue(0) + 1.0} x={120} y={908} w={520} size={44} color={C.mute}>Antwort je Punkt bekannt</Txt>
       {/* 2 unüberwacht */}
       <svg style={{ position: "absolute", left: 710, top: 540, width: 500, height: 360, overflow: "visible" }}>
         {pts.map((q, i) => {
           const g = sp(t, cue(1) + 2.2, 1.0);
-          return <circle key={i} cx={q.p[0] + (rnd(i) - 0.5) * 30} cy={q.p[1] + (rnd(i + 9) - 0.5) * 30} r={15} fill={g > 0.5 ? (q.k ? "#64d2ff" : C.green) : C.mute} opacity={sp(t, cue(1) + 0.2 + i * 0.12, 0.5)} />;
+          return <circle key={i} cx={q.p[0] + (rnd(i) - 0.5) * 30} cy={q.p[1] + (rnd(i + 9) - 0.5) * 30} r={24} fill={g > 0.5 ? (q.k ? "#64d2ff" : C.green) : C.mute} opacity={sp(t, cue(1) + 0.2 + i * 0.12, 0.5)} />;
         })}
         <circle cx={130} cy={120} r={110} fill="none" stroke={C.green} strokeWidth={3} strokeDasharray="10 10" opacity={sp(t, cue(1) + 2.4, 0.8)} />
         <circle cx={370} cy={250} r={110} fill="none" stroke="#64d2ff" strokeWidth={3} strokeDasharray="10 10" opacity={sp(t, cue(1) + 2.6, 0.8)} />
       </svg>
-      <Txt at={cue(1) + 2.4} x={710} y={908} w={520} size={38} color={C.mute}>System findet Gruppen</Txt>
+      <Txt at={cue(1) + 2.4} x={710} y={908} w={520} size={44} color={C.mute}>System findet Gruppen</Txt>
       {/* 3 bestärkend */}
       <svg style={{ position: "absolute", left: 1300, top: 540, width: 500, height: 360, overflow: "visible" }}>
         {Array.from({ length: 24 }).map((_, k) => <rect key={k} x={(k % 6) * 80 + 4} y={Math.floor(k / 6) * 90 + 4} width={72} height={82} rx={10} fill={C.panel} stroke={C.line} strokeWidth={2} opacity={sp(t, cue(2) + 0.1 + k * 0.03, 0.6)} />)}
@@ -186,7 +186,7 @@ const Lernarten = () => {
         <path d="M440 26 l7 15 16 2 -12 11 3 16 -14-8 -14 8 3-16 -12-11 16-2z" fill={C.green} opacity={sp(t, cue(2) + 0.9, 0.6)} transform="translate(-4 -5)" />
         <circle cx={ag[0] + 0} cy={ag[1] + 20} r={20} fill={C.blue} opacity={sp(t, cue(2) + 0.9, 0.5)} />
       </svg>
-      <Txt at={cue(2) + 3.0} x={1300} y={908} w={520} size={38} color={C.green}>Ziel erreicht: Belohnung</Txt>
+      <Txt at={cue(2) + 3.0} x={1300} y={908} w={520} size={44} color={C.green}>Ziel erreicht: Belohnung</Txt>
     </Szene>
   );
 };
@@ -221,17 +221,17 @@ const Ueberanpassung = () => {
         })}
       </svg>
       <div style={{ position: "absolute", left: 1260, top: 310, width: 560 }}>
-        <Rv at={0.5} dy={0}><div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 24, height: 24, borderRadius: 12, background: C.blue }} />Trainingsbeispiele</div></Rv>
-        <Rv at={cue(1) + 0.4} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.orange }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.orange }} />Auswendig gelernt</div>
+        <Rv at={0.5} dy={0}><div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 34, height: 34, borderRadius: 12, background: C.blue }} />Trainingsbeispiele</div></Rv>
+        <Rv at={cue(1) + 0.4} dy={0} style={{ marginTop: 34 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.orange }}><div style={{ width: 60, height: 10, borderRadius: 3, background: C.orange }} />Auswendig gelernt</div>
           <div style={{ fontSize: 40, color: C.mute, marginTop: 8, marginLeft: 56 }}>trifft jedes Trainingsbeispiel</div>
         </Rv>
-        <Rv at={cue(2) + 0.2} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 24, height: 24, borderRadius: 12, border: `5px solid ${C.green}` }} />Neue Daten</div>
+        <Rv at={cue(2) + 0.2} dy={0} style={{ marginTop: 34 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40 }}><div style={{ width: 34, height: 34, borderRadius: 12, border: `5px solid ${C.green}` }} />Neue Daten</div>
           <div style={{ fontSize: 40, color: C.red, marginTop: 8, marginLeft: 56 }}>große Abweichung: das Modell versagt</div>
         </Rv>
-        <Rv at={cue(3) + 0.6} dy={0} style={{ marginTop: 40 }}>
-          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.green }}><div style={{ width: 40, height: 6, borderRadius: 3, background: C.green }} />Muster verstanden</div>
+        <Rv at={cue(3) + 0.6} dy={0} style={{ marginTop: 34 }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 16, fontSize: 40, color: C.green }}><div style={{ width: 60, height: 10, borderRadius: 3, background: C.green }} />Muster verstanden</div>
           <div style={{ fontSize: 40, color: C.mute, marginTop: 8, marginLeft: 56 }}>passt auch zu ungesehenen Testdaten</div>
         </Rv>
       </div>
