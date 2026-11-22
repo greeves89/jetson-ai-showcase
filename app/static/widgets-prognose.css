@@ -186,3 +186,9 @@ table.pg-tab-kosten thead th:not(:first-child),table.pg-tab-sens thead th:not(:f
 .pg-eingabe input{width:120px;min-height:36px;padding:0 12px;border-radius:10px;text-align:right;font-variant-numeric:tabular-nums;font-size:17px}
 .pg-fehler,.pg-hilfe{grid-column:1/-1}
 @media(max-width:520px){.pg-feld{grid-template-columns:1fr}.pg-eingabe{justify-self:stretch}.pg-eingabe input{width:100%}}
+
+/* kosten-kamera: Rechnung in Zeilen mit sichtbarer Formel */
+.pg-rechnung{margin-top:18px}
+.pg-formel{margin:0;padding-left:22px;display:grid;gap:8px;font-size:15px;line-height:1.5;font-variant-numeric:tabular-nums}
+.pg-formel li{overflow-wrap:anywhere}
+.pg-kamera .pg-ueber{font-size:15px}

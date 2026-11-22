@@ -71,7 +71,8 @@ S.ueber = {
 
 S["selbst-bauen"] = {
   nav: "Selbst aufbauen", typ: "lektion", gruppe: "Der Rechner dahinter", titel: "Selbst auf einem Jetson aufbauen", symbol: "hardware",
-  kurz: "Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano.",
+  kurz: "Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet. Das KI-Labor ist frei verfügbar, so bringst du es auf deinen eigenen Jetson Orin Nano.",
+  lesemodus: "ausfuehrlich",
   zusammenfassung: "Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.",
   lernziele: [
     "Du kannst sagen, welche Teile du für ein eigenes KI-Labor brauchst.",
@@ -79,6 +80,11 @@ S["selbst-bauen"] = {
     "Du weißt, welche Fehler typisch sind und wo du sie nachschlägst.",
   ],
   abschnitte: [
+    {h: "Teststand: nur ein Gerät", offen: true,
+     kurz: "Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät. Ein frischer Jetson ist von Dritten noch nicht getestet worden.",
+     p: [
+      "Das Labor läuft bisher auf einem einzigen Gerät, einem Jetson Orin Nano Developer Kit (Super) mit 8 GB und Ollama 0.12.3. Ein Nachbau auf einem frischen Jetson durch Dritte steht noch aus. Ungetestet sind auch eine SD-Karte statt NVMe, das 4-GB-Modell und andere Ollama-Versionen. Plane deshalb Zeit für Fehlersuche ein. Betrieb und Sicherheit des fertigen Labors beschreibt {{betrieb-sicherheit|Betrieb und Sicherheit des Labors}}.",
+     ]},
     {h: "Der Weg in sechs Schritten",
      kurz: "Vom leeren Jetson zum laufenden Labor: flashen, prüfen, Ollama, Skripte, Browser.",
      visual: {typ: "ablauf", paket: true, schritte: [
@@ -95,8 +101,8 @@ S["selbst-bauen"] = {
      ],
      alltag: "Wie beim Aufbau eines Regals: erst der Rahmen (JetPack), dann die Böden (Ollama und Modelle), dann die Fachböden mit Beschriftung (das Labor). Die Anleitung liegt bei, du schraubst selbst.",
      merke: "Drei Skripte, davon ist nur der Check freiwillig: Der Check prüft vorher, `setup.sh` richtet ein, `install-service.sh` macht den Autostart. Die wenigen Befehle stehen im nächsten Abschnitt zum Kopieren."},
-    {h: "Das brauchst du",
-     kurz: "Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD, ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.",
+    {h: "Das brauchst du", offen: true,
+     kurz: "Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD (Empfehlung 256 GB), ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "cpu", text: "Jetson Orin Nano", sub: "Developer Kit, 8 GB, Super"},
       {icon: "hard-drive", text: "NVMe-SSD", sub: "mindestens 10 GB frei"},
@@ -109,8 +115,19 @@ S["selbst-bauen"] = {
       "Die Einkaufsliste im Einzelnen. Getestet ist der Aufbau auf der Super-Ausführung des Jetson Orin Nano Developer Kit mit 8 GB. Das Netzteil (19 V) gehört laut NVIDIA zum Kit, eine SSD oder SD-Karte nicht. Die Anleitung nutzt eine NVMe-SSD (M.2), die Bauform ist hier nicht belegt, sie steht im Handbuch zum Kit. Eine SD-Karte, das 4-GB-Modell und andere Jetson-Modelle sind ungetestet. Plane mindestens 10 GB freien Platz ein, die Modelle und Pakete belegen rund 3,2 GB. Zum Flashen und Bedienen brauchst du einen zweiten Rechner, die Anleitung im Repo nennt einen Ubuntu-PC. Ein Wort zur Kühlung: Ein höherer Leistungsmodus macht das Gerät wärmer, achte auf Kühlung. Welche Lösung passt, steht nicht belegt hier.",
       "Zum Preis: NVIDIA nannte im Blog vom 17. Dezember 2024 für das Developer Kit 249 US-Dollar, gesenkt von 499 (Quelle: developer.nvidia.com/blog/nvidia-jetson-orin-nano-developer-kit-gets-a-super-boost, am 22.11.2026 erneut gelesen). Händlerpreise, Steuer, SSD und Zubehör kommen dazu: Preis beim Händler erfragen. Die Zeitangabe für den Aufbau ist eine Schätzung, keine Messung. Flashen und Downloads machen den größten Teil aus. Die Lesezeit dieser Seite steht oben in der Kopfzeile und ist davon unabhängig.",
      ],
+     tabelle: {
+      beschriftung: "Stückliste (Preise beim Händler erfragen, Stand der Quellen 22.11.2026)",
+      kopf: ["Teil", "Anforderung", "Preis und Hinweis"],
+      zeilen: [
+       ["Jetson Orin Nano Developer Kit (Super), 8 GB", "Getestete Ausführung. Das 4-GB-Modell ist ungetestet.", "Preis beim Händler erfragen. Zur Vorstellung nannte NVIDIA 249 US-Dollar (Blog vom 17.12.2024)."],
+       ["Netzteil", "Gehört laut NVIDIA (19 V) zum Kit.", "Im Kit enthalten."],
+       ["NVMe-SSD (M.2)", "Empfehlung 256 GB. Mindestens 10 GB frei, die Modelle und Pakete belegen rund 3,2 GB. Bauform laut Handbuch zum Kit.", "Preis beim Händler erfragen."],
+       ["Kühlung", "Ein höherer Leistungsmodus macht das Gerät wärmer. Achte auf Luftzirkulation. Eine bestimmte Lösung ist hier nicht getestet.", "Preis beim Händler erfragen."],
+       ["Zweiter Rechner", "Zum Flashen und Bedienen, die Anleitung nennt einen Ubuntu-PC.", "Hast du meist schon."],
+       ["Netzwerk", "Kabel oder WLAN im selben Netz wie dein Rechner.", "Hast du meist schon."],
+      ]},
      merke: "Ein Developer Kit, dazu SSD und zweiter Rechner, ein halber bis ganzer Tag für den Aufbau, ein Terminal. Mehr nicht."},
-    {h: "Die Befehle zum Kopieren",
+    {h: "Die Befehle zum Kopieren", offen: true,
      kurz: "Wenige Befehle, in der Reihenfolge der Anleitung. Wer sudo braucht, ist gekennzeichnet.",
      p: [
       "Das Repo muss unter `~/jetson-ai-showcase` liegen, die Dienstdatei erwartet diesen Pfad. Vor dem Ollama-Schritt meldet der Check Fehler bei Ollama und den Modellen. Das ist normal.",
@@ -132,15 +149,15 @@ S["selbst-bauen"] = {
       {titel: "Update später", text: "cd ~/jetson-ai-showcase\ngit pull\nbash scripts/setup.sh\nsystemctl --user restart jetson-showcase"},
      ],
      merke: "Mit sudo laufen nur Ollama-Installer, Leistungsmodus, Ollama-Einstellungen und linger. Das Labor selbst läuft ohne Administratorrechte."},
-    {h: "Wo du die Anleitung findest",
-     kurz: "Alles steht im öffentlichen Repo, auch mit Einstellungen und Fehlersuche. Die wichtigsten Befehle stehen schon oben.",
+    {h: "Wo du die Anleitung findest", offen: true,
+     kurz: "Alles steht im öffentlichen Repo, auch mit Einstellungen und Fehlersuche. Die Befehle stehen im Abschnitt „Die Befehle zum Kopieren“.",
      p: [
       "Das Repo liegt öffentlich auf GitHub: [github.com/greeves89/jetson-ai-showcase](https://github.com/greeves89/jetson-ai-showcase). Die ausführliche Anleitung mit allen Einstellungen: [docs/selbst-aufbauen.md](https://github.com/greeves89/jetson-ai-showcase/blob/main/docs/selbst-aufbauen.md). Der Vorab-Check heißt `scripts/check.sh`.",
       "Im Dokument steht auch, was geprüft wurde und was nicht. Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät. Ein frischer Jetson ist noch nicht von Dritten getestet worden. Ungetestet sind auch eine SD-Karte statt NVMe, das 4-GB-Modell und andere Ollama-Versionen als 0.12.3.",
      ],
      merke: "Wenn etwas nicht klappt: erst `scripts/check.sh` laufen lassen, dann die Fehlersuche im Dokument ansehen."},
-    {h: "Wenn etwas nicht klappt",
-     kurz: "Die häufigsten Fehler haben feste Ursachen. Die Tabelle hat alle 15 Zeilen der Anleitung.",
+    {h: "Wenn etwas nicht klappt", offen: true,
+     kurz: "Die häufigsten Fehler haben feste Ursachen. Die Tabelle hat die 15 Zeilen der Anleitung und eine Zeile zum Log.",
      visual: {typ: "vergleich", links: {titel: "Typisch", icon: "triangle-alert", farbe: "orange",
         punkte: ["Zu wenig freier Speicher", "Ollama-Fehler bei langen Eingaben", "Kamera ohne HTTPS", "Port 8443 belegt"]},
        rechts: {titel: "Hilfe", icon: "wrench", farbe: "gruen",
@@ -149,7 +166,7 @@ S["selbst-bauen"] = {
       "Auf dem kleinen Rechner teilen sich CPU und GPU denselben Speicher. Die meisten Probleme kommen daher, dass dort zu wenig frei ist oder dass ein Modell zu viel auf einmal will.",
      ],
      tabelle: {
-      beschriftung: "Fehlersuche, alle 15 Zeilen wie in der Anleitung",
+      beschriftung: "Fehlersuche: die 15 Zeilen der Anleitung und eine Zeile zum Log",
       kopf: ["Symptom", "Ursache", "Lösung"],
       zeilen: [
        ["Browser meldet „Verbindung nicht sicher“", "Selbstsigniertes Zertifikat", "Warnung einmal bestätigen"],
@@ -167,13 +184,14 @@ S["selbst-bauen"] = {
        ["Spracherkennung dauert lange", "Whisper rechnet auf der CPU, etwa dreimal Echtzeit", "Erwartet, bei Bedarf `WHISPER_MODELL` kleiner wählen"],
        ["Dienst läuft nach Neustart nicht", "`linger` nicht aktiv", "`sudo loginctl enable-linger \"$USER\"` (braucht sudo)"],
        ["Beim Beenden des Dienstes bricht die SSH-Sitzung ab", "`pkill -f \"uvicorn app.app\"` trifft die eigene Shell", "`pkill -f \"[u]vicorn app.app\"` (die Klammern sind der Trick) oder besser `systemctl --user stop jetson-showcase`"],
+       ["Dienst läuft, aber die Seite antwortet nicht", "Fehler im Dienst oder Ollama nicht erreichbar", "Log ansehen: `journalctl --user -u jetson-showcase -n 50 --no-pager`. Bleibt die Ausgabe leer: `journalctl _SYSTEMD_USER_UNIT=jetson-showcase.service -n 50 --no-pager`. Ollama prüfen: `sudo systemctl status ollama` (**sudo**)"],
       ]},
      merke: "Die meisten Fehler sind Speicherfragen. Erst Platz schaffen, dann weitersuchen."},
-    {h: "Im Heimnetz oder öffentlich",
+    {h: "Im Heimnetz oder öffentlich", offen: true,
      kurz: "Zum Lernen und Vorführen bleibt das Labor im Heimnetz. Öffentlich geht es, braucht aber mehr Arbeit.",
      p: [
       "Standardmäßig ist das Labor nur im eigenen Netz erreichbar und für Suchmaschinen gesperrt. Das ist der Normalfall. Leite den Port nicht im Router ins Internet weiter.",
-      "Willst du es öffentlich betreiben, starte den Dienst mit `OEFFENTLICH=1`. Dann gilt eine Ratenbegrenzung je Besucher. Die weiteren Schritte und die nötigen Rechtstexte beschreibt `docs/veroeffentlichung.md`. Das ist keine Rechtsberatung.",
+      "Willst du es öffentlich betreiben, starte den Dienst mit `OEFFENTLICH=1`. Dann gilt eine Ratenbegrenzung je Besucher. Die weiteren Schritte und die nötigen Rechtstexte beschreibt `docs/veroeffentlichung.md`. Ports, Logs und Schutzmaßnahmen stehen auf {{betrieb-sicherheit|Betrieb und Sicherheit des Labors}}. Das ist keine Rechtsberatung.",
      ],
      merke: "Heimnetz ist der einfache Weg. Öffentlich ist ein eigenes Projekt."},
     {h: "Lizenzen",
@@ -202,7 +220,7 @@ S["selbst-bauen"] = {
      optionen: ["Eine Gebühr je Antwort", "Den sichtbaren Hinweis „Built with Llama“", "Dass das Labor nur im Heimnetz läuft", "Dass keine Fragen gestellt werden"],
      richtig: 1, erklaerung: "Der Hinweis steht in der Fußzeile jeder Seite. Wer das Labor weitergibt, behält ihn bei."},
   ],
-  weiter: ["hardware", "lizenzen", "ueber", "sicherheit-einfach"],
+  weiter: ["betrieb-sicherheit", "hardware", "lizenzen", "ueber", "sicherheit-einfach"],
 };
 
 INHALT.registriere({

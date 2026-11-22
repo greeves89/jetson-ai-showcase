@@ -4,7 +4,9 @@
 //   FAKE_AUDIO    Pfad zu einer .wav-Datei als Mikrofon (optional, 16 kHz mono)
 //   CHROME        Pfad zum Chrome (Standard: macOS-Installation)
 import { chromium } from "playwright-core";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { extname, join } from "node:path";
 
 export const URL_LABOR = process.env.LABOR_URL || "https://localhost:8443";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
@@ -29,6 +31,17 @@ export async function starte({ dunkel = true, breite = 1440, hoehe = 900, kamera
   });
   if (einwilligung) await kontext.addInitScript(() => { try { localStorage.setItem("kl-einwilligung", JSON.stringify({ kamera: "2026-11-22", mikro: "2026-11-22" })); sessionStorage.setItem("kl-einwilligung-bio", "2026-11-22"); } catch (e) { /* egal */ } });
   if (!willkommen) await kontext.addInitScript(() => { try { if (!localStorage.getItem("kl-willkommen")) localStorage.setItem("kl-willkommen", "1"); } catch (e) { /* egal */ } });
+  // LOKAL_STATIC=1: die Dateien unter /static/ kommen von der Platte (Arbeitskopie) statt vom Jetson, damit sich Aenderungen vor dem Deploy pruefen lassen.
+  if (process.env.LOKAL_STATIC) {
+    const wurzel = join(fileURLToPath(new URL("..", import.meta.url)), "app", "static");
+    const typen = { ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".svg": "image/svg+xml" };
+    await kontext.route("**/static/*", async (route) => {
+      const u = new URL(route.request().url());
+      const datei = join(wurzel, decodeURIComponent(u.pathname.replace(/^\/static\//, "")));
+      if (!datei.startsWith(wurzel) || !typen[extname(datei)] || !existsSync(datei)) return route.continue();
+      await route.fulfill({ status: 200, contentType: typen[extname(datei)] + "; charset=utf-8", body: readFileSync(datei) });
+    });
+  }
   const page = await kontext.newPage();
   const fehler = [];
   page.on("console", (m) => { if (m.type() === "error") fehler.push("console: " + m.text()); });

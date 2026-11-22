@@ -33,9 +33,9 @@ start: {
   ],
   entscheider: {
     titel: "In 15 Minuten: Was bringt KI meinem Betrieb?",
-    lead: "Vier feste Seiten für alle, die entscheiden müssen und keine Technik lernen wollen. Die Zeiten sind Richtwerte.",
+    lead: "Vier feste Seiten für alle, die entscheiden müssen und keine Technik lernen wollen. Die angezeigte Gesamtzeit rechnet Lesen, Videos und Labore zusammen und liegt unter 15 Minuten.",
     schritte: [
-      {id: "karte", h: "Was ist KI, und was nicht?", min: 2},
+      {id: "alltag-ki-kurz", h: "Was ist KI, und was nicht?", min: 2},
       {id: "chat", h: "Ein Sprachmodell selbst befragen", min: 5},
       {id: "business", h: "Wo KI im Betrieb hilft", min: 3},
       {id: "ki-einfuehrung", h: "Wie du den Einstieg planst", min: 5},
@@ -554,6 +554,12 @@ chat: {
      p: [
       "Beim ersten Start wird das [[modell|Modell]] von der SSD in den Arbeitsspeicher geladen. Das Modell hat etwa drei Milliarden [[parameter|Parameter]] und belegt rund 2 GB auf der Platte. Danach rechnet die [[gpu|GPU]] jedes Token. In der Seitenleiste steigen dabei GPU-Last und Leistung.",
     ]},
+    {h: "Wie viel das Modell auf einmal sieht",
+     kurz: "Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen. Was darüber hinausgeht, sieht das Modell nicht.",
+     p: [
+      "Das Modell wurde für sehr viel längere Texte gebaut, das Labor stellt aber nur 4096 Token ein (`OLLAMA_CONTEXT_LENGTH`, Grund und Zahlen auf {{hardware|Hardware}}). Praktisch heißt das: Eine längere E-Mail passt hinein, ein ganzes Handbuch nicht. Frage, bisherige Unterhaltung und Antwort teilen sich diese 4096 Token. Was darüber hinausgeht, sieht das Modell nicht. Wie Text in Token zerfällt, zeigt {{tokens-sprachmodelle|Wie ein Sprachmodell gebaut ist}}.",
+      "Die Antwort braucht Zeit. Das Modell lädt beim ersten Mal bis zu einer Minute, und bei viel Betrieb steht eine Warteschlange davor: Rechne mit bis zu zwei Minuten, bis die Antwort fertig ist.",
+     ]},
     {h: "Warum es kleiner ist als bekannte Chatbots",
      kurz: "Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.",
      visual: {typ: "vergleich",
@@ -569,7 +575,7 @@ chat: {
   },
   grenzen: [
     "Kleine Modelle erfinden häufiger Fakten ([[halluzination|Halluzination]]). Prüfe wichtige Aussagen.",
-    "Der Kontext ist begrenzt. Dieses Labor merkt sich keine frühere Unterhaltung.",
+    "Der Kontext ist begrenzt: Im Labor sind es 4096 Token. Was darüber hinausgeht, sieht das Modell nicht. Dieses Labor merkt sich keine frühere Unterhaltung.",
   ],
   weiter: ["genki", "rag", "agent"],
 },

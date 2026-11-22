@@ -6,6 +6,149 @@ Quelle: __BASIS__/ (Autor: Daniel Alisch). Jeder Abschnitt nennt die Adresse der
 
 Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vorbehalten. Zitate mit Quellenangabe (Adresse der Seite) sind erlaubt. Stimmen der Sprachausgabe, Beispielfotos und Icons stammen von Dritten und stehen unter eigenen Lizenzen (__BASIS__/lizenzen).
 
+# KI in 2 Minuten: Was ist das?
+
+Adresse: __BASIS__/alltag-ki-kurz
+Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
+
+Kurz gesagt: KI ist Software, die Aufgaben löst, für die sonst Denken nötig ist. Sie lernt aus Beispielen. Chatbots wählen Wort für Wort, was wahrscheinlich als Nächstes kommt, und klingen auch dann sicher, wenn sie irren.
+
+Was KI ist, wo du ihr täglich begegnest und wo sie danebenliegt. Zwei Minuten, ohne Fachwörter.
+
+## Was KI ist
+
+KI ist Software, die Aufgaben löst, für die wir sonst Denken brauchen: Sprache verstehen, Bilder erkennen, Texte schreiben.
+
+## Wo du ihr schon begegnest
+
+Übersetzer, Sprachassistenten und Chatbots wie ChatGPT beruhen auf KI.
+
+## Wo sie danebenliegt
+
+Ein Chatbot klingt auch dann sicher, wenn er sich irrt. Wichtiges prüfst du nach.
+
+Merke: Klingt sicher heißt nicht: stimmt. Bei allem mit Folgen prüfst du nach.
+
+## Das nimmst du mit
+
+- KI löst Aufgaben, für die sonst Denken nötig ist, und lernt dafür aus Beispielen.
+- Ein Chatbot wählt Wort für Wort und klingt auch bei Fehlern sicher.
+- Wichtiges prüfst du immer gegen eine zweite Quelle.
+
+# Einen Chatbot nutzen und die Antwort prüfen
+
+Adresse: __BASIS__/alltag-chat
+Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
+
+Kurz gesagt: Im Chat des Labors stellst du eine Alltagsfrage. Bei viel Betrieb dauert die Antwort bis zu zwei Minuten. Du prüfst sie gegen eine zweite Quelle und fragst bei Regeln mit Folgen die zuständige Stelle.
+
+Eine Frage stellen, die Antwort prüfen, bevor du ihr traust. Das Labor hat dafür einen Chat.
+
+## Eine Frage stellen
+
+Öffne den Chat, tippe eine Alltagsfrage, drücke Enter. Bei viel Betrieb dauert die Antwort bis zu zwei Minuten.
+
+## Die Antwort prüfen
+
+Merken, was behauptet wird. Gegenprüfen. Bei Folgen die zuständige Stelle fragen.
+
+Merke: Je größer die Folgen, desto weniger reicht ein Chatbot allein.
+
+## Mehr dazu
+
+Wie du Quellen prüfst, steht auf Quellen prüfen. Warum Modelle erfinden, auf Grenzen von Sprachmodellen.
+
+## Das nimmst du mit
+
+- Eine Alltagsfrage reicht für den Anfang. Geduld: bis zu zwei Minuten bei viel Betrieb.
+- Zahlen, Namen und Fristen prüfst du gegen eine zweite Quelle.
+- Bei Regeln mit Folgen fragst du die zuständige Stelle.
+
+# Betrug am Telefon und mit KI: das Wichtigste
+
+Adresse: __BASIS__/alltag-betrug
+Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
+
+Kurz gesagt: Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine gefälschte Stimme. Ein Codewort in der Familie hilft.
+
+Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen.
+
+## Drei Schritte
+
+Erstens auflegen. Zweitens selbst zurückrufen. Drittens bei Verdacht die 110 wählen.
+
+Merke: Auflegen. Selbst zurückrufen. Bei Verdacht 110.
+
+## Warum KI es schwerer macht
+
+Eine Stimme lässt sich nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme.
+
+## Das Codewort
+
+Vereinbart in der Familie ein Kennwort. Wer in Not anruft und es nicht kennt, ist nicht die Person.
+
+## Das nimmst du mit
+
+- Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.
+- Eine vertraute Stimme beweist nichts.
+- Ein Codewort in der Familie schützt auch gegen gute Fälschungen.
+
+# Gute Fragen an die KI: die Alltagskarte
+
+Adresse: __BASIS__/prompts-alltag
+Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
+
+Kurz gesagt: Eine gute Frage sagt, in welcher Rolle die KI antwortet (Wer), was sie tun soll (Was) und wie die Antwort aussehen soll (Wie). Drei Alltagsbeispiele: Einkauf, Brief an die Vermieterin, Urlaubsplan. Zum Schluss ein Satz, der ans Prüfen erinnert.
+
+Wer, Was, Wie: drei Bausteine, drei Beispiele zum Kopieren und ein Satz zum Prüfen.
+
+## Drei Bausteine
+
+Wer antwortet, was soll sie tun, wie soll es aussehen?
+
+## Drei Beispiele zum Kopieren
+
+Einkauf, Brief an die Vermieterin, Urlaubsplan. Ersetze die Angaben durch deine.
+
+## Dann prüfen
+
+Hänge diesen Satz an: „Sag mir am Ende, was du nicht sicher weißt und was ich selbst nachprüfen sollte.“
+
+## Das nimmst du mit
+
+- Wer, Was, Wie: Rolle, Aufgabe, Form.
+- Erfundene Beispiele reichen zum Üben. Gib keine privaten Daten ein.
+- Antworten prüfst du immer selbst.
+
+# Ist das sicher? Die Kurzfassung
+
+Adresse: __BASIS__/alltag-sicher
+Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
+
+Kurz gesagt: Das Labor braucht kein Konto, speichert keine Kamerabilder und Aufnahmen, und eingetippte Texte verfallen nach 30 Minuten Ruhe. Passwörter, Kontodaten und Daten anderer gehören in keinen Chatbot. Die ausführliche Antwort steht auf Ist das sicher?
+
+Was das Labor speichert, was du nirgends eintippen solltest und wo die ganze Antwort steht.
+
+## Was das Labor tut
+
+Kein Konto, keine gespeicherten Bilder und Aufnahmen, Texte nur kurz im Arbeitsspeicher.
+
+## Was du nirgends eintippst
+
+Passwörter, PINs, Kontodaten, Gesundheitsdaten und Daten anderer Menschen. Im Labor reichen erfundene Beispiele.
+
+Merke: Erfundene Beispiele reichen zum Üben.
+
+## Die ganze Antwort
+
+Alle Einträge im Browser, Kamera, Mikrofon und was der Server sieht: Ist das sicher?.
+
+## Das nimmst du mit
+
+- Kein Konto, keine gespeicherten Bilder, Texte nur kurz.
+- Passwörter, Kontodaten und Gesundheitsdaten gehören in keinen Chatbot.
+- Die ganze Antwort steht auf der Seite Ist das sicher?
+
 # Experimente, leicht erklärt
 
 Adresse: __BASIS__/experimente
@@ -32,7 +175,7 @@ Gib keine echten Namen, Passwörter oder privaten Daten ein. Zum Üben reichen e
 # Was ist KI?
 
 Adresse: __BASIS__/karte
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: KI ist ein Sammelbegriff, kein einzelnes Verfahren. Die meiste KI ist auf eine Aufgabe spezialisiert. Sprachmodelle sind breiter, aber keine allgemeine Intelligenz.
 
@@ -69,7 +212,7 @@ Erklärvideo: Was ist KI? (1.4 Minuten), __BASIS__/static/videos/was-ist-ki.mp4,
 # Maschinelles Lernen
 
 Adresse: __BASIS__/ml
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen. Training passiert einmal und ist teuer, Inferenz passiert ständig und ist günstig. Die Qualität der Beispiele bestimmt die Qualität des Modells.
 
@@ -114,7 +257,7 @@ Erklärvideo: Maschinelles Lernen (1.5 Minuten), __BASIS__/static/videos/maschin
 # Generative KI
 
 Adresse: __BASIS__/genki
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Sprachmodell sagt immer nur das nächste Token voraus. Die Temperatur steuert, wie mutig es wählt. Was nicht im Kontext steht, weiß das Modell nicht.
 
@@ -151,7 +294,7 @@ Erklärvideo: Generative KI (1.4 Minuten), __BASIS__/static/videos/generative-ki
 # Robotik
 
 Adresse: __BASIS__/robotik
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Roboter arbeiten im Kreis aus Wahrnehmen, Entscheiden und Handeln. KI liefert meist die Entscheidung aus Sensordaten. Schnelle Reaktion verlangt Rechenleistung direkt am Gerät.
 
@@ -184,7 +327,7 @@ Erklärvideo: Robotik (1.4 Minuten), __BASIS__/static/videos/robotik.mp4, Untert
 # KI im Business
 
 Adresse: __BASIS__/business
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Gute Einsatzfelder haben klare Aufgaben, genug Daten und einen Menschen, der prüft. Lokal lohnt sich bei sensiblen Daten und schneller Reaktion. Fang klein an und miss gegen den heutigen Ablauf.
 
@@ -301,7 +444,7 @@ Ein künstliches Neuron ist nur eine kleine Rechenstelle: mehrere Zahlen hinein,
 
 ## Eingaben, Gewichte, Summe, Schwelle
 
-Eingaben mal Gewichte, Summe bilden, Schwelle prüfen. Die Gewichte stellt das Training ein.
+Eingaben mal Gewichte, Summe bilden, Schwelle prüfen. Die Gewichte stellt das Training ein. Die Formel steht unter „Mit Mathe“.
 
 Merke: Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden.
 
@@ -311,11 +454,11 @@ Die Ausgaben einer Schicht sind die Eingaben der nächsten. So entstehen Merkmal
 
 ## Warum mehrere Schichten mehr können
 
-Ein Neuron zieht nur eine gerade Linie. Mit Zwischenschicht und Aktivierung entstehen gebogene Grenzen.
+Ein Neuron zieht nur eine gerade Linie. Mit Zwischenschicht und Aktivierung entstehen gebogene Grenzen. Die Formel steht unter „Mit Mathe“.
 
 ## Parameter zählen und was „tief“ heißt
 
-Parameter sind alle Gewichte und Verschiebungen. Tief heißt: viele Schichten hintereinander.
+Parameter sind alle Gewichte und Verschiebungen. Tief heißt: viele Schichten hintereinander. Die Formel steht unter „Mit Mathe“.
 
 ## Warum sie wie Blackboxes wirken
 
@@ -369,15 +512,15 @@ Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht. Wie wird dar
 
 ## Zuerst muss man den Fehler messen
 
-Der Verlust ist eine Zahl für den Fehler. Null heißt perfekt, je größer, desto schlechter.
+Der Verlust ist eine Zahl für den Fehler. Null heißt perfekt, je größer, desto schlechter. Die Formel steht unter „Mit Mathe“.
 
 ## Der Kreislauf: vorhersagen, messen, nachjustieren
 
-Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann beginnt die nächste.
+Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann beginnt die nächste. Die Formel steht unter „Mit Mathe“.
 
 ## Gradientenabstieg: im Nebel ins Tal
 
-Wie im Nebel spürt das Modell nur das Gefälle unter den Füßen und geht Schritt für Schritt bergab.
+Wie im Nebel spürt das Modell nur das Gefälle unter den Füßen und geht Schritt für Schritt bergab. Die Formel steht unter „Mit Mathe“.
 
 Merke: Gradientenabstieg heißt: Schritt für Schritt in die Richtung gehen, in der der Fehler am stärksten sinkt.
 
@@ -391,7 +534,7 @@ Zu kleine Schritte kommen nie an, zu große springen über das Tal. Die Lernrate
 
 ## Epochen und Päckchen
 
-Eine Epoche ist ein Durchlauf durch alle Daten. Pro kleinem Päckchen gibt es einen Schritt.
+Eine Epoche ist ein Durchlauf durch alle Daten. Pro kleinem Päckchen gibt es einen Schritt. Die Formel steht unter „Mit Mathe“.
 
 ## Überanpassung und Frühstopp
 
@@ -449,7 +592,7 @@ Bei seltenen Ereignissen ist ein Modell, das nie Alarm schlägt, fast immer rich
 
 ## Die Konfusionsmatrix: vier Fälle
 
-Zwei Fragen, vier Felder: Was war es wirklich, und was sagte das Modell? Hier am Spamfilter.
+Zwei Fragen, vier Felder: Was war es wirklich, und was sagte das Modell? Hier am Spamfilter. Die Formel steht unter „Mit Mathe“.
 
 Merke: „Positiv“ heißt nur: Das Modell schlägt an. Ob das gut oder schlecht ist, hängt von der Aufgabe ab.
 
@@ -459,7 +602,7 @@ Merke: „Positiv“ heißt nur: Das Modell schlägt an. Ob das gut oder schlech
 
 ## Precision und Recall in Worten
 
-Precision: Wie viele Alarme stimmen? Recall: Wie viele echte Fälle werden gefunden?
+Precision: Wie viele Alarme stimmen? Recall: Wie viele echte Fälle werden gefunden? Die Formel steht unter „Mit Mathe“.
 
 ## Die Schwelle: Fehlalarme gegen Übersehenes
 
@@ -855,7 +998,7 @@ Erklärvideo: Fünf Fragen an ein Bild (1.4 Minuten), __BASIS__/static/videos/vi
 # Gesichtserkennung
 
 Adresse: __BASIS__/gesicht
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-23.
 
 Kurz gesagt: Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.
 
@@ -876,7 +1019,7 @@ Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren ken
 # Objekterkennung
 
 Adresse: __BASIS__/objekt
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-23.
 
 Kurz gesagt: Das Netz betrachtet das ganze Bild einmal und sagt zugleich, wo etwas ist und was es ist. Jedes Objekt bekommt einen Rahmen, eine von 80 Klassen und eine Konfidenz zwischen 0 und 1. Ab welcher Konfidenz ein Rahmen erscheint, bestimmst du.
 
@@ -909,7 +1052,7 @@ Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Fünf Fragen an ein 
 # Bildmodell anlernen
 
 Adresse: __BASIS__/anlernen
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-23.
 
 Kurz gesagt: Jedes Beispiel wird zu 1000 Zahlen und mit dem Klassennamen gespeichert. Ein neues Bild wird verglichen, die drei ähnlichsten Beispiele stimmen ab. Das Netz bleibt unverändert.
 
@@ -930,9 +1073,9 @@ Vielfalt schlägt Menge: wenige Beispiele aus vielen Lagen helfen mehr als viele
 # Sprachmodell im Chat
 
 Adresse: __BASIS__/chat
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
-Kurz gesagt: Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.
+Kurz gesagt: Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen.
 
 Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.
 
@@ -943,6 +1086,10 @@ Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat.
 ## Was auf dem Jetson passiert
 
 Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token.
+
+## Wie viel das Modell auf einmal sieht
+
+Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen. Was darüber hinausgeht, sieht das Modell nicht.
 
 ## Warum es kleiner ist als bekannte Chatbots
 
@@ -955,7 +1102,7 @@ Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Wie ein Sprachmodell
 # Sprache zu Text
 
 Adresse: __BASIS__/whisper
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Ton wird in kurze Fenster zerlegt, zu einem Frequenzbild und von einem Netz in Text übersetzt. Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertiteln mit.
 
@@ -972,7 +1119,7 @@ Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertite
 # Wie ein Sprachmodell gebaut ist
 
 Adresse: __BASIS__/tokens-sprachmodelle
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Sprachmodell zerlegt Text in Token, macht daraus Zahlen und sagt Stück für Stück das nächste Token voraus. Aufmerksamkeit verbindet jedes Token mit den Stellen im Text, auf die es ankommt. Vortraining gibt Sprachwissen, Feinabstimmung und Feedback machen daraus einen Assistenten.
 
@@ -994,7 +1141,7 @@ Jedes Token bekommt eine Zahlenliste. Ähnlich verwendete Token liegen im Bedeut
 
 ## Schritt 3: Aufmerksamkeit entscheidet, worauf es ankommt
 
-Für jedes Token gewichtet das Modell, welche anderen Token im Text wichtig sind.
+Für jedes Token gewichtet das Modell, welche anderen Token im Text wichtig sind. Die Formel steht unter „Mit Mathe“.
 
 Merke: Aufmerksamkeit verbindet jedes Token mit den Stellen im Text, die es zum Verstehen braucht.
 
@@ -1012,7 +1159,7 @@ Aus dem Basismodell wird ein Assistent: erst Beispiele für gute Antworten, dann
 
 ## Größe, kleine Modelle und das Kontextfenster
 
-Mehr Parameter heißen mehr Wissen, aber auch mehr Speicher. Gröber gespeicherte Zahlen sparen Platz.
+Mehr Parameter heißen mehr Wissen, aber auch mehr Speicher. Gröber gespeicherte Zahlen sparen Platz. Im Labor passen 4096 Token ins Kontextfenster.
 
 Merke: Mehr Parameter heißen mehr Wissen und mehr Aufwand. Das Kontextfenster ist der Arbeitsplatz des Modells, nicht sein Gedächtnis.
 
@@ -1048,7 +1195,7 @@ Erklärvideo: Wie ein Sprachmodell gebaut ist (1.2 Minuten), __BASIS__/static/vi
 # Gut fragen: Prompts schreiben
 
 Adresse: __BASIS__/prompting
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Das Modell kennt nur deinen Prompt: Was fehlt, erfindet es. Rolle, Aufgabe, Kontext, Beispiele, Format und Grenzen sind die Checkliste für gute Prompts. Prüfe die Antwort, verbessere den Prompt in kleinen Schritten und gib keine vertraulichen Daten an Dienste, die du nicht kennst.
 
@@ -1056,7 +1203,7 @@ Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn. Hier lernst
 
 ## Warum die Frage zählt
 
-Was im Prompt fehlt, füllt das Modell mit dem, was am wahrscheinlichsten klingt.
+Was im Prompt fehlt, füllt das Modell mit dem, was am wahrscheinlichsten klingt. Für den Alltag gibt es die kurze Karte Gute Fragen im Alltag.
 
 Merke: Schreibe den Prompt so, als würdest du die Aufgabe an eine kluge Person delegieren, die gestern angefangen hat.
 
@@ -1120,7 +1267,7 @@ Erklärvideo: Gut fragen: drei Beispiele aus dem Büro (1.3 Minuten), __BASIS__/
 # Grenzen und Risiken von Sprachmodellen
 
 Adresse: __BASIS__/llm-grenzen
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Modell schreibt Plausibles. Ob es stimmt, musst du prüfen, besonders bei Zahlen, Quellen und Rechtlichem. Fremder Text im Kontext kann Anweisungen enthalten.
 
@@ -1194,7 +1341,7 @@ Erklärvideo: Grenzen und Risiken von Sprachmodellen (1.2 Minuten), __BASIS__/st
 # Wissen ins Modell oder ins Dokument?
 
 Adresse: __BASIS__/finetuning-oder-rag
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Besser fragen ist der schnellste Weg, RAG der Weg für Fakten aus Dokumenten, Nachtrainieren der Weg für Verhalten und Stil. Wer sagt „Wir trainieren das Modell mit unseren Dokumenten“, meint meist RAG. Fakten, die sich ändern oder belegt werden müssen, gehören in Dokumente, nicht in die Parameter.
 
@@ -1264,7 +1411,7 @@ Erklärvideo: Wissen ins Modell oder ins Dokument? (1.3 Minuten), __BASIS__/stat
 # Text zu Sprache
 
 Adresse: __BASIS__/sprachausgabe
-Bereich: Sprache. Stand: 2026-11-22.
+Bereich: Sprache. Stand: 2026-11-23.
 
 Kurz gesagt: Aus Text wird Sprache in Schritten: aufbereiten, Aussprache bestimmen, Klang erzeugen und Betonung setzen. Zahlen, Abkürzungen, Eigennamen und Fachwörter sind die häufigsten Stolperstellen. Stimmen gehören Menschen: Einwilligung einholen, erzeugte Sprache kennzeichnen, vor geklonten Stimmen am Telefon vorsichtig sein.
 
@@ -1422,11 +1569,11 @@ Merke: Ein Embedding ist die Position eines Textes auf einer gelernten Bedeutung
 
 ## Ähnlichkeit messen
 
-Der Kosinus misst die Richtung zweier Vektoren, von -1 bis 1. Echte Textwerte liegen meist im oberen Teil.
+Der Kosinus misst die Richtung zweier Vektoren, von -1 bis 1. Echte Textwerte liegen meist im oberen Teil. Die Formel steht unter „Mit Mathe“.
 
 ## Dimensionen: warum 768 Zahlen
 
-768 Zahlen tragen die Bedeutung eines Textes. Mehr Dimensionen kosten Speicher und Zeit.
+768 Zahlen tragen die Bedeutung eines Textes. Mehr Dimensionen kosten Speicher und Zeit. Die Formel steht unter „Mit Mathe“.
 
 ## Worauf du achten musst: Passung
 
@@ -1760,7 +1907,7 @@ Erklärvideo: Gut ist, was du misst (1.4 Minuten), __BASIS__/static/videos/rag-b
 # RAG-Werkstatt: Fragen an eigene Dokumente
 
 Adresse: __BASIS__/rag
-Bereich: Wissen und RAG. Stand: 2026-11-22.
+Bereich: Wissen und RAG. Stand: 2026-11-23.
 
 Kurz gesagt: Deine Dokumente stecken nicht im Modell. Ohne Nachschlagen würde es raten. Zerlegen, einbetten, suchen, antworten.
 
@@ -1925,7 +2072,7 @@ Erklärvideo: Planen, Schritte und Fehler (1.3 Minuten), __BASIS__/static/videos
 # Agent mit Werkzeugen
 
 Adresse: __BASIS__/agent
-Bereich: Agenten. Stand: 2026-11-22.
+Bereich: Agenten. Stand: 2026-11-23.
 
 Kurz gesagt: Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet. Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.
 
@@ -2084,7 +2231,7 @@ Erklärvideo: MCP einfach erklärt (1.3 Minuten), __BASIS__/static/videos/mcp-er
 # Entscheidungsbäume und Tabellendaten
 
 Adresse: __BASIS__/tabellen-ml
-Bereich: Daten und Prognosen. Stand: 2026-11-22.
+Bereich: Daten und Prognosen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Entscheidungsbaum ist ein Fragebogen, dessen beste Fragen aus Beispielen gelernt werden. Bäume sind nachvollziehbar, wachsen aber leicht zu weit und lernen dann Zufälle auswendig. Ein Wald aus vielen Bäumen gleicht das aus.
 
@@ -2148,7 +2295,7 @@ Erklärvideo: Entscheidungsbäume (1.3 Minuten), __BASIS__/static/videos/entsche
 # Prognosen aus Zeitreihen
 
 Adresse: __BASIS__/zeitreihen
-Bereich: Daten und Prognosen. Stand: 2026-11-22.
+Bereich: Daten und Prognosen. Stand: 2026-11-23.
 
 Kurz gesagt: Eine Zeitreihe besteht aus Trend, Saison und Zufall. Ein Modell schreibt Trend und Saison fort, den Zufall nicht. Prognosen brauchen einen Maßstab (zum Beispiel „wie letzte Woche“), einen Fehlerwert und einen Unsicherheitsbereich statt einer einzelnen Zahl.
 
@@ -2210,7 +2357,7 @@ Erklärvideo: Zeitreihen und Prognose (1.3 Minuten), __BASIS__/static/videos/zei
 # Auffälliges finden
 
 Adresse: __BASIS__/anomalien
-Bereich: Daten und Prognosen. Stand: 2026-11-22.
+Bereich: Daten und Prognosen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Modell lernt, wie Normal aussieht, und meldet, was davon abweicht. Dafür braucht es keine Fehlerbeispiele. Der Schwellenwert bestimmt das Verhältnis aus Fehlalarmen und übersehenen Fällen.
 
@@ -2278,7 +2425,7 @@ Erklärvideo: Anomalieerkennung (1.3 Minuten), __BASIS__/static/videos/anomaliee
 # Empfehlungssysteme
 
 Adresse: __BASIS__/empfehlungen
-Bereich: Daten und Prognosen. Stand: 2026-11-22.
+Bereich: Daten und Prognosen. Stand: 2026-11-23.
 
 Kurz gesagt: Empfehlungen entstehen aus Ähnlichkeit: von Nutzern, die sich ähnlich verhalten, und von Dingen, die sich ähneln. Ohne Verhalten gibt es den Kaltstart, und mit Rückkopplung drohen Filterblasen. Beides lässt sich bewusst ausgleichen.
 
@@ -2346,7 +2493,7 @@ Erklärvideo: Empfehlungssysteme (1.3 Minuten), __BASIS__/static/videos/empfehlu
 # Vom Prototyp in den Betrieb
 
 Adresse: __BASIS__/mlops
-Bereich: KI im Betrieb. Stand: 2026-11-22.
+Bereich: KI im Betrieb. Stand: 2026-11-23.
 
 Kurz gesagt: Zwischen Prototyp und Betrieb liegen Datenpflege, Prüfung, Auslieferung, Überwachung und Nachlernen. Die Welt ändert sich, das Modell nicht. Drift erkennst du an veränderten Eingaben und sinkender Qualität.
 
@@ -2414,7 +2561,7 @@ Erklärvideo: KI im Betrieb (1.3 Minuten), __BASIS__/static/videos/mlops-betrieb
 # Kosten und Energie
 
 Adresse: __BASIS__/kosten-energie
-Bereich: KI im Betrieb. Stand: 2026-11-22.
+Bereich: KI im Betrieb. Stand: 2026-11-23.
 
 Kurz gesagt: Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung. Einen besten Weg gibt es nicht. Kosten bestehen aus Rechenzeit, Speicher, Personal und Datenpflege.
 
@@ -2490,7 +2637,7 @@ Erklärvideo: Kosten und Energie (1.4 Minuten), __BASIS__/static/videos/kosten-u
 # KI im Unternehmen einführen
 
 Adresse: __BASIS__/ki-einfuehrung
-Bereich: KI im Betrieb. Stand: 2026-11-22.
+Bereich: KI im Betrieb. Stand: 2026-11-23.
 
 Kurz gesagt: Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko. Ein Pilot braucht einen vorher festgelegten Maßstab. Er endet mit der Entscheidung: stoppen, ändern oder ausrollen.
 
@@ -2502,7 +2649,7 @@ Ausgehen vom Problem macht den Erfolg messbar. Manchmal reicht eine Regel.
 
 ## Den Einsatz auswählen: Nutzen, Machbarkeit, Daten, Risiko
 
-Starte dort, wo viel Nutzen und hohe Machbarkeit zusammenkommen. Das ist der leichte Karton.
+Starte dort, wo viel Nutzen und hohe Machbarkeit zusammenkommen. Das ist der beste Startpunkt.
 
 ## Der Pilot als Probefahrt
 
@@ -2560,7 +2707,7 @@ Erklärvideo: KI einführen (1.3 Minuten), __BASIS__/static/videos/ki-einfuehren
 # Deine Entscheidung: sechs Fragen vor dem Start
 
 Adresse: __BASIS__/betrieb-entscheidung
-Bereich: KI im Betrieb. Stand: 2026-11-22.
+Bereich: KI im Betrieb. Stand: 2026-11-23.
 
 Kurz gesagt: Endseite des Betriebspfads: sechs Fragen vor dem Start eines KI-Einsatzes (Problem, Ziel, Daten, Verantwortung, Betroffene, Rückfall) zum Abhaken, Hinweis zum Drucken per Browser, drei mögliche Entscheidungen und der Weg zur Kontaktseite des Betreibers.
 
@@ -2570,9 +2717,13 @@ Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und w
 
 Starten, nachbessern oder lassen: Alle drei sind gute Ergebnisse, wenn du sie begründen kannst.
 
+## Berufsgeheimnis und Mandantendaten
+
+Mit Schweigepflicht (Steuerberatung, Rechtsanwaltschaft, Ärzte) gehören Mandanten- und Patientendaten nicht in dieses Labor. Im eigenen Betrieb sind Vertrag, Standort und Verschwiegenheit vorher zu klären.
+
 ## Drucken oder als PDF speichern
 
-Der Druckdialog deines Browsers genügt. Die Haken werden nicht gespeichert.
+Der Druckdialog deines Browsers genügt. Die Haken bleiben nur in dieser Sitzung, mit „Fortschritt merken“ auch beim nächsten Besuch.
 
 ## Fragen und Kontakt
 
@@ -2584,10 +2735,58 @@ Bei Fragen zum Labor und zur Einführung hilft die Kontaktseite des Betreibers.
 - Jedes Nein ist eine Aufgabe, kein Grund zum Aufgeben.
 - Starten, nachbessern und lassen sind gleichwertige Ergebnisse.
 
+# Kameraprüfung: Grenzen, Haftung, Taktzeit, Datenschutz
+
+Adresse: __BASIS__/kamera-grenzen
+Bereich: KI im Betrieb. Stand: 2026-11-23.
+
+Kurz gesagt: Überblick für Betriebe, die eine Kameraprüfung erwägen: Grenzen (Licht, Glanz, Varianten, Fehlerquote), Haftung als Frage an Versicherung, Hersteller und Kunden, eine Beispielrechnung zur Taktzeit mit erfundenen Zahlen, Datenschutz und Mitbestimmung bei Bildern von Beschäftigten als Punkte zum Klären. Die Beispielbilder im Labor sind gezeichnet.
+
+Was eine Kamera in der Qualitätsprüfung nicht kann, wer bei durchgelassenen Fehlteilen gefragt werden muss, ob sie in den Takt passt und was bei Bildern von Mitarbeitenden gilt. Keine Rechtsberatung.
+
+## Wo die Kamera an Grenzen kommt
+
+Licht, Glanz, neue Varianten und eine Fehlerquote, die ohne Testmenge nichts aussagt.
+
+Merke: Ob die Kamera für deine Teile reicht, zeigt nur ein Pilot mit deinen Teilen am echten Platz.
+
+## Wer haftet, wenn ein Fehlteil durchrutscht?
+
+Das ist eine Frage des Einzelfalls und keine für diese Seite. Frage Versicherung, Hersteller und Kunden, bevor die Kamera die Prüfung ersetzt.
+
+## Taktzeit: passt die Prüfung in den Takt?
+
+Aufnahme, Auswertung und Aussortieren müssen kürzer sein als der Takt. Beispielrechnung mit erfundenen Zahlen, miss im Pilot mit deiner Anlage.
+
+## Datenschutz bei Bildern von Beschäftigten
+
+Sind Hände, Gesichter oder Namensschilder zu sehen, sind es personenbezogene Daten. Datenschutz und Betriebsrat früh einbinden.
+
+## Kosten rechnen
+
+Eine Beispielrechnung für Kameraprojekte steht auf Kosten und Energie, Abschnitt „Kameraprojekte rechnen anders“.
+
+## Das nimmst du mit
+
+- Licht, Glanz, Varianten und Fehlerquote sind die Grenzen. Ein Pilot mit eigenen Teilen zeigt, ob es reicht.
+- Zur Haftung fragst du Versicherung, Hersteller und Kunden schriftlich. Diese Seite beurteilt sie nicht.
+- Aufnahme, Auswertung und Aussortieren müssen in den Takt passen. Bilder von Beschäftigten klärst du mit Datenschutz und Betriebsrat.
+
+## Fragen und Antworten
+
+Frage: Ein Anbieter nennt 99 Prozent Erkennung. Was fragst du zuerst?
+Antwort: Wie viele Testbilder, welche Fehlerarten und unter welchem Licht gemessen wurde. Eine Quote ohne Testmenge, Fehlerarten und Bedingungen sagt wenig. Bei wenigen Testbildern fällt ein einziger Fehler stark ins Gewicht.
+
+Frage: Die Linie läuft mit einem Teil alle 2 Sekunden. Aufnahme, Auswertung und Weiche brauchen zusammen 2 Sekunden. Was folgt?
+Antwort: Es gibt keine Reserve, du brauchst Tempo oder Stichproben. Die Prüfung darf nicht länger dauern als der Takt, und Reserve ist nötig. Hier hilft schnellere Auswertung, eine zweite Kamera oder Stichprobe.
+
+Frage: Auf den Bildern sind Hände der Prüfenden zu sehen. Was tust du?
+Antwort: Mit Datenschutz und Betriebsrat klären, ob das zulässig ist, oder den Bildausschnitt auf die Teile begrenzen. Erkennbare Beschäftigte machen Bilder zu personenbezogenen Daten. Am besten zeigen die Bilder nur Teile, sonst wird früh geklärt.
+
 # Sichtprüfung: Gutteil oder Ausschuss
 
 Adresse: __BASIS__/uc-fertigung-sichtpruefung
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
 
@@ -2657,7 +2856,7 @@ Erklärvideo: Gut oder Ausschuss (1.3 Minuten), __BASIS__/static/videos/uc-ferti
 # Bauteile nach Typ sortieren
 
 Adresse: __BASIS__/uc-fertigung-sortieren
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Teile mit klar verschiedener Form lassen sich schon aus wenigen Beispielen je Typ zuverlässig sortieren. Im Beispiel waren 12 von 12 und 90 von 90 richtig. Das sind Werte für gezeichnete Bilder, echte Teile glänzen und verdecken sich.
 
@@ -2727,7 +2926,7 @@ Erklärvideo: Bauteile sortieren (1.1 Minuten), __BASIS__/static/videos/uc-ferti
 # Fahrzeuge und Fahrräder auf dem Hof zählen
 
 Adresse: __BASIS__/uc-logistik-zaehlen
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Objekterkennung findet und zählt einzelne Objekte im Bild. Sie braucht für gängige Fahrzeuge kein eigenes Anlernen. Kleine und verdeckte Objekte fehlen, und die Schwelle regelt das Verhältnis aus Treffern und Fehlalarmen.
 
@@ -2797,7 +2996,7 @@ Erklärvideo: Fahrzeuge zählen (1 Minuten), __BASIS__/static/videos/uc-logistik
 # Regal und Tisch: Was steht da?
 
 Adresse: __BASIS__/uc-handel-regal
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Objekterkennung findet und zählt Gegenstände wie Flaschen. Sie erkennt weder Marken noch Artikel noch Lücken. Aus der Zahl wird erst ein Hinweis, wenn du ein Soll hinterlegst und vergleichst.
 
@@ -2867,7 +3066,7 @@ Erklärvideo: Regalkontrolle (1.1 Minuten), __BASIS__/static/videos/uc-handel-re
 # Zweitmeinung: Zellprobe auffällig oder unauffällig
 
 Adresse: __BASIS__/uc-gesundheit-auffaellig
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Synthetische Bilder, keine medizinischen Daten. Das Beispiel zeigt nur das Prinzip einer Zweitmeinung und ist kein Medizinprodukt. Das System entscheidet nicht, es lenkt den Blick.
 
@@ -2937,7 +3136,7 @@ Erklärvideo: Zweitmeinung (1.2 Minuten), __BASIS__/static/videos/uc-gesundheit-
 # Fragen an vier Dokumente
 
 Adresse: __BASIS__/uc-buero-dokumente
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Das System sucht zuerst passende Textstellen und antwortet nur damit, mit Quelle. Die Treffer entscheiden über die Qualität. Die Fangfrage ist der wichtigste Test: Steht die Antwort nirgends, soll das System das sagen und nichts erfinden.
 
@@ -2973,6 +3172,12 @@ Bei allen sieben Fragen liegt die richtige Stelle unter den ersten zwei von zwö
 
 Alte Fassungen, Widersprüche und Zugriffsrechte entscheiden, ob du dem System trauen kannst. Unten das Gegenmittel.
 
+## Beispiel Steuerbüro: Belege sortieren und Mandantenanschreiben entwerfen
+
+Zwei Büroaufgaben mit erfundenen Daten: Belege nach Art sortieren und ein Anschreiben an eine Mandantin entwerfen. Echte Mandantendaten gehören nicht in dieses Labor.
+
+Merke: Üben mit erfundenen Belegen, echte Mandantendaten erst nach geklärtem Vertrag und mit Prüfung durch eine Fachkraft.
+
 ## Nutzen und Aufwand
 
 Die Antwort ist nur so gut wie ihre Quelle. Bei wichtigen Aussagen klickt man auf die Fundstelle.
@@ -3007,7 +3212,7 @@ Erklärvideo: Fragen an Dokumente (1.2 Minuten), __BASIS__/static/videos/uc-buer
 # Besprechungsprotokoll aus Sprache
 
 Adresse: __BASIS__/uc-buero-protokoll
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Spracherkennung wandelt Ton lokal in Text um. Das Ergebnis ist ein Entwurf, kein fertiges Protokoll. Zahlen, Daten, Namen und Fachwörter sind die Schwachstellen und müssen immer geprüft werden.
 
@@ -3077,7 +3282,7 @@ Erklärvideo: Vom Gespräch zum Protokoll (1.1 Minuten), __BASIS__/static/videos
 # Bestellfragen mit Werkzeugen beantworten
 
 Adresse: __BASIS__/uc-service-bestellung
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Agent schlägt mit Werkzeugen nach und rechnet damit. Das Modell formuliert, die Werkzeuge liefern Status, Zahlen und Regeln. Lesende Werkzeuge sind harmlos, handelnde nicht: Stornieren oder Erstatten braucht Rechte und eine Freigabe durch einen Menschen.
 
@@ -3147,7 +3352,7 @@ Erklärvideo: Der Agent schlägt nach (1.2 Minuten), __BASIS__/static/videos/uc-
 # Zutritt: Ist jemand an der Tür?
 
 Adresse: __BASIS__/uc-sicherheit-zutritt
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Detektion sagt, dass ein Gesicht da ist. Identifikation sagt, wer es ist. Das Beispiel macht nur das Erste und speichert nichts.
 
@@ -3217,7 +3422,7 @@ Erklärvideo: Ist jemand an der Tür? (1.1 Minuten), __BASIS__/static/videos/uc-
 # Personen auf Baustelle und in der Werkhalle
 
 Adresse: __BASIS__/uc-sicherheit-baustelle
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Das Modell im Beispiel erkennt Personen, keinen Schutzhelm und keine Warnweste. Dafür muss ein eigenes Modell angelernt werden. Kleine, ferne und verdeckte Personen fehlen.
 
@@ -3289,7 +3494,7 @@ Erklärvideo: Personen sind keine Helme (1.1 Minuten), __BASIS__/static/videos/u
 # Im Handwerk: Angebot, Baustellenfoto, Rechnungen
 
 Adresse: __BASIS__/uc-handwerk
-Bereich: Business-Use-Cases. Stand: 2026-11-22.
+Bereich: Business-Use-Cases. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Sprachmodell macht aus Notizen einen Entwurf. Preise, Mengen und Termine gibst du vor und prüfst sie. Bilderkennung zählt und markiert.
 
@@ -3338,7 +3543,7 @@ Antwort: Mit einer erfundenen Notiz ohne echte Namen und Preise. Im Labor gehör
 # Der Jetson und seine Hardware
 
 Adresse: __BASIS__/hardware
-Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.
 
@@ -3370,14 +3575,63 @@ Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensib
 - Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.
 - Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.
 
+# Betrieb und Sicherheit des Labors
+
+Adresse: __BASIS__/betrieb-sicherheit
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
+
+Kurz gesagt: Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama nur lokal auf 11434, ausgehender Tunnel nur im öffentlichen Betrieb. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.
+
+Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet. Hier stehen Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates, so wie sie sind.
+
+## Teststand
+
+Nur ein Gerät getestet: Jetson Orin Nano Developer Kit (Super), 8 GB, Ollama 0.12.3. Ein frischer Jetson ist noch nicht von Dritten getestet.
+
+## Ports
+
+Nach außen braucht das Labor nur 8443. Ollama (11434) soll nur lokal hören. Ein Tunnel verbindet ausgehend, ohne Portfreigabe.
+
+Merke: Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört.
+
+## Datenort
+
+Alles liegt auf dem Jetson. Sitzungen und Eingaben im Arbeitsspeicher, keine Datenbank. Modelle auf der SSD.
+
+## Logs
+
+Das Zugriffsprotokoll von uvicorn steht im Journal: Adresse der Gegenstelle, Methode, Pfad, Status. Eingabetexte stehen nicht darin.
+
+## Aufbewahrung
+
+Eine feste Frist ist nicht eingestellt. Auf dem Referenzgerät liegt das Journal im Arbeitsspeicher und ist nach einem Neustart weg. Die Frist legt der Betreiber fest.
+
+## Schutzmaßnahmen der App
+
+Origin-Prüfung, Erlaubnisliste für Hostnamen, Ratenbegrenzung im öffentlichen Betrieb, Einwilligung vor Kamera und Mikrofon, keine Speicherung, Sicherheitsköpfe.
+
+## Was du für den Firmenbetrieb ergänzt
+
+Die App bringt keinen Reverse-Proxy und keine Anmeldung mit. Für ein Firmennetz sind Zugriffsbeschränkung, Anmeldung und eine Aufbewahrungsregel Sache des Betreibers.
+
+## Updates
+
+Repo aktualisieren, setup.sh ausführen, Dienst neu starten. Ein Neustart beendet laufende Chats.
+
+## Das nimmst du mit
+
+- Nur ein Gerät ist getestet. Prüfe jede Angabe auf deinem Gerät.
+- Nach außen braucht das Labor nur 8443, Ollama soll nur lokal hören (prüfen mit ss -tlnp).
+- Daten bleiben auf dem Jetson, im Journal stehen Adresse, Pfad und Status. Die Aufbewahrung legt der Betreiber fest.
+
 # Ist das sicher? Was wird gespeichert?
 
 Adresse: __BASIS__/sicherheit-einfach
-Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.
 
-Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher. Echte Kunden- oder Personaldaten gehören nicht hinein. Darunter siehst du, was du erlaubt hast, und kannst es widerrufen.
+Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher. Echte Kunden-, Mandanten- oder Personaldaten gehören nicht hinein. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16. Darunter siehst du, was du erlaubt hast, und kannst es widerrufen.
 
 ## Die kurze Antwort
 
@@ -3401,6 +3655,12 @@ Chat-Fragen und Dokumente werden auf dem Rechner dieser Seite verarbeitet. Ein K
 
 Nein. Nimm erfundene Beispiele. Das Labor ist ein Lernangebot, kein Werkzeug für echte Kunden-, Personal- oder Gesundheitsdaten.
 
+## Berufsgeheimnis und Mandantendaten
+
+Wer einer Schweigepflicht unterliegt (Steuerberatung, Rechtsanwaltschaft, Ärzte), gibt keine Mandanten- oder Patientendaten in dieses Labor ein. Für den eigenen Betrieb gelten eigene Regeln, siehe unten.
+
+Merke: Kein Rechtsrat. Lass den Einsatz von Datenschutzbeauftragten, Kammer oder einer Anwältin prüfen, bevor echte Mandantendaten in ein KI-System gehen.
+
 ## Was der Server technisch sieht
 
 Wie jede Webseite sieht der Server technische Angaben zur Verbindung. Sie dienen dem Betrieb und dem Schutz vor Überlastung.
@@ -3418,7 +3678,7 @@ Diese Seite ist eine Erklärung in Alltagssprache. Verbindlich sind Impressum un
 # Über das KI-Labor
 
 Adresse: __BASIS__/ueber
-Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano, der nur wenige Watt aufnimmt, und nutzt keine externen KI-Dienste. Gebaut hat es Daniel Alisch als Lernprojekt.
 
@@ -3459,11 +3719,15 @@ Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt
 # Selbst auf einem Jetson aufbauen
 
 Adresse: __BASIS__/selbst-bauen
-Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.
 
-Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano.
+Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet. Das KI-Labor ist frei verfügbar, so bringst du es auf deinen eigenen Jetson Orin Nano.
+
+## Teststand: nur ein Gerät
+
+Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät. Ein frischer Jetson ist von Dritten noch nicht getestet worden.
 
 ## Der Weg in sechs Schritten
 
@@ -3473,7 +3737,7 @@ Merke: Drei Skripte, davon ist nur der Check freiwillig: Der Check prüft vorher
 
 ## Das brauchst du
 
-Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD, ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.
+Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD (Empfehlung 256 GB), ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.
 
 Merke: Ein Developer Kit, dazu SSD und zweiter Rechner, ein halber bis ganzer Tag für den Aufbau, ein Terminal. Mehr nicht.
 
@@ -3485,13 +3749,13 @@ Merke: Mit sudo laufen nur Ollama-Installer, Leistungsmodus, Ollama-Einstellunge
 
 ## Wo du die Anleitung findest
 
-Alles steht im öffentlichen Repo, auch mit Einstellungen und Fehlersuche. Die wichtigsten Befehle stehen schon oben.
+Alles steht im öffentlichen Repo, auch mit Einstellungen und Fehlersuche. Die Befehle stehen im Abschnitt „Die Befehle zum Kopieren“.
 
 Merke: Wenn etwas nicht klappt: erst scripts/check.sh laufen lassen, dann die Fehlersuche im Dokument ansehen.
 
 ## Wenn etwas nicht klappt
 
-Die häufigsten Fehler haben feste Ursachen. Die Tabelle hat alle 15 Zeilen der Anleitung.
+Die häufigsten Fehler haben feste Ursachen. Die Tabelle hat die 15 Zeilen der Anleitung und eine Zeile zum Log.
 
 Merke: Die meisten Fehler sind Speicherfragen. Erst Platz schaffen, dann weitersuchen.
 
@@ -3565,7 +3829,7 @@ Die Fotos stammen aus Wikimedia Commons und sind gemeinfrei oder CC0. Alles ande
 # KI im Unterricht: Einstieg für Klassen und Lehrkräfte
 
 Adresse: __BASIS__/schule-start
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch. Für Klasse 8 gibt es drei Stunden von je 45 Minuten, die ohne Konto, Kamera und Mikrofon auskommen. Der Klassenlink lautet /?weg=schule.
 
@@ -3608,7 +3872,7 @@ Kamera, Mikrofon und Gesichtserkennung sind im Unterricht nicht nötig und nicht
 # KI 1: Was ist KI? Erkennen, Lernen, Entscheiden
 
 Adresse: __BASIS__/schule-stunde-1
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.
 
@@ -3680,7 +3944,7 @@ Antwort: Ziel, Ton und Form nennen, etwa: in fünf Sätzen für Klasse 8. Das Mo
 # KI 2: Wie lernt ein Computer? Daten, Training, Fehler
 
 Adresse: __BASIS__/schule-stunde-2
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.
 
@@ -3752,7 +4016,7 @@ Antwort: Bei kleinem k kann es dort falsch entscheiden, der Punkt zählt voll. D
 # KI 3: Echt oder erfunden? KI prüfen
 
 Adresse: __BASIS__/schule-stunde-3
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.
 
@@ -3824,7 +4088,7 @@ Antwort: Ich suche das Buch in einem Katalog oder bei einem Verlag. Ein Katalog 
 # Handreichung für Lehrkräfte
 
 Adresse: __BASIS__/schule-lehrkraefte
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden und den sieben Medien-Einheiten in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Übersicht der Medien-Einheiten, Pläne für Einzel- und Doppelstunde (45 oder 90 Minuten), Lehrplanbezug und Bezug zur KMK-Strategie, Kamera und Mikrofon am Schulgerät sperren, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
 
@@ -3840,7 +4104,7 @@ Sieben weitere Einheiten zur Medienkompetenz, je 45 oder 90 Minuten, mit Arbeits
 
 ## Operatoren in den Aufgaben
 
-Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären und vergleichen, III begründen und beurteilen.
+Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären, zuordnen und vergleichen, III begründen und beurteilen.
 
 ## So sind die Arbeitsblätter aufgebaut
 
@@ -3891,7 +4155,7 @@ Quellen zu Kompetenzrahmen, Datenschutz in der Schule und Sprachmodellen im Unte
 # Information für die Schulleitung
 
 Adresse: __BASIS__/schule-schulleitung
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Information in einfacher Sprache für Schulleitungen zum KI-Labor: kostenloses Angebot ohne Konto, welche Daten verarbeitet werden und welche nicht, Verantwortlicher und Hosting, Kamera und Mikrofon im Unterricht nicht vorgesehen. Die Schule entscheidet über den Einsatz und klärt die Rechtsgrundlage. Kein Rechtsrat, Stand 22.11.2026.
 
@@ -3936,7 +4200,7 @@ Ob und wie das Labor eingesetzt wird und welche Rechtsgrundlage gilt, entscheide
 # Information für Eltern
 
 Adresse: __BASIS__/schule-eltern
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Kurzinfo für Eltern in einfacher Sprache: Die Klasse nutzt das kostenlose KI-Labor im Unterricht. Es braucht kein Konto, es gibt keine Kamera und kein Mikrofon im Unterricht. Eingaben werden nicht dauerhaft gespeichert. Stand 22.11.2026, kein Rechtsrat.
 
@@ -3977,7 +4241,7 @@ Merke: Ihr Kind kann das Labor auch zu Hause kostenlos nutzen. Die Seite Ist das
 # Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen
 
 Adresse: __BASIS__/medien-stunde-1
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert ein Set aus zwölf Bildkarten (echte Fotos und KI-Bilder), sucht Hinweise und lernt, warum es keine sichere Erkennung gibt. Mit Zeitplan, Aufgaben, Lösungshinweisen, Tafelbild und druckbarem Kartenset.
 
@@ -4051,7 +4315,7 @@ Erklärvideo: Echt oder KI? (2.5 Minuten), __BASIS__/static/videos/echt-oder-ki.
 # Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen
 
 Adresse: __BASIS__/medien-stunde-2
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wird an drei Quellen gegengeprüft: Chat-Antwort, ein Beitrag und eine Behörden- oder Fachseite. Seitwärtslesen und die vier Züge Stopp, Urheber, andere Berichte, Zurückverfolgen. Mit Aufgaben und Lösungshinweisen.
 
@@ -4125,7 +4389,7 @@ Erklärvideo: Quellen prüfen (2.5 Minuten), __BASIS__/static/videos/quellen-pru
 # Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren
 
 Adresse: __BASIS__/medien-stunde-3
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall (eine Cheap Fake) nach Entstehung, Verbreitung und Nutzen und beurteilt ein Dilemma zu einer KI-erzeugten Stimme: Einwilligung, Persönlichkeitsrecht, Schaden, Gegenmaßnahmen. Beide Fälle sind erfunden, es gibt keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.
 
@@ -4199,7 +4463,7 @@ Erklärvideo: Fake News und Deepfakes (2.4 Minuten), __BASIS__/static/videos/fak
 # Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln
 
 Adresse: __BASIS__/medien-stunde-4
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sortiert Beispiele nach erlaubt, genannt und verboten, übt die Faustfrage und die Angabe von KI-Hilfe und entwickelt Regelvorschläge. Welche Regeln gelten, entscheidet die Schule.
 
@@ -4273,7 +4537,7 @@ Erklärvideo: KI und Hausaufgaben (2.2 Minuten), __BASIS__/static/videos/ki-haus
 # Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren
 
 Adresse: __BASIS__/medien-stunde-5
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse sammelt Datenspuren, entscheidet über App-Freigaben für Kamera, Mikrofon und Standort an erfundenen Beispiel-Apps und entwickelt eine Faustregel für Chatbots. Ohne Kamera, kein Zeigen privater Einstellungen.
 
@@ -4347,7 +4611,7 @@ Erklärvideo: Datenschutz im Alltag (2.3 Minuten), __BASIS__/static/videos/daten
 # Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern
 
 Adresse: __BASIS__/medien-stunde-6
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.
 
@@ -4421,7 +4685,7 @@ Erklärvideo: Gute Prompts für die Schule (2.2 Minuten), __BASIS__/static/video
 # Medien-Einheit 7: KI in deinem Alltag, Poster-Runde
 
 Adresse: __BASIS__/medien-stunde-7
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gruppen gestalten ein Poster, erklären, wie ein Feed entscheidet, und beurteilen in einer Poster-Runde, was wirklich KI ist. Kein Video nötig, ohne Kamera.
 
@@ -4493,7 +4757,7 @@ Antwort: Nicht interessiert wählen und bewusst anders klicken. Du kannst dem Fe
 # Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten
 
 Adresse: __BASIS__/elternabend
-Bereich: Für die Schule. Stand: 2026-11-22.
+Bereich: Für die Schule. Stand: 2026-11-23.
 
 Kurz gesagt: Paket für den Elternabend zu KI und Medienkompetenz in Klasse 8: Info-Blatt (eine Seite A4, Sie-Form), Gesprächsleitfaden für Lehrkräfte und Fragen mit Antworten. Alle Angaben stammen aus den Seiten des KI-Labors, Stand 22.11.2026, kein Rechtsrat.
 
@@ -5204,7 +5468,7 @@ Sechs Fragen, bevor du das Referat abgibst oder hältst.
 # Gute Fragen stellen, mit Schulbeispielen
 
 Adresse: __BASIS__/prompts-schule
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Prompt ist die Frage oder Aufgabe, die du einer KI schreibst. Je genauer du schreibst, desto brauchbarer die Antwort. Die Seite zeigt drei Schulaufgaben (Referat, Vokabeln, Lernplan), je mit einem schlechten und einem guten Prompt zum Kopieren und einem Quiz.
 
@@ -5256,11 +5520,11 @@ Antwort: Ich suche das Buch selbst, bevor ich es angebe. Genaue Angaben können 
 # KI zu Hause: Was Eltern wissen sollten
 
 Adresse: __BASIS__/eltern-zuhause
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
-Kurz gesagt: Hinweise für Eltern zum Einsatz des kostenlosen KI-Labors zu Hause: kein Konto, keine Werbung, Eingaben werden nicht dauerhaft gespeichert. Kamera, Mikrofon und Gesicht sind ab 16 Jahren gedacht, die Seite prüft das Alter nicht. Das Sprachmodell erfindet manchmal Antworten, deshalb gemeinsam nutzen. Drei Gespräche mit dem Kind und Experimente ohne Kamera. Kein Rechtsrat.
+Kurz gesagt: Hinweise für Eltern zum Einsatz des kostenlosen KI-Labors zu Hause: kein Konto, keine Werbung, Eingaben werden nicht dauerhaft gespeichert. Kamera, Mikrofon und Gesicht sind ab 16 Jahren gedacht, die Seite prüft das Alter nicht. Für Kinder unter 16 wird empfohlen, den Chat gemeinsam mit einer erwachsenen Person zu nutzen, denn das Sprachmodell erfindet manchmal Antworten. Drei Gespräche mit dem Kind, Sätze zum Sagen und Experimente ohne Kamera. Kein Rechtsrat.
 
-Ist das KI-Labor sicher für Kinder? Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.
+Ist das KI-Labor sicher für Kinder? Hier steht, was es speichert, wo die Grenzen liegen und wie Sie es zu Hause gemeinsam nutzen. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16.
 
 ## Ist das Labor sicher für Kinder?
 
@@ -5270,23 +5534,27 @@ Merke: Sicher heißt hier: wenig Daten, keine Werbung. Es heißt nicht, dass jed
 
 ## Kamera, Mikrofon und Gesicht
 
-Ab 16 Jahren gedacht. Die Seite prüft das Alter nicht, darum begleitest du Jüngere.
+Kamera, Mikrofon und Gesicht ab 16 Jahren. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen. Die Seite prüft das Alter nicht, darum begleiten Sie Jüngere.
 
-Merke: Kein Alterscheck heißt: Du bist der Alterscheck.
+Merke: Kein Alterscheck heißt: Sie sind der Alterscheck.
 
 ## Was das Sprachmodell kann und was nicht
 
-Es erklärt und formuliert gut, erfindet aber auch. Einen Jugendschutzfilter, auf den du dich verlassen kannst, gibt es nicht.
+Es erklärt und formuliert gut, erfindet aber auch. Einen Jugendschutzfilter, auf den Sie sich verlassen können, gibt es nicht. Kinder unter 16 nutzen den Chat am besten mit einer erwachsenen Person.
 
-## Drei Gespräche mit deinem Kind
+## Drei Gespräche mit Ihrem Kind
 
 Echt oder KI, Quellen prüfen, Hausaufgaben fair. Jedes Gespräch beginnt mit einer Frage, nicht mit einem Verbot.
 
-## Die Kamera braucht dein Kind nicht
+## Was Sie Ihrem Kind sagen können
 
-Alle Experimente laufen ohne Kamera und Mikrofon. Fang dort an.
+Kurze Sätze, die Sie übernehmen können. Sie nehmen Druck heraus und laden zum Fragen ein.
 
-## So richtest du es zu Hause ein
+## Die Kamera braucht Ihr Kind nicht
+
+Alle Experimente laufen ohne Kamera und Mikrofon. Fangen Sie dort an.
+
+## So richten Sie es zu Hause ein
 
 Gemeinsam öffnen, Experimente wählen, Kamera aus lassen, danach reden.
 
@@ -5299,44 +5567,48 @@ Fragen zum Labor und zum Datenschutz beantwortet der Betreiber. Verbindlich sind
 ## Das nimmst du mit
 
 - Das Labor braucht kein Konto, zeigt keine Werbung und speichert Eingaben nicht dauerhaft.
-- Kamera, Mikrofon und Gesicht sind ab 16 gedacht. Die Seite prüft das Alter nicht, du begleitest Jüngere.
-- Das Sprachmodell erfindet manchmal Antworten und hat keinen Filter, auf den du dich verlassen kannst. Nutzt es gemeinsam.
+- Kamera, Mikrofon und Gesicht sind ab 16 gedacht. Die Seite prüft das Alter nicht, Sie begleiten Jüngere.
+- Das Sprachmodell erfindet manchmal Antworten und hat keinen Filter, auf den Sie sich verlassen können. Kinder unter 16 nutzen den Chat mit einer erwachsenen Person.
 
 ## Fragen und Antworten
 
-Frage: Dein Kind ist 12 und will die Gesichtserkennung ausprobieren. Was gilt im Labor?
-Antwort: Die Seite prüft kein Alter, ab 16 gedacht, Jüngere mit deinem Einverständnis. Die Seite fragt nicht nach dem Alter und prüft es nicht. Kamera, Mikrofon und Gesicht sind ab 16 gedacht, Jüngere nutzen sie nur mit Einverständnis der Eltern.
+Frage: Ihr Kind ist 12 und will die Gesichtserkennung ausprobieren. Was gilt im Labor?
+Antwort: Die Seite prüft kein Alter, ab 16 gedacht, Jüngere mit Ihrem Einverständnis. Die Seite fragt nicht nach dem Alter und prüft es nicht. Kamera, Mikrofon und Gesicht sind ab 16 gedacht, Jüngere nutzen sie nur mit Einverständnis der Eltern.
 
-Frage: Warum solltest du beim Chat mit dem Sprachmodell dabei sein?
+Frage: Warum sollten Sie beim Chat mit dem Sprachmodell dabei sein?
 Antwort: Weil Antworten erfunden sein können und kein Filter sie prüft. Das Modell klingt überzeugend, auch wenn es falsch liegt, und das Labor schaltet keinen eigenen Filter davor. Gemeinsam nutzen und nachprüfen ist der Schutz.
 
-Frage: Was ist ein guter Einstieg, wenn dein Kind keine Kamera nutzen soll?
-Antwort: Die Experimente, sie laufen ohne Kamera und Mikrofon. Alle Experimente kommen ohne Kamera und Mikrofon aus. Dein Kind lernt dort, wie KI arbeitet und wo sie danebenliegt.
+Frage: Was ist ein guter Einstieg, wenn Ihr Kind keine Kamera nutzen soll?
+Antwort: Die Experimente, sie laufen ohne Kamera und Mikrofon. Alle Experimente kommen ohne Kamera und Mikrofon aus. Ihr Kind lernt dort, wie KI arbeitet und wo sie danebenliegt.
 
 # Zusammen ausprobieren: Anleitung für zwei
 
 Adresse: __BASIS__/zusammen-ausprobieren
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
-Kurz gesagt: Anleitung für Eltern und Kind, die drei Experimente des KI-Labors gemeinsam ausprobieren: ein Fehler-Spiel mit gleichem Startwert zum Vergleichen, eine KI-Antwort gemeinsam gegen eine zweite Quelle prüfen und das Kartenset Echt oder KI zum Raten. Mit Gesprächsfragen. Ohne Kamera.
+Kurz gesagt: Anleitung für Eltern und Kind, die drei Experimente des KI-Labors gemeinsam auszuprobieren: das Punkte-Labor (wie lernt ein Computer, was eine Katze ist?), eine KI-Antwort gemeinsam gegen eine zweite Quelle prüfen und das Kartenset Echt oder KI zum Raten, mit Auflösung für Eltern. Mit Gesprächsfragen. Ohne Kamera.
 
-Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera. Zu jedem eine Gesprächsfrage. Ein Gerät, zwei Stühle.
+Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera und auch für Kinder gut geeignet. Zu jedem eine Gesprächsfrage. Ein Gerät, zwei Stühle. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16.
 
 ## So geht es
 
 Ein Gerät, zwei Personen, etwa dreißig Minuten. Kein Konto, keine Kamera.
 
-## Experiment 1: Das Fehler-Spiel mit gleichem Startwert
+## Experiment 1: Das Punkte-Labor, was ist eine Katze?
 
-Beide geben denselben Startwert ein und spielen dieselben zehn Karten. Danach vergleicht ihr.
+Sie setzen Punkte in zwei Farben, als wären es Katzen und Hunde, und sehen, wie der Computer neue Punkte einsortiert.
 
 ## Experiment 2: Eine KI-Antwort gemeinsam prüfen
 
-Das Kind fragt den Chat nach etwas, das es gut kennt. Ihr prüft die Antwort gegen eine zweite Quelle.
+Das Kind fragt den Chat nach etwas, das es gut kennt. Sie prüfen die Antwort gegen eine zweite Quelle.
 
 ## Experiment 3: Echt oder KI? mit dem Kartenset
 
-Karten ausdrucken, ausschneiden, nebeneinander legen und gemeinsam sortieren.
+Kartenset für zwei herunterladen, ausschneiden, nebeneinander legen und gemeinsam sortieren. Die Auflösung steht dabei.
+
+## Was Sie Ihrem Kind sagen können
+
+Drei Sätze, die Druck herausnehmen: Wir probieren etwas aus. Die KI darf sich irren. Du darfst widersprechen.
 
 ## Danach reden
 
@@ -5345,28 +5617,28 @@ Eine offene Frage zum Schluss reicht. Nicht belehren, zuhören.
 ## Das nimmst du mit
 
 - Ein Gerät, zwei Personen, keine Kamera: das reicht für drei Experimente.
-- Gleicher Startwert heißt gleiche Karten, so lässt sich vergleichen.
+- Ein Computer lernt aus Beispielen. Zeigen Sie wenige oder einseitige, und er irrt sich.
 - Das Gespräch danach ist wichtiger als das Ergebnis.
 
 ## Fragen und Antworten
 
-Frage: Wozu dient der gleiche Startwert im Fehler-Spiel?
-Antwort: Beide bekommen dieselben Karten und können ihre Entscheidungen vergleichen. Der Startwert legt die Kartenfolge fest. Mit demselben Wert spielt ihr dieselben Karten und könnt Unterschiede besprechen.
+Frage: Was zeigt das Punkte-Labor?
+Antwort: Ein Computer lernt aus Beispielen und ordnet Neues nach ihnen ein. Das Verfahren sieht nur die gesetzten Punkte und ordnet neue nach ihnen ein. Mit wenigen oder einseitigen Beispielen irrt es sich.
 
-Frage: Der Chat nennt eine Zahl zu einem Thema, das dein Kind gut kennt. Was ist ein guter nächster Schritt?
+Frage: Der Chat nennt eine Zahl zu einem Thema, das Ihr Kind gut kennt. Was ist ein guter nächster Schritt?
 Antwort: Eine zweite Quelle suchen und die Zahl vergleichen. Ein Sprachmodell klingt auch dann sicher, wenn es sich irrt. Eine zweite Quelle zeigt, ob die Zahl stimmt.
 
-Frage: Warum begründet ihr beim Kartenset eure Entscheidung laut?
-Antwort: Damit ihr merkt, woran ihr eure Entscheidung festmacht und ob das verlässlich ist. Im Begründen zeigt sich, ob ihr auf Hinweise oder auf ein Bauchgefühl vertraut. Das ist der Lerneffekt.
+Frage: Warum begründen Sie beim Kartenset Ihre Entscheidung laut?
+Antwort: Damit Sie merken, woran Sie Ihre Entscheidung festmachen und ob das verlässlich ist. Im Begründen zeigt sich, ob Sie auf Hinweise oder auf ein Bauchgefühl vertrauen. Das ist der Lerneffekt.
 
 # Bildschirmzeit: kurz und ehrlich
 
 Adresse: __BASIS__/bildschirmzeit
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe und den Mediennutzungsvertrag. Keine medizinische Beratung.
 
-Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo du Rat bekommst. Keine Medizin und keine Versprechen.
+Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.
 
 ## Was sich ehrlich sagen lässt
 
@@ -5382,6 +5654,10 @@ Sie ist keine medizinische oder pädagogische Beratung. Bei Sorgen hilft eine Be
 
 Regeln, die das Kind mit aushandelt, halten länger als verordnete.
 
+## Was Sie Ihrem Kind sagen können
+
+Sätze, die ein Gespräch öffnen, statt ein Verbot auszusprechen.
+
 ## Weiterlesen
 
 Quellen und Hilfe, abgerufen am 22.11.2026.
@@ -5389,7 +5665,7 @@ Quellen und Hilfe, abgerufen am 22.11.2026.
 ## Das nimmst du mit
 
 - Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen.
-- Vereinbart Regeln gemeinsam und haltet sie schriftlich fest.
+- Vereinbaren Sie Regeln gemeinsam und halten Sie sie schriftlich fest.
 - Bei Sorgen: Kinderarzt oder Beratungsstelle fragen, nicht diese Seite.
 
 ## Fragen und Antworten
@@ -5397,10 +5673,10 @@ Quellen und Hilfe, abgerufen am 22.11.2026.
 Frage: Was sagt diese Seite zur richtigen Bildschirmzeit?
 Antwort: Eine Zahl für alle gibt es nicht, Alter, Inhalt und Begleitung zählen. Außer für kleine Kinder gibt es keine einzelne belegte Grenze. Es kommt darauf an, was getan wird und wer dabei ist.
 
-Frage: Wie gehst du am besten mit Regeln um?
+Frage: Wie gehen Sie am besten mit Regeln um?
 Antwort: Gemeinsam vereinbaren, aufschreiben und nach einigen Wochen prüfen. Regeln, die das Kind mit aushandelt, werden eher eingehalten. Aufschreiben und Prüfen hält sie lebendig.
 
-Frage: Dein Kind schläft schlecht und zieht sich zurück. Was ist sinnvoll?
+Frage: Ihr Kind schläft schlecht und zieht sich zurück. Was ist sinnvoll?
 Antwort: Mit Kinderärztin, Kinderarzt oder Beratungsstelle sprechen. Die Seite kann keinen Einzelfall beurteilen. Bei solchen Anzeichen helfen Fachleute weiter.
 
 # Glossar

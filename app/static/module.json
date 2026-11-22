@@ -33,7 +33,8 @@
     "content-experimente.js",
     "content-schulen-ueberblick.js",
     "content-ueber.js",
-    "content-rechtliches.js"
+    "content-rechtliches.js",
+    "content-alltag.js"
   ],
   "module": [
     "laien.js",

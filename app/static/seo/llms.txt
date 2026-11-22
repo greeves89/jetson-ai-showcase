@@ -12,6 +12,14 @@ Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vo
 
 - [Über das KI-Labor](__BASIS__/ueber): Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen.
 
+## Alltag in 15 Minuten
+
+- [KI in 2 Minuten: Was ist das?](__BASIS__/alltag-ki-kurz): Was KI ist, wo du ihr täglich begegnest und wo sie danebenliegt.
+- [Einen Chatbot nutzen und die Antwort prüfen](__BASIS__/alltag-chat): Eine Frage stellen, die Antwort prüfen, bevor du ihr traust.
+- [Betrug am Telefon und mit KI: das Wichtigste](__BASIS__/alltag-betrug): Auflegen, selbst zurückrufen, bei Verdacht 110.
+- [Gute Fragen an die KI: die Alltagskarte](__BASIS__/prompts-alltag): Wer, Was, Wie: drei Bausteine, drei Beispiele zum Kopieren und ein Satz zum Prüfen.
+- [Ist das sicher? Die Kurzfassung](__BASIS__/alltag-sicher): Was das Labor speichert, was du nirgends eintippen solltest und wo die ganze Antwort steht.
+
 ## Experimente
 
 - [Experimente, leicht erklärt](__BASIS__/experimente): Probiere aus, wie KI arbeitet.
@@ -94,6 +102,7 @@ Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.
 - [Kosten und Energie](__BASIS__/kosten-energie): Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung.
 - [KI im Unternehmen einführen](__BASIS__/ki-einfuehrung): Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.
 - [Deine Entscheidung: sechs Fragen vor dem Start](__BASIS__/betrieb-entscheidung): Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.
+- [Kameraprüfung: Grenzen, Haftung, Taktzeit, Datenschutz](__BASIS__/kamera-grenzen): Was eine Kamera in der Qualitätsprüfung nicht kann, wer bei durchgelassenen Fehlteilen gefragt werden muss, ob sie in den Takt passt und was bei Bildern von Mitarbeitenden gilt.
 
 ## Business-Use-Cases
 
@@ -116,8 +125,9 @@ Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit.
 Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?
 
 - [Der Jetson und seine Hardware](__BASIS__/hardware): Ein kleiner Computer mit GPU, gebaut für KI am Gerät.
+- [Betrieb und Sicherheit des Labors](__BASIS__/betrieb-sicherheit): Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet.
 - [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher.
-- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Das KI-Labor ist frei verfügbar.
+- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet.
 - [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
 
 ## Für die Schule
@@ -152,9 +162,9 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich](__BASIS__/falscher-anruf): Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.
 - [Für dein Referat über KI](__BASIS__/referat): Gliederung, die besten Seiten des Labors, deutsche Quellen und eine Vorlage zum Zitieren.
 - [Gute Fragen stellen, mit Schulbeispielen](__BASIS__/prompts-schule): Ein Prompt ist deine Frage an die KI.
-- [KI zu Hause: Was Eltern wissen sollten](__BASIS__/eltern-zuhause): Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.
-- [Zusammen ausprobieren: Anleitung für zwei](__BASIS__/zusammen-ausprobieren): Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera.
-- [Bildschirmzeit: kurz und ehrlich](__BASIS__/bildschirmzeit): Hier steht, was sich ehrlich sagen lässt, was nicht, und wo du Rat bekommst.
+- [KI zu Hause: Was Eltern wissen sollten](__BASIS__/eltern-zuhause): Hier steht, was es speichert, wo die Grenzen liegen und wie Sie es zu Hause gemeinsam nutzen.
+- [Zusammen ausprobieren: Anleitung für zwei](__BASIS__/zusammen-ausprobieren): Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera und auch für Kinder gut geeignet.
+- [Bildschirmzeit: kurz und ehrlich](__BASIS__/bildschirmzeit): Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen.
 
 ## Optional
 

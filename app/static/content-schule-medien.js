@@ -60,7 +60,7 @@ const blaetter = (k, nr) => [
 /* ------------------------------------------------------------------ Einheit 1 */
 S["medien-stunde-1"] = einheit({
   nav: "Medien 1: Echt oder KI?", titel: "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen", symbol: "images", icon: "images",
-  downloads: blaetter("", 1).concat([{text: "Kartenset Echt oder KI?", sub: "12 Bildkarten, 2 Seiten A4, zum Ausschneiden", href: "/static/materialien/bildkarten-echt-oder-ki.pdf"}]),
+  downloads: blaetter("", 1).concat([{text: "Kartenset Echt oder KI?", sub: "für die Klasse: 12 Bildkarten, 2 Seiten A4, zum Ausschneiden. Eine Elternfassung mit Auflösung für zu Hause gibt es auf den Elternseiten", href: "/static/materialien/bildkarten-echt-oder-ki.pdf"}]),
   lernziele: [
     "Du kannst Bilder nach Hinweisen sortieren: wahrscheinlich echt, wahrscheinlich KI, unklar.",
     "Du kannst Warnzeichen bei KI-Bildern nennen und am Bild zeigen.",
@@ -86,7 +86,7 @@ S["medien-stunde-1"] = einheit({
     p: ["Das Set hat zwölf nummerierte Karten. Unter ihnen sind echte Fotos mit freier Lizenz und mit einem Bildmodell erzeugte Bilder. Karten tragen nur eine Nummer, die Lösung steht im Lösungsblatt."]},
   aufgaben: [
     {ort: "Karten sortieren", sozial: "Gruppe zu viert", niveau: "Basis", icon: "layout-grid", tipps: ["Sortiere zuerst nach deinem Gefühl, ohne lange zu überlegen.", "Bist du unsicher, lege die Karte auf den Stapel „unklar“. Das ist erlaubt."],
-     text: "**Nenne** (I) für jede der zwölf Karten, ob sie wahrscheinlich echt, wahrscheinlich KI oder unklar ist. Lege dafür drei Stapel und schreibe die Kartennummern auf."},
+     text: "**Ordne zu** (II) jede der zwölf Karten einem von drei Stapeln: wahrscheinlich echt, wahrscheinlich KI oder unklar. Schreibe dafür die Kartennummern je Stapel auf."},
     {ort: "Hinweise suchen", sozial: "Partnerarbeit", niveau: "Standard", icon: "search", tipps: ["Schau auf Licht, Spiegelungen, Hintergrund und Schrift im Bild.", "Frage dich: Könnte auch ein echtes Foto diese Stelle haben?"],
      text: "**Beschreibe** (I) bei zwei Karten, die du für KI hältst, welche Stelle dich zweifeln lässt. Zeige sie am Bild. Dann **erkläre** (II), warum diese Stelle allein kein Beweis ist."},
     {ort: "Prüfweg", sozial: "Einzelarbeit", niveau: "Herausforderung", icon: "route", tipps: ["Drei Prüfwege: Quelle suchen, Bild rückwärts suchen, Kontext prüfen.", "Schreibe das Urteil mit „wahrscheinlich“ auf, nicht mit „sicher“."],
@@ -97,7 +97,7 @@ S["medien-stunde-1"] = einheit({
   loesVisual: {typ: "matrix", x: ["Es ist echt", "Es ist KI"], y: ["Ich sage: echt", "Ich sage: KI"], xtitel: "Was es wirklich ist", ytitel: "Was du sagst",
    zellen: [[{text: "Richtig", ton: "gut"}, {text: "Reingefallen", ton: "schlecht"}], [{text: "Falscher Verdacht", ton: "schlecht"}, {text: "Richtig", ton: "gut"}]]},
   loesungen: [
-    "**Zu Aufgabe 1, Nenne (I):** Die Stapel sind Einschätzungen, keine Fakten. Einige Karten liegen normalerweise falsch. Löse erst nach Aufgabe 3 mit dem Lösungsblatt auf.",
+    "**Zu Aufgabe 1, Ordne zu (II):** Die Stapel sind Einschätzungen, keine Fakten. Einige Karten liegen normalerweise falsch. Löse erst nach Aufgabe 3 mit dem Lösungsblatt auf.",
     "**Zu Aufgabe 2, Beschreibe (I) und Erkläre (II):** Eine gute Beschreibung nennt Stelle und Beobachtung, zum Beispiel Spiegelung, Licht oder Hintergrund. Die Erklärung nennt den Grund: Ein Fehler ist ein Hinweis, aber kein Beweis, denn auch echte Fotos sind manchmal verwackelt oder bearbeitet, und gute KI-Bilder sind oft fehlerfrei.",
     "**Zu Aufgabe 3, Beurteile (III) und Entwickle (III):** Gut ist ein Urteil mit Wahrscheinlichkeit statt „sicher“. Ein guter Prüfweg fragt: Wer hat das Bild zuerst veröffentlicht? Was zeigt die Rückwärtssuche? Berichten andere darüber?",
     "**Zum Zusatz, Vergleiche (II) und Begründe (III):** Unterschiede zeigen, dass gute Bilder Gruppen auseinanderbringen. Das ist das Lernziel, nicht ein Fehler der Gruppen.",
@@ -105,8 +105,8 @@ S["medien-stunde-1"] = einheit({
   diff: {
     leichtPunkte: ["Nur die Karten 1 bis 6", "Satz zur Karte ergänzen", "Stapel „unklar“ ist erlaubt"],
     schwerPunkte: ["Alle zwölf Karten", "Prüfweg für jede unklare Karte", "Urteil mit Wahrscheinlichkeit"],
-    leicht: "Nur die Karten 1 bis 6 verteilen. Bei **Nenne** (I) und **Beschreibe** (I) bleiben: „Ich halte Karte ___ für KI, weil ___.“",
-    schwer: "Alle zwölf Karten, dazu **beurteile** (III) die Sicherheit jedes Urteils in Prozent und **begründe** (III), welche Quelle du zuerst prüfen würdest.",
+    leicht: "Nur die Karten 1 bis 6 verteilen. Bei **Beschreibe** (I) bleiben: „Ich halte Karte ___ für KI, weil ___.“",
+    schwer: "Alle zwölf Karten, dazu **beurteile** (III) die Sicherheit jedes Urteils in Prozent und gib zu jedem Urteil an, welche Quelle du zuerst prüfen würdest und warum.",
   },
   sicherung: {
     kurz: "Hinweise sammeln, Herkunft prüfen, Wahrscheinlichkeit schätzen: Echt oder KI ist selten ein Ja oder Nein.",
@@ -179,7 +179,7 @@ S["medien-stunde-2"] = einheit({
     {ort: "Seitwärts lesen", sozial: "Partnerarbeit", niveau: "Standard", icon: "files", tipps: ["Markiere den Namen der Seite und suche ihn in einem neuen Tab.", "Frage: Was hat diese Stelle davon, dass ich es glaube?"],
      text: "**Beschreibe** (I) bei einem Beitrag ohne Autor, wer dahintersteckt. Öffne dafür einen neuen Tab und suche den Namen der Seite. Dann **erkläre** (II), welches Interesse die Seite haben kann."},
     {ort: "Gegenprobe", sozial: "Einzelarbeit", niveau: "Herausforderung", icon: "circle-check", tipps: ["Prüfe bei jeder Quelle Urheber, Datum und ob sie selbst recherchiert hat.", "Drei Seiten, die voneinander abschreiben, zählen als eine Quelle."],
-     text: "**Überprüfe** (III) die Behauptung an drei Quellen: Chat, Beitrag, Behörden- oder Fachseite. **Beurteile** (III), welche Quelle am verlässlichsten ist."},
+     text: "**Überprüfe** (III) die Behauptung an drei Quellen: Chat, Beitrag, Behörden- oder Fachseite. **Beurteile** (III), welche Quelle am verlässlichsten ist, und stütze dein Urteil auf Gründe."},
   ],
   zusatz: {sozial: "Einzelarbeit", niveau: "Herausforderung", text: "**Entwickle** (III) eine Merkkarte mit den vier Zügen Stopp, Urheber, andere Berichte, Zurückverfolgen und **vergleiche** (II) sie mit der Karte einer anderen Gruppe."},
   loesKurz: "Der Chat ist ein Wegweiser, keine Quelle: Das Original suchst du selbst.",
@@ -631,7 +631,7 @@ S["medien-stunde-7"] = einheit({
     {ort: "Wie der Feed entscheidet", sozial: "Partnerarbeit", niveau: "Standard", icon: "radio", tipps: ["Ein Feed zählt, was du ansiehst, likest, teilst und wie lange du bleibst.", "Suche in deiner App einen Knopf wie „Nicht interessiert“."],
      text: "**Erkläre** (II), woran ein Feed oder eine Playlist erkennt, was dir gefällt. **Beschreibe** (I) eine Einstellung, mit der du den Feed lenkst."},
     {ort: "Poster-Runde", sozial: "Gruppe zu viert", niveau: "Herausforderung", icon: "route", tipps: ["KI hat aus Beispielen gelernt, eine feste Regel hat jemand aufgeschrieben.", "Frage bei jedem Beispiel: Wer hat hier die Regeln gemacht?"],
-     text: "**Beurteile** (III) an einem fremden Poster, ob alle Beispiele wirklich KI sind, und **begründe** (III), bei welchem Beispiel du zweifelst: Hat die Software aus Beispielen gelernt, oder folgt sie festen Regeln?"},
+     text: "**Beurteile** (III) an einem fremden Poster, ob alle Beispiele wirklich KI sind. Gib zu jedem Urteil den Grund an und nenne das Beispiel, bei dem du zweifelst: Hat die Software aus Beispielen gelernt, oder folgt sie festen Regeln?"},
   ],
   zusatz: {sozial: "Einzelarbeit", niveau: "Herausforderung", text: "**Entwickle** (III) eine Regel für deinen eigenen Feed in einem Satz und **vergleiche** (II) sie mit der Regel deiner Sitznachbarin oder deines Sitznachbarn."},
   loesKurz: "Ein Feed rät, was dich festhält, nicht, was gut für dich ist. Du kannst ihn lenken.",
@@ -642,7 +642,7 @@ S["medien-stunde-7"] = einheit({
   loesungen: [
     "**Zu Aufgabe 1, Nenne (I):** Genannt werden fünf Stellen, zum Beispiel Feed, Playlist, Kamerafilter, Übersetzer, Tastaturvorschläge, Spielgegner. Das sind dieselben Verfahren wie im Labor, nur groß und im Hintergrund.",
     "**Zu Aufgabe 2, Erkläre (II) und Beschreibe (I):** Plattformen erklären öffentlich, dass Empfehlungen auf Signalen beruhen: was du ansiehst, likest, teilst oder kommentierst, Angaben zum Video und Geräteeinstellungen. Der Feed sagt, was dich wahrscheinlich festhält. Einstellungen: „Nicht interessiert“, „Weniger davon“, Verlauf zurücksetzen.",
-    "**Zu Aufgabe 3, Beurteile (III) und Begründe (III):** Der Unterschied: Hat die Software aus Beispielen gelernt, oder hat jemand die Regeln aufgeschrieben? Bei manchen Beispielen weiß man es nicht, denn Anbieter erklären das oft nicht genau. Dieses Ergebnis ist zulässig.",
+    "**Zu Aufgabe 3, Beurteile (III):** Der Unterschied: Hat die Software aus Beispielen gelernt, oder hat jemand die Regeln aufgeschrieben? Bei manchen Beispielen weiß man es nicht, denn Anbieter erklären das oft nicht genau. Dieses Ergebnis ist zulässig.",
     "**Zum Zusatz, Entwickle (III) und Vergleiche (II):** Gute Regeln sind kurz, zum Beispiel „Ich wähle bei Videos, die ich nicht mehr sehen will, immer Nicht interessiert.“",
   ],
   diff: {

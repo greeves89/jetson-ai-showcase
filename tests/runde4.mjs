@@ -142,8 +142,8 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await page.fill("textarea", "Hallo");
   await page.keyboard.press("Enter");
   pruefe(/Das Modell wird geladen, das dauert beim ersten Mal bis zu einer Minute/.test(await page.textContent(".msg.ki")), "Erste Anfrage: Hinweis Modell wird geladen");
-  await page.waitForFunction(() => /Geschätzte Wartezeit: etwa/.test(document.querySelector(".msg.ki").textContent), null, { timeout: 8000 });
-  pruefe(true, "Warteschlange nennt eine geschätzte Wartezeit");
+  await page.waitForFunction(() => /Nr\. 2 in der Warteschlange\. Das kann bis zu einer Minute dauern/.test(document.querySelector(".msg.ki").textContent), null, { timeout: 8000 });
+  pruefe(true, "Warteschlange nennt ohne Messwert ehrlich eine Spanne (bis zu einer Minute), keine erfundene Zahl");
   await t.schliessen();
 }
 
@@ -168,8 +168,9 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   pruefe(/\.jpg$/.test(await page.getAttribute(".video video", "poster") || ""), "Video hat ein Poster (kein schwarzes Bild vor dem Start)");
   await page.waitForTimeout(800);
   pruefe(await page.evaluate(() => { const s = document.querySelector(".video video").textTracks[0]; return !!s && s.mode === "showing"; }), "Untertitelspur steht standardmäßig auf showing");
+  pruefe(/Untertitel ausschalten/.test(await page.textContent(".ut-schalter")) && await page.getAttribute(".ut-schalter", "aria-pressed") === "true", "Schalter nennt die Handlung (Untertitel ausschalten) und trägt aria-pressed=true");
   await page.click(".ut-schalter");
-  pruefe(await page.evaluate(() => document.querySelector(".video video").textTracks[0].mode) === "disabled" && /aus/.test(await page.textContent(".ut-schalter")), "Schalter Untertitel an/aus schaltet aus");
+  pruefe(await page.evaluate(() => document.querySelector(".video video").textTracks[0].mode) === "disabled" && /Untertitel einschalten/.test(await page.textContent(".ut-schalter")) && await page.getAttribute(".ut-schalter", "aria-pressed") === "false", "Schalter schaltet aus und heißt jetzt Untertitel einschalten (aria-pressed=false)");
   await page.click(".ut-schalter");
   pruefe(await page.evaluate(() => document.querySelector(".video video").textTracks[0].mode) === "showing", "Schalter schaltet wieder ein");
   await t.schliessen();

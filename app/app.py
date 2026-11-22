@@ -38,7 +38,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
 
 from app import agent_werkzeuge, speicher
-from app.sicherheit import Belegt, Sitzungen, Warteschlange, begrenzt, origin_ok, sitzungs_kennung, umgebung_zahl
+from app.sicherheit import Belegt, sicherheitskoepfe, Sitzungen, Warteschlange, begrenzt, origin_ok, sitzungs_kennung, umgebung_zahl
 
 HIER = Path(__file__).resolve().parent
 OLLAMA = "http://127.0.0.1:11434"
@@ -92,11 +92,12 @@ def _ist_jpeg_dataurl(s) -> bool:
     return isinstance(s, str) and s.startswith("data:image/jpeg;base64,")
 
 
-app = FastAPI(title="Jetson Demo-Hub")
-app.add_middleware(TrustedHostMiddleware, allowed_hosts=_erlaubte_hosts())
-
 # Oeffentlicher Betrieb (OEFFENTLICH=1): zusaetzlich Ratenbegrenzung je Besucher. Intern aus, damit Tests nicht bremsen.
 _OEFFENTLICH = os.environ.get("OEFFENTLICH") == "1"
+# Die automatische API-Dokumentation (/docs, /redoc, /openapi.json) listet alle Pfade: aus, ausser KL_API_DOKU=1 (nur LAN-Tests).
+_API_DOKU = os.environ.get("KL_API_DOKU") == "1" and not _OEFFENTLICH
+app = FastAPI(title="Jetson Demo-Hub", **({} if _API_DOKU else {"docs_url": None, "redoc_url": None, "openapi_url": None}))
+app.add_middleware(TrustedHostMiddleware, allowed_hosts=_erlaubte_hosts())
 # Einstellbar ueber Umgebungsvariablen (siehe docs/veroeffentlichung.md):
 #   SITZUNG_TTL_S      Zeitlimit je Sitzung: Anlern-Beispiele und RAG-Texte verfallen nach so vielen Sekunden Ruhe (Standard 1800)
 #   LLM_PARALLEL       gleichzeitige Sprachmodell-Antworten (Chat, RAG-Frage, Agent), Standard 2 (Speicher und GPU sind knapp)
@@ -1107,6 +1108,35 @@ class _Kompression:
 
 
 app.add_middleware(_Kompression)
+
+
+class _Sicherheitskoepfe:
+    """Aeusserste Schicht: setzt die Sicherheitskoepfe auf jede Antwort (Seiten, API, Statisches, Fehlerseiten).
+    Regeln und Richtlinie: app/sicherheit.py, Erklaerung: docs/betrieb-sicherheit.md."""
+
+    def __init__(self, anwendung):
+        self.anwendung = anwendung
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] != "http":
+            return await self.anwendung(scope, receive, send)
+        kopf_in = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
+        https = scope.get("scheme") == "https" or kopf_in.get("x-forwarded-proto", "").split(",")[0].strip().lower() == "https"
+        koepfe = sicherheitskoepfe(_OEFFENTLICH, https)
+
+        async def senden(nachricht):
+            if nachricht["type"] == "http.response.start":
+                kopf = MutableHeaders(scope=nachricht)
+                for name, wert in koepfe:
+                    kopf[name] = wert
+                if kopf.get("content-type", "").startswith("text/html") and "cache-control" not in kopf:
+                    kopf["Cache-Control"] = "no-cache"
+            await send(nachricht)
+
+        await self.anwendung(scope, receive, senden)
+
+
+app.add_middleware(_Sicherheitskoepfe)
 
 
 def _seo_daten():
