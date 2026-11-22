@@ -1,0 +1,57 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.170
+Kennst du das Ratespiel
+mit den Ja-Nein-Fragen?
+
+00:00:04.320 --> 00:00:10.230
+Ist es ein Tier? Hat es vier Beine?
+Genau so arbeitet ein Entscheidungsbaum.
+
+00:00:11.480 --> 00:00:16.430
+Jede Zeile einer Tabelle ist ein
+Fall, jede Spalte ein Merkmal.
+
+00:00:16.580 --> 00:00:21.130
+Der Baum fragt nach Merkmalen und
+endet in einem Blatt mit der Antwort.
+
+00:00:22.380 --> 00:00:25.650
+Beim Lernen wählt er die beste Frage zuerst.
+
+00:00:25.800 --> 00:00:29.470
+Von zehn Kreditanträgen
+wurden sechs zurückgezahlt.
+
+00:00:29.620 --> 00:00:37.610
+Gibt es Zahlungsrückstände? Das trennt die Gruppen deutlich.
+Ist die Hausnummer gerade? Das trennt nichts und fliegt raus.
+
+00:00:38.860 --> 00:00:42.370
+Das Beste: Du kannst jeden Weg nachlesen.
+
+00:00:42.520 --> 00:00:48.990
+Rückstände, Rate zu hoch, abgelehnt. Das
+ist eine Begründung, die du nennen kannst.
+
+00:00:50.240 --> 00:00:54.950
+Lässt du den Baum ungebremst wachsen,
+lernt er die Trainingsdaten auswendig.
+
+00:00:55.100 --> 00:00:57.970
+Auf neuen Daten fällt er dann deutlich ab.
+
+00:00:59.220 --> 00:01:05.370
+Darum gibt es den Wald. Viele Bäume stimmen
+ab, und die Mehrheit gleicht Einzelfehler aus.
+
+00:01:06.620 --> 00:01:09.330
+Bei Tabellen genügt oft das Einfache.
+
+00:01:09.480 --> 00:01:13.070
+Ein Baum lernt auf einem
+normalen Rechner in Sekunden.
+
+00:01:13.220 --> 00:01:17.610
+Neuronale Netze brauchst du
+eher bei Bild, Ton und Text.

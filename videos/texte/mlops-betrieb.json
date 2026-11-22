@@ -1,0 +1,64 @@
+{
+ "id": "mlops-betrieb",
+ "titel": "KI im Betrieb",
+ "untertitel": "Was ein Modell braucht, wenn es täglich läuft",
+ "szenen": [
+  {
+   "id": "kueche",
+   "kapitel": "Die Restaurantküche",
+   "saetze": [
+    "Zu Hause darf etwas schiefgehen. In der Restaurantküche muss es jeden Abend gleich gut herauskommen.",
+    "Das ist der Unterschied zwischen Versuch und Betrieb."
+   ]
+  },
+  {
+   "id": "kreis",
+   "kapitel": "Der Kreislauf",
+   "saetze": [
+    "Ein Modell im Betrieb dreht Runden: Daten, Training, Prüfung, Auslieferung, Überwachung, Nachlernen.",
+    "Es ist ein Kreis, kein einmaliger Weg.",
+    "Prüfen heißt: an Daten, die das Modell nie sah."
+   ]
+  },
+  {
+   "id": "drift",
+   "kapitel": "Drift",
+   "saetze": [
+    "Das Modell zeigt die Welt zur Trainingszeit.",
+    "Neues Licht an der Kamera, ein neuer Lieferant, und die Qualität sinkt, oft schleichend. Das heißt Drift."
+   ]
+  },
+  {
+   "id": "armaturenbrett",
+   "kapitel": "Das Armaturenbrett",
+   "saetze": [
+    "Darum brauchst du ein Armaturenbrett.",
+    "Lege vorher fest, was du beobachtest und ab wann jemand Bescheid bekommt."
+   ]
+  },
+  {
+   "id": "versionen",
+   "kapitel": "Versionen und Rückfall",
+   "saetze": [
+    "Eine neue Version läuft zuerst bei wenigen Nutzern, neben der alten.",
+    "Wird sie schlechter, geht es zurück."
+   ]
+  },
+  {
+   "id": "verantwortung",
+   "kapitel": "Verantwortung",
+   "saetze": [
+    "Jemand besitzt das Modell, jemand betreibt es.",
+    "Ein Steckbrief hält fest, was es kann und wo es irrt."
+   ]
+  },
+  {
+   "id": "jetson",
+   "kapitel": "Auf dem Jetson",
+   "saetze": [
+    "Auf einem kleinen Gerät wie dem Jetson gilt: wenig Speicher, wenig Watt, meist ein Modell zur Zeit.",
+    "Dafür bleiben die Daten am Gerät."
+   ]
+  }
+ ]
+}

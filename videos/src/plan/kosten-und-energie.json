@@ -1,0 +1,129 @@
+{
+ "id": "kosten-und-energie",
+ "titel": "Kosten und Energie",
+ "untertitel": "Lokal, Cloud oder Edge: was es wirklich kostet",
+ "gesamt": 83.62,
+ "szenen": [
+  {
+   "id": "wege",
+   "kapitel": "Drei Wege",
+   "start": 0,
+   "dauer": 14.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 10.4,
+     "text": "Kaufen, mieten oder Taxi fahren: Lokal ist der eigene Server, Cloud heißt mieten nach Nutzung, Edge ist ein kleines Gerät dort, wo die Daten entstehen."
+    },
+    {
+     "t": 11.6,
+     "d": 1.92,
+     "text": "Keiner gewinnt in allem."
+    }
+   ]
+  },
+  {
+   "id": "bloecke",
+   "kapitel": "Woraus Kosten bestehen",
+   "start": 14.42,
+   "dauer": 8.02,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Hardware und Cloud-Preis sind nur ein Teil."
+    },
+    {
+     "t": 3.84,
+     "d": 3.28,
+     "text": "Personal und Datenpflege werden oft unterschätzt."
+    }
+   ]
+  },
+  {
+   "id": "annahmen",
+   "kapitel": "Drei Annahmen",
+   "start": 22.44,
+   "dauer": 12.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.28,
+     "text": "Rechnen wir mit Annahmen, die du durch deine ersetzt."
+    },
+    {
+     "t": 4.08,
+     "d": 7.52,
+     "text": "Das Gerät nimmt 15 Watt auf und läuft 24 Stunden am Tag. Eine Kilowattstunde kostet 0,30 Euro."
+    }
+   ]
+  },
+  {
+   "id": "strom",
+   "kapitel": "Die Stromrechnung",
+   "start": 34.94,
+   "dauer": 12.28,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 10.88,
+     "text": "15 Watt mal 24 Stunden sind 360 Wattstunden. Das sind 0,36 Kilowattstunden am Tag, rund 39 Euro im Jahr."
+    }
+   ]
+  },
+  {
+   "id": "vergleich",
+   "kapitel": "Der Vergleich",
+   "start": 47.22,
+   "dauer": 12.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.8,
+     "text": "Ein Cloud-Dienst kostet angenommen 50 Euro im Monat, das Gerät 500 Euro in der Anschaffung."
+    },
+    {
+     "t": 7.6,
+     "d": 4.48,
+     "text": "Nach knapp einem Jahr ist es bezahlt, ohne Personal und Wartung."
+    }
+   ]
+  },
+  {
+   "id": "vergessen",
+   "kapitel": "Was man vergisst",
+   "start": 60.2,
+   "dauer": 7.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.28,
+     "text": "Ein Fitnessstudio-Vertrag kostet auch ohne Besuch."
+    },
+    {
+     "t": 4.08,
+     "d": 2.48,
+     "text": "Ein kaum genutztes Gerät genauso."
+    }
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Sechs Fragen",
+   "start": 67.66,
+   "dauer": 15.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 9.04,
+     "text": "Sechs Fragen ordnen die Wahl besser als ein Preisvergleich: Datenschutz, Tempo, Last, Modellgröße, Betreuung und Ausfall."
+    },
+    {
+     "t": 9.84,
+     "d": 4.32,
+     "text": "Rechne über die gesamte Laufzeit und nenne deine Annahmen offen."
+    }
+   ]
+  }
+ ]
+}

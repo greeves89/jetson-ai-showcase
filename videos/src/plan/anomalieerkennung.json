@@ -1,0 +1,126 @@
+{
+ "id": "anomalieerkennung",
+ "titel": "Anomalieerkennung",
+ "untertitel": "Das Seltene finden, ohne es zu kennen",
+ "gesamt": 75.54,
+ "szenen": [
+  {
+   "id": "abbuchung",
+   "kapitel": "Die seltsame Abbuchung",
+   "start": 0,
+   "dauer": 9.94,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.8,
+     "text": "Du kennst dein Normales. Eine seltsame Abbuchung fällt dir sofort auf."
+    },
+    {
+     "t": 6,
+     "d": 3.04,
+     "text": "Ein Modell lernt genauso, wie normal aussieht."
+    }
+   ]
+  },
+  {
+   "id": "normal",
+   "kapitel": "Normal lernen",
+   "start": 9.94,
+   "dauer": 12.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Es sieht nur Normales. Was davon abweicht, meldet es."
+    },
+    {
+     "t": 4.64,
+     "d": 6.96,
+     "text": "Eine Anomalie ist selten und weicht ab, aber sie ist kein Urteil. Sie ist ein Anlass nachzusehen."
+    }
+   ]
+  },
+  {
+   "id": "daten",
+   "kapitel": "Gute Daten",
+   "start": 22.44,
+   "dauer": 9.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Achte auf die Daten. Was du als normal zeigst, hält das Modell für normal."
+    },
+    {
+     "t": 5.84,
+     "d": 2.88,
+     "text": "Stecken schon Defekte drin, lernt es sie mit."
+    }
+   ]
+  },
+  {
+   "id": "klasse",
+   "kapitel": "Warum nicht Fehler lernen",
+   "start": 32.06,
+   "dauer": 9.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.4,
+     "text": "Fehlerbeispiele sind selten, und der nächste Fehler sieht anders aus."
+    },
+    {
+     "t": 5.2,
+     "d": 3.36,
+     "text": "Ein Modell fürs Normale findet auch Unbekanntes."
+    }
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Schwellenwert",
+   "start": 41.52,
+   "dauer": 20.16,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4,
+     "text": "Der Schwellenwert tauscht Fehlalarme gegen übersehene Fälle."
+    },
+    {
+     "t": 4.8,
+     "d": 8.24,
+     "text": "Nimm zehntausend Buchungen, davon zehn auffällig. Das Verfahren findet neun, schlägt aber bei rund hundert normalen an."
+    },
+    {
+     "t": 13.34,
+     "d": 5.92,
+     "text": "Die meisten Meldungen sind falsch, obwohl das Verfahren gut ist. Schuld ist die Seltenheit."
+    }
+   ]
+  },
+  {
+   "id": "mensch",
+   "kapitel": "Der Mensch prüft",
+   "start": 61.68,
+   "dauer": 13.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.4,
+     "text": "Eine Meldung ist nur ein Verdacht."
+    },
+    {
+     "t": 3.2,
+     "d": 4.16,
+     "text": "Ein Mensch entscheidet, und seine Entscheidung verbessert die Schwelle."
+    },
+    {
+     "t": 7.66,
+     "d": 4.4,
+     "text": "Das gilt überall, wo etwas Seltenes zwischen viel Normalem steckt."
+    }
+   ]
+  }
+ ]
+}

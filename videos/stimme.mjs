@@ -145,7 +145,8 @@ mkdirSync(CACHE, { recursive: true });
 mkdirSync("src/plan", { recursive: true });
 const reihenfolge = ["was-ist-ki", "maschinelles-lernen", "generative-ki", "robotik", "ki-im-business", "rag-ueberblick", "rag-embedding", "rag-embedding-beachten", "rag-chunking", "rag-keywordsuche", "rag-hybridsuche", "rag-reranking", "rag-bewertung", "daten-rohstoff", "neuronale-netze-erklaert", "training-gradientenabstieg", "bewertung-konfusionsmatrix", "verzerrung-fairness", "recht-ueberblick",
   "bild-als-zahlen", "cnn-wie-netze-sehen", "vision-aufgaben-ueberblick", "agenten-grundlagen", "agenten-planung", "agenten-sicherheit", "mcp-erklaert",
-  "sprachmodell-aufbau", "prompting-grundlagen", "prompting-beispiele", "llm-grenzen-risiken", "wissen-ins-modell-oder-dokument", "sprachausgabe-erklaert"];
+  "sprachmodell-aufbau", "prompting-grundlagen", "prompting-beispiele", "llm-grenzen-risiken", "wissen-ins-modell-oder-dokument", "sprachausgabe-erklaert",
+  "entscheidungsbaeume", "zeitreihen-prognose", "anomalieerkennung", "empfehlungssysteme", "mlops-betrieb", "kosten-und-energie", "ki-einfuehren"];
 for (const id of ids) {
   const plan = await planen(id, schaetzen);
   const speicher = JSON.parse(JSON.stringify(plan));

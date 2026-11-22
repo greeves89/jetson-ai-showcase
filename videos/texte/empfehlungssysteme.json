@@ -1,0 +1,57 @@
+{
+ "id": "empfehlungssysteme",
+ "titel": "Empfehlungssysteme",
+ "untertitel": "Wie ein System errät, was zu dir passt",
+ "szenen": [
+  {
+   "id": "buchhaendlerin",
+   "kapitel": "Die Buchhändlerin",
+   "saetze": [
+    "Eine gute Buchhändlerin kennt dich.",
+    "Sie nutzt zwei Quellen: was du magst und was Menschen mit ähnlichem Geschmack mögen."
+   ]
+  },
+  {
+   "id": "aehnlich",
+   "kapitel": "Ähnlichkeit",
+   "saetze": [
+    "Anna bestellt die Teile A, B und C.",
+    "Ben bestellt die Teile A, B und D.",
+    "Die meisten Zellen der Tabelle sind leer, weil niemand alles kauft.",
+    "Sie haben zwei Teile gemeinsam. Ben ist also Annas Nachbar, und er hat Teil D. Darum bekommt Anna Teil D."
+   ]
+  },
+  {
+   "id": "zahlenlisten",
+   "kapitel": "Versteckte Vorlieben",
+   "saetze": [
+    "Bei großen Tabellen wird dieser Vergleich langsam.",
+    "Darum bekommt jeder Nutzer und jedes Produkt eine kurze Zahlenliste, die Vorlieben zusammenfasst."
+   ]
+  },
+  {
+   "id": "kaltstart",
+   "kapitel": "Der Kaltstart",
+   "saetze": [
+    "Ein neuer Nutzer hat noch kein Verhalten, also gibt es nichts zu vergleichen.",
+    "Erst fragen, dann Beliebtes zeigen, dann persönlicher werden."
+   ]
+  },
+  {
+   "id": "blase",
+   "kapitel": "Die Blase",
+   "saetze": [
+    "Was empfohlen wird, wird öfter gekauft und deshalb noch öfter empfohlen.",
+    "Das Populäre wird immer größer."
+   ]
+  },
+  {
+   "id": "messen",
+   "kapitel": "Nutzen messen",
+   "saetze": [
+    "Ein Klick ist noch kein Nutzen. Zähle, was bleibt: Käufe ohne Rückgabe, gefundene Antworten, eine kürzere Suche.",
+    "Und Verhaltensdaten sind personenbezogen. Sammle nur, was du brauchst."
+   ]
+  }
+ ]
+}

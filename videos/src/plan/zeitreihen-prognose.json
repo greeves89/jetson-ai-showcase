@@ -1,0 +1,149 @@
+{
+ "id": "zeitreihen-prognose",
+ "titel": "Zeitreihen und Prognose",
+ "untertitel": "Aus der Vergangenheit auf das Kommende schließen",
+ "gesamt": 75.94,
+ "szenen": [
+  {
+   "id": "wetter",
+   "kapitel": "Eine Zeitreihe",
+   "start": 0,
+   "dauer": 12.98,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 5.68,
+     "text": "Der Wetterbericht ist eine Zeitreihe: Werte in der Reihenfolge, in der sie entstanden."
+    },
+    {
+     "t": 6.88,
+     "d": 5.2,
+     "text": "Hier zählt die Reihenfolge. Und ein Modell muss die Faustregel wie gestern schlagen."
+    }
+   ]
+  },
+  {
+   "id": "teile",
+   "kapitel": "Trend, Saison, Zufall",
+   "start": 12.98,
+   "dauer": 14.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.08,
+     "text": "Ein Verlauf hat drei Teile."
+    },
+    {
+     "t": 2.88,
+     "d": 6.8,
+     "text": "Der Trend ist die Richtung, die Saison das Wiederkehrende, der Zufall der Rest."
+    },
+    {
+     "t": 9.98,
+     "d": 3.2,
+     "text": "Getrennt betrachtet, verstehst du den Verlauf besser."
+    }
+   ]
+  },
+  {
+   "id": "fortschreiben",
+   "kapitel": "Muster fortschreiben",
+   "start": 27.06,
+   "dauer": 9.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Das Modell lernt Trend und Saison aus der Vergangenheit und führt beides fort."
+    },
+    {
+     "t": 5.84,
+     "d": 2.56,
+     "text": "Den Zufall kann es nicht vorhersagen."
+    }
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Die Grenze",
+   "start": 36.36,
+   "dauer": 8.18,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Was in den Daten nie vorkam, sieht es nicht kommen."
+    },
+    {
+     "t": 4.16,
+     "d": 3.12,
+     "text": "Je weiter voraus, desto größer der Fehler."
+    }
+   ]
+  },
+  {
+   "id": "wartung",
+   "kapitel": "Wartungsvorhersage",
+   "start": 44.54,
+   "dauer": 8.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.72,
+     "text": "Bei Maschinen zeigen sich oft Vorboten."
+    },
+    {
+     "t": 3.52,
+     "d": 4.08,
+     "text": "Ein Modell erkennt den Verlauf und warnt, bevor etwas bricht."
+    }
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler messen",
+   "start": 53.04,
+   "dauer": 12.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.16,
+     "text": "Du nimmst die Abweichungen ohne Vorzeichen und bildest den Mittelwert."
+    },
+    {
+     "t": 4.96,
+     "d": 3.52,
+     "text": "Den Fehler misst du an Werten, die zeitlich danach kamen."
+    },
+    {
+     "t": 8.78,
+     "d": 2.4,
+     "text": "Sonst schaut dein Test in die Zukunft."
+    }
+   ]
+  },
+  {
+   "id": "band",
+   "kapitel": "Ein Bereich",
+   "start": 65.12,
+   "dauer": 10.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Ein Bereich ist ehrlicher als eine einzelne Zahl."
+    },
+    {
+     "t": 4.16,
+     "d": 2.56,
+     "text": "Er sagt dir, wie viel Puffer du brauchst."
+    },
+    {
+     "t": 7.02,
+     "d": 2,
+     "text": "Und halte die Daten frisch."
+    }
+   ]
+  }
+ ]
+}

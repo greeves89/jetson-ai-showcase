@@ -1,0 +1,139 @@
+{
+ "id": "mlops-betrieb",
+ "titel": "KI im Betrieb",
+ "untertitel": "Was ein Modell braucht, wenn es täglich läuft",
+ "gesamt": 78.94,
+ "szenen": [
+  {
+   "id": "kueche",
+   "kapitel": "Die Restaurantküche",
+   "start": 0,
+   "dauer": 11.62,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.08,
+     "text": "Zu Hause darf etwas schiefgehen. In der Restaurantküche muss es jeden Abend gleich gut herauskommen."
+    },
+    {
+     "t": 7.28,
+     "d": 3.44,
+     "text": "Das ist der Unterschied zwischen Versuch und Betrieb."
+    }
+   ]
+  },
+  {
+   "id": "kreis",
+   "kapitel": "Der Kreislauf",
+   "start": 11.62,
+   "dauer": 16.88,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8,
+     "text": "Ein Modell im Betrieb dreht Runden: Daten, Training, Prüfung, Auslieferung, Überwachung, Nachlernen."
+    },
+    {
+     "t": 8.8,
+     "d": 3.04,
+     "text": "Es ist ein Kreis, kein einmaliger Weg."
+    },
+    {
+     "t": 12.14,
+     "d": 3.84,
+     "text": "Prüfen heißt: an Daten, die das Modell nie sah."
+    }
+   ]
+  },
+  {
+   "id": "drift",
+   "kapitel": "Drift",
+   "start": 28.5,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.88,
+     "text": "Das Modell zeigt die Welt zur Trainingszeit."
+    },
+    {
+     "t": 3.68,
+     "d": 7.84,
+     "text": "Neues Licht an der Kamera, ein neuer Lieferant, und die Qualität sinkt, oft schleichend. Das heißt Drift."
+    }
+   ]
+  },
+  {
+   "id": "armaturenbrett",
+   "kapitel": "Das Armaturenbrett",
+   "start": 40.92,
+   "dauer": 8.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.24,
+     "text": "Darum brauchst du ein Armaturenbrett."
+    },
+    {
+     "t": 3.04,
+     "d": 4.88,
+     "text": "Lege vorher fest, was du beobachtest und ab wann jemand Bescheid bekommt."
+    }
+   ]
+  },
+  {
+   "id": "versionen",
+   "kapitel": "Versionen und Rückfall",
+   "start": 49.74,
+   "dauer": 8.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.48,
+     "text": "Eine neue Version läuft zuerst bei wenigen Nutzern, neben der alten."
+    },
+    {
+     "t": 5.28,
+     "d": 2.24,
+     "text": "Wird sie schlechter, geht es zurück."
+    }
+   ]
+  },
+  {
+   "id": "verantwortung",
+   "kapitel": "Verantwortung",
+   "start": 58.16,
+   "dauer": 8.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Jemand besitzt das Modell, jemand betreibt es."
+    },
+    {
+     "t": 4.32,
+     "d": 3.76,
+     "text": "Ein Steckbrief hält fest, was es kann und wo es irrt."
+    }
+   ]
+  },
+  {
+   "id": "jetson",
+   "kapitel": "Auf dem Jetson",
+   "start": 67.14,
+   "dauer": 11.8,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.88,
+     "text": "Auf einem kleinen Gerät wie dem Jetson gilt: wenig Speicher, wenig Watt, meist ein Modell zur Zeit."
+    },
+    {
+     "t": 7.68,
+     "d": 2.32,
+     "text": "Dafür bleiben die Daten am Gerät."
+    }
+   ]
+  }
+ ]
+}

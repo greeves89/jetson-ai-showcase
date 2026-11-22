@@ -1,0 +1,139 @@
+{
+ "id": "entscheidungsbaeume",
+ "titel": "Entscheidungsbäume",
+ "untertitel": "Wie ein Verfahren aus einer Tabelle entscheidet",
+ "gesamt": 79.26,
+ "szenen": [
+  {
+   "id": "ratespiel",
+   "kapitel": "Das Ratespiel",
+   "start": 0,
+   "dauer": 10.98,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.12,
+     "text": "Kennst du das Ratespiel mit den Ja-Nein-Fragen?"
+    },
+    {
+     "t": 4.32,
+     "d": 5.76,
+     "text": "Ist es ein Tier? Hat es vier Beine? Genau so arbeitet ein Entscheidungsbaum."
+    }
+   ]
+  },
+  {
+   "id": "tabelle",
+   "kapitel": "Tabelle und Baum",
+   "start": 10.98,
+   "dauer": 10.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Jede Zeile einer Tabelle ist ein Fall, jede Spalte ein Merkmal."
+    },
+    {
+     "t": 5.6,
+     "d": 4.4,
+     "text": "Der Baum fragt nach Merkmalen und endet in einem Blatt mit der Antwort."
+    }
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Die beste Frage zuerst",
+   "start": 21.88,
+   "dauer": 16.48,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Beim Lernen wählt er die beste Frage zuerst."
+    },
+    {
+     "t": 3.92,
+     "d": 3.52,
+     "text": "Von zehn Kreditanträgen wurden sechs zurückgezahlt."
+    },
+    {
+     "t": 7.74,
+     "d": 7.84,
+     "text": "Gibt es Zahlungsrückstände? Das trennt die Gruppen deutlich. Ist die Hausnummer gerade? Das trennt nichts und fliegt raus."
+    }
+   ]
+  },
+  {
+   "id": "lesen",
+   "kapitel": "Man kann ihn lesen",
+   "start": 38.36,
+   "dauer": 11.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Das Beste: Du kannst jeden Weg nachlesen."
+    },
+    {
+     "t": 4.16,
+     "d": 6.32,
+     "text": "Rückstände, Rate zu hoch, abgelehnt. Das ist eine Begründung, die du nennen kannst."
+    }
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Die Grenze",
+   "start": 49.74,
+   "dauer": 8.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.56,
+     "text": "Lässt du den Baum ungebremst wachsen, lernt er die Trainingsdaten auswendig."
+    },
+    {
+     "t": 5.36,
+     "d": 2.72,
+     "text": "Auf neuen Daten fällt er dann deutlich ab."
+    }
+   ]
+  },
+  {
+   "id": "wald",
+   "kapitel": "Der Wald",
+   "start": 58.72,
+   "dauer": 7.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6,
+     "text": "Darum gibt es den Wald. Viele Bäume stimmen ab, und die Mehrheit gleicht Einzelfehler aus."
+    }
+   ]
+  },
+  {
+   "id": "einfach",
+   "kapitel": "Oft genügt das Einfache",
+   "start": 66.12,
+   "dauer": 13.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Bei Tabellen genügt oft das Einfache."
+    },
+    {
+     "t": 3.36,
+     "d": 3.44,
+     "text": "Ein Baum lernt auf einem normalen Rechner in Sekunden."
+    },
+    {
+     "t": 7.1,
+     "d": 4.24,
+     "text": "Neuronale Netze brauchst du eher bei Bild, Ton und Text."
+    }
+   ]
+  }
+ ]
+}

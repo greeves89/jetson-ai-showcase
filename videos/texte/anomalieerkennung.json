@@ -1,0 +1,57 @@
+{
+ "id": "anomalieerkennung",
+ "titel": "Anomalieerkennung",
+ "untertitel": "Das Seltene finden, ohne es zu kennen",
+ "szenen": [
+  {
+   "id": "abbuchung",
+   "kapitel": "Die seltsame Abbuchung",
+   "saetze": [
+    "Du kennst dein Normales. Eine seltsame Abbuchung fällt dir sofort auf.",
+    "Ein Modell lernt genauso, wie normal aussieht."
+   ]
+  },
+  {
+   "id": "normal",
+   "kapitel": "Normal lernen",
+   "saetze": [
+    "Es sieht nur Normales. Was davon abweicht, meldet es.",
+    "Eine Anomalie ist selten und weicht ab, aber sie ist kein Urteil. Sie ist ein Anlass nachzusehen."
+   ]
+  },
+  {
+   "id": "daten",
+   "kapitel": "Gute Daten",
+   "saetze": [
+    "Achte auf die Daten. Was du als normal zeigst, hält das Modell für normal.",
+    "Stecken schon Defekte drin, lernt es sie mit."
+   ]
+  },
+  {
+   "id": "klasse",
+   "kapitel": "Warum nicht Fehler lernen",
+   "saetze": [
+    "Fehlerbeispiele sind selten, und der nächste Fehler sieht anders aus.",
+    "Ein Modell fürs Normale findet auch Unbekanntes."
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Schwellenwert",
+   "saetze": [
+    "Der Schwellenwert tauscht Fehlalarme gegen übersehene Fälle.",
+    "Nimm zehntausend Buchungen, davon zehn auffällig. Das Verfahren findet neun, schlägt aber bei rund hundert normalen an.",
+    "Die meisten Meldungen sind falsch, obwohl das Verfahren gut ist. Schuld ist die Seltenheit."
+   ]
+  },
+  {
+   "id": "mensch",
+   "kapitel": "Der Mensch prüft",
+   "saetze": [
+    "Eine Meldung ist nur ein Verdacht.",
+    "Ein Mensch entscheidet, und seine Entscheidung verbessert die Schwelle.",
+    "Das gilt überall, wo etwas Seltenes zwischen viel Normalem steckt."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,66 @@
+{
+ "id": "zeitreihen-prognose",
+ "titel": "Zeitreihen und Prognose",
+ "untertitel": "Aus der Vergangenheit auf das Kommende schließen",
+ "szenen": [
+  {
+   "id": "wetter",
+   "kapitel": "Eine Zeitreihe",
+   "saetze": [
+    "Der Wetterbericht ist eine Zeitreihe: Werte in der Reihenfolge, in der sie entstanden.",
+    "Hier zählt die Reihenfolge. Und ein Modell muss die Faustregel wie gestern schlagen."
+   ]
+  },
+  {
+   "id": "teile",
+   "kapitel": "Trend, Saison, Zufall",
+   "saetze": [
+    "Ein Verlauf hat drei Teile.",
+    "Der Trend ist die Richtung, die Saison das Wiederkehrende, der Zufall der Rest.",
+    "Getrennt betrachtet, verstehst du den Verlauf besser."
+   ]
+  },
+  {
+   "id": "fortschreiben",
+   "kapitel": "Muster fortschreiben",
+   "saetze": [
+    "Das Modell lernt Trend und Saison aus der Vergangenheit und führt beides fort.",
+    "Den Zufall kann es nicht vorhersagen."
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Die Grenze",
+   "saetze": [
+    "Was in den Daten nie vorkam, sieht es nicht kommen.",
+    "Je weiter voraus, desto größer der Fehler."
+   ]
+  },
+  {
+   "id": "wartung",
+   "kapitel": "Wartungsvorhersage",
+   "saetze": [
+    "Bei Maschinen zeigen sich oft Vorboten.",
+    "Ein Modell erkennt den Verlauf und warnt, bevor etwas bricht."
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler messen",
+   "saetze": [
+    "Du nimmst die Abweichungen ohne Vorzeichen und bildest den Mittelwert.",
+    "Den Fehler misst du an Werten, die zeitlich danach kamen.",
+    "Sonst schaut dein Test in die Zukunft."
+   ]
+  },
+  {
+   "id": "band",
+   "kapitel": "Ein Bereich",
+   "saetze": [
+    "Ein Bereich ist ehrlicher als eine einzelne Zahl.",
+    "Er sagt dir, wie viel Puffer du brauchst.",
+    "Und halte die Daten frisch."
+   ]
+  }
+ ]
+}

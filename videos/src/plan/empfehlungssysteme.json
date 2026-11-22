@@ -1,0 +1,126 @@
+{
+ "id": "empfehlungssysteme",
+ "titel": "Empfehlungssysteme",
+ "untertitel": "Wie ein System errät, was zu dir passt",
+ "gesamt": 77.86,
+ "szenen": [
+  {
+   "id": "buchhaendlerin",
+   "kapitel": "Die Buchhändlerin",
+   "start": 0,
+   "dauer": 10.02,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.32,
+     "text": "Eine gute Buchhändlerin kennt dich."
+    },
+    {
+     "t": 3.52,
+     "d": 5.6,
+     "text": "Sie nutzt zwei Quellen: was du magst und was Menschen mit ähnlichem Geschmack mögen."
+    }
+   ]
+  },
+  {
+   "id": "aehnlich",
+   "kapitel": "Ähnlichkeit",
+   "start": 10.02,
+   "dauer": 21.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Anna bestellt die Teile A, B und C."
+    },
+    {
+     "t": 4.16,
+     "d": 3.28,
+     "text": "Ben bestellt die Teile A, B und D."
+    },
+    {
+     "t": 7.74,
+     "d": 4.16,
+     "text": "Die meisten Zellen der Tabelle sind leer, weil niemand alles kauft."
+    },
+    {
+     "t": 12.2,
+     "d": 8.24,
+     "text": "Sie haben zwei Teile gemeinsam. Ben ist also Annas Nachbar, und er hat Teil D. Darum bekommt Anna Teil D."
+    }
+   ]
+  },
+  {
+   "id": "zahlenlisten",
+   "kapitel": "Versteckte Vorlieben",
+   "start": 31.36,
+   "dauer": 10.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Bei großen Tabellen wird dieser Vergleich langsam."
+    },
+    {
+     "t": 3.92,
+     "d": 6.08,
+     "text": "Darum bekommt jeder Nutzer und jedes Produkt eine kurze Zahlenliste, die Vorlieben zusammenfasst."
+    }
+   ]
+  },
+  {
+   "id": "kaltstart",
+   "kapitel": "Der Kaltstart",
+   "start": 42.26,
+   "dauer": 10.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.56,
+     "text": "Ein neuer Nutzer hat noch kein Verhalten, also gibt es nichts zu vergleichen."
+    },
+    {
+     "t": 5.36,
+     "d": 4.64,
+     "text": "Erst fragen, dann Beliebtes zeigen, dann persönlicher werden."
+    }
+   ]
+  },
+  {
+   "id": "blase",
+   "kapitel": "Die Blase",
+   "start": 53.16,
+   "dauer": 9.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Was empfohlen wird, wird öfter gekauft und deshalb noch öfter empfohlen."
+    },
+    {
+     "t": 5.84,
+     "d": 2.56,
+     "text": "Das Populäre wird immer größer."
+    }
+   ]
+  },
+  {
+   "id": "messen",
+   "kapitel": "Nutzen messen",
+   "start": 62.46,
+   "dauer": 15.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8,
+     "text": "Ein Klick ist noch kein Nutzen. Zähle, was bleibt: Käufe ohne Rückgabe, gefundene Antworten, eine kürzere Suche."
+    },
+    {
+     "t": 8.8,
+     "d": 4.8,
+     "text": "Und Verhaltensdaten sind personenbezogen. Sammle nur, was du brauchst."
+    }
+   ]
+  }
+ ]
+}

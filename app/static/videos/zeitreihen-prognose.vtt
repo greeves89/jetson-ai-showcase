@@ -1,0 +1,62 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:06.730
+Der Wetterbericht ist eine Zeitreihe: Werte
+in der Reihenfolge, in der sie entstanden.
+
+00:00:06.880 --> 00:00:12.230
+Hier zählt die Reihenfolge. Und ein Modell
+muss die Faustregel wie gestern schlagen.
+
+00:00:13.480 --> 00:00:15.710
+Ein Verlauf hat drei Teile.
+
+00:00:15.860 --> 00:00:22.810
+Der Trend ist die Richtung, die Saison
+das Wiederkehrende, der Zufall der Rest.
+
+00:00:22.960 --> 00:00:26.310
+Getrennt betrachtet, verstehst
+du den Verlauf besser.
+
+00:00:27.560 --> 00:00:32.750
+Das Modell lernt Trend und Saison aus
+der Vergangenheit und führt beides fort.
+
+00:00:32.900 --> 00:00:35.610
+Den Zufall kann es nicht vorhersagen.
+
+00:00:36.860 --> 00:00:40.370
+Was in den Daten nie vorkam,
+sieht es nicht kommen.
+
+00:00:40.520 --> 00:00:43.790
+Je weiter voraus, desto größer der Fehler.
+
+00:00:45.040 --> 00:00:47.910
+Bei Maschinen zeigen sich oft Vorboten.
+
+00:00:48.060 --> 00:00:52.290
+Ein Modell erkennt den Verlauf
+und warnt, bevor etwas bricht.
+
+00:00:53.540 --> 00:00:57.850
+Du nimmst die Abweichungen ohne
+Vorzeichen und bildest den Mittelwert.
+
+00:00:58.000 --> 00:01:01.670
+Den Fehler misst du an Werten,
+die zeitlich danach kamen.
+
+00:01:01.820 --> 00:01:04.370
+Sonst schaut dein Test in die Zukunft.
+
+00:01:05.620 --> 00:01:09.130
+Ein Bereich ist ehrlicher
+als eine einzelne Zahl.
+
+00:01:09.280 --> 00:01:11.990
+Er sagt dir, wie viel Puffer du brauchst.
+
+00:01:12.140 --> 00:01:14.290
+Und halte die Daten frisch.

@@ -1,0 +1,64 @@
+{
+ "id": "entscheidungsbaeume",
+ "titel": "Entscheidungsbäume",
+ "untertitel": "Wie ein Verfahren aus einer Tabelle entscheidet",
+ "szenen": [
+  {
+   "id": "ratespiel",
+   "kapitel": "Das Ratespiel",
+   "saetze": [
+    "Kennst du das Ratespiel mit den Ja-Nein-Fragen?",
+    "Ist es ein Tier? Hat es vier Beine? Genau so arbeitet ein Entscheidungsbaum."
+   ]
+  },
+  {
+   "id": "tabelle",
+   "kapitel": "Tabelle und Baum",
+   "saetze": [
+    "Jede Zeile einer Tabelle ist ein Fall, jede Spalte ein Merkmal.",
+    "Der Baum fragt nach Merkmalen und endet in einem Blatt mit der Antwort."
+   ]
+  },
+  {
+   "id": "frage",
+   "kapitel": "Die beste Frage zuerst",
+   "saetze": [
+    "Beim Lernen wählt er die beste Frage zuerst.",
+    "Von zehn Kreditanträgen wurden sechs zurückgezahlt.",
+    "Gibt es Zahlungsrückstände? Das trennt die Gruppen deutlich. Ist die Hausnummer gerade? Das trennt nichts und fliegt raus."
+   ]
+  },
+  {
+   "id": "lesen",
+   "kapitel": "Man kann ihn lesen",
+   "saetze": [
+    "Das Beste: Du kannst jeden Weg nachlesen.",
+    "Rückstände, Rate zu hoch, abgelehnt. Das ist eine Begründung, die du nennen kannst."
+   ]
+  },
+  {
+   "id": "grenze",
+   "kapitel": "Die Grenze",
+   "saetze": [
+    "Lässt du den Baum ungebremst wachsen, lernt er die Trainingsdaten auswendig.",
+    "Auf neuen Daten fällt er dann deutlich ab."
+   ]
+  },
+  {
+   "id": "wald",
+   "kapitel": "Der Wald",
+   "saetze": [
+    "Darum gibt es den Wald. Viele Bäume stimmen ab, und die Mehrheit gleicht Einzelfehler aus."
+   ]
+  },
+  {
+   "id": "einfach",
+   "kapitel": "Oft genügt das Einfache",
+   "saetze": [
+    "Bei Tabellen genügt oft das Einfache.",
+    "Ein Baum lernt auf einem normalen Rechner in Sekunden.",
+    "Neuronale Netze brauchst du eher bei Bild, Ton und Text."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,65 @@
+{
+ "id": "ki-einfuehren",
+ "titel": "KI einführen",
+ "untertitel": "Vom Problem bis zum Betrieb",
+ "szenen": [
+  {
+   "id": "problem",
+   "kapitel": "Erst das Problem",
+   "saetze": [
+    "Fang mit dem Problem an, nicht mit der Technik.",
+    "Ausgehen vom Problem macht den Erfolg messbar.",
+    "Manchmal reicht eine Regel."
+   ]
+  },
+  {
+   "id": "auswahl",
+   "kapitel": "Den Einsatz wählen",
+   "saetze": [
+    "Wähle nach Nutzen, Machbarkeit, Daten und Risiko.",
+    "Starte dort, wo viel Nutzen und hohe Machbarkeit zusammenkommen. Das ist der leichte Karton."
+   ]
+  },
+  {
+   "id": "pilot",
+   "kapitel": "Der Pilot",
+   "saetze": [
+    "Der Pilot ist die Probefahrt.",
+    "Der Maßstab steht vorher fest.",
+    "Zuerst läuft die KI im Schattenbetrieb mit, und Menschen entscheiden weiter."
+   ]
+  },
+  {
+   "id": "menschen",
+   "kapitel": "Menschen mitnehmen",
+   "saetze": [
+    "Nimm die Menschen früh mit.",
+    "Fachbereich, IT, Datenschutz und Betriebsrat sehen jeweils einen anderen Teil des Problems.",
+    "Wer früh mitmacht und die Grenzen kennt, meldet Fehler zurück."
+   ]
+  },
+  {
+   "id": "entscheidung",
+   "kapitel": "Die Entscheidung",
+   "saetze": [
+    "Jeder Pilot endet mit einer Entscheidung: stoppen, ändern oder ausrollen.",
+    "Die Kriterien stehen vorher fest."
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Typische Fehler",
+   "saetze": [
+    "Sechs Fehler wiederholen sich: Technik zuerst, kein Maßstab, Daten unterschätzt, Menschen vergessen, Pilot ohne Betrieb, zu groß gestartet."
+   ]
+  },
+  {
+   "id": "checkliste",
+   "kapitel": "Die Checkliste",
+   "saetze": [
+    "Vor dem Start gibt es sechs Fragen.",
+    "Jedes Nein ist eine Aufgabe, die du zuerst erledigst."
+   ]
+  }
+ ]
+}

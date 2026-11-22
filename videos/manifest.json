@@ -1039,6 +1039,250 @@
           "titel": "Stimmen"
         }
       ]
+    },
+    {
+      "id": "entscheidungsbaeume",
+      "titel": "Entscheidungsbäume",
+      "untertitel": "Wie ein Verfahren aus einer Tabelle entscheidet",
+      "dauer_s": 79.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Das Ratespiel"
+        },
+        {
+          "t": 11,
+          "titel": "Tabelle und Baum"
+        },
+        {
+          "t": 21.9,
+          "titel": "Die beste Frage zuerst"
+        },
+        {
+          "t": 38.4,
+          "titel": "Man kann ihn lesen"
+        },
+        {
+          "t": 49.7,
+          "titel": "Die Grenze"
+        },
+        {
+          "t": 58.7,
+          "titel": "Der Wald"
+        },
+        {
+          "t": 66.1,
+          "titel": "Oft genügt das Einfache"
+        }
+      ]
+    },
+    {
+      "id": "zeitreihen-prognose",
+      "titel": "Zeitreihen und Prognose",
+      "untertitel": "Aus der Vergangenheit auf das Kommende schließen",
+      "dauer_s": 75.9,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Eine Zeitreihe"
+        },
+        {
+          "t": 13,
+          "titel": "Trend, Saison, Zufall"
+        },
+        {
+          "t": 27.1,
+          "titel": "Muster fortschreiben"
+        },
+        {
+          "t": 36.4,
+          "titel": "Die Grenze"
+        },
+        {
+          "t": 44.5,
+          "titel": "Wartungsvorhersage"
+        },
+        {
+          "t": 53,
+          "titel": "Fehler messen"
+        },
+        {
+          "t": 65.1,
+          "titel": "Ein Bereich"
+        }
+      ]
+    },
+    {
+      "id": "anomalieerkennung",
+      "titel": "Anomalieerkennung",
+      "untertitel": "Das Seltene finden, ohne es zu kennen",
+      "dauer_s": 75.5,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die seltsame Abbuchung"
+        },
+        {
+          "t": 9.9,
+          "titel": "Normal lernen"
+        },
+        {
+          "t": 22.4,
+          "titel": "Gute Daten"
+        },
+        {
+          "t": 32.1,
+          "titel": "Warum nicht Fehler lernen"
+        },
+        {
+          "t": 41.5,
+          "titel": "Schwellenwert"
+        },
+        {
+          "t": 61.7,
+          "titel": "Der Mensch prüft"
+        }
+      ]
+    },
+    {
+      "id": "empfehlungssysteme",
+      "titel": "Empfehlungssysteme",
+      "untertitel": "Wie ein System errät, was zu dir passt",
+      "dauer_s": 77.9,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Buchhändlerin"
+        },
+        {
+          "t": 10,
+          "titel": "Ähnlichkeit"
+        },
+        {
+          "t": 31.4,
+          "titel": "Versteckte Vorlieben"
+        },
+        {
+          "t": 42.3,
+          "titel": "Der Kaltstart"
+        },
+        {
+          "t": 53.2,
+          "titel": "Die Blase"
+        },
+        {
+          "t": 62.5,
+          "titel": "Nutzen messen"
+        }
+      ]
+    },
+    {
+      "id": "mlops-betrieb",
+      "titel": "KI im Betrieb",
+      "untertitel": "Was ein Modell braucht, wenn es täglich läuft",
+      "dauer_s": 78.9,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Restaurantküche"
+        },
+        {
+          "t": 11.6,
+          "titel": "Der Kreislauf"
+        },
+        {
+          "t": 28.5,
+          "titel": "Drift"
+        },
+        {
+          "t": 40.9,
+          "titel": "Das Armaturenbrett"
+        },
+        {
+          "t": 49.7,
+          "titel": "Versionen und Rückfall"
+        },
+        {
+          "t": 58.2,
+          "titel": "Verantwortung"
+        },
+        {
+          "t": 67.1,
+          "titel": "Auf dem Jetson"
+        }
+      ]
+    },
+    {
+      "id": "kosten-und-energie",
+      "titel": "Kosten und Energie",
+      "untertitel": "Lokal, Cloud oder Edge: was es wirklich kostet",
+      "dauer_s": 83.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Drei Wege"
+        },
+        {
+          "t": 14.4,
+          "titel": "Woraus Kosten bestehen"
+        },
+        {
+          "t": 22.4,
+          "titel": "Drei Annahmen"
+        },
+        {
+          "t": 34.9,
+          "titel": "Die Stromrechnung"
+        },
+        {
+          "t": 47.2,
+          "titel": "Der Vergleich"
+        },
+        {
+          "t": 60.2,
+          "titel": "Was man vergisst"
+        },
+        {
+          "t": 67.7,
+          "titel": "Sechs Fragen"
+        }
+      ]
+    },
+    {
+      "id": "ki-einfuehren",
+      "titel": "KI einführen",
+      "untertitel": "Vom Problem bis zum Betrieb",
+      "dauer_s": 79.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Erst das Problem"
+        },
+        {
+          "t": 10.9,
+          "titel": "Den Einsatz wählen"
+        },
+        {
+          "t": 22.8,
+          "titel": "Der Pilot"
+        },
+        {
+          "t": 34,
+          "titel": "Menschen mitnehmen"
+        },
+        {
+          "t": 48.5,
+          "titel": "Die Entscheidung"
+        },
+        {
+          "t": 57.8,
+          "titel": "Typische Fehler"
+        },
+        {
+          "t": 70.8,
+          "titel": "Die Checkliste"
+        }
+      ]
     }
   ]
 }

@@ -1,0 +1,62 @@
+{
+ "id": "kosten-und-energie",
+ "titel": "Kosten und Energie",
+ "untertitel": "Lokal, Cloud oder Edge: was es wirklich kostet",
+ "szenen": [
+  {
+   "id": "wege",
+   "kapitel": "Drei Wege",
+   "saetze": [
+    "Kaufen, mieten oder Taxi fahren: Lokal ist der eigene Server, Cloud heißt mieten nach Nutzung, Edge ist ein kleines Gerät dort, wo die Daten entstehen.",
+    "Keiner gewinnt in allem."
+   ]
+  },
+  {
+   "id": "bloecke",
+   "kapitel": "Woraus Kosten bestehen",
+   "saetze": [
+    "Hardware und Cloud-Preis sind nur ein Teil.",
+    "Personal und Datenpflege werden oft unterschätzt."
+   ]
+  },
+  {
+   "id": "annahmen",
+   "kapitel": "Drei Annahmen",
+   "saetze": [
+    "Rechnen wir mit Annahmen, die du durch deine ersetzt.",
+    "Das Gerät nimmt 15 Watt auf und läuft 24 Stunden am Tag. Eine Kilowattstunde kostet 0,30 Euro."
+   ]
+  },
+  {
+   "id": "strom",
+   "kapitel": "Die Stromrechnung",
+   "saetze": [
+    "15 Watt mal 24 Stunden sind 360 Wattstunden. Das sind 0,36 Kilowattstunden am Tag, rund 39 Euro im Jahr."
+   ]
+  },
+  {
+   "id": "vergleich",
+   "kapitel": "Der Vergleich",
+   "saetze": [
+    "Ein Cloud-Dienst kostet angenommen 50 Euro im Monat, das Gerät 500 Euro in der Anschaffung.",
+    "Nach knapp einem Jahr ist es bezahlt, ohne Personal und Wartung."
+   ]
+  },
+  {
+   "id": "vergessen",
+   "kapitel": "Was man vergisst",
+   "saetze": [
+    "Ein Fitnessstudio-Vertrag kostet auch ohne Besuch.",
+    "Ein kaum genutztes Gerät genauso."
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Sechs Fragen",
+   "saetze": [
+    "Sechs Fragen ordnen die Wahl besser als ein Preisvergleich: Datenschutz, Tempo, Last, Modellgröße, Betreuung und Ausfall.",
+    "Rechne über die gesamte Laufzeit und nenne deine Annahmen offen."
+   ]
+  }
+ ]
+}
