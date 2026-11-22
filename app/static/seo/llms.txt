@@ -24,7 +24,7 @@ Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.
 - [Daten, der Rohstoff](__BASIS__/daten): Ein Modell kann nur lernen, was in seinen Daten steckt.
 - [Neuronale Netze von Grund auf](__BASIS__/neuronale-netze): Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen.
 - [Wie ein Modell lernt](__BASIS__/training): Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht.
-- [Wie gut ist ein Modell?](__BASIS__/bewertung): „95 Prozent richtig“ klingt nach einem guten Modell.
+- [Wie gut ist ein Modell?](__BASIS__/bewertung): „99 Prozent richtig“ klingt nach einem guten Modell.
 - [Fairness, Verzerrung und Verantwortung](__BASIS__/verzerrung-ethik): Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire.
 - [Recht und Regeln im Überblick](__BASIS__/recht): Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.
 
@@ -56,7 +56,7 @@ Sprachmodelle im Chat, Sprache zu Text und gutes Fragen.
 Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.
 
 - [RAG im Überblick](__BASIS__/rag-ueberblick): Ein Sprachmodell kennt deine Dokumente nicht.
-- [Vektorisieren und Embeddings](__BASIS__/rag-embedding): Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt.
+- [Vektorisieren und Embeddings](__BASIS__/rag-embedding): Er übersetzt Text in Zahlen, sodass ähnlicher Sinn meist nah beieinander liegt.
 - [Chunking: Text in sinnvolle Stücke teilen](__BASIS__/rag-chunking): Ein Dokument ist zu groß für die Suche am Stück.
 - [Suchen: Stichwort, Vektor und Hybrid](__BASIS__/rag-suche): Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung.
 - [Reranking: erst grob, dann genau](__BASIS__/rag-reranking): Die erste Suche sortiert grob, aber schnell.
@@ -72,13 +72,6 @@ Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen.
 - [Agent mit Werkzeugen](__BASIS__/agent): Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.
 - [Rechte, Prompt-Injection und Freigaben](__BASIS__/agenten-sicherheit): Ein Agent handelt.
 - [Werkzeuge standardisiert anbinden (MCP)](__BASIS__/mcp-werkzeuge): Das Model Context Protocol ist ein gemeinsamer Stecker zwischen KI-Assistenten und den Systemen, die sie nutzen sollen.
-
-## Erzeugen
-
-Bilder aus Text und Gesichtstausch, live auf dem Rechner.
-
-- [Bilder erzeugen](__BASIS__/bild): Aus einer Beschreibung entsteht ein Bild.
-- [Face-Swap und Deepfakes](__BASIS__/faceswap): Ein Gesicht in einem Bild durch ein anderes ersetzen.
 
 ## Daten und Prognosen
 

@@ -11,7 +11,6 @@ gruppen: [
   {name: "Sprache", seiten: ["chat", "whisper"]},
   {name: "Wissen und RAG", seiten: ["rag"]},
   {name: "Agenten", seiten: ["agent"]},
-  {name: "Erzeugen", seiten: ["bild", "faceswap"]},
   {name: "Daten und Prognosen", seiten: []},
   {name: "KI im Betrieb", seiten: []},
   {name: "Business-Use-Cases", seiten: []},
@@ -56,7 +55,6 @@ start: {
     "Sprache": {symbol: "chat", satz: "Sprachmodelle im Chat, Sprache zu Text und gutes Fragen."},
     "Wissen und RAG": {symbol: "rag", satz: "Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung."},
     "Agenten": {symbol: "agent", satz: "Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen."},
-    "Erzeugen": {symbol: "wand-sparkles", satz: "Bilder aus Text und Gesichtstausch, live auf dem Rechner."},
     "Daten und Prognosen": {symbol: "trending-up", satz: "Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen."},
     "KI im Betrieb": {symbol: "gauge", satz: "Vom Prototyp zum Betrieb: Kosten, Energie und Einführung."},
     "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
@@ -83,11 +81,11 @@ karte: {
      p: [
       "[[ki|Künstliche Intelligenz]] ist Software, die Aufgaben löst, für die wir sonst menschliches Denken brauchen: etwas erkennen, Sprache verstehen, eine Entscheidung treffen, etwas Neues erzeugen. Der Begriff stammt aus den 1950er Jahren. Die Technik dahinter hat sich seitdem mehrmals grundlegend geändert.",
     ]},
-    {h: "Alle heutige KI ist spezialisiert",
-     kurz: "Jedes System kann genau seine Aufgabe. Eine KI, die alles kann, ist ein Forschungsziel.",
+    {h: "Die meiste KI ist spezialisiert",
+     kurz: "Die meisten Systeme können genau ihre Aufgabe. Eine KI, die alles kann, ist ein Forschungsziel.",
      visual: {typ: "skala", links: "Eine Aufgabe", rechts: "Alles wie ein Mensch", marker: 0.08, label: "Heutige KI"},
      p: [
-      "Jedes System kann genau seine Aufgabe: Gesichter finden, Text fortsetzen, ein Brettspiel spielen. Eine Maschine, die alles kann, was ein Mensch kann, gibt es nicht. Wenn jemand von allgemeiner KI spricht, meint er ein Forschungsziel, kein Produkt.",
+      "Die meisten Systeme können genau ihre Aufgabe: Gesichter finden, ein Brettspiel spielen. Große Sprachmodelle sind breiter einsetzbar, denn dasselbe Modell fasst zusammen, übersetzt und schreibt Code. Eine allgemeine Intelligenz, die alles kann, was ein Mensch kann, ist das nicht. Wenn jemand von allgemeiner KI spricht, meint er ein Forschungsziel, kein Produkt.",
     ]},
     {h: "So hängen die Begriffe zusammen",
      kurz: "Regeln schreibt ein Mensch, ein lernendes System findet sie selbst in Beispielen.",
@@ -98,8 +96,8 @@ karte: {
       "Die Karte oben zeigt die Verschachtelung. Jeder innere Bereich ist eine Spezialisierung des äußeren: [[ml|Maschinelles Lernen]] ist ein Teil der KI, [[dl|Deep Learning]] ein Teil des maschinellen Lernens, generative KI ein Teil von Deep Learning. Regelbasierte Systeme sind der ältere Weg, und die Robotik steht daneben, weil sie KI als Baustein nutzt, aber auch Mechanik und Regelungstechnik braucht.",
       "Tippe auf einen Bereich, dann siehst du rechts, was er bedeutet und wo du ihn in diesem Labor ausprobieren kannst.",
     ]},
-    {h: "Fünf Fähigkeiten statt vieler Fachwörter",
-     kurz: "Frag nach der Fähigkeit, nicht nach dem Verfahren: Sehen, Sprache, Wissen, Handeln, Erzeugen.",
+    {h: "Fünf Bereiche statt vieler Fachwörter",
+     kurz: "Frag nach dem Bereich, nicht nach dem Verfahren: Sehen, Sprache, Wissen, Handeln, Erzeugen.",
      visual: {typ: "raster", spalten: 5, zellen: [
       {icon: "eye", text: "Sehen", sub: "Bilder lesen"},
       {icon: "message-square", text: "Sprache", sub: "Text und Ton"},
@@ -107,18 +105,18 @@ karte: {
       {icon: "wrench", text: "Handeln", sub: "Werkzeuge nutzen"},
       {icon: "wand-sparkles", text: "Erzeugen", sub: "Text, Bild, Ton"}]},
      p: [
-      "Wer wissen will, was eine KI für ihn tun kann, fragt besser nach der Fähigkeit als nach dem Verfahren:",
+      "Wer wissen will, was eine KI für ihn tun kann, fragt besser nach dem Einsatzbereich als nach dem Verfahren:",
     ], liste: [
       "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
       "**Sprache:** Text und Ton verstehen und formulieren. Labor {{chat|Chat}} und {{whisper|Sprache zu Text}}.",
       "**Wissen:** gezielt in eigenen Dokumenten nachschlagen und Quellen nennen. Labor {{rag|RAG}}.",
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
-      "**Erzeugen:** neue Texte, Bilder und Töne herstellen. Labor {{chat|Chat}} und {{bild|Bilder}}.",
+      "**Erzeugen:** neue Texte, Bilder und Töne herstellen. Labor {{chat|Chat}}.",
     ]},
   ],
   mitnehmen: [
     "KI ist ein Sammelbegriff, kein einzelnes Verfahren.",
-    "Heutige KI ist immer auf eine Aufgabe spezialisiert.",
+    "Die meiste KI ist auf eine Aufgabe spezialisiert. Sprachmodelle sind breiter, aber keine allgemeine Intelligenz.",
     "Maschinelles Lernen ist der wichtigste Teil, aber nicht der einzige.",
   ],
   weiter: ["ml", "genki", "robotik"],
@@ -678,7 +676,7 @@ whisper: {
 /* ------------------------------------------------------------------ Labor: Erzeugen */
 
 bild: {
-  typ: "labor", gruppe: "Erzeugen", titel: "Bilder erzeugen", symbol: "bild", demo: null, status: "bald",
+  versteckt: true, typ: "labor", gruppe: "Erzeugen", titel: "Bilder erzeugen", symbol: "bild", demo: null, status: "bald",
   kurz: "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam.",
   abschnitte: [
     {h: "Wie Diffusion funktioniert",
@@ -715,11 +713,11 @@ bild: {
   grenzen: [
     "Urheberrecht und Markenrecht sind bei erzeugten Bildern nicht abschließend geklärt. Prüfe den Einsatz vorab.",
   ],
-  weiter: ["genki", "faceswap"],
+  weiter: ["genki"],
 },
 
 faceswap: {
-  nav: "Face-Swap", typ: "labor", gruppe: "Erzeugen", titel: "Face-Swap und Deepfakes", symbol: "faceswap", demo: null, status: "bald",
+  nav: "Face-Swap", versteckt: true, typ: "labor", gruppe: "Erzeugen", titel: "Face-Swap und Deepfakes", symbol: "faceswap", demo: null, status: "bald",
   kurz: "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich.",
   abschnitte: [
     {h: "So funktioniert es",
@@ -758,7 +756,7 @@ faceswap: {
   grenzen: [
     "Gefälschte Aufnahmen können Menschen schaden. Setze die Technik nur mit Einwilligung ein.",
   ],
-  weiter: ["bild", "gesicht"],
+  weiter: ["gesicht"],
 },
 
 /* ------------------------------------------------------------------ Jetson */

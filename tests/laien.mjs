@@ -73,6 +73,34 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await t.schliessen();
 }
 
+{ // Einwilligung A2: kein Wort "null", 16+ oben, Mikrofon-Haken, Esc, Touch-Ziele, ehrlicher Ablehnen-Text, Handy
+  const t = await starte({ einwilligung: false, breite: 390, hoehe: 844 });
+  const { page } = t;
+  const dlgTest = async (id, knopf, name) => {
+    await oeffneSeite(page, id);
+    await page.click(knopf);
+    await page.waitForSelector("dialog.einw[open]");
+    const text = await page.textContent("dialog.einw");
+    pruefe(!/\bnull\b|undefined/.test(text), name + ": kein null/undefined im Dialog");
+    pruefe(await page.evaluate(() => { const d = document.querySelector("dialog.einw"), a = d.querySelector(".einw-alter"); const r = a.getBoundingClientRect(), dr = d.getBoundingClientRect(); return /ab 16 Jahren/.test(a.textContent) && /Eltern/.test(a.textContent) && r.bottom < dr.top + 200 && d.scrollTop === 0; }), name + ": 16+ und Eltern oben sichtbar");
+    pruefe(await page.evaluate(() => { const d = document.querySelector("dialog.einw"); return d.contains(document.activeElement); }), name + ": Fokus liegt im Dialog");
+    pruefe(await page.evaluate(() => [...document.querySelectorAll("dialog.einw button, dialog.einw .einw-klein a, dialog.einw .einw-box")].every((e) => e.getBoundingClientRect().height >= 43.5)), name + ": Touch-Ziele mindestens 44 px");
+    await page.screenshot({ path: "tests/ausgabe/laien-einw-" + id + "-handy.png" });
+    return text;
+  };
+  await dlgTest("gesicht", "button:has-text('Kamera starten')", "Gesicht");
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() => !document.querySelector("dialog.einw"));
+  pruefe(!(await page.textContent("body")).includes("mit den Beispielbildern weitermachen"), "Gesicht: kein Versprechen von Beispielbildern nach Ablehnen");
+  await dlgTest("objekt", "button:has-text('Kamera starten')", "Objekt");
+  await page.keyboard.press("Escape");
+  await page.waitForFunction(() => !document.querySelector("dialog.einw"));
+  await dlgTest("whisper", ".wh-knopf, button:has-text('Aufnahme starten')", "Mikrofon");
+  pruefe(await page.$eval("dialog.einw button.primary", (b) => b.disabled) && await page.locator("dialog.einw input[type=checkbox]").count() === 1, "Mikrofon: Haken nicht vorbelegt, Knopf gesperrt");
+  await page.keyboard.press("Escape");
+  await t.schliessen();
+}
+
 /* ---- 2. Last: 503 ausgelastet mit automatischem Wiederholen, Wiederholknopf */
 {
   const t = await starte({ kamera: false });
@@ -141,9 +169,14 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   pruefe(await page.evaluate(() => document.activeElement.id === "inhalt"), "Skip-Link setzt den Fokus in den Inhalt");
   // Suche
   const suche = async (q) => { await page.fill("#nav-suche", q); await page.waitForTimeout(250); return page.evaluate(() => ({ seiten: [...document.querySelectorAll("a.nav")].filter((a) => !a.hidden && !a.closest("[hidden]")).map((a) => a.dataset.id), box: document.querySelector("#such-ergebnis").hidden ? "" : document.querySelector("#such-ergebnis").innerText })); };
-  for (const [q, erwartet] of [["ChatGPT", "chat"], ["KI-Assistent", "agent"], ["Datenschutz", "recht"], ["DSGVO", "recht"], ["Foto", "gesicht"], ["Handy", "gesicht"], ["Halluzination", "llm-grenzen"], ["Cookie", "sicherheit-einfach"]]) {
+  for (const [q, erwartet] of [["ChatGPT", "chat"], ["KI-Assistent", "agenten-grundlagen"], ["Datenschutz", "recht"], ["DSGVO", "recht"], ["Foto", "gesicht"], ["Handy", "gesicht"], ["Halluzination", "llm-grenzen"], ["Cookie", "sicherheit-einfach"]]) {
     const r = await suche(q);
     pruefe(r.seiten.includes(erwartet), `Suche "${q}" findet ${erwartet} (${r.seiten.length} Seiten)`);
+  }
+  // Alltagswoerter: der erste Treffer ist die passende Seite (Rangfolge, nicht Menuereihenfolge)
+  for (const [q, erster] of [["ChatGPT", "chat"], ["Roboter", "robotik"], ["Hausaufgaben", "prompting"], ["Fake News", "llm-grenzen"], ["TikTok", "empfehlungen"], ["Spotify", "empfehlungen"], ["Backpropagation", "training"], ["Gehirn", "neuronale-netze"], ["Wer haftet", "recht"], ["Urheberrecht", "recht"], ["Handy entsperren", "gesicht"], ["Snapchat-Filter", "gesicht"]]) {
+    const r = await suche(q);
+    pruefe(r.seiten[0] === erster, `Suche "${q}": erster Treffer ${erster} (ist ${r.seiten[0]})`);
   }
   const hal = await suche("Halluzination");
   pruefe(/Begriff erklärt/.test(hal.box) && /Halluzination/.test(hal.box), "Suche zeigt die Begriffserklärung");
@@ -179,11 +212,15 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await page.click(".lesemodus button[data-modus=ausfuehrlich]");
   pruefe(/Du liest gerade genau/.test(await page.textContent(".lese-hilfe")), "Hilfetext wechselt mit");
   await page.click(".lesemodus button[data-modus=kompakt]");
-  // Unfertiges
+  // Unfertiges: steht weder im Menue noch auf der Startseite, die Seite selbst ist als Vorschau gekennzeichnet
   await oeffneSeite(page, "bild");
-  const navBild = await page.evaluate(() => document.querySelector('a.nav[data-id=bild]').textContent.trim());
-  pruefe(/Bilder erzeugen\s+in Arbeit/.test(navBild), "Menue: 'Bilder erzeugen in Arbeit' statt 'Bilder erzeugenbald': " + navBild);
-  pruefe(/In Arbeit/.test(await page.textContent(".in-arbeit")) && !/Demo folgt/.test(await page.textContent("#inhalt")), "Seite: 'In Arbeit' statt 'Demo folgt'");
+  pruefe(await page.locator("a.nav[data-id=bild], a.nav[data-id=faceswap]").count() === 0, "Menue: Bilder erzeugen und Face-Swap fehlen (versteckte Seiten)");
+  pruefe(/Vorschau/.test(await page.textContent(".in-arbeit")) && !/Demo folgt/.test(await page.textContent("#inhalt")), "Seite: als Vorschau gekennzeichnet, kein 'Demo folgt'");
+  await oeffneSeite(page, "start");
+  const menueStart = await page.evaluate(() => document.querySelector("#nav-liste").textContent + "|" + document.querySelector("#inhalt").innerText);
+  pruefe(!/\b(bald|folgt|in Arbeit)\b/i.test(menueStart) && !/Erzeugen/.test(await page.textContent("#nav-liste")), "Menue und Startseite ohne 'bald', 'folgt', 'in Arbeit'");
+  const suchBild = await suche("Face-Swap");
+  pruefe(!suchBild.seiten.includes("faceswap"), "Suche zeigt versteckte Seiten nicht");
   // Sicherheitsseite
   await oeffneSeite(page, "sicherheit-einfach");
   const si = await page.textContent("#inhalt");

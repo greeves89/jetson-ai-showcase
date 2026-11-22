@@ -131,9 +131,9 @@ Object.assign(seiten, {
       "**Späte Schichten** setzen Formen zu Teilen und Objekten zusammen: ein Rad, ein Auge, ein Gesicht.",
     ], alltag: "Beim Lesen erkennst du erst Striche, dann Buchstaben, dann Wörter, dann Sätze. Keine Stufe schaut direkt auf das Ganze, jede baut auf der vorigen auf. Das Netz arbeitet ähnlich, nur sind seine Stufen Zahlen und keine Buchstaben.", merke: "Ein Bildnetz geht den Weg von einfachen zu zusammengesetzten Merkmalen. Das Bild als Ganzes sieht erst die letzte Stufe."},
     {h: "Pooling: kleiner werden, Wesentliches behalten",
-     kurz: "Aus jedem kleinen Block bleibt nur der größte Wert. Das Zwischenbild schrumpft.",
+     kurz: "Aus jedem kleinen Block bleibt meist nur der größte Wert. Das Zwischenbild schrumpft.",
      visual: {typ: "zahlen", kacheln: [{wert: "4 zu 1", label: "Pixel je 2-mal-2-Block", icon: "layout-grid"}, {wert: "Halb", label: "Kantenlänge danach", icon: "arrow-down"}, {wert: "Max", label: "Der größte Wert bleibt", icon: "arrow-up"}]}, p: [
-      "Zwischen den Faltungen verkleinert das Netz die Zwischenbilder. Beim [[pooling|Pooling]] wird das Bild in kleine Blöcke geteilt, zum Beispiel zwei mal zwei Pixel. Aus jedem Block bleibt der größte Wert übrig. So halbiert sich die Kantenlänge, das Netz muss weniger rechnen, und die stärksten Antworten bleiben erhalten.",
+      "Zwischen den Faltungen verkleinert das Netz die Zwischenbilder. Beim [[pooling|Pooling]] wird das Bild in kleine Blöcke geteilt, zum Beispiel zwei mal zwei Pixel. Beim verbreiteten Max-Pooling bleibt aus jedem Block der größte Wert übrig, andere Varianten bilden den Mittelwert. So halbiert sich die Kantenlänge, das Netz muss weniger rechnen, und die stärksten Antworten bleiben erhalten.",
       "Das macht das Netz unempfindlich gegen kleine Verschiebungen. Liegt ein Auge im Bild einen Pixel weiter links, bleibt der Maximalwert im Block derselbe. Zusammen mit den Filtern, die überall nach demselben Muster suchen, kommt das Netz damit zurecht, dass ein Objekt an anderer Stelle im Bild steht.",
     ], alltag: "Ein Wetterbericht fasst viele Messstationen zu einer Regionsangabe zusammen: höchste Temperatur der Region. Du verlierst die Einzelwerte, aber die Aussage bleibt nützlich und das Blatt wird kürzer."},
     {h: "Vortraining: Das Sehen muss nicht jeder neu lernen",

@@ -130,7 +130,7 @@ S["rag-ueberblick"] = {
 S["rag-embedding"] = {
   nav: "Embeddings", typ: "lektion", gruppe: "Wissen und RAG", titel: "Vektorisieren und Embeddings", symbol: "rag",
   widget: "rag-bedeutungskarte", videos: ["rag-embedding", "rag-embedding-beachten"],
-  kurz: "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt.",
+  kurz: "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn meist nah beieinander liegt.",
   abschnitte: [
     {h: "Der Stadtplan: Nähe als Zahlen",
      kurz: "Mit Koordinaten lässt sich Nähe ausrechnen. Bei Text bekommt jedes Stück eine Position nach Sinn.",
@@ -161,7 +161,7 @@ S["rag-embedding"] = {
       "Wie hat es das gelernt? Grob so: Man zeigt dem Modell riesige Textmengen. Die Grundannahme lautet, dass Wörter und Sätze, die in ähnlichen Zusammenhängen vorkommen, Ähnliches bedeuten. Beim Training werden Texte, die zusammengehören, zum Beispiel eine Frage und ihre Antwort, so eingestellt, dass ihre Vektoren nah beieinander liegen. Texte ohne Zusammenhang sollen weit auseinander liegen. Nach sehr vielen solcher Beispiele hat das Netz eine Karte gelernt, auf der Sinn Nähe bedeutet.",
     ], alltag: [
       "Lückentext: „Zum Frühstück trinke ich einen ___.“ Kaffee, Tee und Kakao passen, Reifen nicht. Wer viele solche Sätze gelesen hat, weiß, dass Kaffee und Tee verwandt sind, ohne dass es ihm jemand erklärt hat. Das Modell lernt aus dem Zusammenhang, nicht aus einem Wörterbuch.",
-    ], merke: "Ein Embedding ist die Position eines Textes auf einer gelernten Bedeutungskarte. Nähe heißt ähnlicher Sinn, nicht ähnliche Buchstaben."},
+    ], merke: "Ein Embedding ist die Position eines Textes auf einer gelernten Bedeutungskarte. Nähe heißt meist ähnlicher Sinn, nicht ähnliche Buchstaben. Gemeinsame Wörter spielen mit, die Zahlen im Labor zeigen es."},
     {h: "Ähnlichkeit messen",
      kurz: "Der Kosinus misst die Richtung zweier Vektoren, von -1 bis 1. Echte Textwerte liegen meist im oberen Teil.",
      visual: {typ: "skala", links: "-1 entgegengesetzt", rechts: "1 gleiche Richtung", marker: 0.8, label: "Texte meist hier"},
@@ -230,7 +230,7 @@ S["rag-embedding"] = {
     ], merke: "Wer ein Embedding-Modell wählt, wählt für den ganzen Index mit. Ein Wechsel kostet eine komplette Neuberechnung."},
   ],
   mitnehmen: [
-    "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt ähnlicher Sinn.",
+    "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt meist ähnlicher Sinn.",
     "Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden.",
     "Embeddings sind schwach bei Zahlen, Codes und Eigennamen. Dort hilft zusätzlich eine Stichwortsuche.",
   ],
@@ -526,7 +526,7 @@ S["rag-reranking"] = {
      visual: {typ: "vergleich", links: {titel: "Erste Suche", icon: "zap", farbe: "akzent", punkte: ["Zwei getrennte Zahlenlisten", "Vorab berechnet", "Schnell, aber grob"]}, rechts: {titel: "Reranker", icon: "scan-search", farbe: "orange", punkte: ["Frage und Text gemeinsam", "Punktwert je Kandidat", "Genau, aber langsamer"]}},
      p: [
       "Ein [[reranker|Reranker]] bekommt die Frage und einen Kandidaten zusammen und liest beide gemeinsam. Er sieht, wie die Wörter der Frage zu den Wörtern des Textes passen, und gibt einen Punktwert dafür, wie gut der Text die Frage beantwortet. Das ist genauer, weil Frage und Text direkt aufeinander bezogen werden und nicht nur ihre Zusammenfassungen verglichen werden.",
-      "Der Preis ist die Rechenzeit. Für jeden Kandidaten läuft ein eigener Durchgang mit der konkreten Frage. Das kann man nicht vorab erledigen, denn die Frage kennt man erst, wenn sie gestellt wird. Deshalb arbeitet der Reranker nie auf dem ganzen Bestand, sondern nur auf den Treffern der ersten Suche.",
+      "Der Preis ist die Rechenzeit. Für jeden Kandidaten läuft ein eigener Durchgang mit der konkreten Frage. Das kann man nicht vorab erledigen, denn die Frage kennt man erst, wenn sie gestellt wird. Deshalb arbeitet der Reranker in der Regel nicht auf dem ganzen Bestand, sondern nur auf den Treffern der ersten Suche.",
     ], alltag: [
       "Im Gespräch sitzen Bewerberin und Fragender zusammen am Tisch. Er stellt die konkrete Frage der Stelle und hört, wie sie darauf antwortet. Das ist aufwendig, pro Person eine halbe Stunde. Dafür sieht man, ob sie passt, und nicht nur, ob der Lebenslauf so aussieht.",
     ], merke: "Die erste Suche vergleicht zwei Zusammenfassungen. Der Reranker liest Frage und Text gemeinsam. Das ist genauer und langsamer."},

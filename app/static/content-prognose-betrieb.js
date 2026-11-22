@@ -498,7 +498,7 @@ empfehlungen: {
         {icon: "refresh-cw", text: "Wieder empfohlen"},
       ]},
      p: [
-      "Empfehlungen verändern das, was sie messen. Was empfohlen wird, wird öfter gekauft, wird deshalb noch öfter empfohlen. Populäres wird immer populärer, Nischen verschwinden, und jede Person bekommt immer mehr vom Gleichen, eine [[filterblase|Filterblase]]. Dazu kommt: Das System lernt aus dem, was Menschen angeklickt haben, und das war schon durch frühere Empfehlungen beeinflusst.",
+      "Empfehlungen verändern das, was sie messen. Was empfohlen wird, wird öfter gekauft, wird deshalb noch öfter empfohlen. Populäres wird tendenziell populärer, Nischen geraten ins Hintertreffen, und jede Person bekommt leicht mehr vom Gleichen, eine [[filterblase|Filterblase]]. Dazu kommt: Das System lernt aus dem, was Menschen angeklickt haben, und das war schon durch frühere Empfehlungen beeinflusst.",
       "Dagegen hilft Absicht: bewusst Vielfalt beimischen, gelegentlich Neues zeigen, nicht nur Klicks als Ziel nehmen. Auch Fairness spielt hinein, wenn Anbieter oder Gruppen systematisch seltener auftauchen. Siehe {{verzerrung-ethik|Fairness und Verzerrung}}.",
     ], alltag: [
       "Ein Radiosender, der nur noch deine drei Lieblingslieder spielt, ist erst angenehm und nach einer Woche langweilig. Du lernst nichts Neues, und der Sender erfährt nie, was dir sonst noch gefallen könnte.",

@@ -159,7 +159,7 @@ daten: {
      visual: [{"typ":"punkte","grenze":"linie","unter":"Ein Neuron: gerade Linie","klassen":[{"name":"Klasse A","farbe":"gruen","n":24,"mitte":[28,64],"streu":9},{"name":"Klasse B","farbe":"rot","n":22,"mitte":[72,34],"streu":9}]},{"typ":"punkte","grenze":"kreis","unter":"Mehrere Schichten: gebogene Grenze","klassen":[{"name":"Innen","farbe":"akzent","n":34,"mitte":[48,48],"streu":8},{"name":"Außen","farbe":"orange","n":8,"mitte":[84,80],"streu":5}]}],
      p: [
       "Würde jede Schicht nur multiplizieren und addieren, ließen sich alle Schichten zu einer einzigen zusammenfassen. Erst die Aktivierung dazwischen macht mehrere Schichten sinnvoll. Sie bricht die Geradlinigkeit auf, und das Netz kann gebogene, verschlungene Grenzen zwischen Klassen ziehen.",
-      "Ein bekanntes Beispiel: Zwei Gruppen von Punkten liegen so, dass keine Gerade sie trennt. Ein Neuron scheitert. Mit einer Zwischenschicht aus zwei Neuronen klappt es. Probiere das im Baustein oben aus.",
+      "Ein bekanntes Beispiel: Zwei Gruppen von Punkten liegen so, dass keine Gerade sie trennt. Ein Neuron scheitert. Mit einer Zwischenschicht aus wenigen Neuronen klappt es. Im Baustein oben probierst du aus, wie viele es sein müssen.",
     ], tabelle: {
       beschriftung: "Was Schichten verändern",
       kopf: ["Aufbau", "Was das Netz zeichnen kann", "Beispiel"],
@@ -325,11 +325,11 @@ training: {
 
 bewertung: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Wie gut ist ein Modell?", nav: "Bewertung", symbol: "check",
-  kurz: "„95 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
+  kurz: "„99 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
   widget: "konfusionsmatrix",
   videos: ["bewertung-konfusionsmatrix"],
   abschnitte: [
-    {h: "Warum „95 Prozent richtig“ täuschen kann",
+    {h: "Warum „99 Prozent richtig“ täuschen kann",
      kurz: "Bei seltenen Ereignissen ist ein Modell, das nie Alarm schlägt, fast immer richtig und trotzdem wertlos.",
      visual: {"typ":"zahlen","kacheln":[{"wert":"99 %","label":"richtig, ohne je Alarm","icon":"percent"},{"wert":"0 von 10","label":"Auffällige gefunden","icon":"search"},{"wert":"1000","label":"Fälle geprüft","icon":"files"}]},
      p: [
@@ -482,7 +482,7 @@ bewertung: {
      kurz: "Eine hohe Gesamtgenauigkeit kann verdecken, dass eine kleine Gruppe oft falsch erkannt wird.",
      visual: {"typ":"balken","titel":"Fehlerquote je Gruppe (Beispielwerte)","einheit":"%","max":12,"zeilen":[{"label":"Gruppe A","wert":1,"farbe":"gruen"},{"label":"Gruppe B","wert":2,"farbe":"gruen"},{"label":"Gruppe C","wert":9,"farbe":"rot"}],"unter":"Nur die Auswertung nach Gruppen zeigt es."},
      p: [
-      "Untersuchungen zu Gesichtserkennung haben gezeigt, dass die Fehlerquote zwischen Personengruppen unterschiedlich ausfallen kann, zum Beispiel nach Hautfarbe und Geschlecht. Eine häufige Ursache sind Trainingsdaten, in denen manche Gruppen deutlich seltener vorkommen.",
+      "Die Studie „Gender Shades“ (2018) fand bei Programmen, die das Geschlecht aus Gesichtern bestimmen, größere Fehler bei dunkleren Hauttönen. Der NIST-Bericht (2019) prüfte 189 Gesichtserkennungs-Algorithmen und fand bei den meisten Unterschiede nach Herkunft, Geschlecht und Alter. Die Fehlerquote kann also zwischen Personengruppen unterschiedlich ausfallen. Eine häufige Ursache sind Trainingsdaten, in denen manche Gruppen deutlich seltener vorkommen.",
       "Eine Gesamtgenauigkeit verdeckt das. Liegt sie hoch, aber eine kleine Gruppe wird oft falsch erkannt, merkt es nur, wer die Ergebnisse getrennt nach Gruppen auswertet. Hat eine Fehlentscheidung Folgen, etwa eine falsche Verdächtigung, trifft sie diese Gruppe überproportional.",
     ]},
     {h: "Erklärbarkeit und Transparenz",

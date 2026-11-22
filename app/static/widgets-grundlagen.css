@@ -127,3 +127,15 @@
   .gl-kachel b{font-size:17px}
 }
 @media (prefers-reduced-motion:reduce){.gl-sw,.gl-sw::after,.gl-balken i{transition:none}}
+
+/* Handy: Bild und Kennzahlen oben und angeheftet, Regler darunter (Netz-Labor und Gelände-Labor) */
+@media(max-width:700px) and (min-height:620px){
+  .gl-netz,.gl-grad{display:flex;flex-direction:column}
+  .gl-netz>.gl-haupt{order:-3;position:sticky;top:calc(var(--kopfhoehe) + 4px);z-index:4;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:10px;padding:4px 0 8px;margin:0;background:var(--flaeche)}
+  .gl-netz>.gl-haupt figcaption,.gl-netz>.gl-haupt .gl-legende{display:none}
+  .gl-netz>.gl-statuszeile{order:-2;margin-top:4px}
+  .gl-netz>.erklaerung{order:-1}
+  .gl-grad>canvas{order:-3;position:sticky;top:calc(var(--kopfhoehe) + 4px);z-index:4;background:var(--flaeche)}
+  .gl-grad>.gl-standreihe{order:-2}
+  .gl-grad>.erklaerung{order:-1}
+}

@@ -280,9 +280,12 @@
   /* ---- Suche: Volltext ueber alle Seiten, Glossarbegriffe, Suchwoerter (Synonyme) und Vorschlaege bei leerem Treffer */
   const norm = (t) => String(t).toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
   let suchIndex = null;
+  /** Text fuer die Suche: klein, ohne Umlaute, Satzzeichen als Leerzeichen, Leerzeichen vorn und hinten (so lassen sich Wortanfaenge pruefen). */
+  const suchText = (t) => " " + norm(t).replace(/[^a-z0-9]+/g, " ").trim() + " ";
   function suchIndexBauen() {
     const seiten = {};
     for (const [id, sd] of Object.entries(INHALT.seiten)) {
+      if (sd.versteckt) continue;       // versteckte Seiten sind erreichbar, aber nicht auffindbar
       const t = [];
       for (const a of sd.abschnitte || []) {
         t.push(a.h, a.kurz || "", ...(a.p || []), ...(a.liste || []), ...[].concat(a.alltag || []), a.merke || "");
@@ -290,21 +293,43 @@
       }
       t.push(...(sd.mitnehmen || []), (sd.business && sd.business.text) || "", ...(sd.grenzen || []));
       for (const p of sd.pfad || []) t.push(p.h, p.p);
-      seiten[id] = { titel: norm(klar((sd.nav || "") + " " + sd.titel)), kurz: norm(klar(sd.kurz || "")), text: norm(klar(t.join(" "))), roh: JSON.stringify(sd) };
+      seiten[id] = { titel: suchText(klar((sd.nav || "") + " " + sd.titel)), kurz: suchText(klar(sd.kurz || "")), text: suchText(klar(t.join(" "))), roh: JSON.stringify(sd) };
     }
-    const begriffe = Object.entries(INHALT.glossar).map(([k, g]) => ({ k, titel: g[0], t: norm(g[0]), erkl: norm(g[1]) }));
+    const begriffe = Object.entries(INHALT.glossar).map(([k, g]) => ({ k, titel: g[0], t: suchText(g[0]), erkl: suchText(g[1]) }));
     return { seiten, begriffe };
   }
-  /** Zerlegt die Eingabe in Suchwoerter; jedes Wort darf durch seine Synonyme ersetzt werden (ChatGPT findet Chat, Foto findet Bild). */
+  /** Zerlegt die Eingabe in Suchwoerter. Jedes Wort darf durch seine Synonyme ersetzt werden (ChatGPT findet Chat, Foto findet Bild);
+   *  steht die ganze Eingabe als Wortgruppe in INHALT.synonyme ("fake news", "wer haftet"), gilt sie als ein Wort.
+   *  Ein Synonym "=seiten-id" lenkt gezielt auf eine Seite; die Reihenfolge in der Liste ist die Rangfolge. */
+  const STOPPWOERTER = new Set(["am", "im", "in", "an", "auf", "der", "die", "das", "den", "dem", "ein", "eine", "und", "oder", "zu", "zum", "zur", "von", "mit", "fuer", "ist", "wie", "was", "wer", "wo", "kann"]);
   function suchWoerter(text) {
     const syn = INHALT.synonyme || {};
-    return norm(text).trim().split(/\s+/).filter(Boolean).map((w) => [w].concat(syn[w] || [], syn[w.replace(/-/g, "")] || []).map(norm));
+    const hole = (w) => syn[w] || syn[w.replace(/-/g, "")] || syn[w.replace(/-/g, " ")] || [];
+    const voll = norm(text).trim().replace(/\s+/g, " ");
+    if (!voll) return [];
+    const gruppe = hole(voll);
+    if (gruppe.length && /[\s-]/.test(voll)) return [[voll].concat(gruppe).map(norm)];
+    let woerter = voll.split(" ");
+    const ohne = woerter.filter((w) => !STOPPWOERTER.has(w));
+    if (ohne.length) woerter = ohne;
+    return woerter.map((w) => [w].concat(hole(w)).map(norm));
   }
-  function suchPunkte(q, felder) {
+  /** Punkte einer Seite oder eines Begriffs. Je Suchwort zaehlt der beste Treffer: Wortanfang im Feld voll, mitten im Wort (nur bei Woertern ab 5 Buchstaben)
+   *  nur zu 30 Prozent, Synonyme zu 60 Prozent; "=id" bringt 24 minus 2 je Listenplatz, wenn es die Seite selbst ist. Alle Suchwoerter muessen treffen. */
+  function suchPunkte(q, felder, id) {
     let summe = 0;
     for (const alt of q) {
       let best = 0;
-      for (const a of alt) felder.forEach(([text, gewicht]) => { if (text.includes(a)) best = Math.max(best, gewicht); });
+      alt.forEach((a, i) => {
+        if (a[0] === "=") { if (id && a.slice(1) === id) best = Math.max(best, 24 - 2 * i); return; }
+        const wort = a.replace(/[^a-z0-9]+/g, " ").trim();
+        if (!wort) return;
+        const faktor = i ? 0.6 : 1;
+        for (const [text, gewicht] of felder) {
+          if (text.includes(" " + wort)) best = Math.max(best, gewicht * faktor);
+          else if (wort.length > 4 && text.includes(wort)) best = Math.max(best, gewicht * faktor * 0.3);
+        }
+      });
       if (!best) return 0;
       summe += best;
     }
@@ -323,7 +348,7 @@
   /** "Meintest du ...": aehnlich geschriebene Seiten- und Begriffsnamen. */
   function aehnliche(text) {
     const kand = new Map();
-    for (const sd of Object.values(INHALT.seiten)) kand.set(norm(sd.nav || sd.titel), sd.nav || sd.titel);
+    for (const sd of Object.values(INHALT.seiten)) if (!sd.versteckt) kand.set(norm(sd.nav || sd.titel), sd.nav || sd.titel);
     for (const g of Object.values(INHALT.glossar)) kand.set(norm(g[0]), g[0]);
     const gefunden = [];
     for (const w of norm(text).trim().split(/\s+/).filter((x) => x.length >= 4)) {
@@ -363,14 +388,28 @@
     if (!suchIndex && text.trim()) suchIndex = suchIndexBauen();
     const q = suchWoerter(text);
     const gespeichert = navOffenLesen();
+    // Punkte je Seite; nur deutliche Treffer bleiben (ein Titel- oder Zieltreffer verdraengt Zufallsfunde im Fliesstext)
+    const punkte = new Map();
+    let beste = 0;
+    if (q.length) {
+      for (const gr of navGruppen) for (const a of gr.eintraege) {
+        const ix = suchIndex.seiten[a.id];
+        const p = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kurz, 3], [ix.text, 1]], a.id) : 0;
+        punkte.set(a, p);
+        beste = Math.max(beste, p);
+      }
+    }
+    const grenze = Math.max(1, beste * 0.12);
     let treffer = 0;
     for (const gr of navGruppen) {
       let inGruppe = 0;
+      gr.beste = 0;
       for (const a of gr.eintraege) {
-        const ix = q.length ? suchIndex.seiten[a.id] : null;
-        const ok = !q.length || suchPunkte(q, [[ix.titel, 3], [ix.kurz, 2], [ix.text, 1]]) > 0;
+        const p = q.length ? punkte.get(a) || 0 : 1;
+        const ok = p >= grenze;
+        a.p = q.length ? p : 0;
         a.el.hidden = !ok;
-        if (ok) inGruppe++;
+        if (ok) { inGruppe++; gr.beste = Math.max(gr.beste, p); }
       }
       treffer += inGruppe;
       if (q.length) {
@@ -385,12 +424,25 @@
         gr.kopf.setAttribute("aria-expanded", offen ? "true" : "false");
       }
     }
+    // Reihenfolge: bester Treffer zuerst (Gruppen und Seiten darin); ohne Suche wieder wie im Menue
+    const nav = $("#nav-liste"), box = $("#such-ergebnis"), leerEl = $("#nav-leer");
+    const sortiert = q.length && treffer;
+    const gruppen = sortiert ? navGruppen.map((g, i) => [g, i]).sort((x, y) => y[0].beste - x[0].beste || x[1] - y[1]).map(([g]) => g) : navGruppen;
+    for (const gr of navGruppen) {
+      const eintraege = sortiert ? gr.eintraege.map((e, i) => [e, i]).sort((x, y) => y[0].p - x[0].p || x[1] - y[1]).map(([e]) => e) : gr.eintraege;
+      gr.liste.append(...eintraege.map((e) => e.el));
+    }
+    if (nav) {
+      nav.append(...(sortiert ? [...gruppen.map((g) => g.sec), box] : [box, ...gruppen.map((g) => g.sec)]).filter(Boolean));
+      if (leerEl) nav.append(leerEl);
+      if (q.length) nav.scrollTop = 0;
+    }
+    // Begriffskarten: nur wenn der Begriff selbst gemeint ist (Treffer im Namen); der Erklaertext allein zaehlt nur, wenn keine Seite passt
     const begriffe = q.length
-      ? suchIndex.begriffe.map((b) => [b, suchPunkte(q, [[b.t, 3], [b.erkl, 1]])]).filter(([, p]) => p > 0).sort((a, b) => b[1] - a[1]).map(([b]) => b)
+      ? suchIndex.begriffe.map((b) => [b, suchPunkte(q, [[b.t, 6], [b.erkl, 1]])]).filter(([, p]) => p >= 3 || (!treffer && p > 0)).sort((a, b) => b[1] - a[1]).map(([b]) => b)
       : [];
     suchErgebnisBlock(text, begriffe, treffer);
-    const leer = $("#nav-leer");
-    if (leer) leer.hidden = true;
+    if (leerEl) leerEl.hidden = true;
   }
   /* Pfeiltasten im Menue: hoch und runter springen durch Gruppen und Seiten, rechts oeffnet eine Gruppe, links schliesst sie bzw. springt zur Gruppe */
   function navTasten(e) {
@@ -820,7 +872,7 @@
     const ueber = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
     const out = h("div", { class: "seitenbreite" }, zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
-    if (seite.status === "bald") out.append(h("p", { class: "in-arbeit" }, icon("hammer"), h("span", null, h("b", null, "In Arbeit. "), "Die Erklärung steht schon, die Demo wird noch eingebaut.")));
+    if (seite.status === "bald") out.append(h("p", { class: "in-arbeit" }, icon("hammer"), h("span", null, h("b", null, "Vorschau. "), "Die Erklärung steht schon. Eine Demo gibt es hier noch nicht.")));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
     if (vids.length) out.append(videoBlock(vids));
     if (seite.widget) out.append(baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play"));
