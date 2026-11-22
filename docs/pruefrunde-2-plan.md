@@ -4,7 +4,7 @@ Ziel des Betreibers: Das KI-Labor soll eine erstklassige, kostenlose Lernplattfo
 
 ## Prüfer
 Welle 1 (parallel): Schüler Klasse 8 (13 bis 14, Handy), Schüler Klasse 10 (15 bis 16, Handy), Schüler Klasse 12 (17 bis 18, Laptop), Didaktik-Fachprüfer (Lehrplan, Lernwirksamkeit, Aufbau).
-Welle 2 (parallel, frisch): Rentnerin am Tablet, Betriebsinhaber am Desktop, Lehrerin mit Tastatur und Datenschutzblick, Erwachsener Quereinsteiger am Laptop (kein Vorwissen, will "KI verstehen" in 30 Minuten).
+Welle 2 (parallel, frisch): Rentnerin am Tablet, Betriebsinhaber am Desktop, Lehrerin mit Tastatur und Datenschutzblick (unterrichtet Klasse 8, will das Labor im Unterricht nutzen: 28 Kinder, Schul-WLAN, Schulgeräte, Datenschutz der Schule, Lehrerhandreichung, Unterrichtsstunde in 45 Minuten), Erwachsener Quereinsteiger am Laptop (kein Vorwissen, will "KI verstehen" in 30 Minuten).
 
 ## Aufgaben je Prüfer
 Jeder Prüfer bedient das Labor selbst im Browser (Playwright, siehe tests/browser.mjs und tests/laien.mjs), nicht nur Screenshots werten. Pflichtweg: Startseite, "Neu hier", mindestens 3 Lernseiten (eine Grundlagen, eine RAG oder Sprache, eine mit Labor), mindestens 2 Labore selbst bedienen, 1 Video ansehen (Dauer, Untertitel, Verständlichkeit des Verweises am Ende), 1 Quiz lösen, Suche mit Alltagswörtern, eine Fehlersituation herbeiführen (Kamera ablehnen, leere Eingabe).
