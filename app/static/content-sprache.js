@@ -107,13 +107,13 @@ seiten: {
       ],
     }},
     {h: "Größe, kleine Modelle und das Kontextfenster",
-     kurz: "Mehr Parameter heißen mehr Wissen, aber auch mehr Speicher. Gröber gespeicherte Zahlen sparen Platz.",
+     kurz: "Mehr Parameter heißen mehr Wissen, aber auch mehr Speicher. Gröber gespeicherte Zahlen sparen Platz. Im Labor passen 4096 Token ins Kontextfenster.",
      visual: {typ: "balken", titel: "Speicher für 3 Mrd. Parameter (Rechenbeispiel)", einheit: "GB", zeilen: [
       {label: "Zwei Byte je Zahl", wert: 6, farbe: "orange"},
       {label: "Quantisiert, wie im Chat-Labor", wert: 2, farbe: "gruen"}]}, p: [
       "Die Größe eines Modells wird in Parametern angegeben. Das sind die Zahlen, die im Training eingestellt wurden. Das Modell im {{chat|Chat-Labor}} hat rund drei Milliarden. Die großen Dienste im Rechenzentrum sind um ein Vielfaches größer. Mehr Parameter bedeuten mehr Platz für Wissen und Muster. Sie bedeuten auch mehr Speicher und mehr Rechenzeit.",
       "Ein kleines Modell kann weniger Fakten behalten und macht bei Spezialthemen mehr Fehler. Es schreibt oft trotzdem gut, denn Sprache braucht weniger Platz als Weltwissen. Im Gegenzug läuft es auf dem Jetson, bleibt privat und antwortet ohne Netzwerk. Rechne mit dem Speicher: Drei Milliarden Zahlen mit je zwei Byte ergeben rund 6 GB. Darum nutzt man verkleinerte Fassungen mit gröber gespeicherten Zahlen ([[quantisierung|Quantisierung]]). Das Modell hier belegt rund 2 GB.",
-      "Das [[kontext|Kontextfenster]] ist die Menge an Token, die das Modell auf einmal sehen kann: deine Frage, der bisherige Verlauf, mitgeschickte Texte und die Antwort. Wie groß es ist, hängt vom Modell und von der Einstellung ab. Alles, was draußen bleibt, existiert für das Modell nicht.",
+      "Das [[kontext|Kontextfenster]] ist die Menge an Token, die das Modell auf einmal sehen kann: deine Frage, der bisherige Verlauf, mitgeschickte Texte und die Antwort. Wie groß es ist, hängt vom Modell und von der Einstellung ab. Im Labor sind es 4096 Token (`OLLAMA_CONTEXT_LENGTH`, Zahlen auf {{hardware|Hardware}}, praktische Folgen im {{chat|Chat}}). Alles, was draußen bleibt, existiert für das Modell nicht.",
     ], alltag: [
       "Ein Taschenlexikon und eine Enzyklopädie in zwanzig Bänden erklären beide, was ein Wort bedeutet. In die Enzyklopädie passt mehr Wissen. Das Kontextfenster ist dagegen dein Schreibtisch: Du kannst mehrere Bücher aufschlagen, aber nur so viele, wie darauf passen.",
     ], merke: "Mehr Parameter heißen mehr Wissen und mehr Aufwand. Das Kontextfenster ist der Arbeitsplatz des Modells, nicht sein Gedächtnis."},
@@ -161,7 +161,7 @@ seiten: {
   videos: ["prompting-grundlagen", "prompting-beispiele"],
   abschnitte: [
     {h: "Warum die Frage zählt",
-     kurz: "Was im Prompt fehlt, füllt das Modell mit dem, was am wahrscheinlichsten klingt.",
+     kurz: "Was im Prompt fehlt, füllt das Modell mit dem, was am wahrscheinlichsten klingt. Für den Alltag gibt es die kurze Karte {{prompts-alltag|Gute Fragen im Alltag}}.",
      visual: {typ: "skala", links: "Modell muss raten", rechts: "Modell weiß Bescheid", marker: 0.15, label: "Eine vage Zeile"}, p: [
       "Ein Sprachmodell kennt nur das, was du ihm schreibst, plus sein Training. Es kennt weder deine Firma noch deine Kundin noch deinen Tonfall. Es füllt jede Lücke mit dem, was am wahrscheinlichsten klingt. Ein [[prompt|Prompt]] ist deine Eingabe an das Modell. Je weniger Lücken er lässt, desto weniger muss das Modell raten.",
     ], alltag: [
@@ -284,7 +284,7 @@ seiten: {
      optionen: ["Nichts, Eingaben sind immer privat", "Die Daten auf Englisch übersetzen", "Prüfen, ob der Dienst erlaubt ist, und möglichst anonymisieren", "Die Temperatur auf 0 stellen"],
      richtig: 2, erklaerung: "Eingaben verlassen bei Cloud-Diensten dein Haus. Regeln der Firma und Datenschutz kommen zuerst, und Anonymisieren senkt das Risiko."},
   ],
-  weiter: ["prompts-schule", "llm-grenzen", "tokens-sprachmodelle", "chat", "finetuning-oder-rag"],
+  weiter: ["prompts-alltag", "prompts-schule", "llm-grenzen", "tokens-sprachmodelle", "chat", "finetuning-oder-rag"],
 },
 
 /* ------------------------------------------------------------------ 3 */

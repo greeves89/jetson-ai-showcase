@@ -31,13 +31,14 @@ for (const { datei, id } of EINHEITEN) {
     console.log(`${name}: ${seiten} Seite(n), ${text.split(/\s+/).filter(Boolean).length} Wörter, Format ${(info.match(/Page size:\s+(.+)/) || [])[1]}`);
     if (art === "arbeitsblatt" && (seiten < 3 || seiten > 4)) meld(name + ": erwartet 3 bis 4 Seiten, gefunden " + seiten);
     if (art === "loesung" && seiten > 3) meld(name + ": mehr als drei Seiten");
+    if (art === "loesung" && !/Nur für Lehrkräfte, nicht an Schüler weitergeben/.test(text)) meld(name + ": Hinweis Nur für Lehrkräfte im Kopf fehlt");
     if (!/Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
     if (!/Mehr dazu im KI-Labor|im KI-Labor/.test(text)) meld(name + ": Kasten Mehr dazu fehlt");
     if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
     if (!/abgerufen am 22\.11\.2026/.test(text) || !/Zuordnung kann je Bundesland und Fach leicht abweichen/.test(text)) meld(name + ": Quellenhinweis zu den Operatoren fehlt");
     // Operatoren: jede Aufgabe beginnt mit einem fetten Operator samt Bereich (siehe Seitendaten), die Legende nennt alle verwendeten
     const opTab = OPERATOREN;
-    const genutzt = [...new Set([...text.matchAll(/\b(Nenne|Beschreibe|Erkläre|Vergleiche|Begründe|Beurteile|Überprüfe|Entwickle|nenne|beschreibe|erkläre|vergleiche|begründe|beurteile|überprüfe|entwickle) \((I{1,3})\)/g)].map((m) => m[1][0].toUpperCase() + m[1].slice(1) + "|" + m[2]))];
+    const genutzt = [...new Set([...text.matchAll(/\b(Nenne|Beschreibe|Erkläre|Ordne zu|Vergleiche|Begründe|Beurteile|Überprüfe|Entwickle|nenne|beschreibe|erkläre|ordne zu|vergleiche|begründe|beurteile|überprüfe|entwickle) \((I{1,3})\)/g)].map((m) => m[1][0].toUpperCase() + m[1].slice(1) + "|" + m[2]))];
     if (art === "arbeitsblatt") {
       if (!/Operator\s+Das sollst du tun\s+Bereich/.test(text)) meld(name + ": Operatoren-Legende fehlt");
       const bereiche = new Set(genutzt.map((g) => g.split("|")[1]));
@@ -179,6 +180,48 @@ const linksIn = (pdf) => [...fs.readFileSync(pdf).toString("latin1").matchAll(/\
   if (lizenz < 6) meld("Lösungsblatt Medien 1: Lizenz fehlt bei echten Karten");
   if (echt < 6) meld("Lösungsblatt Medien 1: erwartet 6 echte Karten mit Quelle und Lizenz, gefunden " + echt);
   if (!/(Hände|Spiegelung|Schrift)/.test(loes)) meld("Lösungsblatt Medien 1: Hinweise auf typische Merkmale fehlen");
+}
+
+// Kartenset für Eltern: 4 Seiten (Regeln, Karten 1 bis 6, Karten 7 bis 12, Auflösung), Sie-Form, QR zu echt-oder-ki, Auflösung mit zwölf Einträgen
+{
+  const name = "kartenset-eltern", pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), flach = text.replace(/\s+/g, " ");
+  const seiten = seitenZahl(pdf), url = `${BASIS}/echt-oder-ki?weg=eltern`;
+  const bilder = execFileSync("pdfimages", ["-list", pdf]).toString().split("\n").slice(2).filter((z) => z.trim()).length;
+  console.log(`${name}: ${seiten} Seite(n), ${bilder} Bilder`);
+  if (seiten !== 4) meld(name + ": erwartet 4 Seiten, gefunden " + seiten);
+  if (bilder !== 12) meld(name + ": erwartet 12 Bilder, gefunden " + bilder);
+  if (!/KI-Labor, Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
+  if (/Lizenz(vermerk)?:/.test(text.split("Auflösung für Eltern")[0])) meld(name + ": Lizenzvermerk im Kopf");
+  if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
+  if (/je Gruppe|Lehrkraft|Lehrkräfte|Klasse/.test(text)) meld(name + ": Bezug zu Gruppe, Klasse oder Lehrkraft");
+  if (/\b(Du|Dein|Deine)\b/.test(text)) meld(name + ": Du-Form im Elternteil");
+  for (const t of ["Spielregeln für zwei", "Woran hast du es gesehen", "Punkteblatt", "Karten 1 bis 6", "Karten 7 bis 12", "Auflösung für Eltern"]) if (!flach.includes(t)) meld(`${name}: "${t}" fehlt`);
+  const aufl = flach.split("Auflösung für Eltern")[1] || "";
+  const ki = (aufl.match(/\bKI-Bild\b(?=[^.]*\.)/g) || []).length, echt = (aufl.match(/Foto: [^.]+, (CC0|Public Domain), Wikimedia Commons/g) || []).length;
+  if (!(aufl.match(/\b\d{1,2} (Echt|KI-Bild) /g) || []).length || (aufl.match(/ (Echt|KI-Bild) [A-ZÄÖÜ]/g) || []).length !== 12) meld(name + ": Auflösung braucht zwölf Einträge, gefunden " + (aufl.match(/ (Echt|KI-Bild) [A-ZÄÖÜ]/g) || []).length);
+  if ((aufl.match(/ KI-Bild [A-ZÄÖÜ]/g) || []).length !== 6 || (aufl.match(/ Echt [A-ZÄÖÜ]/g) || []).length !== 6) meld(name + ": Auflösung braucht sechs KI-Bilder und sechs echte Fotos");
+  if (echt !== 6) meld(`${name}: erwartet sechs echte Fotos mit Quelle und Lizenz, gefunden ${echt} (KI ${ki})`);
+  const gefunden = qrCodes(pdf, name);
+  if (!gefunden.includes(url)) meld(`${name}: QR-Code für ${url} nicht dekodierbar (gefunden: ${JSON.stringify(gefunden)})`);
+  if (!linksIn(pdf).includes(url)) meld(`${name}: Link ${url} fehlt als Verknüpfung`);
+}
+// Entscheidungshilfe Betrieb: eine Seite, sechs Fragen aus der Seite betrieb-entscheidung, QR dekodierbar
+{
+  const name = "entscheidungshilfe-betrieb", pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), flach = text.replace(/\s+/g, " ");
+  const seiten = seitenZahl(pdf), url = `${BASIS}/betrieb-entscheidung?weg=beruf`;
+  console.log(`${name}: ${seiten} Seite(n)`);
+  if (seiten !== 1) meld(name + ": erwartet genau 1 Seite, gefunden " + seiten);
+  if (!/KI-Labor, Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
+  if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
+  const punkte = INHALT.seiten["betrieb-entscheidung"].checkliste.punkte;
+  if (punkte.length !== 6) meld(name + ": Seite hat nicht sechs Fragen");
+  punkte.forEach((p, i) => { if (!flach.includes(p.frage.slice(0, 30))) meld(`${name}: Frage ${i + 1} fehlt`); if (!flach.includes(p.hilfe.slice(0, 30))) meld(`${name}: Hilfe ${i + 1} fehlt`); });
+  const html = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
+  if ((html.match(/<span class="box"><\/span>/g) || []).length !== 6) meld(name + ": erwartet sechs Kästchen");
+  if (!/Notizen/.test(text)) meld(name + ": Platz für Notizen fehlt");
+  const gefunden = qrCodes(pdf, name);
+  if (!gefunden.includes(url)) meld(`${name}: QR-Code für ${url} nicht dekodierbar (gefunden: ${JSON.stringify(gefunden)})`);
+  if (!linksIn(pdf).includes(url)) meld(`${name}: Link ${url} fehlt als Verknüpfung`);
 }
 
 // Elternabend: Info-Blatt (1 Seite, Sie-Form), Leitfaden (1 Seite), QR-Codes dekodierbar und verlinkt

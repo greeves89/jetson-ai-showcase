@@ -557,3 +557,76 @@ details.mehr.immer-offen>summary{display:none}
 }
 
 @media(pointer:coarse),(max-width:960px){.gl{min-width:44px;text-align:center}}
+
+/* Chat: Fortschritt bis zum ersten Wort, Karte bei Ausfall, Pruefhinweis unter jeder Antwort, Kontext-Zeile */
+.warte-fort{display:flex;align-items:center;gap:10px;margin-top:8px;white-space:normal}
+.warte-fort .ladebar{flex:1 1 auto;margin-top:0}
+.warte-zeit{flex:none;font-size:15px;color:var(--leise);font-variant-numeric:tabular-nums}
+.last-karte{width:100%}
+.last-karte .last-titel{margin:0 0 6px;font-size:17px;font-weight:600}
+.last-karte .last-auto{color:var(--leise)}
+.last-karte .last-nochmal{margin:2px 0 10px}
+.last-karte .last-hilfe p{margin:0 0 4px}
+.last-links{margin:0;padding-left:20px;font-size:15px;line-height:1.5}
+.last-links a{text-decoration:underline;display:inline-block;min-height:24px}
+.msg .ki-pruefen{display:flex;gap:10px;align-items:flex-start;margin:10px -4px 0;padding:10px 12px;border-radius:12px;background:var(--fuell);font-size:15px;line-height:1.5;white-space:normal;color:var(--text)}
+.msg .ki-pruefen .ic{flex:none;width:18px;height:18px;margin-top:3px;color:var(--akzent)}
+.msg .ki-pruefen p{margin:0 0 4px;min-width:0;overflow-wrap:anywhere}
+.msg .ki-pruefen p:last-child{margin:0}
+.msg .ki-pruefen a{text-decoration:underline;font-weight:600;display:inline-block;min-height:24px}
+.msg.ki:has(.ki-pruefen){max-width:100%}
+.d-kontext a{text-decoration:underline}
+
+/* ---------- Druckansicht (alle Lernseiten, Entscheidungshilfe): nur Inhalt, schwarz auf weiss, Kopf mit Titel und Adresse ---------- */
+.druck-kopf{display:none}
+@media print{
+  @page{size:A4;margin:14mm 14mm 16mm}
+  :root{color-scheme:light;--bg:#fff;--flaeche:#fff;--flaeche2:#fff;--flaeche3:#eee;--text:#000;--leise:#333;--linie:#999;--linie2:#bbb;--akzent:#000;--akzent-h:#000;--akzent-fl:#000;
+    --gruen:#000;--orange:#000;--rot:#000;--fuell:#fff;--glas:#fff;--glas-dicht:#fff;--glas-kante:#999;--glas-schatten:none;--schatten:none}
+  html,body{background:#fff!important;color:#000!important;font-size:12pt!important;line-height:1.4!important}
+  *{animation:none!important;transition:none!important;box-shadow:none!important;backdrop-filter:none!important;-webkit-backdrop-filter:none!important;text-shadow:none!important}
+  .skip,.seite,.leiste,.zurueck-zeile,.lesemodus,.weg-chip,.menueknopf,.fuss,footer,.kennzahl-sprung,.video-block,.video,.video-ki,.folgen,.keine-druck,.statuschip,
+  .hero-aktionen,.pfad-nav,.seitenende,.lese-hilfe,.ki-hinweis,.weiter,dialog,#such-ergebnis,.tip,video,.mathe-schalter,.livebox{display:none!important}
+  .shell{display:block!important;min-height:0!important}
+  .haupt,main,.seitenbreite,.seitenbreite.breit{display:block!important;min-height:0!important;max-width:none!important;width:auto!important;margin:0!important;padding:0!important;overflow:visible!important;height:auto!important}
+  .block{margin:0 0 12pt!important;padding:0!important}
+  .flaeche,.pad{background:#fff!important;border:0!important;padding:0!important;overflow:visible!important}
+  h1{font-size:20pt!important;margin:0 0 6pt!important}
+  h2{font-size:14pt!important;margin:12pt 0 4pt!important;break-after:avoid}
+  p,li{orphans:3;widows:3}
+  li,.karte,figure{break-inside:avoid}
+  a{color:#000!important;text-decoration:underline}
+  .gl{background:none!important;text-decoration:none!important;border:0!important}
+  .gl::after{content:none!important}
+  details:not([open]){display:none!important}                 /* zugeklappte Abschnitte (Mehr dazu, Lernziele) haben auf Papier nur eine leere Titelzeile */
+  details>summary{list-style:none}
+  /* Kopf: Titel und Adresse */
+  .druck-kopf{display:flex!important;flex-direction:column;gap:2pt;margin:0 0 10pt;padding:0 0 6pt;border-bottom:1.5pt solid #000;font-size:10pt}
+  .druck-kopf b{font-size:12pt}
+  .druck-url{color:#333;word-break:break-all}
+  /* Hero kompakt: Symbol, Kennzahlen weg, damit die Checkliste auf eine Seite passt */
+  .hero{padding:0!important;margin:0 0 8pt!important;background:none!important;min-height:0!important}
+  .hero .ueber,.hero .kennzahlen,.hero .hero-icon,.hero svg.ic{display:none!important}
+  .hero h1{font-size:18pt!important}
+  .hero .lead,.hero p{font-size:11pt!important;margin:0 0 4pt!important}
+  /* Checkliste: sichtbare Kaestchen mit Haekchen, auch ohne Hintergrundfarben (nur Rahmen und Linien) */
+  .drei-schritte{gap:6pt!important;display:block!important}
+  .drei-schritte li{margin:0 0 7pt!important;break-inside:avoid}
+  .drei-schritte label{display:flex!important;gap:10pt!important;align-items:flex-start;padding:0!important;min-height:0!important;background:none!important;font-size:11pt!important;line-height:1.35!important;border-radius:0!important}
+  .drei-schritte input:checked + label{background:none!important}
+  .drei-schritte .nr{width:15pt!important;height:15pt!important;min-width:15pt;border:1.5pt solid #000!important;border-radius:2pt!important;background:#fff!important;color:#000!important;font-size:0!important;display:block!important;position:relative;flex:none;margin-top:1pt}
+  .drei-schritte input:checked + label .nr::after{content:"";position:absolute;left:4pt;top:0.5pt;width:4pt;height:8pt;border:solid #000;border-width:0 2pt 2pt 0;transform:rotate(45deg);background:none}
+  .drei-schritte small{color:#333!important;font-size:10pt!important}
+  .pg-notiz{font-size:10pt!important;color:#333!important}
+  .checkliste li{break-inside:avoid}
+}
+
+/* Startseite ohne Rolle: sechs Rollen als Zeile direkt unter der Ueberschrift */
+.rollen-zeile{margin:0 0 20px}
+.rollen-lead{margin:0 0 10px;font-size:16px;color:var(--leise)}
+.rollen-chips{display:flex;flex-wrap:wrap;gap:8px}
+.rollen-chip{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:8px 16px;font-size:16px;font-weight:500;color:var(--text);cursor:pointer}
+.rollen-chip:hover{background:var(--auswahl)}
+.rollen-chip .ic{color:var(--akzent)}
+.nav-teil .nav-titel{padding-top:10px}
+@media print{.rollen-zeile{display:none!important}}

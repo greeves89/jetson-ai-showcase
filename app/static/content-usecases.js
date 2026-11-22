@@ -95,7 +95,7 @@ S["uc-fertigung-sichtpruefung"] = {
         ],
       },
       p: [
-      "Das fertige Beispiel zeigt eine Stanzerei mit runden Metallscheiben. Die Bilder sind per Code gezeichnet, es sind also keine echten Teile. Auf den Scheiben sitzen Kratzer, Dellen und ausgebrochene Kanten.",
+      "Das fertige Beispiel zeigt eine Stanzerei mit runden Metallscheiben. Die Bilder sind per Code gezeichnet, es sind also keine echten Teile. Für das Beispiel brauchst du keine Kamera. Auf den Scheiben sitzen Kratzer, Dellen und ausgebrochene Kanten.",
       "So läuft es ab: Du startest das Beispiel, und der Jetson nimmt je 20 Beispielbilder für Gut und Ausschuss auf. Dann wählst du eines der Testbilder, das das System noch nie gesehen hat, und lässt es zuordnen. Du liest die Balken und vergleichst mit der erwarteten Klasse. Probiere danach weitere Testbilder, vor allem solche mit Delle oder Ausbruch.",
       "Nach dem Klick siehst du das Labor Anlernen mit den schon aufgenommenen Beispielen und kannst direkt prüfen.",
       "{{anlernen?beispiel=fertigung-sichtpruefung|Beispiel starten}}",
@@ -1099,6 +1099,19 @@ S["uc-buero-dokumente"] = {
     ], alltag: [
       "Ein Aushang am Schwarzen Brett ist von 2019 und gilt längst nicht mehr, hängt aber noch. Wer ihn liest, hält ihn für gültig. Das Dokumentensystem liest jeden Aushang, den du ihm gibst.",
     ]},
+    {h: "Beispiel Steuerbüro: Belege sortieren und Mandantenanschreiben entwerfen", id: "steuerbuero",
+      kurz: "Zwei Büroaufgaben mit erfundenen Daten: Belege nach Art sortieren und ein Anschreiben an eine Mandantin entwerfen. Echte Mandantendaten gehören nicht in dieses Labor.",
+      visual: {typ: "ablauf", paket: false, schritte: [
+        {icon: "receipt", text: "Belege", sub: "Datum, Betrag, Art"},
+        {icon: "list-checks", text: "Sortieren", sub: "Vorschlag der KI"},
+        {icon: "mail", text: "Anschreiben", sub: "Entwurf für Fehlendes"},
+        {icon: "user-check", text: "Fachkraft prüft", sub: "bevor etwas hinausgeht", farbe: "gruen"}]},
+      p: [
+      "Ein kleines Steuerbüro bekommt jeden Monat Belege von Mandanten: Quittungen, Rechnungen, Kontoauszüge. Zwei Aufgaben fressen Zeit: die Belege nach Art zu ordnen (Bürobedarf, Fahrtkosten, Bewirtung) und Mandanten zu schreiben, was noch fehlt.",
+      "Zum Üben mit erfundenen Daten: Gib im {{chat|Chat}} drei erfundene Belege ein, etwa „Quittung Tankstelle Musterstadt, 48,20 Euro“, „Rechnung Büromarkt Beispiel, 126,00 Euro“ und „Restaurantbeleg, 62,40 Euro“, und bitte um eine Zuordnung nach Art. Bitte danach um einen höflichen Entwurf an eine erfundene Mandantin, Frau Muster, der drei fehlende Belege anfordert, in der Sie-Form.",
+      "Was die KI liefert, ist ein Vorschlag. Beträge, steuerliche Einordnung und jede Zusage prüft eine Fachkraft, bevor etwas das Haus verlässt. Das kleine Modell im Labor kann sich dabei irren.",
+      "Mit echten Mandantendaten ist das ein anderer Fall: Wer einer Schweigepflicht unterliegt, klärt vorher Vertrag, Standort und Verschwiegenheit des Dienstleisters. Das steht auf {{sicherheit-einfach|Ist das sicher?}} im Abschnitt „Berufsgeheimnis und Mandantendaten“. Kein Rechtsrat.",
+    ], merke: "Üben mit erfundenen Belegen, echte Mandantendaten erst nach geklärtem Vertrag und mit Prüfung durch eine Fachkraft."},
     {h: "Nutzen und Aufwand",
       kurz: "Die Antwort ist nur so gut wie ihre Quelle. Bei wichtigen Aussagen klickt man auf die Fundstelle.",
       visual: {

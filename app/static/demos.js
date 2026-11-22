@@ -72,7 +72,7 @@
     return "Der Jetson antwortet mit Fehler " + r.status + ".";
   }
   /* Wie postS, aber mit freundlichem Wiederholen, wenn der Rechner ausgelastet ist (siehe laien.js). bei meldet den Zaehler. */
-  const postLast = (pfad, obj, signal, bei) => KL.last.post(pfad, obj, signal, bei);
+  const postLast = (pfad, obj, signal, bei, opt) => KL.last.post(pfad, obj, signal, bei, opt);
   const istBelegt = (e) => !!e && e.name === "BelegtFehler";
   function netzFehler(e) {
     if (e && e.name === "AbortError") return null;
@@ -961,13 +961,16 @@
     const leer = h("p", { class: "d-hinweis" }, "Stelle eine Frage oder wähle eine Beispielfrage. Jede Frage steht für sich: Der Jetson bekommt keinen früheren Verlauf mit, das Modell erinnert sich also nicht an vorherige Fragen.");
 
     /* Eingabe */
-    const feld = h("textarea", { rows: 1, maxlength: 1000, placeholder: "Schreibe eine Frage…", "aria-label": "Deine Frage", enterkeyhint: "send" });
+    const feld = h("textarea", { rows: 1, maxlength: 1000, id: "chat-eingabe", placeholder: "Schreibe eine Frage…", "aria-label": "Deine Frage", enterkeyhint: "send", dataset: { testid: "chat-eingabe" } });
     const sendeBtn = h("button", { type: "button", class: "btn primary" }, ic("send"), "Senden");
     const stoppBtn = h("button", { type: "button", class: "btn", hidden: true }, ic("stop"), "Stopp");
     const eingabe = h("div", { class: "eingabe" }, feld, sendeBtn, stoppBtn);
     const feldHinweis = h("p", { class: "d-feldhinweis", role: "status", "aria-live": "polite" });
     const tastenHinweis = h("p", { class: "d-hinweis d-tasten" }, "Enter sendet, Shift+Enter macht eine neue Zeile.");
-    const eingabeBlock = h("div", { class: "d-eingabeblock" }, eingabe, feldHinweis, tastenHinweis);
+    // Kontextlaenge (Zahl wie auf der Seite Hardware: im Labor eingestellt sind 4096 Token)
+    const kontextHinweis = h("p", { class: "d-hinweis d-kontext", title: "Token sind Wortstücke. 4096 Token sind ungefähr ein bis zwei Seiten Text. Längere Texte vergisst das Modell." },
+      "Das Modell hält etwa 4096 Token im Kopf (ein bis zwei Seiten Text). ", h("a", { href: "/hardware" }, "Mehr dazu"));
+    const eingabeBlock = h("div", { class: "d-eingabeblock" }, eingabe, feldHinweis, tastenHinweis, kontextHinweis);
     /* Leeres Senden: kurze, freundliche Rückmeldung, der Cursor springt ins Feld */
     function ausFeldSenden() {
       if (busy) return;
@@ -975,16 +978,19 @@
       senden(feld.value);
     }
 
+    // Beispielfragen je Rolle: Alltag und Beruf. Eintrag als Text oder {t: Frage, l: Beschriftung des Knopfes}.
+    const BUS = "Wie lange darf ein Busfahrer am Stück fahren, bevor er Pause machen muss? Antworte kurz.";
     const BEISPIELE_WEG = {
       schule: ["Wie kann ich KI bei den Hausaufgaben nutzen, ohne zu schummeln?", "Woran erkenne ich, ob ein Bild echt oder von einer KI ist?", "Wie lerne ich besser für eine Klassenarbeit?"],
       lehrende: ["Wie erkläre ich Klasse 8 in drei Sätzen, was ein Sprachmodell ist?", "Was ist ein Token?", "Nenne drei Regeln für KI bei Hausaufgaben."],
-      erwachsene: ["Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", "Was ist künstliche Intelligenz in einfachen Worten?", "Wie erkenne ich eine betrügerische Nachricht?"],
-      eltern: ["Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", "Wie spreche ich mit meinem Kind über KI?", "Was ist künstliche Intelligenz in einfachen Worten?"],
-      beruf: ["Mache aus dieser Notiz ein kurzes Angebot: 3 Fenster tauschen, Montag, 1.200 Euro.", "Fasse in drei Stichpunkten zusammen, wofür ein Betrieb KI nutzen kann.", "Was ist ein Token?"],
+      erwachsene: ["Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", { t: BUS, l: "Wie lange darf ein Busfahrer am Stück fahren? (Antwort prüfen)" }, "Was ist künstliche Intelligenz in einfachen Worten?"],
+      eltern: ["Wie erkläre ich meinem Kind, was KI ist?", "Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", "Wie spreche ich mit meinem Kind über Bildschirmzeit?"],
+      beruf: ["Was darf ich einer KI nie eingeben, wenn ich in einem Steuerbüro arbeite?", "Mache aus dieser Notiz ein kurzes Angebot: 3 Fenster tauschen, Montag, 1.200 Euro.",
+        { t: "Wofür ist ein FI-Schalter in der Elektroinstallation da? Antworte kurz.", l: "FI-Schalter erklären (nur Lehrbeispiel, Antwort prüfen lassen)" }, { t: BUS, l: "Lenk- und Pausenzeiten im Bus (Antwort prüfen)" }],
       technik: ["Erkläre in zwei Sätzen, was ein Token ist.", "Was ist ein Jetson?", "Schreibe einen Satz über Roboter."],
     };
-    const BEISPIELE = BEISPIELE_WEG[KL.weg] || ["Erkläre in zwei Sätzen, was ein Token ist.", "Schreibe einen Satz über Roboter.", "Was ist ein Jetson?"];
-    const chips = h("div", { class: "vorschlaege", "aria-label": "Beispielfragen" }, BEISPIELE.map((b) => h("button", { type: "button", class: "chip", onclick: () => senden(b) }, b)));
+    const BEISPIELE = BEISPIELE_WEG[KL.weg] || ["Erkläre in zwei Sätzen, was ein Token ist.", { t: BUS, l: "Wie lange darf ein Busfahrer am Stück fahren? (Antwort prüfen)" }, "Was ist ein Jetson?"];
+    const chips = h("div", { class: "vorschlaege", "aria-label": "Beispielfragen" }, BEISPIELE.map((b) => { const t = typeof b === "string" ? b : b.t, l = typeof b === "string" ? b : b.l; return h("button", { type: "button", class: "chip", onclick: () => senden(t) }, l); }));
 
     /* Einstellungen */
     const temp = h("input", { type: "range", id: "d-temp", min: 0, max: 2, step: 0.1, value: 0.7 });
@@ -1005,8 +1011,11 @@
     function modellStatusSetzen(d) {
       const geladen = (d.modelle_geladen || []).some((m) => m.startsWith("llama3.2"));
       imSpeicher = geladen;
-      modellStatus.textContent = geladen ? "Modell bereit, im Speicher" : "Modell wird bei der ersten Frage geladen";
-      modellStatus.classList.toggle("live", geladen);
+      // gleiche Aussage wie Startseite und Seitenleiste (KL.rechner): "bereit" nur, solange keine Anfragen warten
+      const lage = KL.rechner ? KL.rechner.lage(d) : { zustand: "frei" };
+      const zusatz = lage.zustand === "voll" ? ", aber gerade viel los" : lage.zustand === "rechnet" ? ", Rechner rechnet gerade" : "";
+      modellStatus.textContent = (geladen ? (zusatz ? "Modell im Speicher" : "Modell bereit, im Speicher") : "Modell wird bei der ersten Frage geladen") + zusatz;
+      modellStatus.classList.toggle("live", geladen && lage.zustand === "frei");
       ladeBtn.hidden = geladen;          // ist es schon im Speicher, gibt es nichts mehr zu laden (kein Widerspruch zum Status)
     }
     L.onEnde(KL.stats.on(modellStatusSetzen));
@@ -1083,7 +1092,7 @@
       leer.hidden = true;
       if (rolle === "du") { verlauf.append(h("div", { class: "msg du" }, text)); nachUnten(); return null; }
       const m = { ki: true, tokens: [], platz: "…", text: h("span", { class: "d-text" }), meta: h("span", { class: "meta" }) };
-      m.el = h("div", { class: "msg ki" }, m.text, m.meta);
+      m.el = h("div", { class: "msg ki", dataset: { testid: "chat-antwort" } }, m.text, m.meta);
       fuelle(m); verlauf.append(m.el); nachrichten.push(m); nachUnten();
       return m;
     }
@@ -1102,7 +1111,22 @@
     }, 500);
     L.onEnde(() => liveSatz.stop());
 
-    async function senden(text, erneut) {
+    const AUSFALL_NACH_S = 90, AUTO_NACH_S = 20;
+    /* Lernmoment unter jeder Antwort: Ein Sprachmodell erfindet Dinge, auch zu Alltagsfragen. Darum immer, nicht nur bei KI-Themen. */
+    function pruefKasten() {
+      return h("div", { class: "ki-pruefen", role: "note", dataset: { testid: "chat-pruefen" } }, ic("search"),
+        h("div", null, h("p", null, h("b", null, "Stimmt das? Prüfe es: "), h("a", { href: "/quellen-pruefen" }, "Quellen prüfen")),
+          h("p", null, "Woran würdest du merken, dass das falsch ist?")));
+    }
+    /* Was inzwischen hilft, wenn der Jetson ausgelastet ist: etwas lesen oder das Quiz machen. */
+    function hilfeLinks() {
+      const quiz = () => document.querySelector(".block.quiz");
+      return h("ul", { class: "last-links" },
+        h("li", null, h("a", { href: "/tokens-sprachmodelle" }, "Seite lesen: Tokens und Sprachmodelle")),
+        quiz() ? h("li", null, h("a", { href: "#quiz", onclick: (e) => { const q = quiz(); if (!q) return; e.preventDefault(); q.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Das Quiz zu dieser Seite machen")) : null);
+    }
+
+    async function senden(text, erneut, autoSchon) {
       text = String(text || "").trim().slice(0, 1000);
       if (!text || busy) return;
       busy = true; sendeBtn.hidden = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = ""; feldHinweis.textContent = ""; feld.classList.remove("d-leer");
@@ -1117,25 +1141,41 @@
       live.text(warMitSpeicher
         ? "Das Modell liegt schon im Speicher. Der Jetson liest deine Frage und beginnt gleich zu rechnen."
         : "Der Jetson lädt das Modell aus der SSD in den Speicher. Das dauert beim ersten Mal einige Sekunden.");
-      let abgebrochen = false, fehler = null, roh = "", belegt = false;
+      let abgebrochen = false, fehler = null, roh = "", belegt = false, zeitlimit = false;
       let rafOffen = false;
       const zeichne = () => { rafOffen = false; fuelle(m); nachUnten(); };
+      // Fortschrittsanzeige mit verstrichener Zeit bis zum ersten Wort (nach AUSFALL_NACH_S Sekunden gilt der Jetson als ausgelastet)
+      const fortI = h("i");
+      const fortZeit = h("span", { class: "warte-zeit" }, "0 s");
+      const fort = h("div", { class: "warte-fort" },
+        h("div", { class: "ladebar", role: "progressbar", "aria-label": "Wartezeit bis zum ersten Wort", "aria-valuemin": 0, "aria-valuemax": AUSFALL_NACH_S, "aria-valuenow": 0 }, fortI), fortZeit);
+      m.el.insertBefore(fort, m.meta);
       // Wartezustand in Klartext: Platznummer in der Warteschlange, Zaehler beim automatischen Wiederholen
       const wartehinweis = (t) => { if (s.tErst) return; m.platz = t; fuelle(m); live.text(t); };
       const stoppePlatz = KL.last.beobachten((i) => wartehinweis(KL.last.platzText(i)));
-      // Wartezustand in Klartext: vergangene Sekunden bis zum ersten Token, solange keine Warteschlangen-Meldung steht
-      // Erste Anfrage (Modell noch nicht im Speicher): ehrlich sagen, dass das Laden dauert. Sonst "rechnet".
+      // Ansage ehrlich: aus den letzten Antworten dieser Sitzung, ohne Messwert "kann bis zu einer Minute dauern"
+      const ANSAGE = KL.last.ansage();
       const WARTE = warMitSpeicher ? "Der Jetson rechnet" : "Das Modell wird geladen, das dauert beim ersten Mal bis zu einer Minute";
-      m.platz = WARTE + (warMitSpeicher ? ", einen Moment … " : ". ") + "Mit „Stopp“ kannst du abbrechen."; fuelle(m);
-      const wartetimer = setInterval(() => { if (s.tErst) return; if (m.platz.startsWith(WARTE)) { m.platz = WARTE + (warMitSpeicher ? " seit " : ". Bisher ") + Math.round((performance.now() - s.tSend) / 1000) + " s … Mit „Stopp“ kannst du abbrechen."; fuelle(m); } }, 1000);
+      const STOPP = " Mit „Stopp“ kannst du abbrechen.";
+      m.platz = WARTE + (warMitSpeicher ? ", einen Moment … " : ". ") + ANSAGE + STOPP; fuelle(m);
+      const wartetimer = setInterval(() => {
+        if (s.tErst) { fort.remove(); return; }
+        const e = Math.round((performance.now() - s.tSend) / 1000);
+        fortI.style.width = Math.min(100, e / AUSFALL_NACH_S * 100) + "%";
+        fort.firstChild.setAttribute("aria-valuenow", String(Math.min(AUSFALL_NACH_S, e)));
+        fortZeit.textContent = "Bisher " + e + " s";
+        if (m.platz.startsWith(WARTE)) { m.platz = WARTE + (warMitSpeicher ? " seit " : ". Bisher ") + e + " s … " + ANSAGE + STOPP; fuelle(m); }
+        if (e >= AUSFALL_NACH_S && ctrl) { zeitlimit = true; ctrl.abort(); }          // kein erstes Wort nach 90 Sekunden: Karte statt endlosem Warten
+      }, 1000);
       try {
-        const r = await postLast("/api/chat", { nachricht: text, temperatur, rolle: KL.weg === "schule" ? "schule" : undefined }, sig, (i) => wartehinweis(KL.last.warteText(i)));    // Rolle Schule: der Server haengt "kurz und einfach" an
+        const r = await postLast("/api/chat", { nachricht: text, temperatur, rolle: KL.weg === "schule" ? "schule" : undefined }, sig, (i) => wartehinweis(KL.last.warteText(i)),
+          { max: 1, sek: AUTO_NACH_S });    // einmal automatisch nach 20 s, nicht dreimal. Rolle Schule: der Server haengt "kurz und einfach" an
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           roh = gesamt;
           const z = zerlege(gesamt);
           m.tokens = z.tokens;
-          if (z.tokens.length && !s.tErst) s.tErst = performance.now();
+          if (z.tokens.length && !s.tErst) { s.tErst = performance.now(); fort.remove(); }
           s.n = z.tokens.length;
           if (s.tErst && !z.meta) liveSatz(s);
           if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); }
@@ -1145,6 +1185,7 @@
       }
       stoppePlatz();
       clearInterval(wartetimer);
+      fort.remove();
       liveSatz.stop();
       const z = zerlege(roh);
       m.tokens = z.tokens;
@@ -1155,32 +1196,36 @@
       const sv = /^\s*\[((?:Dem Jetson fehlt|Das Sprachmodell antwortet|Das Modell ist auf dem Jetson)[^\]]*)\]\s*$/.exec(z.tokens.join(""));
       let hinweisText = "";
       if (sv) { hinweisText = sv[1]; z.tokens = []; m.tokens = []; fehler = fehler || hinweisText; }
+      else if (fehler && !z.tokens.length && /^(?:Dem Jetson fehlt|Das Sprachmodell antwortet|Das Modell ist auf dem Jetson)/.test(fehler)) hinweisText = fehler;      // Meldung ohne Anhang: die eckigen Klammern sind oben schon abgestreift
+      if (zeitlimit && !z.tokens.length) { abgebrochen = false; hinweisText = "Nach " + AUSFALL_NACH_S + " Sekunden kam noch kein erstes Wort."; fehler = hinweisText; }
       if (fehler && z.tokens.length === 0) m.platz = fehler;
       if (fehler && !z.tokens.length && KL.last.istBelegtText(fehler)) belegt = true;
       fuelle(m);
-      const nochmal = () => { const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1); m.el.remove(); senden(text, true); };
-      if (hinweisText) {
+      // Neuer Versuch derselben Frage: die Frage bleibt stehen und wird nicht doppelt eingetragen; Auto-Versuch gibt es je Frage nur einmal
+      const nochmal = () => { if (busy) return; const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1); m.el.remove(); senden(text, true, true); };
+      let karte = null;
+      if (hinweisText || (belegt && !z.tokens.length)) {
+        // Ausfall: Karte "Der Jetson ist gerade ausgelastet" mit Knopf, Hilfe und (einmal je Frage) automatischem Versuch nach 20 s
+        const auto = hinweisText && !autoSchon;
+        karte = KL.last.karte({ titel: "Der Jetson ist gerade ausgelastet", text: hinweisText ? hinweisText + (/[.!?]$/.test(hinweisText) ? "" : ".") + " Das liegt nicht an dir." : KL.last.TEXT,
+          wiederholen: nochmal, auto: auto ? AUTO_NACH_S : 0, hilfe: hilfeLinks() });
         m.el.classList.add("msg-hinweis");
-        m.el.replaceChildren(KL.last.box(hinweisText, nochmal));
-      } else if (belegt && !z.tokens.length) {
-        // Freundlich statt Fehler: Wiederholknopf, die Frage bleibt stehen und wird nicht doppelt eingetragen
-        m.meta.replaceChildren(h("button", { type: "button", class: "btn klein", onclick: () => {
-          const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1);
-          m.el.remove(); senden(text, true);
-        } }, ic("refresh-cw"), "Noch einmal versuchen"));
+        m.el.replaceChildren(karte.el);
+        L.onEnde(() => karte.stop());
       }
       else if (z.meta) m.meta.textContent = metaText(z.meta);
       else if (abgebrochen) m.meta.textContent = "Abgebrochen nach " + z.tokens.length + " Tokens.";
-      if (z.tokens.length && !hinweisText && !m.warnungen) {        // Hinweise zu KI-Erklaerungen und Rechenfragen unter die Antwort
+      if (z.tokens.length && !hinweisText && !m.warnungen) {        // Hinweise zu KI-Erklaerungen und Rechenfragen, danach immer der Pruefhinweis
         m.warnungen = true;
         for (const w of KL.antwortWarnungen(text, z.tokens.join(""))) m.el.append(w);
+        m.el.append(pruefKasten());
         nachUnten();
       }
       else if (fehler && z.tokens.length) m.meta.textContent = fehler;
       // Abschluss der Live-Erklaerung
       const mm = /(\d+) Tokens in ([\d.]+)s \(([\d.]+) Tok\/s\)/.exec(z.meta || "");
       if (mm) {
-        if (KL.last.dauerMerken) KL.last.dauerMerken(Number(mm[2]));                  // gemessene Antwortdauer fuer die Wartezeit-Schaetzung in der Warteschlange
+        KL.last.dauerMerken((performance.now() - s.tSend) / 1000);                    // gemessene Gesamtdauer (mit Warten) fuer die Wartezeit-Schaetzung, nur im Speicher
         const wartezeit = s.tErst ? s.tErst - s.tSend : 0;
         live.text(fett("Fertig. "), mm[1] + " Tokens in " + de(Number(mm[2]), 1) + " Sekunden, das sind " + de(Number(mm[3]), 1) + " Tokens pro Sekunde. Das erste Token kam nach " + sekText(wartezeit) + ". " + (wartezeit > 3000 && !warMitSpeicher ? "Diese Zeit ging vor allem für das Laden des Modells drauf." : "Kürzere Antworten und eine kleinere Temperatur machen das Modell berechenbarer."));
         live.pipe([
@@ -1188,11 +1233,11 @@
           { k: "g", cls: "s4", wert: Math.max(1, performance.now() - s.tErst), text: sekText(performance.now() - s.tErst), name: "Tokens erzeugen" },
         ], "Wartezeit bis zum ersten Token und Zeit zum Erzeugen");
       } else if (abgebrochen) live.text("Du hast die Antwort gestoppt. Der Jetson hat bis dahin " + z.tokens.length + " Tokens erzeugt.");
-      else if (hinweisText) live.text("Der Jetson ist gerade ausgelastet. Die Meldung steht oben im Chat, du kannst es gleich noch einmal versuchen.");
+      else if (hinweisText) live.text("Der Jetson ist gerade ausgelastet. Die Karte im Chat bietet einen neuen Versuch an.");
       else if (fehler) live.text(fehler);
       busy = false; ctrl = null; sendeBtn.hidden = false; stoppBtn.hidden = true; eingabe.classList.remove("laeuft");
       nachUnten();
-      if (!L.weg) feld.focus();
+      if (!L.weg && !karte) feld.focus();
     }
     L.onEnde(() => { if (ctrl) ctrl.abort(); });
 

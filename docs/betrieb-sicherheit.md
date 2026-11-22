@@ -1,0 +1,69 @@
+# Betrieb: Sicherheitsköpfe und Doku-Pfade
+
+Stand: 22.11.2026. Die Regeln stehen in `app/sicherheit.py` (Werte) und `app/app.py` (Middleware `_Sicherheitskoepfe`, äußerste Schicht).
+
+## Köpfe auf jeder Antwort
+
+Seiten, API, Statisches und Fehlerseiten bekommen dieselben Köpfe:
+
+| Kopf | Wert | Grund |
+|---|---|---|
+| `X-Content-Type-Options` | `nosniff` | Browser rät keine Dateitypen |
+| `X-Frame-Options` | `DENY` | Seite lässt sich nicht einbetten (Clickjacking) |
+| `Referrer-Policy` | `strict-origin-when-cross-origin` | Fremde Seiten sehen nur die Herkunft, nicht den Pfad |
+| `Permissions-Policy` | `camera=(self), microphone=(self), geolocation=(), payment=()` | Labore nutzen Kamera und Mikrofon nach Zustimmung, sonst nichts |
+| `Content-Security-Policy` | siehe unten | Skripte nur vom eigenen Ursprung |
+| `Strict-Transport-Security` | `max-age=31536000` | nur im öffentlichen Modus über HTTPS |
+| `Cache-Control` | HTML `no-cache`; Statisches wie bisher (`?v=` Stand: ein Jahr, Medien ein Tag, sonst `no-cache`) | nichts verschlechtert |
+
+### Content-Security-Policy
+
+```
+default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:;
+media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:;
+object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'
+```
+
+Entscheidungen:
+
+- `script-src 'self'`: Das Labor lädt kein Skript von außen und hat keine Inline-Skripte oder Ereignis-Attribute. Das JSON-LD in den Seiten (`type="application/ld+json"`) ist Daten und wird nicht ausgeführt. Kein `unsafe-eval`, kein `wasm-unsafe-eval`: Spracherkennung und Sprachausgabe laufen auf dem Jetson, nicht als WebAssembly im Browser.
+- `style-src 'unsafe-inline'`: Die Oberfläche setzt `style`-Attribute (Balken, Diagramme, Positionen). Das ist die einzige Lockerung. Sie schwächt den Schutz vor Skripteinschleusung nicht.
+- `connect-src 'self'` deckt Fetch und die WebSocket-Verbindung zum eigenen Host ab.
+- `media-src` und `img-src` mit `blob:` und `data:`: Kamerabilder, Mikrofonaufnahmen und eingebettete Vorschaubilder.
+- `worker-src 'self' blob:`: vorsorglich für Web Worker.
+- Mit `KL_CSP=report-only` wird dieselbe Richtlinie nur als `Content-Security-Policy-Report-Only` geschickt (Verstöße stehen dann in der Browser-Konsole, nichts wird blockiert). Nützlich, wenn neue Inhalte von außen laden sollen und man erst prüfen will.
+
+## Umgebungsvariablen
+
+| Variable | Wirkung |
+|---|---|
+| `OEFFENTLICH=1` | Öffentlicher Modus: HSTS (über HTTPS), Ratenbegrenzung, Indexierung. `/docs`, `/redoc`, `/openapi.json` sind immer aus. |
+| `KL_API_DOKU=1` | Nur im LAN-Test (ohne `OEFFENTLICH`): `/docs`, `/redoc`, `/openapi.json` bleiben erreichbar. Sonst liefern sie 404. |
+| `KL_CSP=report-only` | CSP nur als Bericht statt erzwungen. |
+
+## Köpfe prüfen
+
+```
+curl -skI https://192.168.178.83:8443/
+curl -sI https://ki-labor.daniel-alisch.site/
+curl -s -o /dev/null -w "%{http_code}\n" https://ki-labor.daniel-alisch.site/openapi.json   # erwartet 404
+LABOR_URL=https://192.168.178.83:8443 node tests/sicherheitskoepfe.mjs
+python3 tests/sicherheitskoepfe_test.py        # alle Betriebsarten, ohne Jetson
+```
+
+`tests/csp-crawl.mjs` geht Seiten und Knöpfe im Browser durch und meldet CSP-Verstöße (Chrome loggt sie nur als Info; am besten mit `KL_CSP=report-only` gegen eine lokale Kopie).
+
+`ERWARTE_HSTS=1 LABOR_URL=... node tests/sicherheitskoepfe.mjs` verlangt zusätzlich HSTS (nur öffentlich sinnvoll).
+
+## Was bewusst nicht geändert wurde
+
+- Der Dienst bindet im LAN auf `0.0.0.0` mit selbstsigniertem Zertifikat. Das ist Absicht für den Test im Heimnetz. Deshalb setzt der Dienst HSTS dort nicht: Ein Browser, der HSTS kennt, ließe sich nicht mehr über die Zertifikatswarnung hinwegklicken.
+- Der öffentliche Weg läuft über nginx und Cloudflare. HSTS und CSP lassen sich dort zusätzlich setzen; der Dienst liefert sie im öffentlichen Modus aber selbst mit, sobald die Anfrage als HTTPS erkennbar ist (`X-Forwarded-Proto: https`).
+- Der Kopf `server: uvicorn` bleibt. Uvicorn hängt ihn nach der Anwendung selbst an. Abschalten geht nur mit dem Startparameter `--no-server-header` (Dienstdatei in `scripts/`) oder im nginx.
+
+## Empfehlung für nginx (nur Hinweis, am Server nichts geändert)
+
+- `proxy_set_header X-Forwarded-Proto $scheme;` setzen, damit HSTS im Dienst greift.
+- `proxy_hide_header Server;` bzw. `server_tokens off;` und `more_set_headers "Server: ki-labor";` (falls das Modul vorhanden ist), um `uvicorn` und die nginx-Version nicht zu zeigen.
+- HSTS erst mit `includeSubDomains` und `preload` erweitern, wenn alle Unterdomänen von `daniel-alisch.site` dauerhaft HTTPS sprechen. Bis dahin reicht `max-age=31536000`.
+- Doppelte Köpfe vermeiden: Setzt nginx Köpfe selbst, mit `proxy_hide_header` die des Dienstes ausblenden oder beides gleich lassen.

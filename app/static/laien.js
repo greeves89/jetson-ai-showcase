@@ -11,6 +11,10 @@
                                                Besucher wartet. Gibt eine Stopp-Funktion zurueck.
         KL.last.istBelegtText(text)            erkennt die Meldung "ausgelastet" im Antworttext eines Stroms.
         KL.last.box(text, wiederholen)         Hinweisbox mit Knopf "Noch einmal versuchen".
+        KL.last.karte({titel,text,wiederholen,auto,hilfe})  Karte "Der Jetson ist gerade ausgelastet" mit Knopf, Hilfe-Links und genau einem automatischen Versuch nach auto Sekunden; gibt {el, stop}.
+        KL.last.dauerMerken(sek) / mittlere() / wartezeitText(n)  Wartezeit-Schaetzung aus den letzten fuenf Antworten dieser Sitzung (nur im Speicher); ohne Messwert "kann bis zu einer Minute dauern".
+        KL.last.karte({titel,text,wiederholen,auto,hilfe})  Karte "Der Jetson ist gerade ausgelastet" mit Knopf, Hilfe-Links und genau einem automatischen Versuch nach auto Sekunden; gibt {el, stop}.
+        KL.last.dauerMerken(sek) / mittlere() / wartezeitText(n)  Wartezeit-Schaetzung aus den letzten fuenf Antworten dieser Sitzung (nur im Speicher); ohne Messwert "kann bis zu einer Minute dauern".
    Alle Texte kommen nur per textContent oder h(...) ins DOM. */
 (function () {
   "use strict";
@@ -229,31 +233,51 @@
     BelegtFehler,
     schlafen,
     istBelegtText: (t) => /ausgelastet|gerade belegt/i.test(String(t || "")),
-    /** Mittlere Dauer einer Antwort in Sekunden (gemessen in dieser Sitzung, sonst 25): Grundlage der Wartezeit-Schaetzung. */
-    mittlere: 25,
-    dauerMerken(sek) {
-      if (!(sek > 0)) return;
-      KL.last.mittlere = Math.max(8, Math.min(90, Math.round(KL.last.mittlere * 0.5 + sek * 0.5)));
+    /** Gemessene Antworten dieser Sitzung (nur im Arbeitsspeicher, nichts wird gespeichert): Sekunden von Senden bis Antwortende, die letzten fuenf. */
+    messungen: [],
+    /** Mittlere Dauer einer Antwort in Sekunden aus den letzten Antworten dieser Sitzung, ohne Messwert null (dann gibt es keine Schaetzung, nur die ehrliche Spanne). */
+    mittlere() {
+      const m = KL.last.messungen;
+      return m.length ? Math.round(m.reduce((a, b) => a + b, 0) / m.length) : null;
     },
-    /** Geschaetzte Wartezeit bei Platz n als Text: "etwa 30 Sekunden" oder "etwa 2 Minuten". Platz 1 wartet nur auf den Rest der laufenden Antwort. */
-    wartezeitText(n) {
-      const sek = Math.max(10, n === 1 ? KL.last.mittlere / 2 : (n - 0.5) * KL.last.mittlere);
+    /** Merkt die Gesamtdauer einer fertigen Antwort (Sekunden, Warten eingerechnet). */
+    dauerMerken(sek) {
+      if (!(sek > 0) || !isFinite(sek)) return;
+      KL.last.messungen.push(Math.round(sek));
+      if (KL.last.messungen.length > 5) KL.last.messungen.shift();
+    },
+    /** Sekunden als Text: "etwa 30 Sekunden" oder "etwa 2 Minuten". */
+    sekundenText(sek) {
       if (sek < 75) return "etwa " + Math.max(10, Math.round(sek / 10) * 10) + " Sekunden";
       const min = Math.round(sek / 60);
       return min <= 1 ? "etwa eine Minute" : "etwa " + min + " Minuten";
+    },
+    /** Geschaetzte Wartezeit bei Platz n (Mittel der letzten Antworten mal Platz, Platz 1 wartet nur auf den Rest der laufenden Antwort).
+        Ohne Messwert: ehrlich "kann bis zu einer Minute dauern". */
+    wartezeitText(n) {
+      const mit = KL.last.mittlere();
+      if (mit == null) return "kann bis zu einer Minute dauern";
+      return KL.last.sekundenText(Math.max(10, n === 1 ? mit / 2 : (n - 0.5) * mit));
+    },
+    /** Ansage vor dem Start: was ist zu erwarten? */
+    ansage() {
+      const mit = KL.last.mittlere();
+      return mit == null ? "Das erste Wort kann bis zu einer Minute dauern." : "Zuletzt dauerte eine Antwort " + KL.last.sekundenText(mit) + ".";
     },
     /** Satz zur Platznummer mit geschaetzter Wartezeit, z. B. "Du bist Nr. 2 in der Warteschlange. Geschätzte Wartezeit: etwa 40 Sekunden." */
     platzText(info) {
       const n = info && info.position;
       if (!n) return "";
-      return (n === 1 ? "Du bist als Nächster dran." : "Du bist Nr. " + n + " in der Warteschlange.") + " Geschätzte Wartezeit: " + KL.last.wartezeitText(n) + ".";
+      const w = KL.last.wartezeitText(n);
+      return (n === 1 ? "Du bist als Nächster dran." : "Du bist Nr. " + n + " in der Warteschlange.") + (/^kann/.test(w) ? " Das " + w + "." : " Geschätzte Wartezeit: " + w + ".");
     },
-    /** Satz zum automatischen Wiederholen, z. B. "Neuer Versuch in 5 s (Wiederholung 1 von 3)." */
+    /** Satz zum automatischen Wiederholen, z. B. "Neuer Versuch in 20 s (einmal automatisch)." */
     warteText(info) {
-      return "Der Rechner ist gerade ausgelastet, nichts falsch gemacht. Neuer Versuch in " + info.sekunden + " s (Wiederholung " + info.versuch + " von " + info.von + ").";
+      return "Der Rechner ist gerade ausgelastet, nichts falsch gemacht. Neuer Versuch in " + info.sekunden + " s " + (info.von > 1 ? "(Wiederholung " + info.versuch + " von " + info.von + ")." : "(einmal automatisch).");
     },
-    /** POST mit JSON. Bei "ausgelastet" bis zu dreimal selbst wiederholen, danach BelegtFehler. */
-    async post(pfad, obj, signal, bei) {
+    /** POST mit JSON. Bei "ausgelastet" wiederholen (Standard dreimal; opt.max und opt.sek ueberschreiben, der Chat wiederholt einmal nach 20 s), danach BelegtFehler. */
+    async post(pfad, obj, signal, bei, opt) {
+      const max = (opt && opt.max) || MAX_WIEDERHOLUNGEN;
       for (let versuch = 1; ; versuch++) {
         const r = await fetch(pfad, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(obj || {}), signal });
         if (r.status !== 503 && r.status !== 429) return r;
@@ -261,10 +285,10 @@
         try { d = await r.clone().json(); } catch (e) { /* kein JSON */ }
         if (!d || !(d.belegt || d.limit)) return r;
         if (d.limit) throw new BelegtFehler(String(d.fehler || "Bitte warte einen Moment."), { art: "limit" });
-        if (versuch > MAX_WIEDERHOLUNGEN) throw new BelegtFehler(TEXT_BELEGT, { art: "belegt", versuche: versuch });
-        const sek = Math.max(3, Math.min(20, Number(d.wiederholen_s) || 8));
+        if (versuch > max) throw new BelegtFehler(TEXT_BELEGT, { art: "belegt", versuche: versuch });
+        const sek = opt && opt.sek ? opt.sek : Math.max(3, Math.min(20, Number(d.wiederholen_s) || 8));
         for (let rest = sek; rest > 0; rest--) {
-          if (bei) bei({ art: "warte", versuch, von: MAX_WIEDERHOLUNGEN, sekunden: rest });
+          if (bei) bei({ art: "warte", versuch, von: max, sekunden: rest });
           await schlafen(1000, signal);
         }
       }
@@ -290,6 +314,29 @@
         KL.icon("hourglass"),
         h("div", { class: "last-text" }, h("p", null, text),
           wiederholen ? h("button", { type: "button", class: "btn klein", onclick: wiederholen }, KL.icon("refresh-cw"), "Noch einmal versuchen") : null));
+    },
+    /** Karte "Der Jetson ist gerade ausgelastet": Titel, Text, Knopf "Noch einmal versuchen", Hinweis, was inzwischen hilft (opt.hilfe: Knoten),
+        und auf Wunsch (opt.auto Sekunden) ein automatischer Versuch, genau einmal. Gibt {el, stop} zurueck; stop beendet den Zaehler (Seitenwechsel, Klick). */
+    karte(opt) {
+      const o = opt || {};
+      let rest = o.auto || 0, timer = null, fertig = false;
+      const satz = h("p", { class: "last-auto", hidden: !rest });
+      const stop = () => { fertig = true; clearInterval(timer); satz.hidden = true; };
+      const los = () => { if (fertig) return; stop(); if (o.wiederholen) o.wiederholen(); };
+      const zeige = () => { satz.textContent = "Ich versuche es in " + rest + " Sekunden automatisch noch einmal, genau einmal."; };
+      const el = h("div", { class: "last-box last-karte", role: "status", dataset: { testid: "chat-ausfall" } },
+        KL.icon("hourglass"),
+        h("div", { class: "last-text" },
+          h("h3", { class: "last-titel" }, o.titel || "Der Jetson ist gerade ausgelastet"),
+          h("p", null, o.text || "Das liegt nicht an dir. Der Rechner bearbeitet gerade andere Fragen."),
+          satz,
+          o.wiederholen ? h("button", { type: "button", class: "btn klein last-nochmal", onclick: los }, KL.icon("refresh-cw"), "Noch einmal versuchen") : null,
+          o.hilfe ? h("div", { class: "last-hilfe" }, h("p", null, h("b", null, "Bis dahin hilft: ")), o.hilfe) : null));
+      if (rest) {
+        zeige();
+        timer = setInterval(() => { if (!el.isConnected) { stop(); return; } rest--; if (rest <= 0) { los(); return; } zeige(); }, 1000);
+      }
+      return { el, stop };
     },
   };
 
@@ -360,6 +407,8 @@
   }
   KL.willkommen = {
     oeffnen: willkommenOeffnen,
+    /** Schliesst ein offenes Fenster wie "Spaeter" (Adresswechsel); ohne offenes Fenster geschieht nichts. */
+    schliessen() { const d = wkOffen; if (d) { if (d.close) d.close(); else { d.removeAttribute("open"); d.dispatchEvent(new Event("close")); } } },
     beimStart() {
       if (!wkErstbesuch()) return;
       requestAnimationFrame(() => setTimeout(() => { if (wkErstbesuch() && !document.querySelector("dialog[open]")) willkommenOeffnen({}); }, 500));

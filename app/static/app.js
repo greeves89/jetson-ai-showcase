@@ -46,6 +46,13 @@
      Willkommens-Fenster (laien.js, Texte INHALT.willkommen): erscheint nur beim ersten Besuch der Startseite, nutzt KL.wegListe() (Schluessel, Titel, Symbol)
        und KL.wegWaehlen(schluessel); "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile oeffnet dieselbe Karte (KL.willkommen.oeffnen). Die Karte blockiert nichts (kein Modal).
        localStorage kl-willkommen merkt, dass sie gesehen wurde.
+   RECHNERSTATUS: KL.rechner.lage(statsObjekt) liefert {zustand: "frei"|"rechnet"|"voll", aktiv, wartend, parallel, gpu} aus der Warteschlange des Servers,
+     KL.rechner.satz(d) den Klartext. Startseite, Seitenleiste und Chat nutzen NUR diese Funktion ("bereit und frei" nie, solange Anfragen laufen oder warten).
+   CHECKLISTEN-HAKEN: KL.haken.lesen(seitenId) / schreiben(seitenId, [Nummern]): mit Einwilligung (kl-merken) in localStorage kl-haken-<id>, sonst nur in der Sitzung
+     (sessionStorage); "Fortschritt merken" aus leert die dauerhaften Haken. Das Dokument meldet Wechsel mit dem Ereignis kl-merken-geaendert.
+   DRUCK: Jede Lernseite beginnt mit einem Druckkopf (.druck-kopf: Titel, Adresse, nur im Druck sichtbar); laien.css blendet im Druck Bedienelemente aus.
+   SUCHE: Mehrwort-Anfragen zeigen Seiten mit ALLEN Woertern zuerst, Seiten mit einzelnen Woertern in einem eigenen Block danach. Die Rolle gewichtet die Treffer:
+     Seitenfeld rollen (Liste von Wegen, z. B. ["eltern"]), sonst "Fuer dich", Pfad oder Gruppe der Rolle; Schulseiten stehen bei anderen Rollen weiter hinten.
    QUIZ (Seitenfeld quiz: [{frage, optionen, richtig, erklaerung, abschnitt?}]): Antworten werden bei jedem Aufbau gemischt (input.value bleibt der urspruengliche
      Index, richtig gilt weiter). Maus und Touch werten sofort aus, mit der Tastatur waehlen die Pfeiltasten nur und Enter oder "Antwort pruefen" bestaetigt.
      Richtig und falsch tragen Symbol und Text. "Noch einmal" baut das Quiz neu auf. Optional abschnitt (Abschnitts-id, Ueberschrift oder laufende Nummer ab 1):
@@ -55,6 +62,8 @@
    TEXTAUSZEICHNUNG KL.md: **fett**, `code`, [[glossar|Text]], {{seite|Text}} und [Text](Adresse). Adressen nur mit https:// oder / am Anfang
      (kein // und keine anderen Schemata, sonst bleibt es Klartext); alles wird zuerst escaped. Externe Adressen (https://) bekommen
      rel="noopener noreferrer" und target="_blank", die Klasse md-link ist am Handy mindestens 44 px hoch. Interne (/seite) laufen im Router.
+   BAUSTEIN IM ABSCHNITT: Abschnittsfeld widget: "name" haengt KL.widgets[name] unter den Text des Abschnitts (immer sichtbar), neben dem Seitenfeld widget.
+     Beispiel: der Abschnitt "kamera" der Seite kosten-energie mit widget: "kosten-kamera" (Kostenrechner Handpruefung gegen Kamerasystem, widgets-prognose.js).
    CODEBLOECKE: Abschnittsfeld code: [{titel, sudo, text}] (nur bei Anleitungen, Beispiel: Seite selbst-bauen). text ist roher Text, der per
      textContent in <pre><code> kommt (wie md() nie als HTML) und genau so kopiert wird; titel ist die Beschriftung; sudo ist ein Satz mit dem Grund
      und zeigt die Markierung "braucht sudo". Der Knopf "Kopieren" ist mindestens 44 px hoch, nutzt navigator.clipboard und notfalls execCommand;
@@ -252,12 +261,19 @@
       h("div", { class: "mini" }, h("div", { class: "z" }, "Strom", live.w)),
       live.modell);
   }
-  /** Eine Aussage zur Auslastung fuer Seitenleiste und Startseite: "voll" (Warteschlange), "rechnet" (GPU ab 60 Prozent) oder "frei". */
-  function rechnerZustand(d) {
+  /** EINE Aussage zur Auslastung fuer Seitenleiste, Startseite und Chat (KL.rechner). Quelle ist die Warteschlange des Servers
+      (dieselben Zahlen wie /api/warteschlange, kommen mit den Live-Werten): "voll" (alle Plaetze belegt oder jemand wartet), "rechnet"
+      (mindestens eine Anfrage laeuft oder die GPU ist ab 60 Prozent ausgelastet) oder "frei" (nichts laeuft, niemand wartet). */
+  function rechnerLage(d) {
     const w = (d && d.warteschlange) || {};
-    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "voll";
-    return d && d.gpu_pct != null && d.gpu_pct >= 60 ? "rechnet" : "frei";
+    const aktiv = Number(w.aktiv) || 0, wartend = Number(w.wartend) || 0, parallel = Number(w.parallel) || 0;
+    const gpu = d && d.gpu_pct != null ? d.gpu_pct : null;
+    let zustand = "frei";
+    if (parallel && (aktiv >= parallel || wartend > 0)) zustand = "voll";
+    else if (aktiv > 0 || (gpu != null && gpu >= 60)) zustand = "rechnet";
+    return { zustand, aktiv, wartend, parallel, gpu };
   }
+  const rechnerZustand = (d) => rechnerLage(d).zustand;
   function liveAktualisieren(d) {
     live.punkt.classList.toggle("aus", !d.frisch);
     const z = rechnerZustand(d);
@@ -293,7 +309,7 @@
   function videoBlock(ids) {
     ids = [].concat(ids).filter(Boolean);
     const reihe = ids.length > 1;
-    const wrap = h("section", { class: "block", hidden: true }, h("h2", null, icon("play"), reihe ? "Videoreihe" : "Erklärvideo"));
+    const wrap = h("section", { class: "block video-block", hidden: true }, h("h2", null, icon("play"), reihe ? "Videoreihe" : "Erklärvideo"));
     const flaeche = h("div", { class: "flaeche reihe" }, h("div", { class: "video leer" }, h("div", { class: "platz" }, icon("play"), h("div", null, h("b", null, "Das Video wird geladen")))));
     wrap.append(flaeche);
     manifestP.then((m) => {
@@ -331,11 +347,12 @@
           if (untertitelAn && !vollbild) video.dataset.ut = "unter"; else delete video.dataset.ut;
           unterZeigen();
         };
-        const utText = h("span", null, untertitelAn ? "Untertitel an" : "Untertitel aus");
+        const utTitel = () => (untertitelAn ? "Untertitel ausschalten" : "Untertitel einschalten");          // Knopf nennt die Handlung, aria-pressed den Zustand
+        const utText = h("span", null, utTitel());
         const utKnopf = spur ? h("button", { type: "button", class: "btn klein ut-schalter", "aria-pressed": String(untertitelAn), onclick: () => {
           untertitelAn = !untertitelAn;
           utKnopf.setAttribute("aria-pressed", String(untertitelAn));
-          utText.textContent = untertitelAn ? "Untertitel an" : "Untertitel aus";
+          utText.textContent = utTitel();
           unterModus();
         } }, icon("captions"), utText) : null;
         if (spur) {
@@ -440,9 +457,25 @@
     if (merken) { speicherSchreiben("kl-gelesen", JSON.stringify([...gelesen])); zuletztSpeichern(); }
     else { speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null); }
     try { if (merken && pfadWahl) sessionStorage.setItem("kl-pfad", pfadWahl); else if (!merken) sessionStorage.removeItem("kl-pfad"); } catch (e) { /* egal */ }
+    if (!merken) haken.leeren();
+    document.dispatchEvent(new CustomEvent("kl-merken-geaendert"));          // Checklisten schreiben ihren Stand neu (an: dauerhaft, aus: nur Sitzung)
     for (const b of $$(".merken-schalter")) { b.setAttribute("aria-checked", String(merken)); const t = $(".merken-zustand", b); if (t) t.textContent = merken ? "an" : "aus"; }
     if (aktuelleId === "start") route(window.scrollY);
   }
+  /** Haken von Checklisten (Schluessel kl-haken-<seite>, Liste der gesetzten Nummern): mit Einwilligung zum Merken (kl-merken) in localStorage, sonst nur
+      in dieser Sitzung (sessionStorage, weg beim Schliessen des Tabs). Aus beim Merken leert die dauerhaften Eintraege wie den Fortschritt. */
+  const haken = {
+    lesen(k) {
+      try { const l = JSON.parse((merken ? localStorage : sessionStorage).getItem("kl-haken-" + k) || "[]"); return Array.isArray(l) ? l.filter((x) => Number.isInteger(x)) : []; } catch (e) { return []; }
+    },
+    schreiben(k, liste) {
+      const t = JSON.stringify(liste || []);
+      try { if (merken) { localStorage.setItem("kl-haken-" + k, t); sessionStorage.setItem("kl-haken-" + k, "[]"); } else sessionStorage.setItem("kl-haken-" + k, t); } catch (e) { /* ohne Speicher: nur auf dem Bildschirm */ }
+    },
+    leeren() {
+      try { for (const k of Object.keys(localStorage)) if (k.startsWith("kl-haken-")) speicherSchreiben(k, null); } catch (e) { /* egal */ }
+    },
+  };
   function fortschrittLoeschen() {
     gelesen = new Set(); zuletzt = null;
     speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null);
@@ -527,6 +560,17 @@
   }
   /** Minuten Lesen fuer eine Liste von Seiten (im gewaehlten Lesemodus). */
   const lesenMinuten = (ids) => [].concat(ids).reduce((n, id) => n + seitenZeit(id).lesen, 0);
+  /** Gesamtminuten einer Liste von Seiten: Lesen plus Video plus Labor, aus denselben Zahlen wie zeitText (Unterricht zaehlt mit seinen Minuten). */
+  const gesamtMinuten = (ids) => {
+    const z = [].concat(ids).map(seitenZeit);
+    const summe = (k) => z.reduce((n, x) => n + (x[k] || 0), 0);
+    return summe("unterricht") + summe("lesen") + Math.round(summe("video") / 60) + summe("labor");      // Video wie in zeitText: erst alle Sekunden, dann runden
+  };
+  /** Wirklich gerechnete Ueberschrift einer Reihe: "In 15 Minuten", solange die Summe der Seiten hoechstens 15 ist, sonst "In ca. 17 Minuten". */
+  function minutenTitel(ids, grundTitel) {
+    const m = gesamtMinuten(ids);
+    return m > 15 ? "In ca. " + m + " Minuten" : (grundTitel || "In 15 Minuten");
+  }
   /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. Jede Angabe ist ein Stueck mit
       geschuetzten Leerzeichen, damit eine Zeile nie mit einem einzelnen "Min" endet (umbrochen wird nur an den Kommas). */
   const stueck = (t) => t.replace(/ /g, "\u00a0");
@@ -547,6 +591,12 @@
   /** Textfeld, das immer zeitText(ids) zeigt (vor und nach sind feste Textteile davor und dahinter). */
   function zeitFeld(ids, vor, nach, klasse) {
     const fn = () => (vor || "") + zeitText(ids) + (nach ? nach() : "");
+    const el = h("span", { class: klasse || null }, fn());
+    zeitFelder.push({ el, fn });
+    return el;
+  }
+  /** Textfeld, dessen Inhalt fn() liefert und das sich mit Lesemodus und Videokatalog neu rechnet (Titel der Reihen mit Zeitsumme). */
+  function rechenFeld(fn, klasse) {
     const el = h("span", { class: klasse || null }, fn());
     zeitFelder.push({ el, fn });
     return el;
@@ -640,7 +690,7 @@
   }
   /* ---- Suche: Volltext ueber alle Seiten, Glossarbegriffe, Suchwoerter (Synonyme) und Vorschlaege bei leerem Treffer */
   const norm = (t) => String(t).toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
-  let suchIndex = null;
+  let suchIndex = null, teilBlock = null;
   /** Text fuer die Suche: klein, ohne Umlaute, Satzzeichen als Leerzeichen, Leerzeichen vorn und hinten (so lassen sich Wortanfaenge pruefen). */
   const suchText = (t) => " " + norm(t).replace(/[^a-z0-9]+/g, " ").trim() + " ";
   /* Volltextindex: alle sichtbaren Texte einer Seite (Ueberschriften, Kurztexte, Absaetze, Listen, Tabellen, Aufgaben, Quiz, Downloads, Mitnehmen)
@@ -653,8 +703,22 @@
     if (Array.isArray(x)) { for (const y of x) textSammeln(y, out, tiefe + 1); return; }
     if (typeof x === "object") for (const [k, v] of Object.entries(x)) if (!SUCH_UEBERSPRINGEN.has(k)) textSammeln(v, out, tiefe + 1);
   }
-  /** Saetze einer Seite (Klartext) mit normierter Form, fuer den Textauszug bei Treffern. */
-  const satzListe = (texte) => texte.flatMap((t) => (klar(t).match(/[^.!?:]+(?:[.!?:]+(?=\s|$)|$)/g) || []).map((x) => x.trim())).filter((t) => t.length > 12).map((p) => ({ p, n: suchText(p) }));
+  /** Saetze einer Seite (Klartext) mit normierter Form, fuer den Textauszug bei Treffern. Gesplittet wird nur an Punkt, Ausrufe- und Fragezeichen
+      (nicht am Doppelpunkt), Abkuerzungen wie "z. B." und "ca." trennen nicht; Bruchstuecke (klein anfangend, ohne Satzende-Zeichen mitten im Text) fallen weg. */
+  const ABKUERZUNG = /(?:\b[A-Za-z]|\b(?:ca|bzw|usw|vgl|Nr|Abb|inkl|ggf|evtl|etc|Dr|Prof|Std|Min|Mio|Mrd|max|min|Tab|zzgl|St|Hr|Fr)|\b\d+)\.$/;
+  function saetzeAus(t) {
+    const roh = klar(t).match(/[^.!?]+(?:[.!?]+(?=\s|$)|$)/g) || [];
+    const aus = [];
+    for (const x of roh) {
+      const z = x.trim();
+      if (!z) continue;
+      const vor = aus[aus.length - 1];
+      if (vor && (ABKUERZUNG.test(vor) || /^[a-zäöüß(,;)\-\u2013]/.test(z))) aus[aus.length - 1] = vor + " " + z;
+      else aus.push(z);
+    }
+    return aus;
+  }
+  const satzListe = (texte) => texte.flatMap(saetzeAus).filter((t) => t.length > 12 && /^[A-ZÄÖÜ„"'0-9]/.test(t)).map((p) => ({ p, n: suchText(p) }));
   function suchIndexBauen() {
     const seiten = {};
     for (const [id, sd] of Object.entries(INHALT.seiten)) {
@@ -681,8 +745,8 @@
       if (p > bestP) { bestP = p; beste = s; }
     }
     if (!beste) return ersterSatz((INHALT.seiten[id] || {}).kurz || "", 120);
-    const GRENZE = 150;
-    if (beste.p.length <= GRENZE) return beste.p;
+    const GRENZE = 170;
+    if (beste.p.length <= GRENZE) return beste.p;                      // ganzer Satz: beginnt und endet an der Satzgrenze, ohne Auslassungspunkte
     // Fundstelle im Originaltext suchen: normierte Form (ae fuer ä usw.) auf Zeichenpositionen zurueckrechnen
     const nn = []; const pos = [];
     for (let i = 0; i < beste.p.length; i++) { const z = norm(beste.p[i]); for (let k = 0; k < z.length; k++) { nn.push(z[k]); pos.push(i); } }
@@ -690,11 +754,18 @@
     let treffer = -1;
     for (const alt of q) for (const w of woerter(alt)) { const i = flach.indexOf(w); if (i >= 0 && (treffer < 0 || i < treffer)) treffer = i; }
     const mitte = treffer >= 0 ? pos[treffer] : 0;
-    let von = Math.max(0, mitte - 50);
-    if (von > 0) { const sp = beste.p.indexOf(" ", von); von = sp >= 0 && sp < mitte ? sp + 1 : von; }
-    let bis = Math.min(beste.p.length, von + GRENZE);
-    if (bis < beste.p.length) { const sp = beste.p.lastIndexOf(" ", bis); bis = sp > von + 40 ? sp : bis; }
-    return (von > 0 ? "… " : "") + beste.p.slice(von, bis).replace(/[,;:\s]+$/, "") + (bis < beste.p.length ? " …" : "");
+    // Start: der Satzanfang; liegt die Fundstelle zu weit hinten, ab dem Satzteil (nach Komma oder Semikolon) davor. Auslassungspunkte nur am Ende.
+    let t = beste.p;
+    if (mitte > GRENZE - 50) {
+      const k = Math.max(t.lastIndexOf(", ", mitte), t.lastIndexOf("; ", mitte));
+      if (k > 0 && mitte - k < GRENZE - 50) t = t.slice(k + 2).replace(/^./, (c) => c.toUpperCase());
+    }
+    if (t.length <= GRENZE) return t;
+    let bis = t.lastIndexOf(" ", GRENZE);
+    const komma = t.lastIndexOf(", ", GRENZE);
+    if (komma > GRENZE * 0.6) bis = komma;                              // lieber an einem Satzteil enden
+    if (bis < 40) bis = GRENZE;
+    return t.slice(0, bis).replace(/[,;:\s(]+$/, "") + " …";
   }
   /** Zerlegt die Eingabe in Suchwoerter. Jedes Wort darf durch seine Synonyme ersetzt werden (ChatGPT findet Chat, Foto findet Bild);
    *  steht die ganze Eingabe als Wortgruppe in INHALT.synonyme ("fake news", "wer haftet"), gilt sie als ein Wort.
@@ -714,8 +785,8 @@
   }
   /** Punkte einer Seite oder eines Begriffs. Je Suchwort zaehlt der beste Treffer: Wortanfang im Feld voll, mitten im Wort (nur bei Woertern ab 5 Buchstaben)
    *  nur zu 30 Prozent, Synonyme zu 60 Prozent; "=id" bringt 24 minus 2 je Listenplatz, wenn es die Seite selbst ist. Alle Suchwoerter muessen treffen. */
-  function suchPunkte(q, felder, id) {
-    let summe = 0;
+  function suchPunkte(q, felder, id, teil) {
+    let summe = 0, n = 0;
     for (const alt of q) {
       let best = 0;
       alt.forEach((a, i) => {
@@ -728,10 +799,24 @@
           else if (wort.length > 4 && text.includes(wort)) best = Math.max(best, gewicht * faktor * 0.3);
         }
       });
-      if (!best) return 0;
-      summe += best;
+      if (!best) { if (teil) continue; return 0; }
+      summe += best; n++;
     }
-    return summe;
+    return teil ? { summe, n } : summe;
+  }
+  /** Rollen-Gewicht einer Seite fuer die Suche: Feld rollen (Liste von Wegen) an der Seite, sonst "Fuer dich" der Rolle, Pfad der Rolle oder Gruppe der Rolle.
+      Eltern: Elternseiten vor Schulseiten, Betrieb: Betriebsseiten vor Schulseiten, Schule: Schulseiten zuerst. Ohne Rolle 1. */
+  function rollenGewicht(id) {
+    const w = aktiverWeg();
+    if (!w) return 1;
+    const sd = INHALT.seiten[id] || {}, M = INHALT.menue || {};
+    if (Array.isArray(sd.rollen)) return sd.rollen.map(wegNorm).includes(w) ? 1.6 : 0.85;
+    if (((M.fuerDich || {})[w] || []).includes(id)) return 1.6;
+    if (pfadeListe().some((p) => p.rolle === w && p.ids.includes(id))) return 1.4;
+    const gr = ((M.reihenfolge || {})[w] || []).indexOf(sd.gruppe);
+    if (gr >= 0) return 1.25 - gr * 0.03;
+    if (sd.gruppe === "Für die Schule" && w !== "schule" && w !== "lehrende") return 0.7;     // Schulseiten stehen bei Eltern, Betrieb und Co. hinter den eigenen Seiten
+    return 1;
   }
   function distanz(a, b) {
     const m = a.length, n = b.length;
@@ -796,29 +881,38 @@
     const q = suchWoerter(text);
     const gespeichert = navOffenLesen();
     // Punkte je Seite; nur deutliche Treffer bleiben (ein Titel- oder Zieltreffer verdraengt Zufallsfunde im Fliesstext)
-    const punkte = new Map();
-    let beste = 0;
+    // Mehrwort-Anfragen: Seiten mit ALLEN Woertern stehen vor Seiten mit einzelnen Woertern (die nur bei deutlichem Treffer in Titel, Ueberschrift oder Kurztext mitkommen)
+    const punkte = new Map(), teilTreffer = new Set();
+    let beste = 0, besteTeil = 0;
     if (q.length) {
       for (const gr of navGruppen) if (!gr.sammel) for (const a of gr.eintraege) {
         const ix = suchIndex.seiten[a.id];
-        const p = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kopf, 4], [ix.kurz, 3], [ix.text, 1]], a.id) : 0;
-        punkte.set(a, p);
-        beste = Math.max(beste, p);
+        const r = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kopf, 4], [ix.kurz, 3], [ix.text, 1]], a.id, true) : { summe: 0, n: 0 };
+        if (r.n === q.length) { punkte.set(a, r.summe); beste = Math.max(beste, r.summe); }
+        else if (q.length > 1 && r.n > 0) { punkte.set(a, r.summe); teilTreffer.add(a); besteTeil = Math.max(besteTeil, r.summe); }
+        else punkte.set(a, 0);
       }
     }
     const grenze = Math.max(1, beste * 0.12);
-    let treffer = 0;
+    const grenzeTeil = Math.max(3, besteTeil * 0.35);
+    // aus den Teiltreffern nur die besten behalten (mit vollen Treffern wenige, sonst etwas mehr)
+    const teilErlaubt = new Set([...teilTreffer].filter((a) => punkte.get(a) >= grenzeTeil).sort((x, y) => punkte.get(y) - punkte.get(x)).slice(0, beste ? 6 : 12));
+    let treffer = 0, teilAnzahl = 0;
     for (const gr of navGruppen) {
       if (gr.sammel) { gr.sec.hidden = true; continue; }                       // Sammelgruppen doppeln nur Seiten: in der Suche aus
       let inGruppe = 0;
       gr.beste = 0;
       for (const a of gr.eintraege) {
-        const p = q.length ? punkte.get(a) || 0 : 1;
-        const ok = p >= grenze;
+        const roh = q.length ? punkte.get(a) || 0 : 1;
+        const teil = teilTreffer.has(a);
+        const ok = teil ? teilErlaubt.has(a) : roh >= grenze;
+        const p = teil ? roh * rollenGewicht(a.id) : roh * rollenGewicht(a.id) + (q.length ? 1000 : 0);     // volle Treffer immer vor Teiltreffern, darin zaehlt die Rolle
         a.p = q.length ? p : 0;
+        a.el.dataset.treffer = q.length && ok ? (teil ? "teil" : "voll") : "";
         a.el.hidden = !ok;
         auszugSetzen(a, q, ok);
-        if (ok) { inGruppe++; gr.beste = Math.max(gr.beste, p); }
+        if (ok && !teil) { inGruppe++; gr.beste = Math.max(gr.beste, p); }
+        else if (ok) teilAnzahl++;
       }
       treffer += inGruppe;
       if (q.length) {
@@ -835,6 +929,7 @@
     }
     // Reihenfolge: bester Treffer zuerst (Gruppen und Seiten darin); ohne Suche wieder wie im Menue
     const nav = $("#nav-liste"), leerEl = $("#nav-leer");
+    treffer += teilAnzahl;
     const sortiert = q.length && treffer;
     const gruppen = sortiert ? navGruppen.filter((g) => !g.sammel).map((g, i) => [g, i]).sort((x, y) => y[0].beste - x[0].beste || x[1] - y[1]).map(([g]) => g) : navGruppen;
     for (const gr of navGruppen) {
@@ -848,6 +943,14 @@
       alle.kopf.hidden = !!q.length;
       alleOeffnen(q.length ? true : alle.offen, false);
       alle.inhalt.append(...(sortiert ? gruppen : navGruppen).map((g) => g.sec));
+      // Teiltreffer (nur einzelne Woerter der Anfrage) stehen in einem eigenen Block NACH allen vollen Treffern, damit "alle Woerter" immer zuerst kommt
+      const teilListe = [];
+      for (const gr of navGruppen) for (const a of gr.eintraege) if (a.el.dataset.treffer === "teil") teilListe.push(a);
+      teilListe.sort((x, y) => y.p - x.p);
+      if (!teilBlock) { teilBlock = { liste: h("div", { class: "navliste" }) }; teilBlock.sec = h("div", { class: "navgruppe nav-teil", hidden: true }, h("h2", { class: "nav-titel" }, "Nur einzelne Wörter gefunden"), teilBlock.liste); }
+      teilBlock.liste.replaceChildren(...teilListe.map((a) => a.el));
+      teilBlock.sec.hidden = !teilListe.length;
+      alle.inhalt.append(teilBlock.sec);
     }
     if (nav) {
       if (leerEl) nav.append(leerEl);
@@ -912,6 +1015,7 @@
   /* Menue: Suche, "Fuer dich" (je Rolle hoechstens sechs Seiten, offen) und der zugeklappte Block "Alle Bereiche" (Akkordeon der Gruppen).
      Ohne Rolle steht statt "Fuer dich" der "Einstieg": Start, Neu hier, In 15 Minuten. */
   let fuerDich = null, alle = null;
+  const SICHER_LETZT = ["eltern", "beruf", "schule"];
   /** Ein Menueeintrag (Link) fuer eine Seite. */
   function navEintrag(id) {
     const s = INHALT.seiten[id];
@@ -941,18 +1045,24 @@
     if (!fuerDich || !alle) return;
     const w = aktiverWeg();
     const M = INHALT.menue || { fuerDich: {}, reihenfolge: {}, sammel: {} };
-    fuerDich.titel.textContent = w ? "Für dich" : "Einstieg";
+    fuerDich.titel.textContent = "Für dich";               // gleiche Ueberschrift mit und ohne Rolle: der Block wechselt nur seine Eintraege, nicht sein Aussehen
     const eintraege = [navEintrag("start").el];
-    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 14)) eintraege.push(navEintrag(id).el);
-    else {
+    if (w) {
+      // "Ist das sicher?" steht fuer Eltern, Betrieb und Schule immer als letzter Eintrag (Heike, Svenja: sonst nur ueber die Suche zu finden)
+      const sicher = SICHER_LETZT.includes(w) && gibt("sicherheit-einfach");
+      const ids = (M.fuerDich[w] || []).filter(gibt).filter((id) => !(sicher && id === "sicherheit-einfach")).slice(0, sicher ? 13 : 14);
+      if (sicher) ids.push("sicherheit-einfach");
+      for (const id of ids) eintraege.push(navEintrag(id).el);
+    } else {
       const st = INHALT.seiten.start;
-      eintraege.push(navAnker("smile", "Neu hier", "anfangen"), navAnker("briefcase", ((st.entscheider && st.entscheider.titel) || "In 15 Minuten").split(":")[0], "entscheider"));
+      eintraege.push(navAnker("smile", "Neu hier", "anfangen"), navAnker("briefcase", rechenFeld(() => minutenTitel((st.entscheider.schritte || []).map((x) => x.id), ((st.entscheider && st.entscheider.titel) || "In 15 Minuten").split(":")[0])), "entscheider"),
+        navAnker("user-round", "Rolle wählen", "rollen-zeile"));
     }
     fuerDich.liste.replaceChildren(...eintraege);
+    // "Alle Bereiche": feste Reihenfolge, unabhaengig von der Rolle (sie ordnet nur "Fuer dich"); die Rolle blendet nur ihre Sammelgruppen ein
     const reihe = (w && M.reihenfolge[w]) || [];
-    const rang = (g) => { const i = reihe.indexOf(g.name); return i < 0 ? 99 : i; };
     for (const gr of navGruppen) gr.verborgen = gr.name === "Start" || (gr.sammel && !reihe.includes(gr.name));
-    navGruppen.sort((x, y) => rang(x) - rang(y) || x.nr - y.nr);
+    navGruppen.sort((x, y) => x.nr - y.nr);
     alle.inhalt.append(...navGruppen.map((g) => g.sec));
     for (const gr of navGruppen) gr.sec.hidden = !!gr.verborgen;
     navKennzeichnen();
@@ -1392,6 +1502,14 @@
         if (a.offen) { mb.open = true; mb.classList.add("immer-offen"); }          // Feld offen: der Abschnitt bleibt auch im Kurz-Modus aufgeklappt
         sec.append(mb);
       }
+      // Abschnittsfeld widget: ein Baustein (KL.widgets[name]) mitten im Abschnitt, immer sichtbar (nicht im Aufklapper), z. B. der Kostenrechner fuer Kameraprojekte
+      if (a.widget) {
+        const reg = (window.KL.widgets || {})[a.widget];
+        const wurzel = h("div", { class: "flaeche pad abschnitt-widget", dataset: { widget: a.widget } });
+        if (reg) { try { montiert.push(reg(wurzel, seite)); } catch (e) { console.error(e); wurzel.append(h("p", { class: "erklaerung" }, "Der Baustein konnte nicht starten: " + e.message)); } }
+        else wurzel.append(h("p", { class: "erklaerung" }, h("span", { class: "chip warn" }, "Baustein folgt")));
+        sec.append(wurzel);
+      }
       // "Mit Mathe": steht ausserhalb des Aufklappers, damit der Schalter in jedem Lesemodus wirkt; ohne Schalter bleibt es ausgeblendet (CSS)
       if (a.mathe && a.mathe.p && a.mathe.p.length) sec.append(h("aside", { class: "mathe" }, h("b", null, icon("sigma"), "Mit Mathe"), a.mathe.p.map((t) => h("p", { html: md(t) }))));
       out.append(sec);
@@ -1416,10 +1534,11 @@
   /** Statuschip in Klartext: bereit, viel los oder noch keine Verbindung (ohne Fachwoerter). */
   function statusSatz(d) {
     if (!d || !d.frisch) return "Der Rechner meldet sich gleich.";
-    const z = rechnerZustand(d);
-    if (z === "voll") return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
-    if (z === "rechnet") return "Der Rechner rechnet gerade (zu " + d.gpu_pct + " Prozent ausgelastet). Neue Fragen können einen Moment warten müssen.";
-    return "Der Rechner ist bereit und frei (zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet).";
+    const l = rechnerLage(d);
+    const n = (k, e, m) => k + " " + (k === 1 ? e : m);
+    if (l.zustand === "voll") return "Gerade viel los: " + (l.aktiv ? n(l.aktiv, "Frage läuft", "Fragen laufen") : "Fragen laufen") + (l.wartend ? ", " + l.wartend + " warten" : "") + ". Bei Chat und Dokumenten kann es dauern.";
+    if (l.zustand === "rechnet") return "Der Rechner rechnet gerade" + (l.aktiv ? " an " + n(l.aktiv, "Frage", "Fragen") : "") + ". Neue Fragen können einen Moment warten müssen.";
+    return "Der Rechner ist bereit und frei.";
   }
   function zuAbschnitt(id) {
     const z = document.getElementById(id);
@@ -1588,7 +1707,7 @@
     if (name === "minuten") {
       const e = seite.entscheider;
       const schrittIds = e.schritte.map((x) => x.id);
-      return h("section", { class: "block", id: "entscheider" }, kopf("briefcase", "In 15 Minuten"),
+      return h("section", { class: "block", id: "entscheider" }, kopf("briefcase", rechenFeld(() => minutenTitel(schrittIds))),
         h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
           h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
             h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
@@ -1612,7 +1731,7 @@
     // Alles uebrige liegt unter "Weitere Wege" (zugeklappt)
     const sAnfangen = h("section", { class: "block", id: "anfangen" }, h("h2", null, icon("smile"), "Neu hier? So fängst du an"),
       h("p", { class: "start-lead" }, "Drei Schritte, ohne Vorwissen."), schrittListe(anfangenFuer(seite), true));
-    const sEntscheider = w === "beruf" ? null : h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), "In 15 Minuten"),
+    const sEntscheider = w === "beruf" ? null : h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), rechenFeld(() => minutenTitel(schrittIds))),
       h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
         h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
           h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
@@ -1638,10 +1757,14 @@
       h("div", { class: "weitere-in" }, wegBlock(), sAnfangen, sEntscheider, sPfade, sBereiche));
     const einstiege = w ? null : h("section", { class: "block einstiege", id: "einstiege" },
       h("div", { class: "karten karten-3" },
-        karte({ symbol: "smile", kicker: "Einstieg", titel: "Neu hier?", text: "Drei Schritte, ohne Vorwissen.", meta: zeitFeld(anfangenFuer(seite).map((x) => x.id)), href: "#anfangen", knopf: "Hier anfangen", onclick: zuWeitere("anfangen") }),
-        karte({ symbol: "briefcase", kicker: "Für Entscheider", titel: "In 15 Minuten", text: "Was KI einem Betrieb bringt, in vier Seiten.", meta: zeitFeld(schrittIds), href: "#entscheider", knopf: "Überblick", onclick: zuWeitere("entscheider") }),
-        karte({ symbol: "layers", kicker: "Orientierung", titel: "Alle Bereiche", text: "Alle Themen auf einen Blick.", meta: kacheln.length + " Bereiche", href: "#bereiche", knopf: "Ansehen", onclick: zuWeitere("bereiche") })),
-      h("p", { class: "weg-fuss" }, h("button", { type: "button", class: "textlink", onclick: wegAendern }, icon("user-round"), "Für wen bist du hier? Weg wählen")));
+        karte({ symbol: "smile", kicker: "Einstieg", titel: "Neu hier?", text: "Drei Schritte, ohne Vorwissen.", meta: zeitFeld(anfangenFuer(seite).map((x) => x.id)), href: adresse(((anfangenFuer(seite) || [])[0] || { id: "start" }).id), knopf: "Hier anfangen" }),
+        karte({ symbol: "briefcase", kicker: "Für Entscheider", titel: rechenFeld(() => minutenTitel(schrittIds)), text: "Was KI einem Betrieb bringt, in vier Seiten.", meta: zeitFeld(schrittIds), href: "#entscheider", knopf: "Überblick", onclick: zuWeitere("entscheider") }),
+        karte({ symbol: "layers", kicker: "Orientierung", titel: "Alle Bereiche", text: "Alle Themen auf einen Blick.", meta: kacheln.length + " Bereiche", href: "#bereiche", knopf: "Ansehen", onclick: zuWeitere("bereiche") })));
+    // Ohne gewaehlte Rolle stehen die sechs Rollen direkt unter der Ueberschrift (auch wenn das Willkommens-Fenster fehlt oder zu ist)
+    const rollenZeile = w ? null : h("section", { class: "block rollen-zeile", id: "rollen-zeile", "aria-label": "Rolle wählen" },
+      h("p", { class: "rollen-lead" }, "Wofür bist du hier? Freiwillig, nichts wird gesendet."),
+      h("div", { class: "rollen-chips", role: "group", "aria-label": "Rolle wählen" }, Object.entries(WEGE).map(([k, wg]) =>
+        h("button", { type: "button", class: "chip rollen-chip", dataset: { weg: k }, onclick: () => wegWaehlen(k) }, icon(wg.symbol), wg.titel))));
     const fuss = h("section", { class: "block start-fuss" },
       h("div", { class: "hinweis" }, icon("shield-check"), h("p", null, h("strong", null, "Ist das sicher? "), ersterSatz(seite.datenschutz), " ", h("a", { href: "/sicherheit-einfach" }, "Mehr dazu"))),
       h("div", { class: "hinweis" }, icon("users"), h("p", null, h("strong", null, "Ab wann? "), INHALT.alterHinweis || "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck.")),
@@ -1649,6 +1772,7 @@
     return h("div", { class: "seitenbreite breit start" },
       hero({ ueber: w ? "KI-Labor · " + WEGE[w].name : "KI-Labor", titel: R.h1 || seite.titel, leadMd: R.satz || seite.kurz, lead: klar(R.satz || seite.kurz), gross: true, ohneIcon: true,
         kennzahlen: [kennzahl("badge-check", "Kostenlos"), kennzahl("user-check", "Ohne Anmeldung")], unten: h("div", { class: "hero-aktionen" }, chip) }),
+      rollenZeile,
       einstiege,
       weiterKarte(),
       ...(w ? (R.bloecke || []).map((b) => startBlock(b, w, R, seite)) : []),
@@ -1754,6 +1878,11 @@
       setTimeout(() => { const max = document.documentElement.scrollHeight - window.innerHeight; if (max > 0 && y > 0 && window.scrollY < 4) window.scrollTo({ top: Math.round(max * y), left: 0, behavior: "instant" }); }, 450);
     }
   }
+  /** Kopf fuer den Ausdruck (nur im Druck sichtbar): Seitentitel und Adresse. Die Adresse wird kurz vor dem Druck noch einmal gesetzt. */
+  function druckKopf(titel) {
+    return h("div", { class: "druck-kopf", "aria-hidden": "true" }, h("b", null, "KI-Labor: " + titel), h("span", { class: "druck-url" }, location.origin + location.pathname));
+  }
+  window.addEventListener("beforeprint", () => { for (const u of $$(".druck-url")) u.textContent = location.origin + location.pathname; });
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
     if (seite.typ === "start") return startSeite(seite);
@@ -1762,7 +1891,7 @@
     const lzk = lesezeitKopf(seite);
     // Punkt nur zwischen zwei Angaben (nie haengend); am Handy stehen Gruppe und Zeit in zwei Zeilen ohne Punkt (CSS)
     const ueber = lzk ? (ueberText ? [ueberText, h("span", { class: "ueber-trenner", "aria-hidden": "true" }, " · "), lzk] : lzk) : ueberText;
-    const out = h("div", { class: "seitenbreite" }, zurueckZeile(),
+    const out = h("div", { class: "seitenbreite" }, druckKopf(seite.titel), zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
     const lzb = lernzieleBlock(seite); if (lzb) out.append(lzb);
     // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
@@ -1854,6 +1983,7 @@
     // Klassenlink: /?weg=schule gilt in dieser Sitzung (im Speicher der Seite), es wird nichts abgelegt
     if (wegGueltig(aktuelleAbfrage.weg) && wegNorm(aktuelleAbfrage.weg) !== wegUrl) { wegUrl = wegNorm(aktuelleAbfrage.weg); wegAnwenden(false); }
     tipAus(); aufraeumen();
+    if (window.KL && window.KL.willkommen && window.KL.willkommen.schliessen) window.KL.willkommen.schliessen();       // Adresswechsel (Zurueck-Taste, Link, Hash): das Willkommens-Fenster bleibt nicht offen
     if (!lesemodusGemerkt) { const m = seitenStandardModus(gueltig || "start"); if (m !== lesemodus) lesemodusAnwenden(m); }      // Standardmodus je Seite, wenn du nichts gewaehlt hast
     if (document.body.classList.contains("menue-offen")) menueSchalten(false);        // Handy: das offene Menue deckt die neue Seite nicht ab (Link im Menue, Zurueck-Taste, Adresse)
     const main = $("#inhalt");
@@ -1903,8 +2033,13 @@
     navigiere(ziel);
   });
   history.scrollRestoration = "manual";
-  window.addEventListener("popstate", () => route(history.state && history.state.y));
-  window.addEventListener("hashchange", () => { if (ausHash(location.hash)) route(); });
+  /** Bei jedem Adresswechsel (Zurueck-Taste, Link, Hash) bleiben Menue und Willkommens-Fenster nicht offen. */
+  function ebenenSchliessen() {
+    if (document.body.classList.contains("menue-offen")) menueSchalten(false);
+    if (window.KL && window.KL.willkommen && window.KL.willkommen.schliessen) window.KL.willkommen.schliessen();
+  }
+  window.addEventListener("popstate", () => { ebenenSchliessen(); route(history.state && history.state.y); });
+  window.addEventListener("hashchange", () => { ebenenSchliessen(); if (ausHash(location.hash)) route(); });
 
   /* Einstellungsgruppe im Stil der Systemeinstellungen. zeilen: Elemente (.regler, .w-schalter, .g-zeile ...). */
   function gruppe(titel, zeilen, opt) {
@@ -1934,6 +2069,9 @@
   Object.defineProperty(window.KL, "lesemodus", { enumerable: true, get: () => lesemodus, set: lesemodusSetzen });
   Object.defineProperty(window.KL, "weg", { enumerable: true, get: () => aktiverWeg() });
   window.KL.gelesen = (id) => gelesen.has(id);
+  /** Gemeinsamer Rechnerstatus (Startseite, Seitenleiste, Chat): KL.rechner.lage(statsObjekt) -> {zustand: "frei"|"rechnet"|"voll", aktiv, wartend, parallel, gpu}, KL.rechner.satz(d) -> Klartext. */
+  window.KL.haken = haken;
+  window.KL.rechner = { lage: rechnerLage, satz: statusSatz };
 
   function ladeSkript(src) {
     return new Promise((ok) => {

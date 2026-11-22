@@ -1,4 +1,4 @@
-<div class="seitenbreite"><p class="ueber">Sprache</p><h1>Sprachmodell im Chat</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.</p><p class="lead">Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.</p>
+<div class="seitenbreite"><p class="ueber">Sprache</p><h1>Sprachmodell im Chat</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen.</p><p class="lead">Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.</p>
 <div class="text">
 <h2 class="abs">Was du hier steuern kannst</h2>
 <figure class="visual"><figcaption>Tokens</figcaption><ul><li>9 Stücke: Hal | lo | , | wie | kann | ich | hel | fen | ?</li></ul></figure>
@@ -8,6 +8,9 @@
 <figure class="visual"><figcaption>Ablauf</figcaption><ul><li>SSD (rund 2 GB)</li><li>Arbeitsspeicher (beim ersten Start)</li><li>GPU (rechnet Token)</li><li>Antwort (Stück für Stück)</li></ul></figure>
 <p class="kurz">Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token.</p>
 <p>Beim ersten Start wird das Modell von der SSD in den Arbeitsspeicher geladen. Das Modell hat etwa drei Milliarden Parameter und belegt rund 2 GB auf der Platte. Danach rechnet die GPU jedes Token. In der Seitenleiste steigen dabei GPU-Last und Leistung.</p>
+<h2 class="abs">Wie viel das Modell auf einmal sieht</h2>
+<p class="kurz">Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen. Was darüber hinausgeht, sieht das Modell nicht.</p>
+<p>Das Modell wurde für sehr viel längere Texte gebaut, das Labor stellt aber nur 4096 Token ein (<code>OLLAMA_CONTEXT_LENGTH</code>, Grund und Zahlen auf <a href="/hardware">Hardware</a>). Praktisch heißt das: Eine längere E-Mail passt hinein, ein ganzes Handbuch nicht. Frage, bisherige Unterhaltung und Antwort teilen sich diese 4096 Token. Was darüber hinausgeht, sieht das Modell nicht. Wie Text in Token zerfällt, zeigt <a href="/tokens-sprachmodelle">Wie ein Sprachmodell gebaut ist</a>.</p><p>Die Antwort braucht Zeit. Das Modell lädt beim ersten Mal bis zu einer Minute, und bei viel Betrieb steht eine Warteschlange davor: Rechne mit bis zu zwei Minuten, bis die Antwort fertig ist.</p>
 <h2 class="abs">Warum es kleiner ist als bekannte Chatbots</h2>
 <figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Jetson, drei Mrd. Parameter: Sofort verfügbar, Privat, Weiß weniger, Mehr Fehler</li><li>Rechts: Große Dienste: Viel mehr Parameter, Im Rechenzentrum, Weiß mehr</li></ul></figure>
 <p class="kurz">Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.</p>
@@ -16,6 +19,6 @@
 <p class="kurz">Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite <a href="/tokens-sprachmodelle">Wie ein Sprachmodell gebaut ist</a>.</p>
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Ein interner Assistent für Entwürfe, Zusammenfassungen und Fragen, ohne dass Firmeninhalte das Haus verlassen.</p><ul><li>Mail-Entwürfe</li><li>Zusammenfassung eines langen Textes</li></ul></div></section>
-<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Kleine Modelle erfinden häufiger Fakten (Halluzination). Prüfe wichtige Aussagen.</li><li>Der Kontext ist begrenzt. Dieses Labor merkt sich keine frühere Unterhaltung.</li></ul></div></section>
+<section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Kleine Modelle erfinden häufiger Fakten (Halluzination). Prüfe wichtige Aussagen.</li><li>Der Kontext ist begrenzt: Im Labor sind es 4096 Token. Was darüber hinausgeht, sieht das Modell nicht. Dieses Labor merkt sich keine frühere Unterhaltung.</li></ul></div></section>
 <section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/genki">Generative KI</a></li><li><a href="/rag">RAG-Werkstatt: Fragen an eigene Dokumente</a></li><li><a href="/agent">Agent mit Werkzeugen</a></li></ul></section>
 </div>

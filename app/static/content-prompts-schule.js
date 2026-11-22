@@ -79,7 +79,7 @@ seiten: {
      optionen: ["Ich übernehme es, so genaue Angaben sind meist richtig", "Ich frage die KI, ob sie sich sicher ist, und glaube ihr", "Ich lasse das Jahr weg, dann fällt ein Fehler nicht auf", "Ich suche das Buch selbst, bevor ich es angebe"],
      richtig: 3, erklaerung: "Genaue Angaben können erfunden sein. Nur die eigene Suche klärt, ob es das Buch gibt."},
   ],
-  weiter: ["prompts-fuer-schueler", "chat", "referat", "ki-hausaufgaben-fair"],
+  weiter: ["prompts-fuer-schueler", "prompts-alltag", "chat", "referat", "ki-hausaufgaben-fair"],
 },
 
 },

@@ -55,7 +55,7 @@ for (let i = 1; i <= 7; i++) {
 }
 const THEMA = { 1: "Was ist KI?", 2: "Wie lernt ein Computer?", 3: "Echt oder erfunden?" };
 const MEDIEN = { 1: "Echt oder KI?", 2: "Quellen prüfen", 3: "Fake News und Deepfakes", 4: "KI und Hausaufgaben", 5: "Datenschutz im Alltag", 6: "Gute Fragen stellen", 7: "KI in deinem Alltag" };
-const QUELLENFUSS = "Operatoren und Bereiche nach: Bildungsserver Rheinland-Pfalz (bildung.rlp.de, Informatik, 2013), IQB Abituraufgabenpools (iqb.hu-berlin.de, 2026), Bildungsplan Baden-Württemberg 2016 (lehrerfortbildung-bw.de), abgerufen am 22.11.2026. Die Zuordnung kann je Bundesland und Fach leicht abweichen.";
+const QUELLENFUSS = "Operatoren und Bereiche nach: Bildungsserver Rheinland-Pfalz (bildung.rlp.de, Informatik, 2013), IQB Abituraufgabenpools (iqb.hu-berlin.de, 2026), Bildungsplan Baden-Württemberg 2016 (lehrerfortbildung-bw.de), Hessisches Kultusministerium (kultus.hessen.de, 2026), abgerufen am 22.11.2026. Die Zuordnung kann je Bundesland und Fach leicht abweichen.";
 const NIVEAU = { Basis: 1, Standard: 2, Herausforderung: 3 };
 
 /** Operatoren-Tabelle aus der Handreichung (eine Quelle fuer Seite, Arbeitsblatt und Loesungsblatt): kleingeschriebener Operator -> { name, text, bereich }. */
@@ -67,9 +67,9 @@ const OPERATOREN = (() => {
 })();
 /** Aufgabentext muss mit "**Operator** (Bereich)" beginnen; liefert alle im Text genutzten Operatoren in Reihenfolge, prueft das Kuerzel gegen die Tabelle. */
 function operatorenIn(titel, text) {
-  if (!/^\*\*[A-ZÄÖÜ][a-zäöüß]+\*\* \((I{1,3})\)/.test(text)) throw new Error(`${titel}: Aufgabe beginnt nicht mit einem Operator samt Bereich`);
+  if (!/^\*\*[A-ZÄÖÜ][a-zäöüß]+(?: zu)?\*\* \((I{1,3})\)/.test(text)) throw new Error(`${titel}: Aufgabe beginnt nicht mit einem Operator samt Bereich`);
   const gefunden = [];
-  for (const m of text.matchAll(/\*\*([A-Za-zÄÖÜäöüß]+)\*\* \((I{1,3})\)/g)) {
+  for (const m of text.matchAll(/\*\*([A-Za-zÄÖÜäöüß]+(?: zu)?)\*\* \((I{1,3})\)/g)) {
     const op = OPERATOREN[m[1].toLowerCase()];
     if (!op) throw new Error(`${titel}: Operator "${m[1]}" steht nicht in der Tabelle der Handreichung`);
     if (op.bereich !== m[2]) throw new Error(`${titel}: ${m[1]} trägt (${m[2]}), die Tabelle sagt ${op.bereich}`);
@@ -285,6 +285,7 @@ body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 .zus { break-inside: avoid; }
 .zus > h2 { margin-top: 0; }
 body.arbeitsblatt .zus.start { margin-top: 6mm; }
+.nurlehr { border: 0.5mm solid #000; padding: 1mm 3mm; margin: 0 0 2mm; display: inline-block; font-size: 10.5pt; }
 .zeitnote { font-size: 10.5pt; margin: 0 0 2mm; }
 table.plan td:first-child { width: 28mm; font-weight: bold; }
 ul.muster { margin: 0.5mm 0 0 0; padding-left: 5mm; font-size: 9.5pt; }
@@ -303,10 +304,41 @@ body.infoblatt .mehr .t { flex: 1 1 0; min-width: 0; }
 body.infoblatt .mehr .qrbox { flex: 0 0 auto; padding: 0; }
 body.infoblatt .mehr .adr { font-size: 8.5pt; }
 body.infoblatt .mehr small { display: block; font-size: 9.5pt; }
+
+/* Kartenset fuer Eltern */
+body.eltern { font-size: 11.5pt; line-height: 1.35; }
+body.eltern h1 { font-size: 18pt; margin: 3mm 0 2mm; }
+body.eltern h2 { font-size: 13pt; margin: 4mm 0 1.2mm; }
+body.eltern .lead { margin: 0 0 2mm; }
+body.eltern ol.regeln, body.eltern ul.fragen { margin: 0 0 2mm; padding-left: 6mm; }
+body.eltern ol.regeln li, body.eltern ul.fragen li { margin: 0 0 1.2mm; }
+body.eltern p { margin: 0 0 1.5mm; }
+body.eltern table.punkte { font-size: 10pt; table-layout: fixed; }
+body.eltern table.punkte th, body.eltern table.punkte td { padding: 1.2mm 0.5mm; text-align: center; height: 7mm; }
+body.eltern table.punkte th:first-child { width: 17mm; text-align: left; padding-left: 1.5mm; }
+body.eltern .mehr { margin-top: 3mm; }
+body.eltern .pg { break-before: page; }
+body.eltern .pg .bks { break-after: auto; gap: 5mm; }
+body.eltern table.auf { font-size: 9.5pt; }
+body.eltern table.auf td.n { width: 8mm; text-align: center; font-weight: bold; }
+body.eltern table.auf td.a { width: 16mm; font-weight: bold; }
+body.eltern .fuss-eltern { font-size: 9pt; margin-top: 3mm; }
+/* Entscheidungshilfe Betrieb (eine Seite) */
+body.entscheidung { font-size: 11.5pt; line-height: 1.3; }
+body.entscheidung h1 { font-size: 17pt; margin: 3mm 0 1mm; }
+body.entscheidung h2 { font-size: 12.5pt; margin: 3mm 0 1.5mm; }
+body.entscheidung .lead { margin: 0 0 2mm; }
+body.entscheidung .fr { display: flex; gap: 4mm; align-items: flex-start; margin: 0 0 2.4mm; break-inside: avoid; }
+body.entscheidung .fr .box { flex: 0 0 6.5mm; height: 6.5mm; margin-top: 0.5mm; }
+body.entscheidung .hilfe { font-size: 10.5pt; }
+body.entscheidung .drei { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; }
+body.entscheidung .drei div { border: 0.3mm solid #000; padding: 1.5mm 2.5mm; font-size: 10.5pt; }
+body.entscheidung .notiz .zeile { height: 6.8mm; }
+body.entscheidung .fuss { margin-top: auto; display: block; }
 `;
 
 
-const seite = (titel, klasse, inhalt) => `<!doctype html>
+const seite = (titel, klasse, inhalt, kopf = KOPF) => `<!doctype html>
 <html lang="de">
 <head>
 <meta charset="utf-8">
@@ -316,7 +348,7 @@ const seite = (titel, klasse, inhalt) => `<!doctype html>
 </head>
 <body class="${klasse}">
 <div class="seite">
-<div class="kopf"><span>${esc(KOPF)}</span></div>
+<div class="kopf"><span>${esc(kopf)}</span></div>
 ${inhalt}
 </div>
 </body>
@@ -397,6 +429,7 @@ function loesungsblatt(st) {
   const url1 = `${BASIS}/${st.id}?weg=schule`, url2 = `${BASIS}/schule-lehrkraefte?weg=schule`;
   return seite(`Lösungsblatt ${st.kenn}: ${st.titel}`, st.id === "medien-stunde-1" ? "loesung kompakt" : "loesung", `
 <h1>Lösungsblatt ${st.kenn}: ${esc(st.titel)} (für Lehrkräfte)</h1>
+<p class="nurlehr"><b>Nur für Lehrkräfte, nicht an Schüler weitergeben.</b></p>
 <h2>Einzelstunde: Zeitplan (45 Minuten)</h2>
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
 ${zp}
@@ -484,6 +517,70 @@ function kartenset() {
 `);
 }
 
+
+/* ------------------------------------------------------------------ Kartenset fuer Eltern (gleiche zwoelf Karten, eine Quelle: KARTEN) */
+const KOPF_KURZ = "KI-Labor, Stand " + STAND;
+function kartensetEltern() {
+  const karte = (k) => `<div class="bk"><img src="bildkarten/karte-${String(k.n).padStart(2, "0")}.jpg" alt="Bildkarte ${k.n}"><span class="nr">${k.n}</span></div>`;
+  const zellen = (txt) => KARTEN.map(() => `<td>${txt}</td>`).join("");
+  const url = `${BASIS}/echt-oder-ki?weg=eltern`;
+  const q = qrSvg(url, 0.7);
+  const auflKopf = aufloesungKarten().replace("<h2>Auflösung des Kartensets</h2>", "<h2>Auflösung für Eltern</h2>")
+    .replace("Sechs echte Fotos mit freier Lizenz, sechs KI-Bilder. Die Hinweise sind Anhaltspunkte, kein Beweis.", "Sechs Karten zeigen echte Fotos, sechs sind KI-Bilder. Die Hinweise sind Anhaltspunkte, kein Beweis. Schauen Sie erst nach, wenn alle zwölf Karten geraten sind.");
+  return seite("Kartenset Echt oder KI? für Eltern", "kartenset eltern", `
+<h1>Kartenset: Echt oder KI? Für Eltern und Kind</h1>
+<p class="lead">Zwölf Bildkarten auf den Seiten 2 und 3: sechs echte Fotos, sechs KI-Bilder. Sie spielen zu zweit, Sie und Ihr Kind. Es braucht dafür kein Gerät. Die Auflösung steht auf der letzten Seite.</p>
+<h2>Spielregeln für zwei</h2>
+<ol class="regeln">
+<li><b>Vorbereiten.</b> Drucken Sie die Seiten 2 und 3 aus. Ausschneiden ist möglich, Sie können aber auch direkt am Blatt raten. Halten Sie Stift und das Punkteblatt unten bereit.</li>
+<li><b>Abwechselnd raten.</b> Ihr Kind beginnt mit Karte 1, Sie folgen mit Karte 2, dann wieder Ihr Kind, bis Karte 12. Wer an der Reihe ist, sagt laut: „echt“, „KI“ oder „unklar“, und nennt einen Hinweis. Die andere Person darf widersprechen.</li>
+<li><b>Notieren.</b> Tragen Sie die Antwort im Punkteblatt ein: E für echt, K für KI, U für unklar. Noch nicht auflösen.</li>
+<li><b>Auflösen und Punkte zählen.</b> Nach Karte 12 lösen Sie auf der letzten Seite gemeinsam auf. Jede richtige Antwort ist ein Punkt. „Unklar“ ist erlaubt und zählt null Punkte.</li>
+<li><b>Sprechen.</b> Reden Sie bei jeder Karte kurz darüber, auch wenn die Antwort stimmte. Nicht der Punktestand ist wichtig, sondern was Sie beide gesehen haben.</li>
+</ol>
+<h2>Gesprächsfragen</h2>
+<ul class="fragen">
+<li>„Woran hast du es gesehen?“</li>
+<li>„Was hat dich zweifeln lassen?“</li>
+<li>„Könnte ein echtes Foto diese Stelle auch haben?“</li>
+<li>„Wie würdest du prüfen, woher das Bild kommt?“</li>
+</ul>
+<p>Erwachsene liegen bei guten KI-Bildern oft ebenso daneben wie Kinder. Eine sichere Erkennung gibt es nicht. Wichtig ist, dass Ihr Kind vorsichtig bleibt und nachfragt: Wer hat das Bild veröffentlicht, und was berichten andere dazu?</p>
+<h2>Punkteblatt</h2>
+<table class="punkte"><thead><tr><th></th>${KARTEN.map((k) => `<th>${k.n}</th>`).join("")}</tr></thead><tbody>
+<tr><th>Kind</th>${zellen("&nbsp;")}</tr>
+<tr><th>Sie</th>${zellen("&nbsp;")}</tr>
+<tr><th>Richtig</th>${zellen("&nbsp;")}</tr>
+</tbody></table>
+<p>Punkte Kind: ______ &nbsp;&nbsp; Punkte Sie: ______</p>
+<div class="mehr"><div class="paar"><div class="qrbox">${q.svg}</div><div class="t"><h2>Echt oder KI? im KI-Labor</h2><a class="adr" href="${esc(url)}">${adresse(url)}</a><small>Dasselbe Spiel am Bildschirm, mit Erklärung zu jeder Karte. Es wird nichts gespeichert.</small></div></div></div>
+<div class="pg"><h2>Karten 1 bis 6</h2><div class="bks">${KARTEN.slice(0, 6).map(karte).join("")}</div></div>
+<div class="pg"><h2>Karten 7 bis 12</h2><div class="bks">${KARTEN.slice(6).map(karte).join("")}</div></div>
+<div class="pg">${auflKopf}
+<p class="fuss-eltern">Alle Angaben stammen aus dem KI-Labor, Stand ${STAND}. Kein Rechtsrat.</p></div>
+`, KOPF_KURZ);
+}
+
+/* ------------------------------------------------------------------ Entscheidungshilfe fuer Betriebe (Seite "betrieb-entscheidung", eine A4-Seite) */
+function entscheidungshilfe() {
+  const s = INHALT.seiten["betrieb-entscheidung"], c = s.checkliste;
+  if (!c || !Array.isArray(c.punkte) || c.punkte.length !== 6) throw new Error("betrieb-entscheidung: erwartet sechs Fragen im Feld checkliste");
+  const entsch = abschnitt("betrieb-entscheidung", "Was du jetzt entscheidest").visual.zellen;
+  if (entsch.length !== 3) throw new Error("betrieb-entscheidung: erwartet drei Entscheidungen");
+  const url = `${BASIS}/betrieb-entscheidung?weg=beruf`;
+  const q = qrSvg(url, 0.6);
+  const fragen = c.punkte.map((p, i) => `<div class="fr"><span class="box"></span><div><b>${i + 1}. ${md(p.frage)}</b><br><span class="hilfe">${md(p.hilfe)}</span></div></div>`).join("\n");
+  return seite("Entscheidungshilfe: sechs Fragen vor dem Start", "entscheidung", `
+<div class="kopfblock"><div class="links"><h1>${md(s.titel)}</h1><p class="lead">${md(c.lead)}</p></div><div class="qrbox">${q.svg}</div></div>
+${fragen}
+<h2>Was du jetzt entscheidest</h2>
+<div class="drei">${entsch.map((z) => `<div><b>${esc(z.text)}</b><br>${esc(z.sub)}</div>`).join("")}</div>
+<h2>Notizen</h2>
+<div class="notiz">${Array.from({ length: 6 }, () => '<div class="zeile" style="margin-left:0"></div>').join("")}</div>
+<div class="fuss quellen"><b>Online abhaken und drucken:</b> <a href="${esc(url)}">${adresse(url)}</a> Oder den QR-Code oben rechts scannen. Es wird nichts gespeichert. Eine Orientierung, keine Beratung und kein Rechtsrat.</div>
+`, KOPF_KURZ);
+}
+
 /* ------------------------------------------------------------------ Elternabend (Seite "elternabend") */
 function elternabend() {
   const infoA = abschnitt("elternabend", "Das Info-Blatt"), leitA = abschnitt("elternabend", "Der Gesprächsleitfaden"), faqA = abschnitt("elternabend", "Fragen und Antworten");
@@ -537,6 +634,8 @@ for (const n of ALLE) {
 }
 schreibe("bildkarten-echt-oder-ki", kartenset());
 for (const [name, html] of Object.entries(elternabend())) schreibe(name, html);
+schreibe("kartenset-eltern", kartensetEltern());
+schreibe("entscheidungshilfe-betrieb", entscheidungshilfe());
 console.log("HTML geschrieben:", dateien.length);
 
 if (!ohnePdf) {

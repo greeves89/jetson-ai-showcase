@@ -641,10 +641,10 @@ S["schule-lehrkraefte"] = {
       ],
      }},
     {h: "Operatoren in den Aufgaben",
-     kurz: "Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären und vergleichen, III begründen und beurteilen.",
+     kurz: "Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären, zuordnen und vergleichen, III begründen und beurteilen.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [
       {icon: "scale", text: "Bereich III", sub: "Transfer und Bewertung: begründen, beurteilen, überprüfen, entwickeln"},
-      {icon: "network", text: "Bereich II", sub: "Reorganisation: erklären, vergleichen"},
+      {icon: "network", text: "Bereich II", sub: "Reorganisation: erklären, zuordnen, vergleichen"},
       {icon: "list", text: "Bereich I", sub: "Reproduktion: nennen, beschreiben"}]},
      p: [
       "Operatoren sind Verben, die sagen, was die Antwort enthalten soll. Je Stunde kommt mindestens ein Operator aus jedem der drei Anforderungsbereiche vor. Das Kürzel steht in Klammern hinter dem Operator, auf dem Arbeitsblatt steht dazu eine Legende mit den Operatoren dieses Blatts, im Lösungsblatt der Erwartungshorizont.",
@@ -657,6 +657,7 @@ S["schule-lehrkraefte"] = {
        ["Nenne", "Gib etwas ohne Erklärung an: Wort, Zahl oder kurzer Satz.", "I"],
        ["Beschreibe", "Gib einen Sachverhalt sachlich, in eigenen Worten und ganzen Sätzen wieder.", "I"],
        ["Erkläre", "Mach etwas verständlich: Nenne den Grund, ergänze ein Beispiel.", "II"],
+       ["Ordne zu", "Stelle Dinge in einen vorgegebenen Zusammenhang, zum Beispiel in Gruppen, und sage kurz, warum sie dorthin gehören.", "II"],
        ["Vergleiche", "Finde Gemeinsamkeiten und Unterschiede und stelle sie gegenüber.", "II"],
        ["Begründe", "Führe einen Sachverhalt auf Gründe oder Zusammenhänge zurück.", "III"],
        ["Beurteile", "Bilde dir ein eigenes Urteil mit Fachwissen und begründe es.", "III"],
@@ -817,6 +818,7 @@ S["schule-lehrkraefte"] = {
       "**Operatoren, Quelle 1:** Hinweise zur Verwendung von Operatoren im Fach Informatik, zusammengestellt für eine Fortbildung am 3.6.2013 (PL Speyer), Bildungsserver Rheinland-Pfalz: `bildung.rlp.de/fileadmin/user_upload/informatik.bildung.rlp.de/Abitur/OperatorenInformatik_RS092013.pdf`, abgerufen am 22.11.2026. Definitionen und Bereiche von nennen, beschreiben, erklären, vergleichen, beurteilen, überprüfen, entwickeln.",
       "**Operatoren, Quelle 2:** Gemeinsame Abituraufgabenpools der Länder, Grundstock von Operatoren Deutsch (Stand 05.01.2026), IQB: `iqb.hu-berlin.de/media/documents/D_Grundstock_von_Operatoren_uFqEtHs.pdf`, abgerufen am 22.11.2026. Dort steht auch, dass keine strikte Zuordnung eines Operators zu einem Bereich erfolgt.",
       "**Operatoren, Quelle 3:** Operatoren im Bildungsplan 2016 Baden-Württemberg (Reproduktion, Reorganisation, Transfer und Bewertung), `lehrerfortbildung-bw.de/u_mks/kunst/gym/bp2016/fb4/3_oper/operatoren_30_05_15_spo.pdf`, abgerufen am 22.11.2026. Die Quellen 1 und 2 stammen aus der Oberstufe (Informatik, Deutsch), Quelle 3 aus dem Fach Kunst. Eine eigene Liste für Informatik in Klasse 8 war nicht dabei. Die Definitionen sind für Klasse 8 vereinfacht. Die Zuordnung kann je Bundesland und Fach leicht abweichen.",
+      "**Operatoren, Quelle 4:** Hessisches Kultusministerium, Operatoren Datenverarbeitung (Landesabitur 2027), `kultus.hessen.de/sites/kultus.hessen.de/files/2026-08/la27-operatoren-dvwi.pdf`, abgerufen am 22.11.2026. Dort steht ordnen, einordnen und zuordnen im Bereich II („Sachverhalte begründet in einen genannten Zusammenhang stellen“). Daher steht „Ordne zu“ hier im Bereich II.",
       "**Gestaltung der Arbeitsblätter, Quellen:** Kriterienliste der TU Dresden (`bildungsportal.sachsen.de/opal/oer/4UW2UJeUWT4k`), Goethe-Institut (Arbeitsblätter für den Unterricht), Universität Frankfurt (Skript zu Arbeitsblättern), ISB Bayern (Kurzhandreichung zur Gestaltung von Arbeitsblättern), PH Niederösterreich (Methoden zur Differenzierung), Universität Halle (Kriterienkatalog Textdokument analog), BFIT-Bund (Leitfaden barrierefreie Textgestaltung), legasthenie.at (Fonts-Broschüre), LMU München (Lernzirkel mit QR-Stationen), PH St. Gallen (Sammelmappe mit QR-Codes). Recherchestand 22.11.2026, die Titel auf den Seiten der Einrichtungen suchen.",
       "Stundenmaterial zur Medienkompetenz: sieben Einheiten von {{medien-stunde-1|Medien 1: Echt oder KI?}} bis {{medien-stunde-7|Medien 7: KI in deinem Alltag}}, dazu der {{elternabend|Elternabend}}. Operatoren und Aufbau der Blätter gelten dort genauso.",
       "Im Labor: {{karte|Was ist KI?}}, {{llm-grenzen|Grenzen und Risiken von Sprachmodellen}} und {{verzerrung-ethik|Fairness, Verzerrung und Verantwortung}}.",

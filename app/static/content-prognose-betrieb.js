@@ -825,9 +825,11 @@ mlops: {
      p: [
       "15 Watt mal 24 Stunden sind 360 Wattstunden, also 0,36 Kilowattstunden pro Tag. Mal 0,30 Euro sind rund 0,11 Euro pro Tag, also gut 11 Cent. Auf ein Jahr gerechnet (365 Tage) sind das etwa 39 Euro. Würde das Gerät im Mittel 30 Watt aufnehmen, verdoppelte sich der Betrag.",
       "Vergleiche die Zahlen mit einem Cloud-Dienst: Unter „Ausprobieren“ rechnet der Rechner mit deinen Werten, auch mit Betreuung. In der Rechnung im Text fehlen Personal, Wartung und Ersatz noch. Rechne sie bei einer echten Entscheidung mit ein.",
+      "Auf dieser Seite stehen drei Zahlen für die Amortisation, weil drei verschiedene Rechnungen dahinterstehen. **10,7 Monate:** 500 € Anschaffung geteilt durch die Ersparnis ohne Betreuung (Cloud 50 € minus Strom 3,30 € gleich 46,70 € im Monat). **29,9 Monate:** Der Rechner unter „Ausprobieren“ nimmt zusätzlich 30 € Betreuung im Monat an, die Ersparnis sinkt auf rund 16,70 €. **13 Monate:** das erfundene Kameraprojekt weiter unten mit 4.700 € Einmalkosten und 355 € Ersparnis im Monat. Alle Werte sind Annahmen zum Üben.",
     ]},
     {h: "Kameraprojekte rechnen anders",
      id: "kamera",
+     widget: "kosten-kamera",
      kurz: "Der Rechner oben gilt für ein Sprachmodell. Eine Kamera im Betrieb hat andere Posten. Hier eine Beispielrechnung mit erfundenen Werten.",
      visual: {typ: "zahlen", kacheln: [
         {wert: "4.700 €", label: "einmalig (Beispielwert)", icon: "receipt"},
@@ -837,7 +839,7 @@ mlops: {
      p: [
       "**Der Kostenrechner oben rechnet ein Sprachmodell: Strom gegen Cloud. Er passt nicht auf ein Kamerasystem.** Bei einer Kamera zur Qualitätsprüfung kommen Kamera, Licht und Halterung, Einrichtung und Anlernen, laufende Pflege und die Prüfung der Stichproben hinzu.",
       "Beispielrechnung, alle Werte erfunden und nur zum Üben: Kamera, Beleuchtung und Halterung 1.500 €, Rechner 800 €, Einrichtung und Anlernen 40 Stunden zu 60 € gleich 2.400 €. Einmalig also 4.700 €. Laufend: Pflege 4 Stunden im Monat zu 60 € gleich 240 € plus rund 5 € Strom, zusammen 245 €. Angenommen, die Handprüfung kostet heute 1.200 € im Monat und das System nimmt die Hälfte ab, also 600 €. Dann bleiben 600 minus 245 gleich 355 € Ersparnis im Monat, und 4.700 durch 355 sind rund 13 Monate bis zur Amortisation.",
-      "Ob das System die Hälfte abnehmen kann, ist die entscheidende Annahme, und sie lässt sich nur im Pilot mit eigenen Teilen messen. Frage dazu: Wie viele Teile pro Minute müssen geprüft werden? Wie viele Bilder gibt es von seltenen Fehlern? Reicht klassische Bildverarbeitung, oder braucht der Fall wirklich KI? Wer haftet, wenn ein Fehler durchrutscht? Mehr zu einem Beispiel steht auf {{uc-fertigung-sichtpruefung|Sichtprüfung}}.",
+      "Ob das System die Hälfte abnehmen kann, ist die entscheidende Annahme, und sie lässt sich nur im Pilot mit eigenen Teilen messen. Frage dazu: Wie viele Teile pro Minute müssen geprüft werden? Wie viele Bilder gibt es von seltenen Fehlern? Reicht klassische Bildverarbeitung, oder braucht der Fall wirklich KI? Wer haftet, wenn ein Fehler durchrutscht? Mehr zu einem Beispiel steht auf {{uc-fertigung-sichtpruefung|Sichtprüfung}}, Grenzen, Haftung, Taktzeit und Datenschutz auf {{kamera-grenzen|Kameraprüfung: Grenzen}}.",
      ],
      merke: "Alle Zahlen dieser Beispielrechnung sind erfunden. Setze eigene Angebote und Zeiten ein."},
     {h: "Was man gern vergisst",
@@ -901,7 +903,7 @@ mlops: {
      optionen: ["Bei gleichbleibender Dauerlast", "Bei streng vertraulichen Daten", "Bei Anforderungen an kürzeste Reaktionszeit", "Bei stark schwankender Last und sehr großen Modellen"],
      richtig: 3, erklaerung: "Die Cloud rechnet nach Nutzung ab und kann sehr große Modelle betreiben. Bei Dauerlast, vertraulichen Daten und kurzer Reaktionszeit sprechen die anderen Wege dafür."},
   ],
-  weiter: ["hardware", "mlops", "business"],
+  weiter: ["kamera-grenzen", "hardware", "mlops", "business"],
 },
 
 "ki-einfuehrung": {
@@ -921,7 +923,7 @@ mlops: {
       "Du kaufst auch keine Bohrmaschine, weil sie gerade angeboten wird, sondern weil du Löcher in die Wand brauchst. Und für zwei Bilder reicht vielleicht ein Nagel. Auch bei KI kann die richtige Lösung eine einfache Regel oder eine Tabellenformel sein. Die KI muss ihren Platz erst verdienen.",
     ]},
     {h: "Den Einsatz auswählen: Nutzen, Machbarkeit, Daten, Risiko",
-     kurz: "Starte dort, wo viel Nutzen und hohe Machbarkeit zusammenkommen. Das ist der leichte Karton.",
+     kurz: "Starte dort, wo viel Nutzen und hohe Machbarkeit zusammenkommen. Das ist der beste Startpunkt.",
      visual: {typ: "matrix", xtitel: "Machbarkeit", ytitel: "Nutzen", x: ["niedrig", "hoch"], y: ["hoch", "niedrig"], zellen: [
         [{text: "Später prüfen", ton: "neutral"}, {text: "Hier starten", ton: "gut"}],
         [{text: "Lassen", ton: "schlecht"}, {text: "Nebenbei", ton: "neutral"}],

@@ -220,3 +220,34 @@ class _Platz:
     async def __aexit__(self, *exc):
         self._s.freigeben()
         return False
+
+
+# ---------------------------------------------------------------------------------------------------------
+# Sicherheitskoepfe fuer alle Antworten (Middleware in app.py). Alles stammt vom eigenen Ursprung: kein CDN,
+# keine Worker-Skripte von aussen. style-src braucht 'unsafe-inline', weil die Oberflaeche style-Attribute setzt.
+# ---------------------------------------------------------------------------------------------------------
+CSP = ("default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; "
+       "media-src 'self' blob: data:; font-src 'self' data:; connect-src 'self'; worker-src 'self' blob:; "
+       "object-src 'none'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'")
+
+FESTE_KOEPFE = (
+    ("X-Content-Type-Options", "nosniff"),
+    ("X-Frame-Options", "DENY"),
+    ("Referrer-Policy", "strict-origin-when-cross-origin"),
+    ("Permissions-Policy", "camera=(self), microphone=(self), geolocation=(), payment=()"),
+)
+
+
+def csp_kopfname() -> str:
+    """Standard: erzwungene Richtlinie. KL_CSP=report-only liefert sie nur als Bericht (zum Testen neuer Inhalte)."""
+    modus = os.environ.get("KL_CSP", "").strip().lower()
+    return "Content-Security-Policy-Report-Only" if modus == "report-only" else "Content-Security-Policy"
+
+
+def sicherheitskoepfe(oeffentlich: bool, https: bool) -> list:
+    """Liste (Name, Wert) der Sicherheitskoepfe. HSTS nur im oeffentlichen Modus und ueber HTTPS:
+    im LAN mit selbstsigniertem Zertifikat wuerde es Besucher aussperren."""
+    koepfe = list(FESTE_KOEPFE) + [(csp_kopfname(), CSP)]
+    if oeffentlich and https:
+        koepfe.append(("Strict-Transport-Security", "max-age=31536000"))
+    return koepfe

@@ -1183,26 +1183,133 @@
     return aufraeumer(ab);
   };
 
+  /* ============================================================ 5b. kosten-kamera (Kameraprojekt: Handpruefung gegen Kamerasystem) */
+  /* Eingaben mit Beispielwerten (erfunden, wie das Beispiel "Kameraprojekte rechnen anders" auf der Seite Kosten und Energie). Reine Rechnung in kameraRechnung,
+     damit sie auch ohne Oberflaeche pruefbar bleibt (KL.widgets["kosten-kamera"].rechne). */
+  const KAMERA_FELDER = [
+    { k: "einrichtung", label: "Einrichtung und Anlernen", einheit: "€ einmalig", start: "2400", hilfe: "Montage, Licht einstellen, Bilder sammeln, Anlernen. Beispiel: 40 Stunden zu 60 €." },
+    { k: "geraete", label: "Kamera, Licht und Rechner", einheit: "€ einmalig", start: "2300", hilfe: "Kamera, Beleuchtung, Halterung und der Rechner dahinter." },
+    { k: "pflege", label: "Pflege und Strom", einheit: "€ je Monat", start: "245", hilfe: "Nachtrainieren, Updates, Reinigung, Strom. Beispiel: 4 Stunden zu 60 € plus Strom." },
+    { k: "stueck", label: "Prüfstücke pro Tag", einheit: "Stück", start: "400", hilfe: "Wie viele Teile pro Betriebstag geprüft werden." },
+    { k: "sekunden", label: "Zeit je Handprüfung", einheit: "Sekunden", start: "20", positiv: true, hilfe: "Wie lange eine Person ein Teil in der Hand prüft." },
+    { k: "lohn", label: "Stundenlohn", einheit: "€ je Stunde", start: "25", hilfe: "Mit Nebenkosten, was eine Arbeitsstunde den Betrieb kostet." },
+    { k: "quote", label: "Ausschussquote", einheit: "Prozent", start: "3", max: 100, hilfe: "Anteil der Teile, die die Kamera meldet. Diese Teile schaut weiter ein Mensch an." },
+    { k: "anteil", label: "Anteil, den die Kamera übernimmt", einheit: "Prozent", start: "50", max: 100, hilfe: "Die entscheidende Annahme. Sie lässt sich nur mit eigenen Teilen messen." },
+    { k: "tage", label: "Betriebstage pro Monat", einheit: "Tage", start: "22", max: 31, hilfe: "Von 0 bis 31." },
+  ];
+  /** Kosten im Monat: Handpruefung gegen Kamerasystem. Rest der Handpruefung (1 minus Anteil) bleibt beim Menschen, dazu Pflege und die Nachpruefung der gemeldeten Teile. */
+  function kameraRechnung(v) {
+    const stunden = v.stueck * v.sekunden / 3600 * v.tage;          // Stunden Handpruefung im Monat
+    const hand = stunden * v.lohn;
+    const rest = hand * (1 - v.anteil / 100);
+    const gemeldet = v.stueck * v.tage * v.quote / 100;             // Teile, die die Kamera meldet
+    const nach = gemeldet * v.sekunden / 3600 * v.lohn;             // ein Mensch bestaetigt jedes gemeldete Teil
+    const kamera = v.pflege + rest + nach;
+    const einmalig = v.einrichtung + v.geraete;
+    const ersp = hand - kamera;
+    return { stunden, hand, rest, gemeldet, nach, kamera, einmalig, ersp, amort: ersp > 0 ? einmalig / ersp : Infinity };
+  }
+
+  KL.widgets["kosten-kamera"] = function (root) {
+    root.classList.add("pg-wid", "pg-kamera");
+    const V = {}, fehler = {}, herkunft = {}, tagEl = {}, fehlerEl = {};
+    const eur = (n) => euro(n, n !== 0 && Math.abs(n) < 1 ? 3 : 0);
+    const lies = (f, text) => {
+      const t = String(text).trim().replace(/\s/g, "");
+      if (!t) return { fehler: "Bitte gib eine Zahl ein." };
+      if (!/^\d+([.,]\d+)?$/.test(t)) return { fehler: /^-/.test(t) ? "Die Zahl darf nicht negativ sein." : "Bitte eine Zahl ohne Tausenderpunkt, mit Komma für Dezimalstellen." };
+      const n = Number(t.replace(",", "."));
+      if (f.positiv && n <= 0) return { fehler: "Die Zahl muss größer als 0 sein." };
+      if (f.max != null && n > f.max) return { fehler: "Die Zahl darf höchstens " + f.max + " sein." };
+      return { wert: n };
+    };
+    const reihen = [], eingaben = {};
+    for (const f of KAMERA_FELDER) {
+      const id = neueId("kamera"), fid = id + "-f";
+      herkunft[f.k] = "beispiel"; V[f.k] = lies(f, f.start).wert;
+      const input = h("input", { type: "text", inputmode: "decimal", id, value: f.start, autocomplete: "off", "aria-describedby": fid, "data-feld": f.k });
+      const tag = h("span", { class: "pg-tag", "data-herkunft": "beispiel" }, "Beispielwert");
+      const fe = h("span", { class: "pg-fehler", id: fid }, "");
+      input.addEventListener("input", () => {
+        herkunft[f.k] = "eigen";
+        const r = lies(f, input.value);
+        if (r.fehler) { fehler[f.k] = r.fehler; input.setAttribute("aria-invalid", "true"); } else { delete fehler[f.k]; V[f.k] = r.wert; input.removeAttribute("aria-invalid"); }
+        fe.textContent = fehler[f.k] || ""; tag.dataset.herkunft = "eigen"; tag.textContent = "deine Eingabe"; rechne();
+      });
+      eingaben[f.k] = input; tagEl[f.k] = tag; fehlerEl[f.k] = fe;
+      reihen.push(h("div", { class: "pg-feld" }, h("label", { for: id }, f.label, tag),
+        h("span", { class: "pg-eingabe" }, input, h("span", { class: "pg-einheit" }, f.einheit)), fe, h("span", { class: "pg-hilfe" }, f.hilfe)));
+    }
+    const kHand = kachel("Handprüfung pro Monat", ""), kKamera = kachel("Kamerasystem pro Monat", ""), kAmort = kachel("Amortisation der Einmalkosten", "");
+    kHand.el.dataset.pg = "hand"; kKamera.el.dataset.pg = "kamera"; kAmort.el.dataset.pg = "amortisation"; kAmort.el.classList.add("pg-gross");
+    const rechnung = h("div", { class: "pg-rechnung", "data-pg": "rechnung" });
+    const satz = h("p", { class: "erklaerung pg-satz", "data-pg": "satz" });
+    root.append(
+      h("p", { class: "pg-annahme" }, icon("info"), h("span", null, h("b", null, "Beispielwerte, keine Preise. "), "Alle Startwerte sind erfunden. Die Fehlerquote der Kamera ist nicht enthalten: Teile, die das System fälschlich durchlässt, kosten meist mehr als die Handprüfung. Ob die Kamera wirklich den angenommenen Anteil übernimmt, zeigt nur ein Pilot mit deinen eigenen Teilen.")),
+      KL.gruppe("Annahmen", reihen),
+      h("div", { class: "messwerte pg-messwerte" }, kHand.el, kKamera.el, kAmort.el),
+      satz, rechnung,
+      hinweis("Die Rechnung lässt Zinsen, Steuern, Ausfälle, Ersatzteile und Schulung aus. Sie ist so gut wie deine Annahmen, vor allem der Anteil, den die Kamera übernimmt."));
+
+    function rechne() {
+      const ok = KAMERA_FELDER.every((f) => !fehler[f.k]);
+      root.dataset.gueltig = ok ? "1" : "0";
+      if (!ok) { kHand.set("bitte prüfen"); kKamera.set("bitte prüfen"); kAmort.set("bitte prüfen"); satz.textContent = "Bitte gib in den markierten Feldern eine Zahl ein, dann rechne ich neu."; rechnung.replaceChildren(); return; }
+      const r = kameraRechnung(V);
+      kHand.set(eur(r.hand)); kKamera.set(eur(r.kamera)); kAmort.set(isFinite(r.amort) ? fmt(r.amort, 1) + " Monate" : "nie");
+      Object.assign(root.dataset, { stunden: r.stunden.toFixed(6), hand: r.hand.toFixed(6), rest: r.rest.toFixed(6), gemeldet: r.gemeldet.toFixed(6), nachpruefung: r.nach.toFixed(6),
+        kamera: r.kamera.toFixed(6), einmalig: r.einmalig.toFixed(6), ersparnis: r.ersp.toFixed(6), amort: isFinite(r.amort) ? r.amort.toFixed(6) : "nie" });
+      const zahl = (n, d) => fmt(n, n % 1 ? d : 0);
+      // Rechnung in Zeilen erklaert: Formel mit eingesetzten Zahlen
+      rechnung.replaceChildren(h("p", { class: "pg-ueber" }, "So wird gerechnet"), h("ol", { class: "pg-formel" },
+        h("li", null, h("b", null, "Handprüfung: "), "Stück × Sekunden ÷ 3600 × Betriebstage × Stundenlohn = " + zahl(V.stueck, 1) + " × " + zahl(V.sekunden, 1) + " ÷ 3600 × " + zahl(V.tage, 1) + " × " + euro(V.lohn, 2) + " = ", h("b", null, eur(r.hand)), " (" + fmt(r.stunden, 1) + " Stunden)"),
+        h("li", null, h("b", null, "Was beim Menschen bleibt: "), "Handprüfung × (1 − Anteil) = " + eur(r.hand) + " × (1 − " + zahl(V.anteil, 1) + " %) = ", h("b", null, eur(r.rest))),
+        h("li", null, h("b", null, "Nachprüfung der gemeldeten Teile: "), "Stück × Tage × Quote = " + fmt(r.gemeldet, 0) + " Teile, je " + zahl(V.sekunden, 1) + " s von Hand = ", h("b", null, eur(r.nach))),
+        h("li", null, h("b", null, "Kamerasystem pro Monat: "), "Pflege + Rest + Nachprüfung = " + eur(V.pflege) + " + " + eur(r.rest) + " + " + eur(r.nach) + " = ", h("b", null, eur(r.kamera))),
+        h("li", null, h("b", null, "Amortisation: "), "(Einrichtung + Kamera und Rechner) ÷ Ersparnis pro Monat = " + eur(r.einmalig) + " ÷ " + eur(Math.max(r.ersp, 0)) + " = ", h("b", null, isFinite(r.amort) ? fmt(r.amort, 1) + " Monate" : "nie"))));
+      satz.textContent = r.ersp > 0
+        ? "Die Handprüfung kostet " + eur(r.hand) + " im Monat, das Kamerasystem " + eur(r.kamera) + ". Du sparst " + eur(r.ersp) + " im Monat. Die Einmalkosten von " + eur(r.einmalig) + " sind nach " + fmt(r.amort, 1) + " Monaten wieder drin, wenn die Kamera wirklich " + zahl(V.anteil, 1) + " Prozent übernimmt. Fehlteile, die durchrutschen, sind nicht eingerechnet."
+        : "Das Kamerasystem kostet im Monat " + eur(r.kamera) + " und ist damit nicht günstiger als die Handprüfung mit " + eur(r.hand) + ". Die Einmalkosten kommen nie zurück.";
+    }
+    rechne();
+    return { destroy() {} };
+  };
+  KL.widgets["kosten-kamera"].rechne = kameraRechnung;
+
   /* ============================================================ 6. checkliste (Seitenfeld checkliste: {lead, punkte: [{frage, hilfe}]}) */
-  /* Fragen zum Abhaken. Nichts wird gespeichert. "Drucken" öffnet den Druckdialog des Browsers. Texte nur über textContent. */
+  /* Fragen zum Abhaken. Die Haken bleiben beim Neuladen: mit "Fortschritt merken" (kl-merken) in diesem Browser, sonst nur in dieser Sitzung (sessionStorage),
+     beides ueber KL.haken. "Drucken" oeffnet den Druckdialog; im Druck erscheinen die Haken als Kaestchen mit Haekchen (style.css, @media print).
+     Texte nur ueber textContent. */
   KL.widgets.checkliste = function (root, seite) {
     const c = (seite && seite.checkliste) || {};
     const punkte = Array.isArray(c.punkte) ? c.punkte : [];
+    const schluessel = String((seite && seite.id) || "checkliste");
     const stand = h("p", { class: "pg-notiz", role: "status", "aria-live": "polite" }, "");
+    const speichertext = h("p", { class: "pg-notiz pg-speicher" }, "");
     const boxen = [];
     const zaehle = () => { const n = boxen.filter((b) => b.checked).length; stand.textContent = n + " von " + punkte.length + " Fragen geklärt."; };
-    const liste = h("ol", { class: "drei-schritte" }, punkte.map((p, i) => {
+    const speichern = () => { if (KL.haken) KL.haken.schreiben(schluessel, boxen.map((b, i) => (b.checked ? i : -1)).filter((i) => i >= 0)); };
+    const hinweisSpeicher = () => {
+      speichertext.textContent = KL.merken ? "Deine Haken bleiben in diesem Browser, solange „Fortschritt merken“ an ist."
+        : "Deine Haken bleiben, solange dieser Tab offen ist. Mit „Fortschritt merken“ in der Fußzeile bleiben sie auch danach.";
+    };
+    const liste = h("ol", { class: "drei-schritte checkliste", "data-testid": "checkliste" }, punkte.map((p, i) => {
       const id = neueId("check");
       const input = h("input", { type: "checkbox", id });
-      input.addEventListener("change", zaehle);
+      input.addEventListener("change", () => { zaehle(); speichern(); });
       boxen.push(input);
       return h("li", null, input, h("label", { for: id }, h("span", { class: "nr", "aria-hidden": "true" }, String(i + 1)),
         h("span", null, h("b", null, p.frage), p.hilfe ? h("small", { style: "display:block;color:var(--leise)" }, p.hilfe) : null)));
     }));
+    const geaendert = () => { speichern(); hinweisSpeicher(); };
+    document.addEventListener("kl-merken-geaendert", geaendert);
     root.append(c.lead ? h("p", { class: "drei-lead" }, c.lead) : null, liste, stand,
-      h("div", { class: "zeile" }, h("button", { type: "button", class: "btn", onclick: () => window.print() }, icon("printer"), "Seite drucken")),
-      h("p", { class: "pg-notiz" }, "Zum Drucken oder Speichern als PDF nutzt du den Druckdialog deines Browsers. Die Haken werden nicht gespeichert."));
+      h("div", { class: "zeile keine-druck" }, h("button", { type: "button", class: "btn", onclick: () => window.print() }, icon("printer"), "Seite drucken")),
+      h("p", { class: "pg-notiz keine-druck" }, "Zum Drucken oder Speichern als PDF nutzt du den Druckdialog deines Browsers. Auf Papier erscheinen die Haken als Kästchen."), speichertext);
+    if (KL.haken) for (const i of KL.haken.lesen(schluessel)) if (boxen[i]) boxen[i].checked = true;
+    hinweisSpeicher();
     zaehle();
-    return { destroy() {} };
+    return { destroy() { document.removeEventListener("kl-merken-geaendert", geaendert); } };
   };
+
 })();
