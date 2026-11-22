@@ -38,7 +38,7 @@ from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
 
 from app import agent_werkzeuge, speicher
-from app.sicherheit import Belegt, Sitzungen, Warteschlange, begrenzt, sitzungs_kennung, umgebung_zahl
+from app.sicherheit import Belegt, Sitzungen, Warteschlange, begrenzt, origin_ok, sitzungs_kennung, umgebung_zahl
 
 HIER = Path(__file__).resolve().parent
 OLLAMA = "http://127.0.0.1:11434"
@@ -83,18 +83,9 @@ def _erlaubte_hosts():
 
 
 def _origin_ok(headers) -> bool:
-    """Zustandsaendernde Endpunkte verlangen einen Origin-Header, der zum Host passt.
-    Fehlt der Origin, wird abgelehnt (Browser senden ihn bei POST und WebSocket immer).
+    """Zustandsaendernde Endpunkte verlangen einen Origin-Header, der zum Host passt (Regel in app/sicherheit.py).
     Der Host selbst ist per TrustedHostMiddleware auf die Allowlist begrenzt."""
-    origin = headers.get("origin")
-    host = headers.get("host", "")
-    if not origin or not host:
-        return False
-    try:
-        from urllib.parse import urlparse
-        return urlparse(origin).netloc == host
-    except Exception:
-        return False
+    return origin_ok(headers)
 
 
 def _ist_jpeg_dataurl(s) -> bool:
@@ -1067,6 +1058,34 @@ class _RobotsKopf:
 
 
 app.add_middleware(_RobotsKopf)
+
+
+class _NurUeberProxy:
+    """Die Transportadresse (Cloudflare-Tunnel) soll nur ueber den eigenen Proxy erreichbar sein, nicht direkt:
+    sonst waere dieselbe Seite unter zwei Adressen im Netz (doppelter Inhalt, Umgehung der Bot-Regeln).
+    Aktiv nur mit KL_TRANSPORT_HOST und KL_PROXY_KEY; der Proxy sendet den Schluessel im Header X-KL-Proxy."""
+
+    def __init__(self, anwendung):
+        self.anwendung = anwendung
+        self.host = os.environ.get("KL_TRANSPORT_HOST", "").strip().lower()
+        self.schluessel = os.environ.get("KL_PROXY_KEY", "").strip()
+
+    async def __call__(self, scope, receive, send):
+        if self.host and self.schluessel and scope["type"] in ("http", "websocket"):
+            kopf = {k.decode("latin-1").lower(): v.decode("latin-1") for k, v in scope.get("headers", [])}
+            if kopf.get("host", "").split(":")[0].lower() == self.host and not secrets.compare_digest(
+                    kopf.get("x-kl-proxy", ""), self.schluessel):
+                if scope["type"] == "websocket":
+                    await send({"type": "websocket.close", "code": 1008})
+                    return
+                await send({"type": "http.response.start", "status": 403,
+                            "headers": [(b"content-type", b"text/plain; charset=utf-8"), (b"x-robots-tag", b"noindex, nofollow")]})
+                await send({"type": "http.response.body", "body": "Diese Adresse ist nur ueber ki-labor.daniel-alisch.site erreichbar.".encode()})
+                return
+        await self.anwendung(scope, receive, send)
+
+
+app.add_middleware(_NurUeberProxy)
 
 _MEDIEN = (".mp4", ".jpg", ".jpeg", ".png", ".webp", ".mp3", ".wav", ".vtt", ".ico")
 

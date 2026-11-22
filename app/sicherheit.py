@@ -5,6 +5,7 @@ Die Haupt-App (app.py) hat dieselben Regeln selbst. Neue Module importieren sie 
 """
 import asyncio
 import os
+import secrets
 import threading
 import time
 from collections import deque
@@ -20,6 +21,12 @@ def umgebung_zahl(name: str, standard: float, minimum: float = 1.0) -> float:
         return standard
 
 
+def _proxy_echt(headers) -> bool:
+    """True, wenn die Anfrage den gemeinsamen Schluessel des eigenen Proxys (KL_PROXY_KEY) im Header X-KL-Proxy traegt."""
+    schluessel = os.environ.get("KL_PROXY_KEY", "").strip()
+    return bool(schluessel) and secrets.compare_digest(headers.get("x-kl-proxy", ""), schluessel)
+
+
 def origin_ok(headers) -> bool:
     """Zustandsaendernde Endpunkte verlangen einen Origin-Header, der zum Host passt.
     Browser senden ihn bei POST und WebSocket immer. Fehlt er, wird abgelehnt."""
@@ -28,7 +35,14 @@ def origin_ok(headers) -> bool:
     if not origin or not host:
         return False
     try:
-        return urlparse(origin).netloc == host
+        netloc = urlparse(origin).netloc
+        if netloc == host:
+            return True
+        # Hinter dem eigenen Proxy sieht die App die Transportadresse als Host; der Browser sendet die oeffentliche.
+        # Nur akzeptieren, wenn der Proxy sich mit dem gemeinsamen Schluessel ausweist.
+        if _proxy_echt(headers):
+            return netloc == headers.get("x-forwarded-host", "")
+        return False
     except Exception:
         return False
 
@@ -40,6 +54,8 @@ _fenster = {}   # (schluessel, kennung) -> Liste von Zeitstempeln
 def client_kennung(request) -> str:
     """Kennung des Aufrufers. Hinter Cloudflare steht die echte Adresse in CF-Connecting-IP."""
     h = request.headers
+    if _proxy_echt(h) and h.get("x-real-ip"):
+        return h.get("x-real-ip")       # echte Besucheradresse, vom eigenen Proxy gesetzt
     return h.get("cf-connecting-ip") or (request.client.host if request.client else "?")
 
 
