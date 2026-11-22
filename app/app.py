@@ -381,7 +381,7 @@ async def chat(req: Request):
             "model": modell,
             "messages": [{"role": "user", "content": nachricht}],
             "stream": True,
-            "options": {"temperature": temperatur},
+            "options": {"temperature": temperatur, "num_gpu": speicher.LLM_GPU_SCHICHTEN},
         }
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(300.0, connect=10.0)) as c:
@@ -729,7 +729,7 @@ async def rag_ask(req: Request):
             kontext = "\n\n".join("[%d] %s" % (i + 1, t) for i, (_, t) in enumerate(treffer))
             system = ("Beantworte die Frage ausschliesslich mit dem gegebenen Kontext und zitiere "
                       "Belege als [Nummer]. Reicht der Kontext nicht, sage das ehrlich. Antworte auf Deutsch.")
-            payload = {"model": CHAT_MODELL, "stream": True, "messages": [
+            payload = {"model": CHAT_MODELL, "stream": True, "options": {"num_gpu": speicher.LLM_GPU_SCHICHTEN}, "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": "Kontext:\n%s\n\nFrage: %s" % (kontext, frage)}]}
             try:
@@ -847,7 +847,7 @@ async def agent_ask(req: Request):
             for _ in range(5):
                 r = await c.post(f"{OLLAMA}/api/chat",
                                  json={"model": CHAT_MODELL, "messages": messages, "tools": werkzeuge, "stream": False,
-                                       "options": {"temperature": 0}})      # Werkzeugwahl soll reproduzierbar sein
+                                       "options": {"temperature": 0, "num_gpu": speicher.LLM_GPU_SCHICHTEN}})      # Werkzeugwahl soll reproduzierbar sein
                 if r.status_code != 200:
                     try:
                         fehler = r.json().get("error", "")

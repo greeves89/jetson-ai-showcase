@@ -23,6 +23,11 @@ MIN_BYTES = 8 * 1024 * 1024
 UEBERSPRINGEN = {".git", "node_modules", "__pycache__"}
 
 
+# Auf dem Jetson liefert llama3.2:3b bei voller GPU-Auslagerung ab ca. 1100 Prompt-Tokens nur noch "GGGG"
+# (Ollama 0.12.3, gemessen 22.11.2026; mit 20 bis 24 GPU-Schichten korrekt und gleich schnell).
+# Gilt fuer alle Chat-Aufrufe des Sprachmodells. Ueberschreibbar per Umgebungsvariable.
+LLM_GPU_SCHICHTEN = int(os.environ.get("KL_LLM_GPU_SCHICHTEN", "24"))
+
 def meminfo():
     """MemFree, MemAvailable und Cached in Megabyte."""
     with open("/proc/meminfo") as f:

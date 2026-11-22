@@ -148,7 +148,7 @@ async def _bewerte_einen(client, frage, text, temperatur):
     """Gibt (score, ms). Bei unlesbarer Ausgabe ein zweiter Versuch, danach RuntimeError."""
     t0 = time.perf_counter()
     for _ in range(2):
-        optionen = {"temperature": temperatur, "num_predict": 24}
+        optionen = {"temperature": temperatur, "num_predict": 24, "num_gpu": speicher.LLM_GPU_SCHICHTEN}
         if temperatur == 0:
             optionen["seed"] = 0
         r = await client.post(f"{OLLAMA}/api/chat", json={
