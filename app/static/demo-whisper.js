@@ -47,6 +47,7 @@
     let pegelListe = [];
     let stille = 0;
     let weg = false;
+    let nachErgebnis = null;        // Beispielmodus: Vergleich mit dem Originaltext
 
     /* ------------------------------------------------------------ Oberflaeche */
     const knopf = h("button", { class: "wh-rec", type: "button", "aria-label": "Aufnahme starten", onclick: umschalten });
@@ -255,6 +256,7 @@
       status.textContent = "Fertig. Das Ergebnis steht unten.";
       zeigeErgebnis(daten);
       zeigePipe("fertig");
+      if (nachErgebnis) nachErgebnis(daten.text || "", blob);
     }
 
     function zeigeErgebnis(d) {
@@ -423,6 +425,42 @@
 
     zeichne(pegel.getContext("2d"), 60);
     zeigePipe("leer");
+
+    /* ------------------------------------------------------------ Beispielmodus (?beispiel=buero-protokoll) */
+    const woerter = (t) => String(t).toLowerCase().replace(/[^a-zäöüß0-9\s]/g, " ").split(/\s+/).filter(Boolean);
+    KL.beispiel.start(root, seite, "whisper", { get weg() { return weg; } }, (e, kopf) => {
+      const d = e.daten || {};
+      const player = h("audio", { class: "wh-player", controls: true, preload: "metadata", src: KL.beispiel.url(d.audio), "aria-label": "Beispielaudio: " + e.titel });
+      const los = h("button", { type: "button", class: "btn primary" }, icon("whisper"), "Beispielaudio erkennen");
+      const vergleich = h("div", { class: "wh-bsp-vergleich", hidden: true });
+      const panel = h("section", { class: "d-beispiel wh-bsp" },
+        h("div", { class: "wh-label" }, "Beispielaudio, " + Math.round(d.dauer_sekunden || 0) + " Sekunden"),
+        player, h("div", { class: "wh-reihe" }, los), vergleich);
+      kopf.el.after(panel);
+      nachErgebnis = (text) => {
+        const soll = woerter(d.originaltext || ""), ist = new Set(woerter(text));
+        const treffer = soll.filter((w) => ist.has(w)).length;
+        const quote = soll.length ? Math.round(100 * treffer / soll.length) : 0;
+        vergleich.replaceChildren(
+          h("p", { class: "d-bsp-urteil d-bsp-ok", role: "status" }, "Von " + soll.length + " Wörtern des Originaltexts stehen " + treffer + " (" + quote + " Prozent) im erkannten Text. Zahlen schreibt Whisper oft als Ziffern, daher fehlen einzelne Wörter."),
+          h("details", { class: "d-bsp-mehr" }, h("summary", null, "Originaltext zum Vergleich"), h("p", null, d.originaltext || "")));
+        vergleich.hidden = false;
+      };
+      los.addEventListener("click", async () => {
+        if (zustand === "senden" || zustand === "aufnahme") return;
+        los.disabled = true; vergleich.hidden = true;
+        try {
+          const r = await fetch(KL.beispiel.url(d.audio));
+          if (!r.ok) throw new Error("Das Beispielaudio ließ sich nicht laden.");
+          const blob = await r.blob();
+          if (weg) return;
+          setzeSprache("de");
+          await senden(new Blob([blob], { type: "audio/mpeg" }), null);
+        } catch (err) { melde(err && err.message ? err.message : "Das Beispielaudio ließ sich nicht laden.", "warn"); }
+        finally { los.disabled = false; }
+      });
+      kopf.text("Bereit: Das Beispielaudio liegt vor. Der Klick auf Beispielaudio erkennen startet die Erkennung. Du kannst es vorher anhören.");
+    });
 
     return {
       destroy() {

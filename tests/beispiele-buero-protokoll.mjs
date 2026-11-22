@@ -1,0 +1,21 @@
+// node tests/beispiele-buero-protokoll.mjs: Beispielaudio (Besprechung) vom Jetson in Text umwandeln und mit dem Originaltext vergleichen.
+import { oeffneBeispiel, pruefer, warteStatus, normal } from "./bsp-hilfe.mjs";
+const { pruefe } = pruefer();
+const { t, page, e } = await oeffneBeispiel("buero-protokoll");
+pruefe(/Beispiel:/.test(await page.textContent(".d-bsp-kopf")), "Beispielkopf zeigt " + e.titel);
+await warteStatus(page, /Beispielaudio liegt vor/, 15000);
+pruefe(await page.$eval(".wh-bsp audio", (a) => a.src.endsWith("/besprechung.mp3")), "Beispielaudio ist eingebunden");
+await page.click("button:has-text('Beispielaudio erkennen')");
+await page.waitForSelector(".wh-text", { timeout: 180000 });
+await page.waitForSelector(".wh-bsp-vergleich .d-bsp-urteil", { timeout: 10000 });
+const text = (await page.textContent(".wh-text")).trim();
+const vergleich = await page.textContent(".wh-bsp-vergleich .d-bsp-urteil");
+console.log("       Text: " + text); console.log("       " + vergleich);
+const quote = parseInt((/\((\d+) Prozent\)/.exec(vergleich) || [])[1]);
+pruefe(quote >= 60, `Erkannter Text deckt ${quote} Prozent der Wörter des Originals ab (mindestens 60)`);
+pruefe(/greifer/.test(normal(text)) && /montagelinie|instandhaltung/.test(normal(text)), "Schlüsselwörter Greifer und Montagelinie oder Instandhaltung erkannt");
+pruefe(/Deutsch/.test(await page.textContent(".wh-kopf")), "Sprache Deutsch erkannt");
+pruefe((await page.$$eval(".wh-live .pipe > div", (d) => d.length)) >= 2, "Live-Erklärung zeigt die Zeitanteile");
+await page.screenshot({ path: "tests/ausgabe/beispiel-buero-protokoll.png", fullPage: true });
+pruefe(t.fehler.length === 0, "Konsole sauber " + t.fehler.join("; "));
+await t.schliessen();

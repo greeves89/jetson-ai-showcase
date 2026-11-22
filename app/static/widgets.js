@@ -824,17 +824,25 @@
         const s = INHALT.seiten[id];
         return s ? h("a", { class: "chip w-link", href: "#/" + id }, s.nav || s.titel, icon("arrow")) : null;
       });
+      const dl = h("dl", null,
+        h("dt", null, "Wie"), h("dd", null, b.verfahren),
+        h("dt", null, "Warum"), h("dd", null, b.warum),
+        h("dt", null, "Frage vor dem Einsatz"), h("dd", null, b.frage),
+        labore.length ? [h("dt", null, "Im Labor ausprobieren"), h("dd", { class: "w-labore" }, labore)] : null);
       const d = h("details", { class: "bz" },
         h("summary", null,
           h("span", { class: "b" }, b.name),
           h("span", { class: "ch" }, icon("chevron")),
           h("span", { class: "a" }, b.aufgabe),
           h("span", { class: "w-faehig" }, b.f.map((f) => h("span", { class: "chip" }, F[f] || f)))),
-        h("div", { class: "in" }, h("dl", null,
-          h("dt", null, "Wie"), h("dd", null, b.verfahren),
-          h("dt", null, "Warum"), h("dd", null, b.warum),
-          h("dt", null, "Frage vor dem Einsatz"), h("dd", null, b.frage),
-          labore.length ? [h("dt", null, "Im Labor ausprobieren"), h("dd", { class: "w-labore" }, labore)] : null)));
+        h("div", { class: "in" }, dl));
+      // Fertige Beispiele dieses Bereichs (Katalog KL.beispiele()): Knopf "Beispiel starten" je Use-Case
+      KL.beispiele().then((m) => {
+        const bsp = (m.usecases || []).filter((u) => u.bereich === b.name);
+        if (!bsp.length) return;
+        dl.append(h("dt", null, "Beispiel starten"), h("dd", { class: "w-labore" }, bsp.map((u) =>
+          h("a", { class: "chip w-bsp", href: "#/" + u.lab + "?beispiel=" + u.id, title: u.titel }, icon("play"), "Beispiel starten: " + u.titel))));
+      });
       alle.push({ d, f: b.f });
       liste.append(d);
     }

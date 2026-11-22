@@ -23,6 +23,7 @@
     search: '<circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/>',
     wrench: '<path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94z"/>',
     alert: '<circle cx="12" cy="12" r="9"/><path d="M12 8v5M12 16h.01"/>',
+    rocket: '<path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/>',
     file: '<path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h6"/>',
   };
   function ic(name) {
@@ -109,7 +110,7 @@
   }
   /* Ein 4:3-Ausschnitt der Kamera als JPEG-DataURL (480x360, Qualitaet 0,6). */
   function bildAufnehmen(video, canvas) {
-    const vw = video.videoWidth, vh = video.videoHeight;
+    const vw = video.videoWidth || video.naturalWidth, vh = video.videoHeight || video.naturalHeight;   // Video oder Beispielbild
     let sw = vw, sh = vw * 3 / 4, sx = 0, sy = 0;
     if (sh > vh) { sh = vh; sw = vh * 4 / 3; }
     sx = (vw - sw) / 2; sy = (vh - sh) / 2;
@@ -156,8 +157,87 @@
   }
   const fett = (t) => h("b", null, t);
 
+  /* ============================================================ Beispielmodus
+     Die Labore lesen seite.query.beispiel (z. B. /anlernen?beispiel=fertigung-sortieren), suchen den Eintrag im Katalog
+     (KL.beispiele(), Quelle app/static/beispiele/manifest.json) und laden die fertigen Daten. Nur Eintraege, deren
+     "lab" zum Labor passt, werden geladen. Texte aus dem Katalog kommen nur per textContent ins DOM. */
+  const bspUrl = (pfad) => "/static/beispiele/" + pfad;
+  function bildLaden(pfad) {
+    return new Promise((ok, fehl) => {
+      const img = new Image();
+      img.onload = () => ok(img);
+      img.onerror = () => fehl(new Error("Das Beispielbild " + pfad + " ließ sich nicht laden."));
+      img.src = bspUrl(pfad);
+    });
+  }
+  async function textLaden(pfad) {
+    const r = await fetch(bspUrl(pfad), { cache: "no-cache" });
+    if (!r.ok) throw new Error("Die Beispieldatei " + pfad + " ließ sich nicht laden.");
+    return r.text();
+  }
+  function beispielKopf(e) {
+    const status = h("p", { class: "d-bsp-status", role: "status", "aria-live": "polite" });
+    const el = h("section", { class: "d-beispiel", "aria-label": "Beispiel: " + e.titel },
+      h("div", { class: "d-bsp-kopf" }, ic("rocket"), h("b", null, "Beispiel: " + e.titel), h("span", { class: "chip" }, e.bereich)),
+      h("p", { class: "d-bsp-text" }, e.beschreibung),
+      h("p", { class: "d-bsp-text d-leise" }, e.ziel),
+      h("details", { class: "d-bsp-mehr" }, h("summary", null, "Ablauf in Schritten"), h("ol", null, (e.ablauf || []).map((a) => h("li", null, a)))),
+      (e.erwartung || e.hinweis) ? h("details", { class: "d-bsp-mehr" }, h("summary", null, "Was du erwarten kannst"),
+        e.erwartung ? h("p", null, e.erwartung) : null, e.hinweis ? h("p", { class: "d-leise" }, e.hinweis) : null) : null,
+      status);
+    return { el, status, text(t) { status.textContent = t; } };
+  }
+  /* Haengt den Kopf oben in root ein und ruft fn(eintrag, kopf), wenn ?beispiel= zu diesem Labor passt. */
+  function beispielStart(root, seite, lab, L, fn) {
+    const id = seite && seite.query && seite.query.beispiel;
+    if (!id) return;
+    KL.beispiele().then((m) => {
+      if (L.weg) return;
+      const e = (m.usecases || []).find((u) => u.id === id);
+      if (!e || e.lab !== lab) {
+        const k = h("section", { class: "d-beispiel" }, h("p", { class: "d-bsp-text" }, !e
+          ? "Dieses Beispiel gibt es nicht. Das Labor läuft ganz normal, du kannst es selbst ausprobieren."
+          : "Dieses Beispiel gehört zu einem anderen Labor. Öffne es über die Seite des Use-Cases."));
+        root.prepend(k);
+        return;
+      }
+      const kopf = beispielKopf(e);
+      root.prepend(kopf.el);
+      return fn(e, kopf);
+    }).catch((err) => { if (!L.weg) root.prepend(h("section", { class: "d-beispiel" }, h("p", { class: "d-bsp-text" }, "Das Beispiel ließ sich nicht laden: " + (err && err.message ? err.message : "unbekannter Fehler")))); });
+  }
+  /* Prueft einen Antworttext gegen antwort_enthaelt/oder (ohne Beachtung der Gross-/Kleinschreibung). */
+  function antwortPasst(f, text) {
+    const t = String(text).toLowerCase();
+    const muster = [f.antwort_enthaelt].concat(f.oder || []).filter(Boolean).map((x) => String(x).toLowerCase());
+    return muster.length ? muster.some((x) => t.includes(x)) : null;
+  }
+  KL.beispiel = { url: bspUrl, bildLaden, textLaden, kopf: beispielKopf, start: beispielStart, antwortPasst };
+
+  /* Baustein fuer die Use-Case-Seiten (widget: "beispielstart"): Knopf, der das passende Labor mit dem Beispiel oeffnet. */
+  KL.widgets.beispielstart = function (root, seite) {
+    const id = String((seite && seite.id) || "").replace(/^uc-/, "");
+    const box = h("div", { class: "d-bsp-start" });
+    root.append(box);
+    let weg = false;
+    KL.beispiele().then((m) => {
+      if (weg) return;
+      const e = (m.usecases || []).find((u) => u.id === id);
+      if (!e) { box.append(h("p", { class: "d-hinweis" }, "Für diesen Fall gibt es kein fertiges Beispiel.")); return; }
+      const labor = KL.INHALT.seiten[e.lab];
+      box.append(
+        h("p", { class: "d-bsp-text" }, e.ziel),
+        h("div", { class: "zeile" },
+          h("a", { class: "btn primary", href: "#/" + e.lab + "?beispiel=" + e.id }, ic("rocket"), "Beispiel starten"),
+          h("span", { class: "chip" }, "Labor: " + (labor ? (labor.nav || labor.titel) : e.lab)),
+          e.live ? h("span", { class: "chip" }, "braucht deine Kamera") : null),
+        h("p", { class: "d-hinweis" }, "Die Daten sind schon vorbereitet. Du musst nur noch klicken."));
+    });
+    return { destroy() { weg = true; } };
+  };
+
   /* ============================================================ 1 Webcam: Gesicht und Objekt */
-  function webcam(root, modus) {
+  function webcam(root, modus, seite) {
     const objekt = modus === "objekt";
     const L = leben();
     const dingEin = objekt ? "Objekt" : "Gesicht";
@@ -169,6 +249,7 @@
     const platzV = h("div", { class: "d-platz" }, ic("camera"), h("span", null, "Die Kamera ist aus. Starte sie mit dem Knopf oben."));
     const platzR = h("div", { class: "d-platz" }, ic("arrow"), h("span", null, "Hier erscheint das Bild, das der Jetson zurückschickt."));
     let img = null;
+    let vorlage = null;      // Beispielbild-Element, nur im Beispielmodus
     const kameras = h("div", { class: "kameras" },
       h("figure", null, h("figcaption", null, "Deine Kamera"), video, platzV),
       h("figure", null, h("figcaption", null, "Vom Jetson zurück"), platzR));
@@ -212,7 +293,9 @@
       regler = h("div", { class: "d-regler" }, h("div", { class: "regler" }, h("label", { for: "d-schwelle" }, "Schwelle"), inp, schwelleOut), schwelleSatz);
     }
     function schwelleSenden() {
-      if (objekt && ws && ws.readyState === 1) ws.send(JSON.stringify({ schwelle: schwelle / 100 }));
+      if (!objekt || !ws || ws.readyState !== 1) return;
+      ws.send(JSON.stringify({ schwelle: schwelle / 100 }));
+      if (bildQuelle && !wartet) aufnehmenUndSenden();      // stehendes Beispielbild: mit neuer Schwelle noch einmal auswerten
     }
 
     // regler gibt es nur im Objekt-Modus; Element.append(null) wuerde sonst das Wort "null" in die Seite schreiben
@@ -223,6 +306,7 @@
     /* Zustand */
     let stream = null, ws = null, laeuft = false, startet = false, wartet = false;
     let tStart = 0, tBrowser = 0, versuche = 0, wachhund = null, neuTimer = null;
+    let bildQuelle = null, gesendetFuer = null;      // Beispielbild statt Kamera: ein stehendes Bild, wird einmal je Auswahl gesendet
     const canvas = neuesCanvas();
     const reihen = { b: [], n: [], d: [], e: [], k: [], w: [], t: [] };
     const stempel = [];
@@ -269,10 +353,11 @@
 
     function aufnehmenUndSenden() {
       if (!laeuft || wartet || !ws || ws.readyState !== 1) return;
-      if (video.readyState < 2 || !video.videoWidth) { L.timeout(aufnehmenUndSenden, 100); return; }
+      if (!bildQuelle && (video.readyState < 2 || !video.videoWidth)) { L.timeout(aufnehmenUndSenden, 100); return; }
       const t0 = performance.now();
       let url;
-      try { url = bildAufnehmen(video, canvas); } catch (e) { L.timeout(aufnehmenUndSenden, 200); return; }
+      try { url = bildAufnehmen(bildQuelle || video, canvas); } catch (e) { L.timeout(aufnehmenUndSenden, 200); return; }
+      gesendetFuer = bildQuelle;
       tBrowser = performance.now() - t0;
       tStart = t0;
       wartet = true;
@@ -298,6 +383,7 @@
         let d;
         try { d = JSON.parse(ev.data); } catch (e) { wartet = false; L.timeout(aufnehmenUndSenden, 50); return; }
         clearTimeout(wachhund);
+        if (bildQuelle && gesendetFuer !== bildQuelle) { wartet = false; aufnehmenUndSenden(); return; }   // Bild wurde inzwischen gewechselt
         const jetzt = performance.now();
         const gesamt = jetzt - tStart;
         const z = d.zeiten || {};
@@ -317,6 +403,7 @@
         meld.weg();
         versuche = 0;
         wartet = false;
+        if (bildQuelle) { zeichneGedrosselt.jetzt(); setStatus("Beispielbild ausgewertet", true); return; }
         zeichneGedrosselt();
         L.timeout(aufnehmenUndSenden, 0);
       };
@@ -349,7 +436,14 @@
     }
     L.onEnde(() => { laeuft = false; wartet = false; if (ws) { try { ws.close(); } catch (e) { /* egal */ } ws = null; } kameraStoppen(stream, video); stream = null; });
 
+    function beispielbildAus() {
+      if (!bildQuelle) return;
+      bildQuelle = null; gesendetFuer = null; if (vorlage) vorlage.hidden = true;
+      laeuft = false; wartet = false; clearTimeout(wachhund);
+      if (ws) { const sk = ws; ws = null; try { sk.close(); } catch (e) { /* egal */ } }
+    }
     async function starten() {
+      beispielbildAus();
       if (startet || laeuft) return;
       startet = true; btn.disabled = true; meld.weg(); setStatus("Kamera startet…", false);
       try {
@@ -372,13 +466,64 @@
         meld.zeige(e.message || "Die Kamera ließ sich nicht starten.");
       }
     }
-    btn.addEventListener("click", () => { if (laeuft) stoppen(); else starten(); });
+    btn.addEventListener("click", () => { if (laeuft && !bildQuelle) stoppen(); else starten(); });
+
+    /* Beispielmodus: statische Beispielbilder aus dem Katalog statt Kamera, sie laufen durch denselben Weg zum Jetson. */
+    beispielStart(root, seite, modus, L, (e, kopf) => {
+      const bilder = (e.daten && e.daten.bilder) || [];
+      if (!bilder.length) {
+        kopf.text("Für dieses Beispiel brauchst du deine Kamera. Drücke auf Kamera starten.");
+        return;
+      }
+      let aktuell = -1;
+      vorlage = h("img", { class: "d-vorlage", alt: "Beispielbild, das der Jetson auswerten soll", hidden: true });
+      video.after(vorlage);
+      kameras.querySelector("figcaption").textContent = "Deine Kamera oder Beispielbild";
+      const info = h("div", { class: "d-bsp-info", "aria-live": "polite" });
+      const erkBtn = h("button", { type: "button", class: "btn primary" }, ic("search"), "Beispielbild erkennen");
+      const knoepfe = bilder.map((b, i) => {
+        const t = h("img", { src: bspUrl(b.datei), alt: "", loading: "lazy" });
+        return h("button", { type: "button", class: "d-bsp-bild", "aria-pressed": "false", "aria-label": "Beispielbild " + (i + 1) + ": " + b.titel, title: b.titel, onclick: () => waehlen(i, true) }, t, h("span", null, b.titel));
+      });
+      const leiste = h("div", { class: "d-bsp-bilder", role: "group", "aria-label": "Beispielbilder" }, knoepfe);
+      const zeile = h("div", { class: "d-bsp-quelle" }, leiste, h("div", { class: "zeile d-zeile" }, erkBtn), info);
+      kameras.before(zeile);
+      function infoZeigen(b) {
+        info.replaceChildren(
+          h("p", null, fett("Erwartet: "), b.erwartet || "keine Angabe"),
+          b.fehlmeldung ? h("p", { class: "d-leise" }, b.fehlmeldung) : null,
+          b.bemerkung ? h("p", { class: "d-leise" }, b.bemerkung) : null,
+          b.quelle ? h("p", { class: "d-leise d-bsp-quelltext" }, "Quelle: " + b.quelle) : null);
+      }
+      async function waehlen(i, auswerten) {
+        if (i === aktuell && !auswerten) return;
+        const b = bilder[i];
+        try {
+          const img = await bildLaden(b.datei);
+          if (L.weg) return;
+          if (stream) stoppen();
+          aktuell = i;
+          knoepfe.forEach((k, j) => k.setAttribute("aria-pressed", j === i ? "true" : "false"));
+          bildQuelle = img; gesendetFuer = null;
+          vorlage.src = img.src; vorlage.hidden = false; video.hidden = true; platzV.hidden = true;
+          infoZeigen(b);
+          meld.weg();
+          if (!auswerten) { kopf.text("Beispielbild " + (i + 1) + " von " + bilder.length + " ist geladen. Drücke auf Beispielbild erkennen."); return; }
+          kopf.text("Der Jetson wertet Beispielbild " + (i + 1) + " aus.");
+          if (ws && ws.readyState === 1) { wartet = false; aufnehmenUndSenden(); }
+          else if (!ws) { laeuft = true; versuche = 0; setStatus("verbinde mit dem Jetson…", false); verbinden(); }
+        } catch (err) { meld.zeige(err.message); }
+      }
+      erkBtn.addEventListener("click", () => { if (aktuell < 0) waehlen(0, true); else waehlen(aktuell, true); });
+      live.text("Wähle ein Beispielbild und drücke auf Beispielbild erkennen. Dann siehst du hier Schritt für Schritt, was der Jetson mit dem Bild macht.");
+      waehlen(0, false).then(() => kopf.text(bilder.length + " Beispielbilder sind bereit. Wähle eines und lass es erkennen, oder starte deine Kamera."));
+    });
 
     return { destroy() { L.destroy(); } };
   }
 
   /* ============================================================ 2 Bildmodell anlernen */
-  function teach(root) {
+  function teach(root, seite) {
     const L = leben();
     const FARBEN = ["var(--k1)", "var(--k2)", "var(--k3)", "var(--k4)"];
     const MIN_GUT = 8, MAX_BSP = 50;
@@ -402,8 +547,9 @@
     const balkenBox = h("div", { class: "d-balken" });
     const ergebnis = h("div", { class: "d-ergebnis" }, grossName, grossSich, balkenBox);
 
+    const testBild = h("img", { class: "d-vorlage", alt: "Testbild, das der Jetson zuordnen soll", hidden: true });
     const kopf = h("div", { class: "d-teachkopf kameras" },
-      h("figure", null, h("figcaption", null, "Deine Kamera"), video, platz),
+      h("figure", null, h("figcaption", null, "Deine Kamera oder Testbild"), video, testBild, platz),
       h("figure", null, h("figcaption", null, "Was der Jetson erkennt"), ergebnis));
 
     /* Klassen */
@@ -639,7 +785,7 @@
       try {
         const s = await kameraOeffnen();
         if (L.weg) { s.getTracks().forEach((t) => t.stop()); return; }
-        stream = s; video.srcObject = s; video.hidden = false; platz.hidden = true;
+        stream = s; video.srcObject = s; video.hidden = false; platz.hidden = true; testBild.hidden = true;
         try { await video.play(); } catch (e) { /* egal */ }
         startet = false; kamBtn.disabled = false;
         kamBtn.replaceChildren(ic("stop"), "Kamera stoppen"); kamBtn.classList.remove("primary");
@@ -664,6 +810,75 @@
     L.onEnde(() => { kameraStoppen(stream, video); stream = null; });
 
     bauKlassen();
+
+    /* Beispielmodus: Anlern-Bilder und Testbilder aus dem Katalog, ohne Kamera. Die Bilder laufen durch dieselben Wege
+       wie Kamerabilder (/api/teach/sample und /api/teach/classify). */
+    beispielStart(root, seite, "anlernen", L, async (e, kopfB) => {
+      const kl = ((e.daten && e.daten.klassen) || []).slice(0, 4);
+      const tests = (e.daten && e.daten.test) || [];
+      const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite" });
+      const testZeile = h("div", { class: "d-bsp-bilder", role: "group", "aria-label": "Testbilder", hidden: true });
+      const testBox = h("div", { class: "d-bsp-quelle", hidden: true },
+        h("h3", null, "Testbilder, die der Jetson noch nie gesehen hat"), testZeile, urteil);
+      kopf.before(testBox);
+      kamBtn.disabled = false;
+      const gesamt = kl.reduce((n, k) => n + k.bilder.length, 0);
+      try {
+        kopfB.text("Der Jetson wird vorbereitet: Alte Beispiele löschen …");
+        const r0 = await postS("/api/teach/reset", {}, ctrl.signal);
+        if (!r0.ok) throw new Error(await antwortFehler(r0));
+        counts = {};
+        klassen = kl.map((k) => ({ name: k.name }));
+        bauKlassen(); streifen();
+        let fertig = 0;
+        for (const k of kl) {
+          for (const datei of k.bilder) {
+            if (L.weg) return;
+            const img = await bildLaden(datei);
+            const url = bildAufnehmen(img, canvas);
+            const r = await postS("/api/teach/sample", { bild: url, label: k.name }, ctrl.signal);
+            if (!r.ok) throw new Error(await antwortFehler(r));
+            const d = await r.json();
+            counts = d.counts || counts;
+            fertig++;
+            aktualisiereZaehler(); streifen();
+            kopfB.text("Beispielbilder werden gelernt: " + fertig + " von " + gesamt + " (" + k.name + ").");
+          }
+        }
+      } catch (err) { const t = netzFehler(err); if (t) meld.zeige(t); kopfB.text("Das Laden der Beispiele ist abgebrochen."); return; }
+      live.text("Die Beispielbilder sind gelernt: " + kl.map((k) => k.name + " " + (counts[k.name] || 0)).join(", ") + ". Wähle ein Testbild und lass den Jetson es zuordnen.");
+      kopfB.text("Fertig: " + gesamt + " Beispielbilder gelernt. Wähle ein Testbild, der Klick startet die Zuordnung.");
+      let busyT = false;
+      async function zuordnen(i) {
+        if (busyT || L.weg) return;
+        busyT = true;
+        const t = tests[i];
+        try {
+          const img = await bildLaden(t.bild);
+          stoppeAufnahme(); if (stream) stoppen();
+          testBild.src = img.src; testBild.hidden = false; video.hidden = true; platz.hidden = true;
+          tKnoepfe.forEach((b, j) => b.setAttribute("aria-pressed", j === i ? "true" : "false"));
+          urteil.textContent = "Der Jetson ordnet das Bild zu …";
+          const r = await postS("/api/teach/classify", { bild: bildAufnehmen(img, canvas) }, ctrl.signal);
+          if (!r.ok) throw new Error(await antwortFehler(r));
+          const d = await r.json();
+          if (!d.label) throw new Error("Der Jetson hat keine Zuordnung geliefert.");
+          if (d.dimension) dimension = d.dimension;
+          const namen = zeigeErgebnis(d);
+          satzKl.jetzt(d, namen);
+          const passt = d.label === t.erwartet;
+          urteil.textContent = "Erwartet: " + t.erwartet + ". Der Jetson sagt: " + d.label + " (Sicherheit " + Math.round((d.conf || 0) * 100) + " Prozent). " + (passt ? "Das stimmt." : "Das stimmt hier nicht. Auch das gehört zum Beispiel: Kein Modell trifft immer.");
+          urteil.classList.toggle("d-bsp-ok", passt);
+          meld.weg();
+        } catch (err) { const m = netzFehler(err); if (m) meld.zeige(m); urteil.textContent = ""; }
+        finally { busyT = false; }
+      }
+      const tKnoepfe = tests.map((t, i) => h("button", { type: "button", class: "d-bsp-bild", "aria-pressed": "false", "aria-label": "Testbild " + (i + 1), onclick: () => zuordnen(i) },
+        h("img", { src: bspUrl(t.bild), alt: "", loading: "lazy" }), h("span", null, "Testbild " + (i + 1))));
+      testZeile.replaceChildren(...tKnoepfe);
+      testZeile.hidden = false; testBox.hidden = false;
+    });
+
     return { destroy() { L.destroy(); } };
   }
 
@@ -891,7 +1106,7 @@
     "Das größte Risiko ist der Stahlpreis. Steigt er bis Mai um mehr als zehn Prozent, wird der Rohbau um etwa drei Wochen verschoben. Für diesen Fall gibt es einen Ersatzlieferanten in Reserve.",
   ].join("\n\n");
 
-  function rag(root) {
+  function rag(root, seite) {
     const L = leben();
     let busy = false, ctrl = null, hatText = false;
     const meld = meldungBox();
@@ -919,8 +1134,22 @@
 
     /* Schritt 3 */
     const antwort = h("div", { class: "satz d-antwort", "aria-live": "off" }, "Hier erscheint die Antwort.");
+    const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite", hidden: true });
     const s3 = h("div", { class: "schritt" }, h("div", { class: "nr" }, "3"),
-      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwort));
+      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwort, urteil));
+    let erwartet = null;            // Beispielfrage mit erwarteter Antwort (Beispielmodus)
+    frage.addEventListener("input", () => { if (erwartet && frage.value !== erwartet.frage) erwartet = null; });
+    function urteilZeigen(roh) {
+      if (!erwartet) { urteil.hidden = true; return; }
+      const f = erwartet;
+      const passt = KL.beispiel.antwortPasst(f, roh);
+      urteil.classList.toggle("d-bsp-ok", passt === true);
+      urteil.textContent = passt === null
+        ? "Fangfrage. " + (f.erklaerung || "Davon steht nichts in den Dokumenten.") + " Prüfe, ob die Antwort das ehrlich sagt, statt etwas zu erfinden."
+        : passt ? "Erwartet war: " + f.antwort_enthaelt + ". Die Antwort enthält es, die Suche hat die richtige Stelle gefunden."
+          : "Erwartet war: " + f.antwort_enthaelt + ". Die Antwort enthält es nicht. Schau bei den Treffern, ob die richtige Stelle gefunden wurde: Daran erkennst du, ob Suche oder Modell danebenlag.";
+      urteil.hidden = false;
+    }
 
     const live = liveBlock("Live-Erklärung");
     live.text("Lies einen Text ein und stelle eine Frage. Dann siehst du hier, wie lange Suchen und Antworten dauern.");
@@ -980,7 +1209,7 @@
     async function fragen() {
       const f = frage.value.trim().slice(0, 300);
       if (!f || busy) return;
-      setBusy(true); meld.weg(); ok(s2, false); ok(s3, false);
+      setBusy(true); meld.weg(); ok(s2, false); ok(s3, false); urteil.hidden = true;
       trefferBox.replaceChildren(); sucheSatz.textContent = "Der Jetson vergleicht deine Frage mit den Abschnitten…";
       antwort.textContent = "Wartet auf die Suche…";
       live.pipe([]);
@@ -1016,21 +1245,34 @@
 
         const tAsk = performance.now();
         let tErst = 0;
-        const r2 = await postS("/api/rag/ask", { frage: f }, c.signal);
-        if (!r2.ok) throw new Error(await antwortFehler(r2));
         let roh = "", rafOffen = false, fertigGezeichnet = false;
-        const zeichne = () => { rafOffen = false; if (fertigGezeichnet) return; antwort.replaceChildren(...antwortMitVerweisen(roh, karten)); };
+        const zeichne = () => { rafOffen = false; if (fertigGezeichnet || /^\[Dem Jetson fehlt gerade freier Speicher/.test(roh)) return; antwort.replaceChildren(...antwortMitVerweisen(roh, karten)); };
         const liveAntwort = drossel((n) => {
           live.text("Das Sprachmodell bekommt nur die vier Treffer und deine Frage und schreibt die Antwort. Bisher: " + n + " Wörter.");
         }, 500);
         L.onEnde(() => liveAntwort.stop());
-        await streamLesen(r2, (gesamt) => {
-          const i = gesamt.indexOf("\n\n---\n");
-          roh = (i < 0 ? gesamt : gesamt.slice(0, i)).trim();
-          if (roh && !tErst) tErst = performance.now();
-          if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); }
-          liveAntwort(roh.split(/\s+/).filter(Boolean).length);
-        });
+        /* Auf dem Jetson scheitert das Laden des Sprachmodells direkt nach dem Embedding-Modell manchmal einmal
+           ("fehlt gerade freier Speicher"). Der zweite Versuch gelingt dann meist, deshalb einmal selbst wiederholen. */
+        for (let versuch = 1; ; versuch++) {
+          const r2 = await postS("/api/rag/ask", { frage: f }, c.signal);
+          if (!r2.ok) throw new Error(await antwortFehler(r2));
+          roh = "";
+          await streamLesen(r2, (gesamt) => {
+            const i = gesamt.indexOf("\n\n---\n");
+            roh = (i < 0 ? gesamt : gesamt.slice(0, i)).trim();
+            if (roh && !tErst) tErst = performance.now();
+            if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); }
+            liveAntwort(roh.split(/\s+/).filter(Boolean).length);
+          });
+          if (versuch < 2 && /^\[Dem Jetson fehlt gerade freier Speicher/.test(roh)) {
+            live.text("Dem Jetson fehlte kurz Speicher für das Sprachmodell. Er räumt auf und versucht es noch einmal.");
+            tErst = 0;
+            await new Promise((ok2) => L.timeout(ok2, 2500));
+            if (L.weg) return;
+            continue;
+          }
+          break;
+        }
         liveAntwort.stop();
         fertigGezeichnet = true;
         const tEnde = performance.now();
@@ -1039,6 +1281,7 @@
         if (fe) throw new Error("Das Sprachmodell meldet einen Fehler: " + fe[1]);
         if (/^\[(?!\d+\])[^\]]+\]$/.test(roh)) throw new Error(roh.slice(1, -1));
         ok(s3, !!roh);
+        urteilZeigen(roh);
         const warte = (tErst || tEnde) - tAsk, schreib = tEnde - (tErst || tEnde);
         live.pipe([
           { k: "e", cls: "s4", wert: d.embed_ms, text: msText(d.embed_ms), name: "Frage einbetten" },
@@ -1056,11 +1299,44 @@
     fragBtn.addEventListener("click", fragen);
     frage.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); fragen(); } });
 
+    /* Beispielmodus: Dokumentensatz einlesen und die Beispielfragen als Chips anbieten. */
+    beispielStart(root, seite, "rag", L, async (e, kopfB) => {
+      const dokus = (e.daten && e.daten.dokumente) || [];
+      const fragenListe = (e.daten && e.daten.fragen) || [];
+      setBusy(true);
+      try {
+        kopfB.text("Der Jetson wird vorbereitet: Alte Abschnitte löschen …");
+        const r0 = await postS("/api/rag/reset", {}, ctrl2().signal);
+        if (!r0.ok) throw new Error(await antwortFehler(r0));
+        let abschnitte = 0, dim = 0;
+        for (let i = 0; i < dokus.length; i++) {
+          if (L.weg) return;
+          kopfB.text("Dokument " + (i + 1) + " von " + dokus.length + " wird eingelesen: " + dokus[i].titel);
+          const t = await KL.beispiel.textLaden(dokus[i].datei);
+          const r = await postS("/api/rag/upload", { text: t }, ctrl2().signal);
+          if (!r.ok) throw new Error(await antwortFehler(r));
+          const d = await r.json();
+          abschnitte = d.gesamt; dim = d.dimension;
+        }
+        hatText = abschnitte > 0;
+        lesenErg.replaceChildren(
+          h("p", { class: "d-hinweis" }, fett(dokus.length + " Dokumente"), " sind eingelesen, zusammen " + abschnitte + " Abschnitte, jeder als Liste aus " + dim + " Zahlen:"),
+          h("ul", { class: "d-vorschau" }, dokus.map((d) => h("li", null, d.titel))));
+        ok(s1, hatText);
+        live.text("Die Dokumente sind eingelesen. Wähle eine Beispielfrage. Eine davon ist eine Fangfrage: Ihre Antwort steht in keinem Dokument.");
+      } catch (err) { const m = netzFehler(err); if (m) meld.zeige(m); kopfB.text("Das Einlesen ist abgebrochen."); setBusy(false); return; }
+      setBusy(false);
+      chips.replaceChildren(...fragenListe.map((f) => h("button", { type: "button", class: "chip", onclick: () => { if (busy) return; erwartet = f; frage.value = f.frage; fragen(); } }, f.frage)));
+      chips.setAttribute("aria-label", "Beispielfragen zu den Dokumenten");
+      kopfB.text("Fertig: " + dokus.length + " Dokumente eingelesen. Wähle eine Beispielfrage, der Klick startet die Suche.");
+    });
+    function ctrl2() { ctrl = L.abbruch(); return ctrl; }
+
     return { destroy() { L.destroy(); } };
   }
 
   /* ============================================================ 5 Agent */
-  function agent(root) {
+  function agent(root, seite) {
     const L = leben();
     let busy = false, ctrl = null;
     const meld = meldungBox();
@@ -1074,6 +1350,20 @@
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Aufgabe. Hier siehst du dann, wie das Modell Werkzeuge wählt und wie lange jeder Schritt dauert.");
     root.append(h("div", { class: "eingabe d-frage" }, frage, sendeBtn), chips, hinweis, meld.el, status, karten, live.el);
+    let szenario = null, erwartet = null;      // Beispielmodus: Szenario fuer /api/agent/ask und erwartete Antwort
+    frage.addEventListener("input", () => { if (erwartet && frage.value !== erwartet.frage) erwartet = null; });
+    const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite", hidden: true });
+    karten.after(urteil);
+    function urteilZeigen(text) {
+      if (!erwartet) { urteil.hidden = true; return; }
+      const f = erwartet;
+      const passt = KL.beispiel.antwortPasst(f, text);
+      urteil.classList.toggle("d-bsp-ok", passt === true);
+      urteil.textContent = passt === null
+        ? "Fangfrage. " + (f.erklaerung || "") + " Prüfe, ob der Agent ehrlich sagt, dass er nichts gefunden hat."
+        : (passt ? "Erwartet war: " + f.antwort_enthaelt + ". Die Antwort enthält es. " : "Erwartet war: " + f.antwort_enthaelt + ". Die Antwort enthält es nicht. ") + (f.erklaerung || "");
+      urteil.hidden = false;
+    }
 
     function zeigeEingabe(json) {
       let o = null;
@@ -1096,6 +1386,12 @@
           ? "Das Modell hat das Werkzeug dokumentsuche mit dem Begriff " + (o.begriff != null ? o.begriff : json) + " benutzt. Es gab keinen Treffer. Lies vorher im RAG-Labor einen Text ein."
           : "Das Modell hat das Werkzeug dokumentsuche mit dem Begriff " + (o.begriff != null ? o.begriff : json) + " benutzt. Der Jetson hat Abschnitte gefunden, die das Wort enthalten, und gibt sie an das Modell zurück.";
       }
+      if (name === "bestellstatus") return fehler
+        ? "Das Werkzeug bestellstatus kennt diese Bestellnummer nicht und meldet das. Ein gutes Modell sagt das ehrlich weiter, statt einen Status zu erfinden."
+        : "Das Modell hat das Werkzeug bestellstatus mit der Bestellnummer " + (o.nummer != null ? o.nummer : json) + " gewählt. Die Daten kommen aus der Bestelltabelle, nicht aus dem Gedächtnis des Modells.";
+      if (name === "preis_berechnen") return "Das Modell hat das Werkzeug preis_berechnen gewählt. Es rechnet das Werkzeug aus, nicht das Modell: Zwischensumme und Versandkosten nach der Regel, dann der Gesamtpreis.";
+      if (name === "stornierung_pruefen") return "Das Modell hat das Werkzeug stornierung_pruefen gewählt. Es wendet die Regel an (nur bei Status bestellt oder in Bearbeitung) und liefert Antwort und Grund. Storniert wird dabei nichts.";
+      if (name === "bestellungen_suchen") return "Das Modell hat das Werkzeug bestellungen_suchen mit dem Kundenkürzel " + (o.kunde != null ? o.kunde : json) + " gewählt und bekommt die Liste der Bestellungen dieses Kunden.";
       return "Das Modell hat ein Werkzeug namens " + name + " gewählt. Der Jetson hat es ausgeführt und das Ergebnis an das Modell zurückgegeben.";
     }
     function schrittKarte(n, name, json, ergebnis) {
@@ -1110,7 +1406,7 @@
     async function los() {
       const f = frage.value.trim().slice(0, 300);
       if (!f || busy) return;
-      busy = true; sendeBtn.disabled = true; meld.weg(); karten.replaceChildren();
+      busy = true; sendeBtn.disabled = true; meld.weg(); karten.replaceChildren(); urteil.hidden = true;
       status.hidden = false; status.textContent = "Das Modell überlegt…";
       ctrl = new AbortController(); const sig = ctrl.signal;
       const t0 = performance.now();
@@ -1119,7 +1415,7 @@
       live.pipe([]);
       const zeitStreifen = () => live.pipe(segs, "Zeit je Schritt");
       try {
-        const r = await postS("/api/agent/ask", { frage: f }, sig);
+        const r = await postS("/api/agent/ask", szenario ? { frage: f, szenario } : { frage: f }, sig);
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           const jetzt = performance.now();
@@ -1160,6 +1456,7 @@
         const gesamtMs = performance.now() - t0;
         if (!antwortKarte) throw new Error("Das Modell hat keine Antwort geliefert. Versuche es mit einer anderen Formulierung.");
         zeitStreifen();
+        urteilZeigen(antwortText.textContent);
         status.textContent = schritte + (schritte === 1 ? " Werkzeug-Schritt" : " Werkzeug-Schritte") + ", Gesamtzeit " + sekText(gesamtMs) + ".";
         live.text(fett("Fertig. "), schritte === 0 ? "Das Modell hat ohne Werkzeug geantwortet. " : "Das Modell hat " + schritte + (schritte === 1 ? " Werkzeug" : " Werkzeuge") + " gewählt, der Jetson hat sie ausgeführt. ", "Alles zusammen dauerte " + sekText(gesamtMs) + ". Jeder Abschnitt im Streifen ist die Zeit bis zum nächsten Ergebnis.");
       } catch (e) {
@@ -1172,13 +1469,28 @@
     L.onEnde(() => { if (ctrl) ctrl.abort(); });
     sendeBtn.addEventListener("click", los);
     frage.addEventListener("keydown", (e) => { if (e.key === "Enter" && !e.isComposing) { e.preventDefault(); los(); } });
+
+    /* Beispielmodus: Szenario mit eigenen Werkzeugen, Beispielfragen als Klickchips. */
+    beispielStart(root, seite, "agent", L, (e, kopfB) => {
+      const d = e.daten || {};
+      szenario = e.id;
+      const werkz = d.werkzeuge || [];
+      hinweis.replaceChildren(
+        fett("Werkzeuge in diesem Beispiel: "), werkz.map((w) => w.name).join(", ") + ". ",
+        "Die Daten kommen aus einer Bestelltabelle mit erfundenen Bestellungen, die Regeln stehen im Werkzeug. Das Modell rät nicht, es schlägt nach.");
+      chips.replaceChildren(...(d.fragen || []).map((f) => h("button", { type: "button", class: "chip", onclick: () => { if (busy) return; erwartet = f; frage.value = f.frage; los(); } }, f.frage)));
+      chips.setAttribute("aria-label", "Beispielfragen zu den Bestellungen");
+      frage.placeholder = "Frage zu den Bestellungen, zum Beispiel: Wie ist der Status der Bestellung B-10233?";
+      live.text("Wähle eine Beispielfrage. Das Modell entscheidet selbst, welches der vier Werkzeuge es braucht. Hier siehst du dann jeden Schritt.");
+      kopfB.text("Bereit: " + werkz.length + " Werkzeuge und " + (d.fragen || []).length + " Beispielfragen. Der Klick auf eine Frage startet den Agenten.");
+    });
     return { destroy() { L.destroy(); } };
   }
 
   /* ------------------------------------------------------------ Registrierung */
   Object.assign(KL.demos, {
-    "webcam-gesicht": (root) => webcam(root, "gesicht"),
-    "webcam-objekt": (root) => webcam(root, "objekt"),
+    "webcam-gesicht": (root, seite) => webcam(root, "gesicht", seite),
+    "webcam-objekt": (root, seite) => webcam(root, "objekt", seite),
     teach, chat, rag, agent,
   });
 })();

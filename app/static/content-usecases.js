@@ -7,6 +7,7 @@ const S = {};
 /* ====================================================================== 1 Sichtpruefung */
 S["uc-fertigung-sichtpruefung"] = {
   nav: "Sichtprüfung", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Sichtprüfung: Gutteil oder Ausschuss", symbol: "anlernen",
+  widget: "beispielstart",
   videos: ["uc-fertigung-sichtpruefung"],
   kurz: "Am Bandende sieht jemand jede Metallscheibe an und sucht Kratzer, Dellen und ausgebrochene Kanten. Kann eine Kamera das aus wenigen Beispielen lernen, und wo hört das auf?",
   abschnitte: [
@@ -195,6 +196,7 @@ S["uc-fertigung-sichtpruefung"] = {
 /* ====================================================================== 2 Sortieren */
 S["uc-fertigung-sortieren"] = {
   nav: "Sortieren", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Bauteile nach Typ sortieren", symbol: "anlernen",
+  widget: "beispielstart",
   videos: ["uc-fertigung-sortieren"],
   kurz: "Schrauben, Muttern und Scheiben liegen gemischt in einer Kiste. Wie schnell lernt eine Kamera, sie nach Typ zu trennen, und warum klappt es hier so viel leichter als bei der Fehlersuche?",
   abschnitte: [
@@ -367,6 +369,7 @@ S["uc-fertigung-sortieren"] = {
 /* ====================================================================== 3 Zaehlen im Lager */
 S["uc-logistik-zaehlen"] = {
   nav: "Zählen im Lager", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Fahrzeuge und Fahrräder auf dem Hof zählen", symbol: "objekt",
+  widget: "beispielstart",
   videos: ["uc-logistik-zaehlen"],
   kurz: "Die Torkontrolle möchte wissen, wie viele Fahrzeuge gerade auf dem Hof stehen, ohne jedes Mal hinzusehen. Eine Kamera kann zählen. Wie genau, und wo irrt sie sich?",
   abschnitte: [
@@ -550,6 +553,7 @@ S["uc-logistik-zaehlen"] = {
 /* ====================================================================== 4 Regalkontrolle */
 S["uc-handel-regal"] = {
   nav: "Regalkontrolle", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Regal und Tisch: Was steht da?", symbol: "objekt",
+  widget: "beispielstart",
   videos: ["uc-handel-regal"],
   kurz: "Eine Kamera am Gang soll Flaschen im Regal finden und Lücken sichtbar machen. Was leistet Objekterkennung dabei, und was kann sie nicht?",
   abschnitte: [
@@ -721,6 +725,7 @@ S["uc-handel-regal"] = {
 /* ====================================================================== 5 Gesundheit */
 S["uc-gesundheit-auffaellig"] = {
   nav: "Auffälliges in Bildern", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Zweitmeinung: Zellprobe auffällig oder unauffällig", symbol: "anlernen",
+  widget: "beispielstart",
   videos: ["uc-gesundheit-auffaellig"],
   kurz: "Eine Software sortiert viele Proben vor und legt Auffälliges nach vorn. Das ist eine Zweitmeinung, kein Medizinprodukt: Menschen entscheiden.",
   abschnitte: [
@@ -915,6 +920,7 @@ S["uc-gesundheit-auffaellig"] = {
 /* ====================================================================== 6 Dokumente befragen */
 S["uc-buero-dokumente"] = {
   nav: "Dokumente befragen", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Fragen an vier Dokumente", symbol: "rag",
+  widget: "beispielstart",
   videos: ["uc-buero-dokumente"],
   kurz: "Wartungsanleitung, Vertrag, Betriebsvereinbarung und Produkt-FAQ liegen in verschiedenen Ordnern. Ein System soll die passende Stelle finden und mit Quelle antworten. Und es soll sagen können, wenn die Antwort nirgends steht.",
   abschnitte: [
@@ -1116,6 +1122,7 @@ S["uc-buero-dokumente"] = {
 /* ====================================================================== 7 Protokoll aus Sprache */
 S["uc-buero-protokoll"] = {
   nav: "Protokoll aus Sprache", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Besprechungsprotokoll aus Sprache", symbol: "whisper",
+  widget: "beispielstart",
   videos: ["uc-buero-protokoll"],
   kurz: "Nach der Besprechung soll jemand das Protokoll schreiben. Der Jetson kann Sprache lokal in Text umwandeln. Was funktioniert, und was musst du immer nachprüfen?",
   abschnitte: [
@@ -1296,6 +1303,7 @@ S["uc-buero-protokoll"] = {
 /* ====================================================================== 8 Bestellservice */
 S["uc-service-bestellung"] = {
   nav: "Bestellservice", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Bestellfragen mit Werkzeugen beantworten", symbol: "agent",
+  widget: "beispielstart",
   videos: ["uc-service-bestellung"],
   kurz: "Viele Kundinnen fragen nach dem Stand ihrer Bestellung, dem Preis oder einer Stornierung. Ein Agent schlägt das selbst im Bestellsystem nach, rechnet mit einem Werkzeug und entscheidet nach einer Regel, statt zu raten.",
   abschnitte: [
@@ -1493,6 +1501,7 @@ S["uc-service-bestellung"] = {
 /* ====================================================================== 9 Zutritt */
 S["uc-sicherheit-zutritt"] = {
   nav: "Zutritt", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Zutritt: Ist jemand an der Tür?", symbol: "gesicht",
+  widget: "beispielstart",
   videos: ["uc-sicherheit-zutritt"],
   kurz: "Ein Türsystem soll merken, ob jemand vor dem Eingang steht, und dann etwa das Licht einschalten. Wer es ist, soll es dabei nicht erfahren. Dieser Fall zeigt den Unterschied zwischen Gesicht erkennen und Person identifizieren.",
   abschnitte: [
@@ -1574,7 +1583,7 @@ S["uc-sicherheit-zutritt"] = {
       "Das Beispiel nutzt deine eigene Kamera. Öffne das Labor Gesichter und erlaube der Seite den Zugriff auf die Kamera. Stelle dich in den Bildausschnitt: Der Jetson markiert dein Gesicht mit einem Rahmen.",
       "Dann probiere aus: Neige den Kopf, geh weiter weg oder setze eine Maske auf und beobachte, wann der Rahmen verschwindet. Lass eine zweite Person ins Bild kommen. Der Jetson findet beide Gesichter, weiß aber nicht, wer wer ist.",
       "Zeige das nur Personen, die einverstanden sind, und richte die Kamera nicht auf Unbeteiligte.",
-      "{{gesicht|Mit deiner Kamera ausprobieren}}",
+      "{{gesicht?beispiel=sicherheit-zutritt|Mit deiner Kamera ausprobieren}}",
     ]},
     {h: "Was dabei herauskommt",
       kurz: "Es gibt keine Messwerte: Du beobachtest selbst. Der Rahmen folgt dem Gesicht, einen Namen siehst du nie.",
@@ -1678,6 +1687,7 @@ S["uc-sicherheit-zutritt"] = {
 /* ====================================================================== 10 Baustelle */
 S["uc-sicherheit-baustelle"] = {
   nav: "Baustelle", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Personen auf Baustelle und in der Werkhalle", symbol: "objekt",
+  widget: "beispielstart",
   videos: ["uc-sicherheit-baustelle"],
   kurz: "Eine Kamera soll melden, wenn jemand im Gefahrenbereich steht. Das Modell findet Personen. Schutzhelme und Warnwesten erkennt es nicht, und genau das ist der Lernpunkt.",
   abschnitte: [
