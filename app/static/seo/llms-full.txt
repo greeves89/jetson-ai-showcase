@@ -3483,10 +3483,6 @@ Kurz gesagt: Stunde 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punk
 
 45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
-## Zum Ausdrucken
-
-Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
-
 ## Der Zeitplan
 
 Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
@@ -3506,6 +3502,10 @@ Drei Aufgaben für die Gruppe, die auf ein Blatt passen.
 ## Lösungshinweise
 
 Das Labor entscheidet nach den nächsten Beispielen, ein knapper Prompt lässt dem Modell Raum zum Raten.
+
+## Gestufte Hilfen
+
+Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.
 
 ## Differenzierung: leicht und schwer
 
@@ -3547,10 +3547,6 @@ Kurz gesagt: Stunde 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse ar
 
 45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
 
-## Zum Ausdrucken
-
-Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
-
 ## Der Zeitplan
 
 Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
@@ -3570,6 +3566,10 @@ Drei Aufgaben zu Daten, Netz und Lernrate.
 ## Lösungshinweise
 
 Falsche Beispiele schaden bei kleinem k stark, schwierige Muster brauchen Zwischenschichten.
+
+## Gestufte Hilfen
+
+Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.
 
 ## Differenzierung: leicht und schwer
 
@@ -3611,10 +3611,6 @@ Kurz gesagt: Stunde 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet
 
 45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
 
-## Zum Ausdrucken
-
-Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
-
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
@@ -3634,6 +3630,10 @@ Drei Aufgaben: erfinden lassen, im Spiel entscheiden, eine Antwort prüfen.
 ## Lösungshinweise
 
 Ein Modell klingt sicher und erfindet trotzdem, prüfen heißt: Quelle, zweite Quelle, Datum.
+
+## Gestufte Hilfen
+
+Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.
 
 ## Differenzierung: leicht und schwer
 
@@ -3675,13 +3675,17 @@ Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: L
 
 Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
 
-## Arbeitsblätter und Lösungen
-
-Für jede Stunde ein Arbeitsblatt und ein Lösungsblatt zum Ausdrucken.
-
 ## Was die Klasse am Ende kann
 
 Vier Stufen, verteilt auf die drei Stunden, angelehnt an gängige Kompetenzrahmen.
+
+## Operatoren in den Aufgaben
+
+Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären und vergleichen, III begründen und beurteilen.
+
+## So sind die Arbeitsblätter aufgebaut
+
+Eine DIN-A4-Seite, schwarzweiß druckbar: Kopf mit Zielen, Aufgaben mit Niveau und Tipp, Legende, Selbsteinschätzung, QR-Code.
 
 ## Vorbereitung in zehn Minuten
 
@@ -3790,6 +3794,481 @@ Merke: Ihr Kind kann das Labor auch zu Hause kostenlos nutzen. Die Seite Ist das
 - Das Labor ist kostenlos und braucht kein Konto.
 - Im Unterricht werden keine Kamera, kein Mikrofon und keine Gesichtserkennung benutzt.
 - Eingaben werden nicht dauerhaft gespeichert. Details stehen in der Datenschutzerklärung des Betreibers, Stand 22.11.2026.
+
+# Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen
+
+Adresse: __BASIS__/medien-stunde-1
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert ein Set aus zwölf Bildkarten (echte Fotos und KI-Bilder), sucht Hinweise und lernt, warum es keine sichere Erkennung gibt. Mit Zeitplan, Aufgaben, Lösungshinweisen, Tafelbild und druckbarem Kartenset.
+
+45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Frage: Wie sicher bist du bei einem Bild?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Karten sortieren (7 Minuten), Hinweise suchen (7 Minuten), Prüfweg wählen (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Gute KI-Bilder sind oft fehlerfrei, echte Fotos haben manchmal Fehler: Nur Herkunft und Kontext helfen.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Hinweise sammeln, Herkunft prüfen, Wahrscheinlichkeit schätzen: Echt oder KI ist selten ein Ja oder Nein.
+
+Merke: Echt oder KI ist selten ein Ja oder Nein. Du sammelst Hinweise und schätzt die Wahrscheinlichkeit.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Sicherheit, Folgen, Prüfen im Alltag.
+
+## Das nimmst du mit
+
+- Sichere Erkennung gibt es nicht. Du sammelst Hinweise und schätzt ab.
+- Ein Fehler im Bild ist ein Hinweis auf KI, aber kein Beweis. Ein sauberes Bild beweist nicht, dass es echt ist.
+- Herkunft und Kontext prüfen schlägt genaues Hinsehen.
+
+## Fragen und Antworten
+
+Frage: Ein Bild zeigt keinen einzigen Fehler. Was folgt daraus?
+Antwort: Nichts Sicheres, denn gute KI-Bilder sind oft fehlerfrei. Fehlerfreiheit beweist nichts. Darum zählen Herkunft und Kontext.
+
+Frage: Welcher Schritt bringt bei einem seltsamen Bild am meisten?
+Antwort: Klären, wer es zuerst veröffentlicht hat. Die Herkunft lässt sich auch bei einem perfekten Bild prüfen. Likes sagen nichts über echt oder KI.
+
+Frage: Wie formulierst du dein Urteil am besten?
+Antwort: Wahrscheinlich echt, weil Quelle und Kontext passen. Du schätzt eine Wahrscheinlichkeit und nennst den Grund. „Nie beurteilen“ hilft dir nicht weiter.
+
+# Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen
+
+Adresse: __BASIS__/medien-stunde-2
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wird an drei Quellen gegengeprüft: Chat-Antwort, ein Beitrag und eine Behörden- oder Fachseite. Seitwärtslesen und die vier Züge Stopp, Urheber, andere Berichte, Zurückverfolgen. Mit Aufgaben und Lösungshinweisen.
+
+45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Frage: Eine Meldung im Klassenchat, was tust du zuerst?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Chat fragen (6 Minuten), seitwärts lesen (8 Minuten), Gegenprobe (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Der Chat ist ein Wegweiser, keine Quelle: Das Original suchst du selbst.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Nicht auf der Seite bleiben: Urheber klären, andere Berichte suchen, zum Original zurückgehen.
+
+Merke: Nicht auf der Seite nach Beweisen suchen, dass die Seite stimmt. Woanders nachsehen.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Weitergeben, Interesse, Chat als Quelle.
+
+## Das nimmst du mit
+
+- Nicht auf der Seite bleiben: Neuen Tab öffnen und nachsehen, was andere über die Quelle sagen.
+- Prüfe Urheber, Datum und Interesse, und suche Berichte, die selbst recherchiert haben.
+- Ein Chatbot ist ein Wegweiser und keine Quelle. Das Original suchst du selbst.
+
+## Fragen und Antworten
+
+Frage: Drei Seiten melden dasselbe, sie haben aber voneinander abgeschrieben. Wie viele Quellen sind das?
+Antwort: Eine, denn sie sind nicht unabhängig. Nicht die Anzahl zählt, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert?
+
+Frage: Was heißt Seitwärtslesen?
+Antwort: Die Seite verlassen und woanders nachsehen, was über sie gesagt wird. Profis öffnen einen neuen Tab und suchen den Namen der Seite oder des Autors.
+
+Frage: Der Chat nennt eine Quelle mit Titel, Autor und Jahr. Was tust du?
+Antwort: Ich suche das Original und streiche sie, wenn es sie nicht gibt. Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt.
+
+# Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren
+
+Adresse: __BASIS__/medien-stunde-3
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall nach Entstehung, Verbreitung, Nutzen und Gegenmaßnahmen. Keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.
+
+45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Frage: Was ist der Unterschied zwischen Irrtum und Absicht?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten), Gegenmaßnahmen (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Viele Fälschungen brauchen keine KI. Nicht weiterleiten ist die stärkste Gegenmaßnahme.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Fälschungen leben von Gefühlen und Teilen. Prüfen, nicht weiterleiten und notfalls melden.
+
+Merke: Nicht jede falsche Meldung ist eine Lüge. Aber jede, die du weiterleitest, trägt deinen Namen.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Gefühle, Gruppenchat, Hilfe.
+
+## Das nimmst du mit
+
+- Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite.
+- Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.
+- Fälschungen echter Menschen verletzen Rechte. Wenn es dich trifft: sichern, Hilfe holen, melden.
+
+## Fragen und Antworten
+
+Frage: Ein echtes Foto trägt eine erfundene Bildunterschrift. Wie heißt das?
+Antwort: Eine Cheap Fake. Cheap Fakes brauchen keine KI: Ein echtes Bild bekommt einen falschen Zusammenhang.
+
+Frage: Was macht Falschmeldungen so schnell?
+Antwort: Starke Gefühle machen Teilen leicht, und Feeds zeigen, was Reaktionen bekommt. Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt.
+
+Frage: Jemand verbreitet ein gefälschtes Bild von dir. Was ist richtig?
+Antwort: Beweise sichern, Hilfe holen, melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird.
+
+# Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln
+
+Adresse: __BASIS__/medien-stunde-4
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sortiert Beispiele nach erlaubt, genannt und verboten, übt die Faustfrage und die Angabe von KI-Hilfe und entwickelt Regelvorschläge. Welche Regeln gelten, entscheidet die Schule.
+
+45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Faustfrage: Hast du danach mehr verstanden, oder nur etwas abgegeben?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Beispiele sortieren (6 Minuten), Faustfrage anwenden (8 Minuten), Klassenregeln schreiben (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Es kommt nicht auf das Werkzeug an, sondern darauf, wer das Denken macht und ob du es offen sagst.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Erst selbst versuchen, dann KI fragen, dann prüfen und in eigenen Worten aufschreiben.
+
+Merke: KI darf dir helfen, es zu verstehen. Das Verstehen selbst kann sie dir nicht abnehmen.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Lernen, Angabe, Vertrauen.
+
+## Das nimmst du mit
+
+- Frage dich: Hast du danach mehr verstanden, oder nur etwas abgegeben?
+- Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben.
+- Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben.
+
+## Fragen und Antworten
+
+Frage: Wann wird KI-Hilfe bei Hausaufgaben zur Täuschung?
+Antwort: Wenn man KI-Text als eigene Leistung abgibt und es verschweigt. Täuschung heißt: etwas als eigene Leistung abgeben, das nicht von dir ist, und es verschweigen.
+
+Frage: Was ist die beste Reihenfolge?
+Antwort: Selbst versuchen, KI fragen, prüfen, in eigenen Worten aufschreiben. Wer erst selbst versucht, behält das Denken. Wer die Reihenfolge umdreht, lernt weniger.
+
+Frage: Es gibt an deiner Schule keine Regel zu KI. Was heißt das?
+Antwort: Du fragst nach, was für die Aufgabe gilt. Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab.
+
+# Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren
+
+Adresse: __BASIS__/medien-stunde-5
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse sammelt Datenspuren, entscheidet über App-Freigaben für Kamera, Mikrofon und Standort an erfundenen Beispiel-Apps und entwickelt eine Faustregel für Chatbots. Ohne Kamera, kein Zeigen privater Einstellungen.
+
+45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Frage: Welche Daten entstehen, wenn du eine App öffnest?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Datenspuren sammeln (6 Minuten), App-Rechte prüfen (8 Minuten), Chatbot-Regel (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Daten entstehen auch nebenbei. Gib Freigaben nur, wenn die App sie für ihren Zweck braucht.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Mehr Daten entstehen, als du eintippst: Frage bei jeder Freigabe nach dem Zweck.
+
+Merke: Was du in ein Eingabefeld tippst, behandle wie eine Postkarte, nicht wie einen Brief.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Nein sagen, Passwörter, Chat.
+
+## Das nimmst du mit
+
+- Apps sammeln mehr, als du eintippst: Nutzung, Standort, Gerät, Vorlieben.
+- Gib Kamera, Mikrofon und Standort nur frei, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr.
+- Behandle Chatbot-Eingaben wie eine Postkarte. Keine Passwörter, Adressen oder Daten anderer.
+
+## Fragen und Antworten
+
+Frage: Eine Taschenlampen-App will auf deine Kontakte zugreifen. Was ist die beste Reaktion?
+Antwort: Ablehnen, die App braucht die Kontakte nicht für ihren Zweck. Frage bei jeder Freigabe: Braucht die App das für das, was ich tun will?
+
+Frage: Was gehört nicht in einen Chatbot?
+Antwort: Ein Passwort oder die Adresse deiner Familie. Gib nichts ein, das dich blamiert, wenn es später jemand liest.
+
+Frage: Du hast eine Freigabe erteilt und willst sie zurücknehmen. Wo geht das?
+Antwort: Jederzeit in den Einstellungen des Geräts. Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu.
+
+# Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern
+
+Adresse: __BASIS__/medien-stunde-6
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.
+
+45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Video ansehen, etwa 2 Minuten, dann die Frage: Was bestellst du im Imbiss, wenn du nur „Döner“ sagst?
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Frage schreiben (6 Minuten), Antworten vergleichen (8 Minuten), prüfen und nachfragen (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Eine bessere Frage sagt, was fehlen würde. Das Modell rät sonst, und ein sicherer Ton beweist nichts.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Die erste Antwort ist ein Entwurf: nachfragen, prüfen, erst dann nutzen.
+
+Merke: Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht verstanden.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Bausteine, Trainer, Prüfen.
+
+## Das nimmst du mit
+
+- Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau.
+- Nutze die KI als Trainer: erklären, abfragen, Feedback geben. Die Arbeit bleibt bei dir.
+- Frage nach, wenn die Antwort nicht passt, und prüfe Zahlen, Namen und Quellen, bevor du sie benutzt.
+
+## Fragen und Antworten
+
+Frage: Welche Frage bekommt meist die bessere Antwort?
+Antwort: Erkläre Windkraft in sechs Sätzen für Klasse 9 und nenne drei Begriffe zum Nachschlagen. Die bessere Frage nennt Länge, Niveau und Format. Das Modell muss weniger raten.
+
+Frage: Die Antwort ist zu allgemein. Was ist am besten?
+Antwort: Nachfragen: Gib ein Beispiel aus dem Fußball. Die erste Antwort ist ein Entwurf, eine Nachfrage macht sie besser.
+
+Frage: Die KI nennt eine Jahreszahl in sicherem Ton. Was tust du?
+Antwort: Ich suche die Zahl in einer zweiten Quelle. Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen.
+
+# Medien-Einheit 7: KI in deinem Alltag, Poster-Runde
+
+Adresse: __BASIS__/medien-stunde-7
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gruppen gestalten ein Poster, erklären, wie ein Feed entscheidet, und beurteilen in einer Poster-Runde, was wirklich KI ist. Kein Video nötig, ohne Kamera.
+
+45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Die Frage an die Klasse: Wo steckt KI schon in deinem Tag? Beispiele an der Tafel sammeln.
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: Poster zeichnen (6 Minuten), Feed erklären (8 Minuten), Poster-Runde (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+
+## Lösungshinweise
+
+Ein Feed rät, was dich festhält, nicht, was gut für dich ist. Du kannst ihn lenken.
+
+## Gestufte Hilfen
+
+Zwei Tipps je Aufgabe, auch als Hilfekarten im Lösungsblatt: Tipp 1 zuerst, Tipp 2 nur bei Bedarf.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+KI steckt dort, wo aus Daten gelernt wird: im Feed, in Playlists, Filtern, Übersetzern und Tastaturen.
+
+Merke: Dein Feed ist kein Schicksal. Du kannst ihn beeinflussen, bewusst oder durch Einstellungen.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Feed, Gewohnheit, Einstellungen.
+
+## Das nimmst du mit
+
+- KI steckt in Feeds, Playlists, Filtern, Übersetzern und Tastaturen: überall, wo aus Daten gelernt wird.
+- Ein Feed rät, was dich festhält, nicht, was gut für dich ist.
+- Du kannst Empfehlungen lenken: Nicht interessiert wählen, Themen filtern, Verlauf zurücksetzen.
+
+## Fragen und Antworten
+
+Frage: Woran erkennst du, ob eine Software KI nutzt?
+Antwort: Sie hat aus Beispielen gelernt, statt feste Regeln zu befolgen. Der Unterschied: aus Beispielen gelernt oder von Hand geschriebene Regeln.
+
+Frage: Was zählt für einen Feed bei der Auswahl?
+Antwort: Was du ansiehst, likest, teilst und wie lange du bleibst. Der Feed rät, was dich wahrscheinlich festhält. Das erklärt, warum er zu einem Thema abdriften kann.
+
+Frage: Du willst ein Thema nicht mehr sehen. Was hilft?
+Antwort: Nicht interessiert wählen und bewusst anders klicken. Du kannst dem Feed beibringen, was du nicht sehen willst.
+
+# Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten
+
+Adresse: __BASIS__/elternabend
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Paket für den Elternabend zu KI und Medienkompetenz in Klasse 8: Info-Blatt (eine Seite A4, Sie-Form), Gesprächsleitfaden für Lehrkräfte und Fragen mit Antworten. Alle Angaben stammen aus den Seiten des KI-Labors, Stand 22.11.2026, kein Rechtsrat.
+
+Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen.
+
+## Das Info-Blatt für Eltern
+
+Eine Seite A4 zum Austeilen: Worum es geht, was Ihr Kind tut, welche Daten, was zu Hause hilft.
+
+## Der Gesprächsleitfaden
+
+Zehn Minuten am Elternabend: Begrüßung, Beispiel, Datenfragen, Fragen, Abschluss.
+
+## Fragen und Antworten
+
+Acht Fragen von Eltern, jeweils mit einer Kurzantwort aus den Seiten des Labors.
+
+## Das nimmst du mit
+
+- Das Info-Blatt passt auf eine Seite und verspricht nicht mehr, als die Seiten des Labors belegen.
+- Sichere Erkennung von KI-Bildern gibt es nicht. Darum üben die Kinder das Prüfen.
+- Kein Rechtsrat: Die Schule entscheidet über den Einsatz, die Datenschutzerklärung des Betreibers ist verbindlich.
 
 # KI für Schulen: Was gibt es und wie fange ich an?
 

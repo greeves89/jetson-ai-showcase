@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kartenset Echt oder KI?</title>
+<style>
+@page { size: A4; margin: 8mm 13mm; }
+* { box-sizing: border-box; }
+html { font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; }
+body { margin: 0; font-size: 12pt; line-height: 1.3; }
+body.arbeitsblatt { font-size: 11.5pt; line-height: 1.28; }
+.kopfblock { display: flex; gap: 6mm; align-items: flex-start; }
+.kopfblock .links { flex: 1; }
+.kopfblock .qrbox { flex: 0 0 auto; padding-top: 1mm; }
+.seite { display: flex; flex-direction: column; min-height: 281mm; }
+.kopf { display: flex; justify-content: space-between; font-size: 9pt; border-bottom: 0.4mm solid #000; padding-bottom: 1.5mm; }
+h1 { font-size: 18pt; line-height: 1.15; margin: 2mm 0 1mm; }
+h2 { font-size: 13.5pt; margin: 4mm 0 1.5mm; }
+.felder { display: flex; gap: 10mm; margin: 0 0 1mm; font-size: 12pt; }
+.felder span { display: block; border-bottom: 0.3mm solid #000; flex: 1; height: 6.5mm; }
+.felder span.klein { flex: 0 0 52mm; }
+.zeit { font-size: 11pt; border: 0.4mm solid #000; padding: 0.8mm 3mm; display: inline-block; margin: 0 0 1mm; }
+.aufgabe { margin: 0 0 1.6mm; break-inside: avoid; }
+.aufgabe .k { display: flex; gap: 3mm; align-items: baseline; }
+.niv { vertical-align: -0.4mm; }
+.meta { margin-left: auto; font-size: 10.5pt; white-space: nowrap; }
+.nz { font-size: 10.5pt; }
+.tipp { font-size: 10.5pt; }
+table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; }
+table.ziele td, table.ziele th { padding: 0.8mm 2mm; }
+table.ziele th.b, table.ziele td.b { width: 19mm; white-space: nowrap; text-align: center; }
+table.ziele th { font-size: 10pt; }
+table.legende th.b, table.legende td.b { width: 16mm; text-align: center; }
+table.legende td, table.legende th { padding: 0.4mm 2mm; }
+.box { display: inline-block; width: 5mm; height: 5mm; border: 0.5mm solid #000; vertical-align: middle; }
+.zusatz .k { display: flex; gap: 3mm; align-items: baseline; }
+.quellen { font-size: 8.5pt; line-height: 1.2; display: block; margin-top: auto; padding-top: 1.5mm; }
+.fuss.quellen { display: block; }
+.karten { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin: 1mm 0 2mm; }
+.karte { border: 0.4mm dashed #000; padding: 1.5mm 2.5mm; break-inside: avoid; }
+.nr { flex: 0 0 9mm; height: 9mm; border: 0.5mm solid #000; border-radius: 50%; text-align: center; font-weight: bold; font-size: 13pt; line-height: 8mm; }
+.aufgabe h3 { margin: 0; font-size: 12.5pt; }
+.aufgabe .zt { font-weight: normal; font-size: 10.5pt; margin-left: 2mm; }
+.aufgabe p { margin: 0.5mm 0 0 12mm; }
+.zusatz p { margin: 0.5mm 0 0; }
+.zeile { height: 5.5mm; border-bottom: 0.25mm solid #000; margin-left: 12mm; }
+.zusatz { border: 0.4mm dashed #000; padding: 1.5mm 3mm; margin: 0 0 2.4mm; break-inside: avoid; }
+.verstanden { border: 0.5mm solid #000; padding: 2mm 3mm; display: flex; gap: 3mm; align-items: flex-start; margin: 0 0 2.4mm; break-inside: avoid; }
+.verstanden .box { flex: 0 0 7mm; height: 7mm; border: 0.5mm solid #000; margin-top: 0.5mm; }
+.mehr { margin-top: auto; border: 0.5mm solid #000; padding: 2mm 3mm; display: flex; gap: 5mm; align-items: center; break-inside: avoid; }
+.mehr .paar { display: flex; gap: 5mm; align-items: center; flex: 1; }
+.mehr .t { flex: 1; }
+.mehr h2 { margin: 0 0 1mm; }
+.mehr .adr { font-size: 13pt; font-weight: bold; display: block; margin: 1mm 0 1mm; color: #000; text-decoration: underline; }
+.mehr small { font-size: 9.5pt; }
+.qrbox { text-align: center; font-size: 8.5pt; line-height: 1.2; }
+.qr { display: block; margin: 0 auto; }
+.fuss { margin-top: 2mm; font-size: 9pt; display: flex; justify-content: space-between; border-top: 0.3mm solid #000; padding-top: 1mm; }
+table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 10.5pt; }
+h2, h3 { break-after: avoid; }
+th, td { border: 0.3mm solid #000; padding: 1.2mm 2mm; text-align: left; vertical-align: top; }
+th { font-weight: bold; }
+.loesung body, body.loesung { font-size: 10.5pt; line-height: 1.3; }
+body.loesung h1 { font-size: 17pt; margin: 3mm 0 2mm; }
+body.loesung h2 { font-size: 12pt; margin: 3.5mm 0 1mm; border-bottom: 0.25mm solid #000; }
+body.loesung p { margin: 0 0 1.2mm; }
+body.loesung ul { margin: 0 0 1.5mm; padding-left: 5mm; }
+body.loesung li { margin: 0 0 1.2mm; break-inside: avoid; }
+.lg { break-inside: avoid; margin: 0 0 1.6mm; }
+.lg b.t { display: inline-block; }
+.zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.zwei > div { border: 0.3mm solid #000; padding: 1.5mm 2.5mm; break-inside: avoid; }
+.pfad { display: flex; flex-wrap: wrap; gap: 2mm; align-items: center; margin: 1mm 0; }
+.pfad span { border: 0.3mm solid #000; padding: 0.8mm 2.5mm; border-radius: 2mm; }
+.pfad i { font-style: normal; }
+body.loesung .mehr { margin-top: 4mm; padding: 2.5mm; gap: 4mm; align-items: flex-start; }
+body.loesung .mehr .adr { font-size: 10.5pt; }
+body.loesung .mehr .paar { gap: 4mm; }
+body.loesung .mehr .paar + .paar { border-left: 0.3mm solid #000; padding-left: 4mm; }
+body.loesung .mehr h2 { border: 0; font-size: 12pt; margin: 0 0 1mm; }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; } }
+
+body.infoblatt { font-size: 12pt; line-height: 1.35; }
+body.infoblatt h1 { font-size: 18pt; margin: 3mm 0 2mm; }
+body.infoblatt .ib { margin: 0 0 2.6mm; break-inside: avoid; }
+body.infoblatt .ib h2 { font-size: 12.5pt; margin: 0 0 0.6mm; }
+body.infoblatt .ib p { margin: 0; }
+body.infoblatt .mehr { margin-top: 3mm; }
+body.infoblatt .mehr .paar { align-items: center; }
+body.infoblatt .mehr .paar + .paar { border-left: 0.3mm solid #000; padding-left: 4mm; }
+body.infoblatt .mehr .adr { font-size: 9.5pt; }
+body.infoblatt .mehr h2 { font-size: 11.5pt; margin: 0 0 1mm; }
+body.infoblatt .mehr small { font-size: 9pt; }
+body.kartenset .hinweis { font-size: 10pt; margin: 1mm 0 3mm; }
+.bks { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 6mm; break-after: page; }
+.bks:last-of-type { break-after: auto; }
+.bk { border: 0.4mm dashed #000; padding: 2mm; break-inside: avoid; position: relative; }
+.bk img { display: block; width: 100%; height: auto; }
+.bk .nr { position: absolute; left: 4mm; top: 4mm; width: 11mm; height: 11mm; line-height: 10mm; font-size: 16pt; background: #fff; }
+body.loesung table.auf { font-size: 8pt; margin: 0 0 2mm; }
+body.loesung table.auf td, body.loesung table.auf th { padding: 0.5mm 1.4mm; }
+body.loesung table.auf td.n { width: 8mm; text-align: center; font-weight: bold; }
+body.loesung table.auf td.a { width: 14mm; font-weight: bold; }
+body.loesung.kompakt { font-size: 9.6pt; line-height: 1.25; }
+body.loesung.kompakt h2 { margin: 2.5mm 0 0.8mm; }
+body.loesung.kompakt .lg { margin: 0 0 1mm; }
+body.loesung.kompakt .karten { gap: 2mm; }
+body.loesung.kompakt .karte { padding: 1mm 2mm; }
+body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
+body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+</style>
+</head>
+<body class="kartenset">
+<div class="seite">
+<div class="kopf"><span>KI-Labor, ki-labor.daniel-alisch.site, Stand 22.11.2026</span><span>Lizenz: noch festzulegen</span></div>
+
+<h1>Kartenset: Echt oder KI?</h1>
+<p class="hinweis">Medien-Einheit 1. Karten ausschneiden und je Gruppe ein Set austeilen. Die Auflösung steht nur im Lösungsblatt der Lehrkraft.</p>
+<div class="bks"><div class="bk"><img src="bildkarten/karte-01.jpg" alt="Bildkarte 1"><span class="nr">1</span></div><div class="bk"><img src="bildkarten/karte-02.jpg" alt="Bildkarte 2"><span class="nr">2</span></div><div class="bk"><img src="bildkarten/karte-03.jpg" alt="Bildkarte 3"><span class="nr">3</span></div><div class="bk"><img src="bildkarten/karte-04.jpg" alt="Bildkarte 4"><span class="nr">4</span></div><div class="bk"><img src="bildkarten/karte-05.jpg" alt="Bildkarte 5"><span class="nr">5</span></div><div class="bk"><img src="bildkarten/karte-06.jpg" alt="Bildkarte 6"><span class="nr">6</span></div></div>
+<div class="bks"><div class="bk"><img src="bildkarten/karte-07.jpg" alt="Bildkarte 7"><span class="nr">7</span></div><div class="bk"><img src="bildkarten/karte-08.jpg" alt="Bildkarte 8"><span class="nr">8</span></div><div class="bk"><img src="bildkarten/karte-09.jpg" alt="Bildkarte 9"><span class="nr">9</span></div><div class="bk"><img src="bildkarten/karte-10.jpg" alt="Bildkarte 10"><span class="nr">10</span></div><div class="bk"><img src="bildkarten/karte-11.jpg" alt="Bildkarte 11"><span class="nr">11</span></div><div class="bk"><img src="bildkarten/karte-12.jpg" alt="Bildkarte 12"><span class="nr">12</span></div></div>
+
+</div>
+</body>
+</html>

@@ -40,6 +40,7 @@ S["schule-start"] = {
       "{{schule-stunde-1|Stunde 1}}: Was ist KI? Punkte-Labor und Prompting.",
       "{{schule-stunde-2|Stunde 2}}: Wie lernt ein Computer? Punkte-Labor und Netz-Spielplatz.",
       "{{schule-stunde-3|Stunde 3}}: Echt oder erfunden? Halluzinationen und Quellenprüfung.",
+      "Medienkompetenz: sieben weitere Einheiten, beginnend mit {{medien-stunde-1|Medien 1: Echt oder KI?}}, und ein Paket für den {{elternabend|Elternabend}}.",
      ]},
     {h: "Der Klassenlink",
      kurz: "Der Klassenlink öffnet das Labor im Schulweg und speichert nichts.",
@@ -97,8 +98,8 @@ S["schule-start"] = {
 S["schule-stunde-1"] = {
   nav: "Stunde 1: Was ist KI?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden", symbol: "presentation",
   downloads: [
-    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
-    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
+    {text: "Arbeitsblatt Stunde 1", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt Stunde 1", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
   ],
   lernziele: [
     "Du kannst an drei Beispielen aus deinem Alltag erklären, wo KI etwas erkennt und entscheidet.",
@@ -108,15 +109,6 @@ S["schule-stunde-1"] = {
   kurz: "45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
   zusammenfassung: "Stunde 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.",
   abschnitte: [
-    {h: "Zum Ausdrucken",
-     kurz: "Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.",
-     visual: {typ: "raster", spalten: 2, zellen: [
-      {icon: "file-text", text: "Arbeitsblatt", sub: "1 Seite A4, für die Klasse"},
-      {icon: "circle-check", text: "Lösungsblatt", sub: "2 Seiten, für dich"}]},
-     p: [
-      "[Arbeitsblatt Stunde 1 (PDF)](/static/materialien/arbeitsblatt-stunde-1.pdf)",
-      "[Lösungsblatt Stunde 1 (PDF)](/static/materialien/loesung-stunde-1.pdf)"
-     ]},
     {h: "Der Zeitplan",
      kurz: "Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
      visual: {typ: "zeitachse", punkte: [
@@ -154,11 +146,15 @@ S["schule-stunde-1"] = {
       {icon: "chart-scatter", text: "Aufgabe 1", sub: "Punkte lernen lassen"},
       {icon: "sliders-horizontal", text: "Aufgabe 2", sub: "k verändern"},
       {icon: "pen-line", text: "Aufgabe 3", sub: "Prompt verbessern"}]},
+     p: [
+      "Jede Aufgabe beginnt mit einem Operator, also einem Arbeitsauftrag wie „Beschreibe“. Das Kürzel dahinter zeigt den Anforderungsbereich (I, II oder III). Die Tabelle steht in der {{schule-lehrkraefte|Handreichung}}.",
+      "Zusätzlich steht an jeder Aufgabe die Sozialform und das Niveau: Basis, Standard oder Herausforderung.",
+     ],
      liste: [
-      "**Aufgabe 1, Punkte-Labor:** Setze mit Blau etwa zehn Punkte in die linke und mit Orange etwa zehn Punkte in die rechte Hälfte. Fahre mit der Maus über eine freie Stelle in der Mitte. Wie entscheidet das Labor? Schreibe es in einem Satz auf.",
-      "**Aufgabe 2, Punkte-Labor:** Schalte „Entscheidungsfläche zeigen“ ein und verändere den Regler k (Nachbarn) von 1 bis 15. Was passiert mit der Grenze zwischen den Farben? Setze dann einen blauen Punkt mitten in die orangefarbene Gruppe. Was ändert sich bei k gleich 1 und bei k gleich 9?",
-      "**Aufgabe 3, Prompt-Werkstatt:** Wähle eine Aufgabe aus dem Alltag und drücke „Beide senden“. Vergleiche die Antworten von Prompt A (kurz) und Prompt B (ausführlich). Welche passt besser? Ändere Prompt A so, dass er fast so gut wird wie Prompt B.",
-      "**Zusatz für Schnelle:** Drücke „Beispieldaten“ im Punkte-Labor und setze drei eigene Punkte an Stellen, an denen die Entscheidung schwerfällt. Begründe, warum sie schwerfällt.",
+      "**Aufgabe 1, Punkte-Labor (Gruppe zu viert, Basis):** **Beschreibe** (I), wie das Labor in der Mitte entscheidet, und schreibe es in einem Satz auf. Setze dafür mit Blau etwa zehn Punkte in die linke und mit Orange etwa zehn Punkte in die rechte Hälfte. Fahre mit der Maus über eine freie Stelle in der Mitte.",
+      "**Aufgabe 2, Punkte-Labor (Partnerarbeit, Standard):** **Beschreibe** (I), was mit der Grenze zwischen den Farben passiert, wenn du den Regler k (Nachbarn) von 1 bis 15 verschiebst. Schalte dafür „Entscheidungsfläche zeigen“ ein. Setze dann einen blauen Punkt mitten in die orangefarbene Gruppe und **erkläre** (II), was sich bei k gleich 1 und bei k gleich 9 ändert.",
+      "**Aufgabe 3, Prompt-Werkstatt (Gruppe zu viert, Herausforderung):** **Vergleiche** (II) die Antworten von Prompt A (kurz) und Prompt B (ausführlich). Wähle dafür eine Aufgabe aus dem Alltag und drücke „Beide senden“. **Beurteile** (III), welche Antwort besser passt, und **entwickle** (III) eine Fassung von Prompt A, die fast so gut wird wie Prompt B.",
+      "**Zusatz für Schnelle (Einzelarbeit, Herausforderung):** **Begründe** (III), warum die Entscheidung im Punkte-Labor schwerfällt. Drücke dafür „Beispieldaten“ und setze drei eigene Punkte an Stellen, an denen die Entscheidung schwerfällt.",
      ]},
     {h: "Lösungshinweise",
      kurz: "Das Labor entscheidet nach den nächsten Beispielen, ein knapper Prompt lässt dem Modell Raum zum Raten.",
@@ -166,10 +162,23 @@ S["schule-stunde-1"] = {
       links: {titel: "Punkte-Labor", icon: "chart-scatter", farbe: "akzent", punkte: ["Nächste Nachbarn stimmen ab", "Kleines k: unruhige Grenze", "Großes k: ruhige Grenze"]},
       rechts: {titel: "Prompt-Werkstatt", icon: "pen-line", farbe: "gruen", punkte: ["Rolle, Ziel, Form nennen", "Was fehlt, wird geraten", "Antwort prüfen"]}},
      liste: [
-      "**Zu Aufgabe 1:** Das Labor nimmt die Farbe der Mehrheit unter den Punkten, die dem Mauspunkt am nächsten liegen. Es braucht keine Regel wie „links ist blau“: Beispiele statt Regeln, das Kernbild von maschinellem Lernen.",
-      "**Zu Aufgabe 2:** Bei kleinem k folgt die Grenze jedem einzelnen Punkt und wird unruhig, bei großem k wird sie glatter. Ein falsch gesetzter Punkt stört bei k gleich 1 stark, bei größerem k kaum, die Mehrheit überstimmt ihn.",
-      "**Zu Aufgabe 3:** Prompt B nennt meist Rolle, Ziel, Ton und Form, daran liegt der Unterschied. Es gibt keine Musterantwort, die Antworten des Modells wechseln. Zählt die Begründung der Gruppe.",
-      "**Zum Zusatz:** Schwer fällt die Entscheidung dort, wo beide Farben gemischt liegen. Dort hat das Modell zu wenig klare Beispiele.",
+      "**Zu Aufgabe 1, Beschreibe (I):** Eine gute Antwort nennt, dass das Labor die Farbe der Mehrheit unter den Punkten nimmt, die dem Mauspunkt am nächsten liegen. Sie braucht keine Regel wie „links ist blau“: Beispiele statt Regeln, das Kernbild von maschinellem Lernen.",
+      "**Zu Aufgabe 2, Beschreibe (I) und Erkläre (II):** Beschreiben heißt hier, die Beobachtung festzuhalten: Bei kleinem k folgt die Grenze jedem einzelnen Punkt und wird unruhig, bei großem k wird sie glatter. Erklären heißt, den Grund zu nennen: Ein falsch gesetzter Punkt stört bei k gleich 1 stark, bei größerem k kaum, die Mehrheit überstimmt ihn.",
+      "**Zu Aufgabe 3, Vergleiche (II), Beurteile (III), Entwickle (III):** Der Vergleich nennt Unterschiede, meist ist Prompt B genauer: Er nennt Rolle, Ziel, Ton und Form. Das Urteil sagt, welche Antwort besser passt, und stützt sich auf diese Unterschiede. Der neue Prompt A ergänzt mindestens eine der fehlenden Angaben. Es gibt keine Musterantwort, die Antworten des Modells wechseln. Zählt die Begründung der Gruppe.",
+      "**Zum Zusatz, Begründe (III):** Eine gute Begründung nennt den Grund: Schwer fällt die Entscheidung dort, wo beide Farben gemischt liegen. Dort hat das Modell zu wenig klare Beispiele.",
+     ]},
+    {h: "Gestufte Hilfen",
+     kurz: "Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.",
+     visual: {typ: "raster", spalten: 2, zellen: [
+      {icon: "lightbulb", text: "Tipp 1", sub: "gibst du zuerst"},
+      {icon: "key-round", text: "Tipp 2", sub: "nur bei Bedarf"}]},
+     liste: [
+      "**Tipp 1 zu Aufgabe 1:** Schau, welche Punkte in der Nähe des Mauspunkts liegen.",
+      "**Tipp 2 zu Aufgabe 1:** Zähle, welche Farbe unter den nächsten Punkten öfter vorkommt.",
+      "**Tipp 1 zu Aufgabe 2:** Ziehe den Regler langsam und beobachte die Grenze.",
+      "**Tipp 2 zu Aufgabe 2:** Vergleiche k gleich 1 mit k gleich 9: Wie viele Nachbarn stimmen jeweils ab?",
+      "**Tipp 1 zu Aufgabe 3:** Lies beide Antworten nebeneinander: Was steht nur in Prompt B?",
+      "**Tipp 2 zu Aufgabe 3:** Rolle, Ziel, Ton, Form: Welche dieser Angaben fehlt in Prompt A?",
      ]},
     {h: "Differenzierung: leicht und schwer",
      kurz: "Leichte Wege geben Sätze vor, schwere Wege verlangen eigene Begründungen.",
@@ -177,8 +186,8 @@ S["schule-stunde-1"] = {
       links: {titel: "Leichter", icon: "smile", farbe: "gruen", punkte: ["Knopf „Beispieldaten“ nutzen", "Lückensatz zur Entscheidung", "Prompt A nur um eine Angabe ergänzen"]},
       rechts: {titel: "Schwerer", icon: "flame", farbe: "orange", punkte: ["Eigene Daten mit drei Farben", "Entscheidungsfläche deuten", "Neuen Prompt von null schreiben"]}},
      liste: [
-      "**Leichter:** Start mit „Beispieldaten“, Satz ergänzen: „Das Labor entscheidet nach ___, weil ___.“ Bei Aufgabe 3 nur eine Angabe in Prompt A ergänzen, etwa den Ton.",
-      "**Schwerer:** Drei Farben, die sich überlappen: Wo macht die Fläche Fehler? Bei Aufgabe 3 einen neuen Prompt mit Rolle, Ziel, Kontext, Format und Grenzen schreiben.",
+      "**Leichter:** Start mit „Beispieldaten“. Bei den Operatoren **Nenne** (I) und **Beschreibe** (I) bleiben: Satz ergänzen: „Das Labor entscheidet nach ___, weil ___.“ Bei Aufgabe 3 nur eine Angabe in Prompt A ergänzen, etwa den Ton.",
+      "**Schwerer:** Mit **Begründe** (III) und **Beurteile** (III) arbeiten: Drei Farben, die sich überlappen: Wo macht die Fläche Fehler, und warum? Bei Aufgabe 3 einen neuen Prompt mit Rolle, Ziel, Kontext, Format und Grenzen schreiben.",
      ]},
     {h: "Sicherung (10 Minuten): das Tafelbild",
      kurz: "Erkennen, Lernen, Entscheiden: Ein Kreislauf aus Beispielen, Muster, Entscheidung und Prüfung.",
@@ -224,8 +233,8 @@ S["schule-stunde-1"] = {
 S["schule-stunde-2"] = {
   nav: "Stunde 2: Wie lernt ein Computer?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler", symbol: "brain-circuit",
   downloads: [
-    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
-    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
+    {text: "Arbeitsblatt Stunde 2", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt Stunde 2", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum die Qualität der Daten bestimmt, wie gut ein Modell entscheidet.",
@@ -235,15 +244,6 @@ S["schule-stunde-2"] = {
   kurz: "45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.",
   zusammenfassung: "Stunde 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.",
   abschnitte: [
-    {h: "Zum Ausdrucken",
-     kurz: "Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.",
-     visual: {typ: "raster", spalten: 2, zellen: [
-      {icon: "file-text", text: "Arbeitsblatt", sub: "1 Seite A4, für die Klasse"},
-      {icon: "circle-check", text: "Lösungsblatt", sub: "2 Seiten, für dich"}]},
-     p: [
-      "[Arbeitsblatt Stunde 2 (PDF)](/static/materialien/arbeitsblatt-stunde-2.pdf)",
-      "[Lösungsblatt Stunde 2 (PDF)](/static/materialien/loesung-stunde-2.pdf)"
-     ]},
     {h: "Der Zeitplan",
      kurz: "Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
      visual: {typ: "zeitachse", punkte: [
@@ -279,11 +279,15 @@ S["schule-stunde-2"] = {
       {icon: "chart-scatter", text: "Aufgabe 1", sub: "Falsche Beispiele"},
       {icon: "network", text: "Aufgabe 2", sub: "Schichten bauen"},
       {icon: "gauge", text: "Aufgabe 3", sub: "Lernrate prüfen"}]},
+     p: [
+      "Jede Aufgabe beginnt mit einem Operator, also einem Arbeitsauftrag wie „Beschreibe“. Das Kürzel dahinter zeigt den Anforderungsbereich (I, II oder III). Die Tabelle steht in der {{schule-lehrkraefte|Handreichung}}.",
+      "Zusätzlich steht an jeder Aufgabe die Sozialform und das Niveau: Basis, Standard oder Herausforderung.",
+     ],
      liste: [
-      "**Aufgabe 1, Punkte-Labor:** Drücke „Beispieldaten“ und schalte „Entscheidungsfläche zeigen“ ein. Setze einen Punkt in der falschen Farbe mitten in eine Gruppe. Stelle k auf 1, dann auf 9. Wo entsteht ein Fehler? Wie sieht die Fläche rund um den falschen Punkt aus?",
-      "**Aufgabe 2, Netz-Spielplatz:** Wähle „Zwei Wolken“, starte das Training mit 0 Zwischenschichten und notiere die Zahl der richtigen Punkte. Wiederhole das mit dem „Schachbrett“. Was fällt auf? Baue dann eine Zwischenschicht mit vier Neuronen ein und trainiere erneut.",
-      "**Aufgabe 3, Netz-Spielplatz:** Stelle die Lernrate sehr klein, dann sehr groß. Beobachte den Verlust (die Kurve). Bei welcher Einstellung lernt das Netz stabil? Schreibe in zwei Sätzen auf, was die Lernrate steuert.",
-      "**Zusatz für Schnelle:** Wähle die „Spirale“. Wie viele Schichten und Neuronen brauchst du, damit mehr als 90 von 100 Punkten stimmen? Vergleiche die Trainings- und die Testkurve.",
+      "**Aufgabe 1, Punkte-Labor (Gruppe zu viert, Basis):** **Beschreibe** (I), wo ein Fehler entsteht und wie die Fläche rund um den falschen Punkt aussieht. Drücke dafür „Beispieldaten“ und schalte „Entscheidungsfläche zeigen“ ein. Setze einen Punkt in der falschen Farbe mitten in eine Gruppe. Stelle k auf 1, dann auf 9, und **vergleiche** (II) beide Flächen.",
+      "**Aufgabe 2, Netz-Spielplatz (Partnerarbeit, Standard):** **Nenne** (I) die Zahl der richtigen Punkte bei „Zwei Wolken“ und beim „Schachbrett“, jeweils mit 0 Zwischenschichten, und **vergleiche** (II) beide Werte. Starte dafür das Training und notiere die Zahl. Baue dann eine Zwischenschicht mit vier Neuronen ein, trainiere erneut und **erkläre** (II), was sich ändert.",
+      "**Aufgabe 3, Netz-Spielplatz (Gruppe zu viert, Herausforderung):** **Begründe** (III), bei welcher Einstellung der Lernrate das Netz stabil lernt. Stelle dafür die Lernrate sehr klein, dann sehr groß und beobachte den Verlust (die Kurve). **Erkläre** (II) in zwei Sätzen, was die Lernrate steuert.",
+      "**Zusatz für Schnelle (Einzelarbeit, Herausforderung):** **Entwickle** (III) für die „Spirale“ ein Netz, bei dem mehr als 90 von 100 Punkten stimmen. Probiere dafür Schichten und Neuronen aus und **vergleiche** (II) die Trainings- und die Testkurve.",
      ]},
     {h: "Lösungshinweise",
      kurz: "Falsche Beispiele schaden bei kleinem k stark, schwierige Muster brauchen Zwischenschichten.",
@@ -291,10 +295,23 @@ S["schule-stunde-2"] = {
       zellen: [[{text: "gelingt", ton: "gut"}, {text: "scheitert", ton: "schlecht"}],
                [{text: "gelingt", ton: "gut"}, {text: "gelingt", ton: "gut"}]]},
      liste: [
-      "**Zu Aufgabe 1:** Bei k gleich 1 entscheidet allein der nächste Punkt, um den falschen Punkt bildet sich eine Insel in der falschen Farbe. Bei k gleich 9 überstimmen die richtigen Nachbarn den Fehler. Lehre: Fehler in den Trainingsdaten wirken mal stärker, mal schwächer.",
-      "**Zu Aufgabe 2:** Zwei Wolken trennt eine gerade Linie, das schafft ein Netz ohne Zwischenschicht. Das Schachbrett braucht eine gebogene Grenze: Ohne Zwischenschicht bleibt die Trefferquote nahe der Hälfte, erst eine Zwischenschicht mit mehreren Neuronen biegt die Grenze.",
-      "**Zu Aufgabe 3:** Eine sehr kleine Lernrate lässt das Netz kaum vorankommen, eine sehr große lässt den Verlust springen, das Netz findet keine stabile Lösung. Die Lernrate steuert die Schrittgröße beim Nachjustieren.",
-      "**Zum Zusatz:** Fällt die Trainingskurve weiter, während die Testkurve steigt, hat das Netz die Beispiele eher auswendig gelernt ([[ueberanpassung|Überanpassung]]), vor allem mit sehr vielen Neuronen und wenigen Daten.",
+      "**Zu Aufgabe 1, Beschreibe (I) und Vergleiche (II):** Eine gute Beschreibung nennt: Bei k gleich 1 entscheidet allein der nächste Punkt, um den falschen Punkt bildet sich eine Insel in der falschen Farbe. Der Vergleich ergänzt: Bei k gleich 9 überstimmen die richtigen Nachbarn den Fehler. Lehre: Fehler in den Trainingsdaten wirken mal stärker, mal schwächer.",
+      "**Zu Aufgabe 2, Nenne (I), Vergleiche (II), Erkläre (II):** Genannt werden zwei Zahlen ohne Erklärung. Der Vergleich stellt sie gegenüber: Zwei Wolken trennt eine gerade Linie, das schafft ein Netz ohne Zwischenschicht. Die Erklärung nennt den Grund: Das Schachbrett braucht eine gebogene Grenze, ohne Zwischenschicht bleibt die Trefferquote nahe der Hälfte, erst eine Zwischenschicht mit mehreren Neuronen biegt die Grenze.",
+      "**Zu Aufgabe 3, Begründe (III) und Erkläre (II):** Eine gute Begründung sagt, warum eine Einstellung stabil lernt und andere nicht: Eine sehr kleine Lernrate lässt das Netz kaum vorankommen, eine sehr große lässt den Verlust springen, das Netz findet keine stabile Lösung. Die Erklärung hält fest: Die Lernrate steuert die Schrittgröße beim Nachjustieren.",
+      "**Zum Zusatz, Entwickle (III) und Vergleiche (II):** Das Ergebnis ist eine Einstellung (Schichten, Neuronen), die mehr als 90 von 100 Punkten trifft. Beim Vergleich der Kurven gilt: Fällt die Trainingskurve weiter, während die Testkurve steigt, hat das Netz die Beispiele eher auswendig gelernt ([[ueberanpassung|Überanpassung]]), vor allem mit sehr vielen Neuronen und wenigen Daten.",
+     ]},
+    {h: "Gestufte Hilfen",
+     kurz: "Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.",
+     visual: {typ: "raster", spalten: 2, zellen: [
+      {icon: "lightbulb", text: "Tipp 1", sub: "gibst du zuerst"},
+      {icon: "key-round", text: "Tipp 2", sub: "nur bei Bedarf"}]},
+     liste: [
+      "**Tipp 1 zu Aufgabe 1:** Setze den falschen Punkt in die Mitte einer Gruppe und schau, welche Farbe um ihn herum entsteht.",
+      "**Tipp 2 zu Aufgabe 1:** Bei k gleich 1 entscheidet nur der nächste Punkt, bei k gleich 9 stimmen neun Nachbarn ab.",
+      "**Tipp 1 zu Aufgabe 2:** Schau, ob eine gerade Linie die Punkte trennen kann.",
+      "**Tipp 2 zu Aufgabe 2:** Eine Zwischenschicht lässt die Grenze eine Biegung machen.",
+      "**Tipp 1 zu Aufgabe 3:** Beobachte die Kurve bei jeder Einstellung: Fällt sie ruhig oder springt sie?",
+      "**Tipp 2 zu Aufgabe 3:** Die Lernrate bestimmt, wie groß jeder Schritt beim Nachjustieren ist.",
      ]},
     {h: "Differenzierung: leicht und schwer",
      kurz: "Leichte Wege geben Einstellungen vor, schwere verlangen eigene Vermutungen.",
@@ -302,8 +319,8 @@ S["schule-stunde-2"] = {
       links: {titel: "Leichter", icon: "smile", farbe: "gruen", punkte: ["Einstellungen sind vorgegeben", "Lückentext zum Ergebnis", "Nur Aufgabe 1 und 2"]},
       rechts: {titel: "Schwerer", icon: "flame", farbe: "orange", punkte: ["Erst vermuten, dann testen", "Kurven deuten", "Spirale und Zusatzaufgabe"]}},
      liste: [
-      "**Leichter:** Die Lehrkraft nennt die Einstellungen, etwa „Schachbrett, 1 Schicht, 4 Neuronen“. Die Gruppe ergänzt: „Ohne Zwischenschicht stimmen nur etwa ___ Punkte, weil ___.“",
-      "**Schwerer:** Erst eine Vermutung aufschreiben („Mit zwei Neuronen reicht es für das Schachbrett“), dann prüfen und Trainings- und Testkurve unterscheiden.",
+      "**Leichter:** Die Lehrkraft nennt die Einstellungen, etwa „Schachbrett, 1 Schicht, 4 Neuronen“. Die Gruppe bleibt bei **Nenne** (I) und **Beschreibe** (I) und ergänzt: „Ohne Zwischenschicht stimmen nur etwa ___ Punkte, weil ___.“",
+      "**Schwerer:** Erst eine Vermutung aufschreiben („Mit zwei Neuronen reicht es für das Schachbrett“), dann prüfen, **begründen** (III) und **beurteilen** (III), ob sie stimmt, und Trainings- und Testkurve unterscheiden.",
      ]},
     {h: "Sicherung (10 Minuten): das Tafelbild",
      kurz: "Training ist ein Kreislauf: vorhersagen, Fehler messen, nachjustieren, wiederholen.",
@@ -349,8 +366,8 @@ S["schule-stunde-2"] = {
 S["schule-stunde-3"] = {
   nav: "Stunde 3: Echt oder erfunden?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 3: Echt oder erfunden? KI prüfen", symbol: "search",
   downloads: [
-    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
-    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
+    {text: "Arbeitsblatt Stunde 3", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt Stunde 3", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum ein Sprachmodell Dinge erfinden kann, die überzeugend klingen.",
@@ -360,15 +377,6 @@ S["schule-stunde-3"] = {
   kurz: "45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.",
   zusammenfassung: "Stunde 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.",
   abschnitte: [
-    {h: "Zum Ausdrucken",
-     kurz: "Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.",
-     visual: {typ: "raster", spalten: 2, zellen: [
-      {icon: "file-text", text: "Arbeitsblatt", sub: "1 Seite A4, für die Klasse"},
-      {icon: "circle-check", text: "Lösungsblatt", sub: "2 Seiten, für dich"}]},
-     p: [
-      "[Arbeitsblatt Stunde 3 (PDF)](/static/materialien/arbeitsblatt-stunde-3.pdf)",
-      "[Lösungsblatt Stunde 3 (PDF)](/static/materialien/loesung-stunde-3.pdf)"
-     ]},
     {h: "Der Zeitplan",
      kurz: "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.",
      visual: {typ: "zeitachse", punkte: [
@@ -404,11 +412,15 @@ S["schule-stunde-3"] = {
       {icon: "message-circle", text: "Aufgabe 1", sub: "Erfundene Frage"},
       {icon: "triangle-alert", text: "Aufgabe 2", sub: "Risiko-Spiel"},
       {icon: "file-search", text: "Aufgabe 3", sub: "Antwort prüfen"}]},
+     p: [
+      "Jede Aufgabe beginnt mit einem Operator, also einem Arbeitsauftrag wie „Beschreibe“. Das Kürzel dahinter zeigt den Anforderungsbereich (I, II oder III). Die Tabelle steht in der {{schule-lehrkraefte|Handreichung}}.",
+      "Zusätzlich steht an jeder Aufgabe die Sozialform und das Niveau: Basis, Standard oder Herausforderung.",
+     ],
      liste: [
-      "**Aufgabe 1, Chat:** Frage das Sprachmodell nach dem erfundenen Fall der Lehrkraft, zum Beispiel „Wer hat das Buch ‚Titel‘ geschrieben und wann erschien es?“. Schreibe die Antwort auf. Gab das Modell zu, nichts zu wissen, oder erfand es etwas Überzeugendes?",
-      "**Aufgabe 2, Risiko-Spiel:** Spielt die Karten durch. Entscheidet bei jeder Karte: Stimmt oder erfunden? Notiert, bei welchen Karten ihr falsch lagt und woran ihr es hättet erkennen können.",
-      "**Aufgabe 3, Prüfen:** Nimm eine Behauptung aus Aufgabe 1. Prüfe sie in drei Schritten: Wer ist die Quelle? Gibt es eine zweite, unabhängige Quelle? Von wann ist die Information? Schreibe das Ergebnis in drei Sätzen auf.",
-      "**Zusatz für Schnelle:** Formuliere eine Regel für deine Klasse: „Bevor ich eine KI-Antwort weitergebe, prüfe ich ___.“ Vergleicht die Regeln der Gruppen.",
+      "**Aufgabe 1, Chat (Gruppe zu viert, Basis):** **Beschreibe** (I), wie das Sprachmodell auf den erfundenen Fall der Lehrkraft antwortet: Gab es zu, nichts zu wissen, oder erfand es etwas Überzeugendes? Frage dafür das Modell, zum Beispiel „Wer hat das Buch ‚Titel‘ geschrieben und wann erschien es?“. Schreibe die Antwort auf.",
+      "**Aufgabe 2, Risiko-Spiel (Partnerarbeit, Standard):** **Nenne** (I) die Karten, bei denen du falsch lagst, und **erkläre** (II), woran du es hättest erkennen können. Spiele dafür die Karten durch und entscheide bei jeder Karte: Stimmt oder erfunden?",
+      "**Aufgabe 3, Prüfen (Einzelarbeit, Herausforderung):** **Überprüfe** (III) eine Behauptung aus Aufgabe 1 in drei Schritten: Wer ist die Quelle? Gibt es eine zweite, unabhängige Quelle? Von wann ist die Information? Schreibe das Ergebnis in drei Sätzen auf.",
+      "**Zusatz für Schnelle (Einzelarbeit, Herausforderung):** **Entwickle** (III) eine Regel für deine Klasse: „Bevor ich eine KI-Antwort weitergebe, prüfe ich ___.“ **Vergleiche** (II) sie mit den Regeln der anderen Gruppen.",
      ]},
     {h: "Lösungshinweise",
      kurz: "Ein Modell klingt sicher und erfindet trotzdem, prüfen heißt: Quelle, zweite Quelle, Datum.",
@@ -417,10 +429,23 @@ S["schule-stunde-3"] = {
       {icon: "copy", text: "Zweite Quelle", sub: "unabhängig"},
       {icon: "calendar", text: "Datum", sub: "noch aktuell?", farbe: "gruen"}]},
      liste: [
-      "**Zu Aufgabe 1:** Beide Ergebnisse lehren etwas: Erfindet das Modell Autor und Jahr, ist das eine [[halluzination|Halluzination]], sagt es „kenne ich nicht“, hat es richtig reagiert. Die Antworten wechseln, teste den Fall vorher selbst.",
-      "**Zu Aufgabe 2:** Jede Karte hat eine Auflösung mit Erklärung. Typisch für Erfundenes: sehr genaue Zahlen und Aktenzeichen ohne Beleg und ein selbstsicherer Ton.",
-      "**Zu Aufgabe 3:** Gut geprüft heißt: Quelle mit Namen, zweite Quelle, Datum. Bei Büchern helfen ein Bibliothekskatalog oder die Seite des Verlags. Das Modell um Bestätigung zu bitten ist keine Prüfung, es bestätigt oft die eigene Antwort.",
-      "**Zum Zusatz:** Gute Regeln sind kurz und prüfbar, zum Beispiel „Zahlen und Namen immer in einer zweiten Quelle suchen“.",
+      "**Zu Aufgabe 1, Beschreibe (I):** Beschrieben wird, was das Modell tatsächlich geantwortet hat. Beide Ergebnisse lehren etwas: Erfindet das Modell Autor und Jahr, ist das eine [[halluzination|Halluzination]], sagt es „kenne ich nicht“, hat es richtig reagiert. Die Antworten wechseln, teste den Fall vorher selbst.",
+      "**Zu Aufgabe 2, Nenne (I) und Erkläre (II):** Genannt werden die Karten mit falscher Einschätzung. Die Erklärung nutzt die Auflösung der Karte. Typisch für Erfundenes: sehr genaue Zahlen und Aktenzeichen ohne Beleg und ein selbstsicherer Ton.",
+      "**Zu Aufgabe 3, Überprüfe (III):** Gut geprüft heißt: Quelle mit Namen, zweite Quelle, Datum, und am Ende steht ein Ergebnis. Bei Büchern helfen ein Bibliothekskatalog oder die Seite des Verlags. Das Modell um Bestätigung zu bitten ist keine Prüfung, es bestätigt oft die eigene Antwort.",
+      "**Zum Zusatz, Entwickle (III) und Vergleiche (II):** Gute Regeln sind kurz und prüfbar, zum Beispiel „Zahlen und Namen immer in einer zweiten Quelle suchen“. Beim Vergleich fällt auf, welche Regeln mehrere Gruppen nennen.",
+     ]},
+    {h: "Gestufte Hilfen",
+     kurz: "Zu jeder Aufgabe zwei Tipps, auch als Hilfekarten im Lösungsblatt: Tipp 1 gibst du zuerst, Tipp 2 nur bei Bedarf.",
+     visual: {typ: "raster", spalten: 2, zellen: [
+      {icon: "lightbulb", text: "Tipp 1", sub: "gibst du zuerst"},
+      {icon: "key-round", text: "Tipp 2", sub: "nur bei Bedarf"}]},
+     liste: [
+      "**Tipp 1 zu Aufgabe 1:** Lies die Antwort genau: Steht dort ein Autor und ein Jahr?",
+      "**Tipp 2 zu Aufgabe 1:** Hat das Modell etwas zugegeben oder etwas Überzeugendes erfunden?",
+      "**Tipp 1 zu Aufgabe 2:** Erfundenes klingt oft sehr genau und sehr sicher.",
+      "**Tipp 2 zu Aufgabe 2:** Achte auf genaue Zahlen und Aktenzeichen ohne Beleg.",
+      "**Tipp 1 zu Aufgabe 3:** Die drei Fragen: Quelle, zweite Quelle, Datum.",
+      "**Tipp 2 zu Aufgabe 3:** Bei Büchern helfen ein Bibliothekskatalog oder die Seite des Verlags.",
      ]},
     {h: "Differenzierung: leicht und schwer",
      kurz: "Leichte Wege geben Prüffragen vor, schwere Wege verlangen eigene Recherche.",
@@ -428,8 +453,8 @@ S["schule-stunde-3"] = {
       links: {titel: "Leichter", icon: "smile", farbe: "gruen", punkte: ["Prüffragen sind vorgegeben", "Antwort mit Lückentext", "Fall ist bereits ausgewählt"]},
       rechts: {titel: "Schwerer", icon: "flame", farbe: "orange", punkte: ["Eigene Frage ausdenken", "Zwei Quellen vergleichen", "Eigene Regel begründen"]}},
      liste: [
-      "**Leichter:** Die drei Prüffragen stehen auf einer Karte, die Gruppe füllt „Die Antwort ist ___, weil ___.“ aus.",
-      "**Schwerer:** Die Gruppe sucht selbst eine Behauptung, die ein Modell erfunden haben könnte, prüft sie mit zwei Quellen und bewertet deren Verlässlichkeit.",
+      "**Leichter:** Die drei Prüffragen stehen auf einer Karte. Die Gruppe bleibt bei **Nenne** (I) und **Beschreibe** (I) und füllt „Die Antwort ist ___, weil ___.“ aus.",
+      "**Schwerer:** Die Gruppe sucht selbst eine Behauptung, die ein Modell erfunden haben könnte, prüft sie mit zwei Quellen, **begründet** (III) das Ergebnis und **beurteilt** (III) die Verlässlichkeit der Quellen.",
      ]},
     {h: "Sicherung (10 Minuten): das Tafelbild",
      kurz: "Eine KI-Antwort ist ein Vorschlag, kein Beweis: erst prüfen, dann weitergeben.",
@@ -479,18 +504,15 @@ S["schule-lehrkraefte"] = {
   ],
   kurz: "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.",
   zusammenfassung: "Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
+  downloads: [
+    {text: "Arbeitsblatt Stunde 1", sub: "Stunde 1, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt Stunde 1", sub: "Stunde 1, 2 Seiten", href: "/static/materialien/loesung-stunde-1.pdf"},
+    {text: "Arbeitsblatt Stunde 2", sub: "Stunde 2, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt Stunde 2", sub: "Stunde 2, 2 Seiten", href: "/static/materialien/loesung-stunde-2.pdf"},
+    {text: "Arbeitsblatt Stunde 3", sub: "Stunde 3, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt Stunde 3", sub: "Stunde 3, 2 Seiten", href: "/static/materialien/loesung-stunde-3.pdf"},
+  ],
   abschnitte: [
-    {h: "Arbeitsblätter und Lösungen",
-     kurz: "Für jede Stunde ein Arbeitsblatt und ein Lösungsblatt zum Ausdrucken.",
-     visual: {typ: "raster", spalten: 3, zellen: [
-      {icon: "file-text", text: "Stunde 1", sub: "Arbeitsblatt und Lösung"},
-      {icon: "file-text", text: "Stunde 2", sub: "Arbeitsblatt und Lösung"},
-      {icon: "file-text", text: "Stunde 3", sub: "Arbeitsblatt und Lösung"}]},
-     p: [
-      "Stunde 1: [Arbeitsblatt](/static/materialien/arbeitsblatt-stunde-1.pdf) und [Lösungsblatt](/static/materialien/loesung-stunde-1.pdf)",
-      "Stunde 2: [Arbeitsblatt](/static/materialien/arbeitsblatt-stunde-2.pdf) und [Lösungsblatt](/static/materialien/loesung-stunde-2.pdf)",
-      "Stunde 3: [Arbeitsblatt](/static/materialien/arbeitsblatt-stunde-3.pdf) und [Lösungsblatt](/static/materialien/loesung-stunde-3.pdf)"
-     ]},
     {h: "Was die Klasse am Ende kann",
      kurz: "Vier Stufen, verteilt auf die drei Stunden, angelehnt an gängige Kompetenzrahmen.",
      visual: {typ: "raster", spalten: 4, zellen: [
@@ -508,6 +530,42 @@ S["schule-lehrkraefte"] = {
        ["Bewerten", "KI-Antworten prüfen und begründen, wann sie nicht reichen"],
       ],
      }},
+    {h: "Operatoren in den Aufgaben",
+     kurz: "Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll sie ist: I nennen und beschreiben, II erklären und vergleichen, III begründen und beurteilen.",
+     visual: {typ: "schichten", richtung: "stapel", ebenen: [
+      {icon: "scale", text: "Bereich III", sub: "Transfer und Bewertung: begründen, beurteilen, überprüfen, entwickeln"},
+      {icon: "network", text: "Bereich II", sub: "Reorganisation: erklären, vergleichen"},
+      {icon: "list", text: "Bereich I", sub: "Reproduktion: nennen, beschreiben"}]},
+     p: [
+      "Operatoren sind Verben, die sagen, was die Antwort enthalten soll. Je Stunde kommt mindestens ein Operator aus jedem der drei Anforderungsbereiche vor. Das Kürzel steht in Klammern hinter dem Operator, auf dem Arbeitsblatt steht dazu eine Legende mit den Operatoren dieses Blatts, im Lösungsblatt der Erwartungshorizont.",
+      "Die Zuordnung gilt als Orientierung. Die Quellen ordnen einzelne Operatoren je nach Bundesland und Fach leicht unterschiedlich zu, manche Operatoren reichen über zwei Bereiche (zum Beispiel beschreiben von I bis II, beurteilen von II bis III). Welcher Bereich gefordert ist, hängt auch von der Aufgabe ab. Quellen: siehe „Weiterlesen“.",
+     ],
+     tabelle: {
+      beschriftung: "Operatoren in den Arbeitsblättern (vereinfacht für Klasse 8)",
+      kopf: ["Operator", "Das sollst du tun", "Bereich"],
+      zeilen: [
+       ["Nenne", "Gib etwas ohne Erklärung an: Wort, Zahl oder kurzer Satz.", "I"],
+       ["Beschreibe", "Gib einen Sachverhalt sachlich, in eigenen Worten und ganzen Sätzen wieder.", "I"],
+       ["Erkläre", "Mach etwas verständlich: Nenne den Grund, ergänze ein Beispiel.", "II"],
+       ["Vergleiche", "Finde Gemeinsamkeiten und Unterschiede und stelle sie gegenüber.", "II"],
+       ["Begründe", "Führe einen Sachverhalt auf Gründe oder Zusammenhänge zurück.", "III"],
+       ["Beurteile", "Bilde dir ein eigenes Urteil mit Fachwissen und begründe es.", "III"],
+       ["Überprüfe", "Miss eine Aussage an Fakten und decke Lücken oder Widersprüche auf.", "III"],
+       ["Entwickle", "Entwirf nach vorgegebenen Bedingungen eine eigene Lösung.", "III"],
+      ],
+     }},
+    {h: "So sind die Arbeitsblätter aufgebaut",
+     kurz: "Eine DIN-A4-Seite, schwarzweiß druckbar: Kopf mit Zielen, Aufgaben mit Niveau und Tipp, Legende, Selbsteinschätzung, QR-Code.",
+     visual: {typ: "raster", spalten: 3, zellen: [
+      {icon: "target", text: "Ziele", sub: "Heute kannst du"},
+      {icon: "layers", text: "Niveau", sub: "Basis bis Herausforderung"},
+      {icon: "lightbulb", text: "Tipps", sub: "Hilfekarten bei dir"}]},
+     liste: [
+      "**Kopf:** Thema, Zeit, Lernziele („Heute kannst du ...“). Am Ende kreuzen die Schülerinnen und Schüler je Ziel „sicher“, „fast“ oder „noch nicht“ an.",
+      "**Aufgaben:** Sozialform (Einzelarbeit, Partnerarbeit, Gruppe zu viert) und Niveau (Basis, Standard, Herausforderung) stehen an jeder Aufgabe, das Niveau als ein bis drei Kästchen, nicht als Farbe.",
+      "**Hilfen:** Die Tipps stehen nicht auf dem Schülerblatt, sondern als Hilfekarten im Lösungsblatt. Gib Tipp 1 zuerst und Tipp 2 nur bei Bedarf weiter.",
+      "**Lesbarkeit:** serifenlose Schrift, 12 Punkt, großzügiger Zeilenabstand, linksbündig, Platz zum Schreiben.",
+     ]},
     {h: "Vorbereitung in zehn Minuten",
      kurz: "Link testen, Labore ausprobieren, Gruppen bilden, Aufgaben kopieren.",
      visual: {typ: "ablauf", paket: false, schritte: [
@@ -593,7 +651,12 @@ S["schule-lehrkraefte"] = {
       "UNESCO, KI-Kompetenzrahmen für Lernende (Titel auf unesco.org suchen).",
       "Bayerisches Kultusministerium, Datenschutz an Schulen: `km.bayern.de/recht/datenschutz-an-schulen` (andere Länder haben eigene Regeln).",
       "Universität Potsdam, Sprachbasierte KI-Tools für die Schule: `uni-potsdam.de/de/medienbildung/transfer-1/sprachbasierte-ki-tools-fuer-die-schule`",
-      "Im Labor: {{karte|Was ist KI?}}, {{llm-grenzen|Grenzen und Risiken von Sprachmodellen}} und {{verzerrung-ethik|Fairness, Verzerrung und Verantwortung}}.",
+      "**Operatoren, Quelle 1:** Hinweise zur Verwendung von Operatoren im Fach Informatik, zusammengestellt für eine Fortbildung am 3.6.2013 (PL Speyer), Bildungsserver Rheinland-Pfalz: `bildung.rlp.de/fileadmin/user_upload/informatik.bildung.rlp.de/Abitur/OperatorenInformatik_RS092013.pdf`, abgerufen am 22.11.2026. Definitionen und Bereiche von nennen, beschreiben, erklären, vergleichen, beurteilen, überprüfen, entwickeln.",
+      "**Operatoren, Quelle 2:** Gemeinsame Abituraufgabenpools der Länder, Grundstock von Operatoren Deutsch (Stand 05.01.2026), IQB: `iqb.hu-berlin.de/media/documents/D_Grundstock_von_Operatoren_uFqEtHs.pdf`, abgerufen am 22.11.2026. Dort steht auch, dass keine strikte Zuordnung eines Operators zu einem Bereich erfolgt.",
+      "**Operatoren, Quelle 3:** Operatoren im Bildungsplan 2016 Baden-Württemberg (Reproduktion, Reorganisation, Transfer und Bewertung), `lehrerfortbildung-bw.de/u_mks/kunst/gym/bp2016/fb4/3_oper/operatoren_30_05_15_spo.pdf`, abgerufen am 22.11.2026. Die Quellen 1 und 2 stammen aus der Oberstufe (Informatik, Deutsch), Quelle 3 aus dem Fach Kunst. Eine eigene Liste für Informatik in Klasse 8 war nicht dabei. Die Definitionen sind für Klasse 8 vereinfacht. Die Zuordnung kann je Bundesland und Fach leicht abweichen.",
+      "**Gestaltung der Arbeitsblätter, Quellen:** Kriterienliste der TU Dresden (`bildungsportal.sachsen.de/opal/oer/4UW2UJeUWT4k`), Goethe-Institut (Arbeitsblätter für den Unterricht), Universität Frankfurt (Skript zu Arbeitsblättern), ISB Bayern (Kurzhandreichung zur Gestaltung von Arbeitsblättern), PH Niederösterreich (Methoden zur Differenzierung), Universität Halle (Kriterienkatalog Textdokument analog), BFIT-Bund (Leitfaden barrierefreie Textgestaltung), legasthenie.at (Fonts-Broschüre), LMU München (Lernzirkel mit QR-Stationen), PH St. Gallen (Sammelmappe mit QR-Codes). Recherchestand 22.11.2026, die Titel auf den Seiten der Einrichtungen suchen.",
+      "Stundenmaterial zur Medienkompetenz: sieben Einheiten von {{medien-stunde-1|Medien 1: Echt oder KI?}} bis {{medien-stunde-7|Medien 7: KI in deinem Alltag}}, dazu der {{elternabend|Elternabend}}. Operatoren und Aufbau der Blätter gelten dort genauso.",
+      "Im Labor: {{karte|Was ist KI?}},{{llm-grenzen|Grenzen und Risiken von Sprachmodellen}} und {{verzerrung-ethik|Fairness, Verzerrung und Verantwortung}}.",
      ]},
   ],
   mitnehmen: [
@@ -604,7 +667,7 @@ S["schule-lehrkraefte"] = {
   grenzen: [
     "Das Labor ersetzt keine Datenschutzprüfung der Schule. Siehe {{schule-schulleitung|Info für die Schulleitung}}.",
   ],
-  weiter: ["schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3"],
+  weiter: ["schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "elternabend"],
 };
 
 /* ------------------------------------------------------------------ Schulleitung */

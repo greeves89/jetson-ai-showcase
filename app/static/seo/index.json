@@ -592,7 +592,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-fuer-die-schule",
       "name": "Für die Schule",
-      "numberOfItems": 9,
+      "numberOfItems": 17,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -639,12 +639,60 @@
        {
         "@type": "ListItem",
         "position": 8,
+        "name": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
+        "url": "__BASIS__/medien-stunde-1"
+       },
+       {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
+        "url": "__BASIS__/medien-stunde-2"
+       },
+       {
+        "@type": "ListItem",
+        "position": 10,
+        "name": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
+        "url": "__BASIS__/medien-stunde-3"
+       },
+       {
+        "@type": "ListItem",
+        "position": 11,
+        "name": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
+        "url": "__BASIS__/medien-stunde-4"
+       },
+       {
+        "@type": "ListItem",
+        "position": 12,
+        "name": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
+        "url": "__BASIS__/medien-stunde-5"
+       },
+       {
+        "@type": "ListItem",
+        "position": 13,
+        "name": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+        "url": "__BASIS__/medien-stunde-6"
+       },
+       {
+        "@type": "ListItem",
+        "position": 14,
+        "name": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+        "url": "__BASIS__/medien-stunde-7"
+       },
+       {
+        "@type": "ListItem",
+        "position": 15,
+        "name": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten",
+        "url": "__BASIS__/elternabend"
+       },
+       {
+        "@type": "ListItem",
+        "position": 16,
         "name": "KI für Schulen: Was gibt es und wie fange ich an?",
         "url": "__BASIS__/ki-schule-ueberblick"
        },
        {
         "@type": "ListItem",
-        "position": 9,
+        "position": 17,
         "name": "KI an der Schule: In 7 Schritten starten",
         "url": "__BASIS__/ki-schule-einstieg"
        }
@@ -15816,7 +15864,7 @@
   "schule-lehrkraefte": {
    "titel": "Handreichung für Lehrkräfte · KI-Labor",
    "ueberschrift": "Handreichung für Lehrkräfte",
-   "beschreibung": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Zehn Wörter der drei Stunden, jeweils in einem Satz erklärt.",
+   "beschreibung": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Jede Aufgabe beginnt mit einem Operator.",
    "typ": "seite",
    "datei": "content-schule.js",
    "bild": "/static/og/standard.png",
@@ -15858,7 +15906,7 @@
       "@id": "__BASIS__/schule-lehrkraefte#artikel",
       "headline": "Handreichung für Lehrkräfte",
       "name": "Handreichung für Lehrkräfte",
-      "description": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Zehn Wörter der drei Stunden, jeweils in einem Satz erklärt.",
+      "description": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Jede Aufgabe beginnt mit einem Operator.",
       "url": "__BASIS__/schule-lehrkraefte",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16186,6 +16234,1095 @@
         "position": 2,
         "name": "Information für Eltern",
         "item": "__BASIS__/schule-eltern"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-1": {
+   "titel": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und…",
+   "ueberschrift": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
+   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil. Sichere Erkennung gibt es nicht.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-1#artikel",
+      "headline": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
+      "name": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
+      "description": "45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil. Sichere Erkennung gibt es nicht.",
+      "url": "__BASIS__/medien-stunde-1",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-1"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert ein Set aus zwölf Bildkarten (echte Fotos und KI-Bilder), sucht Hinweise und lernt, warum es keine sichere Erkennung gibt. Mit Zeitplan, Aufgaben, Lösungshinweisen, Tafelbild und druckbarem Kartenset.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-1#breadcrumb"
+      },
+      "teaches": [
+       "Sichere Erkennung gibt es nicht. Du sammelst Hinweise und schätzt ab.",
+       "Ein Fehler im Bild ist ein Hinweis auf KI, aber kein Beweis. Ein sauberes Bild beweist nicht, dass es echt ist.",
+       "Herkunft und Kontext prüfen schlägt genaues Hinsehen."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-1#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
+        "item": "__BASIS__/medien-stunde-1"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-1#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Ein Bild zeigt keinen einzigen Fehler. Was folgt daraus?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nichts Sicheres, denn gute KI-Bilder sind oft fehlerfrei. Fehlerfreiheit beweist nichts. Darum zählen Herkunft und Kontext."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Welcher Schritt bringt bei einem seltsamen Bild am meisten?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Klären, wer es zuerst veröffentlicht hat. Die Herkunft lässt sich auch bei einem perfekten Bild prüfen. Likes sagen nichts über echt oder KI."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wie formulierst du dein Urteil am besten?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Wahrscheinlich echt, weil Quelle und Kontext passen. Du schätzt eine Wahrscheinlichkeit und nennst den Grund. „Nie beurteilen“ hilft dir nicht weiter."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-2": {
+   "titel": "Medien-Einheit 2: Quellen prüfen, eine Behauptung…",
+   "ueberschrift": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
+   "beschreibung": "45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-2#artikel",
+      "headline": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
+      "name": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
+      "description": "45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+      "url": "__BASIS__/medien-stunde-2",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-2"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wird an drei Quellen gegengeprüft: Chat-Antwort, ein Beitrag und eine Behörden- oder Fachseite. Seitwärtslesen und die vier Züge Stopp, Urheber, andere Berichte, Zurückverfolgen. Mit Aufgaben und Lösungshinweisen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-2#breadcrumb"
+      },
+      "teaches": [
+       "Nicht auf der Seite bleiben: Neuen Tab öffnen und nachsehen, was andere über die Quelle sagen.",
+       "Prüfe Urheber, Datum und Interesse, und suche Berichte, die selbst recherchiert haben.",
+       "Ein Chatbot ist ein Wegweiser und keine Quelle. Das Original suchst du selbst."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-2#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
+        "item": "__BASIS__/medien-stunde-2"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-2#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Drei Seiten melden dasselbe, sie haben aber voneinander abgeschrieben. Wie viele Quellen sind das?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Eine, denn sie sind nicht unabhängig. Nicht die Anzahl zählt, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert?"
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was heißt Seitwärtslesen?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Seite verlassen und woanders nachsehen, was über sie gesagt wird. Profis öffnen einen neuen Tab und suchen den Namen der Seite oder des Autors."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Der Chat nennt eine Quelle mit Titel, Autor und Jahr. Was tust du?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ich suche das Original und streiche sie, wenn es sie nicht gibt. Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-3": {
+   "titel": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall…",
+   "ueberschrift": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
+   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-3#artikel",
+      "headline": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
+      "name": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
+      "description": "45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+      "url": "__BASIS__/medien-stunde-3",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-3"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall nach Entstehung, Verbreitung, Nutzen und Gegenmaßnahmen. Keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-3#breadcrumb"
+      },
+      "teaches": [
+       "Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite.",
+       "Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.",
+       "Fälschungen echter Menschen verletzen Rechte. Wenn es dich trifft: sichern, Hilfe holen, melden."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-3#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
+        "item": "__BASIS__/medien-stunde-3"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-3#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Ein echtes Foto trägt eine erfundene Bildunterschrift. Wie heißt das?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Eine Cheap Fake. Cheap Fakes brauchen keine KI: Ein echtes Bild bekommt einen falschen Zusammenhang."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was macht Falschmeldungen so schnell?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Starke Gefühle machen Teilen leicht, und Feeds zeigen, was Reaktionen bekommt. Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Jemand verbreitet ein gefälschtes Bild von dir. Was ist richtig?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Beweise sichern, Hilfe holen, melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-4": {
+   "titel": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln…",
+   "ueberschrift": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
+   "beschreibung": "45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-4#artikel",
+      "headline": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
+      "name": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
+      "description": "45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+      "url": "__BASIS__/medien-stunde-4",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-4"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sortiert Beispiele nach erlaubt, genannt und verboten, übt die Faustfrage und die Angabe von KI-Hilfe und entwickelt Regelvorschläge. Welche Regeln gelten, entscheidet die Schule.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-4#breadcrumb"
+      },
+      "teaches": [
+       "Frage dich: Hast du danach mehr verstanden, oder nur etwas abgegeben?",
+       "Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben.",
+       "Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-4#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
+        "item": "__BASIS__/medien-stunde-4"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-4#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Wann wird KI-Hilfe bei Hausaufgaben zur Täuschung?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Wenn man KI-Text als eigene Leistung abgibt und es verschweigt. Täuschung heißt: etwas als eigene Leistung abgeben, das nicht von dir ist, und es verschweigen."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was ist die beste Reihenfolge?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Selbst versuchen, KI fragen, prüfen, in eigenen Worten aufschreiben. Wer erst selbst versucht, behält das Denken. Wer die Reihenfolge umdreht, lernt weniger."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Es gibt an deiner Schule keine Regel zu KI. Was heißt das?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Du fragst nach, was für die Aufgabe gilt. Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-5": {
+   "titel": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und…",
+   "ueberschrift": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
+   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-5#artikel",
+      "headline": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
+      "name": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
+      "description": "45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.",
+      "url": "__BASIS__/medien-stunde-5",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-5"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse sammelt Datenspuren, entscheidet über App-Freigaben für Kamera, Mikrofon und Standort an erfundenen Beispiel-Apps und entwickelt eine Faustregel für Chatbots. Ohne Kamera, kein Zeigen privater Einstellungen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-5#breadcrumb"
+      },
+      "teaches": [
+       "Apps sammeln mehr, als du eintippst: Nutzung, Standort, Gerät, Vorlieben.",
+       "Gib Kamera, Mikrofon und Standort nur frei, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr.",
+       "Behandle Chatbot-Eingaben wie eine Postkarte. Keine Passwörter, Adressen oder Daten anderer."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-5#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
+        "item": "__BASIS__/medien-stunde-5"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-5#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Eine Taschenlampen-App will auf deine Kontakte zugreifen. Was ist die beste Reaktion?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ablehnen, die App braucht die Kontakte nicht für ihren Zweck. Frage bei jeder Freigabe: Braucht die App das für das, was ich tun will?"
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was gehört nicht in einen Chatbot?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ein Passwort oder die Adresse deiner Familie. Gib nichts ein, das dich blamiert, wenn es später jemand liest."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Du hast eine Freigabe erteilt und willst sie zurücknehmen. Wo geht das?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Jederzeit in den Einstellungen des Geräts. Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-6": {
+   "titel": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+   "ueberschrift": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+   "beschreibung": "45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-6#artikel",
+      "headline": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+      "name": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+      "description": "45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
+      "url": "__BASIS__/medien-stunde-6",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-6"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-6#breadcrumb"
+      },
+      "teaches": [
+       "Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau.",
+       "Nutze die KI als Trainer: erklären, abfragen, Feedback geben. Die Arbeit bleibt bei dir.",
+       "Frage nach, wenn die Antwort nicht passt, und prüfe Zahlen, Namen und Quellen, bevor du sie benutzt."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-6#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
+        "item": "__BASIS__/medien-stunde-6"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-6#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Welche Frage bekommt meist die bessere Antwort?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Erkläre Windkraft in sechs Sätzen für Klasse 9 und nenne drei Begriffe zum Nachschlagen. Die bessere Frage nennt Länge, Niveau und Format. Das Modell muss weniger raten."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Die Antwort ist zu allgemein. Was ist am besten?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nachfragen: Gib ein Beispiel aus dem Fußball. Die erste Antwort ist ein Entwurf, eine Nachfrage macht sie besser."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Die KI nennt eine Jahreszahl in sicherem Ton. Was tust du?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ich suche die Zahl in einer zweiten Quelle. Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "medien-stunde-7": {
+   "titel": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+   "ueberschrift": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+   "beschreibung": "45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde. Beispiele an der Tafel sammeln.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/medien-stunde-7#artikel",
+      "headline": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+      "name": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+      "description": "45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde. Beispiele an der Tafel sammeln.",
+      "url": "__BASIS__/medien-stunde-7",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/medien-stunde-7"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gruppen gestalten ein Poster, erklären, wie ein Feed entscheidet, und beurteilen in einer Poster-Runde, was wirklich KI ist. Kein Video nötig, ohne Kamera.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/medien-stunde-7#breadcrumb"
+      },
+      "teaches": [
+       "KI steckt in Feeds, Playlists, Filtern, Übersetzern und Tastaturen: überall, wo aus Daten gelernt wird.",
+       "Ein Feed rät, was dich festhält, nicht, was gut für dich ist.",
+       "Du kannst Empfehlungen lenken: Nicht interessiert wählen, Themen filtern, Verlauf zurücksetzen."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/medien-stunde-7#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
+        "item": "__BASIS__/medien-stunde-7"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/medien-stunde-7#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Woran erkennst du, ob eine Software KI nutzt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Sie hat aus Beispielen gelernt, statt feste Regeln zu befolgen. Der Unterschied: aus Beispielen gelernt oder von Hand geschriebene Regeln."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was zählt für einen Feed bei der Auswahl?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Was du ansiehst, likest, teilst und wie lange du bleibst. Der Feed rät, was dich wahrscheinlich festhält. Das erklärt, warum er zu einem Thema abdriften kann."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Du willst ein Thema nicht mehr sehen. Was hilft?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nicht interessiert wählen und bewusst anders klicken. Du kannst dem Feed beibringen, was du nicht sehen willst."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "elternabend": {
+   "titel": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und…",
+   "ueberschrift": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten",
+   "beschreibung": "Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen. Sichere Erkennung von KI-Bildern gibt es nicht.",
+   "typ": "seite",
+   "datei": "content-schule-medien.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/elternabend#artikel",
+      "headline": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten",
+      "name": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten",
+      "description": "Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen. Sichere Erkennung von KI-Bildern gibt es nicht.",
+      "url": "__BASIS__/elternabend",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/elternabend"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Paket für den Elternabend zu KI und Medienkompetenz in Klasse 8: Info-Blatt (eine Seite A4, Sie-Form), Gesprächsleitfaden für Lehrkräfte und Fragen mit Antworten. Alle Angaben stammen aus den Seiten des KI-Labors, Stand 22.11.2026, kein Rechtsrat.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/elternabend#breadcrumb"
+      },
+      "teaches": [
+       "Das Info-Blatt passt auf eine Seite und verspricht nicht mehr, als die Seiten des Labors belegen.",
+       "Sichere Erkennung von KI-Bildern gibt es nicht. Darum üben die Kinder das Prüfen.",
+       "Kein Rechtsrat: Die Schule entscheidet über den Einsatz, die Datenschutzerklärung des Betreibers ist verbindlich."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/elternabend#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten",
+        "item": "__BASIS__/elternabend"
        }
       ]
      }
@@ -18581,6 +19718,14 @@
   "schule-lehrkraefte",
   "schule-schulleitung",
   "schule-eltern",
+  "medien-stunde-1",
+  "medien-stunde-2",
+  "medien-stunde-3",
+  "medien-stunde-4",
+  "medien-stunde-5",
+  "medien-stunde-6",
+  "medien-stunde-7",
+  "elternabend",
   "ki-schule-ueberblick",
   "ki-schule-einstieg",
   "echt-oder-ki",
@@ -18719,6 +19864,14 @@
     "schule-lehrkraefte",
     "schule-schulleitung",
     "schule-eltern",
+    "medien-stunde-1",
+    "medien-stunde-2",
+    "medien-stunde-3",
+    "medien-stunde-4",
+    "medien-stunde-5",
+    "medien-stunde-6",
+    "medien-stunde-7",
+    "elternabend",
     "ki-schule-ueberblick",
     "ki-schule-einstieg"
    ]

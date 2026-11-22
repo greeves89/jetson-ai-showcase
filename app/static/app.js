@@ -31,7 +31,7 @@
    html: oder innerHTML. KL.md() ist nur fuer eigene, statische Texte aus content.js gedacht.
    CSS-Klassen stehen in style.css (flaeche, pad, btn, chip, regler, live, pipe, erklaerung, ...).
    LERNPLATTFORM (alles nur im Browser, nichts wird gesendet):
-     Seitenfeld downloads: [{text, sub, href}]   Knöpfe "Zum Ausdrucken" direkt unter dem Seitenkopf, href nur unter /static/ (PDF), öffnet in neuem Tab
+     Seitenfeld downloads: [{text, sub, href}]   Dateikarten mit Download-Knopf rechts, immer sichtbar direkt unter dem Seitenkopf, href nur unter /static/ (PDF), öffnet in neuem Tab
      Seitenfeld lernziele: ["Du kannst ...", ...]   2 bis 4 Sätze, stehen oben auf der Seite; daneben die Lesezeit (kurz und genau, aus der Wortzahl)
      Abschnittsfeld mathe: {p: [...]}                 erscheint nur, wenn der Schalter "Mit Mathe" an ist (localStorage kl-mathe)
      Fortschritt: Eine Seite zaehlt als gelesen, wenn das Seitenende erreicht ist (mindestens 5 s nach dem Oeffnen) oder das Quiz fertig ist
@@ -1513,7 +1513,10 @@
     // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
     const dls = (seite.downloads || []).filter((d) => d && typeof d.href === "string" && d.href.startsWith("/static/") && !d.href.startsWith("//"));
     if (dls.length) out.append(h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken" },
-      dls.map((d) => h("a", { class: "btn primary dl", href: d.href, download: "download", target: "_blank", rel: "noopener" }, icon("printer"), h("span", null, d.text), d.sub ? h("small", null, d.sub) : null))));
+      dls.map((d) => h("a", { class: "dlkarte", href: d.href, download: "ki-labor-" + d.href.split("/").pop(), target: "_blank", rel: "noopener", "aria-label": d.text + " herunterladen" },
+        h("span", { class: "dl-icon", "aria-hidden": "true" }, icon("file-text")),
+        h("span", { class: "dl-text" }, h("b", null, d.text), d.sub ? h("small", null, d.sub) : null),
+        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen"))))));
     if (seite.experimente) out.append(h("section", { class: "block" }, experimenteRaster()));
     if (imSchulweg(id)) out.append(h("p", { class: "kamera-hinweis" }, icon("camera"), h("span", null, h("b", null, "Braucht Kamera oder Mikrofon. "),
       "Im Unterricht ist das nicht nötig. Nutze es nur mit Einverständnis, bei unter 16 Jahren mit dem der Eltern.")));

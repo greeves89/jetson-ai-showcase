@@ -434,7 +434,11 @@ html[data-mathe=aus] .mathe{display:none}
 .md-link{text-decoration:underline;text-underline-offset:3px;font-weight:500}
 @media(max-width:960px),(pointer:coarse){.md-link{display:inline-flex;align-items:center;min-height:44px}}
 
-.downloads{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px}
-.downloads .dl{min-height:44px;display:inline-flex;align-items:center;gap:10px;text-decoration:none}
-.downloads .dl small{font-weight:400;opacity:.85}
-@media (max-width:600px){.downloads .dl{width:100%;justify-content:center}}
+.downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin:0 0 24px}
+.dlkarte{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r);background:var(--flaeche);color:inherit;text-decoration:none;min-height:64px}
+.dlkarte:hover{background:var(--flaeche-hover,var(--flaeche))}
+.dlkarte .dl-icon{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--akzent) 14%,transparent);color:var(--akzent)}
+.dlkarte .dl-text{display:flex;flex-direction:column;min-width:0;flex:1}
+.dlkarte .dl-text small{opacity:.75}
+.dlkarte .dl-knopf{flex:none;margin-left:auto;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+@media (max-width:600px){.downloads{grid-template-columns:1fr}.dlkarte{flex-wrap:wrap}.dlkarte .dl-knopf{width:100%;justify-content:center}}

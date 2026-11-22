@@ -128,6 +128,14 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Handreichung für Lehrkräfte](__BASIS__/schule-lehrkraefte): Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
 - [Information für die Schulleitung](__BASIS__/schule-schulleitung): Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet.
 - [Information für Eltern](__BASIS__/schule-eltern): Ihre Klasse arbeitet im Unterricht mit dem KI-Labor.
+- [Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen](__BASIS__/medien-stunde-1): 45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
+- [Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen](__BASIS__/medien-stunde-2): 45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
+- [Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren](__BASIS__/medien-stunde-3): 45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen.
+- [Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln](__BASIS__/medien-stunde-4): 45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
+- [Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren](__BASIS__/medien-stunde-5): 45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
+- [Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern](__BASIS__/medien-stunde-6): 45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
+- [Medien-Einheit 7: KI in deinem Alltag, Poster-Runde](__BASIS__/medien-stunde-7): 45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
+- [Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten](__BASIS__/elternabend): Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen.
 - [KI für Schulen: Was gibt es und wie fange ich an?](__BASIS__/ki-schule-ueberblick): Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
 - [KI an der Schule: In 7 Schritten starten](__BASIS__/ki-schule-einstieg): Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
 
