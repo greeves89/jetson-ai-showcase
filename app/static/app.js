@@ -201,8 +201,7 @@
       const fertig = ids.map((id) => (m.videos || []).find((x) => x.id === id)).filter(Boolean);
       const offen = ids.length - fertig.length;
       if (!fertig.length) {
-        flaeche.replaceChildren(h("div", { class: "video leer" }, h("div", { class: "platz" }, icon("play"),
-          h("div", null, h("b", null, reihe ? "Die Videos zu diesem Thema entstehen gerade" : "Das Erklärvideo zu diesem Thema entsteht gerade"), "Bis dahin findest du die Erklärung als Text unten."))));
+        flaeche.replaceChildren(h("p", { class: "video-folgt" }, icon("clock"), reihe ? "Videos zu diesem Thema folgen." : "Video zu diesem Thema folgt."));
         return;
       }
       const zeigen = (i, abspielen) => {

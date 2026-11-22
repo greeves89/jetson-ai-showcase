@@ -342,3 +342,7 @@ details.mehr>.mehr-in>:first-child{margin-top:0}
 .biz{display:flex;flex-direction:column;gap:6px}
 [data-lesemodus=ausfuehrlich] .biz details.mehr{order:-1}
 [data-lesemodus=ausfuehrlich] .biz .zeile{margin-top:8px}
+
+/* Video noch nicht produziert: eine schmale Zeile statt eines leeren Blocks */
+.video-folgt { display: flex; align-items: center; gap: 8px; margin: 0; padding: 4px 0; font-size: 14px; color: var(--leise); }
+.video-folgt svg { width: 16px; height: 16px; flex: none; }
