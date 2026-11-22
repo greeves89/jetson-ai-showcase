@@ -1,0 +1,51 @@
+{
+ "id": "prompting-beispiele",
+ "titel": "Gut fragen: drei Beispiele aus dem Büro",
+ "untertitel": "Mail, Protokoll und Angebotsvergleich, vorher und nachher",
+ "szenen": [
+  {
+   "id": "uebersicht",
+   "kapitel": "Drei Aufgaben",
+   "saetze": [
+    "Drei Aufgaben aus dem Büroalltag: eine Mail schreiben, ein Protokoll zusammenfassen, Angebote vergleichen.",
+    "Bei allen dreien gilt dasselbe: Sag dem Modell genau, was du brauchst."
+   ]
+  },
+  {
+   "id": "mail",
+   "kapitel": "Die Mail",
+   "saetze": [
+    "Erst die Mail. Vorher: ein Satz.",
+    "Nachher: Rolle, Grund, Ton, Länge, und was nicht versprochen wird.",
+    "Die Antwort wird kürzer, passender und erfindet nichts."
+   ]
+  },
+  {
+   "id": "protokoll",
+   "kapitel": "Das Protokoll",
+   "saetze": [
+    "Beim Protokoll gibst du das Format vor: Teilnehmende, Beschlüsse, offene Punkte mit Frist.",
+    "Und die Regel: Fehlt etwas, schreibe nicht genannt. So füllt das Modell keine Lücken mit Erfundenem.",
+    "Die Lücken bleiben sichtbar."
+   ]
+  },
+  {
+   "id": "angebote",
+   "kapitel": "Die Angebote",
+   "saetze": [
+    "Beim Angebotsvergleich lässt du es Schritt für Schritt vorgehen: erst die Eckdaten, dann die Gesamtkosten, dann die Empfehlung.",
+    "Du siehst jeden Zwischenschritt und kannst ihn prüfen.",
+    "Am Ende steht eine Gesamtsumme, die du nachrechnen kannst."
+   ]
+  },
+  {
+   "id": "muster",
+   "kapitel": "Das Muster",
+   "saetze": [
+    "Und wenn die Form schwer zu beschreiben ist, zeig zwei Beispiele.",
+    "Zwei Beispielzeilen, dann eine neue Zeile.",
+    "Das Modell erkennt das Muster und führt es fort."
+   ]
+  }
+ ]
+}

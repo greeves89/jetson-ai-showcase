@@ -1,0 +1,68 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.450
+Jedes Land hat einen anderen Stecker.
+
+00:00:03.600 --> 00:00:06.550
+Ähnlich ging es Agenten mit jedem System.
+
+00:00:06.700 --> 00:00:10.690
+Du packst sechs Adapter ein und
+findest trotzdem den falschen.
+
+00:00:11.940 --> 00:00:16.810
+Drei Assistenten, vier Systeme:
+zwölf Einzelanbindungen.
+
+00:00:16.960 --> 00:00:19.590
+Jede muss jemand bauen und pflegen.
+
+00:00:19.740 --> 00:00:23.490
+Kommt ein fünftes System
+dazu, sind es schon fünfzehn.
+
+00:00:24.740 --> 00:00:30.570
+Das Model Context Protocol, kurz
+MCP, legt einen Standard fest.
+
+00:00:30.720 --> 00:00:35.350
+Jedes System baut einen Anschluss,
+und jeder Assistent kann ihn nutzen.
+
+00:00:36.600 --> 00:00:38.990
+Der Server macht ein System bekannt.
+
+00:00:39.140 --> 00:00:43.610
+Der Client, also die Anwendung
+des Assistenten, nutzt es.
+
+00:00:43.760 --> 00:00:47.030
+Wie ein Reisebüro, das
+viele Anbieter vermittelt.
+
+00:00:48.280 --> 00:00:52.910
+Ein Server nennt Werkzeuge mit
+Namen, Beschreibung und Parametern.
+
+00:00:53.060 --> 00:00:57.210
+Zum Beispiel termine lesen,
+mit dem Parameter Datum.
+
+00:00:57.360 --> 00:00:59.430
+Das Modell wählt danach.
+
+00:01:00.680 --> 00:01:03.230
+Ein Server ist Code mit Zugriff.
+
+00:01:03.380 --> 00:01:07.770
+Prüfe die Quelle, begrenze die
+Rechte und lass Folgen freigeben.
+
+00:01:09.020 --> 00:01:12.530
+MCP ist der Anschluss, nicht der Agent.
+
+00:01:12.680 --> 00:01:15.550
+Der Agent denkt und handelt wie bisher.
+
+00:01:15.700 --> 00:01:18.650
+MCP ist nur das Kabel dazwischen.

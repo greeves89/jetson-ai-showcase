@@ -1,0 +1,149 @@
+{
+ "id": "vision-aufgaben-ueberblick",
+ "titel": "Fünf Fragen an ein Bild",
+ "untertitel": "Jede Bildaufgabe beantwortet eine andere Frage",
+ "gesamt": 80.98,
+ "szenen": [
+  {
+   "id": "fragen",
+   "kapitel": "Ein Bild",
+   "start": 0,
+   "dauer": 11.62,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.16,
+     "text": "Ein Bild, fünf Fragen. Die Straße vor dir zeigt es."
+    },
+    {
+     "t": 5.36,
+     "d": 5.36,
+     "text": "Jede Frage ist eine eigene Aufgabe, mit eigenen Daten und eigenem Aufwand."
+    }
+   ]
+  },
+  {
+   "id": "klass",
+   "kapitel": "Klassifikation",
+   "start": 11.62,
+   "dauer": 10.64,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.08,
+     "text": "Was ist das? Das Netz nennt eine Klasse für das ganze Bild."
+    },
+    {
+     "t": 4.88,
+     "d": 2.4,
+     "text": "Hier zum Beispiel: Straße."
+    },
+    {
+     "t": 7.58,
+     "d": 2.16,
+     "text": "Das ist günstig und einfach."
+    }
+   ]
+  },
+  {
+   "id": "erkennung",
+   "kapitel": "Erkennung",
+   "start": 22.26,
+   "dauer": 10.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Wo ist es, und wie viele? Das Netz zeichnet Rahmen um Objekte."
+    },
+    {
+     "t": 5.84,
+     "d": 4.08,
+     "text": "So kannst du zählen: drei Autos und ein Mensch."
+    }
+   ]
+  },
+  {
+   "id": "segment",
+   "kapitel": "Segmentierung",
+   "start": 33.08,
+   "dauer": 14.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.4,
+     "text": "Welche Pixel gehören dazu? Das Netz färbt jede Fläche ein."
+    },
+    {
+     "t": 5.2,
+     "d": 4.72,
+     "text": "Jedes Pixel bekommt eine Klasse: Straße, Himmel, Haus."
+    },
+    {
+     "t": 10.22,
+     "d": 3.2,
+     "text": "Dafür brauchst du die aufwendigsten Trainingsdaten."
+    }
+   ]
+  },
+  {
+   "id": "pose",
+   "kapitel": "Pose",
+   "start": 47.4,
+   "dauer": 11.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Wo sind die Gelenke? Aus den Punkten liest du die Haltung."
+    },
+    {
+     "t": 4.64,
+     "d": 3.68,
+     "text": "Das hilft zum Beispiel bei der Frage, ob jemand richtig hebt."
+    },
+    {
+     "t": 8.62,
+     "d": 2.16,
+     "text": "Ein Gesicht brauchst du dafür nicht."
+    }
+   ]
+  },
+  {
+   "id": "text",
+   "kapitel": "Texterkennung",
+   "start": 59.08,
+   "dauer": 9.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Was steht da? Das Netz liest Schrift im Bild und macht Text daraus."
+    },
+    {
+     "t": 5.6,
+     "d": 3.28,
+     "text": "Zum Beispiel von Schildern oder Lieferscheinen."
+    }
+   ]
+  },
+  {
+   "id": "wahl",
+   "kapitel": "Die Wahl",
+   "start": 68.86,
+   "dauer": 12.12,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.2,
+     "text": "Nimm die einfachste Aufgabe, die dein Problem löst."
+    },
+    {
+     "t": 4,
+     "d": 6.32,
+     "text": "Und denk früh an den Datenschutz, denn Personen und Kennzeichen im Bild sind personenbezogene Daten."
+    }
+   ]
+  }
+ ]
+}

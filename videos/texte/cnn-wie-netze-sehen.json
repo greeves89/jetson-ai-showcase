@@ -1,0 +1,65 @@
+{
+ "id": "cnn-wie-netze-sehen",
+ "titel": "Wie Netze Bilder verstehen",
+ "untertitel": "Filter, Schichten und gelernte Merkmale",
+ "szenen": [
+  {
+   "id": "frage",
+   "kapitel": "Die Frage",
+   "saetze": [
+    "Wie wird aus einer Tabelle voller Zahlen ein Haus?",
+    "Nicht mit einer Regel. Mit Schablonen."
+   ]
+  },
+  {
+   "id": "filter",
+   "kapitel": "Der Filter",
+   "saetze": [
+    "Ein Filter ist ein kleines Zahlenraster.",
+    "Er wandert über das Bild und sucht an jeder Stelle dasselbe Muster.",
+    "Jede Position ergibt eine Zahl: Wie gut passt das Muster hier?"
+   ]
+  },
+  {
+   "id": "kanten",
+   "kapitel": "Kanten leuchten",
+   "saetze": [
+    "Ein Kantenfilter leuchtet, wo es von dunkel nach hell geht.",
+    "Auf glatten Flächen bleibt er dunkel."
+   ]
+  },
+  {
+   "id": "schichten",
+   "kapitel": "Schichten",
+   "saetze": [
+    "Ein Netz hat viele Schichten.",
+    "Die ersten finden Kanten, die mittleren Formen, die letzten Dinge wie Fenster oder Türen.",
+    "Aus einfachen Mustern werden so Stück für Stück ganze Objekte."
+   ]
+  },
+  {
+   "id": "gelernt",
+   "kapitel": "Gelernt",
+   "saetze": [
+    "Diese Filter schreibt niemand von Hand.",
+    "Das Netz lernt sie aus vielen Beispielen und verbessert sie in jeder Runde."
+   ]
+  },
+  {
+   "id": "vortraining",
+   "kapitel": "Vortraining",
+   "saetze": [
+    "Ein vortrainiertes Netz liefert fertige Merkmale als Zahlen.",
+    "Darum reichen im Anlern-Labor wenige Beispiele."
+   ]
+  },
+  {
+   "id": "irrtum",
+   "kapitel": "Wo es irrt",
+   "saetze": [
+    "Aber Vorsicht: Ein Netz lernt manchmal an der falschen Eigenschaft.",
+    "Zeigen alle Wolfsbilder Schnee, lernt es: Schnee bedeutet Wolf. Dann wird ein Husky im Schnee zum Wolf."
+   ]
+  }
+ ]
+}

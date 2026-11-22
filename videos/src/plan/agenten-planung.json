@@ -1,0 +1,144 @@
+{
+ "id": "agenten-planung",
+ "titel": "Planen, Schritte und Fehler",
+ "untertitel": "Je länger die Kette, desto mehr kann schiefgehen",
+ "gesamt": 78.6,
+ "szenen": [
+  {
+   "id": "umzug",
+   "kapitel": "Zerlegen",
+   "start": 0,
+   "dauer": 14.4,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.12,
+     "text": "Große Aufgaben zerlegst du in kleine Schritte."
+    },
+    {
+     "t": 4.32,
+     "d": 6.96,
+     "text": "Ein Umzug heißt: Kartons packen, Transporter buchen, Strom ummelden, Schlüssel übergeben."
+    },
+    {
+     "t": 11.58,
+     "d": 1.92,
+     "text": "Ein Agent muss das auch."
+    }
+   ]
+  },
+  {
+   "id": "plan",
+   "kapitel": "Plan oder reagieren",
+   "start": 14.4,
+   "dauer": 10.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.64,
+     "text": "Erst planen und abarbeiten, oder nach jedem Ergebnis neu entscheiden?"
+    },
+    {
+     "t": 5.44,
+     "d": 4,
+     "text": "Das ist wie Rezept gegen Kühlschrank. Meist hilft eine Mischung."
+    }
+   ]
+  },
+  {
+   "id": "verlauf",
+   "kapitel": "Der Verlauf wächst",
+   "start": 24.74,
+   "dauer": 9.54,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Jeder Aufruf und jedes Ergebnis kommt in den Verlauf."
+    },
+    {
+     "t": 4.64,
+     "d": 4,
+     "text": "Er wächst, und jede Runde wird langsamer und teurer."
+    }
+   ]
+  },
+  {
+   "id": "notizen",
+   "kapitel": "Notizen",
+   "start": 34.28,
+   "dauer": 10.02,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.48,
+     "text": "Besser ist eine kurze Notiz mit dem Ergebnis, statt alles mitzuschleppen."
+    },
+    {
+     "t": 5.28,
+     "d": 3.84,
+     "text": "So bleibt der Verlauf kurz, und jede Runde bleibt schnell."
+    }
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler summieren sich",
+   "start": 44.3,
+   "dauer": 10.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.32,
+     "text": "Gelingt jeder Schritt zu 90 Prozent, gelingen fünf Schritte nur noch zu etwa 59 Prozent."
+    },
+    {
+     "t": 7.12,
+     "d": 2.88,
+     "text": "Je länger die Kette, desto mehr geht schief."
+    }
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Grenzen",
+   "start": 55.2,
+   "dauer": 13.28,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Lege fest, wann Schluss ist: eine Höchstzahl an Runden und ein Zeitlimit."
+    },
+    {
+     "t": 6.24,
+     "d": 3.2,
+     "text": "Das schützt vor Endlosschleifen und hohen Kosten."
+    },
+    {
+     "t": 9.74,
+     "d": 2.64,
+     "text": "Und bei Stillstand fragt ein Mensch."
+    }
+   ]
+  },
+  {
+   "id": "protokoll",
+   "kapitel": "Protokoll",
+   "start": 68.48,
+   "dauer": 10.12,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.88,
+     "text": "Und protokolliere jeden Schritt: Werkzeug, Ergebnis, Dauer."
+    },
+    {
+     "t": 5.68,
+     "d": 2.64,
+     "text": "Ohne Protokoll findest du keinen Fehler."
+    }
+   ]
+  }
+ ]
+}

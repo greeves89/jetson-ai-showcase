@@ -1,0 +1,149 @@
+{
+ "id": "bild-als-zahlen",
+ "titel": "Wie ein Computer ein Bild sieht",
+ "untertitel": "Ein Foto ist eine Tabelle aus Zahlen",
+ "gesamt": 84.82,
+ "szenen": [
+  {
+   "id": "foto",
+   "kapitel": "Ein Foto",
+   "start": 0,
+   "dauer": 10.48,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.64,
+     "text": "Das hier ist ein Foto von ein paar Tassen."
+    },
+    {
+     "t": 3.84,
+     "d": 3.92,
+     "text": "Für einen Computer ist es keine Tasse. Er sieht nur Zahlen."
+    },
+    {
+     "t": 8.06,
+     "d": 1.52,
+     "text": "Gehen wir näher ran."
+    }
+   ]
+  },
+  {
+   "id": "raster",
+   "kapitel": "Das Raster",
+   "start": 10.48,
+   "dauer": 10.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.52,
+     "text": "Ein Bild besteht aus kleinen Quadraten, den Pixeln."
+    },
+    {
+     "t": 4.32,
+     "d": 5.12,
+     "text": "Jedes Pixel hat genau eine Farbe, wie ein Stich in einem Kreuzstichmuster."
+    }
+   ]
+  },
+  {
+   "id": "grau",
+   "kapitel": "Helligkeit",
+   "start": 20.82,
+   "dauer": 11.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.6,
+     "text": "Im Schwarzweißbild ist jede Helligkeit eine Zahl."
+    },
+    {
+     "t": 4.4,
+     "d": 6.56,
+     "text": "Null ist Schwarz, 255 ist Weiß. Dazwischen liegen alle Grautöne."
+    }
+   ]
+  },
+  {
+   "id": "farbe",
+   "kapitel": "Drei Kanäle",
+   "start": 32.68,
+   "dauer": 12.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Bei Farbe sind es drei Zahlen je Pixel: Rot, Grün und Blau."
+    },
+    {
+     "t": 5.6,
+     "d": 5.6,
+     "text": "Rot und Grün zusammen ergeben Gelb. Alle drei voll ergeben Weiß."
+    }
+   ]
+  },
+  {
+   "id": "groesse",
+   "kapitel": "Auflösung",
+   "start": 44.78,
+   "dauer": 13.04,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.56,
+     "text": "Mehr Pixel zeigen mehr Details."
+    },
+    {
+     "t": 3.36,
+     "d": 3.52,
+     "text": "Sie brauchen aber auch mehr Speicher und mehr Rechenzeit."
+    },
+    {
+     "t": 7.18,
+     "d": 4.96,
+     "text": "Breite mal Höhe mal drei ergibt, wie viele Zahlen das Modell lesen muss."
+    }
+   ]
+  },
+  {
+   "id": "licht",
+   "kapitel": "Hell und dunkel",
+   "start": 57.82,
+   "dauer": 11.7,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.24,
+     "text": "Ist ein Bild zu hell, stoßen die Werte an 255, und Details gehen verloren."
+    },
+    {
+     "t": 7.04,
+     "d": 3.76,
+     "text": "Bei wenig Licht entsteht Rauschen, und die Werte zittern."
+    }
+   ]
+  },
+  {
+   "id": "labor",
+   "kapitel": "Im Labor",
+   "start": 69.52,
+   "dauer": 15.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Darum wird jedes Bild vor der Erkennung verkleinert."
+    },
+    {
+     "t": 4.16,
+     "d": 5.44,
+     "text": "Aus dem Kamerabild im Labor werden 480 mal 360 Pixel."
+    },
+    {
+     "t": 9.9,
+     "d": 3.6,
+     "text": "Das spart Zeit, kostet aber kleine Details."
+    }
+   ]
+  }
+ ]
+}

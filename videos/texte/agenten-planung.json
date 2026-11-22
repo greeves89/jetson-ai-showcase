@@ -1,0 +1,65 @@
+{
+ "id": "agenten-planung",
+ "titel": "Planen, Schritte und Fehler",
+ "untertitel": "Je länger die Kette, desto mehr kann schiefgehen",
+ "szenen": [
+  {
+   "id": "umzug",
+   "kapitel": "Zerlegen",
+   "saetze": [
+    "Große Aufgaben zerlegst du in kleine Schritte.",
+    "Ein Umzug heißt: Kartons packen, Transporter buchen, Strom ummelden, Schlüssel übergeben.",
+    "Ein Agent muss das auch."
+   ]
+  },
+  {
+   "id": "plan",
+   "kapitel": "Plan oder reagieren",
+   "saetze": [
+    "Erst planen und abarbeiten, oder nach jedem Ergebnis neu entscheiden?",
+    "Das ist wie Rezept gegen Kühlschrank. Meist hilft eine Mischung."
+   ]
+  },
+  {
+   "id": "verlauf",
+   "kapitel": "Der Verlauf wächst",
+   "saetze": [
+    "Jeder Aufruf und jedes Ergebnis kommt in den Verlauf.",
+    "Er wächst, und jede Runde wird langsamer und teurer."
+   ]
+  },
+  {
+   "id": "notizen",
+   "kapitel": "Notizen",
+   "saetze": [
+    "Besser ist eine kurze Notiz mit dem Ergebnis, statt alles mitzuschleppen.",
+    "So bleibt der Verlauf kurz, und jede Runde bleibt schnell."
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler summieren sich",
+   "saetze": [
+    "Gelingt jeder Schritt zu 90 Prozent, gelingen fünf Schritte nur noch zu etwa 59 Prozent.",
+    "Je länger die Kette, desto mehr geht schief."
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Grenzen",
+   "saetze": [
+    "Lege fest, wann Schluss ist: eine Höchstzahl an Runden und ein Zeitlimit.",
+    "Das schützt vor Endlosschleifen und hohen Kosten.",
+    "Und bei Stillstand fragt ein Mensch."
+   ]
+  },
+  {
+   "id": "protokoll",
+   "kapitel": "Protokoll",
+   "saetze": [
+    "Und protokolliere jeden Schritt: Werkzeug, Ergebnis, Dauer.",
+    "Ohne Protokoll findest du keinen Fehler."
+   ]
+  }
+ ]
+}

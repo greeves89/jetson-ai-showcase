@@ -1,0 +1,63 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.610
+Ein Chat antwortet aus dem Gedächtnis.
+
+00:00:03.760 --> 00:00:06.870
+Ein Agent kann nachsehen und etwas tun.
+
+00:00:08.120 --> 00:00:13.630
+Stell dir eine Sachbearbeiterin vor. Sie
+hat einen Zettel und einen Werkzeugkasten.
+
+00:00:13.780 --> 00:00:18.330
+Auf dem Zettel steht: Wann
+kommt Bestellung 1042?
+
+00:00:19.580 --> 00:00:24.050
+Jedes Werkzeug hat einen Namen,
+eine Beschreibung und Parameter.
+
+00:00:24.200 --> 00:00:28.030
+Zum Beispiel bestellung suchen,
+mit dem Parameter Nummer.
+
+00:00:28.180 --> 00:00:30.970
+Danach wählt das Modell, was es aufruft.
+
+00:00:32.220 --> 00:00:37.810
+Der Agent denkt, ruft ein Werkzeug auf,
+liest das Ergebnis und entscheidet neu.
+
+00:00:37.960 --> 00:00:41.390
+Das wiederholt sich, bis
+die Aufgabe erledigt ist.
+
+00:00:41.540 --> 00:00:45.210
+Darum heißt es Schleife: Sie läuft im Kreis.
+
+00:00:46.460 --> 00:00:53.650
+Das Modell führt nichts selbst aus.
+Es schreibt nur: rechne 240 mal 0,18.
+
+00:00:53.800 --> 00:00:58.350
+Ein Programm drumherum
+rechnet und gibt 43,2 zurück.
+
+00:00:59.600 --> 00:01:02.470
+Das Gedächtnis ist der Verlauf der Schritte.
+
+00:01:02.620 --> 00:01:06.690
+Für Dauerhaftes gibt es Notizen
+außerhalb, in einer Akte.
+
+00:01:06.840 --> 00:01:11.070
+Ohne diese Notizen vergisst der
+Agent beim nächsten Start alles.
+
+00:01:12.320 --> 00:01:16.150
+Immer gleiche Schritte? Dann
+nimm einen festen Ablauf.
+
+00:01:16.300 --> 00:01:19.170
+Offene Fälle? Dann nimm einen Agenten.

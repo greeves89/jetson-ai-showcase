@@ -26,9 +26,10 @@ const mux = (crf) => {
     "-c:a", "aac", "-b:a", "128k", "-shortest", "-movflags", "+faststart", ziel], { stdio: "inherit" });
 };
 mux(23);
-let mb = statSync(ziel).size / 1048576;
+const MAXB = 8_000_000; // Dezimal-MB: höchstens 8 MB
+let mb = statSync(ziel).size / 1e6;
 let crfNutz = 23;
-for (const crf of [25, 27, 29]) { if (mb <= 8) break; mux(crf); crfNutz = crf; mb = statSync(ziel).size / 1048576; }
+for (const crf of [25, 27, 29, 31, 33, 35]) { if (statSync(ziel).size <= MAXB) break; mux(crf); crfNutz = crf; mb = statSync(ziel).size / 1e6; }
 console.log(`crf ${crfNutz}`);
 // Vorschaubild: ruhiges Bild aus der Mitte der letzten Hälfte der gewünschten Szene
 const th = plan.szenen.find((s) => s.id === (plan.vorschau ?? "")) ?? plan.szenen[Math.floor(plan.szenen.length / 2)];

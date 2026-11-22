@@ -1,0 +1,66 @@
+{
+ "id": "vision-aufgaben-ueberblick",
+ "titel": "Fünf Fragen an ein Bild",
+ "untertitel": "Jede Bildaufgabe beantwortet eine andere Frage",
+ "szenen": [
+  {
+   "id": "fragen",
+   "kapitel": "Ein Bild",
+   "saetze": [
+    "Ein Bild, fünf Fragen. Die Straße vor dir zeigt es.",
+    "Jede Frage ist eine eigene Aufgabe, mit eigenen Daten und eigenem Aufwand."
+   ]
+  },
+  {
+   "id": "klass",
+   "kapitel": "Klassifikation",
+   "saetze": [
+    "Was ist das? Das Netz nennt eine Klasse für das ganze Bild.",
+    "Hier zum Beispiel: Straße.",
+    "Das ist günstig und einfach."
+   ]
+  },
+  {
+   "id": "erkennung",
+   "kapitel": "Erkennung",
+   "saetze": [
+    "Wo ist es, und wie viele? Das Netz zeichnet Rahmen um Objekte.",
+    "So kannst du zählen: drei Autos und ein Mensch."
+   ]
+  },
+  {
+   "id": "segment",
+   "kapitel": "Segmentierung",
+   "saetze": [
+    "Welche Pixel gehören dazu? Das Netz färbt jede Fläche ein.",
+    "Jedes Pixel bekommt eine Klasse: Straße, Himmel, Haus.",
+    "Dafür brauchst du die aufwendigsten Trainingsdaten."
+   ]
+  },
+  {
+   "id": "pose",
+   "kapitel": "Pose",
+   "saetze": [
+    "Wo sind die Gelenke? Aus den Punkten liest du die Haltung.",
+    "Das hilft zum Beispiel bei der Frage, ob jemand richtig hebt.",
+    "Ein Gesicht brauchst du dafür nicht."
+   ]
+  },
+  {
+   "id": "text",
+   "kapitel": "Texterkennung",
+   "saetze": [
+    "Was steht da? Das Netz liest Schrift im Bild und macht Text daraus.",
+    "Zum Beispiel von Schildern oder Lieferscheinen."
+   ]
+  },
+  {
+   "id": "wahl",
+   "kapitel": "Die Wahl",
+   "saetze": [
+    "Nimm die einfachste Aufgabe, die dein Problem löst.",
+    "Und denk früh an den Datenschutz, denn Personen und Kennzeichen im Bild sind personenbezogene Daten."
+   ]
+  }
+ ]
+}

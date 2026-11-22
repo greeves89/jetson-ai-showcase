@@ -1,0 +1,65 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.690
+Das hier ist ein Foto von ein paar Tassen.
+
+00:00:03.840 --> 00:00:07.910
+Für einen Computer ist es keine
+Tasse. Er sieht nur Zahlen.
+
+00:00:08.060 --> 00:00:09.730
+Gehen wir näher ran.
+
+00:00:10.980 --> 00:00:14.650
+Ein Bild besteht aus kleinen
+Quadraten, den Pixeln.
+
+00:00:14.800 --> 00:00:20.070
+Jedes Pixel hat genau eine Farbe, wie
+ein Stich in einem Kreuzstichmuster.
+
+00:00:21.320 --> 00:00:25.070
+Im Schwarzweißbild ist
+jede Helligkeit eine Zahl.
+
+00:00:25.220 --> 00:00:31.930
+Null ist Schwarz, 255 ist Weiß.
+Dazwischen liegen alle Grautöne.
+
+00:00:33.180 --> 00:00:38.130
+Bei Farbe sind es drei Zahlen
+je Pixel: Rot, Grün und Blau.
+
+00:00:38.280 --> 00:00:44.030
+Rot und Grün zusammen ergeben
+Gelb. Alle drei voll ergeben Weiß.
+
+00:00:45.280 --> 00:00:47.990
+Mehr Pixel zeigen mehr Details.
+
+00:00:48.140 --> 00:00:51.810
+Sie brauchen aber auch mehr
+Speicher und mehr Rechenzeit.
+
+00:00:51.960 --> 00:00:57.070
+Breite mal Höhe mal drei ergibt, wie
+viele Zahlen das Modell lesen muss.
+
+00:00:58.320 --> 00:01:04.710
+Ist ein Bild zu hell, stoßen die Werte
+an 255, und Details gehen verloren.
+
+00:01:04.860 --> 00:01:08.770
+Bei wenig Licht entsteht
+Rauschen, und die Werte zittern.
+
+00:01:10.020 --> 00:01:13.530
+Darum wird jedes Bild vor
+der Erkennung verkleinert.
+
+00:01:13.680 --> 00:01:19.270
+Aus dem Kamerabild im Labor
+werden 480 mal 360 Pixel.
+
+00:01:19.420 --> 00:01:23.170
+Das spart Zeit, kostet aber kleine Details.

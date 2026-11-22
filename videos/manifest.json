@@ -603,6 +603,442 @@
           "titel": "Dokumentieren"
         }
       ]
+    },
+    {
+      "id": "bild-als-zahlen",
+      "titel": "Wie ein Computer ein Bild sieht",
+      "untertitel": "Ein Foto ist eine Tabelle aus Zahlen",
+      "dauer_s": 84.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Ein Foto"
+        },
+        {
+          "t": 10.5,
+          "titel": "Das Raster"
+        },
+        {
+          "t": 20.8,
+          "titel": "Helligkeit"
+        },
+        {
+          "t": 32.7,
+          "titel": "Drei Kanäle"
+        },
+        {
+          "t": 44.8,
+          "titel": "Auflösung"
+        },
+        {
+          "t": 57.8,
+          "titel": "Hell und dunkel"
+        },
+        {
+          "t": 69.5,
+          "titel": "Im Labor"
+        }
+      ]
+    },
+    {
+      "id": "cnn-wie-netze-sehen",
+      "titel": "Wie Netze Bilder verstehen",
+      "untertitel": "Filter, Schichten und gelernte Merkmale",
+      "dauer_s": 76.5,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Frage"
+        },
+        {
+          "t": 8.1,
+          "titel": "Der Filter"
+        },
+        {
+          "t": 21.5,
+          "titel": "Kanten leuchten"
+        },
+        {
+          "t": 29.4,
+          "titel": "Schichten"
+        },
+        {
+          "t": 44,
+          "titel": "Gelernt"
+        },
+        {
+          "t": 52.7,
+          "titel": "Vortraining"
+        },
+        {
+          "t": 61.7,
+          "titel": "Wo es irrt"
+        }
+      ]
+    },
+    {
+      "id": "vision-aufgaben-ueberblick",
+      "titel": "Fünf Fragen an ein Bild",
+      "untertitel": "Jede Bildaufgabe beantwortet eine andere Frage",
+      "dauer_s": 81,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Ein Bild"
+        },
+        {
+          "t": 11.6,
+          "titel": "Klassifikation"
+        },
+        {
+          "t": 22.3,
+          "titel": "Erkennung"
+        },
+        {
+          "t": 33.1,
+          "titel": "Segmentierung"
+        },
+        {
+          "t": 47.4,
+          "titel": "Pose"
+        },
+        {
+          "t": 59.1,
+          "titel": "Texterkennung"
+        },
+        {
+          "t": 68.9,
+          "titel": "Die Wahl"
+        }
+      ]
+    },
+    {
+      "id": "agenten-grundlagen",
+      "titel": "Was ist ein Agent?",
+      "untertitel": "Ein Sprachmodell mit Werkzeugen in einer Schleife",
+      "dauer_s": 80.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Chat oder Agent"
+        },
+        {
+          "t": 7.6,
+          "titel": "Zettel und Werkzeugkasten"
+        },
+        {
+          "t": 19.1,
+          "titel": "Ein Werkzeug"
+        },
+        {
+          "t": 31.7,
+          "titel": "Die Schleife"
+        },
+        {
+          "t": 46,
+          "titel": "Das Programm führt aus"
+        },
+        {
+          "t": 59.1,
+          "titel": "Gedächtnis"
+        },
+        {
+          "t": 71.8,
+          "titel": "Agent oder Ablauf"
+        }
+      ]
+    },
+    {
+      "id": "agenten-planung",
+      "titel": "Planen, Schritte und Fehler",
+      "untertitel": "Je länger die Kette, desto mehr kann schiefgehen",
+      "dauer_s": 78.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Zerlegen"
+        },
+        {
+          "t": 14.4,
+          "titel": "Plan oder reagieren"
+        },
+        {
+          "t": 24.7,
+          "titel": "Der Verlauf wächst"
+        },
+        {
+          "t": 34.3,
+          "titel": "Notizen"
+        },
+        {
+          "t": 44.3,
+          "titel": "Fehler summieren sich"
+        },
+        {
+          "t": 55.2,
+          "titel": "Grenzen"
+        },
+        {
+          "t": 68.5,
+          "titel": "Protokoll"
+        }
+      ]
+    },
+    {
+      "id": "agenten-sicherheit",
+      "titel": "Rechte, Prompt-Injection, Freigaben",
+      "untertitel": "Ein Agent handelt, darum braucht er Grenzen",
+      "dauer_s": 76.1,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Chat gegen Agent"
+        },
+        {
+          "t": 8.3,
+          "titel": "Geringste Rechte"
+        },
+        {
+          "t": 17.4,
+          "titel": "Der Zettel in der Post"
+        },
+        {
+          "t": 31.4,
+          "titel": "Warum es klappt"
+        },
+        {
+          "t": 38.6,
+          "titel": "Die gefährliche Mischung"
+        },
+        {
+          "t": 50.3,
+          "titel": "Freigabe"
+        },
+        {
+          "t": 62.8,
+          "titel": "Testen"
+        }
+      ]
+    },
+    {
+      "id": "mcp-erklaert",
+      "titel": "MCP einfach erklärt",
+      "untertitel": "Ein gemeinsamer Stecker für Assistenten und Systeme",
+      "dauer_s": 80.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Steckerwirrwarr"
+        },
+        {
+          "t": 11.4,
+          "titel": "Zwölf Verbindungen"
+        },
+        {
+          "t": 24.2,
+          "titel": "Ein Standard"
+        },
+        {
+          "t": 36.1,
+          "titel": "Server und Client"
+        },
+        {
+          "t": 47.8,
+          "titel": "Was ein Server beschreibt"
+        },
+        {
+          "t": 60.2,
+          "titel": "Wem vertraust du?"
+        },
+        {
+          "t": 68.5,
+          "titel": "Einordnung"
+        }
+      ]
+    },
+    {
+      "id": "sprachmodell-aufbau",
+      "titel": "Wie ein Sprachmodell gebaut ist",
+      "untertitel": "Token, Zahlen, Aufmerksamkeit und das nächste Wort",
+      "dauer_s": 74.5,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Das nächste Wort"
+        },
+        {
+          "t": 11.8,
+          "titel": "Token"
+        },
+        {
+          "t": 25.1,
+          "titel": "Zahlen"
+        },
+        {
+          "t": 34.5,
+          "titel": "Aufmerksamkeit"
+        },
+        {
+          "t": 47.1,
+          "titel": "Transformer"
+        },
+        {
+          "t": 59.1,
+          "titel": "Zwei Lernphasen"
+        }
+      ]
+    },
+    {
+      "id": "prompting-grundlagen",
+      "titel": "Gut fragen: die Grundlagen",
+      "untertitel": "Rolle, Aufgabe, Kontext, Beispiele, Format, Grenzen",
+      "dauer_s": 81.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Der Zettel"
+        },
+        {
+          "t": 19.2,
+          "titel": "Lücken füllen"
+        },
+        {
+          "t": 33,
+          "titel": "Sechs Bausteine"
+        },
+        {
+          "t": 54.2,
+          "titel": "Der Vergleich"
+        },
+        {
+          "t": 66.6,
+          "titel": "Ein Ausweg"
+        }
+      ]
+    },
+    {
+      "id": "prompting-beispiele",
+      "titel": "Gut fragen: drei Beispiele aus dem Büro",
+      "untertitel": "Mail, Protokoll und Angebotsvergleich, vorher und nachher",
+      "dauer_s": 75.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Drei Aufgaben"
+        },
+        {
+          "t": 14.4,
+          "titel": "Die Mail"
+        },
+        {
+          "t": 29.1,
+          "titel": "Das Protokoll"
+        },
+        {
+          "t": 46.2,
+          "titel": "Die Angebote"
+        },
+        {
+          "t": 62.6,
+          "titel": "Das Muster"
+        }
+      ]
+    },
+    {
+      "id": "llm-grenzen-risiken",
+      "titel": "Grenzen und Risiken von Sprachmodellen",
+      "untertitel": "Halluzination, Prompt-Injection und Datenschutz",
+      "dauer_s": 74.4,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Der selbstsichere Kollege"
+        },
+        {
+          "t": 10.8,
+          "titel": "Halluzination"
+        },
+        {
+          "t": 23.6,
+          "titel": "Alter Stand"
+        },
+        {
+          "t": 32.7,
+          "titel": "Prompt-Injection"
+        },
+        {
+          "t": 49.6,
+          "titel": "Datenschutz"
+        },
+        {
+          "t": 59.8,
+          "titel": "So arbeitest du damit"
+        }
+      ]
+    },
+    {
+      "id": "wissen-ins-modell-oder-dokument",
+      "titel": "Wissen ins Modell oder ins Dokument?",
+      "untertitel": "Prompt, RAG oder Nachtrainieren",
+      "dauer_s": 80.2,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Frage"
+        },
+        {
+          "t": 9.4,
+          "titel": "Drei Wege"
+        },
+        {
+          "t": 26.5,
+          "titel": "Besser fragen"
+        },
+        {
+          "t": 38.5,
+          "titel": "RAG"
+        },
+        {
+          "t": 52.4,
+          "titel": "Nachtrainieren"
+        },
+        {
+          "t": 67,
+          "titel": "Die Leiter"
+        }
+      ]
+    },
+    {
+      "id": "sprachausgabe-erklaert",
+      "titel": "Wie aus Text eine Stimme wird",
+      "untertitel": "Aufbereiten, Aussprache, Klang und Betonung",
+      "dauer_s": 77.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Das Navi"
+        },
+        {
+          "t": 14.1,
+          "titel": "Aufbereiten"
+        },
+        {
+          "t": 28.2,
+          "titel": "Aussprache"
+        },
+        {
+          "t": 41,
+          "titel": "Klang"
+        },
+        {
+          "t": 50.7,
+          "titel": "Betonung"
+        },
+        {
+          "t": 63.1,
+          "titel": "Stimmen"
+        }
+      ]
     }
   ]
 }

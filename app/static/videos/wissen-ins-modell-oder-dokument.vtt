@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.570
+Ein Sprachmodell kennt die
+Welt, aber nicht deine Firma.
+
+00:00:04.720 --> 00:00:08.630
+Wie bekommt es dein Wissen?
+Dafür gibt es drei Wege.
+
+00:00:09.880 --> 00:00:17.630
+Stell dir eine Prüfung vor. Du kannst einen Spickzettel mitnehmen,
+ein Nachschlagewerk benutzen oder alles auswendig lernen.
+
+00:00:17.780 --> 00:00:25.770
+Spickzettel heißt Prompt. Nachschlagewerk heißt
+RAG. Auswendiglernen heißt Nachtrainieren.
+
+00:00:27.020 --> 00:00:31.650
+Weg eins: besser fragen. Du
+gibst das Wissen im Prompt mit.
+
+00:00:31.800 --> 00:00:37.710
+Das geht sofort, kostet wenig und ist
+immer aktuell. Die Grenze ist der Platz.
+
+00:00:38.960 --> 00:00:45.510
+Weg zwei: RAG. Das System sucht die passende
+Stelle in deinen Dokumenten und gibt sie mit.
+
+00:00:45.660 --> 00:00:51.650
+Das Modell antwortet damit und nennt die Quelle.
+Änderst du das Dokument, gilt es sofort.
+
+00:00:52.900 --> 00:01:01.050
+Weg drei: Nachtrainieren. Das verändert das Modell
+selbst. Es lernt Ton, Format und Spezialaufgaben gut.
+
+00:01:01.200 --> 00:01:06.230
+Als Wissensspeicher ist es schwach, und
+jede Änderung heißt neues Training.
+
+00:01:07.480 --> 00:01:13.230
+Wenn jemand sagt, wir trainieren das Modell
+mit unseren Dokumenten, meint er meist RAG.
+
+00:01:13.380 --> 00:01:18.570
+Fang beim Prompt an, nimm RAG für
+Fakten und trainiere erst zuletzt.

@@ -1,0 +1,66 @@
+{
+ "id": "agenten-grundlagen",
+ "titel": "Was ist ein Agent?",
+ "untertitel": "Ein Sprachmodell mit Werkzeugen in einer Schleife",
+ "szenen": [
+  {
+   "id": "chat",
+   "kapitel": "Chat oder Agent",
+   "saetze": [
+    "Ein Chat antwortet aus dem Gedächtnis.",
+    "Ein Agent kann nachsehen und etwas tun."
+   ]
+  },
+  {
+   "id": "zettel",
+   "kapitel": "Zettel und Werkzeugkasten",
+   "saetze": [
+    "Stell dir eine Sachbearbeiterin vor. Sie hat einen Zettel und einen Werkzeugkasten.",
+    "Auf dem Zettel steht: Wann kommt Bestellung 1042?"
+   ]
+  },
+  {
+   "id": "werkzeug",
+   "kapitel": "Ein Werkzeug",
+   "saetze": [
+    "Jedes Werkzeug hat einen Namen, eine Beschreibung und Parameter.",
+    "Zum Beispiel bestellung suchen, mit dem Parameter Nummer.",
+    "Danach wählt das Modell, was es aufruft."
+   ]
+  },
+  {
+   "id": "schleife",
+   "kapitel": "Die Schleife",
+   "saetze": [
+    "Der Agent denkt, ruft ein Werkzeug auf, liest das Ergebnis und entscheidet neu.",
+    "Das wiederholt sich, bis die Aufgabe erledigt ist.",
+    "Darum heißt es Schleife: Sie läuft im Kreis."
+   ]
+  },
+  {
+   "id": "programm",
+   "kapitel": "Das Programm führt aus",
+   "saetze": [
+    "Das Modell führt nichts selbst aus. Es schreibt nur: rechne 240 mal 0,18.",
+    "Ein Programm drumherum rechnet und gibt 43,2 zurück."
+   ]
+  },
+  {
+   "id": "gedaechtnis",
+   "kapitel": "Gedächtnis",
+   "saetze": [
+    "Das Gedächtnis ist der Verlauf der Schritte.",
+    "Für Dauerhaftes gibt es Notizen außerhalb, in einer Akte.",
+    "Ohne diese Notizen vergisst der Agent beim nächsten Start alles."
+   ]
+  },
+  {
+   "id": "ablauf",
+   "kapitel": "Agent oder Ablauf",
+   "saetze": [
+    "Immer gleiche Schritte? Dann nimm einen festen Ablauf.",
+    "Offene Fälle? Dann nimm einen Agenten."
+   ]
+  }
+ ]
+}

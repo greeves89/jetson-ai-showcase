@@ -1,0 +1,136 @@
+{
+ "id": "sprachausgabe-erklaert",
+ "titel": "Wie aus Text eine Stimme wird",
+ "untertitel": "Aufbereiten, Aussprache, Klang und Betonung",
+ "gesamt": 77.26,
+ "szenen": [
+  {
+   "id": "navi",
+   "kapitel": "Das Navi",
+   "start": 0,
+   "dauer": 14.08,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.32,
+     "text": "Dein Navi liest dir Wege vor."
+    },
+    {
+     "t": 3.52,
+     "d": 3.92,
+     "text": "Text wird zu Sprache. Das ist Sprachausgabe."
+    },
+    {
+     "t": 7.74,
+     "d": 5.44,
+     "text": "Der Satz nach dreihundert Metern rechts abbiegen wurde nie aufgenommen. Er wird erzeugt."
+    }
+   ]
+  },
+  {
+   "id": "aufbereiten",
+   "kapitel": "Aufbereiten",
+   "start": 14.08,
+   "dauer": 14.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.32,
+     "text": "Zuerst wird der Text aufbereitet."
+    },
+    {
+     "t": 3.12,
+     "d": 4.96,
+     "text": "Zahlen, Abkürzungen und Zeichen werden ausgeschrieben, so wie man sie spricht."
+    },
+    {
+     "t": 8.38,
+     "d": 4.8,
+     "text": "Eine Zahl mit Einheit wird zu Wörtern, genau so, wie du sie sagen würdest."
+    }
+   ]
+  },
+  {
+   "id": "laute",
+   "kapitel": "Aussprache",
+   "start": 28.16,
+   "dauer": 12.8,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.32,
+     "text": "Dann wird die Aussprache bestimmt. Jedes Wort wird in Laute übersetzt, wie die Lautschrift im Wörterbuch."
+    },
+    {
+     "t": 7.12,
+     "d": 2.16,
+     "text": "Aus Schule werden vier Laute."
+    },
+    {
+     "t": 9.58,
+     "d": 2.32,
+     "text": "Eigennamen sind oft schwierig."
+    }
+   ]
+  },
+  {
+   "id": "klang",
+   "kapitel": "Klang",
+   "start": 40.96,
+   "dauer": 9.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.08,
+     "text": "Ein Modell schreibt aus den Lauten die Noten, ein Spektrogramm."
+    },
+    {
+     "t": 4.88,
+     "d": 4,
+     "text": "Ein zweites Modell, der Vocoder, spielt sie als Ton ab."
+    }
+   ]
+  },
+  {
+   "id": "betonung",
+   "kapitel": "Betonung",
+   "start": 50.74,
+   "dauer": 12.32,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Betonung und Tempo geben der Stimme Leben."
+    },
+    {
+     "t": 3.84,
+     "d": 4.24,
+     "text": "Eine Frage geht am Ende nach oben, eine Aussage nach unten."
+    },
+    {
+     "t": 8.38,
+     "d": 3.04,
+     "text": "Satzzeichen und kurze Sätze helfen dabei."
+    }
+   ]
+  },
+  {
+   "id": "stimme",
+   "kapitel": "Stimmen",
+   "start": 63.06,
+   "dauer": 14.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Eine Stimme gehört einem Menschen. Klone sie nur mit Einwilligung und kennzeichne erzeugte Sprache."
+    },
+    {
+     "t": 7.28,
+     "d": 5.12,
+     "text": "Auf dem Jetson läuft ein kleines Modell lokal, ohne dass dein Text das Haus verlässt."
+    }
+   ]
+  }
+ ]
+}

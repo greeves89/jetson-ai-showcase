@@ -1,0 +1,144 @@
+{
+ "id": "cnn-wie-netze-sehen",
+ "titel": "Wie Netze Bilder verstehen",
+ "untertitel": "Filter, Schichten und gelernte Merkmale",
+ "gesamt": 76.52,
+ "szenen": [
+  {
+   "id": "frage",
+   "kapitel": "Die Frage",
+   "start": 0,
+   "dauer": 8.1,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.28,
+     "text": "Wie wird aus einer Tabelle voller Zahlen ein Haus?"
+    },
+    {
+     "t": 4.48,
+     "d": 2.72,
+     "text": "Nicht mit einer Regel. Mit Schablonen."
+    }
+   ]
+  },
+  {
+   "id": "filter",
+   "kapitel": "Der Filter",
+   "start": 8.1,
+   "dauer": 13.44,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.8,
+     "text": "Ein Filter ist ein kleines Zahlenraster."
+    },
+    {
+     "t": 3.6,
+     "d": 4.24,
+     "text": "Er wandert über das Bild und sucht an jeder Stelle dasselbe Muster."
+    },
+    {
+     "t": 8.14,
+     "d": 4.4,
+     "text": "Jede Position ergibt eine Zahl: Wie gut passt das Muster hier?"
+    }
+   ]
+  },
+  {
+   "id": "kanten",
+   "kapitel": "Kanten leuchten",
+   "start": 21.54,
+   "dauer": 7.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Ein Kantenfilter leuchtet, wo es von dunkel nach hell geht."
+    },
+    {
+     "t": 4.64,
+     "d": 2.32,
+     "text": "Auf glatten Flächen bleibt er dunkel."
+    }
+   ]
+  },
+  {
+   "id": "schichten",
+   "kapitel": "Schichten",
+   "start": 29.4,
+   "dauer": 14.56,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2,
+     "text": "Ein Netz hat viele Schichten."
+    },
+    {
+     "t": 2.8,
+     "d": 6,
+     "text": "Die ersten finden Kanten, die mittleren Formen, die letzten Dinge wie Fenster oder Türen."
+    },
+    {
+     "t": 9.1,
+     "d": 4.56,
+     "text": "Aus einfachen Mustern werden so Stück für Stück ganze Objekte."
+    }
+   ]
+  },
+  {
+   "id": "gelernt",
+   "kapitel": "Gelernt",
+   "start": 43.96,
+   "dauer": 8.74,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.48,
+     "text": "Diese Filter schreibt niemand von Hand."
+    },
+    {
+     "t": 3.28,
+     "d": 4.56,
+     "text": "Das Netz lernt sie aus vielen Beispielen und verbessert sie in jeder Runde."
+    }
+   ]
+  },
+  {
+   "id": "vortraining",
+   "kapitel": "Vortraining",
+   "start": 52.7,
+   "dauer": 8.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4,
+     "text": "Ein vortrainiertes Netz liefert fertige Merkmale als Zahlen."
+    },
+    {
+     "t": 4.8,
+     "d": 3.28,
+     "text": "Darum reichen im Anlern-Labor wenige Beispiele."
+    }
+   ]
+  },
+  {
+   "id": "irrtum",
+   "kapitel": "Wo es irrt",
+   "start": 61.68,
+   "dauer": 14.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.64,
+     "text": "Aber Vorsicht: Ein Netz lernt manchmal an der falschen Eigenschaft."
+    },
+    {
+     "t": 5.44,
+     "d": 7.6,
+     "text": "Zeigen alle Wolfsbilder Schnee, lernt es: Schnee bedeutet Wolf. Dann wird ein Husky im Schnee zum Wolf."
+    }
+   ]
+  }
+ ]
+}

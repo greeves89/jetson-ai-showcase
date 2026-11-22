@@ -1,0 +1,68 @@
+{
+ "id": "mcp-erklaert",
+ "titel": "MCP einfach erklärt",
+ "untertitel": "Ein gemeinsamer Stecker für Assistenten und Systeme",
+ "szenen": [
+  {
+   "id": "stecker",
+   "kapitel": "Steckerwirrwarr",
+   "saetze": [
+    "Jedes Land hat einen anderen Stecker.",
+    "Ähnlich ging es Agenten mit jedem System.",
+    "Du packst sechs Adapter ein und findest trotzdem den falschen."
+   ]
+  },
+  {
+   "id": "netz",
+   "kapitel": "Zwölf Verbindungen",
+   "saetze": [
+    "Drei Assistenten, vier Systeme: zwölf Einzelanbindungen.",
+    "Jede muss jemand bauen und pflegen.",
+    "Kommt ein fünftes System dazu, sind es schon fünfzehn."
+   ]
+  },
+  {
+   "id": "standard",
+   "kapitel": "Ein Standard",
+   "saetze": [
+    "Das Model Context Protocol, kurz MCP, legt einen Standard fest.",
+    "Jedes System baut einen Anschluss, und jeder Assistent kann ihn nutzen."
+   ]
+  },
+  {
+   "id": "serverclient",
+   "kapitel": "Server und Client",
+   "saetze": [
+    "Der Server macht ein System bekannt.",
+    "Der Client, also die Anwendung des Assistenten, nutzt es.",
+    "Wie ein Reisebüro, das viele Anbieter vermittelt."
+   ]
+  },
+  {
+   "id": "beschreibung",
+   "kapitel": "Was ein Server beschreibt",
+   "saetze": [
+    "Ein Server nennt Werkzeuge mit Namen, Beschreibung und Parametern.",
+    "Zum Beispiel termine lesen, mit dem Parameter Datum.",
+    "Das Modell wählt danach."
+   ]
+  },
+  {
+   "id": "vertrauen",
+   "kapitel": "Wem vertraust du?",
+   "saetze": [
+    "Ein Server ist Code mit Zugriff.",
+    "Prüfe die Quelle, begrenze die Rechte und lass Folgen freigeben."
+   ]
+  },
+  {
+   "id": "einordnung",
+   "kapitel": "Einordnung",
+   "saetze": [
+    "MCP ist der Anschluss, nicht der Agent.",
+    "Der Agent denkt und handelt wie bisher.",
+    "MCP ist nur das Kabel dazwischen."
+   ]
+  }
+ ]
+}

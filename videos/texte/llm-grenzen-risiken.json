@@ -1,0 +1,56 @@
+{
+ "id": "llm-grenzen-risiken",
+ "titel": "Grenzen und Risiken von Sprachmodellen",
+ "untertitel": "Halluzination, Prompt-Injection und Datenschutz",
+ "szenen": [
+  {
+   "id": "kollege",
+   "kapitel": "Der selbstsichere Kollege",
+   "saetze": [
+    "Stell dir einen Kollegen vor, der nie sagt: Das weiß ich nicht.",
+    "Meistens hat er recht. Manchmal erfindet er etwas, und du hörst es nicht."
+   ]
+  },
+  {
+   "id": "halluzination",
+   "kapitel": "Halluzination",
+   "saetze": [
+    "Das ist die Halluzination. Das Modell setzt das wahrscheinlichste Wort fort, auch ohne Wissen.",
+    "Erfundene Quellen und sehr genaue Angaben ohne Beleg sind Warnzeichen."
+   ]
+  },
+  {
+   "id": "stand",
+   "kapitel": "Alter Stand",
+   "saetze": [
+    "Außerdem kennt das Modell nur den Stand seines Trainings. Was danach kam, fehlt.",
+    "Fragst du nach Neuem, rät es."
+   ]
+  },
+  {
+   "id": "injection",
+   "kapitel": "Prompt-Injection",
+   "saetze": [
+    "Prompt-Injection ist wie ein Zettel in der Post. Die Assistentin stutzt, denn der Chef hat das nie gesagt.",
+    "Ein Modell stutzt nicht. Für das Modell ist alles Text.",
+    "Darum bekommt es nur so viele Rechte, wie du im Notfall verkraftest."
+   ]
+  },
+  {
+   "id": "datenschutz",
+   "kapitel": "Datenschutz",
+   "saetze": [
+    "Und was du in einen Cloud-Chat tippst, verlässt dein Haus.",
+    "Kundendaten gehören nur in freigegebene Dienste oder in ein lokales Modell."
+   ]
+  },
+  {
+   "id": "vorgehen",
+   "kapitel": "So arbeitest du damit",
+   "saetze": [
+    "Prüfe das Ergebnis, verlange Quellen, lass einen Menschen freigeben, geh in kleinen Schritten vor und begrenze die Zugriffe.",
+    "Dann bleibt der Nutzen, und das Risiko klein."
+   ]
+  }
+ ]
+}

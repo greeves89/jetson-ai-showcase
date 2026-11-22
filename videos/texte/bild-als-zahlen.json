@@ -1,0 +1,66 @@
+{
+ "id": "bild-als-zahlen",
+ "titel": "Wie ein Computer ein Bild sieht",
+ "untertitel": "Ein Foto ist eine Tabelle aus Zahlen",
+ "szenen": [
+  {
+   "id": "foto",
+   "kapitel": "Ein Foto",
+   "saetze": [
+    "Das hier ist ein Foto von ein paar Tassen.",
+    "Für einen Computer ist es keine Tasse. Er sieht nur Zahlen.",
+    "Gehen wir näher ran."
+   ]
+  },
+  {
+   "id": "raster",
+   "kapitel": "Das Raster",
+   "saetze": [
+    "Ein Bild besteht aus kleinen Quadraten, den Pixeln.",
+    "Jedes Pixel hat genau eine Farbe, wie ein Stich in einem Kreuzstichmuster."
+   ]
+  },
+  {
+   "id": "grau",
+   "kapitel": "Helligkeit",
+   "saetze": [
+    "Im Schwarzweißbild ist jede Helligkeit eine Zahl.",
+    "Null ist Schwarz, 255 ist Weiß. Dazwischen liegen alle Grautöne."
+   ]
+  },
+  {
+   "id": "farbe",
+   "kapitel": "Drei Kanäle",
+   "saetze": [
+    "Bei Farbe sind es drei Zahlen je Pixel: Rot, Grün und Blau.",
+    "Rot und Grün zusammen ergeben Gelb. Alle drei voll ergeben Weiß."
+   ]
+  },
+  {
+   "id": "groesse",
+   "kapitel": "Auflösung",
+   "saetze": [
+    "Mehr Pixel zeigen mehr Details.",
+    "Sie brauchen aber auch mehr Speicher und mehr Rechenzeit.",
+    "Breite mal Höhe mal drei ergibt, wie viele Zahlen das Modell lesen muss."
+   ]
+  },
+  {
+   "id": "licht",
+   "kapitel": "Hell und dunkel",
+   "saetze": [
+    "Ist ein Bild zu hell, stoßen die Werte an 255, und Details gehen verloren.",
+    "Bei wenig Licht entsteht Rauschen, und die Werte zittern."
+   ]
+  },
+  {
+   "id": "labor",
+   "kapitel": "Im Labor",
+   "saetze": [
+    "Darum wird jedes Bild vor der Erkennung verkleinert.",
+    "Aus dem Kamerabild im Labor werden 480 mal 360 Pixel.",
+    "Das spart Zeit, kostet aber kleine Details."
+   ]
+  }
+ ]
+}

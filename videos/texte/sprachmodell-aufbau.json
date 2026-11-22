@@ -1,0 +1,55 @@
+{
+ "id": "sprachmodell-aufbau",
+ "titel": "Wie ein Sprachmodell gebaut ist",
+ "untertitel": "Token, Zahlen, Aufmerksamkeit und das nächste Wort",
+ "szenen": [
+  {
+   "id": "handy",
+   "kapitel": "Das nächste Wort",
+   "saetze": [
+    "Dein Handy schlägt nach Guten das Wort Morgen vor.",
+    "Ein Sprachmodell macht dasselbe, nur viel größer: Es sagt voraus, was als Nächstes kommt."
+   ]
+  },
+  {
+   "id": "token",
+   "kapitel": "Token",
+   "saetze": [
+    "Zuerst wird der Text in Token zerlegt. Das sind Stücke aus einem festen Kasten, wie Legosteine.",
+    "Häufige Wörter sind ein einziger Stein, seltene bestehen aus mehreren."
+   ]
+  },
+  {
+   "id": "karte",
+   "kapitel": "Zahlen",
+   "saetze": [
+    "Jeder Stein wird zu einer Liste von Zahlen, wie Koordinaten auf einem Stadtplan.",
+    "Ähnliche Wörter liegen nah beieinander."
+   ]
+  },
+  {
+   "id": "aufmerksamkeit",
+   "kapitel": "Aufmerksamkeit",
+   "saetze": [
+    "Dann kommt die Aufmerksamkeit. Bei dem Wort er schaut das Modell zurück und erkennt: Gemeint ist der Koffer.",
+    "So verknüpft es jedes Token mit den Stellen, auf die es ankommt."
+   ]
+  },
+  {
+   "id": "transformer",
+   "kapitel": "Transformer",
+   "saetze": [
+    "Viele Schichten davon ergeben den Transformer.",
+    "Am Ende steht eine Liste mit Wahrscheinlichkeiten. Ein Token wird gewählt, angehängt, und alles beginnt von vorn."
+   ]
+  },
+  {
+   "id": "lernen",
+   "kapitel": "Zwei Lernphasen",
+   "saetze": [
+    "Im Vortraining rät das Modell auf riesigen Textmengen das nächste Token. In der Feinabstimmung lernt es, Aufgaben zu befolgen.",
+    "Kleine Modelle wie das auf dem Jetson wissen weniger, laufen aber lokal."
+   ]
+  }
+ ]
+}

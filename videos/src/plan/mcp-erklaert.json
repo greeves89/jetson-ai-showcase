@@ -1,0 +1,159 @@
+{
+ "id": "mcp-erklaert",
+ "titel": "MCP einfach erklärt",
+ "untertitel": "Ein gemeinsamer Stecker für Assistenten und Systeme",
+ "gesamt": 80.3,
+ "szenen": [
+  {
+   "id": "stecker",
+   "kapitel": "Steckerwirrwarr",
+   "start": 0,
+   "dauer": 11.44,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.4,
+     "text": "Jedes Land hat einen anderen Stecker."
+    },
+    {
+     "t": 3.6,
+     "d": 2.8,
+     "text": "Ähnlich ging es Agenten mit jedem System."
+    },
+    {
+     "t": 6.7,
+     "d": 3.84,
+     "text": "Du packst sechs Adapter ein und findest trotzdem den falschen."
+    }
+   ]
+  },
+  {
+   "id": "netz",
+   "kapitel": "Zwölf Verbindungen",
+   "start": 11.44,
+   "dauer": 12.8,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.72,
+     "text": "Drei Assistenten, vier Systeme: zwölf Einzelanbindungen."
+    },
+    {
+     "t": 5.52,
+     "d": 2.48,
+     "text": "Jede muss jemand bauen und pflegen."
+    },
+    {
+     "t": 8.3,
+     "d": 3.6,
+     "text": "Kommt ein fünftes System dazu, sind es schon fünfzehn."
+    }
+   ]
+  },
+  {
+   "id": "standard",
+   "kapitel": "Ein Standard",
+   "start": 24.24,
+   "dauer": 11.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.68,
+     "text": "Das Model Context Protocol, kurz MCP, legt einen Standard fest."
+    },
+    {
+     "t": 6.48,
+     "d": 4.48,
+     "text": "Jedes System baut einen Anschluss, und jeder Assistent kann ihn nutzen."
+    }
+   ]
+  },
+  {
+   "id": "serverclient",
+   "kapitel": "Server und Client",
+   "start": 36.1,
+   "dauer": 11.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.24,
+     "text": "Der Server macht ein System bekannt."
+    },
+    {
+     "t": 3.04,
+     "d": 4.32,
+     "text": "Der Client, also die Anwendung des Assistenten, nutzt es."
+    },
+    {
+     "t": 7.66,
+     "d": 3.12,
+     "text": "Wie ein Reisebüro, das viele Anbieter vermittelt."
+    }
+   ]
+  },
+  {
+   "id": "beschreibung",
+   "kapitel": "Was ein Server beschreibt",
+   "start": 47.78,
+   "dauer": 12.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.48,
+     "text": "Ein Server nennt Werkzeuge mit Namen, Beschreibung und Parametern."
+    },
+    {
+     "t": 5.28,
+     "d": 4,
+     "text": "Zum Beispiel termine lesen, mit dem Parameter Datum."
+    },
+    {
+     "t": 9.58,
+     "d": 1.92,
+     "text": "Das Modell wählt danach."
+    }
+   ]
+  },
+  {
+   "id": "vertrauen",
+   "kapitel": "Wem vertraust du?",
+   "start": 60.18,
+   "dauer": 8.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.4,
+     "text": "Ein Server ist Code mit Zugriff."
+    },
+    {
+     "t": 3.2,
+     "d": 4.24,
+     "text": "Prüfe die Quelle, begrenze die Rechte und lass Folgen freigeben."
+    }
+   ]
+  },
+  {
+   "id": "einordnung",
+   "kapitel": "Einordnung",
+   "start": 68.52,
+   "dauer": 11.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "MCP ist der Anschluss, nicht der Agent."
+    },
+    {
+     "t": 4.16,
+     "d": 2.72,
+     "text": "Der Agent denkt und handelt wie bisher."
+    },
+    {
+     "t": 7.18,
+     "d": 2.8,
+     "text": "MCP ist nur das Kabel dazwischen."
+    }
+   ]
+  }
+ ]
+}

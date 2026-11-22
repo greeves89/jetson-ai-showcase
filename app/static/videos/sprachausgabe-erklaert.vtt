@@ -1,0 +1,58 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:03.370
+Dein Navi liest dir Wege vor.
+
+00:00:03.520 --> 00:00:07.590
+Text wird zu Sprache. Das ist Sprachausgabe.
+
+00:00:07.740 --> 00:00:13.330
+Der Satz nach dreihundert Metern rechts abbiegen
+wurde nie aufgenommen. Er wird erzeugt.
+
+00:00:14.580 --> 00:00:17.050
+Zuerst wird der Text aufbereitet.
+
+00:00:17.200 --> 00:00:22.310
+Zahlen, Abkürzungen und Zeichen werden
+ausgeschrieben, so wie man sie spricht.
+
+00:00:22.460 --> 00:00:27.410
+Eine Zahl mit Einheit wird zu Wörtern,
+genau so, wie du sie sagen würdest.
+
+00:00:28.660 --> 00:00:35.130
+Dann wird die Aussprache bestimmt. Jedes Wort wird in
+Laute übersetzt, wie die Lautschrift im Wörterbuch.
+
+00:00:35.280 --> 00:00:37.590
+Aus Schule werden vier Laute.
+
+00:00:37.740 --> 00:00:40.210
+Eigennamen sind oft schwierig.
+
+00:00:41.460 --> 00:00:45.690
+Ein Modell schreibt aus den Lauten
+die Noten, ein Spektrogramm.
+
+00:00:45.840 --> 00:00:49.990
+Ein zweites Modell, der
+Vocoder, spielt sie als Ton ab.
+
+00:00:51.240 --> 00:00:54.430
+Betonung und Tempo geben der Stimme Leben.
+
+00:00:54.580 --> 00:00:58.970
+Eine Frage geht am Ende nach
+oben, eine Aussage nach unten.
+
+00:00:59.120 --> 00:01:02.310
+Satzzeichen und kurze Sätze helfen dabei.
+
+00:01:03.560 --> 00:01:10.190
+Eine Stimme gehört einem Menschen. Klone sie nur
+mit Einwilligung und kennzeichne erzeugte Sprache.
+
+00:01:10.340 --> 00:01:15.610
+Auf dem Jetson läuft ein kleines Modell
+lokal, ohne dass dein Text das Haus verlässt.

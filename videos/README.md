@@ -1,6 +1,6 @@
 # Erklärvideos
 
-Fünf vertonte, animierte Erklärvideos (Deutsch, 1920x1080, 30 fps) zu den Grundlagen der KI. Gebaut mit Remotion (React). Die Webapp bindet die fertigen Dateien aus `app/static/videos/` ein und liest `manifest.json` für die Kapitelsprünge.
+Vertonte, animierte Erklärvideos (Deutsch, 1920x1080, 30 fps) zu den Grundlagen der KI, zu RAG, zu Sehen und Agenten sowie zur Sprache. Gebaut mit Remotion (React). Die Webapp bindet die fertigen Dateien aus `app/static/videos/` ein und liest `manifest.json` für die Kapitelsprünge.
 
 | Id | Thema |
 |---|---|
@@ -9,6 +9,11 @@ Fünf vertonte, animierte Erklärvideos (Deutsch, 1920x1080, 30 fps) zu den Grun
 | `generative-ki` | Tokens, Temperatur, Halluzination, RAG |
 | `robotik` | Regelkreis, Jetson am Roboter |
 | `ki-im-business` | Einsatzfelder und drei Fragen vor dem Einsatz |
+
+Weitere Folgen (Strang Sehen und Agenten, Strang Sprache; Skizzen in `docs/videos-sehen-agenten.md` und `docs/videos-sprache.md`):
+`bild-als-zahlen`, `cnn-wie-netze-sehen`, `vision-aufgaben-ueberblick`, `agenten-grundlagen`, `agenten-planung`, `agenten-sicherheit`, `mcp-erklaert`,
+`sprachmodell-aufbau`, `prompting-grundlagen`, `prompting-beispiele`, `llm-grenzen-risiken`, `wissen-ins-modell-oder-dokument`, `sprachausgabe-erklaert`.
+Ihre Szenen nutzen gemeinsame Anker über Szenengrenzen (`anker` in `Szene`) als Match-Cuts; Hilfsbausteine liegen in `src/neu.jsx`, Beispielbilder in `src/img/`.
 
 ## Aufbau
 
@@ -44,8 +49,8 @@ npm run render -- <id>              # mp4, jpg, vtt nach out/ und ../app/static/
 - Modell `eleven_v4`, Stimme George, Sprache `de`. Der API-Schlüssel wird nur aus `~/.elevenlabs/key` gelesen und nie ausgegeben oder gespeichert.
 - Jeder Satz wird einmal bezahlt: Zwischenspeicher nach Text-Hash in `stimme-cache/` (nicht eingecheckt). Geänderte Sätze kosten neu, unveränderte nichts.
 - Die Obergrenze neuer Zeichen je Lauf steht in `ZEICHEN_MAX` (Standard 15000). `stimme-cache/verbrauch.tsv` zählt mit.
-- Alle fünf Videos zusammen umfassen etwa 5.000 Zeichen.
+- Ein Video umfasst etwa 900 bis 1.000 Zeichen. Die Aussprache der Stimme lässt sich mit `faster-whisper` gegen den Text prüfen (Wortfehlerrate je Satz).
 
 ## Ergebnisdateien
 
-Je Video `<id>.mp4` (H.264 und AAC, faststart, höchstens 15 MB), `<id>.jpg` (Vorschaubild), `<id>.vtt` (Untertitel). `mp4` und `jpg` sind nicht eingecheckt (`.gitignore`), `vtt` und `manifest.json` schon.
+Je Video `<id>.mp4` (H.264 und AAC, faststart, höchstens 8 MB; `render.mjs` erhöht den CRF, bis die Obergrenze von 8.000.000 Byte eingehalten ist), `<id>.jpg` (Vorschaubild), `<id>.vtt` (Untertitel). `mp4` und `jpg` sind nicht eingecheckt (`.gitignore`), `vtt` und `manifest.json` schon.

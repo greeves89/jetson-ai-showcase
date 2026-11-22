@@ -1,0 +1,50 @@
+{
+ "id": "prompting-grundlagen",
+ "titel": "Gut fragen: die Grundlagen",
+ "untertitel": "Rolle, Aufgabe, Kontext, Beispiele, Format, Grenzen",
+ "szenen": [
+  {
+   "id": "zettel",
+   "kapitel": "Der Zettel",
+   "saetze": [
+    "Stell dir vor, du gibst deiner neuen Kollegin diesen Zettel: Schreib dem Kunden wegen der Verspätung.",
+    "Eine kluge Kollegin würde zurückfragen. Ein Modell antwortet einfach.",
+    "Es weiß nicht, an wen, warum und in welchem Ton. Das Ergebnis ist Glückssache."
+   ]
+  },
+  {
+   "id": "fuellen",
+   "kapitel": "Lücken füllen",
+   "saetze": [
+    "Mit drei Sätzen mehr klappt es fast immer.",
+    "Je mehr du sagst, desto weniger muss es raten.",
+    "Beim Sprachmodell ist es genauso, denn es füllt jede Lücke mit dem, was wahrscheinlich klingt."
+   ]
+  },
+  {
+   "id": "bausteine",
+   "kapitel": "Sechs Bausteine",
+   "saetze": [
+    "Sechs Bausteine helfen dir. Rolle: Aus welcher Sicht antwortet das Modell? Aufgabe: Was soll es tun? Kontext: Was muss es wissen?",
+    "Beispiele: Wie sieht gut aus? Format: Wie lang, in welcher Form? Und Grenzen: Was soll es lassen?"
+   ]
+  },
+  {
+   "id": "vergleich",
+   "kapitel": "Der Vergleich",
+   "saetze": [
+    "Vergleiche die beiden Antworten.",
+    "Links hat das Modell geraten. Rechts hatte es alles, was es brauchte.",
+    "Der Prompt ist länger, dafür sparst du dir drei Nachfragen."
+   ]
+  },
+  {
+   "id": "ausweg",
+   "kapitel": "Ein Ausweg",
+   "saetze": [
+    "Gib dem Modell einen Ausweg: Wenn etwas fehlt, soll es das sagen.",
+    "Und denk daran: Was du in einen Cloud-Chat kopierst, verlässt dein Haus. Gib keine vertraulichen Daten an fremde Dienste."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,48 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:04.330
+Dein Handy schlägt nach
+Guten das Wort Morgen vor.
+
+00:00:04.480 --> 00:00:11.030
+Ein Sprachmodell macht dasselbe, nur viel
+größer: Es sagt voraus, was als Nächstes kommt.
+
+00:00:12.280 --> 00:00:18.830
+Zuerst wird der Text in Token zerlegt. Das sind
+Stücke aus einem festen Kasten, wie Legosteine.
+
+00:00:18.980 --> 00:00:24.330
+Häufige Wörter sind ein einziger
+Stein, seltene bestehen aus mehreren.
+
+00:00:25.580 --> 00:00:30.930
+Jeder Stein wird zu einer Liste von Zahlen,
+wie Koordinaten auf einem Stadtplan.
+
+00:00:31.080 --> 00:00:33.790
+Ähnliche Wörter liegen nah beieinander.
+
+00:00:35.040 --> 00:00:42.150
+Dann kommt die Aufmerksamkeit. Bei dem Wort er schaut
+das Modell zurück und erkennt: Gemeint ist der Koffer.
+
+00:00:42.300 --> 00:00:46.370
+So verknüpft es jedes Token mit
+den Stellen, auf die es ankommt.
+
+00:00:47.620 --> 00:00:50.730
+Viele Schichten davon
+ergeben den Transformer.
+
+00:00:50.880 --> 00:00:58.310
+Am Ende steht eine Liste mit Wahrscheinlichkeiten. Ein
+Token wird gewählt, angehängt, und alles beginnt von vorn.
+
+00:00:59.560 --> 00:01:07.710
+Im Vortraining rät das Modell auf riesigen Textmengen das nächste
+Token. In der Feinabstimmung lernt es, Aufgaben zu befolgen.
+
+00:01:07.860 --> 00:01:12.810
+Kleine Modelle wie das auf dem Jetson
+wissen weniger, laufen aber lokal.

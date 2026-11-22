@@ -1,0 +1,116 @@
+{
+ "id": "wissen-ins-modell-oder-dokument",
+ "titel": "Wissen ins Modell oder ins Dokument?",
+ "untertitel": "Prompt, RAG oder Nachtrainieren",
+ "gesamt": 80.22,
+ "szenen": [
+  {
+   "id": "frage",
+   "kapitel": "Die Frage",
+   "start": 0,
+   "dauer": 9.38,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 3.52,
+     "text": "Ein Sprachmodell kennt die Welt, aber nicht deine Firma."
+    },
+    {
+     "t": 4.72,
+     "d": 3.76,
+     "text": "Wie bekommt es dein Wissen? Dafür gibt es drei Wege."
+    }
+   ]
+  },
+  {
+   "id": "drei",
+   "kapitel": "Drei Wege",
+   "start": 9.38,
+   "dauer": 17.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.6,
+     "text": "Stell dir eine Prüfung vor. Du kannst einen Spickzettel mitnehmen, ein Nachschlagewerk benutzen oder alles auswendig lernen."
+    },
+    {
+     "t": 8.4,
+     "d": 7.84,
+     "text": "Spickzettel heißt Prompt. Nachschlagewerk heißt RAG. Auswendiglernen heißt Nachtrainieren."
+    }
+   ]
+  },
+  {
+   "id": "prompt",
+   "kapitel": "Besser fragen",
+   "start": 26.52,
+   "dauer": 11.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.48,
+     "text": "Weg eins: besser fragen. Du gibst das Wissen im Prompt mit."
+    },
+    {
+     "t": 5.28,
+     "d": 5.76,
+     "text": "Das geht sofort, kostet wenig und ist immer aktuell. Die Grenze ist der Platz."
+    }
+   ]
+  },
+  {
+   "id": "rag",
+   "kapitel": "RAG",
+   "start": 38.46,
+   "dauer": 13.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.4,
+     "text": "Weg zwei: RAG. Das System sucht die passende Stelle in deinen Dokumenten und gibt sie mit."
+    },
+    {
+     "t": 7.2,
+     "d": 5.84,
+     "text": "Das Modell antwortet damit und nennt die Quelle. Änderst du das Dokument, gilt es sofort."
+    }
+   ]
+  },
+  {
+   "id": "nachtrainieren",
+   "kapitel": "Nachtrainieren",
+   "start": 52.4,
+   "dauer": 14.58,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8,
+     "text": "Weg drei: Nachtrainieren. Das verändert das Modell selbst. Es lernt Ton, Format und Spezialaufgaben gut."
+    },
+    {
+     "t": 8.8,
+     "d": 4.88,
+     "text": "Als Wissensspeicher ist es schwach, und jede Änderung heißt neues Training."
+    }
+   ]
+  },
+  {
+   "id": "leiter",
+   "kapitel": "Die Leiter",
+   "start": 66.98,
+   "dauer": 13.24,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.6,
+     "text": "Wenn jemand sagt, wir trainieren das Modell mit unseren Dokumenten, meint er meist RAG."
+    },
+    {
+     "t": 6.4,
+     "d": 5.04,
+     "text": "Fang beim Prompt an, nimm RAG für Fakten und trainiere erst zuletzt."
+    }
+   ]
+  }
+ ]
+}

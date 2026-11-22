@@ -1,0 +1,59 @@
+{
+ "id": "sprachausgabe-erklaert",
+ "titel": "Wie aus Text eine Stimme wird",
+ "untertitel": "Aufbereiten, Aussprache, Klang und Betonung",
+ "szenen": [
+  {
+   "id": "navi",
+   "kapitel": "Das Navi",
+   "saetze": [
+    "Dein Navi liest dir Wege vor.",
+    "Text wird zu Sprache. Das ist Sprachausgabe.",
+    "Der Satz nach dreihundert Metern rechts abbiegen wurde nie aufgenommen. Er wird erzeugt."
+   ]
+  },
+  {
+   "id": "aufbereiten",
+   "kapitel": "Aufbereiten",
+   "saetze": [
+    "Zuerst wird der Text aufbereitet.",
+    "Zahlen, Abkürzungen und Zeichen werden ausgeschrieben, so wie man sie spricht.",
+    "Eine Zahl mit Einheit wird zu Wörtern, genau so, wie du sie sagen würdest."
+   ]
+  },
+  {
+   "id": "laute",
+   "kapitel": "Aussprache",
+   "saetze": [
+    "Dann wird die Aussprache bestimmt. Jedes Wort wird in Laute übersetzt, wie die Lautschrift im Wörterbuch.",
+    "Aus Schule werden vier Laute.",
+    "Eigennamen sind oft schwierig."
+   ]
+  },
+  {
+   "id": "klang",
+   "kapitel": "Klang",
+   "saetze": [
+    "Ein Modell schreibt aus den Lauten die Noten, ein Spektrogramm.",
+    "Ein zweites Modell, der Vocoder, spielt sie als Ton ab."
+   ]
+  },
+  {
+   "id": "betonung",
+   "kapitel": "Betonung",
+   "saetze": [
+    "Betonung und Tempo geben der Stimme Leben.",
+    "Eine Frage geht am Ende nach oben, eine Aussage nach unten.",
+    "Satzzeichen und kurze Sätze helfen dabei."
+   ]
+  },
+  {
+   "id": "stimme",
+   "kapitel": "Stimmen",
+   "saetze": [
+    "Eine Stimme gehört einem Menschen. Klone sie nur mit Einwilligung und kennzeichne erzeugte Sprache.",
+    "Auf dem Jetson läuft ein kleines Modell lokal, ohne dass dein Text das Haus verlässt."
+   ]
+  }
+ ]
+}

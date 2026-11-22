@@ -1,0 +1,149 @@
+{
+ "id": "agenten-grundlagen",
+ "titel": "Was ist ein Agent?",
+ "untertitel": "Ein Sprachmodell mit Werkzeugen in einer Schleife",
+ "gesamt": 80.82,
+ "szenen": [
+  {
+   "id": "chat",
+   "kapitel": "Chat oder Agent",
+   "start": 0,
+   "dauer": 7.62,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 2.56,
+     "text": "Ein Chat antwortet aus dem Gedächtnis."
+    },
+    {
+     "t": 3.76,
+     "d": 2.96,
+     "text": "Ein Agent kann nachsehen und etwas tun."
+    }
+   ]
+  },
+  {
+   "id": "zettel",
+   "kapitel": "Zettel und Werkzeugkasten",
+   "start": 7.62,
+   "dauer": 11.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.36,
+     "text": "Stell dir eine Sachbearbeiterin vor. Sie hat einen Zettel und einen Werkzeugkasten."
+    },
+    {
+     "t": 6.16,
+     "d": 4.4,
+     "text": "Auf dem Zettel steht: Wann kommt Bestellung 1042?"
+    }
+   ]
+  },
+  {
+   "id": "werkzeug",
+   "kapitel": "Ein Werkzeug",
+   "start": 19.08,
+   "dauer": 12.64,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.32,
+     "text": "Jedes Werkzeug hat einen Namen, eine Beschreibung und Parameter."
+    },
+    {
+     "t": 5.12,
+     "d": 3.68,
+     "text": "Zum Beispiel bestellung suchen, mit dem Parameter Nummer."
+    },
+    {
+     "t": 9.1,
+     "d": 2.64,
+     "text": "Danach wählt das Modell, was es aufruft."
+    }
+   ]
+  },
+  {
+   "id": "schleife",
+   "kapitel": "Die Schleife",
+   "start": 31.72,
+   "dauer": 14.24,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Der Agent denkt, ruft ein Werkzeug auf, liest das Ergebnis und entscheidet neu."
+    },
+    {
+     "t": 6.24,
+     "d": 3.28,
+     "text": "Das wiederholt sich, bis die Aufgabe erledigt ist."
+    },
+    {
+     "t": 9.82,
+     "d": 3.52,
+     "text": "Darum heißt es Schleife: Sie läuft im Kreis."
+    }
+   ]
+  },
+  {
+   "id": "programm",
+   "kapitel": "Das Programm führt aus",
+   "start": 45.96,
+   "dauer": 13.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.04,
+     "text": "Das Modell führt nichts selbst aus. Es schreibt nur: rechne 240 mal 0,18."
+    },
+    {
+     "t": 7.84,
+     "d": 4.4,
+     "text": "Ein Programm drumherum rechnet und gibt 43,2 zurück."
+    }
+   ]
+  },
+  {
+   "id": "gedaechtnis",
+   "kapitel": "Gedächtnis",
+   "start": 59.1,
+   "dauer": 12.72,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 2.72,
+     "text": "Das Gedächtnis ist der Verlauf der Schritte."
+    },
+    {
+     "t": 3.52,
+     "d": 3.92,
+     "text": "Für Dauerhaftes gibt es Notizen außerhalb, in einer Akte."
+    },
+    {
+     "t": 7.74,
+     "d": 4.08,
+     "text": "Ohne diese Notizen vergisst der Agent beim nächsten Start alles."
+    }
+   ]
+  },
+  {
+   "id": "ablauf",
+   "kapitel": "Agent oder Ablauf",
+   "start": 71.82,
+   "dauer": 9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.68,
+     "text": "Immer gleiche Schritte? Dann nimm einen festen Ablauf."
+    },
+    {
+     "t": 4.48,
+     "d": 2.72,
+     "text": "Offene Fälle? Dann nimm einen Agenten."
+    }
+   ]
+  }
+ ]
+}

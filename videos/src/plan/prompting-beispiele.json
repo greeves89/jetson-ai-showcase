@@ -1,0 +1,118 @@
+{
+ "id": "prompting-beispiele",
+ "titel": "Gut fragen: drei Beispiele aus dem Büro",
+ "untertitel": "Mail, Protokoll und Angebotsvergleich, vorher und nachher",
+ "gesamt": 75.64,
+ "szenen": [
+  {
+   "id": "uebersicht",
+   "kapitel": "Drei Aufgaben",
+   "start": 0,
+   "dauer": 14.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 7.36,
+     "text": "Drei Aufgaben aus dem Büroalltag: eine Mail schreiben, ein Protokoll zusammenfassen, Angebote vergleichen."
+    },
+    {
+     "t": 8.56,
+     "d": 4.96,
+     "text": "Bei allen dreien gilt dasselbe: Sag dem Modell genau, was du brauchst."
+    }
+   ]
+  },
+  {
+   "id": "mail",
+   "kapitel": "Die Mail",
+   "start": 14.42,
+   "dauer": 14.72,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Erst die Mail. Vorher: ein Satz."
+    },
+    {
+     "t": 3.92,
+     "d": 5.76,
+     "text": "Nachher: Rolle, Grund, Ton, Länge, und was nicht versprochen wird."
+    },
+    {
+     "t": 9.98,
+     "d": 3.84,
+     "text": "Die Antwort wird kürzer, passender und erfindet nichts."
+    }
+   ]
+  },
+  {
+   "id": "protokoll",
+   "kapitel": "Das Protokoll",
+   "start": 29.14,
+   "dauer": 17.04,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.32,
+     "text": "Beim Protokoll gibst du das Format vor: Teilnehmende, Beschlüsse, offene Punkte mit Frist."
+    },
+    {
+     "t": 7.12,
+     "d": 6.88,
+     "text": "Und die Regel: Fehlt etwas, schreibe nicht genannt. So füllt das Modell keine Lücken mit Erfundenem."
+    },
+    {
+     "t": 14.3,
+     "d": 1.84,
+     "text": "Die Lücken bleiben sichtbar."
+    }
+   ]
+  },
+  {
+   "id": "angebote",
+   "kapitel": "Die Angebote",
+   "start": 46.18,
+   "dauer": 16.4,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.84,
+     "text": "Beim Angebotsvergleich lässt du es Schritt für Schritt vorgehen: erst die Eckdaten, dann die Gesamtkosten, dann die Empfehlung."
+    },
+    {
+     "t": 8.64,
+     "d": 3.12,
+     "text": "Du siehst jeden Zwischenschritt und kannst ihn prüfen."
+    },
+    {
+     "t": 12.06,
+     "d": 3.44,
+     "text": "Am Ende steht eine Gesamtsumme, die du nachrechnen kannst."
+    }
+   ]
+  },
+  {
+   "id": "muster",
+   "kapitel": "Das Muster",
+   "start": 62.58,
+   "dauer": 13.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.84,
+     "text": "Und wenn die Form schwer zu beschreiben ist, zeig zwei Beispiele."
+    },
+    {
+     "t": 4.64,
+     "d": 3.2,
+     "text": "Zwei Beispielzeilen, dann eine neue Zeile."
+    },
+    {
+     "t": 8.14,
+     "d": 3.12,
+     "text": "Das Modell erkennt das Muster und führt es fort."
+    }
+   ]
+  }
+ ]
+}

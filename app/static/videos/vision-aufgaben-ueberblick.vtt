@@ -1,0 +1,66 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:05.210
+Ein Bild, fünf Fragen. Die
+Straße vor dir zeigt es.
+
+00:00:05.360 --> 00:00:10.870
+Jede Frage ist eine eigene Aufgabe,
+mit eigenen Daten und eigenem Aufwand.
+
+00:00:12.120 --> 00:00:16.350
+Was ist das? Das Netz nennt
+eine Klasse für das ganze Bild.
+
+00:00:16.500 --> 00:00:19.050
+Hier zum Beispiel: Straße.
+
+00:00:19.200 --> 00:00:21.510
+Das ist günstig und einfach.
+
+00:00:22.760 --> 00:00:27.950
+Wo ist es, und wie viele? Das
+Netz zeichnet Rahmen um Objekte.
+
+00:00:28.100 --> 00:00:32.330
+So kannst du zählen: drei
+Autos und ein Mensch.
+
+00:00:33.580 --> 00:00:38.130
+Welche Pixel gehören dazu? Das
+Netz färbt jede Fläche ein.
+
+00:00:38.280 --> 00:00:43.150
+Jedes Pixel bekommt eine
+Klasse: Straße, Himmel, Haus.
+
+00:00:43.300 --> 00:00:46.650
+Dafür brauchst du die
+aufwendigsten Trainingsdaten.
+
+00:00:47.900 --> 00:00:51.890
+Wo sind die Gelenke? Aus den
+Punkten liest du die Haltung.
+
+00:00:52.040 --> 00:00:55.870
+Das hilft zum Beispiel bei der
+Frage, ob jemand richtig hebt.
+
+00:00:56.020 --> 00:00:58.330
+Ein Gesicht brauchst du dafür nicht.
+
+00:00:59.580 --> 00:01:04.530
+Was steht da? Das Netz liest Schrift
+im Bild und macht Text daraus.
+
+00:01:04.680 --> 00:01:08.110
+Zum Beispiel von Schildern
+oder Lieferscheinen.
+
+00:01:09.360 --> 00:01:12.710
+Nimm die einfachste Aufgabe,
+die dein Problem löst.
+
+00:01:12.860 --> 00:01:19.330
+Und denk früh an den Datenschutz, denn Personen und
+Kennzeichen im Bild sind personenbezogene Daten.

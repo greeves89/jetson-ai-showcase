@@ -1,0 +1,121 @@
+{
+ "id": "llm-grenzen-risiken",
+ "titel": "Grenzen und Risiken von Sprachmodellen",
+ "untertitel": "Halluzination, Prompt-Injection und Datenschutz",
+ "gesamt": 74.44,
+ "szenen": [
+  {
+   "id": "kollege",
+   "kapitel": "Der selbstsichere Kollege",
+   "start": 0,
+   "dauer": 10.82,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4,
+     "text": "Stell dir einen Kollegen vor, der nie sagt: Das weiß ich nicht."
+    },
+    {
+     "t": 5.2,
+     "d": 4.72,
+     "text": "Meistens hat er recht. Manchmal erfindet er etwas, und du hörst es nicht."
+    }
+   ]
+  },
+  {
+   "id": "halluzination",
+   "kapitel": "Halluzination",
+   "start": 10.82,
+   "dauer": 12.74,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.08,
+     "text": "Das ist die Halluzination. Das Modell setzt das wahrscheinlichste Wort fort, auch ohne Wissen."
+    },
+    {
+     "t": 6.88,
+     "d": 4.96,
+     "text": "Erfundene Quellen und sehr genaue Angaben ohne Beleg sind Warnzeichen."
+    }
+   ]
+  },
+  {
+   "id": "stand",
+   "kapitel": "Alter Stand",
+   "start": 23.56,
+   "dauer": 9.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.12,
+     "text": "Außerdem kennt das Modell nur den Stand seines Trainings. Was danach kam, fehlt."
+    },
+    {
+     "t": 5.92,
+     "d": 2.32,
+     "text": "Fragst du nach Neuem, rät es."
+    }
+   ]
+  },
+  {
+   "id": "injection",
+   "kapitel": "Prompt-Injection",
+   "start": 32.7,
+   "dauer": 16.88,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.64,
+     "text": "Prompt-Injection ist wie ein Zettel in der Post. Die Assistentin stutzt, denn der Chef hat das nie gesagt."
+    },
+    {
+     "t": 7.44,
+     "d": 4,
+     "text": "Ein Modell stutzt nicht. Für das Modell ist alles Text."
+    },
+    {
+     "t": 11.74,
+     "d": 4.24,
+     "text": "Darum bekommt es nur so viele Rechte, wie du im Notfall verkraftest."
+    }
+   ]
+  },
+  {
+   "id": "datenschutz",
+   "kapitel": "Datenschutz",
+   "start": 49.58,
+   "dauer": 10.18,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.36,
+     "text": "Und was du in einen Cloud-Chat tippst, verlässt dein Haus."
+    },
+    {
+     "t": 4.16,
+     "d": 5.12,
+     "text": "Kundendaten gehören nur in freigegebene Dienste oder in ein lokales Modell."
+    }
+   ]
+  },
+  {
+   "id": "vorgehen",
+   "kapitel": "So arbeitest du damit",
+   "start": 59.76,
+   "dauer": 14.68,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.96,
+     "text": "Prüfe das Ergebnis, verlange Quellen, lass einen Menschen freigeben, geh in kleinen Schritten vor und begrenze die Zugriffe."
+    },
+    {
+     "t": 9.76,
+     "d": 3.12,
+     "text": "Dann bleibt der Nutzen, und das Risiko klein."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,55 @@
+{
+ "id": "wissen-ins-modell-oder-dokument",
+ "titel": "Wissen ins Modell oder ins Dokument?",
+ "untertitel": "Prompt, RAG oder Nachtrainieren",
+ "szenen": [
+  {
+   "id": "frage",
+   "kapitel": "Die Frage",
+   "saetze": [
+    "Ein Sprachmodell kennt die Welt, aber nicht deine Firma.",
+    "Wie bekommt es dein Wissen? Dafür gibt es drei Wege."
+   ]
+  },
+  {
+   "id": "drei",
+   "kapitel": "Drei Wege",
+   "saetze": [
+    "Stell dir eine Prüfung vor. Du kannst einen Spickzettel mitnehmen, ein Nachschlagewerk benutzen oder alles auswendig lernen.",
+    "Spickzettel heißt Prompt. Nachschlagewerk heißt RAG. Auswendiglernen heißt Nachtrainieren."
+   ]
+  },
+  {
+   "id": "prompt",
+   "kapitel": "Besser fragen",
+   "saetze": [
+    "Weg eins: besser fragen. Du gibst das Wissen im Prompt mit.",
+    "Das geht sofort, kostet wenig und ist immer aktuell. Die Grenze ist der Platz."
+   ]
+  },
+  {
+   "id": "rag",
+   "kapitel": "RAG",
+   "saetze": [
+    "Weg zwei: RAG. Das System sucht die passende Stelle in deinen Dokumenten und gibt sie mit.",
+    "Das Modell antwortet damit und nennt die Quelle. Änderst du das Dokument, gilt es sofort."
+   ]
+  },
+  {
+   "id": "nachtrainieren",
+   "kapitel": "Nachtrainieren",
+   "saetze": [
+    "Weg drei: Nachtrainieren. Das verändert das Modell selbst. Es lernt Ton, Format und Spezialaufgaben gut.",
+    "Als Wissensspeicher ist es schwach, und jede Änderung heißt neues Training."
+   ]
+  },
+  {
+   "id": "leiter",
+   "kapitel": "Die Leiter",
+   "saetze": [
+    "Wenn jemand sagt, wir trainieren das Modell mit unseren Dokumenten, meint er meist RAG.",
+    "Fang beim Prompt an, nimm RAG für Fakten und trainiere erst zuletzt."
+   ]
+  }
+ ]
+}
