@@ -15,6 +15,7 @@ async function zuruecksetzen() {
 await zuruecksetzen();
 async function halten(i, ms) {
   const b = (await page.$$(".d-halten"))[i];
+  await b.scrollIntoViewIfNeeded();
   const box = await b.boundingBox();
   await page.mouse.move(box.x + box.width / 2, box.y + box.height / 2);
   await page.mouse.down(); await page.waitForTimeout(ms); await page.mouse.up();
