@@ -96,6 +96,10 @@ S["schule-start"] = {
 /* ------------------------------------------------------------------ Stunde 1 */
 S["schule-stunde-1"] = {
   nav: "Stunde 1: Was ist KI?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden", symbol: "presentation",
+  downloads: [
+    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
+  ],
   lernziele: [
     "Du kannst an drei Beispielen aus deinem Alltag erklären, wo KI etwas erkennt und entscheidet.",
     "Du kannst im Punkte-Labor zeigen, dass ein Modell aus Beispielen lernt und nicht aus festen Regeln.",
@@ -219,6 +223,10 @@ S["schule-stunde-1"] = {
 /* ------------------------------------------------------------------ Stunde 2 */
 S["schule-stunde-2"] = {
   nav: "Stunde 2: Wie lernt ein Computer?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler", symbol: "brain-circuit",
+  downloads: [
+    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
+  ],
   lernziele: [
     "Du kannst erklären, warum die Qualität der Daten bestimmt, wie gut ein Modell entscheidet.",
     "Du kannst am Netz-Spielplatz zeigen, dass Training ein Kreislauf aus Vorhersagen, Fehler messen und Nachjustieren ist.",
@@ -340,6 +348,10 @@ S["schule-stunde-2"] = {
 /* ------------------------------------------------------------------ Stunde 3 */
 S["schule-stunde-3"] = {
   nav: "Stunde 3: Echt oder erfunden?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 3: Echt oder erfunden? KI prüfen", symbol: "search",
+  downloads: [
+    {text: "Arbeitsblatt (PDF)", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt (PDF)", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
+  ],
   lernziele: [
     "Du kannst erklären, warum ein Sprachmodell Dinge erfinden kann, die überzeugend klingen.",
     "Du kannst eine Antwort in drei Schritten prüfen: Quelle, zweite Quelle, Datum.",

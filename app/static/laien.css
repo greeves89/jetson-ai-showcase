@@ -433,3 +433,8 @@ html[data-mathe=aus] .mathe{display:none}
 /* Links im Text: [Text](Adresse) */
 .md-link{text-decoration:underline;text-underline-offset:3px;font-weight:500}
 @media(max-width:960px),(pointer:coarse){.md-link{display:inline-flex;align-items:center;min-height:44px}}
+
+.downloads{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 24px}
+.downloads .dl{min-height:44px;display:inline-flex;align-items:center;gap:10px;text-decoration:none}
+.downloads .dl small{font-weight:400;opacity:.85}
+@media (max-width:600px){.downloads .dl{width:100%;justify-content:center}}
