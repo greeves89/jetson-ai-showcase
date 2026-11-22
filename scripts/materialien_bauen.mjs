@@ -1,5 +1,5 @@
 // Baut die Unterrichtsmaterialien zu den drei Schulstunden (Plan: docs/materialien-plan.md):
-//   app/static/materialien/arbeitsblatt-stunde-N.html und .pdf   (Schueler, ein bis drei Seiten DIN A4)
+//   app/static/materialien/arbeitsblatt-stunde-N.html und .pdf   (Schueler, zwei bis vier Seiten DIN A4)
 //   app/static/materialien/loesung-stunde-N.html und .pdf        (Lehrkraft: Zeitplan, Loesungen, Differenzierung)
 // Dazu die sieben Medien-Einheiten (Seiten medien-stunde-1 bis -7, Dateien arbeitsblatt-medien-N und loesung-medien-N),
 // das Kartenset zu Medien 1 (bildkarten-echt-oder-ki.pdf, Bilder in materialien/bildkarten/) und das Paket Elternabend
@@ -79,6 +79,14 @@ function operatorenIn(titel, text) {
 }
 const kasten = (n) => `<svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true">${[0, 1, 2].map((i) => `<rect x="${i * 4 + 0.15}" y="0.15" width="2.7" height="2.7" fill="${i < n ? "#000" : "#fff"}" stroke="#000" stroke-width="0.3"/>`).join("")}</svg>`;
 
+/** Die 90-Minuten-Phasen einer Einheit, gelesen aus dem Seitenabschnitt "Einzelstunde oder Doppelstunde" (Summe muss 90 sein). */
+function doppelPhasen(id) {
+  const d = abschnitt(id, "Einzelstunde oder Doppelstunde").doppel;
+  if (!Array.isArray(d) || d.length < 5 || d.some((x) => !x.phase || !x.min || !x.was)) throw new Error(`${id}: Doppelstunde ohne Phasendaten`);
+  if (d.reduce((n, x) => n + x.min, 0) !== 90) throw new Error(`${id}: Doppelstunde ergibt nicht 90 Minuten`);
+  return d;
+}
+
 /** n = 1 bis 3 (KI-Stunden) oder "medien-1" bis "medien-7" (Medien-Einheiten). */
 function stunde(n) {
   const medien = typeof n === "string";
@@ -128,6 +136,8 @@ function stunde(n) {
     muster: abschnitt(id, "Reflexion").muster,
     vorbereitung: (vorb.p || []).concat(vorb.alltag ? [vorb.alltag] : []),
     merksatz: s.mitnehmen[0], quiz: s.quiz || [],
+    // Doppelstunde und Lehrplanbezug stehen auf der Seite (content-schule.js, window.KLSchule): eine Quelle fuer Seite und Loesungsblatt
+    doppel: doppelPhasen(id), lehrplan: abschnitt(id, "Lehrplanbezug").p,
   };
 }
 
@@ -255,7 +265,7 @@ body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 /* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
 @page ab { size: A4; margin: 15mm 17mm; }
-body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt { page: ab; font-size: 13pt; line-height: 1.4; }
 body.arbeitsblatt .seite { min-height: 0; }
 body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
 body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
@@ -313,10 +323,12 @@ ${inhalt}
 </html>
 `;
 
+/** Adresse als HTML: Umbruch nur vor / ? und ., nie mitten in einem Wort (auch nicht am Bindestrich). */
+const adresse = (url) => esc(url.replace(/^https:\/\//, "")).split(/(?=[\/?.])/).map((s) => `<span style="white-space:nowrap">${s}</span>`).join("<wbr>");
 const mehrKasten = (paare) => `<div class="mehr">
 ${paare.map((p) => {
   const q = qrSvg(p.url);
-  return `<div class="paar"><div class="qrbox">${q.svg}</div><div class="t"><h2>${esc(p.titel)}</h2><a class="adr" href="${esc(p.url)}">${esc(p.url.replace(/^https:\/\//, "")).replace(/([\/?])/g, "$1<wbr>")}</a><small>${esc(p.hinweis)}</small></div></div>`;
+  return `<div class="paar"><div class="qrbox">${q.svg}</div><div class="t"><h2>${esc(p.titel)}</h2><a class="adr" href="${esc(p.url)}">${adresse(p.url)}</a><small>${esc(p.hinweis)}</small></div></div>`;
 }).join("\n")}
 </div>`;
 
@@ -333,7 +345,7 @@ function arbeitsblatt(st) {
   const meta = (a) => `<span class="meta">${esc(a.sozial)} ${kasten(NIVEAU[a.niveau])}</span>`;
   const auf = st.aufgaben.map((a, i) => {
     const zt = zeitVon(i) ? `<span class="zt">(ca. ${zeitVon(i)} Minuten${st.minuten.zuordnung.find((g) => g[0] === i).length > 1 ? " für die Aufgaben " + st.minuten.zuordnung.find((g) => g[0] === i).map((x) => x + 1).join(" und ") : ""})</span>` : "";
-    return `<div class="aufgabe"><div class="k"><span class="nr">${a.nr}</span><h3>${esc(a.ort)}${zt}</h3>${meta(a)}</div><p>${mdFett(a.text)}</p>${zeilen(2)}</div>`;
+    return `<div class="aufgabe"><div class="k"><span class="nr">${a.nr}</span><h3>${esc(a.ort)}${zt}</h3>${meta(a)}</div><p>${mdFett(a.text)}</p>${zeilen(4)}</div>`;
   }).join("\n");
   const buchst = "ABCD";
   const frageQuiz = (q, i) => `<div class="aufgabe"><div class="k"><span class="nr">${i + 1}</span><h3>${esc(q.frage)}</h3></div>${q.optionen.map((o, j) => `<p class="opt"><span class="box"></span> ${buchst[j]}) ${esc(o)}</p>`).join("")}</div>`;
@@ -359,7 +371,8 @@ ${st.reflexion.slice(1).map((r, i) => frageNd(r, i + 1)).join("\n")}
 <div class="kopfblock"><div class="links">
 <h1>Arbeitsblatt ${st.kenn}: ${esc(st.titel)}</h1>
 <div class="felder"><span>Name:</span><span class="klein">Datum:</span></div>
-<div class="zeit"><b>Zeit:</b> Aufgaben ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))} in der Einzelstunde (so viele Minuten stehen bei den Aufgaben), 30 Minuten in der Doppelstunde. Quiz und Nachdenken: Doppelstunde oder Hausaufgabe. ${niveauZeile}</div>
+<div class="zeit"><b>Zeit:</b> ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))} (Doppelstunde: 30). Quiz und Nachdenken: Hausaufgabe (Doppelstunde: in der Stunde).</div>
+<div class="zeitnote">${niveauZeile}</div>
 </div><div class="qrbox">${q.svg}</div></div>
 <table class="ziele"><thead><tr><th>Heute kannst du ...</th><th class="b">sicher</th><th class="b">fast</th><th class="b">noch nicht</th></tr></thead><tbody>${ziele}</tbody></table>
 ${auf}
@@ -367,7 +380,7 @@ ${quizHtml}
 ${nachdenken}
 ${zus}
 ${legende(st)}
-<div class="fuss quellen"><b>Mehr dazu im KI-Labor:</b> <a href="${esc(url)}">${esc(url.replace(/^https:\/\//, ""))}</a> Oder den QR-Code oben rechts scannen: Labor und Material, es wird nichts gespeichert. Hilfe zu einer Aufgabe: Tipp-Karte bei deiner Lehrkraft.<br>${esc(QUELLENFUSS)}</div>
+<div class="fuss quellen"><b>Mehr dazu im KI-Labor:</b> <a href="${esc(url)}">${adresse(url)}</a> Oder den QR-Code oben rechts scannen: Labor und Material, es wird nichts gespeichert. Hilfe zu einer Aufgabe: Hilfekarten bekommst du bei deiner Lehrkraft.<br>${esc(QUELLENFUSS)}</div>
 `);
 }
 
@@ -379,6 +392,7 @@ function loesungsblatt(st) {
   const tafel = st.tafel.length ? `<div class="pfad">${st.tafelMitte ? `<span><b>${esc(st.tafelMitte)}:</b></span>` : ""}${st.tafel.map((t, i) => `<span>${esc(t)}</span>${i < st.tafel.length - 1 ? "<i>&gt;</i>" : ""}`).join("")}</div>` : "";
   const loes = st.loesungen.map((x) => `<div class="lg"><b>${esc(x.titel.replace(/^Zu /, "Zu "))}.</b> ${mdFett(x.text)}</div>`).join("\n");
   const diff = st.diff.map((x) => `<div><b>${esc(x.titel)}</b><br>${mdFett(x.text)}</div>`).join("");
+  const dp = st.doppel.map((d) => `<tr><td>${esc(d.phase)}</td><td style="white-space:nowrap">${d.min} Min</td><td>${md(d.was)}</td></tr>`).join("\n");
   const zp = st.phasen.map((p) => `<tr><td>${esc(p.phase)}</td><td style="white-space:nowrap">${esc(p.zeit)}</td><td>${md(p.was)}${p.phase === "Reflexion" ? " Nur mündlich, nichts wird aufgeschrieben (schriftlich: Hausaufgabe)." : ""}</td></tr>`).join("\n");
   const url1 = `${BASIS}/${st.id}?weg=schule`, url2 = `${BASIS}/schule-lehrkraefte?weg=schule`;
   return seite(`Lösungsblatt ${st.kenn}: ${st.titel}`, st.id === "medien-stunde-1" ? "loesung kompakt" : "loesung", `
@@ -387,18 +401,15 @@ function loesungsblatt(st) {
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
 ${zp}
 </tbody></table>
-<p>In der Stunde laufen die Aufgaben 1 bis ${st.aufgaben.length} (Seite 1 des Arbeitsblatts) und die mündliche Reflexion. <b>Quiz und schriftliches Nachdenken</b> (Seiten 2 und 3) sind Hausaufgabe oder Teil der Folgestunde, die Auflösung steht unten. Das Blatt gibst du in beiden Varianten ganz aus.</p>
+<p>In der Stunde laufen die Aufgaben 1 bis ${st.aufgaben.length} (am Anfang des Arbeitsblatts) und die mündliche Reflexion. <b>Quiz und schriftliches Nachdenken</b> (danach auf dem Arbeitsblatt) sind Hausaufgabe oder Teil der Folgestunde, die Auflösung steht unten. Das Blatt gibst du in beiden Varianten ganz aus.</p>
 <h2>Doppelstunde: Zeitplan (90 Minuten)</h2>
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
-<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>${md(st.phasen[0].was)} Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
-<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis ${st.aufgaben.length} des Arbeitsblatts (20 Minuten in der Einzelstunde, hier 30), Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
-<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
-<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>${md(st.phasen[2].was)} Tafelbild gemeinsam entwickeln.</td></tr>
-<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ schriftlich allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
-<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+${dp}
 </tbody></table>
 <p>In beiden Varianten gilt: Den Merksatz bekommen alle am Ende der Sicherung an die Tafel und ins Heft.</p>
 ${st.vorbereitung.map((v) => `<p>${md(v)}</p>`).join("\n")}
+<h2>Lehrplanbezug</h2>
+${st.lehrplan.map((v) => `<p>${mdFett(v)}</p>`).join("\n")}
 <div class="zus"><h2>Operatoren und Erwartungshorizont</h2>
 <p>Die Operatoren dieses Blatts mit ihrem Bereich. Was eine gute Antwort je Operator enthält, steht bei den Lösungen.</p>
 ${legende(st)}</div>
@@ -408,8 +419,8 @@ ${st.id === "medien-stunde-1" ? aufloesungKarten() : ""}
 ${st.quiz.length ? `<h2>Quiz: richtige Antworten</h2><ul>${st.quiz.map((q, i) => `<li><b>Frage ${i + 1}: ${buchst2[q.richtig]}.</b> ${esc(satz(q.optionen[q.richtig]))} ${esc(q.erklaerung)} <i>Nachlesen: Abschnitt „${esc(q.abschnitt.replace(/ \(\d+ Minuten\)/, ""))}“.</i></li>`).join("")}</ul>` : ""}
 <h2>Differenzierung</h2>
 <div class="zwei">${diff}</div>
-<h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>
-<p>Die Tipps stehen nicht auf dem Arbeitsblatt. Gib Tipp 1 zuerst und Tipp 2 nur bei Bedarf weiter, am besten ausgeschnitten.</p>
+<h2${st.id === "medien-stunde-1" ? "" : ' style="break-before:page"'}>Hilfekarten zum Ausschneiden (Tipp 1 und Tipp 2)</h2>
+<p>Die Hilfekarten liegen nur in diesem Lösungsblatt, nicht auf dem Arbeitsblatt der Klasse. Schneide sie entlang der gestrichelten Linien aus, gib Tipp 1 zuerst und Tipp 2 nur bei Bedarf weiter.</p>
 <div class="karten">${st.aufgaben.flatMap((a) => [1, 2].map((t) => `<div class="karte"><b>Aufgabe ${a.nr}, Tipp ${t}</b><br>${md(st.hilfen[a.nr][t])}</div>`)).join("")}</div>
 <h2>Tafelbild (Sicherung)</h2>
 ${tafel}

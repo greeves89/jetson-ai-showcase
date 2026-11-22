@@ -229,11 +229,24 @@
     BelegtFehler,
     schlafen,
     istBelegtText: (t) => /ausgelastet|gerade belegt/i.test(String(t || "")),
-    /** Satz zur Platznummer, z. B. "Du bist Nr. 2 in der Warteschlange." */
+    /** Mittlere Dauer einer Antwort in Sekunden (gemessen in dieser Sitzung, sonst 25): Grundlage der Wartezeit-Schaetzung. */
+    mittlere: 25,
+    dauerMerken(sek) {
+      if (!(sek > 0)) return;
+      KL.last.mittlere = Math.max(8, Math.min(90, Math.round(KL.last.mittlere * 0.5 + sek * 0.5)));
+    },
+    /** Geschaetzte Wartezeit bei Platz n als Text: "etwa 30 Sekunden" oder "etwa 2 Minuten". Platz 1 wartet nur auf den Rest der laufenden Antwort. */
+    wartezeitText(n) {
+      const sek = Math.max(10, n === 1 ? KL.last.mittlere / 2 : (n - 0.5) * KL.last.mittlere);
+      if (sek < 75) return "etwa " + Math.max(10, Math.round(sek / 10) * 10) + " Sekunden";
+      const min = Math.round(sek / 60);
+      return min <= 1 ? "etwa eine Minute" : "etwa " + min + " Minuten";
+    },
+    /** Satz zur Platznummer mit geschaetzter Wartezeit, z. B. "Du bist Nr. 2 in der Warteschlange. Geschätzte Wartezeit: etwa 40 Sekunden." */
     platzText(info) {
       const n = info && info.position;
       if (!n) return "";
-      return n === 1 ? "Du bist als Nächster dran. Gleich geht es los." : "Du bist Nr. " + n + " in der Warteschlange. Gleich geht es los.";
+      return (n === 1 ? "Du bist als Nächster dran." : "Du bist Nr. " + n + " in der Warteschlange.") + " Geschätzte Wartezeit: " + KL.last.wartezeitText(n) + ".";
     },
     /** Satz zum automatischen Wiederholen, z. B. "Neuer Versuch in 5 s (Wiederholung 1 von 3)." */
     warteText(info) {
@@ -319,14 +332,15 @@
     const schalter = h("button", { type: "button", class: "wk-merken", role: "switch", "aria-checked": String(merken),
       onclick: () => { merken = !merken; schalter.setAttribute("aria-checked", String(merken)); } },
       h("span", { class: "wk-merken-knopf", "aria-hidden": "true" }), h("span", { class: "wk-merken-text" }, T.merken));
-    const x = h("button", { type: "button", class: "wk-x", "aria-label": T.schliessen, onclick: () => zu(null) }, KL.icon("x"));
+    // Ein Name je Aktion: das X heisst "Schliessen" (nur als aria-label, es zeigt kein Wort), der Knopf in der Fusszeile "Später entscheiden" (Erstbesuch) bzw. "Schließen" (Weg ändern)
+    const x = h("button", { type: "button", class: "wk-x", "aria-label": "Schließen", title: "Schließen", onclick: () => zu(null) }, KL.icon("x"));
     dlg.append(
       x,
       h("h2", { id: "wk-t", tabindex: "-1" }, T.titel),
       h("p", { class: "wk-satz", id: "wk-s" }, T.satz),
       h("div", { class: "wk-wege" }, knoepfe),
       schalter,
-      h("div", { class: "wk-aktion" }, h("button", { type: "button", class: "btn wk-spaeter", onclick: () => zu(null) }, aendern ? T.schliessen : T.spaeter)),
+      h("div", { class: "wk-aktion" }, h("button", { type: "button", class: "btn wk-spaeter", onclick: () => zu(null) }, aendern ? "Schließen" : "Später entscheiden")),
       h("p", { class: "wk-klein" }, h("span", { "aria-hidden": "true" }, KL.icon("lock")), h("span", null, T.hinweis)));
     dlg.addEventListener("click", (e) => { if (e.target === dlg) zu(null); });          // Klick neben das Fenster wie "Später"
     dlg.addEventListener("close", () => {

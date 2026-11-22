@@ -176,7 +176,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     pruefe(r.seiten.includes(erwartet), `Suche "${q}" findet ${erwartet} (${r.seiten.length} Seiten)`);
   }
   // Alltagswoerter: der erste Treffer ist die passende Seite (Rangfolge, nicht Menuereihenfolge)
-  for (const [q, erster] of [["ChatGPT", "chat"], ["Roboter", "robotik"], ["Hausaufgaben", "prompting"], ["Fake News", "fake-news-deepfakes"], ["TikTok", "empfehlungen"], ["Spotify", "empfehlungen"], ["Backpropagation", "training"], ["Gehirn", "neuronale-netze"], ["Wer haftet", "recht"], ["Urheberrecht", "recht"], ["Handy entsperren", "gesicht"], ["Snapchat-Filter", "gesicht"]]) {
+  for (const [q, erster] of [["ChatGPT", "chat"], ["Roboter", "robotik"], ["Hausaufgaben", "ki-hausaufgaben-fair"], ["Fake News", "fake-news-deepfakes"], ["TikTok", "empfehlungen"], ["Spotify", "empfehlungen"], ["Backpropagation", "training"], ["Gehirn", "neuronale-netze"], ["Wer haftet", "recht"], ["Urheberrecht", "recht"], ["Handy entsperren", "gesicht"], ["Snapchat-Filter", "gesicht"]]) {
     const r = await suche(q);
     pruefe(r.seiten[0] === erster, `Suche "${q}": erster Treffer ${erster} (ist ${r.seiten[0]})`);
   }
@@ -290,7 +290,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   const { page } = t;
   const ls = (k) => page.evaluate((x) => localStorage.getItem(x), k);
   await oeffneSeite(page, "neuronale-netze");
-  pruefe(await page.locator("details.lernziele li").count() >= 2 && await page.$eval("details.lernziele", (d) => !d.open) && /ca\. \d+ Min/.test(await page.innerText(".hero .ueber")), "Lektion: Lernziele einzeilig aufklappbar, Lesezeit in der Kopfzeile");
+  pruefe(await page.locator("details.lernziele li").count() >= 2 && await page.$eval("details.lernziele", (d) => !d.open) && /ca\.\s\d+\sMin/.test(await page.innerText(".hero .ueber")), "Lektion: Lernziele einzeilig aufklappbar, Lesezeit in der Kopfzeile");
   pruefe(!(await ls("kl-gelesen")), "Öffnen allein zählt nicht als gelesen");
   // Mit Mathe: Kasten nur bei eingeschaltetem Schalter sichtbar
   pruefe(await page.locator(".mathe").first().isHidden(), "Mit Mathe: Kasten ist standardmäßig aus");
@@ -327,7 +327,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   pruefe(await page.locator("a.nav[data-id=gesicht] .kam:not([hidden])").count() === 1 && /braucht Kamera, im Unterricht nicht nötig/.test(await page.textContent("a.nav[data-id=gesicht]")), "Schulweg: Kamera-Labor im Menü gekennzeichnet");
   pruefe(await page.locator(".weg-kachel").count() === 0, "Nach der Wahl keine zweite Rollenauswahl auf der Startseite");
   pruefe(await page.locator("#lernpfade .pfad-karte").count() >= 6 && await page.locator("#lernpfade .pfad-karte[data-pfad=schule-einstieg]").count() === 1, "Pfade: Stufen und Rollenpfade");
-  const schulPfad = await page.$$eval("#lernpfade .pfad-karte[data-pfad=schule-einstieg] .pfad-seiten a", (a) => a.map((x) => x.getAttribute("href")));
+  const schulPfad = await page.$$eval("#lernpfade .pfad-karte[data-pfad=schule-einstieg] .pfad-seiten a", (a) => a.map((x) => x.getAttribute("href").split("?")[0]));      // ?pfad= (gewählter Pfad) gehört nicht zur Seite
   pruefe(schulPfad[0] === "/experimente" && schulPfad.every((h) => !/gesicht|objekt|anlernen|whisper|schule-start|lehrkraefte|schulleitung|stunde|eltern/.test(h)), "Schülerpfad: beginnt mit Experimenten, nichts für Lehrkräfte, keine Kamera-Labore");
   pruefe(await page.locator("#experimente .karte").count() === 6 && await page.locator("#empfohlen .karte").count() === 3, "Schule: sechs Experimente und drei Empfehlungen");
   await page.reload({ waitUntil: "load" });
@@ -468,7 +468,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     }
   }
   { // Eltern, Technik, Erwachsene (Alias neugierig): Klassenlink wirkt ohne Speichern, Pfade da
-    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 8], ["technik", /Ich arbeite in der IT/, 7], ["neugierig", /Ich will KI verstehen/, 10], ["erwachsene", /Ich will KI verstehen/, 10]]) {
+    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 9], ["technik", /Ich arbeite in der IT/, 7], ["neugierig", /Ich will KI verstehen/, 11], ["erwachsene", /Ich will KI verstehen/, 11]]) {
       const t = await neu(); const { page } = t;
       await page.goto(URL_LABOR + "/?weg=" + w, { waitUntil: "load" });
       await page.waitForSelector("#empfohlen");
@@ -476,7 +476,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
       const n = await page.locator("#lernpfade .pfad-karte[data-pfad=" + (w === "neugierig" ? "erwachsene" : w) + "] .pfad-seiten a").count();
       pruefe(n === anzahl, w + ": Pfad mit " + anzahl + " Seiten (" + n + ")");
       const menue = await page.locator("#nav-liste a.nav:visible").count();
-      pruefe(menue <= 8, w + ": höchstens 8 sichtbare Menüeinträge beim Start (" + menue + ")");
+      pruefe(menue <= 16, w + ": höchstens 16 sichtbare Menüeinträge beim Start (Für dich bis 14) (" + menue + ")");
       await t.schliessen();
     }
   }
@@ -568,7 +568,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await oeffneSeite(page, "karte");
   await page.waitForSelector(".lz-kopf .lz");
   const kopfZeit = (await page.textContent(".lz-kopf .lz")).trim();
-  pruefe(karteZeit === kopfZeit && /^ca\. \d+ Min Lesen/.test(kopfZeit), "Zeitangabe: Karte und Seitenkopf gleich (" + karteZeit + " | " + kopfZeit + ")");
+  pruefe(karteZeit === kopfZeit && /^ca\.\s\d+\sMin\sLesen/.test(kopfZeit), "Zeitangabe: Karte und Seitenkopf gleich (" + karteZeit + " | " + kopfZeit + ")");
   const weiter = await page.textContent(".pfad-weiter-info").catch(() => "");
   pruefe(!weiter || /Schritt \d+ von \d+/.test(weiter), "Pfad: Seitenende sagt Schritt n von m (" + weiter.trim() + ")");
   pruefe(/Schritt \d+ von \d+/.test(kicker) || kicker === "", "Pfad: Startkarte sagt Schritt n von m (" + kicker + ")");
@@ -576,12 +576,12 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await oeffneSeite(page, "echt-oder-ki");
   await page.waitForFunction(() => /Video \d+:\d\d/.test((document.querySelector(".lz-kopf .lz") || {}).textContent || ""), null, { timeout: 8000 }).catch(() => {});
   const vz = (await page.textContent(".lz-kopf .lz")).trim();
-  pruefe(/ca\. \d+ Min Lesen, plus Video \d+:\d\d/.test(vz), "Zeitangabe nennt Lesen und Video getrennt (" + vz + ")");
+  pruefe(/ca\.\s\d+\sMin\sLesen, plus\sVideo\s\d+:\d\d/.test(vz), "Zeitangabe nennt Lesen und Video getrennt (" + vz + ")");
   // Lesemodus wechseln: Zahl folgt
   const vorher = await page.textContent(".lz-kopf .lz");
   await page.evaluate(() => { window.KL.lesemodus = window.KL.lesemodus === "kompakt" ? "ausfuehrlich" : "kompakt"; });
   const nachher = await page.textContent(".lz-kopf .lz");
-  pruefe(/Min Lesen/.test(nachher), "Zeitangabe folgt dem Lesemodus (" + vorher.trim() + " -> " + nachher.trim() + ")");
+  pruefe(/Min\sLesen/.test(nachher), "Zeitangabe folgt dem Lesemodus (" + vorher.trim() + " -> " + nachher.trim() + ")");
   pruefe(t.fehler.length === 0, "Konsole sauber " + t.fehler.join("; "));
   await t.schliessen();
 }

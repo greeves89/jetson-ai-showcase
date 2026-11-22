@@ -29,7 +29,7 @@ for (const { datei, id } of EINHEITEN) {
     const text = execFileSync("pdftotext", ["-layout", pdf, "-"]).toString();
     const soll = art === "arbeitsblatt" ? [`${BASIS}/${id}?weg=schule`] : [`${BASIS}/${id}?weg=schule`, `${BASIS}/schule-lehrkraefte?weg=schule`];
     console.log(`${name}: ${seiten} Seite(n), ${text.split(/\s+/).filter(Boolean).length} Wörter, Format ${(info.match(/Page size:\s+(.+)/) || [])[1]}`);
-    if (art === "arbeitsblatt" && (seiten < 2 || seiten > 3)) meld(name + ": erwartet 2 bis 3 Seiten, gefunden " + seiten);
+    if (art === "arbeitsblatt" && (seiten < 3 || seiten > 4)) meld(name + ": erwartet 3 bis 4 Seiten, gefunden " + seiten);
     if (art === "loesung" && seiten > 3) meld(name + ": mehr als drei Seiten");
     if (!/Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
     if (!/Mehr dazu im KI-Labor|im KI-Labor/.test(text)) meld(name + ": Kasten Mehr dazu fehlt");
@@ -54,8 +54,15 @@ for (const { datei, id } of EINHEITEN) {
       if (!/Niveau:\s+Basis\s+Standard\s+Herausforderung/.test(text)) meld(name + ": Niveau-Legende fehlt");
       if (!/(Einzelarbeit|Partnerarbeit|Gruppe zu viert)/.test(text)) meld(name + ": Sozialform fehlt");
       if (/Tipp 2/.test(text)) meld(name + ": Tipp 2 darf nicht auf dem Schülerblatt stehen");
-      // Zeitangabe nennt Einzel- und Doppelstunde
-      if (!/in der Einzelstunde/.test(text) || !/30 Minuten in der Doppelstunde/.test(text)) meld(name + ": Zeitangabe zu Einzel- und Doppelstunde fehlt");
+      // Zeitangabe nennt Einzel- (20 Minuten) und Doppelstunde (30)
+      if (!/Zeit:\s+\d+ Minuten \(Doppelstunde: 30\)\. Quiz und Nachdenken: Hausaufgabe/.test(text.replace(/\s+/g, " "))) meld(name + ": Zeitangabe zu Einzel- und Doppelstunde fehlt");
+      // Schreibzeilen: je Aufgabe vier (die Linien sind Vektorgrafik, darum über die HTML-Quelle geprüft)
+      const html = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
+      const aufgaben = html.split('<div class="aufgabe">').slice(1, 4);
+      aufgaben.forEach((a, i) => { const n = (a.split('<div class="aufgabe">')[0].match(/class="zeile"/g) || []).length; if (n !== 4) meld(`${name}: Aufgabe ${i + 1} hat ${n} Schreibzeilen, erwartet 4`); });
+      if (!/font-size: 13pt/.test(html)) meld(name + ": Schrift nicht 13 pt");
+      // Adressen brechen nie mitten im Wort: jedes Stück der Adresse steht in einem Nowrap-Span
+      if (/(?:daniel|ki|medien|schule|labor)-[ \t]*\n[ \t]*(?:alisch|stunde|labor|lehrkraefte)|stunde-[ \t]*\n[ \t]*\d/.test(text)) meld(name + ": Adresse bricht mitten im Wort");
     } else {
       const flach = text.replace(/\s+/g, " ");
       if (!/Einzelstunde: Zeitplan \(45 Minuten\)/.test(flach) || !/Doppelstunde: Zeitplan \(90 Minuten\)/.test(flach)) meld(name + ": beide Zeitpläne fehlen");
@@ -67,7 +74,17 @@ for (const { datei, id } of EINHEITEN) {
       rf.muster.forEach((m, i) => { const t = m[0].replace(/\s+/g, " ").slice(0, 28); if (!flach.includes(t)) meld(`${name}: Musterantwort ${i + 1} fehlt (${t})`); });
       // Quiz: Satzende zwischen Antwort und Erklärung
       sd.quiz.forEach((q, i) => { const o = q.optionen[q.richtig].trim(); const z = (/[.!?]$/.test(o) ? o : o + ".") + " " + q.erklaerung; if (!flach.includes(z.slice(0, 70))) meld(`${name}: Quiz-Lösung ${i + 1} ohne Satzende zwischen Antwort und Erklärung`); });
-      if (!/Hilfekarten/.test(text) || (text.match(/Tipp 2/g) || []).length < 3) meld(name + ": Hilfekarten mit Tipp 2 fehlen");
+      if (!/Hilfekarten zum Ausschneiden/.test(text) || (text.match(/Tipp 2/g) || []).length < 3) meld(name + ": Hilfekarten zum Ausschneiden mit Tipp 2 fehlen");
+      if (!/Lehrplanbezug/.test(text) || !/Kompetenzbereiche/.test(flach)) meld(name + ": Lehrplanbezug fehlt");
+      const phasen = sd.abschnitte.find((a) => a.h === "Einzelstunde oder Doppelstunde");
+      if (!phasen) meld(id + ": Seitenabschnitt Einzelstunde oder Doppelstunde fehlt");
+      else {
+        if (phasen.doppel.reduce((n, d) => n + d.min, 0) !== 90) meld(id + ": Doppelstunde ergibt nicht 90 Minuten");
+        for (const d of phasen.doppel) if (!flach.includes(d.phase.split(" ")[0]) || !flach.includes(d.min + " Min")) meld(`${name}: Phase "${d.phase}" (${d.min} Min) der Doppelstunde fehlt`);
+        const sum = phasen.tabelle.zeilen.find((z) => z[0] === "Summe");
+        if (!sum || sum[1] !== "45 Minuten" || sum[2] !== "90 Minuten") meld(id + ": Tabelle Einzel-/Doppelstunde ohne Summe 45/90");
+      }
+      if (!sd.abschnitte.some((a) => a.h === "Lehrplanbezug")) meld(id + ": Abschnitt Lehrplanbezug fehlt auf der Seite");
       if (!/Erwartungshorizont/.test(text)) meld(name + ": Erwartungshorizont fehlt");
     }
     // Schrift: serifenlos eingebettet
@@ -210,6 +227,47 @@ for (const id of Object.keys(INHALT.seiten)) {
 // Texte auf den Seiten dürfen nicht mehr von einem Blatt sprechen
 for (const id of ["schule-lehrkraefte", ...EINHEITEN.map((e) => e.id)]) {
   if (/auf ein Blatt|Eine DIN-A4-Seite/.test(JSON.stringify(INHALT.seiten[id]))) meld(id + ": Text spricht von einem Blatt, die Arbeitsblätter haben drei Seiten");
+}
+// Handreichung: Medien-Einheiten mit Links, Lehrplanbezug, Kamera sperren; Anrede Sie
+{
+  const hr = INHALT.seiten["schule-lehrkraefte"], text = JSON.stringify(hr);
+  const medien = hr.abschnitte.find((a) => a.h === "Die sieben Medien-Einheiten");
+  if (!medien) meld("Handreichung: Abschnitt Die sieben Medien-Einheiten fehlt");
+  else for (let i = 1; i <= 7; i++) if (!medien.tabelle.zeilen.some((z) => z[0].includes(`{{medien-stunde-${i}|`))) meld(`Handreichung: Medien ${i} fehlt in der Übersicht`);
+  if (!hr.abschnitte.some((a) => /^Kamera und Mikrofon am Schulgerät sperren/.test(a.h))) meld("Handreichung: Abschnitt zum Sperren der Kamera fehlt");
+  if (!hr.abschnitte.some((a) => /^Lehrplanbezug/.test(a.h))) meld("Handreichung: Abschnitt Lehrplanbezug fehlt");
+  const lp = hr.abschnitte.find((a) => /^Lehrplanbezug/.test(a.h));
+  if (lp && lp.tabelle.zeilen.length !== 10) meld("Handreichung: Lehrplantabelle braucht zehn Einheiten");
+  if (/\b(deinem Land|Du kannst eine|So gehst du|So passt du|kürzt du|erweiterst du|für dich behalten)\b/.test(text.replace(/Heute kannst du/g, ""))) meld("Handreichung: Du-Anrede an Lehrkräfte");
+}
+for (const id of ["schule-schulleitung", "elternabend"]) {
+  const s = INHALT.seiten[id], text = JSON.stringify(s).replace(/Woran würdest du[^"]*|Was hast du selbst[^"]*|Wo hast du zuletzt[^"]*/g, "");
+  if (/\b(du|dich|dein|deine|deinen|deinem|deiner|dir)\b/.test(text)) meld(id + ": Du-Anrede auf einer Sie-Seite");
+}
+{
+  const sl = INHALT.seiten["schule-schulleitung"], b = sl.abschnitte.find((a) => a.h === "Betrieb und Verträge");
+  if (!b) meld("Schulleitung: Abschnitt Betrieb und Verträge fehlt");
+  else {
+    const z = JSON.stringify(b);
+    if (!/Kostenlos, ohne Vertrag, ohne Zusage zur Verfügbarkeit/.test(z)) meld("Schulleitung: Kostenaussage fehlt");
+    if (!/Auf Anfrage beim Betreiber/.test(z)) meld("Schulleitung: Auf Anfrage fehlt");
+    if (/laut Planung|vorgesehen/.test(z)) meld("Schulleitung: Planungsformulierung im Abschnitt Betrieb");
+  }
+  if (JSON.stringify(sl).includes("laut Planung")) meld("Schulleitung: noch \"laut Planung\" auf der Seite");
+}
+// Medien 3: Deepfake-Dilemma in Aufgabe 3, Quiz mit Deepfake-Frage, Aufgaben bleiben drei
+{
+  const m3 = INHALT.seiten["medien-stunde-3"], auf = m3.abschnitte.find((a) => a.h.startsWith("Arbeitsblatt")).liste;
+  if (auf.filter((a) => /^\*\*Aufgabe/.test(a)).length !== 3) meld("Medien 3: erwartet drei Aufgaben");
+  if (!/KI-Stimme|Deepfake/.test(auf.join(" "))) meld("Medien 3: keine Aufgabe zu KI-erzeugten Medien");
+  if (m3.quiz.length !== 3 || !m3.quiz.some((q) => /Deepfake/.test(q.optionen.concat(q.erklaerung).join(" ")))) meld("Medien 3: Quiz braucht drei Fragen, eine zu Deepfakes");
+  if (/\*\*Begründe\*\* \(III\) deine Wahl/.test(auf.join(" "))) meld("Medien 3: Beurteile und Begründe doppelt in Aufgabe 3");
+}
+// Videos: Medien 1 bis 6 haben das Erklärvideo auf der Einheit, Videodateien liegen vor
+for (let i = 1; i <= 6; i++) {
+  const s = INHALT.seiten["medien-stunde-" + i];
+  if (!s.videos || s.videos.length !== 1) meld(`Medien ${i}: Erklärvideo nicht eingebettet`);
+  else if (!fs.existsSync(path.join(DIR, "..", "videos", s.videos[0] + ".mp4"))) meld(`Medien ${i}: Videodatei ${s.videos[0]}.mp4 fehlt`);
 }
 console.log("Seitendaten und Downloads geprüft");
 

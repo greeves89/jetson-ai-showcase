@@ -59,7 +59,7 @@
      textContent in <pre><code> kommt (wie md() nie als HTML) und genau so kopiert wird; titel ist die Beschriftung; sudo ist ein Satz mit dem Grund
      und zeigt die Markierung "braucht sudo". Der Knopf "Kopieren" ist mindestens 44 px hoch, nutzt navigator.clipboard und notfalls execCommand;
      die Stile stehen inline in codeBlock() (style.css gehoert anderen). Der Block steht im aufklappbaren Teil des Abschnitts, nach den Absaetzen.
-   MENUE UND STARTSEITE: Das Menue zeigt beim Start nur Suche, "Fuer dich" (INHALT.menue.fuerDich, hoechstens 12 Seiten) und den zugeklappten Block
+   MENUE UND STARTSEITE: Das Menue zeigt beim Start nur Suche, "Fuer dich" (INHALT.menue.fuerDich, hoechstens 14 Seiten) und den zugeklappten Block
      "Alle Bereiche" (Akkordeon). Die Startseite zeigt je Rolle INHALT.startRollen (Ueberschrift, Satz, Bloecke), alles Uebrige liegt unter "Weitere Wege".
      Karten (karte()) haben immer Kopfzeile, Titel, Satz und Fuss; der Fuss liegt unten (margin-top:auto), damit Knoepfe in einer Zeile stehen.
      Der Rohtext der Startseite fuer Suchmaschinen (scripts/seo_bauen.mjs) bleibt unveraendert; die Rolle aendert nur die Darstellung im Browser.
@@ -289,6 +289,7 @@
   const manifestP = fetch("/api/videos", { cache: "no-cache" })
     .then((r) => (r.ok ? r.json() : { videos: [] })).catch(() => ({ videos: [] }));
   function mmss(t) { return Math.floor(t / 60) + ":" + String(Math.floor(t % 60)).padStart(2, "0"); }
+  let untertitelAn = true;                                 // Untertitel an (Standard) oder aus, gilt fuer alle Videos dieser Sitzung
   function videoBlock(ids) {
     ids = [].concat(ids).filter(Boolean);
     const reihe = ids.length > 1;
@@ -305,7 +306,8 @@
         const basis = "/static/videos/" + v.id;
         // Standbild vor dem Start und nach dem Ende: die erste Szene (Sekunde 3) statt des schwarzen Anfangs- oder Schlussbilds; kein Poster mit fremdem Ausschnitt
         const STILL = 3;
-        const video = h("video", { controls: true, preload: "metadata", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
+        // Poster: das Standbild der Folge (echtes Bild aus dem Video, <id>.jpg), damit vor dem Start nie ein schwarzes Bild steht; Start und Ende bleiben bei Sekunde 3
+        const video = h("video", { controls: true, preload: "metadata", playsinline: true, poster: basis + ".jpg", "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
           h("source", { src: basis + ".mp4#t=" + STILL, type: "video/mp4" }),
           h("track", { kind: "subtitles", srclang: "de", label: "Deutsch", src: basis + ".vtt", default: true }));
         const kap = (v.kapitel || []).map((k) => h("li", null,
@@ -316,12 +318,26 @@
         const spur = video.textTracks && video.textTracks[0];
         const schmal = window.matchMedia("(max-width: 600px)");
         let vollbild = false;
+        // Untertitel sind standardmaessig an (Spur im Modus "showing"). Im Bild selbst bleiben sie unsichtbar (CSS video[data-ut=unter]::cue), damit sie keinen Bildtext
+        // verdecken: Der Text steht als Zeile unter dem Bild; nur im Vollbild zeichnet der Browser sie selbst. Der Schalter "Untertitel an/aus" gilt fuer alle Folgen der Sitzung.
         const unterZeigen = () => {
-          const eigen = !!spur && spur.mode === "hidden";
+          const eigen = !!spur && spur.mode === "showing" && !vollbild;
           unter.hidden = !eigen;
           unter.textContent = eigen ? Array.from(spur.activeCues || []).map((c) => String(c.text).replace(/<[^>]+>/g, "").replace(/\s*\n\s*/g, " ")).join(" ") : "";
         };
-        const unterModus = () => { if (!spur) return; spur.mode = vollbild ? "showing" : "hidden"; unterZeigen(); };
+        const unterModus = () => {
+          if (!spur) return;
+          spur.mode = untertitelAn ? "showing" : "disabled";
+          if (untertitelAn && !vollbild) video.dataset.ut = "unter"; else delete video.dataset.ut;
+          unterZeigen();
+        };
+        const utText = h("span", null, untertitelAn ? "Untertitel an" : "Untertitel aus");
+        const utKnopf = spur ? h("button", { type: "button", class: "btn klein ut-schalter", "aria-pressed": String(untertitelAn), onclick: () => {
+          untertitelAn = !untertitelAn;
+          utKnopf.setAttribute("aria-pressed", String(untertitelAn));
+          utText.textContent = untertitelAn ? "Untertitel an" : "Untertitel aus";
+          unterModus();
+        } }, icon("captions"), utText) : null;
         if (spur) {
           spur.addEventListener("cuechange", unterZeigen);
           video.addEventListener("loadedmetadata", unterModus);
@@ -342,7 +358,7 @@
         const kapListe = kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel", tabindex: "0" }, kap) : null;
         const kapHinweis = kap.length ? h("p", { class: "kapitel-hinweis", hidden: true }, icon("chevron-down"), "Weitere Kapitel: nach unten scrollen") : null;
         const kopf = h("div", { class: "video" + (kap.length ? "" : " leer") },
-          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video, ende), unter),
+          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video, ende), unter, utKnopf),
           kap.length ? h("div", { class: "kapitel-box" }, kapListe, kapHinweis) : null);
         if (kapListe) {
           // Scroll-Hinweis: nur wenn die Liste laenger ist als der Platz; verschwindet am Listenende
@@ -423,6 +439,7 @@
     if (!merken) speicherSchreiben("kl-hilfe", null); else if (hilfeImSpeicher) speicherSchreiben("kl-hilfe", "1");
     if (merken) { speicherSchreiben("kl-gelesen", JSON.stringify([...gelesen])); zuletztSpeichern(); }
     else { speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null); }
+    try { if (merken && pfadWahl) sessionStorage.setItem("kl-pfad", pfadWahl); else if (!merken) sessionStorage.removeItem("kl-pfad"); } catch (e) { /* egal */ }
     for (const b of $$(".merken-schalter")) { b.setAttribute("aria-checked", String(merken)); const t = $(".merken-zustand", b); if (t) t.textContent = merken ? "an" : "aus"; }
     if (aktuelleId === "start") route(window.scrollY);
   }
@@ -480,7 +497,18 @@
   const LABOR_MIN = 3;
   const videoDauer = new Map();                            // Video-ID -> Sekunden, gefuellt nach dem Laden des Videokatalogs (Seiten kommen nachgeladen, darum erst beim Rechnen zusammengezaehlt)
   const zeitFelder = [];                                   // { el, fn }: Textfelder, die sich bei Lesemodus und Videokatalog neu beschriften
-  const lesemodusZeit = () => (lesemodus === "ausfuehrlich" ? "ausfuehrlich" : "kompakt");
+  /** Standard-Lesemodus einer Seite, solange du selbst nichts eingestellt hast: Unterrichtsseiten (Typ lektion in der Gruppe "Für die Schule") lesen sich
+      genau, weil Aufgaben, Loesungen und Planung sonst hinter "Mehr dazu" stehen; sonst gilt der Standard des Weges (Lehrende genau, Schule kompakt). */
+  function seitenStandardModus(id) {
+    const sd = INHALT.seiten[id];
+    if (sd && MODI.includes(sd.lesemodus)) return sd.lesemodus;
+    if (sd && sd.typ === "lektion" && sd.gruppe === "Für die Schule") return "ausfuehrlich";
+    const w = WEGE[aktiverWeg()];
+    return w && w.lesemodus ? w.lesemodus : "kompakt";
+  }
+  /** Der Modus, in dem Seite id gelesen wird: deine Wahl, sonst der Standard der Seite. Karte, Seitenkopf und Pfad rechnen alle damit (eine Funktion, ein Modus). */
+  const modusFuer = (id) => (lesemodusGemerkt ? lesemodus : seitenStandardModus(id));
+  const lesemodusZeit = (id) => (modusFuer(id) === "ausfuehrlich" ? "ausfuehrlich" : "kompakt");
   /** Unterrichtseinheit (Gruppe "Für die Schule", Typ lektion, Feld minuten oder Zeitplan, sonst "-stunde-N" mit 45 Minuten im Satz): Minuten Unterricht, sonst 0. */
   function unterrichtMinuten(sd, id) {
     if (!sd || sd.typ !== "lektion" || sd.gruppe !== "Für die Schule") return 0;
@@ -495,24 +523,26 @@
     if (unterricht) return { lesen: 0, video: 0, labor: 0, unterricht };
     const lz = lesezeit(sd);
     const vids = sd.videos || (sd.video ? [sd.video] : []);
-    return { lesen: (sd.abschnitte || []).length ? lz[lesemodusZeit()] : 0, video: Math.round(vids.reduce((n, v) => n + (videoDauer.get(v) || 0), 0)), labor: sd.widget || sd.demo ? LABOR_MIN : 0 };
+    return { lesen: (sd.abschnitte || []).length ? lz[lesemodusZeit(id)] : 0, video: Math.round(vids.reduce((n, v) => n + (videoDauer.get(v) || 0), 0)), labor: sd.widget || sd.demo ? LABOR_MIN : 0 };
   }
   /** Minuten Lesen fuer eine Liste von Seiten (im gewaehlten Lesemodus). */
   const lesenMinuten = (ids) => [].concat(ids).reduce((n, id) => n + seitenZeit(id).lesen, 0);
-  /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. */
+  /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. Jede Angabe ist ein Stueck mit
+      geschuetzten Leerzeichen, damit eine Zeile nie mit einem einzelnen "Min" endet (umbrochen wird nur an den Kommas). */
+  const stueck = (t) => t.replace(/ /g, "\u00a0");
   function zeitText(ids) {
     const z = [].concat(ids).map(seitenZeit);
     const unt = z.reduce((n, x) => n + (x.unterricht || 0), 0);
     if (unt) {
       const rest = z.filter((x) => !x.unterricht), lesenR = rest.reduce((n, x) => n + x.lesen, 0);
-      return unt + " Minuten Unterricht" + (lesenR ? ", plus ca. " + lesenR + " Min Lesen" : "");
+      return stueck(unt + " Minuten Unterricht") + (lesenR ? ", " + stueck("plus ca. " + lesenR + " Min Lesen") : "");
     }
     const lesen = z.reduce((n, x) => n + x.lesen, 0), video = z.reduce((n, x) => n + x.video, 0), labor = z.reduce((n, x) => n + x.labor, 0);
     const teile = [];
-    if (lesen) teile.push("ca. " + lesen + " Min Lesen");
-    if (video) teile.push((teile.length ? "plus " : "") + "Video " + mmss(video));
-    if (labor) teile.push((teile.length ? "plus " : "") + "Labor ca. " + labor + " Min");
-    return teile.join(", ") || "ca. 1 Min";
+    if (lesen) teile.push(stueck("ca. " + lesen + " Min Lesen"));
+    if (video) teile.push(stueck((teile.length ? "plus " : "") + "Video " + mmss(video)));
+    if (labor) teile.push(stueck((teile.length ? "plus " : "") + "Labor ca. " + labor + " Min"));
+    return teile.join(", ") || stueck("ca. 1 Min");
   }
   /** Textfeld, das immer zeitText(ids) zeigt (vor und nach sind feste Textteile davor und dahinter). */
   function zeitFeld(ids, vor, nach, klasse) {
@@ -562,6 +592,23 @@
   function pfadeListe() {
     return (INHALT.lernpfade || []).map((p) => Object.assign({}, p, { ids: (p.seiten || []).filter(zaehlbar) })).filter((p) => p.ids.length >= 2);
   }
+  /* Gewaehlter Pfad: Wer einen Pfad startet (Karte, Weiter, Naechste Seite), bekommt ?pfad=<id> in die Adresse. route() merkt ihn im Arbeitsspeicher
+     (mit Einwilligung zum Merken zusaetzlich je Sitzung in sessionStorage), damit Pfadfuss und "Naechste Seite" im gewaehlten Pfad bleiben,
+     auch wenn eine Seite in mehreren Pfaden steht. Ohne Wahl gilt der Pfad der Rolle, sonst der erste Pfad mit dieser Seite. */
+  let pfadWahl = null;
+  if (merken) { try { pfadWahl = sessionStorage.getItem("kl-pfad") || null; } catch (e) { /* ohne Speicher */ } }
+  function pfadMerken(id) {
+    pfadWahl = id || null;
+    try { if (merken && id) sessionStorage.setItem("kl-pfad", id); else sessionStorage.removeItem("kl-pfad"); } catch (e) { /* nur im Arbeitsspeicher */ }
+  }
+  const pfadQuery = (pfadId) => (pfadId ? "pfad=" + encodeURIComponent(pfadId) : "");
+  /** Der Pfad, in dem die Seite gerade eingeordnet wird (gewaehlter Pfad, sonst Pfad der Rolle, sonst der erste). */
+  function pfadFuer(id) {
+    const alle = pfadeListe().filter((q) => q.ids.includes(id));
+    if (!alle.length) return null;
+    const w = aktiverWeg();
+    return alle.find((q) => pfadWahl && q.id === pfadWahl) || alle.find((q) => w && q.rolle === w) || alle[0];
+  }
   function pfadNaechste(p) {
     if (zuletzt && p.ids.includes(zuletzt.id) && !gelesen.has(zuletzt.id)) return zuletzt.id;
     return p.ids.find((id) => !gelesen.has(id)) || null;
@@ -596,21 +643,58 @@
   let suchIndex = null;
   /** Text fuer die Suche: klein, ohne Umlaute, Satzzeichen als Leerzeichen, Leerzeichen vorn und hinten (so lassen sich Wortanfaenge pruefen). */
   const suchText = (t) => " " + norm(t).replace(/[^a-z0-9]+/g, " ").trim() + " ";
+  /* Volltextindex: alle sichtbaren Texte einer Seite (Ueberschriften, Kurztexte, Absaetze, Listen, Tabellen, Aufgaben, Quiz, Downloads, Mitnehmen)
+     werden rekursiv eingesammelt, damit nichts durchs Raster faellt, wenn ein Inhaltsfeld neu dazukommt. Verweise, Symbole, Bildbeschreibungen
+     und Kennungen zaehlen nicht. */
+  const SUCH_UEBERSPRINGEN = new Set(["href", "symbol", "visual", "video", "videos", "widget", "widgetTitel", "widgetSymbol", "widgetZuerst", "widgetNach", "demo", "weiter", "id", "typ", "gruppe", "nr", "status", "anfaenger", "versteckt", "query", "richtig", "src", "dataset", "lesemodus"]);
+  function textSammeln(x, out, tiefe) {
+    if (x == null || tiefe > 8) return;
+    if (typeof x === "string") { if (x.length > 2) out.push(x); return; }
+    if (Array.isArray(x)) { for (const y of x) textSammeln(y, out, tiefe + 1); return; }
+    if (typeof x === "object") for (const [k, v] of Object.entries(x)) if (!SUCH_UEBERSPRINGEN.has(k)) textSammeln(v, out, tiefe + 1);
+  }
+  /** Saetze einer Seite (Klartext) mit normierter Form, fuer den Textauszug bei Treffern. */
+  const satzListe = (texte) => texte.flatMap((t) => (klar(t).match(/[^.!?:]+(?:[.!?:]+(?=\s|$)|$)/g) || []).map((x) => x.trim())).filter((t) => t.length > 12).map((p) => ({ p, n: suchText(p) }));
   function suchIndexBauen() {
     const seiten = {};
     for (const [id, sd] of Object.entries(INHALT.seiten)) {
       if (sd.versteckt) continue;       // versteckte Seiten sind erreichbar, aber nicht auffindbar
       const t = [];
-      for (const a of sd.abschnitte || []) {
-        t.push(a.h, a.kurz || "", ...(a.p || []), ...(a.liste || []), ...[].concat(a.alltag || []), a.merke || "");
-        if (a.tabelle) for (const z of a.tabelle.zeilen || []) t.push(...z);
-      }
-      t.push(...(sd.mitnehmen || []), (sd.business && sd.business.text) || "", ...(sd.grenzen || []), ...(sd.lernziele || []));
-      for (const p of sd.pfad || []) t.push(p.h, p.p);
-      seiten[id] = { titel: suchText(klar((sd.nav || "") + " " + sd.titel)), kurz: suchText(klar(sd.kurz || "")), text: suchText(klar(t.join(" "))), roh: JSON.stringify(sd) };
+      textSammeln(sd.abschnitte, t, 0);
+      textSammeln([sd.mitnehmen, sd.business, sd.grenzen, sd.lernziele, (INHALT.lernzieleErgaenzung || {})[id], sd.pfad, sd.quiz, sd.downloads, sd.dreiSchritte, sd.zusammenfassung, sd.checkliste, sd.ueberSeite], t, 0);
+      const koepfe = (sd.abschnitte || []).map((a) => a.h || "").join(" ");
+      seiten[id] = { titel: suchText(klar((sd.nav || "") + " " + sd.titel)), kopf: suchText(klar(koepfe)), kurz: suchText(klar(sd.kurz || "")), text: suchText(klar(t.join(" "))),
+        saetze: satzListe([sd.kurz || "", ...t]), roh: JSON.stringify(sd) };
     }
     const begriffe = Object.entries(INHALT.glossar).map(([k, g]) => ({ k, titel: g[0], t: suchText(g[0]), erkl: suchText(g[1]) }));
     return { seiten, begriffe };
+  }
+  /** Textauszug fuer einen Treffer: der Satz der Seite, in dem die meisten Suchwoerter vorkommen, auf etwa 150 Zeichen um die Fundstelle gekuerzt. */
+  function suchAuszug(id, q) {
+    const ix = suchIndex && suchIndex.seiten[id];
+    if (!ix) return "";
+    const woerter = (alt) => alt.filter((a) => a[0] !== "=").map((a) => a.replace(/[^a-z0-9]+/g, " ").trim()).filter(Boolean);
+    let beste = null, bestP = 0;
+    for (const s of ix.saetze) {
+      let p = 0;
+      for (const alt of q) { let g = 0; woerter(alt).forEach((w, i) => { if (s.n.includes(" " + w)) g = Math.max(g, i ? 0.6 : 1); }); p += g; }
+      if (p > bestP) { bestP = p; beste = s; }
+    }
+    if (!beste) return ersterSatz((INHALT.seiten[id] || {}).kurz || "", 120);
+    const GRENZE = 150;
+    if (beste.p.length <= GRENZE) return beste.p;
+    // Fundstelle im Originaltext suchen: normierte Form (ae fuer ä usw.) auf Zeichenpositionen zurueckrechnen
+    const nn = []; const pos = [];
+    for (let i = 0; i < beste.p.length; i++) { const z = norm(beste.p[i]); for (let k = 0; k < z.length; k++) { nn.push(z[k]); pos.push(i); } }
+    const flach = nn.join("");
+    let treffer = -1;
+    for (const alt of q) for (const w of woerter(alt)) { const i = flach.indexOf(w); if (i >= 0 && (treffer < 0 || i < treffer)) treffer = i; }
+    const mitte = treffer >= 0 ? pos[treffer] : 0;
+    let von = Math.max(0, mitte - 50);
+    if (von > 0) { const sp = beste.p.indexOf(" ", von); von = sp >= 0 && sp < mitte ? sp + 1 : von; }
+    let bis = Math.min(beste.p.length, von + GRENZE);
+    if (bis < beste.p.length) { const sp = beste.p.lastIndexOf(" ", bis); bis = sp > von + 40 ? sp : bis; }
+    return (von > 0 ? "… " : "") + beste.p.slice(von, bis).replace(/[,;:\s]+$/, "") + (bis < beste.p.length ? " …" : "");
   }
   /** Zerlegt die Eingabe in Suchwoerter. Jedes Wort darf durch seine Synonyme ersetzt werden (ChatGPT findet Chat, Foto findet Bild);
    *  steht die ganze Eingabe als Wortgruppe in INHALT.synonyme ("fake news", "wer haftet"), gilt sie als ein Wort.
@@ -678,7 +762,7 @@
     const box = $("#such-ergebnis");
     if (!box) return;
     box.replaceChildren();
-    box.hidden = !text.trim();
+    box.hidden = true;                                   // ein leerer Kasten zeigt sich nie (sonst steht ein grauer Balken ueber den Treffern)
     if (!text.trim()) return;
     const eingeben = (t) => { const i = $("#nav-suche"); if (i) { i.value = t; navSuche(t); i.focus(); } };
     if (begriffe.length) {
@@ -697,6 +781,15 @@
         h("p", null, "Probiere zum Beispiel:"),
         h("div", { class: "such-chips" }, (INHALT.sucheVorschlaege || ["Chat", "Datenschutz", "Bilder"]).map((n) => h("button", { type: "button", class: "chip", onclick: () => eingeben(n) }, n)))));
     }
+    box.hidden = !box.childNodes.length;
+  }
+  /** Textauszug unter dem Menuetitel eines Treffers (nur waehrend der Suche); ohne Suche oder ohne Treffer verschwindet er. */
+  function auszugSetzen(eintrag, q, ok) {
+    let au = $(".such-auszug", eintrag.el);
+    const t = ok && q.length && eintrag.id !== "start" ? suchAuszug(eintrag.id, q) : "";
+    if (!t) { if (au) au.remove(); return; }
+    if (!au) { au = h("small", { class: "such-auszug" }); const ziel = $(".nav-text", eintrag.el); if (ziel) ziel.append(au); }
+    au.textContent = t;
   }
   function navSuche(text) {
     if (!suchIndex && text.trim()) suchIndex = suchIndexBauen();
@@ -708,7 +801,7 @@
     if (q.length) {
       for (const gr of navGruppen) if (!gr.sammel) for (const a of gr.eintraege) {
         const ix = suchIndex.seiten[a.id];
-        const p = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kurz, 3], [ix.text, 1]], a.id) : 0;
+        const p = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kopf, 4], [ix.kurz, 3], [ix.text, 1]], a.id) : 0;
         punkte.set(a, p);
         beste = Math.max(beste, p);
       }
@@ -724,6 +817,7 @@
         const ok = p >= grenze;
         a.p = q.length ? p : 0;
         a.el.hidden = !ok;
+        auszugSetzen(a, q, ok);
         if (ok) { inGruppe++; gr.beste = Math.max(gr.beste, p); }
       }
       treffer += inGruppe;
@@ -849,7 +943,7 @@
     const M = INHALT.menue || { fuerDich: {}, reihenfolge: {}, sammel: {} };
     fuerDich.titel.textContent = w ? "Für dich" : "Einstieg";
     const eintraege = [navEintrag("start").el];
-    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 12)) eintraege.push(navEintrag(id).el);
+    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 14)) eintraege.push(navEintrag(id).el);
     else {
       const st = INHALT.seiten.start;
       eintraege.push(navAnker("smile", "Neu hier", "anfangen"), navAnker("briefcase", ((st.entscheider && st.entscheider.titel) || "In 15 Minuten").split(":")[0], "entscheider"));
@@ -1085,17 +1179,16 @@
     speicherSchreiben("kl-lesemodus", m);
     lesemodusAnwenden(m);
   }
-  /** Standard-Lesemodus des Weges (Schule: kurz), solange du selbst nichts eingestellt hast. Wird nicht gespeichert. */
+  /** Standard-Lesemodus der aktuellen Seite und des Weges (siehe seitenStandardModus), solange du selbst nichts eingestellt hast. Wird nicht gespeichert. */
   function wegLesemodus() {
     if (lesemodusGemerkt) return;
-    const w = WEGE[aktiverWeg()];
-    const ziel = w && w.lesemodus ? w.lesemodus : "kompakt";
+    const ziel = seitenStandardModus(aktuelleId || "start");
     if (ziel !== lesemodus) lesemodusAnwenden(ziel);
   }
   function lesemodusAnwenden(m) {
     lesemodus = m;
     document.documentElement.dataset.lesemodus = m;
-    for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich";
+    for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich" || d.classList.contains("immer-offen");
     for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
     for (const g of $$(".lesemodus")) g.style.setProperty("--i", String(MODI.indexOf(m)));
     for (const t of $$(".lese-hilfe-text")) t.textContent = leseHilfe(m);
@@ -1138,6 +1231,7 @@
   /* ------------------------------------------------------------ Wege: Auswahl merken, anwenden, anzeigen */
   function wegWaehlen(w) {              // w: Schluessel oder null (Auswahl aufheben); gewaehlt heisst gespeichert, nur im Browser
     wegUrl = null;
+    pfadMerken(null);                      // neue Rolle, neuer Pfad: die frueher gewaehlte Pfadwahl gilt nicht mehr
     wegGespeichert = wegGueltig(w) ? wegNorm(w) : null;
     speicherSchreiben("kl-weg", wegGespeichert);
     wegAnwenden(true);
@@ -1215,11 +1309,13 @@
       o.unten || null);
   }
   const kennzahl = (symbol, text) => h("span", { class: "kennzahl" }, icon(symbol), text);
+  /** Kennzahl als Sprungmarke zu einem Abschnitt der Seite (z. B. zum Spiel oder Labor). */
+  const sprungKennzahl = (symbol, text, anker) => h("a", { class: "kennzahl kennzahl-sprung", href: "#" + anker, onclick: (e) => { e.preventDefault(); zuAbschnitt(anker); } }, icon(symbol), text);
   function kennzahlenFuer(seite) {
     const z = [];
     const vids = seite.videos || (seite.video ? [seite.video] : []);
     if (vids.length) z.push(kennzahl("play", vids.length > 1 ? vids.length + " Videos" : "Video"));
-    if (seite.widget) z.push(kennzahl("sliders-horizontal", "Zum Ausprobieren"));
+    if (seite.widget) z.push(sprungKennzahl("sliders-horizontal", "Zum Ausprobieren", "ausprobieren"));
     if (seite.demo) z.push(kennzahl("live", "Live-Demo"));
     const n = (seite.abschnitte || []).length;
     if (n) z.push(kennzahl("book-open", n + (n === 1 ? " Abschnitt" : " Abschnitte")));
@@ -1291,7 +1387,11 @@
       if (a.alltag) mehr.push(h("aside", { class: "alltag" }, h("b", null, "Beispiel aus dem Alltag"),
         [].concat(a.alltag).map((t) => h("p", { html: md(t) }))));
       if (a.merke) mehr.push(h("aside", { class: "merke" }, h("b", null, "Merke"), h("p", { html: md(a.merke) })));
-      if (mehr.length) sec.append(mehrBlock(mehr));
+      if (mehr.length) {
+        const mb = mehrBlock(mehr);
+        if (a.offen) { mb.open = true; mb.classList.add("immer-offen"); }          // Feld offen: der Abschnitt bleibt auch im Kurz-Modus aufgeklappt
+        sec.append(mb);
+      }
       // "Mit Mathe": steht ausserhalb des Aufklappers, damit der Schalter in jedem Lesemodus wirkt; ohne Schalter bleibt es ausgeblendet (CSS)
       if (a.mathe && a.mathe.p && a.mathe.p.length) sec.append(h("aside", { class: "mathe" }, h("b", null, icon("sigma"), "Mit Mathe"), a.mathe.p.map((t) => h("p", { html: md(t) }))));
       out.append(sec);
@@ -1366,7 +1466,7 @@
     const gel = gelesen.has(id);
     return karte({ symbol: sd.symbol, kicker: o.kicker || (sd.typ === "labor" ? "Labor" : sd.widget || sd.demo ? "Zum Ausprobieren" : "Lektion"),
       titel: o.h || sd.nav || sd.titel, text: o.satz || ersterSatz(sd.kurz || "", 100),
-      meta: zeitFeld(id, "", gel ? () => ", gelesen" : null), href: adresse(id), knopf: o.knopf || (gel ? "Noch einmal ansehen" : "Öffnen"), dataset: { seite: id } });
+      meta: zeitFeld(id, "", gel ? () => ", gelesen" : null), href: adresse(id, pfadQuery(o.pfad)), knopf: o.knopf || (gel ? "Noch einmal ansehen" : "Öffnen"), dataset: { seite: id } });
   }
   /** Raster der Labore ohne Kamera (INHALT.experimente, content-experimente.js): Start der Rolle Schule und Seite "Experimente". */
   function experimenteRaster(max) {
@@ -1383,13 +1483,13 @@
     const liste = h("ol", { class: "pfad-seiten" }, p.ids.map((id) => {
       const sd = INHALT.seiten[id];
       const gel = gelesen.has(id);
-      return h("li", null, h("a", { href: adresse(id) },
+      return h("li", null, h("a", { href: adresse(id, pfadQuery(p.id)) },
         h("span", { class: "pfad-haken" + (gel ? " an" : ""), "aria-hidden": "true" }, gel ? icon("check") : null),
         h("span", null, sd.nav || sd.titel, imSchulweg(id) ? h("small", { class: "kam" }, kameraHinweis) : null),
         gel ? h("span", { class: "sr-nur" }, " (gelesen)") : null));
     }));
     const k = karte({ kicker: tag, titel: p.name, text: p.kurz, meta: zeitFeld(p.ids, p.ids.length + " Schritte, ", () => ", " + n + " gelesen"),
-      balken: anteil, balkenLabel: "Fortschritt im Pfad " + p.name, href: next ? adresse(next) : null, knopf: n ? "Weiter im Pfad" : "Pfad starten", fertig: !next, dataset: { pfad: p.id }, klasse: "pfad-karte" });
+      balken: anteil, balkenLabel: "Fortschritt im Pfad " + p.name, href: next ? adresse(next, pfadQuery(p.id)) : null, knopf: n ? "Weiter im Pfad" : "Pfad starten", fertig: !next, dataset: { pfad: p.id }, klasse: "pfad-karte" });
     k.append(h("details", { class: "pfad-liste" }, h("summary", null, icon("chevron"), "Alle " + p.ids.length + " Schritte"), liste));
     return k;
   }
@@ -1411,7 +1511,7 @@
     return h("section", { class: "block weiter-karte", id: "weiter" },
       h("div", { class: "weiter-in" },
         h("div", { class: "weiter-text" }, h("h2", null, icon("play"), "Weiter, wo du aufgehört hast"), h("p", null, text), fortschrittLeiste()),
-        ziel ? h("a", { class: "btn primary", href: adresse(ziel.id), onclick: () => { if (ziel.art === "zuletzt" && zuletzt) scrollZiel = { id: ziel.id, y: zuletzt.y }; } }, "Weiter lesen", icon("chevron")) : null),
+        ziel ? h("a", { class: "btn primary", href: adresse(ziel.id, ziel.art === "pfad" ? pfadQuery(ziel.pfad.id) : ""), onclick: () => { if (ziel.art === "zuletzt" && zuletzt) scrollZiel = { id: ziel.id, y: zuletzt.y }; } }, "Weiter lesen", icon("chevron")) : null),
       h("p", { class: "weiter-fuss" }, merken ? "Dein Fortschritt liegt nur in deinem Browser. " : "Dein Fortschritt gilt nur, solange diese Seite offen ist. ",
         merken ? null : h("button", { type: "button", class: "textlink", onclick: () => merkenSetzen(true) }, icon("save"), "In diesem Browser merken"), " ", loeschen));
   }
@@ -1465,13 +1565,20 @@
         h("p", { class: "weg-fuss" }, h("a", { class: "textlink", href: "/experimente" }, "Alle Experimente", icon("chevron")),
           h("span", null, "Labore mit Kamera findest du unter „Alle Bereiche“. Im Unterricht brauchst du sie nicht.")));
     }
+    if (name === "oberstufe") {
+      const O = R.oberstufe || {}, pf = pfadeListe().find((q) => q.id === O.pfad);
+      if (!pf) return null;
+      return h("section", { class: "block", id: "oberstufe" }, kopf("sigma", O.titel || pf.name),
+        h("div", { class: "karten" }, pfadKarte(Object.assign({}, pf, { name: O.titel || pf.name, kurz: O.satz || pf.kurz }))));
+    }
     if (name === "empfohlen") {
       const kand = (R.empfohlen || []).filter((e) => gibt(e.id) && zaehlbar(e.id));
       const pfadIds = ((pfadeListe().find((q) => q.rolle === R.pfad) || {}).ids) || [];      // gleiche Zaehlung wie "Schritt n von m" am Seitenende
       const wahl = [...kand.filter((e) => !gelesen.has(e.id)), ...kand.filter((e) => gelesen.has(e.id))].slice(0, 3);
       return h("section", { class: "block", id: "empfohlen" }, kopf("sparkles", "Empfohlen für dich"),
         h("div", { class: "karten karten-3" }, wahl.map((e) => seitenKarte(e.id, { satz: e.satz, h: e.h,
-          kicker: R.pfad && pfadIds.includes(e.id) ? "Schritt " + (pfadIds.indexOf(e.id) + 1) + " von " + pfadIds.length : (/^uc-/.test(e.id) ? "Anwendungsfall" : null) }))));
+          kicker: R.pfad && pfadIds.includes(e.id) ? "Schritt " + (pfadIds.indexOf(e.id) + 1) + " von " + pfadIds.length : (/^uc-/.test(e.id) ? "Anwendungsfall" : null),
+          pfad: R.pfad && pfadIds.includes(e.id) ? (pfadeListe().find((q) => q.rolle === R.pfad) || {}).id : null }))));
     }
     if (name === "morgen") {
       const kand = (R.morgen || []).filter((e) => gibt(e.id));
@@ -1510,7 +1617,9 @@
         h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
           h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
     const pfade = pfadeListe();
-    const stufen = pfade.filter((p) => p.stufe), rollen = pfade.filter((p) => p.rolle);
+    const stufen = pfade.filter((p) => p.stufe);
+    const vornZuerst = (p) => (w && (p.vorn || []).includes(w) ? 0 : 1);            // Pfade mit vorn: [Weg] stehen beim aktiven Weg zuerst
+    const rollen = pfade.filter((p) => p.rolle).map((p, i) => [p, i]).sort((a, b) => vornZuerst(a[0]) - vornZuerst(b[0]) || a[1] - b[1]).map(([p]) => p);
     const sPfade = pfade.length ? h("section", { class: "block", id: "lernpfade" }, h("h2", null, icon("route"), "Lernpfade"),
       h("p", { class: "start-lead" }, "Vier Stufen: Verstehen, Anwenden, Erstellen, Bewerten."),
       stufen.length ? [h("h3", { class: "pfad-gruppe" }, "Nach Stufe"), h("div", { class: "karten karten-2" }, stufen.map(pfadKarte))] : null,
@@ -1595,18 +1704,17 @@
     return h("details", { class: "lernziele lz-kompakt", "aria-label": "Lernziele" }, h("summary", null, icon("target"), h("span", null, "Lernziele"), h("small", null, z.length === 1 ? "1 Punkt" : z.length + " Punkte"), icon("chevron")),
       h("ul", null, z.map((t) => h("li", null, t))));
   }
-  /** Am Ende einer Lektion: die naechste Seite im Pfad (bevorzugt im Pfad des gewaehlten Weges). */
+  /** Am Ende einer Lektion: die naechste Seite im gewaehlten Pfad (siehe pfadFuer). Der Pfad bleibt in der Adresse (?pfad=), Zaehlung wie auf der Pfadkarte. */
   function pfadWeiterBlock(id) {
-    const alle = pfadeListe().filter((q) => q.ids.includes(id));
-    if (!alle.length) return null;
+    const pf = pfadFuer(id);
+    if (!pf) return null;
     const w = aktiverWeg();
-    const pf = alle.find((q) => w && q.rolle === w) || alle[0];
     const i = pf.ids.indexOf(id);
     const next = pf.ids.slice(i + 1).find((x) => !(w === "schule" && kameraSeiten().has(x)));
     if (!next) return null;
     const sd = INHALT.seiten[next];
-    return h("section", { class: "block pfad-weiter" }, h("h2", null, icon("route"), "Nächste Seite im Pfad"),
-      h("div", { class: "weiter" }, h("a", { href: adresse(next) }, icon(sd.symbol), sd.titel)),
+    return h("section", { class: "block pfad-weiter", dataset: { pfad: pf.id } }, h("h2", null, icon("route"), "Nächste Seite im Pfad"),
+      h("div", { class: "weiter" }, h("a", { href: adresse(next, pfadQuery(pf.id)) }, icon(sd.symbol), sd.titel)),
       h("p", { class: "pfad-weiter-info" }, "Pfad „" + pf.name + "“, Schritt " + (i + 1) + " von " + pf.ids.length + "."));
   }
   /** Eine Seite gilt als gelesen, wenn das Seitenende im Bild war und mindestens MIN_LESEDAUER seit dem Oeffnen vergangen ist. */
@@ -1652,17 +1760,18 @@
     const art = seite.typ === "lektion" ? "Lektion" + (seite.nr ? " " + seite.nr : "") : "Labor";
     const ueberText = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
     const lzk = lesezeitKopf(seite);
-    const ueber = lzk ? [ueberText, h("span", { class: "ueber-trenner", "aria-hidden": "true" }, " · "), lzk] : ueberText;
+    // Punkt nur zwischen zwei Angaben (nie haengend); am Handy stehen Gruppe und Zeit in zwei Zeilen ohne Punkt (CSS)
+    const ueber = lzk ? (ueberText ? [ueberText, h("span", { class: "ueber-trenner", "aria-hidden": "true" }, " · "), lzk] : lzk) : ueberText;
     const out = h("div", { class: "seitenbreite" }, zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
     const lzb = lernzieleBlock(seite); if (lzb) out.append(lzb);
     // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
     const dls = (seite.downloads || []).filter((d) => d && typeof d.href === "string" && d.href.startsWith("/static/") && !d.href.startsWith("//"));
-    if (dls.length) out.append(h("section", { class: "downloads-box" }, h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
+    const dlBox = !dls.length ? null : h("section", { class: "downloads-box" }, h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
       dls.map((d) => h("a", { class: "dlkarte", href: d.href, download: "ki-labor-" + d.href.split("/").pop(), target: "_blank", rel: "noopener", "aria-label": d.text + " herunterladen" },
         h("span", { class: "dl-icon", "aria-hidden": "true" }, icon("file-text")),
         h("span", { class: "dl-text" }, h("b", null, d.text), d.sub ? h("small", null, d.sub) : null),
-        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen")))))));
+        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen"))))));
     if (seite.experimente) out.append(h("section", { class: "block" }, experimenteRaster()));
     if (imSchulweg(id)) out.append(h("p", { class: "kamera-hinweis" }, icon("camera"), h("span", null, h("b", null, "Braucht Kamera oder Mikrofon. "),
       "Im Unterricht ist das nicht nötig. Nutze es nur mit Einverständnis, bei unter 16 Jahren mit dem der Eltern.")));
@@ -1672,7 +1781,8 @@
     const widgetZuerst = !!seite.widget && (seite.widgetZuerst || id === "echt-oder-ki");
     const widgetNach = !!seite.widget && (seite.widgetNach || id === "sicherheit-einfach");
     const widgetKnoten = seite.widget ? baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play") : null;
-    if (widgetZuerst) out.append(widgetKnoten);
+    if (dlBox && !widgetZuerst) out.append(dlBox);          // Spiel zuerst: Das Spiel steht ueber dem Falz, Downloads folgen danach
+    if (widgetZuerst) { out.append(widgetKnoten); if (dlBox) out.append(dlBox); }
     if (vids.length) out.append(videoBlock(vids));
     if (widgetKnoten && !widgetZuerst && !widgetNach) out.append(widgetKnoten);
     if (seite.demo) out.append(baustein("demos", seite.demo, seite, "Live ausprobieren", "live"));
@@ -1715,22 +1825,37 @@
     const m = pfad.match(/^\/([a-z0-9-]+)\/?$/);
     return { id: m ? m[1] : null, query };
   }
+  /** Seite "nicht gefunden" fuer jede unbekannte Adresse, auch fuer #/unbekannt: Links zur Startseite und zur Suche, nie still die Startseite. */
   function nichtGefunden() {
-    return h("div", { class: "seitenbreite" }, hero({ symbol: "info", ueber: "KI-Labor", titel: "Seite nicht gefunden", lead: "Diese Adresse gibt es im KI-Labor nicht.",
-      unten: h("div", { class: "hero-aktionen" }, h("a", { class: "btn primary", href: "/" }, "Zur Startseite")) }));
+    const suchen = (text) => {
+      const i = $("#nav-suche");
+      if (!i) return;
+      i.value = text || "";
+      if (text) { navSuche(text); menueSchalten(true); }
+      i.focus();
+      if (i.scrollIntoView) i.scrollIntoView({ block: "center" });
+    };
+    return h("div", { class: "seitenbreite" }, hero({ symbol: "info", ueber: "KI-Labor", titel: "Seite nicht gefunden", lead: "Diese Adresse gibt es im KI-Labor nicht. Vielleicht hilft die Suche oder die Startseite.",
+      unten: h("div", { class: "hero-aktionen" }, h("a", { class: "btn primary", href: "/" }, icon("arrow-left"), "Zur Startseite"),
+        h("button", { type: "button", class: "btn", onclick: () => suchen("") }, icon("search"), "Seiten suchen")) }),
+      h("section", { class: "block" }, h("h2", null, icon("compass"), "Oder probiere"),
+        h("div", { class: "such-chips" }, (INHALT.sucheVorschlaege || ["Chat", "Datenschutz", "Bilder"]).map((n) => h("button", { type: "button", class: "chip", onclick: () => suchen(n) }, n)))));
   }
   function route(y) {
     if (!bereit) return;
     const alt = ausHash(location.hash);
-    if (alt) history.replaceState(history.state, "", adresse(gibt(alt.id) ? alt.id : "start", alt.query));
+    if (alt) history.replaceState(history.state, "", adresse(alt.id, alt.query));       // auch unbekannte Kennungen: dann zeigt route() "Seite nicht gefunden"
     const { id, query } = ausPfad(location.pathname, location.search);
     const gueltig = gibt(id) ? id : null;
     // saubere Schreibweise: /start und /id/ gehen auf /id bzw. /
     if (gueltig && location.pathname !== adresse(gueltig)) history.replaceState(history.state, "", adresse(gueltig, query));
     aktuelleAbfrage = Object.fromEntries(new URLSearchParams(query));
+    if (aktuelleAbfrage.pfad && pfadeListe().some((q) => q.id === aktuelleAbfrage.pfad)) pfadMerken(aktuelleAbfrage.pfad);
     // Klassenlink: /?weg=schule gilt in dieser Sitzung (im Speicher der Seite), es wird nichts abgelegt
     if (wegGueltig(aktuelleAbfrage.weg) && wegNorm(aktuelleAbfrage.weg) !== wegUrl) { wegUrl = wegNorm(aktuelleAbfrage.weg); wegAnwenden(false); }
     tipAus(); aufraeumen();
+    if (!lesemodusGemerkt) { const m = seitenStandardModus(gueltig || "start"); if (m !== lesemodus) lesemodusAnwenden(m); }      // Standardmodus je Seite, wenn du nichts gewaehlt hast
+    if (document.body.classList.contains("menue-offen")) menueSchalten(false);        // Handy: das offene Menue deckt die neue Seite nicht ab (Link im Menue, Zurueck-Taste, Adresse)
     const main = $("#inhalt");
     if (gueltig) {
       main.replaceChildren(seiteBauen(gueltig));
@@ -1761,7 +1886,7 @@
   function linkZiel(a) {
     const href = a.getAttribute("href") || "";
     const alt = ausHash(href);
-    if (alt) return { id: gibt(alt.id) ? alt.id : "start", query: alt.query };
+    if (alt) return { id: alt.id, query: alt.query };
     let u;
     try { u = new URL(href, location.href); } catch (e) { return null; }
     if (u.origin !== location.origin || u.hash) return null;
@@ -1838,6 +1963,11 @@
     fortschrittZeigen();
     wegAnwenden(false);
     fussErgaenzen();
+    // Handy: Hoehe der Kopfleiste messen (sie umbricht bei grosser Schrift auf zwei Zeilen); Menue, Sprungmarken und Leiste richten sich danach
+    const kopfMessen = () => { if (schmal.matches) document.documentElement.style.setProperty("--kopfhoehe", Math.ceil(seitenleiste.getBoundingClientRect().height) + "px"); else document.documentElement.style.removeProperty("--kopfhoehe"); };
+    if (window.ResizeObserver) new ResizeObserver(kopfMessen).observe(seitenleiste);
+    if (schmal.addEventListener) schmal.addEventListener("change", kopfMessen);
+    kopfMessen();
     const haupt = $(".haupt");
     if (haupt) haupt.prepend(leisteBauen());
     schieberFuellen(document);

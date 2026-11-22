@@ -246,9 +246,24 @@
   /* Kennzeichnung nach KI-Verordnung (Art. 50) und Llama-Lizenz (Abschnitt 1.b.i): kurzer, sichtbarer Hinweis am
      Ausgabebereich jeder Sprachmodell-Antwort. Gemeinsam fuer Chat, RAG, Agent und die Bausteine mit echtem Modell. */
   KL.kiHinweis = function () {
+    // Text und Link in einem Satzfluss (ein span): der Rahmen nutzt die ganze Breite des Bereichs, auch bei grosser Schrift; der Link bricht mit dem Text um
     return h("p", { class: "ki-hinweis" }, KL.icon("bot"),
-      h("span", null, "Antwort eines KI-Modells. Sie kann falsch sein, prüfe Wichtiges. "),
-      h("a", { href: "/lizenzen" }, "Built with Llama"));
+      h("span", null, "Antwort eines KI-Modells. Sie kann falsch sein, prüfe Wichtiges. ", h("a", { href: "/lizenzen" }, "Built with Llama")));
+  };
+
+  /* Hinweise unter einer Chat-Antwort: Das kleine Modell (3B) erklaert Sprachmodelle und KI oft falsch und rechnet schlecht. Die Pruefung laeuft im Browser
+     ueber Stichwoerter in Frage und Antwort; sie ersetzt nichts, sie verweist nur auf die gepruefte Erklaerung. */
+  const KI_THEMA = /Sprachmodell|Token|Training|Chatbot|neuronal|\bKI\b|\bLLM|künstliche Intelligenz|Llama|ChatGPT/i;
+  const RECHEN_THEMA = /\d\s*(?:[-+*\/×÷:^=]|mal|plus|minus|geteilt)\s*\d|rechne|berechn|ausrechn|gleichung|ableitung|integral|wurzel|prozent|gradient|summe von|wie viel ist|wie viele ist/i;
+  KL.antwortWarnungen = function (frage, antwort) {
+    const aus = [];
+    const box = (symbol, kopf, ...rest) => h("div", { class: "ki-warn", role: "note" }, KL.icon(symbol), h("p", null, h("b", null, kopf), " ", ...rest));
+    if (RECHEN_THEMA.test(frage)) aus.push(box("triangle-alert", "Kleine Modelle rechnen schlecht.", "Rechne das Ergebnis selbst nach, zum Beispiel mit dem Taschenrechner."));
+    if (KI_THEMA.test(frage) || KI_THEMA.test(antwort)) {
+      const sd = KL.INHALT.seiten["tokens-sprachmodelle"];
+      aus.push(box("triangle-alert", "Das kleine Modell irrt bei Erklärungen zur KI oft.", "Geprüfte Erklärung: Seite ", sd ? h("a", { href: "/tokens-sprachmodelle" }, "Tokens und Sprachmodelle") : "Tokens und Sprachmodelle", "."));
+    }
+    return aus;
   };
 
   /* Baustein fuer die Use-Case-Seiten (widget: "beispielstart"): Knopf, der das passende Labor mit dem Beispiel oeffnet. */
@@ -977,7 +992,7 @@
     temp.addEventListener("input", () => { temperatur = Number(temp.value); tempOut.textContent = de(temperatur, 1); });
     const schalter = h("input", { type: "checkbox", id: "d-tokens", role: "switch" });
     schalter.addEventListener("change", () => { tokensZeigen = schalter.checked; nachrichten.forEach((m) => m.ki && fuelle(m)); });
-    const einst = KL.gruppe("Antwort", [
+    const einst = KL.gruppe("Antwort einstellen", [
       h("div", { class: "regler" }, h("label", { for: "d-temp" }, "Temperatur"), temp, tempOut),
       h("label", { class: "d-schalter", for: "d-tokens" }, schalter, h("span", { class: "d-sw-bahn", "aria-hidden": "true" }, h("i")), "Tokens zeigen")], { klasse: "d-einst" });
 
@@ -1109,11 +1124,12 @@
       const wartehinweis = (t) => { if (s.tErst) return; m.platz = t; fuelle(m); live.text(t); };
       const stoppePlatz = KL.last.beobachten((i) => wartehinweis(KL.last.platzText(i)));
       // Wartezustand in Klartext: vergangene Sekunden bis zum ersten Token, solange keine Warteschlangen-Meldung steht
-      const WARTE = "Der Jetson rechnet";
-      m.platz = WARTE + ", einen Moment … Mit „Stopp“ kannst du abbrechen."; fuelle(m);
-      const wartetimer = setInterval(() => { if (s.tErst) return; if (m.platz.startsWith(WARTE)) { m.platz = WARTE + " seit " + Math.round((performance.now() - s.tSend) / 1000) + " s … Mit „Stopp“ kannst du abbrechen."; fuelle(m); } }, 1000);
+      // Erste Anfrage (Modell noch nicht im Speicher): ehrlich sagen, dass das Laden dauert. Sonst "rechnet".
+      const WARTE = warMitSpeicher ? "Der Jetson rechnet" : "Das Modell wird geladen, das dauert beim ersten Mal bis zu einer Minute";
+      m.platz = WARTE + (warMitSpeicher ? ", einen Moment … " : ". ") + "Mit „Stopp“ kannst du abbrechen."; fuelle(m);
+      const wartetimer = setInterval(() => { if (s.tErst) return; if (m.platz.startsWith(WARTE)) { m.platz = WARTE + (warMitSpeicher ? " seit " : ". Bisher ") + Math.round((performance.now() - s.tSend) / 1000) + " s … Mit „Stopp“ kannst du abbrechen."; fuelle(m); } }, 1000);
       try {
-        const r = await postLast("/api/chat", { nachricht: text, temperatur }, sig, (i) => wartehinweis(KL.last.warteText(i)));
+        const r = await postLast("/api/chat", { nachricht: text, temperatur, rolle: KL.weg === "schule" ? "schule" : undefined }, sig, (i) => wartehinweis(KL.last.warteText(i)));    // Rolle Schule: der Server haengt "kurz und einfach" an
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           roh = gesamt;
@@ -1155,10 +1171,16 @@
       }
       else if (z.meta) m.meta.textContent = metaText(z.meta);
       else if (abgebrochen) m.meta.textContent = "Abgebrochen nach " + z.tokens.length + " Tokens.";
+      if (z.tokens.length && !hinweisText && !m.warnungen) {        // Hinweise zu KI-Erklaerungen und Rechenfragen unter die Antwort
+        m.warnungen = true;
+        for (const w of KL.antwortWarnungen(text, z.tokens.join(""))) m.el.append(w);
+        nachUnten();
+      }
       else if (fehler && z.tokens.length) m.meta.textContent = fehler;
       // Abschluss der Live-Erklaerung
       const mm = /(\d+) Tokens in ([\d.]+)s \(([\d.]+) Tok\/s\)/.exec(z.meta || "");
       if (mm) {
+        if (KL.last.dauerMerken) KL.last.dauerMerken(Number(mm[2]));                  // gemessene Antwortdauer fuer die Wartezeit-Schaetzung in der Warteschlange
         const wartezeit = s.tErst ? s.tErst - s.tSend : 0;
         live.text(fett("Fertig. "), mm[1] + " Tokens in " + de(Number(mm[2]), 1) + " Sekunden, das sind " + de(Number(mm[3]), 1) + " Tokens pro Sekunde. Das erste Token kam nach " + sekText(wartezeit) + ". " + (wartezeit > 3000 && !warMitSpeicher ? "Diese Zeit ging vor allem für das Laden des Modells drauf." : "Kürzere Antworten und eine kleinere Temperatur machen das Modell berechenbarer."));
         live.pipe([

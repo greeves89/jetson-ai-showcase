@@ -27,7 +27,7 @@ function einheit(c) {
      p: c.zeitP, alltag: c.vorbereitung},
     Object.assign({h: "Einstieg (5 Minuten)"}, c.einstieg),
     Object.assign({h: "Erarbeitung (20 Minuten)"}, c.erarbeitung),
-    {h: "Arbeitsblatt: die Aufgaben", kurz: "Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).",
+    {h: "Arbeitsblatt: die Aufgaben", kurz: "Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).",
      visual: {typ: "raster", spalten: 3, zellen: c.aufgaben.map((a, i) => ({icon: a.icon, text: "Aufgabe " + (i + 1), sub: a.ort}))},
      p: [AUFGABEN_HINWEIS], liste: aufg},
     {h: "Lösungshinweise", kurz: c.loesKurz, visual: c.loesVisual, liste: c.loesungen},
@@ -53,8 +53,8 @@ function einheit(c) {
 }
 
 const blaetter = (k, nr) => [
-  {text: "Arbeitsblatt Medien " + nr, sub: "3 Seiten A4, mit Quiz, für die Klasse", href: `/static/materialien/arbeitsblatt-medien-${nr}.pdf`},
-  {text: "Lösungsblatt Medien " + nr, sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde", href: `/static/materialien/loesung-medien-${nr}.pdf`},
+  {text: "Arbeitsblatt Medien " + nr, sub: "4 Seiten A4, mit Quiz, für die Klasse", href: `/static/materialien/arbeitsblatt-medien-${nr}.pdf`},
+  {text: "Lösungsblatt Medien " + nr, sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde und Hilfekarten zum Ausschneiden", href: `/static/materialien/loesung-medien-${nr}.pdf`},
 ];
 
 /* ------------------------------------------------------------------ Einheit 1 */
@@ -66,9 +66,9 @@ S["medien-stunde-1"] = einheit({
     "Du kannst Warnzeichen bei KI-Bildern nennen und am Bild zeigen.",
     "Du kannst erklären, warum Herkunft und Kontext mehr bringen als genaues Hinsehen.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.",
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.",
   zusammenfassung: "Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert ein Set aus zwölf Bildkarten (echte Fotos und KI-Bilder), sucht Hinweise und lernt, warum es keine sichere Erkennung gibt. Mit Zeitplan, Aufgaben, Lösungshinweisen, Tafelbild und druckbarem Kartenset.",
-  zeitP: ["Vierergruppen, ein ausgedrucktes Kartenset je Gruppe (Download oben). Es braucht kein Gerät, Kamera und Mikrofon bleiben aus. Das Video liegt auf der Medienseite {{echt-oder-ki|Echt oder KI?}}"],
+  zeitP: ["Vierergruppen, ein ausgedrucktes Kartenset je Gruppe (Download oben). Es braucht kein Gerät, Kamera und Mikrofon bleiben aus. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{echt-oder-ki|Echt oder KI?}}"],
   vorbereitung: "Vorbereitung: Kartenset zweimal ausdrucken und ausschneiden. Die Auflösung steht nur im Lösungsblatt, gib sie erst in der Sicherung bekannt.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Wie sicher bist du bei einem Bild?",
@@ -76,7 +76,7 @@ S["medien-stunde-1"] = einheit({
       {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
       {icon: "circle-help", text: "Frage", sub: "Wie sicher bist du?"},
       {icon: "hand", text: "Handzeichen", sub: "für die Reflexion", farbe: "gruen"}]},
-    p: ["Zeige das Video auf der Medienseite {{echt-oder-ki|Echt oder KI?}} und frage danach: Wer ist sicher, dass er KI-Bilder erkennt? Merke dir die Handzeichen, die Frage kommt in der Reflexion zurück."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{echt-oder-ki|Echt oder KI?}}) und frage danach: Wer ist sicher, dass er KI-Bilder erkennt? Merke dir die Handzeichen, die Frage kommt in der Reflexion zurück."]},
   erarbeitung: {
     kurz: "Drei Schritte: Karten sortieren (7 Minuten), Hinweise suchen (7 Minuten), Prüfweg wählen (6 Minuten).",
     visual: {typ: "ablauf", paket: false, schritte: [
@@ -155,9 +155,9 @@ S["medien-stunde-2"] = einheit({
     "Du kannst mit Seitwärtslesen herausfinden, wer hinter einer Seite steckt.",
     "Du kannst erklären, warum ein Chatbot als Quelle nicht reicht.",
   ],
-  kurz: "45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.",
+  kurz: "45 oder 90 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.",
   zusammenfassung: "Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wird an drei Quellen gegengeprüft: Chat-Antwort, ein Beitrag und eine Behörden- oder Fachseite. Seitwärtslesen und die vier Züge Stopp, Urheber, andere Berichte, Zurückverfolgen. Mit Aufgaben und Lösungshinweisen.",
-  zeitP: ["Vierergruppen, ein Gerät je Gruppe mit Browser. Die Chat-Frage braucht das Sprachmodell, die Gruppen fragen versetzt. Das Video liegt auf der Seite {{quellen-pruefen|Quellen prüfen}}."],
+  zeitP: ["Vierergruppen, ein Gerät je Gruppe mit Browser. Die Chat-Frage braucht das Sprachmodell, die Gruppen fragen versetzt. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{quellen-pruefen|Quellen prüfen}}."],
   vorbereitung: "Vorbereitung: Wähle eine Behauptung, die du in einer verlässlichen Quelle belegen kannst, und teste vorher, was der Chat dazu antwortet. Lege einen Beitrag ohne Autor und eine Behörden- oder Fachseite zum Thema bereit.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Eine Meldung im Klassenchat, was tust du zuerst?",
@@ -165,7 +165,7 @@ S["medien-stunde-2"] = einheit({
       {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
       {icon: "message-circle", text: "Klassenchat", sub: "Meldung kommt an"},
       {icon: "hand", text: "Stopp", sub: "erst denken", farbe: "gruen"}]},
-    p: ["Zeige das Video von der Seite {{quellen-pruefen|Quellen prüfen}}. Frage danach: Wer leitet Meldungen sofort weiter? Das erste Wort der vier Züge ist Stopp."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{quellen-pruefen|Quellen prüfen}}). Frage danach: Wer leitet Meldungen sofort weiter? Das erste Wort der vier Züge ist Stopp."]},
   erarbeitung: {
     kurz: "Drei Schritte: Chat fragen (6 Minuten), seitwärts lesen (8 Minuten), Gegenprobe (6 Minuten).",
     visual: {typ: "ablauf", paket: true, schritte: [
@@ -245,32 +245,32 @@ S["medien-stunde-3"] = einheit({
   lernziele: [
     "Du kannst an einem Fall zeigen, wie eine Falschmeldung entsteht.",
     "Du kannst erklären, warum sie sich schnell verbreitet und wem sie nutzen kann.",
-    "Du kannst Gegenmaßnahmen bewerten und eine davon begründen.",
+    "Du kannst an einem Dilemma zu einer KI-Stimme beurteilen, was erlaubt ist und welche Gegenmaßnahme hilft.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen.",
-  zusammenfassung: "Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall nach Entstehung, Verbreitung, Nutzen und Gegenmaßnahmen. Keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.",
-  zeitP: ["Vierergruppen, kein Gerät nötig. Das Video liegt auf der Seite {{fake-news-deepfakes|Fake News und Deepfakes}}. Der Fall ist erfunden, es gibt keine Anleitung zum Fälschen."],
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung und Nutzen, ein Dilemma zu einer KI-Stimme die Frage nach Einwilligung und Schaden.",
+  zusammenfassung: "Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall (eine Cheap Fake) nach Entstehung, Verbreitung und Nutzen und beurteilt ein Dilemma zu einer KI-erzeugten Stimme: Einwilligung, Persönlichkeitsrecht, Schaden, Gegenmaßnahmen. Beide Fälle sind erfunden, es gibt keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.",
+  zeitP: ["Vierergruppen, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{fake-news-deepfakes|Fake News und Deepfakes}}. Der Fall ist erfunden, es gibt keine Anleitung zum Fälschen."],
   vorbereitung: "Vorbereitung: Lies auf der Seite den Abschnitt „Wenn es dich selbst trifft“. Nenne bei Bedarf Hilfe: Nummer gegen Kummer (116 111), JUUUPORT.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Was ist der Unterschied zwischen Irrtum und Absicht?",
     visual: {typ: "vergleich",
      links: {titel: "Falschinformation", icon: "circle-help", farbe: "akzent", punkte: ["Falsch", "Ohne böse Absicht"]},
      rechts: {titel: "Desinformation", icon: "triangle-alert", farbe: "orange", punkte: ["Falsch", "Mit Absicht verbreitet"]}},
-    p: ["Zeige das Video von der Seite {{fake-news-deepfakes|Fake News und Deepfakes}}. Schreibe die beiden Begriffe an die Tafel und frage, warum die Unterscheidung für die Reaktion wichtig ist."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{fake-news-deepfakes|Fake News und Deepfakes}}). Schreibe die beiden Begriffe an die Tafel und frage, warum die Unterscheidung für die Reaktion wichtig ist."]},
   erarbeitung: {
-    kurz: "Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten), Gegenmaßnahmen (6 Minuten).",
+    kurz: "Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten), Dilemma zu einer KI-Stimme (6 Minuten).",
     visual: {typ: "ablauf", paket: false, schritte: [
       {icon: "file-search", text: "Entstehung", sub: "was ist echt?"},
       {icon: "share-2", text: "Nutzen", sub: "wem hilft es?"},
-      {icon: "shield-check", text: "Gegenmaßnahmen", sub: "was hilft?", farbe: "gruen"}]},
-    p: ["Der Fall steht im Arbeitsblatt, er ist erfunden. Er braucht nur Papier und den Text. Gruppen, die fertig sind, lesen auf der Seite den Abschnitt „Was du tust, wenn du eine Fälschung siehst“."]},
+      {icon: "audio-lines", text: "KI-Stimme", sub: "Dilemma, was hilft?", farbe: "gruen"}]},
+    p: ["Der Fall und das Dilemma stehen im Arbeitsblatt, beide sind erfunden. Sie brauchen nur Papier und den Text. Gruppen, die fertig sind, lesen auf der Seite den Abschnitt „Was du tust, wenn du eine Fälschung siehst“."]},
   aufgaben: [
     {ort: "Entstehung", sozial: "Gruppe zu viert", niveau: "Basis", icon: "file-search", tipps: ["Trenne: Was ist ein echtes Foto, was ist die falsche Zeile darunter?", "Ein altes Bild mit neuer Bildunterschrift braucht keine KI."],
      text: "**Nenne** (I) die echten und die falschen Teile des folgenden Falls und **beschreibe** (I), wie die Meldung entstanden sein kann. Fall: Im Klassenchat kreist ein Foto einer eingestürzten Turnhalle mit der Zeile „Heute Nacht bei uns passiert“. Das Foto ist Jahre alt und zeigt einen anderen Ort."},
     {ort: "Nutzen und Verbreitung", sozial: "Partnerarbeit", niveau: "Standard", icon: "share-2", tipps: ["Wie fühlst du dich, wenn du das Foto siehst? Was machst du dann?", "Denke an Klicks, Aufmerksamkeit oder Schaden als mögliches Ziel."],
-     text: "**Erkläre** (II), warum sich die Meldung schnell verbreitet und wem sie nutzen kann. **Vergleiche** (II), ob es Falschinformation oder Desinformation ist, wenn sie aus Versehen oder mit Absicht gepostet wurde."},
-    {ort: "Gegenmaßnahmen", sozial: "Einzelarbeit", niveau: "Herausforderung", icon: "shield-check", tipps: ["Mögliche Maßnahmen: nicht teilen, kurz prüfen, melden, ruhig nachfragen.", "Nicht jede Maßnahme passt zu jedem Fall: Was passt zu einem Irrtum, was zu Absicht?"],
-     text: "**Beurteile** (III), welche Gegenmaßnahme in dem Fall am meisten hilft: nicht teilen, kurz prüfen, melden oder eine ruhige Nachricht schreiben. **Begründe** (III) deine Wahl."},
+     text: "**Erkläre** (II), warum sich die Meldung schnell verbreitet und wem sie nutzen kann. **Vergleiche** (II) dazu zwei Möglichkeiten: Das Foto wird aus Versehen gepostet, oder es wird mit Absicht gepostet. Was ist in beiden gleich, was ist anders?"},
+    {ort: "Dilemma KI-Stimme", sozial: "Einzelarbeit", niveau: "Herausforderung", icon: "audio-lines", tipps: ["Frage dich: Wurde die Person gefragt? Wie fühlt sie sich, wenn die ganze Klasse die Nachricht hört?", "Prüfe drei Sichten: Einwilligung, Rechte der Person, möglicher Schaden. Ein „Scherz“ ändert daran nichts."],
+     text: "**Beurteile** (III) das folgende Dilemma: Ist das ein Scherz, und welche Gegenmaßnahme (nicht teilen, kurz prüfen, melden oder ruhig nachfragen) hilft am meisten? Dilemma: Ein Mitschüler baut mit einer KI die Stimme eines anderen Mitschülers nach und schickt als „Scherz“ eine Sprachnachricht in den Klassenchat, in der der andere etwas Peinliches sagt. Er wurde nicht gefragt. Wäge Einwilligung, Persönlichkeitsrecht und Schaden gegeneinander ab. Die Nachricht ist erfunden, niemand aus der Klasse ist gemeint."},
   ],
   zusatz: {sozial: "Einzelarbeit", niveau: "Herausforderung", text: "**Entwickle** (III) eine ruhige Nachricht für den Klassenchat in zwei Sätzen, die auf die Falschmeldung hinweist, ohne jemanden bloßzustellen."},
   loesKurz: "Viele Fälschungen brauchen keine KI. Nicht weiterleiten ist die stärkste Gegenmaßnahme.",
@@ -280,16 +280,16 @@ S["medien-stunde-3"] = einheit({
     {icon: "share-2", text: "Geteilt", sub: "Gefühle treiben an"},
     {icon: "ban", text: "Nicht weiterleiten", sub: "hilft am meisten", farbe: "gruen"}]},
   loesungen: [
-    "**Zu Aufgabe 1, Nenne (I) und Beschreibe (I):** Echt ist das Foto, falsch sind Ort und Zeitpunkt in der Zeile. Das ist eine Cheap Fake: ein echtes Bild mit falscher Bildunterschrift, dafür braucht man keine KI. Die Beschreibung nennt die Schritte vom alten Bild zur neuen Zeile.",
-    "**Zu Aufgabe 2, Erkläre (II) und Vergleiche (II):** Starke Gefühle wie Schreck machen Teilen leicht, und Empfehlungssysteme zeigen, was Reaktionen bekommt. Nutzen kann Aufmerksamkeit, Klicks oder Schaden sein. Aus Versehen gepostet ist es Falschinformation, mit Absicht Desinformation.",
-    "**Zu Aufgabe 3, Beurteile (III) und Begründe (III):** Es gibt keine einzige richtige Maßnahme. Bei einem Irrtum reicht eine freundliche Richtigstellung, bei Absicht hilft Melden. Nicht weiterleiten ist in beiden Fällen die wirksamste Hilfe, die man allein leisten kann.",
+    "**Zu Aufgabe 1, Nenne (I) und Beschreibe (I):** Echt ist das Foto, falsch sind Ort und Zeitpunkt in der Zeile. Das ist eine Cheap Fake: ein echtes Bild mit falscher Bildunterschrift, dafür braucht man keine KI. Die Beschreibung nennt die Schritte vom alten Bild zur neuen Zeile. Erst Aufgabe 3 arbeitet mit einem KI-erzeugten Medium.",
+    "**Zu Aufgabe 2, Erkläre (II) und Vergleiche (II):** Starke Gefühle wie Schreck machen Teilen leicht, und Empfehlungssysteme zeigen, was Reaktionen bekommt. Nutzen kann Aufmerksamkeit, Klicks oder Schaden sein. Beim Vergleich zählt: Foto und Folgen sind in beiden Fällen gleich (Schreck, Weiterleiten), verschieden sind die Absicht und die richtige Reaktion. Aus Versehen gepostet ist es Falschinformation und eine freundliche Richtigstellung reicht, mit Absicht ist es Desinformation und Melden hilft.",
+    "**Zu Aufgabe 3, Beurteile (III):** Das Urteil nennt seine Gründe, das Begründen gehört zum Beurteilen. Erwartet wird: Mit einer KI lässt sich eine Stimme nachbauen, die nie gesagt hat, was sie sagt (ein Deepfake). Ohne Einwilligung der Person ist das kein Scherz: Die Stimme gehört zur Person, ihr Persönlichkeitsrecht kann verletzt sein, und die Nachricht kann bloßstellen und Schaden anrichten, auch wenn niemand das beabsichtigt hat. Es zählt die Wirkung, nicht nur die Absicht. Bei den Gegenmaßnahmen passt hier Nicht weiterleiten, dazu Beweise sichern und melden. Eine Gegenposition („war doch nur Spaß“) darf aufgenommen und mit diesen Gründen beantwortet werden. Es geht ums Abwägen, nicht um Paragrafen, kein Rechtsrat. Wie sicher sich solche Fälschungen erkennen lassen, siehe Sicherung.",
     "**Zum Zusatz, Entwickle (III):** Eine gute Nachricht sagt, was man gefunden hat, und verweist auf den Faktencheck: „Ich habe dazu nichts gefunden, hier ist der Faktencheck.“",
   ],
   diff: {
     leichtPunkte: ["Fall ist vorbereitet", "Lückensatz zur Entstehung", "Nur Aufgabe 1 und 2"],
     schwerPunkte: ["Eigenen Fall ausdenken", "Maßnahmen gewichten", "Nachricht schreiben und prüfen"],
-    leicht: "Bei **Nenne** (I) und **Beschreibe** (I) bleiben: „Das Foto ist ___, die Zeile ist ___.“ Eine Liste mit vier Maßnahmen liegt bereit.",
-    schwer: "Die Gruppe denkt sich einen eigenen Fall mit anderem Ort aus, **beurteilt** (III) die Maßnahmen nach Wirkung und **begründet** (III) die Rangfolge.",
+    leicht: "Bei **Nenne** (I) und **Beschreibe** (I) bleiben: „Das Foto ist ___, die Zeile ist ___.“ Eine Liste mit vier Maßnahmen und die drei Sichten (Einwilligung, Rechte, Schaden) liegen bereit.",
+    schwer: "Die Gruppe denkt sich einen eigenen Fall mit anderem Ort aus, **beurteilt** (III) die Maßnahmen nach Wirkung und stellt eine Rangfolge auf.",
   },
   sicherung: {
     kurz: "Fälschungen leben von Gefühlen und Teilen. Prüfen, nicht weiterleiten und notfalls melden.",
@@ -297,7 +297,7 @@ S["medien-stunde-3"] = einheit({
       {icon: "triangle-alert", text: "Meldung", sub: "löst Gefühl aus"},
       {icon: "search", text: "Kurz prüfen", sub: "eine Minute"},
       {icon: "shield-check", text: "Nicht teilen", sub: "oder melden", farbe: "gruen"}]},
-    p: ["Fasse zusammen: Wer eine Fälschung teilt, um sich aufzuregen, verbreitet sie trotzdem. Fälschungen echter Menschen verletzen Rechte, auch als Spaß mit Mitschülern oder Lehrkräften."],
+    p: ["Fasse zusammen: Wer eine Fälschung teilt, um sich aufzuregen, verbreitet sie trotzdem. Fälschungen echter Menschen verletzen Rechte, auch als Spaß mit Mitschülern oder Lehrkräften. Bei KI-Stimmen und KI-Videos gibt es Hinweise (etwa seltsame Betonung oder Details, die nicht stimmen), aber keine sichere Erkennung. Gute Fälschungen fallen nicht auf, darum zählen Herkunft und Kontext wie in Medien 1 und 2."],
     merke: "Nicht jede falsche Meldung ist eine Lüge. Aber jede, die du weiterleitest, trägt deinen Namen."},
   reflexionMuster: [["Eigene Erfahrung, es gibt keine Musterantwort", "Starke Gefühle sind ein Warnsignal: erst prüfen, dann teilen", "Prüffragen: Quelle, Datum, Bestätigung durch andere"], ["Man vertraut Freunden und prüft weniger", "Meldungen verbreiten sich schnell und ohne Einordnung", "Eine Richtigstellung erreicht selten alle, die die Meldung gesehen haben"], ["Eltern, Lehrkraft, Vertrauenslehrkraft oder Schulsozialarbeit", "Beratung: Nummer gegen Kummer (116 111), JUUUPORT", "Beweise sichern und den Inhalt bei der Plattform melden"]],
   reflexionKurz: "Drei Fragen: Gefühle, Gruppenchat, Hilfe.",
@@ -321,10 +321,10 @@ S["medien-stunde-3"] = einheit({
      optionen: ["Falschmeldungen sind technisch meist besser gemacht als echte", "Plattformen wollen sie absichtlich möglichst weit verbreiten", "Gefühle machen Teilen leicht, und Feeds zeigen Beliebtes zuerst", "Sie sind kürzer als echte Meldungen und werden schneller gelesen"],
      richtig: 2, abschnitt: "Erarbeitung (20 Minuten)",
      erklaerung: "Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt."},
-    {frage: "Jemand hat ein gefälschtes Bild von dir im Klassenchat verbreitet. Was ist der beste erste Schritt?",
-     optionen: ["Beweise sichern, eine Vertrauensperson holen und melden", "Das Bild sofort löschen und mit niemandem mehr darüber reden", "Ein eigenes Gegenbild bauen und im Chat verbreiten", "Abwarten, bis sich der Chat von selbst beruhigt"],
+    {frage: "Ein Mitschüler baut mit einer KI die Stimme eines anderen nach und schickt als „Scherz“ eine Sprachnachricht in den Klassenchat. Der andere wurde nicht gefragt. Was ist das?",
+     optionen: ["Ein Deepfake ohne Einwilligung, der Rechte verletzen kann", "Ein harmloser Spaß, solange die Klasse darüber lacht", "Erlaubt, weil die Stimme nur nachgebaut und nicht aufgenommen wurde", "Nur ein Problem, wenn die Nachricht im Netz öffentlich steht"],
      richtig: 0, abschnitt: "Lösungshinweise",
-     erklaerung: "Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird."},
+     erklaerung: "Eine nachgebaute Stimme ohne Einwilligung ist ein Deepfake. Der Scherz ändert nichts: Sie kann Persönlichkeitsrechte verletzen und Schaden anrichten."},
   ],
   weiter: ["fake-news-deepfakes", "medien-stunde-4", "quellen-pruefen", "schule-lehrkraefte"],
 });
@@ -338,9 +338,9 @@ S["medien-stunde-4"] = einheit({
     "Du kannst KI-Hilfe so angeben, dass sie nachvollziehbar ist.",
     "Du kannst Regeln vorschlagen: erlaubt, genannt, verboten.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.",
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.",
   zusammenfassung: "Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sortiert Beispiele nach erlaubt, genannt und verboten, übt die Faustfrage und die Angabe von KI-Hilfe und entwickelt Regelvorschläge. Welche Regeln gelten, entscheidet die Schule.",
-  zeitP: ["Vierergruppen, kein Gerät nötig. Das Video liegt auf der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}. Die Regeln der Schule gehen vor: Die Ergebnisse der Klasse sind Vorschläge."],
+  zeitP: ["Vierergruppen, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}. Die Regeln der Schule gehen vor: Die Ergebnisse der Klasse sind Vorschläge."],
   vorbereitung: "Vorbereitung: Kläre vorher, was an deiner Schule zu KI bei Hausaufgaben gilt. Was erlaubt ist, entscheidet die Schule oder Lehrkraft, nicht die Technik.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Faustfrage: Hast du danach mehr verstanden, oder nur etwas abgegeben?",
@@ -348,7 +348,7 @@ S["medien-stunde-4"] = einheit({
       {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
       {icon: "circle-help", text: "Faustfrage", sub: "mehr verstanden?"},
       {icon: "hand", text: "Handzeichen", sub: "Wer nutzt KI?", farbe: "gruen"}]},
-    p: ["Zeige das Video von der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}. Schreibe die Faustfrage an die Tafel. Frage ohne Vorwurf, wer KI schon für Hausaufgaben nutzt."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}). Schreibe die Faustfrage an die Tafel. Frage ohne Vorwurf, wer KI schon für Hausaufgaben nutzt."]},
   erarbeitung: {
     kurz: "Drei Schritte: Beispiele sortieren (6 Minuten), Faustfrage anwenden (8 Minuten), Klassenregeln schreiben (6 Minuten).",
     visual: {typ: "ablauf", paket: false, schritte: [
@@ -425,9 +425,9 @@ S["medien-stunde-5"] = einheit({
     "Du kannst entscheiden, welche Freigaben eine App für ihren Zweck braucht.",
     "Du kannst als Faustregel sagen, was du keinem Chatbot eingibst.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.",
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.",
   zusammenfassung: "Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse sammelt Datenspuren, entscheidet über App-Freigaben für Kamera, Mikrofon und Standort an erfundenen Beispiel-Apps und entwickelt eine Faustregel für Chatbots. Ohne Kamera, kein Zeigen privater Einstellungen.",
-  zeitP: ["Einzel- und Partnerarbeit, kein Gerät nötig. Das Video liegt auf der Seite {{datenschutz-im-alltag|Datenschutz im Alltag}}. Niemand muss eigene Einstellungen oder Apps zeigen."],
+  zeitP: ["Einzel- und Partnerarbeit, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{datenschutz-im-alltag|Datenschutz im Alltag}}. Niemand muss eigene Einstellungen oder Apps zeigen."],
   vorbereitung: "Vorbereitung: Die Stunde ist ein Überblick und keine Rechtsberatung. Bei der Einwilligung gilt nach der Seite: In Deutschland liegt die Grenze bei 16 Jahren für Online-Dienste, darunter sind die Eltern beteiligt.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Welche Daten entstehen, wenn du eine App öffnest?",
@@ -435,7 +435,7 @@ S["medien-stunde-5"] = einheit({
       {icon: "clock", text: "Wie lange", sub: "du ein Video siehst"},
       {icon: "map-pin", text: "Wo", sub: "du dich befindest"},
       {icon: "smartphone", text: "Womit", sub: "welches Gerät"}]},
-    p: ["Zeige das Video von der Seite {{datenschutz-im-alltag|Datenschutz im Alltag}}. Sammle an der Tafel, was Apps nebenbei sammeln. Frage: Ist das immer schlimm? Nein, Navigation braucht den Standort."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{datenschutz-im-alltag|Datenschutz im Alltag}}). Sammle an der Tafel, was Apps nebenbei sammeln. Frage: Ist das immer schlimm? Nein, Navigation braucht den Standort."]},
   erarbeitung: {
     kurz: "Drei Schritte: Datenspuren sammeln (6 Minuten), App-Rechte prüfen (8 Minuten), Chatbot-Regel (6 Minuten).",
     visual: {typ: "ablauf", paket: false, schritte: [
@@ -514,9 +514,9 @@ S["medien-stunde-6"] = einheit({
     "Du kannst Antworten auf eine knappe und eine bessere Frage vergleichen.",
     "Du kannst eine Antwort der KI prüfen, bevor du sie benutzt.",
   ],
-  kurz: "45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
+  kurz: "45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
   zusammenfassung: "Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.",
-  zeitP: ["Einzelarbeit: Jede und jeder schreibt zuerst auf Papier. Gesendet wird in der Prompt-Werkstatt am Gruppengerät, nacheinander und versetzt, denn der Rechner beantwortet Anfragen nacheinander (höchstens 7 Geräte). Das Video liegt auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}."],
+  zeitP: ["Einzelarbeit: Jede und jeder schreibt zuerst auf Papier. Gesendet wird in der Prompt-Werkstatt am Gruppengerät, nacheinander und versetzt, denn der Rechner beantwortet Anfragen nacheinander (höchstens 7 Geräte). Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}."],
   vorbereitung: "Vorbereitung: Probiere „Beide senden“ in der Prompt-Werkstatt (Seite prompting) mit einer eigenen Frage aus. Gruppen, die warten, schreiben schon die nächste Frage auf Papier.",
   einstieg: {
     kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Was bestellst du im Imbiss, wenn du nur „Döner“ sagst?",
@@ -524,7 +524,7 @@ S["medien-stunde-6"] = einheit({
       {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
       {icon: "message-circle", text: "Döner", sub: "ohne Angaben"},
       {icon: "message-square", text: "Mit Angaben", sub: "ohne Zwiebeln, scharf", farbe: "gruen"}]},
-    p: ["Zeige das Video von der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}. Das Modell ergänzt Fehlendes mit dem Üblichen. Je mehr du sagst, was du willst, desto besser trifft es."]},
+    p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}). Das Modell ergänzt Fehlendes mit dem Üblichen. Je mehr du sagst, was du willst, desto besser trifft es."]},
   erarbeitung: {
     kurz: "Drei Schritte: Frage schreiben (6 Minuten), Antworten vergleichen (8 Minuten), prüfen und nachfragen (6 Minuten).",
     visual: {typ: "ablauf", paket: false, schritte: [
@@ -604,7 +604,7 @@ S["medien-stunde-7"] = einheit({
     "Du kannst erklären, wie ein Feed oder eine Playlist grob entscheidet.",
     "Du kannst deinen Feed bewusst beeinflussen.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.",
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.",
   zusammenfassung: "Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gruppen gestalten ein Poster, erklären, wie ein Feed entscheidet, und beurteilen in einer Poster-Runde, was wirklich KI ist. Kein Video nötig, ohne Kamera.",
   zeitP: ["Vierergruppen, ein Blatt A3 und Stifte je Gruppe, kein Gerät nötig. Grundlage ist die Seite {{schueler-alltag-ki|KI in deinem Alltag}}. Diese Einheit hat kein Video, der Einstieg läuft über die Beispiele."],
   vorbereitung: "Vorbereitung: A3-Blätter, Stifte und Klebepunkte bereitlegen. Hänge die fertigen Poster im Raum auf, für die Runde.",
@@ -713,7 +713,7 @@ S["elternabend"] = {
       "**Worum es geht:** Ihre Klasse lernt in sieben Einheiten, KI zu erkennen, Quellen zu prüfen und KI fair zu nutzen: Echt oder KI, Quellen prüfen, Fake News und Deepfakes, KI und Hausaufgaben, Datenschutz, gute Fragen und KI im Alltag.",
       "**Was Ihr Kind tut:** Es sortiert Bildkarten, prüft Behauptungen, entwickelt Regeln für Hausaufgaben und schreibt bessere Fragen an ein Sprachmodell. Alle Aufgaben kommen ohne Kamera und Mikrofon aus.",
       "**Welche Daten:** Das KI-Labor braucht kein Konto, zeigt keine Werbung und speichert Chat-Eingaben nicht dauerhaft. Technisch nötig sind ein kleines Cookie, einige Merkzettel im Browser und die üblichen Verbindungsdaten des Servers. Verbindlich ist die Datenschutzerklärung des Betreibers.",
-      "**Zu Hause:** Reden Sie mit Ihrem Kind über drei Fragen: Woran würdest du das prüfen? Was hast du selbst gemacht, was die KI? Wo hast du zuletzt auf Akzeptieren geklickt? Vereinbaren Sie ein Codewort für Notfallanrufe, denn Stimmen lassen sich nachbauen.",
+      "**Zu Hause:** Reden Sie mit Ihrem Kind über drei Fragen: „Woran würdest du das prüfen?“, „Was hast du selbst gemacht, was die KI?“, „Wo hast du zuletzt auf Akzeptieren geklickt?“ Vereinbaren Sie ein Codewort für Notfallanrufe, denn Stimmen lassen sich nachbauen.",
       "**Wichtig:** Ob und wie das Labor im Unterricht eingesetzt wird, entscheidet die Schule. Dieses Blatt ist kein Rechtsrat.",
      ]},
     {h: "Der Gesprächsleitfaden",
@@ -762,6 +762,14 @@ S["elternabend"] = {
   ],
   weiter: ["schule-eltern", "eltern-zuhause", "schule-schulleitung", "medien-stunde-1"],
 };
+
+/* Erklärvideo je Einheit (Medien 7 hat keines) und die gemeinsamen Abschnitte Einzelstunde oder Doppelstunde und Lehrplanbezug (content-schule.js). */
+const VIDEO = {1: "echt-oder-ki", 2: "quellen-pruefen", 3: "fake-news-deepfakes", 4: "ki-hausaufgaben-fair", 5: "datenschutz-im-alltag", 6: "prompts-fuer-schueler"};
+for (let n = 1; n <= 7; n++) {
+  const id = "medien-stunde-" + n;
+  if (VIDEO[n]) S[id].videos = [VIDEO[n]];
+  window.KLSchule.ergaenzeEinheit(S[id], id);
+}
 
 INHALT.registriere({
   seiten: S,

@@ -119,29 +119,29 @@ INHALT.synonyme = {
   siri: ["=whisper", "=sprachausgabe", "=chat"],
   sprachassistent: ["=whisper", "=sprachausgabe", "=chat"],
   /* Schule und Lernen */
-  hausaufgabe: ["=prompting", "=llm-grenzen", "=chat", "=recht"],
-  hausaufgaben: ["=prompting", "=llm-grenzen", "=chat", "=recht"],
+  hausaufgabe: ["=ki-hausaufgaben-fair", "=prompts-schule", "=llm-grenzen", "=chat", "=recht"],
+  hausaufgaben: ["=ki-hausaufgaben-fair", "=prompts-schule", "=llm-grenzen", "=chat", "=recht"],
   schule: ["=prompting", "=llm-grenzen", "=karte", "=chat"],
-  schueler: ["=karte", "=prompting", "=llm-grenzen"],
+  schueler: ["=experimente", "=ki-hausaufgaben-fair", "=prompts-schule", "=referat", "=karte"],
   schummeln: ["=llm-grenzen", "=recht", "=verzerrung-ethik", "=prompting"],
   spicken: ["=llm-grenzen", "=recht", "=verzerrung-ethik"],
   plagiat: ["=recht", "=llm-grenzen", "=lizenzen"],
-  referat: ["=prompting", "=llm-grenzen", "=lizenzen", "=chat"],
-  praesentation: ["=prompting", "=llm-grenzen", "=lizenzen"],
+  referat: ["=referat", "=prompts-schule", "=quellen-pruefen", "=llm-grenzen", "=lizenzen"],
+  praesentation: ["=referat", "=prompts-schule", "=llm-grenzen", "=lizenzen"],
   lernen: ["=ml", "=training", "=neuronale-netze", "=karte"],
-  quelle: ["=quellen-pruefen", "=verzerrung-ethik", "=lizenzen", "=llm-grenzen", "=rag-ueberblick", "=recht", "weiterlesen", "literatur"],
+  quelle: ["=referat", "=quellen-pruefen", "=verzerrung-ethik", "=lizenzen", "=llm-grenzen", "=rag-ueberblick", "=recht", "weiterlesen", "literatur"],
   literatur: ["=verzerrung-ethik", "=neuronale-netze", "=tokens-sprachmodelle", "=rag-embedding", "=quellen-pruefen", "weiterlesen"],
   weiterlesen: ["=verzerrung-ethik", "=neuronale-netze", "=tokens-sprachmodelle", "=rag-embedding", "=training", "quelle"],
-  zitieren: ["=verzerrung-ethik", "=neuronale-netze", "=quellen-pruefen", "=lizenzen", "=recht", "quelle"],
-  doppelstunde: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "stunde"],
+  zitieren: ["=referat", "=quellen-pruefen", "=verzerrung-ethik", "=lizenzen", "=recht", "quelle"],
+  doppelstunde: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=medien-stunde-3", "stunde"],
   stundenplanung: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "doppelstunde"],
   unterrichtsplanung: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "doppelstunde"],
   drucken: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "=zusammen-ausprobieren", "arbeitsblatt", "pdf"],
   druck: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "arbeitsblatt", "pdf"],
   ausdrucken: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "=zusammen-ausprobieren", "arbeitsblatt", "pdf"],
   pdf: ["=uc-buero-dokumente", "=rag-ueberblick", "=rag", "=schule-lehrkraefte", "=elternabend", "=betrieb-entscheidung", "arbeitsblatt"],
-  arbeitsblatt: ["=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=schule-lehrkraefte", "pdf"],
-  arbeitsblaetter: ["=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=schule-lehrkraefte", "pdf"],
+  arbeitsblatt: ["=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=medien-stunde-2", "=medien-stunde-3", "=medien-stunde-4", "=schule-lehrkraefte", "pdf"],
+  arbeitsblaetter: ["=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=medien-stunde-2", "=medien-stunde-3", "=medien-stunde-4", "=schule-lehrkraefte", "pdf"],
   softmax: ["=tokens-sprachmodelle", "=neuronale-netze", "=training", "=rag-embedding", "attention"],
   overfitting: ["=ml", "=training", "=bewertung", "=daten", "ueberanpassung"],
   ueberanpassung: ["=ml", "=training", "=bewertung", "=daten", "overfitting"],
@@ -151,13 +151,13 @@ INHALT.synonyme = {
   formeln: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=tokens-sprachmodelle", "mathe"],
   "neuron formel": ["=neuronale-netze", "=training", "mathe", "formel"],
   "neuronale netze formel": ["=neuronale-netze", "=training", "mathe", "formel"],
-  abitur: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=schule-lehrkraefte", "oberstufe", "mathe"],
-  oberstufe: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=schule-lehrkraefte", "abitur", "mathe"],
-  seminararbeit: ["=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
-  facharbeit: ["=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
-  "falscher polizist": ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "enkeltrick"],
-  "falsche polizisten": ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "enkeltrick"],
-  polizei: ["=echt-oder-ki", "=fake-news-deepfakes", "betrug", "enkeltrick"],
+  abitur: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "oberstufe", "mathe"],
+  oberstufe: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "mathe"],
+  seminararbeit: ["=referat", "=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
+  facharbeit: ["=referat", "=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
+  "falscher polizist": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "enkeltrick"],
+  "falsche polizisten": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "enkeltrick"],
+  polizei: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "enkeltrick"],
   glossar: ["=karte", "=ml", "=tokens-sprachmodelle", "=neuronale-netze", "begriff"],
   begriff: ["=karte", "=ml", "=tokens-sprachmodelle", "=neuronale-netze", "glossar"],
   "vater sohn": ["=zusammen-ausprobieren", "=eltern-zuhause", "=llm-grenzen", "=echt-oder-ki", "familie"],
@@ -172,7 +172,7 @@ INHALT.synonyme = {
   kundendatenschutz: ["=sicherheit-einfach", "=recht", "=ki-einfuehrung", "datenschutz", "kundendaten"],
   entscheidung: ["=betrieb-entscheidung", "=ki-einfuehrung", "=kosten-energie", "checkliste"],
   checkliste: ["=betrieb-entscheidung", "=ki-einfuehrung", "=zusammen-ausprobieren"],
-  quellen: ["=quellen-pruefen", "=lizenzen", "=llm-grenzen", "=rag-ueberblick", "=recht"],
+  quellen: ["=referat", "=quellen-pruefen", "=lizenzen", "=llm-grenzen", "=rag-ueberblick", "=recht"],
   /* Fälschungen und Medien */
   fake: ["=llm-grenzen", "=genki", "=verzerrung-ethik", "=recht"],
   "fake news": ["=fake-news-deepfakes", "=llm-grenzen", "=genki", "=verzerrung-ethik", "=empfehlungen"],
@@ -250,13 +250,42 @@ INHALT.synonyme = {
   erfinden: ["=llm-grenzen", "halluzination", "erfunden"],
   luegen: ["=llm-grenzen", "halluzination", "erfunden"],
   /* Betrug und Antworten prüfen */
-  betrug: ["=echt-oder-ki", "=fake-news-deepfakes", "=datenschutz-im-alltag", "=quellen-pruefen"],
-  betrugsmasche: ["=echt-oder-ki", "=fake-news-deepfakes", "=datenschutz-im-alltag", "betrug"],
-  enkeltrick: ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "stimme"],
-  "enkel trick": ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "stimme"],
-  schockanruf: ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "stimme"],
-  phishing: ["=echt-oder-ki", "=fake-news-deepfakes", "=datenschutz-im-alltag", "betrug"],
-  "fake anruf": ["=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen", "betrug", "stimme"],
+  ethik: ["=verzerrung-ethik", "=medien-stunde-3", "=recht", "=medien-stunde-4", "=fake-news-deepfakes"],
+  operator: ["=schule-lehrkraefte", "=schule-stunde-1", "=medien-stunde-1", "=medien-stunde-2", "=medien-stunde-3"],
+  operatoren: ["=schule-lehrkraefte", "=schule-stunde-1", "=medien-stunde-1", "=medien-stunde-2", "=medien-stunde-3"],
+  lehrplan: ["=schule-lehrkraefte", "=schule-schulleitung", "=medien-stunde-1", "=medien-stunde-3"],
+  schulleiterin: ["=schule-schulleitung", "=elternabend", "=ueber"],
+  schulleiter: ["=schule-schulleitung", "=elternabend", "=ueber"],
+  schulleitung: ["=schule-schulleitung", "=elternabend", "=ueber", "=schule-lehrkraefte"],
+  betreiber: ["=ueber", "=schule-schulleitung", "=hardware", "kontakt"],
+  impressum: ["=ueber", "=schule-schulleitung", "kontakt"],
+  kontakt: ["=ueber", "=schule-schulleitung", "=betrieb-entscheidung", "impressum"],
+  lernplan: ["=prompts-schule", "=prompts-fuer-schueler", "=chat"],
+  vokabeln: ["=prompts-schule", "=prompts-fuer-schueler", "=chat"],
+  prompts: ["=prompts-schule", "=prompts-fuer-schueler", "=prompting", "=chat"],
+  prompt: ["=prompts-schule", "=prompts-fuer-schueler", "=prompting", "=chat"],
+  "quellen angeben": ["=referat", "=quellen-pruefen", "=lizenzen"],
+  vortrag: ["=referat", "=prompts-schule", "=quellen-pruefen"],
+  codewort: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "falscher bankmitarbeiter": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  bankmitarbeiter: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  notruf: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "stimmen klonen": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "stimme klonen": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  stimmenklon: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "betrug am telefon": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  telefonbetrug: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  telefon: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  anruf: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "falsche anrufe": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  "falscher anruf": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  betrug: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "=quellen-pruefen"],
+  betrugsmasche: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug"],
+  enkeltrick: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "stimme"],
+  "enkel trick": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "stimme"],
+  schockanruf: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "stimme"],
+  phishing: ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "=datenschutz-im-alltag", "betrug"],
+  "fake anruf": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "stimme"],
   "ki antwort pruefen": ["=quellen-pruefen", "=echt-oder-ki", "=llm-grenzen", "=schule-stunde-3"],
   "antwort pruefen": ["=quellen-pruefen", "=echt-oder-ki", "=llm-grenzen", "=schule-stunde-3"],
   "quellen pruefen": ["=quellen-pruefen", "=echt-oder-ki", "=lizenzen"],
@@ -313,6 +342,7 @@ for (const id of ["karte", "ml", "genki", "business", "gesicht", "objekt", "chat
 /* ---------- Lernplattform: Lernpfade, Wege, Hinweise (gelesen von app.js) ----------
    lernpfade   benannte Pfade. stufe 1 bis 4 (Verstehen, Anwenden, Erstellen, Bewerten, Kompetenzrahmen in docs/jugendpaedagogik.md)
                oder rolle ("schule", "lehrende", "erwachsene", "technik", "beruf", "eltern"). Seiten-IDs, die es (noch) nicht gibt, werden still übergangen.
+   vorn          (optional) Wege, bei denen dieser Pfad auf der Startseite unter "Weitere Wege" zuerst steht (Oberstufe bei "schule")
    kameraSeiten  Labore mit Kamera, Mikrofon oder Gesicht: im Weg "schule" im Menü und in Pfaden gekennzeichnet, nie im Schulpfad empfohlen.
    alterHinweis  der Satz zu 16+ (Startseite, Seite "Ist das sicher?"); die Seite prüft kein Alter.
    lernzieleErgaenzung  Lernziele für Seiten aus Dateien, in denen kein Feld "lernziele" steht (Seitenfeld hat Vorrang). */
@@ -320,15 +350,15 @@ INHALT.lernpfade = [
   {id: "verstehen", stufe: 1, name: "Verstehen", kurz: "Was KI ist, wie sie lernt und woran sie scheitert. Ohne Vorkenntnisse.",
    seiten: ["karte", "ml", "genki", "daten", "neuronale-netze", "training", "tokens-sprachmodelle", "bild-als-zahlen", "cnn-intuition"]},
   {id: "anwenden", stufe: 2, name: "Anwenden", kurz: "KI selbst benutzen: fragen, hören, sehen, nachschlagen, Aufgaben abgeben.",
-   seiten: ["chat", "prompting", "prompts-fuer-schueler", "whisper", "objekt", "rag-ueberblick", "agenten-grundlagen", "finetuning-oder-rag", "empfehlungen"]},
+   seiten: ["chat", "prompting", "prompts-fuer-schueler", "prompts-schule", "whisper", "objekt", "rag-ueberblick", "agenten-grundlagen", "finetuning-oder-rag", "empfehlungen"]},
   {id: "erstellen", stufe: 3, name: "Erstellen", kurz: "Eigene Bausteine bauen: Bildmodell anlernen, Dokumente durchsuchen, Agenten planen.",
    seiten: ["anlernen", "tabellen-ml", "zeitreihen", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "agenten-planung", "mcp-werkzeuge", "mlops"]},
   {id: "bewerten", stufe: 4, name: "Bewerten", kurz: "Grenzen erkennen, Ergebnisse prüfen, Verantwortung tragen.",
-   seiten: ["llm-grenzen", "echt-oder-ki", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "sicherheit-einfach", "kosten-energie"]},
-  {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Erst Betrug erkennen, dann die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Zum Schluss: Ist das sicher? Ohne Vorwissen.",
-   seiten: ["karte", "echt-oder-ki", "fake-news-deepfakes", "ml", "neuronale-netze", "daten", "training", "tokens-sprachmodelle", "rag-ueberblick", "sicherheit-einfach"]},
+   seiten: ["llm-grenzen", "echt-oder-ki", "falscher-anruf", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "sicherheit-einfach", "kosten-energie"]},
+  {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Erst Betrug am Telefon und mit KI erkennen, dann die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Zum Schluss: Ist das sicher? Ohne Vorwissen.",
+   seiten: ["karte", "falscher-anruf", "echt-oder-ki", "fake-news-deepfakes", "ml", "neuronale-netze", "daten", "training", "tokens-sprachmodelle", "rag-ueberblick", "sicherheit-einfach"]},
   {id: "schule-einstieg", rolle: "schule", name: "Schule: Einstieg", kurz: "Erst ausprobieren, dann prüfen und fair nutzen. Alles ohne Kamera und Mikrofon.",
-   seiten: ["experimente", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "schueler-alltag-ki", "ml", "quellen-pruefen", "datenschutz-im-alltag"]},
+   seiten: ["experimente", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "prompts-schule", "schueler-alltag-ki", "ml", "quellen-pruefen", "referat", "datenschutz-im-alltag"]},
   {id: "schule-vertiefung", rolle: "schule", name: "Schule: Vertiefung", kurz: "Wie Daten, Netze und Training zusammenspielen, mit Rechnen und Ausprobieren.",
    seiten: ["daten", "neuronale-netze", "training", "bewertung", "bild-als-zahlen", "cnn-intuition", "verzerrung-ethik"]},
   {id: "beruf", rolle: "beruf", name: "KI im Betrieb: In 15 Minuten", kurz: "Vier Seiten für alle, die entscheiden müssen: Was ist KI, selbst ausprobieren, wo sie im Betrieb hilft und wie du den Einstieg planst. Danach geht es mit der Praxis weiter.",
@@ -340,13 +370,14 @@ INHALT.lernpfade = [
 ];
 INHALT.lernpfade.push(
   {id: "eltern", rolle: "eltern", name: "Für Eltern", kurz: "Wie KI im Alltag von Kindern vorkommt, was mit Daten passiert und wie ihr darüber sprecht. Zum Ausprobieren zusammen, ohne Kamera.",
-   seiten: ["eltern-zuhause", "karte", "experimente", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "datenschutz-im-alltag", "sicherheit-einfach"]},
+   seiten: ["eltern-zuhause", "falscher-anruf", "karte", "experimente", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "datenschutz-im-alltag", "sicherheit-einfach"]},
   {id: "eltern-zusammen", rolle: "eltern", name: "Zusammen ausprobieren", kurz: "Eine Anleitung für zwei, mit drei Experimenten von je zehn Minuten und Gesprächsfragen. Ohne Kamera.",
    seiten: ["zusammen-ausprobieren", "llm-grenzen", "chat", "echt-oder-ki"]},
   {id: "technik", rolle: "technik", name: "Selbst tüfteln", kurz: "Vom Rechner dahinter über Lernen und Netze bis zu Dokumentensuche und Agenten.",
    seiten: ["selbst-bauen", "hardware", "ml", "neuronale-netze", "rag-ueberblick", "agenten-grundlagen", "sicherheit-einfach"]},
   {id: "oberstufe", rolle: "oberstufe", name: "Oberstufe und Abitur", kurz: "Neuronale Netze, Training, Bewertung, Embeddings und Verzerrung mit Formeln (Schalter „Mit Mathe“) und mit Quellen zum Weiterlesen. Für Referat, Seminararbeit und Informatikkurs.",
-   seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen"]},
+   seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen", "referat"],
+   vorn: ["schule"]},
 );
 INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
 /* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
@@ -356,12 +387,12 @@ INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "
                       empfohlen/morgen [{id, satz, h?}] mit einem kurzen Satz; "ohne" gilt, wenn keine Rolle gewählt ist. */
 INHALT.menue = {
   fuerDich: {
-    schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "karte"],
-    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "elternabend"],
-    erwachsene: ["karte", "echt-oder-ki", "fake-news-deepfakes", "ml", "daten", "neuronale-netze", "sicherheit-einfach"],
+    schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-schule", "referat", "prompts-fuer-schueler", "karte"],
+    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "elternabend"],
+    erwachsene: ["karte", "falscher-anruf", "echt-oder-ki", "fake-news-deepfakes", "ml", "daten", "neuronale-netze", "sicherheit-einfach"],
     technik: ["selbst-bauen", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen", "neuronale-netze"],
     beruf: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "prompting", "business", "ki-einfuehrung", "kosten-energie", "betrieb-entscheidung"],
-    eltern: ["eltern-zuhause", "zusammen-ausprobieren", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "sicherheit-einfach"],
+    eltern: ["eltern-zuhause", "falscher-anruf", "zusammen-ausprobieren", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "sicherheit-einfach"],
   },
   reihenfolge: {
     schule: ["Experimente", "Medienkompetenz", "Grundlagen", "Oberstufe"],
@@ -376,14 +407,24 @@ INHALT.menue = {
     Oberstufe: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen"],
   },
 };
+/* Zahl der Seiten eines Pfades aus den Pfaddaten, damit Startseitentext und "Schritt n von m" nie auseinanderlaufen */
+const ZAHLWORT = ["null", "eine", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn"];
+function pfadSatz(id, rest) {
+  const p = INHALT.lernpfade.find((x) => x.id === id);
+  const n = p ? p.seiten.filter((x) => INHALT.seiten[x] && INHALT.seiten[x].typ !== "start" && !INHALT.seiten[x].versteckt && INHALT.seiten[x].status !== "bald").length : 0;
+  const w = ZAHLWORT[n] || String(n);
+  return w.charAt(0).toUpperCase() + w.slice(1) + " kurze Seiten: " + rest;
+}
 INHALT.startRollen = {
   ohne: {h1: "KI verstehen, indem du sie ausprobierst", satz: "Frag eine [[ki|KI]], lass Bilder erkennen, höre Sprache. Kostenlos und ohne Anmeldung."},
-  schule: {h1: "Experimente, leicht erklärt", satz: "Probiere aus, wie KI arbeitet. Ohne Kamera und ohne Anmeldung.",
-    bloecke: ["experimente", "empfohlen"],
+  schule: {h1: "Experimente, leicht erklärt", satz: "Probiere aus, wie KI arbeitet. Ohne Kamera und ohne Anmeldung. Darfst du das Labor für Hausaufgaben nutzen? Es ist zum Verstehen da. Was du abgibst, regeln deine Schule und deine Lehrkraft. Frag sie, im Zweifel gib an, dass du KI genutzt hast ({{ki-hausaufgaben-fair|mehr dazu}}).",
+    bloecke: ["experimente", "empfohlen", "oberstufe"],
+    oberstufe: {titel: "Oberstufe und Abitur: Mathe, Quellen, Formeln", satz: "Neuronale Netze, Training und Bewertung mit Rechnung, dazu Quellen für Referat und Seminararbeit.", pfad: "oberstufe"},
     empfohlen: [
       {id: "echt-oder-ki", satz: "Woran du Fälschungen von KI erkennst."},
-      {id: "ki-hausaufgaben-fair", satz: "Wann KI beim Lernen hilft und wann sie schummeln ist."},
-      {id: "prompts-fuer-schueler", satz: "So fragst du, damit die Antwort brauchbar wird."}]},
+      {id: "ki-hausaufgaben-fair", satz: "Darfst du das Labor für Hausaufgaben nutzen? Wann KI beim Lernen hilft und wann sie zum Schummeln wird."},
+      {id: "prompts-schule", satz: "Schwache und gute Fragen an die KI, mit Schulbeispielen zum Kopieren."},
+      {id: "referat", satz: "Gliederung, Quellen und Zitieren für dein Referat."}]},
   lehrende: {h1: "Für morgen im Unterricht", satz: "Drei KI-Stunden, sieben Medien-Einheiten, Handreichung, Elternabend und Info für die Schulleitung. Jede Einheit mit Arbeitsblatt, Lösungen und Plan für Einzel- und Doppelstunde.",
     bloecke: ["morgen"],
     morgen: [
@@ -400,11 +441,12 @@ INHALT.startRollen = {
       {id: "schule-lehrkraefte", satz: "Checkliste, Fachbegriffe und Kurzantworten."},
       {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."},
       {id: "elternabend", satz: "Info-Blatt, Leitfaden und Antworten auf Elternfragen."}]},
-  erwachsene: {h1: "KI verstehen, Schritt für Schritt", satz: "Neun kurze Seiten: erst Betrug erkennen, dann die Grundlagen. Ohne Vorwissen.",
+  erwachsene: {h1: "KI verstehen, Schritt für Schritt", get satz() { return pfadSatz("erwachsene", "erst Betrug erkennen, dann die Grundlagen. Ohne Vorwissen."); },
     bloecke: ["empfohlen"], pfad: "erwachsene",
     empfohlen: [
       {id: "karte", satz: "Eine Landkarte der Begriffe in zwei Minuten."},
-      {id: "echt-oder-ki", satz: "Woran du Fälschungen, falsche Anrufe und Betrug erkennst."},
+      {id: "falscher-anruf", satz: "Auflegen, zurückrufen, 110: Schutz vor Enkeltrick und Schockanruf."},
+      {id: "echt-oder-ki", satz: "Woran du gefälschte Bilder, Texte und Stimmen erkennst."},
       {id: "fake-news-deepfakes", satz: "Wie Falschmeldungen entstehen und was du dagegen tust."},
       {id: "ml", satz: "Statt Regeln zeigst du Beispiele, das Verfahren lernt daraus."},
       {id: "neuronale-netze", satz: "Wie ein Netz aus kleinen Rechenstellen entscheidet."},
@@ -431,6 +473,7 @@ INHALT.startRollen = {
     bloecke: ["empfohlen"],
     empfohlen: [
       {id: "eltern-zuhause", satz: "Ist das Labor sicher für Kinder? Was ihr zu Hause wissen solltet."},
+      {id: "falscher-anruf", satz: "Schutz vor Enkeltrick und Schockanruf, auch für die Großeltern."},
       {id: "zusammen-ausprobieren", satz: "Drei Experimente zu zweit, mit Gesprächsfragen. Ohne Kamera."},
       {id: "experimente", satz: "Zum Ausprobieren, ganz ohne Kamera."},
       {id: "quellen-pruefen", satz: "Wem man glauben kann: ein Gespräch mit dem Kind."},
@@ -463,6 +506,17 @@ INHALT.lernzieleErgaenzung = {
   "ueber": ["Du kannst sagen, wer hinter dem KI-Labor steht und wie es betrieben wird.", "Du kannst erklären, wie die Labore arbeiten und wo ihre Grenzen liegen."],
   "lizenzen": ["Du kannst nachlesen, welche Modelle, Stimmen und Fotos hier laufen und unter welcher Lizenz.", "Du kannst KI-erzeugte Inhalte im Labor erkennen."],
 };
+
+/* "Quiz zu diesem Labor": Punkte-Labor, Chat und Objekt-Labor haben kein eigenes Quiz. Der Abschnitt unter dem Labor verweist auf die
+   Seite zum Thema, die ein Quiz hat (Prompt-Vergleich: das Quiz steht auf der Seite selbst). Die Fragenzahl kommt aus den Seitendaten. */
+for (const [id, ziel] of [["ml", "daten"], ["chat", "tokens-sprachmodelle"], ["objekt", "vision-aufgaben"]]) {
+  const sd = INHALT.seiten[id], z = INHALT.seiten[ziel];
+  if (!sd || !z || !(z.quiz || []).length || (sd.abschnitte || []).some((x) => x.h === "Quiz zu diesem Labor")) continue;
+  const abs = {h: "Quiz zu diesem Labor", kurz: "Teste, was du hier gelernt hast: " + (z.quiz.length === 1 ? "ein Quiz" : z.quiz.length + " Quizfragen") + " auf der Seite {{" + ziel + "|" + z.titel + "}}."};
+  sd.abschnitte = sd.abschnitte || [];
+  const i = sd.abschnitte.findIndex((x) => x.h === "Weiterlesen");
+  if (i >= 0) sd.abschnitte.splice(i, 0, abs); else sd.abschnitte.push(abs);
+}
 
 INHALT.registriere({
   seiten: S,

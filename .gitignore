@@ -22,3 +22,5 @@ tests/fixtures/*.y4m
 tests/fixtures/*.jpg
 tests/ausgabe/
 docs/runde3/*-bilder/
+docs/runde4/*-bilder/
+docs/runde4/bilder-*/
