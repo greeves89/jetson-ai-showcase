@@ -77,6 +77,12 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
   .d-chatbox ~ .vorschlaege{margin-bottom:16px}
 }
 .d-text{white-space:pre-wrap;overflow-wrap:anywhere}
+.d-text.md{display:block;white-space:normal}
+.d-text .md-p{margin:0 0 8px}
+.d-text .md-p:last-child,.d-text .md-liste:last-child{margin-bottom:0}
+.d-text .md-liste{margin:0 0 8px;padding-left:22px}
+.d-text .md-liste li{margin:2px 0}
+.d-text code{font-size:.92em;padding:1px 5px;border-radius:6px;background:var(--fuell)}
 .msg.ki .meta{font-size:12px;opacity:1;color:var(--leise)}
 .msg.ki .meta:empty{display:none}
 .d-schalter{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
@@ -112,6 +118,10 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-ergtext{white-space:pre-wrap;overflow-wrap:anywhere}
 .karte-w.antwort .d-ergtext{font-size:16.5px;line-height:1.5}
 .d-erkl{margin:8px 0 0;padding-top:8px;border-top:.5px solid var(--linie2);font-size:14px;line-height:1.5;color:var(--leise)}
+.d-erkl.d-warnung{display:flex;gap:8px;align-items:flex-start;color:var(--text)}
+.d-warnung svg.ic{flex:none;width:18px;height:18px;margin-top:2px;color:var(--orange)}
+.karte-w.d-widerspruch{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--orange) 70%,transparent)}
+.d-warte{color:var(--text)}
 .d-karten .karte-w:first-child{margin-top:14px}
 
 @media (prefers-reduced-motion:reduce){.d-bar i,.d-treffer,.d-sw-bahn,.d-sw-bahn i{transition:none!important}}
@@ -156,3 +166,7 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .w-wid .chip.w-bsp:hover{background:var(--akzent-h);text-decoration:none}
 .w-wid .chip.w-bsp .ic{width:14px;height:14px}
 .d-regler{margin-top:20px}
+
+/* Meldung des Servers im Chat: Hinweis-Kasten statt Blase */
+.msg.ki.msg-hinweis{background:none;padding:0;max-width:100%;box-shadow:none}
+.msg-hinweis .last-box{width:100%}

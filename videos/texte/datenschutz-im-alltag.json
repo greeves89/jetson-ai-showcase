@@ -1,0 +1,79 @@
+{
+ "id": "datenschutz-im-alltag",
+ "titel": "Datenschutz im Alltag",
+ "untertitel": "Was du preisgibst und wie du es kontrollierst",
+ "szenen": [
+  {
+   "id": "profil",
+   "kapitel": "Was weiß das Netz?",
+   "saetze": [
+    "Was weiß das Netz über dich? Name, Wohnort, Fotos, deine Stimme, was du gern hörst, wann du wo bist.",
+    "Vieles davon hast du selbst geliefert, ganz nebenbei."
+   ]
+  },
+  {
+   "id": "bezahlen",
+   "kapitel": "Bezahlen mit Daten",
+   "saetze": [
+    "Viele Apps kosten kein Geld. Dafür bezahlst du oft mit Daten.",
+    "Damit lässt sich zeigen, was dich interessiert, und passende Werbung ausspielen. Das ist nicht automatisch schlimm. Du solltest es nur wissen und selbst entscheiden."
+   ]
+  },
+  {
+   "id": "foto",
+   "kapitel": "Das Foto verrät mehr",
+   "saetze": [
+    "Ein Foto kann mehr verraten, als du siehst. Oft stecken Aufnahmeort, Uhrzeit und Handymodell darin.",
+    "Manche Netzwerke entfernen das, andere nicht. Schalte die Ortsangabe für die Kamera lieber aus."
+   ]
+  },
+  {
+   "id": "alt",
+   "kapitel": "Das Netz vergisst wenig",
+   "saetze": [
+    "Was einmal online ist, lässt sich schwer ganz löschen. Andere können es speichern und weiterschicken.",
+    "Frag dich vorher: Wäre mir das in fünf Jahren noch recht?"
+   ]
+  },
+  {
+   "id": "einstellungen",
+   "kapitel": "Fünf Minuten Einstellungen",
+   "saetze": [
+    "Nimm dir fünf Minuten für die Einstellungen. Profil auf privat. Standort nur, wenn die App läuft.",
+    "Kamera, Mikrofon und Kontakte nur für Apps, die sie wirklich brauchen. Eine Taschenlampen-App braucht keine Kontakte."
+   ]
+  },
+  {
+   "id": "chat",
+   "kapitel": "KI-Chats",
+   "saetze": [
+    "Wichtig bei KI-Chats: Je nach Anbieter und Einstellung kann gespeichert werden, was du eintippst.",
+    "Mathe-Aufgaben und Rezeptideen sind unproblematisch. Passwörter, Adresse, Geheimnisse und Fotos von anderen gehören nicht hinein."
+   ]
+  },
+  {
+   "id": "passwort",
+   "kapitel": "Gute Passwörter",
+   "saetze": [
+    "Ein gutes Passwort ist lang und gehört nur zu einem Konto. Vier zufällige Wörter hintereinander sind stark und leichter zu merken als Zeichenchaos.",
+    "Schalte außerdem die Anmeldung in zwei Schritten ein. Dann reicht einem Dieb das Passwort allein nicht."
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Deine Rechte",
+   "saetze": [
+    "Du hast Rechte. Du darfst fragen: Was habt ihr über mich gespeichert? Und du darfst verlangen, dass sie es löschen.",
+    "Das steht in der Datenschutz-Grundverordnung. Für viele Dienste brauchen unter Sechzehnjährige außerdem die Zustimmung ihrer Eltern."
+   ]
+  },
+  {
+   "id": "andere",
+   "kapitel": "Und die anderen",
+   "saetze": [
+    "Und denk an die anderen. Ein Foto von Freunden gehört auch ihnen. Frag, bevor du es teilst.",
+    "Das ist Respekt, und es ist auch Recht: Jeder darf über Bilder von sich selbst mitentscheiden."
+   ]
+  }
+ ]
+}

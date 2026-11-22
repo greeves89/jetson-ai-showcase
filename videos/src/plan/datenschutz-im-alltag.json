@@ -1,0 +1,170 @@
+{
+ "id": "datenschutz-im-alltag",
+ "titel": "Datenschutz im Alltag",
+ "untertitel": "Was du preisgibst und wie du es kontrollierst",
+ "gesamt": 138.12,
+ "szenen": [
+  {
+   "id": "profil",
+   "kapitel": "Was weiß das Netz?",
+   "start": 0,
+   "dauer": 13.46,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 7.84,
+     "text": "Was weiß das Netz über dich? Name, Wohnort, Fotos, deine Stimme, was du gern hörst, wann du wo bist."
+    },
+    {
+     "t": 9.04,
+     "d": 3.52,
+     "text": "Vieles davon hast du selbst geliefert, ganz nebenbei."
+    }
+   ]
+  },
+  {
+   "id": "bezahlen",
+   "kapitel": "Bezahlen mit Daten",
+   "start": 13.46,
+   "dauer": 15.7,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.4,
+     "text": "Viele Apps kosten kein Geld. Dafür bezahlst du oft mit Daten."
+    },
+    {
+     "t": 5.2,
+     "d": 9.6,
+     "text": "Damit lässt sich zeigen, was dich interessiert, und passende Werbung ausspielen. Das ist nicht automatisch schlimm. Du solltest es nur wissen und selbst entscheiden."
+    }
+   ]
+  },
+  {
+   "id": "foto",
+   "kapitel": "Das Foto verrät mehr",
+   "start": 29.16,
+   "dauer": 14.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.8,
+     "text": "Ein Foto kann mehr verraten, als du siehst. Oft stecken Aufnahmeort, Uhrzeit und Handymodell darin."
+    },
+    {
+     "t": 7.6,
+     "d": 6.4,
+     "text": "Manche Netzwerke entfernen das, andere nicht. Schalte die Ortsangabe für die Kamera lieber aus."
+    }
+   ]
+  },
+  {
+   "id": "alt",
+   "kapitel": "Das Netz vergisst wenig",
+   "start": 44.06,
+   "dauer": 12.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.4,
+     "text": "Was einmal online ist, lässt sich schwer ganz löschen. Andere können es speichern und weiterschicken."
+    },
+    {
+     "t": 7.2,
+     "d": 4,
+     "text": "Frag dich vorher: Wäre mir das in fünf Jahren noch recht?"
+    }
+   ]
+  },
+  {
+   "id": "einstellungen",
+   "kapitel": "Fünf Minuten Einstellungen",
+   "start": 56.16,
+   "dauer": 15.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Nimm dir fünf Minuten für die Einstellungen. Profil auf privat. Standort nur, wenn die App läuft."
+    },
+    {
+     "t": 7.28,
+     "d": 7.44,
+     "text": "Kamera, Mikrofon und Kontakte nur für Apps, die sie wirklich brauchen. Eine Taschenlampen-App braucht keine Kontakte."
+    }
+   ]
+  },
+  {
+   "id": "chat",
+   "kapitel": "KI-Chats",
+   "start": 71.78,
+   "dauer": 16.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.08,
+     "text": "Wichtig bei KI-Chats: Je nach Anbieter und Einstellung kann gespeichert werden, was du eintippst."
+    },
+    {
+     "t": 6.88,
+     "d": 9.04,
+     "text": "Mathe-Aufgaben und Rezeptideen sind unproblematisch. Passwörter, Adresse, Geheimnisse und Fotos von anderen gehören nicht hinein."
+    }
+   ]
+  },
+  {
+   "id": "passwort",
+   "kapitel": "Gute Passwörter",
+   "start": 88.6,
+   "dauer": 17.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 9.76,
+     "text": "Ein gutes Passwort ist lang und gehört nur zu einem Konto. Vier zufällige Wörter hintereinander sind stark und leichter zu merken als Zeichenchaos."
+    },
+    {
+     "t": 10.56,
+     "d": 6.4,
+     "text": "Schalte außerdem die Anmeldung in zwei Schritten ein. Dann reicht einem Dieb das Passwort allein nicht."
+    }
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Deine Rechte",
+   "start": 106.46,
+   "dauer": 16.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.2,
+     "text": "Du hast Rechte. Du darfst fragen: Was habt ihr über mich gespeichert? Und du darfst verlangen, dass sie es löschen."
+    },
+    {
+     "t": 8,
+     "d": 7.92,
+     "text": "Das steht in der Datenschutz-Grundverordnung. Für viele Dienste brauchen unter Sechzehnjährige außerdem die Zustimmung ihrer Eltern."
+    }
+   ]
+  },
+  {
+   "id": "andere",
+   "kapitel": "Und die anderen",
+   "start": 123.28,
+   "dauer": 14.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.16,
+     "text": "Und denk an die anderen. Ein Foto von Freunden gehört auch ihnen. Frag, bevor du es teilst."
+    },
+    {
+     "t": 6.96,
+     "d": 6.08,
+     "text": "Das ist Respekt, und es ist auch Recht: Jeder darf über Bilder von sich selbst mitentscheiden."
+    }
+   ]
+  }
+ ]
+}

@@ -60,13 +60,14 @@ start: {
     "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
     "Der Rechner dahinter": {symbol: "hardware", satz: "Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?"},
   },
-  datenschutz: "Kamera und Mikrofon starten nur, wenn du zustimmst. Bilder und Aufnahmen werden nicht gespeichert. Texte, die du ins Dokumenten-Labor einfügst, bleiben kurz im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe.",
+  datenschutz: "Kamera und Mikrofon starten nur, wenn du zustimmst. Bilder und Aufnahmen werden nicht gespeichert. Texte, die du in die RAG-Werkstatt einfügst, bleiben kurz im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe.",
 },
 
 /* ------------------------------------------------------------------ Grundlagen */
 
 karte: {
   typ: "lektion", gruppe: "Grundlagen", nr: 1, titel: "Was ist KI?", symbol: "karte", video: "was-ist-ki",
+  lernziele: ["Du kannst in zwei Sätzen erklären, was KI ist und was nicht.", "Du kannst KI, maschinelles Lernen und Deep Learning einordnen.", "Du kannst an einem Beispiel zeigen, warum die meiste KI nur eine Aufgabe gut kann."],
   kurz: "Ein Oberbegriff, unter dem sehr verschiedene Verfahren stecken. Diese Karte sortiert sie.",
   widget: "landkarte",
   abschnitte: [
@@ -94,6 +95,7 @@ karte: {
       rechts: {titel: "Maschinelles Lernen", icon: "brain-circuit", farbe: "akzent", punkte: ["Muster aus Beispielen", "Regeln stecken im Modell", "Gut bei Mustern"]}},
      p: [
       "Die Karte oben zeigt die Verschachtelung. Jeder innere Bereich ist eine Spezialisierung des äußeren: [[ml|Maschinelles Lernen]] ist ein Teil der KI, [[dl|Deep Learning]] ein Teil des maschinellen Lernens, generative KI ein Teil von Deep Learning. Regelbasierte Systeme sind der ältere Weg, und die Robotik steht daneben, weil sie KI als Baustein nutzt, aber auch Mechanik und Regelungstechnik braucht.",
+      "**Deep Learning** heißt: Ein neuronales Netz mit vielen Schichten lernt aus Rohdaten wie Pixeln oder Text selbst, worauf es ankommt. **Ein Transformer** ist ein Netzbau von 2017, bei dem jedes Wort beim Verarbeiten auf alle anderen Wörter des Textes achten kann. Fast alle heutigen Sprachmodelle beruhen darauf.",
       "Tippe auf einen Bereich, dann siehst du rechts, was er bedeutet und wo du ihn in diesem Labor ausprobieren kannst.",
     ]},
     {h: "Fünf Bereiche statt vieler Fachwörter",
@@ -113,6 +115,13 @@ karte: {
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
       "**Erzeugen:** neue Texte, Bilder und Töne herstellen. Labor {{chat|Chat}}.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Google: [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Vaswani et al.: [Attention Is All You Need](https://arxiv.org/abs/1706.03762), 2017 (der Transformer), abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Was ist KI?“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/karte).",
+     ]},
   ],
   mitnehmen: [
     "KI ist ein Sammelbegriff, kein einzelnes Verfahren.",
@@ -124,6 +133,7 @@ karte: {
 
 ml: {
   typ: "lektion", gruppe: "Grundlagen", nr: 2, titel: "Maschinelles Lernen", symbol: "ml", video: "maschinelles-lernen",
+  lernziele: ["Du kannst erklären, warum eine Maschine aus Beispielen lernt, statt Regeln zu bekommen.", "Du kannst Training und Inferenz unterscheiden.", "Du kannst sagen, was passiert, wenn die Beispiele schlecht sind."],
   kurz: "Statt Regeln zu schreiben, zeigst du Beispiele. Das Verfahren findet das Muster selbst.",
   widget: "knn",
   abschnitte: [
@@ -174,6 +184,13 @@ ml: {
       "Daten sind das Produkt. Ein Modell lernt nur, was in den Beispielen steckt. Sind sie einseitig, ist es das Modell auch.",
       "[[ueberanpassung|Überanpassung]] heißt, dass ein Modell die Beispiele auswendig lernt, statt das Muster zu verstehen. Dann ist es bei bekannten Daten perfekt und bei neuen schlecht. Darum prüft man immer mit Daten, die das Modell vorher nie gesehen hat. Du kannst das oben nachstellen: Stelle k auf 1 und setze einzelne Ausreißer. Die Grenze wird zackig und folgt jedem Zufall.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Google: [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Michael Nielsen: [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/), Online-Buch, 2015, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Maschinelles Lernen“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/ml).",
+     ]},
   ],
   mitnehmen: [
     "Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen.",
@@ -185,6 +202,7 @@ ml: {
 
 genki: {
   typ: "lektion", gruppe: "Grundlagen", nr: 3, titel: "Generative KI", symbol: "genki", video: "generative-ki",
+  lernziele: ["Du kannst erklären, wie ein Sprachmodell Stück für Stück das nächste Wort auswählt.", "Du kannst sagen, was die Temperatur verändert und warum ein Modell trotzdem Falsches schreibt.", "Du kannst erklären, warum ein Modell nur begrenzt viel Text im Blick hat."],
   kurz: "Ein Sprachmodell wählt Wort für Wort das nächste Stück. Aus vielen kleinen Würfen entsteht ein Text.",
   widget: "tokens",
   abschnitte: [
@@ -219,7 +237,7 @@ genki: {
       {icon: "file-text", text: "Fundstellen"},
       {icon: "circle-check", text: "Antwort", sub: "mit Quelle", farbe: "gruen"}]},
      p: [
-      "Weil das Modell Wahrscheinliches fortsetzt, kann es Falsches überzeugend formulieren, eine [[halluzination|Halluzination]]. Ein Gegenmittel ist [[rag|RAG]]: Erst wird in eigenen Dokumenten nachgeschlagen, dann antwortet das Modell auf Grundlage der Fundstellen und nennt sie als Quelle. Das probierst du im {{rag|RAG-Labor}}.",
+      "Weil das Modell Wahrscheinliches fortsetzt, kann es Falsches überzeugend formulieren, eine [[halluzination|Halluzination]]. Ein Gegenmittel ist [[rag|RAG]]: Erst wird in eigenen Dokumenten nachgeschlagen, dann antwortet das Modell auf Grundlage der Fundstellen und nennt sie als Quelle. Das probierst du im {{rag|RAG-Werkstatt}}.",
     ]},
     {h: "Bilder aus Rauschen",
      kurz: "Diffusion startet mit Rauschen und entfernt es Schritt für Schritt, gelenkt von deiner Beschreibung.",
@@ -242,6 +260,7 @@ genki: {
 
 robotik: {
   typ: "lektion", gruppe: "Grundlagen", nr: 4, titel: "Robotik", symbol: "robotik", video: "robotik",
+  lernziele: ["Du kannst den Regelkreis aus Wahrnehmen, Entscheiden und Handeln beschreiben.", "Du kannst erklären, welche Rolle KI im Roboter hat.", "Du kannst sagen, warum der Rechner oft direkt am Roboter sitzt."],
   kurz: "Eine Maschine mit Körper: Sie misst, entscheidet und bewegt sich, und das viele Male pro Sekunde.",
   widget: "regelkreis",
   abschnitte: [
@@ -299,6 +318,7 @@ robotik: {
 
 business: {
   typ: "lektion", gruppe: "Grundlagen", nr: 5, titel: "KI im Business", symbol: "business", video: "ki-im-business",
+  lernziele: ["Du kannst drei Aufgaben nennen, bei denen KI im Betrieb Arbeit abnimmt.", "Du kannst lokal und Cloud gegenüberstellen.", "Du kannst die drei Fragen nennen, die vor jedem Einsatz stehen."],
   kurz: "Wo KI heute Arbeit abnimmt, wann lokal sinnvoll ist und welche Fragen vor dem Einsatz stehen.",
   widget: "bereiche",
   abschnitte: [
@@ -354,13 +374,14 @@ business: {
     "Lokal lohnt sich bei sensiblen Daten und schneller Reaktion.",
     "Fang klein an und miss gegen den heutigen Ablauf.",
   ],
-  weiter: ["gesicht", "chat", "agent"],
+  weiter: ["uc-handwerk", "gesicht", "chat", "agent"],
 },
 
 /* ------------------------------------------------------------------ Labor: Sehen */
 
 gesicht: {
   nav: "Gesichter", typ: "labor", gruppe: "Sehen", titel: "Gesichtserkennung", symbol: "gesicht", demo: "webcam-gesicht",
+  lernziele: ["Du kannst die drei Stufen von Gesichtserkennung unterscheiden.", "Du kannst beschreiben, welche Schritte im Hintergrund laufen.", "Du kannst erklären, warum Gesichter beim Datenschutz besonders heikel sind."],
   kurz: "Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.",
   abschnitte: [
     {h: "Drei Stufen, die man oft verwechselt",
@@ -408,6 +429,7 @@ gesicht: {
 
 objekt: {
   nav: "Objekte", typ: "labor", gruppe: "Sehen", titel: "Objekterkennung", symbol: "objekt", demo: "webcam-objekt",
+  lernziele: ["Du kannst erklären, was Rahmen, Klasse und Sicherheit bei der Objekterkennung bedeuten.", "Du kannst mit der Schwelle Treffer und Fehlalarme abwägen.", "Du kannst sagen, warum doppelte Rahmen aufgeräumt werden müssen."],
   kurz: "Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.",
   abschnitte: [
     {h: "Ein Blick reicht",
@@ -463,6 +485,7 @@ objekt: {
 
 anlernen: {
   typ: "labor", gruppe: "Sehen", titel: "Bildmodell anlernen", symbol: "anlernen", demo: "teach",
+  lernziele: ["Du kannst beschreiben, was beim Aufnehmen und beim Erkennen im Labor passiert.", "Du kannst drei Wege nennen, wie das angelernte Modell besser wird."],
   kurz: "Zeige dem Jetson Beispiele, und er erkennt sie danach selbst. In einer halben Minute, ohne Training.",
   abschnitte: [
     {h: "Was beim Aufnehmen passiert",
@@ -511,6 +534,7 @@ anlernen: {
 
 chat: {
   typ: "labor", gruppe: "Sprache", titel: "Sprachmodell im Chat", symbol: "chat", demo: "chat",
+  lernziele: ["Du kannst im Chat Einstellungen wie die Temperatur ändern und die Wirkung beschreiben.", "Du kannst erklären, was auf dem Jetson passiert, wenn du eine Frage stellst.", "Du kannst sagen, warum dieses Modell kleiner ist als bekannte Chatbots."],
   kurz: "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.",
   abschnitte: [
     {h: "Was du hier steuern kannst",
@@ -551,7 +575,8 @@ chat: {
 },
 
 rag: {
-  nav: "RAG", typ: "labor", gruppe: "Wissen und RAG", titel: "RAG: Fragen an eigene Dokumente", symbol: "rag", demo: "rag",
+  nav: "RAG-Werkstatt", typ: "labor", gruppe: "Wissen und RAG", titel: "RAG-Werkstatt: Fragen an eigene Dokumente", symbol: "rag", demo: "rag",
+  lernziele: ["Du kannst erklären, warum ein Sprachmodell deine Dokumente nicht kennt.", "Du kannst die vier Schritte von der Frage bis zur Antwort nennen.", "Du kannst an den Scores ablesen, wie gut eine gefundene Stelle passt."],
   kurz: "Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit.",
   abschnitte: [
     {h: "Das Problem",
@@ -595,6 +620,7 @@ rag: {
 
 agent: {
   nav: "Agent", typ: "labor", gruppe: "Agenten", titel: "Agent mit Werkzeugen", symbol: "agent", demo: "agent",
+  lernziele: ["Du kannst erklären, was einen Agenten von einem Chat unterscheidet.", "Du kannst die Schleife aus Denken, Werkzeug und Ergebnis an einem Beispiel verfolgen.", "Du kannst sagen, worauf du bei Agenten achten solltest."],
   kurz: "Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.",
   abschnitte: [
     {h: "Ein Agent ist ein Modell mit Werkzeugen",
@@ -640,6 +666,7 @@ agent: {
 
 whisper: {
   typ: "labor", gruppe: "Sprache", titel: "Sprache zu Text", symbol: "whisper", demo: "whisper",
+  lernziele: ["Du kannst beschreiben, wie aus Ton Text wird.", "Du kannst beobachten, wo die Spracherkennung Fehler macht."],
   kurz: "Sprich in dein Mikrofon, und der Jetson schreibt mit. Das Modell läuft lokal, ohne Cloud.",
   abschnitte: [
     {h: "Wie aus Ton Text wird",
@@ -677,6 +704,7 @@ whisper: {
 
 bild: {
   versteckt: true, typ: "labor", gruppe: "Erzeugen", titel: "Bilder erzeugen", symbol: "bild", demo: null, status: "bald",
+  lernziele: ["Du kannst in Schritten beschreiben, wie Diffusion aus Rauschen ein Bild formt."],
   kurz: "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam.",
   abschnitte: [
     {h: "Wie Diffusion funktioniert",
@@ -718,6 +746,7 @@ bild: {
 
 faceswap: {
   nav: "Face-Swap", versteckt: true, typ: "labor", gruppe: "Erzeugen", titel: "Face-Swap und Deepfakes", symbol: "faceswap", demo: null, status: "bald",
+  lernziele: ["Du kannst erklären, wie Face-Swap funktioniert, und Chancen und Risiken nennen."],
   kurz: "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich.",
   abschnitte: [
     {h: "So funktioniert es",
@@ -763,6 +792,7 @@ faceswap: {
 
 hardware: {
   nav: "Hardware", typ: "lektion", gruppe: "Der Rechner dahinter", titel: "Der Jetson und seine Hardware", symbol: "hardware", widget: "hardware",
+  lernziele: ["Du kannst erklären, was ein Jetson ist und wofür er gut ist.", "Du kannst sagen, warum der gemeinsame Speicher die Modellgröße begrenzt.", "Du kannst die Anzeigen für Auslastung, Speicher und Strom deuten.", "Du kannst begründen, warum Rechnen direkt am Gerät (Edge) Vorteile hat."],
   kurz: "Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.",
   abschnitte: [
     {h: "Was ist ein Jetson",
@@ -777,11 +807,11 @@ hardware: {
     {h: "Gemeinsamer Speicher",
      kurz: "CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [
-      {icon: "brain", text: "Geladenes Modell", sub: "immer nur eins"},
+      {icon: "brain", text: "Geladenes Modell", sub: "bis zu zwei, je nach Größe"},
       {icon: "cpu", text: "CPU und GPU", sub: "rechnen im selben Speicher"},
       {icon: "memory-stick", text: "Gemeinsamer Speicher", sub: "8 GB für alles"}]},
      p: [
-      "CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen und immer nur eins zur Zeit geladen ist. Der Speicher in der Anzeige oben ist die wichtigste Grenze.",
+      "CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen. Der Jetson hält bis zu zwei Modelle gleichzeitig im Speicher (Einstellung OLLAMA_MAX_LOADED_MODELS=2), zum Beispiel ein Sprachmodell und ein Embedding-Modell. Zwei große Modelle passen nicht zusammen hinein. Der Speicher in der Anzeige oben ist die wichtigste Grenze.",
     ]},
     {h: "Was die Anzeigen bedeuten",
      kurz: "Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.",
@@ -798,6 +828,16 @@ hardware: {
       "**Leistung:** Strom, den das Board gerade aufnimmt, ohne Netzteilverluste.",
       "**Temperatur:** der heißeste Messpunkt des Chips. Bei zu hoher Temperatur taktet er herunter.",
     ]},
+    {h: "Das Sprachmodell, das hier läuft",
+     kurz: "Llama 3.2 mit 3,2 Milliarden Parametern, Quantisierung Q4_K_M, Kontext im Labor auf 4096 Token eingestellt.",
+     visual: {typ: "zahlen", kacheln: [
+      {wert: "3,2 Mrd.", label: "Parameter (Llama 3.2)", icon: "brain"},
+      {wert: "Q4_K_M", label: "Quantisierung", icon: "binary"},
+      {wert: "4096", label: "Kontext in Token, im Labor eingestellt", icon: "scan"}]},
+     p: [
+      "Gemessen am 22.11.2026 auf dem Jetson mit Ollama 0.12.3: Das Modell `llama3.2:3b` hat 3,2 Milliarden [[parameter|Parameter]] und ist mit dem Verfahren Q4_K_M [[quantisierung|quantisiert]], also mit etwa vier Bit je Zahl gespeichert. Dadurch passt es in rund 2 GB des gemeinsamen Speichers.",
+      "Das Modell wurde für bis zu 131 072 Token Kontext gebaut. Das Labor stellt aber nur 4096 Token ein (OLLAMA_CONTEXT_LENGTH=4096), dazu einen Zwischenspeicher mit 8-Bit-Werten (OLLAMA_KV_CACHE_TYPE=q8_0) und Flash Attention. Der Grund ist der knappe Speicher: Ein längerer Kontext braucht mehr davon. Mehr zum [[kontext|Kontextfenster]] steht auf {{tokens-sprachmodelle|Wie ein Sprachmodell gebaut ist}}.",
+     ]},
     {h: "Warum Edge-Geräte wichtig sind",
      kurz: "Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.",
      visual: {typ: "ablauf", paket: true, schritte: [

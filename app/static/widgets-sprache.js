@@ -793,11 +793,12 @@
         if (id === o.id) b.classList.add("gewaehlt");
       });
       ref.rueck.className = "sp-rueck " + (ok ? "ok" : "nein");
-      ref.rueck.replaceChildren(
+      // Element.replaceChildren(null) schriebe das Wort "null" in die Seite: leere Teile vorher herausfiltern
+      ref.rueck.replaceChildren(...[
         h("p", { class: "sp-urteil" }, ic(ok ? "check" : "x"), ok ? "Richtig." : "Nicht ganz."),
         ok ? null : h("p", { class: "sp-text" }, "Richtig wäre: " + richtigOpt.t + "."),
         h("p", { class: "sp-text" }, s.erklaerung),
-        h("p", { class: "sp-tun" }, h("b", null, "Was du tun würdest: "), s.tun));
+        h("p", { class: "sp-tun" }, h("b", null, "Was du tun würdest: "), s.tun)].filter(Boolean));
       ref.weiter.hidden = false;
       ref.weiter.focus({ preventScroll: false });
       const n = ergebnisse.filter((e) => e.richtig).length;

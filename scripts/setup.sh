@@ -16,11 +16,11 @@ if [ ! -f app/models/haarcascade_frontalface_default.xml ]; then
   if [ -n "$F" ]; then cp "$F" app/models/
   else curl -sS -m 30 -o app/models/haarcascade_frontalface_default.xml \
     https://raw.githubusercontent.com/opencv/opencv/4.8.0/data/haarcascades/haarcascade_frontalface_default.xml; fi
+fi
 echo "== yunet (robuste Gesichtserkennung) =="
 if [ ! -f app/models/face_detection_yunet_2023mar.onnx ]; then
   curl -sS -m 30 -L -o app/models/face_detection_yunet_2023mar.onnx \
     https://github.com/opencv/opencv_zoo/raw/main/models/face_detection_yunet/face_detection_yunet_2023mar.onnx
-fi
 fi
 echo "== yolox (objekterkennung) =="
 if [ ! -f app/models/yolox_tiny.onnx ]; then

@@ -1,0 +1,185 @@
+{
+ "id": "quellen-pruefen",
+ "titel": "Quellen prüfen",
+ "untertitel": "Fünf Schritte, bevor du etwas glaubst oder weiterschickst",
+ "gesamt": 149.34,
+ "szenen": [
+  {
+   "id": "likes",
+   "kapitel": "Tausend Likes",
+   "start": 0,
+   "dauer": 14.82,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.88,
+     "text": "Dein Chat explodiert. Alle schicken denselben Beitrag, mit großer Überschrift und tausend Likes."
+    },
+    {
+     "t": 8.08,
+     "d": 5.84,
+     "text": "Stimmt das? Likes sind kein Beweis. Auch Unsinn kann tausendmal geteilt werden."
+    }
+   ]
+  },
+  {
+   "id": "stopp",
+   "kapitel": "Schritt 1: Stopp",
+   "start": 14.82,
+   "dauer": 14.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.76,
+     "text": "Schritt eins heißt Stopp. Bevor du glaubst oder teilst, atme einmal durch."
+    },
+    {
+     "t": 6.56,
+     "d": 7.04,
+     "text": "Beiträge, die wütend oder neugierig machen, verbreiten sich besonders gut. Manche sind genau dafür gebaut."
+    }
+   ]
+  },
+  {
+   "id": "wer",
+   "kapitel": "Schritt 2: Wer steckt dahinter?",
+   "start": 29.32,
+   "dauer": 13.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.6,
+     "text": "Schritt zwei: Wer steckt dahinter? Schau, ob die Seite sagt, wer sie betreibt."
+    },
+    {
+     "t": 6.4,
+     "d": 6.32,
+     "text": "Ein Impressum mit Name und Adresse ist ein gutes Zeichen. Fehlt es ganz, sei misstrauisch."
+    }
+   ]
+  },
+  {
+   "id": "seitlich",
+   "kapitel": "Schritt 3: Seitlich lesen",
+   "start": 42.94,
+   "dauer": 14.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.68,
+     "text": "Schritt drei: Lies seitlich. Verlass die Seite und öffne einen neuen Tab. Such nach dem Namen der Quelle."
+    },
+    {
+     "t": 8.48,
+     "d": 4.88,
+     "text": "Was sagen andere über sie? So arbeiten Profis, die Fakten prüfen."
+    }
+   ]
+  },
+  {
+   "id": "zweite",
+   "kapitel": "Schritt 4: Zweite Quelle",
+   "start": 57.2,
+   "dauer": 13.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.04,
+     "text": "Schritt vier: Gibt es eine zweite Quelle? Berichten unabhängige Medien dasselbe, oder eine Behörde?"
+    },
+    {
+     "t": 7.84,
+     "d": 4.88,
+     "text": "Hat nur eine einzige Seite die große Neuigkeit, ist das ein Warnzeichen."
+    }
+   ]
+  },
+  {
+   "id": "original",
+   "kapitel": "Schritt 5: Zum Original",
+   "start": 70.82,
+   "dauer": 15.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.88,
+     "text": "Schritt fünf: Geh zum Original. Wie bei Stille Post wird eine Studie auf dem Weg oft verdreht."
+    },
+    {
+     "t": 7.68,
+     "d": 6.56,
+     "text": "Such die Studie selbst. Steht dort wirklich, was der Beitrag behauptet? Und wer hat sie bezahlt?"
+    }
+   ]
+  },
+  {
+   "id": "probe",
+   "kapitel": "Probelauf",
+   "start": 85.96,
+   "dauer": 26.96,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.08,
+     "text": "Ein Probelauf mit einer erfundenen Meldung: Schüler mit blauen Stiften schreiben bessere Noten."
+    },
+    {
+     "t": 6.88,
+     "d": 9.84,
+     "text": "Stopp: Das klingt zu schön, um wahr zu sein. Wer steckt dahinter? Eine Seite ohne Impressum. Seitlich gelesen: Niemand kennt sie."
+    },
+    {
+     "t": 17.02,
+     "d": 9.04,
+     "text": "Zweite Quelle? Keine. Original? Keine Studie zu finden. Ergebnis: Quatsch, und du hast es in zwei Minuten gemerkt."
+    }
+   ]
+  },
+  {
+   "id": "ki",
+   "kapitel": "Und die KI?",
+   "start": 112.92,
+   "dauer": 18.64,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.28,
+     "text": "Und die KI? Ein Chatbot ist keine Quelle. Er setzt Wörter fort, die passen, und kann Quellen erfinden."
+    },
+    {
+     "t": 8.08,
+     "d": 5.44,
+     "text": "Bitte ihn um Links und klick sie an. Gibt es die Seite nicht, hat er sie erfunden."
+    },
+    {
+     "t": 13.82,
+     "d": 3.92,
+     "text": "Hilfreich ist er trotzdem: für Ideen, was du prüfen kannst."
+    }
+   ]
+  },
+  {
+   "id": "merken",
+   "kapitel": "Dein Merksatz",
+   "start": 131.56,
+   "dauer": 17.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.08,
+     "text": "Dein Merksatz: Stopp, wer, seitlich, zweite Quelle, Original."
+    },
+    {
+     "t": 6.88,
+     "d": 4.08,
+     "text": "Das dauert ein paar Minuten und macht dich zum Profi im Freundeskreis."
+    },
+    {
+     "t": 11.26,
+     "d": 4.72,
+     "text": "Und wenn du nichts findest? Dann teile es nicht. Das ist völlig in Ordnung."
+    }
+   ]
+  }
+ ]
+}

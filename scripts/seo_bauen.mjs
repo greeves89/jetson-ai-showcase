@@ -16,8 +16,16 @@ const IDS = new Set(Object.keys(INHALT.seiten));
 /* ---------------------------------------------------------------- Markierungen (gleiche Regeln wie md() in app.js) */
 const esc = (s) => String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const pfad = (id) => (id === "start" ? "/" : "/" + id);
+const LINK_OK = /^(?:https:\/\/[^\s"'<>*`\\]+|\/(?!\/)[^\s"'<>*`\\]*)$/;   // gleiche Regel wie LINK_OK in app.js
+const LINK_RE = /\[([^\[\]]+)\]\(([^()\s]+)\)/g;
 function md(t) {
   let s = esc(t);
+  const links = [];
+  s = s.replace(LINK_RE, (m, text, url) => {
+    if (!LINK_OK.test(url)) return text;
+    links.push('<a href="' + url + '"' + (url.startsWith("https://") ? ' rel="noopener noreferrer"' : "") + ">" + text + "</a>");
+    return "\u0001" + (links.length - 1) + "\u0001";
+  });
   s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g, (m, k, anzeige) => {
     const g = INHALT.glossar[k];
     return anzeige || (g ? g[0] : k);
@@ -25,7 +33,7 @@ function md(t) {
   s = s.replace(/\{\{([a-z0-9-]+)(\?[a-z0-9_=&-]+)?\|([^}]+)\}\}/g, (m, id, abfrage, text) => (IDS.has(id) ? '<a href="' + pfad(id) + (abfrage || "") + '">' + text + "</a>" : text));
   s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
   s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
-  return s;
+  return s.replace(/\u0001(\d+)\u0001/g, (m, i) => links[+i]);
 }
 /** Saetze eines Textes (ohne Markierungen); Abkuerzungen wie "z. B." trennen nicht. */
 function saetze(t) {

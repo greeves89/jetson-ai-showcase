@@ -1,0 +1,83 @@
+{
+ "id": "echt-oder-ki",
+ "titel": "Echt oder KI?",
+ "untertitel": "So gehst du mit Bildern um, die zu gut aussehen",
+ "szenen": [
+  {
+   "id": "raten",
+   "kapitel": "Zwei Bilder",
+   "saetze": [
+    "Zwei Bilder von einem Berg. Eins hat eine Kamera gemacht, eins eine KI.",
+    "Welches ist welches? Tipp kurz, bevor du weiterhörst."
+   ]
+  },
+  {
+   "id": "bauchgefuehl",
+   "kapitel": "Bauchgefühl",
+   "saetze": [
+    "Und genau das ist das Problem. Studien zeigen, dass Menschen KI-Gesichter oft nicht sicher von echten unterscheiden.",
+    "Dein Bauchgefühl ist also kein Messgerät."
+   ]
+  },
+  {
+   "id": "fehler",
+   "kapitel": "Fehler im Bild",
+   "saetze": [
+    "Früher halfen Fehler im Bild. Hände mit zu vielen Fingern, Schrift wie Buchstabensuppe, Schatten, die in die falsche Richtung fallen.",
+    "Schau trotzdem hin. Das sind gute erste Hinweise."
+   ]
+  },
+  {
+   "id": "wettlauf",
+   "kapitel": "Die Modelle lernen",
+   "saetze": [
+    "Aber die Modelle lernen dazu. Was heute auffällt, ist bald weg.",
+    "Ein Bild ohne sichtbaren Fehler ist deshalb noch lange kein echtes Bild."
+   ]
+  },
+  {
+   "id": "herkunft",
+   "kapitel": "Woher kommt es?",
+   "saetze": [
+    "Dreh die Frage um. Nicht: Sieht das echt aus? Sondern: Woher kommt das?",
+    "Wer hat es zuerst gezeigt? Gibt es dazu ein Datum, einen Ort, einen Namen?",
+    "Ein Bild ohne Herkunft ist wie eine Behauptung ohne Beweis."
+   ]
+  },
+  {
+   "id": "kontext",
+   "kapitel": "Echt, aber falsch",
+   "saetze": [
+    "Und noch etwas: Nicht jedes falsche Bild kommt von einer KI. Oft ist es ein echtes Foto mit falscher Geschichte.",
+    "Ein altes Foto, das als neues Ereignis verkauft wird. Darum zählt die Herkunft mehr als die Technik."
+   ]
+  },
+  {
+   "id": "suche",
+   "kapitel": "Bildersuche",
+   "saetze": [
+    "Mit der Bildersuche siehst du, wo ein Bild sonst noch auftaucht. Lade es hoch oder gib die Adresse ein.",
+    "Oft zeigt sich: Das Bild ist alt, geklaut oder gehört zu einer ganz anderen Geschichte.",
+    "Findest du es nirgends, ist das ein Warnsignal, aber kein Beweis."
+   ]
+  },
+  {
+   "id": "siegel",
+   "kapitel": "Herkunftsangabe",
+   "saetze": [
+    "Manche Programme speichern eine Herkunftsangabe im Bild. Sie heißt Content Credentials und zeigt, womit das Bild entstanden ist.",
+    "Ist sie da, hilft das. Fehlt sie, heißt das nichts, denn sie geht zum Beispiel bei einem Bildschirmfoto verloren.",
+    "Und Apps, die KI-Bilder erkennen sollen, liegen auch oft daneben."
+   ]
+  },
+  {
+   "id": "plan",
+   "kapitel": "Dein Plan",
+   "saetze": [
+    "Dein Plan in drei Fragen. Wer zeigt mir das? Was soll ich dabei fühlen oder tun? Gibt es eine zweite Quelle?",
+    "Achte auch darauf, was das Bild mit dir macht. Macht es dich sofort wütend? Dann sei besonders vorsichtig, denn an Gefühlen ziehen Fakes am liebsten.",
+    "Bist du danach unsicher, schick es nicht weiter. Zweifeln ist erlaubt, und es macht dich nicht langweilig."
+   ]
+  }
+ ]
+}

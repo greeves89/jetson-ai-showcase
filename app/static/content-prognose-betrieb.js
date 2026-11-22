@@ -14,6 +14,7 @@ seiten: {
 "tabellen-ml": {
   nav: "Entscheidungsbäume", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Entscheidungsbäume und Tabellendaten", symbol: "ml",
   widget: "baum-spiel", videos: ["entscheidungsbaeume"],
+  lernziele: ["Du kannst erklären, wie ein Entscheidungsbaum aus Daten lernt.", "Du kannst sagen, warum Bäume gut lesbar sind und trotzdem zu viel auswendig lernen.", "Du kannst entscheiden, wann bei Tabellen ein einfaches Verfahren reicht."],
   kurz: "Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?",
   abschnitte: [
     {h: "Das Ratespiel mit den Ja-Nein-Fragen",
@@ -145,6 +146,7 @@ seiten: {
 zeitreihen: {
   nav: "Zeitreihen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Prognosen aus Zeitreihen", symbol: "ml",
   widget: "prognose-labor", videos: ["zeitreihen-prognose"],
+  lernziele: ["Du kannst Trend, Saison und Zufall in einer Zeitreihe unterscheiden.", "Du kannst sagen, warum eine Prognose einen Maßstab und einen Fehlerwert braucht.", "Du kannst erklären, welche Ereignisse ein Modell nicht vorhersagen kann."],
   kurz: "Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?",
   abschnitte: [
     {h: "Der Wetterbericht als Zeitreihe",
@@ -271,6 +273,7 @@ zeitreihen: {
 anomalien: {
   nav: "Auffälliges finden", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Auffälliges finden", symbol: "ml",
   widget: "anomalie-labor", videos: ["anomalieerkennung"],
+  lernziele: ["Du kannst erklären, wie ein Modell lernt, was normal ist.", "Du kannst den Schwellenwert zwischen Fehlalarmen und übersehenen Fällen einordnen.", "Du kannst sagen, warum ein Mensch die Verdachtsfälle prüft."],
   kurz: "Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?",
   abschnitte: [
     {h: "Die seltsame Abbuchung",
@@ -413,6 +416,7 @@ anomalien: {
 empfehlungen: {
   nav: "Empfehlungen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Empfehlungssysteme", symbol: "ml",
   widget: "empfehlungs-labor", videos: ["empfehlungssysteme"],
+  lernziele: ["Du kannst zwei Grundideen von Empfehlungssystemen unterscheiden.", "Du kannst erklären, was Kaltstart und Filterblase sind.", "Du kannst sagen, woran man gute Empfehlungen misst."],
   kurz: "Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?",
   abschnitte: [
     {h: "Die Buchhändlerin, die dich kennt",
@@ -563,6 +567,7 @@ empfehlungen: {
 mlops: {
   nav: "Prototyp zu Betrieb", typ: "lektion", gruppe: "KI im Betrieb", titel: "Vom Prototyp in den Betrieb", symbol: "hardware",
   videos: ["mlops-betrieb"],
+  lernziele: ["Du kannst die Stationen vom Prototyp bis zum Betrieb nennen.", "Du kannst Drift erklären und sagen, wie man sie bemerkt.", "Du kannst begründen, warum Versionen, Rückfall und Zuständigkeiten dazugehören."],
   kurz: "Ein Modell, das im Versuch funktioniert, ist erst der Anfang. Was braucht es, damit es jeden Tag zuverlässig arbeitet?",
   abschnitte: [
     {h: "Die Küche eines Restaurants",
@@ -685,14 +690,14 @@ mlops: {
       "Schreibe einen Steckbrief dazu: Zweck, Trainingsdaten und ihr Stand, Grenzen, gemessene Qualität, bekannte Schwächen, Version und Datum. Er hilft neuen Kolleginnen und Kollegen und bei Rückfragen von Datenschutz und Prüfern. Je nach Einsatz verlangt auch das Recht Nachweise, mehr auf der Seite {{recht|Recht und Regeln}}.",
     ]},
     {h: "Was auf einem kleinen Gerät wie dem Jetson anders ist",
-     kurz: "Wenig Speicher, wenig Watt, meist ein Modell zur Zeit. Dafür bleiben die Daten am Gerät.",
+     kurz: "Wenig Speicher, wenig Watt, meist nur wenige Modelle gleichzeitig. Dafür bleiben die Daten am Gerät.",
      visual: {typ: "zahlen", kacheln: [
         {wert: "8 GB", label: "Speicher für CPU und GPU gemeinsam", icon: "memory-stick"},
         {wert: "wenige Watt", label: "Leistungsaufnahme", icon: "zap"},
         {wert: "1 Modell", label: "meist nur eins zur Zeit", icon: "brain"},
       ]},
      p: [
-      "Auf dem Jetson Orin Nano teilen sich CPU und GPU 8 GB Speicher, und das Gerät nimmt nur wenige Watt auf. Das prägt den Betrieb: Das Modell muss klein genug sein (oft verkleinert, zum Beispiel mit geringerer Zahlengenauigkeit), meist läuft nur ein Modell zur Zeit, und Wärme und Stromversorgung zählen mit. Die Seite {{hardware|Hardware}} zeigt live Speicher, Auslastung, Leistung und Temperatur, also genau die Werte, die du im Betrieb beobachten würdest.",
+      "Auf dem Jetson Orin Nano teilen sich CPU und GPU 8 GB Speicher, und das Gerät nimmt nur wenige Watt auf. Das prägt den Betrieb: Das Modell muss klein genug sein (oft verkleinert, zum Beispiel mit geringerer Zahlengenauigkeit), meist passen nur ein bis zwei Modelle gleichzeitig in den Speicher, und Wärme und Stromversorgung zählen mit. Die Seite {{hardware|Hardware}} zeigt live Speicher, Auslastung, Leistung und Temperatur, also genau die Werte, die du im Betrieb beobachten würdest.",
       "Ein Vorteil: Die Daten bleiben am Gerät, und es gibt keinen Netzweg. Dafür musst du Updates, Zugriff und Ausfälle vor Ort selbst regeln. Wie das mit Kosten und Strom zusammenhängt, steht auf der Seite {{kosten-energie|Kosten und Energie}}.",
     ], alltag: [
       "Ein Imbisswagen ist keine Restaurantküche. Er hat einen Herd, wenig Platz und Strom aus einem begrenzten Anschluss. Wer dort arbeitet, plant die Speisekarte nach diesen Grenzen und prüft öfter, ob alles läuft, weil kein zweiter Koch einspringt. Der Jetson ist der Imbisswagen: Er kann viel, aber du musst haushalten.",
@@ -726,6 +731,7 @@ mlops: {
 "kosten-energie": {
   nav: "Kosten und Energie", typ: "lektion", gruppe: "KI im Betrieb", titel: "Kosten und Energie", symbol: "hardware",
   widget: "kosten-rechner", videos: ["kosten-und-energie"],
+  lernziele: ["Du kannst lokal, Cloud und Edge nach Kosten und Datenschutz vergleichen.", "Du kannst Stromkosten aus Watt, Stunden und Preis ausrechnen.", "Du kannst Kosten nennen, die man gern vergisst."],
   kurz: "Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?",
   abschnitte: [
     {h: "Kaufen, mieten, Taxi fahren",
@@ -805,7 +811,7 @@ mlops: {
       "Eine Kilowattstunde kostet **0,30 Euro** (nur zum Rechnen, nimm den Wert deiner Stromrechnung).",
     ]},
     {h: "Die Rechnung und der Vergleich mit der Cloud",
-     kurz: "Watt mal Stunden mal Preis ergibt die Stromkosten. Mit den Annahmen aus dem Text hat sich das Gerät nach knapp einem Jahr bezahlt.",
+     kurz: "Watt mal Stunden mal Preis ergibt die Stromkosten. Ohne Betreuung hat sich das Gerät in dieser Annahme nach knapp einem Jahr bezahlt.",
      visual: [{typ: "ablauf", paket: false, schritte: [
           {icon: "zap", text: "15 W mal 24 h", sub: "360 Wh"},
           {icon: "scale", text: "0,36 kWh", sub: "pro Tag"},
@@ -818,8 +824,22 @@ mlops: {
         ], unter: "Gerät 500 € Anschaffung, nach rund 10,7 Monaten gleichauf. Personal und Wartung fehlen noch."}],
      p: [
       "15 Watt mal 24 Stunden sind 360 Wattstunden, also 0,36 Kilowattstunden pro Tag. Mal 0,30 Euro sind rund 0,11 Euro pro Tag, also gut 11 Cent. Auf ein Jahr gerechnet (365 Tage) sind das etwa 39 Euro. Würde das Gerät im Mittel 30 Watt aufnehmen, verdoppelte sich der Betrag.",
-      "Jetzt der Vergleich mit einem Cloud-Dienst. Auch hier nur angenommene Zahlen: Der Dienst kostet 50 Euro im Monat, das Gerät in der Anschaffung 500 Euro. Der Strom kostet monatlich etwa 3,30 Euro (39 Euro durch 12). Ersparnis pro Monat: 50 minus 3,30, rund 46,70 Euro. Anschaffung geteilt durch Ersparnis ergibt rund 10,7 Monate. Nach knapp einem Jahr hätte sich das Gerät in dieser Rechnung bezahlt gemacht. Personal, Wartung und Ersatz sind dabei nicht eingerechnet. Rechne sie bei einer echten Entscheidung mit ein.",
+      "Vergleiche die Zahlen mit einem Cloud-Dienst: Unter „Ausprobieren“ rechnet der Rechner mit deinen Werten, auch mit Betreuung. In der Rechnung im Text fehlen Personal, Wartung und Ersatz noch. Rechne sie bei einer echten Entscheidung mit ein.",
     ]},
+    {h: "Kameraprojekte rechnen anders",
+     id: "kamera",
+     kurz: "Der Rechner oben gilt für ein Sprachmodell. Eine Kamera im Betrieb hat andere Posten. Hier eine Beispielrechnung mit erfundenen Werten.",
+     visual: {typ: "zahlen", kacheln: [
+        {wert: "4.700 €", label: "einmalig (Beispielwert)", icon: "receipt"},
+        {wert: "245 €", label: "pro Monat laufend (Beispielwert)", icon: "calendar-days"},
+        {wert: "13 Monate", label: "bis zur Amortisation (Beispielrechnung)", icon: "clock"},
+      ]},
+     p: [
+      "**Der Kostenrechner oben rechnet ein Sprachmodell: Strom gegen Cloud. Er passt nicht auf ein Kamerasystem.** Bei einer Kamera zur Qualitätsprüfung kommen Kamera, Licht und Halterung, Einrichtung und Anlernen, laufende Pflege und die Prüfung der Stichproben hinzu.",
+      "Beispielrechnung, alle Werte erfunden und nur zum Üben: Kamera, Beleuchtung und Halterung 1.500 €, Rechner 800 €, Einrichtung und Anlernen 40 Stunden zu 60 € gleich 2.400 €. Einmalig also 4.700 €. Laufend: Pflege 4 Stunden im Monat zu 60 € gleich 240 € plus rund 5 € Strom, zusammen 245 €. Angenommen, die Handprüfung kostet heute 1.200 € im Monat und das System nimmt die Hälfte ab, also 600 €. Dann bleiben 600 minus 245 gleich 355 € Ersparnis im Monat, und 4.700 durch 355 sind rund 13 Monate bis zur Amortisation.",
+      "Ob das System die Hälfte abnehmen kann, ist die entscheidende Annahme, und sie lässt sich nur im Pilot mit eigenen Teilen messen. Frage dazu: Wie viele Teile pro Minute müssen geprüft werden? Wie viele Bilder gibt es von seltenen Fehlern? Reicht klassische Bildverarbeitung, oder braucht der Fall wirklich KI? Wer haftet, wenn ein Fehler durchrutscht? Mehr zu einem Beispiel steht auf {{uc-fertigung-sichtpruefung|Sichtprüfung}}.",
+     ],
+     merke: "Alle Zahlen dieser Beispielrechnung sind erfunden. Setze eigene Angebote und Zeiten ein."},
     {h: "Was man gern vergisst",
      kurz: "Ein Fitnessstudio-Vertrag kostet auch ohne Besuch. So ist es mit schwach genutzten Geräten.",
      visual: {typ: "raster", spalten: 4, zellen: [
@@ -887,6 +907,7 @@ mlops: {
 "ki-einfuehrung": {
   nav: "KI einführen", typ: "lektion", gruppe: "KI im Betrieb", titel: "KI im Unternehmen einführen", symbol: "business",
   videos: ["ki-einfuehren"],
+  lernziele: ["Du kannst einen KI-Einsatz nach Nutzen, Machbarkeit, Daten und Risiko bewerten.", "Du kannst einen Piloten mit Maßstab und Entscheidung planen.", "Du kannst sagen, wer von Anfang an beteiligt sein sollte."],
   kurz: "Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?",
   abschnitte: [
     {h: "Erst das Problem, dann die Technik",
@@ -1028,7 +1049,7 @@ mlops: {
       "Ist ein Verantwortlicher benannt, und prüft jemand die Ergebnisse?",
       "Sind Betroffene, Datenschutz und Betriebsrat informiert?",
       "Gibt es einen Rückfall, und weißt du, wann du stoppst?",
-    ], merke: "Mehr zu Einsatzfeldern steht auf der Seite {{business|KI im Business}}, zur Messung auf {{bewertung|Wie gut ist ein Modell?}}, zu den Regeln auf {{recht|Recht und Regeln}}."},
+    ], merke: "Die sechs Fragen zum Abhaken und Drucken stehen auf {{betrieb-entscheidung|Deine Entscheidung}}. Mehr zu Einsatzfeldern steht auf der Seite {{business|KI im Business}}, zur Messung auf {{bewertung|Wie gut ist ein Modell?}}, zu den Regeln auf {{recht|Recht und Regeln}}."},
   ],
   mitnehmen: [
     "Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.",
@@ -1052,7 +1073,7 @@ mlops: {
      optionen: ["Ausrollen, weil es fast reicht", "Ändern und eine zweite Runde mit besseren Daten machen", "Alle Daten löschen", "Nichts tun"],
      richtig: 1, erklaerung: "Die Richtung stimmt, aber etwas fehlt. Die Entscheidung heißt: ändern und neu prüfen, nicht blind ausrollen."},
   ],
-  weiter: ["business", "recht", "bewertung"],
+  weiter: ["uc-handwerk", "kosten-energie", "betrieb-entscheidung", "business", "recht", "bewertung"],
 },
 
 },

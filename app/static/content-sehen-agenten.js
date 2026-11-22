@@ -9,6 +9,7 @@ const seiten = {
 "bild-als-zahlen": {
   nav: "Bild als Zahlen", typ: "lektion", gruppe: "Sehen", titel: "Wie ein Computer ein Bild sieht", symbol: "gesicht",
   widget: "pixel-labor", videos: ["bild-als-zahlen"],
+  lernziele: ["Du kannst erklären, warum ein Bild für den Computer eine Tabelle aus Zahlen ist.", "Du kannst sagen, wie Helligkeit und Farbe als Zahlen gespeichert werden.", "Du kannst beschreiben, was Auflösung, Belichtung und Rauschen verändern."],
   kurz: "Du siehst ein Foto, ein Computer sieht eine Tabelle voller Zahlen. Hier lernst du, wie aus Licht Zahlen werden und warum jede Bilderkennung damit beginnt.",
   abschnitte: [
     {h: "Ein Bild ist ein Raster aus Punkten",
@@ -98,6 +99,7 @@ Object.assign(seiten, {
 "cnn-intuition": {
   nav: "Wie Netze sehen", typ: "lektion", gruppe: "Sehen", titel: "Wie Netze Bilder verstehen", symbol: "objekt",
   widget: "filter-labor", videos: ["cnn-wie-netze-sehen"],
+  lernziele: ["Du kannst erklären, was ein Filter in einem Bildnetz macht.", "Du kannst sagen, was frühe, mittlere und späte Schichten erkennen.", "Du kannst begründen, warum ein Netz wegen Hintergrund oder Mustern irren kann."],
   kurz: "Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge. Hier siehst du ohne Formeln, wie das gelingt und wo es danebenliegt.",
   abschnitte: [
     {h: "Das Problem: Zahlen in Bedeutung verwandeln",
@@ -177,6 +179,7 @@ Object.assign(seiten, {
 "vision-aufgaben": {
   nav: "Aufgaben im Vergleich", typ: "lektion", gruppe: "Sehen", titel: "Fünf Fragen an ein Bild", symbol: "anlernen",
   videos: ["vision-aufgaben-ueberblick"],
+  lernziele: ["Du kannst fünf Bildaufgaben unterscheiden: Klasse, Rahmen, Pixelmaske, Pose und Text.", "Du kannst für ein Problem die einfachste passende Aufgabe wählen."],
   kurz: "Was ist das? Wo ist es? Welche Pixel gehören dazu? Wo sind die Gelenke? Was steht da? Jede Frage ist eine eigene Aufgabe mit eigenem Aufwand.",
   abschnitte: [
     {h: "Erst die Frage, dann das Verfahren",
@@ -272,6 +275,7 @@ Object.assign(seiten, {
 "agenten-grundlagen": {
   nav: "Was ist ein Agent?", typ: "lektion", gruppe: "Agenten", titel: "Was ist ein Agent?", symbol: "agent",
   videos: ["agenten-grundlagen"],
+  lernziele: ["Du kannst erklären, was einen Agenten von einem Chat unterscheidet.", "Du kannst die Schleife aus Denken, Aufrufen und Lesen beschreiben.", "Du kannst sagen, wann ein Agent sinnvoll ist und wann ein fester Ablauf besser passt."],
   kurz: "Ein Chat antwortet. Ein Agent arbeitet: Er wählt Werkzeuge, liest ihre Ergebnisse und macht weiter, bis die Aufgabe erledigt ist.",
   abschnitte: [
     {h: "Der Unterschied zum Chat",
@@ -303,7 +307,7 @@ Object.assign(seiten, {
      kurz: "Das Modell behält nichts. Es kennt nur den mitgeschickten Verlauf und Notizen außerhalb.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [{icon: "notebook-pen", text: "Notizen", sub: "Datei, Datenbank: bleiben"}, {icon: "scroll-text", text: "Kontext", sub: "Verlauf: begrenzt"}, {icon: "brain", text: "Modell", sub: "behält nichts"}]}, p: [
       "Das Modell selbst behält zwischen zwei Aufrufen nichts. Was es „weiß“, steht im Verlauf, der jedes Mal mitgeschickt wird: Aufgabe, bisherige Aufrufe, Ergebnisse. Dieser Verlauf heißt [[kontext|Kontext]] und hat eine Obergrenze.",
-      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Genau so funktioniert die Dokumentsuche im {{rag|RAG-Labor}}.",
+      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Genau so funktioniert die Dokumentsuche im {{rag|RAG-Werkstatt}}.",
     ], alltag: "Ein Kollege mit gutem Kurzzeitgedächtnis kann sich auf einem Telefonat alles merken, solange es dauert. Danach ist es weg. Wer es später braucht, schreibt es in die Akte."},
     {h: "Ein Durchlauf an einem Beispiel",
      kurz: "Drei Runden, kein Schritt war vorher festgelegt: rechnen, Uhrzeit holen, antworten.",
@@ -342,6 +346,12 @@ Object.assign(seiten, {
       "Das {{agent|Agent-Labor}} verwendet ein kleines Modell mit etwa drei Milliarden Parametern und drei Werkzeugen: **rechne**, **uhrzeit** und **dokumentsuche**. Du siehst jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah. Frage zuerst etwas, das ein Werkzeug braucht, und dann etwas, das keines braucht, und beobachte den Unterschied.",
       "Das Modell dahinter ist ein Sprachmodell, wie es die Seite {{genki|Generative KI}} beschreibt. Der Agent ergänzt es um Werkzeuge und die Schleife.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Yao et al.: [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629), 2022, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Agenten“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/agenten-grundlagen).",
+     ]},
   ],
   mitnehmen: [
     "Ein Agent ist ein Sprachmodell mit Werkzeugen in einer Schleife aus Denken, Aufrufen und Lesen.",
@@ -361,6 +371,7 @@ Object.assign(seiten, {
 "agenten-planung": {
   nav: "Planen und Fehler", typ: "lektion", gruppe: "Agenten", titel: "Planen, Schritte, Speicher und Fehler", symbol: "agent",
   widget: "agenten-ablaufspiel", videos: ["agenten-planung"],
+  lernziele: ["Du kannst erklären, wie ein Agent eine große Aufgabe in Schritte zerlegt.", "Du kannst sagen, warum sich Fehler bei langen Ketten summieren.", "Du kannst drei Schutzmaßnahmen nennen: Grenzen setzen, protokollieren, nachfragen."],
   kurz: "Je länger die Kette der Schritte, desto mehr kann schiefgehen. Hier lernst du, wie Agenten Aufgaben zerlegen, sich Dinge merken und mit Fehlern umgehen.",
   abschnitte: [
     {h: "Aufgaben zerlegen",
@@ -443,6 +454,7 @@ Object.assign(seiten, {
 "agenten-sicherheit": {
   nav: "Rechte und Sicherheit", typ: "lektion", gruppe: "Agenten", titel: "Rechte, Prompt-Injection und Freigaben", symbol: "agent",
   widget: "agenten-angriff", videos: ["agenten-sicherheit"],
+  lernziele: ["Du kannst erklären, warum ein Agent mit wenigen Rechten sicherer ist.", "Du kannst Prompt-Injection an einem Beispiel beschreiben.", "Du kannst sagen, wann ein Mensch freigeben muss."],
   kurz: "Ein Agent handelt. Darum musst du festlegen, was er darf, wem er glaubt und wann ein Mensch zustimmt.",
   abschnitte: [
     {h: "Warum Agenten ein eigenes Sicherheitsthema sind",
@@ -535,6 +547,7 @@ Object.assign(seiten, {
 "mcp-werkzeuge": {
   nav: "Werkzeuge anbinden", typ: "lektion", gruppe: "Agenten", titel: "Werkzeuge standardisiert anbinden (MCP)", symbol: "agent",
   videos: ["mcp-erklaert"],
+  lernziele: ["Du kannst erklären, welches Problem MCP löst.", "Du kannst Server und Client unterscheiden.", "Du kannst begründen, warum ein Server wie jede Software geprüft werden muss."],
   kurz: "Das Model Context Protocol ist ein gemeinsamer Stecker zwischen KI-Assistenten und den Systemen, die sie nutzen sollen.",
   abschnitte: [
     {h: "Das Problem: jede Anbindung einzeln",

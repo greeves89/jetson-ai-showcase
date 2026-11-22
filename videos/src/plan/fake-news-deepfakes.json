@@ -1,0 +1,180 @@
+{
+ "id": "fake-news-deepfakes",
+ "titel": "Fake News und Deepfakes",
+ "untertitel": "Was dahinter steckt und wie du dich schützt",
+ "gesamt": 145.68,
+ "szenen": [
+  {
+   "id": "stimme",
+   "kapitel": "Die Sprachnachricht",
+   "start": 0,
+   "dauer": 15.06,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.88,
+     "text": "Stell dir vor: Eine Sprachnachricht von deinem Bruder. Er klingt gestresst und bittet dich, schnell Geld zu schicken."
+    },
+    {
+     "t": 8.08,
+     "d": 6.08,
+     "text": "Es klingt echt. Aber er hat sie nie aufgenommen. Eine KI hat seine Stimme nachgebaut."
+    }
+   ]
+  },
+  {
+   "id": "begriffe",
+   "kapitel": "Zwei Begriffe",
+   "start": 15.06,
+   "dauer": 19.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.28,
+     "text": "Zwei Begriffe, die oft vermischt werden. Eine Falschinformation ist falsch und wird aus Versehen weitergegeben."
+    },
+    {
+     "t": 8.08,
+     "d": 5.76,
+     "text": "Desinformation ist absichtlich falsch. Fake News nennt man beides im Alltag."
+    },
+    {
+     "t": 14.14,
+     "d": 4.16,
+     "text": "Wichtig: Wer teilt, macht mit, auch ohne Absicht."
+    }
+   ]
+  },
+  {
+   "id": "warum",
+   "kapitel": "Warum das jemand tut",
+   "start": 34.26,
+   "dauer": 14.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.72,
+     "text": "Warum macht jemand so etwas? Manche verdienen Geld mit Klicks. Manche wollen Meinung machen. Und manche finden es einfach lustig."
+    },
+    {
+     "t": 9.52,
+     "d": 3.84,
+     "text": "Oft ist egal, ob es stimmt. Hauptsache, es wird geteilt."
+    }
+   ]
+  },
+  {
+   "id": "deepfake",
+   "kapitel": "Was ist ein Deepfake?",
+   "start": 48.52,
+   "dauer": 15.22,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Ein Deepfake ist ein Bild, ein Video oder eine Stimme, die eine KI erzeugt oder verändert hat."
+    },
+    {
+     "t": 7.28,
+     "d": 7.04,
+     "text": "Bei Stimmen reichen manchen Programmen schon wenige Sekunden Aufnahme. Dafür kann eine kurze Sprachnachricht genügen."
+    }
+   ]
+  },
+  {
+   "id": "spass",
+   "kapitel": "Spaß oder Schaden",
+   "start": 63.74,
+   "dauer": 14.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.12,
+     "text": "Nicht jeder Deepfake ist böse. Ein gekennzeichneter Witz oder ein Film mit Spezialeffekten ist harmlos."
+    },
+    {
+     "t": 7.92,
+     "d": 6.08,
+     "text": "Schwierig wird es, wenn etwas echt aussehen soll und jemanden sagen lässt, was er nie gesagt hat."
+    }
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "So prüfst du",
+   "start": 78.64,
+   "dauer": 15.7,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.68,
+     "text": "So prüfst du. Erstens: Passt das zu dieser Person? Zweitens: Berichten seriöse Quellen darüber?"
+    },
+    {
+     "t": 8.48,
+     "d": 6.32,
+     "text": "Drittens, bei Anrufen und Sprachnachrichten: Ruf zurück, über die Nummer, die du schon kennst."
+    }
+   ]
+  },
+  {
+   "id": "codewort",
+   "kapitel": "Das Codewort",
+   "start": 94.34,
+   "dauer": 15.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.96,
+     "text": "Mach mit Familie und Freunden ein Codewort aus. Es darf ruhig albern sein."
+    },
+    {
+     "t": 5.76,
+     "d": 8.96,
+     "text": "Wer in einer Notlage das Codewort nicht kennt, ist vermutlich nicht der, der er vorgibt zu sein. Ein Hundename ist dafür zu leicht zu erraten."
+    }
+   ]
+  },
+  {
+   "id": "teilen",
+   "kapitel": "Teilen ist Mitmachen",
+   "start": 109.96,
+   "dauer": 17.2,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.88,
+     "text": "Und du? Teilen ist Mitmachen. Lies erst, bevor du weiterschickst."
+    },
+    {
+     "t": 5.68,
+     "d": 7.68,
+     "text": "Fakes von echten Menschen, die sie bloßstellen, sind kein Spaß. Sie können sehr weh tun, und sie können strafbar sein."
+    },
+    {
+     "t": 13.66,
+     "d": 2.64,
+     "text": "Bau sie nicht und schick sie nicht weiter."
+    }
+   ]
+  },
+  {
+   "id": "hilfe",
+   "kapitel": "Wenn es dich trifft",
+   "start": 127.16,
+   "dauer": 18.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.44,
+     "text": "Wenn es dich trifft: Mach Bildschirmfotos, melde den Inhalt der Plattform und sprich mit jemandem, dem du vertraust."
+    },
+    {
+     "t": 8.24,
+     "d": 8.48,
+     "text": "Die Nummer gegen Kummer hilft Jugendlichen kostenlos und anonym. Sie lautet: eins eins sechs, eins eins eins."
+    }
+   ]
+  }
+ ]
+}

@@ -7,6 +7,7 @@ seiten: {
 
 daten: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Daten, der Rohstoff", nav: "Daten", symbol: "ml",
+  lernziele: ["Du kannst Merkmale und Etiketten an einem Beispiel unterscheiden.", "Du kannst begründen, warum Vielfalt und Qualität wichtiger sind als Menge.", "Du kannst erklären, wozu Trainings-, Validierungs- und Testdaten dienen."],
   kurz: "Ein Modell kann nur lernen, was in seinen Daten steckt. Was zählt als Datum, wie sieht gute Qualität aus, und wie viel braucht man?",
   widget: "datenqualitaet",
   videos: ["daten-rohstoff"],
@@ -98,6 +99,13 @@ daten: {
       "Mit dem ersten Training ist die Arbeit nicht fertig. Die Welt ändert sich: Neue Produkte erscheinen, Kunden verhalten sich anders, ein Sensor wird getauscht. Daten, die gestern gut waren, passen nach einem Jahr womöglich nicht mehr zur Wirklichkeit. Das Modell wird dann schleichend schlechter, ohne dass jemand eine Fehlermeldung sieht.",
       "Darum gehören zu jedem Einsatz klare Zuständigkeiten: Wer prüft die Qualität, wer ergänzt neue Fälle, wer löscht Altes? Eine Datenpflege, die nebenbei läuft, fällt bei Zeitdruck als Erstes weg.",
     ], alltag: "Ein Adressbuch, das zehn Jahre niemand angefasst hat, ist voller alter Nummern und Umzüge. Es sieht noch vollständig aus und führt trotzdem ins Leere."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Gebru et al.: [Datasheets for Datasets](https://arxiv.org/abs/1803.09010), 2018, abgerufen am 22.11.2026.",
+      "Google: [Machine Learning Crash Course, Abschnitt Daten](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Daten“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/daten).",
+     ]},
   ],
   mitnehmen: [
     "Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Beides kommt aus den Daten.",
@@ -125,7 +133,9 @@ daten: {
 },
 
 "neuronale-netze": {
+  mathe: true,
   typ: "lektion", gruppe: "Grundlagen", titel: "Neuronale Netze von Grund auf", nav: "Neuronale Netze", symbol: "ml",
+  lernziele: ["Du kannst beschreiben, wie ein Neuron aus Eingaben eine Ausgabe berechnet.", "Du kannst erklären, warum mehrere Schichten mehr können als eine.", "Du kannst sagen, warum neuronale Netze schwer zu erklären sind."],
   kurz: "Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen. Wie entscheidet eine davon, und was entsteht, wenn man viele verschaltet?",
   widget: "netz-spielplatz",
   videos: ["neuronale-netze-erklaert"],
@@ -146,7 +156,11 @@ daten: {
       "Der Ablauf ist immer gleich. Jede Eingabe wird mit ihrem [[gewicht|Gewicht]] multipliziert. Alle Ergebnisse werden addiert. Zur Summe kommt eine feste Zahl, die Verschiebung, hinzu. Dann folgt die [[aktivierung|Aktivierung]]: Sie legt fest, wie stark das Neuron meldet.",
       "Die einfachste Aktivierung ist eine Schwelle. Liegt die Summe darüber, meldet das Neuron „ja“, sonst „nein“. Weiche Formen geben stattdessen einen gleitenden Wert aus. Wichtig ist: Gewichte und Verschiebung sind die Zahlen, die beim [[training|Training]] eingestellt werden.",
     ], alltag: "Eine Fußgängerampel zeigt Grün, sobald genug Wartezeit abgelaufen ist und kein Auto kommt. Es gibt eine Schwelle: Unter ihr bleibt es rot, darüber wird es grün. Die Schwelle zu verschieben ändert, wie schnell die Ampel umspringt. Im Neuron übernimmt die Verschiebung genau diese Rolle.",
-      merke: "Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden."},
+      merke: "Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden.",
+     mathe: {p: [
+      "In Zeichen: `y = f(w1·x1 + w2·x2 + … + wn·xn + b)`. In Worten: Jede Eingabe x wird mit ihrem Gewicht w malgenommen, alles wird addiert, dazu kommt die Verschiebung b, und die Aktivierung f macht daraus die Ausgabe y.",
+      "Rechenbeispiel mit zwei Eingaben: x1 = 2, x2 = 3, Gewichte w1 = 0,5 und w2 = −1, Verschiebung b = 1. Die Summe ist 0,5·2 + (−1)·3 + 1 = −1. Die Schwelle lautet: ab einer Summe über 0 meldet das Neuron 1, sonst 0. Hier ist die Summe kleiner als 0, also meldet es 0.",
+     ]}},
     {h: "Schichten: Merkmale aus Merkmalen",
      kurz: "Die Ausgaben einer Schicht sind die Eingaben der nächsten. So entstehen Merkmale aus Merkmalen.",
      visual: {"typ":"netz","knoten":[{"id":"e1","text":"Eingabe 1","x":6,"y":14},{"id":"e2","text":"Eingabe 2","x":6,"y":50},{"id":"e3","text":"Eingabe 3","x":6,"y":86},{"id":"h1","text":"Neuron A","x":50,"y":20,"farbe":"orange"},{"id":"h2","text":"Neuron B","x":50,"y":50,"farbe":"orange"},{"id":"h3","text":"Neuron C","x":50,"y":80,"farbe":"orange"},{"id":"a","text":"Ausgabe","x":94,"y":50,"farbe":"gruen"}],"kanten":[["e1","h1"],["e1","h2"],["e1","h3"],["e2","h1"],["e2","h2"],["e2","h3"],["e3","h1"],["e3","h2"],["e3","h3"],["h1","a"],["h2","a"],["h3","a"]]},
@@ -154,7 +168,10 @@ daten: {
       "Ein einzelnes Neuron kann nur eine gerade Trennlinie ziehen. Viele Aufgaben brauchen mehr. Deshalb ordnet man Neuronen in [[schicht|Schichten]]: Die Ausgaben einer Schicht sind die Eingaben der nächsten.",
       "So baut die zweite Schicht auf dem auf, was die erste gefunden hat. Das ist der Kern der Sache: Merkmale entstehen aus Merkmalen. Bei einem Foto erkennen frühe Schichten oft einfache Dinge wie Kanten, spätere setzen daraus Formen zusammen, noch spätere ganze Gegenstände.",
     ], alltag: "Ein Postsortierzentrum arbeitet in Stufen. Erst wird nach Größe getrennt, dann nach Postleitzahlbereich, dann nach Straße. Keine Stufe kennt das ganze Ziel. Jede macht einen einfachen Schritt auf dem Ergebnis der vorigen."},
-    {h: "Warum mehrere Schichten mehr können",
+    {h: "Warum mehrere Schichten mehr können", mathe: {p: [
+      "Ohne Aktivierung wäre jede Schicht eine lineare Abbildung `h = W1·x + b1` und `y = W2·h + b2`. Setzt man ein, so ist `y = (W2·W1)·x + (W2·b1 + b2)`: wieder nur eine einzige lineare Abbildung. Zwei Schichten wären nicht mehr als eine.",
+      "Übliche Aktivierungen: Sigmoid `σ(z) = 1 / (1 + e^(−z))` mit `σ(0) = 0,5` und ReLU `max(0, z)`. Erst sie machen die Verkettung nichtlinear.",
+     ]},
      kurz: "Ein Neuron zieht nur eine gerade Linie. Mit Zwischenschicht und Aktivierung entstehen gebogene Grenzen.",
      visual: [{"typ":"punkte","grenze":"linie","unter":"Ein Neuron: gerade Linie","klassen":[{"name":"Klasse A","farbe":"gruen","n":24,"mitte":[28,64],"streu":9},{"name":"Klasse B","farbe":"rot","n":22,"mitte":[72,34],"streu":9}]},{"typ":"punkte","grenze":"kreis","unter":"Mehrere Schichten: gebogene Grenze","klassen":[{"name":"Innen","farbe":"akzent","n":34,"mitte":[48,48],"streu":8},{"name":"Außen","farbe":"orange","n":8,"mitte":[84,80],"streu":5}]}],
      p: [
@@ -169,7 +186,10 @@ daten: {
         ["Viele Schichten", "Verschachtelte, sehr feine Muster", "Gesichter, Sprache, Schrift"],
       ],
     }},
-    {h: "Parameter zählen und was „tief“ heißt",
+    {h: "Parameter zählen und was „tief“ heißt", mathe: {p: [
+      "Eine Schicht mit `n_ein` Eingaben und `n_aus` Neuronen hat `n_ein·n_aus + n_aus` Parameter, die Gewichte plus je eine Verschiebung pro Neuron. Für 3 Eingaben, 4 Neuronen und 1 Ausgabe: `(3·4 + 4) + (4·1 + 1) = 16 + 5 = 21`.",
+      "Ein Bild mit 28·28 = 784 Punkten und eine Schicht aus 100 Neuronen: `784·100 + 100 = 78 500` Parameter. Das passt zu der Zahl im Text.",
+     ]},
      kurz: "Parameter sind alle Gewichte und Verschiebungen. Tief heißt: viele Schichten hintereinander.",
      visual: {"typ":"skala","links":"Flach: eine Schicht","rechts":"Tief: viele Schichten","marker":0.86,"label":"Millionen bis Milliarden Parameter"},
      p: [
@@ -198,6 +218,14 @@ daten: {
       "Die Seite {{ml|Maschinelles Lernen}} hat gezeigt, dass ein Modell aus Zahlen besteht. Ein neuronales Netz ist eine Bauart davon. Auch das Sprachmodell im {{chat|Chat}} ist ein sehr großes Netz, das im Kern das nächste Wortstück vorhersagt. Wie die Gewichte eingestellt werden, steht auf der Seite {{training|Wie ein Modell lernt}}.",
       "Auch die Objekt- und Gesichtserkennung im Labor laufen auf Netzen. Dort siehst du, wie schnell ein fertiges Netz auf dem Jetson rechnet, obwohl es Millionen Parameter hat. Die Rechenarbeit passiert beim Auswerten nur einmal vorwärts durch alle Schichten.",
     ], alltag: "Ein gelernter Handwerker braucht für den Handgriff Sekunden, obwohl die Ausbildung Jahre gedauert hat. Training ist die Ausbildung, das Auswerten der Handgriff."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Nielsen: [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/), Kapitel 1, 2015, abgerufen am 22.11.2026.",
+      "Goodfellow, Bengio, Courville: [Deep Learning](https://www.deeplearningbook.org/), MIT Press, 2016, abgerufen am 22.11.2026.",
+      "Rumelhart, Hinton, Williams: [Learning representations by back-propagating errors](https://www.nature.com/articles/323533a0), Nature 323, 1986, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Neuronale Netze von Grund auf“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/neuronale-netze).",
+     ]},
   ],
   mitnehmen: [
     "Ein Neuron bildet eine gewichtete Summe seiner Eingaben und entscheidet per Aktivierung, wie stark es meldet.",
@@ -225,12 +253,17 @@ daten: {
 },
 
 training: {
+  mathe: true,
   typ: "lektion", gruppe: "Grundlagen", titel: "Wie ein Modell lernt", nav: "Training", symbol: "ml",
+  lernziele: ["Du kannst erklären, was der Verlust misst.", "Du kannst den Kreislauf aus Vorhersagen, Fehler messen und Nachjustieren beschreiben.", "Du kannst Überanpassung erkennen und sagen, wann man das Training stoppt."],
   kurz: "Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht. Wie wird daraus ein brauchbares, ohne dass jemand die Zahlen von Hand setzt?",
   widget: "gradient-abstieg",
   videos: ["training-gradientenabstieg"],
   abschnitte: [
-    {h: "Zuerst muss man den Fehler messen",
+    {h: "Zuerst muss man den Fehler messen", mathe: {p: [
+      "Mittlerer quadratischer Fehler: `L = (1/n)·Σ (ŷi − yi)²`. Beispiel mit Vorhersagen 0,8 und 0,3 für die richtigen Werte 1 und 0: `((0,8 − 1)² + (0,3 − 0)²) / 2 = (0,04 + 0,09) / 2 = 0,065`.",
+      "Bei Ja-Nein-Aufgaben nimmt man oft die Kreuzentropie: `L = −(1/n)·Σ [yi·ln(pi) + (1 − yi)·ln(1 − pi)]`. Für y = 1 und p = 0,8 ist der Verlust `−ln(0,8) ≈ 0,223`. Je sicherer die falsche Antwort, desto größer der Verlust.",
+     ]},
      kurz: "Der Verlust ist eine Zahl für den Fehler. Null heißt perfekt, je größer, desto schlechter.",
      visual: {"typ":"skala","links":"Null: perfekt","rechts":"Weit daneben","marker":0.62,"label":"Verlust"},
      p: [
@@ -240,14 +273,19 @@ training: {
       "Beim Darts zählt die Entfernung zur Mitte. Ein Pfeil knapp daneben ist besser als einer an der Wand. Der Verlust ist diese Entfernung, gemittelt über viele Würfe.",
       "Der Vergleich hat eine Grenze: Beim Darts siehst du, in welche Richtung du korrigieren musst. Das Modell muss das für Millionen Gewichte gleichzeitig herausfinden.",
     ]},
-    {h: "Der Kreislauf: vorhersagen, messen, nachjustieren",
+    {h: "Der Kreislauf: vorhersagen, messen, nachjustieren", mathe: {p: [
+      "Die Rückpropagierung (Backpropagation) nutzt die Kettenregel. Für ein Neuron `z = w·x + b`, Ausgabe `ŷ = σ(z)` und Verlust `L = (ŷ − y)²` gilt: `∂L/∂w = ∂L/∂ŷ · ∂ŷ/∂z · ∂z/∂w = 2(ŷ − y) · σ(z)(1 − σ(z)) · x`.",
+      "Dieselbe Rechnung läuft rückwärts durch alle Schichten. Jedes Gewicht erfährt so, wie stark es am Fehler beteiligt war (Rumelhart, Hinton und Williams, 1986).",
+     ]},
      kurz: "Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann beginnt die nächste.",
      visual: {"typ":"kreis","mitte":"Eine Runde","knoten":[{"icon":"brain-circuit","text":"Vorhersagen"},{"icon":"ruler","text":"Fehler messen"},{"icon":"sliders-horizontal","text":"Gewichte anpassen"}]},
      p: [
       "Jede Trainingsrunde läuft gleich ab. Das Modell sagt für Beispiele etwas voraus. Der Verlust zeigt, wie weit es daneben lag. Dann wird jedes Gewicht ein kleines Stück in die Richtung verschoben, die den Verlust senkt. Danach beginnt die nächste Runde.",
       "Wie man diese Richtung für alle Gewichte effizient bekommt, regelt ein Rechenverfahren namens Rückpropagierung. Es rechnet vom Fehler am Ausgang rückwärts durch die Schichten und stellt fest, wie viel jedes Gewicht dazu beigetragen hat. Du musst die Mathematik nicht kennen, um das Prinzip zu nutzen.",
     ], alltag: "Beim Abschmecken einer Suppe probierst du, merkst „zu fade“, gibst eine Prise Salz zu und probierst wieder. Du machst keinen großen Sprung, sondern kleine Korrekturen, bis es passt. Training ist dasselbe, nur mit sehr vielen Zutaten gleichzeitig."},
-    {h: "Gradientenabstieg: im Nebel ins Tal",
+    {h: "Gradientenabstieg: im Nebel ins Tal", mathe: {p: [
+      "Update-Regel: `w_neu = w_alt − η·∂L/∂w`, mit der Lernrate η. Beispiel: `L(w) = (w − 3)²`, also `∂L/∂w = 2(w − 3)`. Start bei w = 0 und η = 0,1: Gradient −6, `w = 0 − 0,1·(−6) = 0,6`. Nächster Schritt: Gradient `2(0,6 − 3) = −4,8`, `w = 0,6 + 0,48 = 1,08`. Das Ziel w = 3 rückt Schritt für Schritt näher.",
+     ]},
      kurz: "Wie im Nebel spürt das Modell nur das Gefälle unter den Füßen und geht Schritt für Schritt bergab.",
      visual: {"typ":"balken","titel":"Verlust nach jeder Runde (Beispielwerte)","max":100,"zeilen":[{"label":"Runde 1","wert":90,"farbe":"rot"},{"label":"Runde 2","wert":55,"farbe":"orange"},{"label":"Runde 3","wert":30,"farbe":"orange"},{"label":"Runde 4","wert":15,"farbe":"gruen"},{"label":"Runde 5","wert":8,"farbe":"gruen"}]},
      p: [
@@ -269,7 +307,10 @@ training: {
         ["Viel zu klein", "Es sinkt, aber extrem langsam", "Du setzt Zentimeterschritte und kommst nie an"],
       ],
     }},
-    {h: "Epochen und Päckchen",
+    {h: "Epochen und Päckchen", mathe: {p: [
+      "Ein Päckchen heißt in der Fachsprache Mini-Batch. Bei N Beispielen und der Päckchengröße B gibt es `N / B` Schritte pro Epoche. Beispiel: 1000 Beispiele, B = 50 gleich 20 Schritte pro Epoche, bei 10 Epochen 200 Schritte.",
+      "Der Gradient wird nur aus dem Päckchen geschätzt: `∂L/∂w ≈ (1/B)·Σ ∂Li/∂w`. Weil er vom Zufall der Auswahl abhängt, heißt das Verfahren stochastischer Gradientenabstieg (SGD).",
+     ]},
      kurz: "Eine Epoche ist ein Durchlauf durch alle Daten. Pro kleinem Päckchen gibt es einen Schritt.",
      visual: {"typ":"schichten","richtung":"verschachtelt","ebenen":[{"icon":"repeat","text":"Training","sub":"viele Epochen"},{"icon":"rotate-cw","text":"Epoche","sub":"alle Daten einmal"},{"icon":"package","text":"Päckchen","sub":"ein Schritt je Päckchen"}]},
      p: [
@@ -297,6 +338,14 @@ training: {
       "Große Modelle trainiert man selten von null. Beim [[vortraining|Vortraining]] lernt ein Modell auf riesigen, allgemeinen Datenmengen die Grundlagen. Bei der [[feinabstimmung|Feinabstimmung]] passt man es mit wenigen, gezielten Beispielen an eine Aufgabe an. Das spart Zeit, Daten und Rechenleistung.",
       "Training kostet Rechenzeit und damit Strom. Je größer das Modell und je mehr Daten, desto mehr. Das Vortraining sehr großer Modelle ist aufwendig und liegt bei wenigen Anbietern. Eine Feinabstimmung kleinerer Modelle ist dagegen oft mit überschaubarem Aufwand machbar. Konkrete Zahlen hängen stark von Modell und Hardware ab und sollten für jedes Projekt neu geschätzt werden.",
     ], alltag: "Ein gelernter Koch muss für ein neues Restaurant nicht noch einmal Kochen lernen. Er lernt die Speisekarte. Vortraining ist die Ausbildung, Feinabstimmung die Einarbeitung."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Rumelhart, Hinton, Williams: [Learning representations by back-propagating errors](https://www.nature.com/articles/323533a0), Nature 323, 1986, abgerufen am 22.11.2026.",
+      "Kingma, Ba: [Adam: A Method for Stochastic Optimization](https://arxiv.org/abs/1412.6980), 2014, abgerufen am 22.11.2026.",
+      "Goodfellow, Bengio, Courville: [Deep Learning, Kapitel 8 (Optimierung)](https://www.deeplearningbook.org/), 2016, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Wie ein Modell lernt“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/training).",
+     ]},
   ],
   mitnehmen: [
     "Der Verlust misst den Fehler. Training heißt, die Gewichte so zu verschieben, dass er sinkt.",
@@ -324,7 +373,9 @@ training: {
 },
 
 bewertung: {
+  mathe: true,
   typ: "lektion", gruppe: "Grundlagen", titel: "Wie gut ist ein Modell?", nav: "Bewertung", symbol: "check",
+  lernziele: ["Du kannst erklären, warum „99 Prozent richtig“ täuschen kann.", "Du kannst eine Konfusionsmatrix lesen.", "Du kannst Precision und Recall in Worten unterscheiden.", "Du kannst ein Modell mit dem heutigen Ablauf vergleichen."],
   kurz: "„99 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
   widget: "konfusionsmatrix",
   videos: ["bewertung-konfusionsmatrix"],
@@ -339,7 +390,10 @@ bewertung: {
       "Ein Rauchmelder, der nie piept, ist an 364 von 365 Tagen im Jahr „richtig“, weil es nur an einem Tag brennt. Du würdest ihn trotzdem nicht aufhängen.",
       "Ähnlich bei der Sicherheitskontrolle am Flughafen. Fast alle Koffer sind harmlos. Eine Anlage, die alles durchwinkt, hat nahezu 100 Prozent Genauigkeit und ist unbrauchbar.",
     ]},
-    {h: "Die Konfusionsmatrix: vier Fälle",
+    {h: "Die Konfusionsmatrix: vier Fälle", mathe: {p: [
+      "Mit TP (richtig positiv), FP (falsch positiv), FN (falsch negativ) und TN (richtig negativ) gilt: `Genauigkeit = (TP + TN) / (TP + FP + FN + TN)`.",
+      "Beispiel Spamfilter: TP = 90, FP = 18, FN = 10, TN = 882. Genauigkeit `(90 + 882) / 1000 = 0,972`.",
+     ]},
      kurz: "Zwei Fragen, vier Felder: Was war es wirklich, und was sagte das Modell? Hier am Spamfilter.",
      visual: {"typ":"matrix","xtitel":"Modell sagt","ytitel":"Wirklich","x":["Spam","Kein Spam"],"y":["Spam","Kein Spam"],"zellen":[[{"text":"Treffer","ton":"gut"},{"text":"Übersehen","ton":"schlecht"}],[{"text":"Fehlalarm","ton":"schlecht"},{"text":"Richtig durch","ton":"gut"}]]},
      p: [
@@ -362,7 +416,10 @@ bewertung: {
       "Beispielzahlen, die nur zum Rechnen dienen: Ein Filter prüft 1000 Mails. 100 sind Spam, 900 sind gute Mails. Er erwischt 90 der Spammails (richtig positiv) und übersieht 10 (falsch negativ). Von den guten Mails stuft er 18 fälschlich als Spam ein (falsch positiv), 882 gehen richtig durch (richtig negativ).",
       "Die Genauigkeit beträgt (90 + 882) von 1000, also 97,2 Prozent. Das klingt hervorragend. Die Matrix zeigt aber, dass 18 gute Mails weggefiltert wurden und 10 Spammails durchkamen.",
     ], alltag: "Stell dir vor, die 18 aussortierten Mails enthalten eine Bewerbung und eine Rechnung mit Frist. Der Prozentwert sagt nichts darüber, wie schlimm das ist. Erst die Matrix zeigt, wo die Fehler stecken, und deine Aufgabe zeigt, welche davon weh tun."},
-    {h: "Precision und Recall in Worten",
+    {h: "Precision und Recall in Worten", mathe: {p: [
+      "`Precision = TP / (TP + FP)` und `Recall = TP / (TP + FN)`. Mit TP = 90, FP = 18, FN = 10: `Precision = 90 / 108 ≈ 0,833`, `Recall = 90 / 100 = 0,9`.",
+      "Das F1-Maß ist das harmonische Mittel: `F1 = 2·Precision·Recall / (Precision + Recall)`. Hier `2·0,833·0,9 / (0,833 + 0,9) ≈ 0,865`. Es fällt stark, wenn einer der beiden Werte klein ist.",
+     ]},
      kurz: "Precision: Wie viele Alarme stimmen? Recall: Wie viele echte Fälle werden gefunden?",
      visual: {"typ":"balken","titel":"Kennzahlen im Spamfilter (Beispielwerte)","einheit":"%","max":100,"zeilen":[{"label":"Genauigkeit","wert":97.2,"farbe":"akzent"},{"label":"Precision","wert":83.3,"farbe":"orange"},{"label":"Recall","wert":90,"farbe":"gruen"}]},
      p: [
@@ -411,6 +468,13 @@ bewertung: {
       "Kein Modell trifft immer. Deshalb entscheidet man, was mit unsicheren Fällen passiert. Ein verbreitetes Muster: Das Modell erledigt klare Fälle selbst, unklare gehen an eine Person ([[mensch-schleife|Mensch in der Schleife]]). Die Personen werten die Ergebnisse aus, und aus ihren Korrekturen entstehen neue Trainingsdaten.",
       "Die Gesamtleistung des Ablaufs zählt, nicht nur die des Modells: Wie viele Fälle gehen an Menschen, wie viele Fehler schlüpfen durch, und wie schnell fällt Schlechtes auf?",
     ], alltag: "An einer Selbstbedienungskasse läuft der Einkauf meist von allein. Bei Alkohol oder einem Fehler kommt eine Mitarbeiterin dazu und entscheidet. Der Ablauf funktioniert, weil klar ist, wann sie gerufen wird."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "scikit-learn: [Metrics and scoring: quantifying the quality of predictions](https://scikit-learn.org/stable/modules/model_evaluation.html), abgerufen am 22.11.2026.",
+      "Google: [Machine Learning Crash Course, Klassifikation](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Wie gut ist ein Modell?“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/bewertung).",
+     ]},
   ],
   mitnehmen: [
     "Bei seltenen Ereignissen täuscht die Genauigkeit. Die Konfusionsmatrix zeigt die vier Fälle und damit, wo Fehler stecken.",
@@ -438,7 +502,9 @@ bewertung: {
 },
 
 "verzerrung-ethik": {
+  mathe: true,
   typ: "lektion", gruppe: "Grundlagen", titel: "Fairness, Verzerrung und Verantwortung", nav: "Fairness und Verantwortung", symbol: "info",
+  lernziele: ["Du kannst vier Wege nennen, auf denen Verzerrung entsteht.", "Du kannst erklären, warum das Weglassen eines Merkmals nicht reicht.", "Du kannst sagen, wer für Entscheidungen mit KI Verantwortung trägt."],
   kurz: "Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire. Wie entsteht das, wie erkennst du es, und wer trägt die Verantwortung?",
   videos: ["verzerrung-fairness"],
   abschnitte: [
@@ -478,11 +544,14 @@ bewertung: {
       "Auch wenn man ein sensibles Merkmal wie Herkunft oder Geschlecht weglässt, kann ein Modell es über Stellvertreter rekonstruieren. Postleitzahl, Vorname oder Einkaufsverhalten hängen oft mit solchen Merkmalen zusammen. Das Modell nutzt sie, weil sie in den Daten Vorhersagekraft haben.",
       "Das Weglassen eines Merkmals genügt also nicht. Man muss die Ergebnisse nach Gruppen ansehen und fragen, ob einzelne Gruppen systematisch schlechter wegkommen.",
     ], alltag: "Ein Versicherer verzichtet darauf, nach der Herkunft zu fragen, rechnet aber mit der Wohngegend. Wenn bestimmte Gruppen in bestimmten Gegenden wohnen, kommt die Information durch die Hintertür herein."},
-    {h: "Beispiel Gesichtserkennung",
+    {h: "Beispiel Gesichtserkennung", mathe: {p: [
+      "Fairness lässt sich auf verschiedene Weisen messen. Demografische Parität verlangt, dass der Anteil positiver Entscheidungen in beiden Gruppen gleich ist: `P(ŷ = 1 | A = a) = P(ŷ = 1 | A = b)`. Gleiche Chancen (Hardt et al., 2016) verlangen gleiche Recall-Werte: `P(ŷ = 1 | y = 1, A = a) = P(ŷ = 1 | y = 1, A = b)`.",
+      "Beispiel mit erfundenen Zahlen: Gruppe A hat Recall 90 von 100, Gruppe B 70 von 100. Der Abstand beträgt 0,2, und die Gruppen sind nicht gleich behandelt. Meist lassen sich nicht alle Maße zugleich erfüllen, deshalb ist die Wahl eine Entscheidung mit Folgen.",
+     ]},
      kurz: "Eine hohe Gesamtgenauigkeit kann verdecken, dass eine kleine Gruppe oft falsch erkannt wird.",
      visual: {"typ":"balken","titel":"Fehlerquote je Gruppe (Beispielwerte)","einheit":"%","max":12,"zeilen":[{"label":"Gruppe A","wert":1,"farbe":"gruen"},{"label":"Gruppe B","wert":2,"farbe":"gruen"},{"label":"Gruppe C","wert":9,"farbe":"rot"}],"unter":"Nur die Auswertung nach Gruppen zeigt es."},
      p: [
-      "Die Studie „Gender Shades“ (2018) fand bei Programmen, die das Geschlecht aus Gesichtern bestimmen, größere Fehler bei dunkleren Hauttönen. Der NIST-Bericht (2019) prüfte 189 Gesichtserkennungs-Algorithmen und fand bei den meisten Unterschiede nach Herkunft, Geschlecht und Alter. Die Fehlerquote kann also zwischen Personengruppen unterschiedlich ausfallen. Eine häufige Ursache sind Trainingsdaten, in denen manche Gruppen deutlich seltener vorkommen.",
+      "Die Studie [Gender Shades](https://proceedings.mlr.press/v81/buolamwini18a.html) (Buolamwini und Gebru, 2018) fand bei Programmen, die das Geschlecht aus Gesichtern bestimmen, größere Fehler bei dunkleren Hauttönen. Der [NIST-Bericht zu demografischen Effekten](https://www.nist.gov/publications/face-recognition-vendor-test-part-3-demographic-effects) (2019) prüfte 189 Gesichtserkennungs-Algorithmen und fand bei den meisten Unterschiede nach Herkunft, Geschlecht und Alter. Die Fehlerquote kann also zwischen Personengruppen unterschiedlich ausfallen. Eine häufige Ursache sind Trainingsdaten, in denen manche Gruppen deutlich seltener vorkommen.",
       "Eine Gesamtgenauigkeit verdeckt das. Liegt sie hoch, aber eine kleine Gruppe wird oft falsch erkannt, merkt es nur, wer die Ergebnisse getrennt nach Gruppen auswertet. Hat eine Fehlentscheidung Folgen, etwa eine falsche Verdächtigung, trifft sie diese Gruppe überproportional.",
     ]},
     {h: "Erklärbarkeit und Transparenz",
@@ -514,6 +583,17 @@ bewertung: {
       "Wer entscheidet im Zweifel, und kann diese Person das Ergebnis wirklich überstimmen?",
       "Wie wird das Modell nach dem Start beobachtet, und wer greift bei Auffälligkeiten ein?",
     ], alltag: "Ein Pilot geht vor jedem Flug eine Checkliste durch, obwohl er das Flugzeug kennt. Die Liste ersetzt keine Erfahrung, sie verhindert, dass im Alltag Wichtiges untergeht."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Buolamwini, Gebru: [Gender Shades: Intersectional Accuracy Disparities in Commercial Gender Classification](https://proceedings.mlr.press/v81/buolamwini18a.html), Proceedings of Machine Learning Research 81, 2018, abgerufen am 22.11.2026.",
+      "Grother, Ngan, Hanaoka (NIST): [Face Recognition Vendor Test Part 3: Demographic Effects](https://www.nist.gov/publications/face-recognition-vendor-test-part-3-demographic-effects), NISTIR 8280, 2019, abgerufen am 22.11.2026.",
+      "Angwin et al. (ProPublica): [Machine Bias](https://www.propublica.org/article/machine-bias-risk-assessments-in-criminal-sentencing), 2016, abgerufen am 22.11.2026.",
+      "Hardt, Price, Srebro: [Equality of Opportunity in Supervised Learning](https://arxiv.org/abs/1610.02413), 2016, abgerufen am 22.11.2026.",
+      "Barocas, Hardt, Narayanan: [Fairness and Machine Learning](https://fairmlbook.org/), abgerufen am 22.11.2026.",
+      "Mitchell et al.: [Model Cards for Model Reporting](https://arxiv.org/abs/1810.03993), 2018, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Fairness, Verzerrung und Verantwortung“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/verzerrung-ethik).",
+     ]},
   ],
   mitnehmen: [
     "Ein Modell wiederholt Muster aus seinen Daten, auch unfaire. Verzerrung entsteht durch Daten, Auswahl, Etiketten und Rückkopplung.",
@@ -542,6 +622,7 @@ bewertung: {
 
 recht: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Recht und Regeln im Überblick", nav: "Recht und Regeln", symbol: "info",
+  lernziele: ["Du kannst die Grundsätze der Datenschutz-Grundverordnung in eigenen Worten nennen.", "Du kannst erklären, wie die EU-KI-Verordnung Systeme nach Risiko einordnet.", "Du kannst sagen, welche Fragen beim Urheberrecht noch offen sind."],
   kurz: "Welche Regeln gelten, wenn du KI einsetzt? Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.",
   videos: ["recht-ueberblick"],
   abschnitte: [

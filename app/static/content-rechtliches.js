@@ -19,7 +19,7 @@ INHALT.registriere({
       kurz: "Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos. Hier steht, was davon wofür läuft, unter welcher Lizenz es steht und wo du die Quelle findest.",
       lizenzen: {
         komponenten: [
-          {name: "Llama 3.2 3B (Meta)", zweck: "Sprachmodell für Chat, Dokumente befragen, Agent und Prompt-Werkstatt",
+          {name: "Llama 3.2 3B (Meta)", zweck: "Sprachmodell für Chat, RAG-Werkstatt, Agent und Prompt-Werkstatt",
            lizenz: "Llama 3.2 Community License und Llama 3.2 Acceptable Use Policy", quelle: "Lizenztext", url: LLAMA_LIZENZ},
           {name: "Llama 3.2 Acceptable Use Policy", zweck: "Regeln, wofür das Sprachmodell nicht benutzt werden darf",
            lizenz: "Teil der Llama-Lizenz", quelle: "Nutzungsrichtlinie", url: "https://github.com/meta-llama/llama-models/blob/main/models/llama3_2/USE_POLICY.md"},
@@ -69,7 +69,7 @@ INHALT.registriere({
         {h: "Built with Llama",
          kurz: "Das Sprachmodell ist Llama 3.2 von Meta. Seine Lizenz verlangt den sichtbaren Hinweis „Built with Llama“.",
          p: [
-          "Chat, Dokumente befragen und der Agent laufen mit dem Sprachmodell Llama 3.2 in der Größe 3B. Die Llama 3.2 Community License erlaubt das. Sie verlangt dafür zweierlei: den gut sichtbaren Hinweis „Built with Llama“ und eine Kopie der Lizenz.",
+          "Chat, RAG-Werkstatt und der Agent laufen mit dem Sprachmodell Llama 3.2 in der Größe 3B. Die Llama 3.2 Community License erlaubt das. Sie verlangt dafür zweierlei: den gut sichtbaren Hinweis „Built with Llama“ und eine Kopie der Lizenz.",
           "Den Hinweis findest du in der Fußzeile jeder Seite und unter jeder Antwort des Modells. Den Lizenztext erreichst du über die Tabelle oben. Der Lizenzhinweis von Meta lautet im Original:",
           "**Llama 3.2 is licensed under the Llama 3.2 Community License, Copyright © Meta Platforms, Inc. All Rights Reserved.**",
           "Zur Lizenz gehört eine Nutzungsrichtlinie (Acceptable Use Policy). Sie nennt Zwecke, für die das Modell nicht eingesetzt werden darf. Auch sie ist oben verlinkt.",

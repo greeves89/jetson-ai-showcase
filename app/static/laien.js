@@ -18,7 +18,7 @@
   const h = KL.h;
 
   /* ============================================================ Einwilligung */
-  /* Drei Arten: "bild" (Kamera ohne Wiedererkennung), "ton" (Mikrofon), "biometrisch" (Gesicht: Zahlenlisten zur Wiedererkennung,
+  /* Drei Arten: "bild" (Kamera ohne Wiedererkennung, auch Anlernen), "ton" (Mikrofon), "biometrisch" (Gesicht: Zahlenlisten zur Wiedererkennung,
      Art. 9 DSGVO). Biometrisch braucht ein unvorbelegtes Kontrollkaestchen plus Knopf und wird nur je Sitzung (sessionStorage)
      gemerkt, die beiden anderen bleiben in localStorage "kl-einwilligung" (Schluessel kamera und mikro). */
   const SCHLUESSEL = "kl-einwilligung", BIO = "kl-einwilligung-bio";
@@ -73,9 +73,9 @@
   };
   /* Zusatz je Labor (Seiten-ID), wenn dort etwas auf dem Rechner der Seite zurueckbleibt */
   const ZUSATZ = {
-    anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie.",
+    anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie. Zeige ihm Gegenstände, keine Personen.",
   };
-  const BIO_LABORE = new Set(["gesicht", "anlernen"]);
+  const BIO_LABORE = new Set(["gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
   /* Alters- und Elternhinweis, steht oben im Dialog. Bewusst ohne Abfrage: Die Seite prueft kein Alter und gibt kein Schutzversprechen. */
   const ALTER_HINWEIS = ["Nutzbar ab 16 Jahren.", "Jüngere nur mit Einverständnis der Eltern. Die Seite prüft dein Alter nicht."];
@@ -277,6 +277,78 @@
         KL.icon("hourglass"),
         h("div", { class: "last-text" }, h("p", null, text),
           wiederholen ? h("button", { type: "button", class: "btn klein", onclick: wiederholen }, KL.icon("refresh-cw"), "Noch einmal versuchen") : null));
+    },
+  };
+
+  /* ============================================================ Willkommen (Rollenwahl als kleines Fenster)
+     KL.willkommen.beimStart()  nach dem ersten Rendern: zeigt das Fenster nur beim ersten Besuch der Startseite (Pfad /), nie auf Lektionsseiten,
+                                nicht mit gespeichertem Weg (kl-weg), nicht mit ?weg= in der Adresse, nicht nach "Später" (kl-willkommen),
+                                nicht bei navigator.webdriver (Tests, Crawler), ausser die Adresse hat ?willkommen=1.
+     KL.willkommen.oeffnen({aendern})  dasselbe Fenster auf Wunsch ("Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile). Die Wahl laeuft ueber KL.wegWaehlen (app.js),
+                                es wird nichts gesendet. Texte: INHALT.willkommen (content-laien.js). */
+  const WK = "kl-willkommen";
+  const wkGesehen = () => { try { if (localStorage.getItem(WK)) return true; } catch (e) { /* ohne Speicher */ } try { return !!sessionStorage.getItem(WK); } catch (e) { return false; } };
+  const wkMerken = () => { try { localStorage.setItem(WK, "1"); } catch (e) { try { sessionStorage.setItem(WK, "1"); } catch (e2) { /* nur bis zum Neuladen */ } } };
+  function wkErstbesuch() {
+    try {
+      const q = new URLSearchParams(location.search);
+      if (location.pathname.replace(/\/+$/, "") !== "") return false;                  // nur die Startseite
+      if (q.has("weg")) return false;                                                   // Klassenlink oder Verweis mit Weg
+      if (navigator.webdriver && q.get("willkommen") !== "1") return false;             // Tests und Crawler nicht stoeren
+      return !KL.weg && !wkGesehen();
+    } catch (e) { return false; }
+  }
+  let wkOffen = null;
+  function willkommenOeffnen(opt) {
+    if (wkOffen) return wkOffen;
+    const T = KL.INHALT && KL.INHALT.willkommen;
+    const wege = KL.wegListe ? KL.wegListe() : [];
+    if (!T || !wege.length || !KL.wegWaehlen) return null;
+    const aendern = !!(opt && opt.aendern);
+    const vorher = document.activeElement;
+    const aktiv = KL.weg;
+    let wahl = null;
+    const dlg = h("dialog", { class: "wk", "aria-labelledby": "wk-t", "aria-describedby": "wk-s" });
+    const zu = (w) => { wahl = w || null; if (dlg.close) dlg.close(); else { dlg.removeAttribute("open"); dlg.dispatchEvent(new Event("close")); } };
+    const knoepfe = wege.map((w) => h("button", { type: "button", class: "wk-weg" + (aendern && aktiv === w.id ? " aktiv" : ""), dataset: { weg: w.id },
+      "aria-pressed": aendern ? String(aktiv === w.id) : null, onclick: () => zu(w.id) },
+      h("span", { class: "wk-ic", "aria-hidden": "true" }, KL.icon(w.symbol)),
+      h("span", { class: "wk-text" }, h("b", null, w.titel), w.kurz ? h("span", { class: "wk-kurz" }, w.kurz) : null, (T.kamera || {})[w.id] ? h("small", null, T.kamera[w.id]) : null)));
+    // Fortschritt merken: kleiner Schalter, nie vorbelegt (ausser es ist schon eingewilligt); wirkt erst beim Schliessen
+    let merken = !!KL.merken;
+    const schalter = h("button", { type: "button", class: "wk-merken", role: "switch", "aria-checked": String(merken),
+      onclick: () => { merken = !merken; schalter.setAttribute("aria-checked", String(merken)); } },
+      h("span", { class: "wk-merken-knopf", "aria-hidden": "true" }), h("span", { class: "wk-merken-text" }, T.merken));
+    const x = h("button", { type: "button", class: "wk-x", "aria-label": T.schliessen, onclick: () => zu(null) }, KL.icon("x"));
+    dlg.append(
+      x,
+      h("h2", { id: "wk-t", tabindex: "-1" }, T.titel),
+      h("p", { class: "wk-satz", id: "wk-s" }, T.satz),
+      h("div", { class: "wk-wege" }, knoepfe),
+      schalter,
+      h("div", { class: "wk-aktion" }, h("button", { type: "button", class: "btn wk-spaeter", onclick: () => zu(null) }, aendern ? T.schliessen : T.spaeter)),
+      h("p", { class: "wk-klein" }, h("span", { "aria-hidden": "true" }, KL.icon("lock")), h("span", null, T.hinweis)));
+    dlg.addEventListener("click", (e) => { if (e.target === dlg) zu(null); });          // Klick neben das Fenster wie "Später"
+    dlg.addEventListener("close", () => {
+      if (dlg.parentNode) dlg.remove();
+      wkOffen = null;
+      wkMerken();                                                                       // gesehen: erscheint nicht wieder von selbst
+      if (merken !== !!KL.merken && KL.merkenSetzen) KL.merkenSetzen(merken);            // Einwilligung zum Merken des Fortschritts, nur auf ausdruecklichen Schalter
+      if (wahl) KL.wegWaehlen(wahl);
+      const ziel = vorher && vorher.isConnected && vorher !== document.body ? vorher : document.getElementById("inhalt");
+      try { if (ziel) ziel.focus({ preventScroll: true }); } catch (e) { /* egal */ }
+    }, { once: true });                                                                 // Esc: dialog schliesst selbst, close folgt wie bei "Später"
+    wkOffen = dlg;
+    document.body.append(dlg);
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+    try { dlg.querySelector("#wk-t").focus({ preventScroll: true }); } catch (e) { /* egal */ }      // Fokus auf die Überschrift: keine Kachel wirkt vorgewählt; Tab führt zur ersten Kachel (focus-visible)
+    return dlg;
+  }
+  KL.willkommen = {
+    oeffnen: willkommenOeffnen,
+    beimStart() {
+      if (!wkErstbesuch()) return;
+      requestAnimationFrame(() => setTimeout(() => { if (wkErstbesuch() && !document.querySelector("dialog[open]")) willkommenOeffnen({}); }, 500));
     },
   };
 

@@ -21,13 +21,13 @@ assert.match(await page.textContent(".pg-annahme"), /Alle Werte sind deine Annah
 const tags = await page.$$eval(".pg-tag", (els) => els.map((e) => e.textContent));
 assert.equal(tags.length, 7); assert.ok(tags.every((x) => x === "Beispielannahme"));
 
-// Handrechnung mit den Startwerten: 15 W, 24 h, 0,30 €, 500 €, 50 €
+// Handrechnung mit den Startwerten: 15 W, 24 h, 0,30 €, 500 €, 50 €, Betreuung 30 €
 let z = await d();
-let r = rechne({ w: 15, h: 24, preis: 0.3, kauf: 500, cloud: 50, pers: 0, jahre: 3 });
+let r = rechne({ w: 15, h: 24, preis: 0.3, kauf: 500, cloud: 50, pers: 30, jahre: 3 });
 console.log("Start:", z, "Handrechnung:", r);
 nah(+z.kwhTag, 0.36); nah(+z.kostenTag, 0.108); nah(+z.kostenJahr, 39.42, 1e-2); nah(+z.kostenMonat, r.monat);
 nah(+z.amort, r.amort); nah(+z.ersparnis, r.ersp);
-assert.equal((await page.textContent('[data-pg="amortisation"] b')).trim(), "10,7 Monate");
+assert.equal((await page.textContent('[data-pg="amortisation"] b')).trim(), "29,9 Monate");
 assert.match(await page.textContent('[data-pg="satz"]'), /0,36 Kilowattstunden am Tag/);
 
 // eigene Werte
@@ -55,7 +55,7 @@ assert.equal(z.amort, "nie");
 assert.equal((await page.textContent('[data-pg="amortisation"] b')).trim(), "nie");
 assert.match(await page.textContent('[data-pg="satz"]'), /nicht günstiger als die Cloud/);
 assert.match(await page.textContent('[data-pg="balken"]'), /Die Cloud ist um/);
-await feld("pers", "0");
+await feld("pers", "30");
 
 // Eingabeprüfung: leer, negativ, Text, zu große Laufzeit
 for (const [k, v, muster] of [["w", "", /Bitte gib eine Zahl ein/], ["w", "-5", /nicht negativ/], ["w", "abc", /Bitte eine Zahl/], ["h", "30", /höchstens 24/], ["jahre", "0", /größer als 0/]]) {

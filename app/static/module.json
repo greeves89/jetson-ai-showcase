@@ -10,7 +10,8 @@
     "widgets-prognose.css",
     "widgets-sehen.css",
     "widgets-rag.css",
-    "laien.css"
+    "laien.css",
+    "echtoderki.css"
   ],
   "content": [
     "content-sprache.js",
@@ -18,9 +19,16 @@
     "content-rag.js",
     "content-sehen-agenten.js",
     "content-prognose-betrieb.js",
+    "content-betrieb.js",
     "content-usecases.js",
+    "content-schule.js",
+    "content-schule-medien.js",
+    "content-medien.js",
     "content-visual-demo.js",
     "content-laien.js",
+    "content-eltern.js",
+    "content-experimente.js",
+    "content-schulen-ueberblick.js",
     "content-ueber.js",
     "content-rechtliches.js"
   ],
@@ -35,7 +43,8 @@
     "widgets-sprache.js",
     "widgets-prognose.js",
     "widgets-sehen.js",
-    "widgets-rag.js"
+    "widgets-rag.js",
+    "widgets-echtoderki.js"
   ],
   "seite": {
     "autor": "Daniel Alisch",

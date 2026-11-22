@@ -1,0 +1,188 @@
+{
+ "id": "prompts-fuer-schueler",
+ "titel": "Gute Prompts für die Schule",
+ "untertitel": "Fragen, mit denen du wirklich etwas lernst",
+ "gesamt": 133.58,
+ "szenen": [
+  {
+   "id": "textwand",
+   "kapitel": "Die Textwand",
+   "start": 0,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.56,
+     "text": "Du tippst: Erklär Bruchrechnung. Und bekommst eine Textwand, die auch aus einem Lexikon sein könnte."
+    },
+    {
+     "t": 7.76,
+     "d": 3.76,
+     "text": "Oft liegt das nicht an der KI, sondern an der Frage."
+    }
+   ]
+  },
+  {
+   "id": "raten",
+   "kapitel": "Sie muss raten",
+   "start": 12.42,
+   "dauer": 12.9,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Eine KI sieht nicht, in welcher Klasse du bist. Sie weiß nicht, was du schon kannst und was dich nervt."
+    },
+    {
+     "t": 7.28,
+     "d": 4.72,
+     "text": "Wenn du es ihr nicht sagst, rät sie. Und Raten ergibt Durchschnitt."
+    }
+   ]
+  },
+  {
+   "id": "rolle",
+   "kapitel": "Rolle und Kontext",
+   "start": 25.32,
+   "dauer": 11.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.88,
+     "text": "Sag ihr, wer sie sein soll und wer du bist. Zum Beispiel: Du bist ein geduldiger Nachhilfelehrer."
+    },
+    {
+     "t": 7.68,
+     "d": 3.36,
+     "text": "Ich bin in Klasse acht und verstehe das Kürzen nicht."
+    }
+   ]
+  },
+  {
+   "id": "aufgabe",
+   "kapitel": "Aufgabe und Format",
+   "start": 37.26,
+   "dauer": 15.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.84,
+     "text": "Dann sag, was sie tun soll und wie. Erkläre es in drei Schritten, mit einem Beispiel aus dem Alltag, in kurzen Sätzen."
+    },
+    {
+     "t": 8.64,
+     "d": 5.76,
+     "text": "Du kannst auch sagen, was sie lassen soll. Zum Beispiel keine Fachwörter ohne Erklärung."
+    }
+   ]
+  },
+  {
+   "id": "hinweis",
+   "kapitel": "Hinweise statt Lösung",
+   "start": 52.56,
+   "dauer": 11.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.16,
+     "text": "Der beste Trick fürs Lernen: Bitte um Hinweise statt um die Lösung. Sag: Gib mir nur einen Tipp, ich probiere es selbst."
+    },
+    {
+     "t": 8.96,
+     "d": 2,
+     "text": "So bleibt das Denken bei dir."
+    }
+   ]
+  },
+  {
+   "id": "abfragen",
+   "kapitel": "Lass dich abfragen",
+   "start": 64.42,
+   "dauer": 12.58,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.72,
+     "text": "Lass dich abfragen. Stell mir fünf Fragen, eine nach der anderen, und sag mir am Ende, was ich üben soll."
+    },
+    {
+     "t": 7.52,
+     "d": 4.16,
+     "text": "Das ist wie Vokabeln lernen mit einem Partner, der nie genervt ist."
+    }
+   ]
+  },
+  {
+   "id": "zurueck",
+   "kapitel": "Erklär es zurück",
+   "start": 77,
+   "dauer": 15.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.32,
+     "text": "Dreh den Spieß um. Erkläre der KI das Thema in eigenen Worten und frag: Was stimmt, was fehlt, was ist falsch?"
+    },
+    {
+     "t": 9.12,
+     "d": 5.28,
+     "text": "Wer etwas erklären kann, hat es verstanden. Und du merkst sofort, wo es noch hakt."
+    }
+   ]
+  },
+  {
+   "id": "nachhaken",
+   "kapitel": "Nachhaken",
+   "start": 92.3,
+   "dauer": 14.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.44,
+     "text": "Der erste Versuch ist selten perfekt. Sag, was nicht passt: zu schwer, zu lang, noch ein Beispiel bitte."
+    },
+    {
+     "t": 8.24,
+     "d": 5.12,
+     "text": "Du kannst ihr auch erlauben, nachzufragen. Sag: Frag mich, wenn dir etwas fehlt."
+    }
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Prüfen und schützen",
+   "start": 106.56,
+   "dauer": 11.94,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.96,
+     "text": "Prüf die Antwort, vor allem bei Zahlen und Quellen. Sie kann überzeugend klingen und trotzdem falsch sein."
+    },
+    {
+     "t": 7.76,
+     "d": 3.28,
+     "text": "Und lass Namen, Adressen und Privates draußen."
+    }
+   ]
+  },
+  {
+   "id": "vorlage",
+   "kapitel": "Deine Vorlage",
+   "start": 118.5,
+   "dauer": 15.08,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.96,
+     "text": "Deine Vorlage: Ich bin in Klasse so und so. Ich will dieses Thema verstehen. Erkläre es in kleinen Schritten, dann frag mich ab."
+    },
+    {
+     "t": 9.76,
+     "d": 3.52,
+     "text": "Probier sie aus und verbessere sie, bis sie zu dir passt."
+    }
+   ]
+  }
+ ]
+}

@@ -147,7 +147,8 @@ const reihenfolge = ["was-ist-ki", "maschinelles-lernen", "generative-ki", "robo
   "bild-als-zahlen", "cnn-wie-netze-sehen", "vision-aufgaben-ueberblick", "agenten-grundlagen", "agenten-planung", "agenten-sicherheit", "mcp-erklaert",
   "sprachmodell-aufbau", "prompting-grundlagen", "prompting-beispiele", "llm-grenzen-risiken", "wissen-ins-modell-oder-dokument", "sprachausgabe-erklaert",
   "entscheidungsbaeume", "zeitreihen-prognose", "anomalieerkennung", "empfehlungssysteme", "mlops-betrieb", "kosten-und-energie", "ki-einfuehren",
-  "uc-fertigung-sichtpruefung", "uc-fertigung-sortieren", "uc-logistik-zaehlen", "uc-handel-regal", "uc-gesundheit-auffaellig", "uc-buero-dokumente", "uc-buero-protokoll", "uc-service-bestellung", "uc-sicherheit-zutritt", "uc-sicherheit-baustelle"];
+  "uc-fertigung-sichtpruefung", "uc-fertigung-sortieren", "uc-logistik-zaehlen", "uc-handel-regal", "uc-gesundheit-auffaellig", "uc-buero-dokumente", "uc-buero-protokoll", "uc-service-bestellung", "uc-sicherheit-zutritt", "uc-sicherheit-baustelle",
+  "echt-oder-ki", "quellen-pruefen", "fake-news-deepfakes", "ki-hausaufgaben-fair", "datenschutz-im-alltag", "prompts-fuer-schueler"];
 for (const id of ids) {
   const plan = await planen(id, schaetzen);
   const speicher = JSON.parse(JSON.stringify(plan));

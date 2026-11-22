@@ -107,6 +107,48 @@ dialog.einw::backdrop{background:rgba(0,0,0,.42)}
   .einw-aktion .btn{width:100%}
 }
 
+/* ---------- Willkommen: Rollenwahl beim ersten Besuch (modal, aber jederzeit ohne Auswahl zu schliessen) ---------- */
+dialog.wk{border:0;padding:28px;border-radius:var(--r3);width:calc(100% - 24px);max-width:560px;max-height:calc(100dvh - 24px);overflow:auto;color:var(--text);
+  background:var(--glas-dicht);box-shadow:inset 0 0 0 1px var(--glas-kante),var(--schatten)}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){dialog.wk{backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5)}}
+dialog.wk::backdrop{background:rgba(0,0,0,.45)}
+@supports (backdrop-filter:blur(1px)) or (-webkit-backdrop-filter:blur(1px)){dialog.wk::backdrop{backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}}
+@media(prefers-reduced-transparency:reduce){dialog.wk,dialog.wk::backdrop{backdrop-filter:none!important;-webkit-backdrop-filter:none!important}dialog.wk{background:var(--flaeche)}dialog.wk::backdrop{background:rgba(0,0,0,.6)}}
+dialog.wk[open]{animation:wk-ein .22s var(--feder)}
+@keyframes wk-ein{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){dialog.wk[open]{animation:none}}
+dialog.wk h2:focus{outline:none}
+dialog.wk h2{margin:0 52px 6px 0;font-size:24px;line-height:1.2;font-weight:700;letter-spacing:-.026em}
+.wk-satz{margin:0 0 18px;font-size:16px;line-height:1.4;color:var(--leise)}
+.wk-x{appearance:none;position:absolute;top:12px;right:12px;width:44px;height:44px;border:0;border-radius:99px;background:var(--fuell);color:var(--text);display:grid;place-items:center;cursor:pointer}
+.wk-x:hover{background:var(--flaeche3)}
+.wk-x svg.ic{width:20px;height:20px}
+.wk-wege{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.wk-weg{appearance:none;display:flex;align-items:center;gap:12px;min-height:72px;padding:12px 14px;border:0;border-radius:var(--r2);background:var(--fuell);color:var(--text);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1.5px transparent;transition:background .2s var(--feder),transform .2s var(--feder)}
+.wk-weg:hover{background:var(--flaeche3)}
+.wk-weg:active{transform:scale(.985)}
+.wk-weg.aktiv{box-shadow:inset 0 0 0 2px var(--akzent)}
+.wk-ic{flex:none;width:40px;height:40px;border-radius:12px;display:grid;place-items:center;background:color-mix(in srgb,var(--akzent) 14%,transparent);color:var(--akzent)}
+.wk-ic svg.ic{width:22px;height:22px}
+.wk-text{display:flex;flex-direction:column;gap:3px;min-width:0}
+.wk-text b{font-size:15px;line-height:1.25;font-weight:600;letter-spacing:-.016em}
+.wk-text .wk-kurz{font-size:13px;line-height:1.3;color:var(--leise)}
+.wk-text small{font-size:13px;line-height:1.3;color:var(--leise)}
+.wk-merken{appearance:none;display:flex;align-items:center;gap:12px;width:100%;min-height:48px;margin-top:14px;padding:6px 4px;border:0;background:none;color:var(--text);font:inherit;font-size:15px;text-align:left;cursor:pointer}
+.wk-merken-knopf{flex:none;position:relative;width:46px;height:28px;border-radius:99px;background:var(--auswahl);transition:background .2s var(--feder)}
+.wk-merken-knopf::after{content:"";position:absolute;top:3px;left:3px;width:22px;height:22px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s var(--feder)}
+.wk-merken[aria-checked=true] .wk-merken-knopf{background:var(--akzent-fl)}
+.wk-merken[aria-checked=true] .wk-merken-knopf::after{transform:translateX(18px)}
+.wk-aktion{margin-top:8px}
+.wk-spaeter{width:100%;min-height:48px}
+.wk-klein{display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;font-size:14px;line-height:1.4;color:var(--leise)}
+.wk-klein svg.ic{width:16px;height:16px;margin-top:2px}
+.wk-weg:focus-visible,.wk-x:focus-visible,.wk-merken:focus-visible,.wk-spaeter:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 60%,transparent);outline-offset:2px}
+@media(max-width:560px){dialog.wk{padding:20px 16px 16px}dialog.wk h2{font-size:22px}.wk-weg{padding:12px;gap:8px;flex-direction:column;align-items:flex-start;min-height:96px}.wk-text b{font-size:14px}
+  .wk-text,.wk-text b,.wk-text small,.wk-text .wk-kurz{max-width:100%;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}}
+.fuss-speicher .merken-schalter{appearance:none;border:0;background:none;padding:0;font:inherit;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;cursor:pointer}
+@media(max-width:960px){.fuss-speicher .merken-schalter{min-height:44px}}
+
 /* ---------- Last: freundliche Wartezustaende und Fehler mit Wiederholknopf ---------- */
 .last-box{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--r2);background:color-mix(in srgb,var(--orange) 10%,var(--flaeche2))}
 .last-box svg.ic{margin-top:2px;color:var(--orange)}
@@ -156,3 +198,277 @@ button.chip,button.klasse-btn.klasse-btn,.pfad-nav button,.btn.klein,.video .kap
 .einw-box input{flex:none;width:22px;height:22px;margin:0;accent-color:var(--akzent-fl)}
 .fuss-widerruf{margin:12px auto 0}
 .fuss-widerruf[hidden]{display:none}
+
+/* ---------- Lernplattform: Lernziele, Lesezeit, Fortschritt, Wege, Pfade, Mit Mathe ---------- */
+.sr-nur{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* Lernziele und Lesezeit unter dem Seitenkopf */
+.lernziele{margin:0 0 24px;padding:20px 24px;border-radius:var(--r);background:var(--flaeche)}
+.lz-titel{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.lz-titel svg.ic{color:var(--akzent);width:20px;height:20px}
+.lernziele ul{margin:0 0 12px;padding-left:22px}
+.lernziele li{margin:0 0 4px;font-size:16px;line-height:1.45}
+.lernziele li::marker{color:var(--akzent)}
+.lz-zeit{display:flex;flex-wrap:wrap;align-items:center;gap:4px 6px;margin:0;font-size:15px;color:var(--leise)}
+.lz-zeit svg.ic{color:var(--akzent);width:16px;height:16px;margin-right:2px}
+.lz{font-weight:600;color:var(--text)}
+
+/* Hinweis im Weg "Schule": Labor mit Kamera oder Mikrofon */
+.kamera-hinweis{display:flex;gap:10px;align-items:flex-start;margin:0 0 20px;padding:12px 16px;border-radius:14px;background:color-mix(in srgb,var(--orange) 12%,var(--flaeche));font-size:16px;line-height:1.45}
+.kamera-hinweis svg.ic{flex:none;margin-top:2px;color:var(--orange)}
+.nav .kam,.pfad-seiten .kam{display:block;font-size:11.5px;font-weight:500;line-height:1.3;color:var(--orange)}
+.nav .kam[hidden]{display:none}
+.seite:focus-within .nav[aria-current=page] .kam{color:#fff}
+
+/* Fortschritt: Menue oben, Karte "Weiter" */
+.fs{margin:4px 4px 12px;padding:10px 12px;border-radius:12px;background:var(--fuell)}
+.fs-text{display:block;margin-bottom:6px;font-size:13px;font-weight:600;color:var(--text)}
+.fs-balken,.pf-balken{height:6px;border-radius:99px;background:var(--linie2);overflow:hidden}
+.fs-balken i,.pf-balken i{display:block;height:100%;width:0;border-radius:99px;background:var(--gruen);transition:width .5s var(--feder)}
+.gr-zahl{margin-left:8px;font-size:12px;font-weight:600;color:var(--gruen)}
+.gr-zahl[hidden]{display:none}
+.weiter-karte .weiter-in{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 28px;border-radius:var(--r3);background:color-mix(in srgb,var(--gruen) 10%,var(--flaeche))}
+.weiter-karte h2{display:flex;align-items:center;gap:10px;margin:0 0 6px;font-size:22px;font-weight:700;letter-spacing:-.024em}
+.weiter-karte h2 svg.ic{color:var(--gruen);width:22px;height:22px}
+.weiter-text{flex:1;min-width:0;max-width:60ch}
+.weiter-text p{margin:0 0 12px;font-size:17px;line-height:1.4}
+.weiter-text .fs{margin:0;padding:0;background:none}
+.weiter-fuss{margin:8px 4px 0;font-size:14px;color:var(--leise)}
+.fs-loeschen{min-height:44px;font-size:14px;color:var(--leise)}
+.fs-loeschen svg.ic{width:15px;height:15px}
+
+/* Vier Rollen-Kacheln */
+.weg-kacheln{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.weg-kachel{appearance:none;display:flex;align-items:center;gap:16px;min-height:112px;padding:20px 24px;border:0;border-radius:var(--r);background:var(--flaeche);color:var(--text);text-align:left;font:inherit;cursor:pointer;box-shadow:inset 0 0 0 1.5px transparent;transition:transform .3s var(--feder),box-shadow .2s var(--feder),background .2s var(--feder)}
+.weg-kachel:hover{background:var(--flaeche3)}
+.weg-kachel:active{transform:scale(.985)}
+.weg-kachel.aktiv{box-shadow:inset 0 0 0 2px var(--akzent);background:color-mix(in srgb,var(--akzent) 8%,var(--flaeche))}
+.weg-ic{flex:none;width:56px;height:56px;border-radius:16px;display:grid;place-items:center;background:color-mix(in srgb,var(--akzent) 12%,transparent);color:var(--akzent)}
+.weg-ic svg.ic{width:28px;height:28px}
+.weg-text{display:flex;flex-direction:column;gap:4px;min-width:0}
+.weg-text b{font-size:19px;font-weight:700;letter-spacing:-.022em}
+.weg-text span{font-size:15px;line-height:1.35;color:var(--leise)}
+.weg-fuss{display:flex;flex-wrap:wrap;align-items:center;gap:4px 20px;margin:12px 4px 0;font-size:15px;color:var(--leise)}
+.weg-fuss .textlink{font-size:16px;appearance:none;border:0;background:none;padding:0;cursor:pointer;font-family:inherit}
+.weg-panel .pfad-karten{margin-top:16px}
+.weg-panel .kamera-hinweis{margin-top:4px;max-width:66ch}
+
+/* Klassenlink */
+.klassen-box{margin:0 0 16px;padding:16px 20px;border-radius:var(--r2);background:var(--flaeche);max-width:640px}
+.klassen-box>b{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.klassen-box>b svg.ic{color:var(--akzent);width:18px;height:18px}
+.klassen-box p{margin:0 0 10px;font-size:15px;line-height:1.45;color:var(--leise)}
+.klassen-zeile{display:flex;flex-wrap:wrap;gap:8px}
+.klassenlink{flex:1 1 220px;min-width:0;min-height:44px;padding:0 14px;border:0;border-radius:99px;background:var(--fuell);color:var(--text);font:inherit;font-size:15px}
+.klassenlink-status{display:block;margin-top:6px;font-size:14px;color:var(--gruen)}
+.klassenlink-status:empty{display:none}
+
+/* Hinweis "Ich bin: ..." in der Kopfzeile */
+.leiste-rechts{display:flex;align-items:center;gap:8px}
+.weg-chip{appearance:none;display:inline-flex;align-items:center;gap:6px;min-height:40px;padding:0 14px 0 10px;border:0;border-radius:99px;background:var(--glas);backdrop-filter:blur(28px) saturate(1.5);-webkit-backdrop-filter:blur(28px) saturate(1.5);box-shadow:inset 0 0 0 1px var(--glas-kante),var(--glas-schatten);color:var(--leise);font:inherit;font-size:14px;cursor:pointer;white-space:nowrap}
+.weg-chip:hover{color:var(--text)}
+.weg-chip[hidden]{display:none}
+.weg-chip svg.ic{width:16px;height:16px;color:var(--akzent)}
+.weg-chip b{font-weight:600;color:var(--text);overflow:hidden;text-overflow:ellipsis}
+.weg-chip{max-width:100%}
+.weg-chip-seite{display:none}
+
+/* Lernpfade */
+.pfad-gruppe{margin:24px 0 12px;font-size:17px;font-weight:700;letter-spacing:-.02em;color:var(--leise)}
+.pfad-karten{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.pfad-karte{display:flex;flex-direction:column;align-items:flex-start;gap:6px;padding:20px 24px;border-radius:var(--r);background:var(--flaeche)}
+.pfad-tag{margin:0;font-size:12px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--akzent)}
+.pfad-karte h3{margin:0;font-size:20px;font-weight:700;letter-spacing:-.024em}
+.pfad-kurz{margin:0;font-size:15px;line-height:1.4;color:var(--leise)}
+.pfad-meta{margin:4px 0 0;font-size:14px;color:var(--leise)}
+.pfad-karte .pf-balken{align-self:stretch;margin:4px 0 8px}
+.pfad-fertig{display:flex;align-items:center;gap:6px;margin:0;font-weight:600;color:var(--gruen)}
+.pfad-fertig svg.ic{width:18px;height:18px}
+.pfad-liste{align-self:stretch;margin-top:4px}
+.pfad-liste summary{display:flex;align-items:center;gap:6px;min-height:44px;font-size:15px;font-weight:600;color:var(--akzent);cursor:pointer;list-style:none}
+.pfad-liste summary::-webkit-details-marker{display:none}
+.pfad-liste summary svg.ic{width:14px;height:14px;transition:transform .25s var(--feder)}
+.pfad-liste[open] summary svg.ic{transform:rotate(90deg)}
+.pfad-seiten{list-style:none;margin:0;padding:0}
+.pfad-seiten a{display:flex;align-items:center;gap:10px;min-height:44px;color:var(--text);font-size:15px}
+.pfad-haken{flex:none;width:20px;height:20px;border-radius:50%;box-shadow:inset 0 0 0 1.5px var(--linie);display:grid;place-items:center}
+.pfad-haken.an{background:color-mix(in srgb,var(--gruen) 22%,transparent);box-shadow:none;color:var(--gruen)}
+.pfad-haken svg.ic{width:12px;height:12px;stroke-width:3}
+.pfad-weiter-info{margin:8px 0 0;font-size:14px;color:var(--leise)}
+
+/* Mit Mathe: der Kasten ist nur sichtbar, wenn der Schalter an ist */
+.mathe-zeile{margin:0 0 16px}
+.mathe-schalter{appearance:none;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px 0 16px;border:0;border-radius:99px;background:var(--fuell);color:var(--text);font:inherit;font-size:15px;font-weight:600;cursor:pointer}
+.mathe-schalter svg.ic{color:var(--akzent);width:18px;height:18px}
+.mathe-knopf{position:relative;width:40px;height:24px;border-radius:99px;background:var(--seg-spur);transition:background .25s var(--feder)}
+.mathe-knopf::after{content:"";position:absolute;top:2px;left:2px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .3s var(--feder)}
+.mathe-schalter[aria-checked=true] .mathe-knopf{background:var(--schalter)}
+.mathe-schalter[aria-checked=true] .mathe-knopf::after{transform:translateX(16px)}
+.mathe{margin:8px 0 24px;padding:16px 24px;border-radius:20px;max-width:66ch;background:color-mix(in srgb,var(--k4) 11%,var(--flaeche))}
+.mathe>b{display:flex;align-items:center;gap:6px;margin-bottom:4px;font-size:15px;font-weight:600;color:var(--k4)}
+.mathe>b svg.ic{width:16px;height:16px}
+.mathe p{margin:0 0 8px;font-size:16px;line-height:1.55}
+.mathe p:last-child{margin-bottom:0}
+html[data-mathe=aus] .mathe{display:none}
+
+/* Handy und schmale Fenster */
+@media(max-width:960px){
+  .leiste.leer{display:none}
+  .leiste .weg-chip-leiste{display:none}
+  .weg-chip-seite{order:1;display:inline-flex;flex:0 1 auto;min-width:0;overflow:hidden;font-size:13px;min-height:44px;padding:0 12px 0 8px;background:var(--fuell);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
+  .weg-chip-seite[hidden]{display:none}
+  .weg-chip-seite b{min-width:0;white-space:nowrap}
+  .navsuche{min-width:160px}
+  .weg-chip-seite{max-width:46vw}
+  .zurueck-zeile{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
+  .zurueck-zeile .lesemodus button{padding:0 12px;font-size:14px}
+  .zurueck{padding:0 14px 0 10px;font-size:15px}
+  .weiter-karte .weiter-in{flex-direction:column;align-items:stretch;gap:16px;padding:20px}
+  .weiter-karte .btn{align-self:flex-start}
+  .weg-kacheln,.pfad-karten{grid-template-columns:1fr}
+}
+@media(max-width:600px){
+  /* Kopfzeile am Handy: Rollen-Chip nur als Symbol (Name steht im Tooltip und in aria-label), damit die Suche Platz hat */
+  .weg-chip-seite{flex:none;width:44px;padding:0;justify-content:center;gap:0}
+  .weg-chip-seite b{display:none}
+  .weg-chip-seite svg.ic{width:20px;height:20px}
+  .navsuche{flex:1 1 160px;min-width:160px}
+  .navsuche input[type=search]{height:44px;font-size:16px}
+  .navsuche svg.ic{top:14px}
+  .navsuche input[type=search]:focus{outline:2px solid var(--akzent);outline-offset:1px}
+  .weg-kachel{min-height:96px;padding:16px;gap:12px}
+  .weg-ic{width:48px;height:48px}
+  .lernziele{padding:16px 18px}
+  .pfad-karte{padding:18px 20px}
+}
+.lesemodus button{white-space:nowrap}
+@media(min-width:961px){.leiste-in{grid-template-columns:minmax(0,1fr) auto max-content}}
+@media(max-width:960px){
+  .zurueck-zeile{flex-wrap:nowrap}
+  .zurueck-zeile .lesemodus{grid-auto-columns:auto;flex:none}
+  .zurueck-zeile .lesemodus button{padding:0 10px;font-size:14px}
+  .zurueck{padding:0 12px 0 8px;font-size:15px;white-space:nowrap}
+}
+.lz-labor summary{display:flex;align-items:center;gap:8px;min-height:32px;font-size:17px;font-weight:700;letter-spacing:-.02em;cursor:pointer;list-style:none}
+.lz-labor summary::-webkit-details-marker{display:none}
+.lz-labor summary svg.ic{color:var(--akzent);width:20px;height:20px}
+.lz-labor[open] summary{margin-bottom:8px}
+.lz-labor .lz-titel{display:none}
+@media(max-width:600px){.lernziele.lz-labor{padding:10px 16px;margin-bottom:16px}}
+
+/* ---------- Gleichmaessig: ein Container, ein Abstandsmass (--sp), Karten gleich hoch je Zeile ---------- */
+.seitenbreite{--sp:24px}
+@media(max-width:600px){.seitenbreite{--sp:16px}}
+.karten{display:grid;grid-template-columns:minmax(0,1fr);gap:var(--sp);align-items:stretch}
+@media(min-width:700px){.karten-2{grid-template-columns:repeat(2,minmax(0,1fr))}.karten-3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.karte{display:flex;flex-direction:column;gap:8px;min-width:0;padding:var(--sp);border-radius:var(--r);background:var(--flaeche)}
+.karte-kicker{display:flex;align-items:center;gap:8px;margin:0;font-size:13px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;color:var(--akzent);white-space:nowrap;overflow:hidden}
+.karte-kicker span{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.karte-kicker svg.ic{width:16px;height:16px}
+.karte-titel{margin:0;font-size:20px;line-height:1.2;font-weight:700;letter-spacing:-.024em}
+.karte-text{margin:0;font-size:16px;line-height:1.4;color:var(--leise)}
+.karte-fuss{display:flex;flex-direction:column;gap:8px;margin-top:auto;padding-top:calc(var(--sp) / 2)}
+.karte-meta{margin:0;font-size:14px;line-height:1.35;color:var(--leise)}
+.karte .pf-balken{margin:0}
+.karte .btn{align-self:flex-start}
+.karte .pfad-fertig{min-height:44px}
+.karte.pfad-karte{align-items:stretch;padding:var(--sp);gap:8px}
+.karte .pfad-liste{margin-top:0}
+.karte-breit .karte-fuss{padding-top:calc(var(--sp) / 2)}
+.klassen-karte .klassenlink{width:100%;flex:none}
+.klassen-karte .klassenlink-status{margin:0;min-height:0}
+.start .hero,.seitenbreite .hero{align-items:flex-start;text-align:left}
+.start .hero{padding:8px 0 0}
+.start .hero.gross h1{font-size:clamp(34px,5vw,56px);max-width:none}
+.start .hero.gross .lead{max-width:62ch}
+.start .hero .kennzahlen,.start .hero-aktionen{margin-top:16px}
+.start .block{margin-top:calc(var(--sp) * 2)}
+.start .block>h2{margin-bottom:var(--sp)}
+.start .start-lead{margin:0 0 var(--sp)}
+.weiter-karte .weiter-in{padding:16px var(--sp)}
+.weiter-karte h2{font-size:18px}
+.weiter-text p{font-size:16px;margin-bottom:8px}
+.start .weg-gewaehlt{margin-top:var(--sp)}
+.weg-kacheln.karten{gap:var(--sp)}
+.weg-kachel{height:100%}
+.start .weg-fuss{margin:var(--sp) 0 0}
+.start-fuss{gap:var(--sp)}
+@media(min-width:700px){.start-fuss{grid-template-columns:repeat(3,minmax(0,1fr));align-items:stretch}}
+.start-fuss .hinweis{padding:var(--sp);border-radius:var(--r);background:var(--flaeche)}
+.entscheider-box{padding:var(--sp)}
+
+/* Weitere Wege: alles uebrige, zugeklappt */
+.weitere{margin-top:calc(var(--sp) * 2)}
+.weitere>summary{display:flex;align-items:center;gap:12px;min-height:56px;padding:0 var(--sp);border-radius:var(--r);background:var(--flaeche);font-size:19px;font-weight:700;letter-spacing:-.02em;cursor:pointer;list-style:none}
+.weitere>summary::-webkit-details-marker{display:none}
+.weitere>summary svg.ic{color:var(--akzent);transition:transform .25s var(--feder)}
+.weitere[open]>summary svg.ic{transform:rotate(90deg)}
+.weitere>summary small{margin-left:auto;font-size:14px;font-weight:500;color:var(--leise)}
+.weitere-in>.block:first-child{margin-top:var(--sp)}
+@media(max-width:600px){.weitere>summary small{display:none}}
+
+/* Lernziele einzeilig, aufklappbar; Lesezeit steht in der Kopfzeile */
+.lernziele.lz-kompakt{padding:0;margin:0 0 var(--sp);max-width:66ch}
+.lz-kompakt>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;font-size:16px;font-weight:600;cursor:pointer;list-style:none}
+.lz-kompakt>summary::-webkit-details-marker{display:none}
+.lz-kompakt>summary svg.ic:first-child{color:var(--akzent);width:18px;height:18px}
+.lz-kompakt>summary small{font-size:14px;font-weight:500;color:var(--leise)}
+.lz-kompakt>summary svg.ic:last-child{margin-left:auto;width:14px;height:14px;color:var(--leise);transition:transform .25s var(--feder)}
+.lz-kompakt[open]>summary svg.ic:last-child{transform:rotate(90deg)}
+.lz-kompakt ul{margin:0;padding:0 16px 12px 36px}
+.lz-kopf{display:inline-flex;align-items:center;gap:4px}
+.lz-kopf svg.ic{width:15px;height:15px;color:var(--akzent)}
+.lz-kopf .lz{font-weight:600;color:var(--leise)}
+
+/* Menue: Fortschritt eine Zeile, Fuer dich, Alle Bereiche, Statusbox eingeklappt */
+.navkopf[hidden]{display:none}
+.nav-fortschritt{display:flex;align-items:center;gap:10px;margin:0 4px 6px;padding:6px 10px}
+.nav-fortschritt .fs-text{margin:0;font-size:12.5px;font-weight:600;white-space:nowrap}
+.nav-fortschritt .fs-balken{flex:1;min-width:24px}
+.nav-titel{margin:0;padding:4px 10px;font-size:13px;font-weight:600;letter-spacing:-.01em;color:var(--leise)}
+.nav-fuerdich{margin-top:4px}
+.nav-alle-block{margin-top:8px}
+.nav-alle{font-size:15px;color:var(--text)}
+.nav-alle-inhalt[hidden]{display:none}
+.nav-alle-inhalt{padding-left:6px}
+.nav-alle-inhalt .navgruppe{margin-top:0}
+.livebox{padding:0}
+.livebox>summary{display:flex;align-items:center;gap:8px;min-height:36px;padding:0 12px;font-weight:600;color:var(--text);cursor:pointer;list-style:none}
+.livebox>summary::-webkit-details-marker{display:none}
+.livebox>summary svg.ic{margin-left:auto;width:14px;height:14px;color:var(--leise);transition:transform .25s var(--feder)}
+.livebox[open]>summary svg.ic{transform:rotate(90deg)}
+.livebox>:not(summary){margin-left:12px;margin-right:12px}
+.livebox[open]{padding-bottom:12px}
+
+/* Links im Text: [Text](Adresse) */
+.md-link{text-decoration:underline;text-underline-offset:3px;font-weight:500}
+@media(max-width:960px),(pointer:coarse){.md-link{display:inline-flex;align-items:center;min-height:44px}}
+
+.downloads-box{margin:0 0 24px}
+.downloads-titel{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.downloads-titel svg.ic{width:20px;height:20px;color:var(--akzent)}
+/* gleich breite, gleich hohe Karten: bis drei nebeneinander, vier und mehr zu zweit; Knopf immer unten, gleiche Linie */
+.downloads{display:grid;grid-template-columns:repeat(var(--dl-spalten,2),minmax(0,1fr));gap:12px;margin:0}
+.downloads[data-n="1"]{--dl-spalten:1}
+.downloads[data-n="3"]{--dl-spalten:3}
+.dlkarte{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:1fr auto;gap:14px;align-items:start;padding:16px;border-radius:var(--r);background:var(--flaeche);color:inherit;text-decoration:none;min-width:0}
+.dlkarte:hover{background:var(--flaeche-hover,var(--flaeche))}
+.dlkarte .dl-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--akzent) 14%,transparent);color:var(--akzent)}
+.dlkarte .dl-text{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
+.dlkarte .dl-text b{font-size:16px;line-height:1.3}
+.dlkarte .dl-text small{font-size:14px;line-height:1.4;opacity:.8}
+.dlkarte .dl-knopf{grid-column:1/-1;align-self:end;justify-content:center;width:100%;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+@media (max-width:900px){.downloads,.downloads[data-n="3"]{--dl-spalten:2}.downloads[data-n="1"]{--dl-spalten:1}}
+@media (max-width:600px){.downloads,.downloads[data-n]{--dl-spalten:1}}
+
+/* Handy und Touch: Fachwoerter sind echte 44-px-Ziele. Senkrechtes Padding des Inline-Elements aendert die Zeilenhoehe nicht,
+   die Tint-Flaeche bleibt als Verlauf nur so hoch wie die Zeile. */
+@media (pointer:coarse),(max-width:700px){
+  html body .gl{padding:9px 3px;--gl-t:color-mix(in srgb,var(--akzent) 11%,transparent);background:linear-gradient(var(--gl-t),var(--gl-t)) center/100% 1.45em no-repeat;min-height:44px}
+  html body .gl:hover,html body .gl:focus-visible{--gl-t:color-mix(in srgb,var(--akzent) 20%,transparent);background:linear-gradient(var(--gl-t),var(--gl-t)) center/100% 1.45em no-repeat}
+  html body .gl::before{content:none}
+}
+
+/* Sprungziele (Abschnitte, "Live ausprobieren", Quiz-Rueckverweise) landen frei unter der Kopfleiste, nicht dahinter */
+#inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--leiste) + 20px)}
+@media(max-width:960px){#inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--kopfhoehe) + 20px)}}

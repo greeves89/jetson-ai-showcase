@@ -12,7 +12,7 @@ for (const id of seiten) {
   const felder = t.page.locator("fieldset.quiz-frage");
   pruefe((await felder.count()) === richtig.length, `${id}: ${richtig.length} Quizfragen sichtbar`);
   for (let i = 0; i < richtig.length; i++) {
-    await felder.nth(i).locator("label").nth(richtig[i]).click();
+    await felder.nth(i).locator(`label:has(input[value="${richtig[i]}"])`).click()   // Reihenfolge ist gemischt, value = urspruenglicher Index;
   }
   const ergebnis = (await t.page.locator(".quiz-ergebnis").textContent()).trim();
   pruefe(ergebnis === `${richtig.length} von ${richtig.length} richtig.`, `${id}: Ergebnis "${ergebnis}"`);
@@ -24,7 +24,7 @@ for (const id of seiten) {
   await t.page.goto("about:blank");
   await oeffneSeite(t.page, id);
   const f0 = t.page.locator("fieldset.quiz-frage").first();
-  await f0.locator("label").nth(richtig[0] === 0 ? 1 : 0).click();
+  await f0.locator(`label:has(input[value="${richtig[0] === 0 ? 1 : 0}"])`).click();
   pruefe((await f0.locator(".quiz-rueck").textContent()).startsWith("Nicht ganz."), `${id}: falsche Antwort wird erkannt`);
 }
 pruefe(t.fehler.length === 0, "keine Konsolenfehler" + (t.fehler.length ? ": " + t.fehler.join(" | ") : ""));

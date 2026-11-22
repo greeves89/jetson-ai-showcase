@@ -1,0 +1,170 @@
+{
+ "id": "ki-hausaufgaben-fair",
+ "titel": "KI und Hausaufgaben",
+ "untertitel": "Lernen, ohne zu schummeln",
+ "gesamt": 131.8,
+ "szenen": [
+  {
+   "id": "auftrag",
+   "kapitel": "Der Auftrag",
+   "start": 0,
+   "dauer": 12.66,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.56,
+     "text": "Eine Erörterung zum Handyverbot, fünf Seiten, morgen früh. Die KI schreibt sie in Sekunden."
+    },
+    {
+     "t": 7.76,
+     "d": 4,
+     "text": "Verlockend. Aber schauen wir ehrlich, was dir das bringt."
+    }
+   ]
+  },
+  {
+   "id": "fitness",
+   "kapitel": "Das Fitnessstudio",
+   "start": 12.66,
+   "dauer": 13.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.56,
+     "text": "Stell dir ein Fitnessstudio vor, in dem dein Kumpel die Gewichte für dich hebt. Er wird stärker. Du nicht."
+    },
+    {
+     "t": 7.36,
+     "d": 4.8,
+     "text": "Mit Hausaufgaben ist es genauso. Gelernt wird nur, was du selbst denkst."
+    }
+   ]
+  },
+  {
+   "id": "gut",
+   "kapitel": "Dafür ist KI gut",
+   "start": 25.72,
+   "dauer": 13.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.64,
+     "text": "Dafür kann eine KI richtig gut sein. Sie erklärt dir den Stoff noch einmal anders. Sie fragt dich ab."
+    },
+    {
+     "t": 7.44,
+     "d": 5.04,
+     "text": "Sie zeigt dir, wo dein Text holpert. Und sie hilft dir, Ideen zu sammeln."
+    }
+   ]
+  },
+  {
+   "id": "unfair",
+   "kapitel": "Wo es unfair wird",
+   "start": 39.1,
+   "dauer": 13.14,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.84,
+     "text": "Unfair wird es, wenn du ihren Text als deinen abgibst. Das ist wie Abschreiben, nur schneller."
+    },
+    {
+     "t": 6.64,
+     "d": 5.6,
+     "text": "Und es schadet dir doppelt. Du lernst nichts, und die Lehrkraft kann es als Täuschung werten."
+    }
+   ]
+  },
+  {
+   "id": "ampel",
+   "kapitel": "Die Ampel",
+   "start": 52.24,
+   "dauer": 21.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.88,
+     "text": "Die Regeln sind je nach Schule, Fach und Lehrkraft verschieden. Frag vorher, wofür du KI nutzen darfst."
+    },
+    {
+     "t": 7.68,
+     "d": 12.88,
+     "text": "Ist nichts geregelt, hilft die Ampel. Grün: erklären und abfragen lassen. Gelb: Text überarbeiten lassen, aber offen sagen. Rot: einen fertigen Text abgeben."
+    }
+   ]
+  },
+  {
+   "id": "ablauf",
+   "kapitel": "Ein fairer Ablauf",
+   "start": 73.7,
+   "dauer": 16.18,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.28,
+     "text": "So kann ein fairer Ablauf aussehen. Erst schreibst du selbst eine Gliederung. Dann fragst du die KI, was fehlt."
+    },
+    {
+     "t": 8.08,
+     "d": 7.2,
+     "text": "Dann schreibst du den Text selbst. Zum Schluss lässt du die KI prüfen, wo er noch holpert. Das Denken bleibt bei dir."
+    }
+   ]
+  },
+  {
+   "id": "offen",
+   "kapitel": "Offen sagen",
+   "start": 89.88,
+   "dauer": 13.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.84,
+     "text": "Sag offen, wie du die KI genutzt hast. Ein Satz reicht: Ich habe mir Ideen sammeln und die Rechtschreibung prüfen lassen."
+    },
+    {
+     "t": 8.64,
+     "d": 4.32,
+     "text": "Das wirkt nicht schwach. Es zeigt, dass du weißt, was du tust."
+    }
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Nachprüfen",
+   "start": 103.74,
+   "dauer": 11.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Und prüf, was die KI sagt. Sie rechnet manchmal falsch und erfindet Quellen."
+    },
+    {
+     "t": 6.24,
+     "d": 4.16,
+     "text": "Verantwortlich für das, was du abgibst, bist du, nicht sie."
+    }
+   ]
+  },
+  {
+   "id": "tafel",
+   "kapitel": "Der Tafel-Test",
+   "start": 115.04,
+   "dauer": 16.76,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Ein einfacher Test zum Schluss: Könntest du es morgen an der Tafel erklären, ohne Handy?"
+    },
+    {
+     "t": 6.24,
+     "d": 8.72,
+     "text": "Wenn ja, hast du etwas gelernt, egal wer geholfen hat. Wenn nein, frag die KI noch einmal, aber diesmal nach der Erklärung."
+    }
+   ]
+  }
+ ]
+}

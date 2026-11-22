@@ -13,6 +13,8 @@
      KL.$(sel, root) KL.$$(sel, root)         Kurzformen fuer querySelector(All)
      KL.h(tag, attrs, ...kinder)              Elemente bauen (class, html, on<ereignis>, dataset, sonst Attribute)
      KL.md(text)                              Markierungen aus content.js in sicheres HTML wandeln
+     KL.mdAntwort(text)                       Antworttexte von Modellen (untrusted): Markdown (**fett**, *kursiv*, `code`, Listen, Zeilenumbrueche) als DocumentFragment
+                                              aus DOM-Knoten, nie als HTML. Fuer Chat, RAG und Agent statt textContent, wenn die Antwort Markdown enthalten darf.
      KL.icon(name)                            Inline-SVG (Klasse ic)
      KL.post(pfad, objekt)                    fetch POST mit JSON, gibt Response zurueck (gleiche Herkunft, Origin geht automatisch mit)
      KL.stats.on(fn)                          fn(statsObjekt) etwa alle 1,5 s, gibt eine Abmelde-Funktion zurueck;
@@ -30,6 +32,37 @@
    SICHERHEIT: Server-, Modell- und Nutzertexte NUR per textContent oder h(...) mit Text einsetzen, nie ueber
    html: oder innerHTML. KL.md() ist nur fuer eigene, statische Texte aus content.js gedacht.
    CSS-Klassen stehen in style.css (flaeche, pad, btn, chip, regler, live, pipe, erklaerung, ...).
+   LERNPLATTFORM (alles nur im Browser, nichts wird gesendet):
+     Seitenfeld downloads: [{text, sub, href}]   Dateikarten mit Download-Knopf rechts, immer sichtbar direkt unter dem Seitenkopf, href nur unter /static/ (PDF), öffnet in neuem Tab
+     Seitenfeld lernziele: ["Du kannst ...", ...]   2 bis 4 Sätze, stehen oben auf der Seite; daneben die Lesezeit (kurz und genau, aus der Wortzahl)
+     Abschnittsfeld mathe: {p: [...]}                 erscheint nur, wenn der Schalter "Mit Mathe" an ist (localStorage kl-mathe)
+     Fortschritt: Eine Seite zaehlt als gelesen, wenn das Seitenende erreicht ist (mindestens 5 s nach dem Oeffnen) oder das Quiz fertig ist
+       (localStorage kl-gelesen, kl-zuletzt). INHALT.lernpfade (content-laien.js) benennt die Pfade; unbekannte Seiten-IDs fallen still weg.
+     Weg: Startseite mit sechs Rollen (siehe WEGE), localStorage kl-weg (ein Wort). /?weg=schule wirkt ohne zu speichern.
+     Fortschritt wird nur nach Einwilligung gespeichert (localStorage kl-merken = "1", nie vorbelegt; Schalter im Willkommens-Fenster, "Fortschritt merken" in der
+       Fusszeile, Aus leert kl-gelesen und kl-zuletzt). Ohne Einwilligung bleibt er im Arbeitsspeicher. KL.merken liest, KL.merkenSetzen(an) setzt.
+     Wege: schule, lehrende, erwachsene (Alias neugierig), technik, beruf, eltern. Jeder /?weg=... wirkt wie /?weg=schule, ohne zu speichern.
+     KL.weg liefert den aktiven Weg oder null, KL.gelesen(id) ob eine Seite als gelesen gilt.
+     Willkommens-Fenster (laien.js, Texte INHALT.willkommen): erscheint nur beim ersten Besuch der Startseite, nutzt KL.wegListe() (Schluessel, Titel, Symbol)
+       und KL.wegWaehlen(schluessel); "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile oeffnet dieselbe Karte (KL.willkommen.oeffnen). Die Karte blockiert nichts (kein Modal).
+       localStorage kl-willkommen merkt, dass sie gesehen wurde.
+   QUIZ (Seitenfeld quiz: [{frage, optionen, richtig, erklaerung, abschnitt?}]): Antworten werden bei jedem Aufbau gemischt (input.value bleibt der urspruengliche
+     Index, richtig gilt weiter). Maus und Touch werten sofort aus, mit der Tastatur waehlen die Pfeiltasten nur und Enter oder "Antwort pruefen" bestaetigt.
+     Richtig und falsch tragen Symbol und Text. "Noch einmal" baut das Quiz neu auf. Optional abschnitt (Abschnitts-id, Ueberschrift oder laufende Nummer ab 1):
+     nach einer falschen Antwort fuehrt ein Link zurueck zu diesem Abschnitt.
+   ZEITANGABEN: Lesezeit = Wortzahl des sichtbaren Lesemodus durch 160 je Minute. Unterrichtseinheiten (typ lektion, Gruppe "Für die Schule", Feld minuten
+     oder Seiten-id mit "-stunde-N") zeigen "45 Minuten Unterricht" statt der Lesezeit, auf Karten und im Seitenkopf gleich.
+   TEXTAUSZEICHNUNG KL.md: **fett**, `code`, [[glossar|Text]], {{seite|Text}} und [Text](Adresse). Adressen nur mit https:// oder / am Anfang
+     (kein // und keine anderen Schemata, sonst bleibt es Klartext); alles wird zuerst escaped. Externe Adressen (https://) bekommen
+     rel="noopener noreferrer" und target="_blank", die Klasse md-link ist am Handy mindestens 44 px hoch. Interne (/seite) laufen im Router.
+   CODEBLOECKE: Abschnittsfeld code: [{titel, sudo, text}] (nur bei Anleitungen, Beispiel: Seite selbst-bauen). text ist roher Text, der per
+     textContent in <pre><code> kommt (wie md() nie als HTML) und genau so kopiert wird; titel ist die Beschriftung; sudo ist ein Satz mit dem Grund
+     und zeigt die Markierung "braucht sudo". Der Knopf "Kopieren" ist mindestens 44 px hoch, nutzt navigator.clipboard und notfalls execCommand;
+     die Stile stehen inline in codeBlock() (style.css gehoert anderen). Der Block steht im aufklappbaren Teil des Abschnitts, nach den Absaetzen.
+   MENUE UND STARTSEITE: Das Menue zeigt beim Start nur Suche, "Fuer dich" (INHALT.menue.fuerDich, hoechstens 12 Seiten) und den zugeklappten Block
+     "Alle Bereiche" (Akkordeon). Die Startseite zeigt je Rolle INHALT.startRollen (Ueberschrift, Satz, Bloecke), alles Uebrige liegt unter "Weitere Wege".
+     Karten (karte()) haben immer Kopfzeile, Titel, Satz und Fuss; der Fuss liegt unten (margin-top:auto), damit Knoepfe in einer Zeile stehen.
+     Der Rohtext der Startseite fuer Suchmaschinen (scripts/seo_bauen.mjs) bleibt unveraendert; die Rolle aendert nur die Darstellung im Browser.
    BILDER UND LESEMODUS (docs/visuals.md): KL.visual(spec) baut ein Bild (visuals.js), KL.montiere({destroy}) haengt Aufraeumer an die Seite,
      KL.lesemodus ist "kompakt" (Standard) oder "ausfuehrlich" (Zuweisung wechselt und merkt sich die Wahl), KL.hatIcon(name) prueft Icon-Namen. */
 (function () {
@@ -99,8 +132,18 @@
 
   /* ------------------------------------------------------------ Text mit Markierungen */
   function esc(s) { return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;"); }
+  /** Adresse fuer [Text](Adresse): nur https://... oder /pfad (nicht //), ohne Leerzeichen, Anfuehrungszeichen, spitze Klammern, * und Backtick. */
+  const LINK_OK = /^(?:https:\/\/[^\s"'<>*`\\]+|\/(?!\/)[^\s"'<>*`\\]*)$/;
+  const LINK_RE = /\[([^\[\]]+)\]\(([^()\s]+)\)/g;
   function md(t) {
     let s = esc(String(t));
+    const links = [];
+    s = s.replace(LINK_RE, (m, text, url) => {
+      if (!LINK_OK.test(url)) return text;                                         // keine erlaubte Adresse: nur der Text
+      const extern = url.startsWith("https://");
+      links.push('<a class="md-link' + (extern ? " ext" : "") + '" href="' + url + '"' + (extern ? ' rel="noopener noreferrer" target="_blank"' : "") + ">" + text + "</a>");
+      return "\u0001" + (links.length - 1) + "\u0001";
+    });
     s = s.replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g, (m, k, anzeige) => {
       const g = INHALT.glossar[k];
       if (!g) return anzeige || k;
@@ -110,7 +153,52 @@
     s = s.replace(/\{\{([a-z0-9-]+)(\?[a-z0-9_=&-]+)?\|([^}]+)\}\}/g, (m, id, abfrage, text) => '<a href="#/' + id + (abfrage || "") + '">' + text + "</a>");
     s = s.replace(/\*\*([^*]+)\*\*/g, "<strong>$1</strong>");
     s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
-    return s;
+    return s.replace(/\u0001(\d+)\u0001/g, (m, i) => links[Number(i)] || "");
+  }
+  /** Antworttexte von Modellen (untrusted): Markdown NUR als DOM-Knoten mit textContent, nie als HTML.
+      Unterstuetzt **fett**, *kursiv*, `code`, Ueberschriften (als fetter Absatz), Listen (-, *, 1.) und Zeilenumbrueche. */
+  function mdInline(text) {
+    const teile = [];
+    const re = /(\*\*([^*\n]+?)\*\*|`([^`\n]+)`|(?<![*\w])\*([^*\s][^*\n]*?)\*(?![*\w])|__([^_\n]+?)__)/g;
+    let i = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > i) teile.push(text.slice(i, m.index));
+      if (m[2] != null) teile.push(h("strong", null, m[2]));
+      else if (m[3] != null) teile.push(h("code", null, m[3]));
+      else if (m[4] != null) teile.push(h("em", null, m[4]));
+      else teile.push(h("strong", null, m[5]));
+      i = m.index + m[0].length;
+    }
+    if (i < text.length) teile.push(text.slice(i));
+    return teile;
+  }
+  function mdAntwort(text) {
+    const wurzel = document.createDocumentFragment();
+    const zeilen = String(text == null ? "" : text).replace(/\r/g, "").split("\n");
+    let liste = null, absatz = [];
+    const absatzEnde = () => {
+      if (!absatz.length) return;
+      const p = h("p", { class: "md-p" });
+      absatz.forEach((z, k) => { if (k) p.append(document.createElement("br")); p.append(...mdInline(z)); });
+      wurzel.append(p); absatz = [];
+    };
+    for (const roh of zeilen) {
+      const z = roh.replace(/\s+$/, "");
+      let m;
+      if (!z.trim()) { absatzEnde(); liste = null; continue; }
+      if ((m = /^\s*([-*\u2022])\s+(.*)$/.exec(z)) || (m = /^\s*(\d+)[.)]\s+(.*)$/.exec(z))) {
+        absatzEnde();
+        const geordnet = /\d/.test(m[1]);
+        if (!liste || liste.geordnet !== geordnet) { liste = { geordnet, el: h(geordnet ? "ol" : "ul", { class: "md-liste" }) }; wurzel.append(liste.el); }
+        liste.el.append(h("li", null, ...mdInline(m[2])));
+        continue;
+      }
+      if ((m = /^#{1,4}\s+(.*)$/.exec(z))) { absatzEnde(); liste = null; wurzel.append(h("p", { class: "md-p md-kopf" }, h("strong", null, ...mdInline(m[1])))); continue; }
+      liste = null;
+      absatz.push(z);
+    }
+    absatzEnde();
+    return wurzel;
   }
   const zeit = (ms) => (ms < 1000 ? Math.round(ms) + " ms" : (ms / 1000).toFixed(1).replace(".", ",") + " s");
   function post(pfad, obj) {
@@ -157,18 +245,23 @@
     live.ram = h("b", null, "–"); live.ramB = bar();
     live.w = h("b", null, "–");
     live.modell = h("div", { class: "modell" }, "kein Modell geladen");
-    return h("div", { class: "livebox", "aria-live": "off" },
-      h("div", { class: "kopfz" }, live.punkt, live.status),
+    return h("details", { class: "livebox", "aria-live": "off" },
+      h("summary", { class: "kopfz" }, live.punkt, live.status, icon("chevron")),
       h("div", { class: "mini" }, h("div", { class: "z" }, "Auslastung", live.gpu), live.gpuB),
       h("div", { class: "mini" }, h("div", { class: "z" }, "Speicher", live.ram), live.ramB),
       h("div", { class: "mini" }, h("div", { class: "z" }, "Strom", live.w)),
       live.modell);
   }
+  /** Eine Aussage zur Auslastung fuer Seitenleiste und Startseite: "voll" (Warteschlange), "rechnet" (GPU ab 60 Prozent) oder "frei". */
+  function rechnerZustand(d) {
+    const w = (d && d.warteschlange) || {};
+    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "voll";
+    return d && d.gpu_pct != null && d.gpu_pct >= 60 ? "rechnet" : "frei";
+  }
   function liveAktualisieren(d) {
     live.punkt.classList.toggle("aus", !d.frisch);
-    const w = d.warteschlange || {};
-    const voll = w.parallel && (w.aktiv >= w.parallel || w.wartend > 0);
-    live.status.textContent = !d.frisch ? "keine frischen Werte" : voll ? "Rechner live, gerade viel los" : "Rechner live und frei";
+    const z = rechnerZustand(d);
+    live.status.textContent = !d.frisch ? "keine frischen Werte" : z === "voll" ? "Rechner live, gerade viel los" : z === "rechnet" ? "Rechner live, rechnet gerade" : "Rechner live und frei";
     if (d.gpu_pct != null) { live.gpu.textContent = d.gpu_pct + " %"; live.gpuB.firstChild.style.width = d.gpu_pct + "%"; }
     if (d.ram_mb != null) {
       live.ram.textContent = (d.ram_mb / 1024).toFixed(1).replace(".", ",") + " von " + (d.ram_max_mb / 1024).toFixed(1).replace(".", ",") + " GB";
@@ -210,14 +303,54 @@
       const zeigen = (i, abspielen) => {
         const v = fertig[i];
         const basis = "/static/videos/" + v.id;
-        const video = h("video", { controls: true, preload: "metadata", poster: basis + ".jpg", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
-          h("source", { src: basis + ".mp4", type: "video/mp4" }),
+        // Standbild vor dem Start und nach dem Ende: die erste Szene (Sekunde 3) statt des schwarzen Anfangs- oder Schlussbilds; kein Poster mit fremdem Ausschnitt
+        const STILL = 3;
+        const video = h("video", { controls: true, preload: "metadata", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
+          h("source", { src: basis + ".mp4#t=" + STILL, type: "video/mp4" }),
           h("track", { kind: "subtitles", srclang: "de", label: "Deutsch", src: basis + ".vtt", default: true }));
         const kap = (v.kapitel || []).map((k) => h("li", null,
           h("button", { type: "button", dataset: { t: k.t }, onclick: () => { video.currentTime = k.t; video.play(); } },
             h("span", { class: "t" }, mmss(k.t)), k.titel)));
+        // Untertitel: Im Bild verdecken sie Bildtext und Schlussbild. Darum laufen sie auf jeder Breite als Zeile UNTER dem Bild; nur im Vollbild bleibt es beim Untertitel des Browsers.
+        const unter = h("p", { class: "untertitel", "aria-hidden": "true", hidden: true });
+        const spur = video.textTracks && video.textTracks[0];
+        const schmal = window.matchMedia("(max-width: 600px)");
+        let vollbild = false;
+        const unterZeigen = () => {
+          const eigen = !!spur && spur.mode === "hidden";
+          unter.hidden = !eigen;
+          unter.textContent = eigen ? Array.from(spur.activeCues || []).map((c) => String(c.text).replace(/<[^>]+>/g, "").replace(/\s*\n\s*/g, " ")).join(" ") : "";
+        };
+        const unterModus = () => { if (!spur) return; spur.mode = vollbild ? "showing" : "hidden"; unterZeigen(); };
+        if (spur) {
+          spur.addEventListener("cuechange", unterZeigen);
+          video.addEventListener("loadedmetadata", unterModus);
+          const vb = (an) => () => { vollbild = an; unterModus(); };
+          video.addEventListener("webkitbeginfullscreen", vb(true)); video.addEventListener("webkitendfullscreen", vb(false));
+          const aufModus = () => { if (!video.isConnected) { schmal.removeEventListener("change", aufModus); document.removeEventListener("fullscreenchange", aufVoll); return; } unterModus(); };
+          const aufVoll = () => { if (!video.isConnected) { document.removeEventListener("fullscreenchange", aufVoll); return; } vollbild = !!document.fullscreenElement && document.fullscreenElement.contains(video); unterModus(); };
+          schmal.addEventListener("change", aufModus); document.addEventListener("fullscreenchange", aufVoll);
+          unterModus();
+        }
+        // Ende: nicht im schwarzen Schlussbild stehen bleiben, sondern Standbild und "Nochmal ansehen"
+        const ende = h("div", { class: "spieler-ende", hidden: true }, h("button", { type: "button", class: "btn primary", onclick: () => { amEnde = false; ende.hidden = true; video.currentTime = 0; video.play().catch(() => {}); } }, icon("refresh-cw"), "Nochmal ansehen"));
+        let amEnde = false;
+        video.addEventListener("ended", () => { amEnde = true; video.currentTime = STILL; ende.hidden = false; const b = $("button", ende); if (b && video.isConnected && document.activeElement === video) b.focus(); });
+        video.addEventListener("play", () => { amEnde = false; ende.hidden = true; });
+        video.addEventListener("seeking", () => { if (!amEnde) ende.hidden = true; });
+        video.addEventListener("seeked", () => { amEnde = false; });
+        const kapListe = kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel", tabindex: "0" }, kap) : null;
+        const kapHinweis = kap.length ? h("p", { class: "kapitel-hinweis", hidden: true }, icon("chevron-down"), "Weitere Kapitel: nach unten scrollen") : null;
         const kopf = h("div", { class: "video" + (kap.length ? "" : " leer") },
-          h("div", { class: "spieler" }, video), kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel" }, kap) : null);
+          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video, ende), unter),
+          kap.length ? h("div", { class: "kapitel-box" }, kapListe, kapHinweis) : null);
+        if (kapListe) {
+          // Scroll-Hinweis: nur wenn die Liste laenger ist als der Platz; verschwindet am Listenende
+          const hinweisPruefen = () => { if (!kapListe.isConnected) { window.removeEventListener("resize", hinweisPruefen); return; } const mehr = kapListe.scrollHeight - kapListe.clientHeight > 4 && kapListe.scrollTop + kapListe.clientHeight < kapListe.scrollHeight - 4; kapHinweis.hidden = !mehr; kapListe.classList.toggle("scrollt", mehr); };
+          kapListe.addEventListener("scroll", hinweisPruefen, { passive: true });
+          window.addEventListener("resize", hinweisPruefen);
+          setTimeout(hinweisPruefen, 0); setTimeout(hinweisPruefen, 600);
+        }
         // Kennzeichnung nach KI-Verordnung (Art. 50): zentral fuer jedes Video, nicht je Datei
         const teile = [kopf, h("p", { class: "video-ki" }, icon("audio-lines"),
           h("span", null, "Sprecherstimme KI-erzeugt. Mehr dazu unter ", h("a", { href: "/lizenzen" }, "Lizenzen und Quellen"), "."))];
@@ -254,12 +387,193 @@
   }
 
   /* ------------------------------------------------------------ Navigation und Verlauf */
-  let besucht = new Set();
-  try { besucht = new Set(JSON.parse(localStorage.getItem("kl-besucht") || "[]")); } catch (e) { /* ohne Speicher */ }
-  function besuchtMerken(id) {
-    if (id === "start") return;
-    besucht.add(id);
-    try { localStorage.setItem("kl-besucht", JSON.stringify([...besucht])); } catch (e) { /* egal */ }
+  /* ---- Lernplattform: Fortschritt, Wege und Pfade. Alles bleibt im Browser (localStorage, jeweils in try/catch). */
+  const speicherLesen = (k) => { try { return localStorage.getItem(k); } catch (e) { return null; } };
+  const speicherSchreiben = (k, v) => { try { if (v == null) localStorage.removeItem(k); else localStorage.setItem(k, v); } catch (e) { /* ohne Speicher */ } };
+  /* Fortschritt (kl-gelesen, kl-zuletzt) liegt nur nach ausdruecklicher Einwilligung im Browser (kl-merken = "1", nie vorbelegt).
+     Ohne Einwilligung lebt er nur im Arbeitsspeicher der Seite bis zum Neuladen. Die gewaehlte Rolle (kl-weg) ist eine ausdrueckliche Wahl und darf gespeichert werden. */
+  let merken = speicherLesen("kl-merken") === "1";
+  if (!merken) { speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null); }      // Altbestand ohne Einwilligung bereinigen
+  const fortschrittSchreiben = (k, v) => { if (merken || v == null) speicherSchreiben(k, v); };
+  let gelesen = new Set();
+  try { const l = JSON.parse(speicherLesen("kl-gelesen") || "[]"); if (Array.isArray(l)) gelesen = new Set(l.filter((x) => typeof x === "string")); } catch (e) { /* leer */ }
+  let zuletzt = null;                  // { id, y }: zuletzt geoeffnete Seite und Stelle (Anteil 0 bis 1)
+  try { const z = JSON.parse(speicherLesen("kl-zuletzt") || "null"); if (z && typeof z.id === "string") zuletzt = { id: z.id, y: Math.max(0, Math.min(1, Number(z.y) || 0)) }; } catch (e) { /* leer */ }
+  let aktuelleId = null;
+  let scrollZiel = null;               // { id, y }: "Weiter, wo du aufgehört hast" stellt die Stelle wieder her
+  const MIN_LESEDAUER = 5000;          // ms: das Seitenende zaehlt erst nach dieser Zeit (reines Durchscrollen zaehlt nicht)
+  const zaehlbar = (id) => { const sd = INHALT.seiten[id]; return !!sd && sd.typ !== "start" && !sd.versteckt && sd.status !== "bald"; };
+  const alleSeiten = () => Object.keys(INHALT.seiten).filter(zaehlbar);
+  function fortschritt() {
+    const alle = alleSeiten();
+    const n = alle.filter((id) => gelesen.has(id)).length;
+    return { n, von: alle.length, prozent: alle.length ? Math.round(n / alle.length * 100) : 0 };
+  }
+  function gelesenMerken(id) {
+    if (!zaehlbar(id) || gelesen.has(id)) return;
+    gelesen.add(id);
+    fortschrittSchreiben("kl-gelesen", JSON.stringify([...gelesen]));
+    fortschrittZeigen();
+  }
+  function zuletztSpeichern() { if (zuletzt) fortschrittSchreiben("kl-zuletzt", JSON.stringify(zuletzt)); }
+  /** Einwilligung zum Merken des Fortschritts: an schreibt den aktuellen Stand, aus leert beide Eintraege (die laufende Ansicht behaelt ihn bis zum Neuladen). */
+  function merkenSetzen(an) {
+    merken = !!an;
+    speicherSchreiben("kl-merken", merken ? "1" : null);
+    if (!merken) speicherSchreiben("kl-hilfe", null); else if (hilfeImSpeicher) speicherSchreiben("kl-hilfe", "1");
+    if (merken) { speicherSchreiben("kl-gelesen", JSON.stringify([...gelesen])); zuletztSpeichern(); }
+    else { speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null); }
+    for (const b of $$(".merken-schalter")) { b.setAttribute("aria-checked", String(merken)); const t = $(".merken-zustand", b); if (t) t.textContent = merken ? "an" : "aus"; }
+    if (aktuelleId === "start") route(window.scrollY);
+  }
+  function fortschrittLoeschen() {
+    gelesen = new Set(); zuletzt = null;
+    speicherSchreiben("kl-gelesen", null); speicherSchreiben("kl-zuletzt", null);
+    fortschrittZeigen();
+    if (aktuelleId === "start") route(window.scrollY);
+  }
+  /** Haken im Menue, Gruppenzaehler, Prozent und Balken auf dem Stand halten. */
+  function fortschrittZeigen() {
+    const f = fortschritt();
+    for (const el of $$(".fs-text")) {
+      const kurz = !!el.closest(".nav-fortschritt");                                   // Menue: eine Zeile
+      el.textContent = f.n ? f.prozent + " Prozent gelesen" + (kurz ? "" : " (" + f.n + " von " + f.von + " Seiten)") : "Noch nichts gelesen" + (kurz ? "" : " (" + f.von + " Seiten)");
+    }
+    for (const b of $$(".fs-balken")) { b.setAttribute("aria-valuenow", String(f.prozent)); const i = $("i", b); if (i) i.style.width = f.prozent + "%"; }
+    for (const a of $$(".nav")) { const ok = $(".ok", a); if (ok) ok.hidden = !(gelesen.has(a.dataset.id) && a.dataset.id !== "start"); }
+    for (const gr of navGruppen) {
+      const ids = gr.ids || [];
+      const n = ids.filter((id) => gelesen.has(id)).length;
+      if (gr.zahl) { gr.zahl.textContent = n ? n + " von " + ids.length : ""; gr.zahl.hidden = !n; }
+    }
+  }
+
+  /* Lesezeit: aus der Wortzahl. Kurz = Lead, Ueberschriften, Kernsaetze, Merksaetze; genau = der ganze Text. */
+  const WORTE_PRO_MIN = 160;
+  const woerter = (t) => { const k = klar(t || ""); return k ? k.split(" ").length : 0; };
+  const lesezeitCache = new Map();
+  function lesezeit(sd) {
+    if (lesezeitCache.has(sd)) return lesezeitCache.get(sd);
+    let kurz = woerter(sd.kurz), genau = kurz;
+    for (const a of sd.abschnitte || []) {
+      const quelle = (a.p && a.p[0]) || (a.alltag && [].concat(a.alltag)[0]) || a.merke || (a.liste && a.liste[0]) || "";
+      kurz += woerter(a.h) + woerter(a.kurz || ersterSatz(quelle));
+      genau += woerter(a.h) + woerter(a.kurz);
+      for (const p of a.p || []) genau += woerter(p);
+      for (const l of a.liste || []) genau += woerter(l);
+      for (const t of [].concat(a.alltag || [])) genau += woerter(t);
+      genau += woerter(a.merke);
+      if (a.tabelle) for (const z of a.tabelle.zeilen || []) for (const c of z) genau += woerter(c);
+    }
+    for (const m of sd.mitnehmen || []) { kurz += woerter(m); genau += woerter(m); }
+    if (sd.business) { kurz += woerter(ersterSatz(sd.business.text)); genau += woerter(sd.business.text); }
+    for (const g of sd.grenzen || []) genau += woerter(g);
+    const min = (w) => Math.max(1, Math.round(w / WORTE_PRO_MIN));
+    const r = { kompakt: min(kurz), ausfuehrlich: 0 };
+    r.ausfuehrlich = Math.max(r.kompakt, min(genau));
+    lesezeitCache.set(sd, r);
+    return r;
+  }
+  /* Zeitangaben: EINE Rechnung fuer Startkarten, Pfadkarten, Schritt-Listen und Seitenkopf.
+     Lesen = Wortzahl durch 190 je Minute, im gewaehlten Lesemodus (kompakt oder genau). Das Video steht getrennt dabei (Laenge aus dem Videokatalog),
+     ebenso ein Labor (pauschal 3 Minuten). Quiz und Aufgaben sind nicht eingerechnet. */
+  const LABOR_MIN = 3;
+  const videoDauer = new Map();                            // Video-ID -> Sekunden, gefuellt nach dem Laden des Videokatalogs (Seiten kommen nachgeladen, darum erst beim Rechnen zusammengezaehlt)
+  const zeitFelder = [];                                   // { el, fn }: Textfelder, die sich bei Lesemodus und Videokatalog neu beschriften
+  const lesemodusZeit = () => (lesemodus === "ausfuehrlich" ? "ausfuehrlich" : "kompakt");
+  /** Unterrichtseinheit (Gruppe "Für die Schule", Typ lektion, Feld minuten oder Zeitplan, sonst "-stunde-N" mit 45 Minuten im Satz): Minuten Unterricht, sonst 0. */
+  function unterrichtMinuten(sd, id) {
+    if (!sd || sd.typ !== "lektion" || sd.gruppe !== "Für die Schule") return 0;
+    const m = Number(sd.minuten || (sd.zeitplan && sd.zeitplan.minuten)) || 0;
+    if (m) return m;
+    return /-stunde-\d+$/.test(id || "") || /\b45 Minuten\b/.test(sd.kurz || "") ? 45 : 0;
+  }
+  function seitenZeit(id) {
+    const sd = INHALT.seiten[id];
+    if (!sd) return { lesen: 0, video: 0, labor: 0, unterricht: 0 };
+    const unterricht = unterrichtMinuten(sd, id);
+    if (unterricht) return { lesen: 0, video: 0, labor: 0, unterricht };
+    const lz = lesezeit(sd);
+    const vids = sd.videos || (sd.video ? [sd.video] : []);
+    return { lesen: (sd.abschnitte || []).length ? lz[lesemodusZeit()] : 0, video: Math.round(vids.reduce((n, v) => n + (videoDauer.get(v) || 0), 0)), labor: sd.widget || sd.demo ? LABOR_MIN : 0 };
+  }
+  /** Minuten Lesen fuer eine Liste von Seiten (im gewaehlten Lesemodus). */
+  const lesenMinuten = (ids) => [].concat(ids).reduce((n, id) => n + seitenZeit(id).lesen, 0);
+  /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. */
+  function zeitText(ids) {
+    const z = [].concat(ids).map(seitenZeit);
+    const unt = z.reduce((n, x) => n + (x.unterricht || 0), 0);
+    if (unt) {
+      const rest = z.filter((x) => !x.unterricht), lesenR = rest.reduce((n, x) => n + x.lesen, 0);
+      return unt + " Minuten Unterricht" + (lesenR ? ", plus ca. " + lesenR + " Min Lesen" : "");
+    }
+    const lesen = z.reduce((n, x) => n + x.lesen, 0), video = z.reduce((n, x) => n + x.video, 0), labor = z.reduce((n, x) => n + x.labor, 0);
+    const teile = [];
+    if (lesen) teile.push("ca. " + lesen + " Min Lesen");
+    if (video) teile.push((teile.length ? "plus " : "") + "Video " + mmss(video));
+    if (labor) teile.push((teile.length ? "plus " : "") + "Labor ca. " + labor + " Min");
+    return teile.join(", ") || "ca. 1 Min";
+  }
+  /** Textfeld, das immer zeitText(ids) zeigt (vor und nach sind feste Textteile davor und dahinter). */
+  function zeitFeld(ids, vor, nach, klasse) {
+    const fn = () => (vor || "") + zeitText(ids) + (nach ? nach() : "");
+    const el = h("span", { class: klasse || null }, fn());
+    zeitFelder.push({ el, fn });
+    return el;
+  }
+  function zeitenAktualisieren() {
+    for (let i = zeitFelder.length - 1; i >= 0; i--) {
+      const f = zeitFelder[i];
+      if (f.el.isConnected) { f.sah = true; f.el.textContent = f.fn(); }
+      else if (f.sah) zeitFelder.splice(i, 1);           // Seite gewechselt: Feld ist weg
+    }
+  }
+  manifestP.then((m) => {
+    for (const v of m.videos || []) if (v && v.id && v.dauer_s) videoDauer.set(v.id, v.dauer_s);
+    zeitenAktualisieren();
+  });
+
+  /* Wege (Rollen): freiwillig, nie ein Alterstor. Gewaehlt = localStorage kl-weg (ein Wort). Aus dem Link /?weg=schule gilt der Weg nur
+     in dieser Sitzung im Speicher der Seite, ohne etwas abzulegen. */
+  const WEGE = {
+    schule: { name: "Schule", ich: "in der Schule", symbol: "graduation-cap", titel: "Ich bin Schüler:in", kurz: "Experimente, leicht erklärt", satz: "KI im Alltag verstehen, ohne Kamera und ohne Anmeldung.",
+      lead: "Kurze Texte, Beispiele aus dem Alltag und Aufgaben, alles ohne Kamera und Mikrofon. Labore, die eine Kamera brauchen, sind im Menü gekennzeichnet. Sie bleiben erreichbar.", lesemodus: "kompakt" },
+    lehrende: { name: "Unterricht", ich: "Lehrende", symbol: "presentation", titel: "Ich unterrichte", kurz: "Themen und Material für Lehrende", satz: "Material für den Unterricht und Informationen für Schulleitung und Eltern.",
+      lead: "Für Unterricht und Ausbildung: ein Klassenlink, die Kurzinfo zum Datenschutz und die Seiten, mit denen deine Klasse arbeitet. Ausführlich lesen ist hier voreingestellt.", lesemodus: "ausfuehrlich" },
+    erwachsene: { name: "KI verstehen", ich: "neugierig", symbol: "sparkles", titel: "Ich will KI verstehen", kurz: "Die Grundlagen, Schritt für Schritt", satz: "KI in 30 Minuten verstehen, ohne Vorwissen.",
+      lead: "Der kürzeste Weg durch die Grundideen: kurze Texte, viel zum Ausprobieren, wenig Fachwörter.", lesemodus: "kompakt" },
+    technik: { name: "IT und Technik", ich: "in der IT", symbol: "wrench", titel: "Ich arbeite in der IT", kurz: "Technik, Modelle, selbst aufbauen", satz: "Selbst bauen: Rechner, Modelle, Dokumentensuche und Agenten.",
+      lead: "Vom Rechner dahinter über Lernen und Netze bis zu Dokumentensuche und Agenten. Hier darf es ausführlich sein, die Details sind aufgeklappt.", lesemodus: "ausfuehrlich" },
+    beruf: { name: "Beruf und Betrieb", ich: "im Beruf", symbol: "briefcase", titel: "Ich entscheide im Betrieb", kurz: "Anwendungsfälle, Kosten, Grenzen", satz: "Was KI im Betrieb bringt, was sie kostet und wo ihre Grenzen liegen.",
+      lead: "Der Entscheider-Pfad in 15 Minuten, dazu Kosten, Betrieb und Beispiele aus Branchen. Wie ausführlich du liest, stellst du selbst ein.", lesemodus: null },
+    eltern: { name: "Eltern", ich: "Elternteil", symbol: "users", titel: "Ich bin Elternteil", kurz: "Sicher und verständlich", satz: "Was Kinder mit KI machen, worauf du achten kannst und wie du mitreden kannst.",
+      lead: "Kurz und ohne Fachwörter: wie KI im Schulalltag und zu Hause vorkommt, was mit Daten passiert und woran du Erfundenes erkennst.", lesemodus: "kompakt" },
+  };
+  const WEG_ALIAS = { neugierig: "erwachsene" };          // alter Name: /?weg=neugierig und ein frueher gespeichertes kl-weg gelten weiter
+  const wegNorm = (w) => (typeof w === "string" && eigen(WEG_ALIAS, w) ? WEG_ALIAS[w] : w);
+  const wegGueltig = (w) => typeof w === "string" && (eigen(WEGE, w) || eigen(WEG_ALIAS, w));
+  let wegGespeichert = null, wegUrl = null;
+  { const w = speicherLesen("kl-weg"); if (wegGueltig(w)) wegGespeichert = wegNorm(w); }
+  const aktiverWeg = () => wegUrl || wegGespeichert;
+  const kameraSeiten = () => new Set(INHALT.kameraSeiten || []);
+  const kameraHinweis = "braucht Kamera, im Unterricht nicht nötig";
+  const imSchulweg = (id) => aktiverWeg() === "schule" && kameraSeiten().has(id);
+  /** Pfade mit nur bekannten Seiten (ids). Weniger als zwei Seiten: der Pfad fehlt noch und bleibt unsichtbar. */
+  function pfadeListe() {
+    return (INHALT.lernpfade || []).map((p) => Object.assign({}, p, { ids: (p.seiten || []).filter(zaehlbar) })).filter((p) => p.ids.length >= 2);
+  }
+  function pfadNaechste(p) {
+    if (zuletzt && p.ids.includes(zuletzt.id) && !gelesen.has(zuletzt.id)) return zuletzt.id;
+    return p.ids.find((id) => !gelesen.has(id)) || null;
+  }
+  /** Wohin "Weiter" fuehrt: zuletzt geoeffnete, noch nicht gelesene Seite, sonst die naechste im Pfad des Weges, sonst irgendeine offene. */
+  function weiterZiel() {
+    if (zuletzt && zaehlbar(zuletzt.id) && !gelesen.has(zuletzt.id)) return { id: zuletzt.id, art: "zuletzt" };
+    const w = aktiverWeg();
+    const alle = pfadeListe();
+    for (const p of [...alle.filter((x) => w && x.rolle === w), ...alle]) { const n = pfadNaechste(p); if (n) return { id: n, art: "pfad", pfad: p }; }
+    const rest = alleSeiten().find((id) => !gelesen.has(id));
+    return rest ? { id: rest, art: "rest" } : null;
   }
   let navGruppen = [];
   function navOffenLesen() {
@@ -291,7 +605,7 @@
         t.push(a.h, a.kurz || "", ...(a.p || []), ...(a.liste || []), ...[].concat(a.alltag || []), a.merke || "");
         if (a.tabelle) for (const z of a.tabelle.zeilen || []) t.push(...z);
       }
-      t.push(...(sd.mitnehmen || []), (sd.business && sd.business.text) || "", ...(sd.grenzen || []));
+      t.push(...(sd.mitnehmen || []), (sd.business && sd.business.text) || "", ...(sd.grenzen || []), ...(sd.lernziele || []));
       for (const p of sd.pfad || []) t.push(p.h, p.p);
       seiten[id] = { titel: suchText(klar((sd.nav || "") + " " + sd.titel)), kurz: suchText(klar(sd.kurz || "")), text: suchText(klar(t.join(" "))), roh: JSON.stringify(sd) };
     }
@@ -392,7 +706,7 @@
     const punkte = new Map();
     let beste = 0;
     if (q.length) {
-      for (const gr of navGruppen) for (const a of gr.eintraege) {
+      for (const gr of navGruppen) if (!gr.sammel) for (const a of gr.eintraege) {
         const ix = suchIndex.seiten[a.id];
         const p = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kurz, 3], [ix.text, 1]], a.id) : 0;
         punkte.set(a, p);
@@ -402,6 +716,7 @@
     const grenze = Math.max(1, beste * 0.12);
     let treffer = 0;
     for (const gr of navGruppen) {
+      if (gr.sammel) { gr.sec.hidden = true; continue; }                       // Sammelgruppen doppeln nur Seiten: in der Suche aus
       let inGruppe = 0;
       gr.beste = 0;
       for (const a of gr.eintraege) {
@@ -417,7 +732,7 @@
         gr.liste.hidden = inGruppe === 0;
         gr.kopf.setAttribute("aria-expanded", inGruppe ? "true" : "false");
       } else {
-        gr.sec.hidden = false;
+        gr.sec.hidden = !!gr.verborgen;
         const aktiv = gr.eintraege.some((x) => x.el.getAttribute("aria-current") === "page");
         const offen = gespeichert.has(gr.name) || aktiv;
         gr.liste.hidden = !offen;
@@ -425,15 +740,22 @@
       }
     }
     // Reihenfolge: bester Treffer zuerst (Gruppen und Seiten darin); ohne Suche wieder wie im Menue
-    const nav = $("#nav-liste"), box = $("#such-ergebnis"), leerEl = $("#nav-leer");
+    const nav = $("#nav-liste"), leerEl = $("#nav-leer");
     const sortiert = q.length && treffer;
-    const gruppen = sortiert ? navGruppen.map((g, i) => [g, i]).sort((x, y) => y[0].beste - x[0].beste || x[1] - y[1]).map(([g]) => g) : navGruppen;
+    const gruppen = sortiert ? navGruppen.filter((g) => !g.sammel).map((g, i) => [g, i]).sort((x, y) => y[0].beste - x[0].beste || x[1] - y[1]).map(([g]) => g) : navGruppen;
     for (const gr of navGruppen) {
+      if (gr.sammel) continue;
       const eintraege = sortiert ? gr.eintraege.map((e, i) => [e, i]).sort((x, y) => y[0].p - x[0].p || x[1] - y[1]).map(([e]) => e) : gr.eintraege;
       gr.liste.append(...eintraege.map((e) => e.el));
     }
+    if (alle) {
+      // Suche: "Fuer dich" weg, "Alle Bereiche" offen; ohne Suche wieder wie zuvor
+      fuerDich.sec.hidden = !!q.length;
+      alle.kopf.hidden = !!q.length;
+      alleOeffnen(q.length ? true : alle.offen, false);
+      alle.inhalt.append(...(sortiert ? gruppen : navGruppen).map((g) => g.sec));
+    }
     if (nav) {
-      nav.append(...(sortiert ? [...gruppen.map((g) => g.sec), box] : [box, ...gruppen.map((g) => g.sec)]).filter(Boolean));
       if (leerEl) nav.append(leerEl);
       if (q.length) nav.scrollTop = 0;
     }
@@ -450,18 +772,23 @@
     if (!["ArrowDown", "ArrowUp", "Home", "End", "ArrowRight", "ArrowLeft"].includes(k)) return;
     const el = e.target.closest && e.target.closest(".navkopf, a.nav");
     if (!el) return;
-    const sichtbar = $$(".navkopf, a.nav", $("#nav-liste")).filter((x) => !x.closest("[hidden]"));
+    const sichtbar = $$(".navkopf, a.nav", $("#nav-liste")).filter((x) => !x.closest("[hidden]") && !x.hidden);
     const i = sichtbar.indexOf(el);
     const gr = navGruppen.find((g) => g.kopf === el);
     let ziel = null;
+    if (alle && el === alle.kopf && (k === "ArrowRight" || k === "ArrowLeft")) {
+      const auf = k === "ArrowRight";
+      if ((alle.kopf.getAttribute("aria-expanded") === "true") !== auf) { alleOeffnen(auf); e.preventDefault(); return; }
+      if (auf) ziel = sichtbar[i + 1];
+    }
     if (k === "ArrowDown") ziel = sichtbar[Math.min(sichtbar.length - 1, i + 1)];
     else if (k === "ArrowUp") ziel = sichtbar[Math.max(0, i - 1)];
     else if (k === "Home") ziel = sichtbar[0];
     else if (k === "End") ziel = sichtbar[sichtbar.length - 1];
-    else if (k === "ArrowRight" && gr) {
+    else if (k === "ArrowRight" && !ziel && gr) {
       if (gr.kopf.getAttribute("aria-expanded") !== "true") { gruppeOeffnen(gr, true, true); ziel = el; }
       else ziel = sichtbar[i + 1];
-    } else if (k === "ArrowLeft") {
+    } else if (k === "ArrowLeft" && !(alle && el === alle.kopf)) {
       if (gr) { if (gr.kopf.getAttribute("aria-expanded") === "true") { gruppeOeffnen(gr, false, true); ziel = el; } }
       else { const g2 = navGruppen.find((g) => g.eintraege.some((x) => x.el === el)); if (g2) ziel = g2.kopf; }
     }
@@ -488,6 +815,56 @@
   });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("menue-offen")) menueSchalten(false); });
 
+  /* Menue: Suche, "Fuer dich" (je Rolle hoechstens sechs Seiten, offen) und der zugeklappte Block "Alle Bereiche" (Akkordeon der Gruppen).
+     Ohne Rolle steht statt "Fuer dich" der "Einstieg": Start, Neu hier, In 15 Minuten. */
+  let fuerDich = null, alle = null;
+  /** Ein Menueeintrag (Link) fuer eine Seite. */
+  function navEintrag(id) {
+    const s = INHALT.seiten[id];
+    // Leerzeichen vor dem Zusatz, damit auch der reine Text "Bilder erzeugen in Arbeit" lautet (nicht "Bilder erzeugenbald")
+    const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel, kameraSeiten().has(id) ? h("small", { class: "kam", hidden: true }, kameraHinweis) : null),
+      s.anfaenger ? [" ", h("span", { class: "einst" }, "Einsteiger")] : null,
+      s.status === "bald" ? [" ", h("span", { class: "bald" }, "in Arbeit")] : h("span", { class: "ok", hidden: true }, icon("check")));
+    return { el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() };
+  }
+  /** Eintrag, der zu einem Abschnitt der Startseite fuehrt (Neu hier, In 15 Minuten). */
+  function navAnker(symbol, text, anker) {
+    return h("a", { class: "nav", href: "/#" + anker, onclick: (e) => {
+      if (e.ctrlKey || e.metaKey || e.shiftKey) return;
+      e.preventDefault();
+      if (aktuelleId !== "start") navigiere({ id: "start", query: "" });
+      setTimeout(() => zuAbschnitt(anker), 60);
+    } }, icon(symbol), h("span", { class: "nav-text" }, text));
+  }
+  function alleOeffnen(auf, merken) {
+    if (!alle) return;
+    alle.kopf.setAttribute("aria-expanded", auf ? "true" : "false");
+    alle.inhalt.hidden = !auf;
+    if (merken !== false) alle.offen = auf;
+  }
+  /** "Fuer dich" bzw. "Einstieg" je nach Weg neu aufbauen und die Gruppen in der Reihenfolge der Rolle ordnen. */
+  function navAnordnen() {
+    if (!fuerDich || !alle) return;
+    const w = aktiverWeg();
+    const M = INHALT.menue || { fuerDich: {}, reihenfolge: {}, sammel: {} };
+    fuerDich.titel.textContent = w ? "Für dich" : "Einstieg";
+    const eintraege = [navEintrag("start").el];
+    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 12)) eintraege.push(navEintrag(id).el);
+    else {
+      const st = INHALT.seiten.start;
+      eintraege.push(navAnker("smile", "Neu hier", "anfangen"), navAnker("briefcase", ((st.entscheider && st.entscheider.titel) || "In 15 Minuten").split(":")[0], "entscheider"));
+    }
+    fuerDich.liste.replaceChildren(...eintraege);
+    const reihe = (w && M.reihenfolge[w]) || [];
+    const rang = (g) => { const i = reihe.indexOf(g.name); return i < 0 ? 99 : i; };
+    for (const gr of navGruppen) gr.verborgen = gr.name === "Start" || (gr.sammel && !reihe.includes(gr.name));
+    navGruppen.sort((x, y) => rang(x) - rang(y) || x.nr - y.nr);
+    alle.inhalt.append(...navGruppen.map((g) => g.sec));
+    for (const gr of navGruppen) gr.sec.hidden = !!gr.verborgen;
+    navKennzeichnen();
+    fortschrittZeigen();
+    if (aktuelleId) navMarkieren(aktuelleId);
+  }
   function navBauen() {
     const suche = h("div", { class: "navsuche" }, icon("search"),
       h("input", { type: "search", id: "nav-suche", placeholder: "Seiten suchen", "aria-label": "Seiten suchen", autocomplete: "off",
@@ -495,45 +872,58 @@
         onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
     const nav = h("nav", { class: "navscroll", id: "nav-liste", "aria-label": "Lernpfad" });
     nav.addEventListener("keydown", navTasten);
-    nav.append(h("div", { id: "such-ergebnis", class: "such-ergebnis", "aria-live": "polite", hidden: true }));
+    nav.append(fortschrittLeiste("nav-fortschritt"), h("div", { id: "such-ergebnis", class: "such-ergebnis", "aria-live": "polite", hidden: true }));
     navGruppen = [];
     const gespeichert = navOffenLesen();
-    for (const g of INHALT.gruppen) {
-      if (!g.seiten.length) continue;
+    const bauen = (name, seiten, sammel, nr) => {
       const liste = h("div", { class: "navliste" });
-      const kopf = h("button", { type: "button", class: "navkopf", "aria-expanded": "true" }, h("span", null, g.name), icon("chevron"));
+      const zahl = h("span", { class: "gr-zahl", hidden: true });
+      const kopf = h("button", { type: "button", class: "navkopf", "aria-expanded": "true" }, h("span", null, name, zahl), icon("chevron"));
       const sec = h("div", { class: "navgruppe" }, h("h2", null, kopf), liste);
-      const gr = { name: g.name, sec, kopf, liste, eintraege: [] };
-      for (const id of g.seiten) {
-        const s = INHALT.seiten[id];
-        // Leerzeichen vor dem Zusatz, damit auch der reine Text "Bilder erzeugen in Arbeit" lautet (nicht "Bilder erzeugenbald")
-        const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel),
-          s.anfaenger ? [" ", h("span", { class: "einst" }, "Einsteiger")] : null,
-          s.status === "bald" ? [" ", h("span", { class: "bald" }, "in Arbeit")] : h("span", { class: "ok", hidden: true }, icon("check")));
-        liste.append(el);
-        gr.eintraege.push({ el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() });
-      }
+      const gr = { name, sec, kopf, liste, eintraege: [], zahl, ids: seiten.filter(zaehlbar), sammel, nr };
+      for (const id of seiten) { const e = navEintrag(id); liste.append(e.el); gr.eintraege.push(e); }
       kopf.addEventListener("click", () => gruppeOeffnen(gr, kopf.getAttribute("aria-expanded") !== "true", true));
-      // Voreinstellung: nur die Gruppen offen, die der Besucher geoeffnet hat; Start immer offen; die der aktuellen Seite folgt in navMarkieren
-      gruppeOeffnen(gr, gespeichert.has(g.name) || g.name === "Start", false);
-      nav.append(sec);
+      gruppeOeffnen(gr, gespeichert.has(name), false);     // Voreinstellung: nur die vom Besucher geoeffneten Gruppen; die der aktuellen Seite folgt in navMarkieren
       navGruppen.push(gr);
-    }
-    nav.append(h("p", { id: "nav-leer", class: "nav-leer", hidden: true }, "Keine Seite gefunden."));
+    };
+    let nr = 0;
+    for (const g of INHALT.gruppen) if (g.seiten.length) bauen(g.name, g.seiten, false, nr++);
+    for (const [name, ids] of Object.entries((INHALT.menue && INHALT.menue.sammel) || {})) bauen(name, ids.filter(gibt), true, nr++);
+    fuerDich = { titel: h("h2", { class: "nav-titel" }, "Für dich"), liste: h("div", { class: "navliste" }) };
+    fuerDich.sec = h("div", { class: "navgruppe nav-fuerdich" }, fuerDich.titel, fuerDich.liste);
+    const kopf = h("button", { type: "button", class: "navkopf nav-alle", "aria-expanded": "false", "aria-controls": "nav-alle-inhalt" }, h("span", null, "Alle Bereiche"), icon("chevron"));
+    const inhalt = h("div", { class: "nav-alle-inhalt", id: "nav-alle-inhalt", hidden: true });
+    alle = { kopf, inhalt, offen: false, sec: h("div", { class: "navgruppe nav-alle-block" }, h("h2", null, kopf), inhalt) };
+    kopf.addEventListener("click", () => alleOeffnen(kopf.getAttribute("aria-expanded") !== "true"));
+    nav.append(fuerDich.sec, alle.sec, h("p", { id: "nav-leer", class: "nav-leer", hidden: true }, "Keine Seite gefunden."));
     const f = document.createDocumentFragment();
     f.append(suche, nav);
     return f;
+  }
+  /** Fortschritt als Text mit Balken (Menue oben und Karte "Weiter" auf der Startseite). */
+  function fortschrittLeiste(klasse) {
+    const balken = h("div", { class: "fs-balken", role: "progressbar", "aria-label": "Dein Fortschritt", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": "0" }, h("i"));
+    return h("section", { class: "fs " + (klasse || ""), "aria-label": "Fortschritt" }, h("span", { class: "fs-text" }), balken);
+  }
+  /** Im Weg "Schule": Labore mit Kamera oder Mikrofon im Menue kennzeichnen (sie bleiben erreichbar). */
+  function navKennzeichnen() {
+    const kam = kameraSeiten();
+    const an = aktiverWeg() === "schule";
+    for (const a of $$(".nav")) { const k = $(".kam", a); if (k) k.hidden = !(an && kam.has(a.dataset.id)); }
   }
   function navMarkieren(id) {
     $$(".nav").forEach((a) => {
       const ist = a.dataset.id === id;
       if (ist) a.setAttribute("aria-current", "page"); else a.removeAttribute("aria-current");
       const ok = $(".ok", a);
-      if (ok) ok.hidden = !(besucht.has(a.dataset.id) && a.dataset.id !== "start");
+      if (ok) ok.hidden = !(gelesen.has(a.dataset.id) && a.dataset.id !== "start");
     });
     const suche = $("#nav-suche");
+    const sucht = !!(suche && suche.value.trim());
+    if (id === "start") alleOeffnen(false);
+    else if (id && fuerDich && !fuerDich.liste.querySelector('a.nav[data-id="' + id + '"]') && navGruppen.some((g) => !g.sammel && g.eintraege.some((x) => x.id === id)) && !sucht) alleOeffnen(true);
     for (const gr of navGruppen) {
-      if (gr.eintraege.some((x) => x.id === id) && !(suche && suche.value.trim())) gruppeOeffnen(gr, true, false);
+      if (!gr.sammel && gr.eintraege.some((x) => x.id === id) && !sucht && id !== "start" && alle && !alle.inhalt.hidden) gruppeOeffnen(gr, true, false);
     }
     const ak = $('.nav[aria-current="page"]');
     if (ak && ak.scrollIntoView) ak.scrollIntoView({ block: "nearest" });
@@ -574,53 +964,142 @@
     }
     return block;
   }
+  /** Codeblock mit Kopier-Knopf (Abschnittsfeld code). Text nur per textContent, nie als HTML. */
+  function codeBlock(c) {
+    const st = "margin:0;padding:12px 14px;overflow-x:auto;font:14px/1.5 var(--mono);background:var(--flaeche2);color:var(--text);border-radius:0 0 10px 10px;white-space:pre;tab-size:2";
+    const status = h("span", { role: "status", "aria-live": "polite", style: "font-size:14px;color:var(--leise)" });
+    let zurueck = 0;
+    const knopf = h("button", { type: "button", class: "btn klein", style: "min-height:44px;min-width:44px;display:inline-flex;align-items:center;gap:6px", onclick: async () => {
+      try { await navigator.clipboard.writeText(c.text); status.textContent = "Kopiert."; }
+      catch (e) {
+        try {
+          const t = h("textarea", { style: "position:fixed;opacity:0", "aria-hidden": "true" }); t.value = c.text; document.body.append(t); t.select();
+          document.execCommand("copy"); t.remove(); status.textContent = "Kopiert.";
+        } catch (e2) { status.textContent = "Nicht kopiert. Markiere den Text und kopiere ihn mit Strg+C."; }
+      }
+      clearTimeout(zurueck); zurueck = setTimeout(() => { status.textContent = ""; }, 2500);
+    } }, icon("copy"), "Kopieren");
+    const kopf = h("div", { style: "display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:space-between;padding:4px 6px 4px 14px;background:var(--flaeche3);border-radius:10px 10px 0 0" },
+      h("span", { style: "display:flex;flex-wrap:wrap;align-items:center;gap:8px;font-size:15px" },
+        h("b", null, c.titel || "Befehl"),
+        c.sudo ? h("span", { class: "chip", style: "font-weight:600;color:var(--text);background:color-mix(in srgb,var(--orange) 22%,var(--flaeche))" }, "braucht sudo") : null),
+      h("span", { style: "display:flex;align-items:center;gap:8px" }, status, knopf));
+    const pre = h("pre", { style: st, tabindex: "0", role: "region", "aria-label": (c.titel || "Befehl") + ", Quelltext" }, h("code", { style: "background:none;padding:0;font-size:inherit" }, c.text));
+    return h("div", { class: "codeblock", style: "margin:14px 0" }, kopf, c.sudo ? h("p", { class: "kurz", style: "margin:6px 0 0;font-size:15px" }, "Warum sudo: " + c.sudo) : null, pre);
+  }
   function tabelleBlock(t) {
     return h("div", { class: "tabelle-wrap" }, h("table", { class: "vergleich" },
       t.beschriftung ? h("caption", null, t.beschriftung) : null,
       h("thead", null, h("tr", null, t.kopf.map((k) => h("th", { scope: "col", html: md(k) })))),
       h("tbody", null, t.zeilen.map((z) => h("tr", null, z.map((c, i) => h(i === 0 ? "th" : "td", { scope: i === 0 ? "row" : null, html: md(c) })))))));
   }
-  function quizBlock(fragen) {
-    const richtig = new Set(), beantwortet = new Set();
-    const ergebnis = h("p", { class: "quiz-ergebnis", "aria-live": "polite" });
-    const felder = fragen.map((f, i) => {
-      const name = "q" + i + "-" + Math.random().toString(36).slice(2, 7);
-      const rueck = h("p", { class: "quiz-rueck", "aria-live": "polite" });
-      const fs = h("fieldset", { class: "quiz-frage" }, h("legend", null, f.frage));
-      f.optionen.forEach((o, j) => {
-        const id = name + "-" + j;
-        const inp = h("input", { type: "radio", name, id, value: String(j) });
-        inp.addEventListener("change", () => {
+  /** Findet den Abschnitt zu einer Quizfrage: f.abschnitt = Abschnitts-id, Ueberschrift oder laufende Nummer (ab 1) auf der Seite. */
+  function quizAbschnitt(ref) {
+    if (ref == null || ref === "") return null;
+    const alle = $$("#inhalt section.abschnitt");
+    if (typeof ref === "number") return alle[ref - 1] || null;
+    const byId = document.getElementById(String(ref));
+    if (byId && byId.matches("section.abschnitt")) return byId;
+    const t = klar(String(ref));
+    return alle.find((sec) => { const hh = $("h2", sec); return hh && klar(hh.textContent) === t; }) || null;
+  }
+  function mischen(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  /** Quiz: Antwortreihenfolge wird bei jedem Aufbau gemischt (value jeder Option bleibt der urspruengliche Index, f.richtig gilt weiter).
+      Maus und Touch bestaetigen sofort; mit der Tastatur waehlen die Pfeiltasten nur, Enter (oder "Antwort pruefen") bestaetigt.
+      Richtig und falsch zeigen Symbol und Text, nicht nur Farbe. Optional f.abschnitt: Rueckverweis nach einer falschen Antwort. */
+  function quizBlock(fragen, bei) {
+    const box = h("div", { class: "flaeche pad" });
+    function aufbauen() {
+      const richtig = new Set(), beantwortet = new Set();
+      const ergebnis = h("p", { class: "quiz-ergebnis", "aria-live": "polite" });
+      const nochmal = h("button", { type: "button", class: "btn klein quiz-nochmal", hidden: true, onclick: () => { aufbauen(); const e = $("input", box); if (e) e.focus(); } }, icon("refresh-cw"), "Noch einmal");
+      const tipp = h("p", { class: "quiz-tipp" }, icon("info"), h("span", null, "Mit der Tastatur: Pfeiltasten wählen die Antwort, Enter bestätigt."));
+      const felder = fragen.map((f, i) => {
+        const name = "q" + i + "-" + Math.random().toString(36).slice(2, 7);
+        const rueck = h("p", { class: "quiz-rueck", "aria-live": "polite" });
+        const pruefen = h("button", { type: "button", class: "btn klein quiz-pruefen", hidden: true }, icon("check"), "Antwort prüfen");
+        const fs = h("fieldset", { class: "quiz-frage" }, h("legend", null, f.frage));
+        let zeiger = 0, gewaehlt = null;
+        fs.addEventListener("pointerdown", () => { zeiger = performance.now(); });
+        fs.addEventListener("keydown", () => { zeiger = 0; });
+        const bestaetigen = (j) => {
           if (beantwortet.has(i)) return;
           beantwortet.add(i);
           const ok = j === f.richtig;
           if (ok) richtig.add(i);
-          $$("label", fs).forEach((l, k) => { l.classList.toggle("richtig", k === f.richtig); l.classList.toggle("falsch", k === j && !ok); });
+          pruefen.hidden = true;
+          $$("label", fs).forEach((l) => {
+            const k = Number($("input", l).value);
+            l.classList.toggle("richtig", k === f.richtig); l.classList.toggle("falsch", k === j && !ok);
+            if (k === f.richtig || (k === j && !ok)) l.append(h("span", { class: "quiz-marke " + (k === f.richtig ? "ja" : "nein") },
+              icon(k === f.richtig ? "check" : "x"), h("span", null, k === f.richtig ? "Richtig" : "Deine Wahl, falsch")));
+          });
           $$("input", fs).forEach((x) => { x.disabled = true; });
-          rueck.textContent = (ok ? "Richtig. " : "Nicht ganz. ") + f.erklaerung;
-          if (beantwortet.size === fragen.length) ergebnis.textContent = richtig.size + " von " + fragen.length + " richtig.";
+          rueck.replaceChildren(icon(ok ? "check" : "circle-x"), h("span", null, (ok ? "Richtig. " : "Nicht ganz. ") + f.erklaerung));
+          rueck.classList.toggle("ja", ok); rueck.classList.toggle("nein", !ok);
+          const sec = !ok ? quizAbschnitt(f.abschnitt) : null;
+          if (sec) {
+            const hh = $("h2", sec);
+            rueck.append(h("button", { type: "button", class: "textlink quiz-zurueck", onclick: () => { const d = $("details", sec); if (d) d.open = true; sec.scrollIntoView({ block: "start", behavior: "smooth" }); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus({ preventScroll: true }); } } },
+              icon("book-open"), "Abschnitt noch einmal lesen: " + (hh ? hh.textContent : "")));
+          }
+          if (beantwortet.size === fragen.length) {
+            ergebnis.textContent = richtig.size + " von " + fragen.length + " richtig."; nochmal.hidden = false;
+            if (bei) bei();
+          }
+        };
+        pruefen.addEventListener("click", () => { if (gewaehlt != null) bestaetigen(gewaehlt); });
+        mischen(f.optionen.length).forEach((j) => {
+          const id = name + "-" + j;
+          const inp = h("input", { type: "radio", name, id, value: String(j) });
+          inp.addEventListener("change", () => {
+            if (beantwortet.has(i)) return;
+            gewaehlt = j;
+            if (zeiger && performance.now() - zeiger < 1000) bestaetigen(j);          // Maus oder Touch: gleich auswerten
+            else pruefen.hidden = false;                                              // Tastatur: erst auswaehlen, dann bestaetigen
+          });
+          inp.addEventListener("keydown", (e) => { if (e.key === "Enter" && gewaehlt != null && !beantwortet.has(i)) { e.preventDefault(); bestaetigen(gewaehlt); } });
+          fs.append(h("label", { for: id }, inp, h("span", { class: "quiz-text" }, f.optionen[j])));
         });
-        fs.append(h("label", { for: id }, inp, h("span", null, o)));
+        fs.append(pruefen, rueck);
+        return fs;
       });
-      fs.append(rueck);
-      return fs;
-    });
-    return h("section", { class: "block quiz" }, h("h2", null, icon("check"), "Teste dich"), h("div", { class: "flaeche pad" }, felder, ergebnis));
+      box.replaceChildren(tipp, ...felder, h("div", { class: "quiz-fuss" }, ergebnis, nochmal));
+    }
+    aufbauen();
+    return h("section", { class: "block quiz" }, h("h2", null, icon("check"), "Teste dich"), box);
   }
   /* ------------------------------------------------------------ Lesemodus (Kompakt | Ausfuehrlich) */
   const MODI = ["kompakt", "ausfuehrlich"];
   let lesemodus = "kompakt";
-  try { const m = localStorage.getItem("kl-lesemodus"); if (MODI.includes(m)) lesemodus = m; } catch (e) { /* ohne Speicher */ }
+  let lesemodusGemerkt = false;          // true, sobald du selbst umgeschaltet hast: dann gilt deine Wahl vor dem Standard des Weges
+  { const m = speicherLesen("kl-lesemodus"); if (MODI.includes(m)) { lesemodus = m; lesemodusGemerkt = true; } }
   document.documentElement.dataset.lesemodus = lesemodus;
   function lesemodusSetzen(m) {
     if (!MODI.includes(m)) return;
+    lesemodusGemerkt = true;
+    speicherSchreiben("kl-lesemodus", m);
+    lesemodusAnwenden(m);
+  }
+  /** Standard-Lesemodus des Weges (Schule: kurz), solange du selbst nichts eingestellt hast. Wird nicht gespeichert. */
+  function wegLesemodus() {
+    if (lesemodusGemerkt) return;
+    const w = WEGE[aktiverWeg()];
+    const ziel = w && w.lesemodus ? w.lesemodus : "kompakt";
+    if (ziel !== lesemodus) lesemodusAnwenden(ziel);
+  }
+  function lesemodusAnwenden(m) {
     lesemodus = m;
     document.documentElement.dataset.lesemodus = m;
-    try { localStorage.setItem("kl-lesemodus", m); } catch (e) { /* egal */ }
     for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich";
     for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
     for (const g of $$(".lesemodus")) g.style.setProperty("--i", String(MODI.indexOf(m)));
     for (const t of $$(".lese-hilfe-text")) t.textContent = leseHilfe(m);
+    zeitenAktualisieren();
   }
   /** Erklaert in einem Satz, was der Umschalter tut (steht unter der Seitenueberschrift und als Tooltip). */
   function leseHilfe(m) {
@@ -643,11 +1122,58 @@
     });
     return gruppe;
   }
+  /* ------------------------------------------------------------ "Mit Mathe": Formeln nur auf Wunsch (Abschnittsfeld mathe) */
+  let mathe = speicherLesen("kl-mathe") === "1";
+  document.documentElement.dataset.mathe = mathe ? "an" : "aus";
+  function matheSetzen(an) {
+    mathe = !!an;
+    document.documentElement.dataset.mathe = mathe ? "an" : "aus";
+    speicherSchreiben("kl-mathe", mathe ? "1" : null);
+    for (const b of $$(".mathe-schalter")) b.setAttribute("aria-checked", String(mathe));
+  }
+  function matheSchalter() {
+    return h("button", { type: "button", class: "mathe-schalter", role: "switch", "aria-checked": String(mathe), onclick: () => matheSetzen(!mathe),
+      title: "Blendet bei manchen Abschnitten die Rechnung mit Formeln ein" }, icon("sigma"), h("span", null, "Mit Mathe"), h("span", { class: "mathe-knopf", "aria-hidden": "true" }));
+  }
+  /* ------------------------------------------------------------ Wege: Auswahl merken, anwenden, anzeigen */
+  function wegWaehlen(w) {              // w: Schluessel oder null (Auswahl aufheben); gewaehlt heisst gespeichert, nur im Browser
+    wegUrl = null;
+    wegGespeichert = wegGueltig(w) ? wegNorm(w) : null;
+    speicherSchreiben("kl-weg", wegGespeichert);
+    wegAnwenden(true);
+  }
+  function wegAnwenden(neuZeichnen) {
+    wegLesemodus();
+    navAnordnen();
+    chipZeigen();
+    if (neuZeichnen && aktuelleId === "start") route(window.scrollY);
+  }
+  /** Kleiner Hinweis "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile; Antippen fuehrt zur Auswahl auf der Startseite. */
+  function wegChip(klasse) {
+    return h("button", { type: "button", class: "weg-chip " + klasse, hidden: true, onclick: wegAendern }, icon("user-round"), h("b"));
+  }
+  function chipZeigen() {
+    const w = aktiverWeg();
+    for (const c of $$(".weg-chip")) {
+      c.hidden = !w;
+      if (!w) continue;
+      $("b", c).textContent = WEGE[w].titel;           // wie im Willkommens-Fenster ("Ich will KI verstehen")
+      c.title = (wegUrl ? "Dieser Weg kommt aus dem Link und wird nicht gespeichert. " : "") + "Tippen, um den Weg zu ändern";
+      c.setAttribute("aria-label", WEGE[w].titel + ". Weg ändern");
+    }
+  }
+  function wegAendern() {
+    if (window.KL && window.KL.willkommen) { window.KL.willkommen.oeffnen({ aendern: true }); return; }   // dasselbe Fenster wie beim Erstbesuch
+    if (aktuelleId !== "start") navigiere({ id: "start", query: "" });
+    zuAbschnitt("weg");
+  }
   /* ------------------------------------------------------------ Werkzeugleiste (Glas) */
-  const leiste = { el: null, titel: null, rechts: null };
+  const leiste = { el: null, titel: null, rechts: null, chip: null, schalter: null };
+  const schmal = window.matchMedia("(max-width:960px)");
   function leisteBauen() {
     leiste.titel = h("span", { class: "leiste-titel", "aria-hidden": "true" });
-    leiste.rechts = h("div", { class: "leiste-rechts" });
+    leiste.chip = wegChip("weg-chip-leiste");
+    leiste.rechts = h("div", { class: "leiste-rechts" }, leiste.chip);
     leiste.el = h("div", { class: "leiste" }, h("div", { class: "leiste-in" }, leiste.titel, leiste.rechts));
     return leiste.el;
   }
@@ -658,10 +1184,21 @@
     leiste.el.classList.toggle("titel-an", !!leisteH1 && leisteH1.getBoundingClientRect().bottom < 64);
   }
   window.addEventListener("scroll", () => requestAnimationFrame(leisteStand), { passive: true });
+  /** Am Handy steht der Lesemodus-Schalter in der Zeile "Zur Startseite" (eine Zeile statt zwei); die leere Leiste entfaellt. */
+  function schalterPlatzieren() {
+    if (!leiste.el) return;
+    const zeile = $(".zurueck-zeile");
+    if (leiste.schalter) { if (schmal.matches && zeile) zeile.append(leiste.schalter); else leiste.rechts.append(leiste.schalter); }
+    leiste.el.classList.toggle("leer", schmal.matches && !(leiste.schalter && leiste.rechts.contains(leiste.schalter)));
+  }
+  if (schmal.addEventListener) schmal.addEventListener("change", schalterPlatzieren);
   /** Setzt Titel und optional den Lesemodus-Schalter der Werkzeugleiste fuer die aktuelle Seite. */
   function leisteSetzen(titel, mitLesemodus) {
     leiste.titel.textContent = titel || "";
-    leiste.rechts.replaceChildren(...(mitLesemodus ? [lesemodusSchalter()] : []));
+    leiste.schalter = mitLesemodus ? lesemodusSchalter() : null;
+    leiste.rechts.replaceChildren(leiste.chip, ...(leiste.schalter ? [leiste.schalter] : []));
+    schalterPlatzieren();
+    chipZeigen();
     leisteH1 = $("#inhalt h1");
     leisteStand();
   }
@@ -670,7 +1207,7 @@
   /** o: { symbol, ueber, titel, lead, kennzahlen: [Knoten], unten: Knoten, gross } */
   function hero(o) {
     return h("header", { class: "hero" + (o.gross ? " gross" : "") },
-      h("div", { class: "hero-icon", "aria-hidden": "true" }, icon(o.symbol || "info")),
+      o.ohneIcon ? null : h("div", { class: "hero-icon", "aria-hidden": "true" }, icon(o.symbol || "info")),
       o.ueber ? h("p", { class: "ueber" }, o.ueber) : null,
       h("h1", null, o.titel),
       o.leadMd ? h("p", { class: "lead", html: md(o.leadMd) }) : h("p", { class: "lead" }, o.lead),
@@ -696,6 +1233,7 @@
     return String(t)
       .replace(/\[\[([a-z0-9-]+)(?:\|([^\]]+))?\]\]/g, (m, k, a) => a || (INHALT.glossar[k] ? INHALT.glossar[k][0] : k))
       .replace(/\{\{([a-z0-9-]+)(?:\?[a-z0-9_=&-]+)?\|([^}]+)\}\}/g, "$2")
+      .replace(LINK_RE, "$1")
       .replace(/\*\*([^*]+)\*\*/g, "$1").replace(/`([^`]+)`/g, "$1").replace(/\s+/g, " ").trim();
   }
   const KUERZEL = new Set(["z", "b", "h", "d", "u", "a", "o", "s", "v", "bzw", "ca", "ggf", "usw", "vgl", "nr", "abb", "evtl", "etc", "inkl", "max", "min", "sog", "dr", "prof", "bspw"]);
@@ -723,11 +1261,21 @@
     d.open = lesemodus === "ausfuehrlich";
     return d;
   }
+  /** Der Lesehinweis ("Du liest gerade kurz ...") erscheint nur einmal: mit Einwilligung (kl-merken) pro Browser, sonst pro Sitzung (sessionStorage). */
+  function hilfeSchonGesehen() {
+    try { return merken ? localStorage.getItem("kl-hilfe") === "1" : sessionStorage.getItem("kl-hilfe") === "1"; } catch (e) { return hilfeImSpeicher; }
+  }
+  let hilfeImSpeicher = false;
+  function hilfeMerken() {
+    hilfeImSpeicher = true;
+    try { if (merken) localStorage.setItem("kl-hilfe", "1"); else sessionStorage.setItem("kl-hilfe", "1"); } catch (e) { /* nur bis zum Neuladen */ }
+  }
   function abschnitte(seite) {
     const out = h("div", { class: "text" });
-    if ((seite.abschnitte || []).length) out.append(h("p", { class: "lese-hilfe" }, icon("info"), h("span", { class: "lese-hilfe-text" }, leseHilfe(lesemodus))));
+    if ((seite.abschnitte || []).length && !hilfeSchonGesehen()) { out.append(h("p", { class: "lese-hilfe" }, icon("info"), h("span", { class: "lese-hilfe-text" }, leseHilfe(lesemodus)))); hilfeMerken(); }
+    if (seite.mathe === true || (seite.abschnitte || []).some((x) => x.mathe && x.mathe.p && x.mathe.p.length)) out.append(h("div", { class: "mathe-zeile" }, matheSchalter()));
     for (const a of seite.abschnitte || []) {
-      const sec = h("section", { class: "abschnitt" }, h("h2", { class: "abs" }, a.h));
+      const sec = h("section", { class: "abschnitt", id: a.id || null }, h("h2", { class: "abs" }, a.h));
       if (a.visual && window.KL.visual) {
         const bild = window.KL.visual(a.visual);
         if (bild) sec.append(bild);
@@ -738,11 +1286,14 @@
       const mehr = [];
       for (const p of a.p || []) mehr.push(h("p", { html: md(p) }));
       if (a.liste) mehr.push(h("ul", null, a.liste.map((l) => h("li", { html: md(l) }))));
+      for (const c of a.code || []) mehr.push(codeBlock(c));
       if (a.tabelle) mehr.push(tabelleBlock(a.tabelle));
       if (a.alltag) mehr.push(h("aside", { class: "alltag" }, h("b", null, "Beispiel aus dem Alltag"),
         [].concat(a.alltag).map((t) => h("p", { html: md(t) }))));
       if (a.merke) mehr.push(h("aside", { class: "merke" }, h("b", null, "Merke"), h("p", { html: md(a.merke) })));
       if (mehr.length) sec.append(mehrBlock(mehr));
+      // "Mit Mathe": steht ausserhalb des Aufklappers, damit der Schalter in jedem Lesemodus wirkt; ohne Schalter bleibt es ausgeblendet (CSS)
+      if (a.mathe && a.mathe.p && a.mathe.p.length) sec.append(h("aside", { class: "mathe" }, h("b", null, icon("sigma"), "Mit Mathe"), a.mathe.p.map((t) => h("p", { html: md(t) }))));
       out.append(sec);
     }
     return out;
@@ -765,13 +1316,15 @@
   /** Statuschip in Klartext: bereit, viel los oder noch keine Verbindung (ohne Fachwoerter). */
   function statusSatz(d) {
     if (!d || !d.frisch) return "Der Rechner meldet sich gleich.";
-    const w = d.warteschlange || {};
-    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
-    return "Der Rechner ist bereit und frei. Gerade zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet.";
+    const z = rechnerZustand(d);
+    if (z === "voll") return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
+    if (z === "rechnet") return "Der Rechner rechnet gerade (zu " + d.gpu_pct + " Prozent ausgelastet). Neue Fragen können einen Moment warten müssen.";
+    return "Der Rechner ist bereit und frei (zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet).";
   }
   function zuAbschnitt(id) {
     const z = document.getElementById(id);
     if (!z) return;
+    const dd = z.closest("details"); if (dd) dd.open = true;           // Abschnitte unter "Weitere Wege" erst aufklappen
     const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
     z.scrollIntoView({ behavior: ruhig ? "auto" : "smooth", block: "start" });
     const k = $("h2", z); if (k) { k.setAttribute("tabindex", "-1"); k.focus({ preventScroll: true }); }
@@ -784,57 +1337,214 @@
       return h("li", null, h("a", { href: adresse(e.id) },
         h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)),
         h("span", { class: "start-text" }, h("b", null, e.h), e.p ? h("span", { html: md(e.p) }) : null,
-          e.min ? h("span", { class: "start-min" }, "ca. " + e.min + " Min") : null),
-        besuchtZeigen && besucht.has(e.id) ? h("span", { class: "ok", title: "schon gelesen" }, icon("check")) : null,
+          zeitFeld(e.id, "", null, "start-min")),
+        besuchtZeigen && gelesen.has(e.id) ? h("span", { class: "ok", title: "schon gelesen" }, icon("check")) : null,
         icon("chevron")));
     }));
   }
+  /** Karte: Kopfzeile (Kicker), Titel, ein Satz und der Fuss mit Angabe, Balken und Knopf. Der Fuss liegt unten, damit Knoepfe und Balken
+      in einer Zeile stehen. o: { symbol, kicker, titel, text, meta, balken (0 bis 100), balkenLabel, href, knopf, extern, fertig, fuss, klasse, dataset } */
+  function karte(o) {
+    const fuss = [];
+    if (o.meta) fuss.push(h("p", { class: "karte-meta" }, o.meta));
+    if (o.balken != null) {
+      const i = h("i"); i.style.width = o.balken + "%";
+      fuss.push(h("div", { class: "pf-balken", role: "progressbar", "aria-label": o.balkenLabel || "Fortschritt", "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": String(o.balken) }, i));
+    }
+    if (o.fuss) fuss.push(...[].concat(o.fuss));
+    if (o.fertig) fuss.push(h("p", { class: "pfad-fertig" }, icon("check"), "Pfad geschafft"));
+    else if (o.href) fuss.push(h("a", { class: "btn primary klein", href: o.href, rel: o.extern ? "noopener noreferrer" : null, target: o.extern ? "_blank" : null, onclick: o.onclick || null }, o.knopf || "Öffnen", icon(o.extern ? "external-link" : "chevron")));
+    return h("article", { class: "karte" + (o.klasse ? " " + o.klasse : ""), dataset: o.dataset || null },
+      h("p", { class: "karte-kicker" }, o.symbol ? icon(o.symbol) : null, h("span", null, o.kicker || "")),
+      h("h3", { class: "karte-titel" }, o.titel),
+      h("p", { class: "karte-text" }, o.text || ""),
+      h("div", { class: "karte-fuss" }, fuss));
+  }
+  /** Karte zu einer Seite des Labors (opt: { satz, h, kicker, knopf }). */
+  function seitenKarte(id, opt) {
+    const sd = INHALT.seiten[id], o = opt || {};
+    const gel = gelesen.has(id);
+    return karte({ symbol: sd.symbol, kicker: o.kicker || (sd.typ === "labor" ? "Labor" : sd.widget || sd.demo ? "Zum Ausprobieren" : "Lektion"),
+      titel: o.h || sd.nav || sd.titel, text: o.satz || ersterSatz(sd.kurz || "", 100),
+      meta: zeitFeld(id, "", gel ? () => ", gelesen" : null), href: adresse(id), knopf: o.knopf || (gel ? "Noch einmal ansehen" : "Öffnen"), dataset: { seite: id } });
+  }
+  /** Raster der Labore ohne Kamera (INHALT.experimente, content-experimente.js): Start der Rolle Schule und Seite "Experimente". */
+  function experimenteRaster(max) {
+    const liste = (INHALT.experimente || []).filter((e) => gibt(e.id)).slice(0, max || 99);
+    return h("div", { class: "karten karten-3 experimente" }, liste.map((e) => karte({ symbol: e.symbol, kicker: e.hinweis || "Ohne Kamera", titel: e.titel, text: e.satz,
+      meta: zeitFeld(e.id), href: adresse(e.id), knopf: "Starten", dataset: { seite: e.id } })));
+  }
+  /** Karte eines Lernpfades: Stufe oder Rolle, Umfang, Fortschritt, "Weiter" und die Seitenliste. */
+  function pfadKarte(p) {
+    const n = p.ids.filter((id) => gelesen.has(id)).length;
+    const next = pfadNaechste(p);
+    const anteil = Math.round(n / p.ids.length * 100);
+    const tag = p.stufe ? "Stufe " + p.stufe + " von 4" : (WEGE[p.rolle] ? WEGE[p.rolle].name : "Pfad");
+    const liste = h("ol", { class: "pfad-seiten" }, p.ids.map((id) => {
+      const sd = INHALT.seiten[id];
+      const gel = gelesen.has(id);
+      return h("li", null, h("a", { href: adresse(id) },
+        h("span", { class: "pfad-haken" + (gel ? " an" : ""), "aria-hidden": "true" }, gel ? icon("check") : null),
+        h("span", null, sd.nav || sd.titel, imSchulweg(id) ? h("small", { class: "kam" }, kameraHinweis) : null),
+        gel ? h("span", { class: "sr-nur" }, " (gelesen)") : null));
+    }));
+    const k = karte({ kicker: tag, titel: p.name, text: p.kurz, meta: zeitFeld(p.ids, p.ids.length + " Schritte, ", () => ", " + n + " gelesen"),
+      balken: anteil, balkenLabel: "Fortschritt im Pfad " + p.name, href: next ? adresse(next) : null, knopf: n ? "Weiter im Pfad" : "Pfad starten", fertig: !next, dataset: { pfad: p.id }, klasse: "pfad-karte" });
+    k.append(h("details", { class: "pfad-liste" }, h("summary", null, icon("chevron"), "Alle " + p.ids.length + " Schritte"), liste));
+    return k;
+  }
+  /** "Weiter, wo du aufgehört hast": nur wenn schon etwas gelesen oder geöffnet wurde. */
+  function weiterKarte() {
+    const f = fortschritt();
+    if (!f.n && !(zuletzt && zaehlbar(zuletzt.id))) return null;
+    const ziel = weiterZiel();
+    const sd = ziel && INHALT.seiten[ziel.id];
+    const text = !ziel ? "Du hast alle Seiten gelesen. Stöbere in den Pfaden oder wiederhole ein Quiz."
+      : ziel.art === "zuletzt" ? "Du warst zuletzt bei „" + sd.titel + "“."
+      : ziel.art === "pfad" ? "Als Nächstes im Pfad „" + ziel.pfad.name + "“: " + sd.titel + "."
+      : "Noch nicht gelesen: " + sd.titel + ".";
+    const loeschen = h("button", { type: "button", class: "textlink fs-loeschen", onclick: (e) => {
+      const b = e.currentTarget;
+      if (b.dataset.sicher) { fortschrittLoeschen(); return; }
+      b.dataset.sicher = "1"; b.replaceChildren(icon("trash-2"), "Wirklich löschen? Noch einmal tippen");
+    } }, icon("trash-2"), "Fortschritt löschen");
+    return h("section", { class: "block weiter-karte", id: "weiter" },
+      h("div", { class: "weiter-in" },
+        h("div", { class: "weiter-text" }, h("h2", null, icon("play"), "Weiter, wo du aufgehört hast"), h("p", null, text), fortschrittLeiste()),
+        ziel ? h("a", { class: "btn primary", href: adresse(ziel.id), onclick: () => { if (ziel.art === "zuletzt" && zuletzt) scrollZiel = { id: ziel.id, y: zuletzt.y }; } }, "Weiter lesen", icon("chevron")) : null),
+      h("p", { class: "weiter-fuss" }, merken ? "Dein Fortschritt liegt nur in deinem Browser. " : "Dein Fortschritt gilt nur, solange diese Seite offen ist. ",
+        merken ? null : h("button", { type: "button", class: "textlink", onclick: () => merkenSetzen(true) }, icon("save"), "In diesem Browser merken"), " ", loeschen));
+  }
+  /** Karte "Klassenlink": oeffnet die Seite im Schulweg, ohne dass auf dem Geraet etwas gespeichert wird. */
+  function klassenLinkKarte() {
+    const url = location.origin + "/?weg=schule";
+    const feld = h("input", { type: "text", readonly: true, value: url, class: "klassenlink", "aria-label": "Klassenlink" });
+    const status = h("span", { class: "klassenlink-status", role: "status" });
+    const kopieren = async () => {
+      try { await navigator.clipboard.writeText(url); status.textContent = "Link kopiert."; }
+      catch (e) {
+        feld.focus(); feld.select();
+        try { document.execCommand("copy"); status.textContent = "Link kopiert."; } catch (e2) { status.textContent = "Der Link ist markiert. Kopiere ihn mit Strg+C oder durch langes Tippen."; }
+      }
+    };
+    return karte({ symbol: "link", kicker: "Für deine Klasse", titel: "Klassenlink", text: "Öffnet den Schulweg. Auf den Geräten wird nichts gespeichert.", klasse: "klassen-karte",
+      fuss: [feld, h("button", { type: "button", class: "btn primary klein", onclick: kopieren }, icon("copy"), "Link kopieren"), status] });
+  }
+  /** Rollenwahl: ohne Weg sechs Kacheln (freiwillig, keine Altersabfrage), mit Weg nur eine Zeile "Weg ändern". */
+  function wegBlock() {
+    const aktiv = aktiverWeg();
+    if (aktiv) {
+      return h("section", { class: "block weg-wahl weg-gewaehlt", id: "weg" },
+        h("p", { class: "weg-fuss" }, h("span", null, "Dein Weg: ", h("b", null, WEGE[aktiv].titel)),
+          h("button", { type: "button", class: "textlink", onclick: wegAendern }, icon("user-round"), "Weg ändern"),
+          h("button", { type: "button", class: "textlink", onclick: () => wegWaehlen(null) }, wegUrl ? "Auswahl ignorieren" : "Auswahl aufheben"),
+          wegUrl ? h("span", null, "Dieser Weg kommt aus dem Link und wird nicht gespeichert.") : null));
+    }
+    const kacheln = Object.entries(WEGE).map(([k, w]) => h("button", { type: "button", class: "weg-kachel", "aria-pressed": "false", dataset: { weg: k },
+      onclick: () => wegWaehlen(k) },
+      h("span", { class: "weg-ic", "aria-hidden": "true" }, icon(w.symbol)), h("span", { class: "weg-text" }, h("b", null, w.titel), h("span", null, w.satz))));
+    return h("section", { class: "block weg-wahl", id: "weg" },
+      h("h2", null, icon("compass"), "Wofür bist du hier?"),
+      h("p", { class: "start-lead" }, "Freiwillig. Die Wahl ordnet nur diese Seite, nichts wird gesendet."),
+      h("div", { class: "weg-kacheln karten karten-3" }, kacheln));
+  }
+  /** Erste Schritte: im Weg der Rolle die ersten drei Seiten des Rollenpfades, sonst die Voreinstellung aus content.js. */
+  function anfangenFuer(seite) {
+    const w = aktiverWeg();
+    if (w && w !== "beruf") {
+      const p = pfadeListe().find((x) => x.rolle === w);
+      if (p) return p.ids.filter((id) => !(w === "schule" && kameraSeiten().has(id))).slice(0, 3).map((id) => ({ id, h: INHALT.seiten[id].titel, p: ersterSatz(INHALT.seiten[id].kurz || "") }));
+    }
+    return seite.anfangen;
+  }
+  /** Bloecke der Startseite je Rolle (INHALT.startRollen). */
+  function startBlock(name, w, R, seite) {
+    const kopf = (symbol, text, id) => h("h2", { id: id || null }, icon(symbol), text);
+    if (name === "experimente") {
+      return h("section", { class: "block", id: "experimente" }, kopf("flask-conical", "Zum Ausprobieren"), experimenteRaster(6),
+        h("p", { class: "weg-fuss" }, h("a", { class: "textlink", href: "/experimente" }, "Alle Experimente", icon("chevron")),
+          h("span", null, "Labore mit Kamera findest du unter „Alle Bereiche“. Im Unterricht brauchst du sie nicht.")));
+    }
+    if (name === "empfohlen") {
+      const kand = (R.empfohlen || []).filter((e) => gibt(e.id) && zaehlbar(e.id));
+      const pfadIds = ((pfadeListe().find((q) => q.rolle === R.pfad) || {}).ids) || [];      // gleiche Zaehlung wie "Schritt n von m" am Seitenende
+      const wahl = [...kand.filter((e) => !gelesen.has(e.id)), ...kand.filter((e) => gelesen.has(e.id))].slice(0, 3);
+      return h("section", { class: "block", id: "empfohlen" }, kopf("sparkles", "Empfohlen für dich"),
+        h("div", { class: "karten karten-3" }, wahl.map((e) => seitenKarte(e.id, { satz: e.satz, h: e.h,
+          kicker: R.pfad && pfadIds.includes(e.id) ? "Schritt " + (pfadIds.indexOf(e.id) + 1) + " von " + pfadIds.length : (/^uc-/.test(e.id) ? "Anwendungsfall" : null) }))));
+    }
+    if (name === "morgen") {
+      const kand = (R.morgen || []).filter((e) => gibt(e.id));
+      return h("section", { class: "block", id: "morgen" }, kopf("presentation", "Für morgen"),
+        h("div", { class: "karten karten-3" }, [...kand.map((e) => seitenKarte(e.id, { satz: e.satz, kicker: e.id === "schule-lehrkraefte" ? "Handreichung" : e.id === "schule-schulleitung" ? "Für die Schulleitung" : e.id === "elternabend" ? "Für Eltern" : /^medien-/.test(e.id) ? "Medienkompetenz" : "KI-Reihe" })), klassenLinkKarte()]));
+    }
+    if (name === "minuten") {
+      const e = seite.entscheider;
+      const schrittIds = e.schritte.map((x) => x.id);
+      return h("section", { class: "block", id: "entscheider" }, kopf("briefcase", "In 15 Minuten"),
+        h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
+          h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
+            h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
+    }
+    if (name === "repo" && R.repo) {
+      const r = R.repo;
+      return h("section", { class: "block", id: "repo" }, h("div", { class: "karten" }, karte({ symbol: "link", kicker: "Quellcode", titel: r.titel, text: r.satz, href: r.href, knopf: r.knopf, extern: true, klasse: "karte-breit" })));
+    }
+    return null;
+  }
   function startSeite(seite) {
+    const w = aktiverWeg();
+    const R = (INHALT.startRollen || {})[w || "ohne"] || {};
     const punkt = h("span", { class: "punkt aus" });
     const stand = h("span", { class: "statuschip-text" }, statusSatz(null));
     const chip = h("div", { class: "statuschip glas", role: "status" }, punkt, stand);
     montiert.push({ destroy: stats.on((d) => { punkt.classList.toggle("aus", !d.frisch); stand.textContent = statusSatz(d); }) });
-    const aktionen = h("div", { class: "hero-aktionen" },
-      chip,
-      h("div", { class: "hero-knoepfe" },
-        h("a", { class: "btn primary", href: "#anfangen", onclick: (e) => { e.preventDefault(); zuAbschnitt("anfangen"); } }, "Neu hier? Hier anfangen"),
-        h("a", { class: "btn", href: "#entscheider", onclick: (e) => { e.preventDefault(); zuAbschnitt("entscheider"); } }, "Für Entscheider: in 15 Minuten")),
-      h("a", { class: "textlink", href: "#bereiche", onclick: (e) => { e.preventDefault(); zuAbschnitt("bereiche"); } }, "Alle Bereiche ansehen", icon("chevron")));
-    // Bento-Raster: je Bereich eine Kachel; Breiten wechseln, die erste ist die Akzent-Kachel
-    const BREITE = ["fokus breit", "schmal", "", "", "", "schmal", "breit", "", "", ""];
+    const zuWeitere = (anker) => (e) => { e.preventDefault(); zuAbschnitt(anker); };
+    const e = seite.entscheider;
+    const schrittIds = e.schritte.map((x) => x.id);
+    // Alles uebrige liegt unter "Weitere Wege" (zugeklappt)
+    const sAnfangen = h("section", { class: "block", id: "anfangen" }, h("h2", null, icon("smile"), "Neu hier? So fängst du an"),
+      h("p", { class: "start-lead" }, "Drei Schritte, ohne Vorwissen."), schrittListe(anfangenFuer(seite), true));
+    const sEntscheider = w === "beruf" ? null : h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), "In 15 Minuten"),
+      h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
+        h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
+          h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
+    const pfade = pfadeListe();
+    const stufen = pfade.filter((p) => p.stufe), rollen = pfade.filter((p) => p.rolle);
+    const sPfade = pfade.length ? h("section", { class: "block", id: "lernpfade" }, h("h2", null, icon("route"), "Lernpfade"),
+      h("p", { class: "start-lead" }, "Vier Stufen: Verstehen, Anwenden, Erstellen, Bewerten."),
+      stufen.length ? [h("h3", { class: "pfad-gruppe" }, "Nach Stufe"), h("div", { class: "karten karten-2" }, stufen.map(pfadKarte))] : null,
+      rollen.length ? [h("h3", { class: "pfad-gruppe" }, "Nach Rolle"), h("div", { class: "karten karten-2" }, rollen.map(pfadKarte))] : null) : null;
     const kacheln = [];
     for (const g of INHALT.gruppen) {
       if (!g.seiten.length || g.name === "Start") continue;
       const b = (seite.bereiche || {})[g.name] || {};
       const ziel = g.seiten[0];
-      const satz = b.satz || g.seiten.slice(0, 3).map((id) => INHALT.seiten[id].nav || INHALT.seiten[id].titel).join(", ");
-      kacheln.push(h("a", { class: "kachel " + (BREITE[kacheln.length] || ""), href: "#/" + ziel },
-        h("h3", null, g.name), h("p", null, satz),
-        h("span", { class: "mehr-link" }, "Mehr erfahren", icon("chevron")),
-        h("span", { class: "gross-icon", "aria-hidden": "true" }, icon(b.symbol || INHALT.seiten[ziel].symbol))));
+      const satz = b.satz || (g.seiten.length === 1 ? ersterSatz(INHALT.seiten[ziel].kurz || "", 100) : g.seiten.slice(0, 3).map((id) => INHALT.seiten[id].nav || INHALT.seiten[id].titel).join(", "));
+      kacheln.push(karte({ symbol: b.symbol || INHALT.seiten[ziel].symbol, kicker: g.seiten.length + (g.seiten.length === 1 ? " Seite" : " Seiten"), titel: g.name, text: satz, href: "/" + ziel, knopf: "Mehr erfahren" }));
     }
-    const reihe = h("ol", { class: "pfadreihe", tabindex: "0", "aria-label": "Lernpfad" }, seite.pfad.map((p, i) => h("li", null,
-      h("a", { class: "schritt-k", href: "#/" + p.id }, h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)), h("h3", null, p.h), h("p", { html: md(p.p) })))));
-    const schieben = (r) => () => reihe.scrollBy({ left: r * 320, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
-    const nav = h("div", { class: "pfad-nav" },
-      h("button", { type: "button", "aria-label": "Zurück", onclick: schieben(-1) }, icon("arrow-left")),
-      h("button", { type: "button", "aria-label": "Weiter", onclick: schieben(1) }, icon("arrow-right")));
-    const e = seite.entscheider;
-    const summe = e.schritte.reduce((n, x) => n + (x.min || 0), 0);
-    return h("div", { class: "seitenbreite breit" },
-      hero({ symbol: seite.symbol, ueber: "KI-Labor", titel: seite.titel, leadMd: seite.kurz, lead: klar(seite.kurz), gross: true,
-        kennzahlen: [kennzahl("badge-check", "Kostenlos"), kennzahl("user-check", "Ohne Anmeldung"), kennzahl("shield-check", "Kamera nur mit deiner Zustimmung")], unten: aktionen }),
-      h("section", { class: "block", id: "anfangen" }, h("h2", null, icon("smile"), "Neu hier? So fängst du an"),
-        h("p", { class: "start-lead" }, "Drei Schritte, zusammen etwa zehn Minuten. Du brauchst kein Vorwissen."), schrittListe(seite.anfangen)),
-      h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), e.titel),
-        h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, e.lead), schrittListe(e.schritte, true),
-          h("div", { class: "entscheider-fuss" }, h("span", null, "Zusammen etwa " + summe + " Minuten."),
-            h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten")))),
-      h("section", { class: "block", id: "bereiche" }, h("h2", null, "Alle Bereiche"), h("div", { class: "bento" }, kacheln)),
-      h("section", { class: "block" }, h("div", { class: "pfad-kopf" }, h("h2", null, "Wenn du mehr willst: der ganze Lernpfad"), nav), reihe),
-      h("section", { class: "block start-fuss" },
-        h("div", { class: "hinweis" }, icon("shield-check"), h("p", null, h("strong", null, "Ist das sicher? "), seite.datenschutz, " ", h("a", { href: "/sicherheit-einfach" }, "Alles dazu in einfachen Worten"))),
-        h("div", { class: "hinweis" }, icon("cpu"), h("p", null, h("strong", null, "Was ist ein Jetson? "), seite.jetson, " ", h("a", { href: "/hardware" }, "Mehr zum Rechner dahinter")))));
+    const sBereiche = h("section", { class: "block", id: "bereiche" }, h("h2", null, icon("layers"), "Alle Bereiche"), h("div", { class: "karten karten-3" }, kacheln));
+    const weitere = h("details", { class: "weitere", id: "weitere" },
+      h("summary", null, icon("chevron"), h("span", null, "Weitere Wege"), h("small", null, "Rolle wählen, Lernpfade, alle Bereiche")),
+      h("div", { class: "weitere-in" }, wegBlock(), sAnfangen, sEntscheider, sPfade, sBereiche));
+    const einstiege = w ? null : h("section", { class: "block einstiege", id: "einstiege" },
+      h("div", { class: "karten karten-3" },
+        karte({ symbol: "smile", kicker: "Einstieg", titel: "Neu hier?", text: "Drei Schritte, ohne Vorwissen.", meta: zeitFeld(anfangenFuer(seite).map((x) => x.id)), href: "#anfangen", knopf: "Hier anfangen", onclick: zuWeitere("anfangen") }),
+        karte({ symbol: "briefcase", kicker: "Für Entscheider", titel: "In 15 Minuten", text: "Was KI einem Betrieb bringt, in vier Seiten.", meta: zeitFeld(schrittIds), href: "#entscheider", knopf: "Überblick", onclick: zuWeitere("entscheider") }),
+        karte({ symbol: "layers", kicker: "Orientierung", titel: "Alle Bereiche", text: "Alle Themen auf einen Blick.", meta: kacheln.length + " Bereiche", href: "#bereiche", knopf: "Ansehen", onclick: zuWeitere("bereiche") })),
+      h("p", { class: "weg-fuss" }, h("button", { type: "button", class: "textlink", onclick: wegAendern }, icon("user-round"), "Für wen bist du hier? Weg wählen")));
+    const fuss = h("section", { class: "block start-fuss" },
+      h("div", { class: "hinweis" }, icon("shield-check"), h("p", null, h("strong", null, "Ist das sicher? "), ersterSatz(seite.datenschutz), " ", h("a", { href: "/sicherheit-einfach" }, "Mehr dazu"))),
+      h("div", { class: "hinweis" }, icon("users"), h("p", null, h("strong", null, "Ab wann? "), INHALT.alterHinweis || "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck.")),
+      h("div", { class: "hinweis" }, icon("cpu"), h("p", null, h("strong", null, "Was ist ein Jetson? "), ersterSatz(seite.jetson), " ", h("a", { href: "/hardware" }, "Mehr zum Rechner"))));
+    return h("div", { class: "seitenbreite breit start" },
+      hero({ ueber: w ? "KI-Labor · " + WEGE[w].name : "KI-Labor", titel: R.h1 || seite.titel, leadMd: R.satz || seite.kurz, lead: klar(R.satz || seite.kurz), gross: true, ohneIcon: true,
+        kennzahlen: [kennzahl("badge-check", "Kostenlos"), kennzahl("user-check", "Ohne Anmeldung")], unten: h("div", { class: "hero-aktionen" }, chip) }),
+      einstiege,
+      weiterKarte(),
+      ...(w ? (R.bloecke || []).map((b) => startBlock(b, w, R, seite)) : []),
+      weitere,
+      fuss);
   }
   /** Sichtbarer Zurueck-Knopf auf Unterseiten: einen Schritt zurueck, wenn man von einer Seite des Labors kommt, sonst zur Startseite. */
   function zurueckZeile() {
@@ -857,29 +1567,119 @@
      License, Abschnitt 1.b.i) dazu. Fehlen Impressum oder Datenschutz im Server-Text, werden sie aus module.json ergaenzt. */
   function fussErgaenzen() {
     const fuss = $("#fuss");
-    if (!fuss || $(".fuss-lizenz", fuss)) return;
+    if (!fuss || $(".fuss-speicher", fuss)) return;
     const q = window.KL.seite || {};
     const pflicht = [["impressum_url", "Impressum"], ["datenschutz_url", "Datenschutz"]]
       .filter(([k]) => String(q[k] || "").startsWith("https://") && !$$("a", fuss).some((a) => a.getAttribute("href") === q[k]));
     const teile = [h("a", { href: "/lizenzen" }, "Lizenzen und Quellen")]
       .concat(pflicht.map(([k, t]) => h("a", { href: q[k] }, t)), h("span", { class: "fuss-llama" }, "Built with Llama"));
-    fuss.append(h("p", { class: "fuss-lizenz" }, teile.flatMap((t, i) => (i ? [h("span", { "aria-hidden": "true" }, " · "), t] : [t]))));
+    if (!$(".fuss-lizenz", fuss)) fuss.append(h("p", { class: "fuss-lizenz" }, teile.flatMap((t, i) => (i ? [h("span", { "aria-hidden": "true" }, " · "), t] : [t]))));
+    fuss.append(h("p", { class: "fuss-speicher" },
+      h("a", { href: "/sicherheit-einfach#browser-eintraege", onclick: (e) => { if (e.ctrlKey || e.metaKey || e.shiftKey) return; e.preventDefault(); navigiere({ id: "sicherheit-einfach", query: "" }); setTimeout(() => zuAbschnitt("browser-eintraege"), 60); } }, "Was im Browser gespeichert wird"),
+      h("span", { "aria-hidden": "true" }, " · "),
+      h("button", { type: "button", class: "textlink merken-schalter", role: "switch", "aria-checked": String(merken), title: "Merkt gelesene Seiten und die letzte Stelle in diesem Browser. Aus leert diese Einträge.", onclick: () => merkenSetzen(!merken) },
+        "Fortschritt merken: ", h("span", { class: "merken-zustand" }, merken ? "an" : "aus"))));
+  }
+  /** Lesezeit fuer die Kopfzeile: nur der Wert zum gewaehlten Lesemodus ist sichtbar (CSS nach html[data-lesemodus]). */
+  function lesezeitKopf(seite) {
+    if (!(seite.abschnitte || []).length) return null;
+    const lz = lesezeit(seite);
+    if (unterrichtMinuten(seite, seite.id)) return h("span", { class: "lz-kopf", title: "Eine Unterrichtsstunde mit Einstieg, Erarbeitung, Sicherung und Reflexion" }, icon("clock"), zeitFeld(seite.id, "", null, "lz"));
+    return h("span", { class: "lz-kopf", title: "Lesezeit ohne Quiz: ca. " + lz.kompakt + " Min im kurzen Modus, ca. " + lz.ausfuehrlich + " Min im genauen Modus. Das Video und ein Labor kommen dazu." },
+      icon("clock"), zeitFeld(seite.id, "", null, "lz"));
+  }
+  /** Lernziele (Seitenfeld oder Ergaenzung in content-laien.js): eine Zeile, zum Aufklappen. */
+  function lernzieleBlock(seite) {
+    const z = seite.lernziele || (INHALT.lernzieleErgaenzung || {})[seite.id] || null;
+    if (!z || !z.length) return null;
+    return h("details", { class: "lernziele lz-kompakt", "aria-label": "Lernziele" }, h("summary", null, icon("target"), h("span", null, "Lernziele"), h("small", null, z.length === 1 ? "1 Punkt" : z.length + " Punkte"), icon("chevron")),
+      h("ul", null, z.map((t) => h("li", null, t))));
+  }
+  /** Am Ende einer Lektion: die naechste Seite im Pfad (bevorzugt im Pfad des gewaehlten Weges). */
+  function pfadWeiterBlock(id) {
+    const alle = pfadeListe().filter((q) => q.ids.includes(id));
+    if (!alle.length) return null;
+    const w = aktiverWeg();
+    const pf = alle.find((q) => w && q.rolle === w) || alle[0];
+    const i = pf.ids.indexOf(id);
+    const next = pf.ids.slice(i + 1).find((x) => !(w === "schule" && kameraSeiten().has(x)));
+    if (!next) return null;
+    const sd = INHALT.seiten[next];
+    return h("section", { class: "block pfad-weiter" }, h("h2", null, icon("route"), "Nächste Seite im Pfad"),
+      h("div", { class: "weiter" }, h("a", { href: adresse(next) }, icon(sd.symbol), sd.titel)),
+      h("p", { class: "pfad-weiter-info" }, "Pfad „" + pf.name + "“, Schritt " + (i + 1) + " von " + pf.ids.length + "."));
+  }
+  /** Eine Seite gilt als gelesen, wenn das Seitenende im Bild war und mindestens MIN_LESEDAUER seit dem Oeffnen vergangen ist. */
+  function lesefortschrittStarten(id) {
+    const ende = $(".seitenende");
+    if (!ende || gelesen.has(id)) return;
+    const start = Date.now();
+    let timer = null, fertig = false, y = 0, speichern = null;
+    const pruefen = () => {
+      if (fertig) return;
+      if (ende.getBoundingClientRect().top > window.innerHeight + 8) return;      // Ende noch nicht im Bild
+      const rest = MIN_LESEDAUER - (Date.now() - start);
+      if (rest > 0) { if (!timer) timer = setTimeout(() => { timer = null; pruefen(); }, rest + 30); return; }
+      fertig = true;
+      gelesenMerken(id);
+    };
+    const beiScroll = () => {
+      pruefen();
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      y = max > 0 ? Math.max(0, Math.min(1, window.scrollY / max)) : 0;
+      if (!speichern) speichern = setTimeout(() => { speichern = null; if (zuletzt && zuletzt.id === id) { zuletzt.y = Math.round(y * 1000) / 1000; zuletztSpeichern(); } }, 1200);
+    };
+    window.addEventListener("scroll", beiScroll, { passive: true });
+    window.addEventListener("resize", pruefen);
+    requestAnimationFrame(pruefen);
+    montiert.push({ destroy() { window.removeEventListener("scroll", beiScroll); window.removeEventListener("resize", pruefen); clearTimeout(timer); clearTimeout(speichern); } });
+  }
+  function seiteBetreten(id) {
+    aktuelleId = id;
+    if (!zaehlbar(id)) return;
+    zuletzt = { id, y: 0 };
+    zuletztSpeichern();
+    lesefortschrittStarten(id);
+    if (scrollZiel && scrollZiel.id === id) {
+      const y = scrollZiel.y;
+      scrollZiel = null;
+      setTimeout(() => { const max = document.documentElement.scrollHeight - window.innerHeight; if (max > 0 && y > 0 && window.scrollY < 4) window.scrollTo({ top: Math.round(max * y), left: 0, behavior: "instant" }); }, 450);
+    }
   }
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
     if (seite.typ === "start") return startSeite(seite);
     const art = seite.typ === "lektion" ? "Lektion" + (seite.nr ? " " + seite.nr : "") : "Labor";
-    const ueber = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
+    const ueberText = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
+    const lzk = lesezeitKopf(seite);
+    const ueber = lzk ? [ueberText, h("span", { class: "ueber-trenner", "aria-hidden": "true" }, " · "), lzk] : ueberText;
     const out = h("div", { class: "seitenbreite" }, zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
+    const lzb = lernzieleBlock(seite); if (lzb) out.append(lzb);
+    // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
+    const dls = (seite.downloads || []).filter((d) => d && typeof d.href === "string" && d.href.startsWith("/static/") && !d.href.startsWith("//"));
+    if (dls.length) out.append(h("section", { class: "downloads-box" }, h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
+      dls.map((d) => h("a", { class: "dlkarte", href: d.href, download: "ki-labor-" + d.href.split("/").pop(), target: "_blank", rel: "noopener", "aria-label": d.text + " herunterladen" },
+        h("span", { class: "dl-icon", "aria-hidden": "true" }, icon("file-text")),
+        h("span", { class: "dl-text" }, h("b", null, d.text), d.sub ? h("small", null, d.sub) : null),
+        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen")))))));
+    if (seite.experimente) out.append(h("section", { class: "block" }, experimenteRaster()));
+    if (imSchulweg(id)) out.append(h("p", { class: "kamera-hinweis" }, icon("camera"), h("span", null, h("b", null, "Braucht Kamera oder Mikrofon. "),
+      "Im Unterricht ist das nicht nötig. Nutze es nur mit Einverständnis, bei unter 16 Jahren mit dem der Eltern.")));
     if (seite.status === "bald") out.append(h("p", { class: "in-arbeit" }, icon("hammer"), h("span", null, h("b", null, "Vorschau. "), "Die Erklärung steht schon. Eine Demo gibt es hier noch nicht.")));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
+    // Reihenfolge: Spiel-Widgets (widgetZuerst, echt-oder-ki) stehen vor dem Video; Zustimmungs-Kasten (sicherheit-einfach, widgetNach) erst nach der Antwort in den Abschnitten.
+    const widgetZuerst = !!seite.widget && (seite.widgetZuerst || id === "echt-oder-ki");
+    const widgetNach = !!seite.widget && (seite.widgetNach || id === "sicherheit-einfach");
+    const widgetKnoten = seite.widget ? baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play") : null;
+    if (widgetZuerst) out.append(widgetKnoten);
     if (vids.length) out.append(videoBlock(vids));
-    if (seite.widget) out.append(baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play"));
+    if (widgetKnoten && !widgetZuerst && !widgetNach) out.append(widgetKnoten);
     if (seite.demo) out.append(baustein("demos", seite.demo, seite, "Live ausprobieren", "live"));
     out.append(abschnitte(seite));
+    if (widgetKnoten && widgetNach) out.append(widgetKnoten);
     if (seite.mitnehmen) out.append(h("section", { class: "block mitnehmen" }, h("h2", null, "Das nimmst du mit"), h("ul", null, seite.mitnehmen.map((m) => h("li", null, m)))));
-    if (seite.quiz && seite.quiz.length) out.append(quizBlock(seite.quiz));
+    if (seite.quiz && seite.quiz.length) out.append(quizBlock(seite.quiz, () => gelesenMerken(id)));
     if (seite.business) {
       const b = seite.business;
       const chips = b.beispiele && b.beispiele.length ? h("div", { class: "zeile" }, b.beispiele.map((c) => h("span", { class: "chip" }, c))) : null;
@@ -892,7 +1692,9 @@
     }
     if (seite.rechtslinks) out.append(rechtsBlock());
     const d3 = dreiSchritteBlock(seite.dreiSchritte); if (d3) out.append(d3);
+    const pw = pfadWeiterBlock(id); if (pw) out.append(pw);
     const w = weiterBlock(seite.weiter); if (w) out.append(w);
+    out.append(h("div", { class: "seitenende", "aria-hidden": "true" }));
     return out;
   }
 
@@ -926,16 +1728,20 @@
     // saubere Schreibweise: /start und /id/ gehen auf /id bzw. /
     if (gueltig && location.pathname !== adresse(gueltig)) history.replaceState(history.state, "", adresse(gueltig, query));
     aktuelleAbfrage = Object.fromEntries(new URLSearchParams(query));
+    // Klassenlink: /?weg=schule gilt in dieser Sitzung (im Speicher der Seite), es wird nichts abgelegt
+    if (wegGueltig(aktuelleAbfrage.weg) && wegNorm(aktuelleAbfrage.weg) !== wegUrl) { wegUrl = wegNorm(aktuelleAbfrage.weg); wegAnwenden(false); }
     tipAus(); aufraeumen();
     const main = $("#inhalt");
     if (gueltig) {
       main.replaceChildren(seiteBauen(gueltig));
       document.title = INHALT.seiten[gueltig].titel + " · KI-Labor";
-      besuchtMerken(gueltig);
+      seiteBetreten(gueltig);
     } else {
+      aktuelleId = null;
       main.replaceChildren(nichtGefunden());
       document.title = "Seite nicht gefunden · KI-Labor";
     }
+    fortschrittZeigen();
     navMarkieren(gueltig);
     const sd = gueltig ? INHALT.seiten[gueltig] : null;
     leisteSetzen(sd ? sd.titel : "Seite nicht gefunden", !!sd && sd.typ !== "start");
@@ -989,11 +1795,20 @@
     return h("div", { class: "g-zeile" + (stapel ? " g-stapel" : "") }, h(id ? "label" : "span", { class: "g-name", for: id || null }, beschriftung), h("div", { class: "g-steuer" }, steuer));
   }
 
-  window.KL = { $, $$, h, md, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
+  window.KL = { $, $$, h, md, mdAntwort, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
     /** Haengt ein Objekt mit destroy() an die aktuelle Seite: wird beim Seitenwechsel aufgeraeumt (wie ein Baustein). */
     montiere(m) { montiert.push(m); return m; },
-    ersterSatz, klar };
+    ersterSatz, klar,
+    /** Die vier Wege als Liste {id, titel, symbol} (Quelle fuer das Willkommens-Fenster). */
+    wegListe: () => Object.entries(WEGE).map(([id, w]) => ({ id, titel: w.titel, kurz: w.kurz, symbol: w.symbol })),
+    /** Weg waehlen (Schluessel) oder aufheben (null): speichert ein Wort in kl-weg und wendet den Weg an. */
+    wegWaehlen,
+    /** Einwilligung zum Merken des Fortschritts setzen (laien.js: Schalter im Willkommens-Fenster); lesen ueber KL.merken. */
+    merkenSetzen };
+  Object.defineProperty(window.KL, "merken", { enumerable: true, get: () => merken });
   Object.defineProperty(window.KL, "lesemodus", { enumerable: true, get: () => lesemodus, set: lesemodusSetzen });
+  Object.defineProperty(window.KL, "weg", { enumerable: true, get: () => aktiverWeg() });
+  window.KL.gelesen = (id) => gelesen.has(id);
 
   function ladeSkript(src) {
     return new Promise((ok) => {
@@ -1019,7 +1834,9 @@
     const seitenleiste = $("#seite");
     seitenleiste.replaceChildren(
       h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "kostenlos, live ausprobieren"))),
-      menueKnopf(), navBauen(), liveBauen(), tip);
+      wegChip("weg-chip-seite"), menueKnopf(), navBauen(), liveBauen(), tip);
+    fortschrittZeigen();
+    wegAnwenden(false);
     fussErgaenzen();
     const haupt = $(".haupt");
     if (haupt) haupt.prepend(leisteBauen());
@@ -1027,6 +1844,8 @@
     new MutationObserver((ml) => { for (const m of ml) for (const n of m.addedNodes) if (n.nodeType === 1) schieberFuellen(n); }).observe(document.body, { childList: true, subtree: true });
     bereit = true;
     route(history.state && history.state.y);
+    if (/^#[a-z0-9-]+$/.test(location.hash)) setTimeout(() => zuAbschnitt(location.hash.slice(1)), 100);     // Sprung zu einem Abschnitt, z. B. /sicherheit-einfach#browser-eintraege
+    if (window.KL.willkommen) window.KL.willkommen.beimStart();      // erst nach dem ersten Rendern, nur Startseite und Erstbesuch
     poll(); setInterval(poll, 1500);
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();

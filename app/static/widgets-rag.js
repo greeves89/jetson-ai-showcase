@@ -78,9 +78,9 @@
       setze(...teile) {
         wartend = teile.flat(Infinity);
         if (t) return;
-        t = setTimeout(() => { t = null; text.replaceChildren(...wartend); }, 400);
+        t = setTimeout(() => { t = null; text.replaceChildren(...wartend.filter((x) => x != null && x !== false)); }, 400);
       },
-      sofort(...teile) { clearTimeout(t); t = null; text.replaceChildren(...teile.flat(Infinity)); },
+      sofort(...teile) { clearTimeout(t); t = null; text.replaceChildren(...teile.flat(Infinity).filter((x) => x != null && x !== false)); },
       stop() { clearTimeout(t); t = null; },
     };
   }

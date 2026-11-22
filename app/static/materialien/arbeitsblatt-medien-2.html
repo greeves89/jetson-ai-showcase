@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="de">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Arbeitsblatt Medien 2: Quellen prüfen</title>
+<style>
+@page { size: A4; margin: 8mm 13mm; }
+* { box-sizing: border-box; }
+html { font-family: Arial, Helvetica, sans-serif; color: #000; background: #fff; }
+body { margin: 0; font-size: 12pt; line-height: 1.3; }
+body.arbeitsblatt { font-size: 11.5pt; line-height: 1.28; }
+.kopfblock { display: flex; gap: 6mm; align-items: flex-start; }
+.kopfblock .links { flex: 1; }
+.kopfblock .qrbox { flex: 0 0 auto; padding-top: 1mm; }
+.seite { display: flex; flex-direction: column; min-height: 281mm; }
+.kopf { display: flex; justify-content: space-between; font-size: 9pt; border-bottom: 0.4mm solid #000; padding-bottom: 1.5mm; }
+h1 { font-size: 18pt; line-height: 1.15; margin: 2mm 0 1mm; }
+h2 { font-size: 13.5pt; margin: 4mm 0 1.5mm; }
+.felder { display: flex; gap: 10mm; margin: 0 0 1mm; font-size: 12pt; }
+.felder span { display: block; border-bottom: 0.3mm solid #000; flex: 1; height: 6.5mm; }
+.felder span.klein { flex: 0 0 52mm; }
+.zeit { font-size: 11pt; border: 0.4mm solid #000; padding: 0.8mm 3mm; display: inline-block; margin: 0 0 1mm; }
+.aufgabe { margin: 0 0 1.6mm; break-inside: avoid; }
+.aufgabe .k { display: flex; gap: 3mm; align-items: baseline; }
+.niv { vertical-align: -0.4mm; }
+.meta { margin-left: auto; font-size: 10.5pt; white-space: nowrap; }
+.nz { font-size: 10.5pt; }
+.tipp { font-size: 10.5pt; }
+table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; break-inside: avoid; }
+table.ziele td, table.ziele th { padding: 0.8mm 2mm; }
+table.ziele th.b, table.ziele td.b { width: 19mm; white-space: nowrap; text-align: center; }
+table.ziele th { font-size: 10pt; }
+table.legende th.b, table.legende td.b { width: 16mm; text-align: center; }
+table.legende td, table.legende th { padding: 0.4mm 2mm; }
+.box { display: inline-block; width: 5mm; height: 5mm; border: 0.5mm solid #000; vertical-align: middle; }
+.zusatz .k { display: flex; gap: 3mm; align-items: baseline; }
+.quellen { font-size: 8.5pt; line-height: 1.2; display: block; margin-top: auto; padding-top: 1.5mm; }
+.fuss.quellen { display: block; }
+.karten { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3mm; margin: 1mm 0 2mm; }
+.karte { border: 0.4mm dashed #000; padding: 1.5mm 2.5mm; break-inside: avoid; }
+.nr { flex: 0 0 9mm; height: 9mm; border: 0.5mm solid #000; border-radius: 50%; text-align: center; font-weight: bold; font-size: 13pt; line-height: 8mm; }
+.aufgabe h3 { margin: 0; font-size: 12.5pt; }
+.aufgabe .zt { font-weight: normal; font-size: 10.5pt; margin-left: 2mm; }
+.aufgabe p { margin: 0.5mm 0 0 12mm; }
+.zusatz p { margin: 0.5mm 0 0; }
+.zeile { height: 5.5mm; border-bottom: 0.25mm solid #000; margin-left: 12mm; }
+.zusatz { border: 0.4mm dashed #000; padding: 1.5mm 3mm; margin: 0 0 2.4mm; break-inside: avoid; }
+.verstanden { border: 0.5mm solid #000; padding: 2mm 3mm; display: flex; gap: 3mm; align-items: flex-start; margin: 0 0 2.4mm; break-inside: avoid; }
+.verstanden .box { flex: 0 0 7mm; height: 7mm; border: 0.5mm solid #000; margin-top: 0.5mm; }
+.mehr { margin-top: auto; border: 0.5mm solid #000; padding: 2mm 3mm; display: flex; gap: 5mm; align-items: center; break-inside: avoid; }
+.mehr .paar { display: flex; gap: 5mm; align-items: center; flex: 1; }
+.mehr .t { flex: 1; }
+.mehr h2 { margin: 0 0 1mm; }
+.mehr .adr { font-size: 13pt; font-weight: bold; display: block; margin: 1mm 0 1mm; color: #000; text-decoration: underline; }
+.mehr small { font-size: 9.5pt; }
+.qrbox { text-align: center; font-size: 8.5pt; line-height: 1.2; }
+.qr { display: block; margin: 0 auto; }
+.fuss { margin-top: 2mm; font-size: 9pt; display: flex; justify-content: space-between; border-top: 0.3mm solid #000; padding-top: 1mm; }
+table { border-collapse: collapse; width: 100%; margin: 1mm 0 2mm; font-size: 10.5pt; }
+h2, h3 { break-after: avoid; }
+th, td { border: 0.3mm solid #000; padding: 1.2mm 2mm; text-align: left; vertical-align: top; }
+th { font-weight: bold; }
+.loesung body, body.loesung { font-size: 10.5pt; line-height: 1.3; }
+body.loesung h1 { font-size: 17pt; margin: 3mm 0 2mm; }
+body.loesung h2 { font-size: 12pt; margin: 3.5mm 0 1mm; border-bottom: 0.25mm solid #000; }
+body.loesung p { margin: 0 0 1.2mm; }
+body.loesung ul { margin: 0 0 1.5mm; padding-left: 5mm; }
+body.loesung li { margin: 0 0 1.2mm; break-inside: avoid; }
+.lg { break-inside: avoid; margin: 0 0 1.6mm; }
+.lg b.t { display: inline-block; }
+.zwei { display: grid; grid-template-columns: 1fr 1fr; gap: 4mm; }
+.zwei > div { border: 0.3mm solid #000; padding: 1.5mm 2.5mm; break-inside: avoid; }
+.pfad { display: flex; flex-wrap: wrap; gap: 2mm; align-items: center; margin: 1mm 0; }
+.pfad span { border: 0.3mm solid #000; padding: 0.8mm 2.5mm; border-radius: 2mm; }
+.pfad i { font-style: normal; }
+body.loesung .mehr { margin-top: 4mm; padding: 2.5mm; gap: 4mm; align-items: flex-start; }
+body.loesung .mehr .adr { font-size: 10.5pt; }
+body.loesung .mehr .paar { gap: 4mm; }
+body.loesung .mehr .paar + .paar { border-left: 0.3mm solid #000; padding-left: 4mm; }
+body.loesung .mehr h2 { border: 0; font-size: 12pt; margin: 0 0 1mm; }
+@media screen { body { max-width: 210mm; margin: 0 auto; padding: 11mm 13mm; } }
+
+body.infoblatt { font-size: 12pt; line-height: 1.35; }
+body.infoblatt h1 { font-size: 18pt; margin: 3mm 0 2mm; }
+body.infoblatt .ib { margin: 0 0 2.6mm; break-inside: avoid; }
+body.infoblatt .ib h2 { font-size: 12.5pt; margin: 0 0 0.6mm; }
+body.infoblatt .ib p { margin: 0; }
+body.infoblatt .mehr { margin-top: 3mm; }
+body.infoblatt .mehr .paar { align-items: center; }
+body.infoblatt .mehr .paar + .paar { border-left: 0.3mm solid #000; padding-left: 4mm; }
+body.infoblatt .mehr .adr { font-size: 9.5pt; }
+body.infoblatt .mehr h2 { font-size: 11.5pt; margin: 0 0 1mm; }
+body.infoblatt .mehr small { font-size: 9pt; }
+body.kartenset .hinweis { font-size: 10pt; margin: 1mm 0 3mm; }
+.bks { display: grid; grid-template-columns: 1fr 1fr; gap: 6mm 6mm; break-after: page; }
+.bks:last-of-type { break-after: auto; }
+.bk { border: 0.4mm dashed #000; padding: 2mm; break-inside: avoid; position: relative; }
+.bk img { display: block; width: 100%; height: auto; }
+.bk .nr { position: absolute; left: 4mm; top: 4mm; width: 11mm; height: 11mm; line-height: 10mm; font-size: 16pt; background: #fff; }
+body.loesung table.auf { font-size: 8pt; margin: 0 0 2mm; }
+body.loesung table.auf td, body.loesung table.auf th { padding: 0.5mm 1.4mm; }
+body.loesung table.auf td.n { width: 8mm; text-align: center; font-weight: bold; }
+body.loesung table.auf td.a { width: 14mm; font-weight: bold; }
+body.loesung.kompakt { font-size: 9.6pt; line-height: 1.25; }
+body.loesung.kompakt h2 { margin: 2.5mm 0 0.8mm; }
+body.loesung.kompakt .lg { margin: 0 0 1mm; }
+body.loesung.kompakt .karten { gap: 2mm; }
+body.loesung.kompakt .karte { padding: 1mm 2mm; }
+body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
+body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 8.2mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
+/* Ueberschrift mit Anweisung und erster Frage zusammenhalten (kein Kopf allein am Seitenende) */
+.zus { break-inside: avoid; }
+.zus > h2 { margin-top: 0; }
+body.arbeitsblatt .zus.start { margin-top: 6mm; }
+.zeitnote { font-size: 10.5pt; margin: 0 0 2mm; }
+table.plan td:first-child { width: 28mm; font-weight: bold; }
+ul.muster { margin: 0.5mm 0 0 0; padding-left: 5mm; font-size: 9.5pt; }
+body.loesung ul.muster li { margin: 0; }
+.rf { break-inside: avoid; margin: 0 0 1.6mm; }
+/* Info-Blatt: grosse Schrift, Kontaktfeld, Kaesten unten buendig */
+body.infoblatt { font-size: 13pt; line-height: 1.4; }
+body.infoblatt .ib { margin: 0 0 4mm; }
+body.infoblatt .ib h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt { border: 0.5mm solid #000; padding: 3mm 4mm; margin: 2mm 0 0; break-inside: avoid; }
+body.infoblatt .kontakt h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt .linie { border-bottom: 0.3mm solid #000; height: 9mm; margin-top: 1mm; }
+body.infoblatt .mehr { margin-top: auto; align-items: stretch; padding: 3mm 4mm; }
+body.infoblatt .mehr .paar { flex: 1 1 0; align-items: flex-start; gap: 4mm; }
+body.infoblatt .mehr .t { flex: 1 1 0; min-width: 0; }
+body.infoblatt .mehr .qrbox { flex: 0 0 auto; padding: 0; }
+body.infoblatt .mehr .adr { font-size: 8.5pt; }
+body.infoblatt .mehr small { display: block; font-size: 9.5pt; }
+</style>
+</head>
+<body class="arbeitsblatt">
+<div class="seite">
+<div class="kopf"><span>KI-Labor, ki-labor.daniel-alisch.site, Stand 22.11.2026</span></div>
+
+<div class="kopfblock"><div class="links">
+<h1>Arbeitsblatt Medien 2: Quellen prüfen</h1>
+<div class="felder"><span>Name:</span><span class="klein">Datum:</span></div>
+<div class="zeit"><b>Zeit:</b> Aufgaben 20 Minuten in der Einzelstunde (so viele Minuten stehen bei den Aufgaben), 30 Minuten in der Doppelstunde. Quiz und Nachdenken: Doppelstunde oder Hausaufgabe. <span class="nz">Niveau: <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/></svg> Basis <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/></svg> Standard <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/></svg> Herausforderung</span></div>
+</div><div class="qrbox"><svg class="qr" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 41 41" width="24.60mm" height="24.60mm" role="img" aria-label="QR-Code zu https://ki-labor.daniel-alisch.site/medien-stunde-2?weg=schule" shape-rendering="crispEdges"><rect width="41" height="41" fill="#fff"/><path d="M4 4h1v1h-1zM5 4h1v1h-1zM6 4h1v1h-1zM7 4h1v1h-1zM8 4h1v1h-1zM9 4h1v1h-1zM10 4h1v1h-1zM12 4h1v1h-1zM13 4h1v1h-1zM14 4h1v1h-1zM16 4h1v1h-1zM17 4h1v1h-1zM20 4h1v1h-1zM22 4h1v1h-1zM23 4h1v1h-1zM24 4h1v1h-1zM25 4h1v1h-1zM27 4h1v1h-1zM30 4h1v1h-1zM31 4h1v1h-1zM32 4h1v1h-1zM33 4h1v1h-1zM34 4h1v1h-1zM35 4h1v1h-1zM36 4h1v1h-1zM4 5h1v1h-1zM10 5h1v1h-1zM12 5h1v1h-1zM13 5h1v1h-1zM15 5h1v1h-1zM16 5h1v1h-1zM20 5h1v1h-1zM22 5h1v1h-1zM26 5h1v1h-1zM27 5h1v1h-1zM28 5h1v1h-1zM30 5h1v1h-1zM36 5h1v1h-1zM4 6h1v1h-1zM6 6h1v1h-1zM7 6h1v1h-1zM8 6h1v1h-1zM10 6h1v1h-1zM13 6h1v1h-1zM14 6h1v1h-1zM16 6h1v1h-1zM17 6h1v1h-1zM19 6h1v1h-1zM20 6h1v1h-1zM22 6h1v1h-1zM23 6h1v1h-1zM26 6h1v1h-1zM30 6h1v1h-1zM32 6h1v1h-1zM33 6h1v1h-1zM34 6h1v1h-1zM36 6h1v1h-1zM4 7h1v1h-1zM6 7h1v1h-1zM7 7h1v1h-1zM8 7h1v1h-1zM10 7h1v1h-1zM12 7h1v1h-1zM15 7h1v1h-1zM16 7h1v1h-1zM17 7h1v1h-1zM18 7h1v1h-1zM19 7h1v1h-1zM21 7h1v1h-1zM23 7h1v1h-1zM24 7h1v1h-1zM26 7h1v1h-1zM30 7h1v1h-1zM32 7h1v1h-1zM33 7h1v1h-1zM34 7h1v1h-1zM36 7h1v1h-1zM4 8h1v1h-1zM6 8h1v1h-1zM7 8h1v1h-1zM8 8h1v1h-1zM10 8h1v1h-1zM15 8h1v1h-1zM16 8h1v1h-1zM17 8h1v1h-1zM18 8h1v1h-1zM19 8h1v1h-1zM20 8h1v1h-1zM21 8h1v1h-1zM23 8h1v1h-1zM26 8h1v1h-1zM28 8h1v1h-1zM30 8h1v1h-1zM32 8h1v1h-1zM33 8h1v1h-1zM34 8h1v1h-1zM36 8h1v1h-1zM4 9h1v1h-1zM10 9h1v1h-1zM15 9h1v1h-1zM17 9h1v1h-1zM22 9h1v1h-1zM23 9h1v1h-1zM24 9h1v1h-1zM25 9h1v1h-1zM26 9h1v1h-1zM28 9h1v1h-1zM30 9h1v1h-1zM36 9h1v1h-1zM4 10h1v1h-1zM5 10h1v1h-1zM6 10h1v1h-1zM7 10h1v1h-1zM8 10h1v1h-1zM9 10h1v1h-1zM10 10h1v1h-1zM12 10h1v1h-1zM14 10h1v1h-1zM16 10h1v1h-1zM18 10h1v1h-1zM20 10h1v1h-1zM22 10h1v1h-1zM24 10h1v1h-1zM26 10h1v1h-1zM28 10h1v1h-1zM30 10h1v1h-1zM31 10h1v1h-1zM32 10h1v1h-1zM33 10h1v1h-1zM34 10h1v1h-1zM35 10h1v1h-1zM36 10h1v1h-1zM12 11h1v1h-1zM15 11h1v1h-1zM18 11h1v1h-1zM20 11h1v1h-1zM21 11h1v1h-1zM22 11h1v1h-1zM23 11h1v1h-1zM4 12h1v1h-1zM6 12h1v1h-1zM7 12h1v1h-1zM9 12h1v1h-1zM10 12h1v1h-1zM11 12h1v1h-1zM15 12h1v1h-1zM20 12h1v1h-1zM21 12h1v1h-1zM22 12h1v1h-1zM25 12h1v1h-1zM30 12h1v1h-1zM33 12h1v1h-1zM35 12h1v1h-1zM36 12h1v1h-1zM4 13h1v1h-1zM9 13h1v1h-1zM11 13h1v1h-1zM12 13h1v1h-1zM13 13h1v1h-1zM15 13h1v1h-1zM20 13h1v1h-1zM22 13h1v1h-1zM23 13h1v1h-1zM24 13h1v1h-1zM25 13h1v1h-1zM27 13h1v1h-1zM30 13h1v1h-1zM31 13h1v1h-1zM33 13h1v1h-1zM34 13h1v1h-1zM35 13h1v1h-1zM36 13h1v1h-1zM8 14h1v1h-1zM10 14h1v1h-1zM11 14h1v1h-1zM16 14h1v1h-1zM20 14h1v1h-1zM21 14h1v1h-1zM22 14h1v1h-1zM24 14h1v1h-1zM26 14h1v1h-1zM27 14h1v1h-1zM29 14h1v1h-1zM30 14h1v1h-1zM31 14h1v1h-1zM32 14h1v1h-1zM33 14h1v1h-1zM35 14h1v1h-1zM36 14h1v1h-1zM4 15h1v1h-1zM5 15h1v1h-1zM7 15h1v1h-1zM11 15h1v1h-1zM13 15h1v1h-1zM14 15h1v1h-1zM15 15h1v1h-1zM16 15h1v1h-1zM17 15h1v1h-1zM18 15h1v1h-1zM19 15h1v1h-1zM20 15h1v1h-1zM22 15h1v1h-1zM24 15h1v1h-1zM28 15h1v1h-1zM29 15h1v1h-1zM31 15h1v1h-1zM33 15h1v1h-1zM6 16h1v1h-1zM7 16h1v1h-1zM8 16h1v1h-1zM9 16h1v1h-1zM10 16h1v1h-1zM11 16h1v1h-1zM12 16h1v1h-1zM13 16h1v1h-1zM19 16h1v1h-1zM20 16h1v1h-1zM21 16h1v1h-1zM23 16h1v1h-1zM24 16h1v1h-1zM26 16h1v1h-1zM27 16h1v1h-1zM29 16h1v1h-1zM31 16h1v1h-1zM32 16h1v1h-1zM33 16h1v1h-1zM36 16h1v1h-1zM4 17h1v1h-1zM6 17h1v1h-1zM8 17h1v1h-1zM13 17h1v1h-1zM17 17h1v1h-1zM18 17h1v1h-1zM19 17h1v1h-1zM20 17h1v1h-1zM23 17h1v1h-1zM24 17h1v1h-1zM25 17h1v1h-1zM28 17h1v1h-1zM31 17h1v1h-1zM35 17h1v1h-1zM4 18h1v1h-1zM5 18h1v1h-1zM6 18h1v1h-1zM9 18h1v1h-1zM10 18h1v1h-1zM11 18h1v1h-1zM12 18h1v1h-1zM14 18h1v1h-1zM15 18h1v1h-1zM16 18h1v1h-1zM17 18h1v1h-1zM20 18h1v1h-1zM22 18h1v1h-1zM23 18h1v1h-1zM25 18h1v1h-1zM28 18h1v1h-1zM30 18h1v1h-1zM31 18h1v1h-1zM32 18h1v1h-1zM6 19h1v1h-1zM11 19h1v1h-1zM12 19h1v1h-1zM14 19h1v1h-1zM15 19h1v1h-1zM17 19h1v1h-1zM18 19h1v1h-1zM19 19h1v1h-1zM22 19h1v1h-1zM23 19h1v1h-1zM25 19h1v1h-1zM26 19h1v1h-1zM29 19h1v1h-1zM30 19h1v1h-1zM33 19h1v1h-1zM34 19h1v1h-1zM8 20h1v1h-1zM9 20h1v1h-1zM10 20h1v1h-1zM11 20h1v1h-1zM12 20h1v1h-1zM15 20h1v1h-1zM16 20h1v1h-1zM17 20h1v1h-1zM19 20h1v1h-1zM20 20h1v1h-1zM24 20h1v1h-1zM25 20h1v1h-1zM26 20h1v1h-1zM29 20h1v1h-1zM30 20h1v1h-1zM32 20h1v1h-1zM33 20h1v1h-1zM34 20h1v1h-1zM4 21h1v1h-1zM8 21h1v1h-1zM11 21h1v1h-1zM13 21h1v1h-1zM14 21h1v1h-1zM15 21h1v1h-1zM18 21h1v1h-1zM19 21h1v1h-1zM24 21h1v1h-1zM25 21h1v1h-1zM27 21h1v1h-1zM28 21h1v1h-1zM29 21h1v1h-1zM30 21h1v1h-1zM32 21h1v1h-1zM33 21h1v1h-1zM35 21h1v1h-1zM36 21h1v1h-1zM8 22h1v1h-1zM9 22h1v1h-1zM10 22h1v1h-1zM14 22h1v1h-1zM15 22h1v1h-1zM17 22h1v1h-1zM19 22h1v1h-1zM20 22h1v1h-1zM21 22h1v1h-1zM24 22h1v1h-1zM26 22h1v1h-1zM30 22h1v1h-1zM31 22h1v1h-1zM32 22h1v1h-1zM34 22h1v1h-1zM35 22h1v1h-1zM9 23h1v1h-1zM12 23h1v1h-1zM13 23h1v1h-1zM16 23h1v1h-1zM17 23h1v1h-1zM18 23h1v1h-1zM21 23h1v1h-1zM22 23h1v1h-1zM24 23h1v1h-1zM27 23h1v1h-1zM28 23h1v1h-1zM29 23h1v1h-1zM30 23h1v1h-1zM32 23h1v1h-1zM35 23h1v1h-1zM4 24h1v1h-1zM5 24h1v1h-1zM10 24h1v1h-1zM12 24h1v1h-1zM16 24h1v1h-1zM17 24h1v1h-1zM18 24h1v1h-1zM19 24h1v1h-1zM20 24h1v1h-1zM21 24h1v1h-1zM23 24h1v1h-1zM24 24h1v1h-1zM25 24h1v1h-1zM27 24h1v1h-1zM33 24h1v1h-1zM34 24h1v1h-1zM35 24h1v1h-1zM4 25h1v1h-1zM5 25h1v1h-1zM6 25h1v1h-1zM9 25h1v1h-1zM11 25h1v1h-1zM14 25h1v1h-1zM15 25h1v1h-1zM16 25h1v1h-1zM20 25h1v1h-1zM21 25h1v1h-1zM23 25h1v1h-1zM25 25h1v1h-1zM27 25h1v1h-1zM28 25h1v1h-1zM30 25h1v1h-1zM33 25h1v1h-1zM34 25h1v1h-1zM36 25h1v1h-1zM7 26h1v1h-1zM8 26h1v1h-1zM10 26h1v1h-1zM11 26h1v1h-1zM12 26h1v1h-1zM15 26h1v1h-1zM16 26h1v1h-1zM17 26h1v1h-1zM20 26h1v1h-1zM21 26h1v1h-1zM22 26h1v1h-1zM25 26h1v1h-1zM27 26h1v1h-1zM31 26h1v1h-1zM35 26h1v1h-1zM36 26h1v1h-1zM5 27h1v1h-1zM6 27h1v1h-1zM8 27h1v1h-1zM13 27h1v1h-1zM16 27h1v1h-1zM17 27h1v1h-1zM19 27h1v1h-1zM20 27h1v1h-1zM22 27h1v1h-1zM23 27h1v1h-1zM24 27h1v1h-1zM26 27h1v1h-1zM27 27h1v1h-1zM28 27h1v1h-1zM30 27h1v1h-1zM31 27h1v1h-1zM35 27h1v1h-1zM36 27h1v1h-1zM4 28h1v1h-1zM6 28h1v1h-1zM10 28h1v1h-1zM12 28h1v1h-1zM14 28h1v1h-1zM15 28h1v1h-1zM19 28h1v1h-1zM21 28h1v1h-1zM23 28h1v1h-1zM27 28h1v1h-1zM28 28h1v1h-1zM29 28h1v1h-1zM30 28h1v1h-1zM31 28h1v1h-1zM32 28h1v1h-1zM35 28h1v1h-1zM36 28h1v1h-1zM12 29h1v1h-1zM13 29h1v1h-1zM14 29h1v1h-1zM15 29h1v1h-1zM17 29h1v1h-1zM18 29h1v1h-1zM19 29h1v1h-1zM20 29h1v1h-1zM23 29h1v1h-1zM27 29h1v1h-1zM28 29h1v1h-1zM32 29h1v1h-1zM33 29h1v1h-1zM35 29h1v1h-1zM4 30h1v1h-1zM5 30h1v1h-1zM6 30h1v1h-1zM7 30h1v1h-1zM8 30h1v1h-1zM9 30h1v1h-1zM10 30h1v1h-1zM12 30h1v1h-1zM13 30h1v1h-1zM16 30h1v1h-1zM17 30h1v1h-1zM20 30h1v1h-1zM22 30h1v1h-1zM23 30h1v1h-1zM27 30h1v1h-1zM28 30h1v1h-1zM30 30h1v1h-1zM32 30h1v1h-1zM4 31h1v1h-1zM10 31h1v1h-1zM12 31h1v1h-1zM13 31h1v1h-1zM14 31h1v1h-1zM15 31h1v1h-1zM16 31h1v1h-1zM19 31h1v1h-1zM20 31h1v1h-1zM24 31h1v1h-1zM25 31h1v1h-1zM28 31h1v1h-1zM32 31h1v1h-1zM33 31h1v1h-1zM34 31h1v1h-1zM36 31h1v1h-1zM4 32h1v1h-1zM6 32h1v1h-1zM7 32h1v1h-1zM8 32h1v1h-1zM10 32h1v1h-1zM15 32h1v1h-1zM16 32h1v1h-1zM17 32h1v1h-1zM19 32h1v1h-1zM22 32h1v1h-1zM24 32h1v1h-1zM25 32h1v1h-1zM26 32h1v1h-1zM27 32h1v1h-1zM28 32h1v1h-1zM29 32h1v1h-1zM30 32h1v1h-1zM31 32h1v1h-1zM32 32h1v1h-1zM34 32h1v1h-1zM35 32h1v1h-1zM4 33h1v1h-1zM6 33h1v1h-1zM7 33h1v1h-1zM8 33h1v1h-1zM10 33h1v1h-1zM12 33h1v1h-1zM13 33h1v1h-1zM14 33h1v1h-1zM15 33h1v1h-1zM17 33h1v1h-1zM19 33h1v1h-1zM22 33h1v1h-1zM25 33h1v1h-1zM26 33h1v1h-1zM27 33h1v1h-1zM31 33h1v1h-1zM33 33h1v1h-1zM34 33h1v1h-1zM36 33h1v1h-1zM4 34h1v1h-1zM6 34h1v1h-1zM7 34h1v1h-1zM8 34h1v1h-1zM10 34h1v1h-1zM12 34h1v1h-1zM13 34h1v1h-1zM14 34h1v1h-1zM15 34h1v1h-1zM17 34h1v1h-1zM18 34h1v1h-1zM19 34h1v1h-1zM20 34h1v1h-1zM22 34h1v1h-1zM24 34h1v1h-1zM26 34h1v1h-1zM30 34h1v1h-1zM31 34h1v1h-1zM33 34h1v1h-1zM4 35h1v1h-1zM10 35h1v1h-1zM14 35h1v1h-1zM15 35h1v1h-1zM18 35h1v1h-1zM19 35h1v1h-1zM21 35h1v1h-1zM22 35h1v1h-1zM27 35h1v1h-1zM28 35h1v1h-1zM29 35h1v1h-1zM30 35h1v1h-1zM31 35h1v1h-1zM32 35h1v1h-1zM36 35h1v1h-1zM4 36h1v1h-1zM5 36h1v1h-1zM6 36h1v1h-1zM7 36h1v1h-1zM8 36h1v1h-1zM9 36h1v1h-1zM10 36h1v1h-1zM12 36h1v1h-1zM13 36h1v1h-1zM15 36h1v1h-1zM16 36h1v1h-1zM18 36h1v1h-1zM20 36h1v1h-1zM21 36h1v1h-1zM22 36h1v1h-1zM23 36h1v1h-1zM25 36h1v1h-1zM27 36h1v1h-1zM32 36h1v1h-1zM34 36h1v1h-1z" fill="#000"/></svg></div></div>
+<table class="ziele"><thead><tr><th>Heute kannst du ...</th><th class="b">sicher</th><th class="b">fast</th><th class="b">noch nicht</th></tr></thead><tbody><tr><td>eine Behauptung an drei Quellen gegenprüfen.</td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td></tr><tr><td>mit Seitwärtslesen herausfinden, wer hinter einer Seite steckt.</td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td></tr><tr><td>erklären, warum ein Chatbot als Quelle nicht reicht.</td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td><td class="b"><span class="box"></span></td></tr></tbody></table>
+<div class="aufgabe"><div class="k"><span class="nr">1</span><h3>Behauptung und Chat<span class="zt">(ca. 6 Minuten)</span></h3><span class="meta">Gruppe zu viert <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/></svg></span></div><p><b>Nenne</b> (I) die Behauptung der Lehrkraft und die Antwort des Chats dazu. Frage dafür im Labor-Chat, ob die Behauptung stimmt, und schreibe einen Satz der Antwort ab.</p><div class="zeile"></div><div class="zeile"></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">2</span><h3>Seitwärts lesen<span class="zt">(ca. 8 Minuten)</span></h3><span class="meta">Partnerarbeit <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#fff" stroke="#000" stroke-width="0.3"/></svg></span></div><p><b>Beschreibe</b> (I) bei einem Beitrag ohne Autor, wer dahintersteckt. Öffne dafür einen neuen Tab und suche den Namen der Seite. Dann <b>erkläre</b> (II), welches Interesse die Seite haben kann.</p><div class="zeile"></div><div class="zeile"></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">3</span><h3>Gegenprobe<span class="zt">(ca. 6 Minuten)</span></h3><span class="meta">Einzelarbeit <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/></svg></span></div><p><b>Überprüfe</b> (III) die Behauptung an drei Quellen: Chat, Beitrag, Behörden- oder Fachseite. <b>Beurteile</b> (III), welche Quelle am verlässlichsten ist.</p><div class="zeile"></div><div class="zeile"></div></div>
+<div class="zus"><h2>Quiz: Was hast du verstanden?</h2>
+<p class="nz">Kreuze je Frage die beste Antwort an. Es ist genau eine richtig.</p>
+<div class="aufgabe"><div class="k"><span class="nr">1</span><h3>Drei Webseiten melden dieselbe Nachricht. Du findest heraus, dass zwei von der ersten abgeschrieben haben. Wie viele Quellen hast du?</h3></div><p class="opt"><span class="box"></span> A) Drei, weil es drei verschiedene Webseiten mit Namen sind</p><p class="opt"><span class="box"></span> B) Keine, weil Abschreiben immer verboten ist</p><p class="opt"><span class="box"></span> C) Eine, weil zwei nicht selbst recherchiert haben</p><p class="opt"><span class="box"></span> D) Zwei, weil eine Seite immer das Original ist</p></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">2</span><h3>Du kennst eine Webseite nicht und willst prüfen, ob du ihr trauen kannst. Was bedeutet Seitwärtslesen?</h3></div><p class="opt"><span class="box"></span> A) In einem neuen Tab nachsehen, was andere über die Seite sagen</p><p class="opt"><span class="box"></span> B) Den Text quer überfliegen und nur die Überschriften lesen</p><p class="opt"><span class="box"></span> C) Auf der Seite selbst nach Belegen für ihre Glaubwürdigkeit suchen</p><p class="opt"><span class="box"></span> D) Die Seite mit der Übersetzungsfunktion in eine andere Sprache bringen</p></div>
+<div class="aufgabe"><div class="k"><span class="nr">3</span><h3>Ein Chat nennt für deine These eine Quelle mit Titel, Autor und Jahr. Wie gehst du vor?</h3></div><p class="opt"><span class="box"></span> A) Ich übernehme sie, weil sie so genau und sicher klingt</p><p class="opt"><span class="box"></span> B) Ich frage den Chat, ob er sich bei der Quelle sicher ist</p><p class="opt"><span class="box"></span> C) Ich übernehme sie nur, wenn das Jahr noch ganz aktuell ist</p><p class="opt"><span class="box"></span> D) Ich suche das Original und streiche sie, wenn es fehlt</p></div>
+<div class="zus"><h2>Zum Nachdenken</h2>
+<div class="aufgabe"><div class="k"><span class="nr">4</span><h3>Welche Meldung hast du zuletzt weitergeleitet? Würdest du sie jetzt prüfen?</h3></div><div class="zeile"></div><div class="zeile"></div><div class="zeile"></div></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">5</span><h3>Wer hat ein Interesse daran, dass du eine Meldung glaubst?</h3></div><div class="zeile"></div><div class="zeile"></div><div class="zeile"></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">6</span><h3>Wofür nutzt du den Chat, und wofür suchst du das Original?</h3></div><div class="zeile"></div><div class="zeile"></div><div class="zeile"></div></div>
+<div class="aufgabe"><div class="k"><span class="nr">?</span><h3>Meine eigene Frage zum Thema</h3></div><div class="zeile"></div><div class="zeile"></div></div>
+<div class="zusatz"><p><b>Mein Merksatz:</b> Schreibe den wichtigsten Gedanken der Stunde in einem Satz auf.</p><div class="zeile"></div><div class="zeile"></div></div>
+<div class="zusatz"><div class="k"><b>Zusatz für Schnelle</b><span class="meta">Einzelarbeit <svg class="niv" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 11 3" width="9mm" height="2.6mm" aria-hidden="true"><rect x="0.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="4.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/><rect x="8.15" y="0.15" width="2.7" height="2.7" fill="#000" stroke="#000" stroke-width="0.3"/></svg></span></div><p><b>Entwickle</b> (III) eine Merkkarte mit den vier Zügen Stopp, Urheber, andere Berichte, Zurückverfolgen und <b>vergleiche</b> (II) sie mit der Karte einer anderen Gruppe.</p></div>
+<table class="legende"><thead><tr><th>Operator</th><th>Das sollst du tun</th><th class="b">Bereich</th></tr></thead><tbody><tr><td><b>Nenne</b></td><td>Gib etwas ohne Erklärung an: Wort, Zahl oder kurzer Satz.</td><td class="b">I</td></tr><tr><td><b>Beschreibe</b></td><td>Gib einen Sachverhalt sachlich, in eigenen Worten und ganzen Sätzen wieder.</td><td class="b">I</td></tr><tr><td><b>Erkläre</b></td><td>Mach etwas verständlich: Nenne den Grund, ergänze ein Beispiel.</td><td class="b">II</td></tr><tr><td><b>Vergleiche</b></td><td>Finde Gemeinsamkeiten und Unterschiede und stelle sie gegenüber.</td><td class="b">II</td></tr><tr><td><b>Überprüfe</b></td><td>Miss eine Aussage an Fakten und decke Lücken oder Widersprüche auf.</td><td class="b">III</td></tr><tr><td><b>Beurteile</b></td><td>Bilde dir ein eigenes Urteil mit Fachwissen und begründe es.</td><td class="b">III</td></tr><tr><td><b>Entwickle</b></td><td>Entwirf nach vorgegebenen Bedingungen eine eigene Lösung.</td><td class="b">III</td></tr></tbody></table>
+<div class="fuss quellen"><b>Mehr dazu im KI-Labor:</b> <a href="https://ki-labor.daniel-alisch.site/medien-stunde-2?weg=schule">ki-labor.daniel-alisch.site/medien-stunde-2?weg=schule</a> Oder den QR-Code oben rechts scannen: Labor und Material, es wird nichts gespeichert. Hilfe zu einer Aufgabe: Tipp-Karte bei deiner Lehrkraft.<br>Operatoren und Bereiche nach: Bildungsserver Rheinland-Pfalz (bildung.rlp.de, Informatik, 2013), IQB Abituraufgabenpools (iqb.hu-berlin.de, 2026), Bildungsplan Baden-Württemberg 2016 (lehrerfortbildung-bw.de), abgerufen am 22.11.2026. Die Zuordnung kann je Bundesland und Fach leicht abweichen.</div>
+
+</div>
+</body>
+</html>

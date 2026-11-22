@@ -12,6 +12,10 @@ Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vo
 
 - [Über das KI-Labor](__BASIS__/ueber): Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen.
 
+## Experimente
+
+- [Experimente, leicht erklärt](__BASIS__/experimente): Probiere aus, wie KI arbeitet.
+
 ## Grundlagen
 
 Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.
@@ -61,7 +65,7 @@ Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.
 - [Suchen: Stichwort, Vektor und Hybrid](__BASIS__/rag-suche): Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung.
 - [Reranking: erst grob, dann genau](__BASIS__/rag-reranking): Die erste Suche sortiert grob, aber schnell.
 - [RAG messen und verbessern](__BASIS__/rag-bewertung): Drei gute Beispielantworten beweisen nichts.
-- [RAG: Fragen an eigene Dokumente](__BASIS__/rag): Das Modell kennt deine Dokumente nicht.
+- [RAG-Werkstatt: Fragen an eigene Dokumente](__BASIS__/rag): Das Modell kennt deine Dokumente nicht.
 
 ## Agenten
 
@@ -89,6 +93,7 @@ Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.
 - [Vom Prototyp in den Betrieb](__BASIS__/mlops): Ein Modell, das im Versuch funktioniert, ist erst der Anfang.
 - [Kosten und Energie](__BASIS__/kosten-energie): Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung.
 - [KI im Unternehmen einführen](__BASIS__/ki-einfuehrung): Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.
+- [Deine Entscheidung: sechs Fragen vor dem Start](__BASIS__/betrieb-entscheidung): Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.
 
 ## Business-Use-Cases
 
@@ -111,8 +116,42 @@ Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit.
 Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?
 
 - [Der Jetson und seine Hardware](__BASIS__/hardware): Ein kleiner Computer mit GPU, gebaut für KI am Gerät.
-- [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): In Alltagssprache: Was diese Seite auf deinem Gerät ablegt, was mit Kamera, Mikrofon und eingetippten Texten passiert und was du selbst in der Hand hast.
+- [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher.
+- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Das KI-Labor ist frei verfügbar.
 - [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
+
+## Für die Schule
+
+- [KI im Unterricht: Einstieg für Klassen und Lehrkräfte](__BASIS__/schule-start): Kostenlos und ohne Konto: drei Stunden für Klasse 8 und die Technik, die dafür nötig ist.
+- [KI 1: Was ist KI? Erkennen, Lernen, Entscheiden](__BASIS__/schule-stunde-1): 45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+- [KI 2: Wie lernt ein Computer? Daten, Training, Fehler](__BASIS__/schule-stunde-2): 45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
+- [KI 3: Echt oder erfunden? KI prüfen](__BASIS__/schule-stunde-3): 45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
+- [Handreichung für Lehrkräfte](__BASIS__/schule-lehrkraefte): Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
+- [Information für die Schulleitung](__BASIS__/schule-schulleitung): Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet.
+- [Information für Eltern](__BASIS__/schule-eltern): Ihre Klasse arbeitet im Unterricht mit dem KI-Labor.
+- [Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen](__BASIS__/medien-stunde-1): 45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
+- [Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen](__BASIS__/medien-stunde-2): 45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
+- [Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren](__BASIS__/medien-stunde-3): 45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen.
+- [Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln](__BASIS__/medien-stunde-4): 45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
+- [Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren](__BASIS__/medien-stunde-5): 45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
+- [Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern](__BASIS__/medien-stunde-6): 45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
+- [Medien-Einheit 7: KI in deinem Alltag, Poster-Runde](__BASIS__/medien-stunde-7): 45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
+- [Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten](__BASIS__/elternabend): Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen.
+- [KI für Schulen: Was gibt es und wie fange ich an?](__BASIS__/ki-schule-ueberblick): Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
+- [KI an der Schule: In 7 Schritten starten](__BASIS__/ki-schule-einstieg): Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
+
+## Medienkompetenz
+
+- [Echt oder KI? Bilder, Texte und Stimmen prüfen](__BASIS__/echt-oder-ki): KI macht Bilder, Texte und Stimmen, die echt wirken.
+- [Quellen prüfen: Wem kannst du glauben?](__BASIS__/quellen-pruefen): Mit Seitwärtslesen und Gegenprobe.
+- [Fake News und Deepfakes: wie sie entstehen und was du tust](__BASIS__/fake-news-deepfakes): Falschmeldungen sind alt, KI macht sie schneller und überzeugender.
+- [KI bei Hausaufgaben: fair nutzen](__BASIS__/ki-hausaufgaben-fair): KI kann beim Lernen helfen oder die Arbeit komplett abnehmen.
+- [Datenschutz im Alltag: was Apps über dich wissen](__BASIS__/datenschutz-im-alltag): Fast jede App sammelt Daten.
+- [Gute Fragen an die KI stellen](__BASIS__/prompts-fuer-schueler): Bessere Frage, bessere Antwort.
+- [KI in deinem Alltag: wo sie überall steckt](__BASIS__/schueler-alltag-ki): Feed, Filter, Übersetzer, Spiele, Playlist: KI ist schon da, auch wenn niemand "KI" draufschreibt.
+- [KI zu Hause: Was Eltern wissen sollten](__BASIS__/eltern-zuhause): Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.
+- [Zusammen ausprobieren: Anleitung für zwei](__BASIS__/zusammen-ausprobieren): Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera.
+- [Bildschirmzeit: kurz und ehrlich](__BASIS__/bildschirmzeit): Hier steht, was sich ehrlich sagen lässt, was nicht, und wo du Rat bekommst.
 
 ## Optional
 
