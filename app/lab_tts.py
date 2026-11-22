@@ -33,14 +33,10 @@ MAX_GELADEN = 2              # zwei Stimmen gleichzeitig im Speicher, die aeltes
 SATZPAUSE_S = 0.2            # Piper selbst setzt zwischen Saetzen keine Pause
 
 # Feste Liste: nur diese IDs sind erlaubt, der Dateiname kommt nie aus der Anfrage.
-# Nur Stimmen mit freier Lizenz (siehe docs/lizenzen.md).
+# Nur Stimmen, deren Aufnahmen UND Ausgangsmodell frei lizenziert sind (siehe docs/lizenzen.md).
 STIMMEN = {
     "thorsten": {"datei": "de_DE-thorsten-medium", "name": "Thorsten",
                  "beschreibung": "Männliche Stimme, mittlere Qualität. Klingt klar und ruhig."},
-    "kerstin": {"datei": "de_DE-kerstin-low", "name": "Kerstin",
-                "beschreibung": "Weibliche Stimme, einfachere Qualität. Rechnet sehr schnell."},
-    "thorsten-hoch": {"datei": "de_DE-thorsten-high", "name": "Thorsten (hohe Qualität)",
-                      "beschreibung": "Dieselbe Sprecherstimme, größeres Modell. Klingt voller, rechnet länger."},
 }
 
 _sperre = asyncio.Lock()     # immer nur eine Synthese (Speicher, Rechenkerne)

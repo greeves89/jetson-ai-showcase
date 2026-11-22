@@ -12,23 +12,30 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
       "@type": "WebSite",
       "@id": "__BASIS__/#website",
       "name": "KI-Labor",
       "url": "__BASIS__/",
       "inLanguage": "de",
       "description": "Hier erlebst du künstliche Intelligenz live: Fragen stellen, Bilder erkennen lassen, Sprache verstehen. Kostenlos und ohne Anmeldung.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -48,18 +55,14 @@
       "mainEntity": {
        "@id": "__BASIS__/#kurs"
       },
+      "datePublished": "2026-11-21",
       "dateModified": "2026-11-22",
+      "abstract": "Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano und nutzt keine externen KI-Dienste. Zu den Themen gibt es Erklärungen, Versuche zum Ausprobieren, Erklärvideos und kurze Selbsttests.",
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -72,10 +75,7 @@
       "isAccessibleForFree": true,
       "educationalLevel": "Einsteiger",
       "provider": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "hasPart": {
        "@id": "__BASIS__/#lernpfad"
@@ -97,16 +97,10 @@
        "Der Rechner dahinter: Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?"
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -564,7 +558,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-der-rechner-dahinter",
       "name": "Der Rechner dahinter",
-      "numberOfItems": 2,
+      "numberOfItems": 4,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -577,6 +571,18 @@
         "position": 2,
         "name": "Ist das sicher? Was wird gespeichert?",
         "url": "__BASIS__/sicherheit-einfach"
+       },
+       {
+        "@type": "ListItem",
+        "position": 3,
+        "name": "Über das KI-Labor",
+        "url": "__BASIS__/ueber"
+       },
+       {
+        "@type": "ListItem",
+        "position": 4,
+        "name": "Lizenzen und Quellen",
+        "url": "__BASIS__/lizenzen"
        }
       ]
      },
@@ -1996,6 +2002,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -2014,6 +2046,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "KI ist ein Sammelbegriff, kein einzelnes Verfahren. Heutige KI ist immer auf eine Aufgabe spezialisiert. Maschinelles Lernen ist der wichtigste Teil, aber nicht der einzige.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -2058,16 +2094,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -2146,16 +2176,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      }
     ]
@@ -2172,6 +2196,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -2191,6 +2241,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen. Training passiert einmal und ist teuer, Inferenz passiert ständig und ist günstig. Die Qualität der Beispiele bestimmt die Qualität des Modells.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -2255,16 +2309,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -2343,16 +2391,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      }
     ]
@@ -2369,6 +2411,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -2388,6 +2456,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Ein Sprachmodell sagt immer nur das nächste Token voraus. Die Temperatur steuert, wie mutig es wählt. Was nicht im Kontext steht, weiß das Modell nicht.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -2452,16 +2524,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -2547,16 +2613,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      }
     ]
@@ -2573,6 +2633,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -2592,6 +2678,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Roboter arbeiten im Kreis aus Wahrnehmen, Entscheiden und Handeln. KI liefert meist die Entscheidung aus Sensordaten. Schnelle Reaktion verlangt Rechenleistung direkt am Gerät.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -2641,16 +2731,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -2722,16 +2806,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      }
     ]
@@ -2748,6 +2826,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -2767,6 +2871,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Gute Einsatzfelder haben klare Aufgaben, genug Daten und einen Menschen, der prüft. Lokal lohnt sich bei sensiblen Daten und schneller Reaktion. Fang klein an und miss gegen den heutigen Ablauf.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -2794,16 +2902,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -2875,16 +2977,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      }
     ]
@@ -2901,6 +2997,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -2920,6 +3042,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Beides kommt aus den Daten. Vielfalt und Qualität zählen mehr als reine Menge.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -3014,16 +3140,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3102,16 +3222,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3176,6 +3290,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -3194,6 +3334,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Ein Neuron bildet eine gewichtete Summe seiner Eingaben und entscheidet per Aktivierung, wie stark es meldet. Schichten bauen Merkmale aus Merkmalen auf. Erst die Aktivierung dazwischen macht mehrere Schichten wertvoll.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -3263,16 +3407,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3351,16 +3489,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3425,6 +3557,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -3443,6 +3601,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Der Verlust misst den Fehler. Training heißt, die Gewichte so zu verschieben, dass er sinkt. Gradientenabstieg geht in kleinen Schritten bergab.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -3522,16 +3684,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3610,16 +3766,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3684,6 +3834,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -3702,6 +3878,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Bei seltenen Ereignissen täuscht die Genauigkeit. Die Konfusionsmatrix zeigt die vier Fälle und damit, wo Fehler stecken. Precision fragt, wie viele Alarme stimmen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -3766,16 +3946,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3854,16 +4028,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -3928,6 +4096,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -3946,6 +4140,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Ein Modell wiederholt Muster aus seinen Daten, auch unfaire. Verzerrung entsteht durch Daten, Auswahl, Etiketten und Rückkopplung. Ein Merkmal wegzulassen reicht nicht, denn Stellvertreter schleichen sich ein.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -3985,16 +4183,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4073,16 +4265,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4147,6 +4333,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -4165,6 +4377,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
+      "abstract": "Personenbezogene Daten brauchen eine Rechtsgrundlage, einen Zweck und Sparsamkeit. Dienstleister brauchen einen Auftragsvertrag. Die EU-KI-Verordnung ordnet Systeme nach Risiko.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/grundlagen.png"
       ],
@@ -4219,16 +4435,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4307,16 +4517,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4381,6 +4585,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -4399,6 +4629,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sehen",
+      "abstract": "Ein Bild ist eine Tabelle aus Zahlen: Ein Wert von 0 bis 255 je Pixel und Farbkanal. Auflösung, Belichtung und Rauschen entscheiden, welche Informationen überhaupt beim Modell ankommen. Verkleinern spart Rechenzeit, kostet aber kleine Details.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -4458,16 +4692,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4553,16 +4781,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4627,6 +4849,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -4645,6 +4893,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sehen",
+      "abstract": "Ein Filter ist eine kleine Zahlenschablone. Er wandert über das Bild und meldet, wo sein Muster vorkommt. Die Filter lernt das Netz selbst.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -4719,16 +4971,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4814,16 +5060,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -4888,6 +5128,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -4906,6 +5172,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sehen",
+      "abstract": "Die Frage bestimmt die Aufgabe: Klasse, Rahmen, Pixelmaske, Gelenkpunkte oder Text. Je genauer die Antwort, desto aufwendiger sind Etiketten, Rechenzeit und Pflege. Wähle die einfachste Aufgabe, die dein Problem löst, und prüfe früh den Datenschutz.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -4960,16 +5230,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5055,16 +5319,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5129,6 +5387,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5147,6 +5431,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sehen",
+      "abstract": "Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -5181,16 +5469,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5226,6 +5508,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5244,6 +5552,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sehen",
+      "abstract": "Das Netz betrachtet das ganze Bild einmal und sagt zugleich, wo etwas ist und was es ist. Jedes Objekt bekommt einen Rahmen, eine von 80 Klassen und eine Konfidenz zwischen 0 und 1. Ab welcher Konfidenz ein Rahmen erscheint, bestimmst du.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -5278,16 +5590,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5323,6 +5629,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5341,6 +5673,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sehen",
+      "abstract": "Jedes Beispiel wird zu 1000 Zahlen und mit dem Klassennamen gespeichert. Ein neues Bild wird verglichen, die drei ähnlichsten Beispiele stimmen ab. Das Netz bleibt unverändert.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sehen.png"
       ],
@@ -5370,16 +5706,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5415,6 +5745,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5433,6 +5789,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sprache",
+      "abstract": "Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -5472,16 +5832,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5517,6 +5871,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5535,6 +5915,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sprache",
+      "abstract": "Ton wird in kurze Fenster zerlegt, zu einem Frequenzbild und von einem Netz in Text übersetzt. Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertiteln mit.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -5552,16 +5936,10 @@
        "@id": "__BASIS__/whisper#breadcrumb"
       },
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5597,6 +5975,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5615,6 +6019,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sprache",
+      "abstract": "Ein Sprachmodell zerlegt Text in Token, macht daraus Zahlen und sagt Stück für Stück das nächste Token voraus. Aufmerksamkeit verbindet jedes Token mit den Stellen im Text, auf die es ankommt. Vortraining gibt Sprachwissen, Feinabstimmung und Feedback machen daraus einen Assistenten.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -5704,16 +6112,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5792,16 +6194,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -5866,6 +6262,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -5884,6 +6306,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sprache",
+      "abstract": "Das Modell kennt nur deinen Prompt: Was fehlt, erfindet es. Rolle, Aufgabe, Kontext, Beispiele, Format und Grenzen sind die Checkliste für gute Prompts. Prüfe die Antwort, verbessere den Prompt in kleinen Schritten und gib keine vertraulichen Daten an Dienste, die du nicht kennst.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -5926,16 +6352,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6007,16 +6427,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6070,16 +6484,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6144,6 +6552,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -6162,6 +6596,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sprache",
+      "abstract": "Ein Modell schreibt Plausibles. Ob es stimmt, musst du prüfen, besonders bei Zahlen, Quellen und Rechtlichem. Fremder Text im Kontext kann Anweisungen enthalten.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -6206,16 +6644,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6294,16 +6726,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6368,6 +6794,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -6386,6 +6838,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sprache",
+      "abstract": "Besser fragen ist der schnellste Weg, RAG der Weg für Fakten aus Dokumenten, Nachtrainieren der Weg für Verhalten und Stil. Wer sagt „Wir trainieren das Modell mit unseren Dokumenten“, meint meist RAG. Fakten, die sich ändern oder belegt werden müssen, gehören in Dokumente, nicht in die Parameter.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -6430,16 +6886,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6518,16 +6968,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6592,6 +7036,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -6610,6 +7080,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Sprache",
+      "abstract": "Aus Text wird Sprache in Schritten: aufbereiten, Aussprache bestimmen, Klang erzeugen und Betonung setzen. Zahlen, Abkürzungen, Eigennamen und Fachwörter sind die häufigsten Stolperstellen. Stimmen gehören Menschen: Einwilligung einholen, erzeugte Sprache kennzeichnen, vor geklonten Stimmen am Telefon vorsichtig sein.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/sprache.png"
       ],
@@ -6669,16 +7143,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6757,16 +7225,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -6831,6 +7293,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -6849,6 +7337,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "RAG lässt ein Sprachmodell erst in deinen Dokumenten nachschlagen und dann antworten, mit Quelle. Die Antwort ist nur so gut wie die gefundenen Stellen: Suche und Aufbereitung entscheiden mehr als das Modell. Fakten gehören ins Dokument, Verhalten und Stil ins Modell.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -6913,16 +7405,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7001,16 +7487,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7075,6 +7555,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -7093,6 +7599,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt ähnlicher Sinn. Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden. Embeddings sind schwach bei Zahlen, Codes und Eigennamen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -7155,16 +7665,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7243,16 +7747,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7313,16 +7811,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7387,6 +7879,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -7405,6 +7923,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "Text wird in Stücke geteilt, weil Modelle Längengrenzen haben und ein Vektor für viel Text zu unscharf wird. Ein guter Chunk behandelt eine Sache und ist allein verständlich. Zu klein verliert Kontext, zu groß verwässert den Treffer.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -7459,16 +7981,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7547,16 +8063,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7621,6 +8131,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -7639,6 +8175,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "Stichwortsuche (BM25) findet Wörter und gewichtet seltene Wörter stärker. Die Hybridsuche führt beide Ranglisten über die Platzierung zusammen, nicht über die Punktwerte. Gewicht und Trefferzahl stellst du am eigenen Material ein.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -7701,16 +8241,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7789,16 +8323,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7859,16 +8387,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -7933,6 +8455,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -7951,6 +8499,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "Die erste Suche vergleicht fertige Vektoren und ist schnell, aber grob. Ein Reranker liest Frage und Text gemeinsam und ist genauer, aber langsam. Der Ablauf lautet: viele Kandidaten holen, wenige genau sortieren, die besten an das Modell geben.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -7990,16 +8542,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8078,16 +8624,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8152,6 +8692,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -8170,6 +8736,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
+      "abstract": "Ein Testset aus echten Fragen mit bekannter Fundstelle zeigt, wo das System steht. Miss Suche (Trefferquote, Rang) und Antwort (Richtigkeit, Antworttreue, Vollständigkeit) getrennt. Verbessere von vorn nach hinten: Daten und Chunking, dann Suche, dann Reranking, zuletzt Modell.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -8209,16 +8779,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8297,16 +8861,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8371,6 +8929,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -8389,6 +8973,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Wissen und RAG",
+      "abstract": "Deine Dokumente stecken nicht im Modell. Ohne Nachschlagen würde es raten. Zerlegen, einbetten, suchen, antworten.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
@@ -8418,16 +9006,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8463,6 +9045,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -8481,6 +9089,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Agenten",
+      "abstract": "Ein Agent ist ein Sprachmodell mit Werkzeugen in einer Schleife aus Denken, Aufrufen und Lesen. Das Modell schlägt Aufrufe nur vor, ein Programm führt sie aus. Das Gedächtnis ist der Kontext plus Notizen außerhalb.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/agenten.png"
       ],
@@ -8530,16 +9142,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8625,16 +9231,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8699,6 +9299,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -8717,6 +9343,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Agenten",
+      "abstract": "Zerlege Aufgaben in kleine, klare Schritte. Das Modell wählt dann sicherer. Der Kontext wächst mit jeder Runde.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/agenten.png"
       ],
@@ -8761,16 +9391,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8856,16 +9480,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -8930,6 +9548,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -8948,6 +9592,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Agenten",
+      "abstract": "Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet. Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/agenten.png"
       ],
@@ -8977,16 +9625,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9022,6 +9664,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9040,6 +9708,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Agenten",
+      "abstract": "Gib einem Agenten nur die Rechte, die seine Aufgabe braucht. Sie sind die Obergrenze für den Schaden. Fremde Texte können versteckte Anweisungen enthalten.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/agenten.png"
       ],
@@ -9089,16 +9761,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9184,16 +9850,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9258,6 +9918,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9276,6 +9962,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Agenten",
+      "abstract": "MCP ist ein offener Standard: Systeme melden ihre Werkzeuge einheitlich, Assistenten nutzen sie einheitlich. Ein Server beschreibt Werkzeuge mit Name, Beschreibung und Parametern. Der Client reicht sie dem Modell und führt Aufrufe aus.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/agenten.png"
       ],
@@ -9315,16 +10005,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9410,16 +10094,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9484,6 +10162,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9502,6 +10206,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Erzeugen",
+      "abstract": "Das Training verrauscht echte Bilder und lernt die Umkehrung. Die Beschreibung lenkt, wohin das Rauschen verschwindet. Derselbe Entrauschungsschritt läuft 4 bis 50 Mal, bis ein Bild dasteht.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/erzeugen.png"
       ],
@@ -9519,16 +10227,10 @@
        "@id": "__BASIS__/bild#breadcrumb"
       },
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9564,6 +10266,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9582,6 +10310,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Erzeugen",
+      "abstract": "Erst Gesicht und Landmarken finden, dann die Merkmale der Quellperson einsetzen und angleichen. Dieselbe Technik trägt Avatare und Fälschungen. Darum nur mit Einwilligung und mit Kennzeichnung.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/erzeugen.png"
       ],
@@ -9599,16 +10331,10 @@
        "@id": "__BASIS__/faceswap#breadcrumb"
       },
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9644,6 +10370,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9662,6 +10414,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Daten und Prognosen",
+      "abstract": "Ein Entscheidungsbaum ist ein Fragebogen, dessen beste Fragen aus Beispielen gelernt werden. Bäume sind nachvollziehbar, wachsen aber leicht zu weit und lernen dann Zufälle auswendig. Ein Wald aus vielen Bäumen gleicht das aus.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
@@ -9721,16 +10477,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9816,16 +10566,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -9890,6 +10634,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -9908,6 +10678,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Daten und Prognosen",
+      "abstract": "Eine Zeitreihe besteht aus Trend, Saison und Zufall. Ein Modell schreibt Trend und Saison fort, den Zufall nicht. Prognosen brauchen einen Maßstab (zum Beispiel „wie letzte Woche“), einen Fehlerwert und einen Unsicherheitsbereich statt einer einzelnen Zahl.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
@@ -9962,16 +10736,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10057,16 +10825,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10131,6 +10893,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -10149,6 +10937,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Daten und Prognosen",
+      "abstract": "Ein Modell lernt, wie Normal aussieht, und meldet, was davon abweicht. Dafür braucht es keine Fehlerbeispiele. Der Schwellenwert bestimmt das Verhältnis aus Fehlalarmen und übersehenen Fällen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
@@ -10198,16 +10990,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10286,16 +11072,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10360,6 +11140,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -10378,6 +11184,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Daten und Prognosen",
+      "abstract": "Empfehlungen entstehen aus Ähnlichkeit: von Nutzern, die sich ähnlich verhalten, und von Dingen, die sich ähneln. Ohne Verhalten gibt es den Kaltstart, und mit Rückkopplung drohen Filterblasen. Beides lässt sich bewusst ausgleichen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
@@ -10427,16 +11237,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10515,16 +11319,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10589,6 +11387,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -10607,6 +11431,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "KI im Betrieb",
+      "abstract": "Zwischen Prototyp und Betrieb liegen Datenpflege, Prüfung, Auslieferung, Überwachung und Nachlernen. Die Welt ändert sich, das Modell nicht. Drift erkennst du an veränderten Eingaben und sinkender Qualität.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
@@ -10646,16 +11474,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10741,16 +11563,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10815,6 +11631,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -10833,6 +11675,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "KI im Betrieb",
+      "abstract": "Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung. Einen besten Weg gibt es nicht. Kosten bestehen aus Rechenzeit, Speicher, Personal und Datenpflege.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
@@ -10867,16 +11713,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -10962,16 +11802,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11036,6 +11870,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -11054,6 +11914,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "KI im Betrieb",
+      "abstract": "Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko. Ein Pilot braucht einen vorher festgelegten Maßstab. Er endet mit der Entscheidung: stoppen, ändern oder ausrollen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
@@ -11081,16 +11945,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11176,16 +12034,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11250,6 +12102,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -11268,6 +12146,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -11307,16 +12189,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11395,16 +12271,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11469,6 +12339,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -11487,6 +12383,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Teile mit klar verschiedener Form lassen sich schon aus wenigen Beispielen je Typ zuverlässig sortieren. Im Beispiel waren 12 von 12 und 90 von 90 richtig. Das sind Werte für gezeichnete Bilder, echte Teile glänzen und verdecken sich.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -11521,16 +12421,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11609,16 +12503,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11683,6 +12571,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -11701,6 +12615,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Objekterkennung findet und zählt einzelne Objekte im Bild. Sie braucht für gängige Fahrzeuge kein eigenes Anlernen. Kleine und verdeckte Objekte fehlen, und die Schwelle regelt das Verhältnis aus Treffern und Fehlalarmen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -11745,16 +12663,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11826,16 +12738,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -11900,6 +12806,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -11918,6 +12850,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Objekterkennung findet und zählt Gegenstände wie Flaschen. Sie erkennt weder Marken noch Artikel noch Lücken. Aus der Zahl wird erst ein Hinweis, wenn du ein Soll hinterlegst und vergleichst.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -11945,16 +12881,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12033,16 +12963,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12107,6 +13031,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -12125,6 +13075,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Synthetische Bilder, keine medizinischen Daten. Das Beispiel zeigt nur das Prinzip einer Zweitmeinung und ist kein Medizinprodukt. Das System entscheidet nicht, es lenkt den Blick.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -12164,16 +13118,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12252,16 +13200,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12326,6 +13268,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -12344,6 +13312,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Das System sucht zuerst passende Textstellen und antwortet nur damit, mit Quelle. Die Treffer entscheiden über die Qualität. Die Fangfrage ist der wichtigste Test: Steht die Antwort nirgends, soll das System das sagen und nichts erfinden.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -12393,16 +13365,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12481,16 +13447,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12555,6 +13515,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -12573,6 +13559,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Spracherkennung wandelt Ton lokal in Text um. Das Ergebnis ist ein Entwurf, kein fertiges Protokoll. Zahlen, Daten, Namen und Fachwörter sind die Schwachstellen und müssen immer geprüft werden.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -12600,16 +13590,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12688,16 +13672,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12762,6 +13740,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -12780,6 +13784,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Ein Agent schlägt mit Werkzeugen nach und rechnet damit. Das Modell formuliert, die Werkzeuge liefern Status, Zahlen und Regeln. Lesende Werkzeuge sind harmlos, handelnde nicht: Stornieren oder Erstatten braucht Rechte und eine Freigabe durch einen Menschen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -12814,16 +13822,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12902,16 +13904,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -12976,6 +13972,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -12994,6 +14016,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Detektion sagt, dass ein Gesicht da ist. Identifikation sagt, wer es ist. Das Beispiel macht nur das Erste und speichert nichts.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -13048,16 +14074,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13136,16 +14156,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13210,6 +14224,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -13228,6 +14268,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Das Modell im Beispiel erkennt Personen, keinen Schutzhelm und keine Warnweste. Dafür muss ein eigenes Modell angelernt werden. Kleine, ferne und verdeckte Personen fehlen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -13267,16 +14311,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13355,16 +14393,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13429,6 +14461,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -13447,6 +14505,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
+      "abstract": "Ein Sprachmodell macht aus Notizen einen Entwurf. Preise, Mengen und Termine gibst du vor und prüfst sie. Bilderkennung zählt und markiert.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/business-use-cases.png"
       ],
@@ -13486,16 +14548,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13531,6 +14587,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -13549,6 +14631,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
+      "abstract": "Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/standard.png"
       ],
@@ -13583,16 +14669,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13628,6 +14708,32 @@
     "@context": "https://schema.org",
     "@graph": [
      {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": [
        "Article",
        "LearningResource"
@@ -13646,6 +14752,10 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
+      "abstract": "Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/standard.png"
       ],
@@ -13680,16 +14790,10 @@
        }
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13713,6 +14817,248 @@
     ]
    }
   },
+  "ueber": {
+   "titel": "Über das KI-Labor",
+   "ueberschrift": "Über das KI-Labor",
+   "beschreibung": "Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen. Das KI-Labor ist ein Projekt von Daniel Alisch.",
+   "typ": "seite",
+   "datei": "content-ueber.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/ueber#artikel",
+      "headline": "Über das KI-Labor",
+      "name": "Über das KI-Labor",
+      "description": "Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen. Das KI-Labor ist ein Projekt von Daniel Alisch.",
+      "url": "__BASIS__/ueber",
+      "mainEntityOfPage": {
+       "@id": "__BASIS__/ueber"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Hintergrund",
+      "articleSection": "Der Rechner dahinter",
+      "abstract": "Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano, der nur wenige Watt aufnimmt, und nutzt keine externen KI-Dienste. Gebaut hat es Daniel Alisch als Lernprojekt.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/ueber#breadcrumb"
+      },
+      "teaches": [
+       "Das KI-Labor ist kostenlos, braucht keine Anmeldung und läuft lokal auf einem Jetson Orin Nano.",
+       "Es nutzt keine externen KI-Dienste. Eingaben werden nur im Arbeitsspeicher verarbeitet.",
+       "Kleine Modelle auf kleiner Hardware: gut zum Verstehen, nicht für den Ernstfall."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-gpu",
+        "name": "GPU"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/ueber#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Über das KI-Labor",
+        "item": "__BASIS__/ueber"
+       }
+      ]
+     },
+     {
+      "@type": "AboutPage",
+      "@id": "__BASIS__/ueber",
+      "name": "Über das KI-Labor",
+      "url": "__BASIS__/ueber",
+      "description": "Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen. Das KI-Labor ist ein Projekt von Daniel Alisch.",
+      "inLanguage": "de",
+      "isPartOf": {
+       "@id": "__BASIS__/#website"
+      },
+      "breadcrumb": {
+       "@id": "__BASIS__/ueber#breadcrumb"
+      },
+      "primaryImageOfPage": "__BASIS__/static/og/standard.png",
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "about": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "mainEntity": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     }
+    ]
+   }
+  },
+  "lizenzen": {
+   "titel": "Lizenzen und Quellen · KI-Labor",
+   "ueberschrift": "Lizenzen und Quellen",
+   "beschreibung": "Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos. Hier steht, was davon wofür läuft, unter welcher Lizenz es steht und wo du die Quelle findest.",
+   "typ": "seite",
+   "datei": "content-rechtliches.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/lizenzen#artikel",
+      "headline": "Lizenzen und Quellen",
+      "name": "Lizenzen und Quellen",
+      "description": "Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos. Hier steht, was davon wofür läuft, unter welcher Lizenz es steht und wo du die Quelle findest.",
+      "url": "__BASIS__/lizenzen",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/lizenzen"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Der Rechner dahinter",
+      "abstract": "Ein KI-Modell klingt sicher, auch wenn es irrt. Der Hinweis erinnert dich, Wichtiges selbst zu prüfen. Fremde Modelle und Programme dürfen hier laufen, weil ihre Lizenzen das erlauben.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/lizenzen#breadcrumb"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/lizenzen#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Lizenzen und Quellen",
+        "item": "__BASIS__/lizenzen"
+       }
+      ]
+     }
+    ]
+   }
+  },
   "visual-demo": {
    "titel": "Bildsprache: ein Beispiel je Bildtyp · KI-Labor",
    "ueberschrift": "Bildsprache: ein Beispiel je Bildtyp",
@@ -13724,6 +15070,32 @@
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
      {
       "@type": [
        "Article",
@@ -13742,6 +15114,10 @@
       "isAccessibleForFree": true,
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
+      "abstract": "Jedes Bild hat einen Typ und kurze Beschriftungen statt Sätzen. Animationen starten beim Sichtbarwerden und stehen still, wenn der Besucher weniger Bewegung wünscht. Ein Datenpaket wandert durch die Stationen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
       "image": [
        "__BASIS__/static/og/standard.png"
       ],
@@ -13763,16 +15139,10 @@
        "Animationen starten beim Sichtbarwerden und stehen still, wenn der Besucher weniger Bewegung wünscht."
       ],
       "author": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       },
       "publisher": {
-       "@type": "Person",
-       "@id": "https://daniel-alisch.site/#person",
-       "name": "Daniel Alisch",
-       "url": "https://daniel-alisch.site"
+       "@id": "https://daniel-alisch.site/#person"
       }
      },
      {
@@ -13857,7 +15227,9 @@
   "uc-sicherheit-baustelle",
   "uc-handwerk",
   "hardware",
-  "sicherheit-einfach"
+  "sicherheit-einfach",
+  "ueber",
+  "lizenzen"
  ],
  "gruppen": [
   {
@@ -13971,7 +15343,9 @@
    "name": "Der Rechner dahinter",
    "seiten": [
     "hardware",
-    "sicherheit-einfach"
+    "sicherheit-einfach",
+    "ueber",
+    "lizenzen"
    ]
   }
  ]

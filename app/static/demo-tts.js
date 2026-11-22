@@ -117,7 +117,7 @@
       h("p", null, "Sprich einen Text. Dann siehst du hier, wie aus Buchstaben erst Lautschrift und dann Klang wird und wie schnell der Jetson dabei ist."));
     const live = h("div", { class: "live tts-live" }, liveTitel, pipen, lautBox, erkl);
     const missbrauch = h("p", { class: "tts-missbrauch" }, icon("info"),
-      h("span", null, "Diese Stimmen stammen von echten Menschen, deren Aufnahmen frei lizenziert sind. Eine Stimme ohne Einwilligung zu klonen ist ein Missbrauchsrisiko, etwa für Betrug am Telefon."));
+      h("span", null, "Diese Stimmen stammen von echten Menschen, deren Aufnahmen frei lizenziert sind. Eine Stimme ohne Einwilligung zu klonen ist ein Missbrauchsrisiko, etwa für Betrug am Telefon. Was du hier hörst, ist immer KI-erzeugt und wird so gekennzeichnet."));
 
     root.append(
       h("div", { class: "tts-buehne" },
@@ -176,6 +176,7 @@
       const leer = !feld.value.trim();
       sprechKnopf.disabled = laeuft || leer || !gewaehlt;
       vergleichKnopf.disabled = laeuft || leer || !gewaehlt || stimmen.length < 2;
+      vergleichKnopf.hidden = stimmen.length < 2;
       const a = andere();
       if (a) vergleichKnopf.title = "Spricht denselben Text zusätzlich mit " + nameVon(a.id) + ".";
     }
@@ -274,12 +275,13 @@
       const wav = leseWav(bytes);
       const url = URL.createObjectURL(new Blob([bytes], { type: "audio/wav" }));
       const name = nameVon(d.stimme);
-      const audio = h("audio", { class: "tts-player", controls: true, preload: "auto", src: url, "aria-label": "Sprachausgabe mit " + name });
+      const audio = h("audio", { class: "tts-player", controls: true, preload: "auto", src: url, "aria-label": "KI-erzeugte Sprachausgabe mit " + name });
       const canvas = h("canvas", { class: "tts-welle", "aria-hidden": "true" });
       const e = { daten: d, url, audio, canvas, samples: wav.samples, rate: wav.rate, name, raf: 0 };
       const zeiten = d.zeiten || {};
       const kopf = h("div", { class: "tts-kartenkopf" },
         h("b", { class: "tts-name" }, name),
+        h("span", { class: "chip ki-kennung" }, icon("bot"), "KI-erzeugte Stimme"),
         h("span", { class: "chip" }, sek(d.audio_s || 0) + " Sprache"),
         h("span", { class: "chip" }, "gerechnet in " + zeit((zeiten.phonemisierung_ms || 0) + (zeiten.synthese_ms || 0))));
       const karte = h("section", { class: "tts-karte", "aria-label": "Ergebnis mit " + name }, kopf, canvas, audio);

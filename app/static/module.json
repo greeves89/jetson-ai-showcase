@@ -20,7 +20,9 @@
     "content-prognose-betrieb.js",
     "content-usecases.js",
     "content-visual-demo.js",
-    "content-laien.js"
+    "content-laien.js",
+    "content-ueber.js",
+    "content-rechtliches.js"
   ],
   "module": [
     "laien.js",
@@ -38,6 +40,10 @@
   "seite": {
     "autor": "Daniel Alisch",
     "autor_url": "https://daniel-alisch.site",
+    "autor_profile": [
+      "https://www.linkedin.com/in/daniel-alisch-81165a84",
+      "https://github.com/greeves89"
+    ],
     "impressum_url": "https://daniel-alisch.site/impressum",
     "datenschutz_url": "https://daniel-alisch.site/datenschutz"
   }

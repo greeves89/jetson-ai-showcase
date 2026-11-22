@@ -1,10 +1,12 @@
-// Prueft JSON-LD einer Seite lokal (ohne Netz): parsebar, @context/@type, Pflichtfelder je Typ, absolute Adressen.
+// Prueft JSON-LD einer Seite lokal (ohne Netz): parsebar, @context/@type, Pflichtfelder je Typ, absolute Adressen,
+// Autor als Entitaet (Person-Knoten mit name, url, sameAs; author/publisher/provider/copyrightHolder verweisen per @id darauf).
 // Genutzt von seo-rohtext.mjs; einzeln: node tests/seo-ld-pruefung.mjs <Datei.html>
 import fs from "node:fs";
 
 const ISO_DAUER = /^PT(\d+H)?(\d+M)?(\d+S)?$/;
 const DATUM = /^\d{4}-\d{2}-\d{2}$/;
 const typen = (k) => [].concat(k["@type"] || []);
+const PERSON_FELDER = ["author", "publisher", "provider", "copyrightHolder"];
 const hat = (k, ...felder) => felder.filter((f) => k[f] === undefined || k[f] === null || k[f] === "" || (Array.isArray(k[f]) && !k[f].length));
 
 /** Liefert { typen: [..], probleme: [..] } fuer alle ld+json-Elemente des HTML-Textes. */
@@ -17,6 +19,18 @@ export function pruefeLd(html, basis) {
     try { ld = JSON.parse(roh); } catch (e) { probleme.push("JSON-LD nicht parsebar: " + e.message); continue; }
     if (ld["@context"] !== "https://schema.org") probleme.push("@context fehlt oder falsch");
     const knoten = ld["@graph"] || [ld];
+    const nachId = new Map(knoten.filter((k) => k["@id"]).map((k) => [k["@id"], k]));
+    // Verweise auf den Autor: nur @id, das Ziel ist ein Person-Knoten desselben Graphen
+    for (const k of knoten) {
+      for (const f of PERSON_FELDER) {
+        if (k[f] === undefined) continue;
+        const v = k[f];
+        if (!v || typeof v !== "object" || !v["@id"]) { probleme.push(typen(k).join("/") + ": " + f + " ohne @id-Verweis"); continue; }
+        const ziel = nachId.get(v["@id"]);
+        if (!ziel || !typen(ziel).includes("Person")) probleme.push(typen(k).join("/") + ": " + f + " verweist auf keinen Person-Knoten: " + v["@id"]);
+      }
+    }
+    if (knoten.filter((k) => typen(k).includes("Person")).length > 1) probleme.push("mehr als ein Person-Knoten");
     for (const k of knoten) {
       const t = typen(k);
       if (!t.length) { probleme.push("Knoten ohne @type"); continue; }
@@ -24,8 +38,13 @@ export function pruefeLd(html, basis) {
       const fehlt = [];
       if (t.includes("Article")) fehlt.push(...hat(k, "headline", "author", "publisher", "datePublished", "dateModified", "image", "inLanguage", "mainEntityOfPage"));
       if (t.includes("LearningResource")) fehlt.push(...hat(k, "name", "inLanguage", "isAccessibleForFree", "educationalLevel", "learningResourceType"));
-      if (t.includes("WebSite")) fehlt.push(...hat(k, "name", "url", "inLanguage"));
-      if (t.includes("Course")) fehlt.push(...hat(k, "name", "description", "provider"));
+      if (t.includes("WebSite")) fehlt.push(...hat(k, "name", "url", "inLanguage", "publisher", "author"));
+      if (t.includes("Person")) {
+        fehlt.push(...hat(k, "@id", "name", "url", "sameAs"));
+        for (const u of [].concat(k.sameAs || [])) if (!/^https:\/\/[^/]+\/./.test(u)) probleme.push("Person sameAs keine Profiladresse: " + u);
+      }
+      if (t.includes("AboutPage")) fehlt.push(...hat(k, "name", "url", "inLanguage", "mainEntity", "isPartOf"));
+      if (t.includes("Course")) fehlt.push(...hat(k, "name", "description", "provider", "author", "publisher"));
       if (t.includes("CollectionPage")) fehlt.push(...hat(k, "name", "url", "mainEntity"));
       if (t.includes("ItemList")) { fehlt.push(...hat(k, "name", "itemListElement")); (k.itemListElement || []).forEach((e, i) => { if (e.position !== i + 1 || !e.name || !e.url) probleme.push("ItemList " + k.name + ": Eintrag " + (i + 1) + " unvollstaendig"); }); }
       if (t.includes("DefinedTermSet")) { fehlt.push(...hat(k, "name", "hasDefinedTerm")); for (const d of k.hasDefinedTerm || []) if (!d.name || !d.description) probleme.push("DefinedTerm ohne Name oder Beschreibung: " + d.name); }

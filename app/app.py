@@ -1168,6 +1168,9 @@ def _fuss_html(seite):
         "<code>kl_s</code> (ordnet Beispiele und Texte deiner Sitzung zu, die Daten verfallen nach 30 Minuten) und der im Browser gemerkte Lernfortschritt. "
         '<a href="/sicherheit-einfach">Ist das sicher? Was wird gespeichert?</a></p>'
     )
+    # Pflichtangabe der Llama 3.2 Community License (1.b.i) schon im Server-HTML, nicht erst per JavaScript
+    teile.append('<p class="fuss-lizenz"><a href="/lizenzen">Lizenzen und Quellen</a> <span aria-hidden="true">·</span> '
+                 '<span class="fuss-llama">Built with Llama</span></p>')
     return "".join(teile)
 
 
@@ -1285,6 +1288,20 @@ def llms_txt(request: Request):
 @app.get("/llms-full.txt")
 def llms_full_txt(request: Request):
     return _seo_datei(request, "llms-full.txt", "text/plain; charset=utf-8")
+
+
+# IndexNow (Bing, Yandex, Seznam; ChatGPT Search nutzt den Bing-Index): die Schluesseldatei /<Schluessel>.txt belegt,
+# dass Meldungen von scripts/indexnow.mjs vom Betreiber stammen. Schluessel nur aus der Umgebungsvariablen INDEXNOW_KEY
+# (8 bis 128 Zeichen, Buchstaben, Ziffern, Bindestrich), nie im Repo. Nur oeffentlich; sonst gibt es die Route nicht (404).
+_INDEXNOW_KEY = os.environ.get("INDEXNOW_KEY", "").strip()
+if not re.fullmatch(r"[A-Za-z0-9-]{8,128}", _INDEXNOW_KEY):
+    _INDEXNOW_KEY = ""
+
+if _OEFFENTLICH and _INDEXNOW_KEY:
+    @app.get(f"/{_INDEXNOW_KEY}.txt", include_in_schema=False)
+    def indexnow_schluessel():
+        from fastapi.responses import PlainTextResponse
+        return PlainTextResponse(_INDEXNOW_KEY, headers={"Cache-Control": "no-cache", "X-Robots-Tag": "noindex"})
 
 
 @app.get("/", response_class=HTMLResponse)

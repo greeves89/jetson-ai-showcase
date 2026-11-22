@@ -4,10 +4,14 @@
 
 Quelle: __BASIS__/ (Autor: Daniel Alisch). Jeder Abschnitt nennt die Adresse der Seite; bitte mit Adresse zitieren.
 
+Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vorbehalten. Zitate mit Quellenangabe (Adresse der Seite) sind erlaubt. Stimmen der Sprachausgabe, Beispielfotos und Icons stammen von Dritten und stehen unter eigenen Lizenzen (__BASIS__/lizenzen).
+
 # Was ist KI?
 
 Adresse: __BASIS__/karte
 Bereich: Grundlagen. Stand: 2026-11-22.
+
+Kurz gesagt: KI ist ein Sammelbegriff, kein einzelnes Verfahren. Heutige KI ist immer auf eine Aufgabe spezialisiert. Maschinelles Lernen ist der wichtigste Teil, aber nicht der einzige.
 
 Ein Oberbegriff, unter dem sehr verschiedene Verfahren stecken. Diese Karte sortiert sie.
 
@@ -39,6 +43,8 @@ Erklärvideo: Was ist KI? (1.4 Minuten), __BASIS__/static/videos/was-ist-ki.mp4,
 
 Adresse: __BASIS__/ml
 Bereich: Grundlagen. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen. Training passiert einmal und ist teuer, Inferenz passiert ständig und ist günstig. Die Qualität der Beispiele bestimmt die Qualität des Modells.
 
 Statt Regeln zu schreiben, zeigst du Beispiele. Das Verfahren findet das Muster selbst.
 
@@ -75,6 +81,8 @@ Erklärvideo: Maschinelles Lernen (1.5 Minuten), __BASIS__/static/videos/maschin
 Adresse: __BASIS__/genki
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Sprachmodell sagt immer nur das nächste Token voraus. Die Temperatur steuert, wie mutig es wählt. Was nicht im Kontext steht, weiß das Modell nicht.
+
 Ein Sprachmodell wählt Wort für Wort das nächste Stück. Aus vielen kleinen Würfen entsteht ein Text.
 
 ## Ein Sprachmodell rät das nächste Stück
@@ -110,6 +118,8 @@ Erklärvideo: Generative KI (1.4 Minuten), __BASIS__/static/videos/generative-ki
 Adresse: __BASIS__/robotik
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Roboter arbeiten im Kreis aus Wahrnehmen, Entscheiden und Handeln. KI liefert meist die Entscheidung aus Sensordaten. Schnelle Reaktion verlangt Rechenleistung direkt am Gerät.
+
 Eine Maschine mit Körper: Sie misst, entscheidet und bewegt sich, und das viele Male pro Sekunde.
 
 ## Ein Roboter ist KI mit Körper
@@ -141,6 +151,8 @@ Erklärvideo: Robotik (1.4 Minuten), __BASIS__/static/videos/robotik.mp4, Untert
 Adresse: __BASIS__/business
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Gute Einsatzfelder haben klare Aufgaben, genug Daten und einen Menschen, der prüft. Lokal lohnt sich bei sensiblen Daten und schneller Reaktion. Fang klein an und miss gegen den heutigen Ablauf.
+
 Wo KI heute Arbeit abnimmt, wann lokal sinnvoll ist und welche Fragen vor dem Einsatz stehen.
 
 ## Wo KI heute Arbeit abnimmt
@@ -171,6 +183,8 @@ Erklärvideo: KI im Business (1.3 Minuten), __BASIS__/static/videos/ki-im-busine
 
 Adresse: __BASIS__/daten
 Bereich: Grundlagen. Stand: 2026-11-22.
+
+Kurz gesagt: Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Beides kommt aus den Daten. Vielfalt und Qualität zählen mehr als reine Menge.
 
 Ein Modell kann nur lernen, was in seinen Daten steckt. Was zählt als Datum, wie sieht gute Qualität aus, und wie viel braucht man?
 
@@ -238,6 +252,8 @@ Erklärvideo: Daten, der Rohstoff (1.5 Minuten), __BASIS__/static/videos/daten-r
 Adresse: __BASIS__/neuronale-netze
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Neuron bildet eine gewichtete Summe seiner Eingaben und entscheidet per Aktivierung, wie stark es meldet. Schichten bauen Merkmale aus Merkmalen auf. Erst die Aktivierung dazwischen macht mehrere Schichten wertvoll.
+
 Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen. Wie entscheidet eine davon, und was entsteht, wenn man viele verschaltet?
 
 ## Ein Neuron ist ein kleiner Entscheider
@@ -303,6 +319,8 @@ Erklärvideo: Neuronale Netze (1.3 Minuten), __BASIS__/static/videos/neuronale-n
 
 Adresse: __BASIS__/training
 Bereich: Grundlagen. Stand: 2026-11-22.
+
+Kurz gesagt: Der Verlust misst den Fehler. Training heißt, die Gewichte so zu verschieben, dass er sinkt. Gradientenabstieg geht in kleinen Schritten bergab.
 
 Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht. Wie wird daraus ein brauchbares, ohne dass jemand die Zahlen von Hand setzt?
 
@@ -370,6 +388,8 @@ Erklärvideo: Wie ein Modell lernt (1.4 Minuten), __BASIS__/static/videos/traini
 Adresse: __BASIS__/bewertung
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Bei seltenen Ereignissen täuscht die Genauigkeit. Die Konfusionsmatrix zeigt die vier Fälle und damit, wo Fehler stecken. Precision fragt, wie viele Alarme stimmen.
+
 „95 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.
 
 ## Warum „95 Prozent richtig“ täuschen kann
@@ -435,6 +455,8 @@ Erklärvideo: Wie gut ist es? (1.3 Minuten), __BASIS__/static/videos/bewertung-k
 
 Adresse: __BASIS__/verzerrung-ethik
 Bereich: Grundlagen. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Modell wiederholt Muster aus seinen Daten, auch unfaire. Verzerrung entsteht durch Daten, Auswahl, Etiketten und Rückkopplung. Ein Merkmal wegzulassen reicht nicht, denn Stellvertreter schleichen sich ein.
 
 Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire. Wie entsteht das, wie erkennst du es, und wer trägt die Verantwortung?
 
@@ -502,6 +524,8 @@ Erklärvideo: Fairness (1.1 Minuten), __BASIS__/static/videos/verzerrung-fairnes
 Adresse: __BASIS__/recht
 Bereich: Grundlagen. Stand: 2026-11-22.
 
+Kurz gesagt: Personenbezogene Daten brauchen eine Rechtsgrundlage, einen Zweck und Sparsamkeit. Dienstleister brauchen einen Auftragsvertrag. Die EU-KI-Verordnung ordnet Systeme nach Risiko.
+
 Welche Regeln gelten, wenn du KI einsetzt? Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.
 
 ## Wichtig vorab: keine Rechtsberatung
@@ -568,6 +592,8 @@ Erklärvideo: Recht im Überblick (1.2 Minuten), __BASIS__/static/videos/recht-u
 Adresse: __BASIS__/bild-als-zahlen
 Bereich: Sehen. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Bild ist eine Tabelle aus Zahlen: Ein Wert von 0 bis 255 je Pixel und Farbkanal. Auflösung, Belichtung und Rauschen entscheiden, welche Informationen überhaupt beim Modell ankommen. Verkleinern spart Rechenzeit, kostet aber kleine Details.
+
 Du siehst ein Foto, ein Computer sieht eine Tabelle voller Zahlen. Hier lernst du, wie aus Licht Zahlen werden und warum jede Bilderkennung damit beginnt.
 
 ## Ein Bild ist ein Raster aus Punkten
@@ -633,6 +659,8 @@ Erklärvideo: Wie ein Computer ein Bild sieht (1.4 Minuten), __BASIS__/static/vi
 
 Adresse: __BASIS__/cnn-intuition
 Bereich: Sehen. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Filter ist eine kleine Zahlenschablone. Er wandert über das Bild und meldet, wo sein Muster vorkommt. Die Filter lernt das Netz selbst.
 
 Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge. Hier siehst du ohne Formeln, wie das gelingt und wo es danebenliegt.
 
@@ -702,6 +730,8 @@ Erklärvideo: Wie Netze Bilder verstehen (1.3 Minuten), __BASIS__/static/videos/
 Adresse: __BASIS__/vision-aufgaben
 Bereich: Sehen. Stand: 2026-11-22.
 
+Kurz gesagt: Die Frage bestimmt die Aufgabe: Klasse, Rahmen, Pixelmaske, Gelenkpunkte oder Text. Je genauer die Antwort, desto aufwendiger sind Etiketten, Rechenzeit und Pflege. Wähle die einfachste Aufgabe, die dein Problem löst, und prüfe früh den Datenschutz.
+
 Was ist das? Wo ist es? Welche Pixel gehören dazu? Wo sind die Gelenke? Was steht da? Jede Frage ist eine eigene Aufgabe mit eigenem Aufwand.
 
 ## Erst die Frage, dann das Verfahren
@@ -768,6 +798,8 @@ Erklärvideo: Fünf Fragen an ein Bild (1.4 Minuten), __BASIS__/static/videos/vi
 Adresse: __BASIS__/gesicht
 Bereich: Sehen. Stand: 2026-11-22.
 
+Kurz gesagt: Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.
+
 Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.
 
 ## Drei Stufen, die man oft verwechselt
@@ -786,6 +818,8 @@ Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren ken
 
 Adresse: __BASIS__/objekt
 Bereich: Sehen. Stand: 2026-11-22.
+
+Kurz gesagt: Das Netz betrachtet das ganze Bild einmal und sagt zugleich, wo etwas ist und was es ist. Jedes Objekt bekommt einen Rahmen, eine von 80 Klassen und eine Konfidenz zwischen 0 und 1. Ab welcher Konfidenz ein Rahmen erscheint, bestimmst du.
 
 Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.
 
@@ -814,6 +848,8 @@ Hier rechnet der Prozessor mit OpenCV. Das Erkennen braucht den größten Teil d
 Adresse: __BASIS__/anlernen
 Bereich: Sehen. Stand: 2026-11-22.
 
+Kurz gesagt: Jedes Beispiel wird zu 1000 Zahlen und mit dem Klassennamen gespeichert. Ein neues Bild wird verglichen, die drei ähnlichsten Beispiele stimmen ab. Das Netz bleibt unverändert.
+
 Zeige dem Jetson Beispiele, und er erkennt sie danach selbst. In einer halben Minute, ohne Training.
 
 ## Was beim Aufnehmen passiert
@@ -832,6 +868,8 @@ Vielfalt schlägt Menge: wenige Beispiele aus vielen Lagen helfen mehr als viele
 
 Adresse: __BASIS__/chat
 Bereich: Sprache. Stand: 2026-11-22.
+
+Kurz gesagt: Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.
 
 Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.
 
@@ -852,6 +890,8 @@ Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.
 Adresse: __BASIS__/whisper
 Bereich: Sprache. Stand: 2026-11-22.
 
+Kurz gesagt: Ton wird in kurze Fenster zerlegt, zu einem Frequenzbild und von einem Netz in Text übersetzt. Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertiteln mit.
+
 Sprich in dein Mikrofon, und der Jetson schreibt mit. Das Modell läuft lokal, ohne Cloud.
 
 ## Wie aus Ton Text wird
@@ -866,6 +906,8 @@ Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertite
 
 Adresse: __BASIS__/tokens-sprachmodelle
 Bereich: Sprache. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Sprachmodell zerlegt Text in Token, macht daraus Zahlen und sagt Stück für Stück das nächste Token voraus. Aufmerksamkeit verbindet jedes Token mit den Stellen im Text, auf die es ankommt. Vortraining gibt Sprachwissen, Feinabstimmung und Feedback machen daraus einen Assistenten.
 
 Wie wird aus einem Stapel Text ein Modell, das Fragen beantwortet? Hier siehst du die Bausteine: Token, Zahlen, Aufmerksamkeit und zwei Lernphasen.
 
@@ -937,6 +979,8 @@ Erklärvideo: Wie ein Sprachmodell gebaut ist (1.2 Minuten), __BASIS__/static/vi
 Adresse: __BASIS__/prompting
 Bereich: Sprache. Stand: 2026-11-22.
 
+Kurz gesagt: Das Modell kennt nur deinen Prompt: Was fehlt, erfindet es. Rolle, Aufgabe, Kontext, Beispiele, Format und Grenzen sind die Checkliste für gute Prompts. Prüfe die Antwort, verbessere den Prompt in kleinen Schritten und gib keine vertraulichen Daten an Dienste, die du nicht kennst.
+
 Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn. Hier lernst du, wie du Aufgaben so stellst, dass die Antwort brauchbar ist.
 
 ## Warum die Frage zählt
@@ -1007,6 +1051,8 @@ Erklärvideo: Gut fragen: drei Beispiele aus dem Büro (1.3 Minuten), __BASIS__/
 Adresse: __BASIS__/llm-grenzen
 Bereich: Sprache. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Modell schreibt Plausibles. Ob es stimmt, musst du prüfen, besonders bei Zahlen, Quellen und Rechtlichem. Fremder Text im Kontext kann Anweisungen enthalten.
+
 Sprachmodelle schreiben überzeugend, auch wenn sie falsch liegen. Hier lernst du die typischen Risiken kennen und wie du damit arbeitest.
 
 ## Gut formuliert heißt nicht richtig
@@ -1074,6 +1120,8 @@ Erklärvideo: Grenzen und Risiken von Sprachmodellen (1.2 Minuten), __BASIS__/st
 
 Adresse: __BASIS__/finetuning-oder-rag
 Bereich: Sprache. Stand: 2026-11-22.
+
+Kurz gesagt: Besser fragen ist der schnellste Weg, RAG der Weg für Fakten aus Dokumenten, Nachtrainieren der Weg für Verhalten und Stil. Wer sagt „Wir trainieren das Modell mit unseren Dokumenten“, meint meist RAG. Fakten, die sich ändern oder belegt werden müssen, gehören in Dokumente, nicht in die Parameter.
 
 Das Modell kennt deine Firma nicht. Du hast drei Wege, das zu ändern. Hier siehst du, welcher wann passt.
 
@@ -1143,6 +1191,8 @@ Erklärvideo: Wissen ins Modell oder ins Dokument? (1.3 Minuten), __BASIS__/stat
 Adresse: __BASIS__/sprachausgabe
 Bereich: Sprache. Stand: 2026-11-22.
 
+Kurz gesagt: Aus Text wird Sprache in Schritten: aufbereiten, Aussprache bestimmen, Klang erzeugen und Betonung setzen. Zahlen, Abkürzungen, Eigennamen und Fachwörter sind die häufigsten Stolperstellen. Stimmen gehören Menschen: Einwilligung einholen, erzeugte Sprache kennzeichnen, vor geklonten Stimmen am Telefon vorsichtig sein.
+
 Wie wird aus einem geschriebenen Satz eine Stimme? Das Labor oben lässt den Jetson sprechen. Hier erfährst du, was dabei passiert.
 
 ## Vom Text zur Stimme: der Überblick
@@ -1209,6 +1259,8 @@ Erklärvideo: Wie aus Text eine Stimme wird (1.3 Minuten), __BASIS__/static/vide
 Adresse: __BASIS__/rag-ueberblick
 Bereich: Wissen und RAG. Stand: 2026-11-22.
 
+Kurz gesagt: RAG lässt ein Sprachmodell erst in deinen Dokumenten nachschlagen und dann antworten, mit Quelle. Die Antwort ist nur so gut wie die gefundenen Stellen: Suche und Aufbereitung entscheiden mehr als das Modell. Fakten gehören ins Dokument, Verhalten und Stil ins Modell.
+
 Ein Sprachmodell kennt deine Dokumente nicht. RAG lässt es vor jeder Antwort darin nachschlagen.
 
 ## Das Problem: Das Modell war nicht dabei
@@ -1270,6 +1322,8 @@ Erklärvideo: RAG in einer Minute (1.3 Minuten), __BASIS__/static/videos/rag-ueb
 
 Adresse: __BASIS__/rag-embedding
 Bereich: Wissen und RAG. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt ähnlicher Sinn. Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden. Embeddings sind schwach bei Zahlen, Codes und Eigennamen.
 
 Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt.
 
@@ -1341,6 +1395,8 @@ Erklärvideo: Vier Stolpersteine (1.3 Minuten), __BASIS__/static/videos/rag-embe
 Adresse: __BASIS__/rag-chunking
 Bereich: Wissen und RAG. Stand: 2026-11-22.
 
+Kurz gesagt: Text wird in Stücke geteilt, weil Modelle Längengrenzen haben und ein Vektor für viel Text zu unscharf wird. Ein guter Chunk behandelt eine Sache und ist allein verständlich. Zu klein verliert Kontext, zu groß verwässert den Treffer.
+
 Ein Dokument ist zu groß für die Suche am Stück. Wo du es schneidest, entscheidet mit, ob die richtige Stelle gefunden wird.
 
 ## Warum man Text überhaupt zerlegt
@@ -1408,6 +1464,8 @@ Erklärvideo: Stücke schneiden (1.3 Minuten), __BASIS__/static/videos/rag-chunk
 
 Adresse: __BASIS__/rag-suche
 Bereich: Wissen und RAG. Stand: 2026-11-22.
+
+Kurz gesagt: Stichwortsuche (BM25) findet Wörter und gewichtet seltene Wörter stärker. Die Hybridsuche führt beide Ranglisten über die Platzierung zusammen, nicht über die Punktwerte. Gewicht und Trefferzahl stellst du am eigenen Material ein.
 
 Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung. Jede hat ihre eigenen Stärken. Die beste Suche nutzt oft beide.
 
@@ -1479,6 +1537,8 @@ Erklärvideo: Hybridsuche (1.4 Minuten), __BASIS__/static/videos/rag-hybridsuche
 Adresse: __BASIS__/rag-reranking
 Bereich: Wissen und RAG. Stand: 2026-11-22.
 
+Kurz gesagt: Die erste Suche vergleicht fertige Vektoren und ist schnell, aber grob. Ein Reranker liest Frage und Text gemeinsam und ist genauer, aber langsam. Der Ablauf lautet: viele Kandidaten holen, wenige genau sortieren, die besten an das Modell geben.
+
 Die erste Suche sortiert grob, aber schnell. Ein Reranker liest die besten Kandidaten noch einmal genau.
 
 ## Das Alltagsbild: Vorauswahl und Gespräch
@@ -1546,6 +1606,8 @@ Erklärvideo: Erst grob, dann genau (1.3 Minuten), __BASIS__/static/videos/rag-r
 
 Adresse: __BASIS__/rag-bewertung
 Bereich: Wissen und RAG. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Testset aus echten Fragen mit bekannter Fundstelle zeigt, wo das System steht. Miss Suche (Trefferquote, Rang) und Antwort (Richtigkeit, Antworttreue, Vollständigkeit) getrennt. Verbessere von vorn nach hinten: Daten und Chunking, dann Suche, dann Reranking, zuletzt Modell.
 
 Drei gute Beispielantworten beweisen nichts. Ein kleines Testset zeigt, wo das System steht und was du als Nächstes verbesserst.
 
@@ -1617,6 +1679,8 @@ Erklärvideo: Gut ist, was du misst (1.4 Minuten), __BASIS__/static/videos/rag-b
 Adresse: __BASIS__/rag
 Bereich: Wissen und RAG. Stand: 2026-11-22.
 
+Kurz gesagt: Deine Dokumente stecken nicht im Modell. Ohne Nachschlagen würde es raten. Zerlegen, einbetten, suchen, antworten.
+
 Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit.
 
 ## Das Problem
@@ -1635,6 +1699,8 @@ Ein hoher Score heißt ähnlich. Ist die Antwort falsch, standen meist die falsc
 
 Adresse: __BASIS__/agenten-grundlagen
 Bereich: Agenten. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Agent ist ein Sprachmodell mit Werkzeugen in einer Schleife aus Denken, Aufrufen und Lesen. Das Modell schlägt Aufrufe nur vor, ein Programm führt sie aus. Das Gedächtnis ist der Kontext plus Notizen außerhalb.
 
 Ein Chat antwortet. Ein Agent arbeitet: Er wählt Werkzeuge, liest ihre Ergebnisse und macht weiter, bis die Aufgabe erledigt ist.
 
@@ -1704,6 +1770,8 @@ Erklärvideo: Was ist ein Agent? (1.3 Minuten), __BASIS__/static/videos/agenten-
 Adresse: __BASIS__/agenten-planung
 Bereich: Agenten. Stand: 2026-11-22.
 
+Kurz gesagt: Zerlege Aufgaben in kleine, klare Schritte. Das Modell wählt dann sicherer. Der Kontext wächst mit jeder Runde.
+
 Je länger die Kette der Schritte, desto mehr kann schiefgehen. Hier lernst du, wie Agenten Aufgaben zerlegen, sich Dinge merken und mit Fehlern umgehen.
 
 ## Aufgaben zerlegen
@@ -1772,6 +1840,8 @@ Erklärvideo: Planen, Schritte und Fehler (1.3 Minuten), __BASIS__/static/videos
 Adresse: __BASIS__/agent
 Bereich: Agenten. Stand: 2026-11-22.
 
+Kurz gesagt: Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet. Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.
+
 Ein Sprachmodell, das selbst entscheidet, wann es ein Werkzeug braucht, und in Schritten zur Antwort kommt.
 
 ## Ein Agent ist ein Modell mit Werkzeugen
@@ -1790,6 +1860,8 @@ Kleine Modelle greifen manchmal daneben. Darum zeigt das Labor jeden Schritt und
 
 Adresse: __BASIS__/agenten-sicherheit
 Bereich: Agenten. Stand: 2026-11-22.
+
+Kurz gesagt: Gib einem Agenten nur die Rechte, die seine Aufgabe braucht. Sie sind die Obergrenze für den Schaden. Fremde Texte können versteckte Anweisungen enthalten.
 
 Ein Agent handelt. Darum musst du festlegen, was er darf, wem er glaubt und wann ein Mensch zustimmt.
 
@@ -1859,6 +1931,8 @@ Erklärvideo: Rechte, Prompt-Injection, Freigaben (1.3 Minuten), __BASIS__/stati
 Adresse: __BASIS__/mcp-werkzeuge
 Bereich: Agenten. Stand: 2026-11-22.
 
+Kurz gesagt: MCP ist ein offener Standard: Systeme melden ihre Werkzeuge einheitlich, Assistenten nutzen sie einheitlich. Ein Server beschreibt Werkzeuge mit Name, Beschreibung und Parametern. Der Client reicht sie dem Modell und führt Aufrufe aus.
+
 Das Model Context Protocol ist ein gemeinsamer Stecker zwischen KI-Assistenten und den Systemen, die sie nutzen sollen.
 
 ## Das Problem: jede Anbindung einzeln
@@ -1925,6 +1999,8 @@ Erklärvideo: MCP einfach erklärt (1.3 Minuten), __BASIS__/static/videos/mcp-er
 Adresse: __BASIS__/bild
 Bereich: Erzeugen. Stand: 2026-11-22.
 
+Kurz gesagt: Das Training verrauscht echte Bilder und lernt die Umkehrung. Die Beschreibung lenkt, wohin das Rauschen verschwindet. Derselbe Entrauschungsschritt läuft 4 bis 50 Mal, bis ein Bild dasteht.
+
 Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam.
 
 ## Wie Diffusion funktioniert
@@ -1944,6 +2020,8 @@ Bildmodelle brauchen viel Speicher, und der ist auf dem Jetson geteilt.
 Adresse: __BASIS__/faceswap
 Bereich: Erzeugen. Stand: 2026-11-22.
 
+Kurz gesagt: Erst Gesicht und Landmarken finden, dann die Merkmale der Quellperson einsetzen und angleichen. Dieselbe Technik trägt Avatare und Fälschungen. Darum nur mit Einwilligung und mit Kennzeichnung.
+
 Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich.
 
 ## So funktioniert es
@@ -1962,6 +2040,8 @@ Die Demo ist noch nicht eingebaut. Es fehlen Technik und klare Regeln für gespe
 
 Adresse: __BASIS__/tabellen-ml
 Bereich: Daten und Prognosen. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Entscheidungsbaum ist ein Fragebogen, dessen beste Fragen aus Beispielen gelernt werden. Bäume sind nachvollziehbar, wachsen aber leicht zu weit und lernen dann Zufälle auswendig. Ein Wald aus vielen Bäumen gleicht das aus.
 
 Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?
 
@@ -2025,6 +2105,8 @@ Erklärvideo: Entscheidungsbäume (1.3 Minuten), __BASIS__/static/videos/entsche
 Adresse: __BASIS__/zeitreihen
 Bereich: Daten und Prognosen. Stand: 2026-11-22.
 
+Kurz gesagt: Eine Zeitreihe besteht aus Trend, Saison und Zufall. Ein Modell schreibt Trend und Saison fort, den Zufall nicht. Prognosen brauchen einen Maßstab (zum Beispiel „wie letzte Woche“), einen Fehlerwert und einen Unsicherheitsbereich statt einer einzelnen Zahl.
+
 Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?
 
 ## Der Wetterbericht als Zeitreihe
@@ -2084,6 +2166,8 @@ Erklärvideo: Zeitreihen und Prognose (1.3 Minuten), __BASIS__/static/videos/zei
 
 Adresse: __BASIS__/anomalien
 Bereich: Daten und Prognosen. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Modell lernt, wie Normal aussieht, und meldet, was davon abweicht. Dafür braucht es keine Fehlerbeispiele. Der Schwellenwert bestimmt das Verhältnis aus Fehlalarmen und übersehenen Fällen.
 
 Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?
 
@@ -2151,6 +2235,8 @@ Erklärvideo: Anomalieerkennung (1.3 Minuten), __BASIS__/static/videos/anomaliee
 Adresse: __BASIS__/empfehlungen
 Bereich: Daten und Prognosen. Stand: 2026-11-22.
 
+Kurz gesagt: Empfehlungen entstehen aus Ähnlichkeit: von Nutzern, die sich ähnlich verhalten, und von Dingen, die sich ähneln. Ohne Verhalten gibt es den Kaltstart, und mit Rückkopplung drohen Filterblasen. Beides lässt sich bewusst ausgleichen.
+
 Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?
 
 ## Die Buchhändlerin, die dich kennt
@@ -2217,6 +2303,8 @@ Erklärvideo: Empfehlungssysteme (1.3 Minuten), __BASIS__/static/videos/empfehlu
 Adresse: __BASIS__/mlops
 Bereich: KI im Betrieb. Stand: 2026-11-22.
 
+Kurz gesagt: Zwischen Prototyp und Betrieb liegen Datenpflege, Prüfung, Auslieferung, Überwachung und Nachlernen. Die Welt ändert sich, das Modell nicht. Drift erkennst du an veränderten Eingaben und sinkender Qualität.
+
 Ein Modell, das im Versuch funktioniert, ist erst der Anfang. Was braucht es, damit es jeden Tag zuverlässig arbeitet?
 
 ## Die Küche eines Restaurants
@@ -2282,6 +2370,8 @@ Erklärvideo: KI im Betrieb (1.3 Minuten), __BASIS__/static/videos/mlops-betrieb
 
 Adresse: __BASIS__/kosten-energie
 Bereich: KI im Betrieb. Stand: 2026-11-22.
+
+Kurz gesagt: Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung. Einen besten Weg gibt es nicht. Kosten bestehen aus Rechenzeit, Speicher, Personal und Datenpflege.
 
 Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?
 
@@ -2351,6 +2441,8 @@ Erklärvideo: Kosten und Energie (1.4 Minuten), __BASIS__/static/videos/kosten-u
 Adresse: __BASIS__/ki-einfuehrung
 Bereich: KI im Betrieb. Stand: 2026-11-22.
 
+Kurz gesagt: Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko. Ein Pilot braucht einen vorher festgelegten Maßstab. Er endet mit der Entscheidung: stoppen, ändern oder ausrollen.
+
 Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?
 
 ## Erst das Problem, dann die Technik
@@ -2418,6 +2510,8 @@ Erklärvideo: KI einführen (1.3 Minuten), __BASIS__/static/videos/ki-einfuehren
 
 Adresse: __BASIS__/uc-fertigung-sichtpruefung
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
+
+Kurz gesagt: Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
 
 Am Bandende sieht jemand jede Metallscheibe an und sucht Kratzer, Dellen und ausgebrochene Kanten. Kann eine Kamera das aus wenigen Beispielen lernen, und wo hört das auf?
 
@@ -2487,6 +2581,8 @@ Erklärvideo: Gut oder Ausschuss (1.3 Minuten), __BASIS__/static/videos/uc-ferti
 Adresse: __BASIS__/uc-fertigung-sortieren
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Teile mit klar verschiedener Form lassen sich schon aus wenigen Beispielen je Typ zuverlässig sortieren. Im Beispiel waren 12 von 12 und 90 von 90 richtig. Das sind Werte für gezeichnete Bilder, echte Teile glänzen und verdecken sich.
+
 Schrauben, Muttern und Scheiben liegen gemischt in einer Kiste. Wie schnell lernt eine Kamera, sie nach Typ zu trennen, und warum klappt es hier so viel leichter als bei der Fehlersuche?
 
 ## Die Ausgangslage im Betrieb
@@ -2554,6 +2650,8 @@ Erklärvideo: Bauteile sortieren (1.1 Minuten), __BASIS__/static/videos/uc-ferti
 
 Adresse: __BASIS__/uc-logistik-zaehlen
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
+
+Kurz gesagt: Objekterkennung findet und zählt einzelne Objekte im Bild. Sie braucht für gängige Fahrzeuge kein eigenes Anlernen. Kleine und verdeckte Objekte fehlen, und die Schwelle regelt das Verhältnis aus Treffern und Fehlalarmen.
 
 Die Torkontrolle möchte wissen, wie viele Fahrzeuge gerade auf dem Hof stehen, ohne jedes Mal hinzusehen. Eine Kamera kann zählen. Wie genau, und wo irrt sie sich?
 
@@ -2623,6 +2721,8 @@ Erklärvideo: Fahrzeuge zählen (1 Minuten), __BASIS__/static/videos/uc-logistik
 Adresse: __BASIS__/uc-handel-regal
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Objekterkennung findet und zählt Gegenstände wie Flaschen. Sie erkennt weder Marken noch Artikel noch Lücken. Aus der Zahl wird erst ein Hinweis, wenn du ein Soll hinterlegst und vergleichst.
+
 Eine Kamera am Gang soll Flaschen im Regal finden und Lücken sichtbar machen. Was leistet Objekterkennung dabei, und was kann sie nicht?
 
 ## Die Ausgangslage im Betrieb
@@ -2690,6 +2790,8 @@ Erklärvideo: Regalkontrolle (1.1 Minuten), __BASIS__/static/videos/uc-handel-re
 
 Adresse: __BASIS__/uc-gesundheit-auffaellig
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
+
+Kurz gesagt: Synthetische Bilder, keine medizinischen Daten. Das Beispiel zeigt nur das Prinzip einer Zweitmeinung und ist kein Medizinprodukt. Das System entscheidet nicht, es lenkt den Blick.
 
 Eine Software sortiert viele Proben vor und legt Auffälliges nach vorn. Das ist eine Zweitmeinung, kein Medizinprodukt: Menschen entscheiden.
 
@@ -2759,6 +2861,8 @@ Erklärvideo: Zweitmeinung (1.2 Minuten), __BASIS__/static/videos/uc-gesundheit-
 Adresse: __BASIS__/uc-buero-dokumente
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Das System sucht zuerst passende Textstellen und antwortet nur damit, mit Quelle. Die Treffer entscheiden über die Qualität. Die Fangfrage ist der wichtigste Test: Steht die Antwort nirgends, soll das System das sagen und nichts erfinden.
+
 Wartungsanleitung, Vertrag, Betriebsvereinbarung und Produkt-FAQ liegen in verschiedenen Ordnern. Ein System soll die passende Stelle finden und mit Quelle antworten. Und es soll sagen können, wenn die Antwort nirgends steht.
 
 ## Die Ausgangslage im Betrieb
@@ -2826,6 +2930,8 @@ Erklärvideo: Fragen an Dokumente (1.2 Minuten), __BASIS__/static/videos/uc-buer
 
 Adresse: __BASIS__/uc-buero-protokoll
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
+
+Kurz gesagt: Spracherkennung wandelt Ton lokal in Text um. Das Ergebnis ist ein Entwurf, kein fertiges Protokoll. Zahlen, Daten, Namen und Fachwörter sind die Schwachstellen und müssen immer geprüft werden.
 
 Nach der Besprechung soll jemand das Protokoll schreiben. Der Jetson kann Sprache lokal in Text umwandeln. Was funktioniert, und was musst du immer nachprüfen?
 
@@ -2895,6 +3001,8 @@ Erklärvideo: Vom Gespräch zum Protokoll (1.1 Minuten), __BASIS__/static/videos
 Adresse: __BASIS__/uc-service-bestellung
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Agent schlägt mit Werkzeugen nach und rechnet damit. Das Modell formuliert, die Werkzeuge liefern Status, Zahlen und Regeln. Lesende Werkzeuge sind harmlos, handelnde nicht: Stornieren oder Erstatten braucht Rechte und eine Freigabe durch einen Menschen.
+
 Viele Kundinnen fragen nach dem Stand ihrer Bestellung, dem Preis oder einer Stornierung. Ein Agent schlägt das selbst im Bestellsystem nach, rechnet mit einem Werkzeug und entscheidet nach einer Regel, statt zu raten.
 
 ## Die Ausgangslage im Betrieb
@@ -2963,6 +3071,8 @@ Erklärvideo: Der Agent schlägt nach (1.2 Minuten), __BASIS__/static/videos/uc-
 Adresse: __BASIS__/uc-sicherheit-zutritt
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Detektion sagt, dass ein Gesicht da ist. Identifikation sagt, wer es ist. Das Beispiel macht nur das Erste und speichert nichts.
+
 Ein Türsystem soll merken, ob jemand vor dem Eingang steht, und dann etwa das Licht einschalten. Wer es ist, soll es dabei nicht erfahren. Dieser Fall zeigt den Unterschied zwischen Gesicht erkennen und Person identifizieren.
 
 ## Die Ausgangslage im Betrieb
@@ -3030,6 +3140,8 @@ Erklärvideo: Ist jemand an der Tür? (1.1 Minuten), __BASIS__/static/videos/uc-
 
 Adresse: __BASIS__/uc-sicherheit-baustelle
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
+
+Kurz gesagt: Das Modell im Beispiel erkennt Personen, keinen Schutzhelm und keine Warnweste. Dafür muss ein eigenes Modell angelernt werden. Kleine, ferne und verdeckte Personen fehlen.
 
 Eine Kamera soll melden, wenn jemand im Gefahrenbereich steht. Das Modell findet Personen. Schutzhelme und Warnwesten erkennt es nicht, und genau das ist der Lernpunkt.
 
@@ -3101,6 +3213,8 @@ Erklärvideo: Personen sind keine Helme (1.1 Minuten), __BASIS__/static/videos/u
 Adresse: __BASIS__/uc-handwerk
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
+Kurz gesagt: Ein Sprachmodell macht aus Notizen einen Entwurf. Preise, Mengen und Termine gibst du vor und prüfst sie. Bilderkennung zählt und markiert.
+
 Drei Alltagsaufgaben im Kleinbetrieb: ein Angebot aus einer Notiz, ein Foto von der Baustelle und ein Stapel Rechnungen. Was kann KI dabei abnehmen, und was bleibt bei dir?
 
 ## Angebot aus einer Notiz
@@ -3125,6 +3239,8 @@ Erst wird der Text gelesen, dann sortiert. Die Ablage bleibt, die Vorarbeit wird
 
 Adresse: __BASIS__/hardware
 Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+
+Kurz gesagt: Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.
 
 Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.
 
@@ -3154,6 +3270,8 @@ Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensib
 
 Adresse: __BASIS__/sicherheit-einfach
 Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+
+Kurz gesagt: Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.
 
 In Alltagssprache: Was diese Seite auf deinem Gerät ablegt, was mit Kamera, Mikrofon und eingetippten Texten passiert und was du selbst in der Hand hast.
 
@@ -3188,6 +3306,76 @@ Diese Seite ist eine Erklärung in Alltagssprache. Verbindlich sind Impressum un
 - Kein Konto, keine Bezahlung, keine Werbung.
 - Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen.
 - Bilder und Aufnahmen werden nicht gespeichert. Texte verfallen nach 30 Minuten Ruhe.
+
+# Über das KI-Labor
+
+Adresse: __BASIS__/ueber
+Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+
+Kurz gesagt: Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano, der nur wenige Watt aufnimmt, und nutzt keine externen KI-Dienste. Gebaut hat es Daniel Alisch als Lernprojekt.
+
+Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen.
+
+## Wer dahintersteht
+
+Das KI-Labor ist ein Projekt von Daniel Alisch. Mehr über ihn steht auf seiner Hauptseite daniel-alisch.site.
+
+## Was das Labor ist
+
+Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud.
+
+Merke: Das KI-Labor ist ein Lernprojekt. Es läuft auf einem einzigen kleinen Rechner, nicht in einem Rechenzentrum.
+
+## Wie die Seiten aufgebaut sind
+
+Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen.
+
+## Wie die Labore arbeiten
+
+Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt.
+
+## Das nimmst du mit
+
+- Das KI-Labor ist kostenlos, braucht keine Anmeldung und läuft lokal auf einem Jetson Orin Nano.
+- Es nutzt keine externen KI-Dienste. Eingaben werden nur im Arbeitsspeicher verarbeitet.
+- Kleine Modelle auf kleiner Hardware: gut zum Verstehen, nicht für den Ernstfall.
+
+# Lizenzen und Quellen
+
+Adresse: __BASIS__/lizenzen
+Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+
+Kurz gesagt: Ein KI-Modell klingt sicher, auch wenn es irrt. Der Hinweis erinnert dich, Wichtiges selbst zu prüfen. Fremde Modelle und Programme dürfen hier laufen, weil ihre Lizenzen das erlauben.
+
+Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos. Hier steht, was davon wofür läuft, unter welcher Lizenz es steht und wo du die Quelle findest.
+
+## Worum es auf dieser Seite geht
+
+Fremde Modelle und Programme dürfen hier laufen, weil ihre Lizenzen das erlauben. Manche verlangen dafür einen Hinweis.
+
+Merke: Diese Seite ist ein Überblick, keine Rechtsberatung. Verbindlich ist der Lizenztext an der Quelle.
+
+## Built with Llama
+
+Das Sprachmodell ist Llama 3.2 von Meta. Seine Lizenz verlangt den sichtbaren Hinweis „Built with Llama“.
+
+## So erkennst du KI-erzeugte Inhalte
+
+Alles, was ein KI-Modell hier schreibt oder spricht, ist als solches gekennzeichnet.
+
+Merke: Ein KI-Modell klingt sicher, auch wenn es irrt. Der Hinweis erinnert dich, Wichtiges selbst zu prüfen.
+
+## Die Stimmen im Labor Text zu Sprache
+
+Das Labor nutzt nur die Stimme Thorsten in mittlerer Qualität. Aufnahmen und Ausgangsmodell sind frei (CC0).
+
+## Die Erklärvideos
+
+Die Sprecherstimme ist KI-erzeugt. Bilder und Musik entstehen aus Programmcode.
+
+## Beispielfotos und Beispieldaten
+
+Die Fotos stammen aus Wikimedia Commons und sind gemeinfrei oder CC0. Alles andere ist selbst erzeugt oder erfunden.
 
 # Glossar
 

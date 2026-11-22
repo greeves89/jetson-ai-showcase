@@ -1,10 +1,13 @@
 // Rohtext ohne JavaScript: jede Seite per fetch auf Pflichtelemente pruefen (so sieht ein Crawler die Seite).
 // Aufruf:  LABOR_URL=https://<jetson>:8443 node tests/seo-rohtext.mjs
+//          lokal mit OEFFENTLICHE_URL:  LABOR_URL=http://127.0.0.1:8765 SEO_BASIS=https://ki-labor.daniel-alisch.site node tests/seo-rohtext.mjs
 import assert from "node:assert/strict";
 import { pruefeLd } from "./seo-ld-pruefung.mjs";
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const BASIS = (process.env.LABOR_URL || "https://localhost:8443").replace(/\/$/, "");
+// Basis der Adressen im JSON-LD (OEFFENTLICHE_URL des Dienstes), wenn der Test lokal gegen eine andere Adresse laeuft
+const LD_BASIS = (process.env.SEO_BASIS || BASIS).replace(/\/$/, "");
 let probleme = 0;
 const meld = (id, text) => { probleme++; console.log(`  [${id}] ${text}`); };
 
@@ -27,11 +30,17 @@ for (const id of ids) {
   if (!/<link rel="canonical" href="https?:\/\/[^"]+">/.test(t)) meld(id, "kein canonical");
   if (!/<meta property="og:locale" content="de_DE">/.test(t)) meld(id, "kein og:locale");
   if (!/<meta name="author" content="Daniel Alisch">/.test(t)) meld(id, "kein author");
-  const ld = pruefeLd(t, BASIS);
+  const ld = pruefeLd(t, LD_BASIS);
   for (const p of ld.probleme) meld(id, "JSON-LD: " + p);
-  const soll = id === "start" ? ["WebSite", "Course", "ItemList", "DefinedTermSet", "BreadcrumbList"] : ["Article", "LearningResource", "BreadcrumbList"];
+  const soll = id === "start" ? ["WebSite", "Person", "Course", "ItemList", "DefinedTermSet", "BreadcrumbList"]
+    : id === "ueber" ? ["WebSite", "Person", "Article", "LearningResource", "BreadcrumbList", "AboutPage"] : ["WebSite", "Person", "Article", "LearningResource", "BreadcrumbList"];
   for (const k of soll) if (!ld.typen.includes(k)) meld(id, "JSON-LD ohne " + k);
-  if (id !== "start" && !/"author":\{"@type":"Person"/.test(t.replace(/\s/g, ""))) meld(id, "kein JSON-LD mit Autor");
+  // Autor als Entitaet: Article verweist per @id auf den Person-Knoten (Aufloesung prueft seo-ld-pruefung.mjs)
+  if (id !== "start" && !/"author":\{"@id":"https:\/\/[^"]+#person"\}/.test(t.replace(/\s/g, ""))) meld(id, "kein JSON-LD mit Autor (@id-Verweis)");
+  // Antwort zuerst: zitierfaehige Kurzfassung direkt nach dem h1
+  const kg = (t.match(/<\/h1><p class="kurzgesagt"><strong>Kurz gesagt:<\/strong> ([^<]+)<\/p>/) || [])[1];
+  if (!kg) meld(id, "keine Kurzfassung direkt nach dem h1");
+  else if (kg.length > 360 || (kg.match(/[.!?](\s|$)/g) || []).length < 2) meld(id, "Kurzfassung nicht 2 bis 3 Saetze: " + kg.length + " Zeichen");
   // Open Graph und X: Vorschaubild 1200 x 630 mit Textalternative
   const og = (n) => m(new RegExp('<meta property="' + n + '" content="([^"]+)"'));
   const bildUrl = og("og:image");
@@ -84,9 +93,11 @@ if (intern) {
   if (lv.status !== 200 || (lvt.match(/^Adresse: https?:\/\//gm) || []).length < ids.length - 1 || !/^Frage: /m.test(lvt) || !/^# Glossar$/m.test(lvt)) meld("llms-full.txt", "Kerntexte unvollstaendig");
   if (/__BASIS__/.test(lkt + lvt)) meld("llms", "Platzhalter nicht ersetzt");
   if (/[–—]/.test(lkt + lvt)) meld("llms", "Gedankenstrich");
+  if (!/^## Optional$/m.test(lkt) || !/^Autor und Herausgeber: /m.test(lkt) || !/^Lizenz der Inhalte: /m.test(lkt)) meld("llms.txt", "Optional, Autor oder Lizenz fehlt");
 }
 const f404 = await fetch(BASIS + "/gibt-es-nicht-xyz");
 if (f404.status !== 404 || !/noindex/.test(f404.headers.get("x-robots-tag") || "") || !/<meta name="robots" content="noindex,nofollow">/.test(await f404.text())) meld("404", "404-Seite mit Status 404 und noindex erwartet");
+if (!intern && !ids.includes("ueber")) meld("ueber", "Seite Ueber das Labor fehlt in der Navigation");
 if (intern) for (const u of ["/llms.txt", "/llms-full.txt"]) if ((await fetch(BASIS + u)).status !== 404) meld(u, "intern muss 404 liefern");
 const cs = await fetch(BASIS + "/static/app.js?v=1");
 if (!/immutable/.test(cs.headers.get("cache-control") || "")) meld("cache", "statische Datei mit Versionsparameter ohne immutable");

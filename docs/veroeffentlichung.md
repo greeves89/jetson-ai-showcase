@@ -22,6 +22,10 @@ Heimnetz. Die Seiten liegen unter echten Adressen (`/rag-embedding`), der Server
 | Echte Adressen (`/<id>`, History-API), alte `#/id`-Links werden umgeleitet | fertig, `app/static/app.js` |
 | Vorgerenderte Seiten (Titel, Beschreibung, `canonical`, Open Graph, JSON-LD, Inhalt und Linkliste im Rohtext) | fertig, `scripts/seo_bauen.mjs` erzeugt `app/static/seo/` |
 | Strukturierte Daten (`Article`/`LearningResource`, `BreadcrumbList`, `VideoObject` mit Transkript, `FAQPage` aus dem Quiz, `Course`, `ItemList`, `DefinedTermSet`), Open-Graph-Bild je Bereich (`app/static/og/`, erzeugt mit `node scripts/og_bauen.mjs`), `hreflang`, `llms.txt` und `llms-full.txt` (nur öffentlich) | fertig, alles aus den Inhaltsdaten durch `scripts/seo_bauen.mjs` |
+| Autor als Entität: JSON-LD `Person` mit derselben `@id` wie auf der Hauptseite (`https://daniel-alisch.site/#person`), `sameAs` aus `seite.autor_profile` in `module.json` (nur Profile, die auf der Hauptseite verlinkt sind). Jede Seite bringt `Person` und `WebSite` (mit `author`/`publisher`) mit, `Article`, `Course`, `VideoObject` verweisen per `@id`. `datePublished`/`dateModified` aus `git log` der Inhaltsdatei | fertig, `scripts/seo_bauen.mjs` |
+| Antwort zuerst: nach dem `h1` jeder Seite eine Kurzfassung in 2 bis 3 Sätzen ("Kurz gesagt", auch als `abstract` im JSON-LD und in `llms-full.txt`), abgeleitet aus "Das nimmst du mit", Merksätzen und Abschnitts-Leads oder aus dem Feld `zusammenfassung` | fertig, `scripts/seo_bauen.mjs` |
+| Seite "Über das Labor" (`/ueber`, `app/static/content-ueber.js`), im JSON-LD als `AboutPage` mit dem Autor als Hauptgegenstand | fertig |
+| IndexNow für Bing und Yandex (ChatGPT Search nutzt den Bing-Index): Schlüsseldatei und Meldeskript | fertig, Schlüssel fehlt noch (siehe unten) |
 | gzip für Text, `Cache-Control` für `/static/` (mit `?v=` unveränderlich), Vorladen der Skripte | fertig, `app/app.py` |
 | `robots.txt` (KI-Crawler ausdrücklich erlaubt), `sitemap.xml` mit `lastmod`, Bild- und Videoeinträgen, `X-Robots-Tag` und Meta-Robots | fertig, intern überall "nicht indexieren", Umschalter `OEFFENTLICH=1` |
 | Fußzeile mit Name des Autors, Lernprojekt-Hinweis, Links zu Impressum und Datenschutz | fertig, **Adressen der Rechtstexte fehlen**: `seite.impressum_url` und `seite.datenschutz_url` in `app/static/module.json` eintragen (Links erscheinen erst dann) |
@@ -42,6 +46,9 @@ Heimnetz. Die Seiten liegen unter echten Adressen (`/rag-embedding`), der Server
    erlaubt Seiten (nicht `/api/`, `/ws/`) und nennt die Sitemap, `/sitemap.xml` listet alle Seiten. Ohne
    `OEFFENTLICH=1` steht überall "noindex, nofollow", `robots.txt` sperrt alles und die Sitemap gibt 404.
    Vor dem Start: Rechtslinks in `module.json` eintragen, `app/static/seo` neu bauen, in der Search Console die Sitemap melden.
+   Datum: `dateModified` und `lastmod` kommen aus `git log` der Inhaltsdatei. Ist die Datei noch nicht eingecheckt oder
+   geändert, gilt der heutige Tag. Deshalb Inhalt und `app/static/seo` am selben Tag einchecken; sonst meldet
+   `--pruefen` am Folgetag veraltete Dateien (dann neu bauen). Danach IndexNow melden (siehe unten).
 5. **Tunnel:** `cloudflared` auf dem Jetson als Dienst, Tunnel auf `https://localhost:8443` (ohne Zertifikatsprüfung
    für das lokale selbstsignierte Zertifikat) oder besser auf eine HTTP-Adresse, DNS-Eintrag für die Wunschadresse
    im Cloudflare-Konto. Dafür sind ein Tunnel-Token und Zugriff auf die DNS-Zone nötig; beides liegt beim Betreiber.
@@ -51,9 +58,25 @@ Heimnetz. Die Seiten liegen unter echten Adressen (`/rag-embedding`), der Server
 Nur ausgehende Verbindung, keine Portfreigabe im Router, gültiges HTTPS (Browser geben Kamera und Mikrofon nur
 im sicheren Kontext frei), Schutzfunktionen von Cloudflare vor dem Gerät.
 
+## IndexNow (Bing, Yandex und ChatGPT Search)
+IndexNow meldet geänderte Adressen sofort an Bing, Yandex und weitere Suchmaschinen, statt auf den nächsten Besuch des
+Crawlers zu warten. ChatGPT Search greift auf den Bing-Index zu.
+1. Einmalig einen Schlüssel erzeugen (8 bis 128 Zeichen aus Buchstaben, Ziffern und Bindestrich), zum Beispiel
+   `openssl rand -hex 16`. Der Schlüssel kommt nur in die Umgebung des Dienstes (`INDEXNOW_KEY=...` in der
+   systemd-Umgebungsdatei), nie ins Repo.
+2. Dienst mit `OEFFENTLICH=1` und `INDEXNOW_KEY` starten. Dann liefert er `/<Schlüssel>.txt` mit dem Schlüssel als Inhalt
+   aus (sonst 404). Der Schlüssel ist kein Geheimnis im engeren Sinn, er belegt nur, dass Meldungen vom Betreiber stammen.
+3. Nach jeder veröffentlichten Inhaltsänderung: `INDEXNOW_KEY=<Schlüssel> node scripts/indexnow.mjs`. Das Skript holt
+   die Sitemap von `https://ki-labor.daniel-alisch.site`, prüft die Schlüsseldatei und meldet alle Adressen an
+   `api.indexnow.org` (Status 200 oder 202 heißt angenommen). `--probe` prüft nur und meldet nichts, `--abruf
+   http://127.0.0.1:8765` holt Sitemap und Schlüssel von einem lokalen Dienst.
+4. In den Bing Webmaster Tools die Website bestätigen und die Sitemap melden; dort ist auch zu sehen, ob IndexNow ankommt.
+
 ## Tests für die Auffindbarkeit
 - `python3 tests/seo_server_test.py`: beide Betriebsarten (intern und öffentlich) mit dem FastAPI-`TestClient`.
-- `node tests/seo-rohtext.mjs`: jede Seite ohne JavaScript (Titel, Beschreibung, `canonical`, Open Graph und Vorschaubild, JSON-LD mit Pflichtfeldern je Typ über `tests/seo-ld-pruefung.mjs`, `h1`, Linkliste, `llms.txt`, Sitemap, `robots.txt`, 404, Cache, gzip). Gegen beide Betriebsarten laufen lassen.
+- `node tests/seo-rohtext.mjs`: jede Seite ohne JavaScript (Titel, Beschreibung, `canonical`, Open Graph und Vorschaubild, JSON-LD mit Pflichtfeldern je Typ über `tests/seo-ld-pruefung.mjs`, Autor als `Person` mit aufgelösten `@id`-Verweisen, `AboutPage` auf `/ueber`, `h1` mit Kurzfassung direkt danach, Linkliste, `llms.txt`, Sitemap, `robots.txt`, 404, Cache, gzip). Gegen beide Betriebsarten laufen lassen.
+- `node tests/seo-titel.mjs`: ohne Server, prüft `app/static/seo/index.json`: Titel höchstens 60 Zeichen und eindeutig, Beschreibung 120 bis 160 Zeichen, Kurzfassung nach dem `h1`. Der Generator meldet dieselben Ausreißer als Hinweis.
+- Lokal ohne Jetson: `OEFFENTLICH=1 OEFFENTLICHE_URL=https://ki-labor.daniel-alisch.site python3 -m uvicorn app.app:app --port 8765`, dann `LABOR_URL=http://127.0.0.1:8765 SEO_BASIS=https://ki-labor.daniel-alisch.site node tests/seo-rohtext.mjs` (`SEO_BASIS`: Basis der Adressen im JSON-LD). Dienst danach beenden.
 - `node tests/seo-adressen.mjs [hell]`: Klick-Navigation ohne Neuladen, Zurück/Vor, alte `#/`-Links, Abfrage, Fokus, Scrollposition, 404-Seite.
 
 ## Last, Warteschlange und Zeitlimit (Einstellungen)
@@ -63,5 +86,5 @@ Umgebungsvariablen des Dienstes (Standardwerte in Klammern):
 - `LLM_WARTEZEIT_S` (90): längste Wartezeit in der Schlange.
 - `SITZUNG_TTL_S` (1800): Zeitlimit je Sitzung. Anlern-Beispiele und RAG-Texte verfallen nach so vielen Sekunden Ruhe.
 Die Platznummer holt sich die Oberfläche über `GET /api/warteschlange` (Cookie `kl_s`). Die Belegung steht auch in `/api/stats` (`warteschlange`).
-Hinweis: Neue Seiten (`sicherheit-einfach`, `uc-handwerk`) erscheinen für Direktaufrufe und Suchmaschinen erst nach `node scripts/seo_bauen.mjs`.
+Hinweis: Neue Seiten (`sicherheit-einfach`, `uc-handwerk`, `ueber`) erscheinen für Direktaufrufe und Suchmaschinen erst nach `node scripts/seo_bauen.mjs`.
 Test: `python3 tests/warteschlange_test.py`, `node tests/laien.mjs`.

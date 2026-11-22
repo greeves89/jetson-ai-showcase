@@ -38,7 +38,7 @@ python3 -c "from faster_whisper import WhisperModel; WhisperModel('${WHISPER_MOD
 echo "== piper (text zu sprache, laedt die freien deutschen Stimmen vorab, siehe docs/lizenzen.md) =="
 PV="${PIPER_VOICE_DIR:-$HOME/.local/share/piper-voices}"
 mkdir -p "$PV"
-for V in thorsten/medium/de_DE-thorsten-medium thorsten/high/de_DE-thorsten-high kerstin/low/de_DE-kerstin-low; do
+for V in thorsten/medium/de_DE-thorsten-medium; do
   for E in onnx onnx.json; do
     F="$PV/$(basename "$V").$E"
     [ -s "$F" ] || curl -sSL -m 300 --retry 3 -o "$F" "https://huggingface.co/rhasspy/piper-voices/resolve/main/de/de_DE/$V.$E" \

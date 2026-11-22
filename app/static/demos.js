@@ -189,6 +189,8 @@
     const el = h("section", { class: "d-beispiel", "aria-label": "Beispiel: " + e.titel },
       h("div", { class: "d-bsp-kopf" }, ic("rocket"), h("b", null, "Beispiel: " + e.titel), h("span", { class: "chip" }, e.bereich)),
       h("p", { class: "d-bsp-text" }, e.beschreibung),
+      // Beispiel-Sprachaufnahmen sind synthetisch (beispiele/QUELLEN.md): sichtbar kennzeichnen, nicht nur im Aufklapper
+      e.daten && e.daten.audio ? h("p", { class: "ki-hinweis" }, KL.icon("audio-lines"), h("span", null, "Die Stimme der Beispielaufnahme ist KI-erzeugt. Der Inhalt ist erfunden.")) : null,
       h("p", { class: "d-bsp-text d-leise" }, e.ziel),
       h("details", { class: "d-bsp-mehr" }, h("summary", null, "Ablauf in Schritten"), h("ol", null, (e.ablauf || []).map((a) => h("li", null, a)))),
       (e.erwartung || e.hinweis) ? h("details", { class: "d-bsp-mehr" }, h("summary", null, "Was du erwarten kannst"),
@@ -236,6 +238,14 @@
     return muster.length ? muster.some((x) => t.includes(x)) : null;
   }
   KL.beispiel = { url: bspUrl, bildLaden, textLaden, kopf: beispielKopf, start: beispielStart, antwortPasst, hervor };
+
+  /* Kennzeichnung nach KI-Verordnung (Art. 50) und Llama-Lizenz (Abschnitt 1.b.i): kurzer, sichtbarer Hinweis am
+     Ausgabebereich jeder Sprachmodell-Antwort. Gemeinsam fuer Chat, RAG, Agent und die Bausteine mit echtem Modell. */
+  KL.kiHinweis = function () {
+    return h("p", { class: "ki-hinweis" }, KL.icon("bot"),
+      h("span", null, "Antwort eines KI-Modells. Sie kann falsch sein, prüfe Wichtiges. "),
+      h("a", { href: "/lizenzen" }, "Built with Llama"));
+  };
 
   /* Baustein fuer die Use-Case-Seiten (widget: "beispielstart"): Knopf, der das passende Labor mit dem Beispiel oeffnet. */
   KL.widgets.beispielstart = function (root, seite) {
@@ -953,7 +963,7 @@
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Frage. Hier siehst du dann, wie der Jetson Token für Token antwortet.");
 
-    root.append(modellZeile, h("div", { class: "d-chatbox" }, verlauf, leer), eingabe, chips, einst, live.el);
+    root.append(modellZeile, h("div", { class: "d-chatbox" }, verlauf, leer), KL.kiHinweis(), eingabe, chips, einst, live.el);
 
     /* Modellstatus aus den Live-Werten */
     function modellStatusSetzen(d) {
@@ -1175,7 +1185,7 @@
     const antwort = h("div", { class: "satz d-antwort", "aria-live": "off" }, "Hier erscheint die Antwort.");
     const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite", hidden: true });
     const s3 = h("div", { class: "schritt" }, h("div", { class: "nr" }, "3"),
-      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwort, urteil));
+      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwort, KL.kiHinweis(), urteil));
     let erwartet = null;            // Beispielfrage mit erwarteter Antwort (Beispielmodus)
     frage.addEventListener("input", () => { if (erwartet && frage.value !== erwartet.frage) erwartet = null; });
     function urteilZeigen(roh) {
@@ -1403,7 +1413,7 @@
     const karten = h("div", { class: "d-karten" });
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Aufgabe. Hier siehst du dann, wie das Modell Werkzeuge wählt und wie lange jeder Schritt dauert.");
-    root.append(h("div", { class: "eingabe d-frage" }, frage, sendeBtn), chips, hinweis, meld.el, status, karten, live.el);
+    root.append(h("div", { class: "eingabe d-frage" }, frage, sendeBtn), chips, hinweis, meld.el, status, karten, KL.kiHinweis(), live.el);
     let szenario = null, erwartet = null;      // Beispielmodus: Szenario fuer /api/agent/ask und erwartete Antwort
     frage.addEventListener("input", () => { if (erwartet && frage.value !== erwartet.frage) erwartet = null; });
     const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite", hidden: true });

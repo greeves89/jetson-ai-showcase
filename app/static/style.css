@@ -536,3 +536,17 @@ details.mehr>.mehr-in>:first-child{margin-top:0}
 /* Ergebnisflaechen (Live-Erklaerung): ruhige Flaeche, Radius 20; Kacheln und Balken darin eine Stufe heller bzw. dunkler */
 .d-live .messwert,.tts-live .messwert,.wh-live .messwert{background:var(--flaeche)}
 .d-live .pipe,.tts-live .pipe,.wh-live .pipe{background:var(--fuell)}
+
+/* Kennzeichnung KI-erzeugter Inhalte (KI-Verordnung Art. 50) und Lizenzhinweise: dezent, aber immer sichtbar */
+.ki-hinweis{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;font-size:13px;line-height:1.45;color:var(--leise)}
+.ki-hinweis .ic{flex:none;width:16px;height:16px;margin-top:1px}
+.ki-hinweis a{color:inherit;text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px}
+.ki-hinweis a:hover{color:var(--text);text-decoration-color:currentColor}
+.video-ki{display:flex;gap:8px;align-items:center;margin:0;padding:10px 16px;font-size:13px;line-height:1.45;color:var(--leise)}
+.video-ki .ic{flex:none;width:16px;height:16px}
+.video-ki a{color:inherit;text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px}
+.chip.ki-kennung .ic{width:14px;height:14px}
+.fuss-lizenz .fuss-llama{white-space:nowrap}
+table.lizenzen tbody th{white-space:normal;min-width:10em}
+table.lizenzen a{display:inline-flex;align-items:center;gap:4px;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;word-break:break-word}
+table.lizenzen a .ic{width:13px;height:13px;flex:none}

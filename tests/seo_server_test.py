@@ -9,6 +9,7 @@ import subprocess
 import sys
 
 BASIS = "https://ki-labor.example.com"
+INDEXNOW_TEST = "testschluessel-0123456789"   # nur fuer den Test, kein echter Schluessel
 
 
 def pruefe(modus):
@@ -66,7 +67,16 @@ def pruefe(modus):
     typen = {x for k in lds[0].get("@graph", []) for x in (k["@type"] if isinstance(k["@type"], list) else [k["@type"]])}
     ok({"Article", "LearningResource", "BreadcrumbList", "VideoObject", "FAQPage"} <= typen, f"JSON-LD Typen der Seite: {sorted(typen)}")
     art = next(k for k in lds[0]["@graph"] if "Article" in (k["@type"] if isinstance(k["@type"], list) else [k["@type"]]))
-    ok(art["isAccessibleForFree"] is True and art["inLanguage"] == "de" and art["author"]["name"] == "Daniel Alisch" and art["publisher"]["name"] == "Daniel Alisch", "Article: frei, de, Autor, Herausgeber")
+    # Autor als Entitaet: ein Person-Knoten, alle anderen verweisen per @id darauf
+    personen = [k for k in lds[0]["@graph"] if k["@type"] == "Person"]
+    pid = "https://daniel-alisch.site/#person"
+    ok(len(personen) == 1 and personen[0]["@id"] == pid and personen[0]["name"] == "Daniel Alisch" and personen[0]["url"] == seite["autor_url"], "Person-Knoten mit @id, Name, url")
+    ok(personen and personen[0].get("sameAs") == seite.get("autor_profile") and len(seite.get("autor_profile", [])) >= 1, "Person sameAs aus module.json")
+    ok(art["isAccessibleForFree"] is True and art["inLanguage"] == "de" and art["author"] == {"@id": pid} and art["publisher"] == {"@id": pid}, "Article: frei, de, Autor und Herausgeber per @id")
+    web = next((k for k in lds[0]["@graph"] if k["@type"] == "WebSite"), {})
+    ok(web.get("@id") == f"{BASIS}/#website" and web.get("publisher") == {"@id": pid} and web.get("author") == {"@id": pid}, "WebSite mit publisher und author auf jeder Seite")
+    ok(art.get("abstract") and art["abstract"] in t, "Article: abstract = Kurzfassung im Rohtext")
+    ok(re.search(r'<h1>[^<]+</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> [^<]{60,}</p>', t), "Kurzfassung direkt nach dem h1")
     ok(re.fullmatch(r"\d{4}-\d{2}-\d{2}", art["datePublished"]) and re.fullmatch(r"\d{4}-\d{2}-\d{2}", art["dateModified"]), "Article: Datumsangaben")
     ok(art["teaches"] and art["about"] and art["educationalLevel"], "Article: teaches, about, educationalLevel")
     ok(art["image"] == [f"{BASIS}/static/og/wissen-und-rag.png"], "Article: Bild des Bereichs")
@@ -79,6 +89,19 @@ def pruefe(modus):
     sd = re.search(r'<meta name="description" content="([^"]+)"', t).group(1)
     ok(120 <= len(sd) <= 160, f"description 120 bis 160 Zeichen: {len(sd)}")
     ok(len(re.search(r"<title>([^<]+)</title>", t).group(1)) <= 60, "Titel hoechstens 60 Zeichen")
+    ldstart = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S).group(1))["@graph"]
+    kurs = next((k for k in ldstart if k["@type"] == "Course"), {})
+    ok(kurs.get("provider") == {"@id": pid} and kurs.get("author") == {"@id": pid}, "Course: provider und author per @id")
+    ok('<p class="kurzgesagt"><strong>Kurz gesagt:</strong>' in s, "Start: Kurzfassung")
+    # Seite "Ueber das Labor"
+    u = c.get("/ueber")
+    ut = u.text
+    ok(u.status_code == 200 and "<h1>Über das KI-Labor</h1>" in ut and "Daniel Alisch" in ut.split("<main")[1], "/ueber mit h1 und Autor")
+    ulg = json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', ut, re.S).group(1))["@graph"]
+    about = next((k for k in ulg if k["@type"] == "AboutPage"), {})
+    ok(about.get("@id") == f"{BASIS}/ueber" and about.get("mainEntity") == {"@id": pid} and about.get("isPartOf") == {"@id": f"{BASIS}/#website"}, "/ueber: AboutPage mit Autor als Hauptgegenstand")
+    ok(any(k["@type"] == "Person" for k in ulg), "/ueber: Person-Knoten")
+    ok('class="nav" href="/ueber"' in s, "/ueber in der Navigation")
     sg = {x for k in json.loads(re.search(r'<script type="application/ld\+json">(.*?)</script>', s, re.S).group(1))["@graph"] for x in ([k["@type"]] if isinstance(k["@type"], str) else k["@type"])}
     ok({"WebSite", "Course", "ItemList", "DefinedTermSet", "BreadcrumbList", "CollectionPage"} <= sg, f"JSON-LD der Startseite: {sorted(sg)}")
     ok('rel="preload" as="script" href="/static/content-rag.js?v=' in t, "Vorladen der Inhaltsdateien")
@@ -106,6 +129,12 @@ def pruefe(modus):
         ok(lv.status_code == 200 and f"Adresse: {BASIS}/rag-embedding" in lv.text and "Frage: " in lv.text and "# Glossar" in lv.text, "llms-full.txt")
         ok('<link rel="alternate" type="text/plain" href="' + BASIS + '/llms.txt"' in t, "llms.txt-Link im Kopf")
         ok(f"{BASIS}/llms-full.txt" in lk.text, "llms.txt nennt llms-full.txt")
+        ok("\n## Optional\n" in lk.text and "Autor und Herausgeber: Daniel Alisch (https://daniel-alisch.site)" in lk.text and "Lizenz der Inhalte:" in lk.text, "llms.txt: Optional, Autor, Lizenz")
+        ok(f"- [Über das KI-Labor]({BASIS}/ueber): " in lk.text and "Lizenz der Inhalte:" in lv.text and "Kurz gesagt: " in lv.text, "llms: Ueber-Seite, Lizenz, Kurzfassungen")
+        ok(not re.search(r"[–—]", lk.text + lv.text), "llms ohne Gedankenstrich")
+        ik = c.get(f"/{INDEXNOW_TEST}.txt")
+        ok(ik.status_code == 200 and ik.text == INDEXNOW_TEST and ik.headers["content-type"].startswith("text/plain"), "IndexNow-Schluesseldatei")
+        ok(c.get("/falscher-schluessel-123.txt").status_code == 404, "IndexNow: nur der eigene Schluessel")
     else:
         for url in ("/", "/rag-embedding", "/static/app.js", "/api/stats", "/robots.txt", "/gibt-es-nicht"):
             ok("noindex" in c.get(url).headers.get("x-robots-tag", ""), f"X-Robots-Tag noindex auf {url}")
@@ -114,6 +143,7 @@ def pruefe(modus):
         ok(sm.status_code == 404, "Sitemap intern 404")
         ok(lk.status_code == 404 and lv.status_code == 404, "llms.txt intern 404")
         ok("llms.txt" not in t, "kein llms.txt-Link intern")
+        ok(c.get(f"/{INDEXNOW_TEST}.txt").status_code == 404, "IndexNow-Schluesseldatei intern 404")
     print(f"{modus}: {'FEHLER ' + str(fehler) if fehler else 'ok'}")
     return 1 if fehler else 0
 
@@ -125,6 +155,6 @@ if __name__ == "__main__":
     rc = 0
     for modus, extra in (("intern", {}), ("oeffentlich", {"OEFFENTLICH": "1"})):
         env = {k: v for k, v in os.environ.items() if k not in ("OEFFENTLICH", "OEFFENTLICHE_URL")}
-        env.update(extra, OEFFENTLICHE_URL=BASIS)
+        env.update(extra, OEFFENTLICHE_URL=BASIS, INDEXNOW_KEY=INDEXNOW_TEST)
         rc |= subprocess.run([sys.executable, __file__, modus], cwd=wurzel, env=env).returncode
     sys.exit(rc)

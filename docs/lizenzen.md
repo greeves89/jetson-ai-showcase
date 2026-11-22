@@ -9,12 +9,14 @@ Die Lizenz steht in der jeweiligen Modellkarte (`MODEL_CARD`) neben der Stimme.
 | Stimme im Labor | Modell | Quelle der Aufnahmen | Lizenz | Namensnennung |
 |---|---|---|---|---|
 | Thorsten | `de_DE-thorsten-medium` | Thorsten-Voice (github.com/thorstenMueller/Thorsten-Voice) | CC0 | nicht verlangt, wird aber gern gesehen |
-| Thorsten (hohe Qualität) | `de_DE-thorsten-high` | Thorsten-Voice | CC0 | wie oben |
-| Kerstin | `de_DE-kerstin-low` | rhasspy/dataset-voice-kerstin (github.com/rhasspy/dataset-voice-kerstin) | CC0 | nicht verlangt |
 
 Modellquelle: https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE
 
 ## Bewusst nicht aufgenommen
+
+- `thorsten-high` und `kerstin-low` (entfernt am 22.11.2026): Die Aufnahmen sind CC0, die Modelle sind aber aus Ausgangsmodellen
+  mit nicht gewerblichen Trainingsdaten weitertrainiert (thorsten-high aus lessac, Blizzard-2013-Lizenz nur für Forschung;
+  kerstin-low aus ryan, RyanSpeech unter CC BY-NC-SA 4.0). Siehe die jeweilige Modellkarte.
 
 - `pavoque`: CC BY-NC-SA 4.0 (nicht kommerziell, Weitergabe unter gleichen Bedingungen).
 - `eva_k`, `karlsson`, `ramona`: Die Modellkarte verweist nur auf den M-AILABS-Datensatz ("See URL") und nennt keine

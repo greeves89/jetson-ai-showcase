@@ -55,9 +55,49 @@ function beschreibungAus(s) {
   }
   return kuerzen(text || kand[0] || "", 160);
 }
-/** Titel hoechstens 60 Zeichen: "<Titel> · KI-Labor", sonst nur der Titel. */
+/** Zitierfaehige Kurzfassung (2 bis 3 Saetze) fuer den Anfang der Seite, nur aus vorhandenen Feldern:
+ *  zusammenfassung (falls gesetzt), sonst "Das nimmst du mit", Merksaetze und die Leitsaetze der Abschnitte; der erste
+ *  Satz von "Im Business" nur, wenn sonst zu wenig da ist. Jeder Text wird von vorn gelesen; faellt ein Satz heraus,
+ *  entfaellt der Rest dieses Textes (Folgesaetze beziehen sich oft auf ihn). Heraus fallen Fragen, Saetze aus dem Lead
+ *  (kurz), Checklisten, Verweise auf andere Seiten und ein Anfang, der sich auf Vorheriges bezieht. Fehlt Stoff,
+ *  stellen sich Aussagesaetze des Leads davor. Hoechstens 360 Zeichen. */
+const ZF_MAX = 360;
+const BEZUG = /^(Dies|Diese[rsmn]?|Darum|Danach|Dort|Dann|Deshalb|Daher|Damit|Dabei|Dafür|Dazu|Sonst|Außerdem|Auch|Beides|Beide|Sie|Er|Es)\b|^Das (ist|heißt|klappt|kostet|gilt|reicht|geht)\b|\bdas alles\b/;
+function zusammenfassungAus(s) {
+  if (s.zusammenfassung) return klar(s.zusammenfassung).replace(/\s+/g, " ").trim();
+  const lead = saetze(s.kurz || "");
+  const norm = (x) => x.toLowerCase().replace(/[^a-zäöüß0-9]+/g, " ").trim();
+  const imLead = new Set(lead.map(norm));
+  const aussage = (x) => !/\?$/.test(x) && x.length >= 25 && !/^Checkliste\b/.test(x) && !/\b(steht|stehen) auf (der|den) Seiten?\b|^Mehr (zu|dazu)\b/.test(x);
+  const gruppen = [
+    ...(s.mitnehmen || []),
+    ...(s.abschnitte || []).filter((a) => a.merke).map((a) => a.merke),
+    ...(s.abschnitte || []).filter((a) => a.kurz).map((a) => a.kurz),
+  ];
+  const gewaehlt = [];
+  let laenge = 0;
+  const passt = (x) => aussage(x) && !imLead.has(norm(x)) && !gewaehlt.some((g) => norm(g) === norm(x)) && laenge + x.length + 1 <= ZF_MAX;
+  const lesen = (text) => {
+    let erster = true;
+    for (const x of saetze(text)) {
+      if (gewaehlt.length >= 3) return;
+      if (!passt(x) || (erster && BEZUG.test(x))) return;
+      gewaehlt.push(x); laenge += x.length + 1; erster = false;
+    }
+  };
+  for (const g of gruppen) lesen(g);
+  if (gewaehlt.length < 2 && s.business && s.business.text) lesen(saetze(s.business.text)[0] || "");
+  // zu wenig Stoff: Aussagesaetze des Leads stellen sich davor (Reihenfolge wie auf der Seite)
+  const davor = [];
+  for (const l of lead) {
+    if (gewaehlt.length + davor.length >= 2) break;
+    if (aussage(l) && !BEZUG.test(l) && laenge + l.length + 1 <= ZF_MAX) { davor.push(l); laenge += l.length + 1; }
+  }
+  return [...davor, ...gewaehlt].join(" ");
+}
+/** Titel hoechstens 60 Zeichen: "<Titel> · KI-Labor", sonst (zu lang oder Marke schon im Titel) nur der Titel. */
 function titelMitMarke(t) {
-  return kuerzen(t.length + TITEL_ENDE.length <= 60 ? t + TITEL_ENDE : t, 60);
+  return kuerzen(t.length + TITEL_ENDE.length <= 60 && !t.includes("KI-Labor") ? t + TITEL_ENDE : t, 60);
 }
 
 /* ---------------------------------------------------------------- Fragment einer Seite */
@@ -112,12 +152,17 @@ function bild(v) {
 }
 const liste = (l) => "<ul>" + l.map((x) => "<li>" + md(x) + "</li>").join("") + "</ul>";
 
+/** Antwort zuerst: die Kurzfassung direkt nach dem h1 (fuer Suchmaschinen und KI-Antworten zitierfaehig). */
+function kurzGesagt(s) {
+  const z = zusammenfassungAus(s);
+  return z ? '<p class="kurzgesagt"><strong>Kurz gesagt:</strong> ' + esc(z) + "</p>" : "";
+}
 function fragment(id) {
   const s = INHALT.seiten[id];
   const o = [];
   if (s.typ === "start") {
     o.push('<div class="seitenbreite"><p class="ueber">KI-Labor auf dem Jetson</p>');
-    o.push("<h1>" + md(s.titel) + '</h1><p class="lead">' + md(s.kurz) + "</p>");
+    o.push("<h1>" + md(s.titel) + "</h1>" + kurzGesagt(s) + '<p class="lead">' + md(s.kurz) + "</p>");
     o.push('<section class="block"><h2>Dein Lernpfad</h2><div class="flaeche pad"><ol class="pfad">' +
       s.pfad.map((p) => "<li><h3>" + (IDS.has(p.id) ? '<a href="' + pfad(p.id) + '">' + esc(p.h) + "</a>" : esc(p.h)) + "</h3><p>" + md(p.p) + "</p></li>").join("") +
       "</ol></div></section>");
@@ -127,7 +172,7 @@ function fragment(id) {
   }
   const art = s.typ === "lektion" ? "Lektion" + (s.nr ? " " + s.nr : "") : "Labor";
   const ueber = s.typ === "lektion" && s.gruppe === "Grundlagen" ? "Grundlagen · " + art : s.gruppe;
-  o.push('<div class="seitenbreite"><p class="ueber">' + esc(ueber) + "</p><h1>" + md(s.titel) + '</h1><p class="lead">' + md(s.kurz) + "</p>");
+  o.push('<div class="seitenbreite"><p class="ueber">' + esc(ueber) + "</p><h1>" + md(s.titel) + "</h1>" + kurzGesagt(s) + '<p class="lead">' + md(s.kurz) + "</p>");
   o.push('<div class="text">');
   for (const a of s.abschnitte || []) {
     o.push('<h2 class="abs">' + md(a.h) + "</h2>");
@@ -189,27 +234,45 @@ const bereiche = INHALT.seiten.start.bereiche || {};
 const gruppeVon = (id) => index.gruppen.find((g) => g.seiten.includes(id));
 const url = (id) => BASIS + (id === "start" ? "/" : "/" + id);
 
-// Datum aus Git (letzte und erste Aenderung der Datei); ohne Git-Verlauf der heutige Tag
-const heute = new Date().toISOString().slice(0, 10);
+// Datum aus Git (letzte und erste Aenderung der Datei). Hat die Datei nicht eingecheckte Aenderungen (oder ist neu), gilt
+// der heutige Tag: genau dieses Datum traegt der Commit, der sie heute eincheckt; danach bleibt --pruefen stabil.
+// Ohne Git-Verlauf ebenfalls der heutige Tag (Ortszeit wie %cs).
+const heute = new Date().toLocaleDateString("sv-SE");
 const gitCache = {};
+const git = (args) => execFileSync("git", args, { cwd: WURZEL, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] });
 function gitDaten(rel) {
   if (!(rel in gitCache)) {
-    let l = [];
-    try { l = execFileSync("git", ["log", "--format=%cs", "--follow", "--", rel], { cwd: WURZEL, encoding: "utf8", stdio: ["ignore", "pipe", "ignore"] }).trim().split("\n").filter(Boolean); } catch { /* kein Git */ }
-    gitCache[rel] = { neu: l[0] || heute, alt: l[l.length - 1] || heute };
+    let l = [], offen = false;
+    try {
+      l = git(["log", "--format=%cs", "--follow", "--", rel]).trim().split("\n").filter(Boolean);
+      offen = git(["status", "--porcelain", "--", rel]).trim() !== "";
+    } catch { /* kein Git */ }
+    gitCache[rel] = { neu: offen ? heute : l[0] || heute, alt: l[l.length - 1] || heute };
   }
   return gitCache[rel];
 }
 const geaendert = (id) => gitDaten("app/static/" + quelle[id]).neu;
 const veroeffentlicht = (id) => gitDaten("app/static/" + quelle[id]).alt;
 
-// Autor (module.json -> seite)
+// Autor als Entitaet (module.json -> seite): eine Person mit fester @id. Die @id ist dieselbe wie im JSON-LD der Hauptseite
+// (autor_url + "/#person"), damit Suchmaschinen beide Seiten derselben Person zuordnen. sameAs: seite.autor_profile
+// (nur Profile, die auf der Hauptseite verlinkt sind). Jede Seite enthaelt den Personen-Knoten einmal, alle anderen
+// Knoten verweisen per @id darauf (author, publisher, provider, copyrightHolder).
 const seiteInfo = module.seite || {};
 const frei = (u) => (typeof u === "string" && /^https?:\/\//.test(u) ? u : "");
+const profile = (Array.isArray(seiteInfo.autor_profile) ? seiteInfo.autor_profile : []).filter(frei);
 const PERSON = seiteInfo.autor
-  ? { "@type": "Person", ...(frei(seiteInfo.autor_url) ? { "@id": seiteInfo.autor_url.replace(/\/?$/, "/") + "#person" } : {}), name: seiteInfo.autor, ...(frei(seiteInfo.autor_url) ? { url: seiteInfo.autor_url } : {}) }
+  ? { "@type": "Person", "@id": frei(seiteInfo.autor_url) ? seiteInfo.autor_url.replace(/\/?$/, "/") + "#person" : BASIS + "/#autor", name: seiteInfo.autor,
+      ...(frei(seiteInfo.autor_url) ? { url: seiteInfo.autor_url } : {}), ...(profile.length ? { sameAs: profile } : {}) }
   : null;
-const mitPerson = (o) => (PERSON ? { ...o, author: PERSON, publisher: PERSON } : o);
+const PERSON_REF = PERSON ? { "@id": PERSON["@id"] } : null;
+const mitPerson = (o) => (PERSON ? { ...o, author: PERSON_REF, publisher: PERSON_REF } : o);
+/** Knoten, die jede Seite mitbringt: die Person und die Website (Ziel der Verweise isPartOf, author, publisher). */
+const stammKnoten = (beschr) => [
+  ...(PERSON ? [PERSON] : []),
+  mitPerson({ "@type": "WebSite", "@id": BASIS + "/#website", name: "KI-Labor", url: BASIS + "/", inLanguage: "de",
+    ...(beschr ? { description: beschr } : {}), ...(PERSON ? { copyrightHolder: PERSON_REF } : {}) }),
+];
 
 // Erklaervideos: Manifest + Untertitel (Transkript); nur Videos mit Untertiteldatei
 const videoInfo = {};
@@ -267,15 +330,15 @@ function ldSeite(id, beschr, bild) {
   const graph = [];
   if (id === "start") {
     const ids = index.gruppen.flatMap((g) => g.seiten).filter((i) => i !== "start");
-    graph.push(mitPerson({ "@type": "WebSite", "@id": BASIS + "/#website", name: "KI-Labor", url: BASIS + "/", inLanguage: "de", description: beschr }));
+    graph.push(...stammKnoten(beschr));
     graph.push(mitPerson({
       "@type": "CollectionPage", "@id": u + "#seite", name: klar(s.titel), url: u, description: beschr, inLanguage: "de",
       isPartOf: { "@id": BASIS + "/#website" }, breadcrumb: { "@id": u + "#breadcrumb" }, primaryImageOfPage: BASIS + bild.pfad,
-      mainEntity: { "@id": BASIS + "/#kurs" }, dateModified: geaendert(id),
+      mainEntity: { "@id": BASIS + "/#kurs" }, datePublished: veroeffentlicht(id), dateModified: geaendert(id), abstract: zusammenfassungAus(s) || undefined,
     }));
     graph.push(mitPerson({
       "@type": "Course", "@id": BASIS + "/#kurs", name: "KI-Labor: Lernpfad zu künstlicher Intelligenz", description: klar(s.kurz), url: u, inLanguage: "de",
-      isAccessibleForFree: true, educationalLevel: "Einsteiger", provider: PERSON || undefined, hasPart: { "@id": BASIS + "/#lernpfad" },
+      isAccessibleForFree: true, educationalLevel: "Einsteiger", provider: PERSON_REF || undefined, hasPart: { "@id": BASIS + "/#lernpfad" },
       hasCourseInstance: { "@type": "CourseInstance", courseMode: "online" },
       teaches: index.gruppen.filter((g) => g.name !== "Start").map((g) => g.name + (bereiche[g.name] ? ": " + klar(bereiche[g.name].satz) : "")),
     }));
@@ -289,17 +352,25 @@ function ldSeite(id, beschr, bild) {
   }
   const vids = videosVon(s);
   const gr = gruppeVon(id);
+  const zf = zusammenfassungAus(s);
   const art = {
     "@type": ["Article", "LearningResource"], "@id": u + "#artikel", headline: klar(s.titel), name: klar(s.titel), description: beschr, url: u,
-    mainEntityOfPage: { "@type": "WebPage", "@id": u }, inLanguage: "de", isAccessibleForFree: true, educationalLevel: "Einsteiger",
-    learningResourceType: s.typ === "labor" ? "Interaktives Labor" : "Lektion", ...(gr ? { articleSection: gr.name } : {}),
+    mainEntityOfPage: s.ueberSeite ? { "@id": u } : { "@type": "WebPage", "@id": u }, inLanguage: "de", isAccessibleForFree: true, educationalLevel: "Einsteiger",
+    learningResourceType: s.ueberSeite ? "Hintergrund" : s.typ === "labor" ? "Interaktives Labor" : "Lektion", ...(gr ? { articleSection: gr.name } : {}),
+    ...(zf ? { abstract: zf } : {}), ...(PERSON ? { copyrightHolder: PERSON_REF } : {}),
     image: [BASIS + bild.pfad], datePublished: veroeffentlicht(id), dateModified: geaendert(id),
     isPartOf: [{ "@id": BASIS + "/#website" }, { "@id": BASIS + "/#kurs" }], breadcrumb: { "@id": u + "#breadcrumb" },
     ...((s.mitnehmen || []).length ? { teaches: s.mitnehmen.map(klar) } : {}),
     ...(begriffe(s).length ? { about: begriffe(s).map(begriffKnoten) } : {}),
     ...(vids.length ? { video: vids.map((v) => ({ "@id": BASIS + "/static/videos/" + v.id + "#video" })) } : {}),
   };
-  graph.push(mitPerson(art), krumen, ...vids.map(videoKnoten));
+  graph.push(...stammKnoten(), mitPerson(art), krumen, ...vids.map(videoKnoten));
+  // Seite "Ueber das Labor" (ueberSeite: true): AboutPage, deren Hauptgegenstand der Autor ist
+  if (s.ueberSeite) {
+    graph.push({ "@type": "AboutPage", "@id": u, name: klar(s.titel), url: u, description: beschr, inLanguage: "de",
+      isPartOf: { "@id": BASIS + "/#website" }, breadcrumb: { "@id": u + "#breadcrumb" }, primaryImageOfPage: BASIS + bild.pfad,
+      datePublished: veroeffentlicht(id), dateModified: geaendert(id), ...(PERSON ? { about: PERSON_REF, mainEntity: PERSON_REF } : {}) });
+  }
   const fragen = (s.quiz || []).filter(quizAntwort);
   if (fragen.length) {
     graph.push({ "@type": "FAQPage", "@id": u + "#faq", inLanguage: "de", mainEntity: fragen.map((f) => ({
@@ -309,31 +380,52 @@ function ldSeite(id, beschr, bild) {
 }
 
 /* ---------------------------------------------------------------- Textdateien fuer KI-Suchen: llms.txt und llms-full.txt */
-const ersterSatz = (t) => saetze(t)[0] || "";
+// Format nach llmstxt.org: H1, Zusammenfassung als Blockzitat, kurze Absaetze, Abschnitte (H2) mit Linklisten
+// "- [Titel](Adresse): Kurzbeschreibung", am Ende "## Optional" fuer Verzichtbares.
+/** Kurzbeschreibung einer Seite: erster Aussagesatz des Leads (keine Frage), sonst der Kurzfassung. */
+function seitenSatz(s) {
+  return [...saetze(s.kurz || ""), ...saetze(zusammenfassungAus(s))].find((x) => !/\?$/.test(x)) || saetze(s.kurz || "")[0] || "";
+}
+function autorZeile() {
+  if (!PERSON) return "";
+  return "Autor und Herausgeber: " + PERSON.name + (PERSON.url ? " (" + PERSON.url + ")" : "") + "." + (profile.length ? " Profile: " + profile.join(", ") + "." : "");
+}
+function lizenzZeile() {
+  const wer = PERSON ? PERSON.name : "der Autor";
+  return "Lizenz der Inhalte: Texte und Grafiken stammen von " + wer + ", alle Rechte vorbehalten. Zitate mit Quellenangabe (Adresse der Seite) sind erlaubt. " +
+    "Stimmen der Sprachausgabe, Beispielfotos und Icons stammen von Dritten und stehen unter eigenen Lizenzen" + (IDS.has("lizenzen") ? " (" + url("lizenzen") + ")" : "") + ".";
+}
 function llmsKurz() {
   const st = INHALT.seiten.start;
-  const o = ["# KI-Labor", "", "> " + klar(st.kurz), "",
-    "Interaktives Lernlabor zu künstlicher Intelligenz auf einem Jetson, auf Deutsch und kostenlos nutzbar. Zu jedem Thema gibt es eine Erklärung, einen Versuch zum Ausprobieren, ein Erklärvideo und einen kurzen Selbsttest." +
-      (PERSON ? " Autor: " + PERSON.name + (PERSON.url ? " (" + PERSON.url + ")" : "") + "." : ""), "",
-    "Alle Seiten mit den Kernaussagen in einer Datei: " + BASIS + "/llms-full.txt", "Sitemap: " + BASIS + "/sitemap.xml", ""];
+  const o = ["# KI-Labor", "", "> " + (zusammenfassungAus(st) || klar(st.kurz)), "",
+    "Lektionen erklären die Grundlagen, Labore laufen live auf dem Jetson (Bilderkennung, Sprachmodell, RAG, Agent, Sprache zu Text und Text zu Sprache), Erklärvideos und Selbsttests helfen beim Wiederholen. Alle Seiten sind auf Deutsch.", "",
+    ...(PERSON ? [autorZeile(), ""] : []), lizenzZeile(), ""];
+  if (IDS.has("ueber")) o.push("## Über das Labor", "", "- [" + klar(INHALT.seiten.ueber.titel) + "](" + url("ueber") + "): " + seitenSatz(INHALT.seiten.ueber), "");
   for (const g of index.gruppen) {
     if (g.name === "Start") continue;
+    const ids = g.seiten.filter((i) => i !== "ueber");
+    if (!ids.length) continue;
     o.push("## " + g.name, "");
     if (bereiche[g.name]) o.push(klar(bereiche[g.name].satz), "");
-    for (const i of g.seiten) o.push("- [" + klar(INHALT.seiten[i].titel) + "](" + url(i) + "): " + ersterSatz(INHALT.seiten[i].kurz));
+    for (const i of ids) o.push("- [" + klar(INHALT.seiten[i].titel) + "](" + url(i) + "): " + seitenSatz(INHALT.seiten[i]));
     o.push("");
   }
+  o.push("## Optional", "",
+    "- [Alle Seiten mit Kernaussagen](" + BASIS + "/llms-full.txt): Kurzfassung, Abschnitte, Merksätze, Fragen und Antworten jeder Seite in einer Textdatei",
+    "- [Sitemap](" + BASIS + "/sitemap.xml): alle Adressen mit Datum der letzten Änderung", "");
   return o.join("\n");
 }
 function llmsVoll() {
   const st = INHALT.seiten.start;
   const o = ["# KI-Labor: alle Seiten mit Kernaussagen", "", "> " + klar(st.kurz), "",
-    "Quelle: " + BASIS + "/ (Autor: " + (PERSON ? PERSON.name : "unbekannt") + "). Jeder Abschnitt nennt die Adresse der Seite; bitte mit Adresse zitieren.", ""];
+    "Quelle: " + BASIS + "/ (Autor: " + (PERSON ? PERSON.name : "unbekannt") + "). Jeder Abschnitt nennt die Adresse der Seite; bitte mit Adresse zitieren.", "",
+    lizenzZeile(), ""];
   for (const g of index.gruppen) {
     for (const i of g.seiten) {
       if (i === "start") continue;
       const s = INHALT.seiten[i];
-      o.push("# " + klar(s.titel), "", "Adresse: " + url(i), "Bereich: " + g.name + ". Stand: " + geaendert(i) + ".", "", klar(s.kurz), "");
+      const zf = zusammenfassungAus(s);
+      o.push("# " + klar(s.titel), "", "Adresse: " + url(i), "Bereich: " + g.name + ". Stand: " + geaendert(i) + ".", "", ...(zf ? ["Kurz gesagt: " + zf, ""] : []), klar(s.kurz), "");
       for (const a of s.abschnitte || []) {
         o.push("## " + klar(a.h), "");
         if (a.kurz) o.push(klar(a.kurz), "");
@@ -391,6 +483,17 @@ for (const id of alle) {
   };
   dateienNeu[id + ".html"] = fragment(id) + "\n";
 }
+// Titel (hoechstens 60 Zeichen, eindeutig) und Beschreibungen (120 bis 160 Zeichen) pruefen; Ausreisser melden.
+// Dieselbe Pruefung laeuft als Test: node tests/seo-titel.mjs
+const hinweise = [];
+const gesehen = {};
+for (const [id, e] of Object.entries(index.seiten)) {
+  if (e.titel.length > 60) hinweise.push(id + ": Titel " + e.titel.length + " Zeichen");
+  if (e.beschreibung.length < 120 || e.beschreibung.length > 160) hinweise.push(id + ": Beschreibung " + e.beschreibung.length + " Zeichen");
+  if (/…$/.test(e.titel)) hinweise.push(id + ": Titel gekuerzt");
+  if (gesehen[e.titel]) hinweise.push(id + ": Titel wie " + gesehen[e.titel]); else gesehen[e.titel] = id;
+}
+for (const h of hinweise) console.warn("Hinweis Titel/Beschreibung: " + h);
 dateienNeu["nav.html"] = navigation() + "\n";
 dateienNeu["index.json"] = JSON.stringify(index, null, 1) + "\n";
 dateienNeu["sitemap.xml"] = sitemap();

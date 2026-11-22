@@ -1089,7 +1089,7 @@
     const echtBlock = h("div", { class: "sa-echt" },
       h("span", { class: "w-ueber" }, "Zum Vergleich"),
       h("p", { class: "w-leise" }, "Das Sprachmodell auf dem Jetson kennt deine Spielwerkzeuge nicht, es hat nur die Werkzeuge rechne, uhrzeit und dokumentsuche. Deshalb bekommt es eine passende Rechenfrage zur Aufgabe:"),
-      echtFrage, h("div", { class: "zeile" }, echtKnopf, echtStopp), echtStatus, echtListe);
+      echtFrage, h("div", { class: "zeile" }, echtKnopf, echtStopp), echtStatus, echtListe, KL.kiHinweis ? KL.kiHinweis() : null);
 
     spielEl.append(
       KL.gruppe("Aufgabe", [KL.zeile("Aufgabe", aufgabeGruppe.el, null, true), rMax.el], { klasse: "sa-kopf" }),

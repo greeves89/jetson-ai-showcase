@@ -656,7 +656,7 @@
         meld),
       h("div", { class: "sp-sektion" },
         paar(h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Vorher"), A.zahl, A.nochmal), h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Nachher"), B.zahl, B.nochmal)),
-        paar(A.status, B.status), paar(A.antwort, B.antwort), paar(A.pruef, B.pruef),
+        paar(A.status, B.status), paar(A.antwort, B.antwort), KL.kiHinweis ? KL.kiHinweis() : null, paar(A.pruef, B.pruef),
         hinweis("Kleine Modelle schwanken: Dieselbe Frage bringt bei jedem Durchlauf eine andere Antwort, besonders bei hoher Temperatur. Drück mehrmals auf „Nochmal“ und prüfe, ob der Unterschied zwischen Vorher und Nachher bleibt.")));
     waehle(VORLAGEN[0]);
     knoepfeSetzen();

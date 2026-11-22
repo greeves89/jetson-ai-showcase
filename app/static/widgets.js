@@ -1,6 +1,6 @@
 /* KI-Labor: interaktive Lernbausteine (Widgets).
    Vertrag siehe app.js: KL.widgets.<name> = function (root, seite) { ...; return { destroy() {} } }
-   Bausteine: landkarte, knn, tokens, regelkreis, bereiche, hardware.
+   Bausteine: landkarte, knn, tokens, regelkreis, bereiche, hardware, lizenzen-tabelle.
    Daten aus dem Netz (Stats, Modellnamen) gelangen nur per Text in die Seite, nie als HTML. */
 (function () {
   "use strict";
@@ -983,5 +983,46 @@
     /* Zeit läuft weiter, auch wenn gerade kein neuer Wert kommt: Linie wandert nach links */
     const uhr = setInterval(() => { if (!document.hidden) diagramm(); }, 1000);
     return { destroy() { ab(); clearInterval(uhr); } };
+  };
+
+  /* ------------------------------------------------------------ lizenzen-tabelle (Seite lizenzen)
+     Zwei Tabellen mit anklickbaren Quellen: die Komponenten aus seite.lizenzen (content-rechtliches.js) und die
+     Beispielfotos aus beispiele/manifest.json (Feld "quelle": "Urheber, Lizenz, Fundort: https://..."). Die Fotoliste
+     kommt aus dem Katalog selbst, damit sie mit den Beispielen nie auseinanderlaeuft. Nur https-Links, Text per textContent. */
+  const sicherLink = (url, text) => (/^https:\/\/[^\s]+$/.test(String(url || ""))
+    ? h("a", { href: url, rel: "noopener noreferrer", target: "_blank" }, text || url.replace(/^https:\/\//, "").replace(/\/$/, ""), icon("external-link"))
+    : h("span", null, text || "siehe Quelle"));
+  function lizenzTabelle(beschriftung, kopf, zeilen) {
+    return h("div", { class: "tabelle-wrap" }, h("table", { class: "vergleich lizenzen" },
+      h("caption", null, beschriftung),
+      h("thead", null, h("tr", null, kopf.map((k) => h("th", { scope: "col" }, k)))),
+      h("tbody", null, zeilen.map((z) => h("tr", null, z.map((c, i) => h(i === 0 ? "th" : "td", { scope: i === 0 ? "row" : null }, c)))))));
+  }
+  KL.widgets["lizenzen-tabelle"] = function (root, seite) {
+    const L = seite.lizenzen || {};
+    const komp = (L.komponenten || []).map((k) => [k.name, k.zweck, k.lizenz, sicherLink(k.url, k.quelle)]);
+    root.append(lizenzTabelle("Was im Labor läuft und unter welcher Lizenz", ["Komponente", "Zweck im Labor", "Lizenz", "Quelle"], komp));
+    const fotoBox = h("div", null, h("p", { class: "w-leise" }, "Die Liste der Beispielfotos wird geladen."));
+    root.append(fotoBox);
+    let weg = false;
+    KL.beispiele().then((m) => {
+      if (weg) return;
+      const gesehen = new Set(), zeilen = [];
+      for (const u of m.usecases || []) for (const b of (u.daten && u.daten.bilder) || []) {
+        if (!b.quelle || gesehen.has(b.datei)) continue;
+        gesehen.add(b.datei);
+        const q = String(b.quelle), i = q.lastIndexOf(": https://");
+        const angaben = (i > 0 ? q.slice(0, i) : q).split(",").map((x) => x.trim());
+        const url = i > 0 ? q.slice(i + 2).trim() : "";
+        // angaben: Urheber (darf Kommas enthalten), Lizenz, Fundort
+        const fundort = angaben.length > 2 ? angaben.pop() : "";
+        const lizenz = angaben.length > 1 ? angaben.pop() : "siehe Quelle";
+        zeilen.push([b.titel || b.datei, angaben.join(", "), lizenz, sicherLink(url, fundort || null)]);
+      }
+      fotoBox.replaceChildren(zeilen.length
+        ? lizenzTabelle("Beispielfotos (" + zeilen.length + ")", ["Foto", "Urheber", "Lizenz", "Quelle"], zeilen)
+        : h("p", { class: "w-leise" }, "Die Liste der Beispielfotos ist gerade nicht erreichbar."));
+    });
+    return { destroy() { weg = true; } };
   };
 })();

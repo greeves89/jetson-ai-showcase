@@ -1,11 +1,16 @@
 # KI-Labor
 
-> Hier erlebst du künstliche Intelligenz live: Fragen stellen, Bilder erkennen lassen, Sprache verstehen. Alles läuft auf einem kleinen Spezialrechner, den du dabei arbeiten siehst. Kostenlos und ohne Anmeldung.
+> Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano und nutzt keine externen KI-Dienste. Zu den Themen gibt es Erklärungen, Versuche zum Ausprobieren, Erklärvideos und kurze Selbsttests.
 
-Interaktives Lernlabor zu künstlicher Intelligenz auf einem Jetson, auf Deutsch und kostenlos nutzbar. Zu jedem Thema gibt es eine Erklärung, einen Versuch zum Ausprobieren, ein Erklärvideo und einen kurzen Selbsttest. Autor: Daniel Alisch (https://daniel-alisch.site).
+Lektionen erklären die Grundlagen, Labore laufen live auf dem Jetson (Bilderkennung, Sprachmodell, RAG, Agent, Sprache zu Text und Text zu Sprache), Erklärvideos und Selbsttests helfen beim Wiederholen. Alle Seiten sind auf Deutsch.
 
-Alle Seiten mit den Kernaussagen in einer Datei: __BASIS__/llms-full.txt
-Sitemap: __BASIS__/sitemap.xml
+Autor und Herausgeber: Daniel Alisch (https://daniel-alisch.site). Profile: https://www.linkedin.com/in/daniel-alisch-81165a84, https://github.com/greeves89.
+
+Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vorbehalten. Zitate mit Quellenangabe (Adresse der Seite) sind erlaubt. Stimmen der Sprachausgabe, Beispielfotos und Icons stammen von Dritten und stehen unter eigenen Lizenzen (__BASIS__/lizenzen).
+
+## Über das Labor
+
+- [Über das KI-Labor](__BASIS__/ueber): Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen.
 
 ## Grundlagen
 
@@ -21,7 +26,7 @@ Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.
 - [Wie ein Modell lernt](__BASIS__/training): Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht.
 - [Wie gut ist ein Modell?](__BASIS__/bewertung): „95 Prozent richtig“ klingt nach einem guten Modell.
 - [Fairness, Verzerrung und Verantwortung](__BASIS__/verzerrung-ethik): Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire.
-- [Recht und Regeln im Überblick](__BASIS__/recht): Welche Regeln gelten, wenn du KI einsetzt?
+- [Recht und Regeln im Überblick](__BASIS__/recht): Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.
 
 ## Sehen
 
@@ -29,7 +34,7 @@ Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.
 
 - [Wie ein Computer ein Bild sieht](__BASIS__/bild-als-zahlen): Du siehst ein Foto, ein Computer sieht eine Tabelle voller Zahlen.
 - [Wie Netze Bilder verstehen](__BASIS__/cnn-intuition): Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge.
-- [Fünf Fragen an ein Bild](__BASIS__/vision-aufgaben): Was ist das?
+- [Fünf Fragen an ein Bild](__BASIS__/vision-aufgaben): Jede Frage ist eine eigene Aufgabe mit eigenem Aufwand.
 - [Gesichtserkennung](__BASIS__/gesicht): Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.
 - [Objekterkennung](__BASIS__/objekt): Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.
 - [Bildmodell anlernen](__BASIS__/anlernen): Zeige dem Jetson Beispiele, und er erkennt sie danach selbst.
@@ -40,18 +45,18 @@ Sprachmodelle im Chat, Sprache zu Text und gutes Fragen.
 
 - [Sprachmodell im Chat](__BASIS__/chat): Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU.
 - [Sprache zu Text](__BASIS__/whisper): Sprich in dein Mikrofon, und der Jetson schreibt mit.
-- [Wie ein Sprachmodell gebaut ist](__BASIS__/tokens-sprachmodelle): Wie wird aus einem Stapel Text ein Modell, das Fragen beantwortet?
+- [Wie ein Sprachmodell gebaut ist](__BASIS__/tokens-sprachmodelle): Hier siehst du die Bausteine: Token, Zahlen, Aufmerksamkeit und zwei Lernphasen.
 - [Gut fragen: Prompts schreiben](__BASIS__/prompting): Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn.
 - [Grenzen und Risiken von Sprachmodellen](__BASIS__/llm-grenzen): Sprachmodelle schreiben überzeugend, auch wenn sie falsch liegen.
 - [Wissen ins Modell oder ins Dokument?](__BASIS__/finetuning-oder-rag): Das Modell kennt deine Firma nicht.
-- [Text zu Sprache](__BASIS__/sprachausgabe): Wie wird aus einem geschriebenen Satz eine Stimme?
+- [Text zu Sprache](__BASIS__/sprachausgabe): Das Labor oben lässt den Jetson sprechen.
 
 ## Wissen und RAG
 
 Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.
 
 - [RAG im Überblick](__BASIS__/rag-ueberblick): Ein Sprachmodell kennt deine Dokumente nicht.
-- [Vektorisieren und Embeddings](__BASIS__/rag-embedding): Wie vergleicht ein Computer Bedeutung?
+- [Vektorisieren und Embeddings](__BASIS__/rag-embedding): Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt.
 - [Chunking: Text in sinnvolle Stücke teilen](__BASIS__/rag-chunking): Ein Dokument ist zu groß für die Suche am Stück.
 - [Suchen: Stichwort, Vektor und Hybrid](__BASIS__/rag-suche): Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung.
 - [Reranking: erst grob, dann genau](__BASIS__/rag-reranking): Die erste Suche sortiert grob, aber schnell.
@@ -79,18 +84,18 @@ Bilder aus Text und Gesichtstausch, live auf dem Rechner.
 
 Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen.
 
-- [Entscheidungsbäume und Tabellendaten](__BASIS__/tabellen-ml): Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?
-- [Prognosen aus Zeitreihen](__BASIS__/zeitreihen): Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?
-- [Auffälliges finden](__BASIS__/anomalien): Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?
-- [Empfehlungssysteme](__BASIS__/empfehlungen): Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?
+- [Entscheidungsbäume und Tabellendaten](__BASIS__/tabellen-ml): Ein Entscheidungsbaum ist ein Fragebogen, dessen beste Fragen aus Beispielen gelernt werden.
+- [Prognosen aus Zeitreihen](__BASIS__/zeitreihen): Eine Zeitreihe besteht aus Trend, Saison und Zufall.
+- [Auffälliges finden](__BASIS__/anomalien): Ein Modell lernt, wie Normal aussieht, und meldet, was davon abweicht.
+- [Empfehlungssysteme](__BASIS__/empfehlungen): Empfehlungen entstehen aus Ähnlichkeit: von Nutzern, die sich ähnlich verhalten, und von Dingen, die sich ähneln.
 
 ## KI im Betrieb
 
 Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.
 
 - [Vom Prototyp in den Betrieb](__BASIS__/mlops): Ein Modell, das im Versuch funktioniert, ist erst der Anfang.
-- [Kosten und Energie](__BASIS__/kosten-energie): Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?
-- [KI im Unternehmen einführen](__BASIS__/ki-einfuehrung): Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?
+- [Kosten und Energie](__BASIS__/kosten-energie): Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung.
+- [KI im Unternehmen einführen](__BASIS__/ki-einfuehrung): Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.
 
 ## Business-Use-Cases
 
@@ -114,4 +119,10 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 
 - [Der Jetson und seine Hardware](__BASIS__/hardware): Ein kleiner Computer mit GPU, gebaut für KI am Gerät.
 - [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): In Alltagssprache: Was diese Seite auf deinem Gerät ablegt, was mit Kamera, Mikrofon und eingetippten Texten passiert und was du selbst in der Hand hast.
+- [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
+
+## Optional
+
+- [Alle Seiten mit Kernaussagen](__BASIS__/llms-full.txt): Kurzfassung, Abschnitte, Merksätze, Fragen und Antworten jeder Seite in einer Textdatei
+- [Sitemap](__BASIS__/sitemap.xml): alle Adressen mit Datum der letzten Änderung
 

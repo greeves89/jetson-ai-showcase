@@ -210,7 +210,7 @@
       const zeigen = (i, abspielen) => {
         const v = fertig[i];
         const basis = "/static/videos/" + v.id;
-        const video = h("video", { controls: true, preload: "metadata", poster: basis + ".jpg", playsinline: true, "aria-label": v.titel },
+        const video = h("video", { controls: true, preload: "metadata", poster: basis + ".jpg", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
           h("source", { src: basis + ".mp4", type: "video/mp4" }),
           h("track", { kind: "subtitles", srclang: "de", label: "Deutsch", src: basis + ".vtt", default: true }));
         const kap = (v.kapitel || []).map((k) => h("li", null,
@@ -218,7 +218,9 @@
             h("span", { class: "t" }, mmss(k.t)), k.titel)));
         const kopf = h("div", { class: "video" + (kap.length ? "" : " leer") },
           h("div", { class: "spieler" }, video), kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel" }, kap) : null);
-        const teile = [kopf];
+        // Kennzeichnung nach KI-Verordnung (Art. 50): zentral fuer jedes Video, nicht je Datei
+        const teile = [kopf, h("p", { class: "video-ki" }, icon("audio-lines"),
+          h("span", null, "Sprecherstimme KI-erzeugt. Mehr dazu unter ", h("a", { href: "/lizenzen" }, "Lizenzen und Quellen"), "."))];
         if (reihe) {
           teile.push(h("ol", { class: "folgen", "aria-label": "Folgen der Reihe" }, fertig.map((f, j) => h("li", null,
             h("button", { type: "button", "aria-current": j === i ? "true" : "false", onclick: () => zeigen(j, true) },
@@ -794,6 +796,20 @@
     return h("section", { class: "block" }, h("h2", null, icon("scale"), "Die verbindlichen Texte"),
       h("div", { class: "weiter" }, links.map(([k, t, ic]) => h("a", { href: q[k], rel: "noopener" }, icon(ic), t))));
   }
+  /* ------------------------------------------------------------ Fusszeile
+     Der Server setzt Autor, Impressum, Datenschutz und den Hinweis zur Speicherung ein (app.py, _fuss_html). Hier kommen
+     auf jeder Seite der Link auf "Lizenzen und Quellen" und die Pflichtangabe "Built with Llama" (Llama 3.2 Community
+     License, Abschnitt 1.b.i) dazu. Fehlen Impressum oder Datenschutz im Server-Text, werden sie aus module.json ergaenzt. */
+  function fussErgaenzen() {
+    const fuss = $("#fuss");
+    if (!fuss || $(".fuss-lizenz", fuss)) return;
+    const q = window.KL.seite || {};
+    const pflicht = [["impressum_url", "Impressum"], ["datenschutz_url", "Datenschutz"]]
+      .filter(([k]) => String(q[k] || "").startsWith("https://") && !$$("a", fuss).some((a) => a.getAttribute("href") === q[k]));
+    const teile = [h("a", { href: "/lizenzen" }, "Lizenzen und Quellen")]
+      .concat(pflicht.map(([k, t]) => h("a", { href: q[k] }, t)), h("span", { class: "fuss-llama" }, "Built with Llama"));
+    fuss.append(h("p", { class: "fuss-lizenz" }, teile.flatMap((t, i) => (i ? [h("span", { "aria-hidden": "true" }, " · "), t] : [t]))));
+  }
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
     if (seite.typ === "start") return startSeite(seite);
@@ -949,6 +965,7 @@
     seitenleiste.replaceChildren(
       h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "kostenlos, live ausprobieren"))),
       menueKnopf(), navBauen(), liveBauen(), tip);
+    fussErgaenzen();
     const haupt = $(".haupt");
     if (haupt) haupt.prepend(leisteBauen());
     schieberFuellen(document);
