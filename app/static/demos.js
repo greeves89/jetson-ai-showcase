@@ -942,10 +942,19 @@
     const leer = h("p", { class: "d-hinweis" }, "Stelle eine Frage oder wähle eine Beispielfrage. Jede Frage steht für sich: Der Jetson bekommt keinen früheren Verlauf mit, das Modell erinnert sich also nicht an vorherige Fragen.");
 
     /* Eingabe */
-    const feld = h("textarea", { rows: 1, maxlength: 1000, placeholder: "Schreibe eine Frage. Enter sendet, Shift+Enter macht eine neue Zeile.", "aria-label": "Deine Frage" });
+    const feld = h("textarea", { rows: 1, maxlength: 1000, placeholder: "Schreibe eine Frage…", "aria-label": "Deine Frage", enterkeyhint: "send" });
     const sendeBtn = h("button", { type: "button", class: "btn primary" }, ic("send"), "Senden");
     const stoppBtn = h("button", { type: "button", class: "btn", hidden: true }, ic("stop"), "Stopp");
     const eingabe = h("div", { class: "eingabe" }, feld, sendeBtn, stoppBtn);
+    const feldHinweis = h("p", { class: "d-feldhinweis", role: "status", "aria-live": "polite" });
+    const tastenHinweis = h("p", { class: "d-hinweis d-tasten" }, "Enter sendet, Shift+Enter macht eine neue Zeile.");
+    const eingabeBlock = h("div", { class: "d-eingabeblock" }, eingabe, feldHinweis, tastenHinweis);
+    /* Leeres Senden: kurze, freundliche Rückmeldung, der Cursor springt ins Feld */
+    function ausFeldSenden() {
+      if (busy) return;
+      if (!feld.value.trim()) { feldHinweis.textContent = "Schreib zuerst eine Frage."; feld.classList.add("d-leer"); feld.focus(); return; }
+      senden(feld.value);
+    }
 
     const BEISPIELE = ["Erkläre in zwei Sätzen, was ein Token ist.", "Schreibe einen Satz über Roboter.", "Was ist ein Jetson?"];
     const chips = h("div", { class: "vorschlaege", "aria-label": "Beispielfragen" }, BEISPIELE.map((b) => h("button", { type: "button", class: "chip", onclick: () => senden(b) }, b)));
@@ -963,7 +972,7 @@
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Frage. Hier siehst du dann, wie der Jetson Token für Token antwortet.");
 
-    root.append(modellZeile, h("div", { class: "d-chatbox" }, verlauf, leer), KL.kiHinweis(), eingabe, chips, einst, live.el);
+    root.append(modellZeile, h("div", { class: "d-chatbox" }, verlauf, leer), KL.kiHinweis(), eingabeBlock, chips, einst, live.el);
 
     /* Modellstatus aus den Live-Werten */
     function modellStatusSetzen(d) {
@@ -1067,7 +1076,8 @@
     async function senden(text, erneut) {
       text = String(text || "").trim().slice(0, 1000);
       if (!text || busy) return;
-      busy = true; sendeBtn.disabled = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = "";
+      busy = true; sendeBtn.hidden = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = ""; feldHinweis.textContent = ""; feld.classList.remove("d-leer");
+      eingabe.classList.add("laeuft");
       if (!erneut) neueNachricht("du", text);          // beim Wiederholen steht die Frage schon im Verlauf
       const m = neueNachricht("ki");
       ctrl = new AbortController();
@@ -1084,6 +1094,10 @@
       // Wartezustand in Klartext: Platznummer in der Warteschlange, Zaehler beim automatischen Wiederholen
       const wartehinweis = (t) => { if (s.tErst) return; m.platz = t; fuelle(m); live.text(t); };
       const stoppePlatz = KL.last.beobachten((i) => wartehinweis(KL.last.platzText(i)));
+      // Wartezustand in Klartext: vergangene Sekunden bis zum ersten Token, solange keine Warteschlangen-Meldung steht
+      const WARTE = "Der Jetson rechnet";
+      m.platz = WARTE + ", einen Moment … Mit „Stopp“ kannst du abbrechen."; fuelle(m);
+      const wartetimer = setInterval(() => { if (s.tErst) return; if (m.platz.startsWith(WARTE)) { m.platz = WARTE + " seit " + Math.round((performance.now() - s.tSend) / 1000) + " s … Mit „Stopp“ kannst du abbrechen."; fuelle(m); } }, 1000);
       try {
         const r = await postLast("/api/chat", { nachricht: text, temperatur }, sig, (i) => wartehinweis(KL.last.warteText(i)));
         if (!r.ok) throw new Error(await antwortFehler(r));
@@ -1100,6 +1114,7 @@
         if (e && e.name === "AbortError") abgebrochen = true; else { fehler = netzFehler(e) || "Unbekannter Fehler."; belegt = istBelegt(e); }
       }
       stoppePlatz();
+      clearInterval(wartetimer);
       liveSatz.stop();
       const z = zerlege(roh);
       m.tokens = z.tokens;
@@ -1130,18 +1145,18 @@
         ], "Wartezeit bis zum ersten Token und Zeit zum Erzeugen");
       } else if (abgebrochen) live.text("Du hast die Antwort gestoppt. Der Jetson hat bis dahin " + z.tokens.length + " Tokens erzeugt.");
       else if (fehler) live.text(fehler);
-      busy = false; ctrl = null; sendeBtn.disabled = false; stoppBtn.hidden = true;
+      busy = false; ctrl = null; sendeBtn.hidden = false; stoppBtn.hidden = true; eingabe.classList.remove("laeuft");
       nachUnten();
       if (!L.weg) feld.focus();
     }
     L.onEnde(() => { if (ctrl) ctrl.abort(); });
 
-    sendeBtn.addEventListener("click", () => senden(feld.value));
+    sendeBtn.addEventListener("click", ausFeldSenden);
     stoppBtn.addEventListener("click", () => { if (ctrl) ctrl.abort(); });
     feld.addEventListener("keydown", (e) => {
-      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); senden(feld.value); }
+      if (e.key === "Enter" && !e.shiftKey && !e.isComposing) { e.preventDefault(); ausFeldSenden(); }
     });
-    feld.addEventListener("input", () => { feld.style.height = "auto"; feld.style.height = Math.min(feld.scrollHeight, 130) + "px"; });
+    feld.addEventListener("input", () => { if (feldHinweis.textContent) { feldHinweis.textContent = ""; feld.classList.remove("d-leer"); } feld.style.height = "auto"; feld.style.height = Math.min(feld.scrollHeight, 130) + "px"; });
 
     return { destroy() { L.destroy(); } };
   }

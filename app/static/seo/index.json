@@ -90,7 +90,6 @@
        "Sprache: Sprachmodelle im Chat, Sprache zu Text und gutes Fragen.",
        "Wissen und RAG: Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.",
        "Agenten: Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen.",
-       "Erzeugen: Bilder aus Text und Gesichtstausch, live auf dem Rechner.",
        "Daten und Prognosen: Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen.",
        "KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
        "Business-Use-Cases: Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit.",
@@ -399,26 +398,6 @@
         "position": 5,
         "name": "Werkzeuge standardisiert anbinden (MCP)",
         "url": "__BASIS__/mcp-werkzeuge"
-       }
-      ]
-     },
-     {
-      "@type": "ItemList",
-      "@id": "__BASIS__/#bereich-erzeugen",
-      "name": "Erzeugen",
-      "numberOfItems": 2,
-      "itemListElement": [
-       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "Bilder erzeugen",
-        "url": "__BASIS__/bild"
-       },
-       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Face-Swap und Deepfakes",
-        "url": "__BASIS__/faceswap"
        }
       ]
      },
@@ -1965,6 +1944,26 @@
        },
        {
         "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-backpropagation",
+        "termCode": "backpropagation",
+        "name": "Backpropagation (Rückpropagierung)",
+        "description": "Das Rechenverfahren beim Training eines Netzes. Es geht vom Fehler am Ausgang rückwärts durch die Schichten und berechnet, wie stark jedes Gewicht am Fehler beteiligt war. Danach wird jedes Gewicht ein kleines Stück angepasst.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-deepfake",
+        "termCode": "deepfake",
+        "name": "Deepfake",
+        "description": "Ein Bild, Video oder eine Stimme, die eine KI so verändert oder neu erzeugt hat, dass es echt wirkt, obwohl die Szene nie stattgefunden hat. Prüfe die Quelle, bevor du so etwas glaubst oder weiterschickst.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
         "@id": "__BASIS__/#begriff-assistent",
         "termCode": "assistent",
         "name": "KI-Assistent",
@@ -2046,7 +2045,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Grundlagen",
-      "abstract": "KI ist ein Sammelbegriff, kein einzelnes Verfahren. Heutige KI ist immer auf eine Aufgabe spezialisiert. Maschinelles Lernen ist der wichtigste Teil, aber nicht der einzige.",
+      "abstract": "KI ist ein Sammelbegriff, kein einzelnes Verfahren. Die meiste KI ist auf eine Aufgabe spezialisiert. Sprachmodelle sind breiter, aber keine allgemeine Intelligenz.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -2068,7 +2067,7 @@
       },
       "teaches": [
        "KI ist ein Sammelbegriff, kein einzelnes Verfahren.",
-       "Heutige KI ist immer auf eine Aufgabe spezialisiert.",
+       "Die meiste KI ist auf eine Aufgabe spezialisiert. Sprachmodelle sind breiter, aber keine allgemeine Intelligenz.",
        "Maschinelles Lernen ist der wichtigste Teil, aber nicht der einzige."
       ],
       "about": [
@@ -3825,7 +3824,7 @@
   "bewertung": {
    "titel": "Wie gut ist ein Modell? · KI-Labor",
    "ueberschrift": "Wie gut ist ein Modell?",
-   "beschreibung": "„95 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
+   "beschreibung": "„99 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
    "typ": "seite",
    "datei": "content-grundlagen.js",
    "bild": "/static/og/grundlagen.png",
@@ -3867,7 +3866,7 @@
       "@id": "__BASIS__/bewertung#artikel",
       "headline": "Wie gut ist ein Modell?",
       "name": "Wie gut ist ein Modell?",
-      "description": "„95 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
+      "description": "„99 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
       "url": "__BASIS__/bewertung",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -6742,7 +6741,7 @@
         "name": "Warum erfindet ein Sprachmodell manchmal Quellen?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "Es setzt das wahrscheinlichste Token fort, auch wenn ihm das Wissen fehlt. Das Modell prüft keine Fakten. Es produziert Text, der zum bisherigen passt, und das kann auch Erfundenes sein."
+         "text": "Es setzt Text nach Wahrscheinlichkeiten fort, auch wenn ihm das Wissen fehlt. Das Modell prüft keine Fakten. Es produziert Text, der zum bisherigen passt, und das kann auch Erfundenes sein."
         }
        },
        {
@@ -7546,7 +7545,7 @@
   "rag-embedding": {
    "titel": "Vektorisieren und Embeddings · KI-Labor",
    "ueberschrift": "Vektorisieren und Embeddings",
-   "beschreibung": "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt. Mit Koordinaten lässt sich Nähe ausrechnen.",
+   "beschreibung": "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn meist nah beieinander liegt. Antworten schreibt es nicht.",
    "typ": "seite",
    "datei": "content-rag.js",
    "bild": "/static/og/wissen-und-rag.png",
@@ -7588,7 +7587,7 @@
       "@id": "__BASIS__/rag-embedding#artikel",
       "headline": "Vektorisieren und Embeddings",
       "name": "Vektorisieren und Embeddings",
-      "description": "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn nah beieinander liegt. Mit Koordinaten lässt sich Nähe ausrechnen.",
+      "description": "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn meist nah beieinander liegt. Antworten schreibt es nicht.",
       "url": "__BASIS__/rag-embedding",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -7599,7 +7598,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Wissen und RAG",
-      "abstract": "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt ähnlicher Sinn. Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden. Embeddings sind schwach bei Zahlen, Codes und Eigennamen.",
+      "abstract": "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt meist ähnlicher Sinn. Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden. Embeddings sind schwach bei Zahlen, Codes und Eigennamen.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -7620,7 +7619,7 @@
        "@id": "__BASIS__/rag-embedding#breadcrumb"
       },
       "teaches": [
-       "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt ähnlicher Sinn.",
+       "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt meist ähnlicher Sinn.",
        "Dokumente und Fragen brauchen dasselbe Modell, und bei einem Modellwechsel muss der ganze Index neu berechnet werden.",
        "Embeddings sind schwach bei Zahlen, Codes und Eigennamen. Dort hilft zusätzlich eine Stichwortsuche."
       ],
@@ -10144,214 +10143,6 @@
          "@type": "Answer",
          "text": "MCP macht ein Werkzeug erreichbar, nicht besser. Zuverlässigkeit, gute Beschreibung und passende Rechte bleiben deine Aufgabe."
         }
-       }
-      ]
-     }
-    ]
-   }
-  },
-  "bild": {
-   "titel": "Bilder erzeugen · KI-Labor",
-   "ueberschrift": "Bilder erzeugen",
-   "beschreibung": "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam. Das Training verrauscht echte Bilder und lernt die Umkehrung.",
-   "typ": "seite",
-   "datei": "content.js",
-   "bild": "/static/og/erzeugen.png",
-   "bild_alt": "KI-Labor, Bereich Erzeugen: Bilder aus Text und Gesichtstausch, live auf dem Rechner.",
-   "ld": {
-    "@context": "https://schema.org",
-    "@graph": [
-     {
-      "@type": "Person",
-      "@id": "https://daniel-alisch.site/#person",
-      "name": "Daniel Alisch",
-      "url": "https://daniel-alisch.site",
-      "sameAs": [
-       "https://www.linkedin.com/in/daniel-alisch-81165a84",
-       "https://github.com/greeves89"
-      ]
-     },
-     {
-      "@type": "WebSite",
-      "@id": "__BASIS__/#website",
-      "name": "KI-Labor",
-      "url": "__BASIS__/",
-      "inLanguage": "de",
-      "copyrightHolder": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "author": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "publisher": {
-       "@id": "https://daniel-alisch.site/#person"
-      }
-     },
-     {
-      "@type": [
-       "Article",
-       "LearningResource"
-      ],
-      "@id": "__BASIS__/bild#artikel",
-      "headline": "Bilder erzeugen",
-      "name": "Bilder erzeugen",
-      "description": "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam. Das Training verrauscht echte Bilder und lernt die Umkehrung.",
-      "url": "__BASIS__/bild",
-      "mainEntityOfPage": {
-       "@type": "WebPage",
-       "@id": "__BASIS__/bild"
-      },
-      "inLanguage": "de",
-      "isAccessibleForFree": true,
-      "educationalLevel": "Einsteiger",
-      "learningResourceType": "Interaktives Labor",
-      "articleSection": "Erzeugen",
-      "abstract": "Das Training verrauscht echte Bilder und lernt die Umkehrung. Die Beschreibung lenkt, wohin das Rauschen verschwindet. Derselbe Entrauschungsschritt läuft 4 bis 50 Mal, bis ein Bild dasteht.",
-      "copyrightHolder": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "image": [
-       "__BASIS__/static/og/erzeugen.png"
-      ],
-      "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
-      "isPartOf": [
-       {
-        "@id": "__BASIS__/#website"
-       },
-       {
-        "@id": "__BASIS__/#kurs"
-       }
-      ],
-      "breadcrumb": {
-       "@id": "__BASIS__/bild#breadcrumb"
-      },
-      "author": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "publisher": {
-       "@id": "https://daniel-alisch.site/#person"
-      }
-     },
-     {
-      "@type": "BreadcrumbList",
-      "@id": "__BASIS__/bild#breadcrumb",
-      "itemListElement": [
-       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "KI-Labor",
-        "item": "__BASIS__/"
-       },
-       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Bilder erzeugen",
-        "item": "__BASIS__/bild"
-       }
-      ]
-     }
-    ]
-   }
-  },
-  "faceswap": {
-   "titel": "Face-Swap und Deepfakes · KI-Labor",
-   "ueberschrift": "Face-Swap und Deepfakes",
-   "beschreibung": "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich. Dieselbe Technik trägt Avatare und Fälschungen.",
-   "typ": "seite",
-   "datei": "content.js",
-   "bild": "/static/og/erzeugen.png",
-   "bild_alt": "KI-Labor, Bereich Erzeugen: Bilder aus Text und Gesichtstausch, live auf dem Rechner.",
-   "ld": {
-    "@context": "https://schema.org",
-    "@graph": [
-     {
-      "@type": "Person",
-      "@id": "https://daniel-alisch.site/#person",
-      "name": "Daniel Alisch",
-      "url": "https://daniel-alisch.site",
-      "sameAs": [
-       "https://www.linkedin.com/in/daniel-alisch-81165a84",
-       "https://github.com/greeves89"
-      ]
-     },
-     {
-      "@type": "WebSite",
-      "@id": "__BASIS__/#website",
-      "name": "KI-Labor",
-      "url": "__BASIS__/",
-      "inLanguage": "de",
-      "copyrightHolder": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "author": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "publisher": {
-       "@id": "https://daniel-alisch.site/#person"
-      }
-     },
-     {
-      "@type": [
-       "Article",
-       "LearningResource"
-      ],
-      "@id": "__BASIS__/faceswap#artikel",
-      "headline": "Face-Swap und Deepfakes",
-      "name": "Face-Swap und Deepfakes",
-      "description": "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich. Dieselbe Technik trägt Avatare und Fälschungen.",
-      "url": "__BASIS__/faceswap",
-      "mainEntityOfPage": {
-       "@type": "WebPage",
-       "@id": "__BASIS__/faceswap"
-      },
-      "inLanguage": "de",
-      "isAccessibleForFree": true,
-      "educationalLevel": "Einsteiger",
-      "learningResourceType": "Interaktives Labor",
-      "articleSection": "Erzeugen",
-      "abstract": "Erst Gesicht und Landmarken finden, dann die Merkmale der Quellperson einsetzen und angleichen. Dieselbe Technik trägt Avatare und Fälschungen. Darum nur mit Einwilligung und mit Kennzeichnung.",
-      "copyrightHolder": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "image": [
-       "__BASIS__/static/og/erzeugen.png"
-      ],
-      "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
-      "isPartOf": [
-       {
-        "@id": "__BASIS__/#website"
-       },
-       {
-        "@id": "__BASIS__/#kurs"
-       }
-      ],
-      "breadcrumb": {
-       "@id": "__BASIS__/faceswap#breadcrumb"
-      },
-      "author": {
-       "@id": "https://daniel-alisch.site/#person"
-      },
-      "publisher": {
-       "@id": "https://daniel-alisch.site/#person"
-      }
-     },
-     {
-      "@type": "BreadcrumbList",
-      "@id": "__BASIS__/faceswap#breadcrumb",
-      "itemListElement": [
-       {
-        "@type": "ListItem",
-        "position": 1,
-        "name": "KI-Labor",
-        "item": "__BASIS__/"
-       },
-       {
-        "@type": "ListItem",
-        "position": 2,
-        "name": "Face-Swap und Deepfakes",
-        "item": "__BASIS__/faceswap"
        }
       ]
      }
@@ -15059,6 +14850,214 @@
     ]
    }
   },
+  "bild": {
+   "titel": "Bilder erzeugen · KI-Labor",
+   "ueberschrift": "Bilder erzeugen",
+   "beschreibung": "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam. Das Training verrauscht echte Bilder und lernt die Umkehrung.",
+   "typ": "seite",
+   "datei": "content.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/bild#artikel",
+      "headline": "Bilder erzeugen",
+      "name": "Bilder erzeugen",
+      "description": "Aus einer Beschreibung entsteht ein Bild. Auf dem Jetson ist das möglich, aber langsam. Das Training verrauscht echte Bilder und lernt die Umkehrung.",
+      "url": "__BASIS__/bild",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/bild"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "abstract": "Das Training verrauscht echte Bilder und lernt die Umkehrung. Die Beschreibung lenkt, wohin das Rauschen verschwindet. Derselbe Entrauschungsschritt läuft 4 bis 50 Mal, bis ein Bild dasteht.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-21",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/bild#breadcrumb"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/bild#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Bilder erzeugen",
+        "item": "__BASIS__/bild"
+       }
+      ]
+     }
+    ]
+   },
+   "versteckt": true
+  },
+  "faceswap": {
+   "titel": "Face-Swap und Deepfakes · KI-Labor",
+   "ueberschrift": "Face-Swap und Deepfakes",
+   "beschreibung": "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich. Dieselbe Technik trägt Avatare und Fälschungen.",
+   "typ": "seite",
+   "datei": "content.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/faceswap#artikel",
+      "headline": "Face-Swap und Deepfakes",
+      "name": "Face-Swap und Deepfakes",
+      "description": "Ein Gesicht in einem Bild durch ein anderes ersetzen. Eindrucksvoll und riskant zugleich. Dieselbe Technik trägt Avatare und Fälschungen.",
+      "url": "__BASIS__/faceswap",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/faceswap"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "abstract": "Erst Gesicht und Landmarken finden, dann die Merkmale der Quellperson einsetzen und angleichen. Dieselbe Technik trägt Avatare und Fälschungen. Darum nur mit Einwilligung und mit Kennzeichnung.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-21",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/faceswap#breadcrumb"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/faceswap#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Face-Swap und Deepfakes",
+        "item": "__BASIS__/faceswap"
+       }
+      ]
+     }
+    ]
+   },
+   "versteckt": true
+  },
   "visual-demo": {
    "titel": "Bildsprache: ein Beispiel je Bildtyp · KI-Labor",
    "ueberschrift": "Bildsprache: ein Beispiel je Bildtyp",
@@ -15206,8 +15205,6 @@
   "agent",
   "agenten-sicherheit",
   "mcp-werkzeuge",
-  "bild",
-  "faceswap",
   "tabellen-ml",
   "zeitreihen",
   "anomalien",
@@ -15297,13 +15294,6 @@
     "agent",
     "agenten-sicherheit",
     "mcp-werkzeuge"
-   ]
-  },
-  {
-   "name": "Erzeugen",
-   "seiten": [
-    "bild",
-    "faceswap"
    ]
   },
   {

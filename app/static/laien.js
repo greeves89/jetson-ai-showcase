@@ -49,6 +49,7 @@
       wohinLokal: "Das Bild bleibt in deinem Browser. Es wird nicht verschickt.",
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video.",
       abgelehnt: "Du hast die Kamera nicht freigegeben. Das ist in Ordnung. Du kannst mit den Beispielbildern weitermachen oder die Kamera später starten.",
+      abgelehntOhne: "Du hast die Kamera nicht freigegeben. Das ist in Ordnung. Dieses Labor braucht dafür deine Kamera, du kannst sie später starten.",
     },
     ton: {
       icon: "mic", titel: "Darf die Seite dein Mikrofon nutzen?", ja: "Einverstanden, Mikrofon nutzen", nein: "Ohne Mikrofon weitermachen", frei: "Mikrofon",
@@ -57,6 +58,7 @@
       wohinLokal: "Die Aufnahme bleibt in deinem Browser.",
       speichern: "Es wird nichts gespeichert: keine Aufnahme, kein Ton. Nach der Auswertung ist sie weg.",
       abgelehnt: "Du hast das Mikrofon nicht freigegeben. Das ist in Ordnung. Du kannst stattdessen eine Audiodatei wählen oder es später noch einmal versuchen.",
+      box: "Ich willige ein, dass meine Aufnahme zum Aufschreiben kurz verarbeitet wird.",
     },
     biometrisch: {
       icon: "scan-face", titel: "Gesichtserkennung: ausdrücklich einwilligen", ja: "Einwilligen und Kamera starten", nein: "Ohne Kamera weitermachen", frei: "Gesichtserkennung",
@@ -65,6 +67,7 @@
       wohinLokal: "Das Bild bleibt in deinem Browser. Es wird nicht verschickt.",
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video. Zahlenlisten verfallen mit deiner Sitzung.",
       abgelehnt: "Du hast nicht eingewilligt. Das ist in Ordnung. Du kannst mit den Beispielbildern weitermachen.",
+      abgelehntOhne: "Du hast nicht eingewilligt. Das ist in Ordnung. Dieses Labor arbeitet nur mit deiner Kamera, Beispielbilder gibt es hier nicht. Ohne Kamera zeigt dir das Objekt-Labor mit Beispielbildern, wie ein Computer Bilder auswertet.",
       box: "Ich willige ein, dass mein Kamerabild zur Gesichtserkennung kurz verarbeitet wird.",
     },
   };
@@ -73,6 +76,9 @@
     anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie.",
   };
   const BIO_LABORE = new Set(["gesicht", "anlernen"]);
+  const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
+  /* Alters- und Elternhinweis, steht oben im Dialog. Bewusst ohne Abfrage: Die Seite prueft kein Alter und gibt kein Schutzversprechen. */
+  const ALTER_HINWEIS = ["Nutzbar ab 16 Jahren.", "Jüngere nur mit Einverständnis der Eltern. Die Seite prüft dein Alter nicht."];
   const aktuelleSeite = () => (location.pathname.replace(/^\/|\/$/g, "") || "start");
   const typVon = (art, opt) => (opt && opt.typ) || (art === "mikro" ? "ton" : BIO_LABORE.has(aktuelleSeite()) ? "biometrisch" : "bild");
 
@@ -88,13 +94,14 @@
     const a = ARTEN[typ];
     const lab = aktuelleSeite();
     const bio = typ === "biometrisch";
+    const haken = !!a.box;               // Gesicht und Mikrofon: ausdrückliches Kästchen, nie vorbelegt
     const punkte = [
       ["sparkles", "Wozu", a.wozu],
       [opt.sendet ? "send" : "lock", "Wohin", opt.sendet ? a.wohinSendet : a.wohinLokal],
       ["shield-check", "Was bleibt", a.speichern + (ZUSATZ[lab] ? " " + ZUSATZ[lab] : "")],
       ["power", "Stoppen und widerrufen", "Du kannst jederzeit stoppen und deine Einwilligung unten auf der Seite oder unter „Ist das sicher?“ widerrufen." + (bio ? " Die gemerkte Zustimmung gilt nur für diese Sitzung." : "")],
     ];
-    if (bio) punkte.push(["users", "Wer ins Bild darf", "Nur du selbst oder Personen, die zugestimmt haben. Nutzbar ab 16 Jahren, jüngere nur mit Einverständnis der Eltern."]);
+    if (bio) punkte.push(["users", "Wer ins Bild darf", "Nur du selbst oder Personen, die zugestimmt haben."]);
     punkte.push(["badge-check", "Kosten", "Kostenlos und ohne Anmeldung."]);
     return new Promise((fertig, fehl) => {
       let antwort = false;
@@ -106,32 +113,37 @@
         if (dlg.close) dlg.close();                                          // loest das Ereignis close selbst aus
         else { dlg.removeAttribute("open"); dlg.dispatchEvent(new Event("close")); }
       };
-      const ja = h("button", { type: "button", class: "btn primary", disabled: bio, onclick: () => schliessen(true) }, KL.icon("camera" === a.icon ? "camera" : a.icon), a.ja);
-      const kaestchen = bio ? h("input", { type: "checkbox", id: id + "-ok", onchange: (e) => { ja.disabled = !e.target.checked; } }) : null;   // bewusst nicht vorbelegt
+      const ja = h("button", { type: "button", class: "btn primary", disabled: haken, onclick: () => schliessen(true) }, KL.icon("camera" === a.icon ? "camera" : a.icon), a.ja);
+      const kaestchen = haken ? h("input", { type: "checkbox", id: id + "-ok", onchange: (e) => { ja.disabled = !e.target.checked; } }) : null;   // bewusst nicht vorbelegt
       const datenschutz = String((KL.seite || {}).datenschutz_url || "");
-      dlg.append(
+      const nein = h("button", { type: "button", class: "btn", onclick: () => schliessen(false) }, a.nein);
+      // Native append schreibt null als Text "null" in den Dialog: leere Teile gar nicht erst uebergeben
+      dlg.append(...[
         h("div", { class: "einw-kopf" },
           h("div", { class: "einw-icon", "aria-hidden": "true" }, KL.icon(a.icon)),
           h("h2", { id: id + "-t" }, a.titel)),
+        h("p", { class: "einw-alter" }, h("span", { class: "einw-alter-ic", "aria-hidden": "true" }, KL.icon("users")), h("span", null, h("b", null, ALTER_HINWEIS[0]), " ", ALTER_HINWEIS[1])),
         h("p", { class: "einw-lead", id: id + "-l" }, "Kurz erklärt, was dann passiert:"),
         h("ul", { class: "einw-liste" }, punkte.map(([ic, kopf, text]) =>
           h("li", null, h("span", { class: "einw-ic", "aria-hidden": "true" }, KL.icon(ic)), h("div", null, h("b", null, kopf), h("span", null, text))))),
-        bio ? h("label", { class: "einw-box", for: id + "-ok" }, kaestchen, h("span", null, a.box)) : null,
+        haken ? h("label", { class: "einw-box", for: id + "-ok" }, kaestchen, h("span", null, a.box)) : null,
         h("p", { class: "einw-klein" }, "Danach fragt dich noch dein Browser. Das ersetzt deine Einwilligung hier nicht und umgekehrt. ",
           h("a", { href: "/sicherheit-einfach", onclick: () => schliessen(false) }, "Mehr dazu: Ist das sicher?"),
           /^https:\/\//.test(datenschutz) ? [" ", h("a", { href: datenschutz, rel: "noopener", target: "_blank" }, "Datenschutzerklärung")] : null),
         h("div", { class: "einw-aktion" },
-          h("button", { type: "button", class: "btn", onclick: () => schliessen(false) }, a.nein), ja),
-        beispiele);
+          nein, ja),
+        beispiele].filter(Boolean));
       dlg.addEventListener("close", () => {
         if (dlg.parentNode) dlg.remove();
         offen = null;
         if (antwort) { merken(typ); aktualisiereFuss(); fertig(true); }
-        else fehl(einwilligungFehlt(a.abgelehnt));
+        else fehl(einwilligungFehlt(MIT_BEISPIELEN.has(lab) || !a.abgelehntOhne ? a.abgelehnt : a.abgelehntOhne));
       }, { once: true });
       dlg.addEventListener("cancel", () => { antwort = false; });      // Esc: Dialog schliesst selbst, close folgt
       document.body.append(dlg);
       if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
+      try { (kaestchen || nein).focus({ preventScroll: true }); } catch (e) { /* egal */ }
+      dlg.scrollTop = 0;                                                                   // der Hinweis zu Alter und Eltern oben soll zuerst im Bild stehen      // Tastatur: Fokus startet im Dialog, Esc schliesst ihn
       // Ohne Kamera: fertige Beispiele dieses Labors anbieten (aus dem Beispielkatalog)
       KL.beispiele().then((m) => {
         const liste = (m.usecases || []).filter((u) => u.lab === lab && !u.live).slice(0, 3);

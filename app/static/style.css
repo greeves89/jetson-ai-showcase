@@ -551,3 +551,17 @@ table.lizenzen tbody th{white-space:normal;min-width:10em}
 table.lizenzen a{display:inline-flex;align-items:center;gap:4px;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;word-break:normal;overflow-wrap:anywhere}
 table.lizenzen a .ic{width:13px;height:13px;flex:none}
 table.lizenzen td:last-child{min-width:11em}
+
+/* ---------- Touch-Ziele: Tippflächen mindestens 44 px (Handy und Touch-Geräte, Desktop bleibt wie er ist) ---------- */
+@media (pointer:coarse),(max-width:700px){
+  html body button.chip,html body a.chip,html body .w-wid button.chip,html body .w-wid .chip.w-link,html body .w-wid .chip.w-bsp,html body .gl-wid button.chip{min-height:44px}
+  html body .btn.klein,html body .gl-wid .btn,html body .pg-wid .btn.klein,html body .w-wid .btn.klein{min-height:44px}
+  html body .w-knn .klasse-btn{min-height:44px}
+  html body .lesemodus button{min-height:44px}
+  html body .fuss a{display:inline-flex;align-items:center;min-height:44px}
+  html body .gl{position:relative}
+  html body .gl::before{content:"";position:absolute;inset:-12px -4px}
+  /* Links mitten im Fließtext: Zeile bleibt, die antippbare Fläche wächst unsichtbar auf etwa 44 px */
+  html body #inhalt :is(p,li,span)>a:not(.btn):not(.chip):not(.zurueck):not([href*="?beispiel="]){position:relative}
+  html body #inhalt :is(p,li,span)>a:not(.btn):not(.chip):not(.zurueck):not([href*="?beispiel="])::before{content:"";position:absolute;inset:-12px -2px}
+}

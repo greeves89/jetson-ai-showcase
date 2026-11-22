@@ -84,6 +84,10 @@ dialog.einw::backdrop{background:rgba(0,0,0,.42)}
 .einw-kopf h2{margin:0;font-size:22px;line-height:1.2;font-weight:700;letter-spacing:-.024em}
 .einw-icon{flex:none;width:52px;height:52px;border-radius:16px;background:var(--akzent-fl);color:#fff;display:grid;place-items:center}
 .einw-icon svg.ic{width:26px;height:26px}
+.einw-alter{display:flex;gap:12px;align-items:center;margin:16px 28px 0;padding:12px 14px;border-radius:14px;background:var(--akzent-fl);color:#fff;font-size:15px;line-height:1.35}
+.einw-alter b{font-weight:700}
+.einw-alter-ic{flex:none;display:grid;place-items:center}
+.einw-alter-ic svg.ic{width:22px;height:22px}
 .einw-lead{margin:16px 28px 8px;font-size:16px;color:var(--leise)}
 .einw-liste{list-style:none;margin:0;padding:0 28px;display:grid;gap:14px}
 .einw-liste li{display:flex;gap:14px;align-items:flex-start}
@@ -92,6 +96,7 @@ dialog.einw::backdrop{background:rgba(0,0,0,.42)}
 .einw-liste li span:not(.einw-ic){display:block;font-size:15px;line-height:1.4;color:var(--leise)}
 .einw-klein{margin:16px 28px 0;font-size:14px;line-height:1.4;color:var(--leise)}
 .einw-klein a{text-decoration:underline;text-underline-offset:3px}
+.einw-klein a{display:inline-flex;align-items:center;min-height:44px}
 .einw-aktion{display:flex;flex-wrap:wrap;justify-content:flex-end;gap:8px;padding:20px 28px 28px}
 .einw-beispiele{padding:0 28px 24px}
 .einw-beispiele .einw-klein{margin:0 0 8px}

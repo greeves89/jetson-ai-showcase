@@ -60,6 +60,22 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-chatbox{min-height:80px}
 .d-chatbox .verlauf{min-height:60px}
 .d-chatbox .d-hinweis{margin-top:0}
+.d-eingabeblock .eingabe{flex-wrap:wrap}
+.d-eingabeblock .eingabe textarea{flex:1 1 12em;min-width:0;min-height:56px}
+.d-eingabeblock .eingabe .btn{flex:none;min-height:48px}
+.d-feldhinweis{margin:8px 0 0;font-size:15px;line-height:1.4;color:var(--orange);font-weight:500}
+.d-feldhinweis:empty{display:none}
+.d-eingabeblock .eingabe textarea.d-leer{box-shadow:0 0 0 2px color-mix(in srgb,var(--orange) 70%,transparent)}
+.d-tasten{margin-top:8px}
+@media (pointer:coarse){.d-tasten{display:none}}
+@media(max-width:700px){
+  /* Feld immer volle Breite, Knöpfe darunter (auch während einer laufenden Antwort) */
+  .d-eingabeblock .eingabe textarea{flex:1 1 100%;min-height:56px}
+  .d-eingabeblock .eingabe .btn{flex:1 1 0;min-height:48px}
+  .d-chatbox .verlauf{max-height:52vh}
+  .vorschlaege button.chip{height:auto;text-align:left;line-height:1.3;border-radius:22px}
+  .d-chatbox ~ .vorschlaege{margin-bottom:16px}
+}
 .d-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .msg.ki .meta{font-size:12px;opacity:1;color:var(--leise)}
 .msg.ki .meta:empty{display:none}
