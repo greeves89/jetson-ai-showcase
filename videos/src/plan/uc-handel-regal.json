@@ -1,0 +1,116 @@
+{
+ "id": "uc-handel-regal",
+ "titel": "Regalkontrolle",
+ "untertitel": "Was die Kamera sieht und was nicht",
+ "gesamt": 68.06,
+ "szenen": [
+  {
+   "id": "abend",
+   "kapitel": "Der Abendgang",
+   "start": 0,
+   "dauer": 12.18,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.64,
+     "text": "Am Abend geht jemand durch die Gänge und notiert, was nachgefüllt werden muss."
+    },
+    {
+     "t": 5.84,
+     "d": 5.44,
+     "text": "Eine Lücke fällt erst auf, wenn Ware fehlt. Das Foto ist ein freies Bild."
+    }
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "kapitel": "Flaschen zählen",
+   "start": 12.18,
+   "dauer": 10.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.2,
+     "text": "Eine Kamera am Gang findet die Flaschen und zählt sie, im Beispiel rund 40."
+    },
+    {
+     "t": 6,
+     "d": 3.92,
+     "text": "Das Modell kennt Flaschen, Tassen und viele Alltagsdinge."
+    }
+   ]
+  },
+  {
+   "id": "luecke",
+   "kapitel": "Die Lücke",
+   "start": 23,
+   "dauer": 11.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.12,
+     "text": "Aber ein leerer Platz ist kein Gegenstand."
+    },
+    {
+     "t": 3.92,
+     "d": 6.64,
+     "text": "Beim lückenhaften Regal findet das Modell 18 Flaschen. Welche Artikel fehlen, weiß es nicht."
+    }
+   ]
+  },
+  {
+   "id": "fehlmeldung",
+   "kapitel": "Fehlmeldungen",
+   "start": 34.46,
+   "dauer": 10.66,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Auch Fehlmeldungen kommen vor: Das Regal selbst wird einmal als Kühlschrank erkannt."
+    },
+    {
+     "t": 6.24,
+     "d": 3.52,
+     "text": "Solche Klassen blendest du aus und beobachtest weiter."
+    }
+   ]
+  },
+  {
+   "id": "soll",
+   "kapitel": "Das Soll",
+   "start": 45.12,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.32,
+     "text": "Aus der Zahl wird erst ein Hinweis, wenn du ein Soll hinterlegst. Das Wissen darüber kommt von dir."
+    },
+    {
+     "t": 7.12,
+     "d": 4.4,
+     "text": "Für eigene Artikel braucht es Anlernen oder ein eigenes Modell."
+    }
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Wohin die Kamera schaut",
+   "start": 57.54,
+   "dauer": 10.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.6,
+     "text": "Richte die Kamera aufs Regal, nicht auf die Gänge, und speichere nichts, was du nicht brauchst."
+    },
+    {
+     "t": 6.4,
+     "d": 2.32,
+     "text": "Das Beispiel liegt fertig bereit."
+    }
+   ]
+  }
+ ]
+}

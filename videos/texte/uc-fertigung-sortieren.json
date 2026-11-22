@@ -1,0 +1,56 @@
+{
+ "id": "uc-fertigung-sortieren",
+ "titel": "Bauteile sortieren",
+ "untertitel": "Schrauben, Muttern und Scheiben mit der Kamera",
+ "szenen": [
+  {
+   "id": "kiste",
+   "kapitel": "Die gemischte Kiste",
+   "saetze": [
+    "Schrauben, Muttern und Scheiben liegen gemischt in einer Kiste.",
+    "Jemand sortiert sie von Hand, und diese Person fehlt dann woanders."
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Eine Kamera, drei Klassen",
+   "saetze": [
+    "Eine Kamera über dem Tisch sagt, welches Teil gerade liegt.",
+    "Mehr leistet das System hier nicht, und das ist Absicht."
+   ]
+  },
+  {
+   "id": "vielfalt",
+   "kapitel": "Vielfalt zeigen",
+   "saetze": [
+    "Du zeigst je 20 Beispiele pro Typ, in verschiedenen Lagen und Drehungen.",
+    "Liegt die Schraube immer gleich, erkennt das System sie schräg nicht wieder."
+   ]
+  },
+  {
+   "id": "balken",
+   "kapitel": "Der Abstand der Balken",
+   "saetze": [
+    "Bei klar verschiedenen Formen liegt die richtige Klasse weit vorn.",
+    "Der Abstand der Balken zeigt, wie sicher sich das System ist."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "saetze": [
+    "Im Beispiel waren alle 12 Testbilder und alle 90 weiteren richtig.",
+    "Das sind Beispielwerte für gezeichnete Bilder. Echte Teile spiegeln und verdecken sich.",
+    "Und zwölf Testbilder sind noch kein Beweis."
+   ]
+  },
+  {
+   "id": "weiche",
+   "kapitel": "Die Mechanik bleibt deine",
+   "saetze": [
+    "Die Kamera sagt nur, was es ist. Greifer oder Weiche baust du selbst an.",
+    "Fang mit der leichten Aufgabe an und prüfe Stichproben."
+   ]
+  }
+ ]
+}

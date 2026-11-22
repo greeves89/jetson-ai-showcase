@@ -1,0 +1,47 @@
+{
+ "id": "uc-logistik-zaehlen",
+ "titel": "Fahrzeuge zählen",
+ "untertitel": "Objekterkennung auf dem Hof",
+ "szenen": [
+  {
+   "id": "hof",
+   "kapitel": "Der Hof",
+   "saetze": [
+    "Auf dem Hof stehen Lieferfahrzeuge, und die Torkontrolle möchte wissen, wie viele es gerade sind.",
+    "Das Foto ist ein freies Bild, kein Bild aus einem echten Betrieb."
+   ]
+  },
+  {
+   "id": "rahmen",
+   "kapitel": "Rahmen mit Sicherheit",
+   "saetze": [
+    "Die Kamera findet jedes Fahrzeug einzeln und zeichnet einen Rahmen mit Klasse und Sicherheit.",
+    "Gezählt wird, was über der Schwelle liegt. Anlernen musst du nichts."
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Die Schwelle",
+   "saetze": [
+    "Die Schwelle ist ein Regler. Hoch gestellt, sind die Treffer zuverlässig, aber manches fehlt.",
+    "Niedrig gestellt, kommen mehr Treffer, aber auch Fehlalarme."
+   ]
+  },
+  {
+   "id": "luecken",
+   "kapitel": "Was fehlt",
+   "saetze": [
+    "Auf diesem Foto findet das Modell einen Lastwagen und vier Fahrräder.",
+    "Es stehen aber mehr Räder im Bild. Kleine und verdeckte Objekte fehlen."
+   ]
+  },
+  {
+   "id": "pilot",
+   "kapitel": "Der Pilot",
+   "saetze": [
+    "Ob es für deinen Hof reicht, zeigt ein Pilot mit eigenen Bildern und einer Handzählung als Maßstab.",
+    "Speichere nur, was du brauchst. Oft reicht die Zahl. Das Beispiel liegt fertig bereit."
+   ]
+  }
+ ]
+}

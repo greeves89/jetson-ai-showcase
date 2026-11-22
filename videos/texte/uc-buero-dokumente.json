@@ -1,0 +1,55 @@
+{
+ "id": "uc-buero-dokumente",
+ "titel": "Fragen an Dokumente",
+ "untertitel": "Mit Quelle und mit Mut zu: steht nicht drin",
+ "szenen": [
+  {
+   "id": "ordner",
+   "kapitel": "Vier Dokumente",
+   "saetze": [
+    "Wartungsanleitung, Vertrag, Betriebsvereinbarung, FAQ: vier Dokumente an vier Orten.",
+    "Wer eine Antwort braucht, blättert lange. Alle vier sind frei erfunden."
+   ]
+  },
+  {
+   "id": "abschnitte",
+   "kapitel": "In Abschnitte teilen",
+   "saetze": [
+    "Das System teilt die Dokumente in zwölf kleine Abschnitte.",
+    "Aus jedem macht es Zahlen, die seine Bedeutung beschreiben."
+   ]
+  },
+  {
+   "id": "treffer",
+   "kapitel": "Treffer und Score",
+   "saetze": [
+    "Du stellst eine Frage, und das System zeigt die am besten passenden Abschnitte mit ihrem Score.",
+    "Schau zuerst auf die Treffer. Liegt der richtige Abschnitt nicht oben, rettet auch ein gutes Modell nichts."
+   ]
+  },
+  {
+   "id": "quelle",
+   "kapitel": "Antwort mit Quelle",
+   "saetze": [
+    "Dann antwortet ein Sprachmodell nur mit diesen Stellen und nennt die Quelle.",
+    "Du klickst auf die Fundstelle und prüfst selbst."
+   ]
+  },
+  {
+   "id": "fang",
+   "kapitel": "Die Fangfrage",
+   "saetze": [
+    "Jetzt die Fangfrage: Wie viel Urlaub gibt es? Das steht nirgends.",
+    "Ein gutes System sagt das und erfindet keine Zahl. Das ist der wichtigste Test."
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Aktuell und berechtigt",
+   "saetze": [
+    "Achte auf aktuelle Dokumente und auf Zugriffsrechte.",
+    "Wer ein Dokument nicht sehen darf, bekommt es auch über das System nicht. Das Beispiel liegt fertig bereit."
+   ]
+  }
+ ]
+}

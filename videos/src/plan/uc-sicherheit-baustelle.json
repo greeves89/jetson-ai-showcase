@@ -1,0 +1,116 @@
+{
+ "id": "uc-sicherheit-baustelle",
+ "titel": "Personen sind keine Helme",
+ "untertitel": "Was Personenerkennung auf der Baustelle leistet",
+ "gesamt": 68.14,
+ "szenen": [
+  {
+   "id": "baustelle",
+   "kapitel": "Die Baustelle",
+   "start": 0,
+   "dauer": 10.82,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4.88,
+     "text": "Auf der Baustelle sind Menschen dort, wo Fahrzeuge fahren und Lasten schwenken."
+    },
+    {
+     "t": 6.08,
+     "d": 3.84,
+     "text": "Eine Kamera kann dabei unterstützen, aber nicht ersetzen."
+    }
+   ]
+  },
+  {
+   "id": "personen",
+   "kapitel": "Personen finden",
+   "start": 10.82,
+   "dauer": 9.86,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.36,
+     "text": "Das Modell findet Personen und zeichnet Rahmen. Auf diesem Foto sind es fünf."
+    },
+    {
+     "t": 6.16,
+     "d": 2.8,
+     "text": "Als Klasse steht immer nur: Person."
+    }
+   ]
+  },
+  {
+   "id": "helm",
+   "kapitel": "Helm oder nicht",
+   "start": 20.68,
+   "dauer": 10.42,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.32,
+     "text": "Trägt die Person einen Helm? Das weiß das Modell nicht. Es erkennt weder Helme noch Warnwesten."
+    },
+    {
+     "t": 7.12,
+     "d": 2.4,
+     "text": "Das ist die häufigste Fehlannahme."
+    }
+   ]
+  },
+  {
+   "id": "fehlen",
+   "kapitel": "Wer fehlt",
+   "start": 31.1,
+   "dauer": 10.18,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.36,
+     "text": "Auch Personen fehlen. In der Werkhalle sind mehr Menschen im Bild, als erkannt werden."
+    },
+    {
+     "t": 6.16,
+     "d": 3.12,
+     "text": "Auf der Großbaustelle sind die meisten zu klein."
+    }
+   ]
+  },
+  {
+   "id": "anlernen",
+   "kapitel": "Helme anlernen",
+   "start": 41.28,
+   "dauer": 12.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.52,
+     "text": "Für Helme nimmst du im Labor Anlernen zwei Klassen auf: mit Helm und ohne."
+    },
+    {
+     "t": 6.32,
+     "d": 5.12,
+     "text": "Das klappt für Nahaufnahmen. Im Gesamtbild braucht es ein eigenes Erkennungsmodell."
+    }
+   ]
+  },
+  {
+   "id": "mitbestimmung",
+   "kapitel": "Vorher klären",
+   "start": 53.62,
+   "dauer": 14.52,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 8.48,
+     "text": "Die Kamera ergänzt Absperrung und Einweisung, sie ersetzt sie nicht. Kläre Zweck, Datenschutz und Mitbestimmung vor dem Start."
+    },
+    {
+     "t": 9.28,
+     "d": 3.44,
+     "text": "Wer nicht erkannt wird, ist nicht unbedingt abwesend."
+    }
+   ]
+  }
+ ]
+}

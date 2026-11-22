@@ -1,0 +1,116 @@
+{
+ "id": "uc-buero-protokoll",
+ "titel": "Vom Gespräch zum Protokoll",
+ "untertitel": "Spracherkennung liefert einen Entwurf",
+ "gesamt": 67.74,
+ "szenen": [
+  {
+   "id": "besprechung",
+   "kapitel": "Nach der Besprechung",
+   "start": 0,
+   "dauer": 10.98,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 5.84,
+     "text": "Nach der Besprechung soll jemand das Protokoll schreiben. Wer protokolliert, hört nur halb zu."
+    },
+    {
+     "t": 7.04,
+     "d": 3.04,
+     "text": "Später weiß keiner mehr genau, was gesagt wurde."
+    }
+   ]
+  },
+  {
+   "id": "zustimmung",
+   "kapitel": "Erst der Datenschutz",
+   "start": 10.98,
+   "dauer": 9.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.12,
+     "text": "Zuerst der Datenschutz: Alle wissen vorher, dass aufgenommen wird, und stimmen zu."
+    },
+    {
+     "t": 5.92,
+     "d": 2.48,
+     "text": "Zweck und Löschfrist sind festgelegt."
+    }
+   ]
+  },
+  {
+   "id": "text",
+   "kapitel": "Ton wird Text",
+   "start": 20.28,
+   "dauer": 12.34,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.68,
+     "text": "Der Jetson wandelt den Ton lokal in Text um. Das Audio verlässt das Haus nicht."
+    },
+    {
+     "t": 6.48,
+     "d": 4.96,
+     "text": "Hall, Nebengeräusche und Durcheinanderreden machen es schwerer als im Studio."
+    }
+   ]
+  },
+  {
+   "id": "vergleich",
+   "kapitel": "Mit dem Original vergleichen",
+   "start": 32.62,
+   "dauer": 11.7,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.96,
+     "text": "Vergleiche das Ergebnis mit dem Original. Eine Fehlerquote wurde nicht gemessen, du zählst die Abweichungen selbst."
+    },
+    {
+     "t": 7.76,
+     "d": 3.04,
+     "text": "Die Beispielaufnahme ist eine synthetische Stimme."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Zahlen und Fristen",
+   "start": 44.32,
+   "dauer": 13.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.2,
+     "text": "Besonders heikel sind Zahlen und Fristen. Zwischen dem Neunzehnten und dem Neunten liegt eine ganze Aufgabe."
+    },
+    {
+     "t": 8,
+     "d": 4.16,
+     "text": "Ein glatter Entwurf wirkt richtig, auch wenn eine Zahl nicht stimmt."
+    }
+   ]
+  },
+  {
+   "id": "freigabe",
+   "kapitel": "Freigabe und Löschung",
+   "start": 57.38,
+   "dauer": 10.36,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.44,
+     "text": "Eine Person, die dabei war, gibt das Protokoll frei. Danach löschst du die Aufnahme."
+    },
+    {
+     "t": 6.24,
+     "d": 2.32,
+     "text": "Das Beispiel liegt fertig bereit."
+    }
+   ]
+  }
+ ]
+}

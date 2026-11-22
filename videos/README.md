@@ -15,6 +15,10 @@ Weitere Folgen (Strang Sehen und Agenten, Strang Sprache; Skizzen in `docs/video
 `sprachmodell-aufbau`, `prompting-grundlagen`, `prompting-beispiele`, `llm-grenzen-risiken`, `wissen-ins-modell-oder-dokument`, `sprachausgabe-erklaert`.
 Ihre Szenen nutzen gemeinsame Anker über Szenengrenzen (`anker` in `Szene`) als Match-Cuts; Hilfsbausteine liegen in `src/neu.jsx`, Beispielbilder in `src/img/`.
 
+Strang Business-Use-Cases (zehn Folgen, Skizzen in `docs/videos-usecases.md`, Inhalt aus `app/static/content-usecases.js`):
+`uc-fertigung-sichtpruefung`, `uc-fertigung-sortieren`, `uc-logistik-zaehlen`, `uc-handel-regal`, `uc-gesundheit-auffaellig`, `uc-buero-dokumente`, `uc-buero-protokoll`, `uc-service-bestellung`, `uc-sicherheit-zutritt`, `uc-sicherheit-baustelle`.
+Die Bilder sind die echten Beispieldaten aus `app/static/beispiele/` (Kopie in `src/img/uc/`, Zuordnung in `src/bilder-uc.js`). Die Erkennungsrahmen auf den Fotos (`src/boxen-uc.json`) stammen vom selben YOLOX-tiny-Modell wie im Labor (Schwellen 0,3, 0,5 und 0,8), die Zahlen entsprechen `beispiele/pruefung.json`. Bausteine dazu: `src/bausteine-uc.jsx`.
+
 ## Aufbau
 
 - `texte/<id>.json`: Sprechtext als Daten, Sätze je Szene. Jede Szene ist ein Kapitel.

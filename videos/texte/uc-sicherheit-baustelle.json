@@ -1,0 +1,55 @@
+{
+ "id": "uc-sicherheit-baustelle",
+ "titel": "Personen sind keine Helme",
+ "untertitel": "Was Personenerkennung auf der Baustelle leistet",
+ "szenen": [
+  {
+   "id": "baustelle",
+   "kapitel": "Die Baustelle",
+   "saetze": [
+    "Auf der Baustelle sind Menschen dort, wo Fahrzeuge fahren und Lasten schwenken.",
+    "Eine Kamera kann dabei unterstützen, aber nicht ersetzen."
+   ]
+  },
+  {
+   "id": "personen",
+   "kapitel": "Personen finden",
+   "saetze": [
+    "Das Modell findet Personen und zeichnet Rahmen. Auf diesem Foto sind es fünf.",
+    "Als Klasse steht immer nur: Person."
+   ]
+  },
+  {
+   "id": "helm",
+   "kapitel": "Helm oder nicht",
+   "saetze": [
+    "Trägt die Person einen Helm? Das weiß das Modell nicht. Es erkennt weder Helme noch Warnwesten.",
+    "Das ist die häufigste Fehlannahme."
+   ]
+  },
+  {
+   "id": "fehlen",
+   "kapitel": "Wer fehlt",
+   "saetze": [
+    "Auch Personen fehlen. In der Werkhalle sind mehr Menschen im Bild, als erkannt werden.",
+    "Auf der Großbaustelle sind die meisten zu klein."
+   ]
+  },
+  {
+   "id": "anlernen",
+   "kapitel": "Helme anlernen",
+   "saetze": [
+    "Für Helme nimmst du im Labor Anlernen zwei Klassen auf: mit Helm und ohne.",
+    "Das klappt für Nahaufnahmen. Im Gesamtbild braucht es ein eigenes Erkennungsmodell."
+   ]
+  },
+  {
+   "id": "mitbestimmung",
+   "kapitel": "Vorher klären",
+   "saetze": [
+    "Die Kamera ergänzt Absperrung und Einweisung, sie ersetzt sie nicht. Kläre Zweck, Datenschutz und Mitbestimmung vor dem Start.",
+    "Wer nicht erkannt wird, ist nicht unbedingt abwesend."
+   ]
+  }
+ ]
+}

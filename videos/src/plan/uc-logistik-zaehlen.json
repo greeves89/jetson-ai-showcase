@@ -1,0 +1,98 @@
+{
+ "id": "uc-logistik-zaehlen",
+ "titel": "Fahrzeuge zählen",
+ "untertitel": "Objekterkennung auf dem Hof",
+ "gesamt": 62.2,
+ "szenen": [
+  {
+   "id": "hof",
+   "kapitel": "Der Hof",
+   "start": 0,
+   "dauer": 12.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6,
+     "text": "Auf dem Hof stehen Lieferfahrzeuge, und die Torkontrolle möchte wissen, wie viele es gerade sind."
+    },
+    {
+     "t": 7.2,
+     "d": 4.32,
+     "text": "Das Foto ist ein freies Bild, kein Bild aus einem echten Betrieb."
+    }
+   ]
+  },
+  {
+   "id": "rahmen",
+   "kapitel": "Rahmen mit Sicherheit",
+   "start": 12.42,
+   "dauer": 12.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.84,
+     "text": "Die Kamera findet jedes Fahrzeug einzeln und zeichnet einen Rahmen mit Klasse und Sicherheit."
+    },
+    {
+     "t": 6.64,
+     "d": 4.56,
+     "text": "Gezählt wird, was über der Schwelle liegt. Anlernen musst du nichts."
+    }
+   ]
+  },
+  {
+   "id": "schwelle",
+   "kapitel": "Die Schwelle",
+   "start": 24.52,
+   "dauer": 12.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.24,
+     "text": "Die Schwelle ist ein Regler. Hoch gestellt, sind die Treffer zuverlässig, aber manches fehlt."
+    },
+    {
+     "t": 7.04,
+     "d": 4.16,
+     "text": "Niedrig gestellt, kommen mehr Treffer, aber auch Fehlalarme."
+    }
+   ]
+  },
+  {
+   "id": "luecken",
+   "kapitel": "Was fehlt",
+   "start": 36.62,
+   "dauer": 11.3,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Auf diesem Foto findet das Modell einen Lastwagen und vier Fahrräder."
+    },
+    {
+     "t": 5.6,
+     "d": 4.8,
+     "text": "Es stehen aber mehr Räder im Bild. Kleine und verdeckte Objekte fehlen."
+    }
+   ]
+  },
+  {
+   "id": "pilot",
+   "kapitel": "Der Pilot",
+   "start": 47.92,
+   "dauer": 14.28,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6,
+     "text": "Ob es für deinen Hof reicht, zeigt ein Pilot mit eigenen Bildern und einer Handzählung als Maßstab."
+    },
+    {
+     "t": 6.8,
+     "d": 5.68,
+     "text": "Speichere nur, was du brauchst. Oft reicht die Zahl. Das Beispiel liegt fertig bereit."
+    }
+   ]
+  }
+ ]
+}

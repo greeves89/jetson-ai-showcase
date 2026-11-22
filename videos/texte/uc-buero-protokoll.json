@@ -1,0 +1,55 @@
+{
+ "id": "uc-buero-protokoll",
+ "titel": "Vom Gespräch zum Protokoll",
+ "untertitel": "Spracherkennung liefert einen Entwurf",
+ "szenen": [
+  {
+   "id": "besprechung",
+   "kapitel": "Nach der Besprechung",
+   "saetze": [
+    "Nach der Besprechung soll jemand das Protokoll schreiben. Wer protokolliert, hört nur halb zu.",
+    "Später weiß keiner mehr genau, was gesagt wurde."
+   ]
+  },
+  {
+   "id": "zustimmung",
+   "kapitel": "Erst der Datenschutz",
+   "saetze": [
+    "Zuerst der Datenschutz: Alle wissen vorher, dass aufgenommen wird, und stimmen zu.",
+    "Zweck und Löschfrist sind festgelegt."
+   ]
+  },
+  {
+   "id": "text",
+   "kapitel": "Ton wird Text",
+   "saetze": [
+    "Der Jetson wandelt den Ton lokal in Text um. Das Audio verlässt das Haus nicht.",
+    "Hall, Nebengeräusche und Durcheinanderreden machen es schwerer als im Studio."
+   ]
+  },
+  {
+   "id": "vergleich",
+   "kapitel": "Mit dem Original vergleichen",
+   "saetze": [
+    "Vergleiche das Ergebnis mit dem Original. Eine Fehlerquote wurde nicht gemessen, du zählst die Abweichungen selbst.",
+    "Die Beispielaufnahme ist eine synthetische Stimme."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Zahlen und Fristen",
+   "saetze": [
+    "Besonders heikel sind Zahlen und Fristen. Zwischen dem Neunzehnten und dem Neunten liegt eine ganze Aufgabe.",
+    "Ein glatter Entwurf wirkt richtig, auch wenn eine Zahl nicht stimmt."
+   ]
+  },
+  {
+   "id": "freigabe",
+   "kapitel": "Freigabe und Löschung",
+   "saetze": [
+    "Eine Person, die dabei war, gibt das Protokoll frei. Danach löschst du die Aufnahme.",
+    "Das Beispiel liegt fertig bereit."
+   ]
+  }
+ ]
+}

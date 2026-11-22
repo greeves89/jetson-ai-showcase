@@ -1,0 +1,55 @@
+{
+ "id": "uc-gesundheit-auffaellig",
+ "titel": "Zweitmeinung",
+ "untertitel": "Die Software lenkt den Blick",
+ "szenen": [
+  {
+   "id": "hinweis",
+   "kapitel": "Vorab",
+   "saetze": [
+    "Vorab: Diese Bilder sind gezeichnet. Es sind keine medizinischen Daten, und das Beispiel ist kein Medizinprodukt.",
+    "Es zeigt nur ein Prinzip."
+   ]
+  },
+  {
+   "id": "proben",
+   "kapitel": "Viele Proben",
+   "saetze": [
+    "Im Labor sind die meisten Proben unauffällig.",
+    "Wer oft Unauffälliges sieht, übersieht leicht das Auffällige."
+   ]
+  },
+  {
+   "id": "vorsortieren",
+   "kapitel": "Nach vorn legen",
+   "saetze": [
+    "Die Software legt auffällige Proben nach vorn. Sie stellt keine Diagnose.",
+    "Ein Mensch prüft jeden gemeldeten Fall."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "saetze": [
+    "Im Beispiel waren alle 12 Testbilder richtig und 59 von 60 weiteren, also 98 Prozent.",
+    "Der Unterschied ist deutlich gezeichnet, echte Proben sind schwieriger."
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Zwei Fehlerarten",
+   "saetze": [
+    "Nicht jeder Fehler wiegt gleich. Eine übersehene Probe wiegt schwerer als eine unnötig gemeldete.",
+    "Deshalb zählst du beide getrennt und stellst die Schwelle bewusst ein."
+   ]
+  },
+  {
+   "id": "haftung",
+   "kapitel": "Wer verantwortet",
+   "saetze": [
+    "Wer das Ergebnis prüft und wer haftet, klärst du vorher, samt Datenschutz.",
+    "Das ist keine Rechtsberatung. Im Beispiel bleibt der Hinweis immer sichtbar."
+   ]
+  }
+ ]
+}

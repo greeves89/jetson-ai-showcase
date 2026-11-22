@@ -1,0 +1,54 @@
+{
+ "id": "uc-sicherheit-zutritt",
+ "titel": "Ist jemand an der Tür?",
+ "untertitel": "Erkennen ist nicht identifizieren",
+ "szenen": [
+  {
+   "id": "tuer",
+   "kapitel": "Die Seitentür",
+   "saetze": [
+    "Ein Seiteneingang, abends selten genutzt. Das Licht brennt die ganze Nacht oder gar nicht.",
+    "Besser wäre: Es geht an, wenn jemand kommt."
+   ]
+  },
+  {
+   "id": "unterschied",
+   "kapitel": "Zwei Aufgaben",
+   "saetze": [
+    "Detektion sagt, dass ein Gesicht da ist. Identifikation sagt, wer es ist.",
+    "Für das Licht genügt das Erste. Das Zweite braucht eine Datenbank mit Gesichtern, und das ist rechtlich ein eigenes Feld."
+   ]
+  },
+  {
+   "id": "rahmen",
+   "kapitel": "Nur ein Rahmen",
+   "saetze": [
+    "Das Beispiel macht nur das Erste. Der Jetson zeichnet einen Rahmen und weiß nicht, wer du bist.",
+    "Er speichert nichts."
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Deine Kamera",
+   "saetze": [
+    "Du probierst es mit deiner eigenen Kamera, und nur mit Menschen, die einverstanden sind."
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Die Grenzen",
+   "saetze": [
+    "Beobachte die Grenzen. Bei Maske, Gegenlicht und starker Neigung geht der Rahmen verloren.",
+    "An einer echten Tür braucht es deshalb einen Weg ohne Gesichtserkennung."
+   ]
+  },
+  {
+   "id": "recht",
+   "kapitel": "Das Recht zuerst",
+   "saetze": [
+    "Bei Gesichtern kommt das Recht zuerst: Rechtsgrundlage, Datenschutz, Betriebsrat und Löschfristen.",
+    "Das ist keine Rechtsberatung."
+   ]
+  }
+ ]
+}

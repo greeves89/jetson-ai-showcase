@@ -1,0 +1,54 @@
+{
+ "id": "uc-service-bestellung",
+ "titel": "Der Agent schlägt nach",
+ "untertitel": "Bestellfragen beantworten, ohne zu raten",
+ "szenen": [
+  {
+   "id": "fragen",
+   "kapitel": "Immer dieselben Fragen",
+   "saetze": [
+    "Wo ist meine Bestellung? Was kostet sie? Kann ich stornieren?",
+    "Die Antworten stehen im Bestellsystem, nur muss jemand nachsehen."
+   ]
+  },
+  {
+   "id": "werkzeuge",
+   "kapitel": "Vier Werkzeuge",
+   "saetze": [
+    "Der Agent hat vier Werkzeuge: Status lesen, Preis rechnen, Stornierung prüfen und Bestellungen eines Kunden suchen.",
+    "Alle vier lesen nur, keines verändert eine Bestellung."
+   ]
+  },
+  {
+   "id": "preis",
+   "kapitel": "Der Preis",
+   "saetze": [
+    "Beim Gesamtpreis wählt der Agent das Preis-Werkzeug. Es rechnet 28,80 Euro plus 4,90 Euro Versand.",
+    "Gerechnet wird im Werkzeug, das Modell formuliert nur."
+   ]
+  },
+  {
+   "id": "storno",
+   "kapitel": "Die Stornoregel",
+   "saetze": [
+    "Bei einer versendeten Bestellung sagt die Regel Nein. Das Werkzeug prüft nur und storniert nichts.",
+    "Die Regel kommt aus dem Werkzeug, nicht aus dem Gedächtnis des Modells."
+   ]
+  },
+  {
+   "id": "fang",
+   "kapitel": "Die Fangfrage",
+   "saetze": [
+    "Fangfrage: eine Nummer, die es nicht gibt. Das Werkzeug meldet nicht gefunden, und der Agent soll das ehrlich weitergeben."
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Nur nötige Rechte",
+   "saetze": [
+    "Gib dem Agenten nur die Rechte, die er braucht. Aktionen mit Folgen gibt ein Mensch frei.",
+    "Das Beispiel liegt fertig bereit, mit 14 erfundenen Bestellungen."
+   ]
+  }
+ ]
+}

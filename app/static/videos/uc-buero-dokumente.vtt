@@ -1,0 +1,49 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:08.970
+Wartungsanleitung, Vertrag, Betriebsvereinbarung,
+FAQ: vier Dokumente an vier Orten.
+
+00:00:09.120 --> 00:00:14.310
+Wer eine Antwort braucht, blättert
+lange. Alle vier sind frei erfunden.
+
+00:00:15.560 --> 00:00:19.470
+Das System teilt die Dokumente
+in zwölf kleine Abschnitte.
+
+00:00:19.620 --> 00:00:23.130
+Aus jedem macht es Zahlen, die
+seine Bedeutung beschreiben.
+
+00:00:24.380 --> 00:00:30.130
+Du stellst eine Frage, und das System zeigt die
+am besten passenden Abschnitte mit ihrem Score.
+
+00:00:30.280 --> 00:00:36.750
+Schau zuerst auf die Treffer. Liegt der richtige Abschnitt
+nicht oben, rettet auch ein gutes Modell nichts.
+
+00:00:38.000 --> 00:00:42.630
+Dann antwortet ein Sprachmodell nur mit
+diesen Stellen und nennt die Quelle.
+
+00:00:42.780 --> 00:00:45.810
+Du klickst auf die Fundstelle
+und prüfst selbst.
+
+00:00:47.060 --> 00:00:52.010
+Jetzt die Fangfrage: Wie viel
+Urlaub gibt es? Das steht nirgends.
+
+00:00:52.160 --> 00:00:58.070
+Ein gutes System sagt das und erfindet
+keine Zahl. Das ist der wichtigste Test.
+
+00:00:59.320 --> 00:01:03.230
+Achte auf aktuelle Dokumente
+und auf Zugriffsrechte.
+
+00:01:03.380 --> 00:01:10.170
+Wer ein Dokument nicht sehen darf, bekommt es auch über
+das System nicht. Das Beispiel liegt fertig bereit.

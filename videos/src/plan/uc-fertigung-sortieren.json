@@ -1,0 +1,121 @@
+{
+ "id": "uc-fertigung-sortieren",
+ "titel": "Bauteile sortieren",
+ "untertitel": "Schrauben, Muttern und Scheiben mit der Kamera",
+ "gesamt": 67.8,
+ "szenen": [
+  {
+   "id": "kiste",
+   "kapitel": "Die gemischte Kiste",
+   "start": 0,
+   "dauer": 10.42,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 4,
+     "text": "Schrauben, Muttern und Scheiben liegen gemischt in einer Kiste."
+    },
+    {
+     "t": 5.2,
+     "d": 4.32,
+     "text": "Jemand sortiert sie von Hand, und diese Person fehlt dann woanders."
+    }
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Eine Kamera, drei Klassen",
+   "start": 10.42,
+   "dauer": 9.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.92,
+     "text": "Eine Kamera über dem Tisch sagt, welches Teil gerade liegt."
+    },
+    {
+     "t": 4.72,
+     "d": 3.76,
+     "text": "Mehr leistet das System hier nicht, und das ist Absicht."
+    }
+   ]
+  },
+  {
+   "id": "vielfalt",
+   "kapitel": "Vielfalt zeigen",
+   "start": 19.8,
+   "dauer": 11.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Du zeigst je 20 Beispiele pro Typ, in verschiedenen Lagen und Drehungen."
+    },
+    {
+     "t": 5.6,
+     "d": 4.56,
+     "text": "Liegt die Schraube immer gleich, erkennt das System sie schräg nicht wieder."
+    }
+   ]
+  },
+  {
+   "id": "balken",
+   "kapitel": "Der Abstand der Balken",
+   "start": 30.86,
+   "dauer": 9.78,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.24,
+     "text": "Bei klar verschiedenen Formen liegt die richtige Klasse weit vorn."
+    },
+    {
+     "t": 5.04,
+     "d": 3.84,
+     "text": "Der Abstand der Balken zeigt, wie sicher sich das System ist."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "start": 40.64,
+   "dauer": 15.92,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Im Beispiel waren alle 12 Testbilder und alle 90 weiteren richtig."
+    },
+    {
+     "t": 5.84,
+     "d": 5.92,
+     "text": "Das sind Beispielwerte für gezeichnete Bilder. Echte Teile spiegeln und verdecken sich."
+    },
+    {
+     "t": 12.06,
+     "d": 2.96,
+     "text": "Und zwölf Testbilder sind noch kein Beweis."
+    }
+   ]
+  },
+  {
+   "id": "weiche",
+   "kapitel": "Die Mechanik bleibt deine",
+   "start": 56.56,
+   "dauer": 11.24,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Die Kamera sagt nur, was es ist. Greifer oder Weiche baust du selbst an."
+    },
+    {
+     "t": 5.84,
+     "d": 3.6,
+     "text": "Fang mit der leichten Aufgabe an und prüfe Stichproben."
+    }
+   ]
+  }
+ ]
+}

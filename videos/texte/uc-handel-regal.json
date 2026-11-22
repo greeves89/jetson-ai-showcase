@@ -1,0 +1,55 @@
+{
+ "id": "uc-handel-regal",
+ "titel": "Regalkontrolle",
+ "untertitel": "Was die Kamera sieht und was nicht",
+ "szenen": [
+  {
+   "id": "abend",
+   "kapitel": "Der Abendgang",
+   "saetze": [
+    "Am Abend geht jemand durch die Gänge und notiert, was nachgefüllt werden muss.",
+    "Eine Lücke fällt erst auf, wenn Ware fehlt. Das Foto ist ein freies Bild."
+   ]
+  },
+  {
+   "id": "zaehlen",
+   "kapitel": "Flaschen zählen",
+   "saetze": [
+    "Eine Kamera am Gang findet die Flaschen und zählt sie, im Beispiel rund 40.",
+    "Das Modell kennt Flaschen, Tassen und viele Alltagsdinge."
+   ]
+  },
+  {
+   "id": "luecke",
+   "kapitel": "Die Lücke",
+   "saetze": [
+    "Aber ein leerer Platz ist kein Gegenstand.",
+    "Beim lückenhaften Regal findet das Modell 18 Flaschen. Welche Artikel fehlen, weiß es nicht."
+   ]
+  },
+  {
+   "id": "fehlmeldung",
+   "kapitel": "Fehlmeldungen",
+   "saetze": [
+    "Auch Fehlmeldungen kommen vor: Das Regal selbst wird einmal als Kühlschrank erkannt.",
+    "Solche Klassen blendest du aus und beobachtest weiter."
+   ]
+  },
+  {
+   "id": "soll",
+   "kapitel": "Das Soll",
+   "saetze": [
+    "Aus der Zahl wird erst ein Hinweis, wenn du ein Soll hinterlegst. Das Wissen darüber kommt von dir.",
+    "Für eigene Artikel braucht es Anlernen oder ein eigenes Modell."
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Wohin die Kamera schaut",
+   "saetze": [
+    "Richte die Kamera aufs Regal, nicht auf die Gänge, und speichere nichts, was du nicht brauchst.",
+    "Das Beispiel liegt fertig bereit."
+   ]
+  }
+ ]
+}

@@ -1,0 +1,47 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:05.930
+Auf der Baustelle sind Menschen dort, wo
+Fahrzeuge fahren und Lasten schwenken.
+
+00:00:06.080 --> 00:00:10.070
+Eine Kamera kann dabei
+unterstützen, aber nicht ersetzen.
+
+00:00:11.320 --> 00:00:16.830
+Das Modell findet Personen und zeichnet
+Rahmen. Auf diesem Foto sind es fünf.
+
+00:00:16.980 --> 00:00:19.930
+Als Klasse steht immer nur: Person.
+
+00:00:21.180 --> 00:00:27.650
+Trägt die Person einen Helm? Das weiß das Modell
+nicht. Es erkennt weder Helme noch Warnwesten.
+
+00:00:27.800 --> 00:00:30.350
+Das ist die häufigste Fehlannahme.
+
+00:00:31.600 --> 00:00:37.110
+Auch Personen fehlen. In der Werkhalle sind
+mehr Menschen im Bild, als erkannt werden.
+
+00:00:37.260 --> 00:00:40.530
+Auf der Großbaustelle sind
+die meisten zu klein.
+
+00:00:41.780 --> 00:00:47.450
+Für Helme nimmst du im Labor Anlernen
+zwei Klassen auf: mit Helm und ohne.
+
+00:00:47.600 --> 00:00:52.870
+Das klappt für Nahaufnahmen. Im Gesamtbild
+braucht es ein eigenes Erkennungsmodell.
+
+00:00:54.120 --> 00:01:02.750
+Die Kamera ergänzt Absperrung und Einweisung, sie ersetzt sie
+nicht. Kläre Zweck, Datenschutz und Mitbestimmung vor dem Start.
+
+00:01:02.900 --> 00:01:06.490
+Wer nicht erkannt wird, ist
+nicht unbedingt abwesend.

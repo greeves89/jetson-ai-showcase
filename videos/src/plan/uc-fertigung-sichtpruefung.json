@@ -1,0 +1,121 @@
+{
+ "id": "uc-fertigung-sichtpruefung",
+ "titel": "Gut oder Ausschuss",
+ "untertitel": "Sichtprüfung lernt aus Beispielen",
+ "gesamt": 75.16,
+ "szenen": [
+  {
+   "id": "band",
+   "kapitel": "Am Bandende",
+   "start": 0,
+   "dauer": 14.1,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.08,
+     "text": "Am Ende des Bandes schaut jemand jede Scheibe an: Kratzer, Dellen, ausgebrochene Kanten."
+    },
+    {
+     "t": 7.28,
+     "d": 5.92,
+     "text": "Nach zwei Stunden lässt die Aufmerksamkeit nach, und das Urteil schwankt von Schicht zu Schicht."
+    }
+   ]
+  },
+  {
+   "id": "fach",
+   "kapitel": "Zwei Fächer",
+   "start": 14.1,
+   "dauer": 8.98,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.08,
+     "text": "Das System soll nur eines sagen: gut oder Ausschuss."
+    },
+    {
+     "t": 4.88,
+     "d": 3.2,
+     "text": "Es repariert nichts und sucht keine Ursache."
+    }
+   ]
+  },
+  {
+   "id": "stapel",
+   "kapitel": "Zwei Stapel Beispiele",
+   "start": 23.08,
+   "dauer": 12.02,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.68,
+     "text": "Dafür zeigst du ihm Beispiele, im Labor je 20 gute und 20 schlechte Scheiben."
+    },
+    {
+     "t": 6.48,
+     "d": 4.64,
+     "text": "Alle, die prüfen, müssen sich vorher einig sein, was Ausschuss ist."
+    }
+   ]
+  },
+  {
+   "id": "nachbarn",
+   "kapitel": "Die drei Nachbarn",
+   "start": 35.1,
+   "dauer": 10.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.24,
+     "text": "Kommt ein neues Bild, sucht das System die drei ähnlichsten Beispiele, und die Mehrheit entscheidet."
+    },
+    {
+     "t": 7.04,
+     "d": 2.16,
+     "text": "Das braucht kein langes Training."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "start": 45.2,
+   "dauer": 16.48,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.84,
+     "text": "Im Beispiel waren 11 von 12 Testbildern richtig und 60 von 60 weiteren."
+    },
+    {
+     "t": 6.64,
+     "d": 4.16,
+     "text": "Der eine Fehler war die teure Richtung: Ausschuss als gut."
+    },
+    {
+     "t": 11.1,
+     "d": 4.48,
+     "text": "Die Bilder sind gezeichnet, echte Teile glänzen und sind schwerer."
+    }
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Vor dem Einsatz",
+   "start": 61.68,
+   "dauer": 13.48,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.88,
+     "text": "Frage dich: Welche Entscheidung? Welche Daten? Wer prüft?"
+    },
+    {
+     "t": 5.68,
+     "d": 6,
+     "text": "Ein Mensch zieht Stichproben, besonders aus dem Gut-Fach. Das Beispiel liegt fertig bereit."
+    }
+   ]
+  }
+ ]
+}

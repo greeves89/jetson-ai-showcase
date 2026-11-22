@@ -1,0 +1,116 @@
+{
+ "id": "uc-gesundheit-auffaellig",
+ "titel": "Zweitmeinung",
+ "untertitel": "Die Software lenkt den Blick",
+ "gesamt": 69.74,
+ "szenen": [
+  {
+   "id": "hinweis",
+   "kapitel": "Vorab",
+   "start": 0,
+   "dauer": 11.86,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 7.84,
+     "text": "Vorab: Diese Bilder sind gezeichnet. Es sind keine medizinischen Daten, und das Beispiel ist kein Medizinprodukt."
+    },
+    {
+     "t": 9.04,
+     "d": 1.92,
+     "text": "Es zeigt nur ein Prinzip."
+    }
+   ]
+  },
+  {
+   "id": "proben",
+   "kapitel": "Viele Proben",
+   "start": 11.86,
+   "dauer": 9.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.04,
+     "text": "Im Labor sind die meisten Proben unauffällig."
+    },
+    {
+     "t": 3.84,
+     "d": 4.32,
+     "text": "Wer oft Unauffälliges sieht, übersieht leicht das Auffällige."
+    }
+   ]
+  },
+  {
+   "id": "vorsortieren",
+   "kapitel": "Nach vorn legen",
+   "start": 20.92,
+   "dauer": 9.22,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.88,
+     "text": "Die Software legt auffällige Proben nach vorn. Sie stellt keine Diagnose."
+    },
+    {
+     "t": 5.68,
+     "d": 2.64,
+     "text": "Ein Mensch prüft jeden gemeldeten Fall."
+    }
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "start": 30.14,
+   "dauer": 14.1,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 7.84,
+     "text": "Im Beispiel waren alle 12 Testbilder richtig und 59 von 60 weiteren, also 98 Prozent."
+    },
+    {
+     "t": 8.64,
+     "d": 4.56,
+     "text": "Der Unterschied ist deutlich gezeichnet, echte Proben sind schwieriger."
+    }
+   ]
+  },
+  {
+   "id": "waage",
+   "kapitel": "Zwei Fehlerarten",
+   "start": 44.24,
+   "dauer": 12.66,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.72,
+     "text": "Nicht jeder Fehler wiegt gleich. Eine übersehene Probe wiegt schwerer als eine unnötig gemeldete."
+    },
+    {
+     "t": 7.52,
+     "d": 4.24,
+     "text": "Deshalb zählst du beide getrennt und stellst die Schwelle bewusst ein."
+    }
+   ]
+  },
+  {
+   "id": "haftung",
+   "kapitel": "Wer verantwortet",
+   "start": 56.9,
+   "dauer": 12.84,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.28,
+     "text": "Wer das Ergebnis prüft und wer haftet, klärst du vorher, samt Datenschutz."
+    },
+    {
+     "t": 6.08,
+     "d": 4.96,
+     "text": "Das ist keine Rechtsberatung. Im Beispiel bleibt der Hinweis immer sichtbar."
+    }
+   ]
+  }
+ ]
+}

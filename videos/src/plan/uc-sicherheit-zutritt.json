@@ -1,0 +1,111 @@
+{
+ "id": "uc-sicherheit-zutritt",
+ "titel": "Ist jemand an der Tür?",
+ "untertitel": "Erkennen ist nicht identifizieren",
+ "gesamt": 67.04,
+ "szenen": [
+  {
+   "id": "tuer",
+   "kapitel": "Die Seitentür",
+   "start": 0,
+   "dauer": 11.7,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 6.32,
+     "text": "Ein Seiteneingang, abends selten genutzt. Das Licht brennt die ganze Nacht oder gar nicht."
+    },
+    {
+     "t": 7.52,
+     "d": 3.28,
+     "text": "Besser wäre: Es geht an, wenn jemand kommt."
+    }
+   ]
+  },
+  {
+   "id": "unterschied",
+   "kapitel": "Zwei Aufgaben",
+   "start": 11.7,
+   "dauer": 15.38,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.76,
+     "text": "Detektion sagt, dass ein Gesicht da ist. Identifikation sagt, wer es ist."
+    },
+    {
+     "t": 6.56,
+     "d": 7.92,
+     "text": "Für das Licht genügt das Erste. Das Zweite braucht eine Datenbank mit Gesichtern, und das ist rechtlich ein eigenes Feld."
+    }
+   ]
+  },
+  {
+   "id": "rahmen",
+   "kapitel": "Nur ein Rahmen",
+   "start": 27.08,
+   "dauer": 9.46,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.24,
+     "text": "Das Beispiel macht nur das Erste. Der Jetson zeichnet einen Rahmen und weiß nicht, wer du bist."
+    },
+    {
+     "t": 7.04,
+     "d": 1.52,
+     "text": "Er speichert nichts."
+    }
+   ]
+  },
+  {
+   "id": "kamera",
+   "kapitel": "Deine Kamera",
+   "start": 36.54,
+   "dauer": 6.44,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.04,
+     "text": "Du probierst es mit deiner eigenen Kamera, und nur mit Menschen, die einverstanden sind."
+    }
+   ]
+  },
+  {
+   "id": "grenzen",
+   "kapitel": "Die Grenzen",
+   "start": 42.98,
+   "dauer": 12.5,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.48,
+     "text": "Beobachte die Grenzen. Bei Maske, Gegenlicht und starker Neigung geht der Rahmen verloren."
+    },
+    {
+     "t": 7.28,
+     "d": 4.32,
+     "text": "An einer echten Tür braucht es deshalb einen Weg ohne Gesichtserkennung."
+    }
+   ]
+  },
+  {
+   "id": "recht",
+   "kapitel": "Das Recht zuerst",
+   "start": 55.48,
+   "dauer": 11.56,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 6.96,
+     "text": "Bei Gesichtern kommt das Recht zuerst: Rechtsgrundlage, Datenschutz, Betriebsrat und Löschfristen."
+    },
+    {
+     "t": 7.76,
+     "d": 2,
+     "text": "Das ist keine Rechtsberatung."
+    }
+   ]
+  }
+ ]
+}

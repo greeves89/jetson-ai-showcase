@@ -1,0 +1,116 @@
+{
+ "id": "uc-buero-dokumente",
+ "titel": "Fragen an Dokumente",
+ "untertitel": "Mit Quelle und mit Mut zu: steht nicht drin",
+ "gesamt": 71.82,
+ "szenen": [
+  {
+   "id": "ordner",
+   "kapitel": "Vier Dokumente",
+   "start": 0,
+   "dauer": 15.06,
+   "saetze": [
+    {
+     "t": 0.9,
+     "d": 7.92,
+     "text": "Wartungsanleitung, Vertrag, Betriebsvereinbarung, FAQ: vier Dokumente an vier Orten."
+    },
+    {
+     "t": 9.12,
+     "d": 5.04,
+     "text": "Wer eine Antwort braucht, blättert lange. Alle vier sind frei erfunden."
+    }
+   ]
+  },
+  {
+   "id": "abschnitte",
+   "kapitel": "In Abschnitte teilen",
+   "start": 15.06,
+   "dauer": 8.82,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.76,
+     "text": "Das System teilt die Dokumente in zwölf kleine Abschnitte."
+    },
+    {
+     "t": 4.56,
+     "d": 3.36,
+     "text": "Aus jedem macht es Zahlen, die seine Bedeutung beschreiben."
+    }
+   ]
+  },
+  {
+   "id": "treffer",
+   "kapitel": "Treffer und Score",
+   "start": 23.88,
+   "dauer": 13.62,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 5.6,
+     "text": "Du stellst eine Frage, und das System zeigt die am besten passenden Abschnitte mit ihrem Score."
+    },
+    {
+     "t": 6.4,
+     "d": 6.32,
+     "text": "Schau zuerst auf die Treffer. Liegt der richtige Abschnitt nicht oben, rettet auch ein gutes Modell nichts."
+    }
+   ]
+  },
+  {
+   "id": "quelle",
+   "kapitel": "Antwort mit Quelle",
+   "start": 37.5,
+   "dauer": 9.06,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.48,
+     "text": "Dann antwortet ein Sprachmodell nur mit diesen Stellen und nennt die Quelle."
+    },
+    {
+     "t": 5.28,
+     "d": 2.88,
+     "text": "Du klickst auf die Fundstelle und prüfst selbst."
+    }
+   ]
+  },
+  {
+   "id": "fang",
+   "kapitel": "Die Fangfrage",
+   "start": 46.56,
+   "dauer": 12.26,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 4.8,
+     "text": "Jetzt die Fangfrage: Wie viel Urlaub gibt es? Das steht nirgends."
+    },
+    {
+     "t": 5.6,
+     "d": 5.76,
+     "text": "Ein gutes System sagt das und erfindet keine Zahl. Das ist der wichtigste Test."
+    }
+   ]
+  },
+  {
+   "id": "rechte",
+   "kapitel": "Aktuell und berechtigt",
+   "start": 58.82,
+   "dauer": 13,
+   "saetze": [
+    {
+     "t": 0.5,
+     "d": 3.76,
+     "text": "Achte auf aktuelle Dokumente und auf Zugriffsrechte."
+    },
+    {
+     "t": 4.56,
+     "d": 6.64,
+     "text": "Wer ein Dokument nicht sehen darf, bekommt es auch über das System nicht. Das Beispiel liegt fertig bereit."
+    }
+   ]
+  }
+ ]
+}

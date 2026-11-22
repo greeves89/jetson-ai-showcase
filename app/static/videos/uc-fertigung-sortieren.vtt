@@ -1,0 +1,52 @@
+WEBVTT
+
+00:00:00.900 --> 00:00:05.050
+Schrauben, Muttern und Scheiben
+liegen gemischt in einer Kiste.
+
+00:00:05.200 --> 00:00:09.670
+Jemand sortiert sie von Hand, und
+diese Person fehlt dann woanders.
+
+00:00:10.920 --> 00:00:14.990
+Eine Kamera über dem Tisch sagt,
+welches Teil gerade liegt.
+
+00:00:15.140 --> 00:00:19.050
+Mehr leistet das System hier
+nicht, und das ist Absicht.
+
+00:00:20.300 --> 00:00:25.250
+Du zeigst je 20 Beispiele pro Typ, in
+verschiedenen Lagen und Drehungen.
+
+00:00:25.400 --> 00:00:30.110
+Liegt die Schraube immer gleich, erkennt
+das System sie schräg nicht wieder.
+
+00:00:31.360 --> 00:00:35.750
+Bei klar verschiedenen Formen liegt
+die richtige Klasse weit vorn.
+
+00:00:35.900 --> 00:00:39.890
+Der Abstand der Balken zeigt,
+wie sicher sich das System ist.
+
+00:00:41.140 --> 00:00:46.330
+Im Beispiel waren alle 12 Testbilder
+und alle 90 weiteren richtig.
+
+00:00:46.480 --> 00:00:52.550
+Das sind Beispielwerte für gezeichnete Bilder.
+Echte Teile spiegeln und verdecken sich.
+
+00:00:52.700 --> 00:00:55.810
+Und zwölf Testbilder sind noch kein Beweis.
+
+00:00:57.060 --> 00:01:02.250
+Die Kamera sagt nur, was es ist.
+Greifer oder Weiche baust du selbst an.
+
+00:01:02.400 --> 00:01:06.150
+Fang mit der leichten Aufgabe
+an und prüfe Stichproben.

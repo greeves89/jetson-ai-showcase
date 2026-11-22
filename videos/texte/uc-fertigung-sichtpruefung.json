@@ -1,0 +1,56 @@
+{
+ "id": "uc-fertigung-sichtpruefung",
+ "titel": "Gut oder Ausschuss",
+ "untertitel": "Sichtprüfung lernt aus Beispielen",
+ "szenen": [
+  {
+   "id": "band",
+   "kapitel": "Am Bandende",
+   "saetze": [
+    "Am Ende des Bandes schaut jemand jede Scheibe an: Kratzer, Dellen, ausgebrochene Kanten.",
+    "Nach zwei Stunden lässt die Aufmerksamkeit nach, und das Urteil schwankt von Schicht zu Schicht."
+   ]
+  },
+  {
+   "id": "fach",
+   "kapitel": "Zwei Fächer",
+   "saetze": [
+    "Das System soll nur eines sagen: gut oder Ausschuss.",
+    "Es repariert nichts und sucht keine Ursache."
+   ]
+  },
+  {
+   "id": "stapel",
+   "kapitel": "Zwei Stapel Beispiele",
+   "saetze": [
+    "Dafür zeigst du ihm Beispiele, im Labor je 20 gute und 20 schlechte Scheiben.",
+    "Alle, die prüfen, müssen sich vorher einig sein, was Ausschuss ist."
+   ]
+  },
+  {
+   "id": "nachbarn",
+   "kapitel": "Die drei Nachbarn",
+   "saetze": [
+    "Kommt ein neues Bild, sucht das System die drei ähnlichsten Beispiele, und die Mehrheit entscheidet.",
+    "Das braucht kein langes Training."
+   ]
+  },
+  {
+   "id": "zahlen",
+   "kapitel": "Was herauskam",
+   "saetze": [
+    "Im Beispiel waren 11 von 12 Testbildern richtig und 60 von 60 weiteren.",
+    "Der eine Fehler war die teure Richtung: Ausschuss als gut.",
+    "Die Bilder sind gezeichnet, echte Teile glänzen und sind schwerer."
+   ]
+  },
+  {
+   "id": "fragen",
+   "kapitel": "Vor dem Einsatz",
+   "saetze": [
+    "Frage dich: Welche Entscheidung? Welche Daten? Wer prüft?",
+    "Ein Mensch zieht Stichproben, besonders aus dem Gut-Fach. Das Beispiel liegt fertig bereit."
+   ]
+  }
+ ]
+}

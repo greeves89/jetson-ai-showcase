@@ -1283,6 +1283,322 @@
           "titel": "Die Checkliste"
         }
       ]
+    },
+    {
+      "id": "uc-fertigung-sichtpruefung",
+      "titel": "Gut oder Ausschuss",
+      "untertitel": "Sichtprüfung lernt aus Beispielen",
+      "dauer_s": 75.2,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Am Bandende"
+        },
+        {
+          "t": 14.1,
+          "titel": "Zwei Fächer"
+        },
+        {
+          "t": 23.1,
+          "titel": "Zwei Stapel Beispiele"
+        },
+        {
+          "t": 35.1,
+          "titel": "Die drei Nachbarn"
+        },
+        {
+          "t": 45.2,
+          "titel": "Was herauskam"
+        },
+        {
+          "t": 61.7,
+          "titel": "Vor dem Einsatz"
+        }
+      ]
+    },
+    {
+      "id": "uc-fertigung-sortieren",
+      "titel": "Bauteile sortieren",
+      "untertitel": "Schrauben, Muttern und Scheiben mit der Kamera",
+      "dauer_s": 67.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die gemischte Kiste"
+        },
+        {
+          "t": 10.4,
+          "titel": "Eine Kamera, drei Klassen"
+        },
+        {
+          "t": 19.8,
+          "titel": "Vielfalt zeigen"
+        },
+        {
+          "t": 30.9,
+          "titel": "Der Abstand der Balken"
+        },
+        {
+          "t": 40.6,
+          "titel": "Was herauskam"
+        },
+        {
+          "t": 56.6,
+          "titel": "Die Mechanik bleibt deine"
+        }
+      ]
+    },
+    {
+      "id": "uc-logistik-zaehlen",
+      "titel": "Fahrzeuge zählen",
+      "untertitel": "Objekterkennung auf dem Hof",
+      "dauer_s": 62.2,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Der Hof"
+        },
+        {
+          "t": 12.4,
+          "titel": "Rahmen mit Sicherheit"
+        },
+        {
+          "t": 24.5,
+          "titel": "Die Schwelle"
+        },
+        {
+          "t": 36.6,
+          "titel": "Was fehlt"
+        },
+        {
+          "t": 47.9,
+          "titel": "Der Pilot"
+        }
+      ]
+    },
+    {
+      "id": "uc-handel-regal",
+      "titel": "Regalkontrolle",
+      "untertitel": "Was die Kamera sieht und was nicht",
+      "dauer_s": 68.1,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Der Abendgang"
+        },
+        {
+          "t": 12.2,
+          "titel": "Flaschen zählen"
+        },
+        {
+          "t": 23,
+          "titel": "Die Lücke"
+        },
+        {
+          "t": 34.5,
+          "titel": "Fehlmeldungen"
+        },
+        {
+          "t": 45.1,
+          "titel": "Das Soll"
+        },
+        {
+          "t": 57.5,
+          "titel": "Wohin die Kamera schaut"
+        }
+      ]
+    },
+    {
+      "id": "uc-gesundheit-auffaellig",
+      "titel": "Zweitmeinung",
+      "untertitel": "Die Software lenkt den Blick",
+      "dauer_s": 69.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Vorab"
+        },
+        {
+          "t": 11.9,
+          "titel": "Viele Proben"
+        },
+        {
+          "t": 20.9,
+          "titel": "Nach vorn legen"
+        },
+        {
+          "t": 30.1,
+          "titel": "Was herauskam"
+        },
+        {
+          "t": 44.2,
+          "titel": "Zwei Fehlerarten"
+        },
+        {
+          "t": 56.9,
+          "titel": "Wer verantwortet"
+        }
+      ]
+    },
+    {
+      "id": "uc-buero-dokumente",
+      "titel": "Fragen an Dokumente",
+      "untertitel": "Mit Quelle und mit Mut zu: steht nicht drin",
+      "dauer_s": 71.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Vier Dokumente"
+        },
+        {
+          "t": 15.1,
+          "titel": "In Abschnitte teilen"
+        },
+        {
+          "t": 23.9,
+          "titel": "Treffer und Score"
+        },
+        {
+          "t": 37.5,
+          "titel": "Antwort mit Quelle"
+        },
+        {
+          "t": 46.6,
+          "titel": "Die Fangfrage"
+        },
+        {
+          "t": 58.8,
+          "titel": "Aktuell und berechtigt"
+        }
+      ]
+    },
+    {
+      "id": "uc-buero-protokoll",
+      "titel": "Vom Gespräch zum Protokoll",
+      "untertitel": "Spracherkennung liefert einen Entwurf",
+      "dauer_s": 67.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Nach der Besprechung"
+        },
+        {
+          "t": 11,
+          "titel": "Erst der Datenschutz"
+        },
+        {
+          "t": 20.3,
+          "titel": "Ton wird Text"
+        },
+        {
+          "t": 32.6,
+          "titel": "Mit dem Original vergleichen"
+        },
+        {
+          "t": 44.3,
+          "titel": "Zahlen und Fristen"
+        },
+        {
+          "t": 57.4,
+          "titel": "Freigabe und Löschung"
+        }
+      ]
+    },
+    {
+      "id": "uc-service-bestellung",
+      "titel": "Der Agent schlägt nach",
+      "untertitel": "Bestellfragen beantworten, ohne zu raten",
+      "dauer_s": 73.2,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Immer dieselben Fragen"
+        },
+        {
+          "t": 10.4,
+          "titel": "Vier Werkzeuge"
+        },
+        {
+          "t": 24.5,
+          "titel": "Der Preis"
+        },
+        {
+          "t": 37.9,
+          "titel": "Die Stornoregel"
+        },
+        {
+          "t": 50.6,
+          "titel": "Die Fangfrage"
+        },
+        {
+          "t": 60,
+          "titel": "Nur nötige Rechte"
+        }
+      ]
+    },
+    {
+      "id": "uc-sicherheit-zutritt",
+      "titel": "Ist jemand an der Tür?",
+      "untertitel": "Erkennen ist nicht identifizieren",
+      "dauer_s": 67,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Seitentür"
+        },
+        {
+          "t": 11.7,
+          "titel": "Zwei Aufgaben"
+        },
+        {
+          "t": 27.1,
+          "titel": "Nur ein Rahmen"
+        },
+        {
+          "t": 36.5,
+          "titel": "Deine Kamera"
+        },
+        {
+          "t": 43,
+          "titel": "Die Grenzen"
+        },
+        {
+          "t": 55.5,
+          "titel": "Das Recht zuerst"
+        }
+      ]
+    },
+    {
+      "id": "uc-sicherheit-baustelle",
+      "titel": "Personen sind keine Helme",
+      "untertitel": "Was Personenerkennung auf der Baustelle leistet",
+      "dauer_s": 68.1,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Baustelle"
+        },
+        {
+          "t": 10.8,
+          "titel": "Personen finden"
+        },
+        {
+          "t": 20.7,
+          "titel": "Helm oder nicht"
+        },
+        {
+          "t": 31.1,
+          "titel": "Wer fehlt"
+        },
+        {
+          "t": 41.3,
+          "titel": "Helme anlernen"
+        },
+        {
+          "t": 53.6,
+          "titel": "Vorher klären"
+        }
+      ]
     }
   ]
 }
