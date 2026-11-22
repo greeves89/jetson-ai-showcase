@@ -548,5 +548,6 @@ details.mehr>.mehr-in>:first-child{margin-top:0}
 .chip.ki-kennung .ic{width:14px;height:14px}
 .fuss-lizenz .fuss-llama{white-space:nowrap}
 table.lizenzen tbody th{white-space:normal;min-width:10em}
-table.lizenzen a{display:inline-flex;align-items:center;gap:4px;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;word-break:break-word}
+table.lizenzen a{display:inline-flex;align-items:center;gap:4px;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;word-break:normal;overflow-wrap:anywhere}
 table.lizenzen a .ic{width:13px;height:13px;flex:none}
+table.lizenzen td:last-child{min-width:11em}
