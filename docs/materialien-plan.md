@@ -20,3 +20,6 @@ Kacheln je Zielgruppe (Schule, Lehrende, Eltern, Beruf, Alle), je Material: Tite
 
 ## Entscheidung beim Betreiber
 Lizenz der Materialien. Vorschlag: CC BY 4.0 (frei nutzbar, Namensnennung "KI-Labor, Daniel Alisch"). Alternativen: CC BY-SA (Weitergabe unter gleichen Bedingungen) oder alle Rechte vorbehalten. Drittmaterial nur mit passender Lizenz; Bilder nur aus app/static/beispiele/ oder selbst erzeugt, keine Kundenbilder.
+
+## PDF je Lektion und Labor mit Specs (Wunsch 22.11.)
+Jede Lektion und jedes Labor bekommt einen Knopf "Als PDF herunterladen". Das PDF enthält den Seiteninhalt (Kompaktfassung, Bilder, Merksätze, Quiz ohne Lösung, Lösungen am Ende) und einen Kasten "Technische Daten" mit den Specs des Labors: eingesetztes Modell (Name, Größe, Version), Zweck, Lizenz, Hardware (Jetson Orin Nano, Speicher), typische Laufzeit/Messwerte (nur gemessene Werte, mit Datum), Datenfluss (was wird gespeichert: nichts). Quelle der Angaben: docs/lizenzen.md, app/speicher.py, app/lab_*.py, Modellnamen aus der Laufzeit; keine erfundenen Zahlen. Erzeugung zur Bauzeit aus den Inhaltsdaten (kein zweiter Text), Ablage unter app/static/materialien/pdf/<seiten-id>.pdf.
