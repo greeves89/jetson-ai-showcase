@@ -9,21 +9,21 @@
 .sp-h3:focus{outline:none}
 .sp-sektion{margin-top:26px;padding-top:22px;border-top:.5px solid var(--linie2)}
 .sp-text{margin:0 0 10px;font-size:15.5px;line-height:1.55;max-width:68ch}
-.sp-wid h4{margin:0 0 6px;font-size:13px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--leise)}
+.sp-wid h4{margin:0 0 6px;font-size:13px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .sp-feld{display:block;width:100%;min-width:0;line-height:1.5;font-size:15.5px}
 .sp-feldfuss{display:flex;justify-content:space-between;gap:12px;margin-top:6px}
 .sp-zaehler{font-size:12.5px;color:var(--leise)}
 .sp-bsp{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
-.sp-wid button.chip[aria-checked=true]{background:var(--akzent);color:var(--w-auf-akzent)}
+.sp-wid button.chip[aria-checked=true]{background:var(--akzent-fl);color:var(--w-auf-akzent)}
 .sp-wid button.chip:disabled{opacity:.5;cursor:not-allowed}
 .sp-mini{font-size:11.5px;padding:2px 8px;margin-left:8px}
 
 /* Segment */
 .sp-kopf{display:flex;justify-content:space-between;align-items:flex-end;gap:12px 20px;flex-wrap:wrap;margin-bottom:12px}
 .sp-gruppe .w-ueber{margin-bottom:6px}
-.sp-seg{display:inline-flex;padding:3px;border-radius:11px;background:var(--flaeche2);gap:2px}
+.sp-seg{display:inline-flex;padding:3px;border-radius:12px;background:var(--flaeche2);gap:2px}
 .sp-seg button{appearance:none;border:0;background:none;padding:6px 16px;border-radius:8px;font-weight:500;font-size:14px;cursor:pointer;color:var(--text);min-height:32px}
-.sp-seg button[aria-checked=true]{background:var(--akzent);color:var(--w-auf-akzent)}
+.sp-seg button[aria-checked=true]{background:var(--akzent-fl);color:var(--w-auf-akzent)}
 .sp-seg button:disabled{opacity:.45;cursor:not-allowed}
 
 /* Tokens */
@@ -44,7 +44,7 @@
 .sp-notiz{margin:6px 0 0;font-size:15.5px;line-height:1.55;max-width:68ch}
 .sp-folge{margin-top:20px}
 .sp-bar{display:block;height:10px;border-radius:5px;background:var(--flaeche3);overflow:hidden;margin:12px 0}
-.sp-bar i{display:block;height:100%;min-width:2px;background:var(--akzent);border-radius:5px;transition:width .25s}
+.sp-bar i{display:block;height:100%;min-width:2px;background:var(--akzent-fl);border-radius:5px;transition:width .25s}
 .sp-bar-klein{height:6px;margin:4px 0 0}
 .sp-tabwrap{overflow-x:auto;margin-top:14px}
 .sp-tab{width:100%;border-collapse:collapse;font-size:14px}
@@ -82,7 +82,7 @@
 .sp-status{margin:0;font-size:13.5px;line-height:1.45;color:var(--leise);min-height:2.9em}
 .sp-antwort{min-height:190px;max-height:380px;overflow:auto;padding:14px;border-radius:var(--r2);background:var(--flaeche2);border:.5px solid var(--linie2);white-space:pre-wrap;overflow-wrap:anywhere;font-size:15px;line-height:1.55}
 .sp-prfeld{border:0;margin:6px 0 0;padding:0;min-width:0}
-.sp-prfeld legend{padding:0;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--leise);margin-bottom:4px}
+.sp-prfeld legend{padding:0;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise);margin-bottom:4px}
 .sp-prreihe{display:flex;flex-wrap:wrap;gap:2px 16px}
 .sp-pruef{display:inline-flex;align-items:center;gap:7px;min-height:30px;font-size:14px;cursor:pointer}
 .sp-pruef input{accent-color:var(--akzent);width:17px;height:17px;margin:0}
@@ -100,14 +100,14 @@
 .sp-zahl{font-size:13.5px;color:var(--leise)}
 .sp-stand{margin-left:auto;font-size:13px;color:var(--leise)}
 .sp-fort{height:4px;border-radius:2px;background:var(--flaeche3);overflow:hidden;margin:12px 0 18px}
-.sp-fort i{display:block;height:100%;background:var(--akzent);transition:width .3s}
+.sp-fort i{display:block;height:100%;background:var(--akzent-fl);transition:width .3s}
 .sp-ktitel{font-size:20px;margin:0 0 12px}
 .sp-blocke{display:grid;gap:10px}
 .sp-block{--sp-bl:var(--leise);padding:11px 14px;border-radius:var(--r2);background:var(--flaeche2);border-left:3px solid var(--sp-bl)}
 .sp-b-antwort{--sp-bl:var(--k1)}
 .sp-b-quelle{--sp-bl:var(--k3)}
 .sp-b-mail,.sp-b-code,.sp-b-text{--sp-bl:var(--k2)}
-.sp-bk{display:block;margin-bottom:3px;font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--leise)}
+.sp-bk{display:block;margin-bottom:3px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .sp-bt{margin:0;font-size:15.5px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere}
 pre.sp-bt{font:13.5px/1.55 var(--mono);overflow:auto;white-space:pre}
 .sp-opts{display:grid;gap:8px;margin-top:16px}

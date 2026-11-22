@@ -2,17 +2,17 @@
    Nutzt die Variablen und Klassen aus style.css. Eigene Klassen beginnen mit pg-. */
 
 .pg-wid{--pg-auf-akzent:#fff;position:relative}
-@media (prefers-color-scheme:dark){.pg-wid{--pg-auf-akzent:#00162e}}
+@media (prefers-color-scheme:dark){.pg-wid{--pg-auf-akzent:#fff}}
 .pg-wid .btn.primary,.pg-wid .btn[aria-pressed=true]{color:var(--pg-auf-akzent)}
-.pg-wid .btn[aria-pressed=true]{background:var(--akzent)}
+.pg-wid .btn[aria-pressed=true]{background:var(--akzent-fl)}
 .pg-wid .btn[aria-pressed=true]:hover{background:var(--akzent-h)}
 .pg-wid button.chip{min-height:34px;padding:5px 14px;font-size:14px}
-.pg-wid button.chip[aria-pressed=true]{background:var(--akzent);color:var(--pg-auf-akzent)}
+.pg-wid button.chip[aria-pressed=true]{background:var(--akzent-fl);color:var(--pg-auf-akzent)}
 .pg-wid .btn{min-height:40px}
 .pg-wid .btn.klein{min-height:34px}
 .pg-leise{color:var(--leise);font-size:15px;margin:0 0 14px;max-width:70ch}
 .pg-notiz{color:var(--leise);font-size:14px;margin:4px 0 0;line-height:1.5}
-.pg-ueber{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise)}
+.pg-ueber{margin:0 0 6px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .pg-h3{margin:0 0 4px;font-size:17px;letter-spacing:-.015em}
 .pg-abschnitt{margin-top:26px}
 .pg-hinweis{display:flex;gap:9px;align-items:flex-start;margin:18px 0 0;font-size:13.5px;line-height:1.5;color:var(--leise)}
@@ -35,11 +35,11 @@
 
 /* Schalter */
 .pg-schalter{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14.5px;position:relative;min-height:36px}
-.pg-schalter input{position:absolute;opacity:0;width:44px;height:26px;margin:0;cursor:pointer}
-.pg-sw{width:44px;height:26px;border-radius:13px;background:var(--flaeche3);position:relative;flex:none;transition:background .2s}
-.pg-sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
-.pg-schalter input:checked+.pg-sw{background:var(--akzent)}
-.pg-schalter input:checked+.pg-sw::after{transform:translateX(18px)}
+.pg-schalter input{position:absolute;opacity:0;width:51px;height:31px;margin:0;cursor:pointer}
+.pg-sw{width:51px;height:31px;border-radius:16px;background:var(--flaeche3);position:relative;flex:none;transition:background .3s var(--feder)}
+.pg-sw::after{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .35s var(--feder)}
+.pg-schalter input:checked+.pg-sw{background:var(--schalter)}
+.pg-schalter input:checked+.pg-sw::after{transform:translateX(20px)}
 .pg-schalter input:focus-visible+.pg-sw{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
 
 /* Legende */
@@ -89,13 +89,13 @@
 .pg-fragen{margin:6px 0 4px}
 .pg-pfad{margin:0 0 8px;font-size:14.5px;line-height:1.5}
 .pg-fliste{display:grid;gap:6px;padding:2px}
-.pg-frage{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,.8fr) minmax(0,.9fr);gap:8px 14px;align-items:center;text-align:left;width:100%;padding:9px 12px;border:1.5px solid transparent;border-radius:10px;background:var(--flaeche2);cursor:pointer;min-height:44px;font-size:14px;line-height:1.35}
+.pg-frage{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,.8fr) minmax(0,.8fr) minmax(0,.9fr);gap:8px 14px;align-items:center;text-align:left;width:100%;padding:9px 12px;border:1.5px solid transparent;border-radius:12px;background:var(--flaeche2);cursor:pointer;min-height:44px;font-size:14px;line-height:1.35}
 .pg-frage:hover{background:var(--flaeche3)}
 .pg-frage[aria-disabled=true]{opacity:.5;cursor:not-allowed}
 .pg-frage.ist-vorschlag{border-color:var(--akzent);background:color-mix(in srgb,var(--akzent) 10%,var(--flaeche))}
 .pg-frage.ist-aktuell{border-color:var(--text)}
 .pg-f-text{font-weight:600}
-.pg-f-text em{font-style:normal;font-size:11.5px;font-weight:600;margin-left:8px;padding:1px 8px;border-radius:99px;background:var(--akzent);color:var(--pg-auf-akzent);white-space:nowrap}
+.pg-f-text em{font-style:normal;font-size:11.5px;font-weight:600;margin-left:8px;padding:1px 8px;border-radius:99px;background:var(--akzent-fl);color:var(--pg-auf-akzent);white-space:nowrap}
 .pg-f-text em.pg-f-akt{background:var(--text);color:var(--bg)}
 .pg-f-seite{display:grid;gap:4px;font-size:12.5px;color:var(--leise)}
 .pg-f-g{display:grid;gap:4px;font-size:12.5px;color:var(--leise);font-variant-numeric:tabular-nums}
@@ -120,17 +120,17 @@
 .pg-tabbox{margin:6px 0 0}
 .pg-etab{border-collapse:separate;border-spacing:0;font-size:14px;margin:0 auto;min-width:560px}
 .pg-etab th,.pg-etab td{padding:2px;text-align:center;vertical-align:middle;border:0}
-.pg-etab .pg-eck{text-align:left;font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--leise);padding:8px 10px}
+.pg-etab .pg-eck{text-align:left;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise);padding:8px 10px}
 .pg-etab .pg-art{text-align:left;white-space:nowrap;padding:2px 12px 2px 10px;font-weight:500;font-size:14px}
 .pg-art i{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:9px}
 .pg-etab .pg-sp{padding:6px 2px 2px}
-.pg-name{border:0;background:none;font-weight:600;padding:5px 7px;border-radius:9px;cursor:pointer;min-height:32px;font-size:14px}
+.pg-name{border:0;background:none;font-weight:600;padding:5px 7px;border-radius:12px;cursor:pointer;min-height:32px;font-size:14px}
 .pg-name:hover{background:var(--flaeche2)}
-.pg-name[aria-pressed=true]{background:var(--akzent);color:var(--pg-auf-akzent)}
+.pg-name[aria-pressed=true]{background:var(--akzent-fl);color:var(--pg-auf-akzent)}
 .pg-nb{display:block;font-size:10.5px;color:var(--akzent);font-weight:600;letter-spacing:.02em}
 .pg-etab .ist-nachbar .pg-name{box-shadow:inset 0 -2.5px 0 var(--akzent)}
 .pg-etab td.ist-gewaehlt{background:color-mix(in srgb,var(--text) 5%,transparent)}
-.pg-zelle{width:44px;height:36px;border:1px solid transparent;border-radius:9px;background:transparent;cursor:pointer;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;color:var(--text)}
+.pg-zelle{width:44px;height:36px;border:1px solid transparent;border-radius:12px;background:transparent;cursor:pointer;font-weight:600;font-size:14px;font-variant-numeric:tabular-nums;color:var(--text)}
 .pg-zelle:hover{border-color:var(--leise)}
 .pg-zelle[data-wert="1"]{background:color-mix(in srgb,var(--akzent) 9%,transparent)}
 .pg-zelle[data-wert="2"]{background:color-mix(in srgb,var(--akzent) 17%,transparent)}
@@ -142,15 +142,15 @@
 @media(max-width:760px){.pg-zwei{grid-template-columns:1fr}}
 .pg-panel{background:var(--flaeche2);border-radius:var(--r2);padding:16px;min-width:0}
 .pg-simliste,.pg-reclist{list-style:none;margin:12px 0 0;padding:0;display:grid;gap:6px}
-.pg-sim{display:grid;grid-template-columns:minmax(84px,auto) minmax(0,1fr) 3em;gap:2px 10px;align-items:center;font-size:14px;padding:6px 8px;border-radius:9px}
+.pg-sim{display:grid;grid-template-columns:minmax(84px,auto) minmax(0,1fr) 3em;gap:2px 10px;align-items:center;font-size:14px;padding:6px 8px;border-radius:12px}
 .pg-sim.ist-nachbar{background:color-mix(in srgb,var(--akzent) 11%,transparent)}
 .pg-sim-n{font-weight:600}
 .pg-sim-n em{font-style:normal;font-size:11px;margin-left:7px;color:var(--akzent);font-weight:600}
 .pg-sim-w{font-variant-numeric:tabular-nums;text-align:right;font-size:13.5px}
 .pg-sim-z{grid-column:1/-1;font-size:12px;color:var(--leise)}
 .pg-sbar{display:block;height:8px;border-radius:4px;background:var(--flaeche3);overflow:hidden}
-.pg-sbar i{display:block;height:100%;background:var(--akzent);border-radius:4px}
-.pg-rec{display:grid;grid-template-columns:24px minmax(0,1fr) 64px 2.6em;gap:2px 10px;align-items:center;width:100%;text-align:left;border:1.5px solid transparent;border-radius:10px;padding:9px 10px;background:var(--flaeche);font-size:14.5px}
+.pg-sbar i{display:block;height:100%;background:var(--akzent-fl);border-radius:4px}
+.pg-rec{display:grid;grid-template-columns:24px minmax(0,1fr) 64px 2.6em;gap:2px 10px;align-items:center;width:100%;text-align:left;border:1.5px solid transparent;border-radius:12px;padding:9px 10px;background:var(--flaeche);font-size:14.5px}
 button.pg-rec{cursor:pointer}
 button.pg-rec:hover{border-color:var(--leise)}
 .pg-rec.ist-gewaehlt{border-color:var(--akzent)}

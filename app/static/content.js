@@ -34,6 +34,18 @@ start: {
     {id: "chat", h: "Sprache: Chat, Dokumente, Agenten", p: "Ein Sprachmodell wählt Wort für Wort. Du stellst die Zufälligkeit ein und siehst die einzelnen Tokens."},
     {id: "business", h: "Wo hilft das im Alltag einer Firma?", p: "Branchen, Einsatzfelder und die drei Fragen, die vor jedem Einsatz stehen sollten."},
   ],
+  bereiche: {
+    "Grundlagen": {symbol: "karte", satz: "Was KI ist, wie Maschinen lernen und wo die Grenzen liegen."},
+    "Sehen": {symbol: "gesicht", satz: "Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle."},
+    "Sprache": {symbol: "chat", satz: "Sprachmodelle im Chat, Sprache zu Text und gutes Fragen."},
+    "Wissen und RAG": {symbol: "rag", satz: "Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung."},
+    "Agenten": {symbol: "agent", satz: "Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen."},
+    "Erzeugen": {symbol: "wand-sparkles", satz: "Bilder aus Text und Gesichtstausch, live auf dem Jetson."},
+    "Daten und Prognosen": {symbol: "trending-up", satz: "Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen."},
+    "KI im Betrieb": {symbol: "gauge", satz: "Vom Prototyp zum Betrieb: Kosten, Energie und Einführung."},
+    "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
+    "Der Jetson": {symbol: "hardware", satz: "Der kleine Computer hinter allem, mit Messwerten in Echtzeit."},
+  },
   datenschutz: "Kamerabilder werden nur für die Berechnung im Arbeitsspeicher gehalten und nicht gespeichert. Texte, die du ins RAG-Labor einfügst, bleiben im Speicher des Jetson und verschwinden beim Neustart.",
 },
 

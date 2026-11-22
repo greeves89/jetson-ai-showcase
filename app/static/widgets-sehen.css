@@ -25,7 +25,7 @@
 .sa-zoom output{font-size:13px;text-align:right}
 .sa-tipp{margin:10px 0 0;font-size:13px}
 .sa-infokopf{display:flex;gap:12px;align-items:center;margin-bottom:12px}
-.sa-farbfeld{width:44px;height:44px;border-radius:10px;border:1px solid var(--linie);flex:none}
+.sa-farbfeld{width:44px;height:44px;border-radius:12px;border:1px solid var(--linie);flex:none}
 .sa-pos{font-size:14px;color:var(--leise)}
 .sa-vier{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-top:0}
 .sa-vier .messwert{padding:7px 10px}
@@ -56,7 +56,7 @@
 .sa-filterchips .w-ueber{margin:0}
 .sa-paar{display:grid;grid-template-columns:minmax(0,1fr) 28px minmax(0,1fr);gap:8px;align-items:center}
 .sa-bildfig{margin:0;min-width:0}
-.sa-bildfig figcaption,.sa-fig figcaption{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--leise);margin:0 0 7px}
+.sa-bildfig figcaption,.sa-fig figcaption{font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise);margin:0 0 7px}
 .sa-fig figcaption{margin:5px 0 0;letter-spacing:.02em;text-transform:none;font-weight:500}
 .sa-bildbox{position:relative;border-radius:var(--r2);overflow:hidden;cursor:crosshair;touch-action:pan-y;border:.5px solid var(--linie)}
 canvas.sa-pix{display:block;width:100%;height:auto;aspect-ratio:4/3;image-rendering:pixelated;background:var(--flaeche2)}
@@ -68,7 +68,7 @@ canvas.sa-pix{display:block;width:100%;height:auto;aspect-ratio:4/3;image-render
 .sa-unten{display:grid;grid-template-columns:minmax(0,.85fr) minmax(0,1.15fr);gap:24px;margin-top:22px;padding-top:18px;border-top:.5px solid var(--linie2);align-items:start}
 .sa-links>.w-ueber,.sa-rechts>.w-ueber{display:block;margin:0 0 8px}
 .sa-kern{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:6px;max-width:240px}
-input.sa-kz{width:100%;text-align:center;font:600 15px var(--mono);padding:9px 2px;background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:9px;min-width:0;-moz-appearance:textfield}
+input.sa-kz{width:100%;text-align:center;font:600 15px var(--mono);padding:9px 2px;background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:12px;min-width:0;-moz-appearance:textfield}
 input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--akzent) 16%,transparent)}
 .sa-filtertext{margin:10px 0 0;font-size:14px;line-height:1.5}
 .sa-links .sa-chips{margin-top:2px}
@@ -84,7 +84,7 @@ input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px c
 .sa-schichten .sa-erkl{margin-top:16px}
 .sa-pipeline{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr) auto minmax(0,1fr);gap:8px;align-items:start}
 .sa-pipeline .sa-pfeil{align-self:center}
-.sa-spkopf{font-size:12px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--leise);margin-bottom:8px;min-height:2.6em}
+.sa-spkopf{font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise);margin-bottom:8px;min-height:2.6em}
 .sa-spbilder{display:grid;gap:6px}
 .sa-fig{margin:0}
 .sa-sptext{margin:8px 0 0;font-size:13px;line-height:1.45;color:var(--leise)}
@@ -101,7 +101,7 @@ input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px c
 .sa-wb{font-size:12.5px;line-height:1.4;color:var(--leise)}
 .sa-eingabe{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-top:12px}
 .sa-eingabe label{font-size:14px;color:var(--leise)}
-.sa-sel{flex:1 1 220px;min-width:0;background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:11px;padding:10px 12px;font:inherit}
+.sa-sel{flex:1 1 220px;min-width:0;background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:12px;padding:10px 12px;font:inherit}
 .sa-sel:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px color-mix(in srgb,var(--akzent) 16%,transparent)}
 .sa-optionen{margin-top:14px;max-width:420px}
 .sa-optionen .regler{grid-template-columns:auto minmax(80px,1fr) 2em}
@@ -113,7 +113,7 @@ input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px c
 .sa-art-fehler .sa-stat svg{color:var(--rot)}
 .sa-schritt:not(.sa-art-ok):not(.sa-art-fehler) .sa-stat svg{color:var(--orange)}
 .sa-sk{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
-.sa-nr{font-size:12px;font-weight:650;letter-spacing:.04em;text-transform:uppercase;color:var(--leise)}
+.sa-nr{font-size:12px;font-weight:650;letter-spacing:0;color:var(--leise)}
 .sa-dauer{margin-left:auto;font-size:12.5px;color:var(--leise)}
 .sa-erg{margin-top:6px;font-size:15px;line-height:1.5}
 .sa-note{margin-top:4px;font-size:13.5px;line-height:1.45;color:var(--leise)}
@@ -133,7 +133,7 @@ input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px c
 .sa-ergebnis .messwerte{margin:12px 0}
 .sa-echt{margin-top:26px;padding-top:18px;border-top:.5px solid var(--linie2)}
 .sa-echt .w-leise{margin:0 0 8px;font-size:14.5px}
-.sa-echtfrage{margin:0 0 10px;padding:9px 13px;border-radius:10px;background:var(--flaeche2);font-size:15px}
+.sa-echtfrage{margin:0 0 10px;padding:9px 13px;border-radius:12px;background:var(--flaeche2);font-size:15px}
 .sa-echtstatus{margin:10px 0 0;min-height:1.5em;font-size:14.5px}
 .sa-echttext{white-space:pre-wrap;overflow-wrap:anywhere;font-size:14.5px;line-height:1.5}
 .sa-reglerpaar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:6px 0 4px}
@@ -159,7 +159,7 @@ input.sa-kz:focus{border-color:var(--akzent);outline:none;box-shadow:0 0 0 4px c
 .sa-fremd>.w-ueber,.sa-regeln>.w-ueber{display:block;margin:0 0 8px}
 .sa-fremdbox{border:1.5px dashed var(--linie);border-radius:12px;padding:14px 16px;background:var(--flaeche2)}
 .sa-fremdbox.sa-daten{border:2px solid var(--akzent);border-style:solid}
-.sa-datenschild{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:650;letter-spacing:.05em;text-transform:uppercase;color:var(--akzent);margin-bottom:8px}
+.sa-datenschild{display:flex;align-items:center;gap:8px;font-size:12px;font-weight:650;letter-spacing:0;color:var(--akzent);margin-bottom:8px}
 .sa-fremdkopf{display:flex;flex-wrap:wrap;gap:4px 16px;font-size:13px;color:var(--leise);margin-bottom:8px}
 .sa-fremdkopf b{color:var(--text)}
 .sa-fremdtext{margin:0;font-size:16px;line-height:1.6;overflow-wrap:anywhere}
@@ -183,7 +183,7 @@ mark.sa-versteckt{background:color-mix(in srgb,var(--rot) 20%,transparent);color
 .sa-anfrage{margin-top:10px;padding:14px 16px;border-radius:12px;border:2px solid var(--akzent);background:var(--flaeche2)}
 .sa-anfrage .w-ueber{display:block;margin:0 0 6px}
 .sa-anfragetext{margin:0 0 10px;font-weight:600;font-size:15.5px;overflow-wrap:anywhere}
-.sa-anfrageinhalt{margin:0 0 10px;padding:8px 12px;border-radius:9px;background:color-mix(in srgb,var(--orange) 16%,transparent);font-size:14.5px}
+.sa-anfrageinhalt{margin:0 0 10px;padding:8px 12px;border-radius:12px;background:color-mix(in srgb,var(--orange) 16%,transparent);font-size:14.5px}
 .sa-anfrageinhalt[hidden]{display:none}
 .sa-an .sa-ergebnis{margin-top:18px}
 .sa-meters{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px 24px;margin:12px 0 4px}

@@ -35,7 +35,7 @@
 .v-ablauf{position:relative;display:grid;grid-template-columns:repeat(var(--n),minmax(0,1fr))}
 .v-bahn{position:absolute;top:28px;left:calc(50% / var(--n));right:calc(50% / var(--n));height:2px;border-radius:1px;background:var(--flaeche3)}
 .v-pfeil{position:absolute;top:50%;width:9px;height:9px;border-top:2px solid var(--leise);border-right:2px solid var(--leise);transform:translate(-50%,-50%) rotate(45deg);opacity:.7}
-.v-paket{position:absolute;top:50%;left:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:5px;background:var(--akzent);opacity:0;box-shadow:0 0 0 3px var(--flaeche)}
+.v-paket{position:absolute;top:50%;left:0;width:16px;height:16px;margin:-8px 0 0 -8px;border-radius:5px;background:var(--akzent-fl);opacity:0;box-shadow:0 0 0 3px var(--flaeche)}
 .v-st{position:relative;display:flex;flex-direction:column;align-items:center;gap:12px;padding:0 6px;text-align:center}
 .v-ablauf .v-ik{position:relative;box-shadow:0 0 0 7px var(--flaeche)}
 .v-txt{display:flex;flex-direction:column;gap:2px;min-width:0}
@@ -62,7 +62,7 @@
 .v-kn .v-kc{width:38px;height:38px}
 .v-kn .v-kc svg.ic{width:20px;height:20px}
 .v-kt{font-size:15.5px;font-weight:650;line-height:1.2;overflow-wrap:anywhere}
-.v-punkt{position:absolute;left:50%;top:50%;width:16px;height:16px;translate:-50% -50%;border-radius:50%;background:var(--akzent);box-shadow:0 0 0 4px var(--flaeche);pointer-events:none}
+.v-punkt{position:absolute;left:50%;top:50%;width:16px;height:16px;translate:-50% -50%;border-radius:50%;background:var(--akzent-fl);box-shadow:0 0 0 4px var(--flaeche);pointer-events:none}
 .v-punkt.klein{width:13px;height:13px;box-shadow:0 0 0 3px var(--flaeche)}
 .v-punkt[hidden]{display:none}
 @container (max-width:430px){
@@ -90,7 +90,7 @@
 
 /* ---------- balken ---------- */
 .v-bal{display:grid;gap:14px}
-.v-bt{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--leise);margin-bottom:2px}
+.v-bt{font-size:14px;font-weight:600;letter-spacing:0;color:var(--leise);margin-bottom:2px}
 .v-zeile{display:grid;grid-template-columns:minmax(96px,28%) minmax(0,1fr) auto;gap:6px 16px;align-items:center}
 .v-lb{font-size:15.5px;line-height:1.3}
 .v-spur{height:18px;border-radius:9px;background:var(--flaeche2);overflow:hidden}
@@ -200,7 +200,7 @@
 .v-sfuell{position:absolute;left:0;top:0;bottom:0;width:var(--p);border-radius:6px;background:color-mix(in srgb,var(--akzent) 35%,var(--flaeche3))}
 .v-tick{position:absolute;top:18px;width:2px;height:6px;margin-left:-1px;border-radius:1px;background:var(--flaeche3)}
 .v-marke{position:absolute;left:var(--p);top:50%;width:0;height:0}
-.v-mknopf{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:var(--akzent);border:5px solid var(--flaeche);box-shadow:0 0 0 1.5px var(--akzent),0 3px 8px rgba(0,0,0,.2)}
+.v-mknopf{position:absolute;left:-14px;top:-14px;width:28px;height:28px;border-radius:50%;background:var(--akzent-fl);border:5px solid var(--flaeche);box-shadow:0 0 0 1.5px var(--akzent),0 3px 8px rgba(0,0,0,.2)}
 .v-mlabel{position:absolute;bottom:26px;left:0;translate:-50% 0;padding:7px 13px;border-radius:12px;background:var(--text);color:var(--bg);font-size:14.5px;font-weight:600;line-height:1.3;white-space:nowrap}
 .v-mlabel::after{content:"";position:absolute;left:50%;bottom:-5px;width:10px;height:10px;margin-left:-5px;background:var(--text);rotate:45deg;border-radius:2px}
 .v-marke.vl .v-mlabel{translate:-14px 0}.v-marke.vl .v-mlabel::after{left:14px}
@@ -220,3 +220,8 @@
 .v-q img{display:inline-block;width:auto;max-width:100%;height:auto;border-radius:14px;background:var(--flaeche2)}
 
 /* ---------- Lesemodus-Schalter und Aufklapper (Aufbau in app.js) ---------- */
+
+/* ---------- Angleichung an die Systemsprache: flache Flaechen, gleiche Radien, Systemfarben ---------- */
+.visual{border:0;box-shadow:none;border-radius:var(--r)}
+.v-seite{border:0;border-radius:20px}
+@media (prefers-reduced-motion:reduce){.visual *{animation-duration:.01ms!important}}

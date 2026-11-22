@@ -21,7 +21,7 @@
 .rr-form-zeile input{flex:1 1 auto;min-width:0}
 @media(max-width:560px){.rr-form-zeile{flex-direction:column;align-items:stretch}}
 .rr .btn.primary,.rr .btn.aktiv{color:var(--w-auf-akzent)}
-.rr .rr-select{background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:11px;padding:10px 12px;font:inherit;max-width:100%;min-height:42px}
+.rr .rr-select{background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:12px;padding:10px 12px;font:inherit;max-width:100%;min-height:42px}
 .rr .rr-select:focus-visible{border-color:var(--akzent)}
 
 /* ---------- Karte ---------- */
@@ -47,13 +47,13 @@
 .rr-zahlenbox{margin:14px 0 0}
 .rr-zahlen{display:flex;align-items:center;gap:2px;height:64px;padding:6px 8px;border-radius:var(--r2);background:var(--flaeche2)}
 .rr-zahlen i{flex:1 1 0;min-width:2px;border-radius:2px;display:block;align-self:center}
-.rr-zahlen i.pos{background:var(--akzent)}.rr-zahlen i.neg{background:var(--orange)}
+.rr-zahlen i.pos{background:var(--akzent-fl)}.rr-zahlen i.neg{background:var(--orange)}
 .rr-zahlnote{margin:8px 0 0;font-size:13.5px}
 .rr-nachbarn{list-style:none;margin:0;padding:0;display:grid;gap:7px}
-.rr-nb{display:grid;grid-template-columns:18px minmax(0,1fr) 84px 46px;gap:10px;align-items:center;padding:9px 12px;border-radius:11px;background:var(--flaeche2);font-size:14.5px}
+.rr-nb{display:grid;grid-template-columns:18px minmax(0,1fr) 84px 46px;gap:10px;align-items:center;padding:9px 12px;border-radius:12px;background:var(--flaeche2);font-size:14.5px}
 .rr-nb-text{min-width:0;overflow-wrap:anywhere}
 .rr-nb-bar{display:block;height:7px;border-radius:4px;background:var(--flaeche3);overflow:hidden}
-.rr-nb-bar i{display:block;height:100%;background:var(--akzent);border-radius:4px}
+.rr-nb-bar i{display:block;height:100%;background:var(--akzent-fl);border-radius:4px}
 .rr-nb-wert{font-size:13px;text-align:right}
 .rr-nb .rr-tag{grid-column:2/-1;justify-self:start}
 .rr-nb-nr{display:inline-grid;place-items:center;min-width:22px;height:22px;border-radius:7px;font:600 12px var(--mono);color:var(--text)}
@@ -77,7 +77,7 @@
 .rr-marke.rr-c0{background:color-mix(in srgb,var(--k1) 30%,var(--flaeche))}.rr-marke.rr-c1{background:color-mix(in srgb,var(--k2) 34%,var(--flaeche))}
 .rr-marke.rr-c2{background:color-mix(in srgb,var(--k3) 30%,var(--flaeche))}.rr-marke.rr-c3{background:color-mix(in srgb,var(--k4) 30%,var(--flaeche))}
 .rr-fragen{display:grid;gap:10px;margin:10px 0 4px}
-.rr-urteil{display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding:10px 13px;border-radius:11px;background:var(--flaeche2);font-size:15.5px;font-weight:500}
+.rr-urteil{display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding:10px 13px;border-radius:12px;background:var(--flaeche2);font-size:15.5px;font-weight:500}
 .rr-urteil .ic{margin-top:3px}
 .rr-urteil.ok{color:var(--rr-ok);background:color-mix(in srgb,var(--gruen) 12%,var(--flaeche2))}
 .rr-urteil.schlecht{color:var(--rr-schlecht);background:color-mix(in srgb,var(--rot) 11%,var(--flaeche2))}
@@ -98,12 +98,12 @@
 .rr-spalte h3{margin:0 0 2px;font-size:16px;letter-spacing:-.01em}
 .rr-spalten-text{margin:0 0 10px;font-size:13.5px;line-height:1.45}
 .rr-karten{list-style:none;margin:0;padding:0;display:grid;gap:8px}
-.rr-karte{padding:10px 12px;border-radius:11px;background:var(--flaeche);border:.5px solid var(--linie);position:relative;font-size:14px;line-height:1.45}
+.rr-karte{padding:10px 12px;border-radius:12px;background:var(--flaeche);border:.5px solid var(--linie);position:relative;font-size:14px;line-height:1.45}
 .rr-karte.ziel,.rr-rrzeile.ziel{box-shadow:inset 3px 0 0 var(--rr-ok)}
 .rr-karte.rr-hl{outline:2px solid var(--akzent);outline-offset:1px}
 .rr-karte-kopf{display:flex;align-items:center;gap:8px;margin-bottom:4px}
 .rr-rang{display:inline-grid;place-items:center;min-width:24px;height:24px;border-radius:8px;background:var(--text);color:var(--bg);font:700 12.5px var(--mono);flex:none}
-.rr-grp{font-size:11.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--leise)}
+.rr-grp{font-size:11.5px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .rr-wert{margin-left:auto;font-size:12.5px;color:var(--leise)}
 .rr-karte-text{margin:0;overflow-wrap:anywhere}
 .rr-mark{background:color-mix(in srgb,var(--orange) 32%,transparent);color:inherit;border-radius:3px;padding:0 2px}
@@ -130,7 +130,7 @@
 .rr-score{display:grid;gap:5px;justify-items:end;padding-top:2px}
 .rr-score-zahl{font-size:18px;font-weight:600;min-height:1.4em;letter-spacing:-.02em}
 .rr-score-bar{display:block;width:100%;height:7px;border-radius:4px;background:var(--flaeche3);overflow:hidden}
-.rr-score-bar i{display:block;height:100%;background:var(--akzent);border-radius:4px;transition:width .4s}
+.rr-score-bar i{display:block;height:100%;background:var(--akzent-fl);border-radius:4px;transition:width .4s}
 .rr-summe{margin:12px 0 0;font-size:15px;min-height:1.5em}
 @media(max-width:560px){.rr-rrzeile{grid-template-columns:28px minmax(0,1fr)}.rr-score{grid-column:2;justify-items:start;grid-auto-flow:column;gap:12px;align-items:center}.rr-score-bar{width:120px}}
 

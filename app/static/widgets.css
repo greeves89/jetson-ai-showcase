@@ -2,7 +2,7 @@
    Nutzt die Variablen und Klassen aus style.css. Eigene Klassen beginnen mit w-. */
 
 .w-wid{--w-auf-akzent:#fff;--w-gedaempft:var(--leise)}
-@media (prefers-color-scheme:dark){.w-wid{--w-auf-akzent:#00162e}}
+@media (prefers-color-scheme:dark){.w-wid{--w-auf-akzent:#fff}}
 .w-wid .btn.primary,.w-wid .btn.aktiv{color:var(--w-auf-akzent)}
 .w-null{padding:0;overflow:hidden}
 .w-leise{color:var(--leise);font-size:15px;margin:0}
@@ -12,21 +12,21 @@
 .w-reihe{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
 .w-reihe .regler{flex:1 1 320px}
 .w-feld{width:100%;min-width:0}
-.w-ueber{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise)}
+.w-ueber{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .w-abschnitt{margin-top:26px}
 
 /* Schalter */
 .w-schalter{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14.5px;position:relative;min-height:32px}
-.w-schalter input{position:absolute;opacity:0;width:44px;height:26px;margin:0;cursor:pointer}
-.w-sw{width:44px;height:26px;border-radius:13px;background:var(--flaeche3);position:relative;flex:none;transition:background .2s}
-.w-sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
-.w-schalter input:checked+.w-sw{background:var(--akzent)}
-.w-schalter input:checked+.w-sw::after{transform:translateX(18px)}
+.w-schalter input{position:absolute;opacity:0;width:51px;height:31px;margin:0;cursor:pointer}
+.w-sw{width:51px;height:31px;border-radius:16px;background:var(--flaeche3);position:relative;flex:none;transition:background .3s var(--feder)}
+.w-sw::after{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .35s var(--feder)}
+.w-schalter input:checked+.w-sw{background:var(--schalter)}
+.w-schalter input:checked+.w-sw::after{transform:translateX(20px)}
 .w-schalter input:focus-visible+.w-sw{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
 
 /* Filterchips und Pflichtkontrast fuer gedrueckte Chips */
 .w-wid button.chip{min-height:32px;padding:5px 13px}
-.w-wid button.chip[aria-pressed=true]{background:var(--akzent);color:var(--w-auf-akzent)}
+.w-wid button.chip[aria-pressed=true]{background:var(--akzent-fl);color:var(--w-auf-akzent)}
 .w-wid .chip.w-link{color:var(--akzent);text-decoration:none;background:color-mix(in srgb,var(--akzent) 10%,transparent);min-height:32px}
 .w-wid .chip.w-link:hover{background:color-mix(in srgb,var(--akzent) 18%,transparent);text-decoration:none}
 .w-wid .chip.w-link .ic{width:14px;height:14px}
@@ -81,12 +81,12 @@
 .w-stand .chip.warn{color:var(--text)}
 .w-meldung{font-size:14px;color:var(--text);font-weight:500}
 .w-phasen{display:grid;gap:6px;margin-top:10px;background:var(--flaeche2);border-radius:var(--r2);padding:8px}
-.w-phase{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:baseline;padding:9px 12px;border-radius:9px;font-size:15px;line-height:1.45;transition:background .25s}
+.w-phase{display:grid;grid-template-columns:150px minmax(0,1fr);gap:12px;align-items:baseline;padding:9px 12px;border-radius:12px;font-size:15px;line-height:1.45;transition:background .25s}
 .w-phase.an{background:color-mix(in srgb,var(--akzent) 16%,transparent)}
 .w-pk{display:flex;gap:9px;align-items:center;font-weight:600;font-size:13px;letter-spacing:.03em;color:var(--leise)}
 .w-pk b{width:22px;height:22px;border-radius:50%;background:var(--flaeche);display:grid;place-items:center;font-size:12px;color:var(--text);flex:none}
 .w-phase.an .w-pk{color:var(--text)}
-.w-phase.an .w-pk b{background:var(--akzent);color:var(--w-auf-akzent)}
+.w-phase.an .w-pk b{background:var(--akzent-fl);color:var(--w-auf-akzent)}
 .w-pt{min-height:1.45em;font-variant-numeric:tabular-nums}
 @media(max-width:620px){.w-phase{grid-template-columns:1fr;gap:4px}}
 

@@ -310,7 +310,7 @@
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("menue-offen")) menueSchalten(false); });
 
   function navBauen() {
-    const suche = h("div", { class: "navsuche" },
+    const suche = h("div", { class: "navsuche" }, icon("search"),
       h("input", { type: "search", id: "nav-suche", placeholder: "Seiten suchen", "aria-label": "Seiten suchen", autocomplete: "off",
         oninput: (e) => { navSuche(e.target.value); if (e.target.value) menueSchalten(true); },
         onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
@@ -355,6 +355,22 @@
     const ak = $('.nav[aria-current="page"]');
     if (ak && ak.scrollIntoView) ak.scrollIntoView({ block: "nearest" });
   }
+
+  /* ------------------------------------------------------------ Schieber: Fuellung der Spur (--p in Prozent) */
+  function schieberFuellen(wurzel) {
+    const liste = wurzel.matches && wurzel.matches("input[type=range]") ? [wurzel] : $$("input[type=range]", wurzel);
+    for (const r of liste) {
+      const mi = parseFloat(r.min || "0"), ma = parseFloat(r.max || "100"), v = parseFloat(r.value);
+      r.style.setProperty("--p", String(ma > mi ? Math.max(0, Math.min(100, (v - mi) / (ma - mi) * 100)) : 0));
+    }
+  }
+  document.addEventListener("input", (e) => { if (e.target.matches && e.target.matches("input[type=range]")) schieberFuellen(e.target); }, true);
+  (function () {   // Wert per Skript gesetzt (Zuruecksetzen, Voreinstellungen): Fuellung folgt
+    const d = Object.getOwnPropertyDescriptor(HTMLInputElement.prototype, "value");
+    if (!d || !d.set) return;
+    Object.defineProperty(HTMLInputElement.prototype, "value", { configurable: true, enumerable: d.enumerable, get: d.get,
+      set(v) { d.set.call(this, v); if (this.type === "range") schieberFuellen(this); } });
+  })();
 
   /* ------------------------------------------------------------ Seiten */
   let montiert = [];
@@ -420,10 +436,12 @@
     try { localStorage.setItem("kl-lesemodus", m); } catch (e) { /* egal */ }
     for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich";
     for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
+    for (const g of $$(".lesemodus")) g.style.setProperty("--i", String(MODI.indexOf(m)));
   }
   function lesemodusSchalter() {
     const knopf = (m, text) => h("button", { type: "button", dataset: { modus: m }, "aria-pressed": lesemodus === m ? "true" : "false", onclick: () => lesemodusSetzen(m) }, text);
     const gruppe = h("div", { class: "lesemodus", role: "group", "aria-label": "Lesemodus" }, knopf("kompakt", "Kompakt"), knopf("ausfuehrlich", "Ausführlich"));
+    gruppe.style.setProperty("--i", String(MODI.indexOf(lesemodus)));
     gruppe.addEventListener("keydown", (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
       e.preventDefault();
@@ -431,7 +449,54 @@
       lesemodusSetzen(ziel);
       const b = $('button[data-modus="' + ziel + '"]', gruppe); if (b) b.focus();
     });
-    return h("div", { class: "lesezeile" }, h("span", null, "Lesemodus"), gruppe);
+    return gruppe;
+  }
+  /* ------------------------------------------------------------ Werkzeugleiste (Glas) */
+  const leiste = { el: null, titel: null, rechts: null };
+  function leisteBauen() {
+    leiste.titel = h("span", { class: "leiste-titel", "aria-hidden": "true" });
+    leiste.rechts = h("div", { class: "leiste-rechts" });
+    leiste.el = h("div", { class: "leiste" }, h("div", { class: "leiste-in" }, leiste.titel, leiste.rechts));
+    return leiste.el;
+  }
+  let leisteH1 = null;
+  function leisteStand() {
+    if (!leiste.el) return;
+    leiste.el.classList.toggle("scharf", window.scrollY > 4);
+    leiste.el.classList.toggle("titel-an", !!leisteH1 && leisteH1.getBoundingClientRect().bottom < 64);
+  }
+  window.addEventListener("scroll", () => requestAnimationFrame(leisteStand), { passive: true });
+  /** Setzt Titel und optional den Lesemodus-Schalter der Werkzeugleiste fuer die aktuelle Seite. */
+  function leisteSetzen(titel, mitLesemodus) {
+    leiste.titel.textContent = titel || "";
+    leiste.rechts.replaceChildren(...(mitLesemodus ? [lesemodusSchalter()] : []));
+    leisteH1 = $("#inhalt h1");
+    leisteStand();
+  }
+
+  /* ------------------------------------------------------------ Hero: eine Komponente fuer jede Seite */
+  /** o: { symbol, ueber, titel, lead, kennzahlen: [Knoten], unten: Knoten, gross } */
+  function hero(o) {
+    return h("header", { class: "hero" + (o.gross ? " gross" : "") },
+      h("div", { class: "hero-icon", "aria-hidden": "true" }, icon(o.symbol || "info")),
+      o.ueber ? h("p", { class: "ueber" }, o.ueber) : null,
+      h("h1", null, o.titel),
+      h("p", { class: "lead" }, o.lead),
+      o.kennzahlen && o.kennzahlen.length ? h("div", { class: "kennzahlen" }, o.kennzahlen) : null,
+      o.unten || null);
+  }
+  const kennzahl = (symbol, text) => h("span", { class: "kennzahl" }, icon(symbol), text);
+  function kennzahlenFuer(seite) {
+    const z = [];
+    const vids = seite.videos || (seite.video ? [seite.video] : []);
+    if (vids.length) z.push(kennzahl("play", vids.length > 1 ? vids.length + " Videos" : "Video"));
+    if (seite.widget) z.push(kennzahl("sliders-horizontal", "Zum Ausprobieren"));
+    if (seite.demo) z.push(kennzahl("live", "Live-Demo"));
+    const n = (seite.abschnitte || []).length;
+    if (n) z.push(kennzahl("book-open", n + (n === 1 ? " Abschnitt" : " Abschnitte")));
+    if (seite.quiz && seite.quiz.length) z.push(kennzahl("check", seite.quiz.length + (seite.quiz.length === 1 ? " Quizfrage" : " Quizfragen")));
+    if (seite.business) z.push(kennzahl("business", "Mit Praxisbezug"));
+    return z;
   }
   /** Markierungen aus content.js in reinen Text wandeln. */
   function klar(t) {
@@ -494,19 +559,43 @@
       h("div", { class: "weiter" }, ids.map((id) => { const s = INHALT.seiten[id]; return s ? h("a", { href: "#/" + id }, icon(s.symbol), s.titel) : null; })));
   }
   function startSeite(seite) {
-    const pfad = h("ol", { class: "pfad" }, seite.pfad.map((p) => h("li", null, h("h3", null, h("a", { href: "#/" + p.id }, p.h)), h("p", null, p.p))));
-    const jetzt = h("p", { class: "jetztsatz" }, "Der Jetson meldet sich gleich.");
+    const punkt = h("span", { class: "punkt aus" });
+    const stand = h("span", { class: "statuschip-text" }, "Der Jetson meldet sich gleich.");
+    const chip = h("div", { class: "statuschip glas", role: "status" }, punkt, stand);
     montiert.push({ destroy: stats.on((d) => {
-      const m = d.modelle_geladen && d.modelle_geladen.length ? "Im Speicher liegt " + d.modelle_geladen.join(", ") + "." : "Gerade ist kein Modell im Speicher.";
-      jetzt.textContent = "GPU " + (d.gpu_pct ?? 0) + " Prozent, " + String(d.power_w ?? 0).replace(".", ",") + " Watt, " + (d.temp_c ?? 0) + " Grad. " + m;
+      punkt.classList.toggle("aus", !d.frisch);
+      const m = d.modelle_geladen && d.modelle_geladen.length ? "Im Speicher: " + d.modelle_geladen.join(", ") : "Kein Modell im Speicher";
+      stand.textContent = "Jetson live: GPU " + (d.gpu_pct ?? 0) + " %, " + String(d.power_w ?? 0).replace(".", ",") + " W, " + String(d.temp_c ?? 0).replace(".", ",") + " °C. " + m + ".";
     }) });
-    return h("div", { class: "seitenbreite" },
-      h("p", { class: "ueber" }, "KI-Labor auf dem Jetson"),
-      h("h1", null, seite.titel),
-      h("p", { class: "lead" }, seite.kurz),
-      h("section", { class: "block" }, h("h2", null, icon("karte"), "Dein Lernpfad"), h("div", { class: "flaeche pad" }, pfad)),
-      h("section", { class: "block" }, h("h2", null, icon("live"), "Gerade im Jetson"), h("div", { class: "flaeche pad" }, jetzt)),
-      h("section", { class: "block" }, h("h2", null, icon("info"), "Datenschutz"), h("div", { class: "text" }, h("p", null, seite.datenschutz))));
+    const los = INHALT.seiten[seite.pfad[0].id] ? seite.pfad[0].id : "karte";
+    const aktionen = h("div", { class: "hero-aktionen" },
+      chip,
+      h("a", { class: "btn primary", href: "#/" + los }, "Loslegen"),
+      h("a", { class: "textlink", href: "#bereiche", onclick: (e) => { e.preventDefault(); const z = $("#bereiche"); if (z) z.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Mehr erfahren", icon("chevron")));
+    // Bento-Raster: je Bereich eine Kachel; Breiten wechseln, die erste ist die Akzent-Kachel
+    const BREITE = ["fokus breit", "schmal", "", "", "", "schmal", "breit", "", "", ""];
+    const kacheln = [];
+    for (const g of INHALT.gruppen) {
+      if (!g.seiten.length || g.name === "Start") continue;
+      const b = (seite.bereiche || {})[g.name] || {};
+      const ziel = g.seiten[0];
+      const satz = b.satz || g.seiten.slice(0, 3).map((id) => INHALT.seiten[id].nav || INHALT.seiten[id].titel).join(", ");
+      kacheln.push(h("a", { class: "kachel " + (BREITE[kacheln.length] || ""), href: "#/" + ziel },
+        h("h3", null, g.name), h("p", null, satz),
+        h("span", { class: "mehr-link" }, "Mehr erfahren", icon("chevron")),
+        h("span", { class: "gross-icon", "aria-hidden": "true" }, icon(b.symbol || INHALT.seiten[ziel].symbol))));
+    }
+    const reihe = h("ol", { class: "pfadreihe", tabindex: "0", "aria-label": "Lernpfad" }, seite.pfad.map((p, i) => h("li", null,
+      h("a", { class: "schritt-k", href: "#/" + p.id }, h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)), h("h3", null, p.h), h("p", null, p.p)))));
+    const schieben = (r) => () => reihe.scrollBy({ left: r * 320, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+    const nav = h("div", { class: "pfad-nav" },
+      h("button", { type: "button", "aria-label": "Zurück", onclick: schieben(-1) }, icon("arrow-left")),
+      h("button", { type: "button", "aria-label": "Weiter", onclick: schieben(1) }, icon("arrow-right")));
+    return h("div", { class: "seitenbreite breit" },
+      hero({ symbol: seite.symbol, ueber: "KI-Labor auf dem Jetson", titel: seite.titel, lead: seite.kurz, unten: aktionen, gross: true }),
+      h("section", { class: "block", id: "bereiche" }, h("h2", null, "Alle Bereiche"), h("div", { class: "bento" }, kacheln)),
+      h("section", { class: "block" }, h("div", { class: "pfad-kopf" }, h("h2", null, "Dein Lernpfad"), nav), reihe),
+      h("section", { class: "block" }, h("div", { class: "hinweis" }, icon("info"), h("p", null, h("strong", null, "Datenschutz. "), seite.datenschutz))));
   }
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
@@ -514,8 +603,7 @@
     const art = seite.typ === "lektion" ? "Lektion" + (seite.nr ? " " + seite.nr : "") : "Labor";
     const ueber = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
     const out = h("div", { class: "seitenbreite" },
-      h("p", { class: "ueber" }, ueber), h("h1", null, seite.titel), h("p", { class: "lead" }, seite.kurz));
-    out.append(lesemodusSchalter());
+      hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
     if (seite.status === "bald") out.append(h("p", null, h("span", { class: "chip warn" }, "Demo folgt"), " Die Erklärung steht schon, die Demo wird noch eingebaut."));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
     if (vids.length) out.append(videoBlock(vids));
@@ -552,9 +640,8 @@
     return { id: m ? m[1] : null, query };
   }
   function nichtGefunden() {
-    return h("div", { class: "seitenbreite" }, h("h1", null, "Seite nicht gefunden"),
-      h("p", { class: "lead" }, "Diese Adresse gibt es im KI-Labor nicht."),
-      h("p", null, h("a", { href: "/" }, "Zur Startseite")));
+    return h("div", { class: "seitenbreite" }, hero({ symbol: "info", ueber: "KI-Labor", titel: "Seite nicht gefunden", lead: "Diese Adresse gibt es im KI-Labor nicht.",
+      unten: h("div", { class: "hero-aktionen" }, h("a", { class: "btn primary", href: "/" }, "Zur Startseite")) }));
   }
   function route(y) {
     const alt = ausHash(location.hash);
@@ -575,7 +662,10 @@
       document.title = "Seite nicht gefunden · KI-Labor";
     }
     navMarkieren(gueltig);
+    const sd = gueltig ? INHALT.seiten[gueltig] : null;
+    leisteSetzen(sd ? sd.titel : "Seite nicht gefunden", !!sd && sd.typ !== "start");
     window.scrollTo({ top: y || 0, left: 0, behavior: "instant" });
+    leisteStand();
   }
   function navigiere(ziel) {         // ziel: { id, query }, ohne Neuladen
     const url = adresse(ziel.id, ziel.query);
@@ -639,6 +729,10 @@
     seitenleiste.replaceChildren(
       h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "läuft auf dem Jetson"))),
       menueKnopf(), navBauen(), liveBauen(), tip);
+    const haupt = $(".haupt");
+    if (haupt) haupt.prepend(leisteBauen());
+    schieberFuellen(document);
+    new MutationObserver((ml) => { for (const m of ml) for (const n of m.addedNodes) if (n.nodeType === 1) schieberFuellen(n); }).observe(document.body, { childList: true, subtree: true });
     route(history.state && history.state.y);
     poll(); setInterval(poll, 1500);
   }

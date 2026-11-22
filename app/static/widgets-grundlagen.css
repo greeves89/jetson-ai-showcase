@@ -2,13 +2,13 @@
    Nutzt die Variablen und Klassen aus style.css. Eigene Klassen beginnen mit gl-. */
 
 .gl-wid{--gl-auf:#fff}
-@media (prefers-color-scheme:dark){.gl-wid{--gl-auf:#00162e}}
+@media (prefers-color-scheme:dark){.gl-wid{--gl-auf:#fff}}
 .gl-wid .btn.primary,.gl-wid .btn.aktiv{color:var(--gl-auf)}
 .gl-wid .btn{min-height:38px}
 .gl-wid .btn .ic{width:16px;height:16px}
 .gl-wid .btn:focus-visible,.gl-wid .chip:focus-visible,.gl-wid canvas:focus-visible,.gl-wid select:focus-visible,.gl-wid .gl-tabwrap:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
 .gl-einf{margin:0 0 16px;color:var(--leise);font-size:15.5px;line-height:1.5;max-width:64ch}
-.gl-ueber{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--leise)}
+.gl-ueber{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .gl-block{margin:0 0 14px}
 .gl-leise{color:var(--leise)}
 .gl-klein{font-size:13.5px;margin:6px 0 0}
@@ -17,7 +17,7 @@
 /* Auswahl und Chips */
 .gl-wahl{display:flex;flex-wrap:wrap;gap:8px}
 .gl-wid button.chip{min-height:36px;padding:6px 14px;font-size:14px;color:var(--text);cursor:pointer}
-.gl-wid button.chip[aria-pressed=true]{background:var(--akzent);color:var(--gl-auf)}
+.gl-wid button.chip[aria-pressed=true]{background:var(--akzent-fl);color:var(--gl-auf)}
 .gl-stand{font-variant-numeric:tabular-nums;color:var(--text);min-height:30px}
 .gl-stand b{font-weight:650}
 .gl-standreihe{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
@@ -30,17 +30,17 @@
 .gl-regler-gitter .regler label{white-space:normal}
 .gl-regler-gitter .regler output{min-width:4.4em}
 .gl-wid input[type=range]{min-height:28px}
-.gl-select{appearance:none;background:var(--flaeche2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236e6e73' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--text);border:.5px solid var(--linie);border-radius:10px;padding:8px 34px 8px 12px;font:inherit;font-size:14px;min-height:38px;width:100%}
+.gl-select{appearance:none;background:var(--flaeche2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236e6e73' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--text);border:.5px solid var(--linie);border-radius:12px;padding:8px 34px 8px 12px;font:inherit;font-size:14px;min-height:38px;width:100%}
 .gl-aktzeile{grid-template-columns:auto minmax(60px,1fr) 0!important}
 .gl-knoepfe{margin:0 0 14px}
 
 /* Schalter */
 .gl-schalter{display:inline-flex;align-items:center;gap:10px;cursor:pointer;font-size:14px;position:relative;min-height:38px}
-.gl-schalter input{position:absolute;opacity:0;width:44px;height:26px;margin:0;cursor:pointer}
-.gl-sw{width:44px;height:26px;border-radius:13px;background:var(--flaeche3);position:relative;flex:none;transition:background .2s}
-.gl-sw::after{content:"";position:absolute;left:3px;top:3px;width:20px;height:20px;border-radius:50%;background:#fff;box-shadow:0 1px 3px rgba(0,0,0,.3);transition:transform .2s}
-.gl-schalter input:checked+.gl-sw{background:var(--akzent)}
-.gl-schalter input:checked+.gl-sw::after{transform:translateX(18px)}
+.gl-schalter input{position:absolute;opacity:0;width:51px;height:31px;margin:0;cursor:pointer}
+.gl-sw{width:51px;height:31px;border-radius:16px;background:var(--flaeche3);position:relative;flex:none;transition:background .3s var(--feder)}
+.gl-sw::after{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.3);transition:transform .35s var(--feder)}
+.gl-schalter input:checked+.gl-sw{background:var(--schalter)}
+.gl-schalter input:checked+.gl-sw::after{transform:translateX(20px)}
 .gl-schalter input:focus-visible+.gl-sw{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
 
 /* Zeichenflaechen */
@@ -85,7 +85,7 @@
 .gl-masskopf{display:flex;justify-content:space-between;align-items:baseline;font-size:14px;font-weight:600}
 .gl-masskopf b{font-variant-numeric:tabular-nums;font-weight:650}
 .gl-balken{height:8px;border-radius:4px;background:var(--flaeche3);margin:5px 0 4px;overflow:hidden}
-.gl-balken i{display:block;height:100%;width:0;background:var(--akzent);border-radius:4px;transition:width .15s}
+.gl-balken i{display:block;height:100%;width:0;background:var(--akzent-fl);border-radius:4px;transition:width .15s}
 .gl-massatz{display:block;font-size:13px;color:var(--leise);line-height:1.4;min-height:1.4em}
 
 /* Datenqualitaet */
