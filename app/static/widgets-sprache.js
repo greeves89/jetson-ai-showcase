@@ -427,7 +427,7 @@
     const teile = roh.split(SEP);
     const rest = teile.pop();
     const r = { tokens: teile, text: teile.join(""), belegt: false, meta: null, fehler: null };
-    if (!teile.length && /^\[Gerade belegt/.test(rest)) r.belegt = true;
+    if (!teile.length && /^\[/.test(rest) && KL.last.istBelegtText(rest)) r.belegt = true;
     else if (rest.startsWith("\n\n---\n") || /^\n{1,2}-{0,3}$/.test(rest)) r.meta = rest;
     else if (/^\n\[/.test(rest)) {
       const t = rest.trim().replace(/^\[|\]$/g, "");
@@ -569,7 +569,7 @@
         s.status.textContent = versuch === 1 ? "Das Modell liest den Prompt …" : "Neuer Versuch " + versuch + " von " + VERSUCHE + " …";
         const erg = await streame(s, nachricht);
         if (erg.art === "belegt" && versuch < VERSUCHE && !stopp) {
-          s.status.textContent = "Der Jetson ist gerade belegt, er beantwortet schon zwei Fragen. Neuer Versuch in " + Math.round(WARTE_MS / 1000) + " Sekunden (" + versuch + " von " + VERSUCHE + ").";
+          s.status.textContent = "Der Rechner ist gerade ausgelastet, nichts falsch gemacht. Neuer Versuch in " + Math.round(WARTE_MS / 1000) + " Sekunden (Wiederholung " + versuch + " von " + (VERSUCHE - 1) + ").";
           await pause(WARTE_MS);
           continue;
         }
@@ -581,7 +581,7 @@
       const c = L.ctrl(); aktuelleCtrl = c; s.ctrl = c;
       const t0 = performance.now();
       let tErst = 0, roh = "", art = "ok", gekappt = false, fertigAnzeige = false;
-      let rafOffen = false, letzt = lies("");
+      let rafOffen = false, letzt = lies(""), stoppePlatz = null;
       const zeichne = () => {
         rafOffen = false;
         s.antwort.textContent = letzt.text;
@@ -590,7 +590,12 @@
       };
       try {
         const r = await postJson("/api/chat", { nachricht, temperatur: Number(temp.value) }, c.signal);
+        if (r.status === 503) {                           // Vorab-Absage: alle Plaetze und Warteplaetze belegt
+          let d = null; try { d = await r.clone().json(); } catch (e) { /* kein JSON */ }
+          if (d && d.belegt) return { art: "belegt" };
+        }
         if (!r.ok) return { art: "fehler", text: await fehlerText(r) };
+        stoppePlatz = KL.last.beobachten((i) => { if (!tErst) s.status.textContent = KL.last.platzText(i); });
         const rd = r.body.getReader(), dec = new TextDecoder();
         for (;;) {
           const { done, value } = await rd.read();
@@ -607,7 +612,7 @@
       } catch (e) {
         if (!(e && e.name === "AbortError")) return { art: "fehler", text: NETZ };
         art = gekappt ? "ok" : "abbruch";
-      } finally { L.frei(c); if (aktuelleCtrl === c) aktuelleCtrl = null; }
+      } finally { if (stoppePlatz) stoppePlatz(); L.frei(c); if (aktuelleCtrl === c) aktuelleCtrl = null; }
       if (letzt.belegt) art = "belegt";
       else if (letzt.fehler && !letzt.tokens.length) art = "fehler";
       zeichne();
@@ -616,13 +621,13 @@
     }
     function abschluss(s, erg, vorher) {
       if (erg.art === "belegt") {
-        s.status.textContent = "Der Jetson ist gerade belegt: Er beantwortet schon zwei Fragen, vermutlich von anderen Besuchern. Drück in einer halben Minute auf Nochmal.";
-        s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Keine Antwort, der Jetson war belegt."));
+        s.status.textContent = KL.last.TEXT + " Drücke auf Nochmal, wenn du magst.";
+        s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Die Antwort kommt, sobald der Rechner frei ist."));
         s.durchlauf--; return;
       }
       if (erg.art === "fehler") {
         s.status.textContent = erg.text || "Das hat nicht geklappt.";
-        if (!s.antwort.textContent.trim()) s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Keine Antwort."));
+        if (!s.antwort.textContent.trim()) s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Diesmal gab es keine Antwort. Die Meldung oben sagt, woran es lag."));
         s.durchlauf--; return;
       }
       if (erg.art === "abbruch") { s.status.textContent = "Abgebrochen nach " + erg.n + " Token."; s.letzteTokens = erg.n; return; }
@@ -837,7 +842,7 @@
             schwach ? h("p", { class: "sp-text" }, h("b", null, schwach.a.name + ": "), schwach.a.tipp) : null)
           : h("div", { class: "sp-verwechslung" }, h("h4", null, "Das verwechselst du noch"), h("p", { class: "sp-text" }, "In dieser Runde nichts. Probiere eine andere Runde mit einem neuen Startwert.")),
         falsche.length ? h("div", { class: "sp-nachlesen" }, h("h4", null, "Zum Nachlesen"),
-          h("ul", null, falsche.map((e) => h("li", null, h("span", null, kurzText(daten.szenarien.find((s) => s.id === e.id).bloecke[0].text, 80)), h("b", { class: "sp-rt" }, "Richtig: " + e.richtigText))))) : null,
+          h("ul", null, falsche.map((e) => h("li", null, h("span", null, kurzText(daten.szenarien.find((s) => s.id === e.id).bloecke[0].text, 80)), h("b", { class: "sp-rt" }, "Richtig: " + e.richtigText))))) : "",
         h("div", { class: "sp-endknoepfe" },
           h("button", { type: "button", class: "btn primary", onclick: () => neueRunde(seed) }, ic("refresh"), "Dieselbe Runde noch einmal"),
           h("button", { type: "button", class: "btn", onclick: () => neueRunde(Math.floor(Math.random() * 9000) + 1000) }, ic("shuffle"), "Neue Runde"),

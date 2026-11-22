@@ -31,13 +31,14 @@ import cv2
 import numpy as np
 import httpx
 from fastapi import FastAPI, Request, WebSocket, WebSocketDisconnect
+from fastapi.middleware.gzip import GZipMiddleware
 from fastapi.middleware.trustedhost import TrustedHostMiddleware
 from fastapi.responses import HTMLResponse, StreamingResponse, JSONResponse, RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
 
 from app import agent_werkzeuge, speicher
-from app.sicherheit import Sitzungen, begrenzt, sitzungs_kennung
+from app.sicherheit import Belegt, Sitzungen, Warteschlange, begrenzt, sitzungs_kennung, umgebung_zahl
 
 HIER = Path(__file__).resolve().parent
 OLLAMA = "http://127.0.0.1:11434"
@@ -105,10 +106,15 @@ app.add_middleware(TrustedHostMiddleware, allowed_hosts=_erlaubte_hosts())
 
 # Oeffentlicher Betrieb (OEFFENTLICH=1): zusaetzlich Ratenbegrenzung je Besucher. Intern aus, damit Tests nicht bremsen.
 _OEFFENTLICH = os.environ.get("OEFFENTLICH") == "1"
-_sitzungen = Sitzungen(ttl_s=1800, maximal=200)
-CHAT_MAX_PARALLEL = 2          # gleichzeitige Chat-Antworten (Speicher und GPU sind knapp)
+# Einstellbar ueber Umgebungsvariablen (siehe docs/veroeffentlichung.md):
+#   SITZUNG_TTL_S      Zeitlimit je Sitzung: Anlern-Beispiele und RAG-Texte verfallen nach so vielen Sekunden Ruhe (Standard 1800)
+#   LLM_PARALLEL       gleichzeitige Sprachmodell-Antworten (Chat, RAG-Frage, Agent), Standard 2 (Speicher und GPU sind knapp)
+#   LLM_WARTEND_MAX    wie viele Besucher dahinter warten duerfen, Standard 6; weitere bekommen sofort "ausgelastet"
+#   LLM_WARTEZEIT_S    laengste Wartezeit in der Schlange, Standard 90
+_sitzungen = Sitzungen(ttl_s=umgebung_zahl("SITZUNG_TTL_S", 1800, 60), maximal=200)
+LLM_PARALLEL = int(umgebung_zahl("LLM_PARALLEL", 2))
+_llm = Warteschlange(LLM_PARALLEL, int(umgebung_zahl("LLM_WARTEND_MAX", 6, 0)), umgebung_zahl("LLM_WARTEZEIT_S", 90, 5))
 WS_MAX = 6                     # gleichzeitige Kameraverbindungen
-_chat_aktiv = 0
 _ws_aktiv = 0
 
 
@@ -121,7 +127,34 @@ def _zu_viele(request, name, maximal, fenster=60.0):
     return _OEFFENTLICH and begrenzt(request, name, maximal, fenster)
 
 
-ZU_VIELE = {"fehler": "Zu viele Anfragen. Bitte warte kurz."}
+ZU_VIELE = {"fehler": "Du hast gerade sehr schnell hintereinander gefragt. Warte etwa eine Minute, dann geht es weiter.", "limit": True}
+BELEGT_TEXT = ("Der Rechner ist gerade ausgelastet, weil viele Menschen das Labor nutzen. "
+               "Du hast nichts falsch gemacht. Versuch es gleich noch einmal.")
+WIEDERHOLEN_S = 8
+
+
+def _belegt_antwort():
+    """Wird zurueckgegeben, wenn weder ein Platz noch ein Warteplatz frei ist (vor Beginn des Antwortstroms)."""
+    return JSONResponse({"fehler": BELEGT_TEXT, "belegt": True, "wiederholen_s": WIEDERHOLEN_S}, status_code=503,
+                        headers={"Retry-After": str(WIEDERHOLEN_S)})
+
+
+async def _mit_platz(request, strom):
+    """Fuehrt den Antwortstrom `strom` (asynchroner Generator) erst aus, wenn in der Warteschlange ein Platz frei ist.
+    Der Platz wird erst nach dem letzten Stueck freigegeben (auch bei Abbruch). Besucher, die warten, fragen ihre
+    Platznummer ueber GET /api/warteschlange ab."""
+    try:
+        async with _llm.platz(sitzungs_kennung(request)):
+            async for stueck in strom:
+                yield stueck
+    except Belegt:
+        yield "[" + BELEGT_TEXT + "]"
+
+
+@app.get("/api/warteschlange")
+def warteschlange(request: Request):
+    """Belegung der Sprachmodelle und Platznummer des Aufrufers (meine_position: 0 = wartet nicht, 1 = als Naechster dran)."""
+    return JSONResponse(_llm.stand(sitzungs_kennung(request)), headers={"Cache-Control": "no-store"})
 
 
 def _ollama_fehler(text):
@@ -333,6 +366,7 @@ def _parse_tegrastats(z):
 def stats():
     d = _parse_tegrastats(_letzte_zeile["roh"])
     d["frisch"] = (time.time() - _letzte_zeile["zeit"]) < 4
+    d["warteschlange"] = {"aktiv": _llm.aktiv, "wartend": _llm.wartend, "parallel": _llm.parallel}
     # geladene Modelle aus Ollama
     try:
         r = httpx.get(f"{OLLAMA}/api/ps", timeout=2)
@@ -358,6 +392,8 @@ async def chat(req: Request):
         return JSONResponse({"fehler": "ungueltiger Origin"}, status_code=403)
     if _zu_viele(req, "chat", 20):
         return JSONResponse(ZU_VIELE, status_code=429)
+    if _llm.voll():
+        return _belegt_antwort()
     daten = await req.json()
     nachricht = (daten.get("nachricht") or "").strip()
     modell = daten.get("modell") or CHAT_MODELL
@@ -404,19 +440,7 @@ async def chat(req: Request):
         except Exception as e:
             yield f"\n[Fehler: {e}]"
 
-    async def strom():
-        global _chat_aktiv
-        if _chat_aktiv >= CHAT_MAX_PARALLEL:
-            yield "[Gerade belegt: Der Jetson beantwortet schon zwei Fragen. Versuch es in einer halben Minute noch einmal.]"
-            return
-        _chat_aktiv += 1
-        try:
-            async for stueck in strom_innen():
-                yield stueck
-        finally:
-            _chat_aktiv -= 1
-
-    return StreamingResponse(strom(), media_type="text/plain; charset=utf-8")
+    return StreamingResponse(_mit_platz(req, strom_innen()), media_type="text/plain; charset=utf-8")
 
 
 # ---------- Modell laden mit Fortschritt (Ollama pull) ----------
@@ -680,6 +704,8 @@ async def _rag_suche(c, frage, rag, k=4):
 async def rag_search(req: Request):
     if not _origin_ok(req.headers):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
+    if _llm.voll():
+        return _belegt_antwort()
     d = await req.json()
     frage = (d.get("frage") or "").strip()[:1000]
     if not frage:
@@ -706,6 +732,8 @@ async def rag_ask(req: Request):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
     if _zu_viele(req, "rag-ask", 15):
         return JSONResponse(ZU_VIELE, status_code=429)
+    if _llm.voll():
+        return _belegt_antwort()
     d = await req.json()
     frage = (d.get("frage") or "").strip()[:1000]
     if not frage:
@@ -749,7 +777,7 @@ async def rag_ask(req: Request):
             except Exception as e:
                 yield "\n[Fehler: %s]" % e
 
-    return StreamingResponse(strom(), media_type="text/plain; charset=utf-8")
+    return StreamingResponse(_mit_platz(req, strom()), media_type="text/plain; charset=utf-8")
 
 
 @app.post("/api/rag/reset")
@@ -825,6 +853,8 @@ async def agent_ask(req: Request):
         return JSONResponse({"fehler": "Origin"}, status_code=403)
     if _zu_viele(req, "agent", 15):
         return JSONResponse(ZU_VIELE, status_code=429)
+    if _llm.voll():
+        return _belegt_antwort()
     d = await req.json()
     frage = (d.get("frage") or "").strip()[:1000]
     if not frage:
@@ -871,7 +901,7 @@ async def agent_ask(req: Request):
                 return
             yield "\n[Abbruch nach 5 Schritten]"
 
-    return StreamingResponse(strom(), media_type="text/plain; charset=utf-8")
+    return StreamingResponse(_mit_platz(req, strom()), media_type="text/plain; charset=utf-8")
 
 
 # ============================================================ Whisper (Sprache zu Text)
@@ -1024,12 +1054,40 @@ class _RobotsKopf:
                 kopf = MutableHeaders(scope=nachricht)
                 if "x-robots-tag" not in kopf and (not _OEFFENTLICH or pfad.startswith(("/api/", "/ws/"))):
                     kopf["X-Robots-Tag"] = "noindex, nofollow"
+                if pfad.startswith("/static/") and nachricht.get("status") in (200, 206, 304) and "cache-control" not in kopf:
+                    if b"v=" in scope.get("query_string", b""):      # Versionsparameter (?v=<Stand>): aendert sich mit jedem Stand
+                        kopf["Cache-Control"] = "public, max-age=31536000, immutable"
+                    elif pfad.endswith(_MEDIEN):
+                        kopf["Cache-Control"] = "public, max-age=86400"
+                    else:
+                        kopf["Cache-Control"] = "no-cache"           # immer mit ETag nachfragen
             await send(nachricht)
 
         await self.anwendung(scope, receive, senden)
 
 
 app.add_middleware(_RobotsKopf)
+
+_MEDIEN = (".mp4", ".jpg", ".jpeg", ".png", ".webp", ".mp3", ".wav", ".vtt", ".ico")
+
+
+class _Kompression:
+    """gzip fuer Text (Seiten, JS, CSS, JSON, XML); nicht fuer Medien (schon komprimiert), /api/ (Streams) und Bereichsanfragen."""
+
+    def __init__(self, anwendung):
+        self.anwendung = anwendung
+        self.gzip = GZipMiddleware(anwendung, minimum_size=1024)
+
+    async def __call__(self, scope, receive, send):
+        if scope["type"] == "http":
+            pfad = scope.get("path", "")
+            bereich = any(k == b"range" for k, _ in scope.get("headers", []))
+            if not bereich and not pfad.startswith(("/api/", "/ws/")) and not pfad.endswith(_MEDIEN):
+                return await self.gzip(scope, receive, send)
+        return await self.anwendung(scope, receive, send)
+
+
+app.add_middleware(_Kompression)
 
 
 def _seo_daten():
@@ -1045,16 +1103,20 @@ def _seo_daten():
             return standard
     index = lesen("index.json", {"seiten": {}, "reihenfolge": []})
     try:
-        seite = json.loads((_STATIC_DIR / "module.json").read_text(encoding="utf-8")).get("seite", {})
+        module = json.loads((_STATIC_DIR / "module.json").read_text(encoding="utf-8"))
     except Exception:
-        seite = {}
+        module = {}
+    seite = module.get("seite", {})
+    # Dateien, die die Oberflaeche beim Start nacheinander nachlaedt: der Browser holt sie vorab parallel (preload)
+    vorab = [("style", f) for f in module.get("css", [])] + [("script", f) for f in module.get("content", []) + module.get("module", [])]
+    vorab = [(art, f) for art, f in vorab if isinstance(f, str) and re.fullmatch(r"[A-Za-z0-9_.-]+", f) and (_STATIC_DIR / f).is_file()]
     def text(name):
         try:
             return (_SEO_DIR / name).read_text(encoding="utf-8")
         except Exception:
             return ""
     fragmente = {i: text(i + ".html") for i in index.get("seiten", {}) if re.fullmatch(r"[a-z0-9-]+", i)}
-    daten = {"index": index, "nav": text("nav.html"), "fragmente": fragmente, "seite": seite if isinstance(seite, dict) else {}}
+    daten = {"index": index, "nav": text("nav.html"), "fragmente": fragmente, "seite": seite if isinstance(seite, dict) else {}, "vorab": vorab}
     _seo_stand.update(stamp=stamp, daten=daten)
     return daten
 
@@ -1066,14 +1128,6 @@ def _basis_url(request):
 
 def _frei(url):
     return url if isinstance(url, str) and url.startswith(_FREIE_ADRESSEN) else ""
-
-
-def _datum(datei):
-    try:
-        t = (_STATIC_DIR / datei).stat().st_mtime
-        return time.strftime("%Y-%m-%d", time.gmtime(t))
-    except Exception:
-        return ""
 
 
 def _fuss_html(seite):
@@ -1092,14 +1146,15 @@ def _fuss_html(seite):
     teile.append(
         '<p class="fuss-klein">Dies ist ein Lernprojekt. Kamerabilder, Mikrofonaufnahmen und eingegebene Texte werden nur im '
         "Arbeitsspeicher verarbeitet und nicht dauerhaft gespeichert. Technisch notwendig sind das Sitzungs-Cookie "
-        "<code>kl_s</code> (ordnet Beispiele und Texte deiner Sitzung zu, die Daten verfallen nach 30 Minuten) und der im Browser gemerkte Lernfortschritt.</p>"
+        "<code>kl_s</code> (ordnet Beispiele und Texte deiner Sitzung zu, die Daten verfallen nach 30 Minuten) und der im Browser gemerkte Lernfortschritt. "
+        '<a href="/sicherheit-einfach">Ist das sicher? Was wird gespeichert?</a></p>'
     )
     return "".join(teile)
 
 
-def _json_ld(obj):
-    """JSON fuer ein script-Element: <, > und & maskieren, damit nichts das Element verlassen kann."""
-    return json.dumps(obj, ensure_ascii=False).replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
+def _json_ld_text(text):
+    """JSON-Text fuer ein script-Element: <, > und & maskieren, damit nichts das Element verlassen kann."""
+    return text.replace("<", "\\u003c").replace(">", "\\u003e").replace("&", "\\u0026")
 
 
 def _oberflaeche(request, seiten_id, status=200):
@@ -1129,26 +1184,25 @@ def _oberflaeche(request, seiten_id, status=200):
         og = [("og:title", titel), ("og:description", beschr), ("og:type", "website" if seiten_id == "start" else "article"),
               ("og:url", adresse), ("og:locale", "de_DE"), ("og:site_name", "KI-Labor")]
         kopf += [f'<meta property="{k}" content="{escape(v)}">' for k, v in og]
-        kopf.append('<meta name="twitter:card" content="summary">')
-        person = {"@type": "Person", "name": autor}
-        if _frei(seite.get("autor_url")):
-            person["url"] = seite["autor_url"]
-        ld = {"@context": "https://schema.org", "@type": "WebSite" if seiten_id == "start" else "Article",
-              "inLanguage": "de", "url": adresse, "description": beschr}
-        if seiten_id == "start":
-            ld["name"] = "KI-Labor"
-        else:
-            ld["headline"] = ueberschrift
-            ld["mainEntityOfPage"] = adresse
-            if _datum(info.get("datei", "")):
-                ld["dateModified"] = _datum(info["datei"])
-        if autor:
-            ld["author"] = person
-        kopf.append('<script type="application/ld+json">' + _json_ld(ld) + "</script>")
+        bild = basis + info["bild"] if info.get("bild") else ""
+        if bild:
+            kopf += [f'<meta property="og:image" content="{escape(bild)}">', '<meta property="og:image:type" content="image/png">',
+                     '<meta property="og:image:width" content="1200">', '<meta property="og:image:height" content="630">',
+                     f'<meta property="og:image:alt" content="{escape(info.get("bild_alt", ""))}">']
+        kopf.append('<meta name="twitter:card" content="summary_large_image">')
+        if bild:
+            kopf += [f'<meta name="twitter:image" content="{escape(bild)}">', f'<meta name="twitter:image:alt" content="{escape(info.get("bild_alt", ""))}">']
+        kopf += [f'<link rel="alternate" hreflang="de" href="{escape(adresse)}">', f'<link rel="alternate" hreflang="x-default" href="{escape(adresse)}">']
+        if _OEFFENTLICH:
+            kopf.append(f'<link rel="alternate" type="text/plain" href="{escape(basis)}/llms.txt" title="llms.txt">')
+        if info.get("ld"):
+            ld_text = json.dumps(info["ld"], ensure_ascii=False).replace("__BASIS__", json.dumps(basis)[1:-1])
+            kopf.append('<script type="application/ld+json">' + _json_ld_text(ld_text) + "</script>")
     stamp = max((int(f.stat().st_mtime) for f in _STATIC_DIR.glob("*") if f.is_file()), default=0)
+    kopf += [f'<link rel="preload" as="{art}" href="/static/{f}?v={stamp}">' for art, f in daten.get("vorab", [])]
     werte = {
         "V": str(stamp), "TITEL": escape(titel), "KOPF": "\n".join(kopf),
-        "SEITE": '<div class="marke"><div class="logo"></div><div><b>KI-Labor</b><span>läuft auf dem Jetson</span></div></div>' + daten["nav"],
+        "SEITE": '<div class="marke"><div class="logo"></div><div><b>KI-Labor</b><span>kostenlos, live ausprobieren</span></div></div>' + daten["nav"],
         "INHALT": inhalt + '\n<noscript><p class="noscript-hinweis">Die interaktiven Teile des KI-Labors brauchen JavaScript.</p></noscript>',
         "FUSS": _fuss_html(seite),
     }
@@ -1160,38 +1214,58 @@ def _oberflaeche(request, seiten_id, status=200):
     return antwort
 
 
+@app.get("/googlee103461f6717de5d.html")
+def google_bestaetigung():
+    """Inhaberbestaetigung der Search Console (Datei muss dauerhaft erreichbar bleiben)."""
+    from fastapi.responses import PlainTextResponse
+    return PlainTextResponse("google-site-verification: googlee103461f6717de5d.html",
+                             headers={"Cache-Control": "no-cache"}, media_type="text/html")
+
+
+# KI-Crawler und Suchmaschinen, die ausdruecklich willkommen sind (eigene Gruppe, weil sie die allgemeine ersetzt)
+_KI_CRAWLER = ("GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended", "CCBot", "Applebot-Extended")
+
+
 @app.get("/robots.txt")
 def robots_txt(request: Request):
+    from fastapi.responses import PlainTextResponse
     if _OEFFENTLICH:
-        text = f"User-agent: *\nDisallow: /api/\nDisallow: /ws/\nAllow: /\n\nSitemap: {_basis_url(request)}/sitemap.xml\n"
+        regeln = "Allow: /\nDisallow: /api/\nDisallow: /ws/\n"
+        gruppen = ["User-agent: *\n" + regeln] + [f"User-agent: {name}\n{regeln}" for name in _KI_CRAWLER]
+        text = "\n".join(gruppen) + f"\nSitemap: {_basis_url(request)}/sitemap.xml\n"
     else:
         text = "User-agent: *\nDisallow: /\n"
-    from fastapi.responses import PlainTextResponse
     return PlainTextResponse(text, headers={"Cache-Control": "no-cache"})
+
+
+def _seo_datei(request, name, medientyp):
+    """Eine von scripts/seo_bauen.mjs erzeugte Vorlage (sitemap.xml, llms.txt, llms-full.txt) mit der Basisadresse; intern 404."""
+    from fastapi.responses import Response
+    if not _OEFFENTLICH:
+        return JSONResponse({"fehler": "Nicht gefunden"}, status_code=404)
+    try:
+        text = (_SEO_DIR / name).read_text(encoding="utf-8")
+    except Exception:
+        return JSONResponse({"fehler": "Nicht gefunden"}, status_code=404)
+    from html import escape
+    basis = _basis_url(request)
+    text = text.replace("__BASIS__", escape(basis) if medientyp == "application/xml" else basis)
+    return Response(text, media_type=medientyp, headers={"Cache-Control": "no-cache"})
 
 
 @app.get("/sitemap.xml")
 def sitemap_xml(request: Request):
-    from html import escape
-    from fastapi.responses import Response
-    if not _OEFFENTLICH:
-        return JSONResponse({"fehler": "Nicht gefunden"}, status_code=404)
-    basis = _basis_url(request)
-    sm = {}
-    try:
-        sm = json.loads((_SEO_DIR / "sitemap.json").read_text(encoding="utf-8"))
-    except Exception:
-        pass
-    zeilen = []
-    for e in sm.get("seiten", []):
-        pfad = e.get("pfad", "")
-        if not re.fullmatch(r"/[a-z0-9-]*", pfad):
-            continue
-        datum = _datum(e.get("datei", ""))
-        zeilen.append(f"<url><loc>{escape(basis + pfad)}</loc>" + (f"<lastmod>{datum}</lastmod>" if datum else "") + "</url>")
-    xml = ('<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
-           + "\n".join(zeilen) + "\n</urlset>\n")
-    return Response(xml, media_type="application/xml", headers={"Cache-Control": "no-cache"})
+    return _seo_datei(request, "sitemap.xml", "application/xml")
+
+
+@app.get("/llms.txt")
+def llms_txt(request: Request):
+    return _seo_datei(request, "llms.txt", "text/plain; charset=utf-8")
+
+
+@app.get("/llms-full.txt")
+def llms_full_txt(request: Request):
+    return _seo_datei(request, "llms-full.txt", "text/plain; charset=utf-8")
 
 
 @app.get("/", response_class=HTMLResponse)

@@ -174,6 +174,7 @@
   async function kameraOeffnen() {
     if (!window.isSecureContext) throw new Error("Der Browser erlaubt die Kamera nur über eine HTTPS-Verbindung. Öffne das Labor über die https-Adresse des Jetson.");
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error("Dieser Browser kann nicht auf die Kamera zugreifen. Probiere einen aktuellen Browser wie Safari, Chrome oder Firefox.");
+    await KL.einwilligung.verlangen("kamera", { sendet: false });      // das Bild bleibt hier im Browser
     try {
       return await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }, audio: false });
     } catch (e) {
@@ -1222,7 +1223,11 @@
       const karte = (kopf, text, klasse) => h("div", { class: "karte-w " + (klasse || "") }, h("div", { class: "kopfz" }, kopf), h("div", { class: "sa-echttext" }, text));
       let verarbeitet = 0, schritte = 0, antwortKarte = null;
       try {
-        const r = await fetch("/api/agent/ask", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ frage: S.aufgabe.echteFrage }), signal: sig });
+        const warteSatz = (t) => { if (!schritte) echtStatus.textContent = t; };
+        const stoppePlatz = KL.last.beobachten((i) => warteSatz(KL.last.platzText(i)));
+        let r;
+        try { r = await KL.last.post("/api/agent/ask", { frage: S.aufgabe.echteFrage }, sig, (i) => warteSatz(KL.last.warteText(i))); }
+        finally { stoppePlatz(); }
         if (!r.ok) {
           let d = null; try { d = await r.json(); } catch (e) { /* kein JSON */ }
           throw new Error(r.status === 429 ? "Zu viele Anfragen in kurzer Zeit. Warte einen Moment." : (d && d.fehler) ? String(d.fehler) : "Der Jetson antwortet mit Fehler " + r.status + ".");
@@ -1249,7 +1254,7 @@
         };
         for (;;) { const { done, value } = await rd.read(); if (done) break; gesamt += dec.decode(value, { stream: true }); auswerten(); }
         gesamt += dec.decode(); auswerten();
-        if (/\[Gerade belegt/.test(gesamt)) { echtListe.replaceChildren(); echtStatus.textContent = "Der Jetson beantwortet schon andere Fragen. Probiere es in einer halben Minute noch einmal."; }
+        if (KL.last.istBelegtText(gesamt) && !antwortKarte) { echtListe.replaceChildren(); echtStatus.textContent = KL.last.TEXT + " Drücke dann noch einmal auf den Knopf."; }
         else if (/\[Fehler\]/.test(gesamt)) { const t = gesamt.slice(gesamt.indexOf("[Fehler]") + 8).trim(); echtStatus.textContent = "Das Modell konnte nicht antworten: " + t; }
         else if (/\[Abbruch/.test(gesamt) && !antwortKarte) echtStatus.textContent = "Das Modell hat nach fünf Schritten abgebrochen, ohne zu antworten. Genau dafür gibt es die Höchstzahl der Runden.";
         else if (!antwortKarte) echtStatus.textContent = "Das Modell hat keine Antwort geliefert.";

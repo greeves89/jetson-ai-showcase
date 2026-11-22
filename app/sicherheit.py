@@ -3,9 +3,21 @@
 Die Haupt-App (app.py) hat dieselben Regeln selbst. Neue Module importieren sie von hier:
     from app.sicherheit import origin_ok, begrenzt
 """
+import asyncio
+import os
 import threading
 import time
+from collections import deque
 from urllib.parse import urlparse
+
+
+def umgebung_zahl(name: str, standard: float, minimum: float = 1.0) -> float:
+    """Liest eine Zahl aus der Umgebung (z. B. LLM_PARALLEL); ungueltige oder zu kleine Werte ergeben den Standard."""
+    try:
+        w = float(os.environ.get(name, ""))
+        return w if w >= minimum else standard
+    except ValueError:
+        return standard
 
 
 def origin_ok(headers) -> bool:
@@ -78,3 +90,111 @@ def sitzungs_kennung(request) -> str:
     if c and 16 <= len(c) <= 64 and c.isalnum():
         return c
     return "ip-" + client_kennung(request)
+
+
+class Belegt(Exception):
+    """Die Warteschlange ist voll oder die Wartezeit ist abgelaufen."""
+
+    def __init__(self, grund: str):
+        super().__init__(grund)
+        self.grund = grund      # "voll" oder "zeit"
+
+
+class Warteschlange:
+    """Faire Warteschlange (FIFO) vor einer knappen Ressource, hier die Sprachmodelle auf dem Jetson.
+
+    - `parallel` Plaetze laufen gleichzeitig, alle weiteren warten der Reihe nach (hoechstens `max_wartend`, hoechstens
+      `max_warten_s` Sekunden). Wer nicht mehr hineinpasst, bekommt sofort `Belegt("voll")`.
+    - `stand(kennung)` liefert Belegung und die Platznummer dieses Besuchers (1 = naechster), damit die Oberflaeche
+      "Du bist Nr. 2" zeigen kann, ohne dass der Antwortstrom selbst etwas Besonderes enthaelt.
+    Nutzung:  async with schlange.platz(kennung): ...  (Platz wird auch bei Abbruch und Fehlern freigegeben).
+    Gedacht fuer einen Ereignisschleifen-Prozess (uvicorn ohne mehrere Worker)."""
+
+    def __init__(self, parallel: int = 2, max_wartend: int = 6, max_warten_s: float = 90.0):
+        self.parallel, self.max_wartend, self.max_warten_s = max(1, int(parallel)), max(0, int(max_wartend)), float(max_warten_s)
+        self._aktiv = 0
+        self._warteliste = deque()          # (kennung, Future) in Ankunftsreihenfolge
+
+    # --- Auskunft
+    @property
+    def aktiv(self) -> int:
+        return self._aktiv
+
+    @property
+    def wartend(self) -> int:
+        return len(self._warteliste)
+
+    def voll(self) -> bool:
+        """True, wenn ein weiterer Besucher weder einen Platz noch einen Warteplatz bekaeme."""
+        return self._aktiv >= self.parallel and len(self._warteliste) >= self.max_wartend
+
+    def position(self, kennung: str) -> int:
+        """Platznummer in der Warteliste (1 = als naechster dran), 0 = wartet nicht."""
+        for i, (k, f) in enumerate(self._warteliste):
+            if k == kennung and not f.done():
+                return i + 1
+        return 0
+
+    def stand(self, kennung: str = "") -> dict:
+        pos = self.position(kennung) if kennung else 0
+        return {"aktiv": self._aktiv, "wartend": len(self._warteliste), "parallel": self.parallel,
+                "max_wartend": self.max_wartend, "meine_position": pos, "frei": self._aktiv < self.parallel and not self._warteliste}
+
+    # --- Platz belegen und freigeben
+    def _weiter(self):
+        while self._warteliste and self._aktiv < self.parallel:
+            _, f = self._warteliste.popleft()
+            if not f.done():
+                self._aktiv += 1
+                f.set_result(True)
+
+    async def betreten(self, kennung: str) -> None:
+        if self._aktiv < self.parallel and not self._warteliste:
+            self._aktiv += 1
+            return
+        if len(self._warteliste) >= self.max_wartend:
+            raise Belegt("voll")
+        f = asyncio.get_running_loop().create_future()
+        eintrag = (kennung, f)
+        self._warteliste.append(eintrag)
+        try:
+            await asyncio.wait_for(asyncio.shield(f), self.max_warten_s)
+        except asyncio.TimeoutError:
+            if f.done() and not f.cancelled():      # Platz kam im selben Augenblick: behalten
+                return
+            self._austragen(eintrag, f)
+            raise Belegt("zeit")
+        except BaseException:                         # Abbruch (Besucher weg): Platz zurueckgeben bzw. austragen
+            if f.done() and not f.cancelled():
+                self.freigeben()
+            else:
+                self._austragen(eintrag, f)
+            raise
+
+    def _austragen(self, eintrag, f):
+        try:
+            self._warteliste.remove(eintrag)
+        except ValueError:
+            pass
+        if not f.done():
+            f.cancel()
+
+    def freigeben(self) -> None:
+        self._aktiv = max(0, self._aktiv - 1)
+        self._weiter()
+
+    def platz(self, kennung: str):
+        return _Platz(self, kennung)
+
+
+class _Platz:
+    def __init__(self, schlange: Warteschlange, kennung: str):
+        self._s, self._k = schlange, kennung
+
+    async def __aenter__(self):
+        await self._s.betreten(self._k)
+        return self
+
+    async def __aexit__(self, *exc):
+        self._s.freigeben()
+        return False

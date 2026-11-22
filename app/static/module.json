@@ -9,7 +9,8 @@
     "widgets-sprache.css",
     "widgets-prognose.css",
     "widgets-sehen.css",
-    "widgets-rag.css"
+    "widgets-rag.css",
+    "laien.css"
   ],
   "content": [
     "content-sprache.js",
@@ -18,9 +19,11 @@
     "content-sehen-agenten.js",
     "content-prognose-betrieb.js",
     "content-usecases.js",
-    "content-visual-demo.js"
+    "content-visual-demo.js",
+    "content-laien.js"
   ],
   "module": [
+    "laien.js",
     "visuals.js",
     "widgets.js",
     "demos.js",

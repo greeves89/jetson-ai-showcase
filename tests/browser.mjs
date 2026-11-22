@@ -9,7 +9,9 @@ import { existsSync } from "node:fs";
 export const URL_LABOR = process.env.LABOR_URL || "https://localhost:8443";
 const CHROME = process.env.CHROME || "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome";
 
-export async function starte({ dunkel = true, breite = 1440, hoehe = 900, kamera = true } = {}) {
+// einwilligung: true setzt die gemerkte Zustimmung zu Kamera und Mikrofon (localStorage "kl-einwilligung"), damit die
+// Labor-Tests nicht an der Einwilligungsansicht haengen. false testet den Erstbesuch (tests/einwilligung.mjs).
+export async function starte({ dunkel = true, breite = 1440, hoehe = 900, kamera = true, einwilligung = true } = {}) {
   const args = ["--ignore-certificate-errors", "--autoplay-policy=no-user-gesture-required"];
   if (kamera) {
     args.push("--use-fake-ui-for-media-stream", "--use-fake-device-for-media-stream");
@@ -23,6 +25,7 @@ export async function starte({ dunkel = true, breite = 1440, hoehe = 900, kamera
     viewport: { width: breite, height: hoehe }, ignoreHTTPSErrors: true,
     colorScheme: dunkel ? "dark" : "light", permissions: kamera ? ["camera", "microphone"] : [],
   });
+  if (einwilligung) await kontext.addInitScript(() => { try { localStorage.setItem("kl-einwilligung", JSON.stringify({ kamera: "2026-11-22", mikro: "2026-11-22" })); sessionStorage.setItem("kl-einwilligung-bio", "2026-11-22"); } catch (e) { /* egal */ } });
   const page = await kontext.newPage();
   const fehler = [];
   page.on("console", (m) => { if (m.type() === "error") fehler.push("console: " + m.text()); });

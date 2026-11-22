@@ -66,10 +66,14 @@
   async function antwortFehler(r) {
     let d = null;
     try { d = await r.json(); } catch (e) { /* kein JSON */ }
+    if (d && (d.belegt || d.limit)) return String(d.fehler || KL.last.TEXT);
     if (r.status === 403) return "Der Jetson hat die Anfrage abgelehnt. Öffne das Labor über die normale Adresse des Jetson.";
     if (d && d.fehler) return String(d.fehler);
     return "Der Jetson antwortet mit Fehler " + r.status + ".";
   }
+  /* Wie postS, aber mit freundlichem Wiederholen, wenn der Rechner ausgelastet ist (siehe laien.js). bei meldet den Zaehler. */
+  const postLast = (pfad, obj, signal, bei) => KL.last.post(pfad, obj, signal, bei);
+  const istBelegt = (e) => !!e && e.name === "BelegtFehler";
   function netzFehler(e) {
     if (e && e.name === "AbortError") return null;
     if (e && e.message && !/fetch|network|load failed/i.test(e.message)) return e.message;
@@ -94,6 +98,7 @@
   async function kameraOeffnen() {
     if (!window.isSecureContext) throw new Error("Der Browser erlaubt die Kamera nur über eine HTTPS-Verbindung. Öffne das Labor über die https-Adresse des Jetson und bestätige dort die Zertifikatswarnung.");
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error("Dieser Browser kann nicht auf die Kamera zugreifen. Probiere einen aktuellen Browser wie Safari, Chrome oder Firefox.");
+    await KL.einwilligung.verlangen("kamera", { sendet: true });      // erst erklären, dann den Browser fragen
     try {
       return await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }, audio: false });
     } catch (e) {
@@ -123,8 +128,12 @@
   /* Meldungsfeld (Ursache und Ausweg) */
   function meldungBox() {
     const text = h("span");
-    const el = h("div", { class: "d-meldung", role: "alert", hidden: true }, ic("alert"), text);
-    return { el, zeige(t) { text.textContent = t; el.hidden = false; }, weg() { el.hidden = true; } };
+    const erneut = h("button", { type: "button", class: "btn klein", hidden: true }, ic("refresh-cw"), "Noch einmal versuchen");
+    const el = h("div", { class: "d-meldung", role: "alert", hidden: true }, ic("alert"), text, erneut);
+    let handler = null;
+    erneut.addEventListener("click", () => { const f = handler; el.hidden = true; if (f) f(); });
+    /* zeige(text, wiederholen): mit Funktion erscheint der Knopf "Noch einmal versuchen" */
+    return { el, zeige(t, wiederholen) { text.textContent = t; handler = wiederholen || null; erneut.hidden = !wiederholen; el.hidden = false; }, weg() { el.hidden = true; handler = null; } };
   }
 
   /* Live-Erklaerung: Titel, Streifen, Legende, Satz */
@@ -187,6 +196,19 @@
       status);
     return { el, status, text(t) { status.textContent = t; } };
   }
+  /* "Beispiel starten" soll nicht oben auf der Seite landen: zum Labor scrollen, damit man sieht, was passiert. */
+  function zumLabor(root) {
+    const block = (root.closest && root.closest("#ausprobieren")) || root;
+    const ruhig = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+    requestAnimationFrame(() => block.scrollIntoView({ block: "start", behavior: ruhig ? "auto" : "smooth" }));
+  }
+  /* Hebt den Knopf hervor, den man als Naechstes drueckt (bis zum Klick), und setzt den Fokus darauf. */
+  function hervor(btn) {
+    if (!btn) return;
+    btn.classList.add("d-hervor");
+    btn.addEventListener("click", () => btn.classList.remove("d-hervor"), { once: true });
+    try { btn.focus({ preventScroll: true }); } catch (e) { /* egal */ }
+  }
   /* Haengt den Kopf oben in root ein und ruft fn(eintrag, kopf), wenn ?beispiel= zu diesem Labor passt. */
   function beispielStart(root, seite, lab, L, fn) {
     const id = seite && seite.query && seite.query.beispiel;
@@ -203,6 +225,7 @@
       }
       const kopf = beispielKopf(e);
       root.prepend(kopf.el);
+      zumLabor(root);
       return fn(e, kopf);
     }).catch((err) => { if (!L.weg) root.prepend(h("section", { class: "d-beispiel" }, h("p", { class: "d-bsp-text" }, "Das Beispiel ließ sich nicht laden: " + (err && err.message ? err.message : "unbekannter Fehler")))); });
   }
@@ -212,7 +235,7 @@
     const muster = [f.antwort_enthaelt].concat(f.oder || []).filter(Boolean).map((x) => String(x).toLowerCase());
     return muster.length ? muster.some((x) => t.includes(x)) : null;
   }
-  KL.beispiel = { url: bspUrl, bildLaden, textLaden, kopf: beispielKopf, start: beispielStart, antwortPasst };
+  KL.beispiel = { url: bspUrl, bildLaden, textLaden, kopf: beispielKopf, start: beispielStart, antwortPasst, hervor };
 
   /* Baustein fuer die Use-Case-Seiten (widget: "beispielstart"): Knopf, der das passende Labor mit dem Beispiel oeffnet. */
   KL.widgets.beispielstart = function (root, seite) {
@@ -473,6 +496,7 @@
       const bilder = (e.daten && e.daten.bilder) || [];
       if (!bilder.length) {
         kopf.text("Für dieses Beispiel brauchst du deine Kamera. Drücke auf Kamera starten.");
+        hervor(btn);
         return;
       }
       let aktuell = -1;
@@ -489,11 +513,12 @@
       const zeile = h("div", { class: "d-bsp-quelle" }, leiste, h("div", { class: "zeile d-zeile" }, erkBtn), info);
       kameras.before(zeile);
       function infoZeigen(b) {
-        info.replaceChildren(
+        // Native replaceChildren schreibt null als Text "null" in die Seite: leere Teile gar nicht erst uebergeben
+        info.replaceChildren(...[
           h("p", null, fett("Erwartet: "), b.erwartet || "keine Angabe"),
           b.fehlmeldung ? h("p", { class: "d-leise" }, b.fehlmeldung) : null,
           b.bemerkung ? h("p", { class: "d-leise" }, b.bemerkung) : null,
-          b.quelle ? h("p", { class: "d-leise d-bsp-quelltext" }, "Quelle: " + b.quelle) : null);
+          b.quelle ? h("p", { class: "d-leise d-bsp-quelltext" }, "Quelle: " + b.quelle) : null].filter(Boolean));
       }
       async function waehlen(i, auswerten) {
         if (i === aktuell && !auswerten) return;
@@ -516,7 +541,8 @@
       }
       erkBtn.addEventListener("click", () => { if (aktuell < 0) waehlen(0, true); else waehlen(aktuell, true); });
       live.text("Wähle ein Beispielbild und drücke auf Beispielbild erkennen. Dann siehst du hier Schritt für Schritt, was der Jetson mit dem Bild macht.");
-      waehlen(0, false).then(() => kopf.text(bilder.length + " Beispielbilder sind bereit. Wähle eines und lass es erkennen, oder starte deine Kamera."));
+      // Das erste Beispielbild wird gleich ausgewertet: Der Klick auf "Beispiel starten" soll etwas in Gang setzen
+      waehlen(0, true).then(() => kopf.text(bilder.length + " Beispielbilder sind bereit, das erste wird gerade ausgewertet. Wähle ein anderes oder starte deine Kamera."));
     });
 
     return { destroy() { L.destroy(); } };
@@ -877,6 +903,7 @@
         h("img", { src: bspUrl(t.bild), alt: "", loading: "lazy" }), h("span", null, "Testbild " + (i + 1))));
       testZeile.replaceChildren(...tKnoepfe);
       testZeile.hidden = false; testBox.hidden = false;
+      if (tests.length) zuordnen(0);               // das erste Testbild gleich zuordnen, damit man sofort ein Ergebnis sieht
     });
 
     return { destroy() { L.destroy(); } };
@@ -1027,11 +1054,11 @@
     }, 500);
     L.onEnde(() => liveSatz.stop());
 
-    async function senden(text) {
+    async function senden(text, erneut) {
       text = String(text || "").trim().slice(0, 1000);
       if (!text || busy) return;
       busy = true; sendeBtn.disabled = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = "";
-      neueNachricht("du", text);
+      if (!erneut) neueNachricht("du", text);          // beim Wiederholen steht die Frage schon im Verlauf
       const m = neueNachricht("ki");
       ctrl = new AbortController();
       const sig = ctrl.signal;
@@ -1041,11 +1068,14 @@
       live.text(warMitSpeicher
         ? "Das Modell liegt schon im Speicher. Der Jetson liest deine Frage und beginnt gleich zu rechnen."
         : "Der Jetson lädt das Modell aus der SSD in den Speicher. Das dauert beim ersten Mal einige Sekunden.");
-      let abgebrochen = false, fehler = null, roh = "";
+      let abgebrochen = false, fehler = null, roh = "", belegt = false;
       let rafOffen = false;
       const zeichne = () => { rafOffen = false; fuelle(m); nachUnten(); };
+      // Wartezustand in Klartext: Platznummer in der Warteschlange, Zaehler beim automatischen Wiederholen
+      const wartehinweis = (t) => { if (s.tErst) return; m.platz = t; fuelle(m); live.text(t); };
+      const stoppePlatz = KL.last.beobachten((i) => wartehinweis(KL.last.platzText(i)));
       try {
-        const r = await postS("/api/chat", { nachricht: text, temperatur }, sig);
+        const r = await postLast("/api/chat", { nachricht: text, temperatur }, sig, (i) => wartehinweis(KL.last.warteText(i)));
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           roh = gesamt;
@@ -1057,8 +1087,9 @@
           if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); }
         });
       } catch (e) {
-        if (e && e.name === "AbortError") abgebrochen = true; else fehler = netzFehler(e) || "Unbekannter Fehler.";
+        if (e && e.name === "AbortError") abgebrochen = true; else { fehler = netzFehler(e) || "Unbekannter Fehler."; belegt = istBelegt(e); }
       }
+      stoppePlatz();
       liveSatz.stop();
       const z = zerlege(roh);
       m.tokens = z.tokens;
@@ -1066,8 +1097,16 @@
       if (fe) fehler = "Das Modell meldet einen Fehler: " + fe[1];
       else if (!z.meta && z.tokens.length === 1 && /^\[(?!\d+\])[^\]]+\]$/.test(z.tokens[0])) { fehler = z.tokens[0].slice(1, -1); z.tokens = []; m.tokens = []; }
       if (fehler && z.tokens.length === 0) m.platz = fehler;
+      if (fehler && !z.tokens.length && KL.last.istBelegtText(fehler)) belegt = true;
       fuelle(m);
-      if (z.meta) m.meta.textContent = metaText(z.meta);
+      if (belegt && !z.tokens.length) {
+        // Freundlich statt Fehler: Wiederholknopf, die Frage bleibt stehen und wird nicht doppelt eingetragen
+        m.meta.replaceChildren(h("button", { type: "button", class: "btn klein", onclick: () => {
+          const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1);
+          m.el.remove(); senden(text, true);
+        } }, ic("refresh-cw"), "Noch einmal versuchen"));
+      }
+      else if (z.meta) m.meta.textContent = metaText(z.meta);
       else if (abgebrochen) m.meta.textContent = "Abgebrochen nach " + z.tokens.length + " Tokens.";
       else if (fehler && z.tokens.length) m.meta.textContent = fehler;
       // Abschluss der Live-Erklaerung
@@ -1253,9 +1292,14 @@
         L.onEnde(() => liveAntwort.stop());
         /* Auf dem Jetson scheitert das Laden des Sprachmodells direkt nach dem Embedding-Modell manchmal einmal
            ("fehlt gerade freier Speicher"). Der zweite Versuch gelingt dann meist, deshalb einmal selbst wiederholen. */
+        const hinweis = (t) => { if (!tErst) { antwort.textContent = t; live.text(t); } };
+        const stoppePlatz = KL.last.beobachten((i) => hinweis(KL.last.platzText(i)));
+        L.onEnde(stoppePlatz);
         for (let versuch = 1; ; versuch++) {
-          const r2 = await postS("/api/rag/ask", { frage: f }, c.signal);
-          if (!r2.ok) throw new Error(await antwortFehler(r2));
+          let r2;
+          try { r2 = await postLast("/api/rag/ask", { frage: f }, c.signal, (i) => hinweis(KL.last.warteText(i))); }
+          catch (err) { stoppePlatz(); throw err; }
+          if (!r2.ok) { stoppePlatz(); throw new Error(await antwortFehler(r2)); }
           roh = "";
           await streamLesen(r2, (gesamt) => {
             const i = gesamt.indexOf("\n\n---\n");
@@ -1273,6 +1317,7 @@
           }
           break;
         }
+        stoppePlatz();
         liveAntwort.stop();
         fertigGezeichnet = true;
         const tEnde = performance.now();
@@ -1292,7 +1337,14 @@
         live.text(fett("Fertig. "), "Suchen: " + msText(tSuche) + ". Bis zum ersten Wort der Antwort: " + sekText(warte) + ". Schreiben: " + sekText(schreib) + ". Fahre mit der Maus über einen Verweis wie [1], dann siehst du, auf welchen Treffer er zeigt.");
       } catch (e) {
         const m = netzFehler(e);
-        if (m) { meld.zeige(m); live.text("Das hat diesmal nicht geklappt. Du kannst es gleich noch einmal versuchen."); if (!karten.length) sucheSatz.textContent = ""; antwort.textContent = "Keine Antwort."; }
+        if (m) {
+          const belegt = istBelegt(e) || KL.last.istBelegtText(m);
+          // Ausgelastet ist kein Fehler des Besuchers: freundlicher Text, Wiederholknopf, die Frage bleibt stehen
+          meld.zeige(m, () => fragen());
+          live.text(belegt ? "Der Rechner ist gerade ausgelastet. Drücke auf Noch einmal versuchen, sobald du magst." : "Das hat diesmal nicht geklappt. Du kannst es gleich noch einmal versuchen.");
+          if (!karten.length) sucheSatz.textContent = "";
+          antwort.textContent = belegt ? "Die Antwort kommt, sobald der Rechner frei ist." : "Diesmal gab es keine Antwort. Die Meldung oben sagt, woran es lag.";
+        }
       }
       finally { setBusy(false); }
     }
@@ -1329,6 +1381,8 @@
       chips.replaceChildren(...fragenListe.map((f) => h("button", { type: "button", class: "chip", onclick: () => { if (busy) return; erwartet = f; frage.value = f.frage; fragen(); } }, f.frage)));
       chips.setAttribute("aria-label", "Beispielfragen zu den Dokumenten");
       kopfB.text("Fertig: " + dokus.length + " Dokumente eingelesen. Wähle eine Beispielfrage, der Klick startet die Suche.");
+      // Die Frage im Feld muss zu den Beispieldokumenten passen (nicht zum Orion-Beispieltext): erste Beispielfrage einsetzen
+      if (fragenListe.length) { erwartet = fragenListe[0]; frage.value = erwartet.frage; hervor(fragBtn); }
     });
     function ctrl2() { ctrl = L.abbruch(); return ctrl; }
 
@@ -1415,7 +1469,12 @@
       live.pipe([]);
       const zeitStreifen = () => live.pipe(segs, "Zeit je Schritt");
       try {
-        const r = await postS("/api/agent/ask", szenario ? { frage: f, szenario } : { frage: f }, sig);
+        const hinweis = (t) => { if (!schritte) { status.textContent = t; live.text(t); } };
+        const stoppePlatz = KL.last.beobachten((i) => hinweis(KL.last.platzText(i)));
+        L.onEnde(stoppePlatz);
+        let r;
+        try { r = await postLast("/api/agent/ask", szenario ? { frage: f, szenario } : { frage: f }, sig, (i) => hinweis(KL.last.warteText(i))); }
+        finally { stoppePlatz(); }
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           const jetzt = performance.now();
@@ -1462,7 +1521,7 @@
       } catch (e) {
         const m = netzFehler(e);
         status.hidden = true;
-        if (m) meld.zeige(m);
+        if (m) meld.zeige(m, istBelegt(e) || KL.last.istBelegtText(m) ? () => los() : null);
       }
       busy = false; ctrl = null; sendeBtn.disabled = false;
     }
@@ -1483,6 +1542,7 @@
       frage.placeholder = "Frage zu den Bestellungen, zum Beispiel: Wie ist der Status der Bestellung B-10233?";
       live.text("Wähle eine Beispielfrage. Das Modell entscheidet selbst, welches der vier Werkzeuge es braucht. Hier siehst du dann jeden Schritt.");
       kopfB.text("Bereit: " + werkz.length + " Werkzeuge und " + (d.fragen || []).length + " Beispielfragen. Der Klick auf eine Frage startet den Agenten.");
+      if ((d.fragen || []).length) { erwartet = d.fragen[0]; frage.value = erwartet.frage; hervor(sendeBtn); }
     });
     return { destroy() { L.destroy(); } };
   }

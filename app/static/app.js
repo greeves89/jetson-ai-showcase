@@ -159,14 +159,16 @@
     live.modell = h("div", { class: "modell" }, "kein Modell geladen");
     return h("div", { class: "livebox", "aria-live": "off" },
       h("div", { class: "kopfz" }, live.punkt, live.status),
-      h("div", { class: "mini" }, h("div", { class: "z" }, "GPU", live.gpu), live.gpuB),
+      h("div", { class: "mini" }, h("div", { class: "z" }, "Auslastung", live.gpu), live.gpuB),
       h("div", { class: "mini" }, h("div", { class: "z" }, "Speicher", live.ram), live.ramB),
-      h("div", { class: "mini" }, h("div", { class: "z" }, "Leistung", live.w)),
+      h("div", { class: "mini" }, h("div", { class: "z" }, "Strom", live.w)),
       live.modell);
   }
   function liveAktualisieren(d) {
     live.punkt.classList.toggle("aus", !d.frisch);
-    live.status.textContent = d.frisch ? "Jetson live" : "keine frischen Werte";
+    const w = d.warteschlange || {};
+    const voll = w.parallel && (w.aktiv >= w.parallel || w.wartend > 0);
+    live.status.textContent = !d.frisch ? "keine frischen Werte" : voll ? "Rechner live, gerade viel los" : "Rechner live und frei";
     if (d.gpu_pct != null) { live.gpu.textContent = d.gpu_pct + " %"; live.gpuB.firstChild.style.width = d.gpu_pct + "%"; }
     if (d.ram_mb != null) {
       live.ram.textContent = (d.ram_mb / 1024).toFixed(1).replace(".", ",") + " von " + (d.ram_max_mb / 1024).toFixed(1).replace(".", ",") + " GB";
@@ -197,16 +199,14 @@
   function videoBlock(ids) {
     ids = [].concat(ids).filter(Boolean);
     const reihe = ids.length > 1;
-    const wrap = h("section", { class: "block" }, h("h2", null, icon("play"), reihe ? "Videoreihe" : "Erklärvideo"));
+    const wrap = h("section", { class: "block", hidden: true }, h("h2", null, icon("play"), reihe ? "Videoreihe" : "Erklärvideo"));
     const flaeche = h("div", { class: "flaeche reihe" }, h("div", { class: "video leer" }, h("div", { class: "platz" }, icon("play"), h("div", null, h("b", null, "Das Video wird geladen")))));
     wrap.append(flaeche);
     manifestP.then((m) => {
       const fertig = ids.map((id) => (m.videos || []).find((x) => x.id === id)).filter(Boolean);
       const offen = ids.length - fertig.length;
-      if (!fertig.length) {
-        flaeche.replaceChildren(h("p", { class: "video-folgt" }, icon("clock"), reihe ? "Videos zu diesem Thema folgen." : "Video zu diesem Thema folgt."));
-        return;
-      }
+      if (!fertig.length) return;          // noch kein Video gebaut: Der Block bleibt weg, statt "Video folgt" zu zeigen
+      wrap.hidden = false;
       const zeigen = (i, abspielen) => {
         const v = fertig[i];
         const basis = "/static/videos/" + v.id;
@@ -272,14 +272,98 @@
       navOffenSchreiben(m);
     }
   }
+  /* ---- Suche: Volltext ueber alle Seiten, Glossarbegriffe, Suchwoerter (Synonyme) und Vorschlaege bei leerem Treffer */
+  const norm = (t) => String(t).toLowerCase().replace(/ä/g, "ae").replace(/ö/g, "oe").replace(/ü/g, "ue").replace(/ß/g, "ss");
+  let suchIndex = null;
+  function suchIndexBauen() {
+    const seiten = {};
+    for (const [id, sd] of Object.entries(INHALT.seiten)) {
+      const t = [];
+      for (const a of sd.abschnitte || []) {
+        t.push(a.h, a.kurz || "", ...(a.p || []), ...(a.liste || []), ...[].concat(a.alltag || []), a.merke || "");
+        if (a.tabelle) for (const z of a.tabelle.zeilen || []) t.push(...z);
+      }
+      t.push(...(sd.mitnehmen || []), (sd.business && sd.business.text) || "", ...(sd.grenzen || []));
+      for (const p of sd.pfad || []) t.push(p.h, p.p);
+      seiten[id] = { titel: norm(klar((sd.nav || "") + " " + sd.titel)), kurz: norm(klar(sd.kurz || "")), text: norm(klar(t.join(" "))), roh: JSON.stringify(sd) };
+    }
+    const begriffe = Object.entries(INHALT.glossar).map(([k, g]) => ({ k, titel: g[0], t: norm(g[0]), erkl: norm(g[1]) }));
+    return { seiten, begriffe };
+  }
+  /** Zerlegt die Eingabe in Suchwoerter; jedes Wort darf durch seine Synonyme ersetzt werden (ChatGPT findet Chat, Foto findet Bild). */
+  function suchWoerter(text) {
+    const syn = INHALT.synonyme || {};
+    return norm(text).trim().split(/\s+/).filter(Boolean).map((w) => [w].concat(syn[w] || [], syn[w.replace(/-/g, "")] || []).map(norm));
+  }
+  function suchPunkte(q, felder) {
+    let summe = 0;
+    for (const alt of q) {
+      let best = 0;
+      for (const a of alt) felder.forEach(([text, gewicht]) => { if (text.includes(a)) best = Math.max(best, gewicht); });
+      if (!best) return 0;
+      summe += best;
+    }
+    return summe;
+  }
+  function distanz(a, b) {
+    const m = a.length, n = b.length;
+    let vor = Array.from({ length: n + 1 }, (_, j) => j);
+    for (let i = 1; i <= m; i++) {
+      const jetzt = [i];
+      for (let j = 1; j <= n; j++) jetzt[j] = Math.min(vor[j] + 1, jetzt[j - 1] + 1, vor[j - 1] + (a[i - 1] === b[j - 1] ? 0 : 1));
+      vor = jetzt;
+    }
+    return vor[n];
+  }
+  /** "Meintest du ...": aehnlich geschriebene Seiten- und Begriffsnamen. */
+  function aehnliche(text) {
+    const kand = new Map();
+    for (const sd of Object.values(INHALT.seiten)) kand.set(norm(sd.nav || sd.titel), sd.nav || sd.titel);
+    for (const g of Object.values(INHALT.glossar)) kand.set(norm(g[0]), g[0]);
+    const gefunden = [];
+    for (const w of norm(text).trim().split(/\s+/).filter((x) => x.length >= 4)) {
+      for (const [k, anzeige] of kand) {
+        for (const teil of k.split(/[\s\-/()]+/)) {
+          if (teil.length >= 4 && distanz(w, teil) <= Math.max(1, Math.floor(w.length / 4)) && !gefunden.includes(anzeige)) gefunden.push(anzeige);
+        }
+      }
+    }
+    return gefunden.slice(0, 3);
+  }
+  function suchErgebnisBlock(text, begriffe, treffer) {
+    const box = $("#such-ergebnis");
+    if (!box) return;
+    box.replaceChildren();
+    box.hidden = !text.trim();
+    if (!text.trim()) return;
+    const eingeben = (t) => { const i = $("#nav-suche"); if (i) { i.value = t; navSuche(t); i.focus(); } };
+    if (begriffe.length) {
+      box.append(h("h3", { class: "such-kopf" }, "Begriff erklärt"));
+      for (const b of begriffe.slice(0, 3)) {
+        const seiten = Object.entries(suchIndex.seiten).filter(([, v]) => v.roh.includes("[[" + b.k + "]]") || v.roh.includes("[[" + b.k + "|")).slice(0, 3);
+        box.append(h("div", { class: "such-begriff" }, h("b", null, b.titel), h("p", null, INHALT.glossar[b.k][1]),
+          seiten.length ? h("p", { class: "such-wo" }, "Mehr dazu: ", seiten.map(([id], i) => [i ? ", " : "", h("a", { href: adresse(id) }, INHALT.seiten[id].nav || INHALT.seiten[id].titel)])) : null));
+      }
+    }
+    if (!treffer && !begriffe.length) {
+      const nah = aehnliche(text);
+      box.append(h("div", { class: "such-leer" }, h("p", null, h("b", null, "Dazu habe ich nichts gefunden.")),
+        nah.length ? h("p", null, "Meintest du:") : null,
+        nah.length ? h("div", { class: "such-chips" }, nah.map((n) => h("button", { type: "button", class: "chip", onclick: () => eingeben(n) }, n))) : null,
+        h("p", null, "Probiere zum Beispiel:"),
+        h("div", { class: "such-chips" }, (INHALT.sucheVorschlaege || ["Chat", "Datenschutz", "Bilder"]).map((n) => h("button", { type: "button", class: "chip", onclick: () => eingeben(n) }, n)))));
+    }
+  }
   function navSuche(text) {
-    const q = text.trim().toLowerCase().split(/\s+/).filter(Boolean);
+    if (!suchIndex && text.trim()) suchIndex = suchIndexBauen();
+    const q = suchWoerter(text);
     const gespeichert = navOffenLesen();
     let treffer = 0;
     for (const gr of navGruppen) {
       let inGruppe = 0;
       for (const a of gr.eintraege) {
-        const ok = !q.length || q.every((t) => a.haystack.includes(t));
+        const ix = q.length ? suchIndex.seiten[a.id] : null;
+        const ok = !q.length || suchPunkte(q, [[ix.titel, 3], [ix.kurz, 2], [ix.text, 1]]) > 0;
         a.el.hidden = !ok;
         if (ok) inGruppe++;
       }
@@ -296,8 +380,35 @@
         gr.kopf.setAttribute("aria-expanded", offen ? "true" : "false");
       }
     }
+    const begriffe = q.length
+      ? suchIndex.begriffe.map((b) => [b, suchPunkte(q, [[b.t, 3], [b.erkl, 1]])]).filter(([, p]) => p > 0).sort((a, b) => b[1] - a[1]).map(([b]) => b)
+      : [];
+    suchErgebnisBlock(text, begriffe, treffer);
     const leer = $("#nav-leer");
-    if (leer) leer.hidden = !(q.length && treffer === 0);
+    if (leer) leer.hidden = true;
+  }
+  /* Pfeiltasten im Menue: hoch und runter springen durch Gruppen und Seiten, rechts oeffnet eine Gruppe, links schliesst sie bzw. springt zur Gruppe */
+  function navTasten(e) {
+    const k = e.key;
+    if (!["ArrowDown", "ArrowUp", "Home", "End", "ArrowRight", "ArrowLeft"].includes(k)) return;
+    const el = e.target.closest && e.target.closest(".navkopf, a.nav");
+    if (!el) return;
+    const sichtbar = $$(".navkopf, a.nav", $("#nav-liste")).filter((x) => !x.closest("[hidden]"));
+    const i = sichtbar.indexOf(el);
+    const gr = navGruppen.find((g) => g.kopf === el);
+    let ziel = null;
+    if (k === "ArrowDown") ziel = sichtbar[Math.min(sichtbar.length - 1, i + 1)];
+    else if (k === "ArrowUp") ziel = sichtbar[Math.max(0, i - 1)];
+    else if (k === "Home") ziel = sichtbar[0];
+    else if (k === "End") ziel = sichtbar[sichtbar.length - 1];
+    else if (k === "ArrowRight" && gr) {
+      if (gr.kopf.getAttribute("aria-expanded") !== "true") { gruppeOeffnen(gr, true, true); ziel = el; }
+      else ziel = sichtbar[i + 1];
+    } else if (k === "ArrowLeft") {
+      if (gr) { if (gr.kopf.getAttribute("aria-expanded") === "true") { gruppeOeffnen(gr, false, true); ziel = el; } }
+      else { const g2 = navGruppen.find((g) => g.eintraege.some((x) => x.el === el)); if (g2) ziel = g2.kopf; }
+    }
+    if (ziel) { e.preventDefault(); ziel.focus(); }
   }
   // Handy und schmale Fenster: Die Navigation klappt als Menue unter der Kopfleiste auf (CSS ab 960 px).
   function menueSchalten(auf) {
@@ -310,6 +421,14 @@
     return h("button", { type: "button", class: "menueknopf", "aria-expanded": "false", "aria-controls": "nav-liste", "aria-label": "Menü öffnen", onclick: () => menueSchalten() }, icon("menu"));
   }
   document.addEventListener("click", (e) => { if (e.target.closest && e.target.closest("a.nav")) menueSchalten(false); });
+  // "Zum Inhalt springen": Fokus in den Hauptbereich (vor dem Start heisst er "vorab", danach "inhalt")
+  document.addEventListener("click", (e) => {
+    const a = e.target.closest && e.target.closest("a.skip");
+    if (!a) return;
+    e.preventDefault();
+    const m = $("#inhalt") || $("#vorab");
+    if (m) { m.focus(); m.scrollIntoView({ block: "start" }); }
+  });
   document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("menue-offen")) menueSchalten(false); });
 
   function navBauen() {
@@ -318,6 +437,8 @@
         oninput: (e) => { navSuche(e.target.value); if (e.target.value) menueSchalten(true); },
         onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
     const nav = h("nav", { class: "navscroll", id: "nav-liste", "aria-label": "Lernpfad" });
+    nav.addEventListener("keydown", navTasten);
+    nav.append(h("div", { id: "such-ergebnis", class: "such-ergebnis", "aria-live": "polite", hidden: true }));
     navGruppen = [];
     const gespeichert = navOffenLesen();
     for (const g of INHALT.gruppen) {
@@ -328,8 +449,10 @@
       const gr = { name: g.name, sec, kopf, liste, eintraege: [] };
       for (const id of g.seiten) {
         const s = INHALT.seiten[id];
-        const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", null, s.nav || s.titel),
-          s.status === "bald" ? h("span", { class: "bald" }, "bald") : h("span", { class: "ok", hidden: true }, icon("check")));
+        // Leerzeichen vor dem Zusatz, damit auch der reine Text "Bilder erzeugen in Arbeit" lautet (nicht "Bilder erzeugenbald")
+        const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel),
+          s.anfaenger ? [" ", h("span", { class: "einst" }, "Einsteiger")] : null,
+          s.status === "bald" ? [" ", h("span", { class: "bald" }, "in Arbeit")] : h("span", { class: "ok", hidden: true }, icon("check")));
         liste.append(el);
         gr.eintraege.push({ el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() });
       }
@@ -440,10 +563,19 @@
     for (const d of $$("details.mehr")) d.open = m === "ausfuehrlich";
     for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
     for (const g of $$(".lesemodus")) g.style.setProperty("--i", String(MODI.indexOf(m)));
+    for (const t of $$(".lese-hilfe-text")) t.textContent = leseHilfe(m);
+  }
+  /** Erklaert in einem Satz, was der Umschalter tut (steht unter der Seitenueberschrift und als Tooltip). */
+  function leseHilfe(m) {
+    return m === "ausfuehrlich"
+      ? "Du liest gerade genau: Alle Erklärungen sind aufgeklappt. Mit „Kurz lesen“ oben rechts bleiben nur die Kernsätze."
+      : "Du liest gerade kurz: Du siehst die Kernsätze. Mit „Mehr dazu“ klappst du Einzelnes auf, mit „Genau lesen“ oben rechts alles. Unterstrichene Begriffe mit ? kannst du antippen, dann erscheint eine Erklärung.";
   }
   function lesemodusSchalter() {
-    const knopf = (m, text) => h("button", { type: "button", dataset: { modus: m }, "aria-pressed": lesemodus === m ? "true" : "false", onclick: () => lesemodusSetzen(m) }, text);
-    const gruppe = h("div", { class: "lesemodus", role: "group", "aria-label": "Lesemodus" }, knopf("kompakt", "Kompakt"), knopf("ausfuehrlich", "Ausführlich"));
+    const knopf = (m, text, tipp) => h("button", { type: "button", dataset: { modus: m }, title: tipp, "aria-pressed": lesemodus === m ? "true" : "false", onclick: () => lesemodusSetzen(m) }, text);
+    const gruppe = h("div", { class: "lesemodus", role: "group", "aria-label": "Wie möchtest du lesen?" },
+      knopf("kompakt", "Kurz lesen", "Kurz lesen: nur die Kernsätze, Einzelnes lässt sich aufklappen"),
+      knopf("ausfuehrlich", "Genau lesen", "Genau lesen: alle Erklärungen sind gleich aufgeklappt"));
     gruppe.style.setProperty("--i", String(MODI.indexOf(lesemodus)));
     gruppe.addEventListener("keydown", (e) => {
       if (e.key !== "ArrowLeft" && e.key !== "ArrowRight") return;
@@ -484,7 +616,7 @@
       h("div", { class: "hero-icon", "aria-hidden": "true" }, icon(o.symbol || "info")),
       o.ueber ? h("p", { class: "ueber" }, o.ueber) : null,
       h("h1", null, o.titel),
-      h("p", { class: "lead" }, o.lead),
+      o.leadMd ? h("p", { class: "lead", html: md(o.leadMd) }) : h("p", { class: "lead" }, o.lead),
       o.kennzahlen && o.kennzahlen.length ? h("div", { class: "kennzahlen" }, o.kennzahlen) : null,
       o.unten || null);
   }
@@ -499,6 +631,7 @@
     if (n) z.push(kennzahl("book-open", n + (n === 1 ? " Abschnitt" : " Abschnitte")));
     if (seite.quiz && seite.quiz.length) z.push(kennzahl("check", seite.quiz.length + (seite.quiz.length === 1 ? " Quizfrage" : " Quizfragen")));
     if (seite.business) z.push(kennzahl("business", "Mit Praxisbezug"));
+    if (seite.anfaenger) z.unshift(kennzahl("smile", "Für Einsteiger"));
     return z;
   }
   /** Markierungen aus content.js in reinen Text wandeln. */
@@ -535,6 +668,7 @@
   }
   function abschnitte(seite) {
     const out = h("div", { class: "text" });
+    if ((seite.abschnitte || []).length) out.append(h("p", { class: "lese-hilfe" }, icon("info"), h("span", { class: "lese-hilfe-text" }, leseHilfe(lesemodus))));
     for (const a of seite.abschnitte || []) {
       const sec = h("section", { class: "abschnitt" }, h("h2", { class: "abs" }, a.h));
       if (a.visual && window.KL.visual) {
@@ -556,25 +690,59 @@
     }
     return out;
   }
+  /** Checkliste "In 3 Schritten bei dir" (Use-Case-Seiten: seite.dreiSchritte). Haken sind nur zum Abhaken, nichts wird gespeichert. */
+  function dreiSchritteBlock(schritte) {
+    if (!schritte || !schritte.length) return null;
+    const liste = h("ol", { class: "drei-schritte" }, schritte.map((t, i) => {
+      const id = "ds-" + i;
+      return h("li", null, h("input", { type: "checkbox", id }), h("label", { for: id }, h("span", { class: "nr", "aria-hidden": "true" }, String(i + 1)), h("span", { html: md(t) })));
+    }));
+    return h("section", { class: "block drei" }, h("h2", null, icon("list-checks"), "In 3 Schritten bei dir"),
+      h("div", { class: "flaeche pad" }, h("p", { class: "drei-lead" }, "Eine Checkliste für den Anfang. Hake ab, was du erledigt hast."), liste));
+  }
   function weiterBlock(ids) {
     if (!ids || !ids.length) return null;
     return h("section", { class: "block" }, h("h2", null, icon("arrow"), "Weiter geht es"),
       h("div", { class: "weiter" }, ids.map((id) => { const s = INHALT.seiten[id]; return s ? h("a", { href: "#/" + id }, icon(s.symbol), s.titel) : null; })));
   }
+  /** Statuschip in Klartext: bereit, viel los oder noch keine Verbindung (ohne Fachwoerter). */
+  function statusSatz(d) {
+    if (!d || !d.frisch) return "Der Rechner meldet sich gleich.";
+    const w = d.warteschlange || {};
+    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
+    return "Der Rechner ist bereit und frei. Gerade zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet.";
+  }
+  function zuAbschnitt(id) {
+    const z = document.getElementById(id);
+    if (!z) return;
+    const ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    z.scrollIntoView({ behavior: ruhig ? "auto" : "smooth", block: "start" });
+    const k = $("h2", z); if (k) { k.setAttribute("tabindex", "-1"); k.focus({ preventScroll: true }); }
+  }
+  /** Zeilenliste im Einstellungs-Stil: Nummer, Titel, Satz, Pfeil. Jede Zeile ist ein Link. */
+  function schrittListe(eintraege, besuchtZeigen) {
+    return h("ol", { class: "start-schritte" }, eintraege.map((e, i) => {
+      const sd = INHALT.seiten[e.id];
+      if (!sd) return null;
+      return h("li", null, h("a", { href: adresse(e.id) },
+        h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)),
+        h("span", { class: "start-text" }, h("b", null, e.h), e.p ? h("span", { html: md(e.p) }) : null,
+          e.min ? h("span", { class: "start-min" }, "ca. " + e.min + " Min") : null),
+        besuchtZeigen && besucht.has(e.id) ? h("span", { class: "ok", title: "schon gelesen" }, icon("check")) : null,
+        icon("chevron")));
+    }));
+  }
   function startSeite(seite) {
     const punkt = h("span", { class: "punkt aus" });
-    const stand = h("span", { class: "statuschip-text" }, "Der Jetson meldet sich gleich.");
+    const stand = h("span", { class: "statuschip-text" }, statusSatz(null));
     const chip = h("div", { class: "statuschip glas", role: "status" }, punkt, stand);
-    montiert.push({ destroy: stats.on((d) => {
-      punkt.classList.toggle("aus", !d.frisch);
-      const m = d.modelle_geladen && d.modelle_geladen.length ? "Im Speicher: " + d.modelle_geladen.join(", ") : "Kein Modell im Speicher";
-      stand.textContent = "Jetson live: GPU " + (d.gpu_pct ?? 0) + " %, " + String(d.power_w ?? 0).replace(".", ",") + " W, " + String(d.temp_c ?? 0).replace(".", ",") + " °C. " + m + ".";
-    }) });
-    const los = INHALT.seiten[seite.pfad[0].id] ? seite.pfad[0].id : "karte";
+    montiert.push({ destroy: stats.on((d) => { punkt.classList.toggle("aus", !d.frisch); stand.textContent = statusSatz(d); }) });
     const aktionen = h("div", { class: "hero-aktionen" },
       chip,
-      h("a", { class: "btn primary", href: "#/" + los }, "Loslegen"),
-      h("a", { class: "textlink", href: "#bereiche", onclick: (e) => { e.preventDefault(); const z = $("#bereiche"); if (z) z.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Mehr erfahren", icon("chevron")));
+      h("div", { class: "hero-knoepfe" },
+        h("a", { class: "btn primary", href: "#anfangen", onclick: (e) => { e.preventDefault(); zuAbschnitt("anfangen"); } }, "Neu hier? Hier anfangen"),
+        h("a", { class: "btn", href: "#entscheider", onclick: (e) => { e.preventDefault(); zuAbschnitt("entscheider"); } }, "Für Entscheider: in 15 Minuten")),
+      h("a", { class: "textlink", href: "#bereiche", onclick: (e) => { e.preventDefault(); zuAbschnitt("bereiche"); } }, "Alle Bereiche ansehen", icon("chevron")));
     // Bento-Raster: je Bereich eine Kachel; Breiten wechseln, die erste ist die Akzent-Kachel
     const BREITE = ["fokus breit", "schmal", "", "", "", "schmal", "breit", "", "", ""];
     const kacheln = [];
@@ -589,28 +757,54 @@
         h("span", { class: "gross-icon", "aria-hidden": "true" }, icon(b.symbol || INHALT.seiten[ziel].symbol))));
     }
     const reihe = h("ol", { class: "pfadreihe", tabindex: "0", "aria-label": "Lernpfad" }, seite.pfad.map((p, i) => h("li", null,
-      h("a", { class: "schritt-k", href: "#/" + p.id }, h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)), h("h3", null, p.h), h("p", null, p.p)))));
+      h("a", { class: "schritt-k", href: "#/" + p.id }, h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)), h("h3", null, p.h), h("p", { html: md(p.p) })))));
     const schieben = (r) => () => reihe.scrollBy({ left: r * 320, behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
     const nav = h("div", { class: "pfad-nav" },
       h("button", { type: "button", "aria-label": "Zurück", onclick: schieben(-1) }, icon("arrow-left")),
       h("button", { type: "button", "aria-label": "Weiter", onclick: schieben(1) }, icon("arrow-right")));
+    const e = seite.entscheider;
+    const summe = e.schritte.reduce((n, x) => n + (x.min || 0), 0);
     return h("div", { class: "seitenbreite breit" },
-      hero({ symbol: seite.symbol, ueber: "KI-Labor auf dem Jetson", titel: seite.titel, lead: seite.kurz, unten: aktionen, gross: true }),
+      hero({ symbol: seite.symbol, ueber: "KI-Labor", titel: seite.titel, leadMd: seite.kurz, lead: klar(seite.kurz), gross: true,
+        kennzahlen: [kennzahl("badge-check", "Kostenlos"), kennzahl("user-check", "Ohne Anmeldung"), kennzahl("shield-check", "Kamera nur mit deiner Zustimmung")], unten: aktionen }),
+      h("section", { class: "block", id: "anfangen" }, h("h2", null, icon("smile"), "Neu hier? So fängst du an"),
+        h("p", { class: "start-lead" }, "Drei Schritte, zusammen etwa zehn Minuten. Du brauchst kein Vorwissen."), schrittListe(seite.anfangen)),
+      h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), e.titel),
+        h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, e.lead), schrittListe(e.schritte, true),
+          h("div", { class: "entscheider-fuss" }, h("span", null, "Zusammen etwa " + summe + " Minuten."),
+            h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten")))),
       h("section", { class: "block", id: "bereiche" }, h("h2", null, "Alle Bereiche"), h("div", { class: "bento" }, kacheln)),
-      h("section", { class: "block" }, h("div", { class: "pfad-kopf" }, h("h2", null, "Dein Lernpfad"), nav), reihe),
-      h("section", { class: "block" }, h("div", { class: "hinweis" }, icon("info"), h("p", null, h("strong", null, "Datenschutz. "), seite.datenschutz))));
+      h("section", { class: "block" }, h("div", { class: "pfad-kopf" }, h("h2", null, "Wenn du mehr willst: der ganze Lernpfad"), nav), reihe),
+      h("section", { class: "block start-fuss" },
+        h("div", { class: "hinweis" }, icon("shield-check"), h("p", null, h("strong", null, "Ist das sicher? "), seite.datenschutz, " ", h("a", { href: "/sicherheit-einfach" }, "Alles dazu in einfachen Worten"))),
+        h("div", { class: "hinweis" }, icon("cpu"), h("p", null, h("strong", null, "Was ist ein Jetson? "), seite.jetson, " ", h("a", { href: "/hardware" }, "Mehr zum Rechner dahinter")))));
+  }
+  /** Sichtbarer Zurueck-Knopf auf Unterseiten: einen Schritt zurueck, wenn man von einer Seite des Labors kommt, sonst zur Startseite. */
+  function zurueckZeile() {
+    const intern = !!(history.state && history.state.i > 0);
+    return h("div", { class: "zurueck-zeile" }, h("a", { class: "zurueck", href: "/", onclick: (e) => { if (history.state && history.state.i > 0) { e.preventDefault(); history.back(); } } },
+      icon("arrow-left"), intern ? "Zurück" : "Zur Startseite"));
+  }
+  /** Links zu Impressum und Datenschutzerklaerung (aus module.json), fuer die Seite "Ist das sicher?". */
+  function rechtsBlock() {
+    const q = window.KL.seite || {};
+    const links = [["datenschutz_url", "Datenschutzerklärung", "shield-check"], ["impressum_url", "Impressum", "file-text"]]
+      .filter(([k]) => /^https:\/\//.test(String(q[k] || "")));
+    if (!links.length) return h("span");
+    return h("section", { class: "block" }, h("h2", null, icon("scale"), "Die verbindlichen Texte"),
+      h("div", { class: "weiter" }, links.map(([k, t, ic]) => h("a", { href: q[k], rel: "noopener" }, icon(ic), t))));
   }
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
     if (seite.typ === "start") return startSeite(seite);
     const art = seite.typ === "lektion" ? "Lektion" + (seite.nr ? " " + seite.nr : "") : "Labor";
     const ueber = seite.typ === "lektion" && seite.gruppe === "Grundlagen" ? "Grundlagen · " + art : seite.gruppe;
-    const out = h("div", { class: "seitenbreite" },
+    const out = h("div", { class: "seitenbreite" }, zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
-    if (seite.status === "bald") out.append(h("p", null, h("span", { class: "chip warn" }, "Demo folgt"), " Die Erklärung steht schon, die Demo wird noch eingebaut."));
+    if (seite.status === "bald") out.append(h("p", { class: "in-arbeit" }, icon("hammer"), h("span", null, h("b", null, "In Arbeit. "), "Die Erklärung steht schon, die Demo wird noch eingebaut.")));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
     if (vids.length) out.append(videoBlock(vids));
-    if (seite.widget) out.append(baustein("widgets", seite.widget, seite, "Ausprobieren", "play"));
+    if (seite.widget) out.append(baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play"));
     if (seite.demo) out.append(baustein("demos", seite.demo, seite, "Live ausprobieren", "live"));
     out.append(abschnitte(seite));
     if (seite.mitnehmen) out.append(h("section", { class: "block mitnehmen" }, h("h2", null, "Das nimmst du mit"), h("ul", null, seite.mitnehmen.map((m) => h("li", null, m)))));
@@ -625,11 +819,17 @@
       out.append(h("section", { class: "block" }, h("h2", null, icon("info"), "Grenzen"),
         h("div", { class: "flaeche pad text" }, mehrBlock([h("ul", null, seite.grenzen.map((g) => h("li", { html: md(g) })))], "Grenzen ansehen (" + seite.grenzen.length + ")"))));
     }
+    if (seite.rechtslinks) out.append(rechtsBlock());
+    const d3 = dreiSchritteBlock(seite.dreiSchritte); if (d3) out.append(d3);
     const w = weiterBlock(seite.weiter); if (w) out.append(w);
     return out;
   }
 
   /* ------------------------------------------------------------ Router (History-API) */
+  /* Der Router darf erst arbeiten, wenn start() den Hauptbereich eingerichtet hat (Module laden asynchron). Ein hashchange,
+     popstate oder Linkklick in diesem Fenster fand sonst kein #inhalt und warf "Cannot read properties of null (reading
+     'replaceChildren')". Davor gilt: Links laufen als normale Seitenaufrufe, start() zeigt am Ende die aktuelle Adresse. */
+  let bereit = false;
   const gibt = (id) => !!id && Object.prototype.hasOwnProperty.call(INHALT.seiten, id);
   const adresse = (id, query) => (id === "start" ? "/" : "/" + id) + (query ? "?" + query : "");
   function ausHash(hash) {           // alte Form #/id oder #/id?abfrage
@@ -647,6 +847,7 @@
       unten: h("div", { class: "hero-aktionen" }, h("a", { class: "btn primary", href: "/" }, "Zur Startseite")) }));
   }
   function route(y) {
+    if (!bereit) return;
     const alt = ausHash(location.hash);
     if (alt) history.replaceState(history.state, "", adresse(gibt(alt.id) ? alt.id : "start", alt.query));
     const { id, query } = ausPfad(location.pathname, location.search);
@@ -673,8 +874,9 @@
   function navigiere(ziel) {         // ziel: { id, query }, ohne Neuladen
     const url = adresse(ziel.id, ziel.query);
     if (url === location.pathname + location.search) { window.scrollTo({ top: 0, left: 0, behavior: "instant" }); $("#inhalt").focus({ preventScroll: true }); return; }
-    history.replaceState({ y: window.scrollY }, "", location.href);
-    history.pushState({ y: 0 }, "", url);
+    const tiefe = (history.state && history.state.i) || 0;           // Tiefe der Verlaufskette: Zurueck-Knopf unterscheidet "im Labor gewesen" von "direkt gelandet"
+    history.replaceState(Object.assign({}, history.state, { y: window.scrollY }), "", location.href);
+    history.pushState({ y: 0, i: tiefe + 1 }, "", url);
     route();
     $("#inhalt").focus({ preventScroll: true });
   }
@@ -690,7 +892,7 @@
     return gibt(p.id) ? p : null;
   }
   document.addEventListener("click", (e) => {
-    if (e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (!bereit || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const a = e.target.closest && e.target.closest("a[href]");
     if (!a || (a.target && a.target !== "_self") || a.hasAttribute("download")) return;
     const ziel = linkZiel(a);
@@ -732,6 +934,7 @@
   async function ladeModule() {
     let m = { css: [], content: [], module: [] };
     try { m = Object.assign(m, await (await fetch("/static/module.json", { cache: "no-cache" })).json()); } catch (e) { console.error(e); }
+    window.KL.seite = (m && m.seite) || {};
     for (const c of m.css || []) document.head.append(h("link", { rel: "stylesheet", href: "/static/" + c + V }));
     for (const f of m.content || []) await ladeSkript("/static/" + f);
     for (const f of m.module || []) await ladeSkript("/static/" + f);
@@ -744,12 +947,13 @@
     const vorab = $("#vorab"); if (vorab) vorab.id = "inhalt";
     const seitenleiste = $("#seite");
     seitenleiste.replaceChildren(
-      h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "läuft auf dem Jetson"))),
+      h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "kostenlos, live ausprobieren"))),
       menueKnopf(), navBauen(), liveBauen(), tip);
     const haupt = $(".haupt");
     if (haupt) haupt.prepend(leisteBauen());
     schieberFuellen(document);
     new MutationObserver((ml) => { for (const m of ml) for (const n of m.addedNodes) if (n.nodeType === 1) schieberFuellen(n); }).observe(document.body, { childList: true, subtree: true });
+    bereit = true;
     route(history.state && history.state.y);
     poll(); setInterval(poll, 1500);
   }

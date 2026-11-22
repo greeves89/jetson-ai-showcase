@@ -118,6 +118,8 @@
 
     async function starten() {
       melde("");
+      try { await KL.einwilligung.verlangen("mikro", { sendet: true }); }       // erst erklären, dann den Browser fragen
+      catch (e) { melde(e.message, "warn"); status.textContent = "Keine Aufnahme gestartet."; return; }
       try {
         stream = await navigator.mediaDevices.getUserMedia({ audio: { echoCancellation: true, noiseSuppression: true } });
       } catch (e) {

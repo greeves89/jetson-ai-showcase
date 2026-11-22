@@ -32,6 +32,11 @@ for (const id of ids) {
       // Platzhalter fuer "noch kein Messwert" (ein einzelner Strich in einer Kachel) sind erlaubt, Striche in Prosa nicht
       strich: /[–—]/.test(text.replace(/(^|\n)[ \t]*[–—][ \t]*(?=\n|$)/g, "$1")),
       baustein: /Baustein folgt/.test(text),
+      // Rohwerte, die nie sichtbar sein duerfen (z. B. null aus Element.append(null)), und zusammengeklebte Zusaetze wie "erzeugenbald"
+      // ("null" allein auf einer Zeile oder hinter einem Trenner ist ein Rohwert; das deutsche Wort "null" im Satz ist erlaubt)
+      roh2: (text.match(/(^|\n|\|\s)(null|undefined)\s*(\||\n|$)|\b(undefined|NaN)\b/) || [])[0] || "",
+      klebt: (text.match(/[a-zäöüß]bald\b/) || [])[0] || "",
+      unfertig: /Demo folgt|Video folgt|Videos zu diesem Thema folgen/.test(text),
     };
   });
   if (!r.h1) meld(id, "keine Ueberschrift");
@@ -40,6 +45,9 @@ for (const id of ids) {
   for (const l of r.links) if (!bekannt.has(l)) meld(id, `Link auf fehlende Seite: ${l}`);
   if (r.roh) meld(id, "Rohmarkierung im Text ([[ ]] oder {{ }})");
   if (r.strich) meld(id, "Gedankenstrich im sichtbaren Text");
+  if (r.roh2) meld(id, "Rohwert im sichtbaren Text: " + r.roh2);
+  if (r.klebt) meld(id, "zusammengeklebter Zusatz: " + r.klebt);
+  if (r.unfertig) meld(id, "Platzhalter 'folgt' im sichtbaren Text");
   for (const f of fehler.slice(vorher)) meld(id, f);
   console.log(`${r.baustein ? "~" : "ok"}  ${id.padEnd(24)} ${r.abschnitte} Abschnitte${r.baustein ? "  (Baustein folgt)" : ""}`);
 }

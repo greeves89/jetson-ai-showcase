@@ -190,6 +190,11 @@ S["uc-fertigung-sichtpruefung"] = {
       optionen: ["Völlig, sie gelten für jede Fertigung", "Gar nicht, sie sind erfunden", "Sie sind Beispielwerte für gezeichnete Bilder und sagen wenig über echte Teile", "Sie gelten nur für den Jetson"],
       richtig: 2, erklaerung: "Die Bilder sind einfacher als echte Fertigung, und zwölf Testbilder sind wenig. Aussagekräftig wird erst ein Pilot mit eigenen Teilen."},
   ],
+  dreiSchritte: [
+    "Fotografiere gute Teile und die typischen Fehler, immer vor demselben Hintergrund und bei gleichem Licht.",
+    "Lerne die Fotos im Labor {{anlernen|Bildmodell anlernen}} an und teste mit Teilen, die das Modell noch nie gesehen hat.",
+    "Vergleiche Kamera und Mensch an Stichproben, bevor die Kamera selbst aussortiert. Notiere, wo sie sich widersprechen.",
+  ],
   weiter: ["anlernen", "ml", "bewertung", "anomalien", "uc-fertigung-sortieren", "ki-einfuehrung"],
 };
 
@@ -362,6 +367,11 @@ S["uc-fertigung-sortieren"] = {
     {frage: "Was gehört nicht zum Erkennungsteil, muss aber für ein fertiges Sortiersystem gelöst werden?",
       optionen: ["Die Zahlenliste eines Bildes", "Die Mechanik, die das Teil ins richtige Fach bringt", "Die Balken je Klasse", "Der Vergleich mit den nächsten Nachbarn"],
       richtig: 1, erklaerung: "Die Kamera liefert nur die Klasse. Greifer oder Weiche und die Anbindung an die Anlage sind eigene Arbeit."},
+  ],
+  dreiSchritte: [
+    "Lege fest, welche Typen es gibt, und fotografiere von jedem mehrere Teile in verschiedenen Lagen.",
+    "Lerne sie im Labor {{anlernen|Bildmodell anlernen}} an und sieh nach, welche Typen das Modell verwechselt.",
+    "Starte mit einem Hinweis auf dem Bildschirm statt mit automatischem Sortieren. Prüfe die Verwechslungen, bevor eine Maschine danach handelt.",
   ],
   weiter: ["anlernen", "vision-aufgaben", "ml", "uc-fertigung-sichtpruefung", "uc-logistik-zaehlen"],
 };
@@ -547,6 +557,11 @@ S["uc-logistik-zaehlen"] = {
       optionen: ["Weil nur die Zahl gebraucht wird, und Datenminimierung gilt", "Weil Bilder auf dem Jetson nicht gespeichert werden können", "Weil das Modell die Bilder sofort vergisst und deshalb nie lernen kann", "Weil Bilder immer verboten sind"],
       richtig: 0, erklaerung: "Wer nur die Zahl braucht, sollte nur die Zahl behalten. Das senkt das Datenschutzrisiko und den Aufwand."},
   ],
+  dreiSchritte: [
+    "Lege fest, was gezählt werden soll und wie genau die Zahl sein muss.",
+    "Teste im Labor {{objekt|Objekterkennung}} mit eigenen Fotos vom Hof, auch bei Regen, Dämmerung und Verdeckung.",
+    "Vergleiche die Zählung einige Tage lang mit einer Handzählung, bevor du dich auf die Zahl verlässt.",
+  ],
   weiter: ["objekt", "vision-aufgaben", "bewertung", "uc-handel-regal", "uc-sicherheit-baustelle", "recht"],
 };
 
@@ -718,6 +733,11 @@ S["uc-handel-regal"] = {
     {frage: "Was gehört zum Datenschutz bei einer Regalkamera?",
       optionen: ["Nichts, es sind ja nur Flaschen im Bild", "Kamera aufs Regal richten, nichts speichern, was nicht gebraucht wird, und sichtbar machen", "Alles aufnehmen, man weiß ja nie", "Die Kamera verstecken, damit niemand sich gestört fühlt"],
       richtig: 1, erklaerung: "Kundinnen und Kunden sind schnell im Bild. Wer nur zählen will, richtet die Kamera aufs Regal, speichert nichts und macht sie erkennbar."},
+  ],
+  dreiSchritte: [
+    "Fotografiere dein Regal zu verschiedenen Zeiten: voll, halb leer und mit Lücken.",
+    "Lass die Fotos im Labor {{objekt|Objekterkennung}} auswerten und notiere, was fälschlich erkannt wird oder fehlt.",
+    "Blende Klassen aus, die du nicht brauchst, und lege fest, wer die Meldung „Lücke“ bekommt.",
   ],
   weiter: ["objekt", "anlernen", "recht", "uc-logistik-zaehlen", "uc-sicherheit-zutritt", "ki-einfuehrung"],
 };
@@ -913,6 +933,11 @@ S["uc-gesundheit-auffaellig"] = {
     {frage: "Welche Aussage über dieses Beispiel stimmt?",
       optionen: ["Es ist ein zugelassenes Medizinprodukt", "Es verwendet echte Patientenbilder", "Es zeigt nur das Prinzip, sonst nichts", "Es darf direkt im Labor eingesetzt werden"],
       richtig: 2, erklaerung: "Die Bilder sind synthetisch, und das Beispiel ist ein Lernbeispiel ohne medizinische Aussage."},
+  ],
+  dreiSchritte: [
+    "Kläre zuerst, wer fachlich verantwortlich ist und ob Datenschutz und Zulassung als Medizinprodukt den Einsatz erlauben.",
+    "Probiere das Prinzip im Labor {{anlernen|Bildmodell anlernen}} mit harmlosen Beispielbildern, nie mit Patientendaten.",
+    "Nutze ein solches System nur als zweite Meinung. Das Fachpersonal entscheidet.",
   ],
   weiter: ["anlernen", "bewertung", "verzerrung-ethik", "recht", "uc-fertigung-sichtpruefung", "anomalien"],
 };
@@ -1116,6 +1141,11 @@ S["uc-buero-dokumente"] = {
       optionen: ["Gar nicht, das Modell weiß es ja", "Erst nach der Antwort, durch Lesen", "Bei der Suche: Was sie nicht sehen darf, kommt gar nicht erst in die Treffer", "Im Titel der Frage"],
       richtig: 2, erklaerung: "Rechte gehören vor die Suche. Was nicht in den Treffern landet, kann auch nicht in der Antwort auftauchen."},
   ],
+  dreiSchritte: [
+    "Sammle die Dokumente, nach denen oft gesucht wird, und kläre, wer sie lesen darf.",
+    "Probiere im Labor {{rag|Dokumente befragen}} einige echte Fragen aus, auch eine, deren Antwort nirgends steht.",
+    "Prüfe bei jeder Antwort die Quelle und lege fest, wer neue Dokumente einpflegt.",
+  ],
   weiter: ["rag", "rag-ueberblick", "rag-suche", "rag-bewertung", "llm-grenzen", "uc-buero-protokoll", "uc-service-bestellung"],
 };
 
@@ -1296,6 +1326,11 @@ S["uc-buero-protokoll"] = {
     {frage: "Was ist der Vorteil der lokalen Verarbeitung auf dem Jetson?",
       optionen: ["Das Audio verlässt das Haus nicht", "Die Spracherkennung wird fehlerfrei", "Zustimmung der Beteiligten ist nicht mehr nötig", "Das Protokoll muss nicht geprüft werden"],
       richtig: 0, erklaerung: "Lokal bleibt die Aufnahme im Haus. Das senkt das Risiko, ändert aber nichts an Zustimmung, Löschfrist und Prüfung."},
+  ],
+  dreiSchritte: [
+    "Hole vor der Aufnahme die Zustimmung aller Beteiligten ein.",
+    "Teste im Labor {{whisper|Sprache zu Text}} mit einer kurzen Probeaufnahme aus deinem Besprechungsraum.",
+    "Lass Namen und Zahlen im Protokoll gegenlesen, bevor es verschickt wird.",
   ],
   weiter: ["whisper", "sprachausgabe", "prompting", "recht", "uc-buero-dokumente", "uc-service-bestellung"],
 };
@@ -1495,6 +1530,11 @@ S["uc-service-bestellung"] = {
       optionen: ["Einen Anfang zum Prüfen, aber noch keine belastbare Messung", "Dass der Agent in 100 Prozent der Fälle richtig liegt", "Dass kein Test mehr nötig ist", "Dass alle Modelle gleich gut sind"],
       richtig: 0, erklaerung: "Neun Fragen zeigen den Ablauf. Wie zuverlässig ein Modell ist, zeigt erst ein größerer Test, auch mit Fangfragen."},
   ],
+  dreiSchritte: [
+    "Schreibe auf, welche Fragen Kunden am häufigsten stellen und welche Systeme die Antworten kennen.",
+    "Lege fest, welche Werkzeuge der {{agent|Agent}} bekommt. Am Anfang nur lesen, nichts verändern.",
+    "Bestimme, ab wann ein Mensch übernimmt, und teste mit echten Fällen.",
+  ],
   weiter: ["agent", "agenten-grundlagen", "agenten-planung", "agenten-sicherheit", "mcp-werkzeuge", "uc-buero-dokumente"],
 };
 
@@ -1680,6 +1720,11 @@ S["uc-sicherheit-zutritt"] = {
     {frage: "Was zeigt es, wenn der Rahmen bei einer Maske verschwindet?",
       optionen: ["Das System ist defekt", "Detektion hat Grenzen bei Verdeckung, Licht und Neigung", "Die Person ist nicht berechtigt", "Der Jetson hat das Gesicht gespeichert"],
       richtig: 1, erklaerung: "Verdeckung, Gegenlicht und starke Neigung erschweren die Detektion. Das gilt auch an einer echten Tür, also braucht es eine Rückfallebene."},
+  ],
+  dreiSchritte: [
+    "Prüfe zuerst Rechtsgrundlage und Datenschutz. Gesichter sind besonders geschützte Daten und brauchen oft Einwilligung und Mitbestimmung.",
+    "Probiere im Labor {{gesicht|Gesichtserkennung}}, was „ein Gesicht finden“ leistet. Es erkennt nicht, wer die Person ist.",
+    "Lege fest, was gespeichert wird und wie lange. Am besten nichts.",
   ],
   weiter: ["gesicht", "recht", "verzerrung-ethik", "daten", "uc-sicherheit-baustelle", "uc-handel-regal"],
 };
@@ -1872,7 +1917,63 @@ S["uc-sicherheit-baustelle"] = {
       optionen: ["Nichts, es ist ja eine Sicherheitsmaßnahme", "Zweck, Rechtsgrundlage, Datenschutz, Betriebsrat und Speicherfristen", "Nur die Farbe der Kamera", "Nur der Preis der Kamera"],
       richtig: 1, erklaerung: "Personenerkennung kann zur Überwachung von Beschäftigten werden. Zweck und Beteiligung müssen vor dem Start feststehen. Das ist keine Rechtsberatung."},
   ],
+  dreiSchritte: [
+    "Lege Zweck und Gefahrenbereich fest und beteilige Sicherheitsfachkraft, Betriebsrat und Datenschutz.",
+    "Teste im Labor {{objekt|Objekterkennung}} mit Fotos deiner Baustelle, auch bei Dunkelheit und Verdeckung.",
+    "Zähle Fehlalarme und übersehene Personen getrennt. Technische Schutzmaßnahmen bleiben bestehen.",
+  ],
   weiter: ["objekt", "anlernen", "recht", "uc-logistik-zaehlen", "uc-sicherheit-zutritt", "ki-einfuehrung"],
+};
+
+/* ====================================================================== Handwerk und Kleinbetrieb */
+S["uc-handwerk"] = {
+  nav: "Handwerk", typ: "lektion", gruppe: "Business-Use-Cases", titel: "Im Handwerk: Angebot, Baustellenfoto, Rechnungen", symbol: "hammer",
+  kurz: "Drei Alltagsaufgaben im Kleinbetrieb: ein Angebot aus einer Notiz, ein Foto von der Baustelle und ein Stapel Rechnungen. Was kann KI dabei abnehmen, und was bleibt bei dir?",
+  abschnitte: [
+    {h: "Angebot aus einer Notiz",
+      kurz: "Aus einer Notiz vom Aufmaß entsteht ein Entwurf. Preise und Mengen prüfst du selbst.",
+      visual: {typ: "ablauf", paket: true, schritte: [
+        {icon: "pencil", text: "Notiz", sub: "vom Aufmaß oder Sprachmemo"},
+        {icon: "message-square", text: "Sprachmodell", sub: "formuliert den Entwurf"},
+        {icon: "file-text", text: "Entwurf", sub: "Positionen und Text"},
+        {icon: "user-check", text: "Du prüfst", sub: "Preise, Mengen, Termin", farbe: "gruen"}]},
+      p: [
+        "Nach dem Aufmaß liegt oft nur ein Zettel mit Stichworten da: Raum, Maße, Material, Sonderwünsche. Daraus ein ordentliches Angebot zu schreiben, kostet am Abend Zeit. Ein [[token|Sprachmodell]] kann aus solchen Stichworten einen lesbaren Entwurf formulieren, mit Einleitung, Positionen und freundlichem Schluss.",
+        "Probiere das Prinzip im Labor {{chat|Sprachmodell im Chat}}: Schreibe eine kurze Notiz mit erfundenen Angaben und bitte um einen Angebotstext. Du siehst, wie schnell ein Entwurf entsteht, und du merkst, wo das Modell etwas dazuerfindet.",
+      ], alltag: "Ein Sprachmodell rechnet nicht nach und kennt deine Preise nicht. Wenn du keinen Preis nennst, erfindet es einen ([[halluzination|Halluzination]]). Gib Preise und Mengen selbst vor und lies jede Zahl im Entwurf noch einmal gegen, bevor das Angebot hinausgeht."},
+    {h: "Baustellenfoto prüfen",
+      kurz: "Die Kamera zählt und benennt Dinge im Bild. Ob eine Arbeit fachgerecht ist, beurteilt sie nicht.",
+      visual: {typ: "vergleich",
+        links: {titel: "Kann sie", icon: "eye", farbe: "gruen", punkte: ["Personen und Fahrzeuge finden", "Gegenstände benennen und zählen", "Auffälliges für einen Blick markieren"]},
+        rechts: {titel: "Kann sie nicht", icon: "triangle-alert", farbe: "rot", punkte: ["Sagen, ob eine Abdichtung fachgerecht ist", "Normen und Vorschriften prüfen", "Verdecktes sehen"]},
+        urteil: "Sie lenkt den Blick. Die Fachkraft beurteilt."},
+      p: [
+        "Ein Foto von der Baustelle zeigt mehr, als man beim Knipsen merkt. Ein Erkennungsmodell findet darin Personen, Fahrzeuge und viele Alltagsgegenstände und markiert sie mit Rahmen. Das hilft zum Beispiel bei der Frage, was auf dem Foto zu sehen ist, oder bei einer ersten Zählung.",
+        "Fachliche Fragen kann es nicht beantworten. Ob ein Anschluss richtig sitzt oder ein Estrich dick genug ist, sieht ein Modell mit Standardwissen nicht. Dafür bräuchte es ein eigenes Modell mit vielen Beispielen aus deinem Gewerk. Probiere die Grundlage im Labor {{objekt|Objekterkennung}} und lies den Fall {{uc-sicherheit-baustelle|Personen auf der Baustelle}}.",
+      ]},
+    {h: "Rechnungen sortieren",
+      kurz: "Erst wird der Text gelesen, dann sortiert. Die Ablage bleibt, die Vorarbeit wird kürzer.",
+      visual: {typ: "ablauf", paket: true, schritte: [
+        {icon: "folder", text: "Stapel", sub: "Scans und Fotos"},
+        {icon: "scroll-text", text: "Text lesen", sub: "Texterkennung"},
+        {icon: "list-checks", text: "Sortieren", sub: "Rechnung, Angebot, Lieferschein"},
+        {icon: "user-check", text: "Du prüfst", sub: "Stichproben, Zweifelsfälle", farbe: "gruen"}]},
+      p: [
+        "Rechnungen, Lieferscheine und Angebote landen im selben Posteingang. Ein System kann zuerst den Text aus dem Scan lesen ([[ocr|Texterkennung]]) und dann entscheiden, um welche Art von Dokument es sich handelt. Auch das Suchen in der Ablage wird leichter, wenn die Dokumente nach Inhalt gefunden werden: Das zeigt das Labor {{rag|Dokumente befragen}}.",
+        "Der Mensch bleibt dabei die letzte Instanz. Zweifelsfälle, Beträge und alles, was steuerlich zählt, prüfst du selbst. Lass das System anfangs nur vorsortieren und kontrolliere Stichproben.",
+      ]},
+  ],
+  mitnehmen: [
+    "Ein Sprachmodell macht aus Notizen einen Entwurf. Preise, Mengen und Termine gibst du vor und prüfst sie.",
+    "Bilderkennung zählt und markiert. Fachliche Urteile über eine Arbeit bleiben bei der Fachkraft.",
+    "Beim Sortieren von Rechnungen ist Vorsortieren der sichere Start. Beträge und Steuerliches prüfst du selbst.",
+  ],
+  dreiSchritte: [
+    "Suche dir die Aufgabe, die dich am meisten Abendzeit kostet: Angebot, Fotodokumentation oder Ablage.",
+    "Probiere das Prinzip im Labor mit erfundenen Beispielen, nicht mit echten Kundendaten, und notiere, wo das Ergebnis falsch liegt.",
+    "Lege fest, was du immer selbst prüfst, etwa Preise, Mengen und Beträge, und teste das Verfahren erst an einem kleinen Stapel.",
+  ],
+  weiter: ["chat", "objekt", "rag", "uc-sicherheit-baustelle", "uc-buero-dokumente", "ki-einfuehrung"],
 };
 
 /* ====================================================================== Glossar */
@@ -1886,6 +1987,6 @@ const glossar = {
 INHALT.registriere({
   seiten: S,
   glossar,
-  gruppen: [{ name: "Business-Use-Cases", seiten: ["uc-fertigung-sichtpruefung", "uc-fertigung-sortieren", "uc-logistik-zaehlen", "uc-handel-regal", "uc-gesundheit-auffaellig", "uc-buero-dokumente", "uc-buero-protokoll", "uc-service-bestellung", "uc-sicherheit-zutritt", "uc-sicherheit-baustelle"] }],
+  gruppen: [{ name: "Business-Use-Cases", seiten: ["uc-fertigung-sichtpruefung", "uc-fertigung-sortieren", "uc-logistik-zaehlen", "uc-handel-regal", "uc-gesundheit-auffaellig", "uc-buero-dokumente", "uc-buero-protokoll", "uc-service-bestellung", "uc-sicherheit-zutritt", "uc-sicherheit-baustelle", "uc-handwerk"] }],
 });
 })();

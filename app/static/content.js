@@ -15,7 +15,7 @@ gruppen: [
   {name: "Daten und Prognosen", seiten: []},
   {name: "KI im Betrieb", seiten: []},
   {name: "Business-Use-Cases", seiten: []},
-  {name: "Der Jetson", seiten: ["hardware"]},
+  {name: "Der Rechner dahinter", seiten: ["hardware"]},
 ],
 
 faehigkeiten: {
@@ -26,12 +26,28 @@ seiten: {
 
 start: {
   nav: "Start", typ: "start", titel: "KI verstehen, indem du sie ausprobierst", symbol: "start",
-  kurz: "Dieses Labor läuft auf einem kleinen Computer in diesem Netz, dem Jetson. Du lernst, was hinter den Begriffen steckt, und siehst bei jedem Versuch, was der Rechner gerade tut.",
+  kurz: "Hier erlebst du [[ki|künstliche Intelligenz]] live: Fragen stellen, Bilder erkennen lassen, Sprache verstehen. Alles läuft auf einem kleinen Spezialrechner, den du dabei arbeiten siehst. Kostenlos und ohne Anmeldung.",
+  anfangen: [
+    {id: "karte", h: "Verstehen, was KI ist", p: "Eine Landkarte der Begriffe, in etwa zwei Minuten gelesen."},
+    {id: "chat", h: "Selbst ausprobieren", p: "Stelle einem Sprachmodell eine Frage und sieh Wort für Wort, wie es antwortet. Dafür brauchst du keine Kamera."},
+    {id: "business", h: "Sehen, was es im Alltag bringt", p: "Beispiele aus Betrieben und die drei Fragen, die vor jedem Einsatz stehen."},
+  ],
+  entscheider: {
+    titel: "In 15 Minuten: Was bringt KI meinem Betrieb?",
+    lead: "Vier feste Seiten für alle, die entscheiden müssen und keine Technik lernen wollen. Die Zeiten sind Richtwerte.",
+    schritte: [
+      {id: "karte", h: "Was ist KI, und was nicht?", min: 2},
+      {id: "chat", h: "Ein Sprachmodell selbst befragen", min: 5},
+      {id: "business", h: "Wo KI im Betrieb hilft", min: 3},
+      {id: "ki-einfuehrung", h: "Wie du den Einstieg planst", min: 5},
+    ],
+  },
+  jetson: "Ein Jetson ist ein kleiner Spezialrechner für KI-Rechnungen, etwa so groß wie eine Handfläche. Er braucht wenig Strom und steht hier im Hintergrund, damit du bei jedem Versuch siehst, was er gerade tut.",
   pfad: [
-    {id: "karte", h: "Was ist KI überhaupt?", p: "Eine Landkarte der Begriffe: künstliche Intelligenz, maschinelles Lernen, Deep Learning, generative KI, Robotik."},
+    {id: "karte", h: "Was ist KI überhaupt?", p: "Eine Landkarte der Begriffe: [[ki|künstliche Intelligenz]], [[ml|maschinelles Lernen]], [[dl|Deep Learning]], generative KI, Robotik."},
     {id: "ml", h: "Wie lernt eine Maschine?", p: "Du setzt Punkte auf eine Fläche und siehst, wie ein Modell daraus Regeln ableitet."},
     {id: "gesicht", h: "Sehen: Gesichter und Objekte", p: "Deine Webcam, der Jetson rechnet, du siehst jeden Schritt der Verarbeitung mit seiner Zeit."},
-    {id: "chat", h: "Sprache: Chat, Dokumente, Agenten", p: "Ein Sprachmodell wählt Wort für Wort. Du stellst die Zufälligkeit ein und siehst die einzelnen Tokens."},
+    {id: "chat", h: "Sprache: Chat, Dokumente, Agenten", p: "Ein Sprachmodell wählt Wort für Wort. Du stellst die [[temperatur|Zufälligkeit]] ein und siehst die einzelnen [[token|Tokens]]."},
     {id: "business", h: "Wo hilft das im Alltag einer Firma?", p: "Branchen, Einsatzfelder und die drei Fragen, die vor jedem Einsatz stehen sollten."},
   ],
   bereiche: {
@@ -40,13 +56,13 @@ start: {
     "Sprache": {symbol: "chat", satz: "Sprachmodelle im Chat, Sprache zu Text und gutes Fragen."},
     "Wissen und RAG": {symbol: "rag", satz: "Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung."},
     "Agenten": {symbol: "agent", satz: "Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen."},
-    "Erzeugen": {symbol: "wand-sparkles", satz: "Bilder aus Text und Gesichtstausch, live auf dem Jetson."},
+    "Erzeugen": {symbol: "wand-sparkles", satz: "Bilder aus Text und Gesichtstausch, live auf dem Rechner."},
     "Daten und Prognosen": {symbol: "trending-up", satz: "Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen."},
     "KI im Betrieb": {symbol: "gauge", satz: "Vom Prototyp zum Betrieb: Kosten, Energie und Einführung."},
     "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
-    "Der Jetson": {symbol: "hardware", satz: "Der kleine Computer hinter allem, mit Messwerten in Echtzeit."},
+    "Der Rechner dahinter": {symbol: "hardware", satz: "Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?"},
   },
-  datenschutz: "Kamerabilder werden nur für die Berechnung im Arbeitsspeicher gehalten und nicht gespeichert. Texte, die du ins RAG-Labor einfügst, bleiben im Speicher des Jetson und verschwinden beim Neustart.",
+  datenschutz: "Kamera und Mikrofon starten nur, wenn du zustimmst. Bilder und Aufnahmen werden nicht gespeichert. Texte, die du ins Dokumenten-Labor einfügst, bleiben kurz im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe.",
 },
 
 /* ------------------------------------------------------------------ Grundlagen */
@@ -748,7 +764,7 @@ faceswap: {
 /* ------------------------------------------------------------------ Jetson */
 
 hardware: {
-  nav: "Hardware", typ: "lektion", gruppe: "Der Jetson", titel: "Der Jetson und seine Hardware", symbol: "hardware", widget: "hardware",
+  nav: "Hardware", typ: "lektion", gruppe: "Der Rechner dahinter", titel: "Der Jetson und seine Hardware", symbol: "hardware", widget: "hardware",
   kurz: "Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.",
   abschnitte: [
     {h: "Was ist ein Jetson",

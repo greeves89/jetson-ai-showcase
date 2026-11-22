@@ -1,6 +1,7 @@
 // Rohtext ohne JavaScript: jede Seite per fetch auf Pflichtelemente pruefen (so sieht ein Crawler die Seite).
 // Aufruf:  LABOR_URL=https://<jetson>:8443 node tests/seo-rohtext.mjs
 import assert from "node:assert/strict";
+import { pruefeLd } from "./seo-ld-pruefung.mjs";
 
 process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 const BASIS = (process.env.LABOR_URL || "https://localhost:8443").replace(/\/$/, "");
@@ -26,7 +27,29 @@ for (const id of ids) {
   if (!/<link rel="canonical" href="https?:\/\/[^"]+">/.test(t)) meld(id, "kein canonical");
   if (!/<meta property="og:locale" content="de_DE">/.test(t)) meld(id, "kein og:locale");
   if (!/<meta name="author" content="Daniel Alisch">/.test(t)) meld(id, "kein author");
-  if (!/<script type="application\/ld\+json">\{.*"author".*\}<\/script>/.test(t)) meld(id, "kein JSON-LD mit Autor");
+  const ld = pruefeLd(t, BASIS);
+  for (const p of ld.probleme) meld(id, "JSON-LD: " + p);
+  const soll = id === "start" ? ["WebSite", "Course", "ItemList", "DefinedTermSet", "BreadcrumbList"] : ["Article", "LearningResource", "BreadcrumbList"];
+  for (const k of soll) if (!ld.typen.includes(k)) meld(id, "JSON-LD ohne " + k);
+  if (id !== "start" && !/"author":\{"@type":"Person"/.test(t.replace(/\s/g, ""))) meld(id, "kein JSON-LD mit Autor");
+  // Open Graph und X: Vorschaubild 1200 x 630 mit Textalternative
+  const og = (n) => m(new RegExp('<meta property="' + n + '" content="([^"]+)"'));
+  const bildUrl = og("og:image");
+  if (!bildUrl || !/^https?:\/\/.+\.png$/.test(bildUrl)) meld(id, "kein og:image");
+  else {
+    const br = await fetch(BASIS + new URL(bildUrl).pathname);
+    if (br.status !== 200 || !/image\/png/.test(br.headers.get("content-type") || "")) meld(id, "og:image nicht abrufbar: " + br.status);
+  }
+  if (og("og:image:width") !== "1200" || og("og:image:height") !== "630") meld(id, "og:image Maße");
+  if (!og("og:image:alt")) meld(id, "kein og:image:alt");
+  if (!/<meta name="twitter:card" content="summary_large_image">/.test(t)) meld(id, "twitter:card nicht summary_large_image");
+  if (!m(/<meta name="twitter:image" content="([^"]+)"/)) meld(id, "kein twitter:image");
+  if (!/<link rel="alternate" hreflang="de" href="https?:\/\/[^"]+">/.test(t)) meld(id, "kein hreflang de");
+  const llmsLink = /<link rel="alternate" type="text\/plain" href="[^"]+\/llms\.txt"/.test(t);
+  if (intern === llmsLink) meld(id, intern ? "llms.txt-Link im internen Modus" : "kein llms.txt-Link");
+  if (ti && ti.length > 60) meld(id, "title laenger als 60: " + ti.length);
+  if (be && be.length < 120) meld(id, "description kuerzer als 120: " + be.length);
+  if ((t.match(/<h1\b/g) || []).length !== 1) meld(id, "nicht genau ein h1");
   if (!/<h1>[^<]+<\/h1>/.test(t)) meld(id, "kein h1");
   if (id !== "start" && !/<h2 class="abs">/.test(t)) meld(id, "keine Abschnitte");
   if (!/<footer[^>]*>[\s\S]*Ein Projekt von[\s\S]*<\/footer>/.test(t)) meld(id, "keine Fusszeile");
@@ -49,6 +72,25 @@ if (intern) {
   if (/Disallow: \/\n/.test(robots) || !/Sitemap: https?:\/\//.test(robots)) meld("robots", "oeffentlich: Seiten freigeben, Sitemap nennen");
   const x = await sm.text();
   if (sm.status !== 200 || (x.match(/<loc>/g) || []).length !== ids.length) meld("sitemap", "Sitemap passt nicht zur Navigation");
+  if ((x.match(/<lastmod>\d{4}-\d{2}-\d{2}<\/lastmod>/g) || []).length !== ids.length) meld("sitemap", "lastmod fehlt bei einer Seite");
+  if (!/<image:loc>[^<]+\.png<\/image:loc>/.test(x) || !/<video:content_loc>[^<]+\.mp4<\/video:content_loc>/.test(x)) meld("sitemap", "keine Bild- oder Videoeintraege");
+  if (/__BASIS__/.test(x)) meld("sitemap", "Platzhalter nicht ersetzt");
+  for (const bot of ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended", "CCBot", "OAI-SearchBot"]) {
+    if (!new RegExp("User-agent: " + bot + "\\nAllow: /\\nDisallow: /api/\\nDisallow: /ws/").test(robots)) meld("robots", bot + " nicht ausdruecklich erlaubt");
+  }
+  const lk = await fetch(BASIS + "/llms.txt"), lv = await fetch(BASIS + "/llms-full.txt");
+  const lkt = await lk.text(), lvt = await lv.text();
+  if (lk.status !== 200 || !/^# KI-Labor\n\n> /.test(lkt) || (lkt.match(/^- \[[^\]]+\]\(https?:\/\/[^)]+\): .+$/gm) || []).length < ids.length - 1) meld("llms.txt", "Gliederung unvollstaendig");
+  if (lv.status !== 200 || (lvt.match(/^Adresse: https?:\/\//gm) || []).length < ids.length - 1 || !/^Frage: /m.test(lvt) || !/^# Glossar$/m.test(lvt)) meld("llms-full.txt", "Kerntexte unvollstaendig");
+  if (/__BASIS__/.test(lkt + lvt)) meld("llms", "Platzhalter nicht ersetzt");
+  if (/[–—]/.test(lkt + lvt)) meld("llms", "Gedankenstrich");
 }
+const f404 = await fetch(BASIS + "/gibt-es-nicht-xyz");
+if (f404.status !== 404 || !/noindex/.test(f404.headers.get("x-robots-tag") || "") || !/<meta name="robots" content="noindex,nofollow">/.test(await f404.text())) meld("404", "404-Seite mit Status 404 und noindex erwartet");
+if (intern) for (const u of ["/llms.txt", "/llms-full.txt"]) if ((await fetch(BASIS + u)).status !== 404) meld(u, "intern muss 404 liefern");
+const cs = await fetch(BASIS + "/static/app.js?v=1");
+if (!/immutable/.test(cs.headers.get("cache-control") || "")) meld("cache", "statische Datei mit Versionsparameter ohne immutable");
+const gz = await fetch(BASIS + "/static/content.js?v=1", { headers: { "accept-encoding": "gzip" } });
+if (!/gzip/.test(gz.headers.get("content-encoding") || "")) meld("kompression", "kein gzip fuer content.js");
 console.log(`${ids.length} Seiten im Rohtext geprueft (${intern ? "intern, noindex" : "oeffentlich"}), ${probleme} Probleme.`);
 process.exit(probleme ? 1 : 0);
