@@ -27,6 +27,9 @@ UEBERSPRINGEN = {".git", "node_modules", "__pycache__"}
 # (Ollama 0.12.3, gemessen 22.11.2026; mit 20 bis 24 GPU-Schichten korrekt und gleich schnell).
 # Gilt fuer alle Chat-Aufrufe des Sprachmodells. Ueberschreibbar per Umgebungsvariable.
 LLM_GPU_SCHICHTEN = int(os.environ.get("KL_LLM_GPU_SCHICHTEN", "24"))
+# Kleinere Batchgroesse = kleinerer Rechenpuffer auf der GPU (565 MB bei 512). Nach langer Laufzeit ist der gemeinsame CPU/GPU-Speicher
+# fragmentiert, ein grosser zusammenhaengender Puffer scheitert dann mit "cudaMalloc failed" (22.11.2026 beobachtet).
+LLM_BATCH = int(os.environ.get("KL_LLM_BATCH", "128"))
 
 def meminfo():
     """MemFree, MemAvailable und Cached in Megabyte."""

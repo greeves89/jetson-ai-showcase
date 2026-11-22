@@ -20,8 +20,8 @@ S["sicherheit-einfach"] = {
      p: [
       "Das KI-Labor ist ein Lernangebot. Du kannst alles ausprobieren, ohne dich anzumelden und ohne etwas zu bezahlen. Auf dem Rechner dahinter wird nichts dauerhaft abgelegt, was du aufnimmst oder eintippst. Damit du genau weißt, was das heißt, steht es hier Punkt für Punkt.",
     ]},
-    {h: "Was auf deinem Gerät gespeichert wird",
-     kurz: "Vier kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung.",
+    {h: "Was auf deinem Gerät gespeichert wird", id: "browser-eintraege",
+     kurz: "Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nur das Cookie geht bei jedem Aufruf mit, die Merkzettel bleiben bei dir.",
      p: [
       "Damit die Seite funktioniert und sich merkt, was du eingestellt hast, legt sie ein paar kleine Einträge in deinem Browser ab. Ein [[cookie|Cookie]] gehört dazu und einige Einträge im [[localstorage|lokalen Speicher]]. Sie enthalten keine Namen und keine Texte von dir, und sie dienen nicht der Werbung.",
      ],
@@ -30,7 +30,13 @@ S["sicherheit-einfach"] = {
       kopf: ["Name", "Wofür", "Wie lange"],
       zeilen: [
        ["`kl_s` (Cookie)", "Ordnet deine Beispiele und eingefügten Texte deiner Sitzung zu, damit sie nicht bei anderen Besuchern landen.", "Bis zu 24 Stunden. Die Daten dahinter verfallen schon nach 30 Minuten ohne Aktivität."],
-       ["`kl-besucht`", "Merkt, welche Seiten du schon gelesen hast (der grüne Haken im Menü).", "Bis du die Daten deines Browsers löschst."],
+       ["`kl-merken`", "Merkt, dass du erlaubt hast, deinen Lernfortschritt zu speichern. Ohne dieses Ja werden `kl-gelesen` und `kl-zuletzt` nicht angelegt, der Fortschritt gilt dann nur, bis du die Seite neu lädst. Du schaltest es im Willkommens-Fenster oder in der Fußzeile („Fortschritt merken“) um.", "Bis du es ausschaltest oder die Daten deines Browsers löschst."],
+       ["`kl-willkommen`", "Merkt, dass du das Willkommens-Fenster schon gesehen hast, damit es nicht noch einmal kommt. Es enthält keine Angabe zu dir.", "Bis du die Daten deines Browsers löschst."],
+       ["`kl-gelesen`", "Nur mit deinem Ja (`kl-merken`): Merkt, welche Seiten du bis zum Ende gelesen oder deren Quiz du abgeschlossen hast (der grüne Haken im Menü, die Prozentanzeige).", "Bis du „Fortschritt merken“ ausschaltest, auf der Startseite „Fortschritt löschen“ wählst oder die Daten deines Browsers löschst."],
+       ["`kl-zuletzt`", "Nur mit deinem Ja (`kl-merken`): Merkt die Seite und die Stelle, an der du zuletzt gelesen hast (für „Weiter, wo du aufgehört hast“).", "Bis du die Daten deines Browsers löschst oder den Fortschritt löschst."],
+       ["`kl-weg`", "Merkt, wenn du auf der Startseite einen Weg wählst (Schüler:in, Lehrende, KI verstehen, IT, Betrieb, Eltern): ein einziges Wort, das du selbst ausdrücklich wählst, kein Alter, keine Nummer. Ein Link wie `/?weg=schule` wirkt, ohne dass etwas gespeichert wird.", "Bis du die Auswahl aufhebst oder die Daten deines Browsers löschst."],
+       ["`kl-mathe`", "Merkt, ob du den Schalter „Mit Mathe“ eingeschaltet hast.", "Bis du die Daten deines Browsers löschst."],
+       ["`kl-hilfe`", "Nur mit deinem Ja (`kl-merken`): Merkt, dass du den Lesehinweis auf einer Lektion schon gesehen hast. Ohne Ja gilt das nur für diesen Tab (sessionStorage).", "Bis du die Daten deines Browsers löschst oder den Tab schließt."],
        ["`kl-nav-offen`", "Merkt, welche Menügruppen du aufgeklappt hast.", "Bis du die Daten deines Browsers löschst."],
        ["`kl-lesemodus`", "Merkt, ob du „Kurz lesen“ oder „Genau lesen“ gewählt hast.", "Bis du die Daten deines Browsers löschst."],
        ["`kl-einwilligung`", "Merkt, dass du der Kamera oder dem Mikrofon zugestimmt hast, damit die Frage nicht jedes Mal kommt. Die Zustimmung zur Gesichtserkennung wird nur bis zum Schließen des Tabs gemerkt.", "Bis du die Einwilligung widerrufst oder die Daten deines Browsers löschst."],
@@ -38,10 +44,11 @@ S["sicherheit-einfach"] = {
      },
      merke: "Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an."},
     {h: "Kamera und Mikrofon",
-     kurz: "Erst fragt dich diese Seite, dann dein Browser. Nichts wird gespeichert, und du kannst jederzeit stoppen.",
+     kurz: "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck. Erst fragt dich diese Seite, dann dein Browser. Nichts wird gespeichert, und du kannst jederzeit stoppen.",
      p: [
       "Kamera und Mikrofon schalten sich nie von allein ein. Vor dem ersten Start zeigt dir die Seite eine kurze Erklärung, und du musst ausdrücklich zustimmen. Danach fragt dich noch dein Browser. Beide Fragen kannst du mit „Nein“ beantworten, die Beispielbilder und Beispieldaten funktionieren auch ohne Kamera und Mikrofon.",
      ], liste: [
+      "**Alter:** Kamera, Mikrofon und Gesicht sind ab 16 Jahren gedacht. Jüngere nutzen sie nur mit Einverständnis der Eltern. Die Seite prüft kein Alter und fragt auch nicht danach. Im Unterricht brauchst du diese Labore nicht.",
       "**Gesichtserkennung und Anlernen:** Hier entstehen aus Gesichtern Zahlenlisten, mit denen man Gesichter wiedererkennen kann. Das sind besonders geschützte Daten. Darum fragt die Seite ausdrücklich mit einem Kontrollkästchen, das du selbst anklicken musst. Die Zustimmung gilt nur für die laufende Sitzung. Nutze nur dein eigenes Gesicht oder Personen, die zugestimmt haben, ab 16 Jahren, jüngere mit Einverständnis der Eltern.",
       "**Objekte:** Jedes Kamerabild geht nur für einen Augenblick an den Rechner dieser Seite. Er wertet es aus und schickt das Ergebnis zurück. Das Bild selbst wird nicht gespeichert.",
       "**Anlernen:** Der Rechner merkt sich für etwa 30 Minuten Zahlenwerte aus deinen Beispielbildern, nicht die Bilder selbst. Danach vergisst er sie, und andere Besucher sehen sie nie.",
@@ -50,9 +57,9 @@ S["sicherheit-einfach"] = {
       "**Stoppen:** Mit dem Stopp-Knopf oder indem du die Seite verlässt. Dann ist die Kamera sofort aus.",
      ]},
     {h: "Texte, die du eintippst",
-     kurz: "Chat-Fragen und eingefügte Dokumente laufen auf dem Rechner dieser Seite, nicht bei einem großen Anbieter im Netz.",
+     kurz: "Chat-Fragen und Dokumente werden auf dem Rechner dieser Seite verarbeitet. Ein KI-Dienst in der Cloud ist nicht beteiligt.",
      p: [
-      "Alles, was du im Chat, im Dokumenten-Labor oder beim Agenten eintippst, wird auf dem kleinen Rechner hinter dieser Seite verarbeitet. Das Sprachmodell läuft dort selbst. Deine Texte gehen nicht an einen Cloud-Dienst.",
+      "Alles, was du im Chat, im Dokumenten-Labor oder beim Agenten eintippst, wird auf dem kleinen Rechner hinter dieser Seite verarbeitet. Das Sprachmodell läuft dort selbst, ein KI-Dienst in der Cloud ist nicht beteiligt. Auf dem Weg zum Rechner laufen deine Texte wie jede Verbindung über Vermittler: einen Server bei IONOS und den Tunneldienst von Cloudflare. Wir speichern sie nicht. Einzelheiten zu IONOS und Cloudflare stehen in der Datenschutzerklärung.",
       "Chat-Fragen werden nicht aufbewahrt. Texte, die du ins Dokumenten-Labor einfügst, bleiben für deine Sitzung im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe. Andere Besucher sehen sie nicht.",
      ],
      alltag: "Gib trotzdem keine echten Namen, Passwörter, Kundendaten oder Gesundheitsdaten ein. Das gilt bei jedem Programm im Netz. Zum Ausprobieren reichen erfundene Beispiele, und die Seite bringt eigene mit."},
@@ -89,6 +96,11 @@ const glossar = {
    die Reihenfolge in der Liste ist die Rangfolge; Wörter in der Liste zählen als Synonym für den Seitentext. */
 INHALT.synonyme = {
   /* Chat und Assistenten */
+  quellcode: ["=selbst-bauen", "=lizenzen"],
+  kaufen: ["=selbst-bauen", "=hardware"],
+  einkaufsliste: ["=selbst-bauen", "=hardware"],
+  "jetson kaufen": ["=selbst-bauen", "=hardware"],
+  anleitung: ["=selbst-bauen"],
   chatgpt: ["=chat", "=genki", "=tokens-sprachmodelle", "=prompting", "sprachmodell"],
   gpt: ["=chat", "=tokens-sprachmodelle", "=genki"],
   copilot: ["=chat", "=agenten-grundlagen", "=prompting"],
@@ -150,9 +162,16 @@ INHALT.synonyme = {
   kamera: ["=gesicht", "=objekt", "=bild-als-zahlen", "=sicherheit-einfach"],
   video: ["=objekt", "=gesicht", "=uc-logistik-zaehlen"],
   navi: ["=agenten-planung", "=robotik", "=agenten-grundlagen"],
-  spiel: ["=ml", "=agenten-planung", "=robotik"],
-  spiele: ["=ml", "=agenten-planung", "=robotik"],
-  game: ["=ml", "=agenten-planung", "=robotik"],
+  spiel: ["=experimente", "=ml", "=llm-grenzen", "=agenten-planung", "=robotik"],
+  spiele: ["=experimente", "=ml", "=llm-grenzen", "=agenten-planung", "=robotik"],
+  game: ["=experimente", "=ml", "=llm-grenzen", "=agenten-planung", "=robotik"],
+  spielfeld: ["=experimente", "=ml", "=neuronale-netze", "=llm-grenzen"],
+  experiment: ["=experimente", "=ml", "=chat", "=prompting"],
+  experimente: ["=experimente", "=ml", "=chat", "=prompting"],
+  ausprobieren: ["=experimente", "=chat", "=ml", "=prompting"],
+  "selbst ausprobieren": ["=experimente", "=chat", "=ml"],
+  quiz: ["=karte", "=ml", "=llm-grenzen", "=bewertung", "=neuronale-netze"],
+  selbsttest: ["=karte", "=ml", "=llm-grenzen", "=bewertung"],
   auto: ["=objekt", "=uc-logistik-zaehlen", "=uc-sicherheit-baustelle"],
   /* Gehirn, Netze, Training */
   gehirn: ["=neuronale-netze", "=ml", "=training", "neuron"],
@@ -220,6 +239,137 @@ INHALT.sucheVorschlaege = ["Chat", "Datenschutz", "Hausaufgaben", "Bilder", "Rob
 
 /* Einsteigerseiten: im Menü mit "Einsteiger" markiert, im Seitenkopf als "Für Einsteiger" */
 for (const id of ["karte", "ml", "genki", "business", "gesicht", "objekt", "chat"]) if (INHALT.seiten[id]) INHALT.seiten[id].anfaenger = true;
+
+/* ---------- Lernplattform: Lernpfade, Wege, Hinweise (gelesen von app.js) ----------
+   lernpfade   benannte Pfade. stufe 1 bis 4 (Verstehen, Anwenden, Erstellen, Bewerten, Kompetenzrahmen in docs/jugendpaedagogik.md)
+               oder rolle ("schule", "lehrende", "erwachsene", "technik", "beruf", "eltern"). Seiten-IDs, die es (noch) nicht gibt, werden still übergangen.
+   kameraSeiten  Labore mit Kamera, Mikrofon oder Gesicht: im Weg "schule" im Menü und in Pfaden gekennzeichnet, nie im Schulpfad empfohlen.
+   alterHinweis  der Satz zu 16+ (Startseite, Seite "Ist das sicher?"); die Seite prüft kein Alter.
+   lernzieleErgaenzung  Lernziele für Seiten aus Dateien, in denen kein Feld "lernziele" steht (Seitenfeld hat Vorrang). */
+INHALT.lernpfade = [
+  {id: "verstehen", stufe: 1, name: "Verstehen", kurz: "Was KI ist, wie sie lernt und woran sie scheitert. Ohne Vorkenntnisse.",
+   seiten: ["karte", "ml", "genki", "daten", "neuronale-netze", "training", "tokens-sprachmodelle", "bild-als-zahlen", "cnn-intuition"]},
+  {id: "anwenden", stufe: 2, name: "Anwenden", kurz: "KI selbst benutzen: fragen, hören, sehen, nachschlagen, Aufgaben abgeben.",
+   seiten: ["chat", "prompting", "prompts-fuer-schueler", "whisper", "objekt", "rag-ueberblick", "agenten-grundlagen", "finetuning-oder-rag", "empfehlungen"]},
+  {id: "erstellen", stufe: 3, name: "Erstellen", kurz: "Eigene Bausteine bauen: Bildmodell anlernen, Dokumente durchsuchen, Agenten planen.",
+   seiten: ["anlernen", "tabellen-ml", "zeitreihen", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "agenten-planung", "mcp-werkzeuge", "mlops"]},
+  {id: "bewerten", stufe: 4, name: "Bewerten", kurz: "Grenzen erkennen, Ergebnisse prüfen, Verantwortung tragen.",
+   seiten: ["llm-grenzen", "echt-oder-ki", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "kosten-energie"]},
+  {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Ohne Vorwissen.",
+   seiten: ["karte", "ml", "neuronale-netze", "daten", "training", "tokens-sprachmodelle", "rag-ueberblick"]},
+  {id: "schule-einstieg", rolle: "schule", name: "Schule: Einstieg", kurz: "Erst ausprobieren, dann prüfen und fair nutzen. Alles ohne Kamera und Mikrofon.",
+   seiten: ["experimente", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "schueler-alltag-ki", "ml", "quellen-pruefen", "datenschutz-im-alltag"]},
+  {id: "schule-vertiefung", rolle: "schule", name: "Schule: Vertiefung", kurz: "Wie Daten, Netze und Training zusammenspielen, mit Rechnen und Ausprobieren.",
+   seiten: ["daten", "neuronale-netze", "training", "bewertung", "bild-als-zahlen", "cnn-intuition", "verzerrung-ethik"]},
+  {id: "beruf", rolle: "beruf", name: "KI im Betrieb", kurz: "Nutzen, Kosten, Risiken und Einführung, mit Beispielen aus der Praxis.",
+   seiten: ["karte", "chat", "business", "ki-einfuehrung", "kosten-energie", "mlops", "recht", "verzerrung-ethik", "uc-buero-dokumente"]},
+  {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, Stundenverläufe und Informationen für Schulleitung und Eltern.",
+   seiten: ["schule-lehrkraefte", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "schule-schulleitung", "schule-eltern", "sicherheit-einfach", "recht"]},
+];
+INHALT.lernpfade.push(
+  {id: "eltern", rolle: "eltern", name: "Für Eltern", kurz: "Wie KI im Alltag von Kindern vorkommt, was mit Daten passiert und wie ihr darüber sprecht.",
+   seiten: ["schule-eltern", "datenschutz-im-alltag", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "sicherheit-einfach"]},
+  {id: "technik", rolle: "technik", name: "Selbst tüfteln", kurz: "Vom Rechner dahinter über Lernen und Netze bis zu Dokumentensuche und Agenten.",
+   seiten: ["selbst-bauen", "hardware", "ml", "neuronale-netze", "rag-ueberblick", "agenten-grundlagen"]},
+);
+INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
+/* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
+   menue.fuerDich     je Rolle höchstens sechs Seiten: der Block "Für dich" im Menü, aufgeklappt.
+   menue.reihenfolge  je Rolle die Gruppen im zugeklappten Block "Alle Bereiche", die genannten zuerst; "Sicherheit" ist eine Sammelgruppe (menue.sammel).
+   startRollen        je Rolle Überschrift, ein Satz, die Blöcke der Startseite (experimente, morgen, minuten, empfohlen, repo) und die Karten:
+                      empfohlen/morgen [{id, satz, h?}] mit einem kurzen Satz; "ohne" gilt, wenn keine Rolle gewählt ist. */
+INHALT.menue = {
+  fuerDich: {
+    schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "karte"],
+    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "schule-schulleitung", "schule-eltern"],
+    erwachsene: ["karte", "ml", "daten", "neuronale-netze", "training", "tokens-sprachmodelle"],
+    technik: ["selbst-bauen", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen"],
+    beruf: ["uc-buero-dokumente", "uc-service-bestellung", "uc-fertigung-sichtpruefung", "business", "ki-einfuehrung", "kosten-energie"],
+    eltern: ["sicherheit-einfach", "datenschutz-im-alltag", "echt-oder-ki", "schule-eltern", "ki-hausaufgaben-fair", "prompts-fuer-schueler"],
+  },
+  reihenfolge: {
+    schule: ["Experimente", "Medienkompetenz", "Grundlagen"],
+    lehrende: ["Für die Schule", "Medienkompetenz", "Grundlagen"],
+    erwachsene: ["Grundlagen", "Medienkompetenz", "Sprache"],
+    technik: ["Der Rechner dahinter", "Wissen und RAG", "Agenten", "Sprache", "Sehen"],
+    beruf: ["KI im Betrieb", "Business-Use-Cases", "Sicherheit"],
+    eltern: ["Medienkompetenz", "Sicherheit", "Für die Schule"],
+  },
+  sammel: {Sicherheit: ["sicherheit-einfach", "datenschutz-im-alltag", "agenten-sicherheit", "recht"]},
+};
+INHALT.startRollen = {
+  ohne: {h1: "KI verstehen, indem du sie ausprobierst", satz: "Frag eine [[ki|KI]], lass Bilder erkennen, höre Sprache. Kostenlos und ohne Anmeldung."},
+  schule: {h1: "Experimente, leicht erklärt", satz: "Probiere aus, wie KI arbeitet. Ohne Kamera und ohne Anmeldung.",
+    bloecke: ["experimente", "empfohlen"],
+    empfohlen: [
+      {id: "echt-oder-ki", satz: "Woran du Fälschungen von KI erkennst."},
+      {id: "ki-hausaufgaben-fair", satz: "Wann KI beim Lernen hilft und wann sie schummeln ist."},
+      {id: "prompts-fuer-schueler", satz: "So fragst du, damit die Antwort brauchbar wird."}]},
+  lehrende: {h1: "Für morgen im Unterricht", satz: "Drei Stunden, Handreichung und Info für die Schulleitung, sofort einsetzbar.",
+    bloecke: ["morgen"],
+    morgen: [
+      {id: "schule-stunde-1", satz: "45 Minuten ohne Kamera, mit Aufgaben und Lösungen."},
+      {id: "schule-stunde-2", satz: "Daten, Training und Fehler zum Anfassen."},
+      {id: "schule-stunde-3", satz: "Erfundenes erkennen und Quellen prüfen."},
+      {id: "schule-lehrkraefte", satz: "Checkliste, Fachbegriffe und Kurzantworten."},
+      {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."}]},
+  erwachsene: {h1: "KI verstehen, Schritt für Schritt", satz: "Sieben kurze Seiten führen durch die Grundlagen. Ohne Vorwissen.",
+    bloecke: ["empfohlen"], pfad: "erwachsene",
+    empfohlen: [
+      {id: "karte", satz: "Eine Landkarte der Begriffe in zwei Minuten."},
+      {id: "ml", satz: "Statt Regeln zeigst du Beispiele, das Verfahren lernt daraus."},
+      {id: "neuronale-netze", satz: "Wie ein Netz aus kleinen Rechenstellen entscheidet."},
+      {id: "daten", satz: "Ein Modell lernt nur, was in seinen Daten steckt."},
+      {id: "training", satz: "Wie ein Modell Schritt für Schritt besser wird."},
+      {id: "tokens-sprachmodelle", satz: "Wie aus Text ein Modell wird, das Fragen beantwortet."},
+      {id: "rag-ueberblick", satz: "Antworten aus eigenen Dokumenten."}]},
+  technik: {h1: "Die Technik dahinter", satz: "Selbst aufbauen, Hardware ansehen, Modelle und Quellcode prüfen.",
+    bloecke: ["empfohlen", "repo"],
+    empfohlen: [
+      {id: "selbst-bauen", satz: "Einkaufsliste, Befehle zum Kopieren und häufige Fehler. Der Aufbau dauert einen halben bis ganzen Tag."},
+      {id: "hardware", satz: "Der Rechner dahinter, mit Messwerten live."},
+      {id: "lizenzen", h: "Modelle und Lizenzen", satz: "Welche Modelle hier laufen und unter welcher Lizenz."}],
+    repo: {titel: "Quellcode auf GitHub", satz: "Das Repo ist öffentlich, mit Anleitung und Vorab-Check.", href: "https://github.com/greeves89/jetson-ai-showcase", knopf: "Repo öffnen"}},
+  beruf: {h1: "Was KI deinem Betrieb bringt", satz: "Einsatzfälle aus der Praxis und der Überblick in 15 Minuten.",
+    bloecke: ["minuten", "empfohlen"],
+    empfohlen: [
+      {id: "uc-buero-dokumente", satz: "Fragen an Dokumente, mit Quelle beantwortet."},
+      {id: "uc-service-bestellung", satz: "Ein Agent beantwortet Bestellfragen mit Werkzeugen."},
+      {id: "uc-fertigung-sichtpruefung", satz: "Ausschuss mit wenigen Beispielbildern erkennen."}]},
+  eltern: {h1: "KI im Alltag deiner Kinder", satz: "Was ist sicher, was passiert mit Daten, woran erkennst du Erfundenes?",
+    bloecke: ["empfohlen"],
+    empfohlen: [
+      {id: "sicherheit-einfach", satz: "Was gespeichert wird und was nicht."},
+      {id: "datenschutz-im-alltag", satz: "Was Apps sammeln und was du steuern kannst."},
+      {id: "echt-oder-ki", satz: "Woran du Erfundenes erkennst."}]},
+};
+INHALT.alterHinweis = "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck.";
+/* Willkommens-Fenster (laien.js): einmal beim ersten Besuch der Startseite. Die Knopftexte kommen aus den Wegen in app.js (WEGE.titel). */
+INHALT.willkommen = {
+  titel: "Willkommen im KI-Labor",
+  satz: "Für wen darf es sein? Dann zeige ich dir den passenden Einstieg.",
+  spaeter: "Später",
+  schliessen: "Schließen",
+  hinweis: "Nichts wird gesendet, deine Wahl bleibt nur in deinem Browser.",
+  merken: "Meinen Lernfortschritt in diesem Browser merken",
+  kamera: {schule: "Kamera, Mikro und Gesicht ab 16, im Schulpfad nicht nötig."},
+};
+INHALT.lernzieleErgaenzung = {
+  "uc-fertigung-sichtpruefung": ["Du kannst beschreiben, wie wenige Beispielbilder reichen, um Gutteile von Ausschuss zu trennen.", "Du kannst sagen, warum gleiche Aufnahmebedingungen wichtig sind.", "Du kannst erklären, warum ein Mensch Stichproben zieht."],
+  "uc-fertigung-sortieren": ["Du kannst erklären, wie Teile aus wenigen Beispielen nach Typ sortiert werden.", "Du kannst sagen, was die Kamera liefert und was der Betrieb selbst leisten muss."],
+  "uc-logistik-zaehlen": ["Du kannst erklären, wie Objekterkennung Fahrzeuge zählt.", "Du kannst sagen, warum kleine und verdeckte Objekte fehlen.", "Du kannst planen, wie ein Pilot mit Handzählung prüft, ob die Zahl reicht."],
+  "uc-handel-regal": ["Du kannst sagen, was Objekterkennung am Regal kann und was nicht.", "Du kannst erklären, warum erst der Vergleich mit einem Soll aus der Zahl einen Hinweis macht.", "Du kannst den Datenschutz bei Kameras im Laden ansprechen."],
+  "uc-gesundheit-auffaellig": ["Du kannst erklären, wie eine Zweitmeinung durch KI funktioniert, ohne selbst zu entscheiden.", "Du kannst sagen, warum ein übersehener Fall schwerer wiegt als eine unnötige Meldung.", "Du kannst beschreiben, wo die Verantwortung bleibt."],
+  "uc-buero-dokumente": ["Du kannst erklären, wie ein System Fragen aus Dokumenten mit Quelle beantwortet.", "Du kannst mit einer Fangfrage Erfundenes erkennen.", "Du kannst sagen, warum Aktualität und Zugriffsrechte zählen."],
+  "uc-buero-protokoll": ["Du kannst beschreiben, wie Sprache lokal zu Text wird.", "Du kannst sagen, welche Stellen im Entwurf immer zu prüfen sind.", "Du kannst nennen, was vor einer Aufnahme geklärt sein muss."],
+  "uc-service-bestellung": ["Du kannst erklären, wie ein Agent mit Werkzeugen Bestellfragen beantwortet.", "Du kannst lesende und handelnde Werkzeuge unterscheiden.", "Du kannst am Schrittverlauf erkennen, ob der Agent das richtige Werkzeug nahm."],
+  "uc-sicherheit-zutritt": ["Du kannst Detektion und Identifikation unterscheiden.", "Du kannst nennen, was bei Gesichtern vor der Technik geklärt sein muss.", "Du kannst sagen, was das Beispiel zeigt und warum es nichts speichert."],
+  "uc-sicherheit-baustelle": ["Du kannst erklären, was ein Personenmodell erkennt und was nicht.", "Du kannst sagen, warum Erkanntwerden kein Beweis für Schutz ist.", "Du kannst nennen, was Personenerkennung am Arbeitsplatz rechtlich braucht."],
+  "uc-handwerk": ["Du kannst drei Aufgaben im Handwerk nennen, bei denen KI Schreibarbeit abnimmt.", "Du kannst sagen, warum Angebote und Rechnungen vor dem Versenden geprüft werden."],
+  "sicherheit-einfach": ["Du kannst sagen, was die Seite in deinem Browser speichert.", "Du kannst erklären, was mit Kamera, Mikrofon und eingetippten Texten passiert.", "Du kannst deine Zustimmungen selbst widerrufen und deine Daten löschen."],
+  "ueber": ["Du kannst sagen, wer hinter dem KI-Labor steht und wie es betrieben wird.", "Du kannst erklären, wie die Labore arbeiten und wo ihre Grenzen liegen."],
+  "lizenzen": ["Du kannst nachlesen, welche Modelle, Stimmen und Fotos hier laufen und unter welcher Lizenz.", "Du kannst KI-erzeugte Inhalte im Labor erkennen."],
+};
 
 INHALT.registriere({
   seiten: S,

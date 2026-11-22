@@ -6,6 +6,29 @@ Quelle: __BASIS__/ (Autor: Daniel Alisch). Jeder Abschnitt nennt die Adresse der
 
 Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vorbehalten. Zitate mit Quellenangabe (Adresse der Seite) sind erlaubt. Stimmen der Sprachausgabe, Beispielfotos und Icons stammen von Dritten und stehen unter eigenen Lizenzen (__BASIS__/lizenzen).
 
+# Experimente, leicht erklärt
+
+Adresse: __BASIS__/experimente
+Bereich: Experimente. Stand: 2026-11-22.
+
+Kurz gesagt: Eine KI lernt aus Beispielen, nicht aus Regeln. Zum Verstehen hilft Ausprobieren mehr als Lesen. Antworten einer KI prüfst du nach.
+
+Probiere aus, wie KI arbeitet. Alle Experimente laufen ohne Kamera und ohne Mikrofon.
+
+## So gehst du vor
+
+Such dir ein Experiment aus, probiere es zwei Minuten aus und beschreibe dann, was passiert ist.
+
+## Was du dabei beachten solltest
+
+Gib keine echten Namen, Passwörter oder privaten Daten ein. Zum Üben reichen erfundene Beispiele.
+
+## Das nimmst du mit
+
+- Eine KI lernt aus Beispielen, nicht aus Regeln.
+- Zum Verstehen hilft Ausprobieren mehr als Lesen.
+- Antworten einer KI prüfst du nach.
+
 # Was ist KI?
 
 Adresse: __BASIS__/karte
@@ -3239,13 +3262,13 @@ Du brauchst kein Konto. Kamerabilder und Aufnahmen werden nicht gespeichert. Ein
 
 ## Was auf deinem Gerät gespeichert wird
 
-Vier kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung.
+Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nichts davon wird an den Rechner geschickt.
 
 Merke: Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an.
 
 ## Kamera und Mikrofon
 
-Erst fragt dich diese Seite, dann dein Browser. Nichts wird gespeichert, und du kannst jederzeit stoppen.
+Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck. Erst fragt dich diese Seite, dann dein Browser. Nichts wird gespeichert, und du kannst jederzeit stoppen.
 
 ## Texte, die du eintippst
 
@@ -3288,6 +3311,10 @@ Merke: Das KI-Labor ist ein Lernprojekt. Es läuft auf einem einzigen kleinen Re
 
 Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen.
 
+## Selbst nachbauen
+
+Das Labor ist frei verfügbar. Wie du es auf einem eigenen Jetson aufbaust, steht auf einer eigenen Seite.
+
 ## Wie die Labore arbeiten
 
 Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt.
@@ -3297,6 +3324,69 @@ Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt
 - Das KI-Labor ist kostenlos, braucht keine Anmeldung und läuft lokal auf einem Jetson Orin Nano.
 - Es nutzt keine externen KI-Dienste. Eingaben werden nur im Arbeitsspeicher verarbeitet.
 - Kleine Modelle auf kleiner Hardware: gut zum Verstehen, nicht für den Ernstfall.
+
+# Selbst auf einem Jetson aufbauen
+
+Adresse: __BASIS__/selbst-bauen
+Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+
+Kurz gesagt: Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.
+
+Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano.
+
+## Der Weg in sechs Schritten
+
+Vom leeren Jetson zum laufenden Labor: flashen, prüfen, Ollama, Skripte, Browser.
+
+Merke: Ein Skript prüft vorher, ein Skript richtet ein, ein Skript macht den Autostart. Du tippst wenige Befehle.
+
+## Das brauchst du
+
+Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD, ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.
+
+Merke: Kosten, Zeit, Vorkenntnisse: ein Developer Kit, ein halber Tag, ein Terminal. Mehr nicht.
+
+## Wo du die Anleitung findest
+
+Alles steht im öffentlichen Repo, mit Befehlen zum Kopieren und einer Tabelle zur Fehlersuche.
+
+Merke: Wenn etwas nicht klappt: erst scripts/check.sh laufen lassen, dann die Fehlersuche im Dokument ansehen.
+
+## Wenn etwas nicht klappt
+
+Die häufigsten Fehler haben feste Ursachen. Die Tabelle zeigt die wichtigsten.
+
+Merke: Die meisten Fehler sind Speicherfragen. Erst Platz schaffen, dann weitersuchen.
+
+## Im Heimnetz oder öffentlich
+
+Zum Lernen und Vorführen bleibt das Labor im Heimnetz. Öffentlich geht es, braucht aber mehr Arbeit.
+
+Merke: Heimnetz ist der einfache Weg. Öffentlich ist ein eigenes Projekt.
+
+## Lizenzen
+
+Das Sprachmodell verlangt den Hinweis „Built with Llama“. Die Lizenz des Codes legt der Betreiber noch fest.
+
+## Das nimmst du mit
+
+- Du brauchst einen Jetson Orin Nano mit 8 GB, eine NVMe-SSD und einen zweiten Rechner.
+- Der Weg: JetPack 6, Vorab-Check, Ollama mit zwei Modellen, zwei Skripte, Browser.
+- Die meisten Fehler sind Speicherfragen. Die Anleitung im Repo hat eine Tabelle dafür.
+
+## Fragen und Antworten
+
+Frage: Was macht scripts/check.sh?
+Antwort: Es prüft den Jetson, ohne etwas zu ändern. Der Check liest nur: Version, Speicher, Ollama, Modelle, Port. Er meldet OK, Warnung oder Fehler. Installieren und Starten übernehmen die anderen Skripte.
+
+Frage: Wo kommen Kamera und Mikrofon für die Labore her?
+Antwort: Aus dem Browser deines Rechners oder Handys. Der Browser gibt Kamera und Mikrofon frei, und nur über HTTPS. Am Jetson brauchst du keine.
+
+Frage: Die Antworten des Sprachmodells sind plötzlich leer, im Protokoll steht „unable to allocate CUDA0 buffer“. Was hilft zuerst?
+Antwort: Den Dateicache freigeben. CPU und GPU teilen sich den Speicher, und der Dateicache blockiert ihn. scripts/cache_leeren.py gibt ihn ohne Administratorrechte frei.
+
+Frage: Was verlangt die Llama 3.2 Community License vom Labor?
+Antwort: Den sichtbaren Hinweis „Built with Llama“. Der Hinweis steht in der Fußzeile jeder Seite. Wer das Labor weitergibt, behält ihn bei.
 
 # Lizenzen und Quellen
 
@@ -3334,6 +3424,933 @@ Die Sprecherstimme ist KI-erzeugt. Bilder und Musik entstehen aus Programmcode.
 ## Beispielfotos und Beispieldaten
 
 Die Fotos stammen aus Wikimedia Commons und sind gemeinfrei oder CC0. Alles andere ist selbst erzeugt oder erfunden.
+
+# KI im Unterricht: Einstieg für Klassen und Lehrkräfte
+
+Adresse: __BASIS__/schule-start
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch. Für Klasse 8 gibt es drei Stunden von je 45 Minuten, die ohne Konto, Kamera und Mikrofon auskommen. Der Klassenlink lautet /?weg=schule.
+
+Kostenlos und ohne Konto: drei Stunden für Klasse 8 und die Technik, die dafür nötig ist.
+
+## Was das Labor ist
+
+Ein Lernangebot zum Ausprobieren: Du verstehst KI, indem du Punkte setzt, ein Netz trainierst und ein Sprachmodell fragst.
+
+Merke: Es ist ein Lernprojekt. Es zeigt, wie KI arbeitet. Es ist kein Werkzeug für Hausaufgaben.
+
+## Der Ablauf in drei Stunden
+
+Drei Stunden zu je 45 Minuten für Klasse 8, jeweils mit Einstieg, Erarbeitung, Sicherung und Reflexion.
+
+## Der Klassenlink
+
+Der Klassenlink öffnet das Labor im Schulweg und speichert nichts.
+
+## Technik: so viele Geräte gehen
+
+Vierergruppen, höchstens 7 Geräte gleichzeitig, denn der Rechner beantwortet Sprachmodell-Anfragen nacheinander.
+
+## Daten: kein Konto, nichts dauerhaft gespeichert
+
+Kein Konto, keine Abfrage von Name, Alter oder Klasse, keine dauerhafte Speicherung der Eingaben.
+
+Merke: Stand: 22.11.2026. Verbindlich sind Impressum und Datenschutzerklärung des Betreibers, sie sind unten in der Fußzeile verlinkt.
+
+## Was ihr nicht braucht
+
+Kamera, Mikrofon und Gesichtserkennung sind im Unterricht nicht nötig und nicht vorgesehen.
+
+## Das nimmst du mit
+
+- Das Labor ist kostenlos, braucht kein Konto und speichert keine Eingaben dauerhaft.
+- Vierergruppen, höchstens 7 Geräte gleichzeitig, kurze Wartezeiten einplanen.
+- Kamera, Mikrofon und Gesichtserkennung bleiben im Unterricht aus. Die Aufgaben brauchen sie nicht.
+
+# Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden
+
+Adresse: __BASIS__/schule-stunde-1
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Stunde 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.
+
+45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+
+## Zum Ausdrucken
+
+Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
+
+## Der Zeitplan
+
+Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+
+## Einstieg (5 Minuten)
+
+Die Frage an die Klasse: Wo steckt KI schon in deinem Tag?
+
+## Erarbeitung (20 Minuten)
+
+Zwei Stationen: Punkte-Labor (12 Minuten) und Prompt-Werkstatt (8 Minuten), die Gruppen starten versetzt.
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben für die Gruppe, die auf ein Blatt passen.
+
+## Lösungshinweise
+
+Das Labor entscheidet nach den nächsten Beispielen, ein knapper Prompt lässt dem Modell Raum zum Raten.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Sätze vor, schwere Wege verlangen eigene Begründungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Erkennen, Lernen, Entscheiden: Ein Kreislauf aus Beispielen, Muster, Entscheidung und Prüfung.
+
+Merke: Ein Modell lernt Muster aus Beispielen. Wer die Beispiele auswählt, bestimmt, was es lernt.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: zwei Minuten in der Gruppe, dann eine Runde im Plenum.
+
+## Das nimmst du mit
+
+- KI lernt aus Beispielen. Sie bekommt keine fertige Regel eingebaut.
+- Mit den Beispielen ändert sich die Entscheidung. Wenige oder schiefe Beispiele führen zu falschen Entscheidungen.
+- Ein Sprachmodell rät, was fehlt. Ein genauer Prompt lässt weniger Raum zum Raten.
+
+## Fragen und Antworten
+
+Frage: Was tut das Punkte-Labor, wenn du mit der Maus eine freie Stelle ansteuerst?
+Antwort: Es sucht die nächsten Beispielpunkte und nimmt die Mehrheitsfarbe. Das Labor vergleicht mit den nächsten Beispielen und lässt sie abstimmen. Eine feste Regel gibt es nicht.
+
+Frage: Warum entscheidet ein Modell mit zu wenigen Beispielen oft schlecht?
+Antwort: Es kennt nur, was in den Beispielen steckt, und rät sonst. Ein Modell hat kein Wissen außerhalb seiner Beispiele. Wo sie fehlen, wird die Entscheidung unsicher.
+
+Frage: Wann hilft ein längerer Prompt besonders?
+Antwort: Wenn sonst Ziel, Ton oder Form der Antwort offen blieben. Länge allein hilft nicht. Es zählt, dass der Prompt sagt, was fehlen würde: Ziel, Ton und Form.
+
+# Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler
+
+Adresse: __BASIS__/schule-stunde-2
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Stunde 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.
+
+45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
+
+## Zum Ausdrucken
+
+Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
+
+## Der Zeitplan
+
+Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+
+## Einstieg (5 Minuten)
+
+Wie lernst du, einen Hund von einer Katze zu unterscheiden, und woher weiß es ein Computer?
+
+## Erarbeitung (20 Minuten)
+
+Zwei Stationen: Daten im Punkte-Labor (8 Minuten), Netz im Spielplatz (12 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben zu Daten, Netz und Lernrate.
+
+## Lösungshinweise
+
+Falsche Beispiele schaden bei kleinem k stark, schwierige Muster brauchen Zwischenschichten.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Einstellungen vor, schwere verlangen eigene Vermutungen.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Training ist ein Kreislauf: vorhersagen, Fehler messen, nachjustieren, wiederholen.
+
+Merke: Gute Daten und ein passendes Netz machen ein Modell stark. Fehlt eins davon, wird es schwach.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen: Fehler in Daten, Grenzen von Netzen, Verantwortung für die Beispiele.
+
+## Das nimmst du mit
+
+- Lernen heißt vorhersagen, Fehler messen, nachjustieren und wiederholen.
+- Die Daten bestimmen, was ein Modell kann. Falsche oder einseitige Beispiele führen zu falschen Entscheidungen.
+- Für schwierige Muster braucht ein Netz Zwischenschichten. Ein Neuron allein zieht nur eine gerade Grenze.
+
+## Fragen und Antworten
+
+Frage: Ein Netz ohne Zwischenschicht lernt das Schachbrett nicht. Was hilft meist?
+Antwort: Mindestens eine Zwischenschicht mit mehreren Neuronen einbauen. Ohne Zwischenschicht kann das Netz nur eine gerade Grenze ziehen. Das Schachbrett braucht eine gebogene.
+
+Frage: Was zeigt der Verlust im Netz-Spielplatz?
+Antwort: Wie weit die Vorhersagen vom richtigen Ergebnis entfernt sind. Der Verlust misst den Fehler. Das Training versucht, ihn Schritt für Schritt kleiner zu machen.
+
+Frage: Ein falsch gefärbter Punkt liegt mitten in der anderen Gruppe. Was folgt daraus?
+Antwort: Das Modell kann dort falsch entscheiden, vor allem bei kleinem k. Das Modell kann nicht wissen, dass der Punkt ein Fehler ist. Bei k gleich 1 zählt er voll.
+
+# Stunde 3: Echt oder erfunden? KI prüfen
+
+Adresse: __BASIS__/schule-stunde-3
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Stunde 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.
+
+45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
+
+## Zum Ausdrucken
+
+Arbeitsblatt für die Klasse und Lösungsblatt für dich, jeweils als PDF mit QR-Code zu dieser Seite.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einstieg (5 Minuten)
+
+Zwei Aussagen an der Tafel, eine stimmt, eine ist erfunden: Die Klasse stimmt ab und begründet.
+
+## Erarbeitung (20 Minuten)
+
+Drei Schritte: erfundene Frage im Chat (8 Minuten), Risiko-Spiel (6 Minuten), Antwort prüfen (6 Minuten).
+
+## Arbeitsblatt: die Aufgaben
+
+Drei Aufgaben: erfinden lassen, im Spiel entscheiden, eine Antwort prüfen.
+
+## Lösungshinweise
+
+Ein Modell klingt sicher und erfindet trotzdem, prüfen heißt: Quelle, zweite Quelle, Datum.
+
+## Differenzierung: leicht und schwer
+
+Leichte Wege geben Prüffragen vor, schwere Wege verlangen eigene Recherche.
+
+## Sicherung (10 Minuten): das Tafelbild
+
+Eine KI-Antwort ist ein Vorschlag, kein Beweis: erst prüfen, dann weitergeben.
+
+Merke: Je wichtiger die Antwort, desto genauer prüfst du sie.
+
+## Reflexion (10 Minuten)
+
+Drei Fragen zum Alltag: Hausaufgaben, Soziale Medien, Verantwortung.
+
+## Das nimmst du mit
+
+- Ein Sprachmodell kann überzeugend erfinden. Der Ton sagt nichts über die Wahrheit.
+- Prüfen heißt: Quelle nennen, zweite unabhängige Quelle suchen, Datum ansehen.
+- Das Modell zu fragen, ob es stimmt, ersetzt keine Prüfung.
+
+## Fragen und Antworten
+
+Frage: Warum erfindet ein Sprachmodell manchmal Quellen?
+Antwort: Es setzt Wörter nach Wahrscheinlichkeit zusammen und prüft nichts. Das Modell erzeugt Text, der plausibel klingt. Ob er stimmt, prüft es nicht.
+
+Frage: Woran erkennst du am besten, dass eine Quelle verlässlich ist?
+Antwort: Mehrere unabhängige Quellen sagen dasselbe. Unabhängige Quellen, die dasselbe sagen, sind ein gutes Zeichen. Likes und Platz in der Suche sagen nichts über Wahrheit.
+
+Frage: Das Modell nennt ein Buch mit Autor und Jahr. Was tust du zuerst?
+Antwort: Ich suche das Buch in einem Bibliothekskatalog. Ein Katalog ist eine unabhängige Quelle. Das Modell bestätigt oft seine eigene Antwort.
+
+# Handreichung für Lehrkräfte
+
+Adresse: __BASIS__/schule-lehrkraefte
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
+
+Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
+
+## Arbeitsblätter und Lösungen
+
+Für jede Stunde ein Arbeitsblatt und ein Lösungsblatt zum Ausdrucken.
+
+## Was die Klasse am Ende kann
+
+Vier Stufen, verteilt auf die drei Stunden, angelehnt an gängige Kompetenzrahmen.
+
+## Vorbereitung in zehn Minuten
+
+Link testen, Labore ausprobieren, Gruppen bilden, Aufgaben kopieren.
+
+## Fachbegriffe in einfachen Worten
+
+Zehn Wörter der drei Stunden, jeweils in einem Satz erklärt.
+
+## Häufige Schülerfragen
+
+Acht Fragen, die in der Klasse fast immer kommen, mit Kurzantwort.
+
+## Stolperstellen
+
+Typische Probleme im Unterricht und wie du sie umgehst.
+
+## Weiterlesen
+
+Quellen zu Kompetenzrahmen, Datenschutz in der Schule und Sprachmodellen im Unterricht.
+
+## Das nimmst du mit
+
+- Die drei Stunden decken Verstehen, Anwenden, Erstellen und Bewerten ab. Alle kommen ohne Kamera aus.
+- Gruppen von vier, höchstens 7 Geräte, versetzt starten: So bleibt die Wartezeit kurz.
+- Antworten des Modells sind Vorschläge. Bewerte die Begründung der Klasse, nicht den Wortlaut.
+
+# Information für die Schulleitung
+
+Adresse: __BASIS__/schule-schulleitung
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Information in einfacher Sprache für Schulleitungen zum KI-Labor: kostenloses Angebot ohne Konto, welche Daten verarbeitet werden und welche nicht, Verantwortlicher und Hosting, Kamera und Mikrofon im Unterricht nicht vorgesehen. Die Schule entscheidet über den Einsatz und klärt die Rechtsgrundlage. Kein Rechtsrat, Stand 22.11.2026.
+
+Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet. Kein Rechtsrat.
+
+## Das Angebot in Kürze
+
+Ein kostenloses Lernangebot zu künstlicher Intelligenz, ohne Konto und ohne Anmeldung.
+
+## Welche Daten verarbeitet werden
+
+Wenige technische Daten, kein Konto, keine Namen, keine Abfrage von Alter oder Klasse.
+
+Merke: Nur technisch nötige Daten, Einzelheiten in der Datenschutzerklärung des Betreibers.
+
+## Wer verantwortlich ist
+
+Verantwortlicher ist Daniel Alisch, Impressum und Datenschutzerklärung stehen auf seiner Hauptseite.
+
+## Hosting und Betrieb
+
+Das Labor läuft auf einem kleinen Rechner des Betreibers, ohne externe KI-Dienste.
+
+## Kamera und Mikrofon
+
+Im Unterrichtseinsatz sind Kamera, Mikrofon und Gesichtserkennung nicht vorgesehen und nicht nötig.
+
+## Was Ihre Schule selbst entscheidet
+
+Ob und wie das Labor eingesetzt wird und welche Rechtsgrundlage gilt, entscheidet die Schule.
+
+## Das nimmst du mit
+
+- Kostenlos, kein Konto, keine Namen. Nur technisch nötige Daten werden verarbeitet.
+- Verantwortlicher ist Daniel Alisch. Impressum und Datenschutzerklärung sind verlinkt. Stand: 22.11.2026.
+- Kamera und Mikrofon sind im Unterricht nicht vorgesehen. Die Schule entscheidet über den Einsatz und klärt die Rechtsgrundlage.
+
+# Information für Eltern
+
+Adresse: __BASIS__/schule-eltern
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Kurzinfo für Eltern in einfacher Sprache: Die Klasse nutzt das kostenlose KI-Labor im Unterricht. Es braucht kein Konto, es gibt keine Kamera und kein Mikrofon im Unterricht. Eingaben werden nicht dauerhaft gespeichert. Stand 22.11.2026, kein Rechtsrat.
+
+Ihre Klasse arbeitet im Unterricht mit dem KI-Labor. Hier lesen Sie in einfacher Sprache, was dabei passiert und was nicht.
+
+## Worum es geht
+
+Ihr Kind lernt im Unterricht mit dem KI-Labor, wie künstliche Intelligenz funktioniert.
+
+## Was Ihr Kind tut
+
+Ihr Kind setzt Punkte, lässt ein kleines Netz lernen, stellt Fragen an ein Sprachmodell und prüft Antworten.
+
+## Was mit Daten passiert
+
+Kein Konto, keine Namensabfrage, keine dauerhafte Speicherung der Eingaben.
+
+## Kamera und Mikrofon
+
+Im Unterricht werden weder Kamera noch Mikrofon noch Gesichtserkennung verwendet.
+
+## Fragen und Kontakt
+
+Bei Fragen zum Unterricht hilft die Lehrkraft, Fragen zum Labor beantwortet der Betreiber.
+
+Merke: Ihr Kind kann das Labor auch zu Hause kostenlos nutzen. Die Seite Ist das sicher? Was wird gespeichert? erklärt es in einfachen Worten.
+
+## Das nimmst du mit
+
+- Das Labor ist kostenlos und braucht kein Konto.
+- Im Unterricht werden keine Kamera, kein Mikrofon und keine Gesichtserkennung benutzt.
+- Eingaben werden nicht dauerhaft gespeichert. Details stehen in der Datenschutzerklärung des Betreibers, Stand 22.11.2026.
+
+# KI für Schulen: Was gibt es und wie fange ich an?
+
+Adresse: __BASIS__/ki-schule-ueberblick
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Orientierung für Lehrkräfte, Schulleitungen, Eltern und Schulträger: vier Wege zu KI an Schulen (Angebote der Länder, kommerzielle Bildungsangebote, Selbstbetrieb auf eigener Hardware, Fortbildung), ein Kriterien-Check für den Kauf und der belegte Stand der Förderung. Mit Quellen und Abrufdatum 22.11.2026. Kein Rechtsrat.
+
+Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
+
+## Vier Wege auf einen Blick
+
+Land, Kaufangebot, Eigenbetrieb, Fortbildung: Die Wege schließen sich nicht aus und lassen sich kombinieren.
+
+## Weg 1: Angebote der Länder
+
+Mehrere Länder stellen Schulen einen KI-Assistenten bereit, der für die Schule kostenfrei ist. Der Stand unterscheidet sich je Land.
+
+Merke: Fragen Sie zuerst Ihre Schulaufsicht oder Ihren Schulträger, ob Ihr Land schon ein Angebot hat. Es kostet die Schule meist nichts.
+
+## Weg 2: Kommerzielle Bildungsangebote
+
+Große und spezialisierte Anbieter haben Schul- und Bildungsvarianten. Lizenz, Altersgrenze und Datenschutz unterscheiden sich stark.
+
+Merke: Gratis in einer Bildungslizenz heißt nicht automatisch: freigegeben. Altersgrenze, Auftragsverarbeitung und Einwilligungen klärt die Schule trotzdem selbst.
+
+## Weg 3: Selbstbetrieb auf eigener Hardware
+
+Lokale Modelle auf Mini-PC, Jetson oder Schulserver: Die Daten bleiben im Haus, aber Betrieb und Qualität liegen bei Ihnen.
+
+## Weg 4: Fortbildung und Beratung
+
+Wissen entscheidet, ob KI im Unterricht hilft. Fortbildungen und Beratung gibt es von verschiedenen Anbietern.
+
+## Die Wege im Vergleich
+
+Kosten, Aufwand und Datenkontrolle unterscheiden sich. Die Tabelle zeigt die Tendenz, nicht jeden Einzelfall.
+
+## Förderung: Was belegt ist
+
+DigitalPakt 2.0 ist beschlossen. KI ist darin kein eigener Fördergegenstand. Den Stand für Ihre Schule kennt der Schulträger.
+
+## Worauf achten beim Kauf
+
+Neun Fragen, die Sie jedem Anbieter schriftlich stellen. Fehlt eine Antwort, ist das selbst eine Antwort.
+
+Merke: Verlassen Sie sich nicht auf Werbetext. Lassen Sie sich jede Antwort schriftlich geben und von der Datenschutzbeauftragten prüfen.
+
+## Quellen und Stand
+
+Alle Angaben mit Quelle. Abgerufen am 22.11.2026. Preise und Fristen ändern sich, prüfen Sie vor einer Entscheidung neu.
+
+## Hinweis
+
+Diese Seite ist keine Rechtsberatung und keine Kaufempfehlung.
+
+## Das nimmst du mit
+
+- Es gibt vier Wege: Angebot des Landes, Kaufangebot, Selbstbetrieb und Fortbildung. Sie lassen sich kombinieren.
+- Fragen Sie zuerst Land und Schulträger. Länderangebote kosten die Schule meist nichts, und KI ist im DigitalPakt 2.0 kein eigener Fördergegenstand.
+- Vor jedem Kauf: Auftragsverarbeitung, Standort, Alter, Trainingsdaten, Kosten über drei Jahre, Support, Ausstieg schriftlich klären.
+
+## Fragen und Antworten
+
+Frage: Ihre Schule will KI nutzen und hat kein Budget. Was ist der sinnvolle erste Schritt?
+Antwort: Beim Schulträger und Land nach einem bestehenden Angebot fragen. Mehrere Länder stellen Schulen KI-Assistenten kostenfrei bereit. Das prüft man vor jedem Kauf und vor jedem Eigenbau.
+
+Frage: Was gilt für lokale Modelle auf eigener Hardware?
+Antwort: Daten bleiben im Haus, Betrieb und Qualität sind Ihre Aufgabe. Lokal schützt vor Datenabfluss in die Cloud. Konten, Updates und Antwortqualität bleiben aber Aufgabe der Schule. Kleine Modelle sind meist schwächer.
+
+Frage: Was sagt die belegte Quelle zum DigitalPakt 2.0 und KI?
+Antwort: KI wird nur im Zusammenhang mit Lehrkräftefortbildung genannt. Laut Bundesmeldung vom 19.08.2026 ist KI kein eigener Fördergegenstand. Den Stand für Ihre Schule kennt der Schulträger.
+
+# KI an der Schule: In 7 Schritten starten
+
+Adresse: __BASIS__/ki-schule-einstieg
+Bereich: Für die Schule. Stand: 2026-11-22.
+
+Kurz gesagt: Sieben Schritte für den Start mit KI an einer Schule: Ziel klären, Schulleitung, Datenschutzbeauftragte und Schulträger einbinden, Rechtsgrundlage und Einwilligungen klären, kleine Pilotklasse, Lehrkräfte schulen, Regeln für Schüler, auswerten und entscheiden. Mit Checkliste und Zeitplan als Vorschlag. Kein Rechtsrat.
+
+Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
+
+## Der Weg im Überblick
+
+Sieben Schritte, klein anfangen, früh die richtigen Menschen einbinden, am Ende bewusst entscheiden.
+
+## Schritt 1 bis 3: Klären und absichern
+
+Zuerst Ziel, dann die richtigen Menschen, dann die rechtliche Grundlage. Erst danach kommen Kinder ins Spiel.
+
+## Schritt 4 bis 5: Klein anfangen, Menschen befähigen
+
+Eine Pilotklasse mit einer kleinen Aufgabe, dazu eine Schulung für die beteiligten Lehrkräfte.
+
+## Schritt 6 bis 7: Regeln und Entscheidung
+
+Klare Regeln für faire Nutzung, dann auswerten und bewusst entscheiden: weiter, anpassen oder lassen.
+
+Merke: Ein Pilot, der nichts verändern darf, ist keiner. Planen Sie die Entscheidung vor dem Start ein.
+
+## Checkliste zum Abhaken
+
+Zehn Punkte. Wenn Sie sie alle mit Ja beantworten, sind Sie startklar.
+
+## Zeitplan: ein Vorschlag
+
+Rund ein Halbjahr vom Ziel bis zur Entscheidung. Passen Sie den Plan an Ihre Schule an.
+
+## Wo es weitergeht
+
+Hilfe für Lehrkräfte, Schulleitung und Eltern, dazu Hintergrund zu den Wegen und Preisen.
+
+## Hinweis
+
+Diese Seite ist keine Rechtsberatung.
+
+## Das nimmst du mit
+
+- Erst Ziel, dann Werkzeug: sieben Schritte vom Ziel bis zur Entscheidung.
+- Binden Sie Schulleitung, Datenschutzbeauftragte und Schulträger früh ein, vor dem ersten Einsatz mit Kindern.
+- Starten Sie mit einer Pilotklasse und planen Sie die Entscheidung (weiter, anpassen, lassen) von Anfang an ein.
+
+## Fragen und Antworten
+
+Frage: Womit beginnt der Einstieg laut den sieben Schritten?
+Antwort: Mit einem klaren Ziel für Fach und Aufgabe. Das Ziel bestimmt, welches Werkzeug passt. Wer mit dem Kauf beginnt, kauft oft das Falsche.
+
+Frage: Warum startet man mit einer Pilotklasse?
+Antwort: Weil man klein lernt, was hilft und was stört. Ein kleiner Versuch zeigt Nutzen und Probleme, bevor viele Menschen und viel Geld beteiligt sind. Datenschutz bleibt auch im Pilot Pflicht.
+
+Frage: Was gehört zur Auswertung am Ende?
+Antwort: Ob das Ziel erreicht wurde und was der Betrieb über drei Jahre kostet. Entscheidend sind Zielerreichung, Rückmeldungen, Datenschutz und die Kosten über mehrere Jahre.
+
+# Echt oder KI? Bilder, Texte und Stimmen prüfen
+
+Adresse: __BASIS__/echt-oder-ki
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Sichere Erkennung gibt es nicht. Du sammelst Hinweise und schätzt ab. Prüfe die Herkunft: Quelle, Rückwärtssuche, Kontext.
+
+KI macht Bilder, Texte und Stimmen, die echt wirken. Hier lernst du Warnzeichen und Prüfwege kennen und warum es keine sichere Erkennung gibt.
+
+## Die ehrliche Ausgangslage
+
+Niemand erkennt KI-Inhalte sicher, auch Profis und Programme nicht. Prüfen heißt: Hinweise sammeln.
+
+Merke: Echt oder KI ist selten ein Ja oder Nein. Du sammelst Hinweise und schätzt die Wahrscheinlichkeit.
+
+## Bilder: wo KI oft patzt
+
+Schau auf Hände, Schrift, Spiegelungen, Schatten und Hintergründe. Dort passieren die meisten Fehler.
+
+## Texte: glatt, allgemein, selbstsicher
+
+KI-Texte klingen oft fehlerfrei, aber allgemein. Prüfe Namen, Zahlen und Quellen, denn die sind manchmal erfunden.
+
+## Stimmen: Klonen braucht wenig Material
+
+Eine Stimme lässt sich aus kurzen Aufnahmen nachbauen. Bei seltsamen Anrufen hilft eine Rückfrage auf anderem Weg.
+
+Merke: Bei Druck und Geldwünschen: erst auflegen, dann über einen bekannten Weg nachfragen.
+
+## Drei Prüfwege, die immer funktionieren
+
+Quelle suchen, Bild rückwärts suchen, Kontext prüfen. Das klappt auch dann, wenn du das Bild selbst nicht beurteilen kannst.
+
+## Erkennungsprogramme: Vorsicht
+
+Programme, die KI-Texte aufspüren sollen, irren sich häufig. Sie sind als alleiniger Beweis ungeeignet.
+
+Merke: Beide Fehler sind möglich: Fälschung glauben und Echtes abtun. Ein Programm nimmt dir das Urteil nicht ab.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Sichere Erkennung gibt es nicht. Du sammelst Hinweise und schätzt ab.
+- Prüfe die Herkunft: Quelle, Rückwärtssuche, Kontext. Das schlägt jedes Pixelstarren.
+- Erkennungsprogramme irren sich und sind kein Beweis. Bei Geldwünschen am Telefon: auflegen und zurückrufen.
+
+## Fragen und Antworten
+
+Frage: Du siehst ein Foto ohne jeden sichtbaren Fehler. Was kannst du daraus schließen?
+Antwort: Nichts Sicheres, gute KI-Bilder sind oft fehlerfrei. Fehlerfreiheit beweist nichts. Gute KI-Bilder sind sauber, und echte Fotos haben manchmal Fehler. Darum zählen Herkunft und Kontext.
+
+Frage: Was ist der verlässlichste erste Schritt bei einem Bild, das dir seltsam vorkommt?
+Antwort: Die Herkunft klären und früher suchen. Die Herkunft lässt sich auch dann prüfen, wenn das Bild perfekt aussieht. Finger sind ein Hinweis, Programme irren sich.
+
+Frage: Eine vertraute Stimme ruft an und verlangt dringend Geld, niemand soll davon wissen. Was tust du?
+Antwort: Auflegen und die bekannte Nummer zurückrufen. Klonen klappt oft sehr gut, der Klang beweist also nichts. Der Rückruf auf eine bekannte Nummer klärt es. Blockieren allein klärt nicht, ob jemand wirklich in Not ist.
+
+Frage: Ein Programm meldet: 95 Prozent KI. Wie gehst du damit um?
+Antwort: Als Hinweis unter mehreren, nicht als Urteil. Solche Werte sind Schätzungen mit Fehlern in beide Richtungen. Sie können ein Hinweis sein, aber niemals ein Beweis.
+
+Erklärvideo: Echt oder KI? (2.5 Minuten), __BASIS__/static/videos/echt-oder-ki.mp4, Untertitel: __BASIS__/static/videos/echt-oder-ki.vtt
+
+# Quellen prüfen: Wem kannst du glauben?
+
+Adresse: __BASIS__/quellen-pruefen
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Nicht auf der Seite bleiben: neuen Tab öffnen und nachsehen, was andere über die Quelle sagen. Prüfe Urheber, Datum und Interesse, und such Berichte, die selbst recherchiert haben. Ein Chatbot ist ein Wegweiser und keine Quelle.
+
+Eine Meldung, ein Video, eine Antwort vom Chatbot: Wie findest du in wenigen Minuten heraus, ob sie stimmt? Mit Seitwärtslesen und Gegenprobe.
+
+## Seitwärts lesen statt nur nach unten
+
+Profis bleiben nicht auf der Seite. Sie öffnen neue Tabs und suchen, was andere über die Seite sagen.
+
+Merke: Nicht auf der Seite nach Beweisen suchen, dass die Seite stimmt. Woanders nachsehen.
+
+## Vier Züge, die fast immer reichen
+
+Stopp, Urheber klären, andere Berichte suchen, zur Quelle zurückverfolgen.
+
+## Urheber und Interesse
+
+Wer etwas veröffentlicht, will meist etwas: informieren, verkaufen, überzeugen oder Klicks. Frag danach.
+
+Merke: Frag nicht nur: Stimmt das? Frag auch: Wer sagt das, und was hat er davon?
+
+## Gegenprobe: unabhängig ist das Stichwort
+
+Drei Seiten, die voneinander abschreiben, sind eine Quelle. Such Berichte, die selbst recherchiert haben.
+
+## Datum: wann war das?
+
+Alte Meldungen werden neu geteilt und wirken dann aktuell. Prüfe immer, wann etwas entstanden ist.
+
+Merke: Ohne Ort und Datum ist ein Bild nur ein Bild und kein Beleg.
+
+## Der Chatbot als Quelle?
+
+Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworten und erfundene Belege liefern.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Nicht auf der Seite bleiben: neuen Tab öffnen und nachsehen, was andere über die Quelle sagen.
+- Prüfe Urheber, Datum und Interesse, und such Berichte, die selbst recherchiert haben.
+- Ein Chatbot ist ein Wegweiser und keine Quelle. Das Original suchst du selbst.
+
+## Fragen und Antworten
+
+Frage: Was meint Seitwärtslesen?
+Antwort: Die Seite verlassen und woanders über sie nachlesen. Es heißt: Neuer Tab, den Namen der Quelle suchen, andere Urteile vergleichen. Auf der Seite selbst steht meist nur, was sie über sich sagt.
+
+Frage: Drei Blogs berichten dasselbe, alle haben es von einer Seite übernommen. Wie viele Quellen sind das?
+Antwort: Eine, weil die anderen nur kopiert haben. Es zählt, wer selbst recherchiert hat. Kopien erhöhen die Zahl der Seiten, aber nicht die Zahl der Belege.
+
+Frage: Ein Foto einer Überschwemmung geht heute viral, aber ohne Ort und Datum. Was ist ein guter nächster Schritt?
+Antwort: Per Rückwärtssuche prüfen, ob es früher auftauchte. Alte Bilder werden oft neu verwendet. Die Rückwärtssuche zeigt das schnell. Likes sagen nichts über Wahrheit, und Pixelfehler zeigen höchstens Bearbeitung.
+
+Frage: Ein Chatbot nennt dir für deine Aussage eine Studie mit Autor und Jahr. Was tust du?
+Antwort: Ich suche die Studie selbst, bevor ich sie angebe. Genaue Angaben wirken überzeugend, können aber erfunden sein. Wieder fragen hilft nicht, denn der Chatbot kann sich selbst bestätigen. Die Aussage ohne Beleg bleibt unbelegt.
+
+Erklärvideo: Quellen prüfen (2.5 Minuten), __BASIS__/static/videos/quellen-pruefen.mp4, Untertitel: __BASIS__/static/videos/quellen-pruefen.vtt
+
+# Fake News und Deepfakes: wie sie entstehen und was du tust
+
+Adresse: __BASIS__/fake-news-deepfakes
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite. Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.
+
+Falschmeldungen sind alt, KI macht sie schneller und überzeugender. Du verstehst, wie sie funktionieren, und weißt, was du tun kannst.
+
+## Zwei Begriffe, ein Unterschied
+
+Falschinformation ist ein Irrtum. Desinformation ist Absicht. Beides kann Schaden anrichten.
+
+Merke: Nicht jede falsche Meldung ist eine Lüge. Aber jede, die du weiterleitest, trägt deinen Namen.
+
+## Wie Falschmeldungen entstehen
+
+Meist braucht es keine KI: ein Zitat aus dem Zusammenhang, ein altes Bild, eine erfundene Seite.
+
+## Warum sie sich so schnell verbreiten
+
+Starke Gefühle machen teilen leicht. Plattformen zeigen, was Reaktionen bekommt, und das verstärkt den Kreislauf.
+
+## Was du tust, wenn du eine Fälschung siehst
+
+Nicht weiterleiten, kurz prüfen, bei Bedarf melden. Du musst nicht jeden Streit gewinnen.
+
+Merke: Nicht teilen ist die wirksamste Hilfe, die du allein leisten kannst.
+
+## Wenn es dich selbst trifft
+
+Wenn jemand ein gefälschtes Bild oder Video von dir verbreitet: Beweise sichern, Hilfe holen, melden. Du bist nicht schuld.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite.
+- Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.
+- Fälschungen echter Menschen verletzen Rechte. Wenn es dich trifft: sichern, Hilfe holen, melden.
+
+## Fragen und Antworten
+
+Frage: Ein Freund schickt dir ein Gerücht weiter, das er ehrlich glaubt. Wie nennt man das?
+Antwort: Falschinformation, denn die Täuschungsabsicht fehlt. Bei Falschinformation ist der Inhalt falsch, aber die Weitergabe gutgläubig. Desinformation setzt Täuschungsabsicht voraus.
+
+Frage: Warum verbreiten sich Falschmeldungen oft schneller als Richtigstellungen?
+Antwort: Sie wecken Gefühle, und Feeds zeigen Reaktionsstarkes. Empörung und Staunen lassen uns schnell teilen, und Empfehlungssysteme belohnen Reaktionen. Wahrheit spielt dafür keine Rolle.
+
+Frage: Ein Mitschüler hat ein gefälschtes Video von dir in einer Gruppe gepostet. Was ist ein guter erster Schritt?
+Antwort: Beweise sichern, Vertrauensperson ansprechen. Erst sichern, dann Hilfe holen und melden. Ignorieren lässt den Beitrag weiter wachsen, und Drohungen oder Gegenvideos machen es oft schlimmer.
+
+Frage: Was sind Cheap Fakes?
+Antwort: Einfache Tricks wie falsche Beschriftung oder Zeitlupe. Cheap Fakes sind einfache Tricks, oft aufwändig gar nicht nötig. Sie wirken trotzdem, weil Menschen nicht nachprüfen.
+
+Erklärvideo: Fake News und Deepfakes (2.4 Minuten), __BASIS__/static/videos/fake-news-deepfakes.mp4, Untertitel: __BASIS__/static/videos/fake-news-deepfakes.vtt
+
+# KI bei Hausaufgaben: fair nutzen
+
+Adresse: __BASIS__/ki-hausaufgaben-fair
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben. Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben.
+
+KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite?
+
+## Eine Frage, die fast alles klärt
+
+Hast du danach mehr verstanden, oder hast du nur etwas abgegeben? Daran siehst du, ob KI dir hilft.
+
+Merke: KI darf dir helfen, es zu verstehen. Das Verstehen selbst kann sie dir nicht abnehmen.
+
+## Lernhilfe und Abschreiben nebeneinander
+
+Gleiche Aufgabe, zwei Wege: Mit Erklärung lernst du. Mit fertiger Lösung nicht.
+
+## Wann es zum Problem wird
+
+Eine Aufgabe, die als eigene Leistung gilt, mit KI-Text abzugeben, ohne es zu sagen, ist Täuschung.
+
+Merke: Im Zweifel fragen. Offen angegebene Hilfe ist selten ein Problem, verschwiegene schon.
+
+## KI-Hilfe angeben
+
+Schreib auf, welches Werkzeug du wofür genutzt hast. Dann ist klar, was von dir ist.
+
+## Fragen an deine Lehrkraft
+
+Statt zu raten: Frag nach. Mit klaren Fragen kommst du zu klaren Antworten.
+
+## Gute Gründe, selbst zu denken
+
+Nicht aus Angst vor Strafe, sondern weil das, was du kannst, dir gehört.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Frag dich: Hast du danach mehr verstanden, oder nur etwas abgegeben?
+- Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben.
+- Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben.
+
+## Fragen und Antworten
+
+Frage: Welcher Auftrag an die KI hilft beim Lernen am meisten?
+Antwort: Erkläre mir die Aufgabe und frag mich danach ab. Wenn du dich erklären und abfragen lässt, denkst du selbst mit. Die anderen Aufträge nehmen dir genau das Denken ab.
+
+Frage: Deine Lehrkraft hat nichts zu KI gesagt. Was ist am klügsten?
+Antwort: Vorab nachfragen, was für diese Aufgabe gilt. Keine Regel heißt nicht automatisch erlaubt. Eine kurze Nachfrage klärt es, und du hast später nichts zu erklären.
+
+Frage: Warum ist es riskant, einen KI-Text ungeprüft zu übernehmen?
+Antwort: Er enthält eventuell Fehler oder erfundene Quellen. Sprachmodelle klingen sicher, auch wenn sie sich irren. Wer abgibt, was er nicht geprüft hat, steht dafür gerade.
+
+Frage: Was gehört in eine gute Angabe zur KI-Hilfe?
+Antwort: Werkzeug, Datum, Zweck und dein eigener Anteil. So ist nachvollziehbar, welcher Teil von dir ist. Die Angabe schützt dich und zeigt, dass du nichts versteckst.
+
+Erklärvideo: KI und Hausaufgaben (2.2 Minuten), __BASIS__/static/videos/ki-hausaufgaben-fair.mp4, Untertitel: __BASIS__/static/videos/ki-hausaufgaben-fair.vtt
+
+# Datenschutz im Alltag: was Apps über dich wissen
+
+Adresse: __BASIS__/datenschutz-im-alltag
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Apps sammeln mehr, als du eintippst: Nutzung, Standort, Gerät, Vorlieben. Gib Kamera, Mikrofon und Standort nur, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr. Behandle Chatbot-Eingaben wie eine Postkarte.
+
+Fast jede App sammelt Daten. Du lernst, was das ist, wo du mitentscheiden kannst und was dieses Labor mit deinen Daten tut und nicht tut.
+
+## Was Apps über dich wissen
+
+Nicht nur, was du eintippst: auch wann, wo, womit und wie lange du etwas tust.
+
+Merke: Daten entstehen auch nebenbei. Gesammelt wird mehr, als du eintippst.
+
+## Einwilligung: das Ja, das du gibst
+
+Vieles ist nur mit deiner Einwilligung erlaubt. Ein Klick auf Akzeptieren ist so ein Ja.
+
+## Konten und Passwörter
+
+Ein Konto muss nicht überall sein. Und jedes Konto braucht ein eigenes, langes Passwort.
+
+## Kamera, Mikrofon, Standort
+
+Gib Zugriff nur, wenn die App ihn für den Zweck braucht, und nur so lange wie nötig.
+
+## Was du keinem Chatbot eingibst
+
+Gib nichts ein, was du auch nicht öffentlich aufhängen würdest: Namen, Adressen, Passwörter, Gesundheit, Fremdes.
+
+Merke: Was du in ein Eingabefeld tippst, behandle wie eine Postkarte, nicht wie einen Brief.
+
+## Was dieses Labor tut und nicht tut
+
+Kein Konto, keine Anmeldung, keine externen KI-Dienste. Eingaben werden nur zum Rechnen genutzt.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Apps sammeln mehr, als du eintippst: Nutzung, Standort, Gerät, Vorlieben.
+- Gib Kamera, Mikrofon und Standort nur, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr.
+- Behandle Chatbot-Eingaben wie eine Postkarte. Keine Passwörter, Adressen oder Daten anderer.
+
+## Fragen und Antworten
+
+Frage: Eine einfache Taschenlampen-App will auf deine Kontakte zugreifen. Was passt?
+Antwort: Ablehnen, die App braucht das nicht. Freigaben sollen zum Zweck passen. Die Taschenlampe braucht keine Kontakte. Nachträgliches Löschen holt nichts zurück, was schon kopiert wurde.
+
+Frage: Welche Eingabe ist bei einem Online-Chatbot am wenigsten ratsam?
+Antwort: Hier mein Passwort, ist es sicher genug. Passwörter gehören nie in ein Eingabefeld eines Dienstes, den du nicht kontrollierst. Allgemeine Wissensfragen sind unkritisch.
+
+Frage: Was gilt bei einer Einwilligung nach der DSGVO?
+Antwort: Sie ist freiwillig, informiert und widerrufbar. Einwilligung muss freiwillig und informiert sein, und du darfst sie widerrufen. Für Jugendliche gelten zusätzliche Regeln, in Deutschland mit Eltern bis 16.
+
+Frage: Was stimmt über das KI-Labor?
+Antwort: Es braucht kein Konto, keine externen KI-Dienste. Das Labor läuft ohne Konto auf einem eigenen Rechner. Kamera und Mikrofon sind freiwillig, es gibt Beispielbilder.
+
+Erklärvideo: Datenschutz im Alltag (2.3 Minuten), __BASIS__/static/videos/datenschutz-im-alltag.mp4, Untertitel: __BASIS__/static/videos/datenschutz-im-alltag.vtt
+
+# Gute Fragen an die KI stellen
+
+Adresse: __BASIS__/prompts-fuer-schueler
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau. Nutze die KI als Trainer: erklären, abfragen, Feedback geben.
+
+Bessere Frage, bessere Antwort. Mit fünf Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media.
+
+## Warum die Frage so viel ausmacht
+
+Das Modell kennt nur, was du schreibst. Eine knappe Frage bekommt eine allgemeine Antwort.
+
+Merke: Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst.
+
+## Fünf Bausteine
+
+Rolle, Aufgabe, Material, Format, Grenzen. Nicht immer alle, aber meist zwei bis drei.
+
+## Beispiele aus Schule und Lernen
+
+Als Trainer, nicht als Lösungsmaschine: erklären lassen, abfragen lassen, Feedback holen.
+
+## Beispiele: Referat, Musik, Social Media
+
+Ideen sammeln, Texte prüfen, Tipps holen. Die Entscheidung und die Arbeit bleiben bei dir.
+
+## Nachfragen statt neu anfangen
+
+Die erste Antwort ist ein Entwurf. Mit einer Nachfrage wird sie besser.
+
+## Antworten prüfen, bevor du sie nutzt
+
+Sprachmodelle klingen sicher, auch wenn sie irren. Prüfe Zahlen, Namen und Behauptungen.
+
+Merke: Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht verstanden.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau.
+- Nutze die KI als Trainer: erklären, abfragen, Feedback geben. Die Arbeit bleibt bei dir.
+- Frag nach, wenn die Antwort nicht passt, und prüfe Zahlen, Namen und Quellen, bevor du sie benutzt.
+
+## Fragen und Antworten
+
+Frage: Welche Frage wird voraussichtlich die beste Antwort liefern?
+Antwort: Erkläre Photosynthese für Klasse 8 in fünf Sätzen. Die dritte Frage nennt Niveau, Länge und Stil. Die anderen lassen das Modell raten, was du willst.
+
+Frage: Du willst für einen Test lernen. Welcher Auftrag fördert das Lernen am meisten?
+Antwort: Stell mir zehn Fragen und sag, was ich üben soll. Beim Abfragen musst du selbst denken und bekommst Rückmeldung. Fertige Antworten oder Lösungen lesen sich leicht, bleiben aber kaum hängen.
+
+Frage: Die KI antwortet zu lang und zu schwer. Was ist am sinnvollsten?
+Antwort: Nachfragen: kürzer, einfacher, mit Alltagsbeispiel. Die erste Antwort ist ein Entwurf. Mit einer Nachfrage passt das Modell Länge und Niveau an, ohne dass du von vorn anfangen musst.
+
+Frage: Die KI nennt dir ein Zitat samt Seitenzahl aus einem Buch. Was tust du?
+Antwort: Ich schlage im Buch oder einer zweiten Quelle nach. Genaue Angaben können erfunden sein. Nur das Nachschlagen in einer eigenen Quelle klärt es.
+
+Erklärvideo: Gute Prompts für die Schule (2.2 Minuten), __BASIS__/static/videos/prompts-fuer-schueler.mp4, Untertitel: __BASIS__/static/videos/prompts-fuer-schueler.vtt
+
+# KI in deinem Alltag: wo sie überall steckt
+
+Adresse: __BASIS__/schueler-alltag-ki
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: KI steckt in Feeds, Playlists, Filtern, Übersetzern und Tastaturen: überall, wo aus Daten gelernt wird. Ein Feed rät, was dich festhält, nicht, was gut für dich ist. Du kannst Empfehlungen lenken: Nicht interessiert wählen, Themen filtern, Einstellungen und Verlauf prüfen.
+
+Feed, Filter, Übersetzer, Spiele, Playlist: KI ist schon da, auch wenn niemand "KI" draufschreibt. Hier siehst du, wo und wie sie arbeitet.
+
+## Eine Liste, die du schon kennst
+
+Du nutzt KI täglich, oft ohne es zu merken. Die meisten Beispiele sind Dinge, die du gar nicht als KI siehst.
+
+Merke: KI ist meist kein Roboter. Meist ist es ein Programm, das aus Daten Muster gelernt hat.
+
+## Wie ein Feed entscheidet
+
+Der Feed rät, was dich fesselt. Dafür zählt, was du tust, nicht, was du sagst.
+
+## Musik: wie die Playlist deinen Geschmack trifft
+
+Streamingdienste vergleichen, was du hörst, mit dem, was andere mit ähnlichem Geschmack hören.
+
+## Kamera: Filter und Gesichtserkennung
+
+Filter finden dein Gesicht im Bild, zum Beispiel Augen und Mund, und legen den Effekt passend darüber.
+
+## Übersetzer, Tastatur, Spiele
+
+Alltagswerkzeuge, die aus Text, Sprache oder Spielverhalten lernen. Sie helfen und machen Fehler.
+
+## Du hast mehr Einfluss, als du denkst
+
+Feeds lassen sich lenken. Durch das, was du tust, und durch Einstellungen.
+
+Merke: Dein Feed ist kein Schicksal. Du kannst ihn beeinflussen, bewusst oder durch Einstellungen.
+
+## Weiterlesen
+
+Quellen zu dieser Seite.
+
+## Das nimmst du mit
+
+- KI steckt in Feeds, Playlists, Filtern, Übersetzern und Tastaturen: überall, wo aus Daten gelernt wird.
+- Ein Feed rät, was dich festhält, nicht, was gut für dich ist.
+- Du kannst Empfehlungen lenken: Nicht interessiert wählen, Themen filtern, Einstellungen und Verlauf prüfen.
+
+## Fragen und Antworten
+
+Frage: Woran orientiert sich ein Kurzvideo-Feed grob?
+Antwort: Daran, was du tust: ansehen, liken, teilen. Empfehlungen beruhen auf Signalen aus deinem Verhalten. Sie schätzen, was dich interessiert, nicht, was gut für dich ist.
+
+Frage: Ein Spielgegner folgt festen Regeln, die jemand programmiert hat. Ist das KI im Sinne des maschinellen Lernens?
+Antwort: Nein, er folgt festen Regeln, lernt nicht aus Daten. Reagieren allein ist noch kein Lernen. Bei maschinellem Lernen findet das Programm Muster in Daten, statt dass jemand jede Regel schreibt.
+
+Frage: Dein Feed zeigt dir immer mehr von einem Thema, das du nur einmal länger angesehen hast. Was kannst du tun?
+Antwort: Nicht interessiert wählen, Einstellungen prüfen. Plattformen bieten meist Knöpfe und Einstellungen, mit denen du den Feed lenkst. Mehr ansehen verstärkt das Thema nur.
+
+Frage: Wie arbeitet ein Kamerafilter, der dir Hasenohren aufsetzt, grob?
+Antwort: Er findet erst dein Gesicht und setzt den Effekt dann dazu. Zuerst wird das Gesicht samt Augen und Mund erkannt, dann sitzt der Effekt passend, und das viele Male pro Sekunde.
 
 # Glossar
 

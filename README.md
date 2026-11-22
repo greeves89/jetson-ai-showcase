@@ -31,23 +31,28 @@ app/index.html        schlanke Hülle der Oberfläche
 app/static/           app.js (Kern, Router, Glossar), content*.js (Lerninhalte), widgets*.js, demos*.js, module.json
 app/static/beispiele/ fertige Beispieldaten der Business-Use-Cases
 videos/               Remotion-Projekt für die Erklärvideos
-docs/                 Lehrplan, Schreibleitfaden, Baustein- und Videoskizzen, Veröffentlichungsplan, Lizenzen
-scripts/              Einrichtung (setup.sh), Autostart (systemd), Hilfsprogramme
+docs/                 Lehrplan, Schreibleitfaden, Baustein- und Videoskizzen, Veröffentlichungsplan, Lizenzen, Anleitung zum Selbstaufbau
+scripts/              Vorab-Check (check.sh), Einrichtung (setup.sh), Autostart (systemd), Hilfsprogramme
 tests/                Browser-Tests (Chrome, Fake-Webcam), Rauchtest über alle Seiten
 ```
 Neue Seiten kommen als Datei `app/static/content-<thema>.js` dazu und werden in `app/static/module.json`
 eingetragen. Die Schnittstelle für Bausteine steht im Kopfkommentar von `app/static/app.js`.
 
 ## Einrichten (auf dem Jetson)
+Die vollständige Schritt-für-Schritt-Anleitung mit Fehlersuche steht in
+[`docs/selbst-aufbauen.md`](docs/selbst-aufbauen.md). Kurzfassung:
+
 Voraussetzungen: JetPack 6 (CUDA 12.6, Python 3.10, OpenCV aus JetPack), Ollama mit `llama3.2:3b` und
-`nomic-embed-text`. Es ist kein Root nötig, pip wird per `get-pip.py --user` eingerichtet.
+`nomic-embed-text`. Das Labor selbst läuft ohne Root, pip wird per `get-pip.py --user` eingerichtet. Der Ollama-Installer, der Leistungsmodus (`nvpmodel`) und notfalls `loginctl enable-linger` brauchen `sudo`. Ollama 0.12.3 ist die Version des Referenzgeräts. Der Aufbau dauert grob einen halben bis ganzen Tag. Das Repo muss unter
+`~/jetson-ai-showcase` liegen, die Dienstdatei erwartet diesen Pfad.
 
 ```bash
-git clone <repo> ~/jetson-ai-showcase && cd ~/jetson-ai-showcase
+git clone https://github.com/greeves89/jetson-ai-showcase.git ~/jetson-ai-showcase && cd ~/jetson-ai-showcase
+bash scripts/check.sh            # Vorab-Check, ändert nichts am System
 bash scripts/setup.sh            # Pakete, Gesichts-/Objekt-/Merkmalsmodelle, Whisper, Piper-Stimmen, Zertifikat
 bash scripts/install-service.sh  # Autostart als systemd-Benutzerdienst
 ```
-Dann im Netz öffnen: `https://<jetson-ip>:8443` (selbstsigniertes Zertifikat, die Warnung einmal bestätigen; Browser
+Drei Skripte: der Check ist freiwillig, `setup.sh` und `install-service.sh` richten ein. Dann im Netz öffnen: `https://<jetson-ip>:8443` (selbstsigniertes Zertifikat, die Warnung einmal bestätigen; Browser
 geben die Kamera nur bei HTTPS frei).
 
 Hinweis zu numpy: Es muss `numpy<2` bleiben, sonst bricht das OpenCV aus JetPack.
@@ -72,5 +77,9 @@ Fake-Mikrofon über `FAKE_AUDIO`).
 - Kamerabilder, Audio und Texte werden nur im Arbeitsspeicher verarbeitet und nicht gespeichert.
 
 ## Lizenzen
+Lizenz des Codes: wird vom Betreiber festgelegt.
+
 Stimmen und Beispielfotos mit Quellen und Lizenzen: [`docs/lizenzen.md`](docs/lizenzen.md) und
-`app/static/beispiele/QUELLEN.md`.
+`app/static/beispiele/QUELLEN.md`. Das Sprachmodell Llama 3.2 steht unter der Llama 3.2 Community License
+("Built with Llama"), die Übersicht aller Bausteine zeigt die Seite "Lizenzen und Quellen" im Labor und der Abschnitt
+"Lizenzen der Bausteine" in [`docs/selbst-aufbauen.md`](docs/selbst-aufbauen.md).

@@ -133,18 +133,18 @@ main{min-width:0;padding:calc(var(--leiste) + 16px) clamp(24px,5vw,72px) 96px;ou
 .fuss code{font-size:.92em}
 
 /* ---------- Hero: eine Komponente fuer jede Seite ---------- */
-.hero{display:flex;flex-direction:column;align-items:center;text-align:center;padding:16px 0 48px}
+.hero{display:flex;flex-direction:column;align-items:flex-start;text-align:left;padding:16px 0 48px}
 .hero-icon{width:88px;height:88px;border-radius:24px;background:var(--flaeche);color:var(--akzent);display:grid;place-items:center;margin-bottom:24px}
 .hero-icon svg.ic{width:44px;height:44px;stroke-width:1.5}
 .ueber{margin:0 0 8px;font-size:17px;font-weight:600;letter-spacing:-.022em;color:var(--leise)}
 h1{font-size:clamp(34px,5vw,52px);line-height:1.08;letter-spacing:-.034em;font-weight:700;margin:0 0 16px}
-.lead{font-size:clamp(19px,2vw,21px);line-height:1.4;color:var(--leise);margin:0;max-width:44ch;letter-spacing:-.018em}
-.kennzahlen{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin-top:24px}
+.lead{font-size:clamp(19px,2vw,21px);line-height:1.4;color:var(--leise);margin:0;max-width:62ch;letter-spacing:-.018em}
+.kennzahlen{display:flex;flex-wrap:wrap;justify-content:flex-start;gap:8px;margin-top:24px}
 .kennzahl{display:inline-flex;align-items:center;gap:8px;min-height:32px;padding:0 16px 0 12px;border-radius:99px;background:var(--flaeche);font-size:15px;font-weight:500;letter-spacing:-.016em;color:var(--text)}
 .kennzahl svg.ic{width:16px;height:16px;color:var(--akzent)}
 .kennzahl.warn{background:color-mix(in srgb,var(--orange) 14%,var(--flaeche));color:var(--orange)}
 .kennzahl.warn svg.ic{color:var(--orange)}
-.hero-aktionen{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:16px;margin-top:32px}
+.hero-aktionen{display:flex;flex-wrap:wrap;justify-content:flex-start;align-items:center;gap:16px;margin-top:32px}
 .hero.gross h1{font-size:clamp(40px,6.4vw,72px);line-height:1.04;letter-spacing:-.04em;max-width:16ch}
 .hero.gross .lead{max-width:40ch}
 .hero.gross .hero-icon{width:96px;height:96px;border-radius:26px}

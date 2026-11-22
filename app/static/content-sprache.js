@@ -11,6 +11,7 @@ seiten: {
 /* ------------------------------------------------------------------ 1 */
 "tokens-sprachmodelle": {
   nav: "Sprachmodelle", typ: "lektion", gruppe: "Sprache", titel: "Wie ein Sprachmodell gebaut ist", symbol: "genki",
+  lernziele: ["Du kannst erklären, wie ein Sprachmodell Text in Token zerlegt und in Zahlen verwandelt.", "Du kannst mit eigenen Worten sagen, was Aufmerksamkeit tut.", "Du kannst Vortraining und Feinabstimmung unterscheiden.", "Du kannst sagen, was das Kontextfenster ist und warum kleine Modelle weniger wissen."],
   kurz: "Wie wird aus einem Stapel Text ein Modell, das Fragen beantwortet? Hier siehst du die Bausteine: Token, Zahlen, Aufmerksamkeit und zwei Lernphasen.",
   widget: "tokenizer-labor",
   videos: ["sprachmodell-aufbau"],
@@ -141,6 +142,7 @@ seiten: {
 /* ------------------------------------------------------------------ 2 */
 "prompting": {
   nav: "Gut fragen", typ: "lektion", gruppe: "Sprache", titel: "Gut fragen: Prompts schreiben", symbol: "chat",
+  lernziele: ["Du kannst die Bausteine eines guten Prompts nennen.", "Du kannst einen schwachen Prompt verbessern und den Unterschied prüfen.", "Du kannst Beispiele und Zwischenschritte nutzen, um bessere Antworten zu bekommen.", "Du kannst erkennen, welche Daten nicht in einen Prompt gehören."],
   kurz: "Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn. Hier lernst du, wie du Aufgaben so stellst, dass die Antwort brauchbar ist.",
   widget: "prompt-werkstatt",
   videos: ["prompting-grundlagen", "prompting-beispiele"],
@@ -275,6 +277,7 @@ seiten: {
 /* ------------------------------------------------------------------ 3 */
 "llm-grenzen": {
   nav: "Grenzen", typ: "lektion", gruppe: "Sprache", titel: "Grenzen und Risiken von Sprachmodellen", symbol: "genki",
+  lernziele: ["Du kannst erklären, warum eine gut klingende Antwort falsch sein kann.", "Du kannst Halluzination, veraltetes Wissen und Prompt-Injection unterscheiden.", "Du kannst drei Regeln für den Umgang mit Sprachmodellen anwenden."],
   kurz: "Sprachmodelle schreiben überzeugend, auch wenn sie falsch liegen. Hier lernst du die typischen Risiken kennen und wie du damit arbeitest.",
   widget: "risiko-spiel",
   videos: ["llm-grenzen-risiken"],
@@ -418,6 +421,7 @@ seiten: {
 /* ------------------------------------------------------------------ 4 */
 "finetuning-oder-rag": {
   nav: "Wissen: Modell oder Dokument", typ: "lektion", gruppe: "Sprache", titel: "Wissen ins Modell oder ins Dokument?", symbol: "chat",
+  lernziele: ["Du kannst die drei Wege erklären, Wissen ins Modell zu bringen.", "Du kannst entscheiden, wann besser fragen, RAG oder Nachtrainieren passt.", "Du kannst den Satz „Wir trainieren das Modell mit unseren Dokumenten“ richtig einordnen."],
   kurz: "Das Modell kennt deine Firma nicht. Du hast drei Wege, das zu ändern. Hier siehst du, welcher wann passt.",
   videos: ["wissen-ins-modell-oder-dokument"],
   abschnitte: [
@@ -552,6 +556,7 @@ seiten: {
 /* ------------------------------------------------------------------ 5 */
 "sprachausgabe": {
   nav: "Sprachausgabe", typ: "lektion", gruppe: "Sprache", titel: "Text zu Sprache", symbol: "whisper", demo: "tts",
+  lernziele: ["Du kannst die Schritte von Text zu Stimme nennen.", "Du kannst erklären, warum Zahlen, Abkürzungen und Namen oft falsch klingen.", "Du kannst sagen, was beim Klonen von Stimmen zu beachten ist."],
   kurz: "Wie wird aus einem geschriebenen Satz eine Stimme? Das Labor oben lässt den Jetson sprechen. Hier erfährst du, was dabei passiert.",
   videos: ["sprachausgabe-erklaert"],
   abschnitte: [

@@ -15,7 +15,7 @@ mkdirSync("../app/static/videos", { recursive: true });
 let letzte = -1;
 const stumm = `arbeit/${id}-stumm.mp4`;
 await renderMedia({
-  composition: comp, serveUrl, codec: "h264", outputLocation: stumm, concurrency: 3, crf: 14, pixelFormat: "yuv420p",
+  composition: comp, serveUrl, codec: "h264", outputLocation: stumm, concurrency: Number(process.env.CONCURRENCY ?? 2), crf: 14, pixelFormat: "yuv420p",
   onProgress: ({ progress }) => { const p = Math.floor(progress * 10) * 10; if (p > letzte) { letzte = p; process.stdout.write(`${id} ${p}% `); } },
 });
 console.log();

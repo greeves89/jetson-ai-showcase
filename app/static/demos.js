@@ -1121,10 +1121,18 @@
       const fe = /\[Fehler: ([^\]]*)\]/.exec(roh);
       if (fe) fehler = "Das Modell meldet einen Fehler: " + fe[1];
       else if (!z.meta && z.tokens.length === 1 && /^\[(?!\d+\])[^\]]+\]$/.test(z.tokens[0])) { fehler = z.tokens[0].slice(1, -1); z.tokens = []; m.tokens = []; }
+      // Meldungen des Servers ("[Dem Jetson fehlt gerade freier Speicher ...]"): freundlicher Hinweis-Kasten statt Text in eckigen Klammern in der Blase
+      const sv = /^\s*\[((?:Dem Jetson fehlt|Das Sprachmodell antwortet|Das Modell ist auf dem Jetson)[^\]]*)\]\s*$/.exec(z.tokens.join(""));
+      let hinweisText = "";
+      if (sv) { hinweisText = sv[1]; z.tokens = []; m.tokens = []; fehler = fehler || hinweisText; }
       if (fehler && z.tokens.length === 0) m.platz = fehler;
       if (fehler && !z.tokens.length && KL.last.istBelegtText(fehler)) belegt = true;
       fuelle(m);
-      if (belegt && !z.tokens.length) {
+      const nochmal = () => { const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1); m.el.remove(); senden(text, true); };
+      if (hinweisText) {
+        m.el.classList.add("msg-hinweis");
+        m.el.replaceChildren(KL.last.box(hinweisText, nochmal));
+      } else if (belegt && !z.tokens.length) {
         // Freundlich statt Fehler: Wiederholknopf, die Frage bleibt stehen und wird nicht doppelt eingetragen
         m.meta.replaceChildren(h("button", { type: "button", class: "btn klein", onclick: () => {
           const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1);

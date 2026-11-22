@@ -185,6 +185,10 @@
       } else { sichtbar = true; Promise.resolve().then(pruefe); }
       document.addEventListener("visibilitychange", pruefe);
       abmelden.push(() => document.removeEventListener("visibilitychange", pruefe));
+      // Drucken und Bildschirmfotos der ganzen Seite: alle Elemente im Endzustand zeigen, nicht auf das Sichtbarwerden warten
+      const drucken = () => { if (!ctx.tot) ctx.zeigeAlles(); };
+      root.addEventListener("beforeprint", drucken);
+      abmelden.push(() => root.removeEventListener("beforeprint", drucken));
     }
     return () => {
       ctx.tot = true;

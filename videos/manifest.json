@@ -1599,6 +1599,274 @@
           "titel": "Vorher klären"
         }
       ]
+    },
+    {
+      "id": "echt-oder-ki",
+      "titel": "Echt oder KI?",
+      "untertitel": "So gehst du mit Bildern um, die zu gut aussehen",
+      "dauer_s": 151.1,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Zwei Bilder"
+        },
+        {
+          "t": 11.9,
+          "titel": "Bauchgefühl"
+        },
+        {
+          "t": 24.4,
+          "titel": "Fehler im Bild"
+        },
+        {
+          "t": 38.4,
+          "titel": "Die Modelle lernen"
+        },
+        {
+          "t": 49.2,
+          "titel": "Woher kommt es?"
+        },
+        {
+          "t": 66.8,
+          "titel": "Echt, aber falsch"
+        },
+        {
+          "t": 83,
+          "titel": "Bildersuche"
+        },
+        {
+          "t": 102.6,
+          "titel": "Herkunftsangabe"
+        },
+        {
+          "t": 124.6,
+          "titel": "Dein Plan"
+        }
+      ]
+    },
+    {
+      "id": "quellen-pruefen",
+      "titel": "Quellen prüfen",
+      "untertitel": "Fünf Schritte, bevor du etwas glaubst oder weiterschickst",
+      "dauer_s": 149.3,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Tausend Likes"
+        },
+        {
+          "t": 14.8,
+          "titel": "Schritt 1: Stopp"
+        },
+        {
+          "t": 29.3,
+          "titel": "Schritt 2: Wer steckt dahinter?"
+        },
+        {
+          "t": 42.9,
+          "titel": "Schritt 3: Seitlich lesen"
+        },
+        {
+          "t": 57.2,
+          "titel": "Schritt 4: Zweite Quelle"
+        },
+        {
+          "t": 70.8,
+          "titel": "Schritt 5: Zum Original"
+        },
+        {
+          "t": 86,
+          "titel": "Probelauf"
+        },
+        {
+          "t": 112.9,
+          "titel": "Und die KI?"
+        },
+        {
+          "t": 131.6,
+          "titel": "Dein Merksatz"
+        }
+      ]
+    },
+    {
+      "id": "fake-news-deepfakes",
+      "titel": "Fake News und Deepfakes",
+      "untertitel": "Was dahinter steckt und wie du dich schützt",
+      "dauer_s": 145.7,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Sprachnachricht"
+        },
+        {
+          "t": 15.1,
+          "titel": "Zwei Begriffe"
+        },
+        {
+          "t": 34.3,
+          "titel": "Warum das jemand tut"
+        },
+        {
+          "t": 48.5,
+          "titel": "Was ist ein Deepfake?"
+        },
+        {
+          "t": 63.7,
+          "titel": "Spaß oder Schaden"
+        },
+        {
+          "t": 78.6,
+          "titel": "So prüfst du"
+        },
+        {
+          "t": 94.3,
+          "titel": "Das Codewort"
+        },
+        {
+          "t": 110,
+          "titel": "Teilen ist Mitmachen"
+        },
+        {
+          "t": 127.2,
+          "titel": "Wenn es dich trifft"
+        }
+      ]
+    },
+    {
+      "id": "ki-hausaufgaben-fair",
+      "titel": "KI und Hausaufgaben",
+      "untertitel": "Lernen, ohne zu schummeln",
+      "dauer_s": 131.8,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Der Auftrag"
+        },
+        {
+          "t": 12.7,
+          "titel": "Das Fitnessstudio"
+        },
+        {
+          "t": 25.7,
+          "titel": "Dafür ist KI gut"
+        },
+        {
+          "t": 39.1,
+          "titel": "Wo es unfair wird"
+        },
+        {
+          "t": 52.2,
+          "titel": "Die Ampel"
+        },
+        {
+          "t": 73.7,
+          "titel": "Ein fairer Ablauf"
+        },
+        {
+          "t": 89.9,
+          "titel": "Offen sagen"
+        },
+        {
+          "t": 103.7,
+          "titel": "Nachprüfen"
+        },
+        {
+          "t": 115,
+          "titel": "Der Tafel-Test"
+        }
+      ]
+    },
+    {
+      "id": "datenschutz-im-alltag",
+      "titel": "Datenschutz im Alltag",
+      "untertitel": "Was du preisgibst und wie du es kontrollierst",
+      "dauer_s": 138.1,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Was weiß das Netz?"
+        },
+        {
+          "t": 13.5,
+          "titel": "Bezahlen mit Daten"
+        },
+        {
+          "t": 29.2,
+          "titel": "Das Foto verrät mehr"
+        },
+        {
+          "t": 44.1,
+          "titel": "Das Netz vergisst wenig"
+        },
+        {
+          "t": 56.2,
+          "titel": "Fünf Minuten Einstellungen"
+        },
+        {
+          "t": 71.8,
+          "titel": "KI-Chats"
+        },
+        {
+          "t": 88.6,
+          "titel": "Gute Passwörter"
+        },
+        {
+          "t": 106.5,
+          "titel": "Deine Rechte"
+        },
+        {
+          "t": 123.3,
+          "titel": "Und die anderen"
+        }
+      ]
+    },
+    {
+      "id": "prompts-fuer-schueler",
+      "titel": "Gute Prompts für die Schule",
+      "untertitel": "Fragen, mit denen du wirklich etwas lernst",
+      "dauer_s": 133.6,
+      "kapitel": [
+        {
+          "t": 0,
+          "titel": "Die Textwand"
+        },
+        {
+          "t": 12.4,
+          "titel": "Sie muss raten"
+        },
+        {
+          "t": 25.3,
+          "titel": "Rolle und Kontext"
+        },
+        {
+          "t": 37.3,
+          "titel": "Aufgabe und Format"
+        },
+        {
+          "t": 52.6,
+          "titel": "Hinweise statt Lösung"
+        },
+        {
+          "t": 64.4,
+          "titel": "Lass dich abfragen"
+        },
+        {
+          "t": 77,
+          "titel": "Erklär es zurück"
+        },
+        {
+          "t": 92.3,
+          "titel": "Nachhaken"
+        },
+        {
+          "t": 106.6,
+          "titel": "Prüfen und schützen"
+        },
+        {
+          "t": 118.5,
+          "titel": "Deine Vorlage"
+        }
+      ]
     }
   ]
 }

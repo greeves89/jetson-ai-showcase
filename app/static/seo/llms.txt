@@ -12,6 +12,10 @@ Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vo
 
 - [Über das KI-Labor](__BASIS__/ueber): Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Grenzen liegen.
 
+## Experimente
+
+- [Experimente, leicht erklärt](__BASIS__/experimente): Probiere aus, wie KI arbeitet.
+
 ## Grundlagen
 
 Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.
@@ -112,7 +116,30 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 
 - [Der Jetson und seine Hardware](__BASIS__/hardware): Ein kleiner Computer mit GPU, gebaut für KI am Gerät.
 - [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): In Alltagssprache: Was diese Seite auf deinem Gerät ablegt, was mit Kamera, Mikrofon und eingetippten Texten passiert und was du selbst in der Hand hast.
+- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Das KI-Labor ist frei verfügbar.
 - [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
+
+## Für die Schule
+
+- [KI im Unterricht: Einstieg für Klassen und Lehrkräfte](__BASIS__/schule-start): Kostenlos und ohne Konto: drei Stunden für Klasse 8 und die Technik, die dafür nötig ist.
+- [Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden](__BASIS__/schule-stunde-1): 45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+- [Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler](__BASIS__/schule-stunde-2): 45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
+- [Stunde 3: Echt oder erfunden? KI prüfen](__BASIS__/schule-stunde-3): 45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
+- [Handreichung für Lehrkräfte](__BASIS__/schule-lehrkraefte): Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
+- [Information für die Schulleitung](__BASIS__/schule-schulleitung): Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet.
+- [Information für Eltern](__BASIS__/schule-eltern): Ihre Klasse arbeitet im Unterricht mit dem KI-Labor.
+- [KI für Schulen: Was gibt es und wie fange ich an?](__BASIS__/ki-schule-ueberblick): Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
+- [KI an der Schule: In 7 Schritten starten](__BASIS__/ki-schule-einstieg): Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
+
+## Medienkompetenz
+
+- [Echt oder KI? Bilder, Texte und Stimmen prüfen](__BASIS__/echt-oder-ki): KI macht Bilder, Texte und Stimmen, die echt wirken.
+- [Quellen prüfen: Wem kannst du glauben?](__BASIS__/quellen-pruefen): Mit Seitwärtslesen und Gegenprobe.
+- [Fake News und Deepfakes: wie sie entstehen und was du tust](__BASIS__/fake-news-deepfakes): Falschmeldungen sind alt, KI macht sie schneller und überzeugender.
+- [KI bei Hausaufgaben: fair nutzen](__BASIS__/ki-hausaufgaben-fair): KI kann beim Lernen helfen oder die Arbeit komplett abnehmen.
+- [Datenschutz im Alltag: was Apps über dich wissen](__BASIS__/datenschutz-im-alltag): Fast jede App sammelt Daten.
+- [Gute Fragen an die KI stellen](__BASIS__/prompts-fuer-schueler): Bessere Frage, bessere Antwort.
+- [KI in deinem Alltag: wo sie überall steckt](__BASIS__/schueler-alltag-ki): Feed, Filter, Übersetzer, Spiele, Playlist: KI ist schon da, auch wenn niemand "KI" draufschreibt.
 
 ## Optional
 

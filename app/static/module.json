@@ -19,8 +19,12 @@
     "content-sehen-agenten.js",
     "content-prognose-betrieb.js",
     "content-usecases.js",
+    "content-schule.js",
+    "content-medien.js",
     "content-visual-demo.js",
     "content-laien.js",
+    "content-experimente.js",
+    "content-schulen-ueberblick.js",
     "content-ueber.js",
     "content-rechtliches.js"
   ],

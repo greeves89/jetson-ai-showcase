@@ -1,0 +1,87 @@
+{
+ "id": "prompts-fuer-schueler",
+ "titel": "Gute Prompts für die Schule",
+ "untertitel": "Fragen, mit denen du wirklich etwas lernst",
+ "szenen": [
+  {
+   "id": "textwand",
+   "kapitel": "Die Textwand",
+   "saetze": [
+    "Du tippst: Erklär Bruchrechnung. Und bekommst eine Textwand, die auch aus einem Lexikon sein könnte.",
+    "Oft liegt das nicht an der KI, sondern an der Frage."
+   ]
+  },
+  {
+   "id": "raten",
+   "kapitel": "Sie muss raten",
+   "saetze": [
+    "Eine KI sieht nicht, in welcher Klasse du bist. Sie weiß nicht, was du schon kannst und was dich nervt.",
+    "Wenn du es ihr nicht sagst, rät sie. Und Raten ergibt Durchschnitt."
+   ]
+  },
+  {
+   "id": "rolle",
+   "kapitel": "Rolle und Kontext",
+   "saetze": [
+    "Sag ihr, wer sie sein soll und wer du bist. Zum Beispiel: Du bist ein geduldiger Nachhilfelehrer.",
+    "Ich bin in Klasse acht und verstehe das Kürzen nicht."
+   ]
+  },
+  {
+   "id": "aufgabe",
+   "kapitel": "Aufgabe und Format",
+   "saetze": [
+    "Dann sag, was sie tun soll und wie. Erkläre es in drei Schritten, mit einem Beispiel aus dem Alltag, in kurzen Sätzen.",
+    "Du kannst auch sagen, was sie lassen soll. Zum Beispiel keine Fachwörter ohne Erklärung."
+   ]
+  },
+  {
+   "id": "hinweis",
+   "kapitel": "Hinweise statt Lösung",
+   "saetze": [
+    "Der beste Trick fürs Lernen: Bitte um Hinweise statt um die Lösung. Sag: Gib mir nur einen Tipp, ich probiere es selbst.",
+    "So bleibt das Denken bei dir."
+   ]
+  },
+  {
+   "id": "abfragen",
+   "kapitel": "Lass dich abfragen",
+   "saetze": [
+    "Lass dich abfragen. Stell mir fünf Fragen, eine nach der anderen, und sag mir am Ende, was ich üben soll.",
+    "Das ist wie Vokabeln lernen mit einem Partner, der nie genervt ist."
+   ]
+  },
+  {
+   "id": "zurueck",
+   "kapitel": "Erklär es zurück",
+   "saetze": [
+    "Dreh den Spieß um. Erkläre der KI das Thema in eigenen Worten und frag: Was stimmt, was fehlt, was ist falsch?",
+    "Wer etwas erklären kann, hat es verstanden. Und du merkst sofort, wo es noch hakt."
+   ]
+  },
+  {
+   "id": "nachhaken",
+   "kapitel": "Nachhaken",
+   "saetze": [
+    "Der erste Versuch ist selten perfekt. Sag, was nicht passt: zu schwer, zu lang, noch ein Beispiel bitte.",
+    "Du kannst ihr auch erlauben, nachzufragen. Sag: Frag mich, wenn dir etwas fehlt."
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Prüfen und schützen",
+   "saetze": [
+    "Prüf die Antwort, vor allem bei Zahlen und Quellen. Sie kann überzeugend klingen und trotzdem falsch sein.",
+    "Und lass Namen, Adressen und Privates draußen."
+   ]
+  },
+  {
+   "id": "vorlage",
+   "kapitel": "Deine Vorlage",
+   "saetze": [
+    "Deine Vorlage: Ich bin in Klasse so und so. Ich will dieses Thema verstehen. Erkläre es in kleinen Schritten, dann frag mich ab.",
+    "Probier sie aus und verbessere sie, bis sie zu dir passt."
+   ]
+  }
+ ]
+}

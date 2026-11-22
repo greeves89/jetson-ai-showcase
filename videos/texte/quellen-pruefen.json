@@ -1,0 +1,82 @@
+{
+ "id": "quellen-pruefen",
+ "titel": "Quellen prüfen",
+ "untertitel": "Fünf Schritte, bevor du etwas glaubst oder weiterschickst",
+ "szenen": [
+  {
+   "id": "likes",
+   "kapitel": "Tausend Likes",
+   "saetze": [
+    "Dein Chat explodiert. Alle schicken denselben Beitrag, mit großer Überschrift und tausend Likes.",
+    "Stimmt das? Likes sind kein Beweis. Auch Unsinn kann tausendmal geteilt werden."
+   ]
+  },
+  {
+   "id": "stopp",
+   "kapitel": "Schritt 1: Stopp",
+   "saetze": [
+    "Schritt eins heißt Stopp. Bevor du glaubst oder teilst, atme einmal durch.",
+    "Beiträge, die wütend oder neugierig machen, verbreiten sich besonders gut. Manche sind genau dafür gebaut."
+   ]
+  },
+  {
+   "id": "wer",
+   "kapitel": "Schritt 2: Wer steckt dahinter?",
+   "saetze": [
+    "Schritt zwei: Wer steckt dahinter? Schau, ob die Seite sagt, wer sie betreibt.",
+    "Ein Impressum mit Name und Adresse ist ein gutes Zeichen. Fehlt es ganz, sei misstrauisch."
+   ]
+  },
+  {
+   "id": "seitlich",
+   "kapitel": "Schritt 3: Seitlich lesen",
+   "saetze": [
+    "Schritt drei: Lies seitlich. Verlass die Seite und öffne einen neuen Tab. Such nach dem Namen der Quelle.",
+    "Was sagen andere über sie? So arbeiten Profis, die Fakten prüfen."
+   ]
+  },
+  {
+   "id": "zweite",
+   "kapitel": "Schritt 4: Zweite Quelle",
+   "saetze": [
+    "Schritt vier: Gibt es eine zweite Quelle? Berichten unabhängige Medien dasselbe, oder eine Behörde?",
+    "Hat nur eine einzige Seite die große Neuigkeit, ist das ein Warnzeichen."
+   ]
+  },
+  {
+   "id": "original",
+   "kapitel": "Schritt 5: Zum Original",
+   "saetze": [
+    "Schritt fünf: Geh zum Original. Wie bei Stille Post wird eine Studie auf dem Weg oft verdreht.",
+    "Such die Studie selbst. Steht dort wirklich, was der Beitrag behauptet? Und wer hat sie bezahlt?"
+   ]
+  },
+  {
+   "id": "probe",
+   "kapitel": "Probelauf",
+   "saetze": [
+    "Ein Probelauf mit einer erfundenen Meldung: Schüler mit blauen Stiften schreiben bessere Noten.",
+    "Stopp: Das klingt zu schön, um wahr zu sein. Wer steckt dahinter? Eine Seite ohne Impressum. Seitlich gelesen: Niemand kennt sie.",
+    "Zweite Quelle? Keine. Original? Keine Studie zu finden. Ergebnis: Quatsch, und du hast es in zwei Minuten gemerkt."
+   ]
+  },
+  {
+   "id": "ki",
+   "kapitel": "Und die KI?",
+   "saetze": [
+    "Und die KI? Ein Chatbot ist keine Quelle. Er setzt Wörter fort, die passen, und kann Quellen erfinden.",
+    "Bitte ihn um Links und klick sie an. Gibt es die Seite nicht, hat er sie erfunden.",
+    "Hilfreich ist er trotzdem: für Ideen, was du prüfen kannst."
+   ]
+  },
+  {
+   "id": "merken",
+   "kapitel": "Dein Merksatz",
+   "saetze": [
+    "Dein Merksatz: Stopp, wer, seitlich, zweite Quelle, Original.",
+    "Das dauert ein paar Minuten und macht dich zum Profi im Freundeskreis.",
+    "Und wenn du nichts findest? Dann teile es nicht. Das ist völlig in Ordnung."
+   ]
+  }
+ ]
+}

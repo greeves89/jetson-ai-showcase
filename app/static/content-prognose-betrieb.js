@@ -14,6 +14,7 @@ seiten: {
 "tabellen-ml": {
   nav: "Entscheidungsbäume", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Entscheidungsbäume und Tabellendaten", symbol: "ml",
   widget: "baum-spiel", videos: ["entscheidungsbaeume"],
+  lernziele: ["Du kannst erklären, wie ein Entscheidungsbaum aus Daten lernt.", "Du kannst sagen, warum Bäume gut lesbar sind und trotzdem zu viel auswendig lernen.", "Du kannst entscheiden, wann bei Tabellen ein einfaches Verfahren reicht."],
   kurz: "Wie entscheidet ein Verfahren anhand einer Tabelle, und warum genügt dafür oft etwas viel Einfacheres als ein neuronales Netz?",
   abschnitte: [
     {h: "Das Ratespiel mit den Ja-Nein-Fragen",
@@ -145,6 +146,7 @@ seiten: {
 zeitreihen: {
   nav: "Zeitreihen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Prognosen aus Zeitreihen", symbol: "ml",
   widget: "prognose-labor", videos: ["zeitreihen-prognose"],
+  lernziele: ["Du kannst Trend, Saison und Zufall in einer Zeitreihe unterscheiden.", "Du kannst sagen, warum eine Prognose einen Maßstab und einen Fehlerwert braucht.", "Du kannst erklären, welche Ereignisse ein Modell nicht vorhersagen kann."],
   kurz: "Wie schreibt ein Modell Verläufe in die Zukunft fort, wie sicher ist das, und wann hilft es gar nicht?",
   abschnitte: [
     {h: "Der Wetterbericht als Zeitreihe",
@@ -271,6 +273,7 @@ zeitreihen: {
 anomalien: {
   nav: "Auffälliges finden", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Auffälliges finden", symbol: "ml",
   widget: "anomalie-labor", videos: ["anomalieerkennung"],
+  lernziele: ["Du kannst erklären, wie ein Modell lernt, was normal ist.", "Du kannst den Schwellenwert zwischen Fehlalarmen und übersehenen Fällen einordnen.", "Du kannst sagen, warum ein Mensch die Verdachtsfälle prüft."],
   kurz: "Wie findet ein Verfahren das Ungewöhnliche, wenn es kaum Beispiele dafür gibt, und wie viele Fehlalarme sind vertretbar?",
   abschnitte: [
     {h: "Die seltsame Abbuchung",
@@ -413,6 +416,7 @@ anomalien: {
 empfehlungen: {
   nav: "Empfehlungen", typ: "lektion", gruppe: "Daten und Prognosen", titel: "Empfehlungssysteme", symbol: "ml",
   widget: "empfehlungs-labor", videos: ["empfehlungssysteme"],
+  lernziele: ["Du kannst zwei Grundideen von Empfehlungssystemen unterscheiden.", "Du kannst erklären, was Kaltstart und Filterblase sind.", "Du kannst sagen, woran man gute Empfehlungen misst."],
   kurz: "Wie kommt ein System darauf, was dir gefallen könnte, und woran merkt man, ob die Empfehlung etwas nützt?",
   abschnitte: [
     {h: "Die Buchhändlerin, die dich kennt",
@@ -563,6 +567,7 @@ empfehlungen: {
 mlops: {
   nav: "Prototyp zu Betrieb", typ: "lektion", gruppe: "KI im Betrieb", titel: "Vom Prototyp in den Betrieb", symbol: "hardware",
   videos: ["mlops-betrieb"],
+  lernziele: ["Du kannst die Stationen vom Prototyp bis zum Betrieb nennen.", "Du kannst Drift erklären und sagen, wie man sie bemerkt.", "Du kannst begründen, warum Versionen, Rückfall und Zuständigkeiten dazugehören."],
   kurz: "Ein Modell, das im Versuch funktioniert, ist erst der Anfang. Was braucht es, damit es jeden Tag zuverlässig arbeitet?",
   abschnitte: [
     {h: "Die Küche eines Restaurants",
@@ -726,6 +731,7 @@ mlops: {
 "kosten-energie": {
   nav: "Kosten und Energie", typ: "lektion", gruppe: "KI im Betrieb", titel: "Kosten und Energie", symbol: "hardware",
   widget: "kosten-rechner", videos: ["kosten-und-energie"],
+  lernziele: ["Du kannst lokal, Cloud und Edge nach Kosten und Datenschutz vergleichen.", "Du kannst Stromkosten aus Watt, Stunden und Preis ausrechnen.", "Du kannst Kosten nennen, die man gern vergisst."],
   kurz: "Lokal, in der Cloud oder am Gerät: Was kostet KI wirklich, und wie rechnest du den Stromverbrauch selbst aus?",
   abschnitte: [
     {h: "Kaufen, mieten, Taxi fahren",
@@ -887,6 +893,7 @@ mlops: {
 "ki-einfuehrung": {
   nav: "KI einführen", typ: "lektion", gruppe: "KI im Betrieb", titel: "KI im Unternehmen einführen", symbol: "business",
   videos: ["ki-einfuehren"],
+  lernziele: ["Du kannst einen KI-Einsatz nach Nutzen, Machbarkeit, Daten und Risiko bewerten.", "Du kannst einen Piloten mit Maßstab und Entscheidung planen.", "Du kannst sagen, wer von Anfang an beteiligt sein sollte."],
   kurz: "Wie wählst du den richtigen Einsatz, prüfst ihn mit einem Pilot und nimmst die Menschen mit, die damit arbeiten sollen?",
   abschnitte: [
     {h: "Erst das Problem, dann die Technik",

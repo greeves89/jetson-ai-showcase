@@ -7,6 +7,7 @@ const S = {};
 S["rag-ueberblick"] = {
   nav: "RAG im Überblick", typ: "lektion", gruppe: "Wissen und RAG", titel: "RAG im Überblick", symbol: "rag",
   videos: ["rag-ueberblick"],
+  lernziele: ["Du kannst erklären, warum ein Sprachmodell deine Dokumente erst nachschlagen muss.", "Du kannst die Pipeline von der Aufbereitung bis zur Antwort beschreiben.", "Du kannst sagen, wann RAG passt und was es nicht löst."],
   kurz: "Ein Sprachmodell kennt deine Dokumente nicht. RAG lässt es vor jeder Antwort darin nachschlagen.",
   abschnitte: [
     {h: "Das Problem: Das Modell war nicht dabei",
@@ -130,6 +131,7 @@ S["rag-ueberblick"] = {
 S["rag-embedding"] = {
   nav: "Embeddings", typ: "lektion", gruppe: "Wissen und RAG", titel: "Vektorisieren und Embeddings", symbol: "rag",
   widget: "rag-bedeutungskarte", videos: ["rag-embedding", "rag-embedding-beachten"],
+  lernziele: ["Du kannst erklären, was ein Vektor und was ein Embedding ist.", "Du kannst sagen, wie die Ähnlichkeit zweier Texte gemessen wird.", "Du kannst begründen, warum bei einem Modellwechsel der Index neu berechnet werden muss."],
   kurz: "Wie vergleicht ein Computer Bedeutung? Er übersetzt Text in Zahlen, sodass ähnlicher Sinn meist nah beieinander liegt.",
   abschnitte: [
     {h: "Der Stadtplan: Nähe als Zahlen",
@@ -258,6 +260,7 @@ S["rag-embedding"] = {
 S["rag-chunking"] = {
   nav: "Chunking", typ: "lektion", gruppe: "Wissen und RAG", titel: "Chunking: Text in sinnvolle Stücke teilen", symbol: "rag",
   widget: "rag-chunk-labor", videos: ["rag-chunking"],
+  lernziele: ["Du kannst erklären, warum Texte in Stücke geteilt werden.", "Du kannst beschreiben, was einen guten Chunk ausmacht.", "Du kannst Größe, Überlappung und Metadaten für ein Beispiel wählen."],
   kurz: "Ein Dokument ist zu groß für die Suche am Stück. Wo du es schneidest, entscheidet mit, ob die richtige Stelle gefunden wird.",
   abschnitte: [
     {h: "Warum man Text überhaupt zerlegt",
@@ -384,6 +387,7 @@ S["rag-chunking"] = {
 S["rag-suche"] = {
   nav: "Suchen", typ: "lektion", gruppe: "Wissen und RAG", titel: "Suchen: Stichwort, Vektor und Hybrid", symbol: "rag",
   widget: "rag-suche-vergleich", videos: ["rag-keywordsuche", "rag-hybridsuche"],
+  lernziele: ["Du kannst Stichwortsuche und Vektorsuche unterscheiden.", "Du kannst erklären, wie eine Hybridsuche beide Ranglisten verbindet.", "Du kannst sagen, wie Filter und eine umformulierte Frage die Suche verbessern."],
   kurz: "Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung. Jede hat ihre eigenen Stärken. Die beste Suche nutzt oft beide.",
   abschnitte: [
     {h: "Zwei Arten zu suchen",
@@ -501,6 +505,7 @@ S["rag-suche"] = {
 S["rag-reranking"] = {
   nav: "Reranking", typ: "lektion", gruppe: "Wissen und RAG", titel: "Reranking: erst grob, dann genau", symbol: "rag",
   widget: "rag-rerank-labor", videos: ["rag-reranking"],
+  lernziele: ["Du kannst erklären, warum die erste Suche nur grob sortiert.", "Du kannst den Ablauf „viele Kandidaten holen, wenige genau sortieren“ beschreiben.", "Du kannst sagen, wann sich ein Reranker lohnt."],
   kurz: "Die erste Suche sortiert grob, aber schnell. Ein Reranker liest die besten Kandidaten noch einmal genau.",
   abschnitte: [
     {h: "Das Alltagsbild: Vorauswahl und Gespräch",
@@ -609,6 +614,7 @@ S["rag-reranking"] = {
 S["rag-bewertung"] = {
   nav: "RAG messen", typ: "lektion", gruppe: "Wissen und RAG", titel: "RAG messen und verbessern", symbol: "rag",
   widget: "rag-test-labor", videos: ["rag-bewertung"],
+  lernziele: ["Du kannst ein kleines Testset für ein RAG-System planen.", "Du kannst die Qualität von Suche und Antwort getrennt messen.", "Du kannst Fehlerbilder ihrer Ursache zuordnen und die Reihenfolge der Verbesserung nennen."],
   kurz: "Drei gute Beispielantworten beweisen nichts. Ein kleines Testset zeigt, wo das System steht und was du als Nächstes verbesserst.",
   abschnitte: [
     {h: "Warum Gefühl nicht reicht",

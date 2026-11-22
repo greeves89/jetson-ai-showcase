@@ -7,6 +7,7 @@ seiten: {
 
 daten: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Daten, der Rohstoff", nav: "Daten", symbol: "ml",
+  lernziele: ["Du kannst Merkmale und Etiketten an einem Beispiel unterscheiden.", "Du kannst begründen, warum Vielfalt und Qualität wichtiger sind als Menge.", "Du kannst erklären, wozu Trainings-, Validierungs- und Testdaten dienen."],
   kurz: "Ein Modell kann nur lernen, was in seinen Daten steckt. Was zählt als Datum, wie sieht gute Qualität aus, und wie viel braucht man?",
   widget: "datenqualitaet",
   videos: ["daten-rohstoff"],
@@ -126,6 +127,7 @@ daten: {
 
 "neuronale-netze": {
   typ: "lektion", gruppe: "Grundlagen", titel: "Neuronale Netze von Grund auf", nav: "Neuronale Netze", symbol: "ml",
+  lernziele: ["Du kannst beschreiben, wie ein Neuron aus Eingaben eine Ausgabe berechnet.", "Du kannst erklären, warum mehrere Schichten mehr können als eine.", "Du kannst sagen, warum neuronale Netze schwer zu erklären sind."],
   kurz: "Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen. Wie entscheidet eine davon, und was entsteht, wenn man viele verschaltet?",
   widget: "netz-spielplatz",
   videos: ["neuronale-netze-erklaert"],
@@ -146,7 +148,11 @@ daten: {
       "Der Ablauf ist immer gleich. Jede Eingabe wird mit ihrem [[gewicht|Gewicht]] multipliziert. Alle Ergebnisse werden addiert. Zur Summe kommt eine feste Zahl, die Verschiebung, hinzu. Dann folgt die [[aktivierung|Aktivierung]]: Sie legt fest, wie stark das Neuron meldet.",
       "Die einfachste Aktivierung ist eine Schwelle. Liegt die Summe darüber, meldet das Neuron „ja“, sonst „nein“. Weiche Formen geben stattdessen einen gleitenden Wert aus. Wichtig ist: Gewichte und Verschiebung sind die Zahlen, die beim [[training|Training]] eingestellt werden.",
     ], alltag: "Eine Fußgängerampel zeigt Grün, sobald genug Wartezeit abgelaufen ist und kein Auto kommt. Es gibt eine Schwelle: Unter ihr bleibt es rot, darüber wird es grün. Die Schwelle zu verschieben ändert, wie schnell die Ampel umspringt. Im Neuron übernimmt die Verschiebung genau diese Rolle.",
-      merke: "Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden."},
+      merke: "Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden.",
+     mathe: {p: [
+      "In Zeichen: `y = f(w1·x1 + w2·x2 + … + wn·xn + b)`. In Worten: Jede Eingabe x wird mit ihrem Gewicht w malgenommen, alles wird addiert, dazu kommt die Verschiebung b, und die Aktivierung f macht daraus die Ausgabe y.",
+      "Rechenbeispiel mit zwei Eingaben: x1 = 2, x2 = 3, Gewichte w1 = 0,5 und w2 = −1, Verschiebung b = 1. Die Summe ist 0,5·2 + (−1)·3 + 1 = −1. Die Schwelle lautet: ab einer Summe über 0 meldet das Neuron 1, sonst 0. Hier ist die Summe kleiner als 0, also meldet es 0.",
+     ]}},
     {h: "Schichten: Merkmale aus Merkmalen",
      kurz: "Die Ausgaben einer Schicht sind die Eingaben der nächsten. So entstehen Merkmale aus Merkmalen.",
      visual: {"typ":"netz","knoten":[{"id":"e1","text":"Eingabe 1","x":6,"y":14},{"id":"e2","text":"Eingabe 2","x":6,"y":50},{"id":"e3","text":"Eingabe 3","x":6,"y":86},{"id":"h1","text":"Neuron A","x":50,"y":20,"farbe":"orange"},{"id":"h2","text":"Neuron B","x":50,"y":50,"farbe":"orange"},{"id":"h3","text":"Neuron C","x":50,"y":80,"farbe":"orange"},{"id":"a","text":"Ausgabe","x":94,"y":50,"farbe":"gruen"}],"kanten":[["e1","h1"],["e1","h2"],["e1","h3"],["e2","h1"],["e2","h2"],["e2","h3"],["e3","h1"],["e3","h2"],["e3","h3"],["h1","a"],["h2","a"],["h3","a"]]},
@@ -226,6 +232,7 @@ daten: {
 
 training: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Wie ein Modell lernt", nav: "Training", symbol: "ml",
+  lernziele: ["Du kannst erklären, was der Verlust misst.", "Du kannst den Kreislauf aus Vorhersagen, Fehler messen und Nachjustieren beschreiben.", "Du kannst Überanpassung erkennen und sagen, wann man das Training stoppt."],
   kurz: "Ein Modell startet mit zufälligen Zahlen und ist anfangs schlecht. Wie wird daraus ein brauchbares, ohne dass jemand die Zahlen von Hand setzt?",
   widget: "gradient-abstieg",
   videos: ["training-gradientenabstieg"],
@@ -325,6 +332,7 @@ training: {
 
 bewertung: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Wie gut ist ein Modell?", nav: "Bewertung", symbol: "check",
+  lernziele: ["Du kannst erklären, warum „99 Prozent richtig“ täuschen kann.", "Du kannst eine Konfusionsmatrix lesen.", "Du kannst Precision und Recall in Worten unterscheiden.", "Du kannst ein Modell mit dem heutigen Ablauf vergleichen."],
   kurz: "„99 Prozent richtig“ klingt nach einem guten Modell. Warum die Zahl allein täuschen kann, und welche Kennzahlen mehr sagen.",
   widget: "konfusionsmatrix",
   videos: ["bewertung-konfusionsmatrix"],
@@ -439,6 +447,7 @@ bewertung: {
 
 "verzerrung-ethik": {
   typ: "lektion", gruppe: "Grundlagen", titel: "Fairness, Verzerrung und Verantwortung", nav: "Fairness und Verantwortung", symbol: "info",
+  lernziele: ["Du kannst vier Wege nennen, auf denen Verzerrung entsteht.", "Du kannst erklären, warum das Weglassen eines Merkmals nicht reicht.", "Du kannst sagen, wer für Entscheidungen mit KI Verantwortung trägt."],
   kurz: "Ein Modell wiederholt, was in seinen Daten steckt, auch das Unfaire. Wie entsteht das, wie erkennst du es, und wer trägt die Verantwortung?",
   videos: ["verzerrung-fairness"],
   abschnitte: [
@@ -542,6 +551,7 @@ bewertung: {
 
 recht: {
   typ: "lektion", gruppe: "Grundlagen", titel: "Recht und Regeln im Überblick", nav: "Recht und Regeln", symbol: "info",
+  lernziele: ["Du kannst die Grundsätze der Datenschutz-Grundverordnung in eigenen Worten nennen.", "Du kannst erklären, wie die EU-KI-Verordnung Systeme nach Risiko einordnet.", "Du kannst sagen, welche Fragen beim Urheberrecht noch offen sind."],
   kurz: "Welche Regeln gelten, wenn du KI einsetzt? Ein Überblick über die Grundgedanken, ausdrücklich keine Rechtsberatung.",
   videos: ["recht-ueberblick"],
   abschnitte: [

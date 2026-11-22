@@ -156,3 +156,7 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .w-wid .chip.w-bsp:hover{background:var(--akzent-h);text-decoration:none}
 .w-wid .chip.w-bsp .ic{width:14px;height:14px}
 .d-regler{margin-top:20px}
+
+/* Meldung des Servers im Chat: Hinweis-Kasten statt Blase */
+.msg.ki.msg-hinweis{background:none;padding:0;max-width:100%;box-shadow:none}
+.msg-hinweis .last-box{width:100%}

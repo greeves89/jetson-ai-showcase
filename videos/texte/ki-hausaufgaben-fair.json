@@ -1,0 +1,79 @@
+{
+ "id": "ki-hausaufgaben-fair",
+ "titel": "KI und Hausaufgaben",
+ "untertitel": "Lernen, ohne zu schummeln",
+ "szenen": [
+  {
+   "id": "auftrag",
+   "kapitel": "Der Auftrag",
+   "saetze": [
+    "Eine Erörterung zum Handyverbot, fünf Seiten, morgen früh. Die KI schreibt sie in Sekunden.",
+    "Verlockend. Aber schauen wir ehrlich, was dir das bringt."
+   ]
+  },
+  {
+   "id": "fitness",
+   "kapitel": "Das Fitnessstudio",
+   "saetze": [
+    "Stell dir ein Fitnessstudio vor, in dem dein Kumpel die Gewichte für dich hebt. Er wird stärker. Du nicht.",
+    "Mit Hausaufgaben ist es genauso. Gelernt wird nur, was du selbst denkst."
+   ]
+  },
+  {
+   "id": "gut",
+   "kapitel": "Dafür ist KI gut",
+   "saetze": [
+    "Dafür kann eine KI richtig gut sein. Sie erklärt dir den Stoff noch einmal anders. Sie fragt dich ab.",
+    "Sie zeigt dir, wo dein Text holpert. Und sie hilft dir, Ideen zu sammeln."
+   ]
+  },
+  {
+   "id": "unfair",
+   "kapitel": "Wo es unfair wird",
+   "saetze": [
+    "Unfair wird es, wenn du ihren Text als deinen abgibst. Das ist wie Abschreiben, nur schneller.",
+    "Und es schadet dir doppelt. Du lernst nichts, und die Lehrkraft kann es als Täuschung werten."
+   ]
+  },
+  {
+   "id": "ampel",
+   "kapitel": "Die Ampel",
+   "saetze": [
+    "Die Regeln sind je nach Schule, Fach und Lehrkraft verschieden. Frag vorher, wofür du KI nutzen darfst.",
+    "Ist nichts geregelt, hilft die Ampel. Grün: erklären und abfragen lassen. Gelb: Text überarbeiten lassen, aber offen sagen. Rot: einen fertigen Text abgeben."
+   ]
+  },
+  {
+   "id": "ablauf",
+   "kapitel": "Ein fairer Ablauf",
+   "saetze": [
+    "So kann ein fairer Ablauf aussehen. Erst schreibst du selbst eine Gliederung. Dann fragst du die KI, was fehlt.",
+    "Dann schreibst du den Text selbst. Zum Schluss lässt du die KI prüfen, wo er noch holpert. Das Denken bleibt bei dir."
+   ]
+  },
+  {
+   "id": "offen",
+   "kapitel": "Offen sagen",
+   "saetze": [
+    "Sag offen, wie du die KI genutzt hast. Ein Satz reicht: Ich habe mir Ideen sammeln und die Rechtschreibung prüfen lassen.",
+    "Das wirkt nicht schwach. Es zeigt, dass du weißt, was du tust."
+   ]
+  },
+  {
+   "id": "pruefen",
+   "kapitel": "Nachprüfen",
+   "saetze": [
+    "Und prüf, was die KI sagt. Sie rechnet manchmal falsch und erfindet Quellen.",
+    "Verantwortlich für das, was du abgibst, bist du, nicht sie."
+   ]
+  },
+  {
+   "id": "tafel",
+   "kapitel": "Der Tafel-Test",
+   "saetze": [
+    "Ein einfacher Test zum Schluss: Könntest du es morgen an der Tafel erklären, ohne Handy?",
+    "Wenn ja, hast du etwas gelernt, egal wer geholfen hat. Wenn nein, frag die KI noch einmal, aber diesmal nach der Erklärung."
+   ]
+  }
+ ]
+}
