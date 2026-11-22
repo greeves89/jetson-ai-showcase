@@ -160,7 +160,7 @@
     const seg = h("div", { class: "sp-seg", role: "radiogroup", "aria-label": "Anzeige der Stücke" }, segText, segIds);
     const quelleEl = h("span", { class: "chip", role: "status" }, "Zerlegung wird geladen");
     const kopf = h("div", { class: "sp-kopf" },
-      h("div", { class: "sp-gruppe" }, h("span", { class: "w-ueber" }, "Anzeige"), seg), quelleEl);
+      KL.gruppe(null, [KL.zeile("Stücke zeigen als", seg)], { klasse: "sp-gruppe" }), quelleEl);
 
     /* Ergebnis */
     const tokenEl = h("div", { class: "sp-tokens", role: "list", "aria-label": "Der Text in Token zerlegt", "aria-live": "polite" });
@@ -193,7 +193,7 @@
         h("div", { class: "sp-folge" },
           h("h4", null, "Kontextgrenze"),
           h("p", { class: "sp-text" }, "Ein Modell kann nur eine feste Zahl Token auf einmal lesen. Deine Frage und die Antwort müssen zusammen hineinpassen. Wähle ein Beispielfenster:"),
-          fensterReihe, bar, fensterText),
+          KL.gruppe(null, [KL.zeile("Kontextfenster", fensterReihe, null, true)]), bar, fensterText),
         h("div", { class: "sp-folge" },
           h("h4", null, "Kosten"),
           h("p", { class: "sp-text" }, "Anbieter rechnen Eingabe und Ausgabe nach Token ab, jeweils mit einem Preis je Token. Die Kosten sind also Token mal Preis. Zwei Texte mit gleichem Sinn können verschieden viel kosten. Hier auf dem Jetson kostet kein Token Geld, aber jedes kostet Rechenzeit."),
@@ -526,8 +526,7 @@
     const sendeBtn = h("button", { type: "button", class: "btn primary", onclick: () => starte(seiten) }, ic("send"), "Beide senden");
     const stoppBtn = h("button", { type: "button", class: "btn", hidden: true, onclick: stoppen }, ic("stop"), "Stopp");
     const meld = h("p", { class: "sp-meldung", role: "alert", hidden: true });
-    const aktion = h("div", { class: "sp-aktion" }, sendeBtn, stoppBtn,
-      h("span", { class: "w-leise sp-klein" }, "Die Fragen laufen nacheinander. Jeder Prompt steht für sich, das Modell erinnert sich an nichts."));
+
 
     function knoepfeSetzen() {
       sendeBtn.disabled = laeuft; stoppBtn.hidden = !laeuft;
@@ -638,7 +637,7 @@
     /* ---- Aufbau */
     const paar = (...k) => h("div", { class: "sp-paar" }, ...k);
     root.append(
-      h("span", { class: "w-ueber" }, "Aufgabe aus dem Alltag"), vorlagenEl,
+      KL.gruppe("Aufgabe aus dem Alltag", [KL.zeile("Vorlage", vorlagenEl, null, true)]),
       h("div", { class: "sp-sektion" },
         h("label", { class: "w-ueber", for: matId }, "Material, auf das sich die Prompts beziehen"), material,
         h("p", { class: "w-leise sp-klein sp-vor" }, "Steht „[MATERIAL]“ im Prompt, wird es durch diesen Text ersetzt. Steht es nicht darin, hängt die Werkstatt das Material unten an.")),
@@ -647,9 +646,9 @@
         paar(h("div", { class: "sp-check" }, h("h4", null, "Bausteine im Prompt"), A.summe, A.liste), h("div", { class: "sp-check" }, h("h4", null, "Bausteine im Prompt"), B.summe, B.liste)),
         paar(A.vorschauBox, B.vorschauBox),
         hinweis("Die Prüfung der Bausteine ist eine Heuristik: Sie sucht Stichwörter wie „du bist“ oder „höchstens“. Sie erkennt Hinweise auf einen Baustein, nicht, ob er gut ist.")),
-      h("div", { class: "sp-sektion" }, reglerEl,
-        h("div", { class: "w-skala sp-skala", "aria-hidden": "true" }, h("span", null, "gleichmäßig, wiederholbar"), h("span", null, "abwechslungsreich, schwankend")),
-        aktion, meld),
+      h("div", { class: "sp-sektion" },
+        KL.gruppe("Temperatur", [reglerEl], { fuss: ["Links gleichmäßig, wiederholbar. Rechts abwechslungsreich, schwankend.", "Die Fragen laufen nacheinander. Jeder Prompt steht für sich, das Modell erinnert sich an nichts."], aktion: [sendeBtn, stoppBtn] }),
+        meld),
       h("div", { class: "sp-sektion" },
         paar(h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Vorher"), A.zahl, A.nochmal), h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Nachher"), B.zahl, B.nochmal)),
         paar(A.status, B.status), paar(A.antwort, B.antwort), paar(A.pruef, B.pruef),
@@ -731,9 +730,7 @@
         h("p", { class: "sp-text" }, "Zehn Karten aus dem Arbeitsalltag mit Sprachmodellen. Du entscheidest, danach siehst du sofort die Erklärung. Alle Texte und Personen sind erfunden."),
         artenEl,
         h("div", { class: "sp-startzeile" },
-          h("div", { class: "sp-seedbox" }, h("label", { class: "w-ueber", for: sid }, "Startwert"), feld,
-            h("p", { class: "w-leise sp-klein", id: sid + "-h" }, "Gleicher Startwert, gleiche Karten in gleicher Reihenfolge.")),
-          gehe),
+          KL.gruppe(null, [KL.zeile("Startwert", feld, sid)], { fuss: h("p", { id: sid + "-h" }, "Gleicher Startwert, gleiche Karten in gleicher Reihenfolge."), aktion: [gehe], klasse: "sp-seedbox" })),
         h("p", { class: "w-leise sp-klein" }, "Bedienung: Mit den Tasten 1 bis 3 wählst du eine Antwort, mit Enter geht es weiter."));
       feld.select();
     }

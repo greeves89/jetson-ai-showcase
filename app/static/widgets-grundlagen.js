@@ -541,10 +541,10 @@
     const rNeu = regler("Neuronen je Schicht", 1, 8, 1, z.nper, (v) => String(v), (v) => { z.nper = v; neuAufbauen(); });
     const rLr = regler("Lernrate", 0, 100, 1, z.lrV, (v) => de(lrVon(v), 3), () => { schmutzig = true; plan(); });
     const selId = neueId("akt");
-    const sel = h("select", { id: selId, class: "gl-select" }, AK.map(([k, t]) => h("option", { value: k }, t)));
+    const sel = h("select", { id: selId }, AK.map(([k, t]) => h("option", { value: k }, t)));
     sel.value = z.akt;
     sel.addEventListener("change", () => { z.akt = sel.value; neuAufbauen(); });
-    const aktZeile = h("div", { class: "regler gl-aktzeile" }, h("label", { for: selId }, "Aktivierung"), sel, h("span"));
+    const aktZeile = KL.zeile("Aktivierung", sel, selId);
 
     const bStart = knopf("Training starten", "play", () => umschalten(), "btn primary klein");
     const bSchritt = knopf("Ein Schritt", "schritt", () => { z.laeuft = false; knopfText(); einSchritt(); if (netz.schritt % 10 !== 0) messen(); schmutzig = true; plan(); });
@@ -553,10 +553,8 @@
     function knopfText() { setzeKnopf(bStart, z.laeuft ? "Pause" : "Training starten", z.laeuft ? "pause" : "play"); statusZeile.setAttribute("aria-live", z.laeuft ? "off" : "polite"); }
 
     root.append(
-      h("p", { class: "gl-einf" }, "Ein kleines Netz lernt, zwei Farben zu trennen. Stelle Schichten und Neuronen ein und sieh zu, wie die Grenze entsteht."),
-      h("div", { class: "gl-block" }, h("p", { class: "gl-ueber" }, "Punktmenge"), wDs.el),
-      h("div", { class: "gl-regler-gitter" }, rHid.el, rNeu.el, aktZeile, rLr.el),
-      h("div", { class: "werkzeuge gl-knoepfe" }, bStart, bSchritt, bNeu, bReset),
+      KL.gruppe("Punktmenge und Netz", [KL.zeile("Punktmenge", wDs.el), rHid.el, rNeu.el, aktZeile, rLr.el],
+        { fuss: "Ein kleines Netz lernt, zwei Farben zu trennen. Stelle Schichten und Neuronen ein und sieh zu, wie die Grenze entsteht.", aktion: [bStart, bSchritt, bNeu, bReset] }),
       h("div", { class: "gl-haupt" },
         h("figure", { class: "gl-fig" }, cvFeld,
           h("figcaption", null, "Blau und Orange sind die zwei Klassen. Gefüllte Punkte trainieren das Netz, hohle Punkte sind Testpunkte, die es nie zum Lernen sieht.")),
@@ -763,10 +761,8 @@
     function knopfText() { setzeKnopf(bStart, laeuft ? "Pause" : "Start", laeuft ? "pause" : "play"); }
 
     root.append(
-      h("p", { class: "gl-einf" }, "Eine Kugel rollt im Gelände bergab, so wie ein Modell beim Training seinen Fehler verkleinert. Klicke ins Bild, um den Startpunkt zu setzen."),
-      h("div", { class: "gl-block" }, h("p", { class: "gl-ueber" }, "Landschaft"), wLs.el),
-      h("div", { class: "gl-regler-gitter gl-drei" }, rLr.el, rMu.el, rTempo.el),
-      h("div", { class: "werkzeuge gl-knoepfe" }, bStart, bSchritt, bReset),
+      KL.gruppe("Gelände und Schrittweite", [KL.zeile("Landschaft", wLs.el), rLr.el, rMu.el, rTempo.el],
+        { fuss: "Eine Kugel rollt im Gelände bergab, so wie ein Modell beim Training seinen Fehler verkleinert. Klicke ins Bild, um den Startpunkt zu setzen.", aktion: [bStart, bSchritt, bReset] }),
       cv,
       h("div", { class: "gl-standreihe" }, chS, chW, chV, chL),
       erkl,
@@ -1030,13 +1026,11 @@
     }
 
     root.append(
-      h("p", { class: "gl-einf" }, "Ein Modell gibt jedem Fall einen Wert zwischen 0 und 1. Ab der Schwelle schlägt es Alarm. Verschiebe sie und sieh, wie Treffer und Fehler wandern."),
-      h("div", { class: "gl-block" }, h("p", { class: "gl-ueber" }, "Szenario"), wSz.el),
+      KL.gruppe("Szenario und Schwelle", [KL.zeile("Szenario", wSz.el), rTh.el, rAn.el, sw.el],
+        { fuss: "Ein Modell gibt jedem Fall einen Wert zwischen 0 und 1. Ab der Schwelle schlägt es Alarm. Verschiebe sie und sieh, wie Treffer und Fehler wandern.", aktion: [bImmer, bReset] }),
       h("div", { class: "gl-haupt gl-konfhaupt" },
         h("div", { class: "gl-links" },
-          h("figure", { class: "gl-fig" }, cv, legende),
-          h("div", { class: "gl-regler-gitter gl-eine" }, rTh.el, rAn.el),
-          h("div", { class: "werkzeuge gl-knoepfe" }, sw.el, bImmer, bReset)),
+          h("figure", { class: "gl-fig" }, cv, legende)),
         h("div", { class: "gl-rechts" },
           mtab,
           massZeile("genau", "Genauigkeit"), massZeile("precision", "Precision"), massZeile("recall", "Recall"))),
@@ -1313,8 +1307,7 @@
     }
 
     root.append(
-      h("p", { class: "gl-einf" }, "In dieser erfundenen Tabelle eines Gebrauchtwagenhändlers stecken Fehler. Finde sie, markiere die Zeilen und sieh, wie sich die Preisschätzung des Modells verbessert."),
-      h("div", { class: "gl-block" }, h("p", { class: "gl-ueber" }, "Markieren als"), wWz.el),
+      KL.gruppe("Markieren", [KL.zeile("Markieren als", wWz.el)], { fuss: "In dieser erfundenen Tabelle eines Gebrauchtwagenhändlers stecken Fehler. Finde sie, markiere die Zeilen und sieh, wie sich die Preisschätzung des Modells verbessert." }),
       h("div", { class: "gl-haupt gl-dqhaupt" },
         h("div", { class: "gl-links" },
           h("div", { class: "gl-tabwrap", tabindex: "0", role: "region", "aria-label": "Tabelle der Fahrzeuge, scrollbar" },
@@ -1324,7 +1317,7 @@
               ), tbody)),
           zaehlerEntf),
         h("div", { class: "gl-rechts" },
-          h("p", { class: "gl-ueber" }, "Modell"), wMo.el,
+          KL.gruppe("Schätzmodell", [KL.zeile("Modell", wMo.el)]),
           h("figure", { class: "gl-fig" }, cv, h("figcaption", null, "Je näher die Punkte an der gestrichelten Linie liegen, desto besser die Schätzung. Getestet wird an 20 sauberen Fahrzeugen, die das Modell nie sieht. Orange Rauten sind die Marke " + SELTEN + ".")),
           h("div", { class: "gl-kacheln" },
             kachel(tileJetzt, "Mittlerer Fehler jetzt"), kachel(tileStart, "Mit allen Fehlern am Anfang"), kachel(tileSauber, "Wenn alles sauber wäre"), kachel(tileSelten, "Fehler bei Marke " + SELTEN)),

@@ -17,14 +17,7 @@
 .pg-abschnitt{margin-top:26px}
 .pg-hinweis{display:flex;gap:9px;align-items:flex-start;margin:18px 0 0;font-size:13.5px;line-height:1.5;color:var(--leise)}
 .pg-hinweis .ic{margin-top:2px}
-.pg-reihe{display:flex;gap:10px 14px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
 .pg-chips{display:flex;gap:8px;flex-wrap:wrap}
-.pg-reglerpaar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:0 0 14px}
-.pg-reglerpaar .regler{grid-template-columns:auto minmax(60px,1fr) auto}
-.pg-reglerpaar .regler output{min-width:5.6em}
-.pg-reglerpaar.pg-einspaltig{grid-template-columns:minmax(0,520px)}
-@media(max-width:760px){.pg-reglerpaar{grid-template-columns:1fr}}
-@media(max-width:520px){.pg-reglerpaar .regler{grid-template-columns:minmax(0,1fr) auto}.pg-reglerpaar .regler label{grid-column:1/-1;white-space:normal}.pg-reglerpaar .regler output{min-width:0}}
 .pg-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
 .pg-satz{min-height:4.8em;margin-top:14px}
 .pg-alltag{margin:10px 0 0;padding:2px 0 2px 14px;border-left:3px solid var(--akzent);font-size:15.5px;line-height:1.55;min-height:3.2em}
@@ -164,13 +157,8 @@ button.pg-rec:hover{border-color:var(--leise)}
 /* ---------- kosten-rechner ---------- */
 .pg-annahme{display:flex;gap:10px;align-items:flex-start;margin:0 0 18px;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--k2) 12%,var(--flaeche));border:.5px solid color-mix(in srgb,var(--k2) 45%,transparent);font-size:14.5px;line-height:1.5}
 .pg-annahme .ic{margin-top:3px}
-.pg-felder{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px 28px;margin-bottom:16px}
-@media(max-width:640px){.pg-felder{grid-template-columns:1fr}}
-.pg-feld{display:grid;gap:5px;align-content:start}
-.pg-feld label{display:flex;justify-content:space-between;gap:10px;align-items:baseline;font-size:14px;font-weight:600}
 .pg-eingabe{display:flex;align-items:center;gap:10px}
-.pg-eingabe input{text-align:right;font-variant-numeric:tabular-nums;max-width:170px}
-.pg-eingabe input[aria-invalid=true]{border-color:var(--rot)}
+.pg-eingabe input[aria-invalid=true]{box-shadow:0 0 0 2px var(--rot)}
 .pg-einheit{color:var(--leise);font-size:13.5px;white-space:nowrap}
 .pg-tag{font-size:11.5px;font-weight:500;padding:2px 9px;border-radius:99px;background:var(--flaeche2);color:var(--leise);white-space:nowrap;border:1px dashed var(--leise)}
 .pg-tag[data-herkunft=eigen]{border:1px solid transparent}
@@ -190,3 +178,11 @@ table.pg-tab-kosten thead th:not(:first-child),table.pg-tab-sens thead th:not(:f
 .pg-bs .a{background:var(--k1)}.pg-bs .b{background:var(--k2)}.pg-bs .c{background:var(--k4)}.pg-bs .d{background:var(--k3)}
 .pg-bw{font-variant-numeric:tabular-nums;font-weight:600;text-align:right;font-size:14px}
 @media(max-width:520px){.pg-bz{grid-template-columns:1fr auto}.pg-bs{grid-column:1/-1;grid-row:2}}
+
+/* Annahmen als Einstellungszeilen: Beschriftung links, Zahlenfeld mit Einheit rechts, Hinweise darunter */
+.pg-feld{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:2px 16px;align-items:center;padding-top:8px;padding-bottom:8px}
+.pg-feld label{display:flex;flex-direction:column;align-items:flex-start;gap:4px;font-size:17px;font-weight:400;letter-spacing:-.022em}
+.pg-eingabe{display:flex;align-items:center;gap:8px;justify-self:end}
+.pg-eingabe input{width:120px;min-height:36px;padding:0 12px;border-radius:10px;text-align:right;font-variant-numeric:tabular-nums;font-size:17px}
+.pg-fehler,.pg-hilfe{grid-column:1/-1}
+@media(max-width:520px){.pg-feld{grid-template-columns:1fr}.pg-eingabe{justify-self:stretch}.pg-eingabe input{width:100%}}

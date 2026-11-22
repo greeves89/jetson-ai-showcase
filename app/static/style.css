@@ -210,10 +210,43 @@ select{width:auto;padding:0 16px;appearance:none}
 .regler label{color:var(--text);white-space:nowrap}.regler output{font-family:var(--mono);font-size:15px;min-width:3.2em;text-align:right;color:var(--leise)}
 .mono{font-family:var(--mono);font-variant-numeric:tabular-nums}
 
-/* Gruppierte Liste im Einstellungs-Stil (inset grouped) */
+/* Gruppierte Liste im Einstellungs-Stil (inset grouped): kleine Ueberschrift, Zeilen 44 px, .5px-Trenner, Footnote, Pill-Aktionen */
+.g-box{margin:0 0 24px}
+.g-box:last-child{margin-bottom:0}
+.g-kopf{margin:0 0 8px 16px;font-size:13px;line-height:1.3;font-weight:400;letter-spacing:-.01em;color:var(--leise)}
 .gruppe{background:var(--flaeche2);border-radius:16px;overflow:hidden}
-.gruppe>*{padding:12px 16px;position:relative}
+.gruppe>*{position:relative;min-height:44px;padding:6px 16px;margin:0}
 .gruppe>*+*::before{content:"";position:absolute;left:16px;right:0;top:0;height:.5px;background:var(--linie)}
+.g-fuss{margin:8px 16px 0;font-size:13px;line-height:1.4;color:var(--leise);letter-spacing:-.01em}
+.g-aktion{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.g-zeile{display:flex;align-items:center;justify-content:space-between;gap:16px;font-size:17px;letter-spacing:-.022em}
+.g-zeile>.g-name{flex:0 1 auto;color:var(--text)}
+.g-zeile.g-stapel{flex-direction:column;align-items:flex-start;gap:8px;padding-top:10px;padding-bottom:12px}
+.g-stapel .g-steuer{justify-content:flex-start;width:100%}
+.g-steuer{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;align-items:center;min-width:0;flex:1 1 auto}
+.g-steuer>select,.g-steuer>input[type=text],.g-steuer>input[type=number]{background:transparent;min-height:36px;padding:0 4px;border-radius:8px;text-align:right;width:auto;max-width:100%}
+.g-stapel .g-steuer>input[type=text],.g-stapel .g-steuer>textarea{width:100%;text-align:left;background:var(--fuell);padding:8px 12px;border-radius:10px}
+.g-steuer>select{padding-right:4px;color:var(--akzent);cursor:pointer}
+/* Reglerzeile in einer Gruppe: Beschriftung links, Schieber, Wert rechts */
+.gruppe .regler{display:grid;grid-template-columns:minmax(6.5em,34%) minmax(0,1fr) minmax(3.4em,auto);gap:16px;align-items:center;font-size:17px;letter-spacing:-.022em}
+.gruppe .regler label{white-space:normal;line-height:1.25}
+.gruppe .regler output{font-family:var(--sans);font-size:17px;font-variant-numeric:tabular-nums;min-width:3.4em;text-align:right;color:var(--leise)}
+@media(max-width:560px){
+  .gruppe .regler{grid-template-columns:minmax(0,1fr) auto;gap:0 12px;padding-top:8px;padding-bottom:6px}
+  .gruppe .regler label{grid-column:1;grid-row:1}
+  .gruppe .regler output{grid-column:2;grid-row:1;min-width:0}
+  .gruppe .regler input[type=range]{grid-column:1/-1;grid-row:2}
+  .g-zeile{flex-wrap:wrap}
+}
+/* Schalter-Zeile in einer Gruppe: Text links, Schalter rechts */
+.gruppe .w-schalter,.gruppe .gl-schalter,.gruppe .pg-schalter,.gruppe .d-schalter{display:flex;align-items:center;width:100%;gap:12px;font-size:17px;letter-spacing:-.022em;min-height:44px;padding-top:6px;padding-bottom:6px}
+.gruppe .w-schalter>span:last-child,.gruppe .gl-schalter>span:last-child,.gruppe .pg-schalter>span:last-child{order:1;flex:1;min-width:0}
+.gruppe .d-sw-bahn,.gruppe .w-sw,.gruppe .gl-sw,.gruppe .pg-sw{order:2;margin-left:auto}
+.gruppe .w-schalter input,.gruppe .gl-schalter input,.gruppe .pg-schalter input{left:auto;right:16px;top:50%;transform:translateY(-50%)}
+.w-farbwahl{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+/* Ergebnisse: eigene ruhige Flaeche */
+.ergebnis{background:var(--flaeche2);border-radius:20px;padding:16px 20px}
+.ergebnis .messwert,.messwert,.ergebnis output{font-variant-numeric:tabular-nums}
 
 /* ---------- Video ---------- */
 .video{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:0;overflow:hidden}
@@ -259,7 +292,7 @@ select{width:auto;padding:0 16px;appearance:none}
 .kameras figcaption{font-size:13px;font-weight:600;color:var(--leise);margin:0 0 8px}
 .kameras video,.kameras img{width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r2);background:#000;display:block}
 .messwerte{display:flex;gap:8px;flex-wrap:wrap;margin-top:16px}
-.messwert{background:var(--flaeche2);border-radius:14px;padding:8px 16px;font-size:13px;color:var(--leise)}
+.messwert{background:var(--flaeche2);border-radius:16px;padding:10px 16px;font-size:13px;color:var(--leise)}
 .messwert b{display:block;font-size:20px;color:var(--text);font-variant-numeric:tabular-nums;letter-spacing:-.022em;line-height:1.25}
 
 /* ---------- Chat, Agent, RAG ---------- */
@@ -499,3 +532,7 @@ details.mehr>.mehr-in>:first-child{margin-top:0}
   .kachel,.schritt-k,.flaeche,.hinweis{box-shadow:inset 0 0 0 1px var(--linie)}
 }
 @media (prefers-contrast:more) and (prefers-color-scheme:dark){:root{--linie:rgba(255,255,255,.6);--leise:#d1d1d6}}
+
+/* Ergebnisflaechen (Live-Erklaerung): ruhige Flaeche, Radius 20; Kacheln und Balken darin eine Stufe heller bzw. dunkler */
+.d-live .messwert,.tts-live .messwert,.wh-live .messwert{background:var(--flaeche)}
+.d-live .pipe,.tts-live .pipe,.wh-live .pipe{background:var(--fuell)}

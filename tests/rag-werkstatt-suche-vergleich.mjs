@@ -48,10 +48,10 @@ await page.locator(".rr input[type=range]").nth(0).fill("100");
 assert.equal(await spalte(2).locator(".rr-karte").first().getAttribute("data-idx"), await spalte(1).locator(".rr-karte").first().getAttribute("data-idx"), "Gewicht 100: Hybrid folgt dem Vektor");
 await page.locator(".rr input[type=range]").nth(0).fill("50");
 // 4. Filter
-await page.click('.rr-filterzeile button:has-text("Personal")');
+await page.click('.rr-regler button:has-text("Personal")');
 const gr = await spalte(1).locator(".rr-grp").allTextContents();
 assert.ok(gr.length > 0 && gr.every((g) => g === "Personal"), "nur Personal: " + gr);
-await page.click('.rr-filterzeile button:has-text("Alle Gruppen")');
+await page.click('.rr-regler button:has-text("Alle Gruppen")');
 // 5. Eigene Frage ueber den Jetson: kein Haken
 await page.locator(".rr input[type=range]").nth(1).fill("5");
 await page.fill(".rr-form-zeile input", "Wo kann ich mein Fahrzeug lassen?");

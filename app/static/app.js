@@ -19,6 +19,9 @@
                                               Felder: gpu_pct, ram_mb, ram_max_mb, cpu_pct, power_w, temp_c, modelle_geladen[], frisch
      KL.stats.letzte                          zuletzt empfangene Werte oder null
      KL.zeit(ms)                              Millisekunden als "12 ms" bzw. "1,2 s"
+     KL.gruppe(titel, zeilen, {fuss, aktion, klasse})  Einstellungsgruppe (inset grouped): kleine Ueberschrift, Zeilen mit 44 px,
+                                              Erlaeuterung (fuss) darunter, Hauptaktionen (aktion: Pill-Buttons) am Ende
+     KL.zeile(beschriftung, steuerelement, id, stapel) Zeile in einer Gruppe: links Beschriftung, rechts Steuerelement (Auswahl, Zahlenfeld, Chips)
      KL.beispiele()                           Promise auf /static/beispiele/manifest.json ({usecases:[...]}), gecacht
      seite.query                              Abfrage der Adresse, z. B. /anlernen?beispiel=fertigung-teile -> {beispiel:"fertigung-teile"}
    ADRESSEN: Seiten liegen unter /<id> (Startseite /). Links der Form href="#/<id>" oder "#/<id>?beispiel=x" funktionieren
@@ -699,7 +702,21 @@
   window.addEventListener("popstate", () => route(history.state && history.state.y));
   window.addEventListener("hashchange", () => { if (ausHash(location.hash)) route(); });
 
-  window.KL = { $, $$, h, md, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
+  /* Einstellungsgruppe im Stil der Systemeinstellungen. zeilen: Elemente (.regler, .w-schalter, .g-zeile ...). */
+  function gruppe(titel, zeilen, opt) {
+    const o = opt || {};
+    const kopf = titel ? h("h3", { class: "g-kopf" }, titel) : null;
+    const box = h("div", { class: "g-box" + (o.klasse ? " " + o.klasse : "") }, kopf,
+      (zeilen && zeilen.length) ? h("div", { class: "gruppe" }, [].concat(zeilen).filter(Boolean)) : null,
+      [].concat(o.fuss || []).map((f) => { if (f && f.nodeType) { f.classList.add("g-fuss"); return f; } return h("p", { class: "g-fuss" }, f); }),
+      o.aktion ? h("div", { class: "g-aktion" + (o.aktionKlasse ? " " + o.aktionKlasse : "") }, o.aktion) : null);
+    return box;
+  }
+  function zeile(beschriftung, steuer, id, stapel) {
+    return h("div", { class: "g-zeile" + (stapel ? " g-stapel" : "") }, h(id ? "label" : "span", { class: "g-name", for: id || null }, beschriftung), h("div", { class: "g-steuer" }, steuer));
+  }
+
+  window.KL = { $, $$, h, md, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
     /** Haengt ein Objekt mit destroy() an die aktuelle Seite: wird beim Seitenwechsel aufgeraeumt (wie ein Baustein). */
     montiere(m) { montiert.push(m); return m; },
     ersterSatz, klar };

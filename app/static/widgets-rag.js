@@ -375,7 +375,7 @@
       vorschlaege.map((t) => h("button", { type: "button", class: "chip", onclick: () => { eingabe.value = t; einbetten(t); } }, t)));
     root.append(
       status, h("div", { class: "rr-kartenwrap" }, karte), legende, info, form, chips,
-      h("div", { class: "zeile rr-aktionen" }, sw.el, reset),
+      KL.gruppe("Anzeige", [sw.el], { aktion: [reset], klasse: "rr-anzeige" }),
       zahlenBox, h("div", { class: "rr-abschnitt" }, listenKopf, liste),
       h("div", { class: "rr-abschnitt" }, live.el));
 
@@ -543,12 +543,11 @@
         h("button", { type: "button", class: "btn klein primary", onclick: () => { const t = eigenFeld.value.replace(/\r\n?/g, "\n").trim(); if (t) { Z.text = t.slice(0, MAXTEXT); neu(); } } }, "Übernehmen"),
         h("button", { type: "button", class: "btn klein", onclick: () => { Z.text = Z.beispiel; eigenFeld.value = ""; neu(); } }, "Beispieltext zurück"))));
     root.append(status,
-      h("div", { class: "rr-steuer" }, h("p", { class: "w-ueber" }, "Strategie"), strat.el,
-        h("div", { class: "w-reglerpaar" }, gr.el, ueb.el)),
+      h("div", { class: "rr-steuer" }, KL.gruppe("Aufteilung", [KL.zeile("Strategie", strat.el, null, true), gr.el, ueb.el])),
       kennzahlen, textBox,
-      h("div", { class: "rr-abschnitt" }, h("p", { class: "w-ueber" }, "Testfrage"), fragenChips,
-        h("div", { class: "rr-fragen" }, frageFeld, antwortFeld), urteilBox,
-        h("div", { class: "zeile rr-aktionen" }, probeKnopf, suchKnopf), probe, suchErg),
+      h("div", { class: "rr-abschnitt" },
+        KL.gruppe("Testfrage", [fragenChips, KL.zeile("Frage", frageFeld, null, true), KL.zeile("Antwortsatz", antwortFeld, null, true)], { aktion: [probeKnopf, suchKnopf], aktionKlasse: "rr-aktionen", klasse: "rr-fragen" }),
+        urteilBox, probe, suchErg),
       eigen, h("div", { class: "rr-abschnitt" }, live.el));
 
     function tabellenBereich(text) {
@@ -716,8 +715,7 @@
     const filter = chipGruppe([["", "Alle Gruppen"]], "", (id) => { Z.gruppe = id || null; neuRechnen(); }, "Filter auf eine Gruppe");
     const spalten = h("div", { class: "rr-spalten" });
     const live = liveBlock("Live-Erklärung");
-    root.append(status, form, beispiele, h("div", { class: "w-reglerpaar rr-regler" }, gw.el, kr.el),
-      h("div", { class: "rr-filterzeile" }, h("span", { class: "w-leise rr-lbl" }, "Filter:"), filter.el), spalten, h("div", { class: "rr-abschnitt" }, live.el));
+    root.append(status, form, beispiele, KL.gruppe("Suche einstellen", [gw.el, kr.el, KL.zeile("Filter", filter.el, null, true)], { klasse: "rr-regler" }), spalten, h("div", { class: "rr-abschnitt" }, live.el));
 
     const SP = [
       ["stichwort", "Stichwort (BM25)", "Zählt, welche Wörter der Frage im Absatz vorkommen. Seltene Wörter wiegen mehr."],
@@ -858,9 +856,8 @@
     const summe = h("p", { class: "rr-summe", "aria-live": "polite" });
     const live = liveBlock("Live-Erklärung");
     const hin = hinweis(HINWEIS_RERANK);
-    root.append(status, h("div", { class: "rr-fragezeile" }, h("label", { class: "w-ueber", for: "rr-rr-frage" }, "Frage"), auswahl), meth.el,
-      h("div", { class: "w-reglerpaar rr-regler" }, nr.el, h("div", { class: "rr-schalterwrap" }, zufall.el)),
-      h("div", { class: "zeile rr-aktionen" }, knopf, nochmal), balken, fortschritt, liste, summe, hin, h("div", { class: "rr-abschnitt" }, live.el));
+    root.append(status,
+      KL.gruppe("Nachsortieren", [KL.zeile("Frage", auswahl, "rr-rr-frage"), KL.zeile("Erste Suche", meth.el, null, true), nr.el, zufall.el], { aktion: [knopf, nochmal], aktionKlasse: "rr-aktionen", klasse: "rr-regler" }), balken, fortschritt, liste, summe, hin, h("div", { class: "rr-abschnitt" }, live.el));
     auswahl.id = "rr-rr-frage";
 
     const vorab = () => (Z.K.rerank_vorab || {})[Z.f.id];
@@ -1009,9 +1006,10 @@
     const frageFeld = h("input", { type: "text", maxlength: "300", placeholder: "Eigene Frage", "aria-label": "Eigene Frage", autocomplete: "off" });
     const stelle = h("select", { class: "rr-select", "aria-label": "Fundstelle der eigenen Frage" });
     const addKnopf = h("button", { type: "submit", class: "btn" }, sym("plus"), "Frage hinzufügen");
-    const form = h("form", { class: "rr-eigenfrage", onsubmit: (e) => { e.preventDefault(); hinzu(); } }, frageFeld, stelle, addKnopf);
+    const form = h("form", { class: "rr-eigenfrage", onsubmit: (e) => { e.preventDefault(); hinzu(); } },
+      KL.gruppe(null, [KL.zeile("Frage", frageFeld), KL.zeile("Fundstelle", stelle)], { aktion: [addKnopf] }));
     const live = liveBlock("Live-Erklärung");
-    root.append(status, meth.el, h("div", { class: "rr-regler" }, kr.el), kacheln, matrix, tabelle, detail,
+    root.append(status, KL.gruppe("Auswertung", [KL.zeile("Suchmethode", meth.el, null, true), kr.el], { klasse: "rr-regler" }), kacheln, matrix, tabelle, detail,
       h("div", { class: "rr-abschnitt" }, h("p", { class: "w-ueber" }, "Eigene Frage hinzufügen"), form,
         h("p", { class: "w-leise rr-note" }, "Wähle den Absatz, in dem die Antwort steht. Die Frage braucht den Jetson. Ob das Sprachmodell die Antwort danach richtig formuliert, misst dieser Baustein nicht.")),
       h("div", { class: "rr-abschnitt" }, live.el));

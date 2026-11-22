@@ -9,8 +9,6 @@
 .w-hinweis{display:flex;gap:9px;align-items:flex-start;margin:16px 0 0;font-size:13.5px;line-height:1.5;color:var(--leise)}
 .w-hinweis .ic{margin-top:2px}
 .w-hinweis[hidden]{display:none}
-.w-reihe{display:flex;gap:20px;align-items:center;flex-wrap:wrap;margin:0 0 14px}
-.w-reihe .regler{flex:1 1 320px}
 .w-feld{width:100%;min-width:0}
 .w-ueber{margin:0 0 10px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
 .w-abschnitt{margin-top:26px}
@@ -63,18 +61,12 @@
 .w-tokens .kand.gewaehlt{background:color-mix(in srgb,var(--gruen) 14%,transparent)}
 .w-tokens .kand .tk{white-space:nowrap}
 .w-tokens .regler{margin-top:4px}
-.w-skala{display:flex;justify-content:space-between;gap:12px;font-size:12px;color:var(--leise);margin:2px 0 16px;padding:0 0 0 0}
 .w-tokens .erklaerung{min-height:5.2em}
 .w-tokens .btn:focus-visible,.w-regel .btn:focus-visible{outline-offset:2px}
-@media(max-width:520px){.w-tokens .kand{grid-template-columns:92px minmax(0,1fr) 58px}.w-skala{display:none}}
+@media(max-width:520px){.w-tokens .kand{grid-template-columns:92px minmax(0,1fr) 58px}}
 
 /* ---------- Regelkreis ---------- */
 .w-regel canvas.w-sim{cursor:pointer;aspect-ratio:16/9}
-.w-reglerpaar{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 28px;margin:0 0 14px}
-.w-reglerpaar .regler{grid-template-columns:auto minmax(60px,1fr) auto}
-.w-reglerpaar .regler output{min-width:4.8em}
-@media(max-width:760px){.w-reglerpaar{grid-template-columns:1fr}}
-@media(max-width:520px){.w-reglerpaar .regler{grid-template-columns:minmax(0,1fr) auto}.w-reglerpaar .regler label{grid-column:1/-1;white-space:normal}.w-reglerpaar .regler output{min-width:0}}
 .w-stand{margin:14px 0 4px;min-height:34px}
 .w-stand .chip{font-variant-numeric:tabular-nums}
 .w-stand .chip.w-ok{background:color-mix(in srgb,var(--gruen) 20%,transparent);color:var(--text)}

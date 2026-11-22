@@ -21,8 +21,6 @@
 .rr-form-zeile input{flex:1 1 auto;min-width:0}
 @media(max-width:560px){.rr-form-zeile{flex-direction:column;align-items:stretch}}
 .rr .btn.primary,.rr .btn.aktiv{color:var(--w-auf-akzent)}
-.rr .rr-select{background:var(--bg);color:var(--text);border:.5px solid var(--linie);border-radius:12px;padding:10px 12px;font:inherit;max-width:100%;min-height:42px}
-.rr .rr-select:focus-visible{border-color:var(--akzent)}
 
 /* ---------- Karte ---------- */
 .rr-kartenwrap{border-radius:var(--r2);background:var(--flaeche2);overflow:hidden}
@@ -76,7 +74,6 @@
 .rr-marke{display:inline-block;font:600 11px/1.5 var(--mono);padding:0 6px;margin:0 4px 0 0;border-radius:6px;vertical-align:middle;white-space:nowrap;color:var(--text);box-shadow:inset 0 0 0 1px var(--linie)}
 .rr-marke.rr-c0{background:color-mix(in srgb,var(--k1) 30%,var(--flaeche))}.rr-marke.rr-c1{background:color-mix(in srgb,var(--k2) 34%,var(--flaeche))}
 .rr-marke.rr-c2{background:color-mix(in srgb,var(--k3) 30%,var(--flaeche))}.rr-marke.rr-c3{background:color-mix(in srgb,var(--k4) 30%,var(--flaeche))}
-.rr-fragen{display:grid;gap:10px;margin:10px 0 4px}
 .rr-urteil{display:flex;gap:9px;align-items:flex-start;margin:12px 0 0;padding:10px 13px;border-radius:12px;background:var(--flaeche2);font-size:15.5px;font-weight:500}
 .rr-urteil .ic{margin-top:3px}
 .rr-urteil.ok{color:var(--rr-ok);background:color-mix(in srgb,var(--gruen) 12%,var(--flaeche2))}
@@ -119,11 +116,8 @@
 .rr-haken .ic{width:15px;height:15px;stroke-width:2.6}
 .rr-fehlt{display:flex;gap:7px;align-items:flex-start;margin:10px 0 0;font-size:13.5px;color:var(--rr-schlecht)}
 .rr-fehlt .ic{margin-top:2px;width:15px;height:15px}
-.rr-filterzeile{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin:6px 0 4px}
 
 /* ---------- Rerank ---------- */
-.rr-fragezeile{display:grid;gap:6px;margin-bottom:12px}
-.rr-schalterwrap{display:flex;align-items:center}
 .rr-rerank{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:8px}
 .rr-rrzeile{display:grid;grid-template-columns:30px minmax(0,1fr) 108px;gap:12px;align-items:start;padding:11px 13px;border-radius:12px;background:var(--flaeche2);font-size:14.5px}
 .rr-rrzeile .rr-rang{margin-top:1px}
@@ -151,7 +145,5 @@
 .rr-ohne{color:var(--leise);font-size:14px}
 .rr-detail-box{padding:16px 18px;margin-top:14px}
 .rr-detailgrund{margin:12px 0 0;font-size:15px}
-.rr-eigenfrage{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr) auto;gap:10px;align-items:center}
-@media(max-width:760px){.rr-eigenfrage{grid-template-columns:1fr}}
 
 @media (prefers-reduced-motion:reduce){.rr *{transition:none!important;animation:none!important}}

@@ -136,10 +136,10 @@
     }
     const bBeispiel = h("button", { type: "button", class: "btn klein", onclick: beispieldaten }, "Beispieldaten");
     const bLeeren = h("button", { type: "button", class: "btn klein", onclick: leeren }, "Leeren");
-    const werkzeuge = h("div", { class: "werkzeuge", role: "group", "aria-label": "Farbe wählen und Daten laden" }, klassenKnoepfe, bBeispiel, bLeeren);
+    const farbwahl = h("div", { class: "w-farbwahl", role: "group", "aria-label": "Farbe wählen" }, klassenKnoepfe);
     const rk = regler("k (Nachbarn)", 1, 15, 1, k, (v) => String(v), (v) => { k = v; gitterDirty = true; aktualisieren(); });
     const sw = schalter("Entscheidungsfläche zeigen", false, (an) => { flaecheAn = an; aktualisieren(); });
-    const reihe = h("div", { class: "w-reihe" }, rk.el, sw.el);
+    const reihe = KL.gruppe("Spielfeld", [KL.zeile("Farbe des nächsten Punkts", farbwahl), rk.el, sw.el], { aktion: [bBeispiel, bLeeren] });
 
     const canvas = h("canvas", {
       class: "spiel", tabindex: "0", role: "application",
@@ -148,7 +148,7 @@
     const wrapper = h("div", { class: "w-feld" }, canvas);
     const satz = h("p", { class: "erklaerung", "aria-live": "off" });
     const extra = h("p", { class: "w-hinweis", hidden: true });
-    root.append(werkzeuge, reihe, wrapper, satz, extra);
+    root.append(reihe, wrapper, satz, extra);
     const ctx = canvas.getContext("2d");
 
     /* ---- Daten */
@@ -375,14 +375,13 @@
     const satzEl = h("div", { class: "satz", "aria-label": "Entstehender Satz" });
     const liste = h("div", { class: "kandidaten", role: "list", "aria-label": "Kandidaten für das nächste Token mit Wahrscheinlichkeit" });
     const rT = regler("Temperatur", 0.1, 2, 0.1, T, (v) => de(v, 1), (v) => { T = v; balkenAktualisieren(); erklaeren(); });
-    const skala = h("div", { class: "w-skala", "aria-hidden": "true" }, h("span", null, "vorsichtig, immer der Favorit"), h("span", null, "mutig, auch Seltenes"));
     const bZiehen = h("button", { type: "button", class: "btn primary", onclick: () => ziehen("zufall") }, "Nächstes Token ziehen");
     const bMax = h("button", { type: "button", class: "btn", onclick: () => ziehen("max") }, "Wahrscheinlichstes nehmen");
     const bAuto = h("button", { type: "button", class: "btn", "aria-pressed": "false", onclick: autoUmschalten }, "Automatisch");
     const bNeu = h("button", { type: "button", class: "btn", onclick: neu }, "Neu");
-    const knoepfe = h("div", { class: "zeile" }, bZiehen, bMax, bAuto, bNeu);
     const erkl = h("p", { class: "erklaerung", "aria-live": "polite" });
-    root.append(satzEl, liste, rT.el, skala, knoepfe, erkl,
+    const einst = KL.gruppe("Zufall", [rT.el], { fuss: "Links vorsichtig, immer der Favorit. Rechts mutig, auch Seltenes.", aktion: [bZiehen, bMax, bAuto, bNeu] });
+    root.append(satzEl, liste, einst, erkl,
       hinweis("Beispielwerte, die für diese Demo festgelegt wurden, kein echtes Modell. Ein echtes Modell rechnet genauso, mit rund 128.000 möglichen Tokens."));
 
     function satzZeichnen() {
@@ -661,8 +660,7 @@
     const taktHinweis = hinweis("Der Roboter wiederholt diese drei Schritte 60 Mal pro Sekunde. Die Anzeige hier läuft langsamer, damit du sie lesen kannst.");
 
     root.append(
-      h("div", { class: "werkzeuge" }, bPause, bZiel, bHind, bLeer, bNeu),
-      h("div", { class: "w-reglerpaar" }, rRausch.el, rVerz.el), h("div", { class: "w-reihe" }, sw.el),
+      KL.gruppe("Sensor des Roboters", [rRausch.el, rVerz.el, sw.el], { aktion: [bPause, bZiel, bHind, bLeer, bNeu] }),
       wrapper, zeileStand, phasenBox, taktHinweis);
     const ctx = canvas.getContext("2d");
 

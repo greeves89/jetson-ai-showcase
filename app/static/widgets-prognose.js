@@ -250,8 +250,7 @@
 
     root.append(
       h("p", { class: "pg-leise" }, "Zwanzig erfundene Kreditanträge, jeder mit dem Ergebnis, ob er zurückgezahlt wurde oder ausfiel. Wähle einen Knoten im Baum und stelle ihm eine Frage. Je reiner die Gruppen danach sind, desto besser trennt die Frage."),
-      h("div", { class: "pg-reihe" }, bVorschlag, bAuto, bNeu),
-      h("div", { class: "pg-reglerpaar" }, tiefeR.el, blattR.el),
+      KL.gruppe("Baum", [tiefeR.el, blattR.el], { aktion: [bVorschlag, bAuto, bNeu] }),
       h("div", { class: "pg-legende", "aria-hidden": "true" },
         h("span", null, h("i", { class: "pg-sw0" }), "zurückgezahlt"), h("span", null, h("i", { class: "pg-sw1" }), "ausgefallen"),
         h("span", { class: "pg-leise" }, "Gini: 0 heißt rein, 0,5 heißt völlig durchmischt")),
@@ -471,9 +470,8 @@
     root.append(
       h("p", { class: "pg-leise" }, "Eine erfundene Zeitreihe aus Trend, Saison und Zufall. Das Modell kennt nur die Historie und schreibt sie zwölf Punkte fort. Die grauen Kreise sind die Werte, die es nicht sehen durfte."),
       h("div", { class: "pg-canvaswrap" }, canvas), info, legende,
-      h("div", { class: "pg-reglerpaar" }, rTrend.el, rSaison.el, rRausch.el, rHist.el),
-      h("div", { class: "pg-reihe" }, bProg, bWahr, bSeed),
-      h("div", { class: "pg-reihe" }, bAusr, bBruch, h("span", { class: "pg-leise" }, "Danach klickst du ins Diagramm, um die Stelle zu verschieben.")),
+      KL.gruppe("Zeitreihe", [rTrend.el, rSaison.el, rRausch.el, rHist.el], { aktion: [bProg, bWahr, bSeed] }),
+      KL.gruppe("Störungen", [], { fuss: "Danach klickst du ins Diagramm, um die Stelle zu verschieben.", aktion: [bAusr, bBruch] }),
       h("div", { class: "messwerte pg-messwerte" }, kMod.el, kFau.el, kBand.el), satz, sr,
       hinweis("Die Reihe ist erfunden und hat keine Einheit. Das Band zeigt grob, wo 95 von 100 neuen Werten liegen würden, wenn das Muster so bleibt. Ein Bruch im Muster ist darin nicht eingerechnet."));
 
@@ -694,10 +692,8 @@
 
     root.append(
       h("p", { class: "pg-leise" }, "Die Messreihe zeigt zum Beispiel die Temperatur einer Maschine. Darin stecken sechs echte Auffälligkeiten, die du hier schon kennst. Das Verfahren kennt sie nicht und lernt nur aus den ersten 100 Punkten, was normal ist."),
-      h("div", { class: "pg-reihe" }, gruppe.el),
       h("div", { class: "pg-canvaswrap" }, canvas), legende,
-      h("div", { class: "pg-reglerpaar pg-einspaltig" }, rK.el),
-      h("div", { class: "pg-reihe" }, sLaut.el, bNeu),
+      KL.gruppe("Verfahren", [KL.zeile("Verfahren", gruppe.el, null, true), rK.el, sLaut.el], { aktion: [bNeu] }),
       h("div", { class: "messwerte pg-messwerte" }, kTr.el, kFa.el, kUe.el, kMe.el),
       satz, alltag, sr,
       h("div", { class: "pg-abschnitt" }, h("p", { class: "pg-ueber" }, "Was die Schwelle kostet"), h("div", { class: "pg-canvaswrap" }, canvas2)),
@@ -893,8 +889,7 @@
 
     root.append(
       h("p", { class: "pg-leise" }, "Acht erfundene Personen haben zehn Wissensartikel von 1 bis 5 bewertet, die Person „Neu“ noch nichts. Klicke auf eine Zelle, um die Bewertung zu ändern, oder tippe eine Zahl von 0 bis 5. Wähle einen Namen, dann siehst du seine Empfehlungen."),
-      h("div", { class: "pg-reihe" }, gruppe.el, sV.el),
-      h("div", { class: "pg-reglerpaar pg-einspaltig" }, rK.el),
+      KL.gruppe("Empfehlung", [KL.zeile("Verfahren", gruppe.el, null, true), rK.el, sV.el]),
       tabBox,
       h("div", { class: "pg-legende", "aria-hidden": "true" },
         h("span", null, h("i", { class: "pg-f0" }), EMP_FELDER[0]), h("span", null, h("i", { class: "pg-f1" }), EMP_FELDER[1]),
@@ -1059,7 +1054,7 @@
     }
 
     /* ---- Oberfläche */
-    const felder = h("div", { class: "pg-felder" });
+    const reihen = [];
     const eingaben = {}, fehlerEl = {}, tagEl = {};
     for (const f of KOSTEN_FELDER) {
       const id = neueId("kosten"), fid = id + "-f";
@@ -1074,7 +1069,7 @@
         fe.textContent = fehler[f.k] || ""; markiere(); rechne();
       });
       eingaben[f.k] = input; fehlerEl[f.k] = fe; tagEl[f.k] = tag;
-      felder.append(h("div", { class: "pg-feld" }, h("label", { for: id }, f.label, tag),
+      reihen.push(h("div", { class: "pg-feld" }, h("label", { for: id }, f.label, tag),
         h("span", { class: "pg-eingabe" }, input, h("span", { class: "pg-einheit" }, f.einheit)), fe, h("span", { class: "pg-hilfe" }, f.hilfe)));
     }
     function markiere() {
@@ -1117,8 +1112,7 @@
 
     root.append(
       h("p", { class: "pg-annahme" }, icon("info"), h("span", null, h("b", null, "Alle Werte sind deine Annahmen, keine Preise oder Messwerte. "), "Die Beispielannahmen unten sind nur Startwerte zum Ausprobieren. Überschreibe sie mit deinen eigenen Zahlen.")),
-      felder,
-      h("div", { class: "pg-reihe" }, bJetson), jetsonStatus,
+      KL.gruppe("Annahmen", reihen, { fuss: jetsonStatus, aktion: [bJetson] }),
       h("div", { class: "messwerte pg-messwerte" }, kErsp.el, kAmort.el),
       satz, sr,
       h("div", { class: "pg-abschnitt" }, tabBox),

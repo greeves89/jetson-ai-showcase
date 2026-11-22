@@ -6,20 +6,18 @@
 .d-steuer{margin-bottom:14px}
 .d-steuer .chip{font-variant-numeric:tabular-nums}
 .d-platz{aspect-ratio:4/3;display:grid;place-content:center;justify-items:center;gap:8px;padding:18px;text-align:center;
-  border-radius:var(--r2);background:var(--flaeche2);border:.5px solid var(--linie);color:var(--leise);font-size:14px;line-height:1.4}
+  border-radius:20px;background:var(--flaeche2);color:var(--leise);font-size:14px;line-height:1.4}
 .d-meldung{display:flex;gap:10px;align-items:flex-start;margin:0 0 14px;padding:12px 14px;border-radius:var(--r2);
   background:color-mix(in srgb,var(--orange) 14%,var(--flaeche));border:.5px solid color-mix(in srgb,var(--orange) 40%,transparent);font-size:14.5px;line-height:1.5}
 .d-meldung .ic{margin-top:2px;color:var(--orange)}
 .d-hinweis{margin:10px 0 0;font-size:14px;line-height:1.5;color:var(--leise)}
 .d-leise{color:var(--leise)}
-.d-live{margin-top:20px;padding:18px 0 0;border-top:.5px solid var(--linie2)}
+.d-live{margin-top:24px;padding:20px 24px;border-radius:20px;background:var(--flaeche2)}
 .d-sw{display:inline-block;width:9px;height:9px;border-radius:3px;margin-right:6px;vertical-align:-1px;background:var(--flaeche3)}
 .d-sw.s1{background:#5e5ce6}.d-sw.s2{background:#64748b}.d-sw.s3{background:#0a84ff}.d-sw.s4{background:#30a14e}.d-sw.s5{background:#e08600}.d-sw.s6{background:#8e8e93}
 .pipeleg .d-sw{margin-right:0}
 .pipeleg span{display:inline-flex;align-items:center;gap:6px}
 .pipe:empty{min-height:34px}
-.d-regler{margin-top:16px;padding:14px 16px;border-radius:var(--r2);background:var(--flaeche2)}
-.d-regler .d-hinweis{margin-top:8px}
 .d-frage input[type=text]{flex:1;min-width:0}
 .d-zeile{margin-top:10px}
 .d-steuer .btn,.d-frage .btn{white-space:nowrap}
@@ -40,11 +38,10 @@
 .d-bar{height:12px;border-radius:6px;background:var(--flaeche3);overflow:hidden}
 .d-bar i{display:block;height:100%;width:0;border-radius:6px;transition:width .25s}
 .d-wert{font-family:var(--mono);font-size:12px;text-align:right;color:var(--leise)}
-.d-klassenkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:22px 0 8px}
-.d-klassenkopf h3{margin:0;font-size:15px}
-.d-klassen{display:grid;gap:8px}
-.d-klasse{display:grid;grid-template-columns:auto minmax(120px,1fr) auto auto;gap:12px;align-items:center;padding:8px 10px;border-radius:var(--r2);background:var(--flaeche2)}
-.d-klasse input[type=text]{padding:7px 10px}
+.d-klassenkopf{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:24px 0 8px 16px}
+.d-klassenkopf h3{margin:0;font-size:13px;font-weight:400;color:var(--leise)}
+.d-klasse{display:grid;grid-template-columns:auto minmax(120px,1fr) auto auto;gap:12px;align-items:center;padding:6px 16px}
+.d-klasse input[type=text]{background:transparent;padding:0 4px;min-height:36px;border-radius:8px}
 .d-klasse input[readonly]{opacity:.85}
 .d-zahl{font-size:13px;color:var(--leise);min-width:7.5em;font-variant-numeric:tabular-nums}
 .d-zahl.d-wenig{color:var(--orange)}
@@ -66,8 +63,6 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-text{white-space:pre-wrap;overflow-wrap:anywhere}
 .msg.ki .meta{font-size:12px;opacity:1;color:var(--leise)}
 .msg.ki .meta:empty{display:none}
-.d-einst{display:flex;gap:22px;align-items:center;flex-wrap:wrap;margin-top:16px;padding:12px 16px;border-radius:var(--r2);background:var(--flaeche2)}
-.d-einst .regler{flex:1;min-width:240px}
 .d-schalter{display:inline-flex;align-items:center;gap:10px;font-size:14px;cursor:pointer;user-select:none}
 .d-schalter input{position:absolute;opacity:0;width:1px;height:1px}
 .d-sw-bahn{width:51px;height:31px;border-radius:99px;background:var(--flaeche3);position:relative;transition:background .3s var(--feder);flex:none}
@@ -144,3 +139,4 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .w-wid .chip.w-bsp{color:#fff;background:var(--akzent-fl);text-decoration:none;min-height:32px}
 .w-wid .chip.w-bsp:hover{background:var(--akzent-h);text-decoration:none}
 .w-wid .chip.w-bsp .ic{width:14px;height:14px}
+.d-regler{margin-top:20px}

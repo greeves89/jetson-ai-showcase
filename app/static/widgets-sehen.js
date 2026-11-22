@@ -312,7 +312,7 @@
     const histText = h("p", { class: "w-leise sa-histtext" });
 
     root.append(
-      h("div", { class: "sa-kopf" }, h("span", { class: "w-ueber" }, "Bildquelle"), quellenGruppe.el),
+      KL.gruppe("Bildquelle", [KL.zeile("Bild", quellenGruppe.el)]),
       hinweis(HINWEIS_LOKAL), meldung,
       h("div", { class: "sa-pl-grid" },
         h("div", { class: "sa-pl-links" }, leinwand, kameraLeiste, zoomLeiste,
@@ -320,8 +320,8 @@
         h("div", { class: "sa-pl-rechts" }, info,
           h("div", { class: "sa-tabwrap" }, h("div", { class: "sa-tabkopf" }, h("span", { class: "w-ueber" }, "Bild als Zahlentabelle"), zahlGruppe.el), tab))),
       h("div", { class: "sa-regelfeld" },
-        h("div", { class: "sa-kanaele" }, h("span", { class: "w-ueber" }, "Farbkanäle"), h("div", { class: "zeile" }, ...kanalSchalter.map((s) => s.el), grauSchalter.el)),
-        h("div", { class: "sa-regler2" }, rHell.el, rKontrast.el, rStufe.el, rRausch.el, h("div", { class: "sa-wuerfel" }, wuerfel))),
+        KL.gruppe("Farbkanäle", [...kanalSchalter.map((s) => s.el), grauSchalter.el]),
+        KL.gruppe("Bild verändern", [rHell.el, rKontrast.el, rStufe.el, rRausch.el], { aktion: [wuerfel] })),
       h("div", { class: "sa-histblock" }, h("span", { class: "w-ueber" }, "Wie viele Pixel gibt es je Helligkeit?"), histCv, histText),
       messwerte);
 
@@ -749,19 +749,19 @@
 
     /* ---- Zusammenbau */
     const filterAnsicht = h("div", { class: "sa-filteransicht" },
-      h("div", { class: "sa-filterchips" }, h("span", { class: "w-ueber" }, "Filter"), filterGruppe.el),
+      KL.gruppe("Filter", [KL.zeile("Filter", filterGruppe.el, null, true)], { klasse: "sa-filterchips" }),
       h("div", { class: "sa-paar" },
         h("figure", { class: "sa-bildfig" }, h("figcaption", null, "Original"), boxO),
         h("span", { class: "sa-pfeil sa-pfeil-gross", "aria-hidden": "true" }, ic("arrow")),
         h("figure", { class: "sa-bildfig" }, ergCap, boxE)),
-      h("div", { class: "sa-positionen" }, sliderX.el, sliderY.el, animKnopf),
+      KL.gruppe("Position des Filters", [sliderX.el, sliderY.el], { aktion: [animKnopf] }),
       h("div", { class: "sa-unten" },
-        h("div", { class: "sa-links" }, h("span", { class: "w-ueber" }, "Der Filter: 3 × 3 Zahlen"), kernEl, filterText, h("span", { class: "w-ueber sa-abst" }, "Darstellung"), darstGruppe.el, darstText, poolSchalter.el),
+        h("div", { class: "sa-links" }, KL.gruppe("Filterwerte und Darstellung", [KL.zeile("Der Filter: 3 × 3 Zahlen", kernEl), KL.zeile("Darstellung", darstGruppe.el, null, true), poolSchalter.el], { fuss: [filterText, darstText] })),
         h("div", { class: "sa-rechts" }, h("span", { class: "w-ueber" }, "Rechenschritt an dieser Stelle"), rechnung, summeEl)),
       erkl, messwerte);
     root.append(
-      h("div", { class: "sa-kopf" }, h("span", { class: "w-ueber" }, "Bildquelle"), quellenGruppe.el),
-      hinweis(HINWEIS_LOKAL), meldung, h("div", { class: "sa-kopf", style: "margin-top:14px" }, ansichtGruppe.el),
+      KL.gruppe("Quelle und Ansicht", [KL.zeile("Bildquelle", quellenGruppe.el, null, true), KL.zeile("Ansicht", ansichtGruppe.el, null, true)]),
+      hinweis(HINWEIS_LOKAL), meldung,
       filterAnsicht, schichtenEl, video);
 
     /* ---- Zustand und Rechnung */
@@ -1071,7 +1071,7 @@
     const eingabeSel = h("select", { id: eingabeId, class: "sa-sel" });
     const knopfLauf = h("button", { type: "button", class: "btn primary", onclick: () => ausfuehren() }, ic("wrench"), "Werkzeug ausführen");
     const knopfAntwort = h("button", { type: "button", class: "btn", onclick: () => antworten() }, ic("check"), "Jetzt antworten");
-    const eingabeZeile = h("div", { class: "sa-eingabe" }, h("label", { for: eingabeId }, "Eingabe"), eingabeSel, knopfLauf, knopfAntwort);
+    const eingabeZeile = KL.gruppe("Werkzeug ausführen", [KL.zeile("Eingabe", eingabeSel, eingabeId)], { aktion: [knopfLauf, knopfAntwort] });
     const status = h("p", { class: "erklaerung sa-erkl", "aria-live": "polite" });
     const rMax = regler("Höchstzahl Runden", 3, 10, 1, S.max, (v) => String(v), (v) => { S.max = v; aktualisieren(); });
     const verlauf = h("ol", { class: "sa-verlauf", "aria-label": "Verlauf der Runden" });
@@ -1091,11 +1091,10 @@
       echtFrage, h("div", { class: "zeile" }, echtKnopf, echtStopp), echtStatus, echtListe);
 
     spielEl.append(
-      h("div", { class: "sa-kopf" }, h("span", { class: "w-ueber" }, "Aufgabe"), aufgabeGruppe.el),
+      KL.gruppe("Aufgabe", [KL.zeile("Aufgabe", aufgabeGruppe.el, null, true), rMax.el], { klasse: "sa-kopf" }),
       aufgabeKarte,
       h("div", { class: "messwerte sa-mess" }, tRunde.el, tKontext.el, tZeit.el, tFehl.el),
       h("span", { class: "w-ueber sa-abst" }, "Werkzeugkasten: Wähle ein Werkzeug und eine Eingabe"), kasten, eingabeZeile,
-      h("div", { class: "sa-optionen" }, rMax.el),
       status, verlauf, kontextBox, ergebnisEl, echtBlock);
 
     /* ---- Kette */
@@ -1110,8 +1109,8 @@
     const wuerfelText = h("p", { class: "erklaerung sa-erkl", "aria-live": "polite" });
     ketteEl.append(
       h("p", { class: "w-leise" }, "Ein Agent mit vielen Schritten ist wie eine Kette: Reißt ein Glied, ist die ganze Kette hinüber. Stelle ein, wie zuverlässig ein einzelner Schritt ist."),
-      h("div", { class: "sa-reglerpaar" }, rP.el, rN.el), keteText, chart,
-      h("div", { class: "zeile sa-wuerfelzeile" }, knopfWuerfel, h("span", { class: "w-leise" }, "Jeder Lauf würfelt jeden Schritt einzeln.")), wuerfelRaster, wuerfelText,
+      KL.gruppe("Zuverlässigkeit", [rP.el, rN.el], { fuss: "Jeder Lauf würfelt jeden Schritt einzeln.", aktion: [knopfWuerfel] }), keteText, chart,
+      wuerfelRaster, wuerfelText,
       hinweis("Die Rechnung nimmt an, dass jeder Schritt unabhängig von den anderen mit derselben Wahrscheinlichkeit gelingt. In echten Agenten hängen Fehler oft zusammen: Ein falsches Ergebnis führt zum nächsten Fehler."));
 
     root.append(h("div", { class: "sa-kopf" }, tabGruppe.el), spielEl, ketteEl);
@@ -1478,9 +1477,6 @@
     const rechteSchalter = RECHTE.map((r) => { const s = schalter(r.name, S.set.rechte[r.id], (an) => { S.set.rechte[r.id] = an; zuruecksetzen(); }); s.el.classList.add("sa-recht"); s.el.prepend(ic(r.icon)); s.el.dataset.recht = r.id; return s; });
     const freigabeSchalter = schalter("Ein Mensch gibt Aktionen nach außen frei", false, (an) => { S.set.freigabe = an; zuruecksetzen(); });
     const markSchalter = schalter("Fremde Texte als Daten kennzeichnen", false, (an) => { S.set.markieren = an; zuruecksetzen(); szenarioZeigen(); });
-    const einstellungen = h("div", { class: "sa-einst" },
-      h("div", null, h("span", { class: "w-ueber" }, "Rechte des Agenten"), h("div", { class: "sa-rechte" }, ...rechteSchalter.map((s) => s.el))),
-      h("div", null, h("span", { class: "w-ueber" }, "Weitere Schutzmaßnahmen"), h("div", { class: "sa-massn" }, freigabeSchalter.el, markSchalter.el)));
     const startKnopf = h("button", { type: "button", class: "btn primary", onclick: () => starten() }, ic("play"), "Agent starten");
     const resetKnopf = h("button", { type: "button", class: "btn", onclick: () => { zuruecksetzen(); } }, ic("refresh"), "Zurücksetzen");
 
@@ -1491,10 +1487,12 @@
     const auswertung = h("div", { class: "sa-auswertung" });
 
     root.append(
-      h("div", { class: "sa-kopf" }, h("span", { class: "w-ueber" }, "Szenario"), szGruppe.el),
+      KL.gruppe("Szenario", [KL.zeile("Szenario", szGruppe.el, null, true)], { klasse: "sa-kopf" }),
       h("div", { class: "sa-aufgabe" }, h("span", { class: "w-ueber" }, "Aufgabe des Agenten"), titel, aufgabe),
       h("div", { class: "sa-fremd" }, h("span", { class: "w-ueber" }, "Ein fremder Text, den der Agent liest"), textBox, stellung),
-      h("div", { class: "sa-regeln" }, h("span", { class: "w-ueber" }, "Deine Entscheidungen"), einstellungen, h("div", { class: "zeile" }, startKnopf, resetKnopf)),
+      h("div", { class: "sa-regeln" },
+        KL.gruppe("Rechte des Agenten", rechteSchalter.map((s) => s.el)),
+        KL.gruppe("Weitere Schutzmaßnahmen", [freigabeSchalter.el, markSchalter.el], { aktion: [startKnopf, resetKnopf] })),
       ablaufListe, anfrageSlot, ergebnis, auswertung,
       hinweis("Das ist ein vereinfachtes Modell. Der Ablauf ist fest vorgegeben, damit du ihn nachvollziehen kannst. Echte Angriffe sind vielfältiger, und ein echtes Modell reagiert nicht immer gleich. Keine dieser Maßnahmen macht einen Agenten sicher."));
 

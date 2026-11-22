@@ -28,7 +28,7 @@ assert.equal(await page.locator(".rr-pkt.rr-gewaehlt").count(), 1);
 assert.match(await page.textContent(".rr-info"), /Frühstück/);
 
 // Zahlen zeigen
-await page.locator(".rr-aktionen label.w-schalter").click();
+await page.locator(".rr-anzeige label.w-schalter").click();
 assert.equal(await page.locator(".rr-zahlen i").count(), 48);
 assert.match(await page.textContent(".rr-zahlnote"), /von 768 Zahlen/);
 

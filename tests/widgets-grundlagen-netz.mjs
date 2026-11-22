@@ -113,9 +113,9 @@ console.log("Wiederholung:", a1, a2);
 assert.ok(Math.abs(a1.richtig - a2.richtig) <= 1, "reproduzierbar");
 
 // 8) Tastatur: Regler per Pfeiltaste, Knoepfe fokussierbar
-await regler(2).focus(); const l0 = await page.textContent(`${W} .regler >> nth=3 >> output`);
+await regler(2).focus(); const l0 = await page.textContent(`${W} .regler >> nth=2 >> output`);
 await page.keyboard.press("ArrowRight");
-assert.notEqual(await page.textContent(`${W} .regler >> nth=3 >> output`), l0);
+assert.notEqual(await page.textContent(`${W} .regler >> nth=2 >> output`), l0);
 // destroy: Seitenwechsel stoppt die Schleife (keine Fehler)
 await page.click(`${W} .btn.primary`);
 await page.goto(page.url().replace("neuronale-netze", "training"));

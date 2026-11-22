@@ -290,7 +290,7 @@
         sendeTimer = setTimeout(schwelleSenden, 150);
       });
       L.onEnde(() => clearTimeout(sendeTimer));
-      regler = h("div", { class: "d-regler" }, h("div", { class: "regler" }, h("label", { for: "d-schwelle" }, "Schwelle"), inp, schwelleOut), schwelleSatz);
+      regler = KL.gruppe("Erkennung", [h("div", { class: "regler" }, h("label", { for: "d-schwelle" }, "Schwelle"), inp, schwelleOut)], { fuss: schwelleSatz, klasse: "d-regler" });
     }
     function schwelleSenden() {
       if (!objekt || !ws || ws.readyState !== 1) return;
@@ -553,7 +553,7 @@
       h("figure", null, h("figcaption", null, "Was der Jetson erkennt"), ergebnis));
 
     /* Klassen */
-    const liste = h("div", { class: "d-klassen" });
+    const liste = h("div", { class: "d-klassen gruppe" });
     let zeilen = [];
     const hinweisKlasse = h("p", { class: "d-hinweis", role: "status" });
     function zaehlerText(n, name) {
@@ -919,9 +919,9 @@
     temp.addEventListener("input", () => { temperatur = Number(temp.value); tempOut.textContent = de(temperatur, 1); });
     const schalter = h("input", { type: "checkbox", id: "d-tokens", role: "switch" });
     schalter.addEventListener("change", () => { tokensZeigen = schalter.checked; nachrichten.forEach((m) => m.ki && fuelle(m)); });
-    const einst = h("div", { class: "d-einst" },
+    const einst = KL.gruppe("Antwort", [
       h("div", { class: "regler" }, h("label", { for: "d-temp" }, "Temperatur"), temp, tempOut),
-      h("label", { class: "d-schalter", for: "d-tokens" }, schalter, h("span", { class: "d-sw-bahn", "aria-hidden": "true" }, h("i")), "Tokens zeigen"));
+      h("label", { class: "d-schalter", for: "d-tokens" }, schalter, h("span", { class: "d-sw-bahn", "aria-hidden": "true" }, h("i")), "Tokens zeigen")], { klasse: "d-einst" });
 
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Frage. Hier siehst du dann, wie der Jetson Token für Token antwortet.");

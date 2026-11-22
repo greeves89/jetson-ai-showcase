@@ -124,11 +124,11 @@
         h("label", { class: "tts-label", for: "tts-text" }, "Text"),
         feld,
         h("div", { class: "tts-feldfuss" }, lernHinweis, zaehler),
-        h("div", { class: "tts-zeile" }, h("span", { class: "tts-label" }, "Zum Ausprobieren"), probenChips),
-        h("div", { class: "tts-zeile tts-stimmenreihe" }, h("span", { class: "tts-label" }, "Stimme"), stimmenZeile),
-        stimmenText,
-        h("div", { class: "regler tts-tempo" }, h("label", { for: "tts-tempo" }, "Sprechtempo"), tempoIn, tempoAus),
-        h("div", { class: "tts-knoepfe" }, sprechKnopf, vergleichKnopf),
+        KL.gruppe("Stimme und Tempo", [
+          KL.zeile("Zum Ausprobieren", probenChips, null, true),
+          KL.zeile("Stimme", stimmenZeile, null, true),
+          h("div", { class: "regler tts-tempo" }, h("label", { for: "tts-tempo" }, "Sprechtempo"), tempoIn, tempoAus)],
+          { fuss: stimmenText, aktion: [sprechKnopf, vergleichKnopf], aktionKlasse: "tts-knoepfe" }),
         status, hinweis),
       ergebnisBox, live, missbrauch);
     zaehlen();

@@ -7,9 +7,7 @@
 .gl-wid .btn{min-height:38px}
 .gl-wid .btn .ic{width:16px;height:16px}
 .gl-wid .btn:focus-visible,.gl-wid .chip:focus-visible,.gl-wid canvas:focus-visible,.gl-wid select:focus-visible,.gl-wid .gl-tabwrap:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
-.gl-einf{margin:0 0 16px;color:var(--leise);font-size:15.5px;line-height:1.5;max-width:64ch}
 .gl-ueber{margin:0 0 8px;font-size:12px;font-weight:600;letter-spacing:0;color:var(--leise)}
-.gl-block{margin:0 0 14px}
 .gl-leise{color:var(--leise)}
 .gl-klein{font-size:13.5px;margin:6px 0 0}
 .gl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
@@ -23,15 +21,7 @@
 .gl-standreihe{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0 0}
 
 /* Regler und Auswahlfeld */
-.gl-regler-gitter{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 32px;margin:0 0 14px}
-.gl-regler-gitter.gl-drei{grid-template-columns:repeat(3,minmax(0,1fr))}
-.gl-regler-gitter.gl-eine{grid-template-columns:minmax(0,1fr);margin-top:14px}
-.gl-regler-gitter .regler{grid-template-columns:auto minmax(60px,1fr) auto}
-.gl-regler-gitter .regler label{white-space:normal}
-.gl-regler-gitter .regler output{min-width:4.4em}
 .gl-wid input[type=range]{min-height:28px}
-.gl-select{appearance:none;background:var(--flaeche2) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%236e6e73' stroke-width='1.8' stroke-linecap='round'/%3E%3C/svg%3E") no-repeat right 12px center;color:var(--text);border:.5px solid var(--linie);border-radius:12px;padding:8px 34px 8px 12px;font:inherit;font-size:14px;min-height:38px;width:100%}
-.gl-aktzeile{grid-template-columns:auto minmax(60px,1fr) 0!important}
 .gl-knoepfe{margin:0 0 14px}
 
 /* Schalter */
@@ -125,7 +115,6 @@
 
 @media(max-width:760px){
   .gl-haupt,.gl-konfhaupt,.gl-dqhaupt{grid-template-columns:minmax(0,1fr)}
-  .gl-regler-gitter,.gl-regler-gitter.gl-drei{grid-template-columns:minmax(0,1fr)}
   .gl-tabwrap{max-height:340px}
 }
 @media(max-width:520px){
@@ -134,10 +123,6 @@
   .gl-tab thead th{padding:8px 4px;font-size:11px}
   .gl-zk{flex-direction:column;align-items:flex-start;gap:0;min-width:0;padding:2px 4px;justify-content:center}
   .gl-zk .gl-mk{font-size:10.5px;line-height:1.1}
-  .gl-regler-gitter .regler{grid-template-columns:minmax(0,1fr) auto}
-  .gl-regler-gitter .regler label{grid-column:1/-1}
-  .gl-regler-gitter .regler output{min-width:0}
-  .gl-aktzeile{grid-template-columns:minmax(0,1fr)!important}
   .gl-matrix td b{font-size:20px}
   .gl-kachel b{font-size:17px}
 }

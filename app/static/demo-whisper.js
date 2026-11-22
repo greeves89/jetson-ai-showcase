@@ -60,9 +60,6 @@
 
     const sprachChips = [["auto", "Sprache erkennen"], ["de", "Deutsch"]].map(([wert, text]) =>
       h("button", { class: "chip wh-sprache", type: "button", "aria-pressed": wert === sprache ? "true" : "false", dataset: { wert }, onclick: () => setzeSprache(wert) }, text));
-    const beispiele = h("div", { class: "wh-beispiele" },
-      h("span", { class: "wh-label" }, "Zum Vorlesen"),
-      BEISPIELE.map((t) => h("span", { class: "chip wh-satz" }, "„" + t + "“")));
 
     const ergebnis = h("div", { class: "wh-ergebnis", hidden: true });
     const liveTitel = h("div", { class: "titel" }, icon("live"), "Live-Erklärung");
@@ -76,8 +73,7 @@
       h("div", { class: "wh-buehne" },
         h("div", { class: "wh-reihe" }, knopf, h("div", { class: "wh-anzeige" }, zeitAnz, pegel)),
         status, hinweis,
-        h("div", { class: "wh-optionen" }, h("span", { class: "wh-label" }, "Sprache"), sprachChips, h("span", { class: "wh-trenner" }), dateiKnopf, dateiEin),
-        beispiele),
+        KL.gruppe("Aufnahme", [KL.zeile("Sprache", sprachChips), KL.zeile("Zum Vorlesen", BEISPIELE.map((t) => h("span", { class: "chip wh-satz" }, "„" + t + "“")), null, true)], { aktion: [dateiKnopf, dateiEin], klasse: "wh-optionen" })),
       ergebnis, live);
     zeichneLeg();
     knopfAnzeigen();
