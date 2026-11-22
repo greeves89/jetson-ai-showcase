@@ -16,6 +16,7 @@ const VERSION = "1.77.0";            // gepinnt, damit das Ergebnis reproduzierb
 const GRENZE = 200 * 1024;
 
 const GRUPPEN = {
+  "Oberflaeche, Nachlieferung": "menu megaphone toggle-right file-signature circle-dot calendar-clock calculator house unplug circle-help list-filter frame id-card headset",
   "Sehen, Kamera, Bild": "camera video webcam scan scan-eye scan-face scan-line eye eye-off eye-closed focus aperture image images image-up film clapperboard cctv monitor-play scan-search zoom-in telescope microscope",
   "Chips, Rechner, Daten": "cpu microchip circuit-board memory-stick hard-drive server server-cog database database-zap network cable plug plug-zap battery battery-charging zap power thermometer gauge fan monitor laptop smartphone tablet printer keyboard mouse tv gamepad-2 lamp-desk",
   "KI, Code, Denken": "brain brain-circuit bot sparkles sparkle wand-sparkles lightbulb puzzle workflow git-branch git-merge git-fork binary braces code code-xml terminal square-terminal file-code regex variable function-square atom flask-conical dna",

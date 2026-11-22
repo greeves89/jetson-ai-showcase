@@ -261,13 +261,22 @@ details.bz .in dd{margin:2px 0 0}
 .pfad h3{margin:0 0 3px;font-size:18px;letter-spacing:-.015em}
 .pfad h3 a{color:var(--text)}.pfad p{margin:0;color:var(--leise);font-size:15.5px;max-width:58ch}
 
+.menueknopf{display:none}
 @media(max-width:960px){
   .shell{grid-template-columns:1fr}
-  .seite{position:static;height:auto;flex-direction:row;overflow-x:auto;padding:10px;gap:4px;border-right:0;border-bottom:.5px solid var(--linie);align-items:center}
-  .marke{padding:0 10px 0 4px}.marke span,.navgruppe h2,.livebox{display:none}
-  .navscroll{overflow:visible;flex:none;display:flex;margin:0;padding:0}.navgruppe{margin:0;display:flex;gap:2px}.nav{white-space:nowrap;width:auto}.nav .bald,.nav .ok{display:none}
+  .seite{position:sticky;top:0;z-index:30;height:auto;flex-direction:row;flex-wrap:nowrap;align-items:center;overflow:visible;padding:10px 14px;gap:10px;border-right:0;border-bottom:.5px solid var(--linie)}
+  .marke{padding:0;flex:none}.marke span,.livebox{display:none}.marke b{font-size:16px}
+  .navsuche{flex:1;min-width:0;padding:0;order:2}
+  .menueknopf{order:3;display:grid;place-items:center;flex:none;width:44px;height:44px;border-radius:12px;border:.5px solid var(--linie);background:var(--flaeche2);color:var(--text);cursor:pointer}
+  .menueknopf svg{width:22px;height:22px}
+  .navscroll{display:none;order:4}
+  body.menue-offen{overflow:hidden}
+  body.menue-offen .navscroll{display:block;position:absolute;left:0;right:0;top:100%;height:calc(100vh - 66px);height:calc(100dvh - 66px);z-index:29;margin:0;padding:8px 14px 40px;overflow-y:auto;background:var(--bg);-webkit-overflow-scrolling:touch}
+  .navgruppe h2{display:block}.navkopf{min-height:44px}
+  .nav{min-height:44px;white-space:normal}
   main{padding-top:30px}
 }
+@media(max-width:600px){ main{padding-left:18px;padding-right:18px} .marke .logo{width:30px;height:30px} }
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important;scroll-behavior:auto!important}}
 
 /* ---------- Videoreihe ---------- */
@@ -346,3 +355,6 @@ details.mehr>.mehr-in>:first-child{margin-top:0}
 /* Video noch nicht produziert: eine schmale Zeile statt eines leeren Blocks */
 .video-folgt { display: flex; align-items: center; gap: 8px; margin: 0; padding: 4px 0; font-size: 14px; color: var(--leise); }
 .video-folgt svg { width: 16px; height: 16px; flex: none; }
+
+/* Schmale Fenster: breite Tabellen scrollen seitlich, statt die Seite zu weiten */
+@media(max-width:700px){ table.vergleich{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch} }

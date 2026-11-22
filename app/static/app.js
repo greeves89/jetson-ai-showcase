@@ -296,12 +296,25 @@
     const leer = $("#nav-leer");
     if (leer) leer.hidden = !(q.length && treffer === 0);
   }
+  // Handy und schmale Fenster: Die Navigation klappt als Menue unter der Kopfleiste auf (CSS ab 960 px).
+  function menueSchalten(auf) {
+    const offen = typeof auf === "boolean" ? auf : !document.body.classList.contains("menue-offen");
+    document.body.classList.toggle("menue-offen", offen);
+    const k = $(".menueknopf");
+    if (k) { k.setAttribute("aria-expanded", String(offen)); k.setAttribute("aria-label", offen ? "Menü schließen" : "Menü öffnen"); k.replaceChildren(icon(offen ? "x" : "menu")); }
+  }
+  function menueKnopf() {
+    return h("button", { type: "button", class: "menueknopf", "aria-expanded": "false", "aria-controls": "nav-liste", "aria-label": "Menü öffnen", onclick: () => menueSchalten() }, icon("menu"));
+  }
+  document.addEventListener("click", (e) => { if (e.target.closest && e.target.closest("a.nav")) menueSchalten(false); });
+  document.addEventListener("keydown", (e) => { if (e.key === "Escape" && document.body.classList.contains("menue-offen")) menueSchalten(false); });
+
   function navBauen() {
     const suche = h("div", { class: "navsuche" },
       h("input", { type: "search", id: "nav-suche", placeholder: "Seiten suchen", "aria-label": "Seiten suchen", autocomplete: "off",
-        oninput: (e) => navSuche(e.target.value),
+        oninput: (e) => { navSuche(e.target.value); if (e.target.value) menueSchalten(true); },
         onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
-    const nav = h("nav", { class: "navscroll", "aria-label": "Lernpfad" });
+    const nav = h("nav", { class: "navscroll", id: "nav-liste", "aria-label": "Lernpfad" });
     navGruppen = [];
     const gespeichert = navOffenLesen();
     for (const g of INHALT.gruppen) {
@@ -625,7 +638,7 @@
     const seitenleiste = $("#seite");
     seitenleiste.replaceChildren(
       h("div", { class: "marke" }, h("div", { class: "logo" }, icon("hardware")), h("div", null, h("b", null, "KI-Labor"), h("span", null, "läuft auf dem Jetson"))),
-      navBauen(), liveBauen(), tip);
+      menueKnopf(), navBauen(), liveBauen(), tip);
     route(history.state && history.state.y);
     poll(); setInterval(poll, 1500);
   }
