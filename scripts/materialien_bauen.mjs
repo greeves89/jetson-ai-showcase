@@ -113,6 +113,8 @@ function stunde(n) {
     (hilfen[m[2]] = hilfen[m[2]] || {})[m[1]] = h.text;
   }
   for (const a of aufgaben) if (!hilfen[a.nr] || !hilfen[a.nr][1] || !hilfen[a.nr][2]) throw new Error(`${id}: Aufgabe ${a.nr} braucht Tipp 1 und Tipp 2`);
+  const rfx = abschnitt(id, "Reflexion");
+  if (!rfx.muster || rfx.muster.length !== rfx.liste.length || rfx.muster.some((m) => !Array.isArray(m) || m.length < 2 || m.length > 3)) throw new Error(`${id}: Reflexion braucht je Frage 2 bis 3 Stichpunkte als Musterantwort`);
   const bereiche = new Set(aufg.flatMap((a) => a.ops).map((o) => OPERATOREN[o.toLowerCase()].bereich));
   for (const b of ["I", "II", "III"]) if (!bereiche.has(b)) throw new Error(`${id}: kein Operator aus Bereich ${b}`);
   const genutzt = [...new Set(aufg.flatMap((a) => a.ops))].sort((a, b) => OPERATOREN[a.toLowerCase()].bereich.length - OPERATOREN[b.toLowerCase()].bereich.length);
@@ -123,6 +125,7 @@ function stunde(n) {
     diff: abschnitt(id, "Differenzierung").liste.map(teile),
     tafel, tafelMitte: sv.mitte || "", tafelMerke: sich.merke, tafelText: sich.p || [],
     reflexion: abschnitt(id, "Reflexion").liste,
+    muster: abschnitt(id, "Reflexion").muster,
     vorbereitung: (vorb.p || []).concat(vorb.alltag ? [vorb.alltag] : []),
     merksatz: s.mitnehmen[0], quiz: s.quiz || [],
   };
@@ -166,7 +169,7 @@ h2 { font-size: 13.5pt; margin: 4mm 0 1.5mm; }
 .meta { margin-left: auto; font-size: 10.5pt; white-space: nowrap; }
 .nz { font-size: 10.5pt; }
 .tipp { font-size: 10.5pt; }
-table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; }
+table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; break-inside: avoid; }
 table.ziele td, table.ziele th { padding: 0.8mm 2mm; }
 table.ziele th.b, table.ziele td.b { width: 19mm; white-space: nowrap; text-align: center; }
 table.ziele th { font-size: 10pt; }
@@ -259,7 +262,7 @@ body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
 body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
 body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
 body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
-body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zeile { height: 8.2mm; }
 body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
 body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
 body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
@@ -268,6 +271,28 @@ body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.
 body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
 body.arbeitsblatt .opt .box { margin-right: 2mm; }
 body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
+/* Ueberschrift mit Anweisung und erster Frage zusammenhalten (kein Kopf allein am Seitenende) */
+.zus { break-inside: avoid; }
+.zus > h2 { margin-top: 0; }
+body.arbeitsblatt .zus.start { margin-top: 6mm; }
+.zeitnote { font-size: 10.5pt; margin: 0 0 2mm; }
+table.plan td:first-child { width: 28mm; font-weight: bold; }
+ul.muster { margin: 0.5mm 0 0 0; padding-left: 5mm; font-size: 9.5pt; }
+body.loesung ul.muster li { margin: 0; }
+.rf { break-inside: avoid; margin: 0 0 1.6mm; }
+/* Info-Blatt: grosse Schrift, Kontaktfeld, Kaesten unten buendig */
+body.infoblatt { font-size: 13pt; line-height: 1.4; }
+body.infoblatt .ib { margin: 0 0 4mm; }
+body.infoblatt .ib h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt { border: 0.5mm solid #000; padding: 3mm 4mm; margin: 2mm 0 0; break-inside: avoid; }
+body.infoblatt .kontakt h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt .linie { border-bottom: 0.3mm solid #000; height: 9mm; margin-top: 1mm; }
+body.infoblatt .mehr { margin-top: auto; align-items: stretch; padding: 3mm 4mm; }
+body.infoblatt .mehr .paar { flex: 1 1 0; align-items: flex-start; gap: 4mm; }
+body.infoblatt .mehr .t { flex: 1 1 0; min-width: 0; }
+body.infoblatt .mehr .qrbox { flex: 0 0 auto; padding: 0; }
+body.infoblatt .mehr .adr { font-size: 8.5pt; }
+body.infoblatt .mehr small { display: block; font-size: 9.5pt; }
 `;
 
 
@@ -311,11 +336,15 @@ function arbeitsblatt(st) {
     return `<div class="aufgabe"><div class="k"><span class="nr">${a.nr}</span><h3>${esc(a.ort)}${zt}</h3>${meta(a)}</div><p>${mdFett(a.text)}</p>${zeilen(2)}</div>`;
   }).join("\n");
   const buchst = "ABCD";
-  const quizHtml = st.quiz.length ? `<h2>Quiz: Was hast du verstanden?</h2>
+  const frageQuiz = (q, i) => `<div class="aufgabe"><div class="k"><span class="nr">${i + 1}</span><h3>${esc(q.frage)}</h3></div>${q.optionen.map((o, j) => `<p class="opt"><span class="box"></span> ${buchst[j]}) ${esc(o)}</p>`).join("")}</div>`;
+  const quizHtml = st.quiz.length ? `<div class="zus"><h2>Quiz: Was hast du verstanden?</h2>
 <p class="nz">Kreuze je Frage die beste Antwort an. Es ist genau eine richtig.</p>
-${st.quiz.map((q, i) => `<div class="aufgabe"><div class="k"><span class="nr">${i + 1}</span><h3>${esc(q.frage)}</h3></div>${q.optionen.map((o, j) => `<p class="opt"><span class="box"></span> ${buchst[j]}) ${esc(o)}</p>`).join("")}</div>`).join("\n")}` : "";
-  const nachdenken = `<h2>Zum Nachdenken</h2>
-${st.reflexion.map((r, i) => `<div class="aufgabe"><div class="k"><span class="nr">${st.aufgaben.length + i + 1}</span><h3>${md(r)}</h3></div>${zeilen(3)}</div>`).join("\n")}
+${frageQuiz(st.quiz[0], 0)}</div>
+${st.quiz.slice(1).map((q, i) => frageQuiz(q, i + 1)).join("\n")}` : "";
+  const frageNd = (r, i) => `<div class="aufgabe"><div class="k"><span class="nr">${st.aufgaben.length + i + 1}</span><h3>${md(r)}</h3></div>${zeilen(3)}</div>`;
+  const nachdenken = `<div class="zus"><h2>Zum Nachdenken</h2>
+${frageNd(st.reflexion[0], 0)}</div>
+${st.reflexion.slice(1).map((r, i) => frageNd(r, i + 1)).join("\n")}
 <div class="aufgabe"><div class="k"><span class="nr">?</span><h3>Meine eigene Frage zum Thema</h3></div>${zeilen(2)}</div>
 <div class="zusatz"><p><b>Mein Merksatz:</b> Schreibe den wichtigsten Gedanken der Stunde in einem Satz auf.</p>${zeilen(2)}</div>`;
   const zus = `<div class="zusatz"><div class="k"><b>Zusatz für Schnelle</b>${meta(st.zusatz)}</div><p>${mdFett(st.zusatz.text)}</p></div>`;
@@ -330,7 +359,7 @@ ${st.reflexion.map((r, i) => `<div class="aufgabe"><div class="k"><span class="n
 <div class="kopfblock"><div class="links">
 <h1>Arbeitsblatt ${st.kenn}: ${esc(st.titel)}</h1>
 <div class="felder"><span>Name:</span><span class="klein">Datum:</span></div>
-<div class="zeit"><b>Zeit:</b> Aufgaben ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))}, mit Quiz und Nachdenken eine Doppelstunde &nbsp;&middot;&nbsp; ${niveauZeile}</div>
+<div class="zeit"><b>Zeit:</b> Aufgaben ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))} in der Einzelstunde (so viele Minuten stehen bei den Aufgaben), 30 Minuten in der Doppelstunde. Quiz und Nachdenken: Doppelstunde oder Hausaufgabe. ${niveauZeile}</div>
 </div><div class="qrbox">${q.svg}</div></div>
 <table class="ziele"><thead><tr><th>Heute kannst du ...</th><th class="b">sicher</th><th class="b">fast</th><th class="b">noch nicht</th></tr></thead><tbody>${ziele}</tbody></table>
 ${auf}
@@ -342,38 +371,41 @@ ${legende(st)}
 `);
 }
 
+/** Beendet einen Satz mit Punkt, falls er mit keinem Satzzeichen endet. */
+const satz = (t) => (/[.!?]$/.test(String(t).trim()) ? String(t).trim() : String(t).trim() + ".");
 function loesungsblatt(st) {
   const buchst2 = "ABCD";
   const lis = (l) => l.map((x) => `<li>${x.titel ? `<b>${esc(x.titel)}:</b> ` : ""}${mdFett(x.text)}</li>`).join("\n");
   const tafel = st.tafel.length ? `<div class="pfad">${st.tafelMitte ? `<span><b>${esc(st.tafelMitte)}:</b></span>` : ""}${st.tafel.map((t, i) => `<span>${esc(t)}</span>${i < st.tafel.length - 1 ? "<i>&gt;</i>" : ""}`).join("")}</div>` : "";
   const loes = st.loesungen.map((x) => `<div class="lg"><b>${esc(x.titel.replace(/^Zu /, "Zu "))}.</b> ${mdFett(x.text)}</div>`).join("\n");
   const diff = st.diff.map((x) => `<div><b>${esc(x.titel)}</b><br>${mdFett(x.text)}</div>`).join("");
-  const zp = st.phasen.map((p) => `<tr><td>${esc(p.phase)}</td><td style="white-space:nowrap">${esc(p.zeit)}</td><td>${md(p.was)}</td></tr>`).join("\n");
+  const zp = st.phasen.map((p) => `<tr><td>${esc(p.phase)}</td><td style="white-space:nowrap">${esc(p.zeit)}</td><td>${md(p.was)}${p.phase === "Reflexion" ? " Nur mündlich, nichts wird aufgeschrieben (schriftlich: Hausaufgabe)." : ""}</td></tr>`).join("\n");
   const url1 = `${BASIS}/${st.id}?weg=schule`, url2 = `${BASIS}/schule-lehrkraefte?weg=schule`;
   return seite(`Lösungsblatt ${st.kenn}: ${st.titel}`, st.id === "medien-stunde-1" ? "loesung kompakt" : "loesung", `
 <h1>Lösungsblatt ${st.kenn}: ${esc(st.titel)} (für Lehrkräfte)</h1>
-<h2>Zeitplan (45 Minuten)</h2>
+<h2>Einzelstunde: Zeitplan (45 Minuten)</h2>
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
 ${zp}
 </tbody></table>
-<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<p>In der Stunde laufen die Aufgaben 1 bis ${st.aufgaben.length} (Seite 1 des Arbeitsblatts) und die mündliche Reflexion. <b>Quiz und schriftliches Nachdenken</b> (Seiten 2 und 3) sind Hausaufgabe oder Teil der Folgestunde, die Auflösung steht unten. Das Blatt gibst du in beiden Varianten ganz aus.</p>
+<h2>Doppelstunde: Zeitplan (90 Minuten)</h2>
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
 <tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>${md(st.phasen[0].was)} Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
-<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis ${st.aufgaben.length} des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis ${st.aufgaben.length} des Arbeitsblatts (20 Minuten in der Einzelstunde, hier 30), Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
 <tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
 <tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>${md(st.phasen[2].was)} Tafelbild gemeinsam entwickeln.</td></tr>
-<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ schriftlich allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
 <tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
 </tbody></table>
-<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
+<p>In beiden Varianten gilt: Den Merksatz bekommen alle am Ende der Sicherung an die Tafel und ins Heft.</p>
 ${st.vorbereitung.map((v) => `<p>${md(v)}</p>`).join("\n")}
-<h2>Operatoren und Erwartungshorizont</h2>
+<div class="zus"><h2>Operatoren und Erwartungshorizont</h2>
 <p>Die Operatoren dieses Blatts mit ihrem Bereich. Was eine gute Antwort je Operator enthält, steht bei den Lösungen.</p>
-${legende(st)}
+${legende(st)}</div>
 <h2>Lösungen und Hinweise</h2>
 ${loes}
 ${st.id === "medien-stunde-1" ? aufloesungKarten() : ""}
-${st.quiz.length ? `<h2>Quiz: richtige Antworten</h2><ul>${st.quiz.map((q, i) => `<li><b>Frage ${i + 1}: ${buchst2[q.richtig]}.</b> ${esc(q.optionen[q.richtig])} ${esc(q.erklaerung)}</li>`).join("")}</ul>` : ""}
+${st.quiz.length ? `<h2>Quiz: richtige Antworten</h2><ul>${st.quiz.map((q, i) => `<li><b>Frage ${i + 1}: ${buchst2[q.richtig]}.</b> ${esc(satz(q.optionen[q.richtig]))} ${esc(q.erklaerung)} <i>Nachlesen: Abschnitt „${esc(q.abschnitt.replace(/ \(\d+ Minuten\)/, ""))}“.</i></li>`).join("")}</ul>` : ""}
 <h2>Differenzierung</h2>
 <div class="zwei">${diff}</div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>
@@ -383,8 +415,9 @@ ${st.quiz.length ? `<h2>Quiz: richtige Antworten</h2><ul>${st.quiz.map((q, i) =>
 ${tafel}
 ${st.tafelText.map((v) => `<p>${md(v)}</p>`).join("\n")}
 <p><b>Merksatz:</b> ${md(st.tafelMerke)}</p>
-<h2>Fragen für die Reflexion</h2>
-<ul style="break-inside:avoid">${st.reflexion.map((r) => `<li>${md(r)}</li>`).join("")}</ul>
+<h2>Fragen für die Reflexion mit Erwartungshorizont</h2>
+<p>Die Stichpunkte zeigen, was eine gute Antwort enthalten kann. Sie sind Orientierung, keine Musterlösung zum Vorlesen.</p>
+<ul>${st.reflexion.map((r, i) => `<li class="rf">${md(r)}<ul class="muster">${st.muster[i].map((m) => `<li>${md(m)}</li>`).join("")}</ul></li>`).join("")}</ul>
 ${mehrKasten([
     { titel: `${st.kenn} im KI-Labor`, url: url1, hinweis: "Seite zur Stunde mit Aufgaben und Quiz." },
     { titel: "Handreichung", url: url2, hinweis: "Fachbegriffe, Operatoren, Schülerfragen, Stolperstellen." },
@@ -448,6 +481,7 @@ function elternabend() {
   const info = seite("Info-Blatt für Eltern: Medienkompetenz in Klasse 8", "infoblatt", `
 <h1>Medienkompetenz in Klasse 8: Information für Eltern</h1>
 ${bloecke}
+<div class="kontakt"><h2>Rückfragen an die Schule</h2><div>Ansprechperson und Kontakt (die Schule trägt sie hier ein):</div><div class="linie"></div></div>
 ${mehrKasten([
     { titel: "Im Unterricht", url: url1, hinweis: "Was die Klasse tut und welche Daten verarbeitet werden." },
     { titel: "Zu Hause", url: url2, hinweis: "Drei Gespräche mit Ihrem Kind, Einrichtung ohne Kamera." },

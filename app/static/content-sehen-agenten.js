@@ -346,6 +346,12 @@ Object.assign(seiten, {
       "Das {{agent|Agent-Labor}} verwendet ein kleines Modell mit etwa drei Milliarden Parametern und drei Werkzeugen: **rechne**, **uhrzeit** und **dokumentsuche**. Du siehst jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah. Frage zuerst etwas, das ein Werkzeug braucht, und dann etwas, das keines braucht, und beobachte den Unterschied.",
       "Das Modell dahinter ist ein Sprachmodell, wie es die Seite {{genki|Generative KI}} beschreibt. Der Agent ergänzt es um Werkzeuge und die Schleife.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Yao et al.: [ReAct: Synergizing Reasoning and Acting in Language Models](https://arxiv.org/abs/2210.03629), 2022, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Agenten“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/agenten-grundlagen).",
+     ]},
   ],
   mitnehmen: [
     "Ein Agent ist ein Sprachmodell mit Werkzeugen in einer Schleife aus Denken, Aufrufen und Lesen.",

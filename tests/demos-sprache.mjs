@@ -10,9 +10,12 @@ const shot = (n) => page.screenshot({ path: `tests/ausgabe/demo-${n}-${modus}.pn
 const nur = process.env.NUR || "chat,rag,agent";
 if (nur.includes("chat")) {
 await oeffneSeite(page, "chat");
-await page.click("text=Modell laden");
-await page.waitForFunction(() => /liegt auf der SSD|beendet/.test(document.querySelector(".ladetxt").textContent), null, { timeout: 60000 });
-pruefe(true, "Modell laden: " + await page.textContent(".ladetxt"));
+await page.waitForTimeout(2500);                     // Live-Werte abwarten: ist das Modell im Speicher, ist der Knopf "Modell laden" ausgeblendet
+if (await page.isVisible(".d-modell .btn")) {
+  await page.click("text=Modell laden");
+  await page.waitForFunction(() => /liegt auf der SSD|beendet/.test(document.querySelector(".ladetxt").textContent), null, { timeout: 60000 });
+  pruefe(true, "Modell laden: " + await page.textContent(".ladetxt"));
+} else pruefe(/im Speicher/.test(await page.textContent(".d-modell [role=status]")), "Modell im Speicher, kein Laden-Knopf");
 await page.fill(".eingabe textarea", "Erkläre in zwei Sätzen, was ein Token ist.");
 await page.keyboard.press("Enter");
 await page.waitForSelector(".msg.ki .d-text:not(:empty)", { timeout: 120000 });

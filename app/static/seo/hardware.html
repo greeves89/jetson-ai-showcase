@@ -13,6 +13,10 @@
 <p class="kurz">Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.</p>
 
 <ul><li><strong>GPU:</strong> wie ausgelastet der Grafikprozessor ist. Er steigt, wenn ein Modell rechnet.</li><li><strong>Arbeitsspeicher:</strong> belegt von Betriebssystem, Programmen und geladenen Modellen.</li><li><strong>CPU:</strong> Auslastung der sechs Prozessorkerne, im Mittel.</li><li><strong>Leistung:</strong> Strom, den das Board gerade aufnimmt, ohne Netzteilverluste.</li><li><strong>Temperatur:</strong> der heißeste Messpunkt des Chips. Bei zu hoher Temperatur taktet er herunter.</li></ul>
+<h2 class="abs">Das Sprachmodell, das hier läuft</h2>
+<figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>3,2 Mrd. Parameter (Llama 3.2)</li><li>Q4_K_M Quantisierung</li><li>4096 Kontext in Token, im Labor eingestellt</li></ul></figure>
+<p class="kurz">Llama 3.2 mit 3,2 Milliarden Parametern, Quantisierung Q4_K_M, Kontext im Labor auf 4096 Token eingestellt.</p>
+<p>Gemessen am 22.11.2026 auf dem Jetson mit Ollama 0.12.3: Das Modell <code>llama3.2:3b</code> hat 3,2 Milliarden Parameter und ist mit dem Verfahren Q4_K_M quantisiert, also mit etwa vier Bit je Zahl gespeichert. Dadurch passt es in rund 2 GB des gemeinsamen Speichers.</p><p>Das Modell wurde für bis zu 131 072 Token Kontext gebaut. Das Labor stellt aber nur 4096 Token ein (OLLAMA_CONTEXT_LENGTH=4096), dazu einen Zwischenspeicher mit 8-Bit-Werten (OLLAMA_KV_CACHE_TYPE=q8_0) und Flash Attention. Der Grund ist der knappe Speicher: Ein längerer Kontext braucht mehr davon. Mehr zum Kontextfenster steht auf <a href="/tokens-sprachmodelle">Wie ein Sprachmodell gebaut ist</a>.</p>
 <h2 class="abs">Warum Edge-Geräte wichtig sind</h2>
 <figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Sensor (Daten entstehen)</li><li>Jetson (rechnet vor Ort)</li><li>Ergebnis (kurze Wege)</li></ul></figure>
 <p class="kurz">Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.</p>

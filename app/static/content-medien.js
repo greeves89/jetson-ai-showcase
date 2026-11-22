@@ -13,6 +13,8 @@ seiten: {
 /* ------------------------------------------------------------------ 1 */
 "echt-oder-ki": {
   videos: ["echt-oder-ki"],
+  widget: "echt-oder-ki", widgetTitel: "Echt oder KI? Das Bilderspiel", widgetSymbol: "images",
+  downloads: [{text: "Kartenset Echt oder KI?", sub: "12 Bildkarten, 2 Seiten A4, zum Ausschneiden", href: "/static/materialien/bildkarten-echt-oder-ki.pdf"}],
   nav: "Echt oder KI?", typ: "lektion", gruppe: "Medienkompetenz", titel: "Echt oder KI? Bilder, Texte und Stimmen prüfen", symbol: "bild",
   kurz: "KI macht Bilder, Texte und Stimmen, die echt wirken. Hier lernst du Warnzeichen und Prüfwege kennen und warum es keine sichere Erkennung gibt.",
   lernziele: [
@@ -183,7 +185,7 @@ seiten: {
       "Eine Behauptung wird nicht wahrer, weil sie oft auftaucht. Im Netz übernehmen viele Seiten dieselbe Meldung ungeprüft. Deshalb zählt nicht die Anzahl, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert, mit eigenen Zeugen, Dokumenten oder Messwerten?",
       "Hilfreich sind Faktencheck-Redaktionen, die Behauptungen prüfen und ihr Vorgehen offenlegen. Auch Tageszeitungen, Fachseiten, Behörden und Studien im Original gehören dazu. Gibt es zu einer aufregenden Meldung nach einer Stunde Suche nur Blogs und Posts, ist Vorsicht angebracht.",
      ],
-     alltag: "Vier Mitschüler erzählen dir, die Klassenarbeit falle aus. Alle haben es von derselben Person gehört. Dann hast du eine Quelle, nicht vier. Erst die Nachricht der Lehrkraft zählt."},
+     alltag: "Vier Bekannte erzählen dir, das Straßenfest falle aus. Alle haben es von derselben Person gehört. Dann hast du eine Quelle, nicht vier. Erst die Mitteilung der Veranstalter zählt."},
     {h: "Datum: wann war das?",
      kurz: "Alte Meldungen werden neu geteilt und wirken dann aktuell. Prüfe immer, wann etwas entstanden ist.",
      visual: {typ: "zeitachse", punkte: [
@@ -193,7 +195,7 @@ seiten: {
       unter: "Beispiel, erfunden: So wandern alte Bilder in neue Zusammenhänge."},
      p: [
       "Ein beliebter Trick ist nicht erfunden, sondern gestohlen: ein echtes Bild oder Video aus einem anderen Ort oder einer anderen Zeit, das als aktuell ausgegeben wird. Das ist leicht zu machen und schwer zu merken.",
-      "Prüfe bei Artikeln das Veröffentlichungs- und das Änderungsdatum. Bei Bildern hilft die Rückwärtssuche: Taucht das Bild früher mit anderer Beschreibung auf, ist es verdächtig. Fehlt jede Datumsangabe, ist das selbst ein Warnzeichen.",
+      "Prüfe bei Artikeln das Veröffentlichungs- und das Änderungsdatum. Bei Bildern hilft die Rückwärtssuche, etwa mit Google Lens, TinEye oder der visuellen Suche von Bing: Du lädst das Bild hoch und siehst, wo es sonst steht. Taucht das Bild früher mit anderer Beschreibung auf, ist es verdächtig. Fehlt jede Datumsangabe, ist das selbst ein Warnzeichen.",
      ],
      merke: "Ohne Ort und Datum ist ein Bild nur ein Bild und kein Beleg."},
     {h: "Der Chatbot als Quelle?",
@@ -207,7 +209,7 @@ seiten: {
       "Ein Sprachmodell setzt Text zusammen, der wahrscheinlich klingt. Es schlägt nicht nach, ob etwas stimmt. Darum kommt es vor, dass es Fakten mischt oder Quellen erfindet, mit Titel, Autor und Jahr, die es nie gab. Das nennt man Halluzination. Mehr dazu steht auf der Seite {{llm-grenzen|Grenzen von Sprachmodellen}}.",
       "Nutze den Chatbot deshalb als Starthilfe: für einen Überblick, für Suchbegriffe, für eine Erklärung in einfachen Worten. Wenn du etwas weitergibst oder abgibst, suchst du das Original. Gibt es die genannte Quelle nicht, streichst du die Aussage oder suchst eine echte.",
      ],
-     alltag: "Ein Chatbot ist wie ein Mitschüler, der viel gelesen hat und sehr überzeugend erzählt, aber nie sagt: Das weiß ich nicht. Du hörst gern zu, schreibst aber nichts ab, ohne es nachzulesen."},
+     alltag: "Ein Chatbot ist wie ein Bekannter, der viel gelesen hat und sehr überzeugend erzählt, aber nie sagt: Das weiß ich nicht. Du hörst gern zu, schreibst aber nichts ab, ohne es nachzulesen."},
     {h: "Weiterlesen",
      kurz: "Quellen zu dieser Seite.",
      liste: [
@@ -283,7 +285,7 @@ seiten: {
       "Empörung, Angst und Staunen bringen uns dazu, etwas ohne Nachdenken zu teilen. Das wissen die, die Falschmeldungen bauen. Sie verpacken sie so, dass sie Gefühle auslösen und gut aussehen.",
       "Empfehlungssysteme der Plattformen sortieren nach Reaktionen, nicht nach Wahrheit. Ein Beitrag, der viele Kommentare bekommt, wird mehr Leuten gezeigt. Das heißt nicht, dass Plattformen Falschmeldungen wollen. Es ist ein Nebeneffekt davon, wie der Feed gebaut ist.",
      ],
-     alltag: "Es ist wie ein Gerücht auf dem Schulhof, nur mit Verstärker. Jeder, der es weitererzählt, macht es lauter, und niemand weiß mehr, wer es angefangen hat."},
+     alltag: "Es ist wie ein Gerücht im Ort oder in der Kantine, nur mit Verstärker. Jeder, der es weitererzählt, macht es lauter, und niemand weiß mehr, wer es angefangen hat."},
     {h: "Was du tust, wenn du eine Fälschung siehst",
      kurz: "Nicht weiterleiten, kurz prüfen, bei Bedarf melden. Du musst nicht jeden Streit gewinnen.",
      visual: {typ: "ablauf", schritte: [
@@ -328,8 +330,8 @@ seiten: {
     {frage: "Warum verbreiten sich Falschmeldungen oft schneller als Richtigstellungen?",
      optionen: ["Sie sind meist besser recherchiert als Richtigstellungen", "Sie wecken Gefühle, und Feeds zeigen Reaktionsstarkes", "Sie werden nur von Computern verschickt, nie von Menschen", "Richtigstellungen sind auf Plattformen grundsätzlich verboten"],
      richtig: 1, erklaerung: "Empörung und Staunen lassen uns schnell teilen, und Empfehlungssysteme belohnen Reaktionen. Wahrheit spielt dafür keine Rolle."},
-    {frage: "Ein Mitschüler hat ein gefälschtes Video von dir in einer Gruppe gepostet. Was ist ein guter erster Schritt?",
-     optionen: ["Sofort ein Gegenvideo drehen und selbst verbreiten", "Alles ignorieren, bis es von allein wieder verschwindet", "Beweise sichern, Vertrauensperson ansprechen", "Dem Mitschüler im Gruppenchat öffentlich drohen"],
+    {frage: "Jemand aus deinem Umfeld hat ein gefälschtes Video von dir in einer Gruppe gepostet. Was ist ein guter erster Schritt?",
+     optionen: ["Sofort ein Gegenvideo drehen und selbst verbreiten", "Alles ignorieren, bis es von allein wieder verschwindet", "Beweise sichern, Vertrauensperson ansprechen", "Der Person im Gruppenchat öffentlich drohen"],
      richtig: 2, erklaerung: "Erst sichern, dann Hilfe holen und melden. Ignorieren lässt den Beitrag weiter wachsen, und Drohungen oder Gegenvideos machen es oft schlimmer."},
     {frage: "Was sind Cheap Fakes?",
      optionen: ["Besonders schlecht gemachte KI-Videos von Laien", "Einfache Tricks wie falsche Beschriftung oder Zeitlupe", "Fälschungen, die kostenlos im Netz angeboten werden", "Bilder, die von Kindern selbst erstellt wurden"],
@@ -401,6 +403,19 @@ seiten: {
       "Lehrkräfte sind oft unsicher, wie sie mit KI umgehen sollen. Die Kultusministerkonferenz hat 2024 Handlungsempfehlungen beschlossen, die ein reines Verbot nicht als sinnvollen Weg sehen. Die Umsetzung liegt bei den Ländern und Schulen. Dein Gegenüber ist also oft froh um konkrete Fragen.",
       "Stell sie ruhig und vorab, nicht erst nach einem Verdacht: Welche Aufgaben darf ich mit KI-Hilfe machen? Wie soll ich die Nutzung kennzeichnen? Was passiert, wenn ich etwas übernommen habe? Eine klare Antwort schützt beide Seiten.",
      ]},
+    {h: "Für Eltern: nachfragen statt kontrollieren",
+     id: "eltern",
+     kurz: "Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis.",
+     visual: {typ: "ablauf", paket: false, schritte: [
+      {icon: "handshake", text: "Vereinbaren", sub: "wann KI erlaubt ist"},
+      {icon: "circle-help", text: "Nachfragen", sub: "wie bist du darauf gekommen"},
+      {icon: "clipboard-check", text: "Angeben", sub: "KI-Hilfe benennen", farbe: "gruen"}]},
+     p: [
+      "Spioniert nicht hinterher und lest nicht heimlich mit. Besser ist eine Vereinbarung, die ihr gemeinsam trefft: Wofür darf KI helfen, wofür nicht, und wie wird es angegeben? Die Regeln der Schule gehen dabei vor. Fragt im Zweifel die Lehrkraft.",
+      "Nachfragen schlägt Kontrollieren. Lass dir zeigen, wie dein Kind vorgegangen ist: Was hast du selbst versucht? Was hat die KI vorgeschlagen? Was hast du geprüft? Wer eine Antwort in eigenen Worten erklären kann, hat sie verstanden. Wer es nicht kann, hat vermutlich nur abgegeben.",
+      "Lobt den Versuch, auch wenn er schiefgeht. Und seid selbst ein Vorbild: Prüft eine KI-Antwort gemeinsam gegen eine zweite Quelle, wie auf der Seite {{quellen-pruefen|Quellen prüfen}} beschrieben. Mehr zu Gesprächen zu Hause steht auf {{eltern-zuhause|KI zu Hause}} und {{zusammen-ausprobieren|Zusammen ausprobieren}}.",
+     ],
+     merke: "Nachfragen statt kontrollieren: Wie bist du darauf gekommen?"},
     {h: "Gute Gründe, selbst zu denken",
      kurz: "Nicht aus Angst vor Strafe, sondern weil das, was du kannst, dir gehört.",
      visual: {typ: "kreis", mitte: "Selbst gelernt", knoten: [
@@ -508,7 +523,7 @@ seiten: {
     {h: "Was dieses Labor tut und nicht tut",
      kurz: "Kein Konto, keine Anmeldung, keine externen KI-Dienste. Eingaben werden nur zum Rechnen genutzt.",
      visual: {typ: "vergleich",
-      links: {titel: "Das Labor tut", icon: "circle-check", punkte: ["Rechnet auf einem eigenen kleinen Rechner", "Fragt vor Kamera und Mikrofon", "Speichert deinen Lernstand nur im Browser", "Bietet Beispielbilder statt Kamera an"], farbe: "gruen"},
+      links: {titel: "Das Labor tut", icon: "circle-check", punkte: ["Rechnet auf einem eigenen kleinen Rechner", "Fragt vor Kamera und Mikrofon", "Speichert deinen Lernstand nur im Browser", "Bietet in den meisten Laboren Beispielbilder statt Kamera an"], farbe: "gruen"},
       rechts: {titel: "Das Labor tut nicht", icon: "circle-x", punkte: ["Verlangt ein Konto", "Schickt Eingaben an externe KI-Dienste", "Speichert Kamerabilder dauerhaft", "Baut ein Profil über dich"], farbe: "grau"}},
      p: [
       "Das KI-Labor läuft auf einem einzelnen Rechner im Haus des Betreibers, nicht in einer großen Cloud. Kamerabilder, Mikrofonaufnahmen und eingetippte Texte werden nach den Angaben des Labors nur im Arbeitsspeicher verarbeitet und nicht dauerhaft gespeichert. Kamera und Mikrofon schalten sich nie von allein ein.",

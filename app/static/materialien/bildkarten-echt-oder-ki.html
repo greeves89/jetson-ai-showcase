@@ -27,7 +27,7 @@ h2 { font-size: 13.5pt; margin: 4mm 0 1.5mm; }
 .meta { margin-left: auto; font-size: 10.5pt; white-space: nowrap; }
 .nz { font-size: 10.5pt; }
 .tipp { font-size: 10.5pt; }
-table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; }
+table.ziele, table.legende { font-size: 10pt; margin: 0 0 2mm; break-inside: avoid; }
 table.ziele td, table.ziele th { padding: 0.8mm 2mm; }
 table.ziele th.b, table.ziele td.b { width: 19mm; white-space: nowrap; text-align: center; }
 table.ziele th { font-size: 10pt; }
@@ -118,7 +118,7 @@ body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
 body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
 body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
 body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
-body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zeile { height: 8.2mm; }
 body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
 body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
 body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
@@ -127,6 +127,28 @@ body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.
 body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
 body.arbeitsblatt .opt .box { margin-right: 2mm; }
 body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
+/* Ueberschrift mit Anweisung und erster Frage zusammenhalten (kein Kopf allein am Seitenende) */
+.zus { break-inside: avoid; }
+.zus > h2 { margin-top: 0; }
+body.arbeitsblatt .zus.start { margin-top: 6mm; }
+.zeitnote { font-size: 10.5pt; margin: 0 0 2mm; }
+table.plan td:first-child { width: 28mm; font-weight: bold; }
+ul.muster { margin: 0.5mm 0 0 0; padding-left: 5mm; font-size: 9.5pt; }
+body.loesung ul.muster li { margin: 0; }
+.rf { break-inside: avoid; margin: 0 0 1.6mm; }
+/* Info-Blatt: grosse Schrift, Kontaktfeld, Kaesten unten buendig */
+body.infoblatt { font-size: 13pt; line-height: 1.4; }
+body.infoblatt .ib { margin: 0 0 4mm; }
+body.infoblatt .ib h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt { border: 0.5mm solid #000; padding: 3mm 4mm; margin: 2mm 0 0; break-inside: avoid; }
+body.infoblatt .kontakt h2 { font-size: 13.5pt; margin: 0 0 1mm; }
+body.infoblatt .kontakt .linie { border-bottom: 0.3mm solid #000; height: 9mm; margin-top: 1mm; }
+body.infoblatt .mehr { margin-top: auto; align-items: stretch; padding: 3mm 4mm; }
+body.infoblatt .mehr .paar { flex: 1 1 0; align-items: flex-start; gap: 4mm; }
+body.infoblatt .mehr .t { flex: 1 1 0; min-width: 0; }
+body.infoblatt .mehr .qrbox { flex: 0 0 auto; padding: 0; }
+body.infoblatt .mehr .adr { font-size: 8.5pt; }
+body.infoblatt .mehr small { display: block; font-size: 9.5pt; }
 </style>
 </head>
 <body class="kartenset">

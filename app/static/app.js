@@ -13,6 +13,8 @@
      KL.$(sel, root) KL.$$(sel, root)         Kurzformen fuer querySelector(All)
      KL.h(tag, attrs, ...kinder)              Elemente bauen (class, html, on<ereignis>, dataset, sonst Attribute)
      KL.md(text)                              Markierungen aus content.js in sicheres HTML wandeln
+     KL.mdAntwort(text)                       Antworttexte von Modellen (untrusted): Markdown (**fett**, *kursiv*, `code`, Listen, Zeilenumbrueche) als DocumentFragment
+                                              aus DOM-Knoten, nie als HTML. Fuer Chat, RAG und Agent statt textContent, wenn die Antwort Markdown enthalten darf.
      KL.icon(name)                            Inline-SVG (Klasse ic)
      KL.post(pfad, objekt)                    fetch POST mit JSON, gibt Response zurueck (gleiche Herkunft, Origin geht automatisch mit)
      KL.stats.on(fn)                          fn(statsObjekt) etwa alle 1,5 s, gibt eine Abmelde-Funktion zurueck;
@@ -44,6 +46,12 @@
      Willkommens-Fenster (laien.js, Texte INHALT.willkommen): erscheint nur beim ersten Besuch der Startseite, nutzt KL.wegListe() (Schluessel, Titel, Symbol)
        und KL.wegWaehlen(schluessel); "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile oeffnet dieselbe Karte (KL.willkommen.oeffnen). Die Karte blockiert nichts (kein Modal).
        localStorage kl-willkommen merkt, dass sie gesehen wurde.
+   QUIZ (Seitenfeld quiz: [{frage, optionen, richtig, erklaerung, abschnitt?}]): Antworten werden bei jedem Aufbau gemischt (input.value bleibt der urspruengliche
+     Index, richtig gilt weiter). Maus und Touch werten sofort aus, mit der Tastatur waehlen die Pfeiltasten nur und Enter oder "Antwort pruefen" bestaetigt.
+     Richtig und falsch tragen Symbol und Text. "Noch einmal" baut das Quiz neu auf. Optional abschnitt (Abschnitts-id, Ueberschrift oder laufende Nummer ab 1):
+     nach einer falschen Antwort fuehrt ein Link zurueck zu diesem Abschnitt.
+   ZEITANGABEN: Lesezeit = Wortzahl des sichtbaren Lesemodus durch 160 je Minute. Unterrichtseinheiten (typ lektion, Gruppe "Für die Schule", Feld minuten
+     oder Seiten-id mit "-stunde-N") zeigen "45 Minuten Unterricht" statt der Lesezeit, auf Karten und im Seitenkopf gleich.
    TEXTAUSZEICHNUNG KL.md: **fett**, `code`, [[glossar|Text]], {{seite|Text}} und [Text](Adresse). Adressen nur mit https:// oder / am Anfang
      (kein // und keine anderen Schemata, sonst bleibt es Klartext); alles wird zuerst escaped. Externe Adressen (https://) bekommen
      rel="noopener noreferrer" und target="_blank", die Klasse md-link ist am Handy mindestens 44 px hoch. Interne (/seite) laufen im Router.
@@ -147,6 +155,51 @@
     s = s.replace(/`([^`]+)`/g, "<code>$1</code>");
     return s.replace(/\u0001(\d+)\u0001/g, (m, i) => links[Number(i)] || "");
   }
+  /** Antworttexte von Modellen (untrusted): Markdown NUR als DOM-Knoten mit textContent, nie als HTML.
+      Unterstuetzt **fett**, *kursiv*, `code`, Ueberschriften (als fetter Absatz), Listen (-, *, 1.) und Zeilenumbrueche. */
+  function mdInline(text) {
+    const teile = [];
+    const re = /(\*\*([^*\n]+?)\*\*|`([^`\n]+)`|(?<![*\w])\*([^*\s][^*\n]*?)\*(?![*\w])|__([^_\n]+?)__)/g;
+    let i = 0, m;
+    while ((m = re.exec(text))) {
+      if (m.index > i) teile.push(text.slice(i, m.index));
+      if (m[2] != null) teile.push(h("strong", null, m[2]));
+      else if (m[3] != null) teile.push(h("code", null, m[3]));
+      else if (m[4] != null) teile.push(h("em", null, m[4]));
+      else teile.push(h("strong", null, m[5]));
+      i = m.index + m[0].length;
+    }
+    if (i < text.length) teile.push(text.slice(i));
+    return teile;
+  }
+  function mdAntwort(text) {
+    const wurzel = document.createDocumentFragment();
+    const zeilen = String(text == null ? "" : text).replace(/\r/g, "").split("\n");
+    let liste = null, absatz = [];
+    const absatzEnde = () => {
+      if (!absatz.length) return;
+      const p = h("p", { class: "md-p" });
+      absatz.forEach((z, k) => { if (k) p.append(document.createElement("br")); p.append(...mdInline(z)); });
+      wurzel.append(p); absatz = [];
+    };
+    for (const roh of zeilen) {
+      const z = roh.replace(/\s+$/, "");
+      let m;
+      if (!z.trim()) { absatzEnde(); liste = null; continue; }
+      if ((m = /^\s*([-*\u2022])\s+(.*)$/.exec(z)) || (m = /^\s*(\d+)[.)]\s+(.*)$/.exec(z))) {
+        absatzEnde();
+        const geordnet = /\d/.test(m[1]);
+        if (!liste || liste.geordnet !== geordnet) { liste = { geordnet, el: h(geordnet ? "ol" : "ul", { class: "md-liste" }) }; wurzel.append(liste.el); }
+        liste.el.append(h("li", null, ...mdInline(m[2])));
+        continue;
+      }
+      if ((m = /^#{1,4}\s+(.*)$/.exec(z))) { absatzEnde(); liste = null; wurzel.append(h("p", { class: "md-p md-kopf" }, h("strong", null, ...mdInline(m[1])))); continue; }
+      liste = null;
+      absatz.push(z);
+    }
+    absatzEnde();
+    return wurzel;
+  }
   const zeit = (ms) => (ms < 1000 ? Math.round(ms) + " ms" : (ms / 1000).toFixed(1).replace(".", ",") + " s");
   function post(pfad, obj) {
     return fetch(pfad, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(obj || {}) });
@@ -199,11 +252,16 @@
       h("div", { class: "mini" }, h("div", { class: "z" }, "Strom", live.w)),
       live.modell);
   }
+  /** Eine Aussage zur Auslastung fuer Seitenleiste und Startseite: "voll" (Warteschlange), "rechnet" (GPU ab 60 Prozent) oder "frei". */
+  function rechnerZustand(d) {
+    const w = (d && d.warteschlange) || {};
+    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "voll";
+    return d && d.gpu_pct != null && d.gpu_pct >= 60 ? "rechnet" : "frei";
+  }
   function liveAktualisieren(d) {
     live.punkt.classList.toggle("aus", !d.frisch);
-    const w = d.warteschlange || {};
-    const voll = w.parallel && (w.aktiv >= w.parallel || w.wartend > 0);
-    live.status.textContent = !d.frisch ? "keine frischen Werte" : voll ? "Rechner live, gerade viel los" : "Rechner live und frei";
+    const z = rechnerZustand(d);
+    live.status.textContent = !d.frisch ? "keine frischen Werte" : z === "voll" ? "Rechner live, gerade viel los" : z === "rechnet" ? "Rechner live, rechnet gerade" : "Rechner live und frei";
     if (d.gpu_pct != null) { live.gpu.textContent = d.gpu_pct + " %"; live.gpuB.firstChild.style.width = d.gpu_pct + "%"; }
     if (d.ram_mb != null) {
       live.ram.textContent = (d.ram_mb / 1024).toFixed(1).replace(".", ",") + " von " + (d.ram_max_mb / 1024).toFixed(1).replace(".", ",") + " GB";
@@ -245,13 +303,15 @@
       const zeigen = (i, abspielen) => {
         const v = fertig[i];
         const basis = "/static/videos/" + v.id;
-        const video = h("video", { controls: true, preload: "metadata", poster: basis + ".jpg", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
-          h("source", { src: basis + ".mp4", type: "video/mp4" }),
+        // Standbild vor dem Start und nach dem Ende: die erste Szene (Sekunde 3) statt des schwarzen Anfangs- oder Schlussbilds; kein Poster mit fremdem Ausschnitt
+        const STILL = 3;
+        const video = h("video", { controls: true, preload: "metadata", playsinline: true, "aria-label": v.titel + " (Sprecherstimme KI-erzeugt)" },
+          h("source", { src: basis + ".mp4#t=" + STILL, type: "video/mp4" }),
           h("track", { kind: "subtitles", srclang: "de", label: "Deutsch", src: basis + ".vtt", default: true }));
         const kap = (v.kapitel || []).map((k) => h("li", null,
           h("button", { type: "button", dataset: { t: k.t }, onclick: () => { video.currentTime = k.t; video.play(); } },
             h("span", { class: "t" }, mmss(k.t)), k.titel)));
-        // Untertitel: Am Handy verdecken sie den Bildtext und das Schlussbild. Dort laufen sie als Zeile UNTER dem Bild; im Vollbild und auf breiten Schirmen bleibt es beim Untertitel des Browsers.
+        // Untertitel: Im Bild verdecken sie Bildtext und Schlussbild. Darum laufen sie auf jeder Breite als Zeile UNTER dem Bild; nur im Vollbild bleibt es beim Untertitel des Browsers.
         const unter = h("p", { class: "untertitel", "aria-hidden": "true", hidden: true });
         const spur = video.textTracks && video.textTracks[0];
         const schmal = window.matchMedia("(max-width: 600px)");
@@ -261,7 +321,7 @@
           unter.hidden = !eigen;
           unter.textContent = eigen ? Array.from(spur.activeCues || []).map((c) => String(c.text).replace(/<[^>]+>/g, "").replace(/\s*\n\s*/g, " ")).join(" ") : "";
         };
-        const unterModus = () => { if (!spur) return; spur.mode = schmal.matches && !vollbild ? "hidden" : "showing"; unterZeigen(); };
+        const unterModus = () => { if (!spur) return; spur.mode = vollbild ? "showing" : "hidden"; unterZeigen(); };
         if (spur) {
           spur.addEventListener("cuechange", unterZeigen);
           video.addEventListener("loadedmetadata", unterModus);
@@ -272,8 +332,25 @@
           schmal.addEventListener("change", aufModus); document.addEventListener("fullscreenchange", aufVoll);
           unterModus();
         }
+        // Ende: nicht im schwarzen Schlussbild stehen bleiben, sondern Standbild und "Nochmal ansehen"
+        const ende = h("div", { class: "spieler-ende", hidden: true }, h("button", { type: "button", class: "btn primary", onclick: () => { amEnde = false; ende.hidden = true; video.currentTime = 0; video.play().catch(() => {}); } }, icon("refresh-cw"), "Nochmal ansehen"));
+        let amEnde = false;
+        video.addEventListener("ended", () => { amEnde = true; video.currentTime = STILL; ende.hidden = false; const b = $("button", ende); if (b && video.isConnected && document.activeElement === video) b.focus(); });
+        video.addEventListener("play", () => { amEnde = false; ende.hidden = true; });
+        video.addEventListener("seeking", () => { if (!amEnde) ende.hidden = true; });
+        video.addEventListener("seeked", () => { amEnde = false; });
+        const kapListe = kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel", tabindex: "0" }, kap) : null;
+        const kapHinweis = kap.length ? h("p", { class: "kapitel-hinweis", hidden: true }, icon("chevron-down"), "Weitere Kapitel: nach unten scrollen") : null;
         const kopf = h("div", { class: "video" + (kap.length ? "" : " leer") },
-          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video), unter), kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel" }, kap) : null);
+          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video, ende), unter),
+          kap.length ? h("div", { class: "kapitel-box" }, kapListe, kapHinweis) : null);
+        if (kapListe) {
+          // Scroll-Hinweis: nur wenn die Liste laenger ist als der Platz; verschwindet am Listenende
+          const hinweisPruefen = () => { if (!kapListe.isConnected) { window.removeEventListener("resize", hinweisPruefen); return; } const mehr = kapListe.scrollHeight - kapListe.clientHeight > 4 && kapListe.scrollTop + kapListe.clientHeight < kapListe.scrollHeight - 4; kapHinweis.hidden = !mehr; kapListe.classList.toggle("scrollt", mehr); };
+          kapListe.addEventListener("scroll", hinweisPruefen, { passive: true });
+          window.addEventListener("resize", hinweisPruefen);
+          setTimeout(hinweisPruefen, 0); setTimeout(hinweisPruefen, 600);
+        }
         // Kennzeichnung nach KI-Verordnung (Art. 50): zentral fuer jedes Video, nicht je Datei
         const teile = [kopf, h("p", { class: "video-ki" }, icon("audio-lines"),
           h("span", null, "Sprecherstimme KI-erzeugt. Mehr dazu unter ", h("a", { href: "/lizenzen" }, "Lizenzen und Quellen"), "."))];
@@ -372,7 +449,7 @@
   }
 
   /* Lesezeit: aus der Wortzahl. Kurz = Lead, Ueberschriften, Kernsaetze, Merksaetze; genau = der ganze Text. */
-  const WORTE_PRO_MIN = 190;
+  const WORTE_PRO_MIN = 160;
   const woerter = (t) => { const k = klar(t || ""); return k ? k.split(" ").length : 0; };
   const lesezeitCache = new Map();
   function lesezeit(sd) {
@@ -404,9 +481,18 @@
   const videoDauer = new Map();                            // Video-ID -> Sekunden, gefuellt nach dem Laden des Videokatalogs (Seiten kommen nachgeladen, darum erst beim Rechnen zusammengezaehlt)
   const zeitFelder = [];                                   // { el, fn }: Textfelder, die sich bei Lesemodus und Videokatalog neu beschriften
   const lesemodusZeit = () => (lesemodus === "ausfuehrlich" ? "ausfuehrlich" : "kompakt");
+  /** Unterrichtseinheit (Gruppe "Für die Schule", Typ lektion, Feld minuten oder Zeitplan, sonst "-stunde-N" mit 45 Minuten im Satz): Minuten Unterricht, sonst 0. */
+  function unterrichtMinuten(sd, id) {
+    if (!sd || sd.typ !== "lektion" || sd.gruppe !== "Für die Schule") return 0;
+    const m = Number(sd.minuten || (sd.zeitplan && sd.zeitplan.minuten)) || 0;
+    if (m) return m;
+    return /-stunde-\d+$/.test(id || "") || /\b45 Minuten\b/.test(sd.kurz || "") ? 45 : 0;
+  }
   function seitenZeit(id) {
     const sd = INHALT.seiten[id];
-    if (!sd) return { lesen: 0, video: 0, labor: 0 };
+    if (!sd) return { lesen: 0, video: 0, labor: 0, unterricht: 0 };
+    const unterricht = unterrichtMinuten(sd, id);
+    if (unterricht) return { lesen: 0, video: 0, labor: 0, unterricht };
     const lz = lesezeit(sd);
     const vids = sd.videos || (sd.video ? [sd.video] : []);
     return { lesen: (sd.abschnitte || []).length ? lz[lesemodusZeit()] : 0, video: Math.round(vids.reduce((n, v) => n + (videoDauer.get(v) || 0), 0)), labor: sd.widget || sd.demo ? LABOR_MIN : 0 };
@@ -416,6 +502,11 @@
   /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. */
   function zeitText(ids) {
     const z = [].concat(ids).map(seitenZeit);
+    const unt = z.reduce((n, x) => n + (x.unterricht || 0), 0);
+    if (unt) {
+      const rest = z.filter((x) => !x.unterricht), lesenR = rest.reduce((n, x) => n + x.lesen, 0);
+      return unt + " Minuten Unterricht" + (lesenR ? ", plus ca. " + lesenR + " Min Lesen" : "");
+    }
     const lesen = z.reduce((n, x) => n + x.lesen, 0), video = z.reduce((n, x) => n + x.video, 0), labor = z.reduce((n, x) => n + x.labor, 0);
     const teile = [];
     if (lesen) teile.push("ca. " + lesen + " Min Lesen");
@@ -902,32 +993,85 @@
       h("thead", null, h("tr", null, t.kopf.map((k) => h("th", { scope: "col", html: md(k) })))),
       h("tbody", null, t.zeilen.map((z) => h("tr", null, z.map((c, i) => h(i === 0 ? "th" : "td", { scope: i === 0 ? "row" : null, html: md(c) })))))));
   }
+  /** Findet den Abschnitt zu einer Quizfrage: f.abschnitt = Abschnitts-id, Ueberschrift oder laufende Nummer (ab 1) auf der Seite. */
+  function quizAbschnitt(ref) {
+    if (ref == null || ref === "") return null;
+    const alle = $$("#inhalt section.abschnitt");
+    if (typeof ref === "number") return alle[ref - 1] || null;
+    const byId = document.getElementById(String(ref));
+    if (byId && byId.matches("section.abschnitt")) return byId;
+    const t = klar(String(ref));
+    return alle.find((sec) => { const hh = $("h2", sec); return hh && klar(hh.textContent) === t; }) || null;
+  }
+  function mischen(n) {
+    const a = Array.from({ length: n }, (_, i) => i);
+    for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; }
+    return a;
+  }
+  /** Quiz: Antwortreihenfolge wird bei jedem Aufbau gemischt (value jeder Option bleibt der urspruengliche Index, f.richtig gilt weiter).
+      Maus und Touch bestaetigen sofort; mit der Tastatur waehlen die Pfeiltasten nur, Enter (oder "Antwort pruefen") bestaetigt.
+      Richtig und falsch zeigen Symbol und Text, nicht nur Farbe. Optional f.abschnitt: Rueckverweis nach einer falschen Antwort. */
   function quizBlock(fragen, bei) {
-    const richtig = new Set(), beantwortet = new Set();
-    const ergebnis = h("p", { class: "quiz-ergebnis", "aria-live": "polite" });
-    const felder = fragen.map((f, i) => {
-      const name = "q" + i + "-" + Math.random().toString(36).slice(2, 7);
-      const rueck = h("p", { class: "quiz-rueck", "aria-live": "polite" });
-      const fs = h("fieldset", { class: "quiz-frage" }, h("legend", null, f.frage));
-      f.optionen.forEach((o, j) => {
-        const id = name + "-" + j;
-        const inp = h("input", { type: "radio", name, id, value: String(j) });
-        inp.addEventListener("change", () => {
+    const box = h("div", { class: "flaeche pad" });
+    function aufbauen() {
+      const richtig = new Set(), beantwortet = new Set();
+      const ergebnis = h("p", { class: "quiz-ergebnis", "aria-live": "polite" });
+      const nochmal = h("button", { type: "button", class: "btn klein quiz-nochmal", hidden: true, onclick: () => { aufbauen(); const e = $("input", box); if (e) e.focus(); } }, icon("refresh-cw"), "Noch einmal");
+      const tipp = h("p", { class: "quiz-tipp" }, icon("info"), h("span", null, "Mit der Tastatur: Pfeiltasten wählen die Antwort, Enter bestätigt."));
+      const felder = fragen.map((f, i) => {
+        const name = "q" + i + "-" + Math.random().toString(36).slice(2, 7);
+        const rueck = h("p", { class: "quiz-rueck", "aria-live": "polite" });
+        const pruefen = h("button", { type: "button", class: "btn klein quiz-pruefen", hidden: true }, icon("check"), "Antwort prüfen");
+        const fs = h("fieldset", { class: "quiz-frage" }, h("legend", null, f.frage));
+        let zeiger = 0, gewaehlt = null;
+        fs.addEventListener("pointerdown", () => { zeiger = performance.now(); });
+        fs.addEventListener("keydown", () => { zeiger = 0; });
+        const bestaetigen = (j) => {
           if (beantwortet.has(i)) return;
           beantwortet.add(i);
           const ok = j === f.richtig;
           if (ok) richtig.add(i);
-          $$("label", fs).forEach((l, k) => { l.classList.toggle("richtig", k === f.richtig); l.classList.toggle("falsch", k === j && !ok); });
+          pruefen.hidden = true;
+          $$("label", fs).forEach((l) => {
+            const k = Number($("input", l).value);
+            l.classList.toggle("richtig", k === f.richtig); l.classList.toggle("falsch", k === j && !ok);
+            if (k === f.richtig || (k === j && !ok)) l.append(h("span", { class: "quiz-marke " + (k === f.richtig ? "ja" : "nein") },
+              icon(k === f.richtig ? "check" : "x"), h("span", null, k === f.richtig ? "Richtig" : "Deine Wahl, falsch")));
+          });
           $$("input", fs).forEach((x) => { x.disabled = true; });
-          rueck.textContent = (ok ? "Richtig. " : "Nicht ganz. ") + f.erklaerung;
-          if (beantwortet.size === fragen.length) { ergebnis.textContent = richtig.size + " von " + fragen.length + " richtig."; if (bei) bei(); }
+          rueck.replaceChildren(icon(ok ? "check" : "circle-x"), h("span", null, (ok ? "Richtig. " : "Nicht ganz. ") + f.erklaerung));
+          rueck.classList.toggle("ja", ok); rueck.classList.toggle("nein", !ok);
+          const sec = !ok ? quizAbschnitt(f.abschnitt) : null;
+          if (sec) {
+            const hh = $("h2", sec);
+            rueck.append(h("button", { type: "button", class: "textlink quiz-zurueck", onclick: () => { const d = $("details", sec); if (d) d.open = true; sec.scrollIntoView({ block: "start", behavior: "smooth" }); if (hh) { hh.setAttribute("tabindex", "-1"); hh.focus({ preventScroll: true }); } } },
+              icon("book-open"), "Abschnitt noch einmal lesen: " + (hh ? hh.textContent : "")));
+          }
+          if (beantwortet.size === fragen.length) {
+            ergebnis.textContent = richtig.size + " von " + fragen.length + " richtig."; nochmal.hidden = false;
+            if (bei) bei();
+          }
+        };
+        pruefen.addEventListener("click", () => { if (gewaehlt != null) bestaetigen(gewaehlt); });
+        mischen(f.optionen.length).forEach((j) => {
+          const id = name + "-" + j;
+          const inp = h("input", { type: "radio", name, id, value: String(j) });
+          inp.addEventListener("change", () => {
+            if (beantwortet.has(i)) return;
+            gewaehlt = j;
+            if (zeiger && performance.now() - zeiger < 1000) bestaetigen(j);          // Maus oder Touch: gleich auswerten
+            else pruefen.hidden = false;                                              // Tastatur: erst auswaehlen, dann bestaetigen
+          });
+          inp.addEventListener("keydown", (e) => { if (e.key === "Enter" && gewaehlt != null && !beantwortet.has(i)) { e.preventDefault(); bestaetigen(gewaehlt); } });
+          fs.append(h("label", { for: id }, inp, h("span", { class: "quiz-text" }, f.optionen[j])));
         });
-        fs.append(h("label", { for: id }, inp, h("span", null, o)));
+        fs.append(pruefen, rueck);
+        return fs;
       });
-      fs.append(rueck);
-      return fs;
-    });
-    return h("section", { class: "block quiz" }, h("h2", null, icon("check"), "Teste dich"), h("div", { class: "flaeche pad" }, felder, ergebnis));
+      box.replaceChildren(tipp, ...felder, h("div", { class: "quiz-fuss" }, ergebnis, nochmal));
+    }
+    aufbauen();
+    return h("section", { class: "block quiz" }, h("h2", null, icon("check"), "Teste dich"), box);
   }
   /* ------------------------------------------------------------ Lesemodus (Kompakt | Ausfuehrlich) */
   const MODI = ["kompakt", "ausfuehrlich"];
@@ -1129,7 +1273,7 @@
   function abschnitte(seite) {
     const out = h("div", { class: "text" });
     if ((seite.abschnitte || []).length && !hilfeSchonGesehen()) { out.append(h("p", { class: "lese-hilfe" }, icon("info"), h("span", { class: "lese-hilfe-text" }, leseHilfe(lesemodus)))); hilfeMerken(); }
-    if ((seite.abschnitte || []).some((x) => x.mathe && x.mathe.p && x.mathe.p.length)) out.append(h("div", { class: "mathe-zeile" }, matheSchalter()));
+    if (seite.mathe === true || (seite.abschnitte || []).some((x) => x.mathe && x.mathe.p && x.mathe.p.length)) out.append(h("div", { class: "mathe-zeile" }, matheSchalter()));
     for (const a of seite.abschnitte || []) {
       const sec = h("section", { class: "abschnitt", id: a.id || null }, h("h2", { class: "abs" }, a.h));
       if (a.visual && window.KL.visual) {
@@ -1172,9 +1316,10 @@
   /** Statuschip in Klartext: bereit, viel los oder noch keine Verbindung (ohne Fachwoerter). */
   function statusSatz(d) {
     if (!d || !d.frisch) return "Der Rechner meldet sich gleich.";
-    const w = d.warteschlange || {};
-    if (w.parallel && (w.aktiv >= w.parallel || w.wartend > 0)) return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
-    return "Der Rechner ist bereit und frei. Gerade zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet.";
+    const z = rechnerZustand(d);
+    if (z === "voll") return "Gerade viel los: Es laufen schon Fragen. Bei Chat und Dokumenten kann es etwas dauern.";
+    if (z === "rechnet") return "Der Rechner rechnet gerade (zu " + d.gpu_pct + " Prozent ausgelastet). Neue Fragen können einen Moment warten müssen.";
+    return "Der Rechner ist bereit und frei (zu " + (d.gpu_pct ?? 0) + " Prozent ausgelastet).";
   }
   function zuAbschnitt(id) {
     const z = document.getElementById(id);
@@ -1439,6 +1584,7 @@
   function lesezeitKopf(seite) {
     if (!(seite.abschnitte || []).length) return null;
     const lz = lesezeit(seite);
+    if (unterrichtMinuten(seite, seite.id)) return h("span", { class: "lz-kopf", title: "Eine Unterrichtsstunde mit Einstieg, Erarbeitung, Sicherung und Reflexion" }, icon("clock"), zeitFeld(seite.id, "", null, "lz"));
     return h("span", { class: "lz-kopf", title: "Lesezeit ohne Quiz: ca. " + lz.kompakt + " Min im kurzen Modus, ca. " + lz.ausfuehrlich + " Min im genauen Modus. Das Video und ein Labor kommen dazu." },
       icon("clock"), zeitFeld(seite.id, "", null, "lz"));
   }
@@ -1512,20 +1658,26 @@
     const lzb = lernzieleBlock(seite); if (lzb) out.append(lzb);
     // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
     const dls = (seite.downloads || []).filter((d) => d && typeof d.href === "string" && d.href.startsWith("/static/") && !d.href.startsWith("//"));
-    if (dls.length) out.append(h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken" },
+    if (dls.length) out.append(h("section", { class: "downloads-box" }, h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
       dls.map((d) => h("a", { class: "dlkarte", href: d.href, download: "ki-labor-" + d.href.split("/").pop(), target: "_blank", rel: "noopener", "aria-label": d.text + " herunterladen" },
         h("span", { class: "dl-icon", "aria-hidden": "true" }, icon("file-text")),
         h("span", { class: "dl-text" }, h("b", null, d.text), d.sub ? h("small", null, d.sub) : null),
-        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen"))))));
+        h("span", { class: "btn primary klein dl-knopf" }, icon("download"), h("span", null, "Herunterladen")))))));
     if (seite.experimente) out.append(h("section", { class: "block" }, experimenteRaster()));
     if (imSchulweg(id)) out.append(h("p", { class: "kamera-hinweis" }, icon("camera"), h("span", null, h("b", null, "Braucht Kamera oder Mikrofon. "),
       "Im Unterricht ist das nicht nötig. Nutze es nur mit Einverständnis, bei unter 16 Jahren mit dem der Eltern.")));
     if (seite.status === "bald") out.append(h("p", { class: "in-arbeit" }, icon("hammer"), h("span", null, h("b", null, "Vorschau. "), "Die Erklärung steht schon. Eine Demo gibt es hier noch nicht.")));
     const vids = seite.videos || (seite.video ? [seite.video] : []);
+    // Reihenfolge: Spiel-Widgets (widgetZuerst, echt-oder-ki) stehen vor dem Video; Zustimmungs-Kasten (sicherheit-einfach, widgetNach) erst nach der Antwort in den Abschnitten.
+    const widgetZuerst = !!seite.widget && (seite.widgetZuerst || id === "echt-oder-ki");
+    const widgetNach = !!seite.widget && (seite.widgetNach || id === "sicherheit-einfach");
+    const widgetKnoten = seite.widget ? baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play") : null;
+    if (widgetZuerst) out.append(widgetKnoten);
     if (vids.length) out.append(videoBlock(vids));
-    if (seite.widget) out.append(baustein("widgets", seite.widget, seite, seite.widgetTitel || "Ausprobieren", seite.widgetSymbol || "play"));
+    if (widgetKnoten && !widgetZuerst && !widgetNach) out.append(widgetKnoten);
     if (seite.demo) out.append(baustein("demos", seite.demo, seite, "Live ausprobieren", "live"));
     out.append(abschnitte(seite));
+    if (widgetKnoten && widgetNach) out.append(widgetKnoten);
     if (seite.mitnehmen) out.append(h("section", { class: "block mitnehmen" }, h("h2", null, "Das nimmst du mit"), h("ul", null, seite.mitnehmen.map((m) => h("li", null, m)))));
     if (seite.quiz && seite.quiz.length) out.append(quizBlock(seite.quiz, () => gelesenMerken(id)));
     if (seite.business) {
@@ -1643,7 +1795,7 @@
     return h("div", { class: "g-zeile" + (stapel ? " g-stapel" : "") }, h(id ? "label" : "span", { class: "g-name", for: id || null }, beschriftung), h("div", { class: "g-steuer" }, steuer));
   }
 
-  window.KL = { $, $$, h, md, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
+  window.KL = { $, $$, h, md, mdAntwort, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
     /** Haengt ein Objekt mit destroy() an die aktuelle Seite: wird beim Seitenwechsel aufgeraeumt (wie ein Baustein). */
     montiere(m) { montiert.push(m); return m; },
     ersterSatz, klar,

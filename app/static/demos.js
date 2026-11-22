@@ -155,11 +155,15 @@
           if (s.farbe) c.style.background = s.farbe;
           c.style.flex = s.wert + " 1 0";
           c.textContent = s.text || "";
+          c.dataset.text = s.text || "";
+          c.title = s.name ? s.name + (s.text ? ": " + s.text : "") : "";
         }
         // Reihenfolge wie in segs
         for (const s of gueltig) pipe.append(pipe.querySelector('[data-k="' + s.k + '"]'));
         pipe.setAttribute("aria-label", beschreibung || "Zeitanteile");
-        leg.replaceChildren(...segs.map((s) => h("span", null, h("i", { class: "d-sw " + (s.cls || ""), style: s.farbe ? "background:" + s.farbe : null }), s.name)));
+        // Passt der Wert nicht in den schmalen Abschnitt, steht er nur in der Legende (statt abgeschnitten im Balken)
+        for (const c of Array.from(pipe.children)) { if (c.textContent !== c.dataset.text) c.textContent = c.dataset.text; if (c.scrollWidth > c.clientWidth + 1) c.textContent = ""; }
+        leg.replaceChildren(...segs.map((s) => h("span", null, h("i", { class: "d-sw " + (s.cls || ""), style: s.farbe ? "background:" + s.farbe : null }), s.name + (s.text && s.wert > 0 ? ": " + s.text : ""))));
       },
       text(...teile) { satz.replaceChildren(...teile); },
     };
@@ -930,7 +934,7 @@
 
     /* Modellzeile */
     const modellStatus = h("span", { class: "chip", role: "status" }, "Status wird gelesen…");
-    const ladeBtn = h("button", { type: "button", class: "btn klein" }, ic("download"), "Modell laden");
+    const ladeBtn = h("button", { type: "button", class: "btn klein", title: "Lädt das Modell vorab auf die SSD des Jetson. Das ist nur einmal nötig." }, ic("download"), "Modell laden");
     const ladeBalken = h("i");
     const ladeLeiste = h("div", { class: "ladebar", role: "progressbar", "aria-valuemin": 0, "aria-valuemax": 100, "aria-valuenow": 0, "aria-label": "Fortschritt beim Laden", hidden: true }, ladeBalken);
     const ladeTxt = h("div", { class: "ladetxt", "aria-live": "polite" });
@@ -956,7 +960,15 @@
       senden(feld.value);
     }
 
-    const BEISPIELE = ["Erkläre in zwei Sätzen, was ein Token ist.", "Schreibe einen Satz über Roboter.", "Was ist ein Jetson?"];
+    const BEISPIELE_WEG = {
+      schule: ["Wie kann ich KI bei den Hausaufgaben nutzen, ohne zu schummeln?", "Woran erkenne ich, ob ein Bild echt oder von einer KI ist?", "Wie lerne ich besser für eine Klassenarbeit?"],
+      lehrende: ["Wie erkläre ich Klasse 8 in drei Sätzen, was ein Sprachmodell ist?", "Was ist ein Token?", "Nenne drei Regeln für KI bei Hausaufgaben."],
+      erwachsene: ["Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", "Was ist künstliche Intelligenz in einfachen Worten?", "Wie erkenne ich eine betrügerische Nachricht?"],
+      eltern: ["Woran erkenne ich einen Enkeltrick oder Betrug am Telefon?", "Wie spreche ich mit meinem Kind über KI?", "Was ist künstliche Intelligenz in einfachen Worten?"],
+      beruf: ["Mache aus dieser Notiz ein kurzes Angebot: 3 Fenster tauschen, Montag, 1.200 Euro.", "Fasse in drei Stichpunkten zusammen, wofür ein Betrieb KI nutzen kann.", "Was ist ein Token?"],
+      technik: ["Erkläre in zwei Sätzen, was ein Token ist.", "Was ist ein Jetson?", "Schreibe einen Satz über Roboter."],
+    };
+    const BEISPIELE = BEISPIELE_WEG[KL.weg] || ["Erkläre in zwei Sätzen, was ein Token ist.", "Schreibe einen Satz über Roboter.", "Was ist ein Jetson?"];
     const chips = h("div", { class: "vorschlaege", "aria-label": "Beispielfragen" }, BEISPIELE.map((b) => h("button", { type: "button", class: "chip", onclick: () => senden(b) }, b)));
 
     /* Einstellungen */
@@ -978,8 +990,9 @@
     function modellStatusSetzen(d) {
       const geladen = (d.modelle_geladen || []).some((m) => m.startsWith("llama3.2"));
       imSpeicher = geladen;
-      modellStatus.textContent = geladen ? "im Speicher" : "nicht im Speicher";
+      modellStatus.textContent = geladen ? "Modell bereit, im Speicher" : "Modell wird bei der ersten Frage geladen";
       modellStatus.classList.toggle("live", geladen);
+      ladeBtn.hidden = geladen;          // ist es schon im Speicher, gibt es nichts mehr zu laden (kein Widerspruch zum Status)
     }
     L.onEnde(KL.stats.on(modellStatusSetzen));
 
@@ -1046,8 +1059,9 @@
       const node = m.text;
       node.replaceChildren();
       if (m.tokens.length === 0) { node.append(m.platz || ""); return; }
+      node.classList.toggle("md", !tokensZeigen);
       if (tokensZeigen) m.tokens.forEach((t) => node.append(h("span", { class: "tok" }, t)));
-      else node.append(m.tokens.join(""));
+      else node.append(KL.mdAntwort(m.tokens.join("")));          // Markdown sicher als DOM-Knoten, nie als HTML
     }
     function nachUnten() { verlauf.scrollTop = verlauf.scrollHeight; }
     function neueNachricht(rolle, text) {
@@ -1152,6 +1166,7 @@
           { k: "g", cls: "s4", wert: Math.max(1, performance.now() - s.tErst), text: sekText(performance.now() - s.tErst), name: "Tokens erzeugen" },
         ], "Wartezeit bis zum ersten Token und Zeit zum Erzeugen");
       } else if (abgebrochen) live.text("Du hast die Antwort gestoppt. Der Jetson hat bis dahin " + z.tokens.length + " Tokens erzeugt.");
+      else if (hinweisText) live.text("Der Jetson ist gerade ausgelastet. Die Meldung steht oben im Chat, du kannst es gleich noch einmal versuchen.");
       else if (fehler) live.text(fehler);
       busy = false; ctrl = null; sendeBtn.hidden = false; stoppBtn.hidden = true; eingabe.classList.remove("laeuft");
       nachUnten();

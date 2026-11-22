@@ -54,7 +54,19 @@ for (const { datei, id } of EINHEITEN) {
       if (!/Niveau:\s+Basis\s+Standard\s+Herausforderung/.test(text)) meld(name + ": Niveau-Legende fehlt");
       if (!/(Einzelarbeit|Partnerarbeit|Gruppe zu viert)/.test(text)) meld(name + ": Sozialform fehlt");
       if (/Tipp 2/.test(text)) meld(name + ": Tipp 2 darf nicht auf dem Schülerblatt stehen");
+      // Zeitangabe nennt Einzel- und Doppelstunde
+      if (!/in der Einzelstunde/.test(text) || !/30 Minuten in der Doppelstunde/.test(text)) meld(name + ": Zeitangabe zu Einzel- und Doppelstunde fehlt");
     } else {
+      const flach = text.replace(/\s+/g, " ");
+      if (!/Einzelstunde: Zeitplan \(45 Minuten\)/.test(flach) || !/Doppelstunde: Zeitplan \(90 Minuten\)/.test(flach)) meld(name + ": beide Zeitpläne fehlen");
+      const plan45 = flach.split("Einzelstunde: Zeitplan (45 Minuten)")[1].split("Doppelstunde: Zeitplan")[0];
+      if (/Quiz/.test(plan45.split("In der Stunde laufen")[0].replace(/Quiz und schriftliches/g, "")) || !/Hausaufgabe/.test(plan45)) meld(name + ": Einzelstunde widerspricht sich (Quiz im Plan oder keine Hausaufgabe)");
+      // Reflexion: jede Frage mit Erwartungshorizont
+      const sd = INHALT.seiten[id], rf = sd.abschnitte.find((a) => a.h.startsWith("Reflexion"));
+      if (!/Fragen für die Reflexion mit Erwartungshorizont/.test(flach)) meld(name + ": Reflexion ohne Erwartungshorizont");
+      rf.muster.forEach((m, i) => { const t = m[0].replace(/\s+/g, " ").slice(0, 28); if (!flach.includes(t)) meld(`${name}: Musterantwort ${i + 1} fehlt (${t})`); });
+      // Quiz: Satzende zwischen Antwort und Erklärung
+      sd.quiz.forEach((q, i) => { const o = q.optionen[q.richtig].trim(); const z = (/[.!?]$/.test(o) ? o : o + ".") + " " + q.erklaerung; if (!flach.includes(z.slice(0, 70))) meld(`${name}: Quiz-Lösung ${i + 1} ohne Satzende zwischen Antwort und Erklärung`); });
       if (!/Hilfekarten/.test(text) || (text.match(/Tipp 2/g) || []).length < 3) meld(name + ": Hilfekarten mit Tipp 2 fehlen");
       if (!/Erwartungshorizont/.test(text)) meld(name + ": Erwartungshorizont fehlt");
     }
@@ -88,6 +100,26 @@ for (const { datei, id } of EINHEITEN) {
     console.log(`   QR dekodiert: ${gefunden.join("  |  ")}; Links: ${links.join(" | ")}`);
   }
 }
+/* ------------------------------------------------------------------ Quiz-Qualität (30 Fragen der Schul-Einheiten) */
+{
+  const alle = EINHEITEN.flatMap((e) => (INHALT.seiten[e.id].quiz || []).map((q, i) => ({ id: e.id, i, q })));
+  const pos = [0, 0, 0, 0]; let laengste = 0;
+  for (const { id, i, q } of alle) {
+    const l = q.optionen.map((o) => o.length), max = Math.max(...l), min = Math.min(...l);
+    pos[q.richtig]++;
+    if (l[q.richtig] === max) laengste++;
+    if (q.optionen.length !== 4) meld(`${id} Frage ${i + 1}: nicht vier Antworten`);
+    if (min < 0.55 * max) meld(`${id} Frage ${i + 1}: Antwortlängen zu unterschiedlich (${min} gegen ${max} Zeichen)`);
+    if (!/[.!?]$/.test(q.erklaerung)) meld(`${id} Frage ${i + 1}: Erklärung ohne Satzzeichen am Ende`);
+    if (!INHALT.seiten[id].abschnitte.some((a) => a.h === q.abschnitt)) meld(`${id} Frage ${i + 1}: abschnitt "${q.abschnitt}" gibt es auf der Seite nicht`);
+    if (/im Beispiel|im Bild oben|wie oben|im Text/.test(q.frage)) meld(`${id} Frage ${i + 1}: verweist auf Beispiel oder Text`);
+  }
+  console.log(`Quiz: ${alle.length} Fragen, richtige Antwort am längsten in ${laengste}, Position A bis D: ${pos.join("/")}`);
+  if (alle.length !== 30) meld("Quiz: erwartet 30 Fragen, gefunden " + alle.length);
+  if (laengste > 10) meld(`Quiz: richtige Antwort ist in ${laengste} von ${alle.length} Fragen die längste (höchstens 10)`);
+  if (pos.some((n) => n < 5 || n > 10)) meld("Quiz: Positionen der richtigen Antwort ungleich verteilt: " + pos.join("/"));
+}
+
 /* ------------------------------------------------------------------ Kartenset, Elternabend, Seiten */
 const seitenZahl = (pdf) => Number((execFileSync("pdfinfo", [pdf]).toString().match(/Pages:\s+(\d+)/) || [])[1]);
 const pdfText = (pdf) => execFileSync("pdftotext", ["-layout", pdf, "-"]).toString();
@@ -132,10 +164,10 @@ const linksIn = (pdf) => [...fs.readFileSync(pdf).toString("latin1").matchAll(/\
   if (!/(Hände|Spiegelung|Schrift)/.test(loes)) meld("Lösungsblatt Medien 1: Hinweise auf typische Merkmale fehlen");
 }
 
-// Elternabend: Info-Blatt (1 Seite, Sie-Form), Leitfaden (höchstens 2 Seiten), QR-Codes dekodierbar und verlinkt
+// Elternabend: Info-Blatt (1 Seite, Sie-Form), Leitfaden (1 Seite), QR-Codes dekodierbar und verlinkt
 for (const [name, seitenMax, soll] of [
   ["elternabend-infoblatt", 1, [`${BASIS}/schule-eltern?weg=schule`, `${BASIS}/eltern-zuhause?weg=schule`]],
-  ["elternabend-leitfaden", 2, [`${BASIS}/elternabend?weg=schule`, `${BASIS}/schule-eltern?weg=schule`]],
+  ["elternabend-leitfaden", 1, [`${BASIS}/elternabend?weg=schule`, `${BASIS}/schule-eltern?weg=schule`]],
 ]) {
   const pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), seiten = seitenZahl(pdf);
   console.log(`${name}: ${seiten} Seite(n), ${text.split(/\s+/).filter(Boolean).length} Wörter`);
@@ -143,6 +175,11 @@ for (const [name, seitenMax, soll] of [
   if (!/Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
   if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
   if (!/Ihr Kind|Ihre Klasse|Sie /.test(text)) meld(name + ": Sie-Form nicht erkennbar");
+  if (name === "elternabend-infoblatt") {
+    if (!/Rückfragen an die Schule/.test(text)) meld(name + ": Kontaktzeile fehlt");
+    if (/@|\b\d{3,}[ -]?\d{3,}\b/.test(text.replace(/116 111/g, ""))) meld(name + ": echte E-Mail oder Telefonnummer im Infoblatt");
+    if (seiten !== 1) meld(name + ": erwartet genau 1 Seite");
+  }
   if (/\b(Du|Dein|Deine)\b/.test(text)) meld(name + ": Du-Form im Elternteil");
   if (!/[Kk]ein Rechtsrat/.test(text)) meld(name + ": Hinweis kein Rechtsrat fehlt");
   const gefunden = qrCodes(pdf, name), links = linksIn(pdf);
@@ -160,6 +197,19 @@ for (const id of [...EINHEITEN.filter((e) => e.id.startsWith("medien")).map((e) 
   if (!s) { meld("Seite fehlt: " + id); continue; }
   for (const d of s.downloads || []) if (!fs.existsSync(path.join(DIR, "..", d.href.replace(/^\/static\//, "")))) meld(`${id}: Download ${d.href} fehlt`);
   if (JSON.stringify(s).match(/[–—]/)) meld(id + ": Gedankenstrich in den Seitendaten");
+}
+// Download-Karten: Seitenzahl in der Beschriftung muss zum PDF passen
+for (const id of Object.keys(INHALT.seiten)) {
+  for (const d of INHALT.seiten[id].downloads || []) {
+    const m = String(d.sub || "").match(/(\d+) Seiten?\b/);
+    if (!m || !/\.pdf$/.test(d.href)) continue;
+    const n = seitenZahl(path.join(DIR, "..", d.href.replace(/^\/static\//, "")));
+    if (Number(m[1]) !== n) meld(`${id}: Download "${d.text}" nennt ${m[1]} Seite(n), das PDF hat ${n}`);
+  }
+}
+// Texte auf den Seiten dürfen nicht mehr von einem Blatt sprechen
+for (const id of ["schule-lehrkraefte", ...EINHEITEN.map((e) => e.id)]) {
+  if (/auf ein Blatt|Eine DIN-A4-Seite/.test(JSON.stringify(INHALT.seiten[id]))) meld(id + ": Text spricht von einem Blatt, die Arbeitsblätter haben drei Seiten");
 }
 console.log("Seitendaten und Downloads geprüft");
 

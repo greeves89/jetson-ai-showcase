@@ -95,6 +95,7 @@ karte: {
       rechts: {titel: "Maschinelles Lernen", icon: "brain-circuit", farbe: "akzent", punkte: ["Muster aus Beispielen", "Regeln stecken im Modell", "Gut bei Mustern"]}},
      p: [
       "Die Karte oben zeigt die Verschachtelung. Jeder innere Bereich ist eine Spezialisierung des äußeren: [[ml|Maschinelles Lernen]] ist ein Teil der KI, [[dl|Deep Learning]] ein Teil des maschinellen Lernens, generative KI ein Teil von Deep Learning. Regelbasierte Systeme sind der ältere Weg, und die Robotik steht daneben, weil sie KI als Baustein nutzt, aber auch Mechanik und Regelungstechnik braucht.",
+      "**Deep Learning** heißt: Ein neuronales Netz mit vielen Schichten lernt aus Rohdaten wie Pixeln oder Text selbst, worauf es ankommt. **Ein Transformer** ist ein Netzbau von 2017, bei dem jedes Wort beim Verarbeiten auf alle anderen Wörter des Textes achten kann. Fast alle heutigen Sprachmodelle beruhen darauf.",
       "Tippe auf einen Bereich, dann siehst du rechts, was er bedeutet und wo du ihn in diesem Labor ausprobieren kannst.",
     ]},
     {h: "Fünf Bereiche statt vieler Fachwörter",
@@ -114,6 +115,13 @@ karte: {
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
       "**Erzeugen:** neue Texte, Bilder und Töne herstellen. Labor {{chat|Chat}}.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Google: [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Vaswani et al.: [Attention Is All You Need](https://arxiv.org/abs/1706.03762), 2017 (der Transformer), abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Was ist KI?“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/karte).",
+     ]},
   ],
   mitnehmen: [
     "KI ist ein Sammelbegriff, kein einzelnes Verfahren.",
@@ -176,6 +184,13 @@ ml: {
       "Daten sind das Produkt. Ein Modell lernt nur, was in den Beispielen steckt. Sind sie einseitig, ist es das Modell auch.",
       "[[ueberanpassung|Überanpassung]] heißt, dass ein Modell die Beispiele auswendig lernt, statt das Muster zu verstehen. Dann ist es bei bekannten Daten perfekt und bei neuen schlecht. Darum prüft man immer mit Daten, die das Modell vorher nie gesehen hat. Du kannst das oben nachstellen: Stelle k auf 1 und setze einzelne Ausreißer. Die Grenze wird zackig und folgt jedem Zufall.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Google: [Machine Learning Crash Course](https://developers.google.com/machine-learning/crash-course), abgerufen am 22.11.2026.",
+      "Michael Nielsen: [Neural Networks and Deep Learning](http://neuralnetworksanddeeplearning.com/), Online-Buch, 2015, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Maschinelles Lernen“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/ml).",
+     ]},
   ],
   mitnehmen: [
     "Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen.",
@@ -813,6 +828,16 @@ hardware: {
       "**Leistung:** Strom, den das Board gerade aufnimmt, ohne Netzteilverluste.",
       "**Temperatur:** der heißeste Messpunkt des Chips. Bei zu hoher Temperatur taktet er herunter.",
     ]},
+    {h: "Das Sprachmodell, das hier läuft",
+     kurz: "Llama 3.2 mit 3,2 Milliarden Parametern, Quantisierung Q4_K_M, Kontext im Labor auf 4096 Token eingestellt.",
+     visual: {typ: "zahlen", kacheln: [
+      {wert: "3,2 Mrd.", label: "Parameter (Llama 3.2)", icon: "brain"},
+      {wert: "Q4_K_M", label: "Quantisierung", icon: "binary"},
+      {wert: "4096", label: "Kontext in Token, im Labor eingestellt", icon: "scan"}]},
+     p: [
+      "Gemessen am 22.11.2026 auf dem Jetson mit Ollama 0.12.3: Das Modell `llama3.2:3b` hat 3,2 Milliarden [[parameter|Parameter]] und ist mit dem Verfahren Q4_K_M [[quantisierung|quantisiert]], also mit etwa vier Bit je Zahl gespeichert. Dadurch passt es in rund 2 GB des gemeinsamen Speichers.",
+      "Das Modell wurde für bis zu 131 072 Token Kontext gebaut. Das Labor stellt aber nur 4096 Token ein (OLLAMA_CONTEXT_LENGTH=4096), dazu einen Zwischenspeicher mit 8-Bit-Werten (OLLAMA_KV_CACHE_TYPE=q8_0) und Flash Attention. Der Grund ist der knappe Speicher: Ein längerer Kontext braucht mehr davon. Mehr zum [[kontext|Kontextfenster]] steht auf {{tokens-sprachmodelle|Wie ein Sprachmodell gebaut ist}}.",
+     ]},
     {h: "Warum Edge-Geräte wichtig sind",
      kurz: "Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.",
      visual: {typ: "ablauf", paket: true, schritte: [

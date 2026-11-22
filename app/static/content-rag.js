@@ -101,6 +101,13 @@ S["rag-ueberblick"] = {
       "Die folgenden fünf Seiten folgen der Pipeline: {{rag-embedding|Vektorisieren}}, {{rag-chunking|Zerlegen}}, {{rag-suche|Suchen}}, {{rag-reranking|Nachsortieren}} und {{rag-bewertung|Messen}}. Jede Seite erklärt den Schritt von null, mit einem Alltagsbild und mit den Stolpersteinen, die man aus Erfahrung kennt.",
       "Wenn du sehen willst, wie das auf dem Jetson abläuft, öffne die {{rag|RAG-Werkstatt}}. Sie zerlegt deinen Text, bettet ihn mit nomic-embed-text ein, sucht und lässt llama3.2:3b antworten. Hintergründe zu Sprachmodellen findest du bei {{genki|Generative KI}}, zum Begriff der Ähnlichkeit bei {{ml|Maschinelles Lernen}}, und ein Modell zum Ausprobieren im {{chat|Chat-Labor}}.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Lewis et al.: [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401), 2020, abgerufen am 22.11.2026.",
+      "Liu et al.: [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172), 2023, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „RAG im Überblick“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-ueberblick).",
+     ]},
   ],
   mitnehmen: [
     "RAG lässt ein Sprachmodell erst in deinen Dokumenten nachschlagen und dann antworten, mit Quelle.",
@@ -129,6 +136,7 @@ S["rag-ueberblick"] = {
 
 /* ====================================================================== 2 Embeddings */
 S["rag-embedding"] = {
+  mathe: true,
   nav: "Embeddings", typ: "lektion", gruppe: "Wissen und RAG", titel: "Vektorisieren und Embeddings", symbol: "rag",
   widget: "rag-bedeutungskarte", videos: ["rag-embedding", "rag-embedding-beachten"],
   lernziele: ["Du kannst erklären, was ein Vektor und was ein Embedding ist.", "Du kannst sagen, wie die Ähnlichkeit zweier Texte gemessen wird.", "Du kannst begründen, warum bei einem Modellwechsel der Index neu berechnet werden muss."],
@@ -164,7 +172,10 @@ S["rag-embedding"] = {
     ], alltag: [
       "Lückentext: „Zum Frühstück trinke ich einen ___.“ Kaffee, Tee und Kakao passen, Reifen nicht. Wer viele solche Sätze gelesen hat, weiß, dass Kaffee und Tee verwandt sind, ohne dass es ihm jemand erklärt hat. Das Modell lernt aus dem Zusammenhang, nicht aus einem Wörterbuch.",
     ], merke: "Ein Embedding ist die Position eines Textes auf einer gelernten Bedeutungskarte. Nähe heißt meist ähnlicher Sinn, nicht ähnliche Buchstaben. Gemeinsame Wörter spielen mit, die Zahlen im Labor zeigen es."},
-    {h: "Ähnlichkeit messen",
+    {h: "Ähnlichkeit messen", mathe: {p: [
+      "Kosinus-Ähnlichkeit: `cos(a, b) = (a·b) / (‖a‖·‖b‖)`, mit dem Skalarprodukt `a·b = Σ ai·bi` und der Länge `‖a‖ = √(Σ ai²)`. Beispiel `a = (1, 2, 2)` und `b = (2, 1, 2)`: `a·b = 2 + 2 + 4 = 8`, `‖a‖ = ‖b‖ = 3`, also `cos = 8 / 9 ≈ 0,889`.",
+      "Der Abstand wäre `‖a − b‖ = √(1 + 1 + 0) ≈ 1,414`. Für Vektoren der Länge 1 gilt `‖a − b‖² = 2 − 2·cos(a, b)`: Je größer der Kosinus, desto kleiner der Abstand. Darum ordnen beide Maße die Treffer gleich.",
+     ]},
      kurz: "Der Kosinus misst die Richtung zweier Vektoren, von -1 bis 1. Echte Textwerte liegen meist im oberen Teil.",
      visual: {typ: "skala", links: "-1 entgegengesetzt", rechts: "1 gleiche Richtung", marker: 0.8, label: "Texte meist hier"},
      p: [
@@ -182,7 +193,9 @@ S["rag-embedding"] = {
         ["Skalarprodukt", "Mischung aus Richtung und Länge", "Bei normierten Vektoren gleich dem Kosinus und sehr schnell zu rechnen."],
       ],
     }},
-    {h: "Dimensionen: warum 768 Zahlen",
+    {h: "Dimensionen: warum 768 Zahlen", mathe: {p: [
+      "Speicher für die Vektoren: `Anzahl · Dimensionen · Bytes je Zahl`. Eine Million Textstücke mit 768 Zahlen zu je 4 Byte: `1 000 000 · 768 · 4 = 3 072 000 000` Byte, rund 3,07 Gigabyte.",
+     ]},
      kurz: "768 Zahlen tragen die Bedeutung eines Textes. Mehr Dimensionen kosten Speicher und Zeit.",
      visual: {typ: "zahlen", kacheln: [{wert: "768", label: "Zahlen je Text", icon: "binary"}, {wert: "gut 3 KB", label: "je Textstück, 4 Byte je Zahl", icon: "hard-drive"}, {wert: "gut 3 GB", label: "für eine Million Stücke", icon: "database"}]},
      p: [
@@ -230,6 +243,14 @@ S["rag-embedding"] = {
       "**Kosten und Geschwindigkeit:** Einbetten ist viel billiger als eine Antwort zu schreiben, summiert sich aber bei vielen Dokumenten. Dokumente bettest du einmal ein, die Frage bei jeder Anfrage. Miss die Zeit mit deinen eigenen Texten in der {{rag|RAG-Werkstatt}}.",
       "**Pflege:** Ändert sich ein Dokument, muss sein Vektor neu berechnet werden. Sonst sucht die Frage in einer veralteten Karte. Gelöschte Dokumente müssen auch aus dem [[index|Index]]. Wechselst du das Modell, bettest du alles neu ein.",
     ], merke: "Wer ein Embedding-Modell wählt, wählt für den ganzen Index mit. Ein Wechsel kostet eine komplette Neuberechnung."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Mikolov et al.: [Efficient Estimation of Word Representations in Vector Space](https://arxiv.org/abs/1301.3781), 2013, abgerufen am 22.11.2026.",
+      "Reimers, Gurevych: [Sentence-BERT: Sentence Embeddings using Siamese BERT-Networks](https://arxiv.org/abs/1908.10084), 2019, abgerufen am 22.11.2026.",
+      "Lewis et al.: [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401), 2020, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Embeddings“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-embedding).",
+     ]},
   ],
   mitnehmen: [
     "Ein Embedding ist eine Liste von Zahlen, die einen Text auf einer Bedeutungskarte platziert: Nähe heißt meist ähnlicher Sinn.",

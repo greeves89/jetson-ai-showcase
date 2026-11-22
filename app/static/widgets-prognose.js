@@ -1025,7 +1025,7 @@
     { k: "kauf", label: "Anschaffung", einheit: "€", start: "500", hilfe: "Einmalig, mit Zubehör." },
     { k: "jahre", label: "Nutzungsdauer", einheit: "Jahre", start: "3", positiv: true, hilfe: "So lange rechnest du mit dem Gerät." },
     { k: "cloud", label: "Alternative: Cloud pro Monat", einheit: "€", start: "50", hilfe: "Was dieselbe Aufgabe in der Cloud kostet." },
-    { k: "pers", label: "Betreuung pro Monat", einheit: "€", start: "0", hilfe: "Personal, Pflege und Updates beim eigenen Betrieb." },
+    { k: "pers", label: "Betreuung pro Monat", einheit: "€", start: "30", hilfe: "Personal, Pflege und Updates beim eigenen Betrieb. Beispielannahme: etwa eine halbe Stunde Arbeit pro Woche." },
   ];
   const TAGE_JAHR = 365;
 
@@ -1181,5 +1181,28 @@
     }
     jetsonAnzeige(); markiere(); rechne();
     return aufraeumer(ab);
+  };
+
+  /* ============================================================ 6. checkliste (Seitenfeld checkliste: {lead, punkte: [{frage, hilfe}]}) */
+  /* Fragen zum Abhaken. Nichts wird gespeichert. "Drucken" öffnet den Druckdialog des Browsers. Texte nur über textContent. */
+  KL.widgets.checkliste = function (root, seite) {
+    const c = (seite && seite.checkliste) || {};
+    const punkte = Array.isArray(c.punkte) ? c.punkte : [];
+    const stand = h("p", { class: "pg-notiz", role: "status", "aria-live": "polite" }, "");
+    const boxen = [];
+    const zaehle = () => { const n = boxen.filter((b) => b.checked).length; stand.textContent = n + " von " + punkte.length + " Fragen geklärt."; };
+    const liste = h("ol", { class: "drei-schritte" }, punkte.map((p, i) => {
+      const id = neueId("check");
+      const input = h("input", { type: "checkbox", id });
+      input.addEventListener("change", zaehle);
+      boxen.push(input);
+      return h("li", null, input, h("label", { for: id }, h("span", { class: "nr", "aria-hidden": "true" }, String(i + 1)),
+        h("span", null, h("b", null, p.frage), p.hilfe ? h("small", { style: "display:block;color:var(--leise)" }, p.hilfe) : null)));
+    }));
+    root.append(c.lead ? h("p", { class: "drei-lead" }, c.lead) : null, liste, stand,
+      h("div", { class: "zeile" }, h("button", { type: "button", class: "btn", onclick: () => window.print() }, icon("printer"), "Seite drucken")),
+      h("p", { class: "pg-notiz" }, "Zum Drucken oder Speichern als PDF nutzt du den Druckdialog deines Browsers. Die Haken werden nicht gespeichert."));
+    zaehle();
+    return { destroy() {} };
   };
 })();

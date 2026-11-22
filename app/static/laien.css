@@ -144,7 +144,8 @@ dialog.wk h2{margin:0 52px 6px 0;font-size:24px;line-height:1.2;font-weight:700;
 .wk-klein{display:flex;gap:8px;align-items:flex-start;margin:14px 0 0;font-size:14px;line-height:1.4;color:var(--leise)}
 .wk-klein svg.ic{width:16px;height:16px;margin-top:2px}
 .wk-weg:focus-visible,.wk-x:focus-visible,.wk-merken:focus-visible,.wk-spaeter:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 60%,transparent);outline-offset:2px}
-@media(max-width:560px){dialog.wk{padding:20px 16px 16px}dialog.wk h2{font-size:22px}.wk-weg{padding:10px;gap:10px}.wk-text b{font-size:14px}}
+@media(max-width:560px){dialog.wk{padding:20px 16px 16px}dialog.wk h2{font-size:22px}.wk-weg{padding:12px;gap:8px;flex-direction:column;align-items:flex-start;min-height:96px}.wk-text b{font-size:14px}
+  .wk-text,.wk-text b,.wk-text small,.wk-text .wk-kurz{max-width:100%;overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}}
 .fuss-speicher .merken-schalter{appearance:none;border:0;background:none;padding:0;font:inherit;color:var(--text);text-decoration:underline;text-decoration-color:var(--linie);text-underline-offset:3px;cursor:pointer}
 @media(max-width:960px){.fuss-speicher .merken-schalter{min-height:44px}}
 
@@ -317,7 +318,8 @@ html[data-mathe=aus] .mathe{display:none}
   .weg-chip-seite{order:1;display:inline-flex;flex:0 1 auto;min-width:0;overflow:hidden;font-size:13px;min-height:44px;padding:0 12px 0 8px;background:var(--fuell);box-shadow:none;backdrop-filter:none;-webkit-backdrop-filter:none}
   .weg-chip-seite[hidden]{display:none}
   .weg-chip-seite b{min-width:0;white-space:nowrap}
-  .navsuche{min-width:84px}
+  .navsuche{min-width:160px}
+  .weg-chip-seite{max-width:46vw}
   .zurueck-zeile{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px}
   .zurueck-zeile .lesemodus button{padding:0 12px;font-size:14px}
   .zurueck{padding:0 14px 0 10px;font-size:15px}
@@ -326,6 +328,14 @@ html[data-mathe=aus] .mathe{display:none}
   .weg-kacheln,.pfad-karten{grid-template-columns:1fr}
 }
 @media(max-width:600px){
+  /* Kopfzeile am Handy: Rollen-Chip nur als Symbol (Name steht im Tooltip und in aria-label), damit die Suche Platz hat */
+  .weg-chip-seite{flex:none;width:44px;padding:0;justify-content:center;gap:0}
+  .weg-chip-seite b{display:none}
+  .weg-chip-seite svg.ic{width:20px;height:20px}
+  .navsuche{flex:1 1 160px;min-width:160px}
+  .navsuche input[type=search]{height:44px;font-size:16px}
+  .navsuche svg.ic{top:14px}
+  .navsuche input[type=search]:focus{outline:2px solid var(--akzent);outline-offset:1px}
   .weg-kachel{min-height:96px;padding:16px;gap:12px}
   .weg-ic{width:48px;height:48px}
   .lernziele{padding:16px 18px}
@@ -434,11 +444,31 @@ html[data-mathe=aus] .mathe{display:none}
 .md-link{text-decoration:underline;text-underline-offset:3px;font-weight:500}
 @media(max-width:960px),(pointer:coarse){.md-link{display:inline-flex;align-items:center;min-height:44px}}
 
-.downloads{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:12px;margin:0 0 24px}
-.dlkarte{display:flex;align-items:center;gap:14px;padding:14px 16px;border-radius:var(--r);background:var(--flaeche);color:inherit;text-decoration:none;min-height:64px}
+.downloads-box{margin:0 0 24px}
+.downloads-titel{display:flex;align-items:center;gap:8px;margin:0 0 10px;font-size:17px;font-weight:700;letter-spacing:-.02em}
+.downloads-titel svg.ic{width:20px;height:20px;color:var(--akzent)}
+/* gleich breite, gleich hohe Karten: bis drei nebeneinander, vier und mehr zu zweit; Knopf immer unten, gleiche Linie */
+.downloads{display:grid;grid-template-columns:repeat(var(--dl-spalten,2),minmax(0,1fr));gap:12px;margin:0}
+.downloads[data-n="1"]{--dl-spalten:1}
+.downloads[data-n="3"]{--dl-spalten:3}
+.dlkarte{display:grid;grid-template-columns:44px minmax(0,1fr);grid-template-rows:1fr auto;gap:14px;align-items:start;padding:16px;border-radius:var(--r);background:var(--flaeche);color:inherit;text-decoration:none;min-width:0}
 .dlkarte:hover{background:var(--flaeche-hover,var(--flaeche))}
-.dlkarte .dl-icon{flex:none;display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--akzent) 14%,transparent);color:var(--akzent)}
-.dlkarte .dl-text{display:flex;flex-direction:column;min-width:0;flex:1}
-.dlkarte .dl-text small{opacity:.75}
-.dlkarte .dl-knopf{flex:none;margin-left:auto;min-height:44px;display:inline-flex;align-items:center;gap:8px}
-@media (max-width:600px){.downloads{grid-template-columns:1fr}.dlkarte{flex-wrap:wrap}.dlkarte .dl-knopf{width:100%;justify-content:center}}
+.dlkarte .dl-icon{display:grid;place-items:center;width:44px;height:44px;border-radius:50%;background:color-mix(in srgb,var(--akzent) 14%,transparent);color:var(--akzent)}
+.dlkarte .dl-text{display:flex;flex-direction:column;gap:2px;min-width:0;overflow-wrap:anywhere}
+.dlkarte .dl-text b{font-size:16px;line-height:1.3}
+.dlkarte .dl-text small{font-size:14px;line-height:1.4;opacity:.8}
+.dlkarte .dl-knopf{grid-column:1/-1;align-self:end;justify-content:center;width:100%;min-height:44px;display:inline-flex;align-items:center;gap:8px}
+@media (max-width:900px){.downloads,.downloads[data-n="3"]{--dl-spalten:2}.downloads[data-n="1"]{--dl-spalten:1}}
+@media (max-width:600px){.downloads,.downloads[data-n]{--dl-spalten:1}}
+
+/* Handy und Touch: Fachwoerter sind echte 44-px-Ziele. Senkrechtes Padding des Inline-Elements aendert die Zeilenhoehe nicht,
+   die Tint-Flaeche bleibt als Verlauf nur so hoch wie die Zeile. */
+@media (pointer:coarse),(max-width:700px){
+  html body .gl{padding:9px 3px;--gl-t:color-mix(in srgb,var(--akzent) 11%,transparent);background:linear-gradient(var(--gl-t),var(--gl-t)) center/100% 1.45em no-repeat;min-height:44px}
+  html body .gl:hover,html body .gl:focus-visible{--gl-t:color-mix(in srgb,var(--akzent) 20%,transparent);background:linear-gradient(var(--gl-t),var(--gl-t)) center/100% 1.45em no-repeat}
+  html body .gl::before{content:none}
+}
+
+/* Sprungziele (Abschnitte, "Live ausprobieren", Quiz-Rueckverweise) landen frei unter der Kopfleiste, nicht dahinter */
+#inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--leiste) + 20px)}
+@media(max-width:960px){#inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--kopfhoehe) + 20px)}}

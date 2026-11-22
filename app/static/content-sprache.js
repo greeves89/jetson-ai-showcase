@@ -10,6 +10,7 @@ seiten: {
 
 /* ------------------------------------------------------------------ 1 */
 "tokens-sprachmodelle": {
+  mathe: true,
   nav: "Sprachmodelle", typ: "lektion", gruppe: "Sprache", titel: "Wie ein Sprachmodell gebaut ist", symbol: "genki",
   lernziele: ["Du kannst erklären, wie ein Sprachmodell Text in Token zerlegt und in Zahlen verwandelt.", "Du kannst mit eigenen Worten sagen, was Aufmerksamkeit tut.", "Du kannst Vortraining und Feinabstimmung unterscheiden.", "Du kannst sagen, was das Kontextfenster ist und warum kleine Modelle weniger wissen."],
   kurz: "Wie wird aus einem Stapel Text ein Modell, das Fragen beantwortet? Hier siehst du die Bausteine: Token, Zahlen, Aufmerksamkeit und zwei Lernphasen.",
@@ -27,9 +28,9 @@ seiten: {
     ]},
     {h: "Schritt 1: Der Text wird in Token zerlegt",
      kurz: "Das Modell liest Stücke aus einem festen Wortschatz. Häufiges ist ein Stück, Seltenes besteht aus mehreren.",
-     visual: {typ: "token", stuecke: ["Haus", "rat", "versicherung"], unter: "Beispielwerte: Jedes Modell zerlegt anders. Das Tokenizer-Labor unten nutzt einen vereinfachten Wortschatz und teilt dasselbe Wort feiner."}, p: [
+     visual: {typ: "token", stuecke: ["Ha", "usr", "at", "vers", "icher", "ung"], unter: "So zerlegt das Modell auf dem Jetson das Wort „Hausratversicherung“ in sechs Stücke (Stand 22.11.2026, geprüft im Tokenizer-Labor unten). Ein anderes Modell zerlegt anders."}, p: [
       "Ein Computer rechnet nicht mit Wörtern, sondern mit Zahlen. Darum wird jeder Text zuerst in [[token|Token]] zerlegt. Ein Token ist ein Stück, das häufig vorkommt: ein kurzes Wort, eine Silbe, ein Wortteil, ein Satzzeichen. Die Liste aller Stücke, die das Modell kennt, ist fest und heißt [[wortschatz|Wortschatz]].",
-      "Häufige Wörter sind ein Token, seltene bestehen aus mehreren. „Haus“ ist wahrscheinlich ein Stück. „Hausratversicherung“ zerfällt in mehrere, im Bild oben beispielhaft in drei. Wie viele Stücke es genau sind, hängt vom Wortschatz des Modells ab: Das Tokenizer-Labor unten arbeitet mit einem vereinfachten Wortschatz und zerlegt dasselbe Wort in mehr, kleinere Stücke. Beides ist plausibel, nur die Zahl unterscheidet sich. Deutsche Wörter brauchen im Schnitt mehr Token als englische, weil die Wortschätze meist auf viel englischem Text beruhen und Zusammensetzungen lang sind.",
+      "Häufige Wörter sind ein Token, seltene bestehen aus mehreren. „Haus“ ist wahrscheinlich ein Stück. „Hausratversicherung“ zerfällt in mehrere, beim Modell auf dem Jetson in sechs, wie im Bild oben. Das Tokenizer-Labor unten nutzt genau diesen Wortschatz und zeigt dieselbe Zerlegung. Ein anderes Modell mit anderem Wortschatz käme auf eine andere Zahl. Deutsche Wörter brauchen im Schnitt mehr Token als englische, weil die Wortschätze meist auf viel englischem Text beruhen und Zusammensetzungen lang sind.",
       "Daraus folgen Dinge, die du im Alltag merkst. Das Modell sieht keine Buchstaben, sondern Stücke. Darum verzählt es sich bei der Frage, wie oft ein Buchstabe in einem Wort vorkommt. Und alles, was ein Modell kostet oder fasst, wird in Token gemessen, nicht in Wörtern.",
     ], alltag: [
       "Stell dir einen Kasten Lego vor. Du baust jedes Haus aus festen Steinen. Häufige Formen gibt es als fertigen Stein, für Ausgefallenes setzt du mehrere zusammen. Ein Tokenizer zerlegt Text genauso: in Steine aus einem festen Kasten. Es gibt kein Wort, das sich nicht aus den Steinen bauen ließe.",
@@ -45,7 +46,10 @@ seiten: {
     ], alltag: [
       "Denk an einen Stadtplan. Jede Straße hat Koordinaten. Wer die Koordinaten zweier Orte vergleicht, sieht sofort, ob sie nah beieinander liegen, ohne ihre Namen zu kennen. Embeddings sind Koordinaten für Wortstücke, nur mit Hunderten Richtungen statt zwei.",
     ]},
-    {h: "Schritt 3: Aufmerksamkeit entscheidet, worauf es ankommt",
+    {h: "Schritt 3: Aufmerksamkeit entscheidet, worauf es ankommt", mathe: {p: [
+      "Die Aufmerksamkeit eines Transformers (Vaswani et al., 2017) rechnet: `Attention(Q, K, V) = softmax(Q·Kᵀ / √dk)·V`. Q (Fragen), K (Schlüssel) und V (Werte) entstehen aus den Zahlenlisten der Token. Q·Kᵀ misst, wie gut jede Frage zu jedem Schlüssel passt, √dk (Wurzel der Länge der Schlüssel) hält die Zahlen in einem handlichen Bereich.",
+      "Softmax macht aus beliebigen Werten Anteile, die sich zu 1 summieren: `softmax(zi) = e^zi / Σj e^zj`. Beispiel mit den Werten 2, 1 und 0: e² ≈ 7,389, e¹ ≈ 2,718 und e⁰ = 1, Summe ≈ 11,107. Die Anteile sind 0,665, 0,245 und 0,090. Der größte Wert bekommt den größten Anteil, aber nicht alles.",
+     ]},
      kurz: "Für jedes Token gewichtet das Modell, welche anderen Token im Text wichtig sind.",
      visual: {typ: "netz", knoten: [
       {id: "koffer", text: "Koffer", icon: "briefcase", x: 10, y: 30},
@@ -113,6 +117,15 @@ seiten: {
     ], alltag: [
       "Ein Taschenlexikon und eine Enzyklopädie in zwanzig Bänden erklären beide, was ein Wort bedeutet. In die Enzyklopädie passt mehr Wissen. Das Kontextfenster ist dagegen dein Schreibtisch: Du kannst mehrere Bücher aufschlagen, aber nur so viele, wie darauf passen.",
     ], merke: "Mehr Parameter heißen mehr Wissen und mehr Aufwand. Das Kontextfenster ist der Arbeitsplatz des Modells, nicht sein Gedächtnis."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Vaswani et al.: [Attention Is All You Need](https://arxiv.org/abs/1706.03762), 2017, abgerufen am 22.11.2026.",
+      "Sennrich, Haddow, Birch: [Neural Machine Translation of Rare Words with Subword Units](https://arxiv.org/abs/1508.07909), 2015 (Zerlegung in Token), abgerufen am 22.11.2026.",
+      "Hugging Face: [Tokenization algorithms](https://huggingface.co/docs/transformers/tokenizer_summary), abgerufen am 22.11.2026.",
+      "Meta: [The Llama 3 Herd of Models](https://arxiv.org/abs/2407.21783), 2024 (Modellfamilie des Chat-Labors), abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Wie ein Sprachmodell gebaut ist“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/tokens-sprachmodelle).",
+     ]},
   ],
   mitnehmen: [
     "Ein Sprachmodell zerlegt Text in Token, macht daraus Zahlen und sagt Stück für Stück das nächste Token voraus.",
@@ -392,6 +405,13 @@ seiten: {
         ["Nachvollziehbarkeit", "Niemand weiß, warum die Antwort so lautet", "Zwischenschritte und Quellen sichtbar machen"],
       ],
     }},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Ji et al.: [Survey of Hallucination in Natural Language Generation](https://arxiv.org/abs/2202.03629), 2022, abgerufen am 22.11.2026.",
+      "Liu et al.: [Lost in the Middle: How Language Models Use Long Contexts](https://arxiv.org/abs/2307.03172), 2023, abgerufen am 22.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Grenzen von Sprachmodellen“, abgerufen am 22.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/llm-grenzen).",
+     ]},
   ],
   mitnehmen: [
     "Ein Modell schreibt Plausibles. Ob es stimmt, musst du prüfen, besonders bei Zahlen, Quellen und Rechtlichem.",

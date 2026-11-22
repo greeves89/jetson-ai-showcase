@@ -811,7 +811,7 @@ mlops: {
       "Eine Kilowattstunde kostet **0,30 Euro** (nur zum Rechnen, nimm den Wert deiner Stromrechnung).",
     ]},
     {h: "Die Rechnung und der Vergleich mit der Cloud",
-     kurz: "Watt mal Stunden mal Preis ergibt die Stromkosten. Mit den Annahmen aus dem Text hat sich das Gerät nach knapp einem Jahr bezahlt.",
+     kurz: "Watt mal Stunden mal Preis ergibt die Stromkosten. Ohne Betreuung hat sich das Gerät in dieser Annahme nach knapp einem Jahr bezahlt.",
      visual: [{typ: "ablauf", paket: false, schritte: [
           {icon: "zap", text: "15 W mal 24 h", sub: "360 Wh"},
           {icon: "scale", text: "0,36 kWh", sub: "pro Tag"},
@@ -824,8 +824,22 @@ mlops: {
         ], unter: "Gerät 500 € Anschaffung, nach rund 10,7 Monaten gleichauf. Personal und Wartung fehlen noch."}],
      p: [
       "15 Watt mal 24 Stunden sind 360 Wattstunden, also 0,36 Kilowattstunden pro Tag. Mal 0,30 Euro sind rund 0,11 Euro pro Tag, also gut 11 Cent. Auf ein Jahr gerechnet (365 Tage) sind das etwa 39 Euro. Würde das Gerät im Mittel 30 Watt aufnehmen, verdoppelte sich der Betrag.",
-      "Jetzt der Vergleich mit einem Cloud-Dienst. Auch hier nur angenommene Zahlen: Der Dienst kostet 50 Euro im Monat, das Gerät in der Anschaffung 500 Euro. Der Strom kostet monatlich etwa 3,30 Euro (39 Euro durch 12). Ersparnis pro Monat: 50 minus 3,30, rund 46,70 Euro. Anschaffung geteilt durch Ersparnis ergibt rund 10,7 Monate. Nach knapp einem Jahr hätte sich das Gerät in dieser Rechnung bezahlt gemacht. Personal, Wartung und Ersatz sind dabei nicht eingerechnet. Rechne sie bei einer echten Entscheidung mit ein.",
+      "Vergleiche die Zahlen mit einem Cloud-Dienst: Unter „Ausprobieren“ rechnet der Rechner mit deinen Werten, auch mit Betreuung. In der Rechnung im Text fehlen Personal, Wartung und Ersatz noch. Rechne sie bei einer echten Entscheidung mit ein.",
     ]},
+    {h: "Kameraprojekte rechnen anders",
+     id: "kamera",
+     kurz: "Der Rechner oben gilt für ein Sprachmodell. Eine Kamera im Betrieb hat andere Posten. Hier eine Beispielrechnung mit erfundenen Werten.",
+     visual: {typ: "zahlen", kacheln: [
+        {wert: "4.700 €", label: "einmalig (Beispielwert)", icon: "receipt"},
+        {wert: "245 €", label: "pro Monat laufend (Beispielwert)", icon: "calendar-days"},
+        {wert: "13 Monate", label: "bis zur Amortisation (Beispielrechnung)", icon: "clock"},
+      ]},
+     p: [
+      "**Der Kostenrechner oben rechnet ein Sprachmodell: Strom gegen Cloud. Er passt nicht auf ein Kamerasystem.** Bei einer Kamera zur Qualitätsprüfung kommen Kamera, Licht und Halterung, Einrichtung und Anlernen, laufende Pflege und die Prüfung der Stichproben hinzu.",
+      "Beispielrechnung, alle Werte erfunden und nur zum Üben: Kamera, Beleuchtung und Halterung 1.500 €, Rechner 800 €, Einrichtung und Anlernen 40 Stunden zu 60 € gleich 2.400 €. Einmalig also 4.700 €. Laufend: Pflege 4 Stunden im Monat zu 60 € gleich 240 € plus rund 5 € Strom, zusammen 245 €. Angenommen, die Handprüfung kostet heute 1.200 € im Monat und das System nimmt die Hälfte ab, also 600 €. Dann bleiben 600 minus 245 gleich 355 € Ersparnis im Monat, und 4.700 durch 355 sind rund 13 Monate bis zur Amortisation.",
+      "Ob das System die Hälfte abnehmen kann, ist die entscheidende Annahme, und sie lässt sich nur im Pilot mit eigenen Teilen messen. Frage dazu: Wie viele Teile pro Minute müssen geprüft werden? Wie viele Bilder gibt es von seltenen Fehlern? Reicht klassische Bildverarbeitung, oder braucht der Fall wirklich KI? Wer haftet, wenn ein Fehler durchrutscht? Mehr zu einem Beispiel steht auf {{uc-fertigung-sichtpruefung|Sichtprüfung}}.",
+     ],
+     merke: "Alle Zahlen dieser Beispielrechnung sind erfunden. Setze eigene Angebote und Zeiten ein."},
     {h: "Was man gern vergisst",
      kurz: "Ein Fitnessstudio-Vertrag kostet auch ohne Besuch. So ist es mit schwach genutzten Geräten.",
      visual: {typ: "raster", spalten: 4, zellen: [
@@ -1035,7 +1049,7 @@ mlops: {
       "Ist ein Verantwortlicher benannt, und prüft jemand die Ergebnisse?",
       "Sind Betroffene, Datenschutz und Betriebsrat informiert?",
       "Gibt es einen Rückfall, und weißt du, wann du stoppst?",
-    ], merke: "Mehr zu Einsatzfeldern steht auf der Seite {{business|KI im Business}}, zur Messung auf {{bewertung|Wie gut ist ein Modell?}}, zu den Regeln auf {{recht|Recht und Regeln}}."},
+    ], merke: "Die sechs Fragen zum Abhaken und Drucken stehen auf {{betrieb-entscheidung|Deine Entscheidung}}. Mehr zu Einsatzfeldern steht auf der Seite {{business|KI im Business}}, zur Messung auf {{bewertung|Wie gut ist ein Modell?}}, zu den Regeln auf {{recht|Recht und Regeln}}."},
   ],
   mitnehmen: [
     "Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.",
@@ -1059,7 +1073,7 @@ mlops: {
      optionen: ["Ausrollen, weil es fast reicht", "Ändern und eine zweite Runde mit besseren Daten machen", "Alle Daten löschen", "Nichts tun"],
      richtig: 1, erklaerung: "Die Richtung stimmt, aber etwas fehlt. Die Entscheidung heißt: ändern und neu prüfen, nicht blind ausrollen."},
   ],
-  weiter: ["business", "recht", "bewertung"],
+  weiter: ["uc-handwerk", "kosten-energie", "betrieb-entscheidung", "business", "recht", "bewertung"],
 },
 
 },

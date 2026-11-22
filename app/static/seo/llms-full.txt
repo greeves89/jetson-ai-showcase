@@ -54,6 +54,10 @@ Regeln schreibt ein Mensch, ein lernendes System findet sie selbst in Beispielen
 
 Frag nach dem Bereich, nicht nach dem Verfahren: Sehen, Sprache, Wissen, Handeln, Erzeugen.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - KI ist ein Sammelbegriff, kein einzelnes Verfahren.
@@ -90,6 +94,10 @@ Jedes Bild wird zu einer Zahlenliste. Ähnliche Bilder liegen im Zahlenraum nah 
 ## Wo es schiefgeht
 
 Ein Modell, das Beispiele auswendig lernt, versagt bei neuen Daten. Darum wird mit ungesehenen Daten geprüft.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -245,6 +253,10 @@ Personenbezogene Daten brauchen einen Zweck, sparsame Erhebung und Kontrolle üb
 
 Die Welt ändert sich, die Daten altern. Ohne Pflege wird das Modell schleichend schlechter.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Beides kommt aus den Daten.
@@ -312,6 +324,10 @@ Netze glänzen bei Bildern, Sprache und Ton. Bei wenigen Daten oder Begründungs
 ## Die Verbindung zu den Modellen im Labor
 
 Auch Chat, Objekt- und Gesichtserkennung im Labor sind Netze. Das Auswerten läuft einmal vorwärts durch alle Schichten.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -381,6 +397,10 @@ Training sind Millionen gleichartiger Rechnungen. Eine GPU erledigt sie parallel
 
 Große Modelle startet man nicht bei null: erst breit vortrainieren, dann gezielt feinabstimmen. Im Einsatz läuft nur die Auswertung.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - Der Verlust misst den Fehler. Training heißt, die Gewichte so zu verschieben, dass er sinkt.
@@ -449,6 +469,10 @@ Eine Kennzahl nützt erst im Vergleich mit der Baseline: dem heutigen Ablauf ode
 
 Das Modell erledigt klare Fälle, unklare gehen an eine Person. Ihre Korrekturen werden neue Trainingsdaten.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - Bei seltenen Ereignissen täuscht die Genauigkeit. Die Konfusionsmatrix zeigt die vier Fälle und damit, wo Fehler stecken.
@@ -516,6 +540,10 @@ Ein Modell kann nicht haften. Es bereitet vor, Menschen und Organisationen veran
 ## Prüfen vor dem Einsatz: eine Fragenliste
 
 Sieben Fragen klären Folgen, Datenherkunft, Gruppenunterschiede, Einspruch und Aufsicht.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -972,6 +1000,10 @@ Mehr Parameter heißen mehr Wissen, aber auch mehr Speicher. Gröber gespeichert
 
 Merke: Mehr Parameter heißen mehr Wissen und mehr Aufwand. Das Kontextfenster ist der Arbeitsplatz des Modells, nicht sein Gedächtnis.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - Ein Sprachmodell zerlegt Text in Token, macht daraus Zahlen und sagt Stück für Stück das nächste Token voraus.
@@ -1113,6 +1145,10 @@ Das Modell entwirft, du prüfst und gibst frei. Das Vier-Augen-Prinzip gilt auch
 ## Überblick: Risiko, Beispiel, Gegenmaßnahme
 
 Neun Risiken, je eine Gegenmaßnahme. Die Tabelle dahinter nennt die Beispiele.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -1316,6 +1352,10 @@ RAG macht schlechte Quellen nicht besser und rechnet nicht über die ganze Samml
 
 Die nächsten fünf Seiten folgen der Pipeline, von den Zahlen bis zur Messung.
 
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
+
 ## Das nimmst du mit
 
 - RAG lässt ein Sprachmodell erst in deinen Dokumenten nachschlagen und dann antworten, mit Quelle.
@@ -1385,6 +1425,10 @@ Codes, Namen und Zahlen tragen wenig Sinn, aber viel Genauigkeit. Lange Mischtex
 Wo der Text hingeht, was Einbetten kostet und wie der Index aktuell bleibt.
 
 Merke: Wer ein Embedding-Modell wählt, wählt für den ganzen Index mit. Ein Wechsel kostet eine komplette Neuberechnung.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -1762,6 +1806,10 @@ Ein Agent scheitert an zwei Stellen: bei der Wahl des Werkzeugs und beim Deuten 
 ## Dein Weg im Labor
 
 Das Labor zeigt jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah.
+
+## Weiterlesen
+
+Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
 
 ## Das nimmst du mit
 
@@ -2380,7 +2428,13 @@ Drei Zahlen genügen. Ersetze sie durch deine eigenen.
 
 ## Die Rechnung und der Vergleich mit der Cloud
 
-Watt mal Stunden mal Preis ergibt die Stromkosten. Mit den Annahmen aus dem Text hat sich das Gerät nach knapp einem Jahr bezahlt.
+Watt mal Stunden mal Preis ergibt die Stromkosten. Ohne Betreuung hat sich das Gerät in dieser Annahme nach knapp einem Jahr bezahlt.
+
+## Kameraprojekte rechnen anders
+
+Der Rechner oben gilt für ein Sprachmodell. Eine Kamera im Betrieb hat andere Posten. Hier eine Beispielrechnung mit erfundenen Werten.
+
+Merke: Alle Zahlen dieser Beispielrechnung sind erfunden. Setze eigene Angebote und Zeiten ein.
 
 ## Was man gern vergisst
 
@@ -2460,7 +2514,7 @@ Sechs Fehler wiederholen sich in fast jedem gescheiterten Projekt.
 
 Sechs Fragen vor dem Start. Jedes Nein ist eine Aufgabe, die du zuerst erledigst.
 
-Merke: Mehr zu Einsatzfeldern steht auf der Seite KI im Business, zur Messung auf Wie gut ist ein Modell?, zu den Regeln auf Recht und Regeln.
+Merke: Die sechs Fragen zum Abhaken und Drucken stehen auf Deine Entscheidung. Mehr zu Einsatzfeldern steht auf der Seite KI im Business, zur Messung auf Wie gut ist ein Modell?, zu den Regeln auf Recht und Regeln.
 
 ## Das nimmst du mit
 
@@ -2486,6 +2540,33 @@ Frage: Ein Pilot erreicht sein Ziel nur teilweise. Es fehlen bessere Daten. Was 
 Antwort: Ändern und eine zweite Runde mit besseren Daten machen. Die Richtung stimmt, aber etwas fehlt. Die Entscheidung heißt: ändern und neu prüfen, nicht blind ausrollen.
 
 Erklärvideo: KI einführen (1.3 Minuten), __BASIS__/static/videos/ki-einfuehren.mp4, Untertitel: __BASIS__/static/videos/ki-einfuehren.vtt
+
+# Deine Entscheidung: sechs Fragen vor dem Start
+
+Adresse: __BASIS__/betrieb-entscheidung
+Bereich: KI im Betrieb. Stand: 2026-11-22.
+
+Kurz gesagt: Endseite des Betriebspfads: sechs Fragen vor dem Start eines KI-Einsatzes (Problem, Ziel, Daten, Verantwortung, Betroffene, Rückfall) zum Abhaken, Hinweis zum Drucken per Browser, drei mögliche Entscheidungen und der Weg zur Kontaktseite des Betreibers.
+
+Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.
+
+## Was du jetzt entscheidest
+
+Starten, nachbessern oder lassen: Alle drei sind gute Ergebnisse, wenn du sie begründen kannst.
+
+## Drucken oder als PDF speichern
+
+Der Druckdialog deines Browsers genügt. Die Haken werden nicht gespeichert.
+
+## Fragen und Kontakt
+
+Bei Fragen zum Labor und zur Einführung hilft die Kontaktseite des Betreibers.
+
+## Das nimmst du mit
+
+- Sechs Fragen genügen vor dem Start: Problem, Ziel, Daten, Verantwortung, Betroffene, Rückfall.
+- Jedes Nein ist eine Aufgabe, kein Grund zum Aufgeben.
+- Starten, nachbessern und lassen sind gleichwertige Ergebnisse.
 
 # Sichtprüfung: Gutteil oder Ausschuss
 
@@ -3210,11 +3291,33 @@ Die Kamera zählt und benennt Dinge im Bild. Ob eine Arbeit fachgerecht ist, beu
 
 Erst wird der Text gelesen, dann sortiert. Die Ablage bleibt, die Vorarbeit wird kürzer.
 
+## Beispiel-Aufgabe zum Ausprobieren
+
+Notiz kopieren, im Chat einfügen, Entwurf lesen und jede Zahl nachrechnen. Erfundene Angaben, kleines Modell.
+
+## Die KI irrt: prüfe immer
+
+Ein kleines Modell verwechselte den FI-Schalter mit einem Fusionsschalter. Fachwissen prüft, bevor etwas den Kunden erreicht.
+
 ## Das nimmst du mit
 
 - Ein Sprachmodell macht aus Notizen einen Entwurf. Preise, Mengen und Termine gibst du vor und prüfst sie.
 - Bilderkennung zählt und markiert. Fachliche Urteile über eine Arbeit bleiben bei der Fachkraft.
 - Beim Sortieren von Rechnungen ist Vorsortieren der sichere Start. Beträge und Steuerliches prüfst du selbst.
+
+## Fragen und Antworten
+
+Frage: Das Modell schreibt ein Angebot, aber du hast keinen Preis genannt. Was passiert wahrscheinlich?
+Antwort: Es erfindet einen Preis, der gut klingt. Ein Sprachmodell kennt deine Preise nicht und füllt Lücken mit Plausiblem. Preise und Mengen gibst du vor und liest sie gegen.
+
+Frage: Die KI erklärt einem Kunden den FI-Schalter falsch. Was ist die richtige Folgerung?
+Antwort: Fachliche Texte liest eine Fachkraft gegen, bevor sie hinausgehen. Das Modell kennt Wörter, nicht dein Gewerk. Eine zweite Antwort kann genauso falsch sein. Das Gegenlesen bleibt bei dir.
+
+Frage: Wofür taugt die Kamera auf einem Baustellenfoto im Labor?
+Antwort: Sie findet und zählt Personen und Gegenstände im Bild. Erkennungsmodelle markieren, was sichtbar ist. Ob eine Arbeit fachgerecht ist, beurteilt die Fachkraft.
+
+Frage: Womit übst du die Angebots-Aufgabe im Labor?
+Antwort: Mit einer erfundenen Notiz ohne echte Namen und Preise. Im Labor gehören keine echten Kunden- oder Personaldaten hinein. Eine erfundene Notiz reicht zum Üben.
 
 # Der Jetson und seine Hardware
 
@@ -3237,6 +3340,10 @@ CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum 
 
 Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.
 
+## Das Sprachmodell, das hier läuft
+
+Llama 3.2 mit 3,2 Milliarden Parametern, Quantisierung Q4_K_M, Kontext im Labor auf 4096 Token eingestellt.
+
 ## Warum Edge-Geräte wichtig sind
 
 Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.
@@ -3254,7 +3361,7 @@ Bereich: Der Rechner dahinter. Stand: 2026-11-22.
 
 Kurz gesagt: Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.
 
-In Alltagssprache: Was diese Seite auf deinem Gerät ablegt, was mit Kamera, Mikrofon und eingetippten Texten passiert und was du selbst in der Hand hast.
+Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher. Echte Kunden- oder Personaldaten gehören nicht hinein. Darunter siehst du, was du erlaubt hast, und kannst es widerrufen.
 
 ## Die kurze Antwort
 
@@ -3273,6 +3380,10 @@ Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Elt
 ## Texte, die du eintippst
 
 Chat-Fragen und Dokumente werden auf dem Rechner dieser Seite verarbeitet. Ein KI-Dienst in der Cloud ist nicht beteiligt.
+
+## Darf ich Kundendaten eingeben?
+
+Nein. Nimm erfundene Beispiele. Das Labor ist ein Lernangebot, kein Werkzeug für echte Kunden-, Personal- oder Gesundheitsdaten.
 
 ## Was der Server technisch sieht
 
@@ -3474,12 +3585,12 @@ Kamera, Mikrofon und Gesichtserkennung sind im Unterricht nicht nötig und nicht
 - Vierergruppen, höchstens 7 Geräte gleichzeitig, kurze Wartezeiten einplanen.
 - Kamera, Mikrofon und Gesichtserkennung bleiben im Unterricht aus. Die Aufgaben brauchen sie nicht.
 
-# Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden
+# KI 1: Was ist KI? Erkennen, Lernen, Entscheiden
 
 Adresse: __BASIS__/schule-stunde-1
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Stunde 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.
+Kurz gesagt: KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.
 
 45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
@@ -3497,7 +3608,7 @@ Zwei Stationen: Punkte-Labor (12 Minuten) und Prompt-Werkstatt (8 Minuten), die 
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben für die Gruppe, die auf ein Blatt passen.
+Drei Aufgaben für die Gruppe, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -3529,21 +3640,21 @@ Drei Fragen: zwei Minuten in der Gruppe, dann eine Runde im Plenum.
 
 ## Fragen und Antworten
 
-Frage: Was tut das Punkte-Labor, wenn du mit der Maus eine freie Stelle ansteuerst?
-Antwort: Es sucht die nächsten Beispielpunkte und nimmt die Mehrheitsfarbe. Das Labor vergleicht mit den nächsten Beispielen und lässt sie abstimmen. Eine feste Regel gibt es nicht.
+Frage: Du fährst im Punkte-Labor mit der Maus über eine freie Stelle, und das Feld wird orange. Woher kommt diese Entscheidung?
+Antwort: Aus den Farben der nächsten gesetzten Punkte, die dort abstimmen. Das Labor vergleicht mit den nächsten Beispielen und lässt sie abstimmen. Eine feste Regel gibt es nicht.
 
-Frage: Warum entscheidet ein Modell mit zu wenigen Beispielen oft schlecht?
-Antwort: Es kennt nur, was in den Beispielen steckt, und rät sonst. Ein Modell hat kein Wissen außerhalb seiner Beispiele. Wo sie fehlen, wird die Entscheidung unsicher.
+Frage: Ein Modell lernt nur mit Fotos von Hunden auf Rasen. Dann bekommt es ein Foto von einem Hund im Schnee. Was ist wahrscheinlich?
+Antwort: Es ist unsicher, weil Schnee in seinen Beispielen fehlt. Ein Modell kennt nur, was in seinen Beispielen steckt. Wo sie fehlen, wird die Entscheidung unsicher oder falsch.
 
-Frage: Wann hilft ein längerer Prompt besonders?
-Antwort: Wenn sonst Ziel, Ton oder Form der Antwort offen blieben. Länge allein hilft nicht. Es zählt, dass der Prompt sagt, was fehlen würde: Ziel, Ton und Form.
+Frage: Dein Prompt lautet nur „Schreib was über Wale“. Die Antwort ist zu lang und zu schwer. Was ist der beste nächste Schritt?
+Antwort: Ziel, Ton und Form nennen, etwa: in fünf Sätzen für Klasse 8. Das Modell rät, was im Prompt fehlt. Wer Ziel, Ton und Form nennt, lässt weniger Raum zum Raten.
 
-# Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler
+# KI 2: Wie lernt ein Computer? Daten, Training, Fehler
 
 Adresse: __BASIS__/schule-stunde-2
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Stunde 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.
+Kurz gesagt: KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.
 
 45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
 
@@ -3593,21 +3704,21 @@ Drei Fragen: Fehler in Daten, Grenzen von Netzen, Verantwortung für die Beispie
 
 ## Fragen und Antworten
 
-Frage: Ein Netz ohne Zwischenschicht lernt das Schachbrett nicht. Was hilft meist?
-Antwort: Mindestens eine Zwischenschicht mit mehreren Neuronen einbauen. Ohne Zwischenschicht kann das Netz nur eine gerade Grenze ziehen. Das Schachbrett braucht eine gebogene.
+Frage: Im Netz-Spielplatz sollen Punkte wie auf einem Schachbrett getrennt werden, aber das Netz hat keine Zwischenschicht. Was hilft meist?
+Antwort: Eine Zwischenschicht mit mehreren Neuronen hinzufügen. Ohne Zwischenschicht kann das Netz nur eine gerade Grenze ziehen. Das Schachbrett braucht eine gebogene.
 
-Frage: Was zeigt der Verlust im Netz-Spielplatz?
-Antwort: Wie weit die Vorhersagen vom richtigen Ergebnis entfernt sind. Der Verlust misst den Fehler. Das Training versucht, ihn Schritt für Schritt kleiner zu machen.
+Frage: Im Netz-Spielplatz sinkt der Verlust von Schritt zu Schritt. Was bedeutet das?
+Antwort: Die Vorhersagen liegen näher am richtigen Ergebnis. Der Verlust misst den Fehler. Das Training versucht, ihn Schritt für Schritt kleiner zu machen.
 
-Frage: Ein falsch gefärbter Punkt liegt mitten in der anderen Gruppe. Was folgt daraus?
-Antwort: Das Modell kann dort falsch entscheiden, vor allem bei kleinem k. Das Modell kann nicht wissen, dass der Punkt ein Fehler ist. Bei k gleich 1 zählt er voll.
+Frage: Beim Beschriften hat jemand einen Punkt mitten in der anderen Gruppe falsch gefärbt. Was kann passieren?
+Antwort: Bei kleinem k kann es dort falsch entscheiden, der Punkt zählt voll. Das Modell kann nicht wissen, dass der Punkt ein Fehler ist. Bei k gleich 1 zählt er voll.
 
-# Stunde 3: Echt oder erfunden? KI prüfen
+# KI 3: Echt oder erfunden? KI prüfen
 
 Adresse: __BASIS__/schule-stunde-3
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Stunde 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.
+Kurz gesagt: KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.
 
 45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
 
@@ -3657,21 +3768,21 @@ Drei Fragen zum Alltag: Hausaufgaben, Soziale Medien, Verantwortung.
 
 ## Fragen und Antworten
 
-Frage: Warum erfindet ein Sprachmodell manchmal Quellen?
-Antwort: Es setzt Wörter nach Wahrscheinlichkeit zusammen und prüft nichts. Das Modell erzeugt Text, der plausibel klingt. Ob er stimmt, prüft es nicht.
+Frage: Du bittest ein Sprachmodell um Belege und bekommst drei Quellenangaben mit Autor und Jahr. Eine davon gibt es nicht. Woran liegt das?
+Antwort: Es reiht passende Wörter aneinander, ohne Fakten zu prüfen. Das Modell erzeugt Text, der plausibel klingt. Ob er stimmt, prüft es nicht.
 
-Frage: Woran erkennst du am besten, dass eine Quelle verlässlich ist?
-Antwort: Mehrere unabhängige Quellen sagen dasselbe. Unabhängige Quellen, die dasselbe sagen, sind ein gutes Zeichen. Likes und Platz in der Suche sagen nichts über Wahrheit.
+Frage: Zwei Meldungen zum selben Ereignis: Die eine hat 10.000 Likes, die andere wird von zwei weiteren unabhängigen Stellen bestätigt. Wem traust du eher?
+Antwort: Der bestätigten, weil unabhängige Quellen dasselbe sagen. Unabhängige Quellen, die dasselbe sagen, sind ein gutes Zeichen. Likes und ein Platz in der Suche sagen nichts über Wahrheit.
 
-Frage: Das Modell nennt ein Buch mit Autor und Jahr. Was tust du zuerst?
-Antwort: Ich suche das Buch in einem Bibliothekskatalog. Ein Katalog ist eine unabhängige Quelle. Das Modell bestätigt oft seine eigene Antwort.
+Frage: Das Modell nennt dir ein Buch mit Autor und Jahr, das du im Referat angeben willst. Was tust du zuerst?
+Antwort: Ich suche das Buch in einem Katalog oder bei einem Verlag. Ein Katalog ist eine unabhängige Quelle. Das Modell bestätigt oft nur seine eigene Antwort.
 
 # Handreichung für Lehrkräfte
 
 Adresse: __BASIS__/schule-lehrkraefte
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
+Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Pläne für Einzel- und Doppelstunde, Bezug zur KMK-Strategie, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
 
 Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
 
@@ -3685,11 +3796,15 @@ Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll si
 
 ## So sind die Arbeitsblätter aufgebaut
 
-Eine DIN-A4-Seite, schwarzweiß druckbar: Kopf mit Zielen, Aufgaben mit Niveau und Tipp, Legende, Selbsteinschätzung, QR-Code.
+Drei Seiten DIN A4, schwarzweiß druckbar: Seite 1 mit Zielen und Aufgaben, Seite 2 und 3 mit Quiz, Nachdenken, Zusatz und Legende, dazu QR-Code.
+
+## Einzelstunde oder Doppelstunde
+
+Dasselbe Material, zwei Pläne: Einzelstunde mit mündlicher Reflexion, Quiz und Nachdenken zu Hause. Doppelstunde mit allem in der Stunde.
 
 ## Vorbereitung in zehn Minuten
 
-Link testen, Labore ausprobieren, Gruppen bilden, Aufgaben kopieren.
+Link testen, Labore ausprobieren, Gruppen bilden, Arbeitsblatt kopieren.
 
 ## Fachbegriffe in einfachen Worten
 
@@ -3702,6 +3817,14 @@ Acht Fragen, die in der Klasse fast immer kommen, mit Kurzantwort.
 ## Stolperstellen
 
 Typische Probleme im Unterricht und wie du sie umgehst.
+
+## Bezug zur KMK-Strategie
+
+Die Einheiten knüpfen an die sechs Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an. Das ist keine amtliche Zuordnung.
+
+## Für Klasse 7 und 9 anpassen
+
+Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzt du, für Klasse 9 erweiterst du.
 
 ## Weiterlesen
 
@@ -3818,7 +3941,7 @@ Drei Schritte: Karten sortieren (7 Minuten), Hinweise suchen (7 Minuten), Prüfw
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -3850,13 +3973,13 @@ Drei Fragen: Sicherheit, Folgen, Prüfen im Alltag.
 
 ## Fragen und Antworten
 
-Frage: Ein Bild zeigt keinen einzigen Fehler. Was folgt daraus?
-Antwort: Nichts Sicheres, denn gute KI-Bilder sind oft fehlerfrei. Fehlerfreiheit beweist nichts. Darum zählen Herkunft und Kontext.
+Frage: Ein Bild im Chat zeigt eine perfekte Berglandschaft ohne jeden Fehler. Was folgt daraus?
+Antwort: Nichts Sicheres: Auch gute KI-Bilder sind oft fehlerfrei. Fehlerfreiheit beweist nichts. Darum zählen Herkunft und Kontext.
 
-Frage: Welcher Schritt bringt bei einem seltsamen Bild am meisten?
-Antwort: Klären, wer es zuerst veröffentlicht hat. Die Herkunft lässt sich auch bei einem perfekten Bild prüfen. Likes sagen nichts über echt oder KI.
+Frage: Ein Bild einer angeblichen Überschwemmung wird im Klassenchat geteilt. Es wirkt echt, aber du bist unsicher. Welcher Schritt bringt am meisten?
+Antwort: Klären, wer das Bild zuerst veröffentlicht hat und wo. Die Herkunft lässt sich auch bei einem perfekten Bild prüfen. Likes sagen nichts über echt oder KI.
 
-Frage: Wie formulierst du dein Urteil am besten?
+Frage: Du hast ein Bild geprüft: Die Quelle passt, der Ort stimmt, nichts wirkt auffällig. Wie formulierst du dein Urteil?
 Antwort: Wahrscheinlich echt, weil Quelle und Kontext passen. Du schätzt eine Wahrscheinlichkeit und nennst den Grund. „Nie beurteilen“ hilft dir nicht weiter.
 
 # Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen
@@ -3882,7 +4005,7 @@ Drei Schritte: Chat fragen (6 Minuten), seitwärts lesen (8 Minuten), Gegenprobe
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -3914,14 +4037,14 @@ Drei Fragen: Weitergeben, Interesse, Chat als Quelle.
 
 ## Fragen und Antworten
 
-Frage: Drei Seiten melden dasselbe, sie haben aber voneinander abgeschrieben. Wie viele Quellen sind das?
-Antwort: Eine, denn sie sind nicht unabhängig. Nicht die Anzahl zählt, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert?
+Frage: Drei Webseiten melden dieselbe Nachricht. Du findest heraus, dass zwei von der ersten abgeschrieben haben. Wie viele Quellen hast du?
+Antwort: Eine, weil zwei nicht selbst recherchiert haben. Nicht die Anzahl zählt, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert?
 
-Frage: Was heißt Seitwärtslesen?
-Antwort: Die Seite verlassen und woanders nachsehen, was über sie gesagt wird. Profis öffnen einen neuen Tab und suchen den Namen der Seite oder des Autors.
+Frage: Du kennst eine Webseite nicht und willst prüfen, ob du ihr trauen kannst. Was bedeutet Seitwärtslesen?
+Antwort: In einem neuen Tab nachsehen, was andere über die Seite sagen. Profis öffnen einen neuen Tab und suchen den Namen der Seite oder des Autors.
 
-Frage: Der Chat nennt eine Quelle mit Titel, Autor und Jahr. Was tust du?
-Antwort: Ich suche das Original und streiche sie, wenn es sie nicht gibt. Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt.
+Frage: Ein Chat nennt für deine These eine Quelle mit Titel, Autor und Jahr. Wie gehst du vor?
+Antwort: Ich suche das Original und streiche sie, wenn es fehlt. Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt.
 
 # Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren
 
@@ -3946,7 +4069,7 @@ Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -3978,14 +4101,14 @@ Drei Fragen: Gefühle, Gruppenchat, Hilfe.
 
 ## Fragen und Antworten
 
-Frage: Ein echtes Foto trägt eine erfundene Bildunterschrift. Wie heißt das?
-Antwort: Eine Cheap Fake. Cheap Fakes brauchen keine KI: Ein echtes Bild bekommt einen falschen Zusammenhang.
+Frage: Ein echtes Foto von einer Demo aus dem Jahr 2015 wird mit der Behauptung geteilt, es sei von gestern. Wie nennt man das?
+Antwort: Eine Cheap Fake, weil ein echtes Bild falsch eingesetzt wird. Cheap Fakes brauchen keine KI: Ein echtes Bild bekommt einen falschen Zusammenhang.
 
-Frage: Was macht Falschmeldungen so schnell?
-Antwort: Starke Gefühle machen Teilen leicht, und Feeds zeigen, was Reaktionen bekommt. Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt.
+Frage: Eine empörende Falschmeldung verbreitet sich binnen einer Stunde in vielen Gruppenchats. Was erklärt das am besten?
+Antwort: Gefühle machen Teilen leicht, und Feeds zeigen Beliebtes zuerst. Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt.
 
-Frage: Jemand verbreitet ein gefälschtes Bild von dir. Was ist richtig?
-Antwort: Beweise sichern, Hilfe holen, melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird.
+Frage: Jemand hat ein gefälschtes Bild von dir im Klassenchat verbreitet. Was ist der beste erste Schritt?
+Antwort: Beweise sichern, eine Vertrauensperson holen und melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird.
 
 # Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln
 
@@ -4010,7 +4133,7 @@ Drei Schritte: Beispiele sortieren (6 Minuten), Faustfrage anwenden (8 Minuten),
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -4042,14 +4165,14 @@ Drei Fragen: Lernen, Angabe, Vertrauen.
 
 ## Fragen und Antworten
 
-Frage: Wann wird KI-Hilfe bei Hausaufgaben zur Täuschung?
-Antwort: Wenn man KI-Text als eigene Leistung abgibt und es verschweigt. Täuschung heißt: etwas als eigene Leistung abgeben, das nicht von dir ist, und es verschweigen.
+Frage: Ein Schüler lässt eine KI seinen Aufsatz schreiben und gibt ihn ab. Wann ist das Täuschung?
+Antwort: Wenn er ihn als eigene Leistung ausgibt und es verschweigt. Täuschung heißt: etwas als eigene Leistung abgeben, das nicht von dir ist, und es verschweigen.
 
-Frage: Was ist die beste Reihenfolge?
-Antwort: Selbst versuchen, KI fragen, prüfen, in eigenen Worten aufschreiben. Wer erst selbst versucht, behält das Denken. Wer die Reihenfolge umdreht, lernt weniger.
+Frage: Du sollst ein Gedicht deuten und willst die KI nutzen, um wirklich etwas zu lernen. Welche Reihenfolge ist am besten?
+Antwort: Erst selbst versuchen, dann KI fragen, prüfen, neu formulieren. Wer erst selbst versucht, behält das Denken. Wer die Reihenfolge umdreht, lernt weniger.
 
-Frage: Es gibt an deiner Schule keine Regel zu KI. Was heißt das?
-Antwort: Du fragst nach, was für die Aufgabe gilt. Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab.
+Frage: An deiner Schule gibt es keine ausdrückliche Regel zur KI-Nutzung bei Hausaufgaben. Was heißt das für dich?
+Antwort: Du fragst vorab nach, was für diese Aufgabe gilt. Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab.
 
 # Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren
 
@@ -4074,7 +4197,7 @@ Drei Schritte: Datenspuren sammeln (6 Minuten), App-Rechte prüfen (8 Minuten), 
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -4106,14 +4229,14 @@ Drei Fragen: Nein sagen, Passwörter, Chat.
 
 ## Fragen und Antworten
 
-Frage: Eine Taschenlampen-App will auf deine Kontakte zugreifen. Was ist die beste Reaktion?
-Antwort: Ablehnen, die App braucht die Kontakte nicht für ihren Zweck. Frage bei jeder Freigabe: Braucht die App das für das, was ich tun will?
+Frage: Eine Taschenlampen-App möchte auf deine Kontakte zugreifen. Was ist die beste Reaktion?
+Antwort: Ablehnen, denn die App braucht sie nicht für ihren Zweck. Frage bei jeder Freigabe: Braucht die App das für das, was ich tun will?
 
-Frage: Was gehört nicht in einen Chatbot?
-Antwort: Ein Passwort oder die Adresse deiner Familie. Gib nichts ein, das dich blamiert, wenn es später jemand liest.
+Frage: Du übst mit einem Chatbot für eine Klassenarbeit. Welche Eingabe lässt du besser weg?
+Antwort: Dein Passwort für den Account und die Adresse deiner Familie. Gib nichts ein, das dich blamiert, wenn es später jemand liest.
 
-Frage: Du hast eine Freigabe erteilt und willst sie zurücknehmen. Wo geht das?
-Antwort: Jederzeit in den Einstellungen des Geräts. Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu.
+Frage: Vor drei Monaten hast du einer App den Zugriff auf dein Mikrofon erlaubt. Jetzt willst du das zurücknehmen. Was stimmt?
+Antwort: Das geht jederzeit in den Einstellungen des Geräts. Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu.
 
 # Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern
 
@@ -4138,7 +4261,7 @@ Drei Schritte: Frage schreiben (6 Minuten), Antworten vergleichen (8 Minuten), p
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -4170,14 +4293,14 @@ Drei Fragen: Bausteine, Trainer, Prüfen.
 
 ## Fragen und Antworten
 
-Frage: Welche Frage bekommt meist die bessere Antwort?
-Antwort: Erkläre Windkraft in sechs Sätzen für Klasse 9 und nenne drei Begriffe zum Nachschlagen. Die bessere Frage nennt Länge, Niveau und Format. Das Modell muss weniger raten.
+Frage: Du willst für ein Referat eine Erklärung zur Windkraft. Welcher Prompt bekommt meist die bessere Antwort?
+Antwort: Erkläre Windkraft für Klasse 9 in sechs Sätzen. Die bessere Frage nennt Länge und Niveau. Das Modell muss weniger raten.
 
-Frage: Die Antwort ist zu allgemein. Was ist am besten?
-Antwort: Nachfragen: Gib ein Beispiel aus dem Fußball. Die erste Antwort ist ein Entwurf, eine Nachfrage macht sie besser.
+Frage: Die erste Antwort der KI ist zu allgemein. Was machst du?
+Antwort: Nachfragen, etwa: Gib ein Beispiel aus dem Fußball. Die erste Antwort ist ein Entwurf, eine Nachfrage macht sie besser.
 
-Frage: Die KI nennt eine Jahreszahl in sicherem Ton. Was tust du?
-Antwort: Ich suche die Zahl in einer zweiten Quelle. Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen.
+Frage: Die KI nennt für dein Referat eine Jahreszahl in sehr sicherem Ton. Was tust du?
+Antwort: Ich suche die Zahl in einer zweiten, unabhängigen Quelle. Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen.
 
 # Medien-Einheit 7: KI in deinem Alltag, Poster-Runde
 
@@ -4202,7 +4325,7 @@ Drei Schritte: Poster zeichnen (6 Minuten), Feed erklären (8 Minuten), Poster-R
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, der auf ein Blatt passt.
+Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
 
 ## Lösungshinweise
 
@@ -4234,13 +4357,13 @@ Drei Fragen: Feed, Gewohnheit, Einstellungen.
 
 ## Fragen und Antworten
 
-Frage: Woran erkennst du, ob eine Software KI nutzt?
-Antwort: Sie hat aus Beispielen gelernt, statt feste Regeln zu befolgen. Der Unterschied: aus Beispielen gelernt oder von Hand geschriebene Regeln.
+Frage: Woran erkennst du, dass eine Software KI nutzt und nicht nur feste Regeln?
+Antwort: Sie hat aus Beispielen gelernt, statt Regeln abzuarbeiten. Der Unterschied: aus Beispielen gelernt oder von Hand geschriebene Regeln.
 
-Frage: Was zählt für einen Feed bei der Auswahl?
-Antwort: Was du ansiehst, likest, teilst und wie lange du bleibst. Der Feed rät, was dich wahrscheinlich festhält. Das erklärt, warum er zu einem Thema abdriften kann.
+Frage: Ein Kurzvideo-Feed zeigt dir plötzlich fast nur noch Videos zu einem Thema. Wonach wählt der Feed vor allem aus?
+Antwort: Danach, was du ansiehst, likest und wie lange du bleibst. Der Feed rät, was dich wahrscheinlich festhält. Das erklärt, warum er zu einem Thema abdriften kann.
 
-Frage: Du willst ein Thema nicht mehr sehen. Was hilft?
+Frage: Du willst ein Thema im Feed nicht mehr sehen. Was hilft am meisten?
 Antwort: Nicht interessiert wählen und bewusst anders klicken. Du kannst dem Feed beibringen, was du nicht sehen willst.
 
 # Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten
@@ -4583,7 +4706,7 @@ Antwort: Falschinformation, denn die Täuschungsabsicht fehlt. Bei Falschinforma
 Frage: Warum verbreiten sich Falschmeldungen oft schneller als Richtigstellungen?
 Antwort: Sie wecken Gefühle, und Feeds zeigen Reaktionsstarkes. Empörung und Staunen lassen uns schnell teilen, und Empfehlungssysteme belohnen Reaktionen. Wahrheit spielt dafür keine Rolle.
 
-Frage: Ein Mitschüler hat ein gefälschtes Video von dir in einer Gruppe gepostet. Was ist ein guter erster Schritt?
+Frage: Jemand aus deinem Umfeld hat ein gefälschtes Video von dir in einer Gruppe gepostet. Was ist ein guter erster Schritt?
 Antwort: Beweise sichern, Vertrauensperson ansprechen. Erst sichern, dann Hilfe holen und melden. Ignorieren lässt den Beitrag weiter wachsen, und Drohungen oder Gegenvideos machen es oft schlimmer.
 
 Frage: Was sind Cheap Fakes?
@@ -4623,6 +4746,12 @@ Schreib auf, welches Werkzeug du wofür genutzt hast. Dann ist klar, was von dir
 ## Fragen an deine Lehrkraft
 
 Statt zu raten: Frag nach. Mit klaren Fragen kommst du zu klaren Antworten.
+
+## Für Eltern: nachfragen statt kontrollieren
+
+Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis.
+
+Merke: Nachfragen statt kontrollieren: Wie bist du darauf gekommen?
 
 ## Gute Gründe, selbst zu denken
 
@@ -4900,6 +5029,96 @@ Antwort: Weil Antworten erfunden sein können und kein Filter sie prüft. Das Mo
 
 Frage: Was ist ein guter Einstieg, wenn dein Kind keine Kamera nutzen soll?
 Antwort: Die Experimente, sie laufen ohne Kamera und Mikrofon. Alle Experimente kommen ohne Kamera und Mikrofon aus. Dein Kind lernt dort, wie KI arbeitet und wo sie danebenliegt.
+
+# Zusammen ausprobieren: Anleitung für zwei
+
+Adresse: __BASIS__/zusammen-ausprobieren
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Anleitung für Eltern und Kind, die drei Experimente des KI-Labors gemeinsam ausprobieren: ein Fehler-Spiel mit gleichem Startwert zum Vergleichen, eine KI-Antwort gemeinsam gegen eine zweite Quelle prüfen und das Kartenset Echt oder KI zum Raten. Mit Gesprächsfragen. Ohne Kamera.
+
+Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera. Zu jedem eine Gesprächsfrage. Ein Gerät, zwei Stühle.
+
+## So geht es
+
+Ein Gerät, zwei Personen, etwa dreißig Minuten. Kein Konto, keine Kamera.
+
+## Experiment 1: Das Fehler-Spiel mit gleichem Startwert
+
+Beide geben denselben Startwert ein und spielen dieselben zehn Karten. Danach vergleicht ihr.
+
+## Experiment 2: Eine KI-Antwort gemeinsam prüfen
+
+Das Kind fragt den Chat nach etwas, das es gut kennt. Ihr prüft die Antwort gegen eine zweite Quelle.
+
+## Experiment 3: Echt oder KI? mit dem Kartenset
+
+Karten ausdrucken, ausschneiden, nebeneinander legen und gemeinsam sortieren.
+
+## Danach reden
+
+Eine offene Frage zum Schluss reicht. Nicht belehren, zuhören.
+
+## Das nimmst du mit
+
+- Ein Gerät, zwei Personen, keine Kamera: das reicht für drei Experimente.
+- Gleicher Startwert heißt gleiche Karten, so lässt sich vergleichen.
+- Das Gespräch danach ist wichtiger als das Ergebnis.
+
+## Fragen und Antworten
+
+Frage: Wozu dient der gleiche Startwert im Fehler-Spiel?
+Antwort: Beide bekommen dieselben Karten und können ihre Entscheidungen vergleichen. Der Startwert legt die Kartenfolge fest. Mit demselben Wert spielt ihr dieselben Karten und könnt Unterschiede besprechen.
+
+Frage: Der Chat nennt eine Zahl zu einem Thema, das dein Kind gut kennt. Was ist ein guter nächster Schritt?
+Antwort: Eine zweite Quelle suchen und die Zahl vergleichen. Ein Sprachmodell klingt auch dann sicher, wenn es sich irrt. Eine zweite Quelle zeigt, ob die Zahl stimmt.
+
+Frage: Warum begründet ihr beim Kartenset eure Entscheidung laut?
+Antwort: Damit ihr merkt, woran ihr eure Entscheidung festmacht und ob das verlässlich ist. Im Begründen zeigt sich, ob ihr auf Hinweise oder auf ein Bauchgefühl vertraut. Das ist der Lerneffekt.
+
+# Bildschirmzeit: kurz und ehrlich
+
+Adresse: __BASIS__/bildschirmzeit
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe und den Mediennutzungsvertrag. Keine medizinische Beratung.
+
+Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo du Rat bekommst. Keine Medizin und keine Versprechen.
+
+## Was sich ehrlich sagen lässt
+
+Eine Zahl für alle gibt es nicht. Alter, Inhalt und Begleitung zählen mehr als die Stoppuhr.
+
+Merke: Nicht nur die Minuten zählen, sondern auch, was in der Zeit passiert und was dafür ausfällt.
+
+## Was die Seite nicht sagen kann
+
+Sie ist keine medizinische oder pädagogische Beratung. Bei Sorgen hilft eine Beratungsstelle.
+
+## Regeln gemeinsam vereinbaren
+
+Regeln, die das Kind mit aushandelt, halten länger als verordnete.
+
+## Weiterlesen
+
+Quellen und Hilfe, abgerufen am 22.11.2026.
+
+## Das nimmst du mit
+
+- Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen.
+- Vereinbart Regeln gemeinsam und haltet sie schriftlich fest.
+- Bei Sorgen: Kinderarzt oder Beratungsstelle fragen, nicht diese Seite.
+
+## Fragen und Antworten
+
+Frage: Was sagt diese Seite zur richtigen Bildschirmzeit?
+Antwort: Eine Zahl für alle gibt es nicht, Alter, Inhalt und Begleitung zählen. Außer für kleine Kinder gibt es keine einzelne belegte Grenze. Es kommt darauf an, was getan wird und wer dabei ist.
+
+Frage: Wie gehst du am besten mit Regeln um?
+Antwort: Gemeinsam vereinbaren, aufschreiben und nach einigen Wochen prüfen. Regeln, die das Kind mit aushandelt, werden eher eingehalten. Aufschreiben und Prüfen hält sie lebendig.
+
+Frage: Dein Kind schläft schlecht und zieht sich zurück. Was ist sinnvoll?
+Antwort: Mit Kinderärztin, Kinderarzt oder Beratungsstelle sprechen. Die Seite kann keinen Einzelfall beurteilen. Bei solchen Anzeichen helfen Fachleute weiter.
 
 # Glossar
 

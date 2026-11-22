@@ -47,7 +47,7 @@ S.ueber = {
      kurz: "Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt.",
      p: [
       "Wenn du ein Labor startest, schickt dein Browser die Eingabe an den Jetson. Dort rechnet das Modell, und das Ergebnis kommt zurück. Das Labor zeigt dir dabei die einzelnen Schritte und wie lange jeder gedauert hat. Auf der Seite {{hardware|Hardware}} siehst du live, wie stark der Rechner gerade ausgelastet ist.",
-      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt die mitgelieferten Beispielbilder und Beispieldaten.",
+      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor arbeitet nur mit der Kamera und hat keine Beispielbilder.",
      ]},
   ],
   mitnehmen: [

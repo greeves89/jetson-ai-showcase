@@ -1,0 +1,52 @@
+/* KI-Labor: Gestaltung des Bausteins "Echt oder KI?" (widgets-echtoderki.js). Eigene Klassen beginnen mit eok-.
+   Nutzt Variablen aus style.css. Grün und Rot tragen nie allein die Aussage: immer Symbol und Text dazu. */
+.eok{max-width:680px;margin:0 auto}
+.eok:focus{outline:none}
+.eok-kopf{display:grid;grid-template-columns:1fr auto;gap:6px 12px;align-items:center;margin:0 0 14px;font-size:14.5px}
+.eok-zahl{font-weight:600}
+.eok-stand{color:var(--leise)}
+.eok-balken{grid-column:1 / -1;height:6px;border-radius:99px;background:var(--fuell);overflow:hidden}
+.eok-balken span{display:block;height:100%;background:var(--akzent-fl);border-radius:99px;transition:width .3s var(--feder)}
+.eok-frage{margin:0 0 12px;font-size:18px;font-weight:600;line-height:1.35}
+.eok-bildbox{aspect-ratio:4/3;width:100%;border-radius:var(--r2);background:var(--flaeche2);overflow:hidden;margin:0 0 14px}
+.eok-bild{display:block;width:100%;height:100%;object-fit:cover}
+.eok-wahlzeile{display:flex;flex-wrap:wrap;gap:12px;margin:0 0 10px}
+.eok-wahl{flex:1 1 0;min-width:140px;min-height:56px;font-size:20px;gap:10px;position:relative;border:2px solid transparent}
+.eok-wahl .ic{width:22px;height:22px}
+.eok-wahl kbd{font:12px var(--mono);color:var(--leise);border:1px solid var(--linie);border-radius:6px;padding:1px 6px;margin-left:4px;background:var(--flaeche)}
+.eok-wahl:focus-visible,.eok-weiter:focus-visible,.eok-nochmal:focus-visible,.eok-druck:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
+.eok-wahl:hover{border-color:var(--akzent)}
+.eok-weiter,.eok-nochmal,.eok-druck{min-height:48px}
+.eok-weiter{flex:1 1 auto}
+.eok-tasten{display:flex;gap:8px;align-items:flex-start;margin:6px 0 0;font-size:13.5px;line-height:1.45;color:var(--leise)}
+.eok-tasten .ic{flex:none;width:16px;height:16px;margin-top:2px}
+@media (hover:none){.eok-tasten{display:none}.eok-wahl kbd{display:none}}
+.eok-urteil{display:flex;gap:10px;align-items:center;margin:0 0 12px;padding:12px 14px;border-radius:var(--r2);font-size:17px;font-weight:600;line-height:1.35}
+.eok-urteil .ic{flex:none;width:24px;height:24px}
+.eok-urteil.ok{background:color-mix(in srgb,var(--gruen) 16%,transparent);color:var(--gruen)}
+.eok-urteil.nein{background:color-mix(in srgb,var(--rot) 14%,transparent);color:var(--rot)}
+.eok-urteil:focus{outline:none}
+.eok-aufl{margin:0 0 14px}
+.eok-aufl h3{margin:12px 0 4px;font-size:15px}
+.eok-aufl p{margin:0 0 6px;line-height:1.5}
+.eok-quelle{display:flex;gap:8px;align-items:flex-start;font-size:13.5px;color:var(--leise)}
+.eok-quelle .ic{flex:none;width:16px;height:16px;margin-top:2px}
+.eok-ki{margin-top:12px}
+.eok-ende{text-align:left}
+.eok-ergebnis{margin:0 0 4px;font-size:18px}
+.eok-ergebnis:focus{outline:none}
+.eok-gross{font-size:44px;font-weight:700;letter-spacing:-.02em;line-height:1.1}
+.eok-teil{margin:0 0 12px;color:var(--leise)}
+.eok-einordnung{margin:0 0 16px;line-height:1.55}
+.eok-liste{margin:6px 0 12px;border-radius:var(--r2);background:var(--flaeche2);padding:10px 14px}
+.eok-liste summary{cursor:pointer;min-height:44px;display:flex;align-items:center;font-weight:600}
+.eok-liste ul{list-style:none;margin:0;padding:0}
+.eok-liste li{display:flex;gap:8px;align-items:flex-start;padding:7px 0;border-top:1px solid var(--linie2);font-size:14.5px;line-height:1.4}
+.eok-liste li .ic{flex:none;width:18px;height:18px;margin-top:1px}
+.eok-liste li.ok .ic{color:var(--gruen)}.eok-liste li.nein .ic{color:var(--rot)}
+.eok-privat{display:flex;gap:8px;align-items:flex-start;margin:10px 0 0;font-size:13.5px;color:var(--leise)}
+.eok-privat .ic{flex:none;width:16px;height:16px;margin-top:2px}
+.eok-live{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:0}
+@media (max-width:480px){.eok-wahl{min-width:0;font-size:19px}.eok-frage{font-size:17px}.eok-gross{font-size:38px}}
+@media (prefers-reduced-motion:reduce){.eok-balken span{transition:none}}
+.eok-freunde{display:flex;gap:8px;align-items:center;margin:14px 0 0;font-size:14.5px;color:var(--leise)}.eok-freunde .ic{flex:none;width:18px;height:18px}

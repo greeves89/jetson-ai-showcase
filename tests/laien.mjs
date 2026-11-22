@@ -249,7 +249,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await page.click(".drei-schritte label >> nth=0");
   pruefe(await page.locator(".drei-schritte input:checked").count() === 1, "Checkliste laesst sich abhaken");
   await oeffneSeite(page, "uc-handwerk");
-  pruefe((await page.$$eval("#inhalt h2.abs", (h) => h.map((x) => x.textContent))).join("|") === "Angebot aus einer Notiz|Baustellenfoto prüfen|Rechnungen sortieren" && await page.locator(".abschnitt .v-bild, .abschnitt [class^=v-]").count() >= 3, "Handwerk: drei Abschnitte mit Bild");
+  pruefe((await page.$$eval("#inhalt h2.abs", (h) => h.map((x) => x.textContent))).join("|") === "Angebot aus einer Notiz|Baustellenfoto prüfen|Rechnungen sortieren|Beispiel-Aufgabe zum Ausprobieren|Die KI irrt: prüfe immer" && await page.locator(".abschnitt .v-bild, .abschnitt [class^=v-]").count() >= 3, "Handwerk: fünf Abschnitte, Bilder da");
   pruefe(t.fehler.length === 0, "Konsole sauber " + t.fehler.join("; "));
   await t.schliessen();
 }
@@ -468,7 +468,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     }
   }
   { // Eltern, Technik, Erwachsene (Alias neugierig): Klassenlink wirkt ohne Speichern, Pfade da
-    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 7], ["technik", /Ich arbeite in der IT/, 6], ["neugierig", /Ich will KI verstehen/, 9], ["erwachsene", /Ich will KI verstehen/, 9]]) {
+    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 8], ["technik", /Ich arbeite in der IT/, 7], ["neugierig", /Ich will KI verstehen/, 10], ["erwachsene", /Ich will KI verstehen/, 10]]) {
       const t = await neu(); const { page } = t;
       await page.goto(URL_LABOR + "/?weg=" + w, { waitUntil: "load" });
       await page.waitForSelector("#empfohlen");
