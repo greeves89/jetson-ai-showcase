@@ -151,7 +151,7 @@ def warteschlange(request: Request):
 def _ollama_fehler(text):
     """Macht eine Fehlermeldung von Ollama fuer Besucher verstaendlich."""
     t = (text or "").lower()
-    if "allocate" in t or "cuda" in t or "out of memory" in t:
+    if speicher.bei_ladefehler(text):
         return "Dem Jetson fehlt gerade freier Speicher, um das Sprachmodell zu laden. Versuch es in einem Moment noch einmal."
     if "not found" in t:
         return "Das Modell ist auf dem Jetson nicht vorhanden."
@@ -408,7 +408,7 @@ async def chat(req: Request):
             "model": modell,
             "messages": [{"role": "user", "content": nachricht}],
             "stream": True,
-            "options": {"temperature": temperatur, "num_gpu": speicher.LLM_GPU_SCHICHTEN, "num_batch": speicher.LLM_BATCH},
+            "options": {"temperature": temperatur, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH},
         }
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(300.0, connect=10.0)) as c:
@@ -748,7 +748,7 @@ async def rag_ask(req: Request):
             kontext = "\n\n".join("[%d] %s" % (i + 1, t) for i, (_, t) in enumerate(treffer))
             system = ("Beantworte die Frage ausschliesslich mit dem gegebenen Kontext und zitiere "
                       "Belege als [Nummer]. Reicht der Kontext nicht, sage das ehrlich. Antworte auf Deutsch.")
-            payload = {"model": CHAT_MODELL, "stream": True, "options": {"num_gpu": speicher.LLM_GPU_SCHICHTEN, "num_batch": speicher.LLM_BATCH}, "messages": [
+            payload = {"model": CHAT_MODELL, "stream": True, "options": {"num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH}, "messages": [
                 {"role": "system", "content": system},
                 {"role": "user", "content": "Kontext:\n%s\n\nFrage: %s" % (kontext, frage)}]}
             try:
@@ -868,7 +868,7 @@ async def agent_ask(req: Request):
             for _ in range(5):
                 r = await c.post(f"{OLLAMA}/api/chat",
                                  json={"model": CHAT_MODELL, "messages": messages, "tools": werkzeuge, "stream": False,
-                                       "options": {"temperature": 0, "num_gpu": speicher.LLM_GPU_SCHICHTEN, "num_batch": speicher.LLM_BATCH}})      # Werkzeugwahl soll reproduzierbar sein
+                                       "options": {"temperature": 0, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH}})      # Werkzeugwahl soll reproduzierbar sein
                 if r.status_code != 200:
                     try:
                         fehler = r.json().get("error", "")

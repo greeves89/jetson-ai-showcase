@@ -31,6 +31,32 @@ LLM_GPU_SCHICHTEN = int(os.environ.get("KL_LLM_GPU_SCHICHTEN", "24"))
 # fragmentiert, ein grosser zusammenhaengender Puffer scheitert dann mit "cudaMalloc failed" (22.11.2026 beobachtet).
 LLM_BATCH = int(os.environ.get("KL_LLM_BATCH", "128"))
 
+# Rueckfall bei fragmentiertem GPU-Speicher: scheitert das Laden des Modells mit "cudaMalloc failed", wird fuer die folgenden Anfragen
+# mit weniger GPU-Schichten geladen (24, 16, 8, 0; langsamer, aber es laeuft). Nach RUECKFALL_MINUTEN wird wieder die volle Stufe versucht.
+_STUFEN = [LLM_GPU_SCHICHTEN, 16, 8, 0]
+RUECKFALL_MINUTEN = int(os.environ.get("KL_RUECKFALL_MINUTEN", "30"))
+_rueckfall = {"stufe": 0, "seit": 0.0}
+
+
+def gpu_schichten():
+    """Anzahl GPU-Schichten fuer die naechste Ollama-Anfrage (siehe Rueckfall oben)."""
+    import time
+    if _rueckfall["stufe"] and time.time() - _rueckfall["seit"] > RUECKFALL_MINUTEN * 60:
+        _rueckfall["stufe"] = 0
+    return min(_STUFEN[_rueckfall["stufe"]], LLM_GPU_SCHICHTEN)
+
+
+def bei_ladefehler(text):
+    """Merkt sich einen Speicherfehler von Ollama und senkt die Stufe. Gibt True zurueck, wenn es ein Speicherfehler war."""
+    import time
+    t = (text or "").lower()
+    if not ("allocate" in t or "cuda" in t or "out of memory" in t):
+        return False
+    if _rueckfall["stufe"] < len(_STUFEN) - 1:
+        _rueckfall["stufe"] += 1
+    _rueckfall["seit"] = time.time()
+    return True
+
 def meminfo():
     """MemFree, MemAvailable und Cached in Megabyte."""
     with open("/proc/meminfo") as f:

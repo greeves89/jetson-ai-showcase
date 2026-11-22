@@ -45,7 +45,7 @@ _karte = {"daten": None}
 
 def _fehler(text):
     t = (text or "").lower()
-    if "allocate" in t or "cuda" in t or "out of memory" in t:
+    if speicher.bei_ladefehler(text):
         return "Dem Jetson fehlt gerade freier Speicher für das Modell. Versuch es in einem Moment noch einmal."
     if "not found" in t:
         return "Das Modell ist auf dem Jetson nicht vorhanden."
@@ -148,7 +148,7 @@ async def _bewerte_einen(client, frage, text, temperatur):
     """Gibt (score, ms). Bei unlesbarer Ausgabe ein zweiter Versuch, danach RuntimeError."""
     t0 = time.perf_counter()
     for _ in range(2):
-        optionen = {"temperature": temperatur, "num_predict": 24, "num_gpu": speicher.LLM_GPU_SCHICHTEN, "num_batch": speicher.LLM_BATCH}
+        optionen = {"temperature": temperatur, "num_predict": 24, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH}
         if temperatur == 0:
             optionen["seed"] = 0
         r = await client.post(f"{OLLAMA}/api/chat", json={
