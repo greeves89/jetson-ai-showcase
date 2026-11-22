@@ -21,7 +21,6 @@ const AUS = path.join(STATIC, "materialien");
 const STAND = "22.11.2026";
 const BASIS = "https://ki-labor.daniel-alisch.site";
 const KOPF = "KI-Labor, ki-labor.daniel-alisch.site, Stand " + STAND;
-const LIZENZ = "Lizenz: noch festzulegen";
 const ohnePdf = process.argv.includes("--ohne-pdf");
 
 const esc = (t) => String(t).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
@@ -282,7 +281,7 @@ const seite = (titel, klasse, inhalt) => `<!doctype html>
 </head>
 <body class="${klasse}">
 <div class="seite">
-<div class="kopf"><span>${esc(KOPF)}</span><span>${esc(LIZENZ)}</span></div>
+<div class="kopf"><span>${esc(KOPF)}</span></div>
 ${inhalt}
 </div>
 </body>
