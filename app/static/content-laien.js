@@ -84,6 +84,12 @@ const glossar = {
 
 INHALT.synonyme = {
   chatgpt: ["chat", "sprachmodell", "generative ki", "prompt"],
+  vektorisierung: ["rag-embedding", "embedding", "vektorisieren", "bedeutungskarte"],
+  vektorisieren: ["rag-embedding", "embedding", "vektorisierung", "bedeutungskarte"],
+  einbetten: ["embedding", "vektorisieren", "vektorisierung"],
+  einbettung: ["embedding", "vektorisieren", "vektorisierung"],
+  vektor: ["embedding", "vektorisieren", "vektorsuche"],
+  vektoren: ["embedding", "vektorisieren", "vektorsuche"],
   gpt: ["chat", "sprachmodell", "generative ki"],
   copilot: ["chat", "agent", "sprachmodell"],
   "ki-assistent": ["chat", "agent", "prompt", "sprachmodell"],

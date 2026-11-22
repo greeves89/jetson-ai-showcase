@@ -228,6 +228,9 @@
               h("span", { class: "du" }, mmss(f.dauer_s || 0)))))));
           if (offen > 0) teile.push(h("p", { class: "folgen-info" }, offen === 1 ? "Eine weitere Folge ist in Arbeit." : offen + " weitere Folgen sind in Arbeit."));
         }
+        // Die Folgen enden mit "Mehr dazu auf der Seite ...": Der Verweis meint diese Seite, darum sagt der Hinweis, wo es weitergeht
+        teile.splice(1, 0, h("p", { class: "video-ki video-weiter" }, icon("arrow-down"),
+          h("span", null, "Der Verweis am Ende der Folge meint diese Seite: Unten stehen die Abschnitte zur Folge, mit Bildern und zum Ausprobieren.")));
         flaeche.replaceChildren(...teile);
         video.addEventListener("timeupdate", () => {
           const knoepfe = $$(".kapitel button", flaeche);
