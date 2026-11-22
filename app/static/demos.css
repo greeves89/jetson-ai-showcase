@@ -112,6 +112,10 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-ergtext{white-space:pre-wrap;overflow-wrap:anywhere}
 .karte-w.antwort .d-ergtext{font-size:16.5px;line-height:1.5}
 .d-erkl{margin:8px 0 0;padding-top:8px;border-top:.5px solid var(--linie2);font-size:14px;line-height:1.5;color:var(--leise)}
+.d-erkl.d-warnung{display:flex;gap:8px;align-items:flex-start;color:var(--text)}
+.d-warnung svg.ic{flex:none;width:18px;height:18px;margin-top:2px;color:var(--orange)}
+.karte-w.d-widerspruch{box-shadow:inset 0 0 0 1.5px color-mix(in srgb,var(--orange) 70%,transparent)}
+.d-warte{color:var(--text)}
 .d-karten .karte-w:first-child{margin-top:14px}
 
 @media (prefers-reduced-motion:reduce){.d-bar i,.d-treffer,.d-sw-bahn,.d-sw-bahn i{transition:none!important}}

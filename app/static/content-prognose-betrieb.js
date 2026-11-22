@@ -690,14 +690,14 @@ mlops: {
       "Schreibe einen Steckbrief dazu: Zweck, Trainingsdaten und ihr Stand, Grenzen, gemessene Qualität, bekannte Schwächen, Version und Datum. Er hilft neuen Kolleginnen und Kollegen und bei Rückfragen von Datenschutz und Prüfern. Je nach Einsatz verlangt auch das Recht Nachweise, mehr auf der Seite {{recht|Recht und Regeln}}.",
     ]},
     {h: "Was auf einem kleinen Gerät wie dem Jetson anders ist",
-     kurz: "Wenig Speicher, wenig Watt, meist ein Modell zur Zeit. Dafür bleiben die Daten am Gerät.",
+     kurz: "Wenig Speicher, wenig Watt, meist nur wenige Modelle gleichzeitig. Dafür bleiben die Daten am Gerät.",
      visual: {typ: "zahlen", kacheln: [
         {wert: "8 GB", label: "Speicher für CPU und GPU gemeinsam", icon: "memory-stick"},
         {wert: "wenige Watt", label: "Leistungsaufnahme", icon: "zap"},
         {wert: "1 Modell", label: "meist nur eins zur Zeit", icon: "brain"},
       ]},
      p: [
-      "Auf dem Jetson Orin Nano teilen sich CPU und GPU 8 GB Speicher, und das Gerät nimmt nur wenige Watt auf. Das prägt den Betrieb: Das Modell muss klein genug sein (oft verkleinert, zum Beispiel mit geringerer Zahlengenauigkeit), meist läuft nur ein Modell zur Zeit, und Wärme und Stromversorgung zählen mit. Die Seite {{hardware|Hardware}} zeigt live Speicher, Auslastung, Leistung und Temperatur, also genau die Werte, die du im Betrieb beobachten würdest.",
+      "Auf dem Jetson Orin Nano teilen sich CPU und GPU 8 GB Speicher, und das Gerät nimmt nur wenige Watt auf. Das prägt den Betrieb: Das Modell muss klein genug sein (oft verkleinert, zum Beispiel mit geringerer Zahlengenauigkeit), meist passen nur ein bis zwei Modelle gleichzeitig in den Speicher, und Wärme und Stromversorgung zählen mit. Die Seite {{hardware|Hardware}} zeigt live Speicher, Auslastung, Leistung und Temperatur, also genau die Werte, die du im Betrieb beobachten würdest.",
       "Ein Vorteil: Die Daten bleiben am Gerät, und es gibt keinen Netzweg. Dafür musst du Updates, Zugriff und Ausfälle vor Ort selbst regeln. Wie das mit Kosten und Strom zusammenhängt, steht auf der Seite {{kosten-energie|Kosten und Energie}}.",
     ], alltag: [
       "Ein Imbisswagen ist keine Restaurantküche. Er hat einen Herd, wenig Platz und Strom aus einem begrenzten Anschluss. Wer dort arbeitet, plant die Speisekarte nach diesen Grenzen und prüft öfter, ob alles läuft, weil kein zweiter Koch einspringt. Der Jetson ist der Imbisswagen: Er kann viel, aber du musst haushalten.",

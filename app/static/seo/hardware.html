@@ -5,9 +5,9 @@
 <p class="kurz">Ein Computer im Kartenformat mit sechs Kernen und einer GPU, die wenige Watt braucht.</p>
 <p>Der NVIDIA Jetson Orin Nano ist ein Computer im Kartenformat. Er hat einen Prozessor mit sechs Kernen und eine GPU, die viele einfache Rechnungen gleichzeitig ausführt. Genau das brauchen neuronale Netze. Er nimmt dabei nur wenige Watt auf.</p>
 <h2 class="abs">Gemeinsamer Speicher</h2>
-<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Geladenes Modell (immer nur eins)</li><li>CPU und GPU (rechnen im selben Speicher)</li><li>Gemeinsamer Speicher (8 GB für alles)</li></ul></figure>
+<figure class="visual"><figcaption>Schichten</figcaption><ul><li>Geladenes Modell (bis zu zwei, je nach Größe)</li><li>CPU und GPU (rechnen im selben Speicher)</li><li>Gemeinsamer Speicher (8 GB für alles)</li></ul></figure>
 <p class="kurz">CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.</p>
-<p>CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen und immer nur eins zur Zeit geladen ist. Der Speicher in der Anzeige oben ist die wichtigste Grenze.</p>
+<p>CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen. Der Jetson hält bis zu zwei Modelle gleichzeitig im Speicher (Einstellung OLLAMA_MAX_LOADED_MODELS=2), zum Beispiel ein Sprachmodell und ein Embedding-Modell. Zwei große Modelle passen nicht zusammen hinein. Der Speicher in der Anzeige oben ist die wichtigste Grenze.</p>
 <h2 class="abs">Was die Anzeigen bedeuten</h2>
 <figure class="visual"><figcaption>Übersicht</figcaption><ul><li>GPU (Auslastung)</li><li>Speicher (belegt)</li><li>CPU (sechs Kerne)</li><li>Leistung (Stromaufnahme)</li><li>Temperatur (heißester Punkt)</li></ul></figure>
 <p class="kurz">Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.</p>

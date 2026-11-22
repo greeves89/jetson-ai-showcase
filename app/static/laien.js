@@ -18,7 +18,7 @@
   const h = KL.h;
 
   /* ============================================================ Einwilligung */
-  /* Drei Arten: "bild" (Kamera ohne Wiedererkennung), "ton" (Mikrofon), "biometrisch" (Gesicht: Zahlenlisten zur Wiedererkennung,
+  /* Drei Arten: "bild" (Kamera ohne Wiedererkennung, auch Anlernen), "ton" (Mikrofon), "biometrisch" (Gesicht: Zahlenlisten zur Wiedererkennung,
      Art. 9 DSGVO). Biometrisch braucht ein unvorbelegtes Kontrollkaestchen plus Knopf und wird nur je Sitzung (sessionStorage)
      gemerkt, die beiden anderen bleiben in localStorage "kl-einwilligung" (Schluessel kamera und mikro). */
   const SCHLUESSEL = "kl-einwilligung", BIO = "kl-einwilligung-bio";
@@ -73,9 +73,9 @@
   };
   /* Zusatz je Labor (Seiten-ID), wenn dort etwas auf dem Rechner der Seite zurueckbleibt */
   const ZUSATZ = {
-    anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie.",
+    anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie. Zeige ihm Gegenstände, keine Personen.",
   };
-  const BIO_LABORE = new Set(["gesicht", "anlernen"]);
+  const BIO_LABORE = new Set(["gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
   /* Alters- und Elternhinweis, steht oben im Dialog. Bewusst ohne Abfrage: Die Seite prueft kein Alter und gibt kein Schutzversprechen. */
   const ALTER_HINWEIS = ["Nutzbar ab 16 Jahren.", "Jüngere nur mit Einverständnis der Eltern. Die Seite prüft dein Alter nicht."];
@@ -284,7 +284,7 @@
      KL.willkommen.beimStart()  nach dem ersten Rendern: zeigt das Fenster nur beim ersten Besuch der Startseite (Pfad /), nie auf Lektionsseiten,
                                 nicht mit gespeichertem Weg (kl-weg), nicht mit ?weg= in der Adresse, nicht nach "Später" (kl-willkommen),
                                 nicht bei navigator.webdriver (Tests, Crawler), ausser die Adresse hat ?willkommen=1.
-     KL.willkommen.oeffnen({aendern})  dasselbe Fenster auf Wunsch ("Ich bin: ..." in der Kopfzeile). Die Wahl laeuft ueber KL.wegWaehlen (app.js),
+     KL.willkommen.oeffnen({aendern})  dasselbe Fenster auf Wunsch ("Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile). Die Wahl laeuft ueber KL.wegWaehlen (app.js),
                                 es wird nichts gesendet. Texte: INHALT.willkommen (content-laien.js). */
   const WK = "kl-willkommen";
   const wkGesehen = () => { try { if (localStorage.getItem(WK)) return true; } catch (e) { /* ohne Speicher */ } try { return !!sessionStorage.getItem(WK); } catch (e) { return false; } };
@@ -322,7 +322,7 @@
     const x = h("button", { type: "button", class: "wk-x", "aria-label": T.schliessen, onclick: () => zu(null) }, KL.icon("x"));
     dlg.append(
       x,
-      h("h2", { id: "wk-t" }, T.titel),
+      h("h2", { id: "wk-t", tabindex: "-1" }, T.titel),
       h("p", { class: "wk-satz", id: "wk-s" }, T.satz),
       h("div", { class: "wk-wege" }, knoepfe),
       schalter,
@@ -341,7 +341,7 @@
     wkOffen = dlg;
     document.body.append(dlg);
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute("open", "");
-    try { knoepfe[0].focus({ preventScroll: true }); } catch (e) { /* egal */ }
+    try { dlg.querySelector("#wk-t").focus({ preventScroll: true }); } catch (e) { /* egal */ }      // Fokus auf die Überschrift: keine Kachel wirkt vorgewählt; Tab führt zur ersten Kachel (focus-visible)
     return dlg;
   }
   KL.willkommen = {

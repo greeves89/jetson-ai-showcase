@@ -101,26 +101,26 @@ S["uc-fertigung-sichtpruefung"] = {
       "{{anlernen?beispiel=fertigung-sichtpruefung|Beispiel starten}}",
     ]},
     {h: "Was dabei herauskommt",
-      kurz: "11 von 12 Testbildern und 60 von 60 Prüfbildern stimmten. Der eine Fehler war ein übersehener Ausschuss.",
+      kurz: "Meist werden fast alle Bilder richtig zugeordnet. Einzelne Fehler hängen von Bild, Beleuchtung und Modell ab.",
       visual: [
         {
           typ: "zahlen",
           kacheln: [
-            {wert: "11 von 12", label: "Testbilder richtig (Beispielwerte)", icon: "target"},
+            {wert: "11 bis 12 von 12", label: "Testbilder richtig (Beispielwerte, je nach Lauf)", icon: "target"},
             {wert: "60 von 60", label: "Prüfbilder richtig (Beispielwerte)", icon: "circle-check"},
-            {wert: "1", label: "Fehler: Ausschuss als Gut", icon: "triangle-alert"},
+            {wert: "0 bis 1", label: "Fehler: Ausschuss als Gut (je nach Lauf)", icon: "triangle-alert"},
           ],
         },
         {
           typ: "quelle",
           src: "/static/beispiele/fertigung-sichtpruefung/test/10.jpg",
-          alt: "Metallscheibe mit ausgebrochener Kante, vom Modell fälschlich als Gut eingestuft",
-          unter: "Testbild 10: Ausschuss, als Gut erkannt",
+          alt: "Metallscheibe mit ausgebrochener Kante, die ein Lauf fälschlich als Gut eingestuft hat",
+          unter: "Testbild 10: Ausschuss, in manchen Läufen als Gut erkannt",
         },
       ],
       p: [
-      "Gemessen wurde mit genau diesen Bildern und dem Verfahren des Labors. Von den 12 Testbildern wurden 11 richtig zugeordnet. Bei den 60 weiteren, frisch erzeugten Bildern waren es alle 60. Gemessen wurde auf einem Entwicklungsrechner mit denselben Modelldateien, nicht auf dem Jetson selbst. Nimm die Zahlen als Beispielwerte.",
-      "Der eine Fehler ist lehrreich: Auf dem Testbild 10 war eine Scheibe Ausschuss, das System nannte sie Gut. Das ist die teure Richtung, denn ein schlechtes Teil geht weiter. Die Balken liegen oft eng beieinander. Entscheidend ist, welche Klasse vorn liegt, aber ein knapper Vorsprung ist ein Zeichen, genauer hinzusehen.",
+      "Gemessen wurde mit genau diesen Bildern und dem Verfahren des Labors. Bei der Messung wurden von den 12 Testbildern 11 richtig zugeordnet, bei den 60 weiteren, frisch erzeugten Bildern alle 60. Gemessen wurde auf einem Entwicklungsrechner mit denselben Modelldateien, nicht auf dem Jetson selbst. Ein Lauf im Labor kann leicht abweichen, etwa mit allen 12 richtig, denn Ergebnis und Abstand der Balken hängen von Bild, Beleuchtung und Modell ab. Nimm die Zahlen als Beispielwerte.",
+      "Ein möglicher Fehler ist lehrreich: Auf dem Testbild 10 liegt eine Scheibe Ausschuss, die das System in der Messung Gut nannte. Das ist die teure Richtung, denn ein schlechtes Teil geht weiter. Die Balken liegen oft eng beieinander. Entscheidend ist, welche Klasse vorn liegt, aber ein knapper Vorsprung ist ein Zeichen, genauer hinzusehen.",
       "Wie gut ist das Ergebnis einzuordnen? Mit Vorsicht. Die Bilder sind gezeichnet, die Fehler sitzen immer ähnlich (Delle oben, Ausbruch unten). Deshalb reichen 20 Beispiele. Echte Teile glänzen, spiegeln und haben Fehler an beliebiger Stelle. Außerdem sind zwölf Testbilder eine kleine Menge: Ein einziger Fehler fällt dort stark ins Gewicht. Wie man solche Zahlen liest, steht auf der Seite {{bewertung|Wie gut ist ein Modell?}}.",
     ], alltag: [
       "Ein Fahrschüler besteht die Prüfung auf dem leeren Parkplatz. Das sagt etwas, aber noch nicht, wie er im Berufsverkehr bei Regen fährt. Die gezeichneten Bilder sind der leere Parkplatz.",
@@ -170,7 +170,7 @@ S["uc-fertigung-sichtpruefung"] = {
   ],
   mitnehmen: [
     "Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben.",
-    "Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
+    "Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
     "Das Ergebnis ist ein Vorschlag. Ein Mensch zieht Stichproben, besonders aus dem Gut-Fach.",
   ],
   quiz: [
@@ -186,7 +186,7 @@ S["uc-fertigung-sichtpruefung"] = {
     {frage: "Was bedeutet es, dass die Balken oft eng beieinander liegen?",
       optionen: ["Das Ergebnis ist immer falsch", "Das System ist sich bei diesem Bild unsicher, ein Mensch sollte hinsehen", "Die Kamera ist defekt", "Das Bild wurde nicht verarbeitet"],
       richtig: 1, erklaerung: "Die gewinnende Klasse entscheidet, aber ein knapper Abstand zeigt Unsicherheit. Solche Fälle lassen sich gezielt zur Prüfung vorlegen."},
-    {frage: "Wie belastbar sind die Werte 11 von 12 und 60 von 60 für deine eigene Fertigung?",
+    {frage: "Wie belastbar sind Werte wie 11 von 12 und 60 von 60 für deine eigene Fertigung?",
       optionen: ["Völlig, sie gelten für jede Fertigung", "Gar nicht, sie sind erfunden", "Sie sind Beispielwerte für gezeichnete Bilder und sagen wenig über echte Teile", "Sie gelten nur für den Jetson"],
       richtig: 2, erklaerung: "Die Bilder sind einfacher als echte Fertigung, und zwölf Testbilder sind wenig. Aussagekräftig wird erst ein Pilot mit eigenen Teilen."},
   ],
@@ -1143,7 +1143,7 @@ S["uc-buero-dokumente"] = {
   ],
   dreiSchritte: [
     "Sammle die Dokumente, nach denen oft gesucht wird, und kläre, wer sie lesen darf.",
-    "Probiere im Labor {{rag|Dokumente befragen}} einige echte Fragen aus, auch eine, deren Antwort nirgends steht.",
+    "Probiere im Labor {{rag|RAG-Werkstatt}} einige echte Fragen aus, auch eine, deren Antwort nirgends steht.",
     "Prüfe bei jeder Antwort die Quelle und lege fest, wer neue Dokumente einpflegt.",
   ],
   weiter: ["rag", "rag-ueberblick", "rag-suche", "rag-bewertung", "llm-grenzen", "uc-buero-protokoll", "uc-service-bestellung"],
@@ -1959,7 +1959,7 @@ S["uc-handwerk"] = {
         {icon: "list-checks", text: "Sortieren", sub: "Rechnung, Angebot, Lieferschein"},
         {icon: "user-check", text: "Du prüfst", sub: "Stichproben, Zweifelsfälle", farbe: "gruen"}]},
       p: [
-        "Rechnungen, Lieferscheine und Angebote landen im selben Posteingang. Ein System kann zuerst den Text aus dem Scan lesen ([[ocr|Texterkennung]]) und dann entscheiden, um welche Art von Dokument es sich handelt. Auch das Suchen in der Ablage wird leichter, wenn die Dokumente nach Inhalt gefunden werden: Das zeigt das Labor {{rag|Dokumente befragen}}.",
+        "Rechnungen, Lieferscheine und Angebote landen im selben Posteingang. Ein System kann zuerst den Text aus dem Scan lesen ([[ocr|Texterkennung]]) und dann entscheiden, um welche Art von Dokument es sich handelt. Auch das Suchen in der Ablage wird leichter, wenn die Dokumente nach Inhalt gefunden werden: Das zeigt das Labor {{rag|RAG-Werkstatt}}.",
         "Der Mensch bleibt dabei die letzte Instanz. Zweifelsfälle, Beträge und alles, was steuerlich zählt, prüfst du selbst. Lass das System anfangs nur vorsortieren und kontrolliere Stichproben.",
       ]},
   ],

@@ -27,9 +27,9 @@ seiten: {
     ]},
     {h: "Schritt 1: Der Text wird in Token zerlegt",
      kurz: "Das Modell liest Stücke aus einem festen Wortschatz. Häufiges ist ein Stück, Seltenes besteht aus mehreren.",
-     visual: {typ: "token", stuecke: ["Haus", "rat", "versicherung"], unter: "Beispiel: Die echte Zerlegung hängt vom Modell ab."}, p: [
+     visual: {typ: "token", stuecke: ["Haus", "rat", "versicherung"], unter: "Beispielwerte: Jedes Modell zerlegt anders. Das Tokenizer-Labor unten nutzt einen vereinfachten Wortschatz und teilt dasselbe Wort feiner."}, p: [
       "Ein Computer rechnet nicht mit Wörtern, sondern mit Zahlen. Darum wird jeder Text zuerst in [[token|Token]] zerlegt. Ein Token ist ein Stück, das häufig vorkommt: ein kurzes Wort, eine Silbe, ein Wortteil, ein Satzzeichen. Die Liste aller Stücke, die das Modell kennt, ist fest und heißt [[wortschatz|Wortschatz]].",
-      "Häufige Wörter sind ein Token, seltene bestehen aus mehreren. „Haus“ ist wahrscheinlich ein Stück. „Hausratversicherung“ zerfällt in mehrere. Deutsche Wörter brauchen im Schnitt mehr Token als englische, weil die Wortschätze meist auf viel englischem Text beruhen und Zusammensetzungen lang sind.",
+      "Häufige Wörter sind ein Token, seltene bestehen aus mehreren. „Haus“ ist wahrscheinlich ein Stück. „Hausratversicherung“ zerfällt in mehrere, im Bild oben beispielhaft in drei. Wie viele Stücke es genau sind, hängt vom Wortschatz des Modells ab: Das Tokenizer-Labor unten arbeitet mit einem vereinfachten Wortschatz und zerlegt dasselbe Wort in mehr, kleinere Stücke. Beides ist plausibel, nur die Zahl unterscheidet sich. Deutsche Wörter brauchen im Schnitt mehr Token als englische, weil die Wortschätze meist auf viel englischem Text beruhen und Zusammensetzungen lang sind.",
       "Daraus folgen Dinge, die du im Alltag merkst. Das Modell sieht keine Buchstaben, sondern Stücke. Darum verzählt es sich bei der Frage, wie oft ein Buchstabe in einem Wort vorkommt. Und alles, was ein Modell kostet oder fasst, wird in Token gemessen, nicht in Wörtern.",
     ], alltag: [
       "Stell dir einen Kasten Lego vor. Du baust jedes Haus aus festen Steinen. Häufige Formen gibt es als fertigen Stein, für Ausgefallenes setzt du mehrere zusammen. Ein Tokenizer zerlegt Text genauso: in Steine aus einem festen Kasten. Es gibt kein Wort, das sich nicht aus den Steinen bauen ließe.",

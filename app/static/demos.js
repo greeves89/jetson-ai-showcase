@@ -1182,6 +1182,7 @@
     const L = leben();
     let busy = false, ctrl = null, hatText = false;
     const meld = meldungBox();
+    const antwortMeld = meldungBox();      // Fehler der Frage erscheinen direkt am Antwortfeld, nicht oben auf der Seite
 
     /* Schritt 1 */
     const text = h("textarea", { rows: 6, maxlength: 300000, placeholder: "Füge hier einen Text ein, zum Beispiel ein Handbuch oder Notizen.", "aria-label": "Text zum Einlesen" });
@@ -1198,17 +1199,18 @@
     const fragBtn = h("button", { type: "button", class: "btn primary klein" }, ic("search"), "Fragen");
     const FRAGEN = ["Wie hoch ist das Gesamtbudget?", "Wer ist für die Bauüberwachung zuständig?", "Wann ist der erste Spatenstich?", "Was ist das größte Risiko?"];
     const chips = h("div", { class: "vorschlaege", "aria-label": "Beispielfragen zum Beispieltext" }, FRAGEN.map((f) => h("button", { type: "button", class: "chip", onclick: () => { frage.value = f; fragen(); } }, f)));
+    const wartehinweis = h("p", { class: "d-hinweis d-warte", role: "status", hidden: true });      // erklärt, warum die Beispielfragen gerade gesperrt sind
     const sucheSatz = h("p", { class: "d-hinweis", "aria-live": "polite" });
     const trefferBox = h("div", { class: "treffer" });
     const s2 = h("div", { class: "schritt" }, h("div", { class: "nr" }, "2"),
       h("div", { class: "d-schrittinhalt" }, h("h3", null, "Frage stellen"), h("p", null, "Der Jetson sucht die Abschnitte, die zur Frage am besten passen."),
-        h("div", { class: "eingabe d-frage" }, frage, fragBtn), chips, sucheSatz, trefferBox));
+        h("div", { class: "eingabe d-frage" }, frage, fragBtn), chips, wartehinweis, sucheSatz, trefferBox));
 
     /* Schritt 3 */
     const antwort = h("div", { class: "satz d-antwort", "aria-live": "off" }, "Hier erscheint die Antwort.");
     const urteil = h("p", { class: "d-bsp-urteil", role: "status", "aria-live": "polite", hidden: true });
     const s3 = h("div", { class: "schritt" }, h("div", { class: "nr" }, "3"),
-      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwort, KL.kiHinweis(), urteil));
+      h("div", { class: "d-schrittinhalt" }, h("h3", null, "Antwort"), h("p", null, "Das Sprachmodell antwortet nur mit den gefundenen Abschnitten. Verweise wie [1] zeigen auf die Treffer."), antwortMeld.el, antwort, KL.kiHinweis(), urteil));
     let erwartet = null;            // Beispielfrage mit erwarteter Antwort (Beispielmodus)
     frage.addEventListener("input", () => { if (erwartet && frage.value !== erwartet.frage) erwartet = null; });
     function urteilZeigen(roh) {
@@ -1226,16 +1228,25 @@
     const live = liveBlock("Live-Erklärung");
     live.text("Lies einen Text ein und stelle eine Frage. Dann siehst du hier, wie lange Suchen und Antworten dauern.");
     root.append(meld.el, s1, s2, s3, live.el);
+    let wartetAuf = "";             // was gerade läuft: "lesen" oder "fragen"
+    const WARTE = { lesen: "Ich lese die Dokumente noch ein, einen Moment.", fragen: "Ich beantworte gerade eine Frage, einen Moment." };
+    const chipKnoepfe = () => Array.from(chips.querySelectorAll("button"));
 
     const ok = (s, an) => s.classList.toggle("ok", an);
-    function setBusy(b) { busy = b; [bspBtn, lesenBtn, resetBtn, fragBtn].forEach((x) => { x.disabled = b; }); }
+    /* Während etwas läuft, sind alle Knöpfe und Beispielfragen gesperrt und ein Satz sagt, worauf gewartet wird (kein stummes Ignorieren). */
+    function setBusy(b, was) {
+      busy = b; wartetAuf = b ? (was || wartetAuf || "fragen") : "";
+      [bspBtn, lesenBtn, resetBtn, fragBtn, ...chipKnoepfe()].forEach((x) => { x.disabled = b; });
+      wartehinweis.textContent = b ? WARTE[wartetAuf] : "";
+      wartehinweis.hidden = !b;
+    }
 
     bspBtn.addEventListener("click", () => { text.value = BEISPIELTEXT; text.focus(); });
     lesenBtn.addEventListener("click", async () => {
       const t = text.value.trim();
       if (!t) { meld.zeige("Füge zuerst einen Text ein oder nutze den Beispieltext."); return; }
       if (busy) return;
-      setBusy(true); meld.weg(); lesenBtn.textContent = "Liest ein…";
+      setBusy(true, "lesen"); meld.weg(); lesenBtn.textContent = "Liest ein…";
       ctrl = L.abbruch();
       try {
         const r = await postS("/api/rag/upload", { text: t }, ctrl.signal);
@@ -1281,7 +1292,7 @@
     async function fragen() {
       const f = frage.value.trim().slice(0, 300);
       if (!f || busy) return;
-      setBusy(true); meld.weg(); ok(s2, false); ok(s3, false); urteil.hidden = true;
+      setBusy(true, "fragen"); meld.weg(); antwortMeld.weg(); ok(s2, false); ok(s3, false); urteil.hidden = true;
       trefferBox.replaceChildren(); sucheSatz.textContent = "Der Jetson vergleicht deine Frage mit den Abschnitten…";
       antwort.textContent = "Wartet auf die Suche…";
       live.pipe([]);
@@ -1373,10 +1384,10 @@
         if (m) {
           const belegt = istBelegt(e) || KL.last.istBelegtText(m);
           // Ausgelastet ist kein Fehler des Besuchers: freundlicher Text, Wiederholknopf, die Frage bleibt stehen
-          meld.zeige(m, () => fragen());
+          antwortMeld.zeige(m, () => fragen());
           live.text(belegt ? "Der Rechner ist gerade ausgelastet. Drücke auf Noch einmal versuchen, sobald du magst." : "Das hat diesmal nicht geklappt. Du kannst es gleich noch einmal versuchen.");
           if (!karten.length) sucheSatz.textContent = "";
-          antwort.textContent = belegt ? "Die Antwort kommt, sobald der Rechner frei ist." : "Diesmal gab es keine Antwort. Die Meldung oben sagt, woran es lag.";
+          antwort.textContent = belegt ? "Die Antwort kommt, sobald der Rechner frei ist." : "Diesmal gab es keine Antwort. Die Meldung darüber sagt, woran es lag.";
         }
       }
       finally { setBusy(false); }
@@ -1388,7 +1399,7 @@
     beispielStart(root, seite, "rag", L, async (e, kopfB) => {
       const dokus = (e.daten && e.daten.dokumente) || [];
       const fragenListe = (e.daten && e.daten.fragen) || [];
-      setBusy(true);
+      setBusy(true, "lesen");
       try {
         kopfB.text("Der Jetson wird vorbereitet: Alte Abschnitte löschen …");
         const r0 = await postS("/api/rag/reset", {}, ctrl2().signal);
@@ -1411,7 +1422,7 @@
         live.text("Die Dokumente sind eingelesen. Wähle eine Beispielfrage. Eine davon ist eine Fangfrage: Ihre Antwort steht in keinem Dokument.");
       } catch (err) { const m = netzFehler(err); if (m) meld.zeige(m); kopfB.text("Das Einlesen ist abgebrochen."); setBusy(false); return; }
       setBusy(false);
-      chips.replaceChildren(...fragenListe.map((f) => h("button", { type: "button", class: "chip", onclick: () => { if (busy) return; erwartet = f; frage.value = f.frage; fragen(); } }, f.frage)));
+      chips.replaceChildren(...fragenListe.map((f) => h("button", { type: "button", class: "chip", onclick: () => { if (busy) { setBusy(true); return; } erwartet = f; frage.value = f.frage; fragen(); } }, f.frage)));
       chips.setAttribute("aria-label", "Beispielfragen zu den Dokumenten");
       kopfB.text("Fertig: " + dokus.length + " Dokumente eingelesen. Wähle eine Beispielfrage, der Klick startet die Suche.");
       // Die Frage im Feld muss zu den Beispieldokumenten passen (nicht zum Orion-Beispieltext): erste Beispielfrage einsetzen
@@ -1497,7 +1508,7 @@
       status.hidden = false; status.textContent = "Das Modell überlegt…";
       ctrl = new AbortController(); const sig = ctrl.signal;
       const t0 = performance.now();
-      let letzteZeit = t0, schritte = 0, verarbeitetBis = 0, antwortKarte = null, antwortText = null, segs = [];
+      let letzteZeit = t0, schritte = 0, verarbeitetBis = 0, antwortKarte = null, antwortText = null, segs = [], leereWerkzeuge = 0;
       live.text("Der Jetson schickt deine Frage und die Beschreibung der drei Werkzeuge an das Modell. Das Modell entscheidet, ob es ein Werkzeug braucht.");
       live.pipe([]);
       const zeitStreifen = () => live.pipe(segs, "Zeit je Schritt");
@@ -1521,6 +1532,7 @@
             const m = /^\[Werkzeug\] ([^(]+)\((.*?)\)  ->  ([\s\S]*)$/.exec(z);
             if (!m) continue;
             schritte++;
+            if (/nichts gefunden|nicht gefunden/i.test(m[3])) leereWerkzeuge++;           // das Werkzeug fand nichts: Antwort später gegenprüfen
             karten.append(schrittKarte(schritte, m[1].trim(), m[2], m[3]));
             segs.push({ k: "s" + schritte, cls: "s" + (((schritte - 1) % 3) + 3), wert: jetzt - letzteZeit, text: sekText(jetzt - letzteZeit), name: "Schritt " + schritte + ": " + m[1].trim() });
             letzteZeit = jetzt;
@@ -1548,6 +1560,11 @@
         const gesamtMs = performance.now() - t0;
         if (!antwortKarte) throw new Error("Das Modell hat keine Antwort geliefert. Versuche es mit einer anderen Formulierung.");
         zeitStreifen();
+        // Widerspruch markieren: Das Werkzeug meldete "nichts gefunden", die Antwort klingt aber nach Erfolg (kein "nicht", "kein", "leider" ...)
+        if (leereWerkzeuge > 0 && antwortKarte.classList.contains("antwort") && !/\b(nicht|kein\w*|nichts|leider|unbekannt|weiß)\b/i.test(antwortText.textContent)) {
+          antwortKarte.classList.add("d-widerspruch");
+          antwortKarte.append(h("p", { class: "d-erkl d-warnung", role: "note" }, ic("alert"), h("span", null, h("b", null, "Das Werkzeug fand nichts, die Antwort des Modells kann erfunden sein. "), "Prüfe sie gegen das Ergebnis oben.")));
+        }
         urteilZeigen(antwortText.textContent);
         status.textContent = schritte + (schritte === 1 ? " Werkzeug-Schritt" : " Werkzeug-Schritte") + ", Gesamtzeit " + sekText(gesamtMs) + ".";
         live.text(fett("Fertig. "), schritte === 0 ? "Das Modell hat ohne Werkzeug geantwortet. " : "Das Modell hat " + schritte + (schritte === 1 ? " Werkzeug" : " Werkzeuge") + " gewählt, der Jetson hat sie ausgeführt. ", "Alles zusammen dauerte " + sekText(gesamtMs) + ". Jeder Abschnitt im Streifen ist die Zeit bis zum nächsten Ergebnis.");

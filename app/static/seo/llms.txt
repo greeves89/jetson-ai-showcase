@@ -65,7 +65,7 @@ Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.
 - [Suchen: Stichwort, Vektor und Hybrid](__BASIS__/rag-suche): Es gibt zwei Arten, Stücke zu finden: nach Wörtern und nach Bedeutung.
 - [Reranking: erst grob, dann genau](__BASIS__/rag-reranking): Die erste Suche sortiert grob, aber schnell.
 - [RAG messen und verbessern](__BASIS__/rag-bewertung): Drei gute Beispielantworten beweisen nichts.
-- [RAG: Fragen an eigene Dokumente](__BASIS__/rag): Das Modell kennt deine Dokumente nicht.
+- [RAG-Werkstatt: Fragen an eigene Dokumente](__BASIS__/rag): Das Modell kennt deine Dokumente nicht.
 
 ## Agenten
 
@@ -140,6 +140,7 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Datenschutz im Alltag: was Apps über dich wissen](__BASIS__/datenschutz-im-alltag): Fast jede App sammelt Daten.
 - [Gute Fragen an die KI stellen](__BASIS__/prompts-fuer-schueler): Bessere Frage, bessere Antwort.
 - [KI in deinem Alltag: wo sie überall steckt](__BASIS__/schueler-alltag-ki): Feed, Filter, Übersetzer, Spiele, Playlist: KI ist schon da, auch wenn niemand "KI" draufschreibt.
+- [KI zu Hause: Was Eltern wissen sollten](__BASIS__/eltern-zuhause): Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.
 
 ## Optional
 

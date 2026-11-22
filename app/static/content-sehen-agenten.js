@@ -307,7 +307,7 @@ Object.assign(seiten, {
      kurz: "Das Modell behält nichts. Es kennt nur den mitgeschickten Verlauf und Notizen außerhalb.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [{icon: "notebook-pen", text: "Notizen", sub: "Datei, Datenbank: bleiben"}, {icon: "scroll-text", text: "Kontext", sub: "Verlauf: begrenzt"}, {icon: "brain", text: "Modell", sub: "behält nichts"}]}, p: [
       "Das Modell selbst behält zwischen zwei Aufrufen nichts. Was es „weiß“, steht im Verlauf, der jedes Mal mitgeschickt wird: Aufgabe, bisherige Aufrufe, Ergebnisse. Dieser Verlauf heißt [[kontext|Kontext]] und hat eine Obergrenze.",
-      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Genau so funktioniert die Dokumentsuche im {{rag|RAG-Labor}}.",
+      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Genau so funktioniert die Dokumentsuche im {{rag|RAG-Werkstatt}}.",
     ], alltag: "Ein Kollege mit gutem Kurzzeitgedächtnis kann sich auf einem Telefonat alles merken, solange es dauert. Danach ist es weg. Wer es später braucht, schreibt es in die Akte."},
     {h: "Ein Durchlauf an einem Beispiel",
      kurz: "Drei Runden, kein Schritt war vorher festgelegt: rechnen, Uhrzeit holen, antworten.",

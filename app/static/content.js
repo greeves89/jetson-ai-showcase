@@ -60,7 +60,7 @@ start: {
     "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
     "Der Rechner dahinter": {symbol: "hardware", satz: "Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?"},
   },
-  datenschutz: "Kamera und Mikrofon starten nur, wenn du zustimmst. Bilder und Aufnahmen werden nicht gespeichert. Texte, die du ins Dokumenten-Labor einfügst, bleiben kurz im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe.",
+  datenschutz: "Kamera und Mikrofon starten nur, wenn du zustimmst. Bilder und Aufnahmen werden nicht gespeichert. Texte, die du in die RAG-Werkstatt einfügst, bleiben kurz im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe.",
 },
 
 /* ------------------------------------------------------------------ Grundlagen */
@@ -222,7 +222,7 @@ genki: {
       {icon: "file-text", text: "Fundstellen"},
       {icon: "circle-check", text: "Antwort", sub: "mit Quelle", farbe: "gruen"}]},
      p: [
-      "Weil das Modell Wahrscheinliches fortsetzt, kann es Falsches überzeugend formulieren, eine [[halluzination|Halluzination]]. Ein Gegenmittel ist [[rag|RAG]]: Erst wird in eigenen Dokumenten nachgeschlagen, dann antwortet das Modell auf Grundlage der Fundstellen und nennt sie als Quelle. Das probierst du im {{rag|RAG-Labor}}.",
+      "Weil das Modell Wahrscheinliches fortsetzt, kann es Falsches überzeugend formulieren, eine [[halluzination|Halluzination]]. Ein Gegenmittel ist [[rag|RAG]]: Erst wird in eigenen Dokumenten nachgeschlagen, dann antwortet das Modell auf Grundlage der Fundstellen und nennt sie als Quelle. Das probierst du im {{rag|RAG-Werkstatt}}.",
     ]},
     {h: "Bilder aus Rauschen",
      kurz: "Diffusion startet mit Rauschen und entfernt es Schritt für Schritt, gelenkt von deiner Beschreibung.",
@@ -359,7 +359,7 @@ business: {
     "Lokal lohnt sich bei sensiblen Daten und schneller Reaktion.",
     "Fang klein an und miss gegen den heutigen Ablauf.",
   ],
-  weiter: ["gesicht", "chat", "agent"],
+  weiter: ["uc-handwerk", "gesicht", "chat", "agent"],
 },
 
 /* ------------------------------------------------------------------ Labor: Sehen */
@@ -560,7 +560,7 @@ chat: {
 },
 
 rag: {
-  nav: "RAG", typ: "labor", gruppe: "Wissen und RAG", titel: "RAG: Fragen an eigene Dokumente", symbol: "rag", demo: "rag",
+  nav: "RAG-Werkstatt", typ: "labor", gruppe: "Wissen und RAG", titel: "RAG-Werkstatt: Fragen an eigene Dokumente", symbol: "rag", demo: "rag",
   lernziele: ["Du kannst erklären, warum ein Sprachmodell deine Dokumente nicht kennt.", "Du kannst die vier Schritte von der Frage bis zur Antwort nennen.", "Du kannst an den Scores ablesen, wie gut eine gefundene Stelle passt."],
   kurz: "Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit.",
   abschnitte: [
@@ -792,11 +792,11 @@ hardware: {
     {h: "Gemeinsamer Speicher",
      kurz: "CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [
-      {icon: "brain", text: "Geladenes Modell", sub: "immer nur eins"},
+      {icon: "brain", text: "Geladenes Modell", sub: "bis zu zwei, je nach Größe"},
       {icon: "cpu", text: "CPU und GPU", sub: "rechnen im selben Speicher"},
       {icon: "memory-stick", text: "Gemeinsamer Speicher", sub: "8 GB für alles"}]},
      p: [
-      "CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen und immer nur eins zur Zeit geladen ist. Der Speicher in der Anzeige oben ist die wichtigste Grenze.",
+      "CPU und GPU teilen sich denselben Arbeitsspeicher von 8 GB. Ein Modell, das 5 GB braucht, lässt kaum Platz für das Betriebssystem. Das ist der Grund, warum hier kleine Modelle laufen. Der Jetson hält bis zu zwei Modelle gleichzeitig im Speicher (Einstellung OLLAMA_MAX_LOADED_MODELS=2), zum Beispiel ein Sprachmodell und ein Embedding-Modell. Zwei große Modelle passen nicht zusammen hinein. Der Speicher in der Anzeige oben ist die wichtigste Grenze.",
     ]},
     {h: "Was die Anzeigen bedeuten",
      kurz: "Fünf Werte zeigen, wie ausgelastet der Jetson ist und wie viel Spielraum bleibt.",

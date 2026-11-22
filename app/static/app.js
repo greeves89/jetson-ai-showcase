@@ -41,7 +41,7 @@
      Wege: schule, lehrende, erwachsene (Alias neugierig), technik, beruf, eltern. Jeder /?weg=... wirkt wie /?weg=schule, ohne zu speichern.
      KL.weg liefert den aktiven Weg oder null, KL.gelesen(id) ob eine Seite als gelesen gilt.
      Willkommens-Fenster (laien.js, Texte INHALT.willkommen): erscheint nur beim ersten Besuch der Startseite, nutzt KL.wegListe() (Schluessel, Titel, Symbol)
-       und KL.wegWaehlen(schluessel); "Ich bin: ..." in der Kopfzeile oeffnet dieselbe Karte (KL.willkommen.oeffnen). Die Karte blockiert nichts (kein Modal).
+       und KL.wegWaehlen(schluessel); "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile oeffnet dieselbe Karte (KL.willkommen.oeffnen). Die Karte blockiert nichts (kein Modal).
        localStorage kl-willkommen merkt, dass sie gesehen wurde.
    TEXTAUSZEICHNUNG KL.md: **fett**, `code`, [[glossar|Text]], {{seite|Text}} und [Text](Adresse). Adressen nur mit https:// oder / am Anfang
      (kein // und keine anderen Schemata, sonst bleibt es Klartext); alles wird zuerst escaped. Externe Adressen (https://) bekommen
@@ -250,8 +250,29 @@
         const kap = (v.kapitel || []).map((k) => h("li", null,
           h("button", { type: "button", dataset: { t: k.t }, onclick: () => { video.currentTime = k.t; video.play(); } },
             h("span", { class: "t" }, mmss(k.t)), k.titel)));
+        // Untertitel: Am Handy verdecken sie den Bildtext und das Schlussbild. Dort laufen sie als Zeile UNTER dem Bild; im Vollbild und auf breiten Schirmen bleibt es beim Untertitel des Browsers.
+        const unter = h("p", { class: "untertitel", "aria-hidden": "true", hidden: true });
+        const spur = video.textTracks && video.textTracks[0];
+        const schmal = window.matchMedia("(max-width: 600px)");
+        let vollbild = false;
+        const unterZeigen = () => {
+          const eigen = !!spur && spur.mode === "hidden";
+          unter.hidden = !eigen;
+          unter.textContent = eigen ? Array.from(spur.activeCues || []).map((c) => String(c.text).replace(/<[^>]+>/g, "").replace(/\s*\n\s*/g, " ")).join(" ") : "";
+        };
+        const unterModus = () => { if (!spur) return; spur.mode = schmal.matches && !vollbild ? "hidden" : "showing"; unterZeigen(); };
+        if (spur) {
+          spur.addEventListener("cuechange", unterZeigen);
+          video.addEventListener("loadedmetadata", unterModus);
+          const vb = (an) => () => { vollbild = an; unterModus(); };
+          video.addEventListener("webkitbeginfullscreen", vb(true)); video.addEventListener("webkitendfullscreen", vb(false));
+          const aufModus = () => { if (!video.isConnected) { schmal.removeEventListener("change", aufModus); document.removeEventListener("fullscreenchange", aufVoll); return; } unterModus(); };
+          const aufVoll = () => { if (!video.isConnected) { document.removeEventListener("fullscreenchange", aufVoll); return; } vollbild = !!document.fullscreenElement && document.fullscreenElement.contains(video); unterModus(); };
+          schmal.addEventListener("change", aufModus); document.addEventListener("fullscreenchange", aufVoll);
+          unterModus();
+        }
         const kopf = h("div", { class: "video" + (kap.length ? "" : " leer") },
-          h("div", { class: "spieler" }, video), kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel" }, kap) : null);
+          h("div", { class: "spieler-spalte" }, h("div", { class: "spieler" }, video), unter), kap.length ? h("ol", { class: "kapitel", "aria-label": "Kapitel" }, kap) : null);
         // Kennzeichnung nach KI-Verordnung (Art. 50): zentral fuer jedes Video, nicht je Datei
         const teile = [kopf, h("p", { class: "video-ki" }, icon("audio-lines"),
           h("span", null, "Sprecherstimme KI-erzeugt. Mehr dazu unter ", h("a", { href: "/lizenzen" }, "Lizenzen und Quellen"), "."))];
@@ -375,8 +396,50 @@
     lesezeitCache.set(sd, r);
     return r;
   }
-  /** Minuten fuer einen Pfad: kurz lesen plus 3 Minuten fuer Labor oder Demo. */
-  const seitenMinuten = (id) => { const sd = INHALT.seiten[id]; return lesezeit(sd).kompakt + (sd.widget || sd.demo ? 3 : 0); };
+  /* Zeitangaben: EINE Rechnung fuer Startkarten, Pfadkarten, Schritt-Listen und Seitenkopf.
+     Lesen = Wortzahl durch 190 je Minute, im gewaehlten Lesemodus (kompakt oder genau). Das Video steht getrennt dabei (Laenge aus dem Videokatalog),
+     ebenso ein Labor (pauschal 3 Minuten). Quiz und Aufgaben sind nicht eingerechnet. */
+  const LABOR_MIN = 3;
+  const videoDauer = new Map();                            // Video-ID -> Sekunden, gefuellt nach dem Laden des Videokatalogs (Seiten kommen nachgeladen, darum erst beim Rechnen zusammengezaehlt)
+  const zeitFelder = [];                                   // { el, fn }: Textfelder, die sich bei Lesemodus und Videokatalog neu beschriften
+  const lesemodusZeit = () => (lesemodus === "ausfuehrlich" ? "ausfuehrlich" : "kompakt");
+  function seitenZeit(id) {
+    const sd = INHALT.seiten[id];
+    if (!sd) return { lesen: 0, video: 0, labor: 0 };
+    const lz = lesezeit(sd);
+    const vids = sd.videos || (sd.video ? [sd.video] : []);
+    return { lesen: (sd.abschnitte || []).length ? lz[lesemodusZeit()] : 0, video: Math.round(vids.reduce((n, v) => n + (videoDauer.get(v) || 0), 0)), labor: sd.widget || sd.demo ? LABOR_MIN : 0 };
+  }
+  /** Minuten Lesen fuer eine Liste von Seiten (im gewaehlten Lesemodus). */
+  const lesenMinuten = (ids) => [].concat(ids).reduce((n, id) => n + seitenZeit(id).lesen, 0);
+  /** Einheitlicher Wortlaut: "ca. 9 Min Lesen, plus Video 1:30, plus Labor ca. 3 Min". Mehrere Seiten werden zusammengezaehlt. */
+  function zeitText(ids) {
+    const z = [].concat(ids).map(seitenZeit);
+    const lesen = z.reduce((n, x) => n + x.lesen, 0), video = z.reduce((n, x) => n + x.video, 0), labor = z.reduce((n, x) => n + x.labor, 0);
+    const teile = [];
+    if (lesen) teile.push("ca. " + lesen + " Min Lesen");
+    if (video) teile.push((teile.length ? "plus " : "") + "Video " + mmss(video));
+    if (labor) teile.push((teile.length ? "plus " : "") + "Labor ca. " + labor + " Min");
+    return teile.join(", ") || "ca. 1 Min";
+  }
+  /** Textfeld, das immer zeitText(ids) zeigt (vor und nach sind feste Textteile davor und dahinter). */
+  function zeitFeld(ids, vor, nach, klasse) {
+    const fn = () => (vor || "") + zeitText(ids) + (nach ? nach() : "");
+    const el = h("span", { class: klasse || null }, fn());
+    zeitFelder.push({ el, fn });
+    return el;
+  }
+  function zeitenAktualisieren() {
+    for (let i = zeitFelder.length - 1; i >= 0; i--) {
+      const f = zeitFelder[i];
+      if (f.el.isConnected) { f.sah = true; f.el.textContent = f.fn(); }
+      else if (f.sah) zeitFelder.splice(i, 1);           // Seite gewechselt: Feld ist weg
+    }
+  }
+  manifestP.then((m) => {
+    for (const v of m.videos || []) if (v && v.id && v.dauer_s) videoDauer.set(v.id, v.dauer_s);
+    zeitenAktualisieren();
+  });
 
   /* Wege (Rollen): freiwillig, nie ein Alterstor. Gewaehlt = localStorage kl-weg (ein Wort). Aus dem Link /?weg=schule gilt der Weg nur
      in dieser Sitzung im Speicher der Seite, ohne etwas abzulegen. */
@@ -891,6 +954,7 @@
     for (const b of $$(".lesemodus button")) b.setAttribute("aria-pressed", b.dataset.modus === m ? "true" : "false");
     for (const g of $$(".lesemodus")) g.style.setProperty("--i", String(MODI.indexOf(m)));
     for (const t of $$(".lese-hilfe-text")) t.textContent = leseHilfe(m);
+    zeitenAktualisieren();
   }
   /** Erklaert in einem Satz, was der Umschalter tut (steht unter der Seitenueberschrift und als Tooltip). */
   function leseHilfe(m) {
@@ -939,18 +1003,18 @@
     chipZeigen();
     if (neuZeichnen && aktuelleId === "start") route(window.scrollY);
   }
-  /** Kleiner Hinweis "Ich bin: ..." in der Kopfzeile; Antippen fuehrt zur Auswahl auf der Startseite. */
+  /** Kleiner Hinweis "Rollenname wie im Fenster (z. B. "Ich will KI verstehen)" in der Kopfzeile; Antippen fuehrt zur Auswahl auf der Startseite. */
   function wegChip(klasse) {
-    return h("button", { type: "button", class: "weg-chip " + klasse, hidden: true, onclick: wegAendern }, icon("user-round"), h("span", { class: "weg-ich" }, "Ich bin: "), h("b"));
+    return h("button", { type: "button", class: "weg-chip " + klasse, hidden: true, onclick: wegAendern }, icon("user-round"), h("b"));
   }
   function chipZeigen() {
     const w = aktiverWeg();
     for (const c of $$(".weg-chip")) {
       c.hidden = !w;
       if (!w) continue;
-      $("b", c).textContent = WEGE[w].ich;
+      $("b", c).textContent = WEGE[w].titel;           // wie im Willkommens-Fenster ("Ich will KI verstehen")
       c.title = (wegUrl ? "Dieser Weg kommt aus dem Link und wird nicht gespeichert. " : "") + "Tippen, um den Weg zu ändern";
-      c.setAttribute("aria-label", "Ich bin: " + WEGE[w].ich + ". Weg ändern");
+      c.setAttribute("aria-label", WEGE[w].titel + ". Weg ändern");
     }
   }
   function wegAendern() {
@@ -1127,7 +1191,7 @@
       return h("li", null, h("a", { href: adresse(e.id) },
         h("span", { class: "nummer", "aria-hidden": "true" }, String(i + 1)),
         h("span", { class: "start-text" }, h("b", null, e.h), e.p ? h("span", { html: md(e.p) }) : null,
-          e.min ? h("span", { class: "start-min" }, "ca. " + e.min + " Min") : null),
+          zeitFeld(e.id, "", null, "start-min")),
         besuchtZeigen && gelesen.has(e.id) ? h("span", { class: "ok", title: "schon gelesen" }, icon("check")) : null,
         icon("chevron")));
     }));
@@ -1156,18 +1220,17 @@
     const gel = gelesen.has(id);
     return karte({ symbol: sd.symbol, kicker: o.kicker || (sd.typ === "labor" ? "Labor" : sd.widget || sd.demo ? "Zum Ausprobieren" : "Lektion"),
       titel: o.h || sd.nav || sd.titel, text: o.satz || ersterSatz(sd.kurz || "", 100),
-      meta: "ca. " + seitenMinuten(id) + " Min" + (gel ? ", gelesen" : ""), href: adresse(id), knopf: o.knopf || (gel ? "Noch einmal ansehen" : "Öffnen"), dataset: { seite: id } });
+      meta: zeitFeld(id, "", gel ? () => ", gelesen" : null), href: adresse(id), knopf: o.knopf || (gel ? "Noch einmal ansehen" : "Öffnen"), dataset: { seite: id } });
   }
   /** Raster der Labore ohne Kamera (INHALT.experimente, content-experimente.js): Start der Rolle Schule und Seite "Experimente". */
   function experimenteRaster(max) {
     const liste = (INHALT.experimente || []).filter((e) => gibt(e.id)).slice(0, max || 99);
     return h("div", { class: "karten karten-3 experimente" }, liste.map((e) => karte({ symbol: e.symbol, kicker: e.hinweis || "Ohne Kamera", titel: e.titel, text: e.satz,
-      meta: "ca. " + seitenMinuten(e.id) + " Min", href: adresse(e.id), knopf: "Starten", dataset: { seite: e.id } })));
+      meta: zeitFeld(e.id), href: adresse(e.id), knopf: "Starten", dataset: { seite: e.id } })));
   }
   /** Karte eines Lernpfades: Stufe oder Rolle, Umfang, Fortschritt, "Weiter" und die Seitenliste. */
   function pfadKarte(p) {
     const n = p.ids.filter((id) => gelesen.has(id)).length;
-    const min = p.ids.reduce((sum, id) => sum + seitenMinuten(id), 0);
     const next = pfadNaechste(p);
     const anteil = Math.round(n / p.ids.length * 100);
     const tag = p.stufe ? "Stufe " + p.stufe + " von 4" : (WEGE[p.rolle] ? WEGE[p.rolle].name : "Pfad");
@@ -1179,9 +1242,9 @@
         h("span", null, sd.nav || sd.titel, imSchulweg(id) ? h("small", { class: "kam" }, kameraHinweis) : null),
         gel ? h("span", { class: "sr-nur" }, " (gelesen)") : null));
     }));
-    const k = karte({ kicker: tag, titel: p.name, text: p.kurz, meta: p.ids.length + " Seiten, ca. " + min + " Min, " + n + " gelesen",
+    const k = karte({ kicker: tag, titel: p.name, text: p.kurz, meta: zeitFeld(p.ids, p.ids.length + " Schritte, ", () => ", " + n + " gelesen"),
       balken: anteil, balkenLabel: "Fortschritt im Pfad " + p.name, href: next ? adresse(next) : null, knopf: n ? "Weiter im Pfad" : "Pfad starten", fertig: !next, dataset: { pfad: p.id }, klasse: "pfad-karte" });
-    k.append(h("details", { class: "pfad-liste" }, h("summary", null, icon("chevron"), "Alle " + p.ids.length + " Seiten"), liste));
+    k.append(h("details", { class: "pfad-liste" }, h("summary", null, icon("chevron"), "Alle " + p.ids.length + " Schritte"), liste));
     return k;
   }
   /** "Weiter, wo du aufgehört hast": nur wenn schon etwas gelesen oder geöffnet wurde. */
@@ -1258,10 +1321,11 @@
     }
     if (name === "empfohlen") {
       const kand = (R.empfohlen || []).filter((e) => gibt(e.id) && zaehlbar(e.id));
+      const pfadIds = ((pfadeListe().find((q) => q.rolle === R.pfad) || {}).ids) || [];      // gleiche Zaehlung wie "Schritt n von m" am Seitenende
       const wahl = [...kand.filter((e) => !gelesen.has(e.id)), ...kand.filter((e) => gelesen.has(e.id))].slice(0, 3);
       return h("section", { class: "block", id: "empfohlen" }, kopf("sparkles", "Empfohlen für dich"),
         h("div", { class: "karten karten-3" }, wahl.map((e) => seitenKarte(e.id, { satz: e.satz, h: e.h,
-          kicker: R.pfad ? "Schritt " + (kand.indexOf(e) + 1) + " von " + kand.length : (/^uc-/.test(e.id) ? "Anwendungsfall" : null) }))));
+          kicker: R.pfad && pfadIds.includes(e.id) ? "Schritt " + (pfadIds.indexOf(e.id) + 1) + " von " + pfadIds.length : (/^uc-/.test(e.id) ? "Anwendungsfall" : null) }))));
     }
     if (name === "morgen") {
       const kand = (R.morgen || []).filter((e) => gibt(e.id));
@@ -1270,10 +1334,10 @@
     }
     if (name === "minuten") {
       const e = seite.entscheider;
-      const summe = e.schritte.reduce((n, x) => n + (x.min || 0), 0);
+      const schrittIds = e.schritte.map((x) => x.id);
       return h("section", { class: "block", id: "entscheider" }, kopf("briefcase", "In 15 Minuten"),
         h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
-          h("div", { class: "entscheider-fuss" }, h("span", null, "Zusammen etwa " + summe + " Minuten."),
+          h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
             h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
     }
     if (name === "repo" && R.repo) {
@@ -1291,13 +1355,13 @@
     montiert.push({ destroy: stats.on((d) => { punkt.classList.toggle("aus", !d.frisch); stand.textContent = statusSatz(d); }) });
     const zuWeitere = (anker) => (e) => { e.preventDefault(); zuAbschnitt(anker); };
     const e = seite.entscheider;
-    const summe = e.schritte.reduce((n, x) => n + (x.min || 0), 0);
+    const schrittIds = e.schritte.map((x) => x.id);
     // Alles uebrige liegt unter "Weitere Wege" (zugeklappt)
     const sAnfangen = h("section", { class: "block", id: "anfangen" }, h("h2", null, icon("smile"), "Neu hier? So fängst du an"),
-      h("p", { class: "start-lead" }, "Drei Schritte, etwa zehn Minuten, ohne Vorwissen."), schrittListe(anfangenFuer(seite), true));
+      h("p", { class: "start-lead" }, "Drei Schritte, ohne Vorwissen."), schrittListe(anfangenFuer(seite), true));
     const sEntscheider = w === "beruf" ? null : h("section", { class: "block", id: "entscheider" }, h("h2", null, icon("briefcase"), "In 15 Minuten"),
       h("div", { class: "entscheider-box" }, h("p", { class: "start-lead" }, ersterSatz(e.lead)), schrittListe(e.schritte, true),
-        h("div", { class: "entscheider-fuss" }, h("span", null, "Zusammen etwa " + summe + " Minuten."),
+        h("div", { class: "entscheider-fuss" }, zeitFeld(schrittIds, "Zusammen: "),
           h("a", { class: "btn primary", href: adresse(e.schritte[0].id) }, "Mit Schritt 1 starten"))));
     const pfade = pfadeListe();
     const stufen = pfade.filter((p) => p.stufe), rollen = pfade.filter((p) => p.rolle);
@@ -1319,8 +1383,8 @@
       h("div", { class: "weitere-in" }, wegBlock(), sAnfangen, sEntscheider, sPfade, sBereiche));
     const einstiege = w ? null : h("section", { class: "block einstiege", id: "einstiege" },
       h("div", { class: "karten karten-3" },
-        karte({ symbol: "smile", kicker: "Einstieg", titel: "Neu hier?", text: "Drei Schritte, ohne Vorwissen.", meta: "ca. 10 Min", href: "#anfangen", knopf: "Hier anfangen", onclick: zuWeitere("anfangen") }),
-        karte({ symbol: "briefcase", kicker: "Für Entscheider", titel: "In 15 Minuten", text: "Was KI einem Betrieb bringt, in vier Seiten.", meta: "ca. " + summe + " Min", href: "#entscheider", knopf: "Überblick", onclick: zuWeitere("entscheider") }),
+        karte({ symbol: "smile", kicker: "Einstieg", titel: "Neu hier?", text: "Drei Schritte, ohne Vorwissen.", meta: zeitFeld(anfangenFuer(seite).map((x) => x.id)), href: "#anfangen", knopf: "Hier anfangen", onclick: zuWeitere("anfangen") }),
+        karte({ symbol: "briefcase", kicker: "Für Entscheider", titel: "In 15 Minuten", text: "Was KI einem Betrieb bringt, in vier Seiten.", meta: zeitFeld(schrittIds), href: "#entscheider", knopf: "Überblick", onclick: zuWeitere("entscheider") }),
         karte({ symbol: "layers", kicker: "Orientierung", titel: "Alle Bereiche", text: "Alle Themen auf einen Blick.", meta: kacheln.length + " Bereiche", href: "#bereiche", knopf: "Ansehen", onclick: zuWeitere("bereiche") })),
       h("p", { class: "weg-fuss" }, h("button", { type: "button", class: "textlink", onclick: wegAendern }, icon("user-round"), "Für wen bist du hier? Weg wählen")));
     const fuss = h("section", { class: "block start-fuss" },
@@ -1374,8 +1438,8 @@
   function lesezeitKopf(seite) {
     if (!(seite.abschnitte || []).length) return null;
     const lz = lesezeit(seite);
-    return h("span", { class: "lz-kopf", title: "Lesezeit: ca. " + lz.kompakt + " Min kurz oder ca. " + lz.ausfuehrlich + " Min genau" },
-      icon("clock"), h("span", { class: "lz lz-k" }, "ca. " + lz.kompakt + " Min"), h("span", { class: "lz lz-g" }, "ca. " + lz.ausfuehrlich + " Min"));
+    return h("span", { class: "lz-kopf", title: "Lesezeit ohne Quiz: ca. " + lz.kompakt + " Min im kurzen Modus, ca. " + lz.ausfuehrlich + " Min im genauen Modus. Das Video und ein Labor kommen dazu." },
+      icon("clock"), zeitFeld(seite.id, "", null, "lz"));
   }
   /** Lernziele (Seitenfeld oder Ergaenzung in content-laien.js): eine Zeile, zum Aufklappen. */
   function lernzieleBlock(seite) {
@@ -1396,7 +1460,7 @@
     const sd = INHALT.seiten[next];
     return h("section", { class: "block pfad-weiter" }, h("h2", null, icon("route"), "Nächste Seite im Pfad"),
       h("div", { class: "weiter" }, h("a", { href: adresse(next) }, icon(sd.symbol), sd.titel)),
-      h("p", { class: "pfad-weiter-info" }, "Pfad „" + pf.name + "“, Seite " + (i + 1) + " von " + pf.ids.length + "."));
+      h("p", { class: "pfad-weiter-info" }, "Pfad „" + pf.name + "“, Schritt " + (i + 1) + " von " + pf.ids.length + "."));
   }
   /** Eine Seite gilt als gelesen, wenn das Seitenende im Bild war und mindestens MIN_LESEDAUER seit dem Oeffnen vergangen ist. */
   function lesefortschrittStarten(id) {

@@ -375,7 +375,7 @@
        {
         "@type": "ListItem",
         "position": 7,
-        "name": "RAG: Fragen an eigene Dokumente",
+        "name": "RAG-Werkstatt: Fragen an eigene Dokumente",
         "url": "__BASIS__/rag"
        }
       ]
@@ -654,7 +654,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-medienkompetenz",
       "name": "Medienkompetenz",
-      "numberOfItems": 7,
+      "numberOfItems": 8,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -697,6 +697,12 @@
         "position": 7,
         "name": "KI in deinem Alltag: wo sie überall steckt",
         "url": "__BASIS__/schueler-alltag-ki"
+       },
+       {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "KI zu Hause: Was Eltern wissen sollten",
+        "url": "__BASIS__/eltern-zuhause"
        }
       ]
      },
@@ -9161,8 +9167,8 @@
    }
   },
   "rag": {
-   "titel": "RAG: Fragen an eigene Dokumente · KI-Labor",
-   "ueberschrift": "RAG: Fragen an eigene Dokumente",
+   "titel": "RAG-Werkstatt: Fragen an eigene Dokumente · KI-Labor",
+   "ueberschrift": "RAG-Werkstatt: Fragen an eigene Dokumente",
    "beschreibung": "Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit. Deine Dokumente stecken nicht im Modell.",
    "typ": "seite",
    "datei": "content.js",
@@ -9203,8 +9209,8 @@
        "LearningResource"
       ],
       "@id": "__BASIS__/rag#artikel",
-      "headline": "RAG: Fragen an eigene Dokumente",
-      "name": "RAG: Fragen an eigene Dokumente",
+      "headline": "RAG-Werkstatt: Fragen an eigene Dokumente",
+      "name": "RAG-Werkstatt: Fragen an eigene Dokumente",
       "description": "Das Modell kennt deine Dokumente nicht. Also sucht der Jetson erst die passenden Stellen und antwortet dann nur damit. Deine Dokumente stecken nicht im Modell.",
       "url": "__BASIS__/rag",
       "mainEntityOfPage": {
@@ -9268,7 +9274,7 @@
        {
         "@type": "ListItem",
         "position": 2,
-        "name": "RAG: Fragen an eigene Dokumente",
+        "name": "RAG-Werkstatt: Fragen an eigene Dokumente",
         "item": "__BASIS__/rag"
        }
       ]
@@ -12181,7 +12187,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Business-Use-Cases",
-      "abstract": "Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
+      "abstract": "Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -12203,7 +12209,7 @@
       },
       "teaches": [
        "Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben.",
-       "Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
+       "Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.",
        "Das Ergebnis ist ein Vorschlag. Ein Mensch zieht Stichproben, besonders aus dem Gut-Fach."
       ],
       "about": [
@@ -12351,7 +12357,7 @@
        },
        {
         "@type": "Question",
-        "name": "Wie belastbar sind die Werte 11 von 12 und 60 von 60 für deine eigene Fertigung?",
+        "name": "Wie belastbar sind Werte wie 11 von 12 und 60 von 60 für deine eigene Fertigung?",
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Sie sind Beispielwerte für gezeichnete Bilder und sagen wenig über echte Teile. Die Bilder sind einfacher als echte Fertigung, und zwölf Testbilder sind wenig. Aussagekräftig wird erst ein Pilot mit eigenen Teilen."
@@ -15046,7 +15052,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
-      "abstract": "Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.",
+      "abstract": "Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -15068,7 +15074,7 @@
       },
       "teaches": [
        "Du brauchst einen Jetson Orin Nano mit 8 GB, eine NVMe-SSD und einen zweiten Rechner.",
-       "Der Weg: JetPack 6, Vorab-Check, Ollama mit zwei Modellen, zwei Skripte, Browser.",
+       "Der Weg: JetPack 6, Vorab-Check, Ollama 0.12.3 mit zwei Modellen, zwei Skripte, Browser. Mit sudo laufen nur Ollama und der Leistungsmodus.",
        "Die meisten Fehler sind Speicherfragen. Die Anleitung im Repo hat eine Tabelle dafür."
       ],
       "author": {
@@ -18049,6 +18055,146 @@
     ]
    }
   },
+  "eltern-zuhause": {
+   "titel": "KI zu Hause: Was Eltern wissen sollten · KI-Labor",
+   "ueberschrift": "KI zu Hause: Was Eltern wissen sollten",
+   "beschreibung": "Ist das KI-Labor sicher für Kinder? Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.",
+   "typ": "seite",
+   "datei": "content-eltern.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/eltern-zuhause#artikel",
+      "headline": "KI zu Hause: Was Eltern wissen sollten",
+      "name": "KI zu Hause: Was Eltern wissen sollten",
+      "description": "Ist das KI-Labor sicher für Kinder? Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.",
+      "url": "__BASIS__/eltern-zuhause",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/eltern-zuhause"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Hinweise für Eltern zum Einsatz des kostenlosen KI-Labors zu Hause: kein Konto, keine Werbung, Eingaben werden nicht dauerhaft gespeichert. Kamera, Mikrofon und Gesicht sind ab 16 Jahren gedacht, die Seite prüft das Alter nicht. Das Sprachmodell erfindet manchmal Antworten, deshalb gemeinsam nutzen. Drei Gespräche mit dem Kind und Experimente ohne Kamera. Kein Rechtsrat.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/eltern-zuhause#breadcrumb"
+      },
+      "teaches": [
+       "Das Labor braucht kein Konto, zeigt keine Werbung und speichert Eingaben nicht dauerhaft.",
+       "Kamera, Mikrofon und Gesicht sind ab 16 gedacht. Die Seite prüft das Alter nicht, du begleitest Jüngere.",
+       "Das Sprachmodell erfindet manchmal Antworten und hat keinen Filter, auf den du dich verlassen kannst. Nutzt es gemeinsam."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/eltern-zuhause#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "KI zu Hause: Was Eltern wissen sollten",
+        "item": "__BASIS__/eltern-zuhause"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/eltern-zuhause#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Dein Kind ist 12 und will die Gesichtserkennung ausprobieren. Was gilt im Labor?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Seite prüft kein Alter, ab 16 gedacht, Jüngere mit deinem Einverständnis. Die Seite fragt nicht nach dem Alter und prüft es nicht. Kamera, Mikrofon und Gesicht sind ab 16 gedacht, Jüngere nutzen sie nur mit Einverständnis der Eltern."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum solltest du beim Chat mit dem Sprachmodell dabei sein?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Weil Antworten erfunden sein können und kein Filter sie prüft. Das Modell klingt überzeugend, auch wenn es falsch liegt, und das Labor schaltet keinen eigenen Filter davor. Gemeinsam nutzen und nachprüfen ist der Schutz."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was ist ein guter Einstieg, wenn dein Kind keine Kamera nutzen soll?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Experimente, sie laufen ohne Kamera und Mikrofon. Alle Experimente kommen ohne Kamera und Mikrofon aus. Dein Kind lernt dort, wie KI arbeitet und wo sie danebenliegt."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
   "bild": {
    "titel": "Bilder erzeugen · KI-Labor",
    "ueberschrift": "Bilder erzeugen",
@@ -18443,7 +18589,8 @@
   "ki-hausaufgaben-fair",
   "datenschutz-im-alltag",
   "prompts-fuer-schueler",
-  "schueler-alltag-ki"
+  "schueler-alltag-ki",
+  "eltern-zuhause"
  ],
  "gruppen": [
   {
@@ -18585,7 +18732,8 @@
     "ki-hausaufgaben-fair",
     "datenschutz-im-alltag",
     "prompts-fuer-schueler",
-    "schueler-alltag-ki"
+    "schueler-alltag-ki",
+    "eltern-zuhause"
    ]
   }
  ]

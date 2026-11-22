@@ -692,6 +692,14 @@ S["schule-eltern"] = {
   kurz: "Ihre Klasse arbeitet im Unterricht mit dem KI-Labor. Hier lesen Sie in einfacher Sprache, was dabei passiert und was nicht.",
   zusammenfassung: "Kurzinfo für Eltern in einfacher Sprache: Die Klasse nutzt das kostenlose KI-Labor im Unterricht. Es braucht kein Konto, es gibt keine Kamera und kein Mikrofon im Unterricht. Eingaben werden nicht dauerhaft gespeichert. Stand 22.11.2026, kein Rechtsrat.",
   abschnitte: [
+    {h: "Zu Hause?",
+     kurz: "Diese Seite ist der Brief für den Einsatz in der Schule. Für zu Hause gibt es eine eigene Seite.",
+     visual: {typ: "ablauf", paket: false, schritte: [
+      {icon: "school", text: "Schule", sub: "dieser Brief"},
+      {icon: "house", text: "Zu Hause?", sub: "eigene Seite für Eltern", farbe: "gruen"}]},
+     p: [
+      "Sie möchten wissen, ob das Labor zu Hause sicher ist, was Ihr Kind dort tun kann und wie Sie darüber sprechen? Das steht auf der Seite {{eltern-zuhause|KI zu Hause: Was Eltern wissen sollten}}. Der Brief hier beschreibt den Einsatz im Unterricht.",
+     ]},
     {h: "Worum es geht",
      kurz: "Ihr Kind lernt im Unterricht mit dem KI-Labor, wie künstliche Intelligenz funktioniert.",
      visual: {typ: "raster", spalten: 3, zellen: [
@@ -747,7 +755,7 @@ S["schule-eltern"] = {
     "Keine Rechtsberatung. Verbindlich sind Impressum und Datenschutzerklärung des Betreibers.",
     "Die Schule entscheidet über den Einsatz im Unterricht.",
   ],
-  weiter: ["sicherheit-einfach", "schule-start", "ueber"],
+  weiter: ["eltern-zuhause", "sicherheit-einfach", "schule-start", "ueber"],
 };
 
 INHALT.registriere({

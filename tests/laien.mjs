@@ -176,7 +176,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     pruefe(r.seiten.includes(erwartet), `Suche "${q}" findet ${erwartet} (${r.seiten.length} Seiten)`);
   }
   // Alltagswoerter: der erste Treffer ist die passende Seite (Rangfolge, nicht Menuereihenfolge)
-  for (const [q, erster] of [["ChatGPT", "chat"], ["Roboter", "robotik"], ["Hausaufgaben", "prompting"], ["Fake News", "llm-grenzen"], ["TikTok", "empfehlungen"], ["Spotify", "empfehlungen"], ["Backpropagation", "training"], ["Gehirn", "neuronale-netze"], ["Wer haftet", "recht"], ["Urheberrecht", "recht"], ["Handy entsperren", "gesicht"], ["Snapchat-Filter", "gesicht"]]) {
+  for (const [q, erster] of [["ChatGPT", "chat"], ["Roboter", "robotik"], ["Hausaufgaben", "prompting"], ["Fake News", "fake-news-deepfakes"], ["TikTok", "empfehlungen"], ["Spotify", "empfehlungen"], ["Backpropagation", "training"], ["Gehirn", "neuronale-netze"], ["Wer haftet", "recht"], ["Urheberrecht", "recht"], ["Handy entsperren", "gesicht"], ["Snapchat-Filter", "gesicht"]]) {
     const r = await suche(q);
     pruefe(r.seiten[0] === erster, `Suche "${q}": erster Treffer ${erster} (ist ${r.seiten[0]})`);
   }
@@ -323,7 +323,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await page.click(".weg-kachel[data-weg=schule]");
   await page.waitForSelector("#experimente");
   pruefe((await ls("kl-weg")) === "schule", "Wahl speichert genau ein Wort");
-  pruefe(/in der Schule/.test(await page.textContent(".weg-chip-leiste")), "Kopfzeile: Ich bin: in der Schule");
+  pruefe(/Ich bin Schüler:in/.test(await page.textContent(".weg-chip-leiste")), "Kopfzeile: Rollenschild nennt die Rolle wie im Willkommens-Fenster");
   pruefe(await page.locator("a.nav[data-id=gesicht] .kam:not([hidden])").count() === 1 && /braucht Kamera, im Unterricht nicht nötig/.test(await page.textContent("a.nav[data-id=gesicht]")), "Schulweg: Kamera-Labor im Menü gekennzeichnet");
   pruefe(await page.locator(".weg-kachel").count() === 0, "Nach der Wahl keine zweite Rollenauswahl auf der Startseite");
   pruefe(await page.locator("#lernpfade .pfad-karte").count() >= 6 && await page.locator("#lernpfade .pfad-karte[data-pfad=schule-einstieg]").count() === 1, "Pfade: Stufen und Rollenpfade");
@@ -332,7 +332,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   pruefe(await page.locator("#experimente .karte").count() === 6 && await page.locator("#empfohlen .karte").count() === 3, "Schule: sechs Experimente und drei Empfehlungen");
   await page.reload({ waitUntil: "load" });
   await page.waitForSelector(".weg-chip-leiste:not([hidden])");
-  pruefe(/in der Schule/.test(await page.textContent(".weg-chip-leiste")), "Wahl bleibt nach dem Neuladen");
+  pruefe(/Ich bin Schüler:in/.test(await page.textContent(".weg-chip-leiste")), "Wahl bleibt nach dem Neuladen");
   await page.evaluate(() => { document.querySelector("#weitere").open = true; });
   await page.click("text=Auswahl aufheben");
   pruefe(!(await ls("kl-weg")) && await page.locator(".weg-chip-leiste:not([hidden])").count() === 0, "Auswahl aufheben löscht den Eintrag und den Hinweis");
@@ -348,7 +348,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await page.goto(`${URL_LABOR}/?weg=schule`, { waitUntil: "load" });
   await page.waitForSelector("#experimente");
   pruefe(await page.evaluate(() => !localStorage.getItem("kl-weg")), "Klassenlink: nichts gespeichert");
-  pruefe(/in der Schule/.test(await page.textContent(".weg-chip-leiste")), "Klassenlink: Weg Schule aktiv");
+  pruefe(/Ich bin Schüler:in/.test(await page.textContent(".weg-chip-leiste")), "Klassenlink: Weg Schule aktiv");
   pruefe(await page.evaluate(() => document.documentElement.dataset.lesemodus === "kompakt") && await page.evaluate(() => !localStorage.getItem("kl-lesemodus")), "Schule: Lesemodus kurz, ohne zu speichern");
   await page.locator("a.nav[data-id=gesicht]").evaluate((a) => a.click());
   await page.waitForSelector("#inhalt h1");
@@ -388,7 +388,9 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     pruefe(/Willkommen im KI-Labor/.test(text) && /Für wen darf es sein\? Dann zeige ich dir den passenden Einstieg\./.test(text) && /Nichts wird gesendet, deine Wahl bleibt nur in deinem Browser\./.test(text), "Willkommen: Titel, Satz und Datenschutzhinweis");
     pruefe(await page.locator("dialog.wk .wk-weg").count() === 6, "Willkommen: sechs Rollen-Kacheln");
     pruefe(await page.locator("dialog.wk").getAttribute("aria-labelledby") === "wk-t" && (await page.textContent("#wk-t")) === "Willkommen im KI-Labor", "Willkommen: aria-labelledby zeigt auf den Titel");
-    pruefe(await page.evaluate(() => document.activeElement && document.activeElement.classList.contains("wk-weg") && document.activeElement.dataset.weg === "schule"), "Willkommen: Fokus liegt auf dem ersten Knopf");
+    pruefe(await page.evaluate(() => document.activeElement && document.activeElement.id === "wk-t" && !document.querySelector(".wk-weg:focus-visible")), "Willkommen: Fokus liegt auf der Überschrift, keine Kachel wirkt vorgewählt");
+    await page.keyboard.press("Tab"); await page.keyboard.press("Tab");
+    pruefe(await page.evaluate(() => !!document.querySelector(".wk-weg:focus-visible")), "Willkommen: mit der Tastatur zeigt eine Kachel den Fokusring");
     pruefe(/Kamera, Mikro und Gesicht ab 16, im Schulpfad nicht nötig/.test(await page.textContent(".wk-weg[data-weg=schule]")), "Willkommen: Schule nennt Kamera ab 16");
     const beschr = await page.$$eval("dialog.wk .wk-weg", (b) => b.map((x) => x.dataset.weg + "|" + x.querySelector("b").textContent + "|" + x.querySelector(".wk-kurz").textContent));
     pruefe(beschr.join(";") === "schule|Ich bin Schüler:in|Experimente, leicht erklärt;lehrende|Ich unterrichte|Themen und Material für Lehrende;erwachsene|Ich will KI verstehen|Die Grundlagen, Schritt für Schritt;technik|Ich arbeite in der IT|Technik, Modelle, selbst aufbauen;beruf|Ich entscheide im Betrieb|Anwendungsfälle, Kosten, Grenzen;eltern|Ich bin Elternteil|Sicher und verständlich", "Willkommen: sechs Rollen mit Beschriftung und Unterzeile (" + beschr.length + ")");
@@ -397,7 +399,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     await page.click(".wk-weg[data-weg=schule]");
     await page.waitForFunction(() => !document.querySelector("dialog.wk"));
     pruefe((await ls(page, "kl-weg")) === "schule" && (await ls(page, "kl-willkommen")) === "1" && !(await ls(page, "kl-merken")), "Wahl: kl-weg = schule, kl-willkommen gemerkt, kein kl-merken");
-    pruefe(/in der Schule/.test(await page.textContent(".weg-chip-leiste")), "Wahl wirkt: Ich bin: in der Schule");
+    pruefe(/Ich bin Schüler:in/.test(await page.textContent(".weg-chip-leiste")), "Wahl wirkt: Rollenschild zeigt Ich bin Schüler:in");
     await page.click(".weg-chip-leiste");
     await page.waitForSelector("dialog.wk[open]");
     pruefe(await page.locator(".wk-weg.aktiv[data-weg=schule]").count() === 1 && /Schließen/.test(await page.textContent(".wk-aktion")), "Kopfzeile Ich bin: öffnet dieselbe Auswahl, aktueller Weg markiert");
@@ -466,7 +468,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     }
   }
   { // Eltern, Technik, Erwachsene (Alias neugierig): Klassenlink wirkt ohne Speichern, Pfade da
-    for (const [w, ich, anzahl] of [["eltern", /Elternteil/, 6], ["technik", /in der IT/, 6], ["neugierig", /neugierig/, 7], ["erwachsene", /neugierig/, 7]]) {
+    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 7], ["technik", /Ich arbeite in der IT/, 6], ["neugierig", /Ich will KI verstehen/, 9], ["erwachsene", /Ich will KI verstehen/, 9]]) {
       const t = await neu(); const { page } = t;
       await page.goto(URL_LABOR + "/?weg=" + w, { waitUntil: "load" });
       await page.waitForSelector("#empfohlen");
@@ -509,6 +511,78 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   await oeffneSeite(page, "start");
   const sichtbar = await page.locator("#nav-liste a.nav:visible, #nav-liste .navkopf:visible").count();
   pruefe(sichtbar <= 8, "Menü beim Start: höchstens 8 sichtbare Einträge (" + sichtbar + ")");
+  await t.schliessen();
+}
+/* ---- 7. Fehlerklassen: Wort "null", Dialog-Typ, Rollenschild, Zeitangaben */
+{
+  const t = await starte({ kamera: false, einwilligung: false });
+  const { page } = t;
+  // 7a. Risiko-Spiel: unter "Richtig." steht kein "null" (Element.replaceChildren(null) schreibt das Wort)
+  await oeffneSeite(page, "llm-grenzen");
+  await page.waitForSelector(".sp-rs .sp-seed");
+  const daten = await page.evaluate(async () => (await fetch("/static/daten/risiko-szenarien.json")).json());
+  await page.click('.sp-rs button:has-text("Runde starten")');
+  let richtigGesehen = 0, falschGesehen = 0;
+  for (let i = 0; i < 4; i++) {
+    await page.waitForSelector(".sp-rs .sp-opt:not([disabled])");
+    const erster = await page.textContent(".sp-rs .sp-block .sp-bt");
+    const sz = daten.szenarien.find((x) => x.bloecke[0].text === erster);
+    const ziel = sz.optionen.find((o) => (i % 2 === 0) === (o.id === sz.richtig)).t;
+    await page.click(`.sp-rs .sp-opt:has(.sp-ot:text-is("${ziel.replace(/"/g, '\\"')}"))`);
+    await page.waitForSelector(".sp-rs .sp-rueck.ok, .sp-rs .sp-rueck.nein");
+    if (await page.$(".sp-rs .sp-rueck.ok")) richtigGesehen++; else falschGesehen++;
+    const r = await page.textContent(".sp-rs .sp-rueck");
+    pruefe(!/\bnull\b|undefined|NaN/.test(r), "Risiko-Karte " + (i + 1) + ": Rückmeldung enthält nicht das Wort null (" + r.slice(0, 40).replace(/\s+/g, " ") + ")");
+    if (i < 3) await page.click(".sp-rs .sp-weiter");
+  }
+  pruefe(richtigGesehen >= 1 && falschGesehen >= 1, "Risiko: richtige und falsche Antwort geprüft");
+  // 7b. Alle Labore und Lektionen: im sichtbaren Text steht nie "null" oder "undefined" als Wort
+  for (const id of ["llm-grenzen", "tokens-sprachmodelle", "agenten-grundlagen", "rag-chunking", "anlernen"]) {
+    await oeffneSeite(page, id);
+    await page.waitForTimeout(500);
+    const txt = await page.evaluate(() => document.getElementById("inhalt").innerText);
+    pruefe(!/(^|\s)(null|undefined)(\s|$)/.test(txt), "Seite " + id + ": kein loses null oder undefined im Text");
+  }
+  // 7c. Dialog-Typ: Anlernen fragt nach der Kamera (Gegenstände), nicht nach Gesichtserkennung
+  await oeffneSeite(page, "anlernen");
+  await page.click("button:has-text('Kamera starten')");
+  await page.waitForSelector("dialog.einw[open]");
+  const dt = await page.textContent("dialog.einw");
+  pruefe(/Darf die Seite deine Kamera nutzen/.test(dt) && !/Gesichtserkennung|Gesichter/.test(dt) && await page.locator("dialog.einw .einw-box").count() === 0, "Anlernen: Dialog fragt nach der Kamera, nicht nach Gesichtserkennung");
+  pruefe(/Gegenstände, keine Personen/.test(dt), "Anlernen: Dialog nennt Gegenstände statt Personen");
+  await page.click("dialog.einw button:has-text('Ohne Kamera weitermachen')");
+  await oeffneSeite(page, "gesicht");
+  await page.click("button:has-text('Kamera starten')");
+  await page.waitForSelector("dialog.einw[open]");
+  pruefe(/Gesichtserkennung: ausdrücklich einwilligen/.test(await page.textContent("dialog.einw")), "Gesicht: Dialog bleibt die Gesichtserkennung");
+  await page.click("dialog.einw button:has-text('Ohne Kamera weitermachen')");
+  // 7d. Rollenschild: Wort wie im Willkommens-Fenster, nie der alte Name
+  await page.goto(URL_LABOR + "/?weg=erwachsene", { waitUntil: "load" });
+  await page.waitForSelector(".weg-chip-leiste:not([hidden])");
+  const chip = await page.textContent(".weg-chip-leiste");
+  pruefe(/Ich will KI verstehen/.test(chip) && !/neugierig/.test(chip), "Rollenschild: Ich will KI verstehen statt neugierig (" + chip.trim() + ")");
+  // 7e. Zeitangaben: Startkarte, Schritt-Liste und Seitenkopf nennen dieselbe Angabe
+  await page.waitForSelector("#empfohlen .karte[data-seite=karte] .karte-meta");
+  const karteZeit = (await page.textContent("#empfohlen .karte[data-seite=karte] .karte-meta")).trim();
+  const kicker = (await page.textContent("#empfohlen .karte[data-seite=karte] .karte-kicker")).trim();
+  await oeffneSeite(page, "karte");
+  await page.waitForSelector(".lz-kopf .lz");
+  const kopfZeit = (await page.textContent(".lz-kopf .lz")).trim();
+  pruefe(karteZeit === kopfZeit && /^ca\. \d+ Min Lesen/.test(kopfZeit), "Zeitangabe: Karte und Seitenkopf gleich (" + karteZeit + " | " + kopfZeit + ")");
+  const weiter = await page.textContent(".pfad-weiter-info").catch(() => "");
+  pruefe(!weiter || /Schritt \d+ von \d+/.test(weiter), "Pfad: Seitenende sagt Schritt n von m (" + weiter.trim() + ")");
+  pruefe(/Schritt \d+ von \d+/.test(kicker) || kicker === "", "Pfad: Startkarte sagt Schritt n von m (" + kicker + ")");
+  // Videos zählen mit: Seite mit Video nennt die Länge
+  await oeffneSeite(page, "echt-oder-ki");
+  await page.waitForFunction(() => /Video \d+:\d\d/.test((document.querySelector(".lz-kopf .lz") || {}).textContent || ""), null, { timeout: 8000 }).catch(() => {});
+  const vz = (await page.textContent(".lz-kopf .lz")).trim();
+  pruefe(/ca\. \d+ Min Lesen, plus Video \d+:\d\d/.test(vz), "Zeitangabe nennt Lesen und Video getrennt (" + vz + ")");
+  // Lesemodus wechseln: Zahl folgt
+  const vorher = await page.textContent(".lz-kopf .lz");
+  await page.evaluate(() => { window.KL.lesemodus = window.KL.lesemodus === "kompakt" ? "ausfuehrlich" : "kompakt"; });
+  const nachher = await page.textContent(".lz-kopf .lz");
+  pruefe(/Min Lesen/.test(nachher), "Zeitangabe folgt dem Lesemodus (" + vorher.trim() + " -> " + nachher.trim() + ")");
+  pruefe(t.fehler.length === 0, "Konsole sauber " + t.fehler.join("; "));
   await t.schliessen();
 }
 console.log(schlecht ? "\n" + schlecht + " FEHLER" : "\nalles ok");

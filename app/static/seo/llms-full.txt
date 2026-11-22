@@ -1697,7 +1697,7 @@ Antwort: Vor der Suche, als Filter nach den Rechten der fragenden Person. Was ga
 
 Erklärvideo: Gut ist, was du misst (1.4 Minuten), __BASIS__/static/videos/rag-bewertung.mp4, Untertitel: __BASIS__/static/videos/rag-bewertung.vtt
 
-# RAG: Fragen an eigene Dokumente
+# RAG-Werkstatt: Fragen an eigene Dokumente
 
 Adresse: __BASIS__/rag
 Bereich: Wissen und RAG. Stand: 2026-11-22.
@@ -2318,7 +2318,7 @@ Jemand besitzt das Modell, jemand betreibt es. Ein Steckbrief hält fest, was es
 
 ## Was auf einem kleinen Gerät wie dem Jetson anders ist
 
-Wenig Speicher, wenig Watt, meist ein Modell zur Zeit. Dafür bleiben die Daten am Gerät.
+Wenig Speicher, wenig Watt, meist nur wenige Modelle gleichzeitig. Dafür bleiben die Daten am Gerät.
 
 Merke: Ein Modell ist erst im Betrieb, wenn jemand es überwacht, es sich zurückrollen lässt und es einen benannten Verantwortlichen gibt.
 
@@ -2492,7 +2492,7 @@ Erklärvideo: KI einführen (1.3 Minuten), __BASIS__/static/videos/ki-einfuehren
 Adresse: __BASIS__/uc-fertigung-sichtpruefung
 Bereich: Business-Use-Cases. Stand: 2026-11-22.
 
-Kurz gesagt: Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
+Kurz gesagt: Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben. Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
 
 Am Bandende sieht jemand jede Metallscheibe an und sucht Kratzer, Dellen und ausgebrochene Kanten. Kann eine Kamera das aus wenigen Beispielen lernen, und wo hört das auf?
 
@@ -2520,7 +2520,7 @@ Du lernst 40 Beispielbilder an, wählst ein Testbild und liest die Balken.
 
 ## Was dabei herauskommt
 
-11 von 12 Testbildern und 60 von 60 Prüfbildern stimmten. Der eine Fehler war ein übersehener Ausschuss.
+Meist werden fast alle Bilder richtig zugeordnet. Einzelne Fehler hängen von Bild, Beleuchtung und Modell ab.
 
 ## Stolpersteine
 
@@ -2535,7 +2535,7 @@ Merke: Checkliste für den Piloten: Kamera und Licht fest aufbauen. 20 bis 50 Bi
 ## Das nimmst du mit
 
 - Mit wenigen Beispielbildern je Klasse lernt ein vorgefertigtes Bildmodell, Gutteile von Ausschuss zu trennen, wenn Aufbau und Licht gleich bleiben.
-- Die Beispielwerte (11 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
+- Die Beispielwerte (etwa 11 bis 12 von 12, 60 von 60) stammen von gezeichneten Bildern. Echte Teile sind schwerer, und die Testmenge ist klein.
 - Das Ergebnis ist ein Vorschlag. Ein Mensch zieht Stichproben, besonders aus dem Gut-Fach.
 
 ## Fragen und Antworten
@@ -2552,7 +2552,7 @@ Antwort: Das System lernt den Untergrund statt den Fehler. Ein Verfahren nutzt j
 Frage: Was bedeutet es, dass die Balken oft eng beieinander liegen?
 Antwort: Das System ist sich bei diesem Bild unsicher, ein Mensch sollte hinsehen. Die gewinnende Klasse entscheidet, aber ein knapper Abstand zeigt Unsicherheit. Solche Fälle lassen sich gezielt zur Prüfung vorlegen.
 
-Frage: Wie belastbar sind die Werte 11 von 12 und 60 von 60 für deine eigene Fertigung?
+Frage: Wie belastbar sind Werte wie 11 von 12 und 60 von 60 für deine eigene Fertigung?
 Antwort: Sie sind Beispielwerte für gezeichnete Bilder und sagen wenig über echte Teile. Die Bilder sind einfacher als echte Fertigung, und zwölf Testbilder sind wenig. Aussagekräftig wird erst ein Pilot mit eigenen Teilen.
 
 Erklärvideo: Gut oder Ausschuss (1.3 Minuten), __BASIS__/static/videos/uc-fertigung-sichtpruefung.mp4, Untertitel: __BASIS__/static/videos/uc-fertigung-sichtpruefung.vtt
@@ -3262,7 +3262,7 @@ Du brauchst kein Konto. Kamerabilder und Aufnahmen werden nicht gespeichert. Ein
 
 ## Was auf deinem Gerät gespeichert wird
 
-Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nichts davon wird an den Rechner geschickt.
+Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nur das Cookie geht bei jedem Aufruf mit, die Merkzettel bleiben bei dir.
 
 Merke: Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an.
 
@@ -3272,7 +3272,7 @@ Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Elt
 
 ## Texte, die du eintippst
 
-Chat-Fragen und eingefügte Dokumente laufen auf dem Rechner dieser Seite, nicht bei einem großen Anbieter im Netz.
+Chat-Fragen und Dokumente werden auf dem Rechner dieser Seite verarbeitet. Ein KI-Dienst in der Cloud ist nicht beteiligt.
 
 ## Was der Server technisch sieht
 
@@ -3330,7 +3330,7 @@ Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt
 Adresse: __BASIS__/selbst-bauen
 Bereich: Der Rechner dahinter. Stand: 2026-11-22.
 
-Kurz gesagt: Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.
+Kurz gesagt: Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.
 
 Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano.
 
@@ -3338,23 +3338,29 @@ Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Ori
 
 Vom leeren Jetson zum laufenden Labor: flashen, prüfen, Ollama, Skripte, Browser.
 
-Merke: Ein Skript prüft vorher, ein Skript richtet ein, ein Skript macht den Autostart. Du tippst wenige Befehle.
+Merke: Drei Skripte, davon ist nur der Check freiwillig: Der Check prüft vorher, setup.sh richtet ein, install-service.sh macht den Autostart. Die wenigen Befehle stehen im nächsten Abschnitt zum Kopieren.
 
 ## Das brauchst du
 
 Ein Jetson Orin Nano mit 8 GB, eine NVMe-SSD, ein zweiter Rechner. Eine Kamera am Jetson ist nicht nötig.
 
-Merke: Kosten, Zeit, Vorkenntnisse: ein Developer Kit, ein halber Tag, ein Terminal. Mehr nicht.
+Merke: Ein Developer Kit, dazu SSD und zweiter Rechner, ein halber bis ganzer Tag für den Aufbau, ein Terminal. Mehr nicht.
+
+## Die Befehle zum Kopieren
+
+Wenige Befehle, in der Reihenfolge der Anleitung. Wer sudo braucht, ist gekennzeichnet.
+
+Merke: Mit sudo laufen nur Ollama-Installer, Leistungsmodus, Ollama-Einstellungen und linger. Das Labor selbst läuft ohne Administratorrechte.
 
 ## Wo du die Anleitung findest
 
-Alles steht im öffentlichen Repo, mit Befehlen zum Kopieren und einer Tabelle zur Fehlersuche.
+Alles steht im öffentlichen Repo, auch mit Einstellungen und Fehlersuche. Die wichtigsten Befehle stehen schon oben.
 
 Merke: Wenn etwas nicht klappt: erst scripts/check.sh laufen lassen, dann die Fehlersuche im Dokument ansehen.
 
 ## Wenn etwas nicht klappt
 
-Die häufigsten Fehler haben feste Ursachen. Die Tabelle zeigt die wichtigsten.
+Die häufigsten Fehler haben feste Ursachen. Die Tabelle hat alle 15 Zeilen der Anleitung.
 
 Merke: Die meisten Fehler sind Speicherfragen. Erst Platz schaffen, dann weitersuchen.
 
@@ -3371,7 +3377,7 @@ Das Sprachmodell verlangt den Hinweis „Built with Llama“. Die Lizenz des Cod
 ## Das nimmst du mit
 
 - Du brauchst einen Jetson Orin Nano mit 8 GB, eine NVMe-SSD und einen zweiten Rechner.
-- Der Weg: JetPack 6, Vorab-Check, Ollama mit zwei Modellen, zwei Skripte, Browser.
+- Der Weg: JetPack 6, Vorab-Check, Ollama 0.12.3 mit zwei Modellen, zwei Skripte, Browser. Mit sudo laufen nur Ollama und der Leistungsmodus.
 - Die meisten Fehler sind Speicherfragen. Die Anleitung im Repo hat eine Tabelle dafür.
 
 ## Fragen und Antworten
@@ -3752,6 +3758,10 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 Kurz gesagt: Kurzinfo für Eltern in einfacher Sprache: Die Klasse nutzt das kostenlose KI-Labor im Unterricht. Es braucht kein Konto, es gibt keine Kamera und kein Mikrofon im Unterricht. Eingaben werden nicht dauerhaft gespeichert. Stand 22.11.2026, kein Rechtsrat.
 
 Ihre Klasse arbeitet im Unterricht mit dem KI-Labor. Hier lesen Sie in einfacher Sprache, was dabei passiert und was nicht.
+
+## Zu Hause?
+
+Diese Seite ist der Brief für den Einsatz in der Schule. Für zu Hause gibt es eine eigene Seite.
 
 ## Worum es geht
 
@@ -4351,6 +4361,66 @@ Antwort: Nicht interessiert wählen, Einstellungen prüfen. Plattformen bieten m
 
 Frage: Wie arbeitet ein Kamerafilter, der dir Hasenohren aufsetzt, grob?
 Antwort: Er findet erst dein Gesicht und setzt den Effekt dann dazu. Zuerst wird das Gesicht samt Augen und Mund erkannt, dann sitzt der Effekt passend, und das viele Male pro Sekunde.
+
+# KI zu Hause: Was Eltern wissen sollten
+
+Adresse: __BASIS__/eltern-zuhause
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Hinweise für Eltern zum Einsatz des kostenlosen KI-Labors zu Hause: kein Konto, keine Werbung, Eingaben werden nicht dauerhaft gespeichert. Kamera, Mikrofon und Gesicht sind ab 16 Jahren gedacht, die Seite prüft das Alter nicht. Das Sprachmodell erfindet manchmal Antworten, deshalb gemeinsam nutzen. Drei Gespräche mit dem Kind und Experimente ohne Kamera. Kein Rechtsrat.
+
+Ist das KI-Labor sicher für Kinder? Hier steht, was es speichert, wo die Grenzen liegen und wie ihr es zu Hause gemeinsam nutzt.
+
+## Ist das Labor sicher für Kinder?
+
+Zum Lernen und Ausprobieren ja: kein Konto, keine Werbung, Eingaben werden nicht dauerhaft gespeichert.
+
+Merke: Sicher heißt hier: wenig Daten, keine Werbung. Es heißt nicht, dass jede Antwort des Chats passt. Mehr dazu im nächsten Abschnitt.
+
+## Kamera, Mikrofon und Gesicht
+
+Ab 16 Jahren gedacht. Die Seite prüft das Alter nicht, darum begleitest du Jüngere.
+
+Merke: Kein Alterscheck heißt: Du bist der Alterscheck.
+
+## Was das Sprachmodell kann und was nicht
+
+Es erklärt und formuliert gut, erfindet aber auch. Einen Jugendschutzfilter, auf den du dich verlassen kannst, gibt es nicht.
+
+## Drei Gespräche mit deinem Kind
+
+Echt oder KI, Quellen prüfen, Hausaufgaben fair. Jedes Gespräch beginnt mit einer Frage, nicht mit einem Verbot.
+
+## Die Kamera braucht dein Kind nicht
+
+Alle Experimente laufen ohne Kamera und Mikrofon. Fang dort an.
+
+## So richtest du es zu Hause ein
+
+Gemeinsam öffnen, Experimente wählen, Kamera aus lassen, danach reden.
+
+Merke: Ein Gerät, zwei Personen, ohne Kamera. Das ist der einfachste sichere Anfang.
+
+## Fragen und Kontakt
+
+Fragen zum Labor und zum Datenschutz beantwortet der Betreiber. Verbindlich sind Datenschutzerklärung und Impressum.
+
+## Das nimmst du mit
+
+- Das Labor braucht kein Konto, zeigt keine Werbung und speichert Eingaben nicht dauerhaft.
+- Kamera, Mikrofon und Gesicht sind ab 16 gedacht. Die Seite prüft das Alter nicht, du begleitest Jüngere.
+- Das Sprachmodell erfindet manchmal Antworten und hat keinen Filter, auf den du dich verlassen kannst. Nutzt es gemeinsam.
+
+## Fragen und Antworten
+
+Frage: Dein Kind ist 12 und will die Gesichtserkennung ausprobieren. Was gilt im Labor?
+Antwort: Die Seite prüft kein Alter, ab 16 gedacht, Jüngere mit deinem Einverständnis. Die Seite fragt nicht nach dem Alter und prüft es nicht. Kamera, Mikrofon und Gesicht sind ab 16 gedacht, Jüngere nutzen sie nur mit Einverständnis der Eltern.
+
+Frage: Warum solltest du beim Chat mit dem Sprachmodell dabei sein?
+Antwort: Weil Antworten erfunden sein können und kein Filter sie prüft. Das Modell klingt überzeugend, auch wenn es falsch liegt, und das Labor schaltet keinen eigenen Filter davor. Gemeinsam nutzen und nachprüfen ist der Schutz.
+
+Frage: Was ist ein guter Einstieg, wenn dein Kind keine Kamera nutzen soll?
+Antwort: Die Experimente, sie laufen ohne Kamera und Mikrofon. Alle Experimente kommen ohne Kamera und Mikrofon aus. Dein Kind lernt dort, wie KI arbeitet und wo sie danebenliegt.
 
 # Glossar
 

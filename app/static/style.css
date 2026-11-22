@@ -64,7 +64,7 @@ code{font-family:var(--mono);font-size:.88em;background:var(--flaeche2);padding:
 .navsuche input[type=search]{width:100%;height:36px;background:var(--fuell);color:var(--text);border:0;border-radius:10px;padding:0 12px 0 38px!important;font:inherit;font-size:15px;letter-spacing:-.016em;outline:none;transition:box-shadow .25s var(--feder)}
 .navsuche input[type=search]:focus{box-shadow:0 0 0 3px color-mix(in srgb,var(--akzent) 45%,transparent)}
 .navsuche input::placeholder{color:var(--leise)}
-.navscroll{flex:1;min-height:0;overflow-y:auto;margin:0;padding:0 4px;scrollbar-width:thin}
+.navscroll{flex:1;min-height:0;overflow-y:auto;margin:0;padding:0 4px 20px;scroll-padding-bottom:20px;scrollbar-width:thin}
 .navgruppe{margin-top:8px}
 .navgruppe ul{list-style:none;margin:0;padding:0}
 .navgruppe h2{margin:0;padding:0}
@@ -251,6 +251,9 @@ select{width:auto;padding:0 16px;appearance:none}
 /* ---------- Video ---------- */
 .video{display:grid;grid-template-columns:minmax(0,1fr) 240px;gap:0;overflow:hidden}
 .video .spieler{background:#000;aspect-ratio:16/9;position:relative}
+.video .spieler-spalte{min-width:0}
+.video .untertitel{margin:0;padding:10px 16px;min-height:3.4em;font-size:16px;line-height:1.45;color:var(--text);background:var(--flaeche2)}
+.video .untertitel[hidden]{display:none}
 .video video{width:100%;height:100%;display:block;background:#000}
 .video .kapitel{margin:0;padding:8px;list-style:none;overflow-y:auto;max-height:100%}
 .video .kapitel li button{display:flex;gap:8px;width:100%;text-align:left;border:0;background:none;padding:8px 12px;min-height:40px;border-radius:12px;cursor:pointer;font-size:15px;line-height:1.3;color:var(--text);transition:background .2s var(--feder)}
@@ -438,7 +441,7 @@ details.bz .in dd{margin:2px 0 0}
   .menueknopf svg{width:22px;height:22px}
   .navscroll{display:none;order:4}
   body.menue-offen{overflow:hidden}
-  body.menue-offen .navscroll{display:block;position:absolute;left:0;right:0;top:100%;height:calc(100vh - var(--kopfhoehe));height:calc(100dvh - var(--kopfhoehe));z-index:29;margin:0;padding:8px 16px 40px;overflow-y:auto;background:var(--bg);-webkit-overflow-scrolling:touch}
+  body.menue-offen .navscroll{display:block;position:absolute;left:0;right:0;top:100%;height:calc(100vh - var(--kopfhoehe));height:calc(100dvh - var(--kopfhoehe));z-index:29;margin:0;padding:8px 16px calc(40px + env(safe-area-inset-bottom, 0px));overflow-y:auto;background:var(--bg);-webkit-overflow-scrolling:touch}
   .navkopf{min-height:44px}
   .nav{min-height:44px;white-space:normal}
   .leiste{top:var(--kopfhoehe)}
