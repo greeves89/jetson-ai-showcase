@@ -35,5 +35,7 @@ ok(origin_ok({"origin": O, "host": H, "x-forwarded-host": "ki-labor.example.com"
 ok(not origin_ok({"origin": "https://boese.example.org", "host": H, "x-forwarded-host": "ki-labor.example.com", "x-kl-proxy": S}), "dritter Origin mit Schluessel: abgelehnt")
 ok(client_kennung(Anfrage({"x-real-ip": "203.0.113.7", "x-kl-proxy": S})) == "203.0.113.7", "Besucheradresse aus X-Real-IP mit Schluessel")
 ok(client_kennung(Anfrage({"x-real-ip": "203.0.113.7"})) == "10.0.0.1", "X-Real-IP ohne Schluessel wird ignoriert")
+ok(client_kennung(Anfrage({"x-real-ip": "1.2.3.4, 5.6.7.8", "x-kl-proxy": S})) == "10.0.0.1", "Liste statt einer Adresse in X-Real-IP wird verworfen")
+ok(client_kennung(Anfrage({"x-real-ip": "<script>", "x-kl-proxy": S})) == "10.0.0.1", "Unsinn in X-Real-IP wird verworfen")
 ok(client_kennung(Anfrage({"cf-connecting-ip": "198.51.100.2"})) == "198.51.100.2", "ohne Proxy: CF-Connecting-IP")
 sys.exit(1 if fehler else 0)

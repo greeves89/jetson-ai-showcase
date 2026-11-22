@@ -4,6 +4,7 @@ Die Haupt-App (app.py) hat dieselben Regeln selbst. Neue Module importieren sie 
     from app.sicherheit import origin_ok, begrenzt
 """
 import asyncio
+import ipaddress
 import os
 import secrets
 import threading
@@ -54,8 +55,13 @@ _fenster = {}   # (schluessel, kennung) -> Liste von Zeitstempeln
 def client_kennung(request) -> str:
     """Kennung des Aufrufers. Hinter Cloudflare steht die echte Adresse in CF-Connecting-IP."""
     h = request.headers
-    if _proxy_echt(h) and h.get("x-real-ip"):
-        return h.get("x-real-ip")       # echte Besucheradresse, vom eigenen Proxy gesetzt
+    if _proxy_echt(h):
+        # Echte Besucheradresse, vom eigenen Proxy aus der TCP-Verbindung gesetzt (der Proxy ueberschreibt den Header
+        # immer, ein vom Besucher mitgeschickter Wert erreicht die App nicht). Trotzdem nur genau eine IP-Adresse annehmen.
+        try:
+            return str(ipaddress.ip_address(h.get("x-real-ip", "").strip()))
+        except ValueError:
+            pass
     return h.get("cf-connecting-ip") or (request.client.host if request.client else "?")
 
 
