@@ -29,8 +29,8 @@ for (const { datei, id } of EINHEITEN) {
     const text = execFileSync("pdftotext", ["-layout", pdf, "-"]).toString();
     const soll = art === "arbeitsblatt" ? [`${BASIS}/${id}?weg=schule`] : [`${BASIS}/${id}?weg=schule`, `${BASIS}/schule-lehrkraefte?weg=schule`];
     console.log(`${name}: ${seiten} Seite(n), ${text.split(/\s+/).filter(Boolean).length} Wörter, Format ${(info.match(/Page size:\s+(.+)/) || [])[1]}`);
-    if (art === "arbeitsblatt" && seiten !== 1) meld(name + ": mehr als eine Seite");
-    if (art === "loesung" && seiten > 2) meld(name + ": mehr als zwei Seiten");
+    if (art === "arbeitsblatt" && (seiten < 2 || seiten > 3)) meld(name + ": erwartet 2 bis 3 Seiten, gefunden " + seiten);
+    if (art === "loesung" && seiten > 3) meld(name + ": mehr als drei Seiten");
     if (!/Stand 22\.11\.2026/.test(text) || !/Lizenz: noch festzulegen/.test(text)) meld(name + ": Kopfzeile fehlt");
     if (!/Mehr dazu im KI-Labor|im KI-Labor/.test(text)) meld(name + ": Kasten Mehr dazu fehlt");
     if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");

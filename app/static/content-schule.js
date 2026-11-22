@@ -33,13 +33,13 @@ S["schule-start"] = {
     {h: "Der Ablauf in drei Stunden",
      kurz: "Drei Stunden zu je 45 Minuten für Klasse 8, jeweils mit Einstieg, Erarbeitung, Sicherung und Reflexion.",
      visual: {typ: "ablauf", paket: false, schritte: [
-      {icon: "lightbulb", text: "Stunde 1", sub: "Was ist KI?"},
-      {icon: "brain-circuit", text: "Stunde 2", sub: "Wie lernt sie?"},
-      {icon: "search", text: "Stunde 3", sub: "Echt oder erfunden?", farbe: "gruen"}]},
+      {icon: "lightbulb", text: "KI 1", sub: "Was ist KI?"},
+      {icon: "brain-circuit", text: "KI 2", sub: "Wie lernt sie?"},
+      {icon: "search", text: "KI 3", sub: "Echt oder erfunden?", farbe: "gruen"}]},
      liste: [
-      "{{schule-stunde-1|Stunde 1}}: Was ist KI? Punkte-Labor und Prompting.",
-      "{{schule-stunde-2|Stunde 2}}: Wie lernt ein Computer? Punkte-Labor und Netz-Spielplatz.",
-      "{{schule-stunde-3|Stunde 3}}: Echt oder erfunden? Halluzinationen und Quellenprüfung.",
+      "{{schule-stunde-1|KI 1}}: Was ist KI? Punkte-Labor und Prompting.",
+      "{{schule-stunde-2|KI 2}}: Wie lernt ein Computer? Punkte-Labor und Netz-Spielplatz.",
+      "{{schule-stunde-3|KI 3}}: Echt oder erfunden? Halluzinationen und Quellenprüfung.",
       "Medienkompetenz: sieben weitere Einheiten, beginnend mit {{medien-stunde-1|Medien 1: Echt oder KI?}}, und ein Paket für den {{elternabend|Elternabend}}.",
      ]},
     {h: "Der Klassenlink",
@@ -89,17 +89,17 @@ S["schule-start"] = {
   ],
   grenzen: [
     "Das Labor ist ein einzelner kleiner Rechner. Bei vielen gleichzeitigen Sprachmodell-Anfragen entstehen Wartezeiten.",
-    "Das Sprachmodell ist klein und macht Fehler. Das ist Teil der Stunde 3, aber keine Musterlösung für Hausaufgaben.",
+    "Das Sprachmodell ist klein und macht Fehler. Das ist Teil von KI 3, aber keine Musterlösung für Hausaufgaben.",
   ],
   weiter: ["schule-stunde-1", "schule-lehrkraefte", "schule-schulleitung", "schule-eltern"],
 };
 
 /* ------------------------------------------------------------------ Stunde 1 */
 S["schule-stunde-1"] = {
-  nav: "Stunde 1: Was ist KI?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 1: Was ist KI? Erkennen, Lernen, Entscheiden", symbol: "presentation",
+  nav: "KI 1: Was ist KI?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden", symbol: "presentation",
   downloads: [
-    {text: "Arbeitsblatt Stunde 1", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
-    {text: "Lösungsblatt Stunde 1", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
+    {text: "Arbeitsblatt KI 1", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt KI 1", sub: "mit Doppelstunden-Plan, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
   ],
   lernziele: [
     "Du kannst an drei Beispielen aus deinem Alltag erklären, wo KI etwas erkennt und entscheidet.",
@@ -107,7 +107,7 @@ S["schule-stunde-1"] = {
     "Du kannst einen Prompt so verbessern, dass die Antwort des Sprachmodells besser passt.",
   ],
   kurz: "45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
-  zusammenfassung: "Stunde 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.",
+  zusammenfassung: "KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.",
   abschnitte: [
     {h: "Der Zeitplan",
      kurz: "Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
@@ -231,10 +231,10 @@ S["schule-stunde-1"] = {
 
 /* ------------------------------------------------------------------ Stunde 2 */
 S["schule-stunde-2"] = {
-  nav: "Stunde 2: Wie lernt ein Computer?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 2: Wie lernt ein Computer? Daten, Training, Fehler", symbol: "brain-circuit",
+  nav: "KI 2: Wie lernt ein Computer?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 2: Wie lernt ein Computer? Daten, Training, Fehler", symbol: "brain-circuit",
   downloads: [
-    {text: "Arbeitsblatt Stunde 2", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
-    {text: "Lösungsblatt Stunde 2", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
+    {text: "Arbeitsblatt KI 2", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt KI 2", sub: "mit Doppelstunden-Plan, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum die Qualität der Daten bestimmt, wie gut ein Modell entscheidet.",
@@ -242,7 +242,7 @@ S["schule-stunde-2"] = {
     "Du kannst beschreiben, was ein Netz tun muss, damit es ein schwieriges Muster lernt.",
   ],
   kurz: "45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.",
-  zusammenfassung: "Stunde 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.",
+  zusammenfassung: "KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.",
   abschnitte: [
     {h: "Der Zeitplan",
      kurz: "Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
@@ -252,7 +252,7 @@ S["schule-stunde-2"] = {
       {t: "10 Min", text: "Sicherung", icon: "clipboard-check"},
       {t: "10 Min", text: "Reflexion", icon: "message-circle"}]},
      p: [
-      "Beide Labore rechnen im Browser, die Gruppen können gleichzeitig arbeiten. Die Stunde baut auf {{schule-stunde-1|Stunde 1}} auf.",
+      "Beide Labore rechnen im Browser, die Gruppen können gleichzeitig arbeiten. Die Stunde baut auf {{schule-stunde-1|KI 1}} auf.",
      ]},
     {h: "Einstieg (5 Minuten)",
      kurz: "Wie lernst du, einen Hund von einer Katze zu unterscheiden, und woher weiß es ein Computer?",
@@ -364,10 +364,10 @@ S["schule-stunde-2"] = {
 
 /* ------------------------------------------------------------------ Stunde 3 */
 S["schule-stunde-3"] = {
-  nav: "Stunde 3: Echt oder erfunden?", typ: "lektion", gruppe: "Für die Schule", titel: "Stunde 3: Echt oder erfunden? KI prüfen", symbol: "search",
+  nav: "KI 3: Echt oder erfunden?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 3: Echt oder erfunden? KI prüfen", symbol: "search",
   downloads: [
-    {text: "Arbeitsblatt Stunde 3", sub: "1 Seite A4, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
-    {text: "Lösungsblatt Stunde 3", sub: "2 Seiten, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
+    {text: "Arbeitsblatt KI 3", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt KI 3", sub: "mit Doppelstunden-Plan, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum ein Sprachmodell Dinge erfinden kann, die überzeugend klingen.",
@@ -375,7 +375,7 @@ S["schule-stunde-3"] = {
     "Du kannst begründen, wann du einer KI-Antwort nicht allein vertrauen solltest.",
   ],
   kurz: "45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.",
-  zusammenfassung: "Stunde 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.",
+  zusammenfassung: "KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.",
   abschnitte: [
     {h: "Der Zeitplan",
      kurz: "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.",
@@ -385,7 +385,7 @@ S["schule-stunde-3"] = {
       {t: "10 Min", text: "Sicherung", icon: "clipboard-check"},
       {t: "10 Min", text: "Reflexion", icon: "message-circle"}]},
      p: [
-      "Der Chat braucht das Sprachmodell: Die Gruppen stellen die Frage zeitlich versetzt, kurze Wartezeiten einplanen. Das Risiko-Spiel rechnet im Browser. Die Stunde baut auf {{schule-stunde-2|Stunde 2}} auf.",
+      "Der Chat braucht das Sprachmodell: Die Gruppen stellen die Frage zeitlich versetzt, kurze Wartezeiten einplanen. Das Risiko-Spiel rechnet im Browser. Die Stunde baut auf {{schule-stunde-2|KI 2}} auf.",
      ],
      alltag: "Vorbereitung für die Lehrkraft: Denke dir einen Buchtitel mit Autor aus und suche kurz im Netz, ob es das wirklich nicht gibt. Diesen Fall gibst du später der Klasse."},
     {h: "Einstieg (5 Minuten)",
@@ -505,21 +505,21 @@ S["schule-lehrkraefte"] = {
   kurz: "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.",
   zusammenfassung: "Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
   downloads: [
-    {text: "Arbeitsblatt Stunde 1", sub: "Stunde 1, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
-    {text: "Lösungsblatt Stunde 1", sub: "Stunde 1, 2 Seiten", href: "/static/materialien/loesung-stunde-1.pdf"},
-    {text: "Arbeitsblatt Stunde 2", sub: "Stunde 2, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
-    {text: "Lösungsblatt Stunde 2", sub: "Stunde 2, 2 Seiten", href: "/static/materialien/loesung-stunde-2.pdf"},
-    {text: "Arbeitsblatt Stunde 3", sub: "Stunde 3, 1 Seite A4", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
-    {text: "Lösungsblatt Stunde 3", sub: "Stunde 3, 2 Seiten", href: "/static/materialien/loesung-stunde-3.pdf"},
+    {text: "Arbeitsblatt KI 1", sub: "KI 1, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt KI 1", sub: "KI 1, für dich", href: "/static/materialien/loesung-stunde-1.pdf"},
+    {text: "Arbeitsblatt KI 2", sub: "KI 2, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt KI 2", sub: "KI 2, für dich", href: "/static/materialien/loesung-stunde-2.pdf"},
+    {text: "Arbeitsblatt KI 3", sub: "KI 3, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt KI 3", sub: "KI 3, für dich", href: "/static/materialien/loesung-stunde-3.pdf"},
   ],
   abschnitte: [
     {h: "Was die Klasse am Ende kann",
      kurz: "Vier Stufen, verteilt auf die drei Stunden, angelehnt an gängige Kompetenzrahmen.",
      visual: {typ: "raster", spalten: 4, zellen: [
-      {icon: "brain", text: "Verstehen", sub: "Stunde 1 und 2"},
+      {icon: "brain", text: "Verstehen", sub: "KI 1 und 2"},
       {icon: "mouse", text: "Anwenden", sub: "alle Stunden"},
-      {icon: "pencil", text: "Erstellen", sub: "Stunde 1 und 3"},
-      {icon: "scale", text: "Bewerten", sub: "Stunde 3"}]},
+      {icon: "pencil", text: "Erstellen", sub: "KI 1 und 3"},
+      {icon: "scale", text: "Bewerten", sub: "KI 3"}]},
      tabelle: {
       beschriftung: "Nach den drei Stunden (kein offizielles Dokument eines Kultusministeriums)",
       kopf: ["Stufe", "Die Schülerinnen und Schüler können"],
@@ -574,7 +574,7 @@ S["schule-lehrkraefte"] = {
       {icon: "users", text: "Gruppen", sub: "vier Personen", farbe: "gruen"}]},
      liste: [
       "Klassenlink am Unterrichtsgerät öffnen: Lädt das Labor?",
-      "Labore der Stunde ausprobieren, für Stunde 3 den erfundenen Fall im Chat testen.",
+      "Labore der Stunde ausprobieren, für KI 3 den erfundenen Fall im Chat testen.",
       "Vierergruppen bilden, ein Gerät je Gruppe, höchstens 7 Geräte gleichzeitig.",
       "Aufgaben aus „Arbeitsblatt: die Aufgaben“ kopieren oder auf der Lernplattform ablegen.",
       "Infos weitergeben: {{schule-schulleitung|Schulleitung}} und {{schule-eltern|Eltern}}.",

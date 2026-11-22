@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung">
@@ -123,6 +141,16 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td>Sicherung</td><td style="white-space:nowrap">10 Min</td><td>Die erste Antwort ist ein Entwurf: nachfragen, prüfen, erst dann nutzen.</td></tr>
 <tr><td>Reflexion</td><td style="white-space:nowrap">10 Min</td><td>Drei Fragen: Bausteine, Trainer, Prüfen.</td></tr>
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>Video ansehen, etwa 2 Minuten, dann die Frage: Was bestellst du im Imbiss, wenn du nur „Döner“ sagst? Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis 3 des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>Die erste Antwort ist ein Entwurf: nachfragen, prüfen, erst dann nutzen. Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 <p>Einzelarbeit: Jede und jeder schreibt zuerst auf Papier. Gesendet wird in der Prompt-Werkstatt am Gruppengerät, nacheinander und versetzt, denn der Rechner beantwortet Anfragen nacheinander (höchstens 7 Geräte). Das Video liegt auf der Seite Gute Fragen an die KI stellen.</p>
 <p>Vorbereitung: Probiere „Beide senden“ in der Prompt-Werkstatt (Seite prompting) mit einer eigenen Frage aus. Gruppen, die warten, schreiben schon die nächste Frage auf Papier.</p>
 <h2>Operatoren und Erwartungshorizont</h2>
@@ -134,6 +162,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <div class="lg"><b>Zu Aufgabe 3, Überprüfe (III), Entwickle (III) und Beurteile (III).</b> Gut geprüft heißt: Zahl oder Name in einer zweiten Quelle suchen. Das Urteil sagt, ob die Antwort brauchbar ist, und nennt den Grund. Wer etwas nicht erklären kann, hat es nicht verstanden: Dann hilft Nachfragen mehr als Abschreiben.</div>
 <div class="lg"><b>Zum Zusatz, Begründe (III).</b> Der Zusatz hält das Denken bei dir: Die KI gibt einen Anstoß und nimmt die Lösung nicht vorweg.</div>
 
+<h2>Quiz: richtige Antworten</h2><ul><li><b>Frage 1: B.</b> Erkläre Windkraft in sechs Sätzen für Klasse 9 und nenne drei Begriffe zum Nachschlagen. Die bessere Frage nennt Länge, Niveau und Format. Das Modell muss weniger raten.</li><li><b>Frage 2: B.</b> Nachfragen: Gib ein Beispiel aus dem Fußball Die erste Antwort ist ein Entwurf, eine Nachfrage macht sie besser.</li><li><b>Frage 3: B.</b> Ich suche die Zahl in einer zweiten Quelle Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen.</li></ul>
 <h2>Differenzierung</h2>
 <div class="zwei"><div><b>Leichter</b><br>Prompt A ist vorgegeben, du ergänzt nur einen Baustein, etwa das Format. Bei <b>Nenne</b> (I) bleiben: „Die Antwort B ist besser, weil ___.“</div><div><b>Schwerer</b><br>Prompt B mit allen fünf Bausteinen schreiben, zwei Nachfragen testen und <b>beurteilen</b> (III), welche die Antwort stärker verbessert.</div></div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>
@@ -141,7 +170,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <div class="karten"><div class="karte"><b>Aufgabe 1, Tipp 1</b><br>Beginne mit einem Schulthema, das du gut kennst.</div><div class="karte"><b>Aufgabe 1, Tipp 2</b><br>Rolle, Aufgabe, Material, Format, Grenzen: Welche Bausteine fehlen noch?</div><div class="karte"><b>Aufgabe 2, Tipp 1</b><br>Lege beide Antworten nebeneinander und markiere, was nur in einer steht.</div><div class="karte"><b>Aufgabe 2, Tipp 2</b><br>Welcher Baustein hat die Antwort verändert?</div><div class="karte"><b>Aufgabe 3, Tipp 1</b><br>Prüfe Zahlen, Namen und Behauptungen, die du weitergeben würdest.</div><div class="karte"><b>Aufgabe 3, Tipp 2</b><br>Eine Nachfrage kann lauten: Kürzer, in drei Sätzen. Oder: Was könnte an deiner Antwort falsch sein?</div></div>
 <h2>Tafelbild (Sicherung)</h2>
 <div class="pfad"><span>Frage mit Bausteinen</span><i>&gt;</i><span>Antwort</span><i>&gt;</i><span>Prüfen</span></div>
-<p>Sammle an der Tafel, welche Bausteine am meisten verändert haben. Verbinde mit Stunde 1 der KI-Reihe: Ein genauer Prompt lässt weniger Raum zum Raten.</p>
+<p>Sammle an der Tafel, welche Bausteine am meisten verändert haben. Verbinde mit KI 1 der KI-Reihe: Ein genauer Prompt lässt weniger Raum zum Raten.</p>
 <p><b>Merksatz:</b> Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht verstanden.</p>
 <h2>Fragen für die Reflexion</h2>
 <ul style="break-inside:avoid"><li>Welchen Baustein vergisst du am häufigsten?</li><li>Wie nutzt du die KI als Trainer statt als Lösungsmaschine?</li><li>Was prüfst du, bevor du eine Antwort weitergibst?</li></ul>

@@ -1,5 +1,5 @@
 // Baut die Unterrichtsmaterialien zu den drei Schulstunden (Plan: docs/materialien-plan.md):
-//   app/static/materialien/arbeitsblatt-stunde-N.html und .pdf   (Schueler, 1 Seite DIN A4)
+//   app/static/materialien/arbeitsblatt-stunde-N.html und .pdf   (Schueler, ein bis drei Seiten DIN A4)
 //   app/static/materialien/loesung-stunde-N.html und .pdf        (Lehrkraft: Zeitplan, Loesungen, Differenzierung)
 // Dazu die sieben Medien-Einheiten (Seiten medien-stunde-1 bis -7, Dateien arbeitsblatt-medien-N und loesung-medien-N),
 // das Kartenset zu Medien 1 (bildkarten-echt-oder-ki.pdf, Bilder in materialien/bildkarten/) und das Paket Elternabend
@@ -118,14 +118,14 @@ function stunde(n) {
   for (const b of ["I", "II", "III"]) if (!bereiche.has(b)) throw new Error(`${id}: kein Operator aus Bereich ${b}`);
   const genutzt = [...new Set(aufg.flatMap((a) => a.ops))].sort((a, b) => OPERATOREN[a.toLowerCase()].bereich.length - OPERATOREN[b.toLowerCase()].bereich.length);
   return {
-    hilfen, genutzt, n: nr, id, medien, kenn: medien ? "Medien " + nr : "Stunde " + nr, datei: medien ? "medien-" + nr : "stunde-" + nr,
+    hilfen, genutzt, n: nr, id, medien, kenn: medien ? "Medien " + nr : "KI " + nr, datei: medien ? "medien-" + nr : "stunde-" + nr,
     titel: medien ? MEDIEN[nr] : THEMA[n], lernziele: s.lernziele, aufgaben, zusatz: zusatz[0], zeitplan, phasen, minuten: z,
     loesungen: abschnitt(id, "Lösungshinweise").liste.map(teile),
     diff: abschnitt(id, "Differenzierung").liste.map(teile),
     tafel, tafelMitte: sv.mitte || "", tafelMerke: sich.merke, tafelText: sich.p || [],
     reflexion: abschnitt(id, "Reflexion").liste,
     vorbereitung: (vorb.p || []).concat(vorb.alltag ? [vorb.alltag] : []),
-    merksatz: s.mitnehmen[0],
+    merksatz: s.mitnehmen[0], quiz: s.quiz || [],
   };
 }
 
@@ -251,7 +251,26 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 `;
+
 
 const seite = (titel, klasse, inhalt) => `<!doctype html>
 <html lang="de">
@@ -292,6 +311,14 @@ function arbeitsblatt(st) {
     const zt = zeitVon(i) ? `<span class="zt">(ca. ${zeitVon(i)} Minuten${st.minuten.zuordnung.find((g) => g[0] === i).length > 1 ? " für die Aufgaben " + st.minuten.zuordnung.find((g) => g[0] === i).map((x) => x + 1).join(" und ") : ""})</span>` : "";
     return `<div class="aufgabe"><div class="k"><span class="nr">${a.nr}</span><h3>${esc(a.ort)}${zt}</h3>${meta(a)}</div><p>${mdFett(a.text)}</p>${zeilen(2)}</div>`;
   }).join("\n");
+  const buchst = "ABCD";
+  const quizHtml = st.quiz.length ? `<h2>Quiz: Was hast du verstanden?</h2>
+<p class="nz">Kreuze je Frage die beste Antwort an. Es ist genau eine richtig.</p>
+${st.quiz.map((q, i) => `<div class="aufgabe"><div class="k"><span class="nr">${i + 1}</span><h3>${esc(q.frage)}</h3></div>${q.optionen.map((o, j) => `<p class="opt"><span class="box"></span> ${buchst[j]}) ${esc(o)}</p>`).join("")}</div>`).join("\n")}` : "";
+  const nachdenken = `<h2>Zum Nachdenken</h2>
+${st.reflexion.map((r, i) => `<div class="aufgabe"><div class="k"><span class="nr">${st.aufgaben.length + i + 1}</span><h3>${md(r)}</h3></div>${zeilen(3)}</div>`).join("\n")}
+<div class="aufgabe"><div class="k"><span class="nr">?</span><h3>Meine eigene Frage zum Thema</h3></div>${zeilen(2)}</div>
+<div class="zusatz"><p><b>Mein Merksatz:</b> Schreibe den wichtigsten Gedanken der Stunde in einem Satz auf.</p>${zeilen(2)}</div>`;
   const zus = `<div class="zusatz"><div class="k"><b>Zusatz für Schnelle</b>${meta(st.zusatz)}</div><p>${mdFett(st.zusatz.text)}</p></div>`;
   const ziele = st.lernziele.map((z) => {
     const t = z.replace(/^Du kannst /, "");
@@ -304,10 +331,12 @@ function arbeitsblatt(st) {
 <div class="kopfblock"><div class="links">
 <h1>Arbeitsblatt ${st.kenn}: ${esc(st.titel)}</h1>
 <div class="felder"><span>Name:</span><span class="klein">Datum:</span></div>
-<div class="zeit"><b>Zeit:</b> ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))} &nbsp;&middot;&nbsp; ${niveauZeile}</div>
+<div class="zeit"><b>Zeit:</b> Aufgaben ${esc(st.zeitplan[1].t.replace(/ Min$/, " Minuten"))}, mit Quiz und Nachdenken eine Doppelstunde &nbsp;&middot;&nbsp; ${niveauZeile}</div>
 </div><div class="qrbox">${q.svg}</div></div>
 <table class="ziele"><thead><tr><th>Heute kannst du ...</th><th class="b">sicher</th><th class="b">fast</th><th class="b">noch nicht</th></tr></thead><tbody>${ziele}</tbody></table>
 ${auf}
+${quizHtml}
+${nachdenken}
 ${zus}
 ${legende(st)}
 <div class="fuss quellen"><b>Mehr dazu im KI-Labor:</b> <a href="${esc(url)}">${esc(url.replace(/^https:\/\//, ""))}</a> Oder den QR-Code oben rechts scannen: Labor und Material, es wird nichts gespeichert. Hilfe zu einer Aufgabe: Tipp-Karte bei deiner Lehrkraft.<br>${esc(QUELLENFUSS)}</div>
@@ -315,6 +344,7 @@ ${legende(st)}
 }
 
 function loesungsblatt(st) {
+  const buchst2 = "ABCD";
   const lis = (l) => l.map((x) => `<li>${x.titel ? `<b>${esc(x.titel)}:</b> ` : ""}${mdFett(x.text)}</li>`).join("\n");
   const tafel = st.tafel.length ? `<div class="pfad">${st.tafelMitte ? `<span><b>${esc(st.tafelMitte)}:</b></span>` : ""}${st.tafel.map((t, i) => `<span>${esc(t)}</span>${i < st.tafel.length - 1 ? "<i>&gt;</i>" : ""}`).join("")}</div>` : "";
   const loes = st.loesungen.map((x) => `<div class="lg"><b>${esc(x.titel.replace(/^Zu /, "Zu "))}.</b> ${mdFett(x.text)}</div>`).join("\n");
@@ -327,6 +357,16 @@ function loesungsblatt(st) {
 <table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
 ${zp}
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>${md(st.phasen[0].was)} Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis ${st.aufgaben.length} des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>${md(st.phasen[2].was)} Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 ${st.vorbereitung.map((v) => `<p>${md(v)}</p>`).join("\n")}
 <h2>Operatoren und Erwartungshorizont</h2>
 <p>Die Operatoren dieses Blatts mit ihrem Bereich. Was eine gute Antwort je Operator enthält, steht bei den Lösungen.</p>
@@ -334,6 +374,7 @@ ${legende(st)}
 <h2>Lösungen und Hinweise</h2>
 ${loes}
 ${st.id === "medien-stunde-1" ? aufloesungKarten() : ""}
+${st.quiz.length ? `<h2>Quiz: richtige Antworten</h2><ul>${st.quiz.map((q, i) => `<li><b>Frage ${i + 1}: ${buchst2[q.richtig]}.</b> ${esc(q.optionen[q.richtig])} ${esc(q.erklaerung)}</li>`).join("")}</ul>` : ""}
 <h2>Differenzierung</h2>
 <div class="zwei">${diff}</div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>

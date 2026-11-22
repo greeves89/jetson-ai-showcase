@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung">

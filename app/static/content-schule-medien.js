@@ -53,8 +53,8 @@ function einheit(c) {
 }
 
 const blaetter = (k, nr) => [
-  {text: "Arbeitsblatt Medien " + nr, sub: "1 Seite A4, für die Klasse", href: `/static/materialien/arbeitsblatt-medien-${nr}.pdf`},
-  {text: "Lösungsblatt Medien " + nr, sub: "2 Seiten, für dich", href: `/static/materialien/loesung-medien-${nr}.pdf`},
+  {text: "Arbeitsblatt Medien " + nr, sub: "3 Seiten A4, mit Quiz, für die Klasse", href: `/static/materialien/arbeitsblatt-medien-${nr}.pdf`},
+  {text: "Lösungsblatt Medien " + nr, sub: "mit Doppelstunden-Plan, für dich", href: `/static/materialien/loesung-medien-${nr}.pdf`},
 ];
 
 /* ------------------------------------------------------------------ Einheit 1 */
@@ -543,7 +543,7 @@ S["medien-stunde-6"] = einheit({
       {icon: "pencil", text: "Frage mit Bausteinen", sub: "Rolle, Format, Grenzen"},
       {icon: "message-circle", text: "Antwort", sub: "Entwurf"},
       {icon: "search", text: "Prüfen", sub: "dann nutzen", farbe: "gruen"}]},
-    p: ["Sammle an der Tafel, welche Bausteine am meisten verändert haben. Verbinde mit Stunde 1 der KI-Reihe: Ein genauer Prompt lässt weniger Raum zum Raten."],
+    p: ["Sammle an der Tafel, welche Bausteine am meisten verändert haben. Verbinde mit KI 1 der KI-Reihe: Ein genauer Prompt lässt weniger Raum zum Raten."],
     merke: "Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht verstanden."},
   reflexionKurz: "Drei Fragen: Bausteine, Trainer, Prüfen.",
   skala: ["knappe Fragen", "klare Fragen", "Wie fragst du künftig?"],

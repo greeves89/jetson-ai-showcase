@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung">
@@ -123,6 +141,16 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td>Sicherung</td><td style="white-space:nowrap">10 Min</td><td>Mehr Daten entstehen, als du eintippst: Frage bei jeder Freigabe nach dem Zweck.</td></tr>
 <tr><td>Reflexion</td><td style="white-space:nowrap">10 Min</td><td>Drei Fragen: Nein sagen, Passwörter, Chat.</td></tr>
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>Video ansehen, etwa 2 Minuten, dann die Frage: Welche Daten entstehen, wenn du eine App öffnest? Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis 3 des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>Mehr Daten entstehen, als du eintippst: Frage bei jeder Freigabe nach dem Zweck. Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 <p>Einzel- und Partnerarbeit, kein Gerät nötig. Das Video liegt auf der Seite Datenschutz im Alltag. Niemand muss eigene Einstellungen oder Apps zeigen.</p>
 <p>Vorbereitung: Die Stunde ist ein Überblick und keine Rechtsberatung. Bei der Einwilligung gilt nach der Seite: In Deutschland liegt die Grenze bei 16 Jahren für Online-Dienste, darunter sind die Eltern beteiligt.</p>
 <h2>Operatoren und Erwartungshorizont</h2>
@@ -134,6 +162,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <div class="lg"><b>Zu Aufgabe 3, Entwickle (III) und Begründe (III).</b> Eine gute Regel: Gib nur ein, was dich nicht blamiert, wenn es später jemand liest. Dazu zählen Passwörter, Adressen, Fotos von anderen, Gesundheitsangaben und Daten, die nicht dir gehören. Bei vielen Chatbots werden Eingaben gespeichert.</div>
 <div class="lg"><b>Zum Zusatz, Überprüfe (III).</b> Die Seite sagt: Kein Konto, keine externen KI-Dienste, Eingaben werden nach den Angaben des Labors nur im Arbeitsspeicher verarbeitet. Eine offene Frage ist zulässig, die Datenschutzerklärung des Betreibers ist verbindlich.</div>
 
+<h2>Quiz: richtige Antworten</h2><ul><li><b>Frage 1: B.</b> Ablehnen, die App braucht die Kontakte nicht für ihren Zweck Frage bei jeder Freigabe: Braucht die App das für das, was ich tun will?</li><li><b>Frage 2: B.</b> Ein Passwort oder die Adresse deiner Familie Gib nichts ein, das dich blamiert, wenn es später jemand liest.</li><li><b>Frage 3: C.</b> Jederzeit in den Einstellungen des Geräts Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu.</li></ul>
 <h2>Differenzierung</h2>
 <div class="zwei"><div><b>Leichter</b><br>Eine Liste mit Datenarten liegt bereit (Zeit, Ort, Gerät, Vorlieben). Bei <b>Nenne</b> (I) und <b>Beschreibe</b> (I) bleiben und ankreuzen, was zu welcher App passt.</div><div><b>Schwerer</b><br>Die Gruppe entwirft eine eigene erfundene App, <b>vergleicht</b> (II) Zweck und gewünschte Rechte und <b>beurteilt</b> (III), welche Freigabe sie nicht geben würde.</div></div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>

@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung">
@@ -123,6 +141,16 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td>Sicherung</td><td style="white-space:nowrap">10 Min</td><td>Erst selbst versuchen, dann KI fragen, dann prüfen und in eigenen Worten aufschreiben.</td></tr>
 <tr><td>Reflexion</td><td style="white-space:nowrap">10 Min</td><td>Drei Fragen: Lernen, Angabe, Vertrauen.</td></tr>
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>Video ansehen, etwa 2 Minuten, dann die Faustfrage: Hast du danach mehr verstanden, oder nur etwas abgegeben? Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis 3 des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>Erst selbst versuchen, dann KI fragen, dann prüfen und in eigenen Worten aufschreiben. Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 <p>Vierergruppen, kein Gerät nötig. Das Video liegt auf der Seite KI bei Hausaufgaben. Die Regeln der Schule gehen vor: Die Ergebnisse der Klasse sind Vorschläge.</p>
 <p>Vorbereitung: Kläre vorher, was an deiner Schule zu KI bei Hausaufgaben gilt. Was erlaubt ist, entscheidet die Schule oder Lehrkraft, nicht die Technik.</p>
 <h2>Operatoren und Erwartungshorizont</h2>
@@ -134,6 +162,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <div class="lg"><b>Zu Aufgabe 3, Entwickle (III) und Begründe (III).</b> Gute Regeln sind kurz, prüfbar und für alle gleich. Beispiel: Verschwiegene Hilfe ist Täuschung, offen angegebene Hilfe ist selten ein Problem. Verboten ist, KI-Text als eigene Leistung abzugeben.</div>
 <div class="lg"><b>Zum Zusatz, Beurteile (III).</b> Es gibt keine richtige Antwort, zählt die Begründung. Die Fragen vorab zu stellen schützt beide Seiten.</div>
 
+<h2>Quiz: richtige Antworten</h2><ul><li><b>Frage 1: B.</b> Wenn man KI-Text als eigene Leistung abgibt und es verschweigt Täuschung heißt: etwas als eigene Leistung abgeben, das nicht von dir ist, und es verschweigen.</li><li><b>Frage 2: B.</b> Selbst versuchen, KI fragen, prüfen, in eigenen Worten aufschreiben Wer erst selbst versucht, behält das Denken. Wer die Reihenfolge umdreht, lernt weniger.</li><li><b>Frage 3: C.</b> Du fragst nach, was für die Aufgabe gilt Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab.</li></ul>
 <h2>Differenzierung</h2>
 <div class="zwei"><div><b>Leichter</b><br>Eine Liste mit Beispielen liegt bereit. Bei <b>Nenne</b> (I) und <b>Beschreibe</b> (I) bleiben: „Ich habe ___ genutzt, um ___.“</div><div><b>Schwerer</b><br>Die Gruppe sucht einen Grenzfall, <b>begründet</b> (III), warum er schwer zu entscheiden ist, und <b>beurteilt</b> (III), welche Regel ihn klärt.</div></div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>

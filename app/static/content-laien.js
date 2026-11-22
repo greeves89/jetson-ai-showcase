@@ -285,8 +285,8 @@ INHALT.lernpfade = [
    seiten: ["daten", "neuronale-netze", "training", "bewertung", "bild-als-zahlen", "cnn-intuition", "verzerrung-ethik"]},
   {id: "beruf", rolle: "beruf", name: "KI im Betrieb", kurz: "Nutzen, Kosten, Risiken und Einführung, mit Beispielen aus der Praxis. Die ersten vier Schritte sind der Überblick „In 15 Minuten“, dann folgt das Beispiel aus dem Handwerk.",
    seiten: ["karte", "chat", "business", "ki-einfuehrung", "uc-handwerk", "kosten-energie", "mlops", "recht", "verzerrung-ethik", "uc-buero-dokumente"]},
-  {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, Stundenverläufe und Informationen für Schulleitung und Eltern.",
-   seiten: ["schule-lehrkraefte", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "schule-schulleitung", "schule-eltern", "sicherheit-einfach", "recht"]},
+  {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, drei KI-Stunden, sieben Medien-Einheiten und Informationen für Schulleitung und Eltern.",
+   seiten: ["schule-lehrkraefte", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
 ];
 INHALT.lernpfade.push(
   {id: "eltern", rolle: "eltern", name: "Für Eltern", kurz: "Wie KI im Alltag von Kindern vorkommt, was mit Daten passiert und wie ihr darüber sprecht. Zum Ausprobieren zusammen, ohne Kamera.",
@@ -303,7 +303,7 @@ INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "
 INHALT.menue = {
   fuerDich: {
     schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "karte"],
-    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "schule-schulleitung", "schule-eltern"],
+    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "elternabend"],
     erwachsene: ["karte", "echt-oder-ki", "fake-news-deepfakes", "ml", "daten", "neuronale-netze"],
     technik: ["selbst-bauen", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen"],
     beruf: ["uc-handwerk", "uc-buero-dokumente", "uc-fertigung-sichtpruefung", "business", "ki-einfuehrung", "kosten-energie"],
@@ -327,14 +327,22 @@ INHALT.startRollen = {
       {id: "echt-oder-ki", satz: "Woran du Fälschungen von KI erkennst."},
       {id: "ki-hausaufgaben-fair", satz: "Wann KI beim Lernen hilft und wann sie schummeln ist."},
       {id: "prompts-fuer-schueler", satz: "So fragst du, damit die Antwort brauchbar wird."}]},
-  lehrende: {h1: "Für morgen im Unterricht", satz: "Drei Stunden, Handreichung und Info für die Schulleitung, sofort einsetzbar.",
+  lehrende: {h1: "Für morgen im Unterricht", satz: "Drei KI-Stunden, sieben Medien-Einheiten, Handreichung, Elternabend und Info für die Schulleitung. Jede Einheit mit Arbeitsblatt, Lösungen und Plan für Einzel- und Doppelstunde.",
     bloecke: ["morgen"],
     morgen: [
-      {id: "schule-stunde-1", satz: "45 Minuten ohne Kamera, mit Aufgaben und Lösungen."},
+      {id: "schule-stunde-1", satz: "Was ist KI? Aufgaben, Quiz und Lösungen, ohne Kamera."},
       {id: "schule-stunde-2", satz: "Daten, Training und Fehler zum Anfassen."},
       {id: "schule-stunde-3", satz: "Erfundenes erkennen und Quellen prüfen."},
+      {id: "medien-stunde-1", satz: "Zwölf Bildkarten sortieren und das Urteil begründen."},
+      {id: "medien-stunde-2", satz: "Eine Behauptung mit drei Quellen gegenprüfen."},
+      {id: "medien-stunde-3", satz: "Einen erfundenen Fall analysieren."},
+      {id: "medien-stunde-4", satz: "Klassenregeln für KI bei Hausaufgaben entwickeln."},
+      {id: "medien-stunde-5", satz: "App-Rechte und eigene Datenspuren prüfen."},
+      {id: "medien-stunde-6", satz: "Mit der Prompt-Werkstatt bessere Fragen stellen."},
+      {id: "medien-stunde-7", satz: "Poster zu KI im eigenen Tag, Beurteilung in der Runde."},
       {id: "schule-lehrkraefte", satz: "Checkliste, Fachbegriffe und Kurzantworten."},
-      {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."}]},
+      {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."},
+      {id: "elternabend", satz: "Info-Blatt, Leitfaden und Antworten auf Elternfragen."}]},
   erwachsene: {h1: "KI verstehen, Schritt für Schritt", satz: "Neun kurze Seiten: erst Betrug erkennen, dann die Grundlagen. Ohne Vorwissen.",
     bloecke: ["empfohlen"], pfad: "erwachsene",
     empfohlen: [

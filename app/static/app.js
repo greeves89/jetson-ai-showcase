@@ -1331,7 +1331,7 @@
     if (name === "morgen") {
       const kand = (R.morgen || []).filter((e) => gibt(e.id));
       return h("section", { class: "block", id: "morgen" }, kopf("presentation", "Für morgen"),
-        h("div", { class: "karten karten-3" }, [...kand.map((e) => seitenKarte(e.id, { satz: e.satz, kicker: e.id === "schule-lehrkraefte" ? "Handreichung" : e.id === "schule-schulleitung" ? "Für die Schulleitung" : "Stunde" })), klassenLinkKarte()]));
+        h("div", { class: "karten karten-3" }, [...kand.map((e) => seitenKarte(e.id, { satz: e.satz, kicker: e.id === "schule-lehrkraefte" ? "Handreichung" : e.id === "schule-schulleitung" ? "Für die Schulleitung" : e.id === "elternabend" ? "Für Eltern" : /^medien-/.test(e.id) ? "Medienkompetenz" : "KI-Reihe" })), klassenLinkKarte()]));
     }
     if (name === "minuten") {
       const e = seite.entscheider;

@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung kompakt">
@@ -123,6 +141,16 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td>Sicherung</td><td style="white-space:nowrap">10 Min</td><td>Hinweise sammeln, Herkunft prüfen, Wahrscheinlichkeit schätzen: Echt oder KI ist selten ein Ja oder Nein.</td></tr>
 <tr><td>Reflexion</td><td style="white-space:nowrap">10 Min</td><td>Drei Fragen: Sicherheit, Folgen, Prüfen im Alltag.</td></tr>
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>Video ansehen, etwa 2 Minuten, dann die Frage: Wie sicher bist du bei einem Bild? Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis 3 des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>Hinweise sammeln, Herkunft prüfen, Wahrscheinlichkeit schätzen: Echt oder KI ist selten ein Ja oder Nein. Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 <p>Vierergruppen, ein ausgedrucktes Kartenset je Gruppe (Download oben). Es braucht kein Gerät, Kamera und Mikrofon bleiben aus. Das Video liegt auf der Medienseite Echt oder KI?</p>
 <p>Vorbereitung: Kartenset zweimal ausdrucken und ausschneiden. Die Auflösung steht nur im Lösungsblatt, gib sie erst in der Sicherung bekannt.</p>
 <h2>Operatoren und Erwartungshorizont</h2>
@@ -149,6 +177,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td class="n">11</td><td class="a">Echt</td><td>Baustelle in einer Stadtstraße. Verkehrsschild, Absperrband und Häuser im Hintergrund stimmig, viele kleine Details. <i>Foto: Fons Heijnsbroek, CC0, Wikimedia Commons.</i></td></tr>
 <tr><td class="n">12</td><td class="a">KI-Bild</td><td>Regentropfen an einer Haltestelle. Tropfen sehr gleichmäßig, Lichter auf der Straße passen nicht ganz. <i>KI-Bild, selbst erzeugt (Bildmodell, 22.11.2026).</i></td></tr>
 </tbody></table>
+<h2>Quiz: richtige Antworten</h2><ul><li><b>Frage 1: C.</b> Nichts Sicheres, denn gute KI-Bilder sind oft fehlerfrei Fehlerfreiheit beweist nichts. Darum zählen Herkunft und Kontext.</li><li><b>Frage 2: B.</b> Klären, wer es zuerst veröffentlicht hat Die Herkunft lässt sich auch bei einem perfekten Bild prüfen. Likes sagen nichts über echt oder KI.</li><li><b>Frage 3: C.</b> Wahrscheinlich echt, weil Quelle und Kontext passen Du schätzt eine Wahrscheinlichkeit und nennst den Grund. „Nie beurteilen“ hilft dir nicht weiter.</li></ul>
 <h2>Differenzierung</h2>
 <div class="zwei"><div><b>Leichter</b><br>Nur die Karten 1 bis 6 verteilen. Bei <b>Nenne</b> (I) und <b>Beschreibe</b> (I) bleiben: „Ich halte Karte ___ für KI, weil ___.“</div><div><b>Schwerer</b><br>Alle zwölf Karten, dazu <b>beurteile</b> (III) die Sicherheit jedes Urteils in Prozent und <b>begründe</b> (III), welche Quelle du zuerst prüfen würdest.</div></div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>

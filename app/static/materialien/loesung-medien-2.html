@@ -109,6 +109,24 @@ body.loesung.kompakt .karten { gap: 2mm; }
 body.loesung.kompakt .karte { padding: 1mm 2mm; }
 body.loesung.kompakt .mehr { margin-top: 2mm; padding: 1.5mm 2.5mm; }
 body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
+/* Arbeitsblaetter duerfen mehrseitig sein: grosse Schrift, viel Schreibraum, keine Quetschung auf eine Seite */
+@page ab { size: A4; margin: 15mm 17mm; }
+body.arbeitsblatt { page: ab; font-size: 12.5pt; line-height: 1.4; }
+body.arbeitsblatt .seite { min-height: 0; }
+body.arbeitsblatt h1 { font-size: 20pt; margin: 4mm 0 2mm; }
+body.arbeitsblatt h2 { font-size: 14pt; margin: 6mm 0 2mm; }
+body.arbeitsblatt .aufgabe { margin: 0 0 5mm; }
+body.arbeitsblatt .aufgabe h3 { font-size: 13.5pt; }
+body.arbeitsblatt .aufgabe p { margin: 1.2mm 0 0 12mm; }
+body.arbeitsblatt .zeile { height: 9mm; }
+body.arbeitsblatt .zusatz { padding: 3mm 4mm; margin: 0 0 5mm; }
+body.arbeitsblatt .verstanden { padding: 3mm 4mm; margin: 4mm 0 5mm; }
+body.arbeitsblatt .karten { gap: 4mm; margin: 2mm 0 4mm; }
+body.arbeitsblatt .karte { padding: 2.5mm 3mm; }
+body.arbeitsblatt table.ziele td, body.arbeitsblatt table.ziele th { padding: 1.6mm 2.5mm; }
+body.arbeitsblatt .opt { margin: 1.5mm 0 0 12mm; }
+body.arbeitsblatt .opt .box { margin-right: 2mm; }
+body.arbeitsblatt .mehr { margin-top: 8mm; padding: 3mm 4mm; }
 </style>
 </head>
 <body class="loesung">
@@ -123,6 +141,16 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <tr><td>Sicherung</td><td style="white-space:nowrap">10 Min</td><td>Nicht auf der Seite bleiben: Urheber klären, andere Berichte suchen, zum Original zurückgehen.</td></tr>
 <tr><td>Reflexion</td><td style="white-space:nowrap">10 Min</td><td>Drei Fragen: Weitergeben, Interesse, Chat als Quelle.</td></tr>
 </tbody></table>
+<h2>Zeitplan für eine Doppelstunde (90 Minuten)</h2>
+<table><thead><tr><th>Phase</th><th style="width:20mm">Zeit</th><th>Was passiert</th></tr></thead><tbody>
+<tr><td>Einstieg</td><td style="white-space:nowrap">10 Min</td><td>Video ansehen, etwa 2 Minuten, dann die Frage: Eine Meldung im Klassenchat, was tust du zuerst? Dazu genug Zeit für das Gespräch an der Tafel.</td></tr>
+<tr><td>Erarbeitung</td><td style="white-space:nowrap">30 Min</td><td>Die Aufgaben 1 bis 3 des Arbeitsblatts, Hilfekarten nach Bedarf, Zusatz für Schnelle.</td></tr>
+<tr><td>Quiz</td><td style="white-space:nowrap">10 Min</td><td>Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen unten.</td></tr>
+<tr><td>Sicherung</td><td style="white-space:nowrap">15 Min</td><td>Nicht auf der Seite bleiben: Urheber klären, andere Berichte suchen, zum Original zurückgehen. Tafelbild gemeinsam entwickeln.</td></tr>
+<tr><td>Nachdenken</td><td style="white-space:nowrap">15 Min</td><td>Die Fragen „Zum Nachdenken“ allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.</td></tr>
+<tr><td>Abschluss</td><td style="white-space:nowrap">10 Min</td><td>Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.</td></tr>
+</tbody></table>
+<p>Bei einer Einzelstunde (45 Minuten) genügt der Zeitplan oben: Aufgaben und Sicherung in der Stunde, Quiz und Nachdenken als Hausaufgabe oder für die nächste Stunde.</p>
 <p>Vierergruppen, ein Gerät je Gruppe mit Browser. Die Chat-Frage braucht das Sprachmodell, die Gruppen fragen versetzt. Das Video liegt auf der Seite Quellen prüfen.</p>
 <p>Vorbereitung: Wähle eine Behauptung, die du in einer verlässlichen Quelle belegen kannst, und teste vorher, was der Chat dazu antwortet. Lege einen Beitrag ohne Autor und eine Behörden- oder Fachseite zum Thema bereit.</p>
 <h2>Operatoren und Erwartungshorizont</h2>
@@ -134,6 +162,7 @@ body.loesung table.frage td:first-child { width: 52mm; font-weight: bold; }
 <div class="lg"><b>Zu Aufgabe 3, Überprüfe (III) und Beurteile (III).</b> Das Urteil nennt Gründe: Urheber, Datum, eigene Recherche. Eine Behörden- oder Fachseite mit Datum ist meist verlässlicher als ein Beitrag ohne Autor. Fehlt jede Datumsangabe, ist das selbst ein Warnzeichen.</div>
 <div class="lg"><b>Zum Zusatz, Entwickle (III) und Vergleiche (II).</b> Die Karte nennt die vier Züge in eigenen Worten. Beim Vergleich fällt auf, welche Züge alle Gruppen nennen.</div>
 
+<h2>Quiz: richtige Antworten</h2><ul><li><b>Frage 1: B.</b> Eine, denn sie sind nicht unabhängig Nicht die Anzahl zählt, sondern die Unabhängigkeit: Haben die Berichte selbst recherchiert?</li><li><b>Frage 2: C.</b> Die Seite verlassen und woanders nachsehen, was über sie gesagt wird Profis öffnen einen neuen Tab und suchen den Namen der Seite oder des Autors.</li><li><b>Frage 3: B.</b> Ich suche das Original und streiche sie, wenn es sie nicht gibt Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt.</li></ul>
 <h2>Differenzierung</h2>
 <div class="zwei"><div><b>Leichter</b><br>Die Lehrkraft legt die drei Quellen bereit. Bei <b>Nenne</b> (I) und <b>Beschreibe</b> (I) bleiben: „Die Quelle ist ___, sie will ___.“</div><div><b>Schwerer</b><br>Die Gruppe sucht selbst zwei weitere Quellen, <b>begründet</b> (III) das Ergebnis und <b>beurteilt</b> (III), ob die Quellen unabhängig sind.</div></div>
 <h2>Hilfekarten (Tipp 1 und Tipp 2)</h2>
