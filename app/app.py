@@ -1248,7 +1248,7 @@ def google_bestaetigung():
 _KI_CRAWLER = ("GPTBot", "OAI-SearchBot", "ChatGPT-User", "ClaudeBot", "Claude-SearchBot", "PerplexityBot", "Google-Extended", "CCBot", "Applebot-Extended")
 
 
-@app.get("/robots.txt")
+@app.api_route("/robots.txt", methods=["GET", "HEAD"])
 def robots_txt(request: Request):
     from fastapi.responses import PlainTextResponse
     if _OEFFENTLICH:
@@ -1275,17 +1275,17 @@ def _seo_datei(request, name, medientyp):
     return Response(text, media_type=medientyp, headers={"Cache-Control": "no-cache"})
 
 
-@app.get("/sitemap.xml")
+@app.api_route("/sitemap.xml", methods=["GET", "HEAD"])
 def sitemap_xml(request: Request):
     return _seo_datei(request, "sitemap.xml", "application/xml")
 
 
-@app.get("/llms.txt")
+@app.api_route("/llms.txt", methods=["GET", "HEAD"])
 def llms_txt(request: Request):
     return _seo_datei(request, "llms.txt", "text/plain; charset=utf-8")
 
 
-@app.get("/llms-full.txt")
+@app.api_route("/llms-full.txt", methods=["GET", "HEAD"])
 def llms_full_txt(request: Request):
     return _seo_datei(request, "llms-full.txt", "text/plain; charset=utf-8")
 
@@ -1304,7 +1304,7 @@ if _OEFFENTLICH and _INDEXNOW_KEY:
         return PlainTextResponse(_INDEXNOW_KEY, headers={"Cache-Control": "no-cache", "X-Robots-Tag": "noindex"})
 
 
-@app.get("/", response_class=HTMLResponse)
+@app.api_route("/", methods=["GET", "HEAD"], response_class=HTMLResponse)
 def index(request: Request):
     return _oberflaeche(request, "start")
 
