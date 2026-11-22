@@ -95,6 +95,10 @@ Jedes Bild wird zu einer Zahlenliste. Ähnliche Bilder liegen im Zahlenraum nah 
 
 Ein Modell, das Beispiele auswendig lernt, versagt bei neuen Daten. Darum wird mit ungesehenen Daten geprüft.
 
+## Quiz zu diesem Labor
+
+Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Daten, der Rohstoff.
+
 ## Weiterlesen
 
 Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.
@@ -376,6 +380,10 @@ Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann be
 Wie im Nebel spürt das Modell nur das Gefälle unter den Füßen und geht Schritt für Schritt bergab.
 
 Merke: Gradientenabstieg heißt: Schritt für Schritt in die Richtung gehen, in der der Fehler am stärksten sinkt.
+
+## Ein Neuron trainieren: ein Beispiel von Anfang bis Ende
+
+Ein Neuron, zwei Eingaben, ein Schritt: raten, Fehler messen, Gewichte verschieben. Alle Zahlen zum Nachrechnen stehen unter „Mit Mathe“.
 
 ## Die Lernrate: wie groß ist der Schritt?
 
@@ -894,6 +902,10 @@ Das Netz meldet ein Objekt oft mehrfach. Die Aufräumung behält nur den sichers
 
 Hier rechnet der Prozessor mit OpenCV. Das Erkennen braucht den größten Teil der Zeit.
 
+## Quiz zu diesem Labor
+
+Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Fünf Fragen an ein Bild.
+
 # Bildmodell anlernen
 
 Adresse: __BASIS__/anlernen
@@ -935,6 +947,10 @@ Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Tok
 ## Warum es kleiner ist als bekannte Chatbots
 
 Das kleine Modell ist sofort da und privat, weiß aber weniger und irrt öfter.
+
+## Quiz zu diesem Labor
+
+Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Wie ein Sprachmodell gebaut ist.
 
 # Sprache zu Text
 
@@ -3412,6 +3428,10 @@ Wer hinter dem KI-Labor steht, was es ist, wie die Labore arbeiten und wo die Gr
 
 Das KI-Labor ist ein Projekt von Daniel Alisch. Mehr über ihn steht auf seiner Hauptseite daniel-alisch.site.
 
+## Kontakt und Impressum
+
+Kontakt zum Betreiber über die Kontaktseite auf daniel-alisch.site. Impressum und Datenschutzerklärung stehen auf derselben Seite.
+
 ## Was das Labor ist
 
 Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud.
@@ -3592,11 +3612,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.
 
-45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+45 oder 90 Minuten für Klasse 8, ohne Kamera. Die Einzelstunde: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
 ## Der Zeitplan
 
 Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Analysieren und Reflektieren; Problemlösen und Handeln. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -3608,7 +3636,7 @@ Zwei Stationen: Punkte-Labor (12 Minuten) und Prompt-Werkstatt (8 Minuten), die 
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben für die Gruppe, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben für die Gruppe, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -3656,11 +3684,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.
 
-45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
+45 oder 90 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
 
 ## Der Zeitplan
 
 Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Analysieren und Reflektieren; Problemlösen und Handeln. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -3720,11 +3756,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.
 
-45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
+45 oder 90 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Suchen, Verarbeiten und Aufbewahren; Analysieren und Reflektieren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -3782,13 +3826,17 @@ Antwort: Ich suche das Buch in einem Katalog oder bei einem Verlag. Ein Katalog 
 Adresse: __BASIS__/schule-lehrkraefte
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Pläne für Einzel- und Doppelstunde, Bezug zur KMK-Strategie, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
+Kurz gesagt: Handreichung für Lehrkräfte zu den drei KI-Stunden und den sieben Medien-Einheiten in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Übersicht der Medien-Einheiten, Pläne für Einzel- und Doppelstunde (45 oder 90 Minuten), Lehrplanbezug und Bezug zur KMK-Strategie, Kamera und Mikrofon am Schulgerät sperren, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.
 
-Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.
+Checkliste, Fachbegriffe, Kurzantworten, Stolperstellen und Lehrplanbezug für die drei KI-Stunden und die sieben Medien-Einheiten in Klasse 8.
 
 ## Was die Klasse am Ende kann
 
 Vier Stufen, verteilt auf die drei Stunden, angelehnt an gängige Kompetenzrahmen.
+
+## Die sieben Medien-Einheiten
+
+Sieben weitere Einheiten zur Medienkompetenz, je 45 oder 90 Minuten, mit Arbeitsblatt und Lösungsblatt wie bei den KI-Stunden.
 
 ## Operatoren in den Aufgaben
 
@@ -3796,7 +3844,7 @@ Jede Aufgabe beginnt mit einem Operator. Das Kürzel zeigt, wie anspruchsvoll si
 
 ## So sind die Arbeitsblätter aufgebaut
 
-Drei Seiten DIN A4, schwarzweiß druckbar: Seite 1 mit Zielen und Aufgaben, Seite 2 und 3 mit Quiz, Nachdenken, Zusatz und Legende, dazu QR-Code.
+Vier Seiten DIN A4, schwarzweiß druckbar: zuerst Ziele und Aufgaben mit Schreibzeilen, danach Quiz, Nachdenken, Zusatz und Legende, dazu QR-Code.
 
 ## Einzelstunde oder Doppelstunde
 
@@ -3816,15 +3864,19 @@ Acht Fragen, die in der Klasse fast immer kommen, mit Kurzantwort.
 
 ## Stolperstellen
 
-Typische Probleme im Unterricht und wie du sie umgehst.
+Typische Probleme im Unterricht und wie Sie sie umgehen.
 
-## Bezug zur KMK-Strategie
+## Kamera und Mikrofon am Schulgerät sperren
+
+Im Unterricht bleiben Kamera und Mikrofon aus. Sperren Sie sie zusätzlich im Browser, dann schaltet sie auch ein versehentlicher Klick nicht ein.
+
+## Lehrplanbezug und KMK-Strategie
 
 Die Einheiten knüpfen an die sechs Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an. Das ist keine amtliche Zuordnung.
 
 ## Für Klasse 7 und 9 anpassen
 
-Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzt du, für Klasse 9 erweiterst du.
+Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzen Sie, für Klasse 9 erweitern Sie.
 
 ## Weiterlesen
 
@@ -3834,7 +3886,7 @@ Quellen zu Kompetenzrahmen, Datenschutz in der Schule und Sprachmodellen im Unte
 
 - Die drei Stunden decken Verstehen, Anwenden, Erstellen und Bewerten ab. Alle kommen ohne Kamera aus.
 - Gruppen von vier, höchstens 7 Geräte, versetzt starten: So bleibt die Wartezeit kurz.
-- Antworten des Modells sind Vorschläge. Bewerte die Begründung der Klasse, nicht den Wortlaut.
+- Antworten des Modells sind Vorschläge. Bewerten Sie die Begründung der Klasse, nicht den Wortlaut.
 
 # Information für die Schulleitung
 
@@ -3862,6 +3914,10 @@ Verantwortlicher ist Daniel Alisch, Impressum und Datenschutzerklärung stehen a
 ## Hosting und Betrieb
 
 Das Labor läuft auf einem kleinen Rechner des Betreibers, ohne externe KI-Dienste.
+
+## Betrieb und Verträge
+
+Kostenlos, ohne Vertrag, ohne Zusage zur Verfügbarkeit. Was nicht belegt ist, beantwortet der Betreiber auf Anfrage.
 
 ## Kamera und Mikrofon
 
@@ -3925,11 +3981,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert ein Set aus zwölf Bildkarten (echte Fotos und KI-Bilder), sucht Hinweise und lernt, warum es keine sichere Erkennung gibt. Mit Zeitplan, Aufgaben, Lösungshinweisen, Tafelbild und druckbarem Kartenset.
 
-45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
+45 oder 90 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Analysieren und Reflektieren; Suchen, Verarbeiten und Aufbewahren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -3941,7 +4005,7 @@ Drei Schritte: Karten sortieren (7 Minuten), Hinweise suchen (7 Minuten), Prüfw
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -3982,6 +4046,8 @@ Antwort: Klären, wer das Bild zuerst veröffentlicht hat und wo. Die Herkunft l
 Frage: Du hast ein Bild geprüft: Die Quelle passt, der Ort stimmt, nichts wirkt auffällig. Wie formulierst du dein Urteil?
 Antwort: Wahrscheinlich echt, weil Quelle und Kontext passen. Du schätzt eine Wahrscheinlichkeit und nennst den Grund. „Nie beurteilen“ hilft dir nicht weiter.
 
+Erklärvideo: Echt oder KI? (2.5 Minuten), __BASIS__/static/videos/echt-oder-ki.mp4, Untertitel: __BASIS__/static/videos/echt-oder-ki.vtt
+
 # Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen
 
 Adresse: __BASIS__/medien-stunde-2
@@ -3989,11 +4055,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wird an drei Quellen gegengeprüft: Chat-Antwort, ein Beitrag und eine Behörden- oder Fachseite. Seitwärtslesen und die vier Züge Stopp, Urheber, andere Berichte, Zurückverfolgen. Mit Aufgaben und Lösungshinweisen.
 
-45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
+45 oder 90 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Suchen, Verarbeiten und Aufbewahren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4005,7 +4079,7 @@ Drei Schritte: Chat fragen (6 Minuten), seitwärts lesen (8 Minuten), Gegenprobe
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4046,18 +4120,28 @@ Antwort: In einem neuen Tab nachsehen, was andere über die Seite sagen. Profis 
 Frage: Ein Chat nennt für deine These eine Quelle mit Titel, Autor und Jahr. Wie gehst du vor?
 Antwort: Ich suche das Original und streiche sie, wenn es fehlt. Ein Sprachmodell kann Quellen erfinden. Nur das Original zählt.
 
+Erklärvideo: Quellen prüfen (2.5 Minuten), __BASIS__/static/videos/quellen-pruefen.mp4, Untertitel: __BASIS__/static/videos/quellen-pruefen.vtt
+
 # Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren
 
 Adresse: __BASIS__/medien-stunde-3
 Bereich: Für die Schule. Stand: 2026-11-22.
 
-Kurz gesagt: Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall nach Entstehung, Verbreitung, Nutzen und Gegenmaßnahmen. Keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.
+Kurz gesagt: Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall (eine Cheap Fake) nach Entstehung, Verbreitung und Nutzen und beurteilt ein Dilemma zu einer KI-erzeugten Stimme: Einwilligung, Persönlichkeitsrecht, Schaden, Gegenmaßnahmen. Beide Fälle sind erfunden, es gibt keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.
 
-45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen.
+45 oder 90 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung und Nutzen, ein Dilemma zu einer KI-Stimme die Frage nach Einwilligung und Schaden.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Analysieren und Reflektieren; Schützen und sicher Agieren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4065,11 +4149,11 @@ Video ansehen, etwa 2 Minuten, dann die Frage: Was ist der Unterschied zwischen 
 
 ## Erarbeitung (20 Minuten)
 
-Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten), Gegenmaßnahmen (6 Minuten).
+Drei Schritte: Entstehung klären (6 Minuten), Nutzen und Verbreitung (8 Minuten), Dilemma zu einer KI-Stimme (6 Minuten).
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4107,8 +4191,10 @@ Antwort: Eine Cheap Fake, weil ein echtes Bild falsch eingesetzt wird. Cheap Fak
 Frage: Eine empörende Falschmeldung verbreitet sich binnen einer Stunde in vielen Gruppenchats. Was erklärt das am besten?
 Antwort: Gefühle machen Teilen leicht, und Feeds zeigen Beliebtes zuerst. Der Feed ist nach Reaktionen gebaut, nicht nach Wahrheit. Das ist ein Nebeneffekt.
 
-Frage: Jemand hat ein gefälschtes Bild von dir im Klassenchat verbreitet. Was ist der beste erste Schritt?
-Antwort: Beweise sichern, eine Vertrauensperson holen und melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird.
+Frage: Ein Mitschüler baut mit einer KI die Stimme eines anderen nach und schickt als „Scherz“ eine Sprachnachricht in den Klassenchat. Der andere wurde nicht gefragt. Was ist das?
+Antwort: Ein Deepfake ohne Einwilligung, der Rechte verletzen kann. Eine nachgebaute Stimme ohne Einwilligung ist ein Deepfake. Der Scherz ändert nichts: Sie kann Persönlichkeitsrechte verletzen und Schaden anrichten.
+
+Erklärvideo: Fake News und Deepfakes (2.4 Minuten), __BASIS__/static/videos/fake-news-deepfakes.mp4, Untertitel: __BASIS__/static/videos/fake-news-deepfakes.vtt
 
 # Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln
 
@@ -4117,11 +4203,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sortiert Beispiele nach erlaubt, genannt und verboten, übt die Faustfrage und die Angabe von KI-Hilfe und entwickelt Regelvorschläge. Welche Regeln gelten, entscheidet die Schule.
 
-45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
+45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Produzieren und Präsentieren; Analysieren und Reflektieren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4133,7 +4227,7 @@ Drei Schritte: Beispiele sortieren (6 Minuten), Faustfrage anwenden (8 Minuten),
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4174,6 +4268,8 @@ Antwort: Erst selbst versuchen, dann KI fragen, prüfen, neu formulieren. Wer er
 Frage: An deiner Schule gibt es keine ausdrückliche Regel zur KI-Nutzung bei Hausaufgaben. Was heißt das für dich?
 Antwort: Du fragst vorab nach, was für diese Aufgabe gilt. Keine Regel heißt nicht, dass alles erlaubt ist. Frage nach, am besten vorab.
 
+Erklärvideo: KI und Hausaufgaben (2.2 Minuten), __BASIS__/static/videos/ki-hausaufgaben-fair.mp4, Untertitel: __BASIS__/static/videos/ki-hausaufgaben-fair.vtt
+
 # Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren
 
 Adresse: __BASIS__/medien-stunde-5
@@ -4181,11 +4277,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse sammelt Datenspuren, entscheidet über App-Freigaben für Kamera, Mikrofon und Standort an erfundenen Beispiel-Apps und entwickelt eine Faustregel für Chatbots. Ohne Kamera, kein Zeigen privater Einstellungen.
 
-45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
+45 oder 90 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Schützen und sicher Agieren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4197,7 +4301,7 @@ Drei Schritte: Datenspuren sammeln (6 Minuten), App-Rechte prüfen (8 Minuten), 
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4238,6 +4342,8 @@ Antwort: Dein Passwort für den Account und die Adresse deiner Familie. Gib nich
 Frage: Vor drei Monaten hast du einer App den Zugriff auf dein Mikrofon erlaubt. Jetzt willst du das zurücknehmen. Was stimmt?
 Antwort: Das geht jederzeit in den Einstellungen des Geräts. Die Freigabe lässt sich jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu.
 
+Erklärvideo: Datenschutz im Alltag (2.3 Minuten), __BASIS__/static/videos/datenschutz-im-alltag.mp4, Untertitel: __BASIS__/static/videos/datenschutz-im-alltag.vtt
+
 # Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern
 
 Adresse: __BASIS__/medien-stunde-6
@@ -4245,11 +4351,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.
 
-45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
+45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Produzieren und Präsentieren; Problemlösen und Handeln. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4261,7 +4375,7 @@ Drei Schritte: Frage schreiben (6 Minuten), Antworten vergleichen (8 Minuten), p
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4302,6 +4416,8 @@ Antwort: Nachfragen, etwa: Gib ein Beispiel aus dem Fußball. Die erste Antwort 
 Frage: Die KI nennt für dein Referat eine Jahreszahl in sehr sicherem Ton. Was tust du?
 Antwort: Ich suche die Zahl in einer zweiten, unabhängigen Quelle. Ein sicherer Ton beweist nichts. Prüfe Zahlen, Namen und Quellen.
 
+Erklärvideo: Gute Prompts für die Schule (2.2 Minuten), __BASIS__/static/videos/prompts-fuer-schueler.mp4, Untertitel: __BASIS__/static/videos/prompts-fuer-schueler.vtt
+
 # Medien-Einheit 7: KI in deinem Alltag, Poster-Runde
 
 Adresse: __BASIS__/medien-stunde-7
@@ -4309,11 +4425,19 @@ Bereich: Für die Schule. Stand: 2026-11-22.
 
 Kurz gesagt: Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gruppen gestalten ein Poster, erklären, wie ein Feed entscheidet, und beurteilen in einer Poster-Runde, was wirklich KI ist. Kein Video nötig, ohne Kamera.
 
-45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
+45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
 
 ## Der Zeitplan
 
 Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
+
+## Einzelstunde oder Doppelstunde
+
+45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Lehrplanbezug
+
+KMK-Kompetenzbereiche: Analysieren und Reflektieren. Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.
 
 ## Einstieg (5 Minuten)
 
@@ -4325,7 +4449,7 @@ Drei Schritte: Poster zeichnen (6 Minuten), Feed erklären (8 Minuten), Poster-R
 
 ## Arbeitsblatt: die Aufgaben
 
-Drei Aufgaben und ein Zusatz, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).
+Drei Aufgaben und ein Zusatz, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).
 
 ## Lösungshinweise
 
@@ -4550,7 +4674,7 @@ KI-Texte klingen oft fehlerfrei, aber allgemein. Prüfe Namen, Zahlen und Quelle
 
 ## Stimmen: Klonen braucht wenig Material
 
-Eine Stimme lässt sich aus kurzen Aufnahmen nachbauen. Bei seltsamen Anrufen hilft eine Rückfrage auf anderem Weg.
+Eine Stimme lässt sich aus kurzen Aufnahmen nachbauen. Bei seltsamen Anrufen hilft eine Rückfrage auf anderem Weg. Mehr: Falscher Anruf, Enkeltrick, Schockanruf.
 
 Merke: Bei Druck und Geldwünschen: erst auflegen, dann über einen bekannten Weg nachfragen.
 
@@ -4566,7 +4690,7 @@ Merke: Beide Fehler sind möglich: Fälschung glauben und Echtes abtun. Ein Prog
 
 ## Weiterlesen
 
-Quellen zu dieser Seite.
+Deutsche Quellen, geprüft am 22.11.2026: klicksafe: Deepfakes, Polizei: Vorsicht Betrug, Bedrohungen durch KI.
 
 ## Das nimmst du mit
 
@@ -4631,7 +4755,7 @@ Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworte
 
 ## Weiterlesen
 
-Quellen zu dieser Seite.
+Deutsche Quellen, geprüft am 22.11.2026: klicksafe: Unterrichtsbeispiele zu Quellenkritik und KI-Chatbots, Verbraucherzentrale: KI-Chatbots im Überblick.
 
 ## Das nimmst du mit
 
@@ -4723,6 +4847,12 @@ Kurz gesagt: Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigene
 
 KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite?
 
+## Darf ich das Labor für Hausaufgaben nutzen?
+
+Das Labor ist zum Verstehen da. Was du abgibst, regeln deine Schule und deine Lehrkraft. Frag sie. Im Zweifel gib an, dass du KI genutzt hast.
+
+Merke: Das Labor ist zum Verstehen da. Was du abgibst, entscheiden Schule und Lehrkraft.
+
 ## Eine Frage, die fast alles klärt
 
 Hast du danach mehr verstanden, oder hast du nur etwas abgegeben? Daran siehst du, ob KI dir hilft.
@@ -4759,7 +4889,7 @@ Nicht aus Angst vor Strafe, sondern weil das, was du kannst, dir gehört.
 
 ## Weiterlesen
 
-Quellen zu dieser Seite.
+Deutsche Quellen, geprüft am 22.11.2026: klicksafe: KI and me, Material für Schule und Praxis, Verbraucherzentrale: KI-Chatbots im Überblick.
 
 ## Das nimmst du mit
 
@@ -4853,17 +4983,17 @@ Bereich: Medienkompetenz. Stand: 2026-11-22.
 
 Kurz gesagt: Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau. Nutze die KI als Trainer: erklären, abfragen, Feedback geben.
 
-Bessere Frage, bessere Antwort. Mit fünf Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media.
+Bessere Frage, bessere Antwort. Mit sechs Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media.
 
 ## Warum die Frage so viel ausmacht
 
-Das Modell kennt nur, was du schreibst. Eine knappe Frage bekommt eine allgemeine Antwort.
+Ein Prompt ist deine Frage oder Aufgabe an die KI. Sie kennt nur, was du schreibst. Eine knappe Frage bekommt eine allgemeine Antwort.
 
 Merke: Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst.
 
-## Fünf Bausteine
+## Sechs Bausteine
 
-Rolle, Aufgabe, Material, Format, Grenzen. Nicht immer alle, aber meist zwei bis drei.
+Rolle, Aufgabe, Material, Format, Grenzen, Niveau. Nicht immer alle, aber meist zwei bis drei.
 
 ## Beispiele aus Schule und Lernen
 
@@ -4885,7 +5015,7 @@ Merke: Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht v
 
 ## Weiterlesen
 
-Quellen zu dieser Seite.
+Deutsche Quellen, geprüft am 22.11.2026: bpb: Begriffe rund um KI, Verbraucherzentrale: KI-Chatbots im Überblick.
 
 ## Das nimmst du mit
 
@@ -4969,6 +5099,159 @@ Antwort: Nicht interessiert wählen, Einstellungen prüfen. Plattformen bieten m
 
 Frage: Wie arbeitet ein Kamerafilter, der dir Hasenohren aufsetzt, grob?
 Antwort: Er findet erst dein Gesicht und setzt den Effekt dann dazu. Zuerst wird das Gesicht samt Augen und Mund erkannt, dann sitzt der Effekt passend, und das viele Male pro Sekunde.
+
+# Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich
+
+Adresse: __BASIS__/falscher-anruf
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die du selbst kennst, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.
+
+Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst.
+
+## Das Wichtigste in drei Schritten
+
+Erstens auflegen. Zweitens selbst zurückrufen, unter einer Nummer, die du kennst. Drittens bei Verdacht die Polizei unter 110 informieren.
+
+Merke: Auflegen. Selbst zurückrufen. Bei Verdacht 110. Nie Geld oder Wertsachen an Unbekannte geben.
+
+## Die Maschen: Enkeltrick, Schockanruf, falscher Polizist
+
+Alle drei arbeiten mit Druck und Angst. Sie wollen, dass du schnell handelst und mit niemandem sprichst.
+
+## KI-Stimmen: Warum eine bekannte Stimme nichts beweist
+
+Eine Stimme lässt sich mit KI nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme. Darum zählt der Rückruf, nicht der Klang.
+
+Merke: Die Stimme beweist nichts. Der Rückruf unter einer bekannten Nummer klärt es.
+
+## Das Familien-Codewort
+
+Vereinbart mit Familie und Freunden ein Kennwort. Wer anruft und in Not ist, nennt es. Wer es nicht kennt, ist nicht die Person.
+
+## Wenn es schon passiert ist
+
+Nicht schämen. Sofort die Polizei informieren und Anzeige erstatten. Notiere, was du noch weißt.
+
+## Checkliste: Das tue ich, wenn das Telefon klingelt
+
+Sechs Sätze zum Merken. Schreib sie auf einen Zettel neben das Telefon.
+
+## Weiterlesen
+
+Quellen, geprüft am 22.11.2026: Polizei: Schockanruf, Polizei: Enkeltrick, Verbraucherzentrale: Falsche Polizisten am Telefon.
+
+## Das nimmst du mit
+
+- Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.
+- Eine vertraute Stimme beweist nichts, denn Stimmen lassen sich mit KI nachbauen.
+- Ein Codewort in der Familie schützt auch dann, wenn die Stimme echt klingt.
+
+## Fragen und Antworten
+
+Frage: Ein Anrufer sagt, dein Enkel hatte einen Unfall und braucht sofort Bargeld. Was tust du zuerst?
+Antwort: Ich lege auf und rufe meinen Enkel selbst an. Auflegen und unter einer bekannten Nummer zurückrufen klärt es. Wer am Telefon bleibt, steht weiter unter dem Druck der Täter.
+
+Frage: Die Stimme am Telefon klingt genau wie deine Tochter. Was sagt das aus?
+Antwort: Nichts Sicheres, denn Stimmen lassen sich mit KI nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine Fälschung. Auch die Nummer im Display lässt sich fälschen. Nur der Rückruf unter einer bekannten Nummer klärt es.
+
+Frage: Ein angeblicher Polizist will deine Wertsachen zur Sicherheit abholen. Was ist richtig?
+Antwort: Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wähle die 110 selbst.
+
+# Für dein Referat über KI
+
+Adresse: __BASIS__/referat
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Für ein Referat über KI brauchst du eine Gliederung, mehrere Quellen und eine saubere Angabe mit Abrufdatum. Das Labor erklärt zum Verstehen und ist als einzige Quelle nicht genug. Die Seite zeigt eine Gliederung, deutschsprachige Quellen von klicksafe, bpb, Bundesregierung und Verbraucherzentrale und eine Zitiervorlage.
+
+Gliederung, die besten Seiten des Labors, deutsche Quellen und eine Vorlage zum Zitieren. So wird dein Referat gut belegt.
+
+## Eine Gliederung für fünf bis zehn Minuten
+
+Einstieg, Was ist KI, Wie lernt sie, Wo steckt sie im Alltag, Grenzen, Fazit. Dazu am Ende die Quellen.
+
+Merke: Sechs Teile, je etwa eine Minute, jeder Teil mit einer Quelle.
+
+## Die besten Seiten des Labors für dein Thema
+
+Zum Verstehen und zum Ausprobieren: Landkarte, Punkte-Labor, Sprachmodelle, Grenzen, Alltag und Quellen prüfen.
+
+## Deutschsprachige Quellen
+
+Gute Startpunkte: klicksafe, bpb, Bundesregierung und Verbraucherzentrale.
+
+## So gibst du Quellen an
+
+Betreiber oder Autor, Titel der Seite, Jahr, Adresse und das Datum, an dem du sie gelesen hast.
+
+## So nutzt du das Labor als Quelle
+
+Als Hilfe zum Verstehen ja, als einzige Quelle nein. Gib den Seitennamen und das Abrufdatum an.
+
+Merke: Das Labor hilft dir beim Verstehen. Belegen musst du mit anderen Quellen.
+
+## Checkliste vor dem Vortrag
+
+Sechs Fragen, bevor du das Referat abgibst oder hältst.
+
+## Das nimmst du mit
+
+- Gliedere in sechs Teile und belege jeden mit einer Quelle.
+- Gib Betreiber, Titel, Jahr, Adresse und Abrufdatum an.
+- Das Labor ist zum Verstehen da. Als einzige Quelle reicht es nicht.
+
+# Gute Fragen stellen, mit Schulbeispielen
+
+Adresse: __BASIS__/prompts-schule
+Bereich: Medienkompetenz. Stand: 2026-11-22.
+
+Kurz gesagt: Ein Prompt ist die Frage oder Aufgabe, die du einer KI schreibst. Je genauer du schreibst, desto brauchbarer die Antwort. Die Seite zeigt drei Schulaufgaben (Referat, Vokabeln, Lernplan), je mit einem schlechten und einem guten Prompt zum Kopieren und einem Quiz.
+
+Ein Prompt ist deine Frage an die KI. Mit drei Schulaufgaben siehst du, wie aus einer schwachen Frage eine gute wird. Zum Kopieren.
+
+## Was ist ein Prompt?
+
+Ein Prompt ist deine Frage oder Aufgabe an die KI. Je genauer du schreibst, desto besser die Antwort.
+
+Merke: Prompt heißt: deine Frage an die KI. Genauer fragen bringt bessere Antworten.
+
+## Aufgabe 1: Referat
+
+Lass dir eine Gliederung vorschlagen und schreib den Text selbst.
+
+Merke: Quellen für das Referat findest du auf der Seite Für dein Referat über KI. Die KI soll sie dir nicht erfinden.
+
+## Aufgabe 2: Vokabeln
+
+Lass dich abfragen, eine Vokabel nach der anderen.
+
+## Aufgabe 3: Lernplan
+
+Nenne Tage, Zeit und Ziel. Dann wird der Plan machbar.
+
+Merke: Gute Prompts nennen Aufgabe, Niveau, Zeit und Format. Probiere sie im Chat aus.
+
+## Antwort prüfen, dann nutzen
+
+Die KI klingt sicher, auch wenn sie irrt. Prüfe Zahlen, Namen und Behauptungen. Der Chat im Labor ist ein kleines Modell und macht mehr Fehler.
+
+## Das nimmst du mit
+
+- Ein Prompt ist deine Frage an die KI. Genauer fragen bringt bessere Antworten.
+- Lass dich erklären und abfragen, statt die Arbeit abzugeben.
+- Prüfe jede Antwort, bevor du sie benutzt.
+
+## Fragen und Antworten
+
+Frage: Was ist ein Prompt?
+Antwort: Eine Frage oder Aufgabe, die du an die KI schreibst. Der Prompt ist dein Text an die KI. Die Antwort ist das, was zurückkommt.
+
+Frage: Welcher Prompt hilft dir beim Lernen für die Vokabelarbeit am meisten?
+Antwort: Frag mich zehn Vokabeln ab, immer nur eine, und warte. Beim Abfragen musst du selbst denken und bekommst Rückmeldung. Fertige Listen liest du nur durch.
+
+Frage: Die KI nennt für dein Referat ein Buch mit Autor und Jahr. Was tust du?
+Antwort: Ich suche das Buch selbst, bevor ich es angebe. Genaue Angaben können erfunden sein. Nur die eigene Suche klärt, ob es das Buch gibt.
 
 # KI zu Hause: Was Eltern wissen sollten
 

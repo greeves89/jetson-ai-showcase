@@ -465,6 +465,9 @@
       s.vorschau = h("pre", { class: "sp-pre" });
       s.vorschauBox = h("details", { class: "sp-details" }, h("summary", null, "Was genau gesendet wird"), s.vorschau);
       s.status = h("p", { class: "sp-status", role: "status", "aria-live": "polite" }, "Noch nichts gesendet.");
+      s.fort = h("div", { class: "sp-fort", role: "progressbar", "aria-label": "Fortschritt der Antwort " + titel, "aria-valuemin": "0", "aria-valuemax": "100", "aria-valuenow": "0", hidden: true }, h("i"));
+      s.statusBox = h("div", { class: "sp-statusbox" }, s.status, s.fort);
+      s.nr = 1; s.von = 1;
       s.zahl = h("span", { class: "sp-tokzahl mono", "aria-hidden": "true" });
       s.antwort = h("div", { class: "sp-antwort", tabindex: "0", role: "region", "aria-label": "Antwort zu " + titel, "aria-live": "off" },
         h("span", { class: "sp-leer" }, "Die Antwort erscheint hier."));
@@ -518,7 +521,7 @@
     function zuruecksetzen(s) {
       s.durchlauf = 0; s.letzteTokens = null;
       s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Die Antwort erscheint hier."));
-      s.status.textContent = "Noch nichts gesendet."; s.zahl.textContent = "";
+      s.status.textContent = "Noch nichts gesendet."; s.zahl.textContent = ""; fortschritt(s, null);
       s.pruefBoxen.forEach((p) => { p.cb.checked = false; }); zaehlePruef(s);
     }
 
@@ -537,6 +540,16 @@
     function stoppen() { stopp = true; if (aktuelleCtrl) aktuelleCtrl.abort(); if (pauseEnde) pauseEnde(); }
     function meldung(t) { meld.hidden = !t; meld.textContent = t || ""; }
 
+    /* Anzeige "Antwort 1 von 2 wird erzeugt ..." je Feld, mit Sekundenzaehler und Fortschrittsbalken (Tokens im Verhaeltnis zur Obergrenze).
+       pct: null = kein Balken, 0 = laeuft, Wartezeit unbestimmt, 1 bis 100 = Anteil. */
+    const kopfText = (s) => (s.von > 1 ? "Antwort " + s.nr + " von " + s.von : "Die Antwort");
+    function fortschritt(s, pct) {
+      s.fort.hidden = pct == null;
+      if (pct == null) return;
+      s.fort.classList.toggle("unbestimmt", pct === 0);
+      s.fort.setAttribute("aria-valuenow", String(Math.round(pct)));
+      s.fort.firstChild.style.width = (pct === 0 ? 35 : Math.min(100, pct)) + "%";
+    }
     async function starte(liste) {
       if (laeuft || L.weg) return;
       meldung("");
@@ -545,12 +558,13 @@
         if (zusammen(s).length > MAXGESAMT) { meldung("Prompt und Material sind zusammen zu lang. Kürze " + s.titel + " oder das Material."); return; }
       }
       laeuft = true; stopp = false; knoepfeSetzen();
-      liste.forEach((s, i) => { if (i > 0 || liste.length > 1) s.status.textContent = i === 0 ? "Gleich dran." : "Wartet, bis " + liste[0].titel + " fertig ist."; });
+      liste.forEach((s, i) => { s.nr = i + 1; s.von = liste.length; fortschritt(s, null); });
+      liste.forEach((s, i) => { if (i > 0 || liste.length > 1) s.status.textContent = i === 0 ? kopfText(s) + " startet gleich." : kopfText(s) + " wartet, bis Antwort 1 von " + s.von + " fertig ist. Die Fragen laufen nacheinander."; });
       try {
         for (const s of liste) { if (stopp || L.weg) break; await anfrage(s); }
       } finally {
         laeuft = false;
-        liste.forEach((s) => { if (stopp && /^Wartet|^Gleich/.test(s.status.textContent)) s.status.textContent = "Nicht gesendet, abgebrochen."; });
+        liste.forEach((s) => { if (stopp && /wartet|startet gleich/.test(s.status.textContent)) { s.status.textContent = "Nicht gesendet, abgebrochen."; fortschritt(s, null); } });
         if (!L.weg) knoepfeSetzen();
       }
     }
@@ -566,7 +580,8 @@
       s.pruefBoxen.forEach((p) => { p.cb.checked = false; }); zaehlePruef(s);
       for (let versuch = 1; versuch <= VERSUCHE; versuch++) {
         if (stopp || L.weg) { s.status.textContent = "Abgebrochen."; return; }
-        s.status.textContent = versuch === 1 ? "Das Modell liest den Prompt …" : "Neuer Versuch " + versuch + " von " + VERSUCHE + " …";
+        s.status.textContent = kopfText(s) + (versuch === 1 ? " wird erzeugt …" : " wird erzeugt, neuer Versuch " + versuch + " von " + VERSUCHE + " …");
+        fortschritt(s, 0);
         const erg = await streame(s, nachricht);
         if (erg.art === "belegt" && versuch < VERSUCHE && !stopp) {
           s.status.textContent = "Der Rechner ist gerade ausgelastet, nichts falsch gemacht. Neuer Versuch in " + Math.round(WARTE_MS / 1000) + " Sekunden (Wiederholung " + versuch + " von " + (VERSUCHE - 1) + ").";
@@ -581,13 +596,22 @@
       const c = L.ctrl(); aktuelleCtrl = c; s.ctrl = c;
       const t0 = performance.now();
       let tErst = 0, roh = "", art = "ok", gekappt = false, fertigAnzeige = false;
-      let rafOffen = false, letzt = lies(""), stoppePlatz = null;
+      let rafOffen = false, letzt = lies(""), stoppePlatz = null, platzSatz = "";
       const zeichne = () => {
         rafOffen = false;
         s.antwort.textContent = letzt.text;
         s.zahl.textContent = letzt.tokens.length + " Token";
         s.antwort.scrollTop = s.antwort.scrollHeight;
+        if (tErst) fortschritt(s, Math.max(3, Math.min(95, letzt.tokens.length / MAXTOK * 100)));
       };
+      // Jede Sekunde aktualisieren, damit bei langer Wartezeit sichtbar bleibt, dass es weitergeht (Platz in der Warteschlange, sonst Sekunden)
+      const tick = setInterval(() => {
+        if (L.weg) return;
+        const sec = Math.round((performance.now() - t0) / 1000);
+        if (tErst) s.status.textContent = kopfText(s) + " wird erzeugt: " + letzt.tokens.length + " Token, " + sec + " s";
+        else s.status.textContent = (platzSatz ? kopfText(s) + " wartet. " + platzSatz : kopfText(s) + " wird erzeugt, das Modell liest den Prompt …") + " (" + sec + " s)";
+      }, 1000);
+      L.timers.add(tick);
       try {
         const r = await postJson("/api/chat", { nachricht, temperatur: Number(temp.value) }, c.signal);
         if (r.status === 503) {                           // Vorab-Absage: alle Plaetze und Warteplaetze belegt
@@ -595,7 +619,7 @@
           if (d && d.belegt) return { art: "belegt" };
         }
         if (!r.ok) return { art: "fehler", text: await fehlerText(r) };
-        stoppePlatz = KL.last.beobachten((i) => { if (!tErst) s.status.textContent = KL.last.platzText(i); });
+        stoppePlatz = KL.last.beobachten((i) => { if (!tErst) { platzSatz = KL.last.platzText(i); s.status.textContent = kopfText(s) + " wartet. " + platzSatz; } });
         const rd = r.body.getReader(), dec = new TextDecoder();
         for (;;) {
           const { done, value } = await rd.read();
@@ -603,7 +627,7 @@
           roh += dec.decode(value, { stream: true });
           letzt = lies(roh);
           if (letzt.belegt) { art = "belegt"; break; }
-          if (letzt.tokens.length && !tErst) { tErst = performance.now(); s.status.textContent = "Das Modell schreibt …"; }
+          if (letzt.tokens.length && !tErst) { tErst = performance.now(); s.status.textContent = kopfText(s) + " wird erzeugt: Das Modell schreibt …"; }
           if (!ruhig() || !fertigAnzeige) { if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); } }
           if (letzt.tokens.length >= MAXTOK) { gekappt = true; c.abort(); break; }
         }
@@ -612,7 +636,7 @@
       } catch (e) {
         if (!(e && e.name === "AbortError")) return { art: "fehler", text: NETZ };
         art = gekappt ? "ok" : "abbruch";
-      } finally { if (stoppePlatz) stoppePlatz(); L.frei(c); if (aktuelleCtrl === c) aktuelleCtrl = null; }
+      } finally { clearInterval(tick); L.timers.delete(tick); if (stoppePlatz) stoppePlatz(); L.frei(c); if (aktuelleCtrl === c) aktuelleCtrl = null; }
       if (letzt.belegt) art = "belegt";
       else if (letzt.fehler && !letzt.tokens.length) art = "fehler";
       zeichne();
@@ -620,6 +644,8 @@
       return { art, text: letzt.fehler, n: letzt.tokens.length, gekappt, erst: tErst ? tErst - t0 : null, gesamt: performance.now() - t0, antwort: letzt.text, fehler: letzt.fehler };
     }
     function abschluss(s, erg, vorher) {
+      fortschritt(s, erg.art === "ok" ? 100 : null);
+      if (KL.last.dauerMerken && erg.art === "ok" && erg.gesamt) KL.last.dauerMerken(erg.gesamt / 1000);
       if (erg.art === "belegt") {
         s.status.textContent = KL.last.TEXT + " Drücke auf Nochmal, wenn du magst.";
         s.antwort.replaceChildren(h("span", { class: "sp-leer" }, "Die Antwort kommt, sobald der Rechner frei ist."));
@@ -656,7 +682,7 @@
         meld),
       h("div", { class: "sp-sektion" },
         paar(h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Vorher"), A.zahl, A.nochmal), h("div", { class: "sp-akopf" }, h("b", null, "Antwort auf Nachher"), B.zahl, B.nochmal)),
-        paar(A.status, B.status), paar(A.antwort, B.antwort), KL.kiHinweis ? KL.kiHinweis() : null, paar(A.pruef, B.pruef),
+        paar(A.statusBox, B.statusBox), paar(A.antwort, B.antwort), KL.kiHinweis ? KL.kiHinweis() : null, paar(A.pruef, B.pruef),
         hinweis("Kleine Modelle schwanken: Dieselbe Frage bringt bei jedem Durchlauf eine andere Antwort, besonders bei hoher Temperatur. Drück mehrmals auf „Nochmal“ und prüfe, ob der Unterschied zwischen Vorher und Nachher bleibt.")));
     waehle(VORLAGEN[0]);
     knoepfeSetzen();

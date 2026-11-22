@@ -472,3 +472,88 @@ html[data-mathe=aus] .mathe{display:none}
 /* Sprungziele (Abschnitte, "Live ausprobieren", Quiz-Rueckverweise) landen frei unter der Kopfleiste, nicht dahinter */
 #inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--leiste) + 20px)}
 @media(max-width:960px){#inhalt section.block,#inhalt section.abschnitt,#ausprobieren{scroll-margin-top:calc(var(--kopfhoehe) + 20px)}}
+
+/* ---------- Runde 4: sehr schmale Breiten (Zoom 150 Prozent am Handy = 260 px, kleine Handys 320 px) ----------
+   Regel: kein Seitenueberlauf. Die Kopfleiste umbricht, Schalter stehen in voller Breite und brechen um statt abgeschnitten zu werden,
+   lange Woerter, Tabellen, Code und Videos bleiben in der Spalte. */
+@media(max-width:360px){
+  main{padding-left:12px;padding-right:12px}
+  #inhalt{overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto}
+  #inhalt table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+  #inhalt pre,#inhalt .code-block{max-width:100%;overflow-x:auto}
+  #inhalt img,#inhalt video,#inhalt svg,#inhalt canvas,#inhalt iframe{max-width:100%}
+  #inhalt video,#inhalt img,#inhalt canvas{height:auto}
+  .seite{flex-wrap:wrap;row-gap:6px;padding:8px 12px}
+  .marke{order:0}
+  .weg-chip-seite{order:1}
+  .menueknopf{order:2;margin-left:auto}
+  .navsuche{order:3;flex:1 1 100%;min-width:0}
+  .zurueck-zeile{flex-wrap:wrap;row-gap:8px}
+  .zurueck-zeile .lesemodus{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));width:100%;grid-auto-columns:auto;flex:1 1 100%}
+  .zurueck-zeile .lesemodus button,.lesemodus button{white-space:normal;padding:4px 6px;font-size:14px;line-height:1.15;min-height:44px}
+  .mathe-schalter{max-width:100%;height:auto;min-height:44px;padding-top:6px;padding-bottom:6px;text-align:left}
+  .leiste-in{padding-left:12px;padding-right:12px}
+  .hero.gross h1,h1{overflow-wrap:anywhere;hyphens:auto;-webkit-hyphens:auto;max-width:100%}
+  .hero.gross h1{font-size:30px}
+  .hero-aktionen,.kennzahlen{max-width:100%}
+  .statuschip{max-width:100%}
+  dialog.wk{width:calc(100% - 16px);padding:16px 12px 12px}
+  .wk-wege{grid-template-columns:minmax(0,1fr)}
+  .wk-weg{flex-direction:row;align-items:center;min-height:64px}
+  .karten,.karten-2,.karten-3{grid-template-columns:minmax(0,1fr)}
+  .tip{max-width:calc(100vw - 24px)}
+  .wh-anzeige{min-width:0}
+}
+
+/* Suche: Textauszug unter dem Treffer */
+.nav-text .such-auszug{display:block;margin-top:2px;font-size:13px;line-height:1.35;font-weight:400;color:var(--leise);overflow-wrap:anywhere}
+.seite:focus-within .nav[aria-current=page] .such-auszug{color:rgba(255,255,255,.85)}
+
+/* Menue (Desktop): am unteren Rand blendet die Liste aus, statt einen halben Eintrag hart abzuschneiden; am Ende des Scrollens bleibt Luft (padding) */
+@media(min-width:961px){
+  .navscroll{-webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(to bottom,#000 calc(100% - 28px),transparent);padding-bottom:48px;scroll-padding-bottom:48px}
+}
+
+/* Videos: Untertitel stehen als Zeile unter dem Bild (nicht im Bild, damit sie keinen Bildtext verdecken); die Spur selbst steht auf "showing".
+   Im Vollbild entfaellt data-ut, dort zeichnet der Browser die Untertitel selbst. */
+video[data-ut=unter]::cue{color:transparent;background:transparent;text-shadow:none}
+.video .ut-schalter{margin:8px 0 0 16px;align-self:flex-start}
+.video .ut-schalter[aria-pressed=false]{opacity:.8}
+.video .ut-schalter .ic{width:18px;height:18px}
+
+/* Seitenkopf am Handy: Gruppe und Lesezeit in zwei Zeilen, kein haengender Punkt am Zeilenende */
+@media(max-width:600px){
+  .hero .ueber{display:flex;flex-direction:column;gap:2px}
+  .hero .ueber-trenner{display:none}
+}
+
+/* Chat: Antwortrahmen und Hinweise in voller Breite des Bereichs; Link im Satzfluss */
+.ki-hinweis{width:100%}
+.ki-hinweis>span{flex:1 1 auto;min-width:0}
+.ki-hinweis a{display:inline;min-height:0;white-space:normal}
+.msg .ki-warn{display:flex;gap:10px;align-items:flex-start;margin:10px -4px 0;padding:10px 12px;border-radius:12px;background:color-mix(in srgb,var(--orange) 12%,var(--flaeche));font-size:14px;line-height:1.45;white-space:normal;color:var(--text)}
+.msg .ki-warn .ic{flex:none;width:18px;height:18px;margin-top:2px;color:var(--orange)}
+.msg .ki-warn p{margin:0;min-width:0;overflow-wrap:anywhere}
+.msg .ki-warn a{text-decoration:underline;font-weight:600}
+.msg.ki:has(.ki-warn){max-width:100%}
+/* Einstellungen unter dem Chat: Beschriftung mit Abstand, damit sie nicht an den Beispielfragen klebt */
+.d-einst{margin-top:24px}
+.d-einst .g-kopf{font-size:14px;font-weight:600;color:var(--text)}
+
+/* Abschnittsfeld offen: bleibt im Kurz-Modus aufgeklappt, ohne Zusammenfassungszeile */
+details.mehr.immer-offen>summary{display:none}
+
+/* Touch-Ziele: auf Handy und Tablet mindestens 44 px (Fusszeile, Tabellenlinks, Schieber, Aufklapper, Pruefkaestchen, Sprungmarke) */
+.kennzahl-sprung{text-decoration:none;min-height:44px;cursor:pointer}
+.kennzahl-sprung:hover{background:var(--flaeche3);text-decoration:none}
+@media(pointer:coarse),(max-width:960px){
+  #inhalt table a{display:inline-flex;align-items:center;min-height:44px;overflow-wrap:anywhere}
+  .fuss a,.fuss-lizenz a{display:inline-flex;align-items:center;min-height:44px}
+  input[type=range]{height:44px}
+  details>summary{min-height:44px;display:flex;align-items:center}
+  details.mehr>summary{display:inline-flex}
+  .sp-pruef,label.d-schalter{min-height:44px;display:inline-flex;align-items:center}
+  button.chip,.chip[role=radio]{min-height:44px}
+}
+
+@media(pointer:coarse),(max-width:960px){.gl{min-width:44px;text-align:center}}

@@ -9,6 +9,81 @@
 
 const S = {};
 
+/* ------------------------------------------------------------------ Gemeinsame Bausteine der zehn Stundenseiten
+   Eine Quelle: Die drei KI-Stunden (unten) und die sieben Medien-Einheiten (content-schule-medien.js, lädt danach) hängen
+   daraus je einen Abschnitt "Einzelstunde oder Doppelstunde" und "Lehrplanbezug" an. Dieselben Daten lesen die
+   Handreichung (Tabellen) und scripts/materialien_bauen.mjs (Lösungsblatt): Feld doppel und KLSchule.lehrplan. */
+const satz = (t) => (/[.!?]$/.test(String(t).trim()) ? String(t).trim() : String(t).trim() + ".");
+
+/** KMK-Kompetenzbereiche je Einheit (Vorschlag des Labors, keine amtliche Zuordnung). */
+const LEHRPLAN = {
+  "schule-stunde-1": ["KI 1: Was ist KI?", "Analysieren und Reflektieren; Problemlösen und Handeln"],
+  "schule-stunde-2": ["KI 2: Wie lernt ein Computer?", "Analysieren und Reflektieren; Problemlösen und Handeln"],
+  "schule-stunde-3": ["KI 3: Echt oder erfunden?", "Suchen, Verarbeiten und Aufbewahren; Analysieren und Reflektieren"],
+  "medien-stunde-1": ["Medien 1: Echt oder KI?", "Analysieren und Reflektieren; Suchen, Verarbeiten und Aufbewahren"],
+  "medien-stunde-2": ["Medien 2: Quellen prüfen", "Suchen, Verarbeiten und Aufbewahren"],
+  "medien-stunde-3": ["Medien 3: Fake News und Deepfakes", "Analysieren und Reflektieren; Schützen und sicher Agieren"],
+  "medien-stunde-4": ["Medien 4: KI und Hausaufgaben", "Produzieren und Präsentieren; Analysieren und Reflektieren"],
+  "medien-stunde-5": ["Medien 5: Datenschutz im Alltag", "Schützen und sicher Agieren"],
+  "medien-stunde-6": ["Medien 6: Gute Fragen stellen", "Produzieren und Präsentieren; Problemlösen und Handeln"],
+  "medien-stunde-7": ["Medien 7: KI in deinem Alltag", "Analysieren und Reflektieren"],
+};
+
+/** Phasen von Einzelstunde (45) und Doppelstunde (90), für alle zehn Einheiten gleich. */
+const PHASEN = [
+  {phase: "Einstieg", einzel: "5 Minuten", min: 10},
+  {phase: "Erarbeitung", einzel: "20 Minuten", min: 30},
+  {phase: "Quiz", einzel: "Hausaufgabe oder Folgestunde", min: 10},
+  {phase: "Sicherung", einzel: "10 Minuten", min: 15},
+  {phase: "Reflexion und Nachdenken", einzel: "10 Minuten mündlich im Plenum, schriftlich zu Hause", min: 15},
+  {phase: "Abschluss", einzel: "in der Reflexion enthalten", min: 10},
+];
+const PHASEN_TEXT = {
+  "Quiz": "Einzelarbeit am Arbeitsblatt, danach gemeinsame Auflösung mit den Erklärungen im Lösungsblatt.",
+  "Reflexion und Nachdenken": "Die Fragen „Zum Nachdenken“ schriftlich allein oder zu zweit, dann Austausch. Eigene Frage und Merksatz zum Schluss.",
+  "Abschluss": "Ergebnisse vorstellen, Lernziele auf dem Blatt ankreuzen, offene Fragen sammeln.",
+};
+const doppelZeilen = () => PHASEN.map((p) => [p.phase, p.einzel, p.min + " Minuten"]).concat([["Summe", "45 Minuten", "90 Minuten"]]);
+const doppelTabelle = (beschriftung) => ({beschriftung, kopf: ["Phase", "Einzelstunde (45 Minuten)", "Doppelstunde (90 Minuten)"], zeilen: doppelZeilen()});
+const DOPPEL_VISUAL = {typ: "vergleich",
+  links: {titel: "Einzelstunde, 45 Minuten", icon: "clock", farbe: "akzent", punkte: ["Einstieg, Aufgaben, Sicherung", "Reflexion mündlich im Plenum", "Quiz und Nachdenken als Hausaufgabe"]},
+  rechts: {titel: "Doppelstunde, 90 Minuten", icon: "clock", farbe: "gruen", punkte: ["Aufgaben mit 30 statt 20 Minuten", "Quiz in der Stunde", "Nachdenken schriftlich, dann Austausch"]}};
+
+/** Abschnitt "Einzelstunde oder Doppelstunde" einer Einheit. doppel = die 90-Minuten-Phasen mit Text, das Lösungsblatt liest sie von hier. */
+function doppelAbschnitt(ab) {
+  const kurz = (anfang) => ab.find((a) => a.h.startsWith(anfang)).kurz;
+  const zeit = ab.find((a) => a.h === "Der Zeitplan").visual.punkte.map((p) => p.t);
+  if (zeit.join("|") !== "5 Min|20 Min|10 Min|10 Min") throw new Error("Zeitplan der Einheit passt nicht zur Doppelstunde: " + zeit.join(", "));
+  if (PHASEN.reduce((n, p) => n + p.min, 0) !== 90) throw new Error("Doppelstunde ergibt nicht 90 Minuten");
+  const was = {
+    "Einstieg": satz(kurz("Einstieg")) + " Dazu genug Zeit für das Gespräch an der Tafel.",
+    "Erarbeitung": "Die Aufgaben 1 bis 3 des Arbeitsblatts (20 Minuten in der Einzelstunde, hier 30), Hilfekarten nach Bedarf, Zusatz für Schnelle.",
+    "Sicherung": satz(kurz("Sicherung")) + " Tafelbild gemeinsam entwickeln.",
+  };
+  return {h: "Einzelstunde oder Doppelstunde",
+    kurz: "45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.",
+    visual: DOPPEL_VISUAL,
+    p: ["Das Arbeitsblatt ist in beiden Fällen dasselbe, die Minuten auf dem Blatt gelten für die Einzelstunde. Das Lösungsblatt enthält beide Pläne mit allen Schritten."],
+    tabelle: doppelTabelle("Zwei Pläne für dieselben Blätter"),
+    doppel: PHASEN.map((p) => ({phase: p.phase, min: p.min, was: was[p.phase] || PHASEN_TEXT[p.phase]}))};
+}
+
+/** Abschnitt "Lehrplanbezug" einer Einheit: KMK-Kompetenzbereiche, Länderlehrplan bleibt Sache der Lehrkraft. */
+function lehrplanAbschnitt(id) {
+  const bereiche = LEHRPLAN[id][1];
+  return {h: "Lehrplanbezug",
+    kurz: "KMK-Kompetenzbereiche: " + bereiche + ". Passende Themen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes sucht die Lehrkraft selbst.",
+    p: ["Die Einheit knüpft an diese Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an: " + bereiche + ". Das ist ein Vorschlag des Labors, keine amtliche Zuordnung.",
+      "Welche Inhalte und Kompetenzen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes dazu passen, wurde für kein Bundesland geprüft und bleibt Sache der Lehrkraft. Das Labor macht dazu keine Länderangaben. Die Tabelle aller Einheiten steht in der {{schule-lehrkraefte|Handreichung}}, Abschnitt Lehrplanbezug."]};
+}
+/** Hängt beide Abschnitte direkt hinter den Zeitplan einer Einheit (einmal je Seite). */
+function ergaenzeEinheit(seite, id) {
+  const ab = seite.abschnitte;
+  if (ab.some((a) => a.h === "Einzelstunde oder Doppelstunde")) return;
+  ab.splice(1, 0, doppelAbschnitt(ab), lehrplanAbschnitt(id));
+}
+window.KLSchule = {lehrplan: LEHRPLAN, doppelZeilen, doppelTabelle, ergaenzeEinheit};
+
 /* ------------------------------------------------------------------ Einstieg */
 S["schule-start"] = {
   nav: "Schule: Einstieg", typ: "lektion", gruppe: "Für die Schule", titel: "KI im Unterricht: Einstieg für Klassen und Lehrkräfte", symbol: "school",
@@ -98,15 +173,15 @@ S["schule-start"] = {
 S["schule-stunde-1"] = {
   nav: "KI 1: Was ist KI?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden", symbol: "presentation",
   downloads: [
-    {text: "Arbeitsblatt KI 1", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
-    {text: "Lösungsblatt KI 1", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde", href: "/static/materialien/loesung-stunde-1.pdf"},
+    {text: "Arbeitsblatt KI 1", sub: "4 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
+    {text: "Lösungsblatt KI 1", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde und Hilfekarten zum Ausschneiden", href: "/static/materialien/loesung-stunde-1.pdf"},
   ],
   lernziele: [
     "Du kannst an drei Beispielen aus deinem Alltag erklären, wo KI etwas erkennt und entscheidet.",
     "Du kannst im Punkte-Labor zeigen, dass ein Modell aus Beispielen lernt und nicht aus festen Regeln.",
     "Du kannst einen Prompt so verbessern, dass die Antwort des Sprachmodells besser passt.",
   ],
-  kurz: "45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
+  kurz: "45 oder 90 Minuten für Klasse 8, ohne Kamera. Die Einzelstunde: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.",
   zusammenfassung: "KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-Labor, dass ein Modell aus Beispielen lernt, und verbessert in der Prompt-Werkstatt eine Frage an ein Sprachmodell. Mit Zeitplan, Aufgaben, Lösungshinweisen und Tafelbild.",
   abschnitte: [
     {h: "Der Zeitplan",
@@ -141,7 +216,7 @@ S["schule-stunde-1"] = {
       "Punkte-Labor: Seite {{ml|Maschinelles Lernen}}, rechnet im Browser. Prompt-Werkstatt: Seite {{prompting|Gut fragen: Prompts schreiben}}, schickt zwei Fragen an das Sprachmodell, darum nicht alle Gruppen gleichzeitig auf „Beide senden“. Die Stichpunkte der Gruppen dienen später als Tafelbild.",
      ]},
     {h: "Arbeitsblatt: die Aufgaben",
-     kurz: "Drei Aufgaben für die Gruppe, gedruckt auf dem dreiseitigen Arbeitsblatt (Seite 1: Aufgaben, Seite 2 und 3: Quiz und Nachdenken).",
+     kurz: "Drei Aufgaben für die Gruppe, gedruckt auf dem vierseitigen Arbeitsblatt (zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz und Legende).",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "chart-scatter", text: "Aufgabe 1", sub: "Punkte lernen lassen"},
       {icon: "sliders-horizontal", text: "Aufgabe 2", sub: "k verändern"},
@@ -237,15 +312,15 @@ S["schule-stunde-1"] = {
 S["schule-stunde-2"] = {
   nav: "KI 2: Wie lernt ein Computer?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 2: Wie lernt ein Computer? Daten, Training, Fehler", symbol: "brain-circuit",
   downloads: [
-    {text: "Arbeitsblatt KI 2", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
-    {text: "Lösungsblatt KI 2", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde", href: "/static/materialien/loesung-stunde-2.pdf"},
+    {text: "Arbeitsblatt KI 2", sub: "4 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-2.pdf"},
+    {text: "Lösungsblatt KI 2", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde und Hilfekarten zum Ausschneiden", href: "/static/materialien/loesung-stunde-2.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum die Qualität der Daten bestimmt, wie gut ein Modell entscheidet.",
     "Du kannst am Netz-Spielplatz zeigen, dass Training ein Kreislauf aus Vorhersagen, Fehler messen und Nachjustieren ist.",
     "Du kannst beschreiben, was ein Netz tun muss, damit es ein schwieriges Muster lernt.",
   ],
-  kurz: "45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.",
+  kurz: "45 oder 90 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.",
   zusammenfassung: "KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeitet mit dem Punkte-Labor und dem Netz-Spielplatz, beide ohne Kamera. Sie sieht, wie Daten und Fehler das Lernen verändern und warum Netze Zwischenschichten brauchen.",
   abschnitte: [
     {h: "Der Zeitplan",
@@ -374,15 +449,15 @@ S["schule-stunde-2"] = {
 S["schule-stunde-3"] = {
   nav: "KI 3: Echt oder erfunden?", typ: "lektion", gruppe: "Für die Schule", titel: "KI 3: Echt oder erfunden? KI prüfen", symbol: "search",
   downloads: [
-    {text: "Arbeitsblatt KI 3", sub: "3 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
-    {text: "Lösungsblatt KI 3", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde", href: "/static/materialien/loesung-stunde-3.pdf"},
+    {text: "Arbeitsblatt KI 3", sub: "4 Seiten A4, mit Quiz, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-3.pdf"},
+    {text: "Lösungsblatt KI 3", sub: "3 Seiten A4, nur für Lehrkräfte, mit Plänen für Einzel- und Doppelstunde und Hilfekarten zum Ausschneiden", href: "/static/materialien/loesung-stunde-3.pdf"},
   ],
   lernziele: [
     "Du kannst erklären, warum ein Sprachmodell Dinge erfinden kann, die überzeugend klingen.",
     "Du kannst eine Antwort in drei Schritten prüfen: Quelle, zweite Quelle, Datum.",
     "Du kannst begründen, wann du einer KI-Antwort nicht allein vertrauen solltest.",
   ],
-  kurz: "45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.",
+  kurz: "45 oder 90 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.",
   zusammenfassung: "KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im Chat, wie ein Sprachmodell Antworten erfindet (Halluzination), spielt das Risiko-Spiel und übt die Quellenprüfung in drei Schritten. Ohne Kamera, mit Zeitplan, Aufgaben und Lösungshinweisen.",
   abschnitte: [
     {h: "Der Zeitplan",
@@ -510,12 +585,12 @@ S["schule-stunde-3"] = {
 S["schule-lehrkraefte"] = {
   nav: "Handreichung Lehrkräfte", typ: "lektion", gruppe: "Für die Schule", titel: "Handreichung für Lehrkräfte", symbol: "graduation-cap",
   lernziele: [
-    "Du kannst eine Stunde in zehn Minuten vorbereiten.",
-    "Du kannst Fachbegriffe und die häufigsten Schülerfragen kurz beantworten.",
-    "Du erkennst typische Stolperstellen, bevor sie im Unterricht auftreten.",
+    "Sie können eine Stunde in zehn Minuten vorbereiten.",
+    "Sie können Fachbegriffe und die häufigsten Schülerfragen kurz beantworten.",
+    "Sie erkennen typische Stolperstellen, bevor sie im Unterricht auftreten.",
   ],
-  kurz: "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8.",
-  zusammenfassung: "Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Pläne für Einzel- und Doppelstunde, Bezug zur KMK-Strategie, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
+  kurz: "Checkliste, Fachbegriffe, Kurzantworten, Stolperstellen und Lehrplanbezug für die drei KI-Stunden und die sieben Medien-Einheiten in Klasse 8.",
+  zusammenfassung: "Handreichung für Lehrkräfte zu den drei KI-Stunden und den sieben Medien-Einheiten in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Übersicht der Medien-Einheiten, Pläne für Einzel- und Doppelstunde (45 oder 90 Minuten), Lehrplanbezug und Bezug zur KMK-Strategie, Kamera und Mikrofon am Schulgerät sperren, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
   downloads: [
     {text: "Arbeitsblatt KI 1", sub: "KI 1, für die Klasse", href: "/static/materialien/arbeitsblatt-stunde-1.pdf"},
     {text: "Lösungsblatt KI 1", sub: "KI 1, nur für Lehrkräfte", href: "/static/materialien/loesung-stunde-1.pdf"},
@@ -540,6 +615,29 @@ S["schule-lehrkraefte"] = {
        ["Anwenden", "Punkte-Labor, Netz-Spielplatz und Chat bedienen und Ergebnisse beschreiben"],
        ["Erstellen", "eigene Beispieldaten setzen und einen besseren Prompt schreiben"],
        ["Bewerten", "KI-Antworten prüfen und begründen, wann sie nicht reichen"],
+      ],
+     }},
+    {h: "Die sieben Medien-Einheiten",
+     kurz: "Sieben weitere Einheiten zur Medienkompetenz, je 45 oder 90 Minuten, mit Arbeitsblatt und Lösungsblatt wie bei den KI-Stunden.",
+     visual: {typ: "zahlen", kacheln: [
+      {wert: "7", label: "Einheiten", icon: "layers"},
+      {wert: "45 / 90", label: "Minuten", icon: "clock"},
+      {wert: "6", label: "mit Erklärvideo", icon: "play"}]},
+     p: [
+      "Die Medien-Einheiten laufen wie KI 1 bis 3: Einstieg, Erarbeitung, Sicherung und Reflexion, dazu Quiz und Nachdenken. Operatoren, Hilfekarten, Differenzierung, Lehrplanbezug und der Plan für die Doppelstunde gelten dort genauso. Sechs der sieben Einheiten beginnen mit einem Erklärvideo, Medien 7 hat keines. Alle Aufgaben kommen ohne Kamera und Mikrofon aus.",
+      "Passend dazu gibt es ein Paket für den {{elternabend|Elternabend}}: Info-Blatt, Gesprächsleitfaden und Antworten auf Elternfragen.",
+     ],
+     tabelle: {
+      beschriftung: "Die Medien-Einheiten im Überblick",
+      kopf: ["Einheit", "Ziel", "Zeit", "Gerät"],
+      zeilen: [
+       ["{{medien-stunde-1|Medien 1: Echt oder KI?}}", "Bilder nach Hinweisen sortieren und das Urteil begründen", "45 oder 90 Minuten", "keins, ausgedrucktes Kartenset"],
+       ["{{medien-stunde-2|Medien 2: Quellen prüfen}}", "Eine Behauptung an drei Quellen gegenprüfen, Seitwärtslesen", "45 oder 90 Minuten", "ein Gerät je Gruppe mit Browser"],
+       ["{{medien-stunde-3|Medien 3: Fake News und Deepfakes}}", "Einen erfundenen Fall analysieren und ein Dilemma zu einer KI-Stimme beurteilen", "45 oder 90 Minuten", "keins"],
+       ["{{medien-stunde-4|Medien 4: KI und Hausaufgaben}}", "Regeln für KI bei Hausaufgaben vorschlagen", "45 oder 90 Minuten", "keins"],
+       ["{{medien-stunde-5|Medien 5: Datenschutz im Alltag}}", "App-Rechte und eigene Datenspuren prüfen", "45 oder 90 Minuten", "keins"],
+       ["{{medien-stunde-6|Medien 6: Gute Fragen stellen}}", "Fragen mit Rolle, Aufgabe, Material, Format und Grenzen schreiben", "45 oder 90 Minuten", "Prompt-Werkstatt am Gruppengerät, höchstens 7 Geräte"],
+       ["{{medien-stunde-7|Medien 7: KI in deinem Alltag}}", "Zeigen, wo KI im Alltag arbeitet und wie ein Feed entscheidet", "45 oder 90 Minuten", "keins, Papier A3"],
       ],
      }},
     {h: "Operatoren in den Aufgaben",
@@ -567,39 +665,26 @@ S["schule-lehrkraefte"] = {
       ],
      }},
     {h: "So sind die Arbeitsblätter aufgebaut",
-     kurz: "Drei Seiten DIN A4, schwarzweiß druckbar: Seite 1 mit Zielen und Aufgaben, Seite 2 und 3 mit Quiz, Nachdenken, Zusatz und Legende, dazu QR-Code.",
+     kurz: "Vier Seiten DIN A4, schwarzweiß druckbar: zuerst Ziele und Aufgaben mit Schreibzeilen, danach Quiz, Nachdenken, Zusatz und Legende, dazu QR-Code.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "target", text: "Ziele", sub: "Heute kannst du"},
       {icon: "layers", text: "Niveau", sub: "Basis bis Herausforderung"},
-      {icon: "lightbulb", text: "Tipps", sub: "Hilfekarten bei dir"}]},
+      {icon: "lightbulb", text: "Tipps", sub: "Hilfekarten bei Ihnen"}]},
      liste: [
       "**Kopf:** Thema, Zeit, Lernziele („Heute kannst du ...“). Am Ende kreuzen die Schülerinnen und Schüler je Ziel „sicher“, „fast“ oder „noch nicht“ an.",
       "**Aufgaben:** Sozialform (Einzelarbeit, Partnerarbeit, Gruppe zu viert) und Niveau (Basis, Standard, Herausforderung) stehen an jeder Aufgabe, das Niveau als ein bis drei Kästchen, nicht als Farbe.",
-      "**Hilfen:** Die Tipps stehen nicht auf dem Schülerblatt, sondern als Hilfekarten im Lösungsblatt. Gib Tipp 1 zuerst und Tipp 2 nur bei Bedarf weiter.",
-      "**Lesbarkeit:** serifenlose Schrift, 12 Punkt, großzügiger Zeilenabstand, linksbündig, Platz zum Schreiben.",
-      "**Lösungsblatt:** Es ist nur für Lehrkräfte gedacht und enthält beide Zeitpläne, Lösungen, Erwartungshorizont, Hilfekarten und Tafelbild. Gib es nicht an die Klasse weiter.",
+      "**Hilfen:** Die Tipps stehen nicht auf dem Schülerblatt, sondern als Hilfekarten im Lösungsblatt. Geben Sie Tipp 1 zuerst und Tipp 2 nur bei Bedarf weiter.",
+      "**Lesbarkeit:** serifenlose Schrift, 13 Punkt, großzügiger Zeilenabstand, linksbündig, Platz zum Schreiben.",
+      "**Lösungsblatt:** Es ist nur für Lehrkräfte gedacht und enthält beide Zeitpläne, Lösungen, Erwartungshorizont, Hilfekarten und Tafelbild. Geben Sie es nicht an die Klasse weiter.",
      ]},
     {h: "Einzelstunde oder Doppelstunde",
      kurz: "Dasselbe Material, zwei Pläne: Einzelstunde mit mündlicher Reflexion, Quiz und Nachdenken zu Hause. Doppelstunde mit allem in der Stunde.",
-     visual: {typ: "vergleich",
-      links: {titel: "Einzelstunde, 45 Minuten", icon: "clock", farbe: "akzent", punkte: ["Einstieg, Aufgaben, Sicherung", "Reflexion mündlich im Plenum", "Quiz und Nachdenken als Hausaufgabe"]},
-      rechts: {titel: "Doppelstunde, 90 Minuten", icon: "clock", farbe: "gruen", punkte: ["Aufgaben mit 30 statt 20 Minuten", "Quiz in der Stunde", "Nachdenken schriftlich, dann Austausch"]}},
+     visual: DOPPEL_VISUAL,
      p: [
-      "Das Arbeitsblatt hat drei Seiten: Seite 1 die Aufgaben, Seite 2 und 3 Quiz, Nachdenken, Zusatz, Merksatz und die Legende der Operatoren. Die Minuten bei den Aufgaben auf dem Blatt gelten für die Einzelstunde. Das Lösungsblatt enthält beide Zeitpläne.",
+      "Das Arbeitsblatt hat vier Seiten: zuerst die Aufgaben, danach Quiz, Nachdenken, Zusatz, Merksatz und die Legende der Operatoren. Die Minuten bei den Aufgaben auf dem Blatt gelten für die Einzelstunde. Das Lösungsblatt enthält beide Zeitpläne.",
      ],
-     tabelle: {
-      beschriftung: "Zwei Pläne für dieselben Blätter",
-      kopf: ["Phase", "Einzelstunde (45 Minuten)", "Doppelstunde (90 Minuten)"],
-      zeilen: [
-       ["Einstieg", "5 Minuten", "10 Minuten"],
-       ["Erarbeitung mit den Aufgaben", "20 Minuten", "30 Minuten"],
-       ["Quiz", "Hausaufgabe oder Folgestunde", "10 Minuten"],
-       ["Sicherung mit Tafelbild und Merksatz", "10 Minuten", "15 Minuten"],
-       ["Reflexion und Nachdenken", "10 Minuten mündlich im Plenum, schriftlich zu Hause", "15 Minuten schriftlich, dann Austausch"],
-       ["Abschluss", "in der Reflexion enthalten", "10 Minuten"],
-       ["Summe", "45 Minuten", "90 Minuten"],
-      ],
-     }},
+     tabelle: doppelTabelle("Zwei Pläne für dieselben Blätter"),
+    },
     {h: "Vorbereitung in zehn Minuten",
      kurz: "Link testen, Labore ausprobieren, Gruppen bilden, Arbeitsblatt kopieren.",
      visual: {typ: "ablauf", paket: false, schritte: [
@@ -610,7 +695,7 @@ S["schule-lehrkraefte"] = {
       "Klassenlink am Unterrichtsgerät öffnen: Lädt das Labor?",
       "Labore der Stunde ausprobieren, für KI 3 den erfundenen Fall im Chat testen.",
       "Vierergruppen bilden, ein Gerät je Gruppe, höchstens 7 Geräte gleichzeitig.",
-      "Das Arbeitsblatt (3 Seiten) kopieren oder auf der Lernplattform ablegen, das Lösungsblatt nur für dich behalten.",
+      "Das Arbeitsblatt (4 Seiten) kopieren oder auf der Lernplattform ablegen, das Lösungsblatt nur für sich behalten.",
       "Infos weitergeben: {{schule-schulleitung|Schulleitung}} und {{schule-eltern|Eltern}}.",
       "Regeln der Schule zu KI-Diensten prüfen, die Schule entscheidet.",
      ]},
@@ -657,24 +742,39 @@ S["schule-lehrkraefte"] = {
       ],
      }},
     {h: "Stolperstellen",
-     kurz: "Typische Probleme im Unterricht und wie du sie umgehst.",
+     kurz: "Typische Probleme im Unterricht und wie Sie sie umgehen.",
      visual: {typ: "vergleich",
       links: {titel: "Häufig", icon: "triangle-alert", farbe: "orange", punkte: ["Alle drücken gleichzeitig auf Senden", "KI wird vermenschlicht", "Chat-Antwort wird als Lösung gesehen"]},
       rechts: {titel: "Besser", icon: "circle-check", farbe: "gruen", punkte: ["Gruppen versetzt starten", "Von Rechnen statt Denken sprechen", "Antwort als Vorschlag prüfen"]}},
      tabelle: {
       beschriftung: "Stolperstellen",
-      kopf: ["Problem", "So gehst du damit um"],
+      kopf: ["Problem", "So gehen Sie damit um"],
       zeilen: [
        ["Wartezeit", "Gruppen versetzt starten, Wartenden eine Zusatzaufgabe geben."],
        ["Vermenschlichen", "Statt „die KI weiß“ sagen: „das Modell berechnet“."],
        ["Musterlösung im Chat", "Antworten wechseln: die Begründung der Gruppe bewerten, nicht den Wortlaut."],
        ["Geräte", "Mit der Maus am genauesten, Laptop oder Tablet vor Handy."],
        ["Eingaben", "Keine Namen, Adressen oder privaten Dinge tippen lassen."],
-       ["Kamera-Labore", "Nicht für den Unterricht, vorher laut sagen."],
-       ["Lehrplanbezug", "Die Anknüpfung an die KMK-Strategie steht weiter unten. Ein Fachlehrplan wurde für kein Bundesland geprüft, passe es an die Vorgaben der Schule an."],
+       ["Kamera-Labore", "Nicht für den Unterricht, vorher laut sagen. Die Kamera lässt sich im Browser sperren, siehe Abschnitt Kamera und Mikrofon am Schulgerät sperren."],
+       ["Lehrplanbezug", "Die Anknüpfung an die KMK-Strategie steht im Abschnitt Lehrplanbezug und auf jeder Einheit. Ein Fachlehrplan wurde für kein Bundesland geprüft, passen Sie es an die Vorgaben der Schule an."],
       ],
      }},
-    {h: "Bezug zur KMK-Strategie",
+    {h: "Kamera und Mikrofon am Schulgerät sperren",
+     kurz: "Im Unterricht bleiben Kamera und Mikrofon aus. Sperren Sie sie zusätzlich im Browser, dann schaltet sie auch ein versehentlicher Klick nicht ein.",
+     visual: {typ: "raster", spalten: 3, zellen: [
+      {icon: "camera", text: "Kamera", sub: "bleibt aus"},
+      {icon: "mic", text: "Mikrofon", sub: "bleibt aus"},
+      {icon: "shield-check", text: "Browser", sub: "sperrt zusätzlich"}]},
+     p: [
+      "Das Labor schaltet Kamera und Mikrofon nie von allein ein: Erst fragt die Seite nach ausdrücklicher Zustimmung, dann der Browser (siehe {{sicherheit-einfach|Ist das sicher?}}). Die Aufgaben der Einheiten brauchen beides nicht.",
+     ],
+     liste: [
+      "**Nur für diese Seite:** Das Symbol links in der Adresszeile öffnen, die Website-Einstellungen aufrufen und Kamera und Mikrofon auf „Blockieren“ stellen. Die Bezeichnungen unterscheiden sich je nach Browser.",
+      "**Für alle Seiten eines Geräts:** In den Einstellungen des Browsers unter Datenschutz oder Website-Einstellungen lässt sich der Zugriff auf Kamera und Mikrofon grundsätzlich verbieten.",
+      "**Für alle Geräte der Schule:** Verwaltet die Schule ihre Geräte zentral, kann die Systembetreuung Kamera und Mikrofon im Browser für alle Geräte sperren. Fragen Sie dort nach.",
+      "**Klassenlink:** Er öffnet den Schulweg, dessen Kacheln mit „Ohne Kamera“ gekennzeichnet sind.",
+     ]},
+    {h: "Lehrplanbezug und KMK-Strategie",
      kurz: "Die Einheiten knüpfen an die sechs Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an. Das ist keine amtliche Zuordnung.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "search", text: "Suchen", sub: "Verarbeiten, Aufbewahren"},
@@ -682,32 +782,21 @@ S["schule-lehrkraefte"] = {
       {icon: "scale", text: "Analysieren", sub: "und Reflektieren"}]},
      p: [
       "Die Kultusministerkonferenz (KMK) beschreibt in der Strategie „Bildung in der digitalen Welt“ vom 8. Dezember 2016 sechs Kompetenzbereiche: Suchen, Verarbeiten und Aufbewahren; Kommunizieren und Kooperieren; Produzieren und Präsentieren; Schützen und sicher Agieren; Problemlösen und Handeln; Analysieren und Reflektieren.",
-      "Die Tabelle ist ein Vorschlag des Labors, wo die Einheiten anknüpfen. Sie ist kein Dokument eines Kultusministeriums. Ob und wo eine Einheit in den Lehrplan deines Landes und Faches passt, prüfst du selbst. Quelle: KMK, `kmk.org/aktuelles-1/artikelansicht/strategie-bildung-in-der-digitalen-welt.html`, abgerufen am 22.11.2026.",
+      "Die Tabelle ist ein Vorschlag des Labors, wo die Einheiten anknüpfen. Sie ist kein Dokument eines Kultusministeriums. Ob und wo eine Einheit in den Lehrplan Ihres Landes und Faches (Informatik, Medienbildung) passt, prüfen Sie selbst. Quelle: KMK, `kmk.org/aktuelles-1/artikelansicht/strategie-bildung-in-der-digitalen-welt.html`, abgerufen am 22.11.2026.",
      ],
      tabelle: {
       beschriftung: "Vorschlag zur Zuordnung",
       kopf: ["Einheit", "Anknüpfung an Kompetenzbereiche"],
-      zeilen: [
-       ["KI 1: Was ist KI?", "Analysieren und Reflektieren; Problemlösen und Handeln"],
-       ["KI 2: Wie lernt ein Computer?", "Analysieren und Reflektieren; Problemlösen und Handeln"],
-       ["KI 3: Echt oder erfunden?", "Suchen, Verarbeiten und Aufbewahren; Analysieren und Reflektieren"],
-       ["Medien 1: Echt oder KI?", "Analysieren und Reflektieren; Suchen, Verarbeiten und Aufbewahren"],
-       ["Medien 2: Quellen prüfen", "Suchen, Verarbeiten und Aufbewahren"],
-       ["Medien 3: Fake News und Deepfakes", "Analysieren und Reflektieren; Schützen und sicher Agieren"],
-       ["Medien 4: KI und Hausaufgaben", "Produzieren und Präsentieren; Analysieren und Reflektieren"],
-       ["Medien 5: Datenschutz im Alltag", "Schützen und sicher Agieren"],
-       ["Medien 6: Gute Fragen stellen", "Produzieren und Präsentieren; Problemlösen und Handeln"],
-       ["Medien 7: KI in deinem Alltag", "Analysieren und Reflektieren"],
-      ],
+      zeilen: Object.values(LEHRPLAN),
      }},
     {h: "Für Klasse 7 und 9 anpassen",
-     kurz: "Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzt du, für Klasse 9 erweiterst du.",
+     kurz: "Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzen Sie, für Klasse 9 erweitern Sie.",
      visual: {typ: "vergleich",
       links: {titel: "Klasse 7: kürzen", icon: "scissors", farbe: "gruen", punkte: ["Basis und Standard", "Hilfekarten von Anfang an", "Quiz gemeinsam lösen"]},
       rechts: {titel: "Klasse 9: erweitern", icon: "flame", farbe: "orange", punkte: ["Zusatz für alle", "Begründungen schriftlich", "Eigene Recherche"]}},
      tabelle: {
       beschriftung: "Vorschläge, in diesen Klassenstufen nicht erprobt",
-      kopf: ["Klasse", "So passt du an"],
+      kopf: ["Klasse", "So passen Sie an"],
       zeilen: [
        ["Klasse 7", "Nur Aufgaben mit Niveau Basis und Standard bearbeiten, Herausforderung und Zusatz streichen oder gemeinsam an der Tafel lösen. Hilfekarten (Tipp 1 und 2) gleich austeilen. Das Quiz in der Klasse gemeinsam lösen statt allein. Bei den Operatoren des Bereichs III die Aufgabe mündlich vorbesprechen."],
        ["Klasse 9", "Aufgaben mit Niveau Herausforderung und den Zusatz für alle verlangen, Begründungen in ganzen Sätzen schreiben lassen. Bei KI 3 und Medien 2 eine aktuelle Meldung selbst recherchieren lassen. Das Quiz als Selbsttest vor der Stunde nutzen, die Reflexion schriftlich mit einem Beispiel aus dem eigenen Alltag."],
@@ -730,13 +819,13 @@ S["schule-lehrkraefte"] = {
       "**Operatoren, Quelle 3:** Operatoren im Bildungsplan 2016 Baden-Württemberg (Reproduktion, Reorganisation, Transfer und Bewertung), `lehrerfortbildung-bw.de/u_mks/kunst/gym/bp2016/fb4/3_oper/operatoren_30_05_15_spo.pdf`, abgerufen am 22.11.2026. Die Quellen 1 und 2 stammen aus der Oberstufe (Informatik, Deutsch), Quelle 3 aus dem Fach Kunst. Eine eigene Liste für Informatik in Klasse 8 war nicht dabei. Die Definitionen sind für Klasse 8 vereinfacht. Die Zuordnung kann je Bundesland und Fach leicht abweichen.",
       "**Gestaltung der Arbeitsblätter, Quellen:** Kriterienliste der TU Dresden (`bildungsportal.sachsen.de/opal/oer/4UW2UJeUWT4k`), Goethe-Institut (Arbeitsblätter für den Unterricht), Universität Frankfurt (Skript zu Arbeitsblättern), ISB Bayern (Kurzhandreichung zur Gestaltung von Arbeitsblättern), PH Niederösterreich (Methoden zur Differenzierung), Universität Halle (Kriterienkatalog Textdokument analog), BFIT-Bund (Leitfaden barrierefreie Textgestaltung), legasthenie.at (Fonts-Broschüre), LMU München (Lernzirkel mit QR-Stationen), PH St. Gallen (Sammelmappe mit QR-Codes). Recherchestand 22.11.2026, die Titel auf den Seiten der Einrichtungen suchen.",
       "Stundenmaterial zur Medienkompetenz: sieben Einheiten von {{medien-stunde-1|Medien 1: Echt oder KI?}} bis {{medien-stunde-7|Medien 7: KI in deinem Alltag}}, dazu der {{elternabend|Elternabend}}. Operatoren und Aufbau der Blätter gelten dort genauso.",
-      "Im Labor: {{karte|Was ist KI?}},{{llm-grenzen|Grenzen und Risiken von Sprachmodellen}} und {{verzerrung-ethik|Fairness, Verzerrung und Verantwortung}}.",
+      "Im Labor: {{karte|Was ist KI?}}, {{llm-grenzen|Grenzen und Risiken von Sprachmodellen}} und {{verzerrung-ethik|Fairness, Verzerrung und Verantwortung}}.",
      ]},
   ],
   mitnehmen: [
     "Die drei Stunden decken Verstehen, Anwenden, Erstellen und Bewerten ab. Alle kommen ohne Kamera aus.",
     "Gruppen von vier, höchstens 7 Geräte, versetzt starten: So bleibt die Wartezeit kurz.",
-    "Antworten des Modells sind Vorschläge. Bewerte die Begründung der Klasse, nicht den Wortlaut.",
+    "Antworten des Modells sind Vorschläge. Bewerten Sie die Begründung der Klasse, nicht den Wortlaut.",
   ],
   grenzen: [
     "Das Labor ersetzt keine Datenschutzprüfung der Schule. Siehe {{schule-schulleitung|Info für die Schulleitung}}.",
@@ -770,7 +859,7 @@ S["schule-schulleitung"] = {
       links: {titel: "Wird verarbeitet", icon: "database", farbe: "orange", punkte: ["Verbindungsdaten (Adresse, Zeit)", "Sitzungs-Cookie kl_s", "Eingegebene Texte, kurz im Speicher"]},
       rechts: {titel: "Wird nicht verarbeitet", icon: "ban", farbe: "gruen", punkte: ["Name, E-Mail, Konto", "Alter oder Klasse", "Werbung, Besucherstatistik"]}},
      p: [
-      "Wie bei jeder Webseite sieht der Server Verbindungsdaten wie Internetadresse und Uhrzeit (Betrieb, Schutz vor Überlastung). Die Aufbewahrungsdauer der Protokolle ist nicht festgelegt, bitte fragen Sie den Betreiber.",
+      "Wie bei jeder Webseite sieht der Server Verbindungsdaten wie Internetadresse und Uhrzeit (Betrieb, Schutz vor Überlastung). Wie lange diese Protokolle aufbewahrt werden, steht im Abschnitt Betrieb und Verträge: Auf Anfrage beim Betreiber.",
       "Technisch nötig ist das Sitzungs-Cookie `kl_s` (bis zu 24 Stunden gültig, die Daten dahinter verfallen nach 30 Minuten ohne Aktivität). Einstellungen und Lernfortschritt merkt sich der Browser auf dem Gerät der Schülerin oder des Schülers.",
       "Chat-Texte verarbeitet ein Sprachmodell auf dem Rechner des Labors, externe KI-Dienste sind nicht angebunden. Chat-Fragen werden nicht aufbewahrt, Schülerinnen und Schüler werden angewiesen, keine echten personenbezogenen Daten einzugeben.",
      ],
@@ -788,10 +877,37 @@ S["schule-schulleitung"] = {
      kurz: "Das Labor läuft auf einem kleinen Rechner des Betreibers, ohne externe KI-Dienste.",
      visual: {typ: "ablauf", paket: true, schritte: [
       {icon: "laptop", text: "Gerät der Klasse", sub: "Browser"},
-      {icon: "cloud", text: "Weiterleitung", sub: "laut Planung"},
+      {icon: "cloud", text: "Weiterleitung", sub: "Server und Tunnel"},
       {icon: "server", text: "Rechner im Labor", sub: "Jetson", farbe: "gruen"}]},
      p: [
-      "Alle Berechnungen laufen auf einem NVIDIA Jetson Orin Nano: Sprachmodell, Bilderkennung und Sprachausgabe rechnen dort selbst. Für die öffentliche Erreichbarkeit ist nach dem Planungsstand vom 22.11.2026 eine Weiterleitung über einen Server und einen Tunnel eines Netzanbieters vorgesehen. Dienstleister und Verträge nennt die Datenschutzerklärung, oder fragen Sie den Betreiber.",
+      "Alle Berechnungen laufen auf einem NVIDIA Jetson Orin Nano: Sprachmodell, Bilderkennung und Sprachausgabe rechnen dort selbst. Die öffentliche Adresse leitet die Verbindung über einen Server bei IONOS und den Tunneldienst von Cloudflare zu diesem Rechner. Was daraus für Verträge und Protokolle folgt, steht im nächsten Abschnitt.",
+     ]},
+    {h: "Betrieb und Verträge",
+     kurz: "Kostenlos, ohne Vertrag, ohne Zusage zur Verfügbarkeit. Was nicht belegt ist, beantwortet der Betreiber auf Anfrage.",
+     visual: {typ: "raster", spalten: 3, zellen: [
+      {icon: "coins", text: "Kostenlos", sub: "ohne Vertrag"},
+      {icon: "server", text: "Verfügbarkeit", sub: "ohne Zusage"},
+      {icon: "mail", text: "Offene Fragen", sub: "auf Anfrage"}]},
+     p: [
+      "Diese Übersicht nennt nur, was auf den Seiten des Labors und in der Datenschutzerklärung beschrieben ist. Alles andere steht als „Auf Anfrage beim Betreiber“ da, damit nichts behauptet wird, was sich nicht belegen lässt. Kein Rechtsrat.",
+     ],
+     tabelle: {
+      beschriftung: "Betrieb und Verträge im Überblick (Stand 22.11.2026)",
+      kopf: ["Thema", "Stand"],
+      zeilen: [
+       ["Kosten", "Kostenlos, ohne Vertrag, ohne Zusage zur Verfügbarkeit."],
+       ["Betreiber", "Daniel Alisch. Impressum und Datenschutzerklärung stehen auf `daniel-alisch.site`."],
+       ["Wo das Labor läuft", "Auf einem NVIDIA Jetson Orin Nano im Heimnetz des Betreibers. Sprachmodell, Bilderkennung und Sprachausgabe rechnen dort selbst, externe KI-Dienste sind nicht angebunden."],
+       ["Weg zum Rechner", "Die öffentliche Adresse läuft über einen Server bei IONOS und den Tunneldienst von Cloudflare."],
+       ["Aufbewahrung der Server-Protokolle", "Auf Anfrage beim Betreiber. Der Server sieht Verbindungsdaten wie Internetadresse und Uhrzeit."],
+       ["Auftragsverarbeitung mit IONOS und Cloudflare", "Auf Anfrage beim Betreiber. Die Dienstleister nennt die Datenschutzerklärung."],
+       ["Verfügbarkeit und Ausfälle", "Keine Zusage. Es ist ein einzelner kleiner Rechner, bei vielen Anfragen entstehen Wartezeiten."],
+       ["Wenn das Angebot eingestellt wird", "Auf Anfrage beim Betreiber. Eine Zusage zur Dauer gibt es nicht. Die Arbeitsblätter lassen sich als PDF herunterladen und ausdrucken."],
+       ["Nutzungsrechte am Unterrichtsmaterial", "Auf Anfrage beim Betreiber."],
+      ],
+     },
+     p: [
+      "Fragen stellen Sie dem Betreiber über die Kontaktangaben im Impressum auf `daniel-alisch.site/impressum`, auch in der Fußzeile jeder Seite verlinkt. Ob Ihre Schule für den Einsatz einen Vertrag oder eine Auftragsverarbeitung braucht, klärt sie selbst mit der oder dem Datenschutzbeauftragten.",
      ]},
     {h: "Kamera und Mikrofon",
      kurz: "Im Unterrichtseinsatz sind Kamera, Mikrofon und Gesichtserkennung nicht vorgesehen und nicht nötig.",
@@ -800,7 +916,8 @@ S["schule-schulleitung"] = {
       {icon: "mic", text: "Mikrofon", sub: "nicht vorgesehen"},
       {icon: "scan-face", text: "Gesichtserkennung", sub: "nicht vorgesehen"}]},
      p: [
-      "Die drei Stunden brauchen weder Kamera noch Mikrofon. Weitere Versuche im Menü starten nur nach ausdrücklicher Zustimmung, sind für den Unterricht nicht vorgesehen, und die Handreichung weist Lehrkräfte darauf hin. Die Gesichtserkennung ist laut Hinweis im Labor erst ab 16 Jahren gedacht, jüngere nur mit Einverständnis der Eltern.",
+      "Die drei Stunden brauchen weder Kamera noch Mikrofon. Weitere Versuche im Menü starten nur nach ausdrücklicher Zustimmung, sind für den Unterricht nicht vorgesehen, und die Handreichung weist Lehrkräfte darauf hin. Die Gesichtserkennung ist laut Hinweis im Labor erst ab 16 Jahren gedacht, jüngere nur mit Einverständnis der Eltern. Eine Altersprüfung gibt es nicht.",
+      "Am Schulgerät lässt sich die Kamera zusätzlich im Browser sperren, für alle Geräte auch über die Systembetreuung der Schule. Eine Anleitung steht in der {{schule-lehrkraefte|Handreichung}}, Abschnitt Kamera und Mikrofon am Schulgerät sperren.",
      ]},
     {h: "Was Ihre Schule selbst entscheidet",
      kurz: "Ob und wie das Labor eingesetzt wird und welche Rechtsgrundlage gilt, entscheidet die Schule.",
@@ -824,7 +941,7 @@ S["schule-schulleitung"] = {
   ],
   grenzen: [
     "Keine Rechtsberatung. Die Datenschutzerklärung des Betreibers ist verbindlich.",
-    "Speicherdauer der Server-Protokolle und die Dienstleister der öffentlichen Weiterleitung stehen hier nicht abschließend. Fragen Sie den Betreiber.",
+    "Speicherdauer der Server-Protokolle, Verträge mit den Dienstleistern und das Vorgehen bei einer Einstellung des Angebots stehen hier nicht. Fragen Sie den Betreiber.",
     "Eine Prüfung nach dem Recht eines bestimmten Bundeslandes ist nicht erfolgt.",
   ],
   weiter: ["schule-start", "sicherheit-einfach", "ueber", "lizenzen"],
@@ -906,6 +1023,8 @@ S["schule-eltern"] = {
   ],
   weiter: ["eltern-zuhause", "sicherheit-einfach", "schule-start", "ueber"],
 };
+
+for (const id of ["schule-stunde-1", "schule-stunde-2", "schule-stunde-3"]) window.KLSchule.ergaenzeEinheit(S[id], id);
 
 INHALT.registriere({
   seiten: S,

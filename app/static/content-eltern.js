@@ -60,7 +60,7 @@ S["eltern-zuhause"] = {
       {icon: "search", text: "Quellen prüfen", sub: "stimmt das wirklich"},
       {icon: "book-open", text: "Hausaufgaben", sub: "was war von dir"}]},
      p: [
-      "**Echt oder KI?** Schaut zusammen ein Bild oder einen Clip an und fragt: Woran würdest du das prüfen? Die Seite {{echt-oder-ki|Echt oder KI?}} zeigt Warnzeichen und Prüfwege, das Kartenset oben zum Ausdrucken eignet sich zum gemeinsamen Raten. Vereinbart auch ein Codewort für Notfallanrufe. Stimmen lassen sich nachbauen, ein Codewort hilft gegen jede Fälschung.",
+      "**Echt oder KI?** Schaut zusammen ein Bild oder einen Clip an und fragt: Woran würdest du das prüfen? Die Seite {{echt-oder-ki|Echt oder KI?}} zeigt Warnzeichen und Prüfwege, das Kartenset oben zum Ausdrucken eignet sich zum gemeinsamen Raten. Vereinbart auch ein Codewort für Notfallanrufe. Stimmen lassen sich nachbauen, ein Codewort hilft gegen jede Fälschung. Was bei falschen Anrufen gilt, steht auf {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}. Das ist auch für die Großeltern wichtig.",
       "**Quellen prüfen.** Lass dein Kind den Chat etwas fragen, das es gut kennt, zum Beispiel sein Hobby. Wo liegt der Chat daneben? Mehr dazu auf der Seite {{quellen-pruefen|Quellen prüfen}}.",
       "**Hausaufgaben fair.** Fragt: Was hast du selbst gemacht, was die KI? Wie schreibst du das auf? Die Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}} erklärt den Unterschied zwischen Helfen und Abnehmen und hat einen eigenen Abschnitt für Eltern.",
       "Alle drei Gespräche als Anleitung für zwei, mit Gesprächsfragen: {{zusammen-ausprobieren|Zusammen ausprobieren}}. Zum Thema Handy und Bildschirm: {{bildschirmzeit|Bildschirmzeit}}.",
@@ -121,7 +121,7 @@ S["eltern-zuhause"] = {
      optionen: ["Die Kamera erlauben und später wieder ausschalten", "Erst ein Konto anlegen und die Kamera sperren", "Die Experimente, sie laufen ohne Kamera und Mikrofon", "Nur Gesichtserkennung, weil sie am meisten zeigt"],
      richtig: 2, erklaerung: "Alle Experimente kommen ohne Kamera und Mikrofon aus. Dein Kind lernt dort, wie KI arbeitet und wo sie danebenliegt."},
   ],
-  weiter: ["zusammen-ausprobieren", "sicherheit-einfach", "experimente", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "schule-eltern"],
+  weiter: ["zusammen-ausprobieren", "falscher-anruf", "sicherheit-einfach", "experimente", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "schule-eltern"],
 };
 
 S["zusammen-ausprobieren"] = {
@@ -201,7 +201,7 @@ S["zusammen-ausprobieren"] = {
      optionen: ["Damit der Punkt an den Schnelleren geht", "Weil die Karten sonst nicht ausgewertet werden können", "Damit ihr merkt, woran ihr eure Entscheidung festmacht und ob das verlässlich ist", "Weil das Lösungsblatt es verlangt"],
      richtig: 2, erklaerung: "Im Begründen zeigt sich, ob ihr auf Hinweise oder auf ein Bauchgefühl vertraut. Das ist der Lerneffekt."},
   ],
-  weiter: ["eltern-zuhause", "llm-grenzen", "chat", "quellen-pruefen", "echt-oder-ki", "ki-hausaufgaben-fair"],
+  weiter: ["eltern-zuhause", "llm-grenzen", "chat", "quellen-pruefen", "echt-oder-ki", "falscher-anruf", "ki-hausaufgaben-fair"],
 };
 
 S["bildschirmzeit"] = {

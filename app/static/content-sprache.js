@@ -284,7 +284,7 @@ seiten: {
      optionen: ["Nichts, Eingaben sind immer privat", "Die Daten auf Englisch übersetzen", "Prüfen, ob der Dienst erlaubt ist, und möglichst anonymisieren", "Die Temperatur auf 0 stellen"],
      richtig: 2, erklaerung: "Eingaben verlassen bei Cloud-Diensten dein Haus. Regeln der Firma und Datenschutz kommen zuerst, und Anonymisieren senkt das Risiko."},
   ],
-  weiter: ["llm-grenzen", "tokens-sprachmodelle", "chat", "finetuning-oder-rag"],
+  weiter: ["prompts-schule", "llm-grenzen", "tokens-sprachmodelle", "chat", "finetuning-oder-rag"],
 },
 
 /* ------------------------------------------------------------------ 3 */

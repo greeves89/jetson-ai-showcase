@@ -6,7 +6,7 @@
 INHALT.experimente = [
   {id: "ml", titel: "Punkte-Labor", symbol: "chart-scatter", satz: "Setze bunte Punkte und sieh, wie der Computer neue Punkte einsortiert."},
   {id: "chat", titel: "Chat", symbol: "message-square", satz: "Stell einem Sprachmodell eine Frage und sieh Wort für Wort, wie es antwortet."},
-  {id: "prompting", titel: "Prompt-Vergleich", symbol: "split", satz: "Gleiche Frage, zwei Formulierungen: Welche Antwort ist besser?"},
+  {id: "prompts-schule", titel: "Prompt-Vergleich", symbol: "split", satz: "Schwache und gute Frage mit Schulbeispielen, zum Kopieren und Ausprobieren."},
   {id: "objekt", titel: "Objekte erkennen", symbol: "scan-search", satz: "Der Computer benennt, was auf einem Bild zu sehen ist.", hinweis: "Mit Beispielbildern"},
   {id: "sprachausgabe", titel: "Text zu Sprache", symbol: "volume-2", satz: "Schreib einen Satz und hör, wie eine Computerstimme ihn spricht."},
   {id: "neuronale-netze", titel: "Netz-Spielplatz", symbol: "network", satz: "Baue ein kleines Netz und schau zu, wie es lernt."},

@@ -276,6 +276,7 @@ training: {
     {h: "Der Kreislauf: vorhersagen, messen, nachjustieren", mathe: {p: [
       "Die Rückpropagierung (Backpropagation) nutzt die Kettenregel. Für ein Neuron `z = w·x + b`, Ausgabe `ŷ = σ(z)` und Verlust `L = (ŷ − y)²` gilt: `∂L/∂w = ∂L/∂ŷ · ∂ŷ/∂z · ∂z/∂w = 2(ŷ − y) · σ(z)(1 − σ(z)) · x`.",
       "Dieselbe Rechnung läuft rückwärts durch alle Schichten. Jedes Gewicht erfährt so, wie stark es am Fehler beteiligt war (Rumelhart, Hinton und Williams, 1986).",
+      "Die Ableitung des Sigmoids: `σ'(x) = σ(x)·(1 − σ(x))`. Beispiele: `σ(0) = 0,5`, also `σ'(0) = 0,5·0,5 = 0,25`. Bei x = 2 ist `σ(2) ≈ 0,881`, also `σ'(2) ≈ 0,881·0,119 ≈ 0,105`. Weit außen ist die Kurve flach und der Gradient klein. Ein kleines Sprachmodell nennt dir diese Ableitung oft falsch. Kleine Modelle rechnen schlecht, rechne selbst nach.",
      ]},
      kurz: "Jede Runde: vorhersagen, Fehler messen, Gewichte ein Stück verschieben. Dann beginnt die nächste.",
      visual: {"typ":"kreis","mitte":"Eine Runde","knoten":[{"icon":"brain-circuit","text":"Vorhersagen"},{"icon":"ruler","text":"Fehler messen"},{"icon":"sliders-horizontal","text":"Gewichte anpassen"}]},
@@ -293,6 +294,20 @@ training: {
       "Dieses Verfahren heißt Gradientenabstieg. Es braucht keine Karte. Es braucht nur an jedem Ort die Frage: Wo geht es hier bergab?",
     ], alltag: "Du wanderst im dichten Nebel und willst ins Tal. Du siehst nichts, spürst aber mit den Füßen, wohin der Boden abfällt. Du machst einen kleinen Schritt bergab, prüfst wieder und gehst weiter. Irgendwann steht der Boden flach, und du bist unten.",
       merke: "Gradientenabstieg heißt: Schritt für Schritt in die Richtung gehen, in der der Fehler am stärksten sinkt."},
+    {h: "Ein Neuron trainieren: ein Beispiel von Anfang bis Ende", mathe: {p: [
+      "Aufgabe: Ein Neuron mit den Eingaben `x1 = 1` und `x2 = 2`, den Gewichten `w1 = 0,5` und `w2 = −0,25`, dem Bias `b = 0` und der Aktivierung `σ(z) = 1/(1 + e^(−z))`. Der Sollwert ist `y = 1`, die Lernrate `η = 1` (nur, damit die Zahlen glatt bleiben).",
+      "1. Vorwärts: `z = w1·x1 + w2·x2 + b = 0,5·1 + (−0,25)·2 + 0 = 0`. Die Ausgabe ist `ŷ = σ(0) = 0,5`.",
+      "2. Fehler: `L = (ŷ − y)² = (0,5 − 1)² = 0,25`.",
+      "3. Gradient mit der Kettenregel: `∂L/∂ŷ = 2(ŷ − y) = −1` und `σ'(z) = σ(z)(1 − σ(z)) = 0,5·0,5 = 0,25`, also `∂L/∂z = −1·0,25 = −0,25`. Daraus folgen `∂L/∂w1 = −0,25·x1 = −0,25`, `∂L/∂w2 = −0,25·x2 = −0,5` und `∂L/∂b = −0,25`.",
+      "4. Schritt: `w1 = 0,5 − 1·(−0,25) = 0,75`, `w2 = −0,25 − 1·(−0,5) = 0,25`, `b = 0 − 1·(−0,25) = 0,25`.",
+      "5. Probe mit den neuen Werten: `z = 0,75·1 + 0,25·2 + 0,25 = 1,5`, `ŷ = σ(1,5) ≈ 0,818`, `L = (0,818 − 1)² ≈ 0,033`. Der Fehler ist von 0,25 auf etwa 0,033 gesunken, nach einem einzigen Schritt.",
+     ]},
+     kurz: "Ein Neuron, zwei Eingaben, ein Schritt: raten, Fehler messen, Gewichte verschieben. Alle Zahlen zum Nachrechnen stehen unter „Mit Mathe“.",
+     visual: {"typ":"ablauf","schritte":[{"icon":"calculator","text":"Raten","sub":"Ausgabe 0,5"},{"icon":"ruler","text":"Fehler","sub":"0,25"},{"icon":"sliders-horizontal","text":"Gewichte ändern","sub":"ein Schritt"},{"icon":"circle-check","text":"Neuer Fehler","sub":"etwa 0,033","farbe":"gruen"}]},
+     p: [
+      "Ein einzelnes Neuron bekommt zwei Zahlen, gewichtet sie, addiert sie und gibt eine Zahl zwischen 0 und 1 aus. Im Beispiel soll das Ergebnis 1 sein. Das Neuron rät zuerst 0,5 und liegt damit weit daneben.",
+      "Dann verschiebt es jedes Gewicht ein Stück in die Richtung, die den Fehler senkt. Mit den neuen Gewichten liegt die Ausgabe bei etwa 0,82. Ein ganzes Netz macht dasselbe, nur mit Millionen Gewichten. Ein kleines Netz kannst du auf {{neuronale-netze|Neuronale Netze}} selbst anfassen.",
+    ]},
     {h: "Die Lernrate: wie groß ist der Schritt?",
      kurz: "Zu kleine Schritte kommen nie an, zu große springen über das Tal. Die Lernrate wählst du vor dem Training.",
      visual: {"typ":"balken","titel":"Schrittweite (Beispielwerte)","max":12,"zeilen":[{"label":"Zu klein","wert":1,"farbe":"orange"},{"label":"Passend","wert":4,"farbe":"gruen"},{"label":"Zu groß","wert":11,"farbe":"rot"}],"unter":"Zu klein dauert ewig, zu groß springt über das Ziel."},

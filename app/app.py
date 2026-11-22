@@ -406,7 +406,7 @@ async def chat(req: Request):
         tokens = 0
         payload = {
             "model": modell,
-            "messages": [{"role": "user", "content": nachricht}],
+            "messages": ([{"role": "system", "content": "Antworte in höchstens 5 Sätzen in einfacher Sprache."}] if daten.get("rolle") == "schule" else []) + [{"role": "user", "content": nachricht}],
             "stream": True,
             "options": {"temperature": temperatur, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH},
         }

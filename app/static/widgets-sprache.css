@@ -152,3 +152,12 @@ pre.sp-bt{font:13.5px/1.55 var(--mono);overflow:auto;white-space:pre}
 .sp-seg button:disabled{opacity:.45;cursor:not-allowed}
 .sp-seedbox{max-width:420px}
 .sp-seed{width:7em;font-family:var(--mono);font-variant-numeric:tabular-nums}
+
+/* Prompt-Vergleich: Fortschritt je Feld (Antwort 1 von 2 / 2 von 2) */
+.sp-statusbox{display:flex;flex-direction:column;gap:6px;min-width:0}
+.sp-fort{height:6px;border-radius:3px;background:var(--flaeche3);overflow:hidden}
+.sp-fort[hidden]{display:none}
+.sp-fort>i{display:block;height:100%;width:0;border-radius:3px;background:var(--akzent-fl);transition:width .4s var(--feder)}
+.sp-fort.unbestimmt>i{animation:sp-lauf 1.4s ease-in-out infinite}
+@keyframes sp-lauf{0%{transform:translateX(-100%)}100%{transform:translateX(290%)}}
+@media (prefers-reduced-motion:reduce){.sp-fort.unbestimmt>i{animation:none;width:100%!important;opacity:.45}.sp-fort>i{transition:none}}

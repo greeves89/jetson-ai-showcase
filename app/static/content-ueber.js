@@ -18,6 +18,11 @@ S.ueber = {
      p: [
       "Daniel Alisch hat das KI-Labor als Lernprojekt gebaut. Es soll zeigen, wie künstliche Intelligenz funktioniert, und zwar so, dass man es selbst ausprobieren kann. Die Hauptseite `daniel-alisch.site` ist unten in der Fußzeile verlinkt. Dort stehen auch Impressum und Datenschutzerklärung.",
      ]},
+    {h: "Kontakt und Impressum",
+     kurz: "Kontakt zum Betreiber über die [Kontaktseite auf daniel-alisch.site](https://daniel-alisch.site/#contact). [Impressum](https://daniel-alisch.site/impressum) und [Datenschutzerklärung](https://daniel-alisch.site/datenschutz) stehen auf derselben Seite.",
+     p: [
+      "Im Labor selbst gibt es keine E-Mail-Adresse und kein Kontaktformular. Fragen zum Betrieb, zu Verträgen und zum Datenschutz gehen an den Betreiber, Daniel Alisch, über die Kontaktseite. Schreib bitte keine vertraulichen Daten in die erste Nachricht. Für Schulen steht Wichtiges auf der Seite {{schule-schulleitung|Info für die Schulleitung}}.",
+     ]},
     {h: "Was das Labor ist",
      kurz: "Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud.",
      visual: {typ: "raster", spalten: 3, zellen: [

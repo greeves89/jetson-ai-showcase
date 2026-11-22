@@ -708,7 +708,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-medienkompetenz",
       "name": "Medienkompetenz",
-      "numberOfItems": 10,
+      "numberOfItems": 13,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -755,18 +755,36 @@
        {
         "@type": "ListItem",
         "position": 8,
+        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+        "url": "__BASIS__/falscher-anruf"
+       },
+       {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "Für dein Referat über KI",
+        "url": "__BASIS__/referat"
+       },
+       {
+        "@type": "ListItem",
+        "position": 10,
+        "name": "Gute Fragen stellen, mit Schulbeispielen",
+        "url": "__BASIS__/prompts-schule"
+       },
+       {
+        "@type": "ListItem",
+        "position": 11,
         "name": "KI zu Hause: Was Eltern wissen sollten",
         "url": "__BASIS__/eltern-zuhause"
        },
        {
         "@type": "ListItem",
-        "position": 9,
+        "position": 12,
         "name": "Zusammen ausprobieren: Anleitung für zwei",
         "url": "__BASIS__/zusammen-ausprobieren"
        },
        {
         "@type": "ListItem",
-        "position": 10,
+        "position": 13,
         "name": "Bildschirmzeit: kurz und ehrlich",
         "url": "__BASIS__/bildschirmzeit"
        }
@@ -15596,7 +15614,7 @@
   "schule-stunde-1": {
    "titel": "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden · KI-Labor",
    "ueberschrift": "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10. Die Frage an die Klasse: Wo steckt KI schon in deinem Tag?",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, ohne Kamera. Die Einzelstunde: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10. KI lernt aus Beispielen.",
    "typ": "seite",
    "datei": "content-schule.js",
    "bild": "/static/og/standard.png",
@@ -15638,7 +15656,7 @@
       "@id": "__BASIS__/schule-stunde-1#artikel",
       "headline": "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden",
       "name": "KI 1: Was ist KI? Erkennen, Lernen, Entscheiden",
-      "description": "45 Minuten für Klasse 8, ohne Kamera: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10. Die Frage an die Klasse: Wo steckt KI schon in deinem Tag?",
+      "description": "45 oder 90 Minuten für Klasse 8, ohne Kamera. Die Einzelstunde: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10. KI lernt aus Beispielen.",
       "url": "__BASIS__/schule-stunde-1",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -15736,7 +15754,7 @@
   "schule-stunde-2": {
    "titel": "KI 2: Wie lernt ein Computer? Daten, Training, Fehler",
    "ueberschrift": "KI 2: Wie lernt ein Computer? Daten, Training, Fehler",
-   "beschreibung": "45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz. Drei Aufgaben zu Daten, Netz und Lernrate.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz. Drei Aufgaben zu Daten, Netz und Lernrate.",
    "typ": "seite",
    "datei": "content-schule.js",
    "bild": "/static/og/standard.png",
@@ -15778,7 +15796,7 @@
       "@id": "__BASIS__/schule-stunde-2#artikel",
       "headline": "KI 2: Wie lernt ein Computer? Daten, Training, Fehler",
       "name": "KI 2: Wie lernt ein Computer? Daten, Training, Fehler",
-      "description": "45 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz. Drei Aufgaben zu Daten, Netz und Lernrate.",
+      "description": "45 oder 90 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz. Drei Aufgaben zu Daten, Netz und Lernrate.",
       "url": "__BASIS__/schule-stunde-2",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -15893,7 +15911,7 @@
   "schule-stunde-3": {
    "titel": "KI 3: Echt oder erfunden? KI prüfen · KI-Labor",
    "ueberschrift": "KI 3: Echt oder erfunden? KI prüfen",
-   "beschreibung": "45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten. Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten. Ein Sprachmodell kann überzeugend erfinden.",
    "typ": "seite",
    "datei": "content-schule.js",
    "bild": "/static/og/standard.png",
@@ -15935,7 +15953,7 @@
       "@id": "__BASIS__/schule-stunde-3#artikel",
       "headline": "KI 3: Echt oder erfunden? KI prüfen",
       "name": "KI 3: Echt oder erfunden? KI prüfen",
-      "description": "45 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten. Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.",
+      "description": "45 oder 90 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten. Ein Sprachmodell kann überzeugend erfinden.",
       "url": "__BASIS__/schule-stunde-3",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16045,7 +16063,7 @@
   "schule-lehrkraefte": {
    "titel": "Handreichung für Lehrkräfte · KI-Labor",
    "ueberschrift": "Handreichung für Lehrkräfte",
-   "beschreibung": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Jede Aufgabe beginnt mit einem Operator.",
+   "beschreibung": "Checkliste, Fachbegriffe, Kurzantworten, Stolperstellen und Lehrplanbezug für die drei KI-Stunden und die sieben Medien-Einheiten in Klasse 8.",
    "typ": "seite",
    "datei": "content-schule.js",
    "bild": "/static/og/standard.png",
@@ -16087,7 +16105,7 @@
       "@id": "__BASIS__/schule-lehrkraefte#artikel",
       "headline": "Handreichung für Lehrkräfte",
       "name": "Handreichung für Lehrkräfte",
-      "description": "Checkliste, Fachbegriffe, Kurzantworten und Stolperstellen für die drei Stunden in Klasse 8. Jede Aufgabe beginnt mit einem Operator.",
+      "description": "Checkliste, Fachbegriffe, Kurzantworten, Stolperstellen und Lehrplanbezug für die drei KI-Stunden und die sieben Medien-Einheiten in Klasse 8.",
       "url": "__BASIS__/schule-lehrkraefte",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16098,7 +16116,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Für die Schule",
-      "abstract": "Handreichung für Lehrkräfte zu den drei KI-Stunden in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Pläne für Einzel- und Doppelstunde, Bezug zur KMK-Strategie, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
+      "abstract": "Handreichung für Lehrkräfte zu den drei KI-Stunden und den sieben Medien-Einheiten in Klasse 8: Lernziele nach den Stufen Verstehen, Anwenden, Erstellen und Bewerten, Übersicht der Medien-Einheiten, Pläne für Einzel- und Doppelstunde (45 oder 90 Minuten), Lehrplanbezug und Bezug zur KMK-Strategie, Kamera und Mikrofon am Schulgerät sperren, Anpassung für Klasse 7 und 9, Vorbereitung, Fachbegriffe, häufige Schülerfragen mit Antworten, Stolperstellen und Quellen zum Weiterlesen.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16121,7 +16139,7 @@
       "teaches": [
        "Die drei Stunden decken Verstehen, Anwenden, Erstellen und Bewerten ab. Alle kommen ohne Kamera aus.",
        "Gruppen von vier, höchstens 7 Geräte, versetzt starten: So bleibt die Wartezeit kurz.",
-       "Antworten des Modells sind Vorschläge. Bewerte die Begründung der Klasse, nicht den Wortlaut."
+       "Antworten des Modells sind Vorschläge. Bewerten Sie die Begründung der Klasse, nicht den Wortlaut."
       ],
       "about": [
        {
@@ -16424,7 +16442,7 @@
   "medien-stunde-1": {
    "titel": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und…",
    "ueberschrift": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil. Sichere Erkennung gibt es nicht.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -16466,7 +16484,7 @@
       "@id": "__BASIS__/medien-stunde-1#artikel",
       "headline": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
       "name": "Medien-Einheit 1: Echt oder KI? Bilder sortieren und begründen",
-      "description": "45 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil. Sichere Erkennung gibt es nicht.",
+      "description": "45 oder 90 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.",
       "url": "__BASIS__/medien-stunde-1",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16502,6 +16520,11 @@
        "Ein Fehler im Bild ist ein Hinweis auf KI, aber kein Beweis. Ein sauberes Bild beweist nicht, dass es echt ist.",
        "Herkunft und Kontext prüfen schlägt genaues Hinsehen."
       ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/echt-oder-ki#video"
+       }
+      ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16526,6 +16549,91 @@
         "item": "__BASIS__/medien-stunde-1"
        }
       ]
+     },
+     {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/echt-oder-ki#video",
+      "name": "Echt oder KI?",
+      "description": "So gehst du mit Bildern um, die zu gut aussehen. Kapitel: Zwei Bilder, Bauchgefühl, Fehler im Bild, Die Modelle lernen, Woher kommt es?, Echt, aber falsch, Bildersuche, Herkunftsangabe, Dein Plan.",
+      "thumbnailUrl": "__BASIS__/static/videos/echt-oder-ki.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M31S",
+      "contentUrl": "__BASIS__/static/videos/echt-oder-ki.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Zwei Bilder von einem Berg. Eins hat eine Kamera gemacht, eins eine KI. Welches ist welches? Tipp kurz, bevor du weiterhörst. Und genau das ist das Problem. Studien zeigen, dass Menschen KI-Gesichter oft nicht sicher von echten unterscheiden. Dein Bauchgefühl ist also kein Messgerät. Früher halfen Fehler im Bild. Hände mit zu vielen Fingern, Schrift wie Buchstabensuppe, Schatten, die in die falsche Richtung fallen. Schau trotzdem hin. Das sind gute erste Hinweise. Aber die Modelle lernen dazu. Was heute auffällt, ist bald weg. Ein Bild ohne sichtbaren Fehler ist deshalb noch lange kein echtes Bild. Dreh die Frage um. Nicht: Sieht das echt aus? Sondern: Woher kommt das? Wer hat es zuerst gezeigt? Gibt es dazu ein Datum, einen Ort, einen Namen? Ein Bild ohne Herkunft ist wie eine Behauptung ohne Beweis. Und noch etwas: Nicht jedes falsche Bild kommt von einer KI. Oft ist es ein echtes Foto mit falscher Geschichte. Ein altes Foto, das als neues Ereignis verkauft wird. Darum zählt die Herkunft mehr als die Technik. Mit der Bildersuche siehst du, wo ein Bild sonst noch auftaucht. Lade es hoch oder gib die Adresse ein. Oft zeigt sich: Das Bild ist alt, geklaut oder gehört zu einer ganz anderen Geschichte. Findest du es nirgends, ist das ein Warnsignal, aber kein Beweis. Manche Programme speichern eine Herkunftsangabe im Bild. Sie heißt Content Credentials und zeigt, womit das Bild entstanden ist. Ist sie da, hilft das. Fehlt sie, heißt das nichts, denn sie geht zum Beispiel bei einem Bildschirmfoto verloren. Und Apps, die KI-Bilder erkennen sollen, liegen auch oft daneben. Dein Plan in drei Fragen. Wer zeigt mir das? Was soll ich dabei fühlen oder tun? Gibt es eine zweite Quelle? Achte auch darauf, was das Bild mit dir macht. Macht es dich sofort wütend? Dann sei besonders vorsichtig, denn an Gefühlen ziehen Fakes am liebsten. Bist du danach unsicher, schick es nicht weiter. Zweifeln ist erlaubt, und es macht dich nicht langweilig.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Zwei Bilder",
+        "startOffset": 0,
+        "endOffset": 12,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Bauchgefühl",
+        "startOffset": 11,
+        "endOffset": 25,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=11"
+       },
+       {
+        "@type": "Clip",
+        "name": "Fehler im Bild",
+        "startOffset": 24,
+        "endOffset": 39,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=24"
+       },
+       {
+        "@type": "Clip",
+        "name": "Die Modelle lernen",
+        "startOffset": 38,
+        "endOffset": 50,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=38"
+       },
+       {
+        "@type": "Clip",
+        "name": "Woher kommt es?",
+        "startOffset": 49,
+        "endOffset": 67,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=49"
+       },
+       {
+        "@type": "Clip",
+        "name": "Echt, aber falsch",
+        "startOffset": 66,
+        "endOffset": 83,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=66"
+       },
+       {
+        "@type": "Clip",
+        "name": "Bildersuche",
+        "startOffset": 83,
+        "endOffset": 103,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=83"
+       },
+       {
+        "@type": "Clip",
+        "name": "Herkunftsangabe",
+        "startOffset": 102,
+        "endOffset": 125,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=102"
+       },
+       {
+        "@type": "Clip",
+        "name": "Dein Plan",
+        "startOffset": 124,
+        "endOffset": 152,
+        "url": "__BASIS__/static/videos/echt-oder-ki.mp4#t=124"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
      },
      {
       "@type": "FAQPage",
@@ -16564,7 +16672,7 @@
   "medien-stunde-2": {
    "titel": "Medien-Einheit 2: Quellen prüfen, eine Behauptung…",
    "ueberschrift": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
-   "beschreibung": "45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Fragen: Weitergeben, Interesse, Chat als Quelle.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Fragen: Weitergeben, Interesse, Chat als Quelle.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -16606,7 +16714,7 @@
       "@id": "__BASIS__/medien-stunde-2#artikel",
       "headline": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
       "name": "Medien-Einheit 2: Quellen prüfen, eine Behauptung gegenprüfen",
-      "description": "45 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Fragen: Weitergeben, Interesse, Chat als Quelle.",
+      "description": "45 oder 90 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen. Drei Fragen: Weitergeben, Interesse, Chat als Quelle.",
       "url": "__BASIS__/medien-stunde-2",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16642,6 +16750,11 @@
        "Prüfe Urheber, Datum und Interesse, und suche Berichte, die selbst recherchiert haben.",
        "Ein Chatbot ist ein Wegweiser und keine Quelle. Das Original suchst du selbst."
       ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/quellen-pruefen#video"
+       }
+      ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16666,6 +16779,91 @@
         "item": "__BASIS__/medien-stunde-2"
        }
       ]
+     },
+     {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/quellen-pruefen#video",
+      "name": "Quellen prüfen",
+      "description": "Fünf Schritte, bevor du etwas glaubst oder weiterschickst. Kapitel: Tausend Likes, Schritt 1: Stopp, Schritt 2: Wer steckt dahinter?, Schritt 3: Seitlich lesen, Schritt 4: Zweite Quelle, Schritt 5: Zum Original, Probelauf, Und die KI?, Dein Merksatz.",
+      "thumbnailUrl": "__BASIS__/static/videos/quellen-pruefen.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M29S",
+      "contentUrl": "__BASIS__/static/videos/quellen-pruefen.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Dein Chat explodiert. Alle schicken denselben Beitrag, mit großer Überschrift und tausend Likes. Stimmt das? Likes sind kein Beweis. Auch Unsinn kann tausendmal geteilt werden. Schritt eins heißt Stopp. Bevor du glaubst oder teilst, atme einmal durch. Beiträge, die wütend oder neugierig machen, verbreiten sich besonders gut. Manche sind genau dafür gebaut. Schritt zwei: Wer steckt dahinter? Schau, ob die Seite sagt, wer sie betreibt. Ein Impressum mit Name und Adresse ist ein gutes Zeichen. Fehlt es ganz, sei misstrauisch. Schritt drei: Lies seitlich. Verlass die Seite und öffne einen neuen Tab. Such nach dem Namen der Quelle. Was sagen andere über sie? So arbeiten Profis, die Fakten prüfen. Schritt vier: Gibt es eine zweite Quelle? Berichten unabhängige Medien dasselbe, oder eine Behörde? Hat nur eine einzige Seite die große Neuigkeit, ist das ein Warnzeichen. Schritt fünf: Geh zum Original. Wie bei Stille Post wird eine Studie auf dem Weg oft verdreht. Such die Studie selbst. Steht dort wirklich, was der Beitrag behauptet? Und wer hat sie bezahlt? Ein Probelauf mit einer erfundenen Meldung: Schüler mit blauen Stiften schreiben bessere Noten. Stopp: Das klingt zu schön, um wahr zu sein. Wer steckt dahinter? Eine Seite ohne Impressum. Seitlich gelesen: Niemand kennt sie. Zweite Quelle? Keine. Original? Keine Studie zu finden. Ergebnis: Quatsch, und du hast es in zwei Minuten gemerkt. Und die KI? Ein Chatbot ist keine Quelle. Er setzt Wörter fort, die passen, und kann Quellen erfinden. Bitte ihn um Links und klick sie an. Gibt es die Seite nicht, hat er sie erfunden. Hilfreich ist er trotzdem: für Ideen, was du prüfen kannst. Dein Merksatz: Stopp, wer, seitlich, zweite Quelle, Original. Das dauert ein paar Minuten und macht dich zum Profi im Freundeskreis. Und wenn du nichts findest? Dann teile es nicht. Das ist völlig in Ordnung.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Tausend Likes",
+        "startOffset": 0,
+        "endOffset": 15,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Schritt 1: Stopp",
+        "startOffset": 14,
+        "endOffset": 30,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=14"
+       },
+       {
+        "@type": "Clip",
+        "name": "Schritt 2: Wer steckt dahinter?",
+        "startOffset": 29,
+        "endOffset": 43,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=29"
+       },
+       {
+        "@type": "Clip",
+        "name": "Schritt 3: Seitlich lesen",
+        "startOffset": 42,
+        "endOffset": 58,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=42"
+       },
+       {
+        "@type": "Clip",
+        "name": "Schritt 4: Zweite Quelle",
+        "startOffset": 57,
+        "endOffset": 71,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=57"
+       },
+       {
+        "@type": "Clip",
+        "name": "Schritt 5: Zum Original",
+        "startOffset": 70,
+        "endOffset": 86,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=70"
+       },
+       {
+        "@type": "Clip",
+        "name": "Probelauf",
+        "startOffset": 86,
+        "endOffset": 113,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=86"
+       },
+       {
+        "@type": "Clip",
+        "name": "Und die KI?",
+        "startOffset": 112,
+        "endOffset": 132,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=112"
+       },
+       {
+        "@type": "Clip",
+        "name": "Dein Merksatz",
+        "startOffset": 131,
+        "endOffset": 150,
+        "url": "__BASIS__/static/videos/quellen-pruefen.mp4#t=131"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
      },
      {
       "@type": "FAQPage",
@@ -16704,7 +16902,7 @@
   "medien-stunde-3": {
    "titel": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall…",
    "ueberschrift": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen. Viele Fälschungen brauchen keine KI.",
+   "beschreibung": "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten. KMK-Kompetenzbereiche: Analysieren und Reflektieren; Schützen und sicher Agieren.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -16746,7 +16944,7 @@
       "@id": "__BASIS__/medien-stunde-3#artikel",
       "headline": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
       "name": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
-      "description": "45 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung, Nutzen und Gegenmaßnahmen. Viele Fälschungen brauchen keine KI.",
+      "description": "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten. KMK-Kompetenzbereiche: Analysieren und Reflektieren; Schützen und sicher Agieren.",
       "url": "__BASIS__/medien-stunde-3",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16757,7 +16955,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Für die Schule",
-      "abstract": "Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall nach Entstehung, Verbreitung, Nutzen und Gegenmaßnahmen. Keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.",
+      "abstract": "Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse analysiert einen erfundenen Fall (eine Cheap Fake) nach Entstehung, Verbreitung und Nutzen und beurteilt ein Dilemma zu einer KI-erzeugten Stimme: Einwilligung, Persönlichkeitsrecht, Schaden, Gegenmaßnahmen. Beide Fälle sind erfunden, es gibt keine Anleitung zum Fälschen. Mit Hinweisen für den Fall, dass jemand betroffen ist.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16781,6 +16979,11 @@
        "Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite.",
        "Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.",
        "Fälschungen echter Menschen verletzen Rechte. Wenn es dich trifft: sichern, Hilfe holen, melden."
+      ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/fake-news-deepfakes#video"
+       }
       ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
@@ -16808,6 +17011,91 @@
       ]
      },
      {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/fake-news-deepfakes#video",
+      "name": "Fake News und Deepfakes",
+      "description": "Was dahinter steckt und wie du dich schützt. Kapitel: Die Sprachnachricht, Zwei Begriffe, Warum das jemand tut, Was ist ein Deepfake?, Spaß oder Schaden, So prüfst du, Das Codewort, Teilen ist Mitmachen, Wenn es dich trifft.",
+      "thumbnailUrl": "__BASIS__/static/videos/fake-news-deepfakes.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M26S",
+      "contentUrl": "__BASIS__/static/videos/fake-news-deepfakes.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Stell dir vor: Eine Sprachnachricht von deinem Bruder. Er klingt gestresst und bittet dich, schnell Geld zu schicken. Es klingt echt. Aber er hat sie nie aufgenommen. Eine KI hat seine Stimme nachgebaut. Zwei Begriffe, die oft vermischt werden. Eine Falschinformation ist falsch und wird aus Versehen weitergegeben. Desinformation ist absichtlich falsch. Fake News nennt man beides im Alltag. Wichtig: Wer teilt, macht mit, auch ohne Absicht. Warum macht jemand so etwas? Manche verdienen Geld mit Klicks. Manche wollen Meinung machen. Und manche finden es einfach lustig. Oft ist egal, ob es stimmt. Hauptsache, es wird geteilt. Ein Deepfake ist ein Bild, ein Video oder eine Stimme, die eine KI erzeugt oder verändert hat. Bei Stimmen reichen manchen Programmen schon wenige Sekunden Aufnahme. Dafür kann eine kurze Sprachnachricht genügen. Nicht jeder Deepfake ist böse. Ein gekennzeichneter Witz oder ein Film mit Spezialeffekten ist harmlos. Schwierig wird es, wenn etwas echt aussehen soll und jemanden sagen lässt, was er nie gesagt hat. So prüfst du. Erstens: Passt das zu dieser Person? Zweitens: Berichten seriöse Quellen darüber? Drittens, bei Anrufen und Sprachnachrichten: Ruf zurück, über die Nummer, die du schon kennst. Mach mit Familie und Freunden ein Codewort aus. Es darf ruhig albern sein. Wer in einer Notlage das Codewort nicht kennt, ist vermutlich nicht der, der er vorgibt zu sein. Ein Hundename ist dafür zu leicht zu erraten. Und du? Teilen ist Mitmachen. Lies erst, bevor du weiterschickst. Fakes von echten Menschen, die sie bloßstellen, sind kein Spaß. Sie können sehr weh tun, und sie können strafbar sein. Bau sie nicht und schick sie nicht weiter. Wenn es dich trifft: Mach Bildschirmfotos, melde den Inhalt der Plattform und sprich mit jemandem, dem du vertraust. Die Nummer gegen Kummer hilft Jugendlichen kostenlos und anonym. Sie lautet: eins eins sechs, eins eins eins.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Die Sprachnachricht",
+        "startOffset": 0,
+        "endOffset": 16,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Zwei Begriffe",
+        "startOffset": 15,
+        "endOffset": 35,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=15"
+       },
+       {
+        "@type": "Clip",
+        "name": "Warum das jemand tut",
+        "startOffset": 34,
+        "endOffset": 49,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=34"
+       },
+       {
+        "@type": "Clip",
+        "name": "Was ist ein Deepfake?",
+        "startOffset": 48,
+        "endOffset": 64,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=48"
+       },
+       {
+        "@type": "Clip",
+        "name": "Spaß oder Schaden",
+        "startOffset": 63,
+        "endOffset": 79,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=63"
+       },
+       {
+        "@type": "Clip",
+        "name": "So prüfst du",
+        "startOffset": 78,
+        "endOffset": 95,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=78"
+       },
+       {
+        "@type": "Clip",
+        "name": "Das Codewort",
+        "startOffset": 94,
+        "endOffset": 110,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=94"
+       },
+       {
+        "@type": "Clip",
+        "name": "Teilen ist Mitmachen",
+        "startOffset": 110,
+        "endOffset": 128,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=110"
+       },
+       {
+        "@type": "Clip",
+        "name": "Wenn es dich trifft",
+        "startOffset": 127,
+        "endOffset": 146,
+        "url": "__BASIS__/static/videos/fake-news-deepfakes.mp4#t=127"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
       "@type": "FAQPage",
       "@id": "__BASIS__/medien-stunde-3#faq",
       "inLanguage": "de",
@@ -16830,10 +17118,10 @@
        },
        {
         "@type": "Question",
-        "name": "Jemand hat ein gefälschtes Bild von dir im Klassenchat verbreitet. Was ist der beste erste Schritt?",
+        "name": "Ein Mitschüler baut mit einer KI die Stimme eines anderen nach und schickt als „Scherz“ eine Sprachnachricht in den Klassenchat. Der andere wurde nicht gefragt. Was ist das?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "Beweise sichern, eine Vertrauensperson holen und melden. Es ist nicht deine Schuld. Sichere Screenshots mit Adresse und Datum, bevor etwas gelöscht wird."
+         "text": "Ein Deepfake ohne Einwilligung, der Rechte verletzen kann. Eine nachgebaute Stimme ohne Einwilligung ist ein Deepfake. Der Scherz ändert nichts: Sie kann Persönlichkeitsrechte verletzen und Schaden anrichten."
         }
        }
       ]
@@ -16844,7 +17132,7 @@
   "medien-stunde-4": {
    "titel": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln…",
    "ueberschrift": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Fragen: Lernen, Angabe, Vertrauen.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Fragen: Lernen, Angabe, Vertrauen.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -16886,7 +17174,7 @@
       "@id": "__BASIS__/medien-stunde-4#artikel",
       "headline": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
       "name": "Medien-Einheit 4: KI und Hausaufgaben, Klassenregeln entwickeln",
-      "description": "45 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Fragen: Lernen, Angabe, Vertrauen.",
+      "description": "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben. Drei Fragen: Lernen, Angabe, Vertrauen.",
       "url": "__BASIS__/medien-stunde-4",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16922,6 +17210,11 @@
        "Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben.",
        "Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben."
       ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/ki-hausaufgaben-fair#video"
+       }
+      ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16946,6 +17239,91 @@
         "item": "__BASIS__/medien-stunde-4"
        }
       ]
+     },
+     {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/ki-hausaufgaben-fair#video",
+      "name": "KI und Hausaufgaben",
+      "description": "Lernen, ohne zu schummeln. Kapitel: Der Auftrag, Das Fitnessstudio, Dafür ist KI gut, Wo es unfair wird, Die Ampel, Ein fairer Ablauf, Offen sagen, Nachprüfen, Der Tafel-Test.",
+      "thumbnailUrl": "__BASIS__/static/videos/ki-hausaufgaben-fair.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M12S",
+      "contentUrl": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Eine Erörterung zum Handyverbot, fünf Seiten, morgen früh. Die KI schreibt sie in Sekunden. Verlockend. Aber schauen wir ehrlich, was dir das bringt. Stell dir ein Fitnessstudio vor, in dem dein Kumpel die Gewichte für dich hebt. Er wird stärker. Du nicht. Mit Hausaufgaben ist es genauso. Gelernt wird nur, was du selbst denkst. Dafür kann eine KI richtig gut sein. Sie erklärt dir den Stoff noch einmal anders. Sie fragt dich ab. Sie zeigt dir, wo dein Text holpert. Und sie hilft dir, Ideen zu sammeln. Unfair wird es, wenn du ihren Text als deinen abgibst. Das ist wie Abschreiben, nur schneller. Und es schadet dir doppelt. Du lernst nichts, und die Lehrkraft kann es als Täuschung werten. Die Regeln sind je nach Schule, Fach und Lehrkraft verschieden. Frag vorher, wofür du KI nutzen darfst. Ist nichts geregelt, hilft die Ampel. Grün: erklären und abfragen lassen. Gelb: Text überarbeiten lassen, aber offen sagen. Rot: einen fertigen Text abgeben. So kann ein fairer Ablauf aussehen. Erst schreibst du selbst eine Gliederung. Dann fragst du die KI, was fehlt. Dann schreibst du den Text selbst. Zum Schluss lässt du die KI prüfen, wo er noch holpert. Das Denken bleibt bei dir. Sag offen, wie du die KI genutzt hast. Ein Satz reicht: Ich habe mir Ideen sammeln und die Rechtschreibung prüfen lassen. Das wirkt nicht schwach. Es zeigt, dass du weißt, was du tust. Und prüf, was die KI sagt. Sie rechnet manchmal falsch und erfindet Quellen. Verantwortlich für das, was du abgibst, bist du, nicht sie. Ein einfacher Test zum Schluss: Könntest du es morgen an der Tafel erklären, ohne Handy? Wenn ja, hast du etwas gelernt, egal wer geholfen hat. Wenn nein, frag die KI noch einmal, aber diesmal nach der Erklärung.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Der Auftrag",
+        "startOffset": 0,
+        "endOffset": 13,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Das Fitnessstudio",
+        "startOffset": 12,
+        "endOffset": 26,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=12"
+       },
+       {
+        "@type": "Clip",
+        "name": "Dafür ist KI gut",
+        "startOffset": 25,
+        "endOffset": 40,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=25"
+       },
+       {
+        "@type": "Clip",
+        "name": "Wo es unfair wird",
+        "startOffset": 39,
+        "endOffset": 53,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=39"
+       },
+       {
+        "@type": "Clip",
+        "name": "Die Ampel",
+        "startOffset": 52,
+        "endOffset": 74,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=52"
+       },
+       {
+        "@type": "Clip",
+        "name": "Ein fairer Ablauf",
+        "startOffset": 73,
+        "endOffset": 90,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=73"
+       },
+       {
+        "@type": "Clip",
+        "name": "Offen sagen",
+        "startOffset": 89,
+        "endOffset": 104,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=89"
+       },
+       {
+        "@type": "Clip",
+        "name": "Nachprüfen",
+        "startOffset": 103,
+        "endOffset": 115,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=103"
+       },
+       {
+        "@type": "Clip",
+        "name": "Der Tafel-Test",
+        "startOffset": 115,
+        "endOffset": 132,
+        "url": "__BASIS__/static/videos/ki-hausaufgaben-fair.mp4#t=115"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
      },
      {
       "@type": "FAQPage",
@@ -16984,7 +17362,7 @@
   "medien-stunde-5": {
    "titel": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und…",
    "ueberschrift": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Daten entstehen auch nebenbei.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Daten entstehen auch nebenbei.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -17026,7 +17404,7 @@
       "@id": "__BASIS__/medien-stunde-5#artikel",
       "headline": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
       "name": "Medien-Einheit 5: Datenschutz im Alltag, App-Rechte und Datenspuren",
-      "description": "45 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Daten entstehen auch nebenbei.",
+      "description": "45 oder 90 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren. Daten entstehen auch nebenbei.",
       "url": "__BASIS__/medien-stunde-5",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -17062,6 +17440,11 @@
        "Gib Kamera, Mikrofon und Standort nur frei, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr.",
        "Behandle Chatbot-Eingaben wie eine Postkarte. Keine Passwörter, Adressen oder Daten anderer."
       ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/datenschutz-im-alltag#video"
+       }
+      ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -17086,6 +17469,91 @@
         "item": "__BASIS__/medien-stunde-5"
        }
       ]
+     },
+     {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/datenschutz-im-alltag#video",
+      "name": "Datenschutz im Alltag",
+      "description": "Was du preisgibst und wie du es kontrollierst. Kapitel: Was weiß das Netz?, Bezahlen mit Daten, Das Foto verrät mehr, Das Netz vergisst wenig, Fünf Minuten Einstellungen, KI-Chats, Gute Passwörter, Deine Rechte, Und die anderen.",
+      "thumbnailUrl": "__BASIS__/static/videos/datenschutz-im-alltag.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M18S",
+      "contentUrl": "__BASIS__/static/videos/datenschutz-im-alltag.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Was weiß das Netz über dich? Name, Wohnort, Fotos, deine Stimme, was du gern hörst, wann du wo bist. Vieles davon hast du selbst geliefert, ganz nebenbei. Viele Apps kosten kein Geld. Dafür bezahlst du oft mit Daten. Damit lässt sich zeigen, was dich interessiert, und passende Werbung ausspielen. Das ist nicht automatisch schlimm. Du solltest es nur wissen und selbst entscheiden. Ein Foto kann mehr verraten, als du siehst. Oft stecken Aufnahmeort, Uhrzeit und Handymodell darin. Manche Netzwerke entfernen das, andere nicht. Schalte die Ortsangabe für die Kamera lieber aus. Was einmal online ist, lässt sich schwer ganz löschen. Andere können es speichern und weiterschicken. Frag dich vorher: Wäre mir das in fünf Jahren noch recht? Nimm dir fünf Minuten für die Einstellungen. Profil auf privat. Standort nur, wenn die App läuft. Kamera, Mikrofon und Kontakte nur für Apps, die sie wirklich brauchen. Eine Taschenlampen-App braucht keine Kontakte. Wichtig bei KI-Chats: Je nach Anbieter und Einstellung kann gespeichert werden, was du eintippst. Mathe-Aufgaben und Rezeptideen sind unproblematisch. Passwörter, Adresse, Geheimnisse und Fotos von anderen gehören nicht hinein. Ein gutes Passwort ist lang und gehört nur zu einem Konto. Vier zufällige Wörter hintereinander sind stark und leichter zu merken als Zeichenchaos. Schalte außerdem die Anmeldung in zwei Schritten ein. Dann reicht einem Dieb das Passwort allein nicht. Du hast Rechte. Du darfst fragen: Was habt ihr über mich gespeichert? Und du darfst verlangen, dass sie es löschen. Das steht in der Datenschutz-Grundverordnung. Für viele Dienste brauchen unter Sechzehnjährige außerdem die Zustimmung ihrer Eltern. Und denk an die anderen. Ein Foto von Freunden gehört auch ihnen. Frag, bevor du es teilst. Das ist Respekt, und es ist auch Recht: Jeder darf über Bilder von sich selbst mitentscheiden.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Was weiß das Netz?",
+        "startOffset": 0,
+        "endOffset": 14,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Bezahlen mit Daten",
+        "startOffset": 13,
+        "endOffset": 30,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=13"
+       },
+       {
+        "@type": "Clip",
+        "name": "Das Foto verrät mehr",
+        "startOffset": 29,
+        "endOffset": 45,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=29"
+       },
+       {
+        "@type": "Clip",
+        "name": "Das Netz vergisst wenig",
+        "startOffset": 44,
+        "endOffset": 57,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=44"
+       },
+       {
+        "@type": "Clip",
+        "name": "Fünf Minuten Einstellungen",
+        "startOffset": 56,
+        "endOffset": 72,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=56"
+       },
+       {
+        "@type": "Clip",
+        "name": "KI-Chats",
+        "startOffset": 71,
+        "endOffset": 89,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=71"
+       },
+       {
+        "@type": "Clip",
+        "name": "Gute Passwörter",
+        "startOffset": 88,
+        "endOffset": 107,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=88"
+       },
+       {
+        "@type": "Clip",
+        "name": "Deine Rechte",
+        "startOffset": 106,
+        "endOffset": 124,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=106"
+       },
+       {
+        "@type": "Clip",
+        "name": "Und die anderen",
+        "startOffset": 123,
+        "endOffset": 139,
+        "url": "__BASIS__/static/videos/datenschutz-im-alltag.mp4#t=123"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
      },
      {
       "@type": "FAQPage",
@@ -17124,7 +17592,7 @@
   "medien-stunde-6": {
    "titel": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
    "ueberschrift": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
-   "beschreibung": "45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -17166,7 +17634,7 @@
       "@id": "__BASIS__/medien-stunde-6#artikel",
       "headline": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
       "name": "Medien-Einheit 6: Gute Fragen stellen, Prompts verbessern",
-      "description": "45 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
+      "description": "45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
       "url": "__BASIS__/medien-stunde-6",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -17202,6 +17670,11 @@
        "Nutze die KI als Trainer: erklären, abfragen, Feedback geben. Die Arbeit bleibt bei dir.",
        "Frage nach, wenn die Antwort nicht passt, und prüfe Zahlen, Namen und Quellen, bevor du sie benutzt."
       ],
+      "video": [
+       {
+        "@id": "__BASIS__/static/videos/prompts-fuer-schueler#video"
+       }
+      ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -17226,6 +17699,98 @@
         "item": "__BASIS__/medien-stunde-6"
        }
       ]
+     },
+     {
+      "@type": "VideoObject",
+      "@id": "__BASIS__/static/videos/prompts-fuer-schueler#video",
+      "name": "Gute Prompts für die Schule",
+      "description": "Fragen, mit denen du wirklich etwas lernst. Kapitel: Die Textwand, Sie muss raten, Rolle und Kontext, Aufgabe und Format, Hinweise statt Lösung, Lass dich abfragen, Erklär es zurück, Nachhaken, Prüfen und schützen, Deine Vorlage.",
+      "thumbnailUrl": "__BASIS__/static/videos/prompts-fuer-schueler.jpg",
+      "uploadDate": "2026-11-22",
+      "duration": "PT2M14S",
+      "contentUrl": "__BASIS__/static/videos/prompts-fuer-schueler.mp4",
+      "encodingFormat": "video/mp4",
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "transcript": "Du tippst: Erklär Bruchrechnung. Und bekommst eine Textwand, die auch aus einem Lexikon sein könnte. Oft liegt das nicht an der KI, sondern an der Frage. Eine KI sieht nicht, in welcher Klasse du bist. Sie weiß nicht, was du schon kannst und was dich nervt. Wenn du es ihr nicht sagst, rät sie. Und Raten ergibt Durchschnitt. Sag ihr, wer sie sein soll und wer du bist. Zum Beispiel: Du bist ein geduldiger Nachhilfelehrer. Ich bin in Klasse acht und verstehe das Kürzen nicht. Dann sag, was sie tun soll und wie. Erkläre es in drei Schritten, mit einem Beispiel aus dem Alltag, in kurzen Sätzen. Du kannst auch sagen, was sie lassen soll. Zum Beispiel keine Fachwörter ohne Erklärung. Der beste Trick fürs Lernen: Bitte um Hinweise statt um die Lösung. Sag: Gib mir nur einen Tipp, ich probiere es selbst. So bleibt das Denken bei dir. Lass dich abfragen. Stell mir fünf Fragen, eine nach der anderen, und sag mir am Ende, was ich üben soll. Das ist wie Vokabeln lernen mit einem Partner, der nie genervt ist. Dreh den Spieß um. Erkläre der KI das Thema in eigenen Worten und frag: Was stimmt, was fehlt, was ist falsch? Wer etwas erklären kann, hat es verstanden. Und du merkst sofort, wo es noch hakt. Der erste Versuch ist selten perfekt. Sag, was nicht passt: zu schwer, zu lang, noch ein Beispiel bitte. Du kannst ihr auch erlauben, nachzufragen. Sag: Frag mich, wenn dir etwas fehlt. Prüf die Antwort, vor allem bei Zahlen und Quellen. Sie kann überzeugend klingen und trotzdem falsch sein. Und lass Namen, Adressen und Privates draußen. Deine Vorlage: Ich bin in Klasse so und so. Ich will dieses Thema verstehen. Erkläre es in kleinen Schritten, dann frag mich ab. Probier sie aus und verbessere sie, bis sie zu dir passt.",
+      "hasPart": [
+       {
+        "@type": "Clip",
+        "name": "Die Textwand",
+        "startOffset": 0,
+        "endOffset": 13,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=0"
+       },
+       {
+        "@type": "Clip",
+        "name": "Sie muss raten",
+        "startOffset": 12,
+        "endOffset": 26,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=12"
+       },
+       {
+        "@type": "Clip",
+        "name": "Rolle und Kontext",
+        "startOffset": 25,
+        "endOffset": 38,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=25"
+       },
+       {
+        "@type": "Clip",
+        "name": "Aufgabe und Format",
+        "startOffset": 37,
+        "endOffset": 53,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=37"
+       },
+       {
+        "@type": "Clip",
+        "name": "Hinweise statt Lösung",
+        "startOffset": 52,
+        "endOffset": 65,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=52"
+       },
+       {
+        "@type": "Clip",
+        "name": "Lass dich abfragen",
+        "startOffset": 64,
+        "endOffset": 77,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=64"
+       },
+       {
+        "@type": "Clip",
+        "name": "Erklär es zurück",
+        "startOffset": 77,
+        "endOffset": 93,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=77"
+       },
+       {
+        "@type": "Clip",
+        "name": "Nachhaken",
+        "startOffset": 92,
+        "endOffset": 107,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=92"
+       },
+       {
+        "@type": "Clip",
+        "name": "Prüfen und schützen",
+        "startOffset": 106,
+        "endOffset": 119,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=106"
+       },
+       {
+        "@type": "Clip",
+        "name": "Deine Vorlage",
+        "startOffset": 118,
+        "endOffset": 134,
+        "url": "__BASIS__/static/videos/prompts-fuer-schueler.mp4#t=118"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
      },
      {
       "@type": "FAQPage",
@@ -17264,7 +17829,7 @@
   "medien-stunde-7": {
    "titel": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
    "ueberschrift": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
-   "beschreibung": "45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde. Beispiele an der Tafel sammeln.",
+   "beschreibung": "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -17306,7 +17871,7 @@
       "@id": "__BASIS__/medien-stunde-7#artikel",
       "headline": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
       "name": "Medien-Einheit 7: KI in deinem Alltag, Poster-Runde",
-      "description": "45 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde. Beispiele an der Tafel sammeln.",
+      "description": "45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.",
       "url": "__BASIS__/medien-stunde-7",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -18507,7 +19072,7 @@
   "ki-hausaufgaben-fair": {
    "titel": "KI bei Hausaufgaben: fair nutzen · KI-Labor",
    "ueberschrift": "KI bei Hausaufgaben: fair nutzen",
-   "beschreibung": "KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite?",
+   "beschreibung": "KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite? Das Labor ist zum Verstehen da.",
    "typ": "seite",
    "datei": "content-medien.js",
    "bild": "/static/og/standard.png",
@@ -18549,7 +19114,7 @@
       "@id": "__BASIS__/ki-hausaufgaben-fair#artikel",
       "headline": "KI bei Hausaufgaben: fair nutzen",
       "name": "KI bei Hausaufgaben: fair nutzen",
-      "description": "KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite?",
+      "description": "KI kann beim Lernen helfen oder die Arbeit komplett abnehmen. Wo ist der Unterschied, und wie bleibst du auf der sicheren Seite? Das Labor ist zum Verstehen da.",
       "url": "__BASIS__/ki-hausaufgaben-fair",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -18983,7 +19548,7 @@
   "prompts-fuer-schueler": {
    "titel": "Gute Fragen an die KI stellen · KI-Labor",
    "ueberschrift": "Gute Fragen an die KI stellen",
-   "beschreibung": "Bessere Frage, bessere Antwort. Mit fünf Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media. Das Modell kennt nur, was du schreibst.",
+   "beschreibung": "Bessere Frage, bessere Antwort. Mit sechs Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media. Sie kennt nur, was du schreibst.",
    "typ": "seite",
    "datei": "content-medien.js",
    "bild": "/static/og/standard.png",
@@ -19025,7 +19590,7 @@
       "@id": "__BASIS__/prompts-fuer-schueler#artikel",
       "headline": "Gute Fragen an die KI stellen",
       "name": "Gute Fragen an die KI stellen",
-      "description": "Bessere Frage, bessere Antwort. Mit fünf Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media. Das Modell kennt nur, was du schreibst.",
+      "description": "Bessere Frage, bessere Antwort. Mit sechs Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media. Sie kennt nur, was du schreibst.",
       "url": "__BASIS__/prompts-fuer-schueler",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -19366,6 +19931,395 @@
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Er findet erst dein Gesicht und setzt den Effekt dann dazu. Zuerst wird das Gesicht samt Augen und Mund erkannt, dann sitzt der Effekt passend, und das viele Male pro Sekunde."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "falscher-anruf": {
+   "titel": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+   "ueberschrift": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+   "beschreibung": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst. Erstens auflegen.",
+   "typ": "seite",
+   "datei": "content-anruf.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/falscher-anruf#artikel",
+      "headline": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+      "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+      "description": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst. Erstens auflegen.",
+      "url": "__BASIS__/falscher-anruf",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/falscher-anruf"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die du selbst kennst, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/falscher-anruf#breadcrumb"
+      },
+      "teaches": [
+       "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.",
+       "Eine vertraute Stimme beweist nichts, denn Stimmen lassen sich mit KI nachbauen.",
+       "Ein Codewort in der Familie schützt auch dann, wenn die Stimme echt klingt."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/falscher-anruf#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+        "item": "__BASIS__/falscher-anruf"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/falscher-anruf#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Ein Anrufer sagt, dein Enkel hatte einen Unfall und braucht sofort Bargeld. Was tust du zuerst?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ich lege auf und rufe meinen Enkel selbst an. Auflegen und unter einer bekannten Nummer zurückrufen klärt es. Wer am Telefon bleibt, steht weiter unter dem Druck der Täter."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Die Stimme am Telefon klingt genau wie deine Tochter. Was sagt das aus?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nichts Sicheres, denn Stimmen lassen sich mit KI nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine Fälschung. Auch die Nummer im Display lässt sich fälschen. Nur der Rückruf unter einer bekannten Nummer klärt es."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Ein angeblicher Polizist will deine Wertsachen zur Sicherheit abholen. Was ist richtig?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wähle die 110 selbst."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "referat": {
+   "titel": "Für dein Referat über KI · KI-Labor",
+   "ueberschrift": "Für dein Referat über KI",
+   "beschreibung": "Gliederung, die besten Seiten des Labors, deutsche Quellen und eine Vorlage zum Zitieren. So wird dein Referat gut belegt.",
+   "typ": "seite",
+   "datei": "content-referat.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/referat#artikel",
+      "headline": "Für dein Referat über KI",
+      "name": "Für dein Referat über KI",
+      "description": "Gliederung, die besten Seiten des Labors, deutsche Quellen und eine Vorlage zum Zitieren. So wird dein Referat gut belegt.",
+      "url": "__BASIS__/referat",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/referat"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Für ein Referat über KI brauchst du eine Gliederung, mehrere Quellen und eine saubere Angabe mit Abrufdatum. Das Labor erklärt zum Verstehen und ist als einzige Quelle nicht genug. Die Seite zeigt eine Gliederung, deutschsprachige Quellen von klicksafe, bpb, Bundesregierung und Verbraucherzentrale und eine Zitiervorlage.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/referat#breadcrumb"
+      },
+      "teaches": [
+       "Gliedere in sechs Teile und belege jeden mit einer Quelle.",
+       "Gib Betreiber, Titel, Jahr, Adresse und Abrufdatum an.",
+       "Das Labor ist zum Verstehen da. Als einzige Quelle reicht es nicht."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/referat#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Für dein Referat über KI",
+        "item": "__BASIS__/referat"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "prompts-schule": {
+   "titel": "Gute Fragen stellen, mit Schulbeispielen · KI-Labor",
+   "ueberschrift": "Gute Fragen stellen, mit Schulbeispielen",
+   "beschreibung": "Ein Prompt ist deine Frage an die KI. Mit drei Schulaufgaben siehst du, wie aus einer schwachen Frage eine gute wird. Zum Kopieren.",
+   "typ": "seite",
+   "datei": "content-prompts-schule.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/prompts-schule#artikel",
+      "headline": "Gute Fragen stellen, mit Schulbeispielen",
+      "name": "Gute Fragen stellen, mit Schulbeispielen",
+      "description": "Ein Prompt ist deine Frage an die KI. Mit drei Schulaufgaben siehst du, wie aus einer schwachen Frage eine gute wird. Zum Kopieren.",
+      "url": "__BASIS__/prompts-schule",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/prompts-schule"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Ein Prompt ist die Frage oder Aufgabe, die du einer KI schreibst. Je genauer du schreibst, desto brauchbarer die Antwort. Die Seite zeigt drei Schulaufgaben (Referat, Vokabeln, Lernplan), je mit einem schlechten und einem guten Prompt zum Kopieren und einem Quiz.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-22",
+      "dateModified": "2026-11-22",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/prompts-schule#breadcrumb"
+      },
+      "teaches": [
+       "Ein Prompt ist deine Frage an die KI. Genauer fragen bringt bessere Antworten.",
+       "Lass dich erklären und abfragen, statt die Arbeit abzugeben.",
+       "Prüfe jede Antwort, bevor du sie benutzt."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/prompts-schule#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Gute Fragen stellen, mit Schulbeispielen",
+        "item": "__BASIS__/prompts-schule"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/prompts-schule#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Was ist ein Prompt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Eine Frage oder Aufgabe, die du an die KI schreibst. Der Prompt ist dein Text an die KI. Die Antwort ist das, was zurückkommt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Welcher Prompt hilft dir beim Lernen für die Vokabelarbeit am meisten?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Frag mich zehn Vokabeln ab, immer nur eine, und warte. Beim Abfragen musst du selbst denken und bekommst Rückmeldung. Fertige Listen liest du nur durch."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Die KI nennt für dein Referat ein Buch mit Autor und Jahr. Was tust du?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ich suche das Buch selbst, bevor ich es angebe. Genaue Angaben können erfunden sein. Nur die eigene Suche klärt, ob es das Buch gibt."
         }
        }
       ]
@@ -20197,6 +21151,9 @@
   "datenschutz-im-alltag",
   "prompts-fuer-schueler",
   "schueler-alltag-ki",
+  "falscher-anruf",
+  "referat",
+  "prompts-schule",
   "eltern-zuhause",
   "zusammen-ausprobieren",
   "bildschirmzeit"
@@ -20351,6 +21308,9 @@
     "datenschutz-im-alltag",
     "prompts-fuer-schueler",
     "schueler-alltag-ki",
+    "falscher-anruf",
+    "referat",
+    "prompts-schule",
     "eltern-zuhause",
     "zusammen-ausprobieren",
     "bildschirmzeit"

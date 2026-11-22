@@ -58,7 +58,7 @@ seiten: {
      ],
      alltag: "Du hast im Kunstunterricht einen Text über ein Bild geschrieben. Zwei Mitschüler schreiben fast gleich glatt, weil beide dieselbe Gliederung aus dem Unterricht nutzen. Der Stil allein verrät also nicht, wer oder was geschrieben hat."},
     {h: "Stimmen: Klonen braucht wenig Material",
-     kurz: "Eine Stimme lässt sich aus kurzen Aufnahmen nachbauen. Bei seltsamen Anrufen hilft eine Rückfrage auf anderem Weg.",
+     kurz: "Eine Stimme lässt sich aus kurzen Aufnahmen nachbauen. Bei seltsamen Anrufen hilft eine Rückfrage auf anderem Weg. Mehr: {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}.",
      visual: {typ: "ablauf", paket: false, schritte: [
       {icon: "phone-call", text: "Anruf", sub: "Stimme klingt vertraut"},
       {icon: "triangle-alert", text: "Druck", sub: "Eile, Geheimhaltung", farbe: "orange"},
@@ -68,6 +68,7 @@ seiten: {
       "Stimmen lassen sich mit KI nachbauen. Oft reichen dafür kurze Aufnahmen, etwa aus einem öffentlichen Video. Das wird manchmal für Betrug genutzt: Jemand ruft an und klingt wie ein Familienmitglied, das dringend Geld braucht.",
       "Warnzeichen sind Zeitdruck, Geheimhaltung und die Bitte um Geld oder Codes. Dazu kommen gleichförmige Betonung, kaum Atemgeräusche oder ein seltsam sauberer Hintergrund. Sicher ist das nicht, deshalb zählt die Rückfrage: auflegen und die Person über die bekannte Nummer zurückrufen.",
       "Viele Familien vereinbaren ein Codewort für Notfälle. Das kostet nichts und hilft gegen jede Fälschung, egal wie gut sie klingt.",
+      "Die drei Schritte bei einem verdächtigen Anruf (auflegen, zurückrufen, bei Verdacht 110) und die Maschen Enkeltrick, Schockanruf und falscher Polizist stehen auf der Seite {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}.",
      ],
      merke: "Bei Druck und Geldwünschen: erst auflegen, dann über einen bekannten Weg nachfragen."},
     {h: "Drei Prüfwege, die immer funktionieren",
@@ -93,12 +94,14 @@ seiten: {
      ],
      merke: "Beide Fehler sind möglich: Fälschung glauben und Echtes abtun. Ein Programm nimmt dir das Urteil nicht ab."},
     {h: "Weiterlesen",
-     kurz: "Quellen zu dieser Seite.",
+     kurz: "Deutsche Quellen, geprüft am 22.11.2026: [klicksafe: Deepfakes](https://www.klicksafe.de/desinformation-und-meinung/deepfakes), [Polizei: Vorsicht Betrug, Bedrohungen durch KI](https://www.polizei-beratung.de/aktuelles/detailansicht/betrug-mit-hilfe-von-kuenstlicher-intelligenz/).",
      liste: [
+      "klicksafe (EU-Initiative für Medienkompetenz): [Deepfakes](https://www.klicksafe.de/desinformation-und-meinung/deepfakes), abgerufen am 22.11.2026.",
+      "Polizeiliche Kriminalprävention: [Vorsicht Betrug: Bedrohungen durch KI](https://www.polizei-beratung.de/aktuelles/detailansicht/betrug-mit-hilfe-von-kuenstlicher-intelligenz/), abgerufen am 22.11.2026.",
       "Coalition for Content Provenance and Authenticity (C2PA): Technische Spezifikation zu Content Credentials, seit 2021 laufend weiterentwickelt.",
       "Weixin Liang, Mert Yuksekgonul, Yining Mao, Eric Wu, James Zou: GPT detectors are biased against non-native English writers. Fachzeitschrift Patterns, 2023.",
       "Robert Chesney, Danielle Citron: Deep Fakes. A Looming Challenge for Privacy, Democracy, and National Security. California Law Review, 2019 (Begriff Lügendividende).",
-      "klicksafe (EU-Initiative für Medienkompetenz): Materialien und Hinweise zu Desinformation und Deepfakes, Webangebot.",
+      "Für ein Referat siehe {{referat|Für dein Referat über KI}} mit Hinweisen zum Zitieren.",
      ]},
   ],
   mitnehmen: [
@@ -120,7 +123,7 @@ seiten: {
      optionen: ["Als sicheren Beweis, denn das Programm rechnet genau", "Gar nicht, weil solche Programme nie etwas Brauchbares liefern", "Nur dann, wenn das Programm kostenpflichtig angeboten wird", "Als Hinweis unter mehreren, nicht als Urteil"],
      richtig: 3, erklaerung: "Solche Werte sind Schätzungen mit Fehlern in beide Richtungen. Sie können ein Hinweis sein, aber niemals ein Beweis."},
   ],
-  weiter: ["quellen-pruefen", "fake-news-deepfakes", "llm-grenzen", "bild-als-zahlen"],
+  weiter: ["falscher-anruf", "quellen-pruefen", "fake-news-deepfakes", "llm-grenzen", "bild-als-zahlen"],
 },
 
 /* ------------------------------------------------------------------ 2 */
@@ -211,12 +214,15 @@ seiten: {
      ],
      alltag: "Ein Chatbot ist wie ein Bekannter, der viel gelesen hat und sehr überzeugend erzählt, aber nie sagt: Das weiß ich nicht. Du hörst gern zu, schreibst aber nichts ab, ohne es nachzulesen."},
     {h: "Weiterlesen",
-     kurz: "Quellen zu dieser Seite.",
+     kurz: "Deutsche Quellen, geprüft am 22.11.2026: [klicksafe: Unterrichtsbeispiele zu Quellenkritik und KI-Chatbots](https://www.klicksafe.de/fileadmin/cms/download/Material/klicksafe_Material-paed-Praxis_ChatGPT.pdf), [Verbraucherzentrale: KI-Chatbots im Überblick](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125).",
      liste: [
+      "klicksafe: [Unterrichtsbeispiele zu den Themen Quellenkritik und Informationskompetenz (ChatGPT)](https://www.klicksafe.de/fileadmin/cms/download/Material/klicksafe_Material-paed-Praxis_ChatGPT.pdf), PDF, abgerufen am 22.11.2026.",
+      "Verbraucherzentrale: [KI-Chatbots im Überblick: Was Sie über ChatGPT, Gemini & Copilot wissen sollten](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125), abgerufen am 22.11.2026.",
       "Sam Wineburg, Sarah McGrew: Lateral Reading and the Nature of Expertise. Teachers College Record, 2019.",
       "Mike Caulfield: SIFT (The Four Moves), Methode zum Prüfen von Online-Quellen, 2019.",
       "Stanford History Education Group: Evaluating Information. The Cornerstone of Civic Online Reasoning, 2016.",
       "Claire Wardle, Hossein Derakhshan: Information Disorder. Council of Europe, 2017.",
+      "Wie du Quellen in einem Referat angibst, steht auf {{referat|Für dein Referat über KI}}.",
      ]},
   ],
   mitnehmen: [
@@ -274,6 +280,7 @@ seiten: {
       {icon: "scan-face", text: "Gesichtstausch", sub: "Video mit fremdem Gesicht"}]},
      p: [
       "Die einfachsten Fälschungen sind oft die wirksamsten. Forschende nennen sie Cheap Fakes: ein Bild mit falscher Bildunterschrift, ein langsamer abgespieltes Video, ein beschnittener Ausschnitt. Dafür braucht man keine KI.",
+      "Wie ein Betrug mit nachgebauter Stimme abläuft und was du dann tust, steht auf {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}.",
       "KI macht es leichter, Bilder, Stimmen und Videos zu erzeugen, die nie existiert haben. Das ist der Kern von Deepfakes: Ein Modell lernt aus vielen Aufnahmen, wie ein Gesicht oder eine Stimme aussieht oder klingt, und erzeugt neues Material. Diese Seite erklärt das Prinzip. Sie zeigt dir keine Anleitung zum Fälschen.",
      ],
      alltag: "Beispiel, erfunden: Ein Audioclip kursiert. Die Bürgermeisterin von Beispielstadt sagt darin, das Freibad werde geschlossen. Es klingt genau nach ihr. Auf der Seite der Stadt und in der Lokalzeitung steht davon nichts. Der Clip ist vermutlich ein Fake."},
@@ -337,7 +344,7 @@ seiten: {
      optionen: ["Besonders schlecht gemachte KI-Videos von Laien", "Einfache Tricks wie falsche Beschriftung oder Zeitlupe", "Fälschungen, die kostenlos im Netz angeboten werden", "Bilder, die von Kindern selbst erstellt wurden"],
      richtig: 1, erklaerung: "Cheap Fakes sind einfache Tricks, oft aufwändig gar nicht nötig. Sie wirken trotzdem, weil Menschen nicht nachprüfen."},
   ],
-  weiter: ["echt-oder-ki", "quellen-pruefen", "verzerrung-ethik", "recht"],
+  weiter: ["echt-oder-ki", "falscher-anruf", "quellen-pruefen", "verzerrung-ethik", "recht"],
 },
 
 /* ------------------------------------------------------------------ 4 */
@@ -351,6 +358,13 @@ seiten: {
     "Du kannst deiner Lehrkraft gezielte Fragen zu den Regeln stellen.",
   ],
   abschnitte: [
+    {h: "Darf ich das Labor für Hausaufgaben nutzen?",
+     kurz: "Das Labor ist zum Verstehen da. Was du abgibst, regeln deine Schule und deine Lehrkraft. Frag sie. Im Zweifel gib an, dass du KI genutzt hast.",
+     p: [
+      "Das Labor erklärt dir, wie KI funktioniert, und lässt dich ausprobieren. Ob du KI bei einer Aufgabe nutzen darfst und was du davon abgeben darfst, legen deine Schule und deine Lehrkraft fest. Frag sie, bevor du anfängst.",
+      "Im Zweifel schreib dazu, dass du KI genutzt hast und wofür. Die Antworten im Chat können falsch sein, denn das Modell ist klein. Prüfe sie, bevor du sie benutzt. Diese Seite ist keine Rechtsberatung.",
+     ],
+     merke: "Das Labor ist zum Verstehen da. Was du abgibst, entscheiden Schule und Lehrkraft."},
     {h: "Eine Frage, die fast alles klärt",
      kurz: "Hast du danach mehr verstanden, oder hast du nur etwas abgegeben? Daran siehst du, ob KI dir hilft.",
      visual: {typ: "skala", links: "Ich lerne damit", rechts: "Ich gebe nur ab", marker: 0.3, label: "Je weiter links, desto mehr bleibt bei dir hängen"},
@@ -425,10 +439,13 @@ seiten: {
       "Und es geht um mehr als Noten: Die Fähigkeit, selbst zu denken und zu prüfen, wird wertvoller, je besser die Maschinen werden. Wer das kann, bleibt unabhängig.",
      ]},
     {h: "Weiterlesen",
-     kurz: "Quellen zu dieser Seite.",
+     kurz: "Deutsche Quellen, geprüft am 22.11.2026: [klicksafe: KI and me, Material für Schule und Praxis](https://www.klicksafe.de/fileadmin/cms/download/Material/KI-and-me_Material-paed-Praxis_klicksafe.pdf), [Verbraucherzentrale: KI-Chatbots im Überblick](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125).",
      liste: [
+      "klicksafe: [Wie künstliche Intelligenz unser Leben prägt. KI and me.](https://www.klicksafe.de/fileadmin/cms/download/Material/KI-and-me_Material-paed-Praxis_klicksafe.pdf), Material für Schule und Praxis, PDF, abgerufen am 22.11.2026.",
+      "Verbraucherzentrale: [KI-Chatbots im Überblick: Was Sie über ChatGPT, Gemini & Copilot wissen sollten](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125), abgerufen am 22.11.2026.",
       "Kultusministerkonferenz (Bildungsministerkonferenz): Handlungsempfehlung für die Bildungsverwaltungen der Länder zum Umgang mit Künstlicher Intelligenz in schulischen Bildungsprozessen, Beschluss vom 10. Oktober 2024.",
       "Regeln deiner Schule oder deines Bundeslandes: Sie gehen vor, wenn sie von dieser Seite abweichen.",
+      "Für ein Referat siehe {{referat|Für dein Referat über KI}}.",
      ]},
   ],
   mitnehmen: [
@@ -563,25 +580,26 @@ seiten: {
 "prompts-fuer-schueler": {
   videos: ["prompts-fuer-schueler"],
   nav: "Gute Fragen stellen", typ: "lektion", gruppe: "Medienkompetenz", titel: "Gute Fragen an die KI stellen", symbol: "chat",
-  kurz: "Bessere Frage, bessere Antwort. Mit fünf Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media.",
+  kurz: "Bessere Frage, bessere Antwort. Mit sechs Bausteinen und Beispielen aus Schule, Referat, Musik und Social Media.",
   lernziele: [
-    "Du kannst eine Frage mit Rolle, Aufgabe, Material, Format und Grenzen formulieren.",
+    "Du kannst eine Frage mit Rolle, Aufgabe, Material, Format, Grenzen und Niveau formulieren.",
     "Du kannst eine schwache Antwort mit einer Nachfrage verbessern.",
     "Du kannst eine Antwort der KI prüfen, bevor du sie benutzt.",
   ],
   abschnitte: [
     {h: "Warum die Frage so viel ausmacht",
-     kurz: "Das Modell kennt nur, was du schreibst. Eine knappe Frage bekommt eine allgemeine Antwort.",
+     kurz: "Ein Prompt ist deine Frage oder Aufgabe an die KI. Sie kennt nur, was du schreibst. Eine knappe Frage bekommt eine allgemeine Antwort.",
      visual: {typ: "vergleich",
       links: {titel: "Knapp", icon: "message-square", punkte: ["Erklär mir Fotosynthese.", "Allgemeine Antwort", "Du musst raten, was passt"], farbe: "orange"},
       rechts: {titel: "Konkret", icon: "message-square", punkte: ["Erkläre Fotosynthese für Klasse 8 in fünf Sätzen, mit einem Vergleich aus dem Alltag.", "Passende Antwort", "Du kannst weiterarbeiten"], farbe: "gruen"}},
      p: [
+      "Ein Prompt ist der Text, den du der KI schickst: deine Frage oder Aufgabe. Übungen mit Schulaufgaben zum Kopieren findest du auf {{prompts-schule|Gute Fragen stellen, mit Schulbeispielen}}.",
       "Ein Sprachmodell hat kein Bild von dir und deiner Aufgabe. Es weiß nicht, ob du in Klasse 6 oder 12 bist, ob du eine Stichpunktliste oder einen Text brauchst. Es ergänzt das, was fehlt, mit dem Wahrscheinlichen: einer durchschnittlichen Antwort.",
       "Je mehr du sagst, was du willst, desto besser trifft es. Das ist wie bei einer Bestellung im Imbiss: Ein Döner ist okay, ein Döner ohne Zwiebeln, mit scharfer Soße, ist das, was du magst.",
      ],
      merke: "Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst."},
-    {h: "Fünf Bausteine",
-     kurz: "Rolle, Aufgabe, Material, Format, Grenzen. Nicht immer alle, aber meist zwei bis drei.",
+    {h: "Sechs Bausteine",
+     kurz: "Rolle, Aufgabe, Material, Format, Grenzen, Niveau. Nicht immer alle, aber meist zwei bis drei.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "user-round", text: "Rolle", sub: "Du bist Nachhilfelehrer"},
       {icon: "target", text: "Aufgabe", sub: "Erkläre, prüfe, frage ab"},
@@ -591,7 +609,7 @@ seiten: {
       {icon: "graduation-cap", text: "Niveau", sub: "für Klasse 8"}]},
      p: [
       "Rolle: Wer soll die KI sein? Zum Beispiel ein geduldiger Nachhilfelehrer. Aufgabe: Was genau soll passieren? Erklären, prüfen, abfragen, vergleichen. Material: Was soll sie benutzen? Füge deinen Text oder deine Notizen ein, statt etwas zu beschreiben.",
-      "Format: Wie soll die Antwort aussehen? Und Grenzen: Was soll sie vermeiden? Zum Beispiel Fachwörter ohne Erklärung. Wenn du das Niveau nennst, passt die Sprache. Diese Bausteine kennst du aus {{prompting|Gut fragen}}, hier mit Beispielen aus deinem Alltag.",
+      "Format: Wie soll die Antwort aussehen? Und Grenzen: Was soll sie vermeiden? Zum Beispiel Fachwörter ohne Erklärung. Niveau: Wenn du die Klasse oder die Schwierigkeit nennst, passt die Sprache. Übungen mit Schulaufgaben findest du auf {{prompts-schule|Gute Fragen stellen, mit Schulbeispielen}}.",
      ]},
     {h: "Beispiele aus Schule und Lernen",
      kurz: "Als Trainer, nicht als Lösungsmaschine: erklären lassen, abfragen lassen, Feedback holen.",
@@ -639,11 +657,13 @@ seiten: {
      ],
      merke: "Erst prüfen, dann nutzen. Was du nicht erklären kannst, hast du nicht verstanden."},
     {h: "Weiterlesen",
-     kurz: "Quellen zu dieser Seite.",
+     kurz: "Deutsche Quellen, geprüft am 22.11.2026: [bpb: Begriffe rund um KI](https://www.bpb.de/lernen/digitale-bildung/werkstatt/580724/begriffe-rund-um-ki/), [Verbraucherzentrale: KI-Chatbots im Überblick](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125).",
      liste: [
+      "Bundeszentrale für politische Bildung: [Begriffe rund um KI](https://www.bpb.de/lernen/digitale-bildung/werkstatt/580724/begriffe-rund-um-ki/), abgerufen am 22.11.2026.",
+      "Verbraucherzentrale: [KI-Chatbots im Überblick: Was Sie über ChatGPT, Gemini & Copilot wissen sollten](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125), abgerufen am 22.11.2026.",
       "OpenAI: Prompt engineering, Leitfaden in der Dokumentation, fortlaufend aktualisiert.",
       "Anthropic: Prompt engineering overview, Dokumentation, fortlaufend aktualisiert.",
-      "Die Seite {{prompting|Gut fragen}} im Labor für die technische Sicht und die Bausteine ausführlicher.",
+      "Die Seite {{prompting|Gut fragen}} im Labor für die technische Sicht und die Bausteine ausführlicher (mit Beispielen aus dem Betrieb).",
      ]},
   ],
   mitnehmen: [
@@ -665,7 +685,7 @@ seiten: {
      optionen: ["Ich übernehme es, denn Seitenzahlen sind sehr genau", "Ich schlage im Buch oder einer zweiten Quelle nach", "Ich ändere ein paar Wörter, dann fällt es nicht auf", "Ich frage dieselbe KI noch einmal und glaube beiden"],
      richtig: 1, erklaerung: "Genaue Angaben können erfunden sein. Nur das Nachschlagen in einer eigenen Quelle klärt es."},
   ],
-  weiter: ["prompting", "ki-hausaufgaben-fair", "llm-grenzen", "chat"],
+  weiter: ["prompts-schule", "ki-hausaufgaben-fair", "llm-grenzen", "chat"],
 },
 
 /* ------------------------------------------------------------------ 7 */
