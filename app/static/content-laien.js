@@ -296,14 +296,14 @@ INHALT.lernpfade.push(
 );
 INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
 /* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
-   menue.fuerDich     je Rolle höchstens sechs Seiten: der Block "Für dich" im Menü, aufgeklappt.
+   menue.fuerDich     je Rolle höchstens zwölf Seiten (meist sechs): der Block "Für dich" im Menü, aufgeklappt.
    menue.reihenfolge  je Rolle die Gruppen im zugeklappten Block "Alle Bereiche", die genannten zuerst; "Sicherheit" ist eine Sammelgruppe (menue.sammel).
    startRollen        je Rolle Überschrift, ein Satz, die Blöcke der Startseite (experimente, morgen, minuten, empfohlen, repo) und die Karten:
                       empfohlen/morgen [{id, satz, h?}] mit einem kurzen Satz; "ohne" gilt, wenn keine Rolle gewählt ist. */
 INHALT.menue = {
   fuerDich: {
     schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "karte"],
-    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "elternabend"],
+    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "elternabend"],
     erwachsene: ["karte", "echt-oder-ki", "fake-news-deepfakes", "ml", "daten", "neuronale-netze"],
     technik: ["selbst-bauen", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen"],
     beruf: ["uc-handwerk", "uc-buero-dokumente", "uc-fertigung-sichtpruefung", "business", "ki-einfuehrung", "kosten-energie"],

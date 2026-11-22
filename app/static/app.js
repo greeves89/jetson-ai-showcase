@@ -51,7 +51,7 @@
      textContent in <pre><code> kommt (wie md() nie als HTML) und genau so kopiert wird; titel ist die Beschriftung; sudo ist ein Satz mit dem Grund
      und zeigt die Markierung "braucht sudo". Der Knopf "Kopieren" ist mindestens 44 px hoch, nutzt navigator.clipboard und notfalls execCommand;
      die Stile stehen inline in codeBlock() (style.css gehoert anderen). Der Block steht im aufklappbaren Teil des Abschnitts, nach den Absaetzen.
-   MENUE UND STARTSEITE: Das Menue zeigt beim Start nur Suche, "Fuer dich" (INHALT.menue.fuerDich, hoechstens 6 Seiten) und den zugeklappten Block
+   MENUE UND STARTSEITE: Das Menue zeigt beim Start nur Suche, "Fuer dich" (INHALT.menue.fuerDich, hoechstens 12 Seiten) und den zugeklappten Block
      "Alle Bereiche" (Akkordeon). Die Startseite zeigt je Rolle INHALT.startRollen (Ueberschrift, Satz, Bloecke), alles Uebrige liegt unter "Weitere Wege".
      Karten (karte()) haben immer Kopfzeile, Titel, Satz und Fuss; der Fuss liegt unten (margin-top:auto), damit Knoepfe in einer Zeile stehen.
      Der Rohtext der Startseite fuer Suchmaschinen (scripts/seo_bauen.mjs) bleibt unveraendert; die Rolle aendert nur die Darstellung im Browser.
@@ -758,7 +758,7 @@
     const M = INHALT.menue || { fuerDich: {}, reihenfolge: {}, sammel: {} };
     fuerDich.titel.textContent = w ? "Für dich" : "Einstieg";
     const eintraege = [navEintrag("start").el];
-    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 6)) eintraege.push(navEintrag(id).el);
+    if (w) for (const id of (M.fuerDich[w] || []).filter(gibt).slice(0, 12)) eintraege.push(navEintrag(id).el);
     else {
       const st = INHALT.seiten.start;
       eintraege.push(navAnker("smile", "Neu hier", "anfangen"), navAnker("briefcase", ((st.entscheider && st.entscheider.titel) || "In 15 Minuten").split(":")[0], "entscheider"));
