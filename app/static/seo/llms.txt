@@ -103,6 +103,7 @@ Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.
 - [KI im Unternehmen einführen](__BASIS__/ki-einfuehrung): Beginne mit dem Problem, nicht mit der Technik, und wähle den Einsatz nach Nutzen, Machbarkeit, Daten und Risiko.
 - [Deine Entscheidung: sechs Fragen vor dem Start](__BASIS__/betrieb-entscheidung): Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.
 - [Kameraprüfung: Grenzen, Haftung, Taktzeit, Datenschutz](__BASIS__/kamera-grenzen): Was eine Kamera in der Qualitätsprüfung nicht kann, wer bei durchgelassenen Fehlteilen gefragt werden muss, ob sie in den Takt passt und was bei Bildern von Mitarbeitenden gilt.
+- [KI in der Arztpraxis: was geht, was nicht](__BASIS__/praxis-gesundheit): Für Praxen, Zahnärzte und Therapeuten: Was KI im Alltag bringen kann, was nicht in eine Cloud-KI gehört und was Schweigepflicht und DSGVO verlangen.
 
 ## Business-Use-Cases
 
@@ -125,10 +126,11 @@ Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit.
 Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?
 
 - [Der Jetson und seine Hardware](__BASIS__/hardware): Ein kleiner Computer mit GPU, gebaut für KI am Gerät.
-- [Betrieb und Sicherheit des Labors](__BASIS__/betrieb-sicherheit): Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet.
-- [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher.
-- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet.
+- [Betrieb und Sicherheit des Labors](__BASIS__/betrieb-sicherheit): Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind.
+- [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner.
+- [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Das KI-Labor ist frei verfügbar.
 - [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
+- [Wie das Labor aufgebaut ist](__BASIS__/architektur): Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper.
 
 ## Für die Schule
 
@@ -149,6 +151,7 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Elternabend: Info-Blatt, Gesprächsleitfaden, Fragen und Antworten](__BASIS__/elternabend): Ein Info-Blatt zum Austeilen, ein Gesprächsleitfaden für zehn Minuten und Antworten auf typische Elternfragen.
 - [KI für Schulen: Was gibt es und wie fange ich an?](__BASIS__/ki-schule-ueberblick): Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
 - [KI an der Schule: In 7 Schritten starten](__BASIS__/ki-schule-einstieg): Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
+- [Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte](__BASIS__/schule-faecher): Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor.
 
 ## Medienkompetenz
 
@@ -159,12 +162,14 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Datenschutz im Alltag: was Apps über dich wissen](__BASIS__/datenschutz-im-alltag): Fast jede App sammelt Daten.
 - [Gute Fragen an die KI stellen](__BASIS__/prompts-fuer-schueler): Bessere Frage, bessere Antwort.
 - [KI in deinem Alltag: wo sie überall steckt](__BASIS__/schueler-alltag-ki): Feed, Filter, Übersetzer, Spiele, Playlist: KI ist schon da, auch wenn niemand "KI" draufschreibt.
-- [Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich](__BASIS__/falscher-anruf): Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.
+- [Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich](__BASIS__/falscher-anruf): Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen.
 - [Für dein Referat über KI](__BASIS__/referat): Gliederung, die besten Seiten des Labors, deutsche Quellen und eine Vorlage zum Zitieren.
 - [Gute Fragen stellen, mit Schulbeispielen](__BASIS__/prompts-schule): Ein Prompt ist deine Frage an die KI.
 - [KI zu Hause: Was Eltern wissen sollten](__BASIS__/eltern-zuhause): Hier steht, was es speichert, wo die Grenzen liegen und wie Sie es zu Hause gemeinsam nutzen.
 - [Zusammen ausprobieren: Anleitung für zwei](__BASIS__/zusammen-ausprobieren): Drei Experimente für zwei Personen, je etwa zehn Minuten, alle ohne Kamera und auch für Kinder gut geeignet.
-- [Bildschirmzeit: kurz und ehrlich](__BASIS__/bildschirmzeit): Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen.
+- [Bildschirmzeit: kurz und ehrlich](__BASIS__/bildschirmzeit): Hier steht, was sich ehrlich sagen lässt, was klicksafe und SCHAU HIN! für 10 und 14 Jahre raten und wo Sie Rat bekommen.
+- [Das kleine Modell irrt: drei geprüfte Fälle](__BASIS__/chat-irrt): Drei Fälle, in denen das kleine Modell typisch danebenliegt, jeweils mit der geprüften richtigen Antwort und der Quelle: Lenkzeiten, Enkeltrick, eine Rechnung.
+- [Hausaufgaben und KI zu Hause: eine Vereinbarung](__BASIS__/hausaufgaben-familie): Eine Vereinbarung für zu Hause in sechs Bausteinen, mit eigenen Vorschlägen für 12 und für 15 Jahre.
 
 ## Optional
 

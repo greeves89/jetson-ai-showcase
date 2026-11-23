@@ -29,13 +29,22 @@ for (const { datei, id } of EINHEITEN) {
     const text = execFileSync("pdftotext", ["-layout", pdf, "-"]).toString();
     const soll = art === "arbeitsblatt" ? [`${BASIS}/${id}?weg=schule`] : [`${BASIS}/${id}?weg=schule`, `${BASIS}/schule-lehrkraefte?weg=schule`];
     console.log(`${name}: ${seiten} Seite(n), ${text.split(/\s+/).filter(Boolean).length} Wörter, Format ${(info.match(/Page size:\s+(.+)/) || [])[1]}`);
-    if (art === "arbeitsblatt" && (seiten < 3 || seiten > 4)) meld(name + ": erwartet 3 bis 4 Seiten, gefunden " + seiten);
+    if (art === "arbeitsblatt" && seiten !== 4) meld(name + ": erwartet 4 ausgewogene Seiten, gefunden " + seiten);
+    if (art === "arbeitsblatt") {
+      // letzte Seite nicht fast leer: Zusatz, Schreibzeilen und Legende stehen dort
+      const letzte = execFileSync("pdftotext", ["-f", String(seiten), "-l", String(seiten), pdf, "-"]).toString();
+      if (letzte.split(/\s+/).filter(Boolean).length < 60) meld(name + ": letzte Seite fast leer");
+    }
+    if (art === "loesung") {
+      const lh = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
+      if (!/body\.loesung \{ font-size: 11pt|\.loesung body, body\.loesung \{ font-size: 11pt/.test(lh)) meld(name + ": Schrift im Lösungsblatt unter 11 pt");
+    }
     if (art === "loesung" && seiten > 3) meld(name + ": mehr als drei Seiten");
     if (art === "loesung" && !/Nur für Lehrkräfte, nicht an Schüler weitergeben/.test(text)) meld(name + ": Hinweis Nur für Lehrkräfte im Kopf fehlt");
     if (!/Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
     if (!/Mehr dazu im KI-Labor|im KI-Labor/.test(text)) meld(name + ": Kasten Mehr dazu fehlt");
     if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
-    if (!/abgerufen am 22\.11\.2026/.test(text) || !/Zuordnung kann je Bundesland und Fach leicht abweichen/.test(text)) meld(name + ": Quellenhinweis zu den Operatoren fehlt");
+    if (!/abgerufen am 22\.11\.2026/.test(text.replace(/\s+/g, " ")) || !/Zuordnung kann je Bundesland und Fach leicht abweichen/.test(text.replace(/\s+/g, " "))) meld(name + ": Quellenhinweis zu den Operatoren fehlt");
     // Operatoren: jede Aufgabe beginnt mit einem fetten Operator samt Bereich (siehe Seitendaten), die Legende nennt alle verwendeten
     const opTab = OPERATOREN;
     const genutzt = [...new Set([...text.matchAll(/\b(Nenne|Beschreibe|Erkläre|Ordne zu|Vergleiche|Begründe|Beurteile|Überprüfe|Entwickle|nenne|beschreibe|erkläre|ordne zu|vergleiche|begründe|beurteile|überprüfe|entwickle) \((I{1,3})\)/g)].map((m) => m[1][0].toUpperCase() + m[1].slice(1) + "|" + m[2]))];
@@ -61,7 +70,7 @@ for (const { datei, id } of EINHEITEN) {
       const html = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
       const aufgaben = html.split('<div class="aufgabe">').slice(1, 4);
       aufgaben.forEach((a, i) => { const n = (a.split('<div class="aufgabe">')[0].match(/class="zeile"/g) || []).length; if (n !== 4) meld(`${name}: Aufgabe ${i + 1} hat ${n} Schreibzeilen, erwartet 4`); });
-      if (!/font-size: 13pt/.test(html)) meld(name + ": Schrift nicht 13 pt");
+      if (!/font-size: 12\.5pt/.test(html)) meld(name + ": Schrift nicht 12,5 pt");
       // Adressen brechen nie mitten im Wort: jedes Stück der Adresse steht in einem Nowrap-Span
       if (/(?:daniel|ki|medien|schule|labor)-[ \t]*\n[ \t]*(?:alisch|stunde|labor|lehrkraefte)|stunde-[ \t]*\n[ \t]*\d/.test(text)) meld(name + ": Adresse bricht mitten im Wort");
     } else {
@@ -182,7 +191,7 @@ const linksIn = (pdf) => [...fs.readFileSync(pdf).toString("latin1").matchAll(/\
   if (!/(Hände|Spiegelung|Schrift)/.test(loes)) meld("Lösungsblatt Medien 1: Hinweise auf typische Merkmale fehlen");
 }
 
-// Kartenset für Eltern: 4 Seiten (Regeln, Karten 1 bis 6, Karten 7 bis 12, Auflösung), Sie-Form, QR zu echt-oder-ki, Auflösung mit zwölf Einträgen
+// Kartenset für Eltern: 4 Seiten (Regeln, Auflösung als Rückseite der Regeln, Karten 1 bis 6, Karten 7 bis 12), Sie-Form, QR zu echt-oder-ki, Auflösung mit zwölf Einträgen
 {
   const name = "kartenset-eltern", pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), flach = text.replace(/\s+/g, " ");
   const seiten = seitenZahl(pdf), url = `${BASIS}/echt-oder-ki?weg=eltern`;
@@ -196,7 +205,12 @@ const linksIn = (pdf) => [...fs.readFileSync(pdf).toString("latin1").matchAll(/\
   if (/je Gruppe|Lehrkraft|Lehrkräfte|Klasse/.test(text)) meld(name + ": Bezug zu Gruppe, Klasse oder Lehrkraft");
   if (/\b(Du|Dein|Deine)\b/.test(text)) meld(name + ": Du-Form im Elternteil");
   for (const t of ["Spielregeln für zwei", "Woran hast du es gesehen", "Punkteblatt", "Karten 1 bis 6", "Karten 7 bis 12", "Auflösung für Eltern"]) if (!flach.includes(t)) meld(`${name}: "${t}" fehlt`);
-  const aufl = flach.split("Auflösung für Eltern")[1] || "";
+  const pos = (t) => flach.indexOf(t);
+  if (!(pos("Spielregeln für zwei") < pos("Auflösung für Eltern") && pos("Auflösung für Eltern") < pos("Karten 1 bis 6") && pos("Karten 1 bis 6") < pos("Karten 7 bis 12"))) meld(name + ": Reihenfolge der Seiten falsch");
+  const sp = [1, 2, 3, 4].map((n) => execFileSync("pdftotext", ["-f", String(n), "-l", String(n), pdf, "-"]).toString());
+  if (!/Spielregeln/.test(sp[0]) || !/Auflösung für Eltern/.test(sp[1]) || !/Karten 1 bis 6/.test(sp[2]) || !/Karten 7 bis 12/.test(sp[3])) meld(name + ": Seiteninhalte nicht in der Reihenfolge 1 Regeln, 2 Auflösung, 3 und 4 Karten");
+  if (!/Karten einseitig drucken und ausschneiden/.test(sp[2]) || !/Karten einseitig drucken und ausschneiden/.test(sp[3])) meld(name + ": Hinweis einseitig drucken fehlt auf den Kartenseiten");
+  const aufl = (flach.split("Auflösung für Eltern")[1] || "").split("Karten 1 bis 6")[0];
   const ki = (aufl.match(/\bKI-Bild\b(?=[^.]*\.)/g) || []).length, echt = (aufl.match(/Foto: [^.]+, (CC0|Public Domain), Wikimedia Commons/g) || []).length;
   if (!(aufl.match(/\b\d{1,2} (Echt|KI-Bild) /g) || []).length || (aufl.match(/ (Echt|KI-Bild) [A-ZÄÖÜ]/g) || []).length !== 12) meld(name + ": Auflösung braucht zwölf Einträge, gefunden " + (aufl.match(/ (Echt|KI-Bild) [A-ZÄÖÜ]/g) || []).length);
   if ((aufl.match(/ KI-Bild [A-ZÄÖÜ]/g) || []).length !== 6 || (aufl.match(/ Echt [A-ZÄÖÜ]/g) || []).length !== 6) meld(name + ": Auflösung braucht sechs KI-Bilder und sechs echte Fotos");
@@ -216,12 +230,63 @@ const linksIn = (pdf) => [...fs.readFileSync(pdf).toString("latin1").matchAll(/\
   const punkte = INHALT.seiten["betrieb-entscheidung"].checkliste.punkte;
   if (punkte.length !== 6) meld(name + ": Seite hat nicht sechs Fragen");
   punkte.forEach((p, i) => { if (!flach.includes(p.frage.slice(0, 30))) meld(`${name}: Frage ${i + 1} fehlt`); if (!flach.includes(p.hilfe.slice(0, 30))) meld(`${name}: Hilfe ${i + 1} fehlt`); });
+  if (!/Schweigepflicht/.test(flach)) meld(name + ": Schweigepflicht-Satz fehlt");
+  if (!flach.includes("Mit Schweigepflicht (Steuerberatung, Anwaltschaft, Ärzte) gelten zusätzliche Regeln")) meld(name + ": Satz zur Schweigepflicht aus Frage 3 der Online-Fassung fehlt");
+  if (/Art\. 9 DSGVO/.test(JSON.stringify(INHALT.seiten["betrieb-entscheidung"].checkliste)) && !/Art\. 9 DSGVO/.test(flach)) meld(name + ": Hinweis Art. 9 DSGVO der Online-Fassung fehlt im PDF");
   const html = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
   if ((html.match(/<span class="box"><\/span>/g) || []).length !== 6) meld(name + ": erwartet sechs Kästchen");
   if (!/Notizen/.test(text)) meld(name + ": Platz für Notizen fehlt");
   const gefunden = qrCodes(pdf, name);
   if (!gefunden.includes(url)) meld(`${name}: QR-Code für ${url} nicht dekodierbar (gefunden: ${JSON.stringify(gefunden)})`);
   if (!linksIn(pdf).includes(url)) meld(`${name}: Link ${url} fehlt als Verknüpfung`);
+}
+
+// Familien-Vereinbarung: zwei Seiten, Felder, Kästchen, Unterschriften, QR zu hausaufgaben-familie
+{
+  const name = "hausaufgaben-vereinbarung-familie", pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), flach = text.replace(/\s+/g, " ");
+  const seiten = seitenZahl(pdf), url = `${BASIS}/hausaufgaben-familie?weg=eltern`;
+  console.log(`${name}: ${seiten} Seite(n)`);
+  if (seiten !== 2) meld(name + ": erwartet genau 2 Seiten, gefunden " + seiten);
+  if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
+  if (/Lizenz/.test(text)) meld(name + ": Lizenzvermerk");
+  if (!/KI-Labor, Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
+  for (const t of ["Hausaufgaben und KI bei uns zu Hause", "Mit 12 Jahren", "Mit 15 Jahren", "Wann darf KI helfen", "Wie wir kennzeichnen", "KI genutzt für", "Antworten prüfen: drei Schritte", "1. Wer sagt das?", "2. Sagen es andere auch?", "3. Gibt es das Original?", "Zeiten", "Was wir bei Streit tun", "Unterschrift Kind", "Unterschrift Eltern", "Datum", "Kein Rechtsrat"]) if (!flach.includes(t)) meld(`${name}: "${t}" fehlt`);
+  const html = fs.readFileSync(path.join(DIR, name + ".html"), "utf8");
+  const kaestchen = (html.match(/<span class="box"><\/span>/g) || []).length;
+  if (kaestchen < 20) meld(name + ": zu wenige Kästchen zum Ausfüllen: " + kaestchen);
+  if (!/class="fl/.test(html)) meld(name + ": Ausfüllfelder fehlen");
+  if (!/Ihrem Kind|Ihr Kind|Sie /.test(text)) meld(name + ": Sie-Form für Eltern nicht erkennbar");
+  const gefunden = qrCodes(pdf, name);
+  if (!gefunden.includes(url)) meld(`${name}: QR-Code für ${url} nicht dekodierbar (gefunden: ${JSON.stringify(gefunden)})`);
+  if (!linksIn(pdf).includes(url)) meld(`${name}: Link ${url} fehlt als Verknüpfung`);
+}
+// Infoblatt Schulleitung: zwei Seiten, nur belegte Fakten, offene Punkte ehrlich, keine E-Mail, QR zu schule-schulleitung
+{
+  const name = "schulleitung-infoblatt", pdf = path.join(DIR, name + ".pdf"), text = pdfText(pdf), flach = text.replace(/\s+/g, " ");
+  const seiten = seitenZahl(pdf), url = `${BASIS}/schule-schulleitung?weg=schule`;
+  console.log(`${name}: ${seiten} Seite(n)`);
+  if (seiten < 1 || seiten > 2) meld(name + ": erwartet 1 bis 2 Seiten, gefunden " + seiten);
+  if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
+  if (/@/.test(text)) meld(name + ": E-Mail im PDF");
+  if (/\b(du|dich|dein|deine|dir)\b/.test(text)) meld(name + ": Du-Form");
+  if (!/KI-Labor, Stand 22\.11\.2026/.test(text)) meld(name + ": Kopfzeile fehlt");
+  for (const t of ["Was entscheidet die Schule?", "Was das KI-Labor ist", "Datenschutz in Fakten", "nicht gespeichert", "ausdrücklicher Zustimmung", "16 Jahren", "IONOS", "Cloudflare", "Kostenlos, ohne Vertrag, ohne Zusage zur Verfügbarkeit", "Fragen, die Ihre Schule klärt", "Auftragsverarbeitung", "Einwilligungen", "Altersgrenzen", "Endgeräte", "daniel-alisch.site/impressum", "Aufbewahrungsdauer der Protokolle", "Auf Anfrage beim Betreiber", "Kein Rechtsrat"]) if (!flach.includes(t)) meld(`${name}: "${t}" fehlt`);
+  const sl = INHALT.seiten["schule-schulleitung"];
+  if (!(sl.downloads || []).some((d) => d.href === "/static/materialien/schulleitung-infoblatt.pdf" && /Zum Mitnehmen: Infoblatt Schulleitung/.test(d.text))) meld("schule-schulleitung: Download Zum Mitnehmen: Infoblatt Schulleitung fehlt");
+  const gefunden = qrCodes(pdf, name);
+  if (!gefunden.includes(url)) meld(`${name}: QR-Code für ${url} nicht dekodierbar (gefunden: ${JSON.stringify(gefunden)})`);
+  if (!linksIn(pdf).includes(url)) meld(`${name}: Link ${url} fehlt als Verknüpfung`);
+  const st = JSON.stringify(sl);
+  if (!st.includes("https://daniel-alisch.site/impressum") || !st.includes("https://daniel-alisch.site/#contact")) meld("schule-schulleitung: Kontakt nicht als Link im Text");
+  if (sl.abschnitte[0].h !== "Was entscheidet die Schule?") meld("schule-schulleitung: Kurzantwort Was entscheidet die Schule? nicht oben");
+}
+// Stundenseiten: Doppelstunde als erster Abschnitt, Fachbezug in der Handreichung, Elternabend nennt das Kartenset mit Dateiname
+for (const e of EINHEITEN) if (INHALT.seiten[e.id].abschnitte[0].h !== "Einzelstunde oder Doppelstunde") meld(e.id + ": Abschnitt Einzelstunde oder Doppelstunde nicht an erster Stelle");
+{
+  const hr = INHALT.seiten["schule-lehrkraefte"], fb = hr.abschnitte.find((a) => a.h === "Fachbezug");
+  if (!fb || !JSON.stringify(fb).includes("{{schule-faecher|Fächer}}")) meld("Handreichung: Abschnitt Fachbezug mit Verweis auf schule-faecher fehlt");
+  if (!INHALT.seiten["schule-faecher"]) meld("Seite schule-faecher existiert noch nicht (legt ein anderer Auftrag an)");
+  if (!/bildkarten-echt-oder-ki\.pdf/.test(JSON.stringify(INHALT.seiten["elternabend"]))) meld("Elternabend: Kartenset nicht mit Dateiname genannt");
 }
 
 // Elternabend: Info-Blatt (1 Seite, Sie-Form), Leitfaden (1 Seite), QR-Codes dekodierbar und verlinkt
@@ -236,6 +301,7 @@ for (const [name, seitenMax, soll] of [
   if (/[–—]/.test(text)) meld(name + ": Gedankenstrich");
   if (!/Ihr Kind|Ihre Klasse|Sie /.test(text)) meld(name + ": Sie-Form nicht erkennbar");
   if (name === "elternabend-infoblatt") {
+    if (/Klasse 8/.test(text.split("Worum es geht")[0])) meld(name + ": Titel fest auf Klasse 8");
     if (!/Rückfragen an die Schule/.test(text)) meld(name + ": Kontaktzeile fehlt");
     if (/@|\b\d{3,}[ -]?\d{3,}\b/.test(text.replace(/116 111/g, ""))) meld(name + ": echte E-Mail oder Telefonnummer im Infoblatt");
     if (seiten !== 1) meld(name + ": erwartet genau 1 Seite");

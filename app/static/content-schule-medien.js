@@ -710,7 +710,7 @@ S["elternabend"] = {
       {icon: "shield-check", text: "Daten", sub: "nur technisch nötig"},
       {icon: "house", text: "Zu Hause", sub: "drei Gespräche"}]},
      liste: [
-      "**Worum es geht:** Ihre Klasse lernt in sieben Einheiten, KI zu erkennen, Quellen zu prüfen und KI fair zu nutzen: Echt oder KI, Quellen prüfen, Fake News und Deepfakes, KI und Hausaufgaben, Datenschutz, gute Fragen und KI im Alltag.",
+      "**Worum es geht:** Ihre Kinder lernen in sieben Einheiten (gedacht ab Klasse 8), KI zu erkennen, Quellen zu prüfen und KI fair zu nutzen: Echt oder KI, Quellen prüfen, Fake News und Deepfakes, KI und Hausaufgaben, Datenschutz, gute Fragen und KI im Alltag.",
       "**Was Ihr Kind tut:** Es sortiert Bildkarten, prüft Behauptungen, entwickelt Regeln für Hausaufgaben und schreibt bessere Fragen an ein Sprachmodell. Alle Aufgaben kommen ohne Kamera und Mikrofon aus.",
       "**Welche Daten:** Das KI-Labor braucht kein Konto, zeigt keine Werbung und speichert Chat-Eingaben nicht dauerhaft. Technisch nötig sind ein kleines Cookie, einige Merkzettel im Browser und die üblichen Verbindungsdaten des Servers. Verbindlich ist die Datenschutzerklärung des Betreibers.",
       "**Zu Hause:** Reden Sie mit Ihrem Kind über drei Fragen: „Woran würdest du das prüfen?“, „Was hast du selbst gemacht, was die KI?“, „Wo hast du zuletzt auf Akzeptieren geklickt?“ Vereinbaren Sie ein Codewort für Notfallanrufe, denn Stimmen lassen sich nachbauen.",
@@ -725,7 +725,7 @@ S["elternabend"] = {
       {t: "3 Min", text: "Fragen", icon: "messages-square"}]},
      liste: [
       "**Begrüßung (2 Minuten):** Nennen Sie das Ziel: Die Kinder sollen KI verstehen, nicht nur benutzen. Das Labor ist ein Lernangebot, kein Werkzeug für Hausaufgaben.",
-      "**Beispiel (3 Minuten):** Zeigen Sie zwei Bildkarten aus dem Kartenset und fragen Sie die Eltern, welche echt ist. Die Eltern merken: Sichere Erkennung gibt es nicht, darum üben die Kinder das Prüfen.",
+      "**Beispiel (3 Minuten):** Zeigen Sie zwei Bildkarten aus dem Kartenset `bildkarten-echt-oder-ki.pdf` (Download auf der Seite Medien 1, Abschnitt Zum Ausdrucken) und fragen Sie die Eltern, welche echt ist. Die Eltern merken: Sichere Erkennung gibt es nicht, darum üben die Kinder das Prüfen.",
       "**Daten (2 Minuten):** Sagen Sie klar: kein Konto, keine Namensabfrage, keine dauerhafte Speicherung der Eingaben. Kamera und Mikrofon sind im Unterricht nicht vorgesehen. Verweisen Sie auf die Datenschutzerklärung.",
       "**Fragen (3 Minuten):** Beantworten Sie mit der Tabelle unten. Was Sie nicht wissen, sagen Sie offen und verweisen an die Schulleitung oder den Betreiber.",
       "**Abschluss:** Geben Sie das Info-Blatt aus und nennen Sie die Seite für zu Hause: KI zu Hause, Was Eltern wissen sollten.",

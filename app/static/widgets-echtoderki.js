@@ -93,7 +93,7 @@
         h("p", { class: "eok-frage" }, "Ist dieses Bild echt oder von einer KI erzeugt?"),
         bildBox(k, false),
         h("div", { class: "eok-wahlzeile", role: "group", "aria-label": "Deine Antwort" }, echtB, kiB),
-        h("p", { class: "eok-tasten" }, icon("info"), h("span", null, "Tastatur: 1 für Echt, 2 für KI. Mit den Pfeiltasten wechselst du zwischen den Knöpfen, Enter wählt.")));
+        h("p", { class: "eok-tasten" }, icon("info"), h("span", null, "Tastatur: 1 für Echt, 2 für KI, Enter für Weiter.")));
       stage.append(kiHinweis());
       live.textContent = "";
       if (fokusZiel === "frage") echtB.focus({ preventScroll: true });
@@ -150,13 +150,13 @@
       stage.replaceChildren(
         h("div", { class: "eok-ende" },
           h("p", { class: "eok-ergebnis", tabindex: "-1" }, h("span", { class: "eok-gross" }, p + " von " + n), " richtig"),
-          h("p", { class: "eok-teil" }, "Echte Fotos: " + echtRichtig + " von " + echtGesamt + " erkannt. KI-Bilder: " + kiRichtig + " von " + kiGesamt + " erkannt."),
           h("p", { class: "eok-einordnung" }, h("b", null, einordnung(p, n) + " "),
-            "Auch Profis liegen oft daneben. Gute KI-Bilder sehen echt aus, und echte Fotos wirken manchmal unecht. Herkunft prüfen schlägt Hinsehen: Wer hat das Bild zuerst gepostet, und berichten andere darüber? Wie das geht, steht auf der Seite ",
-            h("a", { href: "/quellen-pruefen" }, "Quellen prüfen"), "."),
+            "Herkunft prüfen schlägt Hinsehen: ", h("a", { href: "/quellen-pruefen" }, "so geht das"), "."),
           h("div", { class: "eok-wahlzeile" }, nochmal, druck),
-          h("details", { class: "eok-liste" }, h("summary", null, "Alle zwölf Karten im Überblick"), h("ul", null, zeilen)),
-          h("p", { class: "eok-privat" }, icon("shield-check"), h("span", null, "Dein Ergebnis bleibt in diesem Fenster. Es wird nicht gespeichert und nicht gesendet.")),
+          h("details", { class: "eok-liste" }, h("summary", null, "Alle zwölf Karten im Überblick"),
+            h("p", { class: "eok-teil" }, "Echte Fotos: " + echtRichtig + " von " + echtGesamt + " erkannt. KI-Bilder: " + kiRichtig + " von " + kiGesamt + " erkannt."),
+            h("ul", null, zeilen),
+            h("p", { class: "eok-privat" }, icon("shield-check"), h("span", null, "Dein Ergebnis bleibt in diesem Fenster. Es wird nicht gespeichert und nicht gesendet."))),
           kiHinweis()),
       );
       live.textContent = "Ergebnis: " + p + " von " + n + " richtig.";
@@ -172,11 +172,14 @@
       zeigeFrage();
     }
 
-    /* Tastatur: 1 = Echt, 2 = KI, Pfeile wechseln den Fokus zwischen den Knöpfen, Enter wählt (nativ am Knopf). */
+    /* Tastatur: 1 = Echt, 2 = KI, Enter = Weiter (ohne Fokus auf einem Knopf), Pfeile wechseln den Fokus zwischen den Knöpfen.
+       Der Hörer hängt am Dokument: Die Tasten gelten, solange die Seite aktiv ist und kein Eingabefeld oder Dialog den Fokus hat. */
     function taste(e) {
-      if (e.ctrlKey || e.metaKey || e.altKey) return;
+      if (e.ctrlKey || e.metaKey || e.altKey || e.defaultPrevented) return;
       const t = e.target;
-      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT")) return;
+      if (t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA" || t.tagName === "SELECT" || t.isContentEditable)) return;
+      if (document.querySelector("dialog[open]") || !wurzel.isConnected) return;
+      if (e.key === "Enter" && phase === "aufloesung" && !(t && t.closest && t.closest("button, a, summary"))) { e.preventDefault(); voran(); return; }
       if (phase === "frage") {
         if (e.key === "1") { e.preventDefault(); antwort(false); }
         else if (e.key === "2") { e.preventDefault(); antwort(true); }
@@ -192,9 +195,9 @@
         }
       }
     }
-    wurzel.addEventListener("keydown", taste);
+    document.addEventListener("keydown", taste);
 
     zeigeFrage();
-    return { destroy() { wurzel.removeEventListener("keydown", taste); } };
+    return { destroy() { document.removeEventListener("keydown", taste); } };
   };
 })();

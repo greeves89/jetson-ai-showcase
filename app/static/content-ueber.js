@@ -14,17 +14,17 @@ S.ueber = {
   zusammenfassung: "Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano, der nur wenige Watt aufnimmt, und nutzt keine externen KI-Dienste. Gebaut hat es Daniel Alisch als Lernprojekt.",
   abschnitte: [
     {h: "Wer dahintersteht",
-     kurz: "Das KI-Labor ist ein Projekt von Daniel Alisch. Mehr über ihn steht auf seiner Hauptseite daniel-alisch.site.",
+     kurz: "Das KI-Labor ist ein Projekt von Daniel Alisch. Mehr über ihn steht auf seiner Hauptseite [daniel-alisch.site](https://daniel-alisch.site).",
      p: [
       "Daniel Alisch hat das KI-Labor als Lernprojekt gebaut. Es soll zeigen, wie künstliche Intelligenz funktioniert, und zwar so, dass man es selbst ausprobieren kann. Die Hauptseite `daniel-alisch.site` ist unten in der Fußzeile verlinkt. Dort stehen auch Impressum und Datenschutzerklärung.",
      ]},
     {h: "Kontakt und Impressum",
      kurz: "Kontakt zum Betreiber über die [Kontaktseite auf daniel-alisch.site](https://daniel-alisch.site/#contact). [Impressum](https://daniel-alisch.site/impressum) und [Datenschutzerklärung](https://daniel-alisch.site/datenschutz) stehen auf derselben Seite.",
      p: [
-      "Im Labor selbst gibt es keine E-Mail-Adresse und kein Kontaktformular. Fragen zum Betrieb, zu Verträgen und zum Datenschutz gehen an den Betreiber, Daniel Alisch, über die Kontaktseite. Schreib bitte keine vertraulichen Daten in die erste Nachricht. Für Schulen steht Wichtiges auf der Seite {{schule-schulleitung|Info für die Schulleitung}}.",
+      "Im Labor selbst gibt es keine E-Mail-Adresse und kein Kontaktformular. Fragen zum Betrieb, zu Verträgen und zum Datenschutz gehen an den Betreiber, Daniel Alisch, über die Kontaktseite. Schreib bitte keine vertraulichen Daten in die erste Nachricht. Für Schulen steht Wichtiges auf der Seite {{schule-schulleitung|Info für die Schulleitung}}. Für Praxen und Betriebe mit Schweigepflicht: {{praxis-gesundheit|KI in der Arztpraxis}}.",
      ]},
     {h: "Was das Labor ist",
-     kurz: "Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud.",
+     kurz: "Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud. Was gespeichert wird: {{sicherheit-einfach|Ist das sicher?}}.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "user-check", text: "Ohne Anmeldung", sub: "kostenlos nutzbar"},
       {icon: "cpu", text: "Jetson Orin Nano", sub: "wenige Watt"},
@@ -35,7 +35,7 @@ S.ueber = {
      ],
      merke: "Das KI-Labor ist ein Lernprojekt. Es läuft auf einem einzigen kleinen Rechner, nicht in einem Rechenzentrum."},
     {h: "Wie die Seiten aufgebaut sind",
-     kurz: "Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen.",
+     kurz: "Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen. Die Zuordnung zu Rollen steht auf der {{start|Startseite}}.",
      liste: [
       "**Lektionen** erklären die Grundlagen von null, mit Beispielen aus dem Alltag, Vergleichstabellen, Merksätzen und einem kurzen Selbsttest.",
       "**Labore** laufen live auf dem Jetson: Gesichts- und Objekterkennung über die eigene Webcam, ein Bildmodell anlernen, ein Sprachmodell befragen, Dokumente durchsuchen (RAG), ein Agent mit Werkzeugen, Sprache zu Text und Text zu Sprache.",
@@ -44,12 +44,12 @@ S.ueber = {
       "**Business-Use-Cases** zeigen Beispiele aus Betrieben, mit fertigen Beispieldaten zum Starten per Klick.",
      ]},
     {h: "Selbst nachbauen",
-     kurz: "Das Labor ist frei verfügbar. Wie du es auf einem eigenen Jetson aufbaust, steht auf einer eigenen Seite.",
+     kurz: "Das Labor ist frei verfügbar. Wie du es auf einem eigenen Jetson aufbaust, steht auf der Seite {{selbst-bauen|Selbst aufbauen}}.",
      p: [
       "Wer einen Jetson Orin Nano hat, kann das KI-Labor selbst aufbauen. Die Seite {{selbst-bauen|Selbst auf einem Jetson aufbauen}} zeigt die Schritte, die Einkaufsliste und die häufigsten Fehler. Das Repo liegt öffentlich unter `https://github.com/greeves89/jetson-ai-showcase`.",
      ]},
     {h: "Wie die Labore arbeiten",
-     kurz: "Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt.",
+     kurz: "Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt. Den Aufbau im Überblick zeigt {{architektur|Wie das Labor aufgebaut ist}}.",
      p: [
       "Wenn du ein Labor startest, schickt dein Browser die Eingabe an den Jetson. Dort rechnet das Modell, und das Ergebnis kommt zurück. Das Labor zeigt dir dabei die einzelnen Schritte und wie lange jeder gedauert hat. Auf der Seite {{hardware|Hardware}} siehst du live, wie stark der Rechner gerade ausgelastet ist.",
       "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor arbeitet nur mit der Kamera und hat keine Beispielbilder.",
@@ -66,12 +66,12 @@ S.ueber = {
     "Es ist ein einzelnes Gerät. Nur zwei Sprachmodell-Antworten laufen gleichzeitig, bei Andrang wartest du in einer Warteschlange.",
     "Das Labor ist ein Lernangebot und keine Beratung. Für einen echten Einsatz im Betrieb braucht es eigene Prüfung von Daten, Recht und Sicherheit.",
   ],
-  weiter: ["start", "hardware", "selbst-bauen", "sicherheit-einfach"],
+  weiter: ["start", "hardware", "architektur", "selbst-bauen", "sicherheit-einfach"],
 };
 
 S["selbst-bauen"] = {
   nav: "Selbst aufbauen", typ: "lektion", gruppe: "Der Rechner dahinter", titel: "Selbst auf einem Jetson aufbauen", symbol: "hardware",
-  kurz: "Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet. Das KI-Labor ist frei verfügbar, so bringst du es auf deinen eigenen Jetson Orin Nano.",
+  kurz: "Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano: Einkaufsliste, Befehle zum Kopieren und häufige Fehler.",
   lesemodus: "ausfuehrlich",
   zusammenfassung: "Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.",
   lernziele: [
@@ -181,7 +181,7 @@ S["selbst-bauen"] = {
        ["Gesichts- oder Objekterkennung bricht mit Importfehler von `cv2` ab", "numpy 2 oder neuer überschreibt die Version, die OpenCV aus JetPack erwartet", "`python3 -m pip install --user 'numpy<2'`, Dienst neu starten"],
        ["`pip: command not found`", "pip ist bei JetPack nicht dabei", "Normal, `setup.sh` richtet `python3 -m pip` ein. Immer `python3 -m pip` benutzen"],
        ["Hinweis „Du bist Nr. 2“ oder „ausgelastet“", "Es laufen schon zwei Sprachmodell-Antworten", "Warten, das Labor wiederholt bis zu dreimal selbst"],
-       ["Spracherkennung dauert lange", "Whisper rechnet auf der CPU, etwa dreimal Echtzeit", "Erwartet, bei Bedarf `WHISPER_MODELL` kleiner wählen"],
+       ["Spracherkennung dauert lange", "Whisper rechnet auf der CPU und braucht etwa dreimal so lange, wie die Aufnahme dauert", "Erwartet, bei Bedarf `WHISPER_MODELL` kleiner wählen"],
        ["Dienst läuft nach Neustart nicht", "`linger` nicht aktiv", "`sudo loginctl enable-linger \"$USER\"` (braucht sudo)"],
        ["Beim Beenden des Dienstes bricht die SSH-Sitzung ab", "`pkill -f \"uvicorn app.app\"` trifft die eigene Shell", "`pkill -f \"[u]vicorn app.app\"` (die Klammern sind der Trick) oder besser `systemctl --user stop jetson-showcase`"],
        ["Dienst läuft, aber die Seite antwortet nicht", "Fehler im Dienst oder Ollama nicht erreichbar", "Log ansehen: `journalctl --user -u jetson-showcase -n 50 --no-pager`. Bleibt die Ausgabe leer: `journalctl _SYSTEMD_USER_UNIT=jetson-showcase.service -n 50 --no-pager`. Ollama prüfen: `sudo systemctl status ollama` (**sudo**)"],

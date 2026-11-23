@@ -36,8 +36,8 @@ await page.pdf({ path: "tests/ausgabe/druck-entscheidung.pdf", format: "A4", pri
 const pdfText = text("tests/ausgabe/druck-entscheidung.pdf");
 const seite1 = (() => { try { return execFileSync("pdftotext", ["-f", "1", "-l", "1", "-layout", "tests/ausgabe/druck-entscheidung.pdf", "-"], { encoding: "utf8" }); } catch (e) { return ""; } })();
 pruefe(/Sechs Fragen zum Abhaken/.test(seite1) && /3 von 6 Fragen geklärt/.test(seite1) && /Rückfall, und weißt du, wann du stoppst/.test(seite1), "die ganze Checkliste (alle sechs Fragen, Zähler) steht auf der ersten A4-Seite, nichts abgeschnitten");
-pruefe(seiten("tests/ausgabe/druck-entscheidung.pdf") <= 2, "die Seite braucht höchstens zwei A4-Blätter (" + seiten("tests/ausgabe/druck-entscheidung.pdf") + ")");
-pruefe(/KI-Labor: /.test(pdfText) && /betrieb-entscheidung/.test(pdfText), "PDF-Kopf: Titel und Adresse");
+pruefe(seiten("tests/ausgabe/druck-entscheidung.pdf") === 1, "die Checkliste bleibt auf einer A4-Seite (" + seiten("tests/ausgabe/druck-entscheidung.pdf") + ")");
+pruefe(/KI-Labor: /.test(pdfText) && /ki-labor\.daniel-alisch\.site\/betrieb-entscheidung/.test(pdfText) && !/192\.168|localhost/.test(pdfText), "PDF-Kopf: Titel und öffentliche Adresse (keine Testadresse)");
 pruefe(!/Zum Inhalt springen|Kurz lesen|Genau lesen|Seiten suchen|Zur Startseite|Menü/.test(pdfText), "PDF ohne Bedienelemente (Skip-Link, Lesemodus, Suche, Zurück, Menü)");
 pruefe(/3 von \d+ Fragen geklärt/.test(pdfText), "PDF enthält den Stand: 3 Fragen geklärt");
 try { execFileSync("pdftoppm", ["-r", "60", "-png", "tests/ausgabe/druck-entscheidung.pdf", "tests/ausgabe/druck-entscheidung"]); } catch (e) { /* pdftoppm fehlt: PDF liegt trotzdem vor */ }
@@ -57,6 +57,42 @@ for (const id of ["karte", "ki-hausaufgaben-fair", "kosten-energie", "uc-fertigu
   const tx = text(`tests/ausgabe/druck-${id}.pdf`);
   pruefe(tx.length > 200 && !/Zum Inhalt springen|Genau lesen/.test(tx) && new RegExp("KI-Labor: ").test(tx), `${id}: PDF hat ${seiten(`tests/ausgabe/druck-${id}.pdf`)} Seiten, Text vorhanden, Kopf mit Titel`);
   await page.emulateMedia({ media: "screen", colorScheme: "dark" });
+}
+
+/* ---- Runde 5: aufgeklappte Inhalte, Quiz, Downloads, Handreichung */
+{
+  const hole = async (id, kurz = true) => {
+    await oeffneSeite(page, id);
+    await page.evaluate((k) => { try { localStorage.setItem("kl-lesemodus", k ? "kompakt" : "ausfuehrlich"); } catch (e) { /* egal */ } }, kurz);
+    await page.reload({ waitUntil: "load" }); await page.waitForSelector("#inhalt h1"); await page.waitForTimeout(500);
+    await page.emulateMedia({ media: "print", colorScheme: "light" });
+    const pdf = `tests/ausgabe/druck-r5-${id}.pdf`;
+    await page.pdf({ path: pdf, format: "A4", preferCSSPageSize: true });
+    await page.emulateMedia({ media: "screen", colorScheme: "dark" });
+    return pdf;
+  };
+  // Kurz-Modus: der Inhalt hinter "Mehr dazu" kommt aufs Papier, Quiz und Bedienelemente nicht
+  const pdf = await hole("prompts-schule", true);
+  const tx = text(pdf);
+  pruefe(/Ich halte ein Referat über Windkraft/.test(tx), "prompts-schule (Kurz-Modus): die Beispiel-Prompts aus „Mehr dazu“ stehen im Ausdruck");
+  pruefe(!/Teste dich/.test(tx), "Quiz ohne Arbeitsblatt wird nicht gedruckt");
+  pruefe(!/Im Chat ausprobieren/.test(tx) && !/^\s*Kopieren\s*$/m.test(tx), "keine Bedienknöpfe im Ausdruck");
+  pruefe(/ki-labor\.daniel-alisch\.site\/prompts-schule/.test(tx) && !/192\.168|localhost/.test(tx), "Kopf mit öffentlicher Adresse");
+  await oeffneSeite(page, "prompts-schule");
+  pruefe(await page.evaluate(() => [...document.querySelectorAll("details.mehr")].every((d) => !d.hasAttribute("data-druck-offen"))), "am Bildschirm bleiben die Mehr-dazu-Teile wie gewählt");
+  // Downloads: Hinweis "Als PDF" statt Knöpfen
+  await oeffneSeite(page, "schule-lehrkraefte");
+  await page.emulateMedia({ media: "print", colorScheme: "light" });
+  const dl = await page.evaluate(() => ({ knoepfe: [...document.querySelectorAll(".dlkarte,.dl-knopf")].filter((e) => e.getBoundingClientRect().height > 0).length, hinweis: (document.querySelector(".druck-pdf") || {}).textContent || "", sicht: !!document.querySelector(".druck-pdf") && getComputedStyle(document.querySelector(".druck-pdf")).display !== "none" }));
+  await page.emulateMedia({ media: "screen", colorScheme: "dark" });
+  pruefe(dl.knoepfe === 0 && dl.sicht && /^Als PDF: ki-labor-.*\.pdf/.test(dl.hinweis), "Herunterladen-Knöpfe weg, Hinweis: " + dl.hinweis.slice(0, 70));
+  const hand = await hole("schule-lehrkraefte", false);
+  pruefe(seiten(hand) <= 8, "Handreichung für Lehrkräfte: höchstens 8 Seiten (" + seiten(hand) + ")");
+  const kurz = await hole("schule-lehrkraefte", true);
+  pruefe(seiten(kurz) <= 8, "Handreichung (Kurz-Modus): höchstens 8 Seiten (" + seiten(kurz) + ")");
+  // @page-Rand 12 mm (A4 mit Rand: Textbreite 186 mm)
+  const rand = await page.evaluate(() => { for (const sh of document.styleSheets) { try { for (const r of sh.cssRules) { if (r.type === CSSRule.MEDIA_RULE && /print/.test(r.conditionText || r.media.mediaText)) for (const x of r.cssRules) if (x.type === CSSRule.PAGE_RULE) return x.style.margin; } } catch (e) { /* egal */ } } return null; });
+  pruefe(rand === "12mm", "@page margin 12mm (" + rand + ")");
 }
 pruefe(t.fehler.length === 0, "keine Konsolenfehler " + t.fehler.join("; "));
 await t.schliessen();

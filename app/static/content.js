@@ -541,7 +541,7 @@ chat: {
      kurz: "Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat.",
      visual: {typ: "token", stuecke: ["Hal", "lo", ",", " wie", " kann", " ich", " hel", "fen", "?"], unter: "Beispielzerlegung, echte Modelle teilen anders"},
      p: [
-      "**Tokens zeigen** färbt die Antwort Stück für Stück ein. Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Wörter bestehen oft aus mehreren Tokens, häufige Wörter aus einem.",
+      "**Tokens zeigen** färbt die Antwort Stück für Stück ein. Wörter bestehen oft aus mehreren Tokens, häufige Wörter aus einem.",
       "Die **Temperatur** wirkt auf die nächste Antwort. Stelle sie auf 0 und stelle dieselbe Frage zweimal: Die Antworten sind fast gleich. Stelle sie auf 1,5, dann weichen sie ab und werden unzuverlässiger.",
     ]},
     {h: "Was auf dem Jetson passiert",
@@ -576,8 +576,10 @@ chat: {
   grenzen: [
     "Kleine Modelle erfinden häufiger Fakten ([[halluzination|Halluzination]]). Prüfe wichtige Aussagen.",
     "Der Kontext ist begrenzt: Im Labor sind es 4096 Token. Was darüber hinausgeht, sieht das Modell nicht. Dieses Labor merkt sich keine frühere Unterhaltung.",
+    "Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen. Tippe keine echten Namen, Passwörter, Kunden- oder Patientendaten ein.",
+    "Der Chat berät nicht bei Geldforderungen am Telefon und nicht bei Gesundheitsfragen. Bei einem verdächtigen Anruf: auflegen, selbst zurückrufen, bei Verdacht 110. Wie ein Chat danebenliegen kann: {{chat-irrt|Das kleine Modell irrt}}.",
   ],
-  weiter: ["genki", "rag", "agent"],
+  weiter: ["genki", "rag", "agent", "chat-irrt"],
 },
 
 rag: {

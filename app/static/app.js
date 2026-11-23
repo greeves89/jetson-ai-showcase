@@ -72,6 +72,18 @@
      "Alle Bereiche" (Akkordeon). Die Startseite zeigt je Rolle INHALT.startRollen (Ueberschrift, Satz, Bloecke), alles Uebrige liegt unter "Weitere Wege".
      Karten (karte()) haben immer Kopfzeile, Titel, Satz und Fuss; der Fuss liegt unten (margin-top:auto), damit Knoepfe in einer Zeile stehen.
      Der Rohtext der Startseite fuer Suchmaschinen (scripts/seo_bauen.mjs) bleibt unveraendert; die Rolle aendert nur die Darstellung im Browser.
+   RUNDE 5 (Chat und Lernseiten):
+     KL.kopieren(text)                 Zwischenablage mit Notloesung, gibt true/false zurueck.
+     KL.mdAntwort                      zeigt Codezaeune (```sprache ... ```) als Block .antwort-code (Monospace, scrollbar, Knopf Kopieren), Inline-Code als code.
+     KL.datenHinweis()                 Datenschutz- und Altershinweis (Seitenkopf der Chat-Seite und am Chat-Feld).
+     KL.promptBlock(titel, text)       Beispiel-Prompt mit Kopieren und "Im Chat ausprobieren" (sessionStorage kl-chat-vorlage, der Chat fuellt nur sein Feld).
+                                       Auf prompts-schule, prompts-alltag, prompting und prompts-fuer-schueler werden Abschnittsfelder code, beispiel (Text oder {titel,text}),
+                                       Listenpunkte der Form **Titel:** „Text“ und alltag-Saetze "Beispiel: ..." so dargestellt; code mit prompt: true auch auf anderen Seiten.
+     Chat /api/chat Body: {nachricht, temperatur, kurz}: kurz true haengt "Antworte in hoechstens 5 Saetzen in einfacher Sprache." an und begrenzt num_predict auf 300.
+     Suche: Pfeiltasten (aria-activedescendant), Enter oeffnet den ersten Treffer, Escape schliesst; passende INHALT.lernpfade erscheinen als Karte "Lernpfad" vor den Seiten.
+     SPRUNGMARKEN: Seiten mit mehr als 5 Abschnitten oder mehr als 3 Bildschirmen zeigen den aufklappbaren Block "Auf dieser Seite" (nicht im Druck).
+     DRUCK: Mehr-dazu-Teile werden gedruckt, Quiz nur mit seite.typ "arbeitsblatt" oder seite.quizDruck, Downloads als Hinweis "Als PDF: Dateiname", Kopf mit oeffentlicher Adresse.
+     MENUE: "Fuer dich" zeigt bei erwachsene und eltern hoechstens 8 Eintraege (Auswahl und Reihenfolge aus INHALT.menue.fuerDich).
    BILDER UND LESEMODUS (docs/visuals.md): KL.visual(spec) baut ein Bild (visuals.js), KL.montiere({destroy}) haengt Aufraeumer an die Seite,
      KL.lesemodus ist "kompakt" (Standard) oder "ausfuehrlich" (Zuweisung wechselt und merkt sich die Wahl), KL.hatIcon(name) prueft Icon-Namen. */
 (function () {
@@ -181,10 +193,32 @@
     if (i < text.length) teile.push(text.slice(i));
     return teile;
   }
+  /* Kopieren in die Zwischenablage (Antwortcode, Beispiel-Prompts, Codebloecke): gibt true zurueck, wenn es geklappt hat. */
+  async function kopieren(text) {
+    try { await navigator.clipboard.writeText(text); return true; }
+    catch (e) {
+      try {
+        const t = document.createElement("textarea"); t.style.cssText = "position:fixed;opacity:0"; t.setAttribute("aria-hidden", "true"); t.value = text;
+        document.body.append(t); t.select(); const ok = document.execCommand("copy"); t.remove(); return !!ok;
+      } catch (e2) { return false; }
+    }
+  }
+  /* Codeblock einer Modellantwort: Monospace mit Einrueckung, waagerecht scrollbar, Knopf "Kopieren". text kommt per textContent, nie als HTML. */
+  function antwortCode(sprache, code) {
+    const status = h("span", { class: "ac-status", role: "status", "aria-live": "polite" });
+    let zurueck = 0;
+    const knopf = h("button", { type: "button", class: "btn klein ac-knopf", onclick: async () => {
+      status.textContent = (await kopieren(code)) ? "Kopiert." : "Nicht kopiert. Markiere den Text und kopiere ihn mit Strg+C.";
+      clearTimeout(zurueck); zurueck = setTimeout(() => { status.textContent = ""; }, 2500);
+    } }, icon("copy"), "Kopieren");
+    return h("div", { class: "antwort-code" },
+      h("div", { class: "ac-kopf" }, h("span", { class: "ac-sprache" }, sprache || "Code"), h("span", { class: "ac-rechts" }, status, knopf)),
+      h("pre", { tabindex: "0", role: "region", "aria-label": "Codebeispiel" + (sprache ? " " + sprache : "") }, h("code", null, code)));
+  }
   function mdAntwort(text) {
     const wurzel = document.createDocumentFragment();
     const zeilen = String(text == null ? "" : text).replace(/\r/g, "").split("\n");
-    let liste = null, absatz = [];
+    let liste = null, absatz = [], code = null;
     const absatzEnde = () => {
       if (!absatz.length) return;
       const p = h("p", { class: "md-p" });
@@ -194,6 +228,18 @@
     for (const roh of zeilen) {
       const z = roh.replace(/\s+$/, "");
       let m;
+      if (code) {                                   // innerhalb eines Zaunes: Zeilen unveraendert (Einrueckung bleibt)
+        if (/^\s*```\s*$/.test(z)) { wurzel.append(antwortCode(code.sprache, code.zeilen.join("\n"))); code = null; }
+        else code.zeilen.push(roh.replace(/\s+$/, ""));
+        continue;
+      }
+      if ((m = /^\s*```\s*([\w+#.-]*)\s*(.*)$/.exec(z))) {
+        absatzEnde(); liste = null;
+        const rest = m[2];
+        if (/```\s*$/.test(rest)) { wurzel.append(antwortCode(m[1], rest.replace(/```\s*$/, ""))); continue; }       // Einzeiler ```code```
+        code = { sprache: m[1], zeilen: rest ? [rest] : [] };
+        continue;
+      }
       if (!z.trim()) { absatzEnde(); liste = null; continue; }
       if ((m = /^\s*([-*\u2022])\s+(.*)$/.exec(z)) || (m = /^\s*(\d+)[.)]\s+(.*)$/.exec(z))) {
         absatzEnde();
@@ -207,7 +253,13 @@
       absatz.push(z);
     }
     absatzEnde();
+    if (code) wurzel.append(antwortCode(code.sprache, code.zeilen.join("\n")));        // Zaun noch offen (Antwort laeuft oder wurde abgebrochen)
     return wurzel;
+  }
+  /* Datenschutz- und Altershinweis am Chat (Feld und Seitenkopf): immer sichtbar, 15 px, gleicher Wortlaut an beiden Stellen. */
+  function datenHinweis() {
+    return h("div", { class: "daten-hinweis", role: "note", dataset: { testid: "daten-hinweis" } }, icon("shield-check"),
+      h("div", null, h("p", null, "Gib keine Patienten-, Mandanten-, Kunden- oder Personendaten ein."), h("p", null, "Unter 16: bitte gemeinsam mit einer erwachsenen Person.")));
   }
   const zeit = (ms) => (ms < 1000 ? Math.round(ms) + " ms" : (ms / 1000).toFixed(1).replace(".", ",") + " s");
   function post(pfad, obj) {
@@ -437,10 +489,22 @@
   const MIN_LESEDAUER = 5000;          // ms: das Seitenende zaehlt erst nach dieser Zeit (reines Durchscrollen zaehlt nicht)
   const zaehlbar = (id) => { const sd = INHALT.seiten[id]; return !!sd && sd.typ !== "start" && !sd.versteckt && sd.status !== "bald"; };
   const alleSeiten = () => Object.keys(INHALT.seiten).filter(zaehlbar);
+  /* Gesamtzahl nur aus Seiten, die in der gewaehlten Rolle sichtbar sind (nicht Seiten mit anderer Rolle oder nur in versteckten Sammelgruppen);
+     bereits gelesene Seiten zaehlen immer mit, damit der Zaehler nie "nichts gelesen" meldet, obwohl etwas gelesen ist. */
+  function sichtbareSeiten() {
+    const w = aktiverWeg();
+    const M = INHALT.menue || { fuerDich: {} };
+    const ids = alleSeiten().filter((id) => {
+      if (!w) return true;
+      const sd = INHALT.seiten[id];
+      return !Array.isArray(sd.rollen) || sd.rollen.map(wegNorm).includes(w) || ((M.fuerDich || {})[w] || []).includes(id);
+    });
+    return new Set(ids.concat(alleSeiten().filter((id) => gelesen.has(id))));
+  }
   function fortschritt() {
-    const alle = alleSeiten();
+    const alle = [...sichtbareSeiten()];
     const n = alle.filter((id) => gelesen.has(id)).length;
-    return { n, von: alle.length, prozent: alle.length ? Math.round(n / alle.length * 100) : 0 };
+    return { n, von: alle.length, prozent: alle.length ? Math.max(n ? 1 : 0, Math.round(n / alle.length * 100)) : 0 };
   }
   function gelesenMerken(id) {
     if (!zaehlbar(id) || gelesen.has(id)) return;
@@ -771,9 +835,11 @@
    *  steht die ganze Eingabe als Wortgruppe in INHALT.synonyme ("fake news", "wer haftet"), gilt sie als ein Wort.
    *  Ein Synonym "=seiten-id" lenkt gezielt auf eine Seite; die Reihenfolge in der Liste ist die Rangfolge. */
   const STOPPWOERTER = new Set(["am", "im", "in", "an", "auf", "der", "die", "das", "den", "dem", "ein", "eine", "und", "oder", "zu", "zum", "zur", "von", "mit", "fuer", "ist", "wie", "was", "wer", "wo", "kann"]);
+  /* Ergaenzung zu INHALT.synonyme (die Inhalte pflegt content-laien.js): gilt nur, wenn dort kein Eintrag steht. */
+  const SYN_PLUS = { entscheidungshilfe: ["=betrieb-entscheidung"], "entscheidungs hilfe": ["=betrieb-entscheidung"] };
   function suchWoerter(text) {
     const syn = INHALT.synonyme || {};
-    const hole = (w) => syn[w] || syn[w.replace(/-/g, "")] || syn[w.replace(/-/g, " ")] || [];
+    const hole = (w) => syn[w] || syn[w.replace(/-/g, "")] || syn[w.replace(/-/g, " ")] || SYN_PLUS[w] || [];
     const voll = norm(text).trim().replace(/\s+/g, " ");
     if (!voll) return [];
     const gruppe = hole(voll);
@@ -793,9 +859,10 @@
         if (a[0] === "=") { if (id && a.slice(1) === id) best = Math.max(best, 24 - 2 * i); return; }
         const wort = a.replace(/[^a-z0-9]+/g, " ").trim();
         if (!wort) return;
-        const faktor = i ? 0.6 : 1;
+        const faktor = i ? 0.7 : 1;
         for (const [text, gewicht] of felder) {
           if (text.includes(" " + wort)) best = Math.max(best, gewicht * faktor);
+          else if (wort.length >= 8 && gewicht >= 8 && text.split(" ").some((t) => t.length >= 7 && wort.startsWith(t))) best = Math.max(best, gewicht * faktor * 0.75);   // Titelwort steckt vorn im Suchwort ("Entscheidungshilfe" ~ "Entscheidung")
           else if (wort.length > 4 && text.includes(wort)) best = Math.max(best, gewicht * faktor * 0.3);
         }
       });
@@ -843,13 +910,21 @@
     }
     return gefunden.slice(0, 3);
   }
-  function suchErgebnisBlock(text, begriffe, treffer) {
+  function suchErgebnisBlock(text, begriffe, treffer, pfade) {
     const box = $("#such-ergebnis");
     if (!box) return;
     box.replaceChildren();
     box.hidden = true;                                   // ein leerer Kasten zeigt sich nie (sonst steht ein grauer Balken ueber den Treffern)
     if (!text.trim()) return;
     const eingeben = (t) => { const i = $("#nav-suche"); if (i) { i.value = t; navSuche(t); i.focus(); } };
+    if (pfade && pfade.length) {
+      box.append(h("h3", { class: "such-kopf" }, pfade.length > 1 ? "Lernpfade" : "Lernpfad"));
+      for (const p of pfade) {
+        const start = pfadNaechste(p) || p.ids[0];
+        box.append(h("div", { class: "such-begriff such-pfad" }, h("b", null, p.name), p.kurz ? h("p", null, p.kurz) : null,
+          h("a", { class: "such-pfad-link", id: "such-pfad-" + p.id, href: adresse(start, pfadQuery(p.id)), dataset: { pfad: p.id } }, "Pfad starten (" + p.ids.length + " Seiten)")));
+      }
+    }
     if (begriffe.length) {
       box.append(h("h3", { class: "such-kopf" }, "Begriff erklärt"));
       for (const b of begriffe.slice(0, 3)) {
@@ -858,7 +933,7 @@
           seiten.length ? h("p", { class: "such-wo" }, "Mehr dazu: ", seiten.map(([id], i) => [i ? ", " : "", h("a", { href: adresse(id) }, INHALT.seiten[id].nav || INHALT.seiten[id].titel)])) : null));
       }
     }
-    if (!treffer && !begriffe.length) {
+    if (!treffer && !begriffe.length && !(pfade && pfade.length)) {
       const nah = aehnliche(text);
       box.append(h("div", { class: "such-leer" }, h("p", null, h("b", null, "Dazu habe ich nichts gefunden.")),
         nah.length ? h("p", null, "Meintest du:") : null,
@@ -887,7 +962,7 @@
     if (q.length) {
       for (const gr of navGruppen) if (!gr.sammel) for (const a of gr.eintraege) {
         const ix = suchIndex.seiten[a.id];
-        const r = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 8], [ix.kopf, 4], [ix.kurz, 3], [ix.text, 1]], a.id, true) : { summe: 0, n: 0 };
+        const r = ix ? suchPunkte(q, a.id === "start" ? [[ix.titel, 8]] : [[ix.titel, 10], [ix.kopf, 4], [ix.kurz, 3], [ix.text, 1]], a.id, true) : { summe: 0, n: 0 };
         if (r.n === q.length) { punkte.set(a, r.summe); beste = Math.max(beste, r.summe); }
         else if (q.length > 1 && r.n > 0) { punkte.set(a, r.summe); teilTreffer.add(a); besteTeil = Math.max(besteTeil, r.summe); }
         else punkte.set(a, 0);
@@ -960,7 +1035,11 @@
     const begriffe = q.length
       ? suchIndex.begriffe.map((b) => [b, suchPunkte(q, [[b.t, 6], [b.erkl, 1]])]).filter(([, p]) => p >= 3 || (!treffer && p > 0)).sort((a, b) => b[1] - a[1]).map(([b]) => b)
       : [];
-    suchErgebnisBlock(text, begriffe, treffer);
+    const pfade = q.length
+      ? pfadeListe().map((p) => [p, suchPunkte(q, [[suchText(klar(p.name)), 10], [suchText(p.id.replace(/-/g, " ")), 10], [suchText(klar(p.kurz || "")), 3]])]).filter(([, pt]) => pt >= 10).sort((a, b) => b[1] - a[1]).slice(0, 2).map(([p]) => p)
+      : [];
+    suchErgebnisBlock(text, begriffe, treffer, pfade);
+    const sucheEl = $("#nav-suche"); if (sucheEl) sucheEl.setAttribute("aria-expanded", q.length && (treffer || pfade.length) ? "true" : "false");
     if (leerEl) leerEl.hidden = true;
   }
   /* Pfeiltasten im Menue: hoch und runter springen durch Gruppen und Seiten, rechts oeffnet eine Gruppe, links schliesst sie bzw. springt zur Gruppe */
@@ -1020,7 +1099,7 @@
   function navEintrag(id) {
     const s = INHALT.seiten[id];
     // Leerzeichen vor dem Zusatz, damit auch der reine Text "Bilder erzeugen in Arbeit" lautet (nicht "Bilder erzeugenbald")
-    const el = h("a", { class: "nav", href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel, kameraSeiten().has(id) ? h("small", { class: "kam", hidden: true }, kameraHinweis) : null),
+    const el = h("a", { class: "nav", id: "nav-treffer-" + id, href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel, kameraSeiten().has(id) ? [" ", h("small", { class: "kam", hidden: true }, kameraHinweis)] : null),
       s.anfaenger ? [" ", h("span", { class: "einst" }, "Einsteiger")] : null,
       s.status === "bald" ? [" ", h("span", { class: "bald" }, "in Arbeit")] : h("span", { class: "ok", hidden: true }, icon("check")));
     return { el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() };
@@ -1041,6 +1120,7 @@
     if (merken !== false) alle.offen = auf;
   }
   /** "Fuer dich" bzw. "Einstieg" je nach Weg neu aufbauen und die Gruppen in der Reihenfolge der Rolle ordnen. */
+  const FUER_DICH_MAX = { erwachsene: 8, eltern: 8 };
   function navAnordnen() {
     if (!fuerDich || !alle) return;
     const w = aktiverWeg();
@@ -1050,7 +1130,7 @@
     if (w) {
       // "Ist das sicher?" steht fuer Eltern, Betrieb und Schule immer als letzter Eintrag (Heike, Svenja: sonst nur ueber die Suche zu finden)
       const sicher = SICHER_LETZT.includes(w) && gibt("sicherheit-einfach");
-      const ids = (M.fuerDich[w] || []).filter(gibt).filter((id) => !(sicher && id === "sicherheit-einfach")).slice(0, sicher ? 13 : 14);
+      const ids = (M.fuerDich[w] || []).filter(gibt).filter((id) => !(sicher && id === "sicherheit-einfach")).slice(0, (FUER_DICH_MAX[w] || 14) - (sicher ? 1 : 0));        // Reihenfolge und Auswahl liefert INHALT.menue.fuerDich, hier nur die Obergrenze (Aeltere: hoechstens 8)
       if (sicher) ids.push("sicherheit-einfach");
       for (const id of ids) eintraege.push(navEintrag(id).el);
     } else {
@@ -1069,11 +1149,46 @@
     fortschrittZeigen();
     if (aktuelleId) navMarkieren(aktuelleId);
   }
+  /* Tastatur in der Suche: Pfeil runter und hoch waehlen einen Treffer (aria-activedescendant), Enter oeffnet ihn (ohne Auswahl den ersten), Escape leert und schliesst. */
+  let suchAktiv = -1;
+  const suchKandidaten = () => $$("#such-ergebnis a.such-pfad-link, #nav-liste a.nav").filter((a) => !a.closest("[hidden]") && !a.hidden);
+  function suchMarkieren(el) {
+    const eingabe = $("#nav-suche");
+    for (const a of $$(".nav-aktiv")) a.classList.remove("nav-aktiv");
+    if (!eingabe) return;
+    if (!el) { eingabe.removeAttribute("aria-activedescendant"); return; }
+    el.classList.add("nav-aktiv");
+    eingabe.setAttribute("aria-activedescendant", el.id);
+    if (el.scrollIntoView) el.scrollIntoView({ block: "nearest" });
+  }
+  function suchTasten(e) {
+    const eingabe = e.target;
+    if (e.key === "Escape") {
+      eingabe.value = ""; suchAktiv = -1; suchMarkieren(null); navSuche("");
+      eingabe.setAttribute("aria-expanded", "false"); menueSchalten(false);
+      return;
+    }
+    if (!eingabe.value.trim()) return;
+    const liste = suchKandidaten();
+    if (e.key === "ArrowDown" || e.key === "ArrowUp") {
+      if (!liste.length) return;
+      e.preventDefault();
+      suchAktiv = e.key === "ArrowDown" ? Math.min(liste.length - 1, suchAktiv + 1) : Math.max(0, suchAktiv - 1);
+      suchMarkieren(liste[suchAktiv]);
+    } else if (e.key === "Enter") {
+      const ziel = liste[suchAktiv >= 0 ? suchAktiv : 0];
+      if (!ziel) return;
+      e.preventDefault();
+      ziel.click();                       // geht durch den Router wie ein Mausklick
+      suchAktiv = -1; suchMarkieren(null); menueSchalten(false);
+    }
+  }
   function navBauen() {
     const suche = h("div", { class: "navsuche" }, icon("search"),
       h("input", { type: "search", id: "nav-suche", placeholder: "Seiten suchen", "aria-label": "Seiten suchen", autocomplete: "off",
-        oninput: (e) => { navSuche(e.target.value); if (e.target.value) menueSchalten(true); },
-        onkeydown: (e) => { if (e.key === "Escape") { e.target.value = ""; navSuche(""); } } }));
+        role: "combobox", "aria-autocomplete": "list", "aria-expanded": "false", "aria-controls": "nav-liste",
+        oninput: (e) => { suchAktiv = -1; suchMarkieren(null); navSuche(e.target.value); if (e.target.value) menueSchalten(true); },
+        onkeydown: suchTasten }));
     const nav = h("nav", { class: "navscroll", id: "nav-liste", "aria-label": "Lernpfad" });
     nav.addEventListener("keydown", navTasten);
     nav.append(fortschrittLeiste("nav-fortschritt"), h("div", { id: "such-ergebnis", class: "such-ergebnis", "aria-live": "polite", hidden: true }));
@@ -1174,13 +1289,7 @@
     const status = h("span", { role: "status", "aria-live": "polite", style: "font-size:14px;color:var(--leise)" });
     let zurueck = 0;
     const knopf = h("button", { type: "button", class: "btn klein", style: "min-height:44px;min-width:44px;display:inline-flex;align-items:center;gap:6px", onclick: async () => {
-      try { await navigator.clipboard.writeText(c.text); status.textContent = "Kopiert."; }
-      catch (e) {
-        try {
-          const t = h("textarea", { style: "position:fixed;opacity:0", "aria-hidden": "true" }); t.value = c.text; document.body.append(t); t.select();
-          document.execCommand("copy"); t.remove(); status.textContent = "Kopiert.";
-        } catch (e2) { status.textContent = "Nicht kopiert. Markiere den Text und kopiere ihn mit Strg+C."; }
-      }
+      status.textContent = (await kopieren(c.text)) ? "Kopiert." : "Nicht kopiert. Markiere den Text und kopiere ihn mit Strg+C.";
       clearTimeout(zurueck); zurueck = setTimeout(() => { status.textContent = ""; }, 2500);
     } }, icon("copy"), "Kopieren");
     const kopf = h("div", { style: "display:flex;flex-wrap:wrap;align-items:center;gap:8px;justify-content:space-between;padding:4px 6px 4px 14px;background:var(--flaeche3);border-radius:10px 10px 0 0" },
@@ -1191,8 +1300,28 @@
     const pre = h("pre", { style: st, tabindex: "0", role: "region", "aria-label": (c.titel || "Befehl") + ", Quelltext" }, h("code", { style: "background:none;padding:0;font-size:inherit" }, c.text));
     return h("div", { class: "codeblock", style: "margin:14px 0" }, kopf, c.sudo ? h("p", { class: "kurz", style: "margin:6px 0 0;font-size:15px" }, "Warum sudo: " + c.sudo) : null, pre);
   }
+  /* Beispiel-Prompt: bricht um (auch am Handy), Knoepfe "Kopieren" und "Im Chat ausprobieren". Der Chat bekommt den Text ueber sessionStorage
+     kl-chat-vorlage, fuellt nur sein Feld und fokussiert es, es wird nichts gesendet. */
+  const PROMPT_SEITEN = new Set(["prompts-schule", "prompts-alltag", "prompting", "prompts-fuer-schueler"]);
+  function promptBlock(titel, text) {
+    const status = h("span", { class: "pb-status", role: "status", "aria-live": "polite" });
+    let zurueck = 0;
+    const kopierKnopf = h("button", { type: "button", class: "btn klein pb-knopf", onclick: async () => {
+      status.textContent = (await kopieren(text)) ? "Kopiert." : "Nicht kopiert. Markiere den Text und kopiere ihn mit Strg+C.";
+      clearTimeout(zurueck); zurueck = setTimeout(() => { status.textContent = ""; }, 2500);
+    } }, icon("copy"), "Kopieren");
+    const chatKnopf = h("button", { type: "button", class: "btn klein primary pb-knopf", dataset: { testid: "prompt-im-chat" }, onclick: () => {
+      try { sessionStorage.setItem("kl-chat-vorlage", text); } catch (e) { /* ohne Speicher: Chat bleibt leer */ }
+      navigiere({ id: "chat", query: "" });
+    } }, icon("message-square"), "Im Chat ausprobieren");
+    return h("div", { class: "prompt-block", dataset: { testid: "prompt-block" } },
+      h("div", { class: "pb-kopf" }, h("b", null, titel || "Beispiel"), status),
+      h("p", { class: "pb-text" }, text),
+      h("div", { class: "pb-knoepfe" }, kopierKnopf, chatKnopf));
+  }
   function tabelleBlock(t) {
-    return h("div", { class: "tabelle-wrap" }, h("table", { class: "vergleich" },
+    // Rahmen mit waagerechtem Scrollen, per Tastatur erreichbar (tabindex 0, Region mit Namen): nichts wird rechts abgeschnitten
+    return h("div", { class: "tabelle-wrap", tabindex: "0", role: "region", "aria-label": t.beschriftung || "Tabelle" }, h("table", { class: "vergleich" },
       t.beschriftung ? h("caption", null, t.beschriftung) : null,
       h("thead", null, h("tr", null, t.kopf.map((k) => h("th", { scope: "col", html: md(k) })))),
       h("tbody", null, t.zeilen.map((z) => h("tr", null, z.map((c, i) => h(i === 0 ? "th" : "td", { scope: i === 0 ? "row" : null, html: md(c) })))))));
@@ -1239,7 +1368,7 @@
           $$("label", fs).forEach((l) => {
             const k = Number($("input", l).value);
             l.classList.toggle("richtig", k === f.richtig); l.classList.toggle("falsch", k === j && !ok);
-            if (k === f.richtig || (k === j && !ok)) l.append(h("span", { class: "quiz-marke " + (k === f.richtig ? "ja" : "nein") },
+            if (k === f.richtig || (k === j && !ok)) $(".quiz-text", l).append(h("span", { class: "quiz-marke " + (k === f.richtig ? "ja" : "nein") },
               icon(k === f.richtig ? "check" : "x"), h("span", null, k === f.richtig ? "Richtig" : "Deine Wahl, falsch")));
           });
           $$("input", fs).forEach((x) => { x.disabled = true; });
@@ -1306,6 +1435,12 @@
   }
   /** Erklaert in einem Satz, was der Umschalter tut (steht unter der Seitenueberschrift und als Tooltip). */
   function leseHilfe(m) {
+    const sie = !!(aktuelleId && INHALT.seiten[aktuelleId] && INHALT.seiten[aktuelleId].anrede === "sie");
+    if (sie) {
+      return m === "ausfuehrlich"
+        ? "Sie lesen gerade genau: Alle Erklärungen sind aufgeklappt. Mit „Kurz lesen“ oben rechts bleiben nur die Kernsätze."
+        : "Sie lesen gerade kurz: Sie sehen die Kernsätze. Mit „Mehr dazu“ klappen Sie Einzelnes auf, mit „Genau lesen“ oben rechts alles. Unterstrichene Begriffe mit ? können Sie antippen, dann erscheint eine Erklärung.";
+    }
     return m === "ausfuehrlich"
       ? "Du liest gerade genau: Alle Erklärungen sind aufgeklappt. Mit „Kurz lesen“ oben rechts bleiben nur die Kernsätze."
       : "Du liest gerade kurz: Du siehst die Kernsätze. Mit „Mehr dazu“ klappst du Einzelnes auf, mit „Genau lesen“ oben rechts alles. Unterstrichene Begriffe mit ? kannst du antippen, dann erscheint eine Erklärung.";
@@ -1491,11 +1626,18 @@
       else if (quelle) sec.append(h("p", { class: "kurz auto" }, ersterSatz(quelle)));
       const mehr = [];
       for (const p of a.p || []) mehr.push(h("p", { html: md(p) }));
-      if (a.liste) mehr.push(h("ul", null, a.liste.map((l) => h("li", { html: md(l) }))));
-      for (const c of a.code || []) mehr.push(codeBlock(c));
+      const istPromptSeite = PROMPT_SEITEN.has(seite.id);
+      if (a.liste) {
+        // Beispiel-Prompts in Listen ("**Einkauf:** „Du bist ...“") werden auf Prompt-Seiten zu Bloecken mit Knoepfen
+        const pr = (l) => istPromptSeite ? /^\*\*([^*]+?):?\*\*\s*[„"]([\s\S]+?)[“"]\.?$/.exec(l) : null;
+        if (a.liste.some(pr)) a.liste.forEach((l) => { const m = pr(l); mehr.push(m ? promptBlock(m[1], m[2]) : h("p", { html: md(l) })); });
+        else mehr.push(h("ul", null, a.liste.map((l) => h("li", { html: md(l) }))));
+      }
+      for (const c of a.code || []) mehr.push(istPromptSeite || c.prompt ? promptBlock(c.titel, c.text) : codeBlock(c));
+      for (const b of [].concat(a.beispiel || [])) mehr.push(typeof b === "string" ? promptBlock("Beispiel", b) : promptBlock(b.titel, b.text));
       if (a.tabelle) mehr.push(tabelleBlock(a.tabelle));
       if (a.alltag) mehr.push(h("aside", { class: "alltag" }, h("b", null, "Beispiel aus dem Alltag"),
-        [].concat(a.alltag).map((t) => h("p", { html: md(t) }))));
+        [].concat(a.alltag).map((t) => { const m = istPromptSeite && /^Beispiel:\s*([\s\S]{30,})$/.exec(t); return m ? promptBlock("Beispiel-Prompt", m[1]) : h("p", { html: md(t) }); })));
       if (a.merke) mehr.push(h("aside", { class: "merke" }, h("b", null, "Merke"), h("p", { html: md(a.merke) })));
       if (mehr.length) {
         const mb = mehrBlock(mehr);
@@ -1604,7 +1746,7 @@
       const gel = gelesen.has(id);
       return h("li", null, h("a", { href: adresse(id, pfadQuery(p.id)) },
         h("span", { class: "pfad-haken" + (gel ? " an" : ""), "aria-hidden": "true" }, gel ? icon("check") : null),
-        h("span", null, sd.nav || sd.titel, imSchulweg(id) ? h("small", { class: "kam" }, kameraHinweis) : null),
+        h("span", null, sd.nav || sd.titel, imSchulweg(id) ? [" ", h("small", { class: "kam" }, kameraHinweis)] : null),
         gel ? h("span", { class: "sr-nur" }, " (gelesen)") : null));
     }));
     const k = karte({ kicker: tag, titel: p.name, text: p.kurz, meta: zeitFeld(p.ids, p.ids.length + " Schritte, ", () => ", " + n + " gelesen"),
@@ -1866,8 +2008,28 @@
     requestAnimationFrame(pruefen);
     montiert.push({ destroy() { window.removeEventListener("scroll", beiScroll); window.removeEventListener("resize", pruefen); clearTimeout(timer); clearTimeout(speichern); } });
   }
+  /* Sprungmarken: auf langen Seiten (mehr als 5 Abschnitte oder mehr als 3 Bildschirme) ein aufklappbarer Block "Auf dieser Seite" mit Chips zu den
+     Abschnittsueberschriften. Nicht im Druck. */
+  function sprungMarken(id) {
+    const wurzel = $("#inhalt");
+    if (!wurzel || id === "start" || aktuelleId !== id) return;
+    for (const alt of $$(".sprung-block", wurzel)) alt.remove();
+    const abs = $$("section.abschnitt", wurzel).filter((sec) => $("h2", sec));
+    if (abs.length < 2) return;
+    const lang = abs.length > 5 || document.documentElement.scrollHeight > window.innerHeight * 3;
+    if (!lang) return;
+    const chips = abs.map((sec, i) => {
+      if (!sec.id) sec.id = "abs-" + (i + 1);
+      const titel = $("h2", sec).textContent.trim();
+      return h("li", null, h("a", { class: "chip sprung-chip", href: "#" + sec.id, onclick: (e) => { e.preventDefault(); zuAbschnitt(sec.id); } }, titel));
+    });
+    const block = h("details", { class: "sprung-block", dataset: { testid: "sprungmarken" } }, h("summary", null, icon("chevron"), "Auf dieser Seite", h("small", null, abs.length + " Abschnitte")),
+      h("nav", { "aria-label": "Auf dieser Seite" }, h("ul", { class: "sprung-liste" }, chips)));
+    abs[0].parentNode.insertBefore(block, abs[0]);
+  }
   function seiteBetreten(id) {
     aktuelleId = id;
+    setTimeout(() => sprungMarken(id), 700);          // nach dem Laden der Bilder, damit die Hoehe stimmt
     if (!zaehlbar(id)) return;
     zuletzt = { id, y: 0 };
     zuletztSpeichern();
@@ -1879,10 +2041,18 @@
     }
   }
   /** Kopf fuer den Ausdruck (nur im Druck sichtbar): Seitentitel und Adresse. Die Adresse wird kurz vor dem Druck noch einmal gesetzt. */
+  /* Druckkopf: Seitentitel und die OEFFENTLICHE Adresse (nicht die Adresse, unter der gerade getestet wird). */
+  const OEFFENTLICH = "https://ki-labor.daniel-alisch.site";
+  const druckAdresse = () => OEFFENTLICH + (location.pathname === "/" ? "/" : location.pathname.replace(/\/$/, ""));
   function druckKopf(titel) {
-    return h("div", { class: "druck-kopf", "aria-hidden": "true" }, h("b", null, "KI-Labor: " + titel), h("span", { class: "druck-url" }, location.origin + location.pathname));
+    return h("div", { class: "druck-kopf", "aria-hidden": "true" }, h("b", null, "KI-Labor: " + titel), h("span", { class: "druck-url" }, druckAdresse()));
   }
-  window.addEventListener("beforeprint", () => { for (const u of $$(".druck-url")) u.textContent = location.origin + location.pathname; });
+  /* Druck: zugeklappte "Mehr dazu"-Teile werden fuer den Druck aufgeklappt und danach wieder zugeklappt (zusaetzlich zu ::details-content in laien.css). */
+  window.addEventListener("beforeprint", () => {
+    for (const u of $$(".druck-url")) u.textContent = druckAdresse();
+    for (const d of $$("details:not([open])")) { d.setAttribute("data-druck-offen", "1"); d.open = true; }
+  });
+  window.addEventListener("afterprint", () => { for (const d of $$("details[data-druck-offen]")) { d.open = false; d.removeAttribute("data-druck-offen"); } });
   function seiteBauen(id) {
     const seite = Object.assign({ id, query: aktuelleAbfrage }, INHALT.seiten[id]);
     if (seite.typ === "start") return startSeite(seite);
@@ -1893,10 +2063,11 @@
     const ueber = lzk ? (ueberText ? [ueberText, h("span", { class: "ueber-trenner", "aria-hidden": "true" }, " · "), lzk] : lzk) : ueberText;
     const out = h("div", { class: "seitenbreite" }, druckKopf(seite.titel), zurueckZeile(),
       hero({ symbol: seite.symbol, ueber, titel: seite.titel, lead: seite.kurz, kennzahlen: kennzahlenFuer(seite) }));
+    if (id === "chat" || seite.demo === "chat") out.append(datenHinweis());        // Datenschutz- und Altershinweis auch im Seitenkopf
     const lzb = lernzieleBlock(seite); if (lzb) out.append(lzb);
     // Seitenfeld downloads: [{text, sub?, href}] als Knöpfe direkt unter dem Kopf (nur Dateien unter /static/)
     const dls = (seite.downloads || []).filter((d) => d && typeof d.href === "string" && d.href.startsWith("/static/") && !d.href.startsWith("//"));
-    const dlBox = !dls.length ? null : h("section", { class: "downloads-box" }, h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
+    const dlBox = !dls.length ? null : h("section", { class: "downloads-box" }, h("p", { class: "druck-pdf" }, "Als PDF: " + dls.map((d) => "ki-labor-" + d.href.split("/").pop()).join(", ") + ". Die Dateien liegen auf der Seite unter „Zum Ausdrucken“."), h("h2", { class: "downloads-titel" }, icon("file-text"), "Zum Ausdrucken"), h("div", { class: "downloads", role: "group", "aria-label": "Zum Ausdrucken", dataset: { n: String(dls.length) } },
       dls.map((d) => h("a", { class: "dlkarte", href: d.href, download: "ki-labor-" + d.href.split("/").pop(), target: "_blank", rel: "noopener", "aria-label": d.text + " herunterladen" },
         h("span", { class: "dl-icon", "aria-hidden": "true" }, icon("file-text")),
         h("span", { class: "dl-text" }, h("b", null, d.text), d.sub ? h("small", null, d.sub) : null),
@@ -1918,7 +2089,11 @@
     out.append(abschnitte(seite));
     if (widgetKnoten && widgetNach) out.append(widgetKnoten);
     if (seite.mitnehmen) out.append(h("section", { class: "block mitnehmen" }, h("h2", null, "Das nimmst du mit"), h("ul", null, seite.mitnehmen.map((m) => h("li", null, m)))));
-    if (seite.quiz && seite.quiz.length) out.append(quizBlock(seite.quiz, () => gelesenMerken(id)));
+    if (seite.quiz && seite.quiz.length) {
+      const qb = quizBlock(seite.quiz, () => gelesenMerken(id));
+      if (seite.typ === "arbeitsblatt" || seite.quizDruck) qb.classList.add("quiz-druck");        // nur ein Arbeitsblatt-Quiz kommt aufs Papier
+      out.append(qb);
+    }
     if (seite.business) {
       const b = seite.business;
       const chips = b.beispiele && b.beispiele.length ? h("div", { class: "zeile" }, b.beispiele.map((c) => h("span", { class: "chip" }, c))) : null;
@@ -2055,7 +2230,7 @@
     return h("div", { class: "g-zeile" + (stapel ? " g-stapel" : "") }, h(id ? "label" : "span", { class: "g-name", for: id || null }, beschriftung), h("div", { class: "g-steuer" }, steuer));
   }
 
-  window.KL = { $, $$, h, md, mdAntwort, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
+  window.KL = { $, $$, h, md, mdAntwort, kopieren, datenHinweis, promptBlock, gruppe, zeile, icon, hatIcon, post, stats, zeit, beispiele, widgets: {}, demos: {}, INHALT,
     /** Haengt ein Objekt mit destroy() an die aktuelle Seite: wird beim Seitenwechsel aufgeraeumt (wie ein Baustein). */
     montiere(m) { montiert.push(m); return m; },
     ersterSatz, klar,

@@ -76,11 +76,13 @@ function lehrplanAbschnitt(id) {
     p: ["Die Einheit knüpft an diese Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an: " + bereiche + ". Das ist ein Vorschlag des Labors, keine amtliche Zuordnung.",
       "Welche Inhalte und Kompetenzen im Lehrplan Informatik oder Medienbildung des eigenen Bundeslandes dazu passen, wurde für kein Bundesland geprüft und bleibt Sache der Lehrkraft. Das Labor macht dazu keine Länderangaben. Die Tabelle aller Einheiten steht in der {{schule-lehrkraefte|Handreichung}}, Abschnitt Lehrplanbezug."]};
 }
-/** Hängt beide Abschnitte direkt hinter den Zeitplan einer Einheit (einmal je Seite). */
+/** Setzt die Doppelstunde an den Anfang der Abschnitte und den Lehrplanbezug hinter den Zeitplan (einmal je Seite). */
 function ergaenzeEinheit(seite, id) {
   const ab = seite.abschnitte;
   if (ab.some((a) => a.h === "Einzelstunde oder Doppelstunde")) return;
-  ab.splice(1, 0, doppelAbschnitt(ab), lehrplanAbschnitt(id));
+  // Doppelstunde ganz oben (direkt unter den Download-Karten im Seitenkopf), Lehrplanbezug hinter dem Zeitplan
+  ab.splice(0, 0, doppelAbschnitt(ab));
+  ab.splice(2, 0, lehrplanAbschnitt(id));
 }
 window.KLSchule = {lehrplan: LEHRPLAN, doppelZeilen, doppelTabelle, ergaenzeEinheit};
 
@@ -790,6 +792,12 @@ S["schule-lehrkraefte"] = {
       kopf: ["Einheit", "Anknüpfung an Kompetenzbereiche"],
       zeilen: Object.values(LEHRPLAN),
      }},
+    {h: "Fachbezug",
+     kurz: "Welche Fächer passen und wo Sie Ihren Landeslehrplan finden.",
+     p: [
+      "Welche Fächer passen? Siehe {{schule-faecher|Fächer}}.",
+      "Den Lehrplan Ihres Bundeslandes finden Sie über den Bildungsserver Ihres Landes. Eine Übersicht aller Länder mit Verweisen auf die Lehrpläne führt der Deutsche Bildungsserver (`bildungsserver.de/lehrplaene-400-de.html`), eine weitere die Kultusministerkonferenz (`kmk.org/downloads-dokumente/rechtsvorschriften-/-lehrplaene/uebersicht-lehrplaene.html`), beide abgerufen am 23.11.2026. Die Zuordnung der Einheiten zu Ihrem Lehrplan nehmen Sie selbst vor.",
+     ]},
     {h: "Für Klasse 7 und 9 anpassen",
      kurz: "Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzen Sie, für Klasse 9 erweitern Sie.",
      visual: {typ: "vergleich",
@@ -838,6 +846,9 @@ S["schule-lehrkraefte"] = {
 /* ------------------------------------------------------------------ Schulleitung */
 S["schule-schulleitung"] = {
   nav: "Info Schulleitung", typ: "lektion", gruppe: "Für die Schule", titel: "Information für die Schulleitung", symbol: "landmark",
+  downloads: [
+    {text: "Zum Mitnehmen: Infoblatt Schulleitung", sub: "2 Seiten A4, Sie-Form, für Datenschutzbeauftragte und Schulträger", href: "/static/materialien/schulleitung-infoblatt.pdf"},
+  ],
   lernziele: [
     "Sie wissen, was das KI-Labor ist und welche Daten dabei verarbeitet werden.",
     "Sie wissen, wer verantwortlich ist und wo die Datenschutzerklärung steht.",
@@ -846,6 +857,11 @@ S["schule-schulleitung"] = {
   kurz: "Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet. Kein Rechtsrat.",
   zusammenfassung: "Information in einfacher Sprache für Schulleitungen zum KI-Labor: kostenloses Angebot ohne Konto, welche Daten verarbeitet werden und welche nicht, Verantwortlicher und Hosting, Kamera und Mikrofon im Unterricht nicht vorgesehen. Die Schule entscheidet über den Einsatz und klärt die Rechtsgrundlage. Kein Rechtsrat, Stand 22.11.2026.",
   abschnitte: [
+    {h: "Was entscheidet die Schule?",
+     kurz: "Ob und wie das Labor eingesetzt wird, entscheidet die Schule. Der Betreiber stellt es kostenlos und ohne Vertrag bereit.",
+     p: [
+      "Die Schule entscheidet, ob das Labor im Unterricht läuft, welche Rechtsgrundlage sie dafür nutzt, ob Eltern vorab informiert werden und welche Endgeräte dafür gedacht sind. Der Betreiber beschreibt die Daten, trifft diese Entscheidung aber nicht. Das Infoblatt oben fasst die Fakten für Ihre Datenschutzbeauftragte oder Ihren Datenschutzbeauftragten zusammen.",
+     ]},
     {h: "Das Angebot in Kürze",
      kurz: "Ein kostenloses Lernangebot zu künstlicher Intelligenz, ohne Konto und ohne Anmeldung.",
      visual: {typ: "raster", spalten: 3, zellen: [
@@ -873,7 +889,7 @@ S["schule-schulleitung"] = {
       {icon: "file-text", text: "Impressum", sub: "daniel-alisch.site"},
       {icon: "shield-check", text: "Datenschutz", sub: "Erklärung des Betreibers", farbe: "gruen"}]},
      p: [
-      "`daniel-alisch.site/impressum` und `daniel-alisch.site/datenschutz`, auch in der Fußzeile jeder Seite. Bei fehlenden Angaben wenden Sie sich an den Betreiber.",
+      "[Impressum](https://daniel-alisch.site/impressum) und [Datenschutzerklärung](https://daniel-alisch.site/datenschutz) des Betreibers, auch in der Fußzeile jeder Seite. Kontakt: [Kontaktabschnitt auf daniel-alisch.site](https://daniel-alisch.site/#contact). Bei fehlenden Angaben wenden Sie sich an den Betreiber.",
      ]},
     {h: "Hosting und Betrieb",
      kurz: "Das Labor läuft auf einem kleinen Rechner des Betreibers, ohne externe KI-Dienste.",
@@ -909,7 +925,7 @@ S["schule-schulleitung"] = {
       ],
      },
      p: [
-      "Fragen stellen Sie dem Betreiber über die Kontaktangaben im Impressum auf `daniel-alisch.site/impressum`, auch in der Fußzeile jeder Seite verlinkt. Ob Ihre Schule für den Einsatz einen Vertrag oder eine Auftragsverarbeitung braucht, klärt sie selbst mit der oder dem Datenschutzbeauftragten.",
+      "Fragen stellen Sie dem Betreiber über die Kontaktangaben im [Impressum](https://daniel-alisch.site/impressum) oder im [Kontaktabschnitt](https://daniel-alisch.site/#contact) der Betreiberseite, auch in der Fußzeile jeder Seite verlinkt. Ob Ihre Schule für den Einsatz einen Vertrag oder eine Auftragsverarbeitung braucht, klärt sie selbst mit der oder dem Datenschutzbeauftragten.",
      ]},
     {h: "Kamera und Mikrofon",
      kurz: "Im Unterrichtseinsatz sind Kamera, Mikrofon und Gesichtserkennung nicht vorgesehen und nicht nötig.",

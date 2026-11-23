@@ -53,7 +53,7 @@ S["alltag-chat"] = {
   zusammenfassung: "Im Chat des Labors stellst du eine Alltagsfrage. Bei viel Betrieb dauert die Antwort bis zu zwei Minuten. Du prüfst sie gegen eine zweite Quelle und fragst bei Regeln mit Folgen die zuständige Stelle.",
   abschnitte: [
     {h: "Eine Frage stellen",
-     kurz: "Öffne den Chat, tippe eine Alltagsfrage, drücke Enter. Bei viel Betrieb dauert die Antwort bis zu zwei Minuten.",
+     kurz: "Öffne den {{chat|Chat}}, tippe eine Alltagsfrage, drücke Enter. Bei viel Betrieb dauert die Antwort bis zu zwei Minuten.",
      p: [
       "Öffne den {{chat|Chat}}, lade das Modell und tippe eine Frage, zum Beispiel: „Gib mir drei Ideen für ein schnelles Abendessen mit Kartoffeln.“ Beim ersten Mal lädt das Modell, das dauert bis zu einer Minute.",
       "Der Chat läuft auf einem kleinen Rechner. Ist viel los, wartest du in einer Schlange, und die Antwort braucht bis zu zwei Minuten. Lies in der Zeit schon die nächste Seite.",
@@ -70,9 +70,9 @@ S["alltag-chat"] = {
      ],
      merke: "Je größer die Folgen, desto weniger reicht ein Chatbot allein."},
     {h: "Mehr dazu",
-     kurz: "Wie du Quellen prüfst, steht auf {{quellen-pruefen|Quellen prüfen}}. Warum Modelle erfinden, auf {{llm-grenzen|Grenzen von Sprachmodellen}}.",
+     kurz: "Drei geprüfte Fälle: {{chat-irrt|Wenn der Chat irrt}}. Wie du Quellen prüfst: {{quellen-pruefen|Quellen prüfen}}. Warum Modelle erfinden: {{llm-grenzen|Grenzen von Sprachmodellen}}.",
      p: [
-      "Fünf Schritte zum Quellen-Prüfen findest du auf {{quellen-pruefen|Quellen prüfen}}. Warum Sprachmodelle manchmal erfinden, erklärt {{llm-grenzen|Grenzen von Sprachmodellen}}.",
+      "An drei Fällen, mit richtiger Antwort und Quelle, siehst du auf {{chat-irrt|Wenn der Chat irrt}}, wie ein Chat danebenliegt, zum Beispiel bei Lenkzeiten. Fünf Schritte zum Quellen-Prüfen findest du auf {{quellen-pruefen|Quellen prüfen}}. Warum Sprachmodelle manchmal erfinden, erklärt {{llm-grenzen|Grenzen von Sprachmodellen}}.",
      ]},
   ],
   mitnehmen: [
@@ -80,12 +80,12 @@ S["alltag-chat"] = {
     "Zahlen, Namen und Fristen prüfst du gegen eine zweite Quelle.",
     "Bei Regeln mit Folgen fragst du die zuständige Stelle.",
   ],
-  weiter: ["alltag-betrug", "chat", "quellen-pruefen", "llm-grenzen"],
+  weiter: ["alltag-betrug", "chat", "chat-irrt", "quellen-pruefen", "llm-grenzen"],
 };
 
 S["alltag-betrug"] = {
   nav: "Betrug erkennen", typ: "lektion", gruppe: "Alltag in 15 Minuten", titel: "Betrug am Telefon und mit KI: das Wichtigste", symbol: "phone-call", rollen: ["erwachsene", "eltern"],
-  kurz: "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen.",
+  kurz: "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Das ist die Kurzfassung. Die ganze Seite mit Quiz und Quellen heißt „Falscher Anruf“.",
   zusammenfassung: "Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine gefälschte Stimme. Ein Codewort in der Familie hilft.",
   abschnitte: [
     {h: "Drei Schritte",
@@ -141,7 +141,7 @@ S["prompts-alltag"] = {
       "**Urlaub:** „Du bist Reiseberater. Plane drei Tage Hamburg für zwei Erwachsene und ein Kind (7 Jahre), wenig Fußwege. Gib mir je Tag Vormittag und Nachmittag als Liste.“",
      ]},
     {h: "Dann prüfen", offen: true,
-     kurz: "Hänge diesen Satz an: „Sag mir am Ende, was du nicht sicher weißt und was ich selbst nachprüfen sollte.“",
+     kurz: "Lass die KI am Ende ihre Unsicherheiten nennen, und prüfe trotzdem selbst.",
      p: [
       "Hänge an jede Frage: „Sag mir am Ende, was du nicht sicher weißt und was ich selbst nachprüfen sollte.“ Das Modell kann sich auch dann irren. Der Satz erinnert dich ans Prüfen, er ersetzt es nicht. Wie du prüfst, steht auf {{alltag-chat|Chat nutzen und prüfen}}.",
      ]},

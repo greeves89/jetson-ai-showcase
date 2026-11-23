@@ -50,7 +50,7 @@
 }
 
 /* ---------- kreis ---------- */
-.v-zirkel{position:relative;display:block;width:min(100%,520px);aspect-ratio:1;margin:0 auto;border-radius:0;background:none;font-size:inherit}
+.v-zirkel{position:relative;display:block;width:min(88%,480px);aspect-ratio:1;margin:0 auto;border-radius:0;background:none;font-size:inherit}
 .v-ring{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
 .v-ringlinie{fill:none;stroke:var(--flaeche3);stroke-width:2.5px;vector-effect:non-scaling-stroke}
 .v-ringpfeil{fill:none;stroke:var(--leise);stroke-width:1.8px;vector-effect:non-scaling-stroke;stroke-linecap:round;stroke-linejoin:round;opacity:.75}
@@ -58,14 +58,14 @@
 .v-mitte b{font-size:15.5px;line-height:1.25;color:var(--text)}
 .v-mitte svg.ic{width:34px;height:34px;stroke-width:1.5}
 .v-kn{position:absolute;translate:-50% -50%;display:flex;align-items:center;gap:9px;padding:6px 16px 6px 6px;border-radius:99px;background:var(--flaeche);color:var(--text);
-  border:1.5px solid color-mix(in srgb,var(--c) 38%,var(--linie));box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.07);width:max-content;max-width:62%}
+  border:1.5px solid color-mix(in srgb,var(--c) 38%,var(--linie));box-shadow:0 1px 2px rgba(0,0,0,.06),0 6px 16px rgba(0,0,0,.07);width:max-content;max-width:40%}
 .v-kn .v-kc{width:38px;height:38px}
 .v-kn .v-kc svg.ic{width:20px;height:20px}
 .v-kt{font-size:15.5px;font-weight:650;line-height:1.2;overflow-wrap:anywhere}
 .v-punkt{position:absolute;left:50%;top:50%;width:16px;height:16px;translate:-50% -50%;border-radius:50%;background:var(--akzent-fl);box-shadow:0 0 0 4px var(--flaeche);pointer-events:none}
 .v-punkt.klein{width:13px;height:13px;box-shadow:0 0 0 3px var(--flaeche)}
 .v-punkt[hidden]{display:none}
-@container (max-width:430px){
+@container (max-width:560px){
   .v-zirkel{aspect-ratio:auto;display:flex;flex-direction:column;gap:12px;width:100%}
   .v-ring,.v-punkt,.v-mitte{display:none}
   .v-kn{position:static;translate:none;max-width:none;left:auto;top:auto}

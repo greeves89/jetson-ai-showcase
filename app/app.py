@@ -378,6 +378,8 @@ def models():
 
 
 # ---------- LLM-Chat ueber lokales Ollama ----------
+KURZ_PROMPT = "Antworte in höchstens 5 Sätzen in einfacher Sprache."
+KURZ_MAX_TOKEN = 300
 @app.post("/api/chat")
 async def chat(req: Request):
     if not _origin_ok(req.headers):
@@ -386,8 +388,14 @@ async def chat(req: Request):
         return JSONResponse(ZU_VIELE, status_code=429)
     if _llm.voll():
         return _belegt_antwort()
-    daten = await req.json()
-    nachricht = (daten.get("nachricht") or "").strip()
+    try:
+        daten = await req.json()
+    except Exception:
+        daten = None
+    if not isinstance(daten, dict):
+        return JSONResponse({"fehler": "ungueltige Anfrage"}, status_code=400)
+    nachricht = daten.get("nachricht")
+    nachricht = nachricht.strip() if isinstance(nachricht, str) else ""
     modell = daten.get("modell") or CHAT_MODELL
     if not nachricht:
         return JSONResponse({"fehler": "leere Nachricht"}, status_code=400)
@@ -401,15 +409,18 @@ async def chat(req: Request):
     except (TypeError, ValueError):
         temperatur = 0.7
 
+    # "Kurz antworten" (Schalter am Chat-Feld): nur der Wert true zaehlt, alles andere gilt als aus. Begrenzt Saetze und Laenge.
+    kurz = daten.get("kurz") is True
+
     async def strom_innen():
         await _speicher_bereit()
         start = time.time()
         tokens = 0
         payload = {
             "model": modell,
-            "messages": ([{"role": "system", "content": "Antworte in höchstens 5 Sätzen in einfacher Sprache."}] if daten.get("rolle") == "schule" else []) + [{"role": "user", "content": nachricht}],
+            "messages": ([{"role": "system", "content": KURZ_PROMPT}] if kurz else []) + [{"role": "user", "content": nachricht}],
             "stream": True,
-            "options": {"temperature": temperatur, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH},
+            "options": {"temperature": temperatur, "num_gpu": speicher.gpu_schichten(), "num_batch": speicher.LLM_BATCH, **({"num_predict": KURZ_MAX_TOKEN} if kurz else {})},
         }
         try:
             async with httpx.AsyncClient(timeout=httpx.Timeout(300.0, connect=10.0)) as c:

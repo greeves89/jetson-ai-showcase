@@ -9,7 +9,7 @@
 const S = {};
 
 S["eltern-zuhause"] = {
-  nav: "Eltern zu Hause", typ: "lektion", gruppe: "Medienkompetenz", titel: "KI zu Hause: Was Eltern wissen sollten", symbol: "users", rollen: ["eltern"],
+  nav: "Eltern zu Hause", typ: "lektion", gruppe: "Medienkompetenz", titel: "KI zu Hause: Was Eltern wissen sollten", symbol: "users", rollen: ["eltern"], anrede: "sie",
   rechtslinks: true,
   downloads: [{text: "Kartenset für zwei (mit Auflösung)", sub: "Für Eltern und Kinder", href: "/static/materialien/kartenset-eltern.pdf"}],
   lernziele: [
@@ -51,7 +51,7 @@ S["eltern-zuhause"] = {
       urteil: "Deshalb gemeinsam nutzen"},
      p: [
       "Ein Sprachmodell wählt Wort für Wort, was wahrscheinlich als Nächstes kommt. Das klingt oft überzeugend, auch wenn es falsch ist. Manchmal nennt es Quellen, die es nicht gibt. Das Modell im Labor ist klein und weiß weniger als große Modelle.",
-      "Das Labor schaltet keinen eigenen Filter vor das Modell. Eine Frage Ihres Kindes geht direkt an das Sprachmodell Llama 3.2. Ob eine Antwort zum Alter passt, kann niemand vorher garantieren. Für Kinder unter 16 empfehlen wir deshalb, den Chat gemeinsam mit einer erwachsenen Person zu nutzen. Sitzen Sie dabei, wenn Sie den Chat nutzen.",
+      "Das Labor schaltet keinen eigenen Filter vor das Modell. Eine Frage Ihres Kindes geht direkt an das Sprachmodell Llama 3.2. Ob eine Antwort zum Alter passt, kann niemand vorher garantieren. Für Kinder unter 16 empfehlen wir deshalb, den Chat gemeinsam mit einer erwachsenen Person zu nutzen. Setzen Sie sich dazu, wenn Ihr Kind den Chat nutzt.",
      ],
      alltag: "Stellen Sie sich einen belesenen Gast am Tisch vor, der immer sofort und selbstsicher antwortet, auch wenn er etwas nicht weiß. Man hört gern zu, aber man prüft nach. Der Vergleich hinkt an einer Stelle: Ein Gast merkt manchmal selbst, dass er unsicher ist. Das Modell klingt immer gleich sicher."},
     {h: "Drei Gespräche mit Ihrem Kind",
@@ -62,8 +62,8 @@ S["eltern-zuhause"] = {
       {icon: "book-open", text: "Hausaufgaben", sub: "was war von Ihrem Kind"}]},
      p: [
       "**Echt oder KI?** Schauen Sie zusammen ein Bild oder einen Clip an und fragen Sie: Woran würdest du das prüfen? Die Seite {{echt-oder-ki|Echt oder KI?}} zeigt Warnzeichen und Prüfwege, das Kartenset für zwei oben eignet sich zum gemeinsamen Raten. Vereinbaren Sie auch ein Codewort für Notfallanrufe. Stimmen lassen sich nachbauen, ein Codewort hilft gegen jede Fälschung. Was bei falschen Anrufen gilt, steht auf {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}. Das ist auch für die Großeltern wichtig.",
-      "**Quellen prüfen.** Lassen Sie Ihr Kind den Chat etwas fragen, das es gut kennt, zum Beispiel sein Hobby. Wo liegt der Chat daneben? Mehr dazu auf der Seite {{quellen-pruefen|Quellen prüfen}}.",
-      "**Hausaufgaben fair.** Fragen Sie: Was hast du selbst gemacht, was die KI? Wie schreibst du das auf? Die Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}} erklärt den Unterschied zwischen Helfen und Abnehmen und hat einen eigenen Abschnitt für Eltern.",
+      "**Quellen prüfen.** Lassen Sie Ihr Kind den Chat etwas fragen, das es gut kennt, zum Beispiel sein Hobby. Wo liegt der Chat daneben? Drei Beispiele mit richtiger Antwort und Quelle zeigt {{chat-irrt|Das kleine Modell irrt}}. Mehr dazu auf der Seite {{quellen-pruefen|Quellen prüfen}}.",
+      "**Hausaufgaben fair.** Fragen Sie: Was hast du selbst gemacht, was die KI? Wie schreibst du das auf? Die Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}} erklärt den Unterschied zwischen Helfen und Abnehmen und hat einen eigenen Abschnitt für Eltern. Für zu Hause gibt es eine {{hausaufgaben-familie|Vereinbarung zum Ausfüllen}}, getrennt für 12 und 15 Jahre.",
       "Alle drei Gespräche als Anleitung für zwei, mit Gesprächsfragen: {{zusammen-ausprobieren|Zusammen ausprobieren}}. Zum Thema Handy und Bildschirm: {{bildschirmzeit|Bildschirmzeit}}.",
      ]},
     {h: "Was Sie Ihrem Kind sagen können",
@@ -130,11 +130,11 @@ S["eltern-zuhause"] = {
      optionen: ["Die Kamera erlauben und später wieder ausschalten", "Erst ein Konto anlegen und die Kamera sperren", "Die Experimente, sie laufen ohne Kamera und Mikrofon", "Nur Gesichtserkennung, weil sie am meisten zeigt"],
      richtig: 2, erklaerung: "Alle Experimente kommen ohne Kamera und Mikrofon aus. Ihr Kind lernt dort, wie KI arbeitet und wo sie danebenliegt."},
   ],
-  weiter: ["zusammen-ausprobieren", "falscher-anruf", "sicherheit-einfach", "experimente", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "schule-eltern"],
+  weiter: ["zusammen-ausprobieren", "falscher-anruf", "sicherheit-einfach", "experimente", "echt-oder-ki", "quellen-pruefen", "chat-irrt", "ki-hausaufgaben-fair", "hausaufgaben-familie", "bildschirmzeit", "schule-eltern"],
 };
 
 S["zusammen-ausprobieren"] = {
-  nav: "Zusammen ausprobieren", typ: "lektion", gruppe: "Medienkompetenz", titel: "Zusammen ausprobieren: Anleitung für zwei", symbol: "users", rollen: ["eltern"],
+  nav: "Zusammen ausprobieren", typ: "lektion", gruppe: "Medienkompetenz", titel: "Zusammen ausprobieren: Anleitung für zwei", symbol: "users", rollen: ["eltern"], anrede: "sie",
   downloads: [{text: "Kartenset für zwei (mit Auflösung)", sub: "Für Eltern und Kinder, für Experiment 3", href: "/static/materialien/kartenset-eltern.pdf"}],
   lernziele: [
     "Sie können mit Ihrem Kind drei Experimente von je etwa zehn Minuten durchführen.",
@@ -198,7 +198,7 @@ S["zusammen-ausprobieren"] = {
     {h: "Danach reden",
      kurz: "Eine offene Frage zum Schluss reicht. Nicht belehren, zuhören.",
      p: [
-      "Fragen Sie zum Abschluss: Was hat dich überrascht? Was würdest du anderen erzählen? Wann hilft dir KI, und wann lässt du sie lieber weg? Hören Sie zu und lassen Sie Antworten stehen. Mehr Gesprächsanlässe finden Sie auf {{eltern-zuhause|KI zu Hause}}.",
+      "Fragen Sie zum Abschluss: Was hat dich überrascht? Was würdest du anderen erzählen? Wann hilft dir KI, und wann lässt du sie lieber weg? Hören Sie zu und lassen Sie Antworten stehen. Mehr Gesprächsanlässe finden Sie auf {{eltern-zuhause|KI zu Hause}}. Regeln für die Hausaufgaben mit KI halten Sie in der {{hausaufgaben-familie|Vereinbarung zum Ausfüllen}} fest.",
      ]},
   ],
   mitnehmen: [
@@ -217,18 +217,19 @@ S["zusammen-ausprobieren"] = {
      optionen: ["Damit der Punkt an den Schnelleren geht", "Weil die Karten sonst nicht ausgewertet werden können", "Damit Sie merken, woran Sie Ihre Entscheidung festmachen und ob das verlässlich ist", "Weil die Auflösung es verlangt"],
      richtig: 2, erklaerung: "Im Begründen zeigt sich, ob Sie auf Hinweise oder auf ein Bauchgefühl vertrauen. Das ist der Lerneffekt."},
   ],
-  weiter: ["eltern-zuhause", "ml", "chat", "quellen-pruefen", "echt-oder-ki", "falscher-anruf", "ki-hausaufgaben-fair"],
+  weiter: ["eltern-zuhause", "ml", "chat", "quellen-pruefen", "chat-irrt", "echt-oder-ki", "falscher-anruf", "ki-hausaufgaben-fair", "hausaufgaben-familie"],
 };
 
 S["bildschirmzeit"] = {
-  nav: "Bildschirmzeit", typ: "lektion", gruppe: "Medienkompetenz", titel: "Bildschirmzeit: kurz und ehrlich", symbol: "smartphone", rollen: ["eltern"],
+  nav: "Bildschirmzeit", typ: "lektion", gruppe: "Medienkompetenz", titel: "Bildschirmzeit: kurz und ehrlich", symbol: "smartphone", rollen: ["eltern"], anrede: "sie",
   lernziele: [
     "Sie können sagen, warum es keine einzelne richtige Zahl für alle Kinder gibt.",
+    "Sie können für ein Kind mit 10 und eines mit 14 Jahren zwei, drei Regeln vorschlagen, die auf belegten Quellen beruhen.",
     "Sie können mit Ihrem Kind Regeln vereinbaren, statt sie nur zu verordnen.",
     "Sie können sagen, wo die Seite endet und wo andere Stellen weiterhelfen.",
   ],
-  kurz: "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.",
-  zusammenfassung: "Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe und den Mediennutzungsvertrag. Keine medizinische Beratung.",
+  kurz: "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was klicksafe und SCHAU HIN! für 10 und 14 Jahre raten und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.",
+  zusammenfassung: "Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe (Richtwert für 12 bis 16 Jahre: 1 bis 2 Stunden freie Bildschirmzeit am Tag), SCHAU HIN! und den Mediennutzungsvertrag, dazu Beispiele für Kinder mit 10 und mit 14 Jahren. Keine medizinische Beratung.",
   abschnitte: [
     {h: "Was sich ehrlich sagen lässt",
      kurz: "Eine Zahl für alle gibt es nicht. Alter, Inhalt und Begleitung zählen mehr als die Stoppuhr.",
@@ -241,10 +242,29 @@ S["bildschirmzeit"] = {
       "Wichtig sind: Was wird am Bildschirm getan? Wird dabei gelernt, gespielt, gechattet oder endlos gescrollt? Sind Schlaf, Bewegung, Schule und Freunde im Gleichgewicht? Und ist jemand dabei, der mit dem Kind spricht?",
      ],
      merke: "Nicht nur die Minuten zählen, sondern auch, was in der Zeit passiert und was dafür ausfällt."},
+    {h: "Orientierung für 10 und für 14 Jahre",
+     kurz: "klicksafe nennt für 12 bis 16 Jahre als Richtwert 1 bis 2 Stunden freie Bildschirmzeit am Tag, spätestens bis 21 Uhr. Für 10 Jahre nennen die Quellen keine Zahl, aber Regeln, die sich bewährt haben.",
+     visual: {typ: "vergleich",
+      links: {titel: "10 Jahre", icon: "smile", farbe: "akzent", punkte: ["Keine feste Zahl in den Quellen", "Regeln gemeinsam festlegen", "Inhalte begleiten"]},
+      rechts: {titel: "14 Jahre", icon: "smartphone", farbe: "orange", punkte: ["Richtwert 1 bis 2 Stunden frei", "Bis spätestens 21 Uhr", "Alle Geräte zählen zusammen"]}},
+     p: [
+      "Beispiele aus den Empfehlungen von klicksafe und SCHAU HIN!, abgerufen am 23.11.2026. Es sind Richtwerte und Anregungen, kein Regelwerk. Wie viel für Ihr Kind passt, hängt von ihm und Ihrem Alltag ab.",
+     ],
+     tabelle: {
+      beschriftung: "Orientierung nach Alter, mit Quelle",
+      kopf: ["Thema", "Mit 10 Jahren", "Mit 14 Jahren"],
+      zeilen: [
+       ["Zeit", "Keine Zahl in den genannten Quellen. klicksafe empfiehlt für das Grundschulalter, Zeitregeln gemeinsam zu besprechen, etwa mit Mediennutzungsvertrag oder Mediengutscheinen, und sie regelmäßig anzupassen.", "klicksafe nennt für 12 bis 16 Jahre als Richtwert höchstens 1 bis 2 Stunden freie Bildschirmzeit am Tag, bis spätestens 21 Uhr. Die Zeiten sind Richtwerte."],
+       ["Welche Geräte zählen", "Alle zusammen: Handy, Tablet, Fernseher, Konsole, Computer.", "Alle zusammen: Handy, Tablet, Fernseher, Konsole, Computer."],
+       ["Wann Geräte aus sind", "Bei den Hausaufgaben und beim gemeinsamen Essen (SCHAU HIN!).", "Bei den Hausaufgaben und beim gemeinsamen Essen (SCHAU HIN!). Auszeit-Funktionen der Geräte helfen dabei (klicksafe)."],
+       ["Begleitung", "Ein überschaubares Angebot an Seiten, Apps und Spielen, werbefrei und ohne Kaufoptionen (klicksafe).", "Gemeinsam surfen und sich die Online-Welt zeigen lassen. Bei einem Treffen mit Online-Bekanntschaften begleiten (klicksafe)."],
+       ["Kontrolle", "Technische Zeitbegrenzung zu Beginn ist in Ordnung (SCHAU HIN!).", "Technische Zeitbegrenzung nach und nach durch verbindliche Absprachen ablösen (SCHAU HIN!)."],
+      ]},
+     merke: "Ein ausgewogener Tagesablauf zählt mehr als die genaue Minutenzahl. Beide Stellen betonen außerdem: Auch der Inhalt ist entscheidend, nicht nur die Dauer."},
     {h: "Was die Seite nicht sagen kann",
      kurz: "Sie ist keine medizinische oder pädagogische Beratung. Bei Sorgen hilft eine Beratungsstelle.",
      p: [
-      "Wie sich Bildschirmzeit auf ein einzelnes Kind auswirkt, kann diese Seite nicht beurteilen. Sie nennt keine Grenzwerte und verspricht nichts. Wenn Ihr Kind sich stark zurückzieht, schlecht schläft oder Streit um das Gerät dominiert, sprechen Sie mit der Kinderärztin, dem Kinderarzt oder einer Beratungsstelle.",
+      "Wie sich Bildschirmzeit auf ein einzelnes Kind auswirkt, kann diese Seite nicht beurteilen. Sie gibt Richtwerte von klicksafe wieder, keine Grenzwerte, und verspricht nichts. Wenn Ihr Kind sich stark zurückzieht, schlecht schläft oder Streit um das Gerät dominiert, sprechen Sie mit der Kinderärztin, dem Kinderarzt oder einer Beratungsstelle.",
       "Auch das KI-Labor ist nur ein Beispiel für Bildschirmzeit. Die Experimente dauern wenige Minuten und eignen sich gut für gemeinsame Zeit, siehe {{zusammen-ausprobieren|Zusammen ausprobieren}}. Sie ersetzen keine Regeln für Handy, Spiele und soziale Netze.",
      ]},
     {h: "Regeln gemeinsam vereinbaren",
@@ -268,13 +288,14 @@ S["bildschirmzeit"] = {
      kurz: "Quellen und Hilfe, abgerufen am 22.11.2026.",
      liste: [
       "WHO: [Guidelines on physical activity, sedentary behaviour and sleep for children under 5 years of age](https://www.who.int/publications/i/item/9789241550536), 2019, abgerufen am 22.11.2026.",
-      "klicksafe: [Wie lange darf mein Kind an Handy und PC?](https://www.klicksafe.de/eltern), abgerufen am 22.11.2026.",
+      "klicksafe: [Bildschirm- und Medienzeit, was ist für Kinder in Ordnung?](https://www.klicksafe.de/bildschirm-und-medienzeit-was-ist-fuer-kinder-in-ordnung/kinder-von-10-16-jahren), abgerufen am 23.11.2026.",
+      "SCHAU HIN!: [Bildschirmzeiten](https://www.schau-hin.info/bildschirmzeiten), abgerufen am 23.11.2026.",
       "klicksafe und SCHAU HIN!: [Mediennutzungsvertrag](https://www.mediennutzungsvertrag.de/), abgerufen am 22.11.2026.",
       "Beratung für Kinder, Jugendliche und Eltern: [Nummer gegen Kummer](https://www.nummergegenkummer.de/), abgerufen am 22.11.2026.",
      ]},
   ],
   mitnehmen: [
-    "Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen.",
+    "Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen. Als Richtwert nennt klicksafe für 12 bis 16 Jahre 1 bis 2 Stunden freie Zeit am Tag.",
     "Vereinbaren Sie Regeln gemeinsam und halten Sie sie schriftlich fest.",
     "Bei Sorgen: Kinderarzt oder Beratungsstelle fragen, nicht diese Seite.",
   ],

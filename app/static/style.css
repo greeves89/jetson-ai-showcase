@@ -601,3 +601,17 @@ table.lizenzen td:last-child{min-width:11em}
 .quiz-zurueck svg.ic{width:16px;height:16px}
 .quiz-fuss{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between}
 @media(max-width:600px){.quiz-marke{margin-left:0;flex-basis:100%}.quiz-frage label{flex-wrap:wrap}}
+
+/* ---------- Quiz (Runde 5): Reihenfolge und Zeilen bleiben nach der Antwort stabil, Auswahlfeld gut sichtbar ---------- */
+.quiz-frage label{flex-wrap:nowrap!important;align-items:flex-start}
+.quiz-frage input[type=radio]{flex:none;width:22px;height:22px;margin:1px 0 0;accent-color:var(--akzent-fl)}
+.quiz-text{flex:1 1 0;min-width:0;overflow-wrap:anywhere}
+.quiz-text .quiz-marke{display:flex;width:max-content;max-width:100%;margin:6px 0 0;flex-basis:auto}
+
+/* Tabellen (Runde 5): im Rahmen scrollbar, lange Zellen brechen um, nichts wird rechts abgeschnitten */
+.tabelle-wrap{max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabelle-wrap:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
+table.vergleich td,table.vergleich tbody th{overflow-wrap:break-word;min-width:7em}
+table.vergleich tbody th{white-space:normal}
+table.vergleich td code{overflow-wrap:anywhere;white-space:pre-wrap}
+@media(max-width:700px){.tabelle-wrap table.vergleich{display:table;min-width:36em}}

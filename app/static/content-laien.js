@@ -9,7 +9,9 @@ S["sicherheit-einfach"] = {
   nav: "Ist das sicher?", typ: "lektion", gruppe: "Der Rechner dahinter", titel: "Ist das sicher? Was wird gespeichert?", symbol: "shield-check",
   widget: "einwilligung-verwalten", widgetTitel: "Deine Zustimmungen",
   rechtslinks: true,
-  kurz: "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher. Echte Kunden-, Mandanten- oder Personaldaten gehören nicht hinein. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16. Darunter siehst du, was du erlaubt hast, und kannst es widerrufen.",
+  kurz: "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner. Gib keine echten Namen, Passwörter oder Kundendaten ein.",
+  /* Betriebsweg: die Entscheidungshilfe zum Ausdrucken (das PDF trägt den Schweigepflicht-Satz in Frage 3) */
+  get downloads() { return (typeof KL !== "undefined" && KL && KL.weg === "beruf") ? [{text: "Entscheidungshilfe für den Betrieb", sub: "1 Seite A4 mit Kästchen und Notizfeld", href: "/static/materialien/entscheidungshilfe-betrieb.pdf"}] : []; },
   abschnitte: [
     {h: "Die kurze Antwort",
      kurz: "Du brauchst kein Konto. Kamerabilder und Aufnahmen werden nicht gespeichert. Eingefügte Texte bleiben höchstens kurz im Arbeitsspeicher.",
@@ -19,15 +21,22 @@ S["sicherheit-einfach"] = {
       {icon: "clock", text: "Texte nur kurz", sub: "Danach vergisst sie der Rechner"}]},
      p: [
       "Das KI-Labor ist ein Lernangebot. Du kannst alles ausprobieren, ohne dich anzumelden und ohne etwas zu bezahlen. Auf dem Rechner dahinter wird nichts dauerhaft abgelegt, was du aufnimmst oder eintippst. Damit du genau weißt, was das heißt, steht es hier Punkt für Punkt.",
+      "Echte Kunden-, Patienten-, Mandanten- oder Personaldaten gehören nicht hinein. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16. Unten siehst du, was du erlaubt hast, und kannst es widerrufen.",
     ]},
     {h: "Was auf deinem Gerät gespeichert wird", id: "browser-eintraege",
      kurz: "Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nur das Cookie geht bei jedem Aufruf mit, die Merkzettel bleiben bei dir.",
      p: [
       "Damit die Seite funktioniert und sich merkt, was du eingestellt hast, legt sie ein paar kleine Einträge in deinem Browser ab. Ein [[cookie|Cookie]] gehört dazu und einige Einträge im [[localstorage|lokalen Speicher]]. Sie enthalten keine Namen und keine Texte von dir, und sie dienen nicht der Werbung.",
      ],
+     merke: "Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an."},
+    {h: "Technische Details", id: "technische-details",
+     kurz: "Für alle, die es genau wissen wollen: eine Tabelle mit jedem Eintrag, wofür er da ist und wie lange er bleibt. Zum Verstehen ist sie nicht nötig.",
+     p: [
+      "Die Tabelle nennt die technischen Namen der Einträge. Du brauchst sie nur, wenn du im Browser nachsehen oder gezielt löschen willst.",
+     ],
      tabelle: {
-      beschriftung: "Was die Seite in deinem Browser ablegt",
-      kopf: ["Name", "Wofür", "Wie lange"],
+      beschriftung: "Technische Details: alle Einträge im Browser",
+      kopf: ["Technischer Name", "Wofür", "Wie lange"],
       zeilen: [
        ["`kl_s` (Cookie)", "Ordnet deine Beispiele und eingefügten Texte deiner Sitzung zu, damit sie nicht bei anderen Besuchern landen.", "Bis zu 24 Stunden. Die Daten dahinter verfallen schon nach 30 Minuten ohne Aktivität."],
        ["`kl-merken`", "Merkt, dass du erlaubt hast, deinen Lernfortschritt zu speichern. Ohne dieses Ja werden `kl-gelesen` und `kl-zuletzt` nicht angelegt, der Fortschritt gilt dann nur, bis du die Seite neu lädst. Du schaltest es im Willkommens-Fenster oder in der Fußzeile („Fortschritt merken“) um.", "Bis du es ausschaltest oder die Daten deines Browsers löschst."],
@@ -43,7 +52,7 @@ S["sicherheit-einfach"] = {
        ["`kl-einwilligung`", "Merkt, dass du der Kamera oder dem Mikrofon zugestimmt hast, damit die Frage nicht jedes Mal kommt. Die Zustimmung zur Gesichtserkennung wird nur bis zum Schließen des Tabs gemerkt.", "Bis du die Einwilligung widerrufst oder die Daten deines Browsers löschst."],
       ],
      },
-     merke: "Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an."},
+    },
     {h: "Kamera und Mikrofon",
      kurz: "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck. Erst fragt dich diese Seite, dann dein Browser. Nichts wird gespeichert, und du kannst jederzeit stoppen.",
      p: [
@@ -72,8 +81,8 @@ S["sicherheit-einfach"] = {
       "Echte Kundendaten, Personaldaten, Gesundheitsdaten und Betriebsgeheimnisse gehören nicht ins Labor. Es ist ein kostenloses Lernangebot eines Einzelnen, ohne Vertrag zur Auftragsverarbeitung und ohne Zusagen, wie ein Unternehmen sie braucht. Die Eingaben laufen außerdem über Vermittler (IONOS, Cloudflare), auch wenn der Rechner dahinter sie nicht speichert.",
       "Zum Üben reichen erfundene Fälle: ein Muster-Kunde, ein Musterwerk, ein ausgedachtes Aufmaß. Wer KI im Betrieb mit echten Daten nutzen will, klärt vorher Datenschutz, Vertrag und Betriebsrat. Wie das geht, steht auf den Seiten {{ki-einfuehrung|KI einführen}} und {{recht|Recht und Regeln}}.",
      ]},
-    {h: "Berufsgeheimnis und Mandantendaten", id: "berufsgeheimnis",
-     kurz: "Wer einer Schweigepflicht unterliegt (Steuerberatung, Rechtsanwaltschaft, Ärzte), gibt keine Mandanten- oder Patientendaten in dieses Labor ein. Für den eigenen Betrieb gelten eigene Regeln, siehe unten.",
+    {h: "Berufsgeheimnis und Mandantendaten", id: "berufsgeheimnis", offen: true,
+     kurz: "Wer einer Schweigepflicht unterliegt (Steuerberatung, Rechtsanwaltschaft, Ärzte, Zahnärzte), gibt keine Mandanten- oder Patientendaten in dieses Labor ein. Für den eigenen Betrieb braucht es vorher einen Vertrag nach Art. 28 DSGVO und die Verpflichtung zur Geheimhaltung nach § 203 StGB. Die Einzelheiten stehen direkt darunter.",
      p: [
       "Das Labor ist ein Lernangebot ohne Vertrag zur Auftragsverarbeitung. Wer einer beruflichen Schweigepflicht unterliegt, etwa in der Steuerberatung, als Rechtsanwältin oder als Arzt, gibt hier keine Mandanten- oder Patientendaten ein. Das gilt auch für Namen, Beträge und Dokumente, an denen sich ein Fall erkennen lässt. Zum Üben reichen erfundene Fälle.",
       "Technisch passiert Folgendes: Die Eingaben laufen über Vermittler (IONOS, Cloudflare) zum Rechner. Der Rechner speichert sie nicht dauerhaft, das Sprachmodell läuft lokal auf dem Gerät, und es geht nichts an einen KI-Dienst in der Cloud. Das beantwortet aber nicht, was dein eigener Betrieb rechtlich braucht.",
@@ -84,12 +93,13 @@ S["sicherheit-einfach"] = {
       "**Externe Dienstleister:** Nach § 203 Abs. 3 StGB ist die Weitergabe an mitwirkende Personen nur erlaubt, soweit sie für deren Tätigkeit erforderlich ist. Nach Abs. 4 ist strafbar, wer nicht dafür sorgt, dass sie zur Geheimhaltung verpflichtet werden.",
       "**Steuerberatung:** § 62a StBerG verlangt bei Dienstleistern eine sorgfältige Auswahl und einen Vertrag in Textform mit Verschwiegenheitsverpflichtung. Sitzt der Dienstleister im Ausland, muss der Schutz der Geheimnisse dem im Inland vergleichbar sein.",
       "**Auftragsverarbeitung:** Nach Art. 28 DSGVO braucht es einen Vertrag, der unter anderem regelt, dass der Dienstleister Daten nur auf dokumentierte Weisung verarbeitet und seine Mitarbeitenden zur Vertraulichkeit verpflichtet.",
+      "**Gesundheitsdaten:** Sie gehören zu den besonderen Kategorien personenbezogener Daten. Art. 9 DSGVO untersagt ihre Verarbeitung grundsätzlich und lässt Ausnahmen nur unter Bedingungen zu, zum Beispiel für die Behandlung im Gesundheitsbereich. Ob eine Ausnahme einen KI-Dienst trägt, klärst du vorher mit deiner Datenschutzbeauftragten.",
       "**Standort:** Wo werden die Daten verarbeitet? Bei Dienstleistern außerhalb der EU gelten zusätzliche Regeln (Kapitel V DSGVO).",
       "**Training mit Eingaben:** Kläre in den Vertragsbedingungen, ob Eingaben zum Training verwendet werden, und halte das Ergebnis im Vertrag fest.",
       "**Steuergeheimnis:** § 30 AO bindet Amtsträger, also die Finanzbehörden. Es ist nicht die Grundlage der Verschwiegenheit in der Kanzlei. Die ergibt sich aus § 203 StGB und für Steuerberater aus § 57 StBerG.",
-      "**Quellen** (abgerufen am 22.11.2026): [§ 203 StGB](https://www.gesetze-im-internet.de/stgb/__203.html), [§ 62a StBerG](https://www.gesetze-im-internet.de/stberg/__62a.html), [§ 57 StBerG](https://www.gesetze-im-internet.de/stberg/__57.html), [§ 30 AO](https://www.gesetze-im-internet.de/ao_1977/__30.html), [Art. 28 DSGVO](https://dsgvo-gesetz.de/art-28-dsgvo/).",
+      "**Quellen** (abgerufen am 22.11.2026): [§ 203 StGB](https://www.gesetze-im-internet.de/stgb/__203.html), [§ 62a StBerG](https://www.gesetze-im-internet.de/stberg/__62a.html), [§ 57 StBerG](https://www.gesetze-im-internet.de/stberg/__57.html), [§ 30 AO](https://www.gesetze-im-internet.de/ao_1977/__30.html), [Art. 28 DSGVO](https://dsgvo-gesetz.de/art-28-dsgvo/), [Art. 9 DSGVO](https://dsgvo-gesetz.de/art-9-dsgvo/) (Art. 9 abgerufen am 23.11.2026).",
      ],
-     merke: "Kein Rechtsrat. Lass den Einsatz von Datenschutzbeauftragten, Kammer oder einer Anwältin prüfen, bevor echte Mandantendaten in ein KI-System gehen."},
+     merke: "Kein Rechtsrat. Lass den Einsatz von Datenschutzbeauftragten, Kammer oder einer Anwältin prüfen, bevor echte Mandantendaten in ein KI-System gehen. Für Praxen: {{praxis-gesundheit|KI in der Arztpraxis}}. Zum Abhaken und Ausdrucken: [Entscheidungshilfe für den Betrieb (PDF, 1 Seite)](/static/materialien/entscheidungshilfe-betrieb.pdf)."},
     {h: "Was der Server technisch sieht",
      kurz: "Wie jede Webseite sieht der Server technische Angaben zur Verbindung. Sie dienen dem Betrieb und dem Schutz vor Überlastung.",
      p: [
@@ -172,6 +182,11 @@ INHALT.synonyme = {
   "neuronale netze formel": ["=neuronale-netze", "=training", "mathe", "formel"],
   abitur: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "oberstufe", "mathe"],
   oberstufe: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "mathe"],
+  abi: ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "oberstufe", "mathe"],
+  "klasse 11": ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "oberstufe"],
+  "klasse 12": ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "oberstufe"],
+  "klasse 13": ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "oberstufe"],
+  "oberstufe und abitur": ["=neuronale-netze", "=training", "=bewertung", "=rag-embedding", "=verzerrung-ethik", "=referat", "abitur", "oberstufe"],
   seminararbeit: ["=referat", "=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
   facharbeit: ["=referat", "=neuronale-netze", "=verzerrung-ethik", "=quellen-pruefen", "=rag-embedding", "quelle", "oberstufe"],
   "falscher polizist": ["=falscher-anruf", "=echt-oder-ki", "=fake-news-deepfakes", "betrug", "enkeltrick"],
@@ -374,8 +389,8 @@ INHALT.lernpfade = [
    seiten: ["anlernen", "tabellen-ml", "zeitreihen", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "agenten-planung", "mcp-werkzeuge", "mlops"]},
   {id: "bewerten", stufe: 4, name: "Bewerten", kurz: "Grenzen erkennen, Ergebnisse prüfen, Verantwortung tragen.",
    seiten: ["llm-grenzen", "echt-oder-ki", "falscher-anruf", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "sicherheit-einfach", "kosten-energie"]},
-  {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Erst Betrug am Telefon und mit KI erkennen, dann die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Zum Schluss: Ist das sicher? Ohne Vorwissen.",
-   seiten: ["karte", "falscher-anruf", "echt-oder-ki", "fake-news-deepfakes", "ml", "neuronale-netze", "daten", "training", "tokens-sprachmodelle", "rag-ueberblick", "sicherheit-einfach"]},
+  {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Zuerst der Schutz vor Betrug am Telefon, dann die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Danach Fälschungen erkennen und zum Schluss: Ist das sicher? Ohne Vorwissen.",
+   seiten: ["falscher-anruf", "karte", "ml", "daten", "neuronale-netze", "training", "tokens-sprachmodelle", "rag-ueberblick", "echt-oder-ki", "fake-news-deepfakes", "sicherheit-einfach"]},
   {id: "schule-einstieg", rolle: "schule", name: "Schule: Einstieg", kurz: "Erst ausprobieren, dann prüfen und fair nutzen. Alles ohne Kamera und Mikrofon.",
    seiten: ["experimente", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-fuer-schueler", "prompts-schule", "schueler-alltag-ki", "ml", "quellen-pruefen", "referat", "datenschutz-im-alltag"]},
   {id: "schule-vertiefung", rolle: "schule", name: "Schule: Vertiefung", kurz: "Wie Daten, Netze und Training zusammenspielen, mit Rechnen und Ausprobieren.",
@@ -383,21 +398,22 @@ INHALT.lernpfade = [
   {id: "beruf", rolle: "beruf", name: "KI im Betrieb: In 15 Minuten", kurz: "Vier Seiten für alle, die entscheiden müssen: Was ist KI in zwei Minuten, selbst ausprobieren, wo sie im Betrieb hilft und wie du den Einstieg planst. Danach geht es mit der Praxis weiter.",
    seiten: ["alltag-ki-kurz", "chat", "business", "ki-einfuehrung"]},
   {id: "beruf-praxis", rolle: "beruf", name: "KI im Betrieb: Praxis und Entscheidung", kurz: "Beispiele aus Handwerk, Fertigung und Büro, gut fragen, Kosten, Recht und Datenschutz. Am Ende steht deine Entscheidung mit sechs Fragen zum Abhaken.",
-   seiten: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "prompting", "kosten-energie", "recht", "sicherheit-einfach", "betrieb-entscheidung"]},
+   seiten: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "praxis-gesundheit", "prompting", "kosten-energie", "recht", "sicherheit-einfach", "betrieb-entscheidung"]},
   {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, drei KI-Stunden, sieben Medien-Einheiten und Informationen für Schulleitung und Eltern.",
-   seiten: ["schule-lehrkraefte", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
+   seiten: ["schule-lehrkraefte", "schule-faecher", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
 ];
 INHALT.lernpfade.push(
-  {id: "alltag-15", rolle: "erwachsene", name: "In 15 Minuten: das Wichtigste", kurz: "Fünf kurze Seiten für die Pause, ohne Video und Labor: was KI ist, einen Chat nutzen und prüfen, Betrug erkennen, besser fragen, ist das sicher? Für Berufstätige und alle ohne Vorwissen.",
+  {id: "alltag-15", rolle: "erwachsene", name: "In 15 Minuten: das Wichtigste", get kurz() { return zahlSeiten("alltag-15") + " kurze Seiten für die Pause, ohne Video und Labor: was KI ist, einen Chat nutzen und prüfen, Betrug erkennen, besser fragen, ist das sicher? Für Berufstätige und alle ohne Vorwissen."; },
    seiten: ["alltag-ki-kurz", "alltag-chat", "alltag-betrug", "prompts-alltag", "alltag-sicher"],
    vorn: ["erwachsene"]},
   {id: "eltern", rolle: "eltern", name: "Für Eltern", kurz: "Wie KI im Alltag von Kindern vorkommt, was mit Daten passiert und wie Sie darüber sprechen. Zum Ausprobieren zusammen, ohne Kamera.",
-   seiten: ["eltern-zuhause", "falscher-anruf", "karte", "experimente", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "datenschutz-im-alltag", "sicherheit-einfach"]},
+   seiten: ["eltern-zuhause", "falscher-anruf", "karte", "experimente", "quellen-pruefen", "chat-irrt", "ki-hausaufgaben-fair", "hausaufgaben-familie", "bildschirmzeit", "datenschutz-im-alltag", "sicherheit-einfach"]},
   {id: "eltern-zusammen", rolle: "eltern", name: "Zusammen ausprobieren", kurz: "Eine Anleitung für zwei, mit drei Experimenten von je zehn Minuten und Gesprächsfragen. Ohne Kamera.",
    seiten: ["zusammen-ausprobieren", "ml", "chat", "echt-oder-ki"]},
   {id: "technik", rolle: "technik", name: "Selbst tüfteln", kurz: "Vom Rechner dahinter über Lernen und Netze bis zu Dokumentensuche und Agenten.",
-   seiten: ["selbst-bauen", "hardware", "ml", "neuronale-netze", "rag-ueberblick", "agenten-grundlagen", "sicherheit-einfach"]},
-  {id: "oberstufe", rolle: "oberstufe", name: "Oberstufe und Abitur", kurz: "Neuronale Netze, Training, Bewertung, Embeddings und Verzerrung mit Formeln (Schalter „Mit Mathe“) und mit Quellen zum Weiterlesen. Für Referat, Seminararbeit und Informatikkurs.",
+   seiten: ["selbst-bauen", "architektur", "hardware", "ml", "neuronale-netze", "rag-ueberblick", "agenten-grundlagen", "sicherheit-einfach"]},
+  {id: "oberstufe", rolle: "oberstufe", name: "Oberstufe und Abitur", kurz: "Neuronale Netze, Training, Bewertung, Embeddings und Verzerrung mit Formeln (Schalter „Mit Mathe“) und mit Quellen zum Weiterlesen. Für Abitur, Referat, Facharbeit, Seminararbeit und Informatikkurs.",
+   suchwoerter: ["Abitur", "Oberstufe", "Abi", "Klasse 11", "Klasse 12", "Klasse 13", "Facharbeit", "Seminararbeit"],
    seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen", "referat"],
    vorn: ["schule"]},
 );
@@ -410,38 +426,41 @@ INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "
 INHALT.menue = {
   fuerDich: {
     schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-schule", "referat", "prompts-fuer-schueler", "karte"],
-    lehrende: ["schule-lehrkraefte", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "elternabend"],
-    erwachsene: ["alltag-ki-kurz", "alltag-chat", "alltag-betrug", "prompts-alltag", "alltag-sicher", "karte", "falscher-anruf", "echt-oder-ki", "fake-news-deepfakes", "ml", "daten", "neuronale-netze"],
-    technik: ["selbst-bauen", "betrieb-sicherheit", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen", "neuronale-netze"],
-    beruf: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "kamera-grenzen", "prompting", "business", "ki-einfuehrung", "kosten-energie", "betrieb-entscheidung", "sicherheit-einfach"],
-    eltern: ["eltern-zuhause", "falscher-anruf", "zusammen-ausprobieren", "echt-oder-ki", "quellen-pruefen", "ki-hausaufgaben-fair", "bildschirmzeit", "sicherheit-einfach"],
+    lehrende: ["schule-lehrkraefte", "schule-faecher", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "elternabend"],
+    erwachsene: ["alltag-ki-kurz", "alltag-chat", "alltag-betrug", "prompts-alltag", "alltag-sicher", "falscher-anruf", "chat-irrt", "karte"],
+    technik: ["selbst-bauen", "architektur", "betrieb-sicherheit", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen", "neuronale-netze"],
+    beruf: ["praxis-gesundheit", "uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "kamera-grenzen", "prompting", "business", "ki-einfuehrung", "kosten-energie", "betrieb-entscheidung", "sicherheit-einfach"],
+    eltern: ["eltern-zuhause", "falscher-anruf", "zusammen-ausprobieren", "echt-oder-ki", "chat-irrt", "hausaufgaben-familie", "bildschirmzeit", "sicherheit-einfach"],
   },
   reihenfolge: {
-    schule: ["Experimente", "Medienkompetenz", "Grundlagen", "Oberstufe"],
-    lehrende: ["Für die Schule", "Medienkompetenz", "Grundlagen", "Oberstufe"],
-    erwachsene: ["Alltag in 15 Minuten", "Grundlagen", "Medienkompetenz", "Sprache", "Oberstufe"],
-    technik: ["Der Rechner dahinter", "Wissen und RAG", "Agenten", "Sprache", "Sehen", "Oberstufe"],
-    beruf: ["KI im Betrieb", "Business-Use-Cases", "Sprache", "Sicherheit"],
-    eltern: ["Medienkompetenz", "Sicherheit", "Für die Schule"],
+    schule: ["Experimente", "Medienkompetenz", "Grundlagen", "Oberstufe und Abitur"],
+    lehrende: ["Für die Schule", "Medienkompetenz", "Grundlagen", "Oberstufe und Abitur"],
+    erwachsene: ["Alltag in 15 Minuten", "Medienkompetenz", "Sicherheit", "Grundlagen", "Sprache", "Oberstufe und Abitur"],
+    technik: ["Der Rechner dahinter", "Wissen und RAG", "Agenten", "Sprache", "Sehen", "Oberstufe und Abitur"],
+    beruf: ["KI im Betrieb", "Business-Use-Cases", "Sicherheit", "Sprache"],
+    eltern: ["Medienkompetenz", "Sicherheit", "Für die Schule", "Grundlagen"],
   },
   sammel: {
     Sicherheit: ["sicherheit-einfach", "datenschutz-im-alltag", "agenten-sicherheit", "recht"],
-    Oberstufe: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen"],
+    "Oberstufe und Abitur": ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen"],
   },
 };
 /* Zahl der Seiten eines Pfades aus den Pfaddaten, damit Startseitentext und "Schritt n von m" nie auseinanderlaufen */
 const ZAHLWORT = ["null", "eine", "zwei", "drei", "vier", "fünf", "sechs", "sieben", "acht", "neun", "zehn", "elf", "zwölf", "dreizehn", "vierzehn", "fünfzehn"];
-function pfadSatz(id, rest) {
+function zahlSeiten(id) {
   const p = INHALT.lernpfade.find((x) => x.id === id);
   const n = p ? p.seiten.filter((x) => INHALT.seiten[x] && INHALT.seiten[x].typ !== "start" && !INHALT.seiten[x].versteckt && INHALT.seiten[x].status !== "bald").length : 0;
   const w = ZAHLWORT[n] || String(n);
-  return w.charAt(0).toUpperCase() + w.slice(1) + " kurze Seiten: " + rest;
+  return w.charAt(0).toUpperCase() + w.slice(1);
+}
+function pfadSatz(id, rest) {
+  return zahlSeiten(id) + " Seiten: " + rest;
 }
 INHALT.startRollen = {
   ohne: {h1: "KI verstehen, indem du sie ausprobierst", satz: "Frag eine [[ki|KI]], lass Bilder erkennen, höre Sprache. Kostenlos und ohne Anmeldung."},
   schule: {h1: "Experimente, leicht erklärt", satz: "Probiere aus, wie KI arbeitet. Ohne Kamera und ohne Anmeldung. Darfst du das Labor für Hausaufgaben nutzen? Es ist zum Verstehen da. Was du abgibst, regeln deine Schule und deine Lehrkraft. Frag sie, im Zweifel gib an, dass du KI genutzt hast ({{ki-hausaufgaben-fair|mehr dazu}}).",
     bloecke: ["experimente", "empfohlen", "oberstufe"],
-    oberstufe: {titel: "Oberstufe und Abitur: Mathe, Quellen, Formeln", satz: "Neuronale Netze, Training und Bewertung mit Rechnung, dazu Quellen für Referat und Seminararbeit.", pfad: "oberstufe"},
+    oberstufe: {titel: "Oberstufe und Abitur", satz: "Mathe, Quellen, Formeln: Neuronale Netze, Training und Bewertung mit Rechnung, dazu Quellen für Referat, Facharbeit und Seminararbeit.", pfad: "oberstufe"},
     empfohlen: [
       {id: "echt-oder-ki", satz: "Woran du Fälschungen von KI erkennst."},
       {id: "ki-hausaufgaben-fair", satz: "Darfst du das Labor für Hausaufgaben nutzen? Wann KI beim Lernen hilft und wann sie zum Schummeln wird."},
@@ -461,12 +480,13 @@ INHALT.startRollen = {
       {id: "medien-stunde-6", satz: "Mit der Prompt-Werkstatt bessere Fragen stellen."},
       {id: "medien-stunde-7", satz: "Poster zu KI im eigenen Tag, Beurteilung in der Runde."},
       {id: "schule-lehrkraefte", satz: "Checkliste, Fachbegriffe und Kurzantworten."},
+      {id: "schule-faecher", satz: "Welche Fächer passen? Anknüpfungen für Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte."},
       {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."},
       {id: "elternabend", satz: "Info-Blatt, Leitfaden und Antworten auf Elternfragen."}]},
-  erwachsene: {h1: "KI verstehen, Schritt für Schritt", get satz() { return pfadSatz("erwachsene", "erst Betrug erkennen, dann die Grundlagen. Ohne Vorwissen."); },
+  erwachsene: {h1: "KI verstehen, Schritt für Schritt", get satz() { return pfadSatz("erwachsene", "zuerst der Schutz vor Betrug am Telefon, dann die Grundlagen, danach Fälschungen erkennen, zum Schluss Datenschutz. Ohne Vorwissen."); },
     bloecke: ["empfohlen"], pfad: "erwachsene",
     empfohlen: [
-      {id: "alltag-ki-kurz", h: "In 15 Minuten: das Wichtigste", satz: "Fünf kurze Seiten für die Pause: KI, Chat prüfen, Betrug erkennen, besser fragen, Datenschutz."},
+      {id: "alltag-ki-kurz", h: "In 15 Minuten: das Wichtigste", get satz() { return zahlSeiten("alltag-15") + " kurze Seiten für die Pause: KI, Chat prüfen, Betrug erkennen, besser fragen, Datenschutz."; }},
       {id: "karte", satz: "Eine Landkarte der Begriffe in zwei Minuten."},
       {id: "falscher-anruf", satz: "Auflegen, zurückrufen, 110: Schutz vor Enkeltrick und Schockanruf."},
       {id: "echt-oder-ki", satz: "Woran du gefälschte Bilder, Texte und Stimmen erkennst."},
@@ -481,13 +501,15 @@ INHALT.startRollen = {
     bloecke: ["empfohlen", "repo"],
     empfohlen: [
       {id: "selbst-bauen", satz: "Einkaufsliste, Befehle zum Kopieren und häufige Fehler. Der Aufbau dauert einen halben bis ganzen Tag."},
+      {id: "architektur", satz: "Wie das Labor aufgebaut ist: Diagramm vom Browser bis zum Sprachmodell."},
       {id: "betrieb-sicherheit", satz: "Ports, Daten, Logs und Sicherheitsmaßnahmen des Labors."},
       {id: "hardware", satz: "Der Rechner dahinter, mit Messwerten live."},
       {id: "lizenzen", h: "Modelle und Lizenzen", satz: "Welche Modelle hier laufen und unter welcher Lizenz."}],
     repo: {titel: "Quellcode auf GitHub", satz: "Das Repo ist öffentlich, mit Anleitung und Vorab-Check.", href: "https://github.com/greeves89/jetson-ai-showcase", knopf: "Repo öffnen"}},
-  beruf: {h1: "Was KI deinem Betrieb bringt", satz: "Einsatzfälle aus Handwerk, Fertigung und Büro, der Überblick in 15 Minuten und am Ende deine Entscheidung.",
+  beruf: {h1: "Was KI deinem Betrieb bringt", satz: "Einsatzfälle aus Handwerk, Fertigung, Büro und Praxis, der Überblick in 15 Minuten und am Ende deine Entscheidung.",
     bloecke: ["minuten", "empfohlen"],
     empfohlen: [
+      {id: "praxis-gesundheit", h: "KI in der Arztpraxis", satz: "Für Praxen, Zahnärzte und Therapeuten: was KI bringt, was nicht hineingehört und was Schweigepflicht und DSGVO verlangen."},
       {id: "uc-handwerk", satz: "Angebot, Baustellenfoto und Rechnung: Schreibarbeit im Handwerk."},
       {id: "uc-fertigung-sichtpruefung", satz: "Ausschuss mit wenigen Beispielbildern erkennen, für Fertigung und Qualität."},
       {id: "uc-buero-dokumente", satz: "Fragen an Dokumente, mit Quelle beantwortet. Mit Beispiel für ein Steuerbüro."},
@@ -500,8 +522,9 @@ INHALT.startRollen = {
       {id: "eltern-zuhause", satz: "Ist das Labor sicher für Kinder? Was Sie zu Hause wissen sollten."},
       {id: "falscher-anruf", satz: "Schutz vor Enkeltrick und Schockanruf, auch für die Großeltern."},
       {id: "zusammen-ausprobieren", satz: "Drei Experimente zu zweit, mit Gesprächsfragen. Ohne Kamera."},
-      {id: "experimente", satz: "Zum Ausprobieren, ganz ohne Kamera."},
+      {id: "hausaufgaben-familie", satz: "KI bei den Hausaufgaben: eine Vereinbarung für zu Hause, getrennt für 12 und 15 Jahre."},
       {id: "quellen-pruefen", satz: "Wem man glauben kann: ein Gespräch mit dem Kind."},
+      {id: "chat-irrt", satz: "Drei geprüfte Fälle, in denen das kleine Modell danebenliegt, mit der richtigen Antwort."},
       {id: "sicherheit-einfach", satz: "Was gespeichert wird und was nicht."}]},
 };
 INHALT.alterHinweis = "Kamera, Mikro und Gesicht ab 16 Jahren, Jüngere nur mit Einverständnis der Eltern, kein Alterscheck.";

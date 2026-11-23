@@ -170,3 +170,28 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 /* Meldung des Servers im Chat: Hinweis-Kasten statt Blase */
 .msg.ki.msg-hinweis{background:none;padding:0;max-width:100%;box-shadow:none}
 .msg-hinweis .last-box{width:100%}
+
+/* ---------- Chat: Codebloecke, Kurz-Schalter, Datenschutzhinweis, Betrugs-Kasten (Runde 5) ---------- */
+.msg.ki:has(.antwort-code){max-width:100%;min-width:0}
+.d-text .antwort-code{margin:8px 0;border-radius:10px;overflow:hidden;background:var(--flaeche);border:1px solid var(--fuell);max-width:100%}
+.antwort-code .ac-kopf{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px;padding:2px 6px 2px 12px;background:var(--flaeche3);font-size:14px}
+.antwort-code .ac-sprache{font-family:var(--mono);color:var(--leise)}
+.antwort-code .ac-rechts{display:flex;align-items:center;gap:8px}
+.antwort-code .ac-status{font-size:14px;color:var(--leise)}
+.antwort-code .ac-knopf{min-height:44px;min-width:44px;display:inline-flex;align-items:center;gap:6px}
+.antwort-code pre{margin:0;padding:10px 12px;overflow-x:auto;font:14px/1.5 var(--mono);white-space:pre;tab-size:2;max-width:100%}
+.antwort-code pre code{background:none;padding:0;font-size:inherit;white-space:inherit}
+.d-kurz{margin-top:12px;min-height:44px}
+.daten-hinweis{display:flex;gap:10px;align-items:flex-start;margin:10px 0;padding:10px 12px;border-radius:12px;background:var(--flaeche2);font-size:15px;line-height:1.4}
+.daten-hinweis .ic{width:20px;height:20px;flex:none;margin-top:2px}
+.daten-hinweis p{margin:0}
+.daten-hinweis p + p{margin-top:2px}
+.seitenbreite > .daten-hinweis{margin:12px 0}
+.betrug-kasten{display:flex;gap:12px;align-self:stretch;padding:12px 14px;border-radius:14px;border:2px solid var(--orange);background:color-mix(in srgb,var(--orange) 10%,var(--flaeche));font-size:16px;line-height:1.45}
+.betrug-kasten .ic{width:24px;height:24px;flex:none;color:var(--orange);margin-top:2px}
+.betrug-kasten .bk-titel{margin:0 0 4px;font-weight:700}
+.betrug-kasten ul{margin:0;padding-left:20px}
+.betrug-kasten .bk-mehr{margin:6px 0 0}
+.betrug-kasten a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+.d-chatbox .verlauf:empty{display:none}
+.d-chatbox{min-height:0}

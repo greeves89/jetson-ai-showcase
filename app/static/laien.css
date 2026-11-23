@@ -580,7 +580,7 @@ details.mehr.immer-offen>summary{display:none}
 /* ---------- Druckansicht (alle Lernseiten, Entscheidungshilfe): nur Inhalt, schwarz auf weiss, Kopf mit Titel und Adresse ---------- */
 .druck-kopf{display:none}
 @media print{
-  @page{size:A4;margin:14mm 14mm 16mm}
+  @page{size:A4;margin:12mm}
   :root{color-scheme:light;--bg:#fff;--flaeche:#fff;--flaeche2:#fff;--flaeche3:#eee;--text:#000;--leise:#333;--linie:#999;--linie2:#bbb;--akzent:#000;--akzent-h:#000;--akzent-fl:#000;
     --gruen:#000;--orange:#000;--rot:#000;--fuell:#fff;--glas:#fff;--glas-dicht:#fff;--glas-kante:#999;--glas-schatten:none;--schatten:none}
   html,body{background:#fff!important;color:#000!important;font-size:12pt!important;line-height:1.4!important}
@@ -598,8 +598,26 @@ details.mehr.immer-offen>summary{display:none}
   a{color:#000!important;text-decoration:underline}
   .gl{background:none!important;text-decoration:none!important;border:0!important}
   .gl::after{content:none!important}
-  details:not([open]){display:none!important}                 /* zugeklappte Abschnitte (Mehr dazu, Lernziele) haben auf Papier nur eine leere Titelzeile */
+  /* Mehr dazu: aufgeklappt gedruckt (zusaetzlich zum Oeffnen in beforeprint), ohne Titelzeile; Lernziele behalten ihre Zeile */
+  details::details-content{content-visibility:visible!important;display:block!important;height:auto!important;opacity:1!important}
+  details.mehr>summary{display:none!important}
   details>summary{list-style:none}
+  details>summary::-webkit-details-marker{display:none}
+  .mehr-in{padding:0!important;max-height:none!important;overflow:visible!important}
+  .kurz.auto{display:none!important}
+  .visual{break-inside:avoid}
+  /* Quiz nur auf Arbeitsblaettern, sonst nicht drucken */
+  .block.quiz:not(.quiz-druck){display:none!important}
+  .quiz-tipp,.quiz-pruefen,.quiz-nochmal{display:none!important}
+  /* Herunterladen-Knoepfe weg, dafuer der Hinweis "Als PDF: Dateiname" */
+  .downloads-box .downloads,.downloads-box .downloads-titel{display:none!important}
+  .downloads-box .druck-pdf{display:block!important;margin:0 0 8pt;font-size:11pt}
+  /* Bedienelemente sind auf Papier nutzlos (Erklaerungs-Woerter .gl bleiben Text) */
+  button:not(.gl),.btn,input[type=range],textarea,select,.sprung-block,.prompt-block .pb-knoepfe,.antwort-code .ac-kopf{display:none!important}
+  .prompt-block{border:1pt solid #999!important;padding:6pt!important;break-inside:avoid}
+  .prompt-block .pb-text{font-size:11pt!important}
+  /* Checkliste (ein Blatt): nur Kopf, Titel und die Fragen, alles andere bleibt weg */
+  .seitenbreite:has([data-testid="checkliste"])>*:not(.druck-kopf):not(.hero):not(:has([data-testid="checkliste"])){display:none!important}
   /* Kopf: Titel und Adresse */
   .druck-kopf{display:flex!important;flex-direction:column;gap:2pt;margin:0 0 10pt;padding:0 0 6pt;border-bottom:1.5pt solid #000;font-size:10pt}
   .druck-kopf b{font-size:12pt}
@@ -630,3 +648,64 @@ details.mehr.immer-offen>summary{display:none}
 .rollen-chip .ic{color:var(--akzent)}
 .nav-teil .nav-titel{padding-top:10px}
 @media print{.rollen-zeile{display:none!important}}
+
+/* ---------- Beispiel-Prompts (Kopieren, Im Chat ausprobieren), Runde 5 ---------- */
+.prompt-block{margin:12px 0;padding:12px 14px;border-radius:14px;background:var(--flaeche2);border:1px solid var(--fuell);max-width:100%}
+.prompt-block .pb-kopf{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;font-size:15px}
+.prompt-block .pb-status{font-size:14px;color:var(--leise)}
+.prompt-block .pb-text{margin:6px 0 10px;white-space:pre-wrap;overflow-wrap:anywhere;word-break:break-word;font-size:16px;line-height:1.5;color:var(--text)}
+.prompt-block .pb-knoepfe{display:flex;flex-wrap:wrap;gap:8px}
+.prompt-block .pb-knopf{min-height:44px;display:inline-flex;align-items:center;gap:6px}
+@media(max-width:600px){.prompt-block .pb-knopf{flex:1 1 100%;justify-content:center}}
+/* Codebloecke und Prompt-Texte brechen nie aus der Karte aus */
+.codeblock{max-width:100%}
+
+.druck-pdf{display:none}
+
+/* Druck kompakt (Runde 5): lange Seiten wie die Handreichung bleiben bei hoechstens acht A4-Seiten */
+@media print{
+  html,body{font-size:10.5pt!important;line-height:1.35!important}
+  h2{font-size:12.5pt!important;margin:8pt 0 3pt!important}
+  .abschnitt{margin:0 0 6pt!important;padding:0!important}
+  .visual{margin:4pt 0!important;transform-origin:top left}
+  .visual svg,.visual img{max-height:42mm!important;width:auto!important;max-width:100%!important}
+  .visual .raster,.visual [class*=raster]{gap:4pt!important}
+  table{font-size:9.5pt!important}
+  td,th{padding:2pt 4pt!important}
+  p{margin:0 0 4pt!important}
+  .alltag,.merke{margin:4pt 0!important;padding:4pt 6pt!important;border:1pt solid #999!important}
+}
+
+/* Suche: gewaehlter Treffer (Pfeiltasten) und Lernpfad-Treffer */
+.nav-aktiv{outline:3px solid var(--akzent);outline-offset:-3px;border-radius:12px}
+.such-pfad-link{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
+
+/* Willkommens-Fenster kompakt (Runde 5): auf dem iPhone SE (375x667) stehen alle sechs Rollen und "Später entscheiden" ohne Scrollen */
+@media(max-width:560px),(max-height:720px){
+  dialog.wk{padding:14px 12px 12px}
+  dialog.wk h2{font-size:20px;margin:0 48px 4px 0}
+  dialog.wk .wk-satz{font-size:15px;line-height:1.3;margin:0 0 10px}
+  dialog.wk .wk-x{top:6px;right:6px}
+  dialog.wk .wk-wege{grid-template-columns:minmax(0,1fr);gap:8px}
+  dialog.wk .wk-weg{flex-direction:row;align-items:center;gap:8px;min-height:56px;padding:6px 8px}
+  dialog.wk .wk-ic{width:32px;height:32px;border-radius:10px}
+  dialog.wk .wk-ic svg.ic{width:18px;height:18px}
+  dialog.wk .wk-text b{font-size:14px;line-height:1.2}
+  dialog.wk .wk-text .wk-kurz,dialog.wk .wk-text small{display:none}
+  dialog.wk .wk-merken{min-height:44px;margin-top:8px;font-size:14px}
+  dialog.wk .wk-aktion{margin-top:4px}
+  dialog.wk .wk-spaeter{min-height:44px}
+  dialog.wk .wk-klein{margin:8px 0 0;font-size:13px;line-height:1.3}
+}
+
+/* Sprungmarken "Auf dieser Seite" (Runde 5) */
+.sprung-block{margin:0 0 var(--sp,16px);border-radius:14px;background:var(--flaeche2)}
+.sprung-block>summary{display:flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;font-size:16px;font-weight:600;cursor:pointer;list-style:none}
+.sprung-block>summary::-webkit-details-marker{display:none}
+.sprung-block>summary svg.ic{width:14px;height:14px;color:var(--leise);transition:transform .25s var(--feder)}
+.sprung-block[open]>summary svg.ic{transform:rotate(90deg)}
+.sprung-block>summary small{margin-left:auto;font-size:14px;font-weight:500;color:var(--leise)}
+.sprung-liste{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0 12px 12px}
+.sprung-chip{display:inline-flex;align-items:center;min-height:44px;height:auto;padding:6px 14px;text-align:left;line-height:1.25;text-decoration:none;white-space:normal}
+@media print{.sprung-block{display:none!important}}
+@media(min-width:361px) and (max-width:560px),(min-width:361px) and (max-height:720px){dialog.wk .wk-wege{grid-template-columns:repeat(2,minmax(0,1fr))}}

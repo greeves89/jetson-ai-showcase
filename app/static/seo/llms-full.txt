@@ -56,7 +56,7 @@ Merke: Je größer die Folgen, desto weniger reicht ein Chatbot allein.
 
 ## Mehr dazu
 
-Wie du Quellen prüfst, steht auf Quellen prüfen. Warum Modelle erfinden, auf Grenzen von Sprachmodellen.
+Drei geprüfte Fälle: Wenn der Chat irrt. Wie du Quellen prüfst: Quellen prüfen. Warum Modelle erfinden: Grenzen von Sprachmodellen.
 
 ## Das nimmst du mit
 
@@ -71,7 +71,7 @@ Bereich: Alltag in 15 Minuten. Stand: 2026-11-23.
 
 Kurz gesagt: Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine gefälschte Stimme. Ein Codewort in der Familie hilft.
 
-Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen.
+Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Das ist die Kurzfassung. Die ganze Seite mit Quiz und Quellen heißt „Falscher Anruf“.
 
 ## Drei Schritte
 
@@ -112,7 +112,7 @@ Einkauf, Brief an die Vermieterin, Urlaubsplan. Ersetze die Angaben durch deine.
 
 ## Dann prüfen
 
-Hänge diesen Satz an: „Sag mir am Ende, was du nicht sicher weißt und was ich selbst nachprüfen sollte.“
+Lass die KI am Ende ihre Unsicherheiten nennen, und prüfe trotzdem selbst.
 
 ## Das nimmst du mit
 
@@ -360,7 +360,7 @@ Erklärvideo: KI im Business (1.3 Minuten), __BASIS__/static/videos/ki-im-busine
 # Daten, der Rohstoff
 
 Adresse: __BASIS__/daten
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Merkmale sind die Eingabe, das Etikett ist die gesuchte Antwort. Beides kommt aus den Daten. Vielfalt und Qualität zählen mehr als reine Menge.
 
@@ -432,11 +432,11 @@ Erklärvideo: Daten, der Rohstoff (1.5 Minuten), __BASIS__/static/videos/daten-r
 # Neuronale Netze von Grund auf
 
 Adresse: __BASIS__/neuronale-netze
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Neuron bildet eine gewichtete Summe seiner Eingaben und entscheidet per Aktivierung, wie stark es meldet. Schichten bauen Merkmale aus Merkmalen auf. Erst die Aktivierung dazwischen macht mehrere Schichten wertvoll.
 
-Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen. Wie entscheidet eine davon, und was entsteht, wenn man viele verschaltet?
+Hinter vielen KI-Anwendungen steckt ein Netz aus winzigen Rechenstellen. Wie entscheidet eine davon, und was entsteht, wenn man viele verschaltet? Rechnung und Aufgaben stehen unter „Mit Mathe“ und im Abschnitt „Rechne selbst nach“.
 
 ## Ein Neuron ist ein kleiner Entscheider
 
@@ -447,6 +447,10 @@ Ein künstliches Neuron ist nur eine kleine Rechenstelle: mehrere Zahlen hinein,
 Eingaben mal Gewichte, Summe bilden, Schwelle prüfen. Die Gewichte stellt das Training ein. Die Formel steht unter „Mit Mathe“.
 
 Merke: Ein Neuron berechnet: Eingaben mal Gewichte, Summe, Verschiebung, Aktivierung. Das Lernen besteht darin, die Gewichte zu finden.
+
+## Rechne selbst nach
+
+Drei Aufgaben mit Lösungen zum Nachrechnen, mit dem Taschenrechner und ohne Chat.
 
 ## Schichten: Merkmale aus Merkmalen
 
@@ -504,7 +508,7 @@ Erklärvideo: Neuronale Netze (1.3 Minuten), __BASIS__/static/videos/neuronale-n
 # Wie ein Modell lernt
 
 Adresse: __BASIS__/training
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Der Verlust misst den Fehler. Training heißt, die Gewichte so zu verschieben, dass er sinkt. Gradientenabstieg geht in kleinen Schritten bergab.
 
@@ -580,7 +584,7 @@ Erklärvideo: Wie ein Modell lernt (1.4 Minuten), __BASIS__/static/videos/traini
 # Wie gut ist ein Modell?
 
 Adresse: __BASIS__/bewertung
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Bei seltenen Ereignissen täuscht die Genauigkeit. Die Konfusionsmatrix zeigt die vier Fälle und damit, wo Fehler stecken. Precision fragt, wie viele Alarme stimmen.
 
@@ -652,7 +656,7 @@ Erklärvideo: Wie gut ist es? (1.3 Minuten), __BASIS__/static/videos/bewertung-k
 # Fairness, Verzerrung und Verantwortung
 
 Adresse: __BASIS__/verzerrung-ethik
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Ein Modell wiederholt Muster aus seinen Daten, auch unfaire. Verzerrung entsteht durch Daten, Auswahl, Etiketten und Rückkopplung. Ein Merkmal wegzulassen reicht nicht, denn Stellvertreter schleichen sich ein.
 
@@ -724,7 +728,7 @@ Erklärvideo: Fairness (1.1 Minuten), __BASIS__/static/videos/verzerrung-fairnes
 # Recht und Regeln im Überblick
 
 Adresse: __BASIS__/recht
-Bereich: Grundlagen. Stand: 2026-11-22.
+Bereich: Grundlagen. Stand: 2026-11-23.
 
 Kurz gesagt: Personenbezogene Daten brauchen eine Rechtsgrundlage, einen Zweck und Sparsamkeit. Dienstleister brauchen einen Auftragsvertrag. Die EU-KI-Verordnung ordnet Systeme nach Risiko.
 
@@ -2723,7 +2727,7 @@ Mit Schweigepflicht (Steuerberatung, Rechtsanwaltschaft, Ärzte) gehören Mandan
 
 ## Drucken oder als PDF speichern
 
-Der Druckdialog deines Browsers genügt. Die Haken bleiben nur in dieser Sitzung, mit „Fortschritt merken“ auch beim nächsten Besuch.
+Am besten das PDF oben: eine Seite A4 mit Kästchen und Notizfeld. Der Druckdialog deines Browsers geht auch, die Haken bleiben nur in dieser Sitzung.
 
 ## Fragen und Kontakt
 
@@ -2782,6 +2786,68 @@ Antwort: Es gibt keine Reserve, du brauchst Tempo oder Stichproben. Die Prüfung
 
 Frage: Auf den Bildern sind Hände der Prüfenden zu sehen. Was tust du?
 Antwort: Mit Datenschutz und Betriebsrat klären, ob das zulässig ist, oder den Bildausschnitt auf die Teile begrenzen. Erkennbare Beschäftigte machen Bilder zu personenbezogenen Daten. Am besten zeigen die Bilder nur Teile, sonst wird früh geklärt.
+
+# KI in der Arztpraxis: was geht, was nicht
+
+Adresse: __BASIS__/praxis-gesundheit
+Bereich: KI im Betrieb. Stand: 2026-11-23.
+
+Kurz gesagt: KI kann in der Praxis bei Texten helfen, die keine Patientendaten enthalten: Vorlagen für Terminerinnerungen, allgemeine Briefe, Texte für die Website, Prüfschemata für die Abrechnung an erfundenen Fällen. Patientendaten gehören nicht in eine Cloud-KI: Die Schweigepflicht nach § 203 StGB, Gesundheitsdaten als besondere Kategorie nach Art. 9 DSGVO und die Pflicht zum Vertrag mit Dienstleistern nach Art. 28 DSGVO setzen enge Grenzen. Hinweise zur Datenschutz-Folgenabschätzung und zur Aufsichtsbehörde. Kein Rechtsrat.
+
+Für Praxen, Zahnärzte und Therapeuten: Was KI im Alltag bringen kann, was nicht in eine Cloud-KI gehört und was Schweigepflicht und DSGVO verlangen. Kein Rechtsrat.
+
+## Was KI in der Praxis bringen kann
+
+KI schreibt Entwürfe: Erinnerungstexte, allgemeine Briefe, Website-Texte, Prüfschemata für die Abrechnung an erfundenen Fällen. Kein Patient kommt im Text vor.
+
+Merke: In allen vier Aufgaben kommt kein Patient im Text vor. Das ist die Bedingung.
+
+## Was nicht hineingehört
+
+Namen mit Befund, Röntgenbilder, Anamnese, Terminlisten mit Namen und echte Abrechnungsfälle gehören nicht in eine Cloud-KI und nicht in dieses Labor.
+
+Merke: Im Zweifel: erfundener Fall statt echtem Fall.
+
+## Schweigepflicht: § 203 StGB
+
+Wer als Arzt, Zahnarzt oder Angehöriger eines anderen Heilberufs ein anvertrautes Geheimnis unbefugt offenbart, kann sich strafbar machen. Dienstleister müssen zur Geheimhaltung verpflichtet sein.
+
+## Gesundheitsdaten: Art. 9 DSGVO
+
+Gesundheitsdaten sind besondere Kategorien personenbezogener Daten. Ihre Verarbeitung ist grundsätzlich untersagt, Ausnahmen gibt es unter Bedingungen, etwa für die Behandlung.
+
+## Auftragsverarbeitung: Art. 28 DSGVO
+
+Verarbeitet ein Dienstleister Daten in deinem Auftrag, braucht es einen Vertrag. Er regelt unter anderem, dass der Dienstleister nur auf deine dokumentierte Weisung arbeitet.
+
+## Datenschutz-Folgenabschätzung und Aufsichtsbehörde
+
+Bei umfangreicher Verarbeitung besonderer Kategorien kann eine Folgenabschätzung nötig sein. Das klärst du mit der Datenschutzbeauftragten. Die Aufsicht ist Ländersache.
+
+## Dein nächster Schritt
+
+Zum Abhaken: die sechs Fragen der Entscheidungshilfe. Frage 3 steht für Daten und Rechtsgrundlage.
+
+## Quellen
+
+Alle Quellen am 23.11.2026 abgerufen.
+
+## Das nimmst du mit
+
+- KI hilft bei Texten ohne Patientendaten: Vorlagen mit Platzhaltern, allgemeine Briefe, Website-Texte, Prüfschemata an erfundenen Fällen.
+- Patientendaten gehören nicht in eine Cloud-KI und nicht in dieses Labor. Schweigepflicht (§ 203 StGB), Art. 9 und Art. 28 DSGVO setzen die Grenze.
+- Ob ein Einsatz mit echten Daten möglich ist, klären Datenschutzbeauftragte und Kammer vorher. Diese Seite ist kein Rechtsrat.
+
+## Fragen und Antworten
+
+Frage: Eine Praxis will Erinnerungen an Patienten verschicken. Was ist ohne Vertrag mit einem KI-Anbieter unbedenklich?
+Antwort: Einen Entwurf mit Platzhaltern wie [NAME] und [TERMIN] schreiben lassen. Ein Entwurf mit Platzhaltern enthält keinen Patienten. Die Namen setzt die Praxissoftware ein. In allen anderen Fällen gehen Patientendaten an einen Dienstleister.
+
+Frage: Welche Aussage zu § 203 StGB trifft zu?
+Antwort: Er erlaubt mitwirkende Personen, wenn sie zur Geheimhaltung verpflichtet werden. Absatz 1 nennt Ärzte, Zahnärzte und weitere Heilberufe. Absatz 3 erlaubt die Einbindung mitwirkender Personen, soweit erforderlich, und Absatz 4 verlangt, dass sie zur Geheimhaltung verpflichtet werden.
+
+Frage: Warum reicht ein kostenloses Konto bei einem KI-Dienst für Patientendaten nicht aus?
+Antwort: Gesundheitsdaten sind besonders geschützt, und ein Dienstleister braucht einen Vertrag. Art. 9 DSGVO schützt Gesundheitsdaten besonders, und Art. 28 verlangt für die Verarbeitung im Auftrag einen Vertrag. Ein Konto allein ist keiner.
 
 # Sichtprüfung: Gutteil oder Ausschuss
 
@@ -3580,9 +3646,9 @@ Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensib
 Adresse: __BASIS__/betrieb-sicherheit
 Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
-Kurz gesagt: Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama nur lokal auf 11434, ausgehender Tunnel nur im öffentlichen Betrieb. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.
+Kurz gesagt: Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Server bei IONOS und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.
 
-Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet. Hier stehen Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates, so wie sie sind.
+Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind. Mit Befehlen zum Nachprüfen.
 
 ## Teststand
 
@@ -3590,9 +3656,13 @@ Nur ein Gerät getestet: Jetson Orin Nano Developer Kit (Super), 8 GB, Ollama 0.
 
 ## Ports
 
-Nach außen braucht das Labor nur 8443. Ollama (11434) soll nur lokal hören. Ein Tunnel verbindet ausgehend, ohne Portfreigabe.
+Nach außen braucht das Labor nur 8443. Ollama (11434) soll nur lokal hören, am Referenzgerät tut es das aktuell nicht. Ein Tunnel verbindet ausgehend, ohne Portfreigabe.
 
-Merke: Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört.
+Merke: Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört. Am Referenzgerät tut es das noch nicht.
+
+## Der öffentliche Weg: IONOS und Cloudflare
+
+Im öffentlichen Betrieb laufen Eingaben über einen Server bei IONOS (nginx) und den Tunnel von Cloudflare. Dort endet die Verschlüsselung. HSTS und Indexierung gibt es nur mit OEFFENTLICH=1.
 
 ## Datenort
 
@@ -3621,7 +3691,7 @@ Repo aktualisieren, setup.sh ausführen, Dienst neu starten. Ein Neustart beende
 ## Das nimmst du mit
 
 - Nur ein Gerät ist getestet. Prüfe jede Angabe auf deinem Gerät.
-- Nach außen braucht das Labor nur 8443, Ollama soll nur lokal hören (prüfen mit ss -tlnp).
+- Nach außen braucht das Labor nur 8443. Ollama soll nur lokal hören (prüfen mit ss -tlnp), am Referenzgerät hört es aktuell auf allen Schnittstellen.
 - Daten bleiben auf dem Jetson, im Journal stehen Adresse, Pfad und Status. Die Aufbewahrung legt der Betreiber fest.
 
 # Ist das sicher? Was wird gespeichert?
@@ -3631,7 +3701,7 @@ Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.
 
-Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher. Echte Kunden-, Mandanten- oder Personaldaten gehören nicht hinein. Für Kinder unter 16 empfehlen wir, den Chat gemeinsam mit einer erwachsenen Person zu nutzen; Kamera, Mikrofon und Gesicht ab 16. Darunter siehst du, was du erlaubt hast, und kannst es widerrufen.
+Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner. Gib keine echten Namen, Passwörter oder Kundendaten ein.
 
 ## Die kurze Antwort
 
@@ -3642,6 +3712,10 @@ Du brauchst kein Konto. Kamerabilder und Aufnahmen werden nicht gespeichert. Ein
 Einige kleine Merkzettel im Browser und ein Cookie. Keine Werbung, keine Verfolgung. Nur das Cookie geht bei jedem Aufruf mit, die Merkzettel bleiben bei dir.
 
 Merke: Du kannst das alles jederzeit selbst löschen: in den Einstellungen deines Browsers unter „Websitedaten“ oder „Cookies und Websitedaten“. Danach fängt die Seite wieder von vorn an.
+
+## Technische Details
+
+Für alle, die es genau wissen wollen: eine Tabelle mit jedem Eintrag, wofür er da ist und wie lange er bleibt. Zum Verstehen ist sie nicht nötig.
 
 ## Kamera und Mikrofon
 
@@ -3657,9 +3731,9 @@ Nein. Nimm erfundene Beispiele. Das Labor ist ein Lernangebot, kein Werkzeug fü
 
 ## Berufsgeheimnis und Mandantendaten
 
-Wer einer Schweigepflicht unterliegt (Steuerberatung, Rechtsanwaltschaft, Ärzte), gibt keine Mandanten- oder Patientendaten in dieses Labor ein. Für den eigenen Betrieb gelten eigene Regeln, siehe unten.
+Wer einer Schweigepflicht unterliegt (Steuerberatung, Rechtsanwaltschaft, Ärzte, Zahnärzte), gibt keine Mandanten- oder Patientendaten in dieses Labor ein. Für den eigenen Betrieb braucht es vorher einen Vertrag nach Art. 28 DSGVO und die Verpflichtung zur Geheimhaltung nach § 203 StGB. Die Einzelheiten stehen direkt darunter.
 
-Merke: Kein Rechtsrat. Lass den Einsatz von Datenschutzbeauftragten, Kammer oder einer Anwältin prüfen, bevor echte Mandantendaten in ein KI-System gehen.
+Merke: Kein Rechtsrat. Lass den Einsatz von Datenschutzbeauftragten, Kammer oder einer Anwältin prüfen, bevor echte Mandantendaten in ein KI-System gehen. Für Praxen: KI in der Arztpraxis. Zum Abhaken und Ausdrucken: Entscheidungshilfe für den Betrieb (PDF, 1 Seite).
 
 ## Was der Server technisch sieht
 
@@ -3694,21 +3768,21 @@ Kontakt zum Betreiber über die Kontaktseite auf daniel-alisch.site. Impressum u
 
 ## Was das Labor ist
 
-Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud.
+Ein kostenloses Lernangebot ohne Anmeldung. Alles läuft auf einem einzigen kleinen Rechner, ohne Cloud. Was gespeichert wird: Ist das sicher?.
 
 Merke: Das KI-Labor ist ein Lernprojekt. Es läuft auf einem einzigen kleinen Rechner, nicht in einem Rechenzentrum.
 
 ## Wie die Seiten aufgebaut sind
 
-Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen.
+Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen. Die Zuordnung zu Rollen steht auf der Startseite.
 
 ## Selbst nachbauen
 
-Das Labor ist frei verfügbar. Wie du es auf einem eigenen Jetson aufbaust, steht auf einer eigenen Seite.
+Das Labor ist frei verfügbar. Wie du es auf einem eigenen Jetson aufbaust, steht auf der Seite Selbst aufbauen.
 
 ## Wie die Labore arbeiten
 
-Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt.
+Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt. Den Aufbau im Überblick zeigt Wie das Labor aufgebaut ist.
 
 ## Das nimmst du mit
 
@@ -3723,7 +3797,7 @@ Bereich: Der Rechner dahinter. Stand: 2026-11-23.
 
 Kurz gesagt: Das KI-Labor lässt sich auf einem eigenen NVIDIA Jetson Orin Nano mit 8 GB nachbauen. Der Weg: JetPack 6 flashen, Ollama 0.12.3 mit zwei Modellen einrichten, das Repo klonen und zwei Skripte starten, dazu ein freiwilliger Vorab-Check. Einzelne Schritte brauchen sudo. Rechne für den Aufbau mit einem halben bis ganzen Tag. Die Schritt-für-Schritt-Anleitung steht im Repo unter docs/selbst-aufbauen.md.
 
-Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet. Das KI-Labor ist frei verfügbar, so bringst du es auf deinen eigenen Jetson Orin Nano.
+Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano: Einkaufsliste, Befehle zum Kopieren und häufige Fehler.
 
 ## Teststand: nur ein Gerät
 
@@ -3826,6 +3900,50 @@ Die Sprecherstimme ist KI-erzeugt. Bilder und Musik entstehen aus Programmcode.
 
 Die Fotos stammen aus Wikimedia Commons und sind gemeinfrei oder CC0. Alles andere ist selbst erzeugt oder erfunden.
 
+# Wie das Labor aufgebaut ist
+
+Adresse: __BASIS__/architektur
+Bereich: Der Rechner dahinter. Stand: 2026-11-23.
+
+Kurz gesagt: Architektur des KI-Labors: Der Browser des Besuchers erreicht im öffentlichen Betrieb über Cloudflare und einen nginx-Server bei IONOS den Jetson Orin Nano. Dort läuft die App (FastAPI mit uvicorn auf Port 8443), dahinter Ollama für das Sprachmodell und die Einbettung, faster-whisper für Sprache zu Text und Piper für Text zu Sprache. Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher.
+
+Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.
+
+## Der Weg einer Anfrage
+
+Browser, Cloudflare, nginx-Server bei IONOS, Jetson. Im Heimnetz entfallen die Vermittler, dann spricht der Browser direkt mit dem Jetson.
+
+Merke: Vermittler im öffentlichen Betrieb: Cloudflare und ein Server bei IONOS. Im Heimnetz keine.
+
+## Die Bausteine auf dem Jetson
+
+Die App nimmt alles entgegen. Ollama rechnet Sprachmodell und Einbettung, Whisper hört, Piper spricht.
+
+## Welche Daten wohin gehen
+
+Chat und Dokumentenfragen laufen zu Ollama, Aufnahmen zu Whisper, Texte zu Piper. Nichts davon wird dauerhaft gespeichert.
+
+## Wo du weiterliest
+
+Ports, Logs und Schutz: Betrieb und Sicherheit. Einkaufsliste und Befehle: Selbst aufbauen. Die Rechner-Seite zeigt Messwerte live.
+
+## Das nimmst du mit
+
+- Im öffentlichen Betrieb liegen Cloudflare und ein nginx-Server bei IONOS zwischen Browser und Jetson.
+- Auf dem Jetson arbeiten die App (Port 8443), Ollama (Sprachmodell und Einbettung), Whisper (Sprache zu Text) und Piper (Text zu Sprache).
+- Sitzungen liegen im Arbeitsspeicher, es gibt keine Datenbank, Aufnahmen und Kamerabilder werden nicht gespeichert.
+
+## Fragen und Antworten
+
+Frage: Welcher Baustein führt das Sprachmodell llama3.2:3b aus?
+Antwort: Ollama, das die App lokal anspricht. Ollama führt das Sprachmodell aus. Whisper wandelt Sprache in Text, Piper Text in Sprache, Cloudflare ist nur der Tunnel.
+
+Frage: Was gilt für die Vermittler im öffentlichen Betrieb?
+Antwort: Die Verschlüsselung endet bei ihnen, der Jetson speichert die Eingaben nicht. Cloudflare und der Server bei IONOS leiten den Verkehr weiter. Im Heimnetz entfallen sie, und der Tunnel verbindet nur ausgehend.
+
+Frage: Wohin geht eine Aufnahme bei Sprache zu Text?
+Antwort: Über die App zu Whisper, das sie in Text umwandelt. Die App reicht die Aufnahme an Whisper weiter und schickt den Text zurück. Die Aufnahme wird nicht gespeichert.
+
 # KI im Unterricht: Einstieg für Klassen und Lehrkräfte
 
 Adresse: __BASIS__/schule-start
@@ -3878,13 +3996,13 @@ Kurz gesagt: KI 1 von 3 für Klasse 8: Was ist KI? Die Klasse erlebt im Punkte-L
 
 45 oder 90 Minuten für Klasse 8, ohne Kamera. Die Einzelstunde: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
-## Der Zeitplan
-
-Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Vier Phasen in 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
 ## Lehrplanbezug
 
@@ -3950,13 +4068,13 @@ Kurz gesagt: KI 2 von 3 für Klasse 8: Wie lernt ein Computer? Die Klasse arbeit
 
 45 oder 90 Minuten für Klasse 8: Daten, Training und Fehler erlebst du im Punkte-Labor und im Netz-Spielplatz.
 
-## Der Zeitplan
-
-Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Wieder 45 Minuten: Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10.
 
 ## Lehrplanbezug
 
@@ -4022,13 +4140,13 @@ Kurz gesagt: KI 3 von 3 für Klasse 8: Echt oder erfunden? Die Klasse testet im 
 
 45 oder 90 Minuten für Klasse 8: Du testest, wie ein Sprachmodell erfindet, und prüfst Antworten.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4138,6 +4256,10 @@ Im Unterricht bleiben Kamera und Mikrofon aus. Sperren Sie sie zusätzlich im Br
 
 Die Einheiten knüpfen an die sechs Kompetenzbereiche der KMK-Strategie „Bildung in der digitalen Welt“ an. Das ist keine amtliche Zuordnung.
 
+## Fachbezug
+
+Welche Fächer passen und wo Sie Ihren Landeslehrplan finden.
+
 ## Für Klasse 7 und 9 anpassen
 
 Die Blätter sind für Klasse 8 geschrieben. Für Klasse 7 kürzen Sie, für Klasse 9 erweitern Sie.
@@ -4160,6 +4282,10 @@ Bereich: Für die Schule. Stand: 2026-11-23.
 Kurz gesagt: Information in einfacher Sprache für Schulleitungen zum KI-Labor: kostenloses Angebot ohne Konto, welche Daten verarbeitet werden und welche nicht, Verantwortlicher und Hosting, Kamera und Mikrofon im Unterricht nicht vorgesehen. Die Schule entscheidet über den Einsatz und klärt die Rechtsgrundlage. Kein Rechtsrat, Stand 22.11.2026.
 
 Was das Angebot ist, welche Daten verarbeitet werden, wer verantwortlich ist und was Ihre Schule selbst entscheidet. Kein Rechtsrat.
+
+## Was entscheidet die Schule?
+
+Ob und wie das Labor eingesetzt wird, entscheidet die Schule. Der Betreiber stellt es kostenlos und ohne Vertrag bereit.
 
 ## Das Angebot in Kürze
 
@@ -4247,13 +4373,13 @@ Kurz gesagt: Medien-Einheit 1 für Klasse 8: Echt oder KI? Die Klasse sortiert e
 
 45 oder 90 Minuten für Klasse 8, ohne Kamera und ohne Gerät: Die Klasse sortiert zwölf Bildkarten und begründet ihr Urteil.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4321,13 +4447,13 @@ Kurz gesagt: Medien-Einheit 2 für Klasse 8: Quellen prüfen. Eine Behauptung wi
 
 45 oder 90 Minuten für Klasse 8: Die Klasse prüft eine Behauptung mit drei Quellen und übt Seitwärtslesen.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4395,13 +4521,13 @@ Kurz gesagt: Medien-Einheit 3 für Klasse 8: Fake News und Deepfakes. Die Klasse
 
 45 oder 90 Minuten für Klasse 8, ohne Kamera: Ein erfundener Fall zeigt Entstehung und Nutzen, ein Dilemma zu einer KI-Stimme die Frage nach Einwilligung und Schaden.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4469,13 +4595,13 @@ Kurz gesagt: Medien-Einheit 4 für Klasse 8: KI und Hausaufgaben. Die Klasse sor
 
 45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Klasse entwickelt Regelvorschläge für KI bei Hausaufgaben.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4543,13 +4669,13 @@ Kurz gesagt: Medien-Einheit 5 für Klasse 8: Datenschutz im Alltag. Die Klasse s
 
 45 oder 90 Minuten für Klasse 8, ohne Kamera und Mikrofon: Die Klasse prüft App-Rechte und eigene Datenspuren.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4617,13 +4743,13 @@ Kurz gesagt: Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben
 
 45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4691,13 +4817,13 @@ Kurz gesagt: Medien-Einheit 7 für Klasse 8: Wo steckt KI in meinem Tag? Die Gru
 
 45 oder 90 Minuten für Klasse 8, ohne Gerät: Die Gruppen zeichnen Poster zu KI in ihrem Tag und beurteilen sie in einer Runde.
 
-## Der Zeitplan
-
-Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
-
 ## Einzelstunde oder Doppelstunde
 
 45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.
+
+## Der Zeitplan
+
+Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten.
 
 ## Lehrplanbezug
 
@@ -4913,10 +5039,59 @@ Antwort: Weil man klein lernt, was hilft und was stört. Ein kleiner Versuch zei
 Frage: Was gehört zur Auswertung am Ende?
 Antwort: Ob das Ziel erreicht wurde und was der Betrieb über drei Jahre kostet. Entscheidend sind Zielerreichung, Rückmeldungen, Datenschutz und die Kosten über mehrere Jahre.
 
+# Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte
+
+Adresse: __BASIS__/schule-faecher
+Bereich: Für die Schule. Stand: 2026-11-23.
+
+Kurz gesagt: Fachbezug für Lehrkräfte: Wo KI im Unterricht in Mathe (Abstand und Wahrscheinlichkeit, Fehlerrechnung), Informatik (Daten, Training, Test), Biologie (Mustererkennung, Neuron als Analogie mit Grenzen), Deutsch (Textqualität, Quellenkritik), Ethik (Verzerrung, Deepfake-Dilemma) und Geschichte (Quellenkritik und Fälschungen) anknüpft, je mit passender Seite im Labor. Vorschlag, kein Lehrplan, für kein Bundesland geprüft.
+
+Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor. Ausdrücklich ein Vorschlag, kein Lehrplan und für kein Bundesland geprüft.
+
+## Was diese Seite ist und was nicht
+
+Eine Ideensammlung nach Fächern. Ob und wo sie in den Lehrplan Ihres Landes und Faches passt, entscheiden Sie. Ein Lehrplanabgleich für ein Bundesland liegt nicht vor.
+
+Merke: Vorschlag, kein Lehrplan. Die Lehrkraft entscheidet, was in ihr Fach passt.
+
+## Überblick: Fach, Anknüpfung, Seite
+
+Sechs Fächer, je zwei bis drei Anknüpfungen. Die Seiten im Labor sind verlinkt.
+
+## Mathe
+
+Abstand und Mehrheit im Punkte-Labor, Fehlerrechnung mit Konfusionsmatrix, Summe und Gewichte im künstlichen Neuron.
+
+## Informatik
+
+Daten und Merkmale, Training, Validierung und Test, Token und Sprachmodell.
+
+## Biologie
+
+Mustererkennung beim Sehen und bei Netzen, das künstliche Neuron als Analogie, mit den Grenzen der Analogie.
+
+## Deutsch
+
+Textqualität prüfen, Quellenkritik und Zitieren im Referat.
+
+## Ethik
+
+Verzerrung in Daten und Entscheidungen, Verantwortung, das Dilemma bei Deepfakes.
+
+## Geschichte
+
+Quellenkritik wie bei historischen Quellen, Fälschungen früher und heute.
+
+## Das nimmst du mit
+
+- Zu jedem der sechs Fächer gibt es zwei bis drei Anknüpfungen mit einer passenden Seite im Labor.
+- Die Zuordnung ist ein Vorschlag, kein Lehrplan, und für kein Bundesland geprüft.
+- Die zehn Einheiten (drei KI-Stunden, sieben Medien-Einheiten) liefern Arbeitsblatt, Lösungen und Plan für Einzel- und Doppelstunde.
+
 # Echt oder KI? Bilder, Texte und Stimmen prüfen
 
 Adresse: __BASIS__/echt-oder-ki
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Sichere Erkennung gibt es nicht. Du sammelst Hinweise und schätzt ab. Prüfe die Herkunft: Quelle, Rückwärtssuche, Kontext.
 
@@ -4981,7 +5156,7 @@ Erklärvideo: Echt oder KI? (2.5 Minuten), __BASIS__/static/videos/echt-oder-ki.
 # Quellen prüfen: Wem kannst du glauben?
 
 Adresse: __BASIS__/quellen-pruefen
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Nicht auf der Seite bleiben: neuen Tab öffnen und nachsehen, was andere über die Quelle sagen. Prüfe Urheber, Datum und Interesse, und such Berichte, die selbst recherchiert haben. Ein Chatbot ist ein Wegweiser und keine Quelle.
 
@@ -5015,7 +5190,7 @@ Merke: Ohne Ort und Datum ist ein Bild nur ein Bild und kein Beleg.
 
 ## Der Chatbot als Quelle?
 
-Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworten und erfundene Belege liefern.
+Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworten und erfundene Belege liefern. Drei Beispiele: Das kleine Modell irrt.
 
 ## Weiterlesen
 
@@ -5046,7 +5221,7 @@ Erklärvideo: Quellen prüfen (2.5 Minuten), __BASIS__/static/videos/quellen-pru
 # Fake News und Deepfakes: wie sie entstehen und was du tust
 
 Adresse: __BASIS__/fake-news-deepfakes
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Viele Fälschungen brauchen keine KI: falscher Zusammenhang, altes Bild, erfundene Seite. Falschmeldungen leben von Gefühlen und Teilen. Nicht weiterleiten ist die stärkste Gegenmaßnahme.
 
@@ -5105,7 +5280,7 @@ Erklärvideo: Fake News und Deepfakes (2.4 Minuten), __BASIS__/static/videos/fak
 # KI bei Hausaufgaben: fair nutzen
 
 Adresse: __BASIS__/ki-hausaufgaben-fair
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Erst selbst versuchen, dann KI fragen, dann prüfen, dann in eigenen Worten aufschreiben. Die Regeln legt deine Schule fest. Im Zweifel vorher fragen und die Hilfe angeben.
 
@@ -5143,7 +5318,7 @@ Statt zu raten: Frag nach. Mit klaren Fragen kommst du zu klaren Antworten.
 
 ## Für Eltern: nachfragen statt kontrollieren
 
-Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis.
+Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis. Die Vorlage dafür ist die Vereinbarung für zu Hause.
 
 Merke: Nachfragen statt kontrollieren: Wie bist du darauf gekommen?
 
@@ -5180,7 +5355,7 @@ Erklärvideo: KI und Hausaufgaben (2.2 Minuten), __BASIS__/static/videos/ki-haus
 # Datenschutz im Alltag: was Apps über dich wissen
 
 Adresse: __BASIS__/datenschutz-im-alltag
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Apps sammeln mehr, als du eintippst: Nutzung, Standort, Gerät, Vorlieben. Gib Kamera, Mikrofon und Standort nur, wenn die App sie für ihren Zweck braucht, und nimm die Freigabe zurück, wenn nicht mehr. Behandle Chatbot-Eingaben wie eine Postkarte.
 
@@ -5243,7 +5418,7 @@ Erklärvideo: Datenschutz im Alltag (2.3 Minuten), __BASIS__/static/videos/daten
 # Gute Fragen an die KI stellen
 
 Adresse: __BASIS__/prompts-fuer-schueler
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: Das Modell ergänzt Fehlendes mit dem Üblichen. Sag, was du willst, in welchem Format und für welches Niveau. Nutze die KI als Trainer: erklären, abfragen, Feedback geben.
 
@@ -5306,7 +5481,7 @@ Erklärvideo: Gute Prompts für die Schule (2.2 Minuten), __BASIS__/static/video
 # KI in deinem Alltag: wo sie überall steckt
 
 Adresse: __BASIS__/schueler-alltag-ki
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
 Kurz gesagt: KI steckt in Feeds, Playlists, Filtern, Übersetzern und Tastaturen: überall, wo aus Daten gelernt wird. Ein Feed rät, was dich festhält, nicht, was gut für dich ist. Du kannst Empfehlungen lenken: Nicht interessiert wählen, Themen filtern, Einstellungen und Verlauf prüfen.
 
@@ -5364,24 +5539,24 @@ Antwort: Nicht interessiert wählen, Einstellungen prüfen. Plattformen bieten m
 Frage: Wie arbeitet ein Kamerafilter, der dir Hasenohren aufsetzt, grob?
 Antwort: Er findet erst dein Gesicht und setzt den Effekt dann dazu. Zuerst wird das Gesicht samt Augen und Mund erkannt, dann sitzt der Effekt passend, und das viele Male pro Sekunde.
 
-# Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich
+# Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich
 
 Adresse: __BASIS__/falscher-anruf
-Bereich: Medienkompetenz. Stand: 2026-11-22.
+Bereich: Medienkompetenz. Stand: 2026-11-23.
 
-Kurz gesagt: Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die du selbst kennst, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.
+Kurz gesagt: Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die Sie selbst kennen, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.
 
-Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst.
+Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was Sie über KI-Stimmen wissen müssen. Die Kurzfassung heißt „Betrug erkennen“.
 
 ## Das Wichtigste in drei Schritten
 
-Erstens auflegen. Zweitens selbst zurückrufen, unter einer Nummer, die du kennst. Drittens bei Verdacht die Polizei unter 110 informieren.
+Erstens auflegen. Zweitens selbst zurückrufen, unter einer Nummer, die Sie kennen. Drittens bei Verdacht die Polizei unter 110 informieren.
 
 Merke: Auflegen. Selbst zurückrufen. Bei Verdacht 110. Nie Geld oder Wertsachen an Unbekannte geben.
 
 ## Die Maschen: Enkeltrick, Schockanruf, falscher Polizist
 
-Alle drei arbeiten mit Druck und Angst. Sie wollen, dass du schnell handelst und mit niemandem sprichst.
+Alle drei arbeiten mit Druck und Angst. Die Täter wollen, dass Sie schnell handeln und mit niemandem sprechen.
 
 ## KI-Stimmen: Warum eine bekannte Stimme nichts beweist
 
@@ -5391,15 +5566,15 @@ Merke: Die Stimme beweist nichts. Der Rückruf unter einer bekannten Nummer klä
 
 ## Das Familien-Codewort
 
-Vereinbart mit Familie und Freunden ein Kennwort. Wer anruft und in Not ist, nennt es. Wer es nicht kennt, ist nicht die Person.
+Vereinbaren Sie mit Familie und Freunden ein Kennwort. Wer anruft und in Not ist, nennt es. Wer es nicht kennt, ist nicht die Person.
 
 ## Wenn es schon passiert ist
 
-Nicht schämen. Sofort die Polizei informieren und Anzeige erstatten. Notiere, was du noch weißt.
+Nicht schämen. Sofort die Polizei informieren und Anzeige erstatten. Notieren Sie, was Sie noch wissen.
 
 ## Checkliste: Das tue ich, wenn das Telefon klingelt
 
-Sechs Sätze zum Merken. Schreib sie auf einen Zettel neben das Telefon.
+Sechs Sätze zum Merken. Schreiben Sie sie auf einen Zettel neben das Telefon.
 
 ## Weiterlesen
 
@@ -5413,14 +5588,14 @@ Quellen, geprüft am 22.11.2026: Polizei: Schockanruf, Polizei: Enkeltrick, Verb
 
 ## Fragen und Antworten
 
-Frage: Ein Anrufer sagt, dein Enkel hatte einen Unfall und braucht sofort Bargeld. Was tust du zuerst?
+Frage: Ein Anrufer sagt, Ihr Enkel hatte einen Unfall und braucht sofort Bargeld. Was tun Sie zuerst?
 Antwort: Ich lege auf und rufe meinen Enkel selbst an. Auflegen und unter einer bekannten Nummer zurückrufen klärt es. Wer am Telefon bleibt, steht weiter unter dem Druck der Täter.
 
-Frage: Die Stimme am Telefon klingt genau wie deine Tochter. Was sagt das aus?
+Frage: Die Stimme am Telefon klingt genau wie Ihre Tochter. Was sagt das aus?
 Antwort: Nichts Sicheres, denn Stimmen lassen sich mit KI nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine Fälschung. Auch die Nummer im Display lässt sich fälschen. Nur der Rückruf unter einer bekannten Nummer klärt es.
 
-Frage: Ein angeblicher Polizist will deine Wertsachen zur Sicherheit abholen. Was ist richtig?
-Antwort: Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wähle die 110 selbst.
+Frage: Ein angeblicher Polizist will Ihre Wertsachen zur Sicherheit abholen. Was ist richtig?
+Antwort: Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wählen Sie die 110 selbst.
 
 # Für dein Referat über KI
 
@@ -5636,15 +5811,21 @@ Antwort: Damit Sie merken, woran Sie Ihre Entscheidung festmachen und ob das ver
 Adresse: __BASIS__/bildschirmzeit
 Bereich: Medienkompetenz. Stand: 2026-11-23.
 
-Kurz gesagt: Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe und den Mediennutzungsvertrag. Keine medizinische Beratung.
+Kurz gesagt: Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe (Richtwert für 12 bis 16 Jahre: 1 bis 2 Stunden freie Bildschirmzeit am Tag), SCHAU HIN! und den Mediennutzungsvertrag, dazu Beispiele für Kinder mit 10 und mit 14 Jahren. Keine medizinische Beratung.
 
-Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.
+Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was klicksafe und SCHAU HIN! für 10 und 14 Jahre raten und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.
 
 ## Was sich ehrlich sagen lässt
 
 Eine Zahl für alle gibt es nicht. Alter, Inhalt und Begleitung zählen mehr als die Stoppuhr.
 
 Merke: Nicht nur die Minuten zählen, sondern auch, was in der Zeit passiert und was dafür ausfällt.
+
+## Orientierung für 10 und für 14 Jahre
+
+klicksafe nennt für 12 bis 16 Jahre als Richtwert 1 bis 2 Stunden freie Bildschirmzeit am Tag, spätestens bis 21 Uhr. Für 10 Jahre nennen die Quellen keine Zahl, aber Regeln, die sich bewährt haben.
+
+Merke: Ein ausgewogener Tagesablauf zählt mehr als die genaue Minutenzahl. Beide Stellen betonen außerdem: Auch der Inhalt ist entscheidend, nicht nur die Dauer.
 
 ## Was die Seite nicht sagen kann
 
@@ -5664,7 +5845,7 @@ Quellen und Hilfe, abgerufen am 22.11.2026.
 
 ## Das nimmst du mit
 
-- Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen.
+- Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen. Als Richtwert nennt klicksafe für 12 bis 16 Jahre 1 bis 2 Stunden freie Zeit am Tag.
 - Vereinbaren Sie Regeln gemeinsam und halten Sie sie schriftlich fest.
 - Bei Sorgen: Kinderarzt oder Beratungsstelle fragen, nicht diese Seite.
 
@@ -5678,6 +5859,112 @@ Antwort: Gemeinsam vereinbaren, aufschreiben und nach einigen Wochen prüfen. Re
 
 Frage: Ihr Kind schläft schlecht und zieht sich zurück. Was ist sinnvoll?
 Antwort: Mit Kinderärztin, Kinderarzt oder Beratungsstelle sprechen. Die Seite kann keinen Einzelfall beurteilen. Bei solchen Anzeichen helfen Fachleute weiter.
+
+# Das kleine Modell irrt: drei geprüfte Fälle
+
+Adresse: __BASIS__/chat-irrt
+Bereich: Medienkompetenz. Stand: 2026-11-23.
+
+Kurz gesagt: Drei Lehrfälle zum Prüfen von Chat-Antworten: Lenk- und Ruhezeiten nach der EU-Verordnung 561/2006 (9 Stunden täglich, 45 Minuten Pause nach 4,5 Stunden, 11 Stunden Ruhezeit), der Rat der Polizei beim Enkeltrick und Schockanruf (auflegen, zurückrufen, 110) und eine nachgerechnete Zahl (0,634). Dazu drei Schritte zum Prüfen.
+
+Drei Fälle, in denen das kleine Modell typisch danebenliegt, jeweils mit der geprüften richtigen Antwort und der Quelle: Lenkzeiten, Enkeltrick, eine Rechnung.
+
+## Wo du es im Chat siehst
+
+Im Chat steht unter jeder Antwort ein Prüfhinweis. Er führt auf diese Seite. Das Modell ist klein und klingt trotzdem immer gleich sicher.
+
+## So prüfst du in drei Schritten
+
+Behauptung notieren, die Stelle suchen, die zuständig ist, und vergleichen. Stimmt es nicht überein, gilt die Quelle.
+
+Merke: Je größer die Folgen, desto weniger reicht ein Chat allein.
+
+## Fall 1: Lenk- und Ruhezeiten
+
+Der Chat behauptet oft, es gebe keine feste Grenze, und nennt Verbände, die er nicht belegen kann. Richtig: 9 Stunden Lenkzeit, nach 4,5 Stunden mindestens 45 Minuten Pause.
+
+Merke: Bei Arbeits-, Lenk- und Ruhezeiten zählt der Gesetzestext, nicht der Chat. Quelle: Verordnung (EG) Nr. 561/2006 auf EUR-Lex, abgerufen am 23.11.2026.
+
+## Fall 2: Enkeltrick und Schockanruf
+
+Der Chat hält es für möglich, dass der Anrufer echt ist, und lässt das Gespräch weiterlaufen. Die Polizei rät: auflegen, selbst zurückrufen, bei Verdacht 110.
+
+Merke: Bei Geldforderungen am Telefon: auflegen, zurückrufen, bei Verdacht 110. Dafür braucht es keinen Chat.
+
+## Fall 3: Eine Rechnung
+
+Kleine Modelle rechnen schlecht und nennen trotzdem eine glatte Zahl. Nachgerechnet ergibt das Beispiel unten 0,634, nicht den Wert, den das Modell nannte.
+
+Merke: Zahlen aus dem Chat rechnest du selbst nach. Die Quelle ist hier die Rechnung. Wie das Neuron funktioniert, steht auf Neuronale Netze.
+
+## Weiterlesen
+
+Quellen, abgerufen am 23.11.2026.
+
+## Das nimmst du mit
+
+- Ein kleines Modell klingt sicher, auch wenn Zahlen, Quellen oder Ratschläge nicht stimmen.
+- Prüfen in drei Schritten: Behauptung notieren, zuständige Stelle suchen, vergleichen.
+- Bei Regeln mit Folgen und bei Geldforderungen gilt die Quelle oder die Polizei, nicht der Chat.
+
+## Fragen und Antworten
+
+Frage: Wie lange darf ein Lkw-Fahrer nach der Verordnung (EG) Nr. 561/2006 lenken, bevor eine Pause nötig ist?
+Antwort: Viereinhalb Stunden, danach mindestens 45 Minuten Pause. Artikel 7 verlangt nach viereinhalb Stunden Lenkdauer eine Unterbrechung von mindestens 45 Minuten, sofern keine Ruhezeit folgt.
+
+Frage: Ein angeblicher Enkel ruft an und braucht dringend Geld. Was rät die Polizei?
+Antwort: Auflegen und unter der bekannten Nummer zurückrufen. Die Polizei rät, sofort aufzulegen und die Person unter einer bekannten Nummer anzurufen. Bei Verdacht wählst du die 110.
+
+Frage: Das Modell nennt 0,855 als Ergebnis einer Rechnung. Was ist ein guter nächster Schritt?
+Antwort: Die Rechnung selbst nachrechnen, am besten Schritt für Schritt. Kleine Modelle raten Zahlen Stück für Stück. Nachrechnen zeigt, ob sie stimmt. Im Beispiel ergibt die Rechnung etwa 0,634.
+
+# Hausaufgaben und KI zu Hause: eine Vereinbarung
+
+Adresse: __BASIS__/hausaufgaben-familie
+Bereich: Medienkompetenz. Stand: 2026-11-23.
+
+Kurz gesagt: Vorschlag für eine Familienvereinbarung zur KI bei den Hausaufgaben, in Sie-Form für Eltern. Sechs Bausteine: wann KI erlaubt ist, wann nicht, wie die Hilfe gekennzeichnet wird, wie Antworten geprüft werden, Zeiten, und was bei Streit gilt. Mit getrennten Vorschlägen für Kinder mit 12 und mit 15 Jahren, Sätzen zum Übernehmen und einem PDF zum Ausfüllen. Vorschlag, kein Regelwerk. Die Regeln der Schule gehen vor.
+
+Eine Vereinbarung für zu Hause in sechs Bausteinen, mit eigenen Vorschlägen für 12 und für 15 Jahre. Zum gemeinsamen Ausfüllen und Aufhängen. Die Regeln der Schule gehen vor.
+
+## Warum eine Vereinbarung
+
+Regeln, die Ihr Kind mit aushandelt, werden eher eingehalten als verordnete. Schreiben Sie sie auf und prüfen Sie nach einigen Wochen.
+
+Merke: Vorschlag, kein Regelwerk. Wenn die Schule etwas anderes verlangt, gilt die Schule.
+
+## Die sechs Bausteine für 12 und für 15 Jahre
+
+Wann KI erlaubt ist, wann nicht, wie gekennzeichnet wird, wie geprüft wird, welche Zeiten gelten und was bei Streit passiert. Die Tabelle zeigt beide Altersstufen nebeneinander.
+
+## Sätze zum Übernehmen
+
+Kurze Sätze für die Vereinbarung, die Druck herausnehmen und Verantwortung beim Kind lassen.
+
+## Handy und Zeiten bei den Hausaufgaben
+
+SCHAU HIN! nennt als Beispiele für Regeln: Smartphone bei den Hausaufgaben ausgeschaltet. Technische Zeitbegrenzungen sollten nach und nach durch Absprachen abgelöst werden.
+
+## Zum Ausdrucken und Ausfüllen
+
+Das PDF oben hat Felder für alle sechs Bausteine, getrennt für 12 und 15 Jahre, mit Platz für zwei Unterschriften.
+
+## Das nimmst du mit
+
+- Eine kurze, gemeinsam ausgehandelte Vereinbarung hilft mehr als ein Verbot. Schreiben Sie sie auf.
+- Sechs Bausteine: erlaubt, nicht erlaubt, kennzeichnen, prüfen, Zeiten, Streit. Mit 12 etwas enger geführt, mit 15 mit mehr Eigenverantwortung.
+- Die Regeln der Schule gehen vor. Fragen Sie im Zweifel die Lehrkraft.
+
+## Fragen und Antworten
+
+Frage: Ihre Tochter ist 12 und hat eine Hausaufgabe. Welche Regel passt zum Vorschlag?
+Antwort: Sie lässt sich etwas erklären und wird abgefragt, wenn Sie in der Nähe sind. Erklären und Abfragen lassen sich begleiten. Fertige Texte abzugeben nimmt dem Kind das Denken, und heimliche Nutzung widerspricht der Vereinbarung.
+
+Frage: Die Lehrkraft verlangt, KI-Hilfe anzugeben, die Vereinbarung zu Hause sagt nichts dazu. Was gilt?
+Antwort: Die Regel der Schule gilt, die Vereinbarung wird entsprechend ergänzt. Die Schule bestimmt, was bei Hausaufgaben gilt. Ergänzen Sie die Vereinbarung, damit beides zusammenpasst.
+
+Frage: Ihr Sohn ist 15 und will eine Regel ändern. Was ist ein guter Weg?
+Antwort: Er nennt seine Gründe, und Sie passen die Regel gemeinsam an. Regeln, die das Kind mit aushandelt, halten länger. Mit 15 wächst die Eigenverantwortung, und die Vereinbarung wächst mit.
 
 # Glossar
 
