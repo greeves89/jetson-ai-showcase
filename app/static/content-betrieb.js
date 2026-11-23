@@ -8,12 +8,13 @@ const S = {};
 S["betrieb-entscheidung"] = {
   nav: "Deine Entscheidung", typ: "lektion", gruppe: "KI im Betrieb", titel: "Deine Entscheidung: sechs Fragen vor dem Start", symbol: "clipboard-check",
   widget: "checkliste", widgetTitel: "Sechs Fragen zum Abhaken", widgetSymbol: "list-checks",
+  downloads: [{text: "Entscheidungshilfe für den Betrieb", sub: "1 Seite A4 mit Kästchen, Notizfeld und QR-Code, zum Ausdrucken", href: "/static/materialien/entscheidungshilfe-betrieb.pdf"}],
   checkliste: {
     lead: "Gehe die Fragen durch. Jedes Nein ist eine Aufgabe, die du vor dem Start erledigst.",
     punkte: [
       {frage: "Ist das Problem in einem Satz beschrieben?", hilfe: "Zum Beispiel: Wir verlieren jede Woche zwei Stunden mit dem Schreiben von Angeboten."},
       {frage: "Gibt es einen Ausgangswert und ein Ziel?", hilfe: "Wie lange dauert es heute, und was wäre ein Erfolg?"},
-      {frage: "Sind Daten und Rechtsgrundlage geklärt?", hilfe: "Welche Daten gehen in das System, und darf das so geschehen? Echte Kundendaten gehören nicht in dieses Labor. Mit Schweigepflicht (Steuerberatung, Anwaltschaft, Ärzte) gelten zusätzliche Regeln, siehe unten."},
+      {frage: "Sind Daten und Rechtsgrundlage geklärt?", hilfe: "Welche Daten gehen in das System, und darf das so geschehen? Echte Kundendaten gehören nicht in dieses Labor. Mit Schweigepflicht (Steuerberatung, Anwaltschaft, Ärzte) gelten zusätzliche Regeln, siehe den Abschnitt „Berufsgeheimnis und Mandantendaten“ weiter unten. Gesundheitsdaten sind besondere Kategorien nach Art. 9 DSGVO und besonders geschützt."},
       {frage: "Ist ein Verantwortlicher benannt, und prüft jemand die Ergebnisse?", hilfe: "Die KI irrt. Eine Person prüft, bevor etwas hinausgeht."},
       {frage: "Sind Betroffene, Datenschutz und Betriebsrat informiert?", hilfe: "Früh einbinden spart späteres Umbauen."},
       {frage: "Gibt es einen Rückfall, und weißt du, wann du stoppst?", hilfe: "Was passiert, wenn das System ausfällt oder nicht hält, was es verspricht?"},
@@ -40,13 +41,14 @@ S["betrieb-entscheidung"] = {
     {h: "Berufsgeheimnis und Mandantendaten",
      kurz: "Mit Schweigepflicht (Steuerberatung, Rechtsanwaltschaft, Ärzte) gehören Mandanten- und Patientendaten nicht in dieses Labor. Im eigenen Betrieb sind Vertrag, Standort und Verschwiegenheit vorher zu klären.",
      p: [
-      "Frage 3 verlangt, Daten und Rechtsgrundlage zu klären. Für Berufsgeheimnisträger heißt das mehr als Datenschutz: Wer fremde Geheimnisse unbefugt offenbart, kann sich nach § 203 StGB strafbar machen. Externe Dienstleister, auch KI-Dienste, brauchen deshalb vor dem ersten echten Fall einen Vertrag, der sie zur Verschwiegenheit verpflichtet und nur die nötige Kenntnis erlaubt (für Steuerberatung siehe § 62a StBerG, für den Datenschutz Art. 28 DSGVO). Dazu gehören die Fragen nach dem Standort der Verarbeitung und danach, ob Eingaben zum Training verwendet werden.",
-      "Die Einzelheiten mit Quellen stehen auf {{sicherheit-einfach|Ist das sicher?}} im Abschnitt „Berufsgeheimnis und Mandantendaten“. Ein Beispiel für ein Steuerbüro mit erfundenen Daten steht auf {{uc-buero-dokumente|Fragen an Dokumente}}. Das ist keine Rechtsberatung.",
+      "Frage 3 verlangt, Daten und Rechtsgrundlage zu klären. Gesundheitsdaten gehören nach Art. 9 DSGVO zu den besonderen Kategorien und sind grundsätzlich besonders geschützt. Für Berufsgeheimnisträger heißt das mehr als Datenschutz: Wer fremde Geheimnisse unbefugt offenbart, kann sich nach § 203 StGB strafbar machen. Externe Dienstleister, auch KI-Dienste, brauchen deshalb vor dem ersten echten Fall einen Vertrag, der sie zur Verschwiegenheit verpflichtet und nur die nötige Kenntnis erlaubt (für Steuerberatung siehe § 62a StBerG, für den Datenschutz Art. 28 DSGVO). Dazu gehören die Fragen nach dem Standort der Verarbeitung und danach, ob Eingaben zum Training verwendet werden.",
+      "Die Einzelheiten mit Quellen stehen auf {{sicherheit-einfach|Ist das sicher?}} im Abschnitt „Berufsgeheimnis und Mandantendaten“. Ein Beispiel für ein Steuerbüro mit erfundenen Daten steht auf {{uc-buero-dokumente|Fragen an Dokumente}}, für Praxen und Therapeuten gibt es {{praxis-gesundheit|KI in der Arztpraxis}}. Das ist keine Rechtsberatung.",
      ]},
     {h: "Drucken oder als PDF speichern",
-     kurz: "Der Druckdialog deines Browsers genügt. Die Haken bleiben nur in dieser Sitzung, mit „Fortschritt merken“ auch beim nächsten Besuch.",
+     kurz: "Am besten das PDF oben: eine Seite A4 mit Kästchen und Notizfeld. Der Druckdialog deines Browsers geht auch, die Haken bleiben nur in dieser Sitzung.",
      p: [
-      "Über den Knopf oben öffnest du den Druckdialog deines Browsers. Dort kannst du die Seite ausdrucken oder als PDF speichern. Die Haken bleiben in deinem Browser, nur in dieser Sitzung oder mit „Fortschritt merken“ auch beim nächsten Besuch. Sie werden nicht gesendet. Hake vor dem Drucken ab, was geklärt ist.",
+      "Die Entscheidungshilfe gibt es als [PDF mit einer Seite](/static/materialien/entscheidungshilfe-betrieb.pdf), mit Kästchen, Notizfeld und QR-Code. Sie steht oben auf dieser Seite zum Herunterladen.",
+      "Wer die Haken am Bildschirm setzen will: Über den Knopf oben öffnest du den Druckdialog deines Browsers. Dort kannst du die Seite ausdrucken oder als PDF speichern. Die Haken bleiben in deinem Browser, nur in dieser Sitzung oder mit „Fortschritt merken“ auch beim nächsten Besuch. Sie werden nicht gesendet. Hake vor dem Drucken ab, was geklärt ist.",
      ]},
     {h: "Fragen und Kontakt",
      kurz: "Bei Fragen zum Labor und zur Einführung hilft die Kontaktseite des Betreibers.",
@@ -63,7 +65,7 @@ S["betrieb-entscheidung"] = {
     "Jedes Nein ist eine Aufgabe, kein Grund zum Aufgeben.",
     "Starten, nachbessern und lassen sind gleichwertige Ergebnisse.",
   ],
-  weiter: ["ki-einfuehrung", "kosten-energie", "kamera-grenzen", "recht", "sicherheit-einfach"],
+  weiter: ["ki-einfuehrung", "kosten-energie", "kamera-grenzen", "recht", "sicherheit-einfach", "praxis-gesundheit"],
 };
 
 /* Seite "Kameraprüfung: Grenzen, Haftung, Taktzeit, Datenschutz" (Gruppe KI im Betrieb). Zahlen in der Taktzeit-Rechnung sind erfunden und gekennzeichnet.
@@ -167,38 +169,46 @@ S["betrieb-sicherheit"] = {
     "Du weißt, wo die Daten liegen, was geloggt wird und wer die Aufbewahrung festlegt.",
     "Du kennst die Schutzmaßnahmen der App und was du für den Betrieb im Firmennetz selbst ergänzt.",
   ],
-  kurz: "Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet. Hier stehen Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates, so wie sie sind.",
-  zusammenfassung: "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama nur lokal auf 11434, ausgehender Tunnel nur im öffentlichen Betrieb. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
+  kurz: "Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind. Mit Befehlen zum Nachprüfen.",
+  zusammenfassung: "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Server bei IONOS und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
   abschnitte: [
     {h: "Teststand", offen: true,
      kurz: "Nur ein Gerät getestet: Jetson Orin Nano Developer Kit (Super), 8 GB, Ollama 0.12.3. Ein frischer Jetson ist noch nicht von Dritten getestet.",
      p: [
-      "Aufgebaut ist das Labor bisher auf einem einzigen Gerät, einem Jetson Orin Nano Developer Kit (Super) mit 8 GB und Ollama 0.12.3. Ein frischer Jetson ist von Dritten noch nicht nachgebaut worden. Alles auf dieser Seite beschreibt dieses Gerät und den Code im Repo. Prüfe es auf deinem Gerät nach, statt es zu übernehmen. Die Schritte zum Aufbau stehen auf {{selbst-bauen|Selbst aufbauen}}.",
+      "Alles auf dieser Seite beschreibt dieses eine Gerät und den Code im Repo. Prüfe es auf deinem Gerät nach, statt es zu übernehmen. Die Schritte zum Aufbau stehen auf {{selbst-bauen|Selbst aufbauen}}.",
      ]},
     {h: "Ports", offen: true,
-     kurz: "Nach außen braucht das Labor nur 8443. Ollama (11434) soll nur lokal hören. Ein Tunnel verbindet ausgehend, ohne Portfreigabe.",
+     kurz: "Nach außen braucht das Labor nur 8443. Ollama (11434) soll nur lokal hören, am Referenzgerät tut es das aktuell nicht. Ein Tunnel verbindet ausgehend, ohne Portfreigabe.",
      visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "lock", text: "8443", sub: "HTTPS der App"},
-      {icon: "cpu", text: "11434", sub: "Ollama, nur lokal"},
+      {icon: "cpu", text: "11434", sub: "Ollama, soll nur lokal hören"},
       {icon: "cloud", text: "Tunnel", sub: "nur ausgehend"}]},
      p: [
       "Der Dienst startet mit `uvicorn --host 0.0.0.0 --port 8443` und selbstsigniertem Zertifikat (`scripts/jetson-showcase.service`). Er hört also auf allen Schnittstellen. Leite den Port nicht im Router ins Internet weiter. Das Labor spricht Ollama unter `http://127.0.0.1:11434` an. Der Standard von Ollama passt dazu, setze `OLLAMA_HOST` nicht (docs/selbst-aufbauen.md). Im öffentlichen Betrieb läuft `cloudflared` als Tunnel nur ausgehend, ohne Portfreigabe (docs/veroeffentlichung.md).",
-      "Prüfe auf deinem Gerät, was lauscht. Weitere Ports (SSH, Fernzugriff, andere Dienste) gehören nicht zum Labor und fallen in deine eigene Absicherung.",
+      "**Ollama soll nur lokal hören.** Prüfe es mit dem Befehl unten: Die Zeile für 11434 muss `127.0.0.1:11434` zeigen. Steht dort `0.0.0.0:11434` oder `*:11434`, ist Ollama aus dem Netz erreichbar, ohne Anmeldung. Am Referenzgerät hört Ollama aktuell auf allen Schnittstellen (`OLLAMA_HOST=0.0.0.0`). Das ist ein bekannter offener Punkt des Betreibers. Er ist mit `ss -tlnp` belegt und von einem Rechner im selben Netz nachprüfbar. Was die Seite hier verlangt, erfüllt das Referenzgerät an dieser Stelle also noch nicht.",
+      "Weitere Dienste auf dem Gerät: prüfe mit `ss -tlnp`. Sie gehören nicht zum Labor und fallen in deine eigene Absicherung.",
      ],
-     code: [{titel: "Lauschende Ports und Prozesse", text: "ss -tlnp"}],
+     code: [{titel: "Lauschende Ports und Prozesse", text: "ss -tlnp"}, {titel: "Nur Ollama: Hört es auf 127.0.0.1?", text: "ss -tlnp | grep 11434"}],
      tabelle: {
       beschriftung: "Ports des Labors",
       kopf: ["Port", "Dienst", "Erwartung"],
       zeilen: [
        ["8443/TCP", "Labor (uvicorn, HTTPS)", "Hört auf allen Schnittstellen, nicht im Router weiterleiten"],
-       ["11434/TCP", "Ollama", "Standard: nur 127.0.0.1. Prüfen mit ss -tlnp"],
+       ["11434/TCP", "Ollama", "Soll: nur 127.0.0.1 (Standard von Ollama). Am Referenzgerät aktuell auf allen Schnittstellen, offener Punkt des Betreibers. Prüfen mit ss -tlnp"],
        ["Tunnel", "cloudflared, nur öffentlicher Betrieb", "Ausgehende Verbindung, keine Portfreigabe"],
       ]},
-     merke: "Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört."},
+     merke: "Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört. Am Referenzgerät tut es das noch nicht."},
+    {h: "Der öffentliche Weg: IONOS und Cloudflare", offen: true,
+     kurz: "Im öffentlichen Betrieb laufen Eingaben über einen Server bei IONOS (nginx) und den Tunnel von Cloudflare. Dort endet die Verschlüsselung. HSTS und Indexierung gibt es nur mit OEFFENTLICH=1.",
+     p: [
+      "Besucher erreichen das Labor nicht direkt. Der Weg läuft über den Tunneldienst von Cloudflare und einen nginx-Proxy auf einem Server bei IONOS zum Jetson (Skizze: {{architektur|Wie das Labor aufgebaut ist}}). Wie bei jedem Proxy und Tunneldienst endet die Verschlüsselung bei den Vermittlern. Sie sehen den Datenverkehr, der Jetson speichert die Eingaben nicht. Wer das Labor im Firmenbetrieb nutzt, nimmt die beiden Vermittler in seine Risikobewertung auf. Die Seite {{sicherheit-einfach|Ist das sicher?}} nennt sie in einfacher Sprache.",
+      "**HSTS und Indexierung am Gerät:** Der Dienst setzt `Strict-Transport-Security` und `index, follow` nur im öffentlichen Modus (`OEFFENTLICH=1`). Das Referenzgerät läuft im öffentlichen Modus, deshalb sendet auch der LAN-Port 8443 diese Köpfe. Das schadet im Heimnetz nicht: Browser ignorieren HSTS bei einem Zertifikatsfehler, wie ihn das selbstsignierte Zertifikat auslöst. Ein Nachbau im reinen Heimnetz startet ohne `OEFFENTLICH=1` und sendet beides nicht.",
+     ]},
     {h: "Datenort", offen: true,
      kurz: "Alles liegt auf dem Jetson. Sitzungen und Eingaben im Arbeitsspeicher, keine Datenbank. Modelle auf der SSD.",
      p: [
       "Das Labor und seine Modelle liegen auf dem Jetson, die Modelle auf der SSD. Sitzungen (Anlern-Beispiele, RAG-Texte) leben im Arbeitsspeicher und verfallen nach 30 Minuten Ruhe (`SITZUNG_TTL_S`, Standard 1800 Sekunden). Es gibt keine Datenbank. Kamerabilder und Aufnahmen werden nicht gespeichert. Nach einem Neustart des Dienstes sind alle Sitzungen weg.",
+      "**Backup:** Für Nutzerdaten ist keines nötig, denn es gibt keine Datenbank und nichts wird dauerhaft gespeichert. Sichere nur, was du selbst angepasst hast, zum Beispiel die Dienstdatei und die Umgebungsdatei.",
      ]},
     {h: "Logs", offen: true,
      kurz: "Das Zugriffsprotokoll von uvicorn steht im Journal: Adresse der Gegenstelle, Methode, Pfad, Status. Eingabetexte stehen nicht darin.",
@@ -226,15 +236,15 @@ S["betrieb-sicherheit"] = {
       "**Origin-Prüfung:** Zustandsändernde Anfragen (POST, WebSocket) verlangen einen Origin, der zum Host passt. Fehlt er, wird abgelehnt.",
       "**Host-Erlaubnisliste:** Nur eigene Adressen und Namen sind zugelassen, weitere über `SHOWCASE_ALLOWED_HOSTS`. Das schützt vor DNS-Rebinding. Andernfalls erscheint „Invalid host header“.",
       "**Ratenbegrenzung:** Mit `OEFFENTLICH=1` gilt eine Begrenzung je Besucher. Gleichzeitige Chats (2) und Kameraverbindungen (6) sind immer begrenzt, dahinter wartet eine Schlange.",
-      "**Modell-Erlaubnisliste:** Nur `llama3.2:3b` und `nomic-embed-text` lassen sich über die App laden.",
+      "**Modell-Erlaubnisliste:** Nur `llama3.2:3b` und `nomic-embed-text` lassen sich über die App laden. Was Ollama auf dem Gerät sonst noch installiert hat, kann in der Modellliste der App auftauchen, laden lässt es sich darüber nicht.",
       "**Einwilligung und keine Speicherung:** Kamera und Mikrofon starten erst nach Zustimmung, Bilder und Aufnahmen werden nicht gespeichert.",
-      "**Sicherheitsköpfe:** Jede Antwort trägt `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, eine Content-Security-Policy, `Referrer-Policy` und `Permissions-Policy`. `Strict-Transport-Security` kommt nur im öffentlichen Betrieb über HTTPS dazu, weil es im Heimnetz mit selbstsigniertem Zertifikat Besucher aussperren würde.",
+      "**Sicherheitsköpfe:** Jede Antwort trägt `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, eine Content-Security-Policy, `Referrer-Policy` und `Permissions-Policy`. `Strict-Transport-Security` kommt nur im öffentlichen Betrieb (`OEFFENTLICH=1`) über HTTPS dazu, weil es im Heimnetz mit selbstsigniertem Zertifikat Besucher aussperren würde. Am Referenzgerät, das im öffentlichen Modus läuft, ist der Kopf auch im LAN zu sehen.",
       "**API-Dokumentation:** `/docs`, `/redoc` und `/openapi.json` sind aus. Nur im Heimnetz lassen sie sich mit `KL_API_DOKU=1` einschalten, im öffentlichen Betrieb nie.",
      ]},
     {h: "Was du für den Firmenbetrieb ergänzt", offen: true,
      kurz: "Die App bringt keinen Reverse-Proxy und keine Anmeldung mit. Für ein Firmennetz sind Zugriffsbeschränkung, Anmeldung und eine Aufbewahrungsregel Sache des Betreibers.",
      p: [
-      "Der Dienst bindet selbst an `0.0.0.0:8443` mit selbstsigniertem Zertifikat. Es gibt keinen Reverse-Proxy und keine Nutzerverwaltung. Beschränke den Zugriff im Netz (Firewall, VLAN) oder setze einen Proxy mit Anmeldung davor. Lege Aufbewahrung der Logs, Zuständigkeiten und Updates fest. Die Lizenz des Codes ist noch nicht festgelegt, siehe {{selbst-bauen|Selbst aufbauen}}.",
+      "Der Dienst bindet selbst an `0.0.0.0:8443` mit selbstsigniertem Zertifikat. Es gibt keinen Reverse-Proxy und keine Nutzerverwaltung. Beschränke den Zugriff im Netz (Firewall, VLAN) oder setze einen Proxy mit Anmeldung davor. Lege Aufbewahrung der Logs, Zuständigkeiten und Updates fest. Wer wie das Referenzgerät öffentlich über IONOS und Cloudflare erreichbar ist, nimmt diese Vermittler in die Risikobewertung auf (siehe „Der öffentliche Weg“). Die Lizenz des Codes ist noch nicht festgelegt, siehe {{selbst-bauen|Selbst aufbauen}}.",
      ]},
     {h: "Updates", offen: true,
      kurz: "Repo aktualisieren, setup.sh ausführen, Dienst neu starten. Ein Neustart beendet laufende Chats.",
@@ -245,11 +255,11 @@ S["betrieb-sicherheit"] = {
   ],
   mitnehmen: [
     "Nur ein Gerät ist getestet. Prüfe jede Angabe auf deinem Gerät.",
-    "Nach außen braucht das Labor nur 8443, Ollama soll nur lokal hören (prüfen mit ss -tlnp).",
+    "Nach außen braucht das Labor nur 8443. Ollama soll nur lokal hören (prüfen mit ss -tlnp), am Referenzgerät hört es aktuell auf allen Schnittstellen.",
     "Daten bleiben auf dem Jetson, im Journal stehen Adresse, Pfad und Status. Die Aufbewahrung legt der Betreiber fest.",
   ],
   grenzen: ["Beschreibt den Code im Repo und das Referenzgerät am 22.11.2026, kein Sicherheitsgutachten und keine Rechtsberatung."],
-  weiter: ["selbst-bauen", "hardware", "lizenzen", "sicherheit-einfach"],
+  weiter: ["architektur", "selbst-bauen", "hardware", "lizenzen", "sicherheit-einfach"],
 };
 
 INHALT.registriere({

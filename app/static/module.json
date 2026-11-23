@@ -34,6 +34,11 @@
     "content-schulen-ueberblick.js",
     "content-ueber.js",
     "content-rechtliches.js",
+    "content-praxis.js",
+    "content-chat-irrt.js",
+    "content-hausaufgaben-familie.js",
+    "content-schule-faecher.js",
+    "content-architektur.js",
     "content-alltag.js"
   ],
   "module": [

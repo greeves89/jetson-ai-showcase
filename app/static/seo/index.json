@@ -493,7 +493,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-ki-im-betrieb",
       "name": "KI im Betrieb",
-      "numberOfItems": 5,
+      "numberOfItems": 6,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -524,6 +524,12 @@
         "position": 5,
         "name": "Kameraprüfung: Grenzen, Haftung, Taktzeit, Datenschutz",
         "url": "__BASIS__/kamera-grenzen"
+       },
+       {
+        "@type": "ListItem",
+        "position": 6,
+        "name": "KI in der Arztpraxis: was geht, was nicht",
+        "url": "__BASIS__/praxis-gesundheit"
        }
       ]
      },
@@ -605,7 +611,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-der-rechner-dahinter",
       "name": "Der Rechner dahinter",
-      "numberOfItems": 6,
+      "numberOfItems": 7,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -642,6 +648,12 @@
         "position": 6,
         "name": "Lizenzen und Quellen",
         "url": "__BASIS__/lizenzen"
+       },
+       {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "Wie das Labor aufgebaut ist",
+        "url": "__BASIS__/architektur"
        }
       ]
      },
@@ -649,7 +661,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-fuer-die-schule",
       "name": "Für die Schule",
-      "numberOfItems": 17,
+      "numberOfItems": 18,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -752,6 +764,12 @@
         "position": 17,
         "name": "KI an der Schule: In 7 Schritten starten",
         "url": "__BASIS__/ki-schule-einstieg"
+       },
+       {
+        "@type": "ListItem",
+        "position": 18,
+        "name": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
+        "url": "__BASIS__/schule-faecher"
        }
       ]
      },
@@ -759,7 +777,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-medienkompetenz",
       "name": "Medienkompetenz",
-      "numberOfItems": 13,
+      "numberOfItems": 15,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -806,7 +824,7 @@
        {
         "@type": "ListItem",
         "position": 8,
-        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich",
         "url": "__BASIS__/falscher-anruf"
        },
        {
@@ -838,6 +856,18 @@
         "position": 13,
         "name": "Bildschirmzeit: kurz und ehrlich",
         "url": "__BASIS__/bildschirmzeit"
+       },
+       {
+        "@type": "ListItem",
+        "position": 14,
+        "name": "Das kleine Modell irrt: drei geprüfte Fälle",
+        "url": "__BASIS__/chat-irrt"
+       },
+       {
+        "@type": "ListItem",
+        "position": 15,
+        "name": "Hausaufgaben und KI zu Hause: eine Vereinbarung",
+        "url": "__BASIS__/hausaufgaben-familie"
        }
       ]
      },
@@ -2498,7 +2528,7 @@
   "alltag-betrug": {
    "titel": "Betrug am Telefon und mit KI: das Wichtigste · KI-Labor",
    "ueberschrift": "Betrug am Telefon und mit KI: das Wichtigste",
-   "beschreibung": "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Erstens auflegen.",
+   "beschreibung": "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Das ist die Kurzfassung.",
    "typ": "seite",
    "datei": "content-alltag.js",
    "bild": "/static/og/standard.png",
@@ -2540,7 +2570,7 @@
       "@id": "__BASIS__/alltag-betrug#artikel",
       "headline": "Betrug am Telefon und mit KI: das Wichtigste",
       "name": "Betrug am Telefon und mit KI: das Wichtigste",
-      "description": "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Erstens auflegen.",
+      "description": "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Das ist die Kurzfassung.",
       "url": "__BASIS__/alltag-betrug",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -3991,7 +4021,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4283,7 +4313,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4550,7 +4580,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4827,7 +4857,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5089,7 +5119,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5326,7 +5356,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -12826,7 +12856,7 @@
   "betrieb-entscheidung": {
    "titel": "Deine Entscheidung: sechs Fragen vor dem Start · KI-Labor",
    "ueberschrift": "Deine Entscheidung: sechs Fragen vor dem Start",
-   "beschreibung": "Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst. Der Druckdialog deines Browsers genügt.",
+   "beschreibung": "Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.",
    "typ": "seite",
    "datei": "content-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
@@ -12868,7 +12898,7 @@
       "@id": "__BASIS__/betrieb-entscheidung#artikel",
       "headline": "Deine Entscheidung: sechs Fragen vor dem Start",
       "name": "Deine Entscheidung: sechs Fragen vor dem Start",
-      "description": "Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst. Der Druckdialog deines Browsers genügt.",
+      "description": "Zum Schluss des Betriebspfads: sechs Fragen zum Abhaken, was jetzt ansteht und wohin du dich mit Fragen wenden kannst.",
       "url": "__BASIS__/betrieb-entscheidung",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -13065,6 +13095,146 @@
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Mit Datenschutz und Betriebsrat klären, ob das zulässig ist, oder den Bildausschnitt auf die Teile begrenzen. Erkennbare Beschäftigte machen Bilder zu personenbezogenen Daten. Am besten zeigen die Bilder nur Teile, sonst wird früh geklärt."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "praxis-gesundheit": {
+   "titel": "KI in der Arztpraxis: was geht, was nicht · KI-Labor",
+   "ueberschrift": "KI in der Arztpraxis: was geht, was nicht",
+   "beschreibung": "Für Praxen, Zahnärzte und Therapeuten: Was KI im Alltag bringen kann, was nicht in eine Cloud-KI gehört und was Schweigepflicht und DSGVO verlangen.",
+   "typ": "seite",
+   "datei": "content-praxis.js",
+   "bild": "/static/og/ki-im-betrieb.png",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/praxis-gesundheit#artikel",
+      "headline": "KI in der Arztpraxis: was geht, was nicht",
+      "name": "KI in der Arztpraxis: was geht, was nicht",
+      "description": "Für Praxen, Zahnärzte und Therapeuten: Was KI im Alltag bringen kann, was nicht in eine Cloud-KI gehört und was Schweigepflicht und DSGVO verlangen.",
+      "url": "__BASIS__/praxis-gesundheit",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/praxis-gesundheit"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "KI im Betrieb",
+      "abstract": "KI kann in der Praxis bei Texten helfen, die keine Patientendaten enthalten: Vorlagen für Terminerinnerungen, allgemeine Briefe, Texte für die Website, Prüfschemata für die Abrechnung an erfundenen Fällen. Patientendaten gehören nicht in eine Cloud-KI: Die Schweigepflicht nach § 203 StGB, Gesundheitsdaten als besondere Kategorie nach Art. 9 DSGVO und die Pflicht zum Vertrag mit Dienstleistern nach Art. 28 DSGVO setzen enge Grenzen. Hinweise zur Datenschutz-Folgenabschätzung und zur Aufsichtsbehörde. Kein Rechtsrat.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/ki-im-betrieb.png"
+      ],
+      "datePublished": "2026-11-23",
+      "dateModified": "2026-11-23",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/praxis-gesundheit#breadcrumb"
+      },
+      "teaches": [
+       "KI hilft bei Texten ohne Patientendaten: Vorlagen mit Platzhaltern, allgemeine Briefe, Website-Texte, Prüfschemata an erfundenen Fällen.",
+       "Patientendaten gehören nicht in eine Cloud-KI und nicht in dieses Labor. Schweigepflicht (§ 203 StGB), Art. 9 und Art. 28 DSGVO setzen die Grenze.",
+       "Ob ein Einsatz mit echten Daten möglich ist, klären Datenschutzbeauftragte und Kammer vorher. Diese Seite ist kein Rechtsrat."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/praxis-gesundheit#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "KI in der Arztpraxis: was geht, was nicht",
+        "item": "__BASIS__/praxis-gesundheit"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/praxis-gesundheit#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Eine Praxis will Erinnerungen an Patienten verschicken. Was ist ohne Vertrag mit einem KI-Anbieter unbedenklich?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Einen Entwurf mit Platzhaltern wie [NAME] und [TERMIN] schreiben lassen. Ein Entwurf mit Platzhaltern enthält keinen Patienten. Die Namen setzt die Praxissoftware ein. In allen anderen Fällen gehen Patientendaten an einen Dienstleister."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Welche Aussage zu § 203 StGB trifft zu?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Er erlaubt mitwirkende Personen, wenn sie zur Geheimhaltung verpflichtet werden. Absatz 1 nennt Ärzte, Zahnärzte und weitere Heilberufe. Absatz 3 erlaubt die Einbindung mitwirkender Personen, soweit erforderlich, und Absatz 4 verlangt, dass sie zur Geheimhaltung verpflichtet werden."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum reicht ein kostenloses Konto bei einem KI-Dienst für Patientendaten nicht aus?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Gesundheitsdaten sind besonders geschützt, und ein Dienstleister braucht einen Vertrag. Art. 9 DSGVO schützt Gesundheitsdaten besonders, und Art. 28 verlangt für die Verarbeitung im Auftrag einen Vertrag. Ein Konto allein ist keiner."
         }
        }
       ]
@@ -15735,7 +15905,7 @@
   "betrieb-sicherheit": {
    "titel": "Betrieb und Sicherheit des Labors · KI-Labor",
    "ueberschrift": "Betrieb und Sicherheit des Labors",
-   "beschreibung": "Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet. Ein frischer Jetson ist noch nicht von Dritten getestet.",
+   "beschreibung": "Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind. Mit Befehlen zum Nachprüfen.",
    "typ": "seite",
    "datei": "content-betrieb.js",
    "bild": "/static/og/standard.png",
@@ -15777,7 +15947,7 @@
       "@id": "__BASIS__/betrieb-sicherheit#artikel",
       "headline": "Betrieb und Sicherheit des Labors",
       "name": "Betrieb und Sicherheit des Labors",
-      "description": "Teststand: Das Labor ist bisher nur auf einem einzigen Gerät aufgebaut und getestet. Ein frischer Jetson ist noch nicht von Dritten getestet.",
+      "description": "Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind. Mit Befehlen zum Nachprüfen.",
       "url": "__BASIS__/betrieb-sicherheit",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -15788,7 +15958,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
-      "abstract": "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama nur lokal auf 11434, ausgehender Tunnel nur im öffentlichen Betrieb. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
+      "abstract": "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Server bei IONOS und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -15810,7 +15980,7 @@
       },
       "teaches": [
        "Nur ein Gerät ist getestet. Prüfe jede Angabe auf deinem Gerät.",
-       "Nach außen braucht das Labor nur 8443, Ollama soll nur lokal hören (prüfen mit ss -tlnp).",
+       "Nach außen braucht das Labor nur 8443. Ollama soll nur lokal hören (prüfen mit ss -tlnp), am Referenzgerät hört es aktuell auf allen Schnittstellen.",
        "Daten bleiben auf dem Jetson, im Journal stehen Adresse, Pfad und Status. Die Aufbewahrung legt der Betreiber fest."
       ],
       "author": {
@@ -15844,7 +16014,7 @@
   "sicherheit-einfach": {
    "titel": "Ist das sicher? Was wird gespeichert? · KI-Labor",
    "ueberschrift": "Ist das sicher? Was wird gespeichert?",
-   "beschreibung": "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher.",
+   "beschreibung": "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner.",
    "typ": "seite",
    "datei": "content-laien.js",
    "bild": "/static/og/standard.png",
@@ -15886,7 +16056,7 @@
       "@id": "__BASIS__/sicherheit-einfach#artikel",
       "headline": "Ist das sicher? Was wird gespeichert?",
       "name": "Ist das sicher? Was wird gespeichert?",
-      "description": "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, eingetippte Texte bleiben nur kurz im Arbeitsspeicher.",
+      "description": "Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner.",
       "url": "__BASIS__/sicherheit-einfach",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16103,7 +16273,7 @@
   "selbst-bauen": {
    "titel": "Selbst auf einem Jetson aufbauen · KI-Labor",
    "ueberschrift": "Selbst auf einem Jetson aufbauen",
-   "beschreibung": "Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet.",
+   "beschreibung": "Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano: Einkaufsliste, Befehle zum Kopieren und häufige Fehler.",
    "typ": "seite",
    "datei": "content-ueber.js",
    "bild": "/static/og/standard.png",
@@ -16145,7 +16315,7 @@
       "@id": "__BASIS__/selbst-bauen#artikel",
       "headline": "Selbst auf einem Jetson aufbauen",
       "name": "Selbst auf einem Jetson aufbauen",
-      "description": "Teststand: Aufgebaut ist das Labor bisher nur auf einem einzigen Gerät, ein frischer Jetson ist von Dritten noch nicht getestet.",
+      "description": "Das KI-Labor ist frei verfügbar. So bringst du es auf deinen eigenen Jetson Orin Nano: Einkaufsliste, Befehle zum Kopieren und häufige Fehler.",
       "url": "__BASIS__/selbst-bauen",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16346,6 +16516,146 @@
         "position": 2,
         "name": "Lizenzen und Quellen",
         "item": "__BASIS__/lizenzen"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "architektur": {
+   "titel": "Wie das Labor aufgebaut ist · KI-Labor",
+   "ueberschrift": "Wie das Labor aufgebaut ist",
+   "beschreibung": "Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
+   "typ": "seite",
+   "datei": "content-architektur.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/architektur#artikel",
+      "headline": "Wie das Labor aufgebaut ist",
+      "name": "Wie das Labor aufgebaut ist",
+      "description": "Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
+      "url": "__BASIS__/architektur",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/architektur"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Der Rechner dahinter",
+      "abstract": "Architektur des KI-Labors: Der Browser des Besuchers erreicht im öffentlichen Betrieb über Cloudflare und einen nginx-Server bei IONOS den Jetson Orin Nano. Dort läuft die App (FastAPI mit uvicorn auf Port 8443), dahinter Ollama für das Sprachmodell und die Einbettung, faster-whisper für Sprache zu Text und Piper für Text zu Sprache. Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-23",
+      "dateModified": "2026-11-23",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/architektur#breadcrumb"
+      },
+      "teaches": [
+       "Im öffentlichen Betrieb liegen Cloudflare und ein nginx-Server bei IONOS zwischen Browser und Jetson.",
+       "Auf dem Jetson arbeiten die App (Port 8443), Ollama (Sprachmodell und Einbettung), Whisper (Sprache zu Text) und Piper (Text zu Sprache).",
+       "Sitzungen liegen im Arbeitsspeicher, es gibt keine Datenbank, Aufnahmen und Kamerabilder werden nicht gespeichert."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/architektur#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Wie das Labor aufgebaut ist",
+        "item": "__BASIS__/architektur"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/architektur#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Welcher Baustein führt das Sprachmodell llama3.2:3b aus?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ollama, das die App lokal anspricht. Ollama führt das Sprachmodell aus. Whisper wandelt Sprache in Text, Piper Text in Sprache, Cloudflare ist nur der Tunnel."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was gilt für die Vermittler im öffentlichen Betrieb?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Verschlüsselung endet bei ihnen, der Jetson speichert die Eingaben nicht. Cloudflare und der Server bei IONOS leiten den Verkehr weiter. Im Heimnetz entfallen sie, und der Tunnel verbindet nur ausgehend."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wohin geht eine Aufnahme bei Sprache zu Text?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Über die App zu Whisper, das sie in Text umwandelt. Die App reicht die Aufnahme an Whisper weiter und schickt den Text zurück. Die Aufnahme wird nicht gespeichert."
+        }
        }
       ]
      }
@@ -17759,7 +18069,7 @@
   "medien-stunde-3": {
    "titel": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall…",
    "ueberschrift": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
-   "beschreibung": "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten. KMK-Kompetenzbereiche: Analysieren und Reflektieren; Schützen und sicher Agieren.",
+   "beschreibung": "45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.",
    "typ": "seite",
    "datei": "content-schule-medien.js",
    "bild": "/static/og/standard.png",
@@ -17801,7 +18111,7 @@
       "@id": "__BASIS__/medien-stunde-3#artikel",
       "headline": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
       "name": "Medien-Einheit 3: Fake News und Deepfakes, einen Fall analysieren",
-      "description": "Einstieg 5, Erarbeitung 20, Sicherung 10, Reflexion 10 Minuten. KMK-Kompetenzbereiche: Analysieren und Reflektieren; Schützen und sicher Agieren.",
+      "description": "45 oder 90 Minuten mit denselben Blättern: In 45 Minuten bleiben Quiz und schriftliches Nachdenken als Hausaufgabe, in 90 Minuten läuft alles in der Stunde.",
       "url": "__BASIS__/medien-stunde-3",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -19212,6 +19522,115 @@
     ]
    }
   },
+  "schule-faecher": {
+   "titel": "Welche Fächer passen? Einsatz in Mathe, Informatik…",
+   "ueberschrift": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
+   "beschreibung": "Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor. Ausdrücklich ein Vorschlag, kein Lehrplan und für kein Bundesland geprüft.",
+   "typ": "seite",
+   "datei": "content-schule-faecher.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/schule-faecher#artikel",
+      "headline": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
+      "name": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
+      "description": "Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor. Ausdrücklich ein Vorschlag, kein Lehrplan und für kein Bundesland geprüft.",
+      "url": "__BASIS__/schule-faecher",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/schule-faecher"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Für die Schule",
+      "abstract": "Fachbezug für Lehrkräfte: Wo KI im Unterricht in Mathe (Abstand und Wahrscheinlichkeit, Fehlerrechnung), Informatik (Daten, Training, Test), Biologie (Mustererkennung, Neuron als Analogie mit Grenzen), Deutsch (Textqualität, Quellenkritik), Ethik (Verzerrung, Deepfake-Dilemma) und Geschichte (Quellenkritik und Fälschungen) anknüpft, je mit passender Seite im Labor. Vorschlag, kein Lehrplan, für kein Bundesland geprüft.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-23",
+      "dateModified": "2026-11-23",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/schule-faecher#breadcrumb"
+      },
+      "teaches": [
+       "Zu jedem der sechs Fächer gibt es zwei bis drei Anknüpfungen mit einer passenden Seite im Labor.",
+       "Die Zuordnung ist ein Vorschlag, kein Lehrplan, und für kein Bundesland geprüft.",
+       "Die zehn Einheiten (drei KI-Stunden, sieben Medien-Einheiten) liefern Arbeitsblatt, Lösungen und Plan für Einzel- und Doppelstunde."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/schule-faecher#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
+        "item": "__BASIS__/schule-faecher"
+       }
+      ]
+     }
+    ]
+   }
+  },
   "echt-oder-ki": {
    "titel": "Echt oder KI? Bilder, Texte und Stimmen prüfen · KI-Labor",
    "ueberschrift": "Echt oder KI? Bilder, Texte und Stimmen prüfen",
@@ -19276,7 +19695,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19514,7 +19933,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19752,7 +20171,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19990,7 +20409,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20228,7 +20647,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20466,7 +20885,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20711,7 +21130,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20796,9 +21215,9 @@
    }
   },
   "falscher-anruf": {
-   "titel": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
-   "ueberschrift": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
-   "beschreibung": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst. Erstens auflegen.",
+   "titel": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie…",
+   "ueberschrift": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich",
+   "beschreibung": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was Sie über KI-Stimmen wissen müssen.",
    "typ": "seite",
    "datei": "content-anruf.js",
    "bild": "/static/og/standard.png",
@@ -20838,9 +21257,9 @@
        "LearningResource"
       ],
       "@id": "__BASIS__/falscher-anruf#artikel",
-      "headline": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
-      "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
-      "description": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was du über KI-Stimmen wissen musst. Erstens auflegen.",
+      "headline": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich",
+      "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich",
+      "description": "Auflegen, selbst zurückrufen, bei Verdacht die 110 wählen. Dazu ein Codewort in der Familie und was Sie über KI-Stimmen wissen müssen.",
       "url": "__BASIS__/falscher-anruf",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -20851,7 +21270,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Medienkompetenz",
-      "abstract": "Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die du selbst kennst, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.",
+      "abstract": "Bei einem verdächtigen Anruf mit Geldwunsch: erstens auflegen, zweitens die Person unter einer Nummer zurückrufen, die Sie selbst kennen, drittens bei Verdacht die Polizei unter 110 informieren. Ein Codewort in der Familie hilft. Laut BSI reichen für eine gefälschte Stimme mitunter wenige Sekunden Aufnahme.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -20859,7 +21278,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-23",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20896,7 +21315,7 @@
        {
         "@type": "ListItem",
         "position": 2,
-        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützt du dich",
+        "name": "Falscher Anruf, Enkeltrick, Schockanruf: so schützen Sie sich",
         "item": "__BASIS__/falscher-anruf"
        }
       ]
@@ -20908,7 +21327,7 @@
       "mainEntity": [
        {
         "@type": "Question",
-        "name": "Ein Anrufer sagt, dein Enkel hatte einen Unfall und braucht sofort Bargeld. Was tust du zuerst?",
+        "name": "Ein Anrufer sagt, Ihr Enkel hatte einen Unfall und braucht sofort Bargeld. Was tun Sie zuerst?",
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Ich lege auf und rufe meinen Enkel selbst an. Auflegen und unter einer bekannten Nummer zurückrufen klärt es. Wer am Telefon bleibt, steht weiter unter dem Druck der Täter."
@@ -20916,7 +21335,7 @@
        },
        {
         "@type": "Question",
-        "name": "Die Stimme am Telefon klingt genau wie deine Tochter. Was sagt das aus?",
+        "name": "Die Stimme am Telefon klingt genau wie Ihre Tochter. Was sagt das aus?",
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Nichts Sicheres, denn Stimmen lassen sich mit KI nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine Fälschung. Auch die Nummer im Display lässt sich fälschen. Nur der Rückruf unter einer bekannten Nummer klärt es."
@@ -20924,10 +21343,10 @@
        },
        {
         "@type": "Question",
-        "name": "Ein angeblicher Polizist will deine Wertsachen zur Sicherheit abholen. Was ist richtig?",
+        "name": "Ein angeblicher Polizist will Ihre Wertsachen zur Sicherheit abholen. Was ist richtig?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wähle die 110 selbst."
+         "text": "Ich gebe nichts heraus, lege auf und wähle selbst die 110. Die Polizei bittet niemals telefonisch um Wertsachen. Eine genannte Dienstnummer lässt sich ebenso erfinden. Wählen Sie die 110 selbst."
         }
        }
       ]
@@ -21467,7 +21886,7 @@
   "bildschirmzeit": {
    "titel": "Bildschirmzeit: kurz und ehrlich · KI-Labor",
    "ueberschrift": "Bildschirmzeit: kurz und ehrlich",
-   "beschreibung": "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.",
+   "beschreibung": "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was klicksafe und SCHAU HIN! für 10 und 14 Jahre raten und wo Sie Rat bekommen.",
    "typ": "seite",
    "datei": "content-eltern.js",
    "bild": "/static/og/standard.png",
@@ -21509,7 +21928,7 @@
       "@id": "__BASIS__/bildschirmzeit#artikel",
       "headline": "Bildschirmzeit: kurz und ehrlich",
       "name": "Bildschirmzeit: kurz und ehrlich",
-      "description": "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was nicht, und wo Sie Rat bekommen. Keine Medizin und keine Versprechen.",
+      "description": "Wie viel Bildschirm ist in Ordnung? Hier steht, was sich ehrlich sagen lässt, was klicksafe und SCHAU HIN! für 10 und 14 Jahre raten und wo Sie Rat bekommen.",
       "url": "__BASIS__/bildschirmzeit",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -21520,7 +21939,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Medienkompetenz",
-      "abstract": "Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe und den Mediennutzungsvertrag. Keine medizinische Beratung.",
+      "abstract": "Kurzer, ehrlicher Überblick für Eltern zur Bildschirmzeit: Es gibt keine einheitliche richtige Zahl, Inhalt und Begleitung zählen, Regeln gemeinsam vereinbaren. Verweise auf WHO-Empfehlung für Kinder unter fünf Jahren, klicksafe (Richtwert für 12 bis 16 Jahre: 1 bis 2 Stunden freie Bildschirmzeit am Tag), SCHAU HIN! und den Mediennutzungsvertrag, dazu Beispiele für Kinder mit 10 und mit 14 Jahren. Keine medizinische Beratung.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -21541,7 +21960,7 @@
        "@id": "__BASIS__/bildschirmzeit#breadcrumb"
       },
       "teaches": [
-       "Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen.",
+       "Es gibt keine einzelne richtige Zahl für alle. Alter, Inhalt und Begleitung zählen. Als Richtwert nennt klicksafe für 12 bis 16 Jahre 1 bis 2 Stunden freie Zeit am Tag.",
        "Vereinbaren Sie Regeln gemeinsam und halten Sie sie schriftlich fest.",
        "Bei Sorgen: Kinderarzt oder Beratungsstelle fragen, nicht diese Seite."
       ],
@@ -21597,6 +22016,286 @@
         "acceptedAnswer": {
          "@type": "Answer",
          "text": "Mit Kinderärztin, Kinderarzt oder Beratungsstelle sprechen. Die Seite kann keinen Einzelfall beurteilen. Bei solchen Anzeichen helfen Fachleute weiter."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "chat-irrt": {
+   "titel": "Das kleine Modell irrt: drei geprüfte Fälle · KI-Labor",
+   "ueberschrift": "Das kleine Modell irrt: drei geprüfte Fälle",
+   "beschreibung": "Drei Fälle, in denen das kleine Modell typisch danebenliegt, jeweils mit der geprüften richtigen Antwort und der Quelle: Lenkzeiten, Enkeltrick, eine Rechnung.",
+   "typ": "seite",
+   "datei": "content-chat-irrt.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/chat-irrt#artikel",
+      "headline": "Das kleine Modell irrt: drei geprüfte Fälle",
+      "name": "Das kleine Modell irrt: drei geprüfte Fälle",
+      "description": "Drei Fälle, in denen das kleine Modell typisch danebenliegt, jeweils mit der geprüften richtigen Antwort und der Quelle: Lenkzeiten, Enkeltrick, eine Rechnung.",
+      "url": "__BASIS__/chat-irrt",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/chat-irrt"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Drei Lehrfälle zum Prüfen von Chat-Antworten: Lenk- und Ruhezeiten nach der EU-Verordnung 561/2006 (9 Stunden täglich, 45 Minuten Pause nach 4,5 Stunden, 11 Stunden Ruhezeit), der Rat der Polizei beim Enkeltrick und Schockanruf (auflegen, zurückrufen, 110) und eine nachgerechnete Zahl (0,634). Dazu drei Schritte zum Prüfen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-23",
+      "dateModified": "2026-11-23",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/chat-irrt#breadcrumb"
+      },
+      "teaches": [
+       "Ein kleines Modell klingt sicher, auch wenn Zahlen, Quellen oder Ratschläge nicht stimmen.",
+       "Prüfen in drei Schritten: Behauptung notieren, zuständige Stelle suchen, vergleichen.",
+       "Bei Regeln mit Folgen und bei Geldforderungen gilt die Quelle oder die Polizei, nicht der Chat."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/chat-irrt#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Das kleine Modell irrt: drei geprüfte Fälle",
+        "item": "__BASIS__/chat-irrt"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/chat-irrt#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Wie lange darf ein Lkw-Fahrer nach der Verordnung (EG) Nr. 561/2006 lenken, bevor eine Pause nötig ist?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Viereinhalb Stunden, danach mindestens 45 Minuten Pause. Artikel 7 verlangt nach viereinhalb Stunden Lenkdauer eine Unterbrechung von mindestens 45 Minuten, sofern keine Ruhezeit folgt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Ein angeblicher Enkel ruft an und braucht dringend Geld. Was rät die Polizei?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Auflegen und unter der bekannten Nummer zurückrufen. Die Polizei rät, sofort aufzulegen und die Person unter einer bekannten Nummer anzurufen. Bei Verdacht wählst du die 110."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Das Modell nennt 0,855 als Ergebnis einer Rechnung. Was ist ein guter nächster Schritt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Rechnung selbst nachrechnen, am besten Schritt für Schritt. Kleine Modelle raten Zahlen Stück für Stück. Nachrechnen zeigt, ob sie stimmt. Im Beispiel ergibt die Rechnung etwa 0,634."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "hausaufgaben-familie": {
+   "titel": "Hausaufgaben und KI zu Hause: eine Vereinbarung · KI-Labor",
+   "ueberschrift": "Hausaufgaben und KI zu Hause: eine Vereinbarung",
+   "beschreibung": "Eine Vereinbarung für zu Hause in sechs Bausteinen, mit eigenen Vorschlägen für 12 und für 15 Jahre. Zum gemeinsamen Ausfüllen und Aufhängen.",
+   "typ": "seite",
+   "datei": "content-hausaufgaben-familie.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/hausaufgaben-familie#artikel",
+      "headline": "Hausaufgaben und KI zu Hause: eine Vereinbarung",
+      "name": "Hausaufgaben und KI zu Hause: eine Vereinbarung",
+      "description": "Eine Vereinbarung für zu Hause in sechs Bausteinen, mit eigenen Vorschlägen für 12 und für 15 Jahre. Zum gemeinsamen Ausfüllen und Aufhängen.",
+      "url": "__BASIS__/hausaufgaben-familie",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/hausaufgaben-familie"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Lektion",
+      "articleSection": "Medienkompetenz",
+      "abstract": "Vorschlag für eine Familienvereinbarung zur KI bei den Hausaufgaben, in Sie-Form für Eltern. Sechs Bausteine: wann KI erlaubt ist, wann nicht, wie die Hilfe gekennzeichnet wird, wie Antworten geprüft werden, Zeiten, und was bei Streit gilt. Mit getrennten Vorschlägen für Kinder mit 12 und mit 15 Jahren, Sätzen zum Übernehmen und einem PDF zum Ausfüllen. Vorschlag, kein Regelwerk. Die Regeln der Schule gehen vor.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-23",
+      "dateModified": "2026-11-23",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/hausaufgaben-familie#breadcrumb"
+      },
+      "teaches": [
+       "Eine kurze, gemeinsam ausgehandelte Vereinbarung hilft mehr als ein Verbot. Schreiben Sie sie auf.",
+       "Sechs Bausteine: erlaubt, nicht erlaubt, kennzeichnen, prüfen, Zeiten, Streit. Mit 12 etwas enger geführt, mit 15 mit mehr Eigenverantwortung.",
+       "Die Regeln der Schule gehen vor. Fragen Sie im Zweifel die Lehrkraft."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/hausaufgaben-familie#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Hausaufgaben und KI zu Hause: eine Vereinbarung",
+        "item": "__BASIS__/hausaufgaben-familie"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/hausaufgaben-familie#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Ihre Tochter ist 12 und hat eine Hausaufgabe. Welche Regel passt zum Vorschlag?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Sie lässt sich etwas erklären und wird abgefragt, wenn Sie in der Nähe sind. Erklären und Abfragen lassen sich begleiten. Fertige Texte abzugeben nimmt dem Kind das Denken, und heimliche Nutzung widerspricht der Vereinbarung."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Die Lehrkraft verlangt, KI-Hilfe anzugeben, die Vereinbarung zu Hause sagt nichts dazu. Was gilt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Regel der Schule gilt, die Vereinbarung wird entsprechend ergänzt. Die Schule bestimmt, was bei Hausaufgaben gilt. Ergänzen Sie die Vereinbarung, damit beides zusammenpasst."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Ihr Sohn ist 15 und will eine Regel ändern. Was ist ein guter Weg?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Er nennt seine Gründe, und Sie passen die Regel gemeinsam an. Regeln, die das Kind mit aushandelt, halten länger. Mit 15 wächst die Eigenverantwortung, und die Vereinbarung wächst mit."
         }
        }
       ]
@@ -21974,6 +22673,7 @@
   "ki-einfuehrung",
   "betrieb-entscheidung",
   "kamera-grenzen",
+  "praxis-gesundheit",
   "uc-fertigung-sichtpruefung",
   "uc-fertigung-sortieren",
   "uc-logistik-zaehlen",
@@ -21991,6 +22691,7 @@
   "ueber",
   "selbst-bauen",
   "lizenzen",
+  "architektur",
   "schule-start",
   "schule-stunde-1",
   "schule-stunde-2",
@@ -22008,6 +22709,7 @@
   "elternabend",
   "ki-schule-ueberblick",
   "ki-schule-einstieg",
+  "schule-faecher",
   "echt-oder-ki",
   "quellen-pruefen",
   "fake-news-deepfakes",
@@ -22020,7 +22722,9 @@
   "prompts-schule",
   "eltern-zuhause",
   "zusammen-ausprobieren",
-  "bildschirmzeit"
+  "bildschirmzeit",
+  "chat-irrt",
+  "hausaufgaben-familie"
  ],
  "gruppen": [
   {
@@ -22122,7 +22826,8 @@
     "kosten-energie",
     "ki-einfuehrung",
     "betrieb-entscheidung",
-    "kamera-grenzen"
+    "kamera-grenzen",
+    "praxis-gesundheit"
    ]
   },
   {
@@ -22149,7 +22854,8 @@
     "sicherheit-einfach",
     "ueber",
     "selbst-bauen",
-    "lizenzen"
+    "lizenzen",
+    "architektur"
    ]
   },
   {
@@ -22171,7 +22877,8 @@
     "medien-stunde-7",
     "elternabend",
     "ki-schule-ueberblick",
-    "ki-schule-einstieg"
+    "ki-schule-einstieg",
+    "schule-faecher"
    ]
   },
   {
@@ -22189,7 +22896,9 @@
     "prompts-schule",
     "eltern-zuhause",
     "zusammen-ausprobieren",
-    "bildschirmzeit"
+    "bildschirmzeit",
+    "chat-irrt",
+    "hausaufgaben-familie"
    ]
   }
  ]

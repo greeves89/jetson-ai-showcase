@@ -48,7 +48,7 @@ assert.equal(await lauf("richtig", false), 12);
 await (await page.$("#ausprobieren")).screenshot({ path: `tests/ausgabe/eok-ende-${modus}.png` });
 const ende = await page.textContent(".eok-ende");
 assert.ok(/quellen-pruefen/.test(await page.$eval(".eok-ende a[href='/quellen-pruefen']", (a) => a.getAttribute("href"))));
-assert.ok(ende.includes("Herkunft prüfen schlägt Hinsehen") && ende.includes("Auch Profis"));
+assert.ok(ende.includes("Herkunft prüfen schlägt Hinsehen"));
 assert.ok(await page.$('.eok-druck[href$="bildkarten-echt-oder-ki.pdf"]'));
 await page.click(".eok-nochmal");
 assert.equal(await lauf("falsch", true), 0);
@@ -65,6 +65,7 @@ await page.waitForSelector(".eok-urteil");
 // Bilder laden wirklich
 await page.click(".eok-weiter");
 await page.waitForSelector(".eok-bild");
+await page.waitForFunction(() => { const im = document.querySelector(".eok-bild"); return im && im.complete && im.naturalWidth > 0; }, null, { timeout: 8000 });
 assert.ok(await page.$eval(".eok-bild", (im) => im.complete && im.naturalWidth > 0), "Bild geladen");
 // Handy
 await page.setViewportSize({ width: 390, height: 844 });

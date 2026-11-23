@@ -14,7 +14,15 @@ seiten: {
 "echt-oder-ki": {
   videos: ["echt-oder-ki"],
   widget: "echt-oder-ki", widgetTitel: "Echt oder KI? Das Bilderspiel", widgetSymbol: "images",
-  downloads: [{text: "Kartenset Echt oder KI?", sub: "12 Bildkarten, 2 Seiten A4, zum Ausschneiden", href: "/static/materialien/bildkarten-echt-oder-ki.pdf"}],
+  /* Rolle eltern: zuerst das Elternset mit Auflösung und Spielregeln für zwei, das Schulset danach "für die Klasse". Sonst nur das Schulset. */
+  get downloads() {
+    const schule = {text: "Kartenset Echt oder KI?", sub: "12 Bildkarten, 2 Seiten A4, zum Ausschneiden", href: "/static/materialien/bildkarten-echt-oder-ki.pdf"};
+    if (typeof KL !== "undefined" && KL && KL.weg === "eltern") {
+      return [{text: "Kartenset für zwei (mit Auflösung)", sub: "Für Eltern und Kind: 4 Seiten A4 mit Spielregeln für zwei und Auflösung", href: "/static/materialien/kartenset-eltern.pdf"},
+        {text: "Kartenset Echt oder KI? (für die Klasse)", sub: "12 Bildkarten, 2 Seiten A4, ohne Auflösung, für Gruppen im Unterricht", href: schule.href}];
+    }
+    return [schule];
+  },
   nav: "Echt oder KI?", typ: "lektion", gruppe: "Medienkompetenz", titel: "Echt oder KI? Bilder, Texte und Stimmen prüfen", symbol: "bild",
   kurz: "KI macht Bilder, Texte und Stimmen, die echt wirken. Hier lernst du Warnzeichen und Prüfwege kennen und warum es keine sichere Erkennung gibt.",
   lernziele: [
@@ -202,14 +210,14 @@ seiten: {
      ],
      merke: "Ohne Ort und Datum ist ein Bild nur ein Bild und kein Beleg."},
     {h: "Der Chatbot als Quelle?",
-     kurz: "Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworten und erfundene Belege liefern.",
+     kurz: "Ein Chatbot ist ein guter Wegweiser, aber keine Quelle. Er kann falsche Antworten und erfundene Belege liefern. Drei Beispiele: {{chat-irrt|Das kleine Modell irrt}}.",
      visual: {typ: "ablauf", schritte: [
       {icon: "message-square", text: "Chatbot fragen", sub: "Überblick, Stichworte"},
       {icon: "list-checks", text: "Aussagen notieren", sub: "was ist prüfbar?"},
       {icon: "search", text: "Original suchen", sub: "Buch, Seite, Studie"},
       {icon: "badge-check", text: "Erst dann nutzen", sub: "mit echter Quelle", farbe: "gruen"}]},
      p: [
-      "Ein Sprachmodell setzt Text zusammen, der wahrscheinlich klingt. Es schlägt nicht nach, ob etwas stimmt. Darum kommt es vor, dass es Fakten mischt oder Quellen erfindet, mit Titel, Autor und Jahr, die es nie gab. Das nennt man Halluzination. Mehr dazu steht auf der Seite {{llm-grenzen|Grenzen von Sprachmodellen}}.",
+      "Ein Sprachmodell setzt Text zusammen, der wahrscheinlich klingt. Es schlägt nicht nach, ob etwas stimmt. Darum kommt es vor, dass es Fakten mischt oder Quellen erfindet, mit Titel, Autor und Jahr, die es nie gab. Das nennt man Halluzination. Mehr dazu steht auf der Seite {{llm-grenzen|Grenzen von Sprachmodellen}}. Drei geprüfte Fälle, von Lenkzeiten bis zur Rechnung, zeigt {{chat-irrt|Das kleine Modell irrt}}.",
       "Nutze den Chatbot deshalb als Starthilfe: für einen Überblick, für Suchbegriffe, für eine Erklärung in einfachen Worten. Wenn du etwas weitergibst oder abgibst, suchst du das Original. Gibt es die genannte Quelle nicht, streichst du die Aussage oder suchst eine echte.",
      ],
      alltag: "Ein Chatbot ist wie ein Bekannter, der viel gelesen hat und sehr überzeugend erzählt, aber nie sagt: Das weiß ich nicht. Du hörst gern zu, schreibst aber nichts ab, ohne es nachzulesen."},
@@ -244,7 +252,7 @@ seiten: {
      optionen: ["Ich suche die Studie selbst, bevor ich sie angebe", "Ich gebe sie an, so genaue Angaben stimmen immer", "Ich frage den Chatbot nochmal, ob sie echt ist", "Ich lasse die Angabe weg, die Aussage bleibt stehen"],
      richtig: 0, erklaerung: "Genaue Angaben wirken überzeugend, können aber erfunden sein. Wieder fragen hilft nicht, denn der Chatbot kann sich selbst bestätigen. Die Aussage ohne Beleg bleibt unbelegt."},
   ],
-  weiter: ["echt-oder-ki", "fake-news-deepfakes", "llm-grenzen", "ki-hausaufgaben-fair"],
+  weiter: ["echt-oder-ki", "chat-irrt", "fake-news-deepfakes", "llm-grenzen", "ki-hausaufgaben-fair"],
 },
 
 /* ------------------------------------------------------------------ 3 */
@@ -419,7 +427,7 @@ seiten: {
      ]},
     {h: "Für Eltern: nachfragen statt kontrollieren",
      id: "eltern",
-     kurz: "Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis.",
+     kurz: "Vereinbart zu Hause, wann KI helfen darf. Fragt nach dem Weg, nicht nur nach dem Ergebnis. Die Vorlage dafür ist {{hausaufgaben-familie|die Vereinbarung für zu Hause}}.",
      visual: {typ: "ablauf", paket: false, schritte: [
       {icon: "handshake", text: "Vereinbaren", sub: "wann KI erlaubt ist"},
       {icon: "circle-help", text: "Nachfragen", sub: "wie bist du darauf gekommen"},
@@ -427,7 +435,7 @@ seiten: {
      p: [
       "Spioniert nicht hinterher und lest nicht heimlich mit. Besser ist eine Vereinbarung, die ihr gemeinsam trefft: Wofür darf KI helfen, wofür nicht, und wie wird es angegeben? Die Regeln der Schule gehen dabei vor. Fragt im Zweifel die Lehrkraft.",
       "Nachfragen schlägt Kontrollieren. Lass dir zeigen, wie dein Kind vorgegangen ist: Was hast du selbst versucht? Was hat die KI vorgeschlagen? Was hast du geprüft? Wer eine Antwort in eigenen Worten erklären kann, hat sie verstanden. Wer es nicht kann, hat vermutlich nur abgegeben.",
-      "Lobt den Versuch, auch wenn er schiefgeht. Und seid selbst ein Vorbild: Prüft eine KI-Antwort gemeinsam gegen eine zweite Quelle, wie auf der Seite {{quellen-pruefen|Quellen prüfen}} beschrieben. Mehr zu Gesprächen zu Hause steht auf {{eltern-zuhause|KI zu Hause}} und {{zusammen-ausprobieren|Zusammen ausprobieren}}.",
+      "Lobt den Versuch, auch wenn er schiefgeht. Und seid selbst ein Vorbild: Prüft eine KI-Antwort gemeinsam gegen eine zweite Quelle, wie auf der Seite {{quellen-pruefen|Quellen prüfen}} beschrieben. Mehr zu Gesprächen zu Hause steht auf {{eltern-zuhause|KI zu Hause}} und {{zusammen-ausprobieren|Zusammen ausprobieren}}. Eine Vereinbarung zum Ausfüllen, getrennt für 12 und 15 Jahre: {{hausaufgaben-familie|Hausaufgaben und KI zu Hause}}.",
      ],
      merke: "Nachfragen statt kontrollieren: Wie bist du darauf gekommen?"},
     {h: "Gute Gründe, selbst zu denken",
@@ -467,7 +475,7 @@ seiten: {
      optionen: ["Nur der Hinweis, dass du KI nicht gut findest", "Der Name deiner Schule und deine Klassenstufe", "Die Namen aller, die dir sonst geholfen haben", "Werkzeug, Datum, Zweck und dein eigener Anteil"],
      richtig: 3, erklaerung: "So ist nachvollziehbar, welcher Teil von dir ist. Die Angabe schützt dich und zeigt, dass du nichts versteckst."},
   ],
-  weiter: ["prompts-fuer-schueler", "quellen-pruefen", "prompting", "llm-grenzen"],
+  weiter: ["prompts-fuer-schueler", "quellen-pruefen", "hausaufgaben-familie", "chat-irrt", "prompting", "llm-grenzen"],
 },
 
 /* ------------------------------------------------------------------ 5 */

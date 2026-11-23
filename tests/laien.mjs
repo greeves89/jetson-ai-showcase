@@ -470,7 +470,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     }
   }
   { // Eltern, Technik, Erwachsene (Alias neugierig): Klassenlink wirkt ohne Speichern, Pfade da
-    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 9], ["technik", /Ich arbeite in der IT/, 7], ["neugierig", /Ich will KI verstehen/, 11], ["erwachsene", /Ich will KI verstehen/, 11]]) {
+    for (const [w, ich, anzahl] of [["eltern", /Ich bin Elternteil/, 11], ["technik", /Ich arbeite in der IT/, 8], ["neugierig", /Ich will KI verstehen/, 11], ["erwachsene", /Ich will KI verstehen/, 11]]) {
       const t = await neu(); const { page } = t;
       await page.goto(URL_LABOR + "/?weg=" + w, { waitUntil: "load" });
       await page.waitForSelector("#empfohlen");
@@ -489,7 +489,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
     await page.click(".fuss-speicher a");
     await page.waitForSelector("#browser-eintraege");
     pruefe(/sicherheit-einfach/.test(page.url()), "Link führt zu Ist das sicher?");
-    const tab = await page.textContent("#browser-eintraege");
+    const tab = await page.evaluate(() => { const d = document.querySelector("#technische-details"); return (d ? d.textContent : "") + (document.querySelector("#browser-eintraege") || { textContent: "" }).textContent; });      // Tabelle steht seit Runde 5 im Abschnitt Technische Details
     pruefe(/kl-merken/.test(tab) && /kl-willkommen/.test(tab), "Tabelle nennt kl-merken und kl-willkommen");
     await t.schliessen();
   }

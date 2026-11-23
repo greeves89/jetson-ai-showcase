@@ -74,10 +74,11 @@
   /* Wie postS, aber mit freundlichem Wiederholen, wenn der Rechner ausgelastet ist (siehe laien.js). bei meldet den Zaehler. */
   const postLast = (pfad, obj, signal, bei, opt) => KL.last.post(pfad, obj, signal, bei, opt);
   const istBelegt = (e) => !!e && e.name === "BelegtFehler";
+  const NETZ_AUS = "Keine Verbindung zum Labor. Prüfe dein Netz und versuche es noch einmal.";
   function netzFehler(e) {
     if (e && e.name === "AbortError") return null;
     if (e && e.message && !/fetch|network|load failed/i.test(e.message)) return e.message;
-    return "Der Jetson antwortet gerade nicht. Vielleicht startet er einen Dienst neu. Warte einige Sekunden und versuche es noch einmal.";
+    return NETZ_AUS;
   }
   async function streamLesen(r, bei) {
     const rd = r.body.getReader();
@@ -944,7 +945,7 @@
     const MODELL = "llama3.2:3b";
     let tokensZeigen = false, busy = false, pullBusy = false, ctrl = null;
     let temperatur = 0.7;
-    let imSpeicher = false;
+    let imSpeicher = false, verbindungWeg = false, belegtBis = 0;
     const nachrichten = [];
 
     /* Modellzeile */
@@ -958,23 +959,28 @@
 
     /* Verlauf */
     const verlauf = h("div", { class: "verlauf", role: "log", "aria-live": "off", "aria-label": "Chatverlauf", tabindex: "0" });
-    const leer = h("p", { class: "d-hinweis" }, "Stelle eine Frage oder wähle eine Beispielfrage. Jede Frage steht für sich: Der Jetson bekommt keinen früheren Verlauf mit, das Modell erinnert sich also nicht an vorherige Fragen.");
+    const leer = h("p", { class: "d-hinweis" }, "Jede Frage steht für sich: Das Modell erinnert sich nicht an vorherige Fragen.");
 
     /* Eingabe */
     const feld = h("textarea", { rows: 1, maxlength: 1000, id: "chat-eingabe", placeholder: "Schreibe eine Frage…", "aria-label": "Deine Frage", enterkeyhint: "send", dataset: { testid: "chat-eingabe" } });
     const sendeBtn = h("button", { type: "button", class: "btn primary" }, ic("send"), "Senden");
     const stoppBtn = h("button", { type: "button", class: "btn", hidden: true }, ic("stop"), "Stopp");
     const eingabe = h("div", { class: "eingabe" }, feld, sendeBtn, stoppBtn);
-    const feldHinweis = h("p", { class: "d-feldhinweis", role: "status", "aria-live": "polite" });
+    const feldHinweis = h("p", { class: "d-feldhinweis", id: "chat-feldhinweis", role: "status", "aria-live": "polite" });
     const tastenHinweis = h("p", { class: "d-hinweis d-tasten" }, "Enter sendet, Shift+Enter macht eine neue Zeile.");
     // Kontextlaenge (Zahl wie auf der Seite Hardware: im Labor eingestellt sind 4096 Token)
     const kontextHinweis = h("p", { class: "d-hinweis d-kontext", title: "Token sind Wortstücke. 4096 Token sind ungefähr ein bis zwei Seiten Text. Längere Texte vergisst das Modell." },
       "Das Modell hält etwa 4096 Token im Kopf (ein bis zwei Seiten Text). ", h("a", { href: "/hardware" }, "Mehr dazu"));
-    const eingabeBlock = h("div", { class: "d-eingabeblock" }, eingabe, feldHinweis, tastenHinweis, kontextHinweis);
+    // "Kurz antworten": Standard an fuer Schule, Eltern und Erwachsene, aus fuer Technik; der Server begrenzt dann Saetze und Laenge
+    let kurzAn = ["schule", "eltern", "erwachsene"].includes(KL.weg);
+    const kurzBox = h("input", { type: "checkbox", id: "d-kurz", role: "switch", checked: kurzAn, dataset: { testid: "chat-kurz" } });
+    kurzBox.addEventListener("change", () => { kurzAn = kurzBox.checked; });
+    const kurzSchalter = h("label", { class: "d-schalter d-kurz", for: "d-kurz" }, kurzBox, h("span", { class: "d-sw-bahn", "aria-hidden": "true" }, h("i")), "Kurz antworten");
+    const eingabeBlock = h("div", { class: "d-eingabeblock" }, eingabe, feldHinweis, kurzSchalter, KL.datenHinweis(), tastenHinweis, kontextHinweis);
     /* Leeres Senden: kurze, freundliche Rückmeldung, der Cursor springt ins Feld */
     function ausFeldSenden() {
       if (busy) return;
-      if (!feld.value.trim()) { feldHinweis.textContent = "Schreib zuerst eine Frage."; feld.classList.add("d-leer"); feld.focus(); return; }
+      if (!feld.value.trim()) { feldHinweis.textContent = "Schreib zuerst eine Frage."; feld.classList.add("d-leer"); feld.setAttribute("aria-invalid", "true"); feld.setAttribute("aria-describedby", "chat-feldhinweis"); feld.focus({ preventScroll: true }); return; }
       senden(feld.value);
     }
 
@@ -1005,14 +1011,16 @@
     const live = liveBlock("Live-Erklärung");
     live.text("Stelle eine Frage. Hier siehst du dann, wie der Jetson Token für Token antwortet.");
 
-    root.append(modellZeile, h("div", { class: "d-chatbox" }, verlauf, leer), KL.kiHinweis(), eingabeBlock, chips, einst, live.el);
+    root.append(h("div", { class: "d-chatbox" }, verlauf, leer), eingabeBlock, KL.kiHinweis(), chips, modellZeile, einst, live.el);        // Eingabe zuerst, das Modell darunter (Handy: Feld direkt unter der Überschrift)
 
     /* Modellstatus aus den Live-Werten */
     function modellStatusSetzen(d) {
+      if (verbindungWeg) { modellStatus.textContent = "Keine Verbindung zum Labor"; modellStatus.classList.remove("live"); return; }
       const geladen = (d.modelle_geladen || []).some((m) => m.startsWith("llama3.2"));
       imSpeicher = geladen;
       // gleiche Aussage wie Startseite und Seitenleiste (KL.rechner): "bereit" nur, solange keine Anfragen warten
-      const lage = KL.rechner ? KL.rechner.lage(d) : { zustand: "frei" };
+      let lage = KL.rechner ? KL.rechner.lage(d) : { zustand: "frei" };
+      if (belegtBis > Date.now() && lage.zustand !== "voll") lage = Object.assign({}, lage, { zustand: "voll" });      // die Ausfall-Karte meldet "ausgelastet": der Chip sagt dasselbe
       const zusatz = lage.zustand === "voll" ? ", aber gerade viel los" : lage.zustand === "rechnet" ? ", Rechner rechnet gerade" : "";
       modellStatus.textContent = (geladen ? (zusatz ? "Modell im Speicher" : "Modell bereit, im Speicher") : "Modell wird bei der ersten Frage geladen") + zusatz;
       modellStatus.classList.toggle("live", geladen && lage.zustand === "frei");
@@ -1126,13 +1134,29 @@
         quiz() ? h("li", null, h("a", { href: "#quiz", onclick: (e) => { const q = quiz(); if (!q) return; e.preventDefault(); q.scrollIntoView({ behavior: "smooth", block: "start" }); } }, "Das Quiz zu dieser Seite machen")) : null);
     }
 
+    /* Betrugs-Kasten: feste Hinweise, keine Modell-Aussage. Erscheint vor der Antwort, wenn Frage UND Stichwort auf Betrug deuten. */
+    const BETRUG = {
+      stichwort: /\b(?:anruf\w*|angerufen|anrufer\w*|enkel\w*|polizei\w*|schockanruf\w*|konto\w*|gewinn\w*|überweis\w*|ueberweis\w*|(?:paket|pakete|paketen|link|links|sms)(?![a-zäöüß])|bank\w*|falsch(?:er|e|en|es)|betrug\w*|betrüg\w*)/i,
+      frage: /\?|\b(?:was|wie|soll|sollte|muss|darf|kann|wer|ob|woran|warum|wann|wo|wohin|ist|sind|hilfe)\b/i,
+    };
+    function betrugKasten() {
+      return h("div", { class: "betrug-kasten", role: "note", dataset: { testid: "chat-betrug" } }, ic("shield-alert"),
+        h("div", null, h("p", { class: "bk-titel" }, "Bei Verdacht auf Betrug"),
+          h("ul", null, h("li", null, "Auflegen."), h("li", null, "Selbst zurückrufen unter einer Nummer, die du kennst."), h("li", null, "Notruf 110 bei Verdacht.")),
+          h("p", { class: "bk-mehr" }, "Mehr: ", h("a", { href: "/falscher-anruf" }, "Falscher Anruf"))));
+    }
+
     async function senden(text, erneut, autoSchon) {
       text = String(text || "").trim().slice(0, 1000);
       if (!text || busy) return;
-      busy = true; sendeBtn.hidden = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = ""; feldHinweis.textContent = ""; feld.classList.remove("d-leer");
+      busy = true; sendeBtn.hidden = true; stoppBtn.hidden = false; feld.value = ""; feld.style.height = ""; feldHinweis.textContent = ""; feld.classList.remove("d-leer"); feld.removeAttribute("aria-invalid");
+      const scrollY = window.scrollY;                  // die Seite springt beim Absenden nicht
       eingabe.classList.add("laeuft");
       if (!erneut) neueNachricht("du", text);          // beim Wiederholen steht die Frage schon im Verlauf
+      if (!erneut && BETRUG.stichwort.test(text) && BETRUG.frage.test(text)) verlauf.append(betrugKasten());      // sofort, ohne auf das Modell zu warten
       const m = neueNachricht("ki");
+      window.scrollTo(window.scrollX, scrollY);
+      try { stoppBtn.focus({ preventScroll: true }); } catch (e) { /* egal */ }
       ctrl = new AbortController();
       const sig = ctrl.signal;
       const s = { n: 0, tSend: performance.now(), tErst: 0 };
@@ -1168,22 +1192,23 @@
         if (e >= AUSFALL_NACH_S && ctrl) { zeitlimit = true; ctrl.abort(); }          // kein erstes Wort nach 90 Sekunden: Karte statt endlosem Warten
       }, 1000);
       try {
-        const r = await postLast("/api/chat", { nachricht: text, temperatur, rolle: KL.weg === "schule" ? "schule" : undefined }, sig, (i) => wartehinweis(KL.last.warteText(i)),
+        const r = await postLast("/api/chat", { nachricht: text, temperatur, kurz: kurzAn }, sig, (i) => wartehinweis(KL.last.warteText(i)),
           { max: 1, sek: AUTO_NACH_S });    // einmal automatisch nach 20 s, nicht dreimal. Rolle Schule: der Server haengt "kurz und einfach" an
         if (!r.ok) throw new Error(await antwortFehler(r));
         await streamLesen(r, (gesamt) => {
           roh = gesamt;
           const z = zerlege(gesamt);
           m.tokens = z.tokens;
-          if (z.tokens.length && !s.tErst) { s.tErst = performance.now(); fort.remove(); }
+          if (z.tokens.length && !s.tErst) { s.tErst = performance.now(); KL.last.ersteMerken((s.tErst - s.tSend) / 1000); fort.remove(); }
           s.n = z.tokens.length;
           if (s.tErst && !z.meta) liveSatz(s);
           if (!rafOffen) { rafOffen = true; requestAnimationFrame(zeichne); }
         });
       } catch (e) {
-        if (e && e.name === "AbortError") abgebrochen = true; else { fehler = netzFehler(e) || "Unbekannter Fehler."; belegt = istBelegt(e); }
+        if (e && e.name === "AbortError") abgebrochen = true; else { fehler = netzFehler(e) || "Unbekannter Fehler."; belegt = istBelegt(e); if (fehler === NETZ_AUS) { verbindungWeg = true; modellStatusSetzen(KL.stats.letzte || {}); } }
       }
       stoppePlatz();
+      if (!fehler) verbindungWeg = false;
       clearInterval(wartetimer);
       fort.remove();
       liveSatz.stop();
@@ -1204,7 +1229,15 @@
       // Neuer Versuch derselben Frage: die Frage bleibt stehen und wird nicht doppelt eingetragen; Auto-Versuch gibt es je Frage nur einmal
       const nochmal = () => { if (busy) return; const i = nachrichten.indexOf(m); if (i >= 0) nachrichten.splice(i, 1); m.el.remove(); senden(text, true, true); };
       let karte = null;
-      if (hinweisText || (belegt && !z.tokens.length)) {
+      if (!hinweisText && !belegt && fehler && !z.tokens.length && !abgebrochen) {
+        // anderer Fehlschlag (keine Verbindung, Serverfehler): Karte mit "Noch einmal versuchen", ohne Schuldzuweisung
+        karte = KL.last.karte({ titel: fehler === NETZ_AUS ? "Keine Verbindung" : "Das hat nicht geklappt", text: fehler, wiederholen: nochmal, auto: 0 });
+        m.el.classList.add("msg-hinweis");
+        m.el.replaceChildren(karte.el);
+        L.onEnde(() => karte.stop());
+      }
+      else if (hinweisText || (belegt && !z.tokens.length)) {
+        belegtBis = Date.now() + 30000; modellStatusSetzen(KL.stats.letzte || {});
         // Ausfall: Karte "Der Jetson ist gerade ausgelastet" mit Knopf, Hilfe und (einmal je Frage) automatischem Versuch nach 20 s
         const auto = hinweisText && !autoSchon;
         karte = KL.last.karte({ titel: "Der Jetson ist gerade ausgelastet", text: hinweisText ? hinweisText + (/[.!?]$/.test(hinweisText) ? "" : ".") + " Das liegt nicht an dir." : KL.last.TEXT,
@@ -1237,9 +1270,20 @@
       else if (fehler) live.text(fehler);
       busy = false; ctrl = null; sendeBtn.hidden = false; stoppBtn.hidden = true; eingabe.classList.remove("laeuft");
       nachUnten();
-      if (!L.weg && !karte) feld.focus();
+      if (!L.weg && !karte) feld.focus({ preventScroll: true });
+      window.scrollTo(window.scrollX, scrollY);
     }
     L.onEnde(() => { if (ctrl) ctrl.abort(); });
+
+    /* Vorlage von einer Beispiel-Prompt-Seite ("Im Chat ausprobieren"): nur ins Feld, nie automatisch gesendet */
+    try {
+      const vorlage = sessionStorage.getItem("kl-chat-vorlage");
+      if (vorlage) {
+        sessionStorage.removeItem("kl-chat-vorlage");
+        feld.value = vorlage.slice(0, 1000);
+        requestAnimationFrame(() => { feld.style.height = "auto"; feld.style.height = Math.min(feld.scrollHeight, 130) + "px"; feld.scrollIntoView({ block: "center" }); feld.focus(); });
+      }
+    } catch (e) { /* ohne Speicher */ }
 
     sendeBtn.addEventListener("click", ausFeldSenden);
     stoppBtn.addEventListener("click", () => { if (ctrl) ctrl.abort(); });

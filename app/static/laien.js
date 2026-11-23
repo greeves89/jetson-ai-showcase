@@ -262,8 +262,19 @@
     /** Ansage vor dem Start: was ist zu erwarten? */
     ansage() {
       const mit = KL.last.mittlere();
-      return mit == null ? "Das erste Wort kann bis zu einer Minute dauern." : "Zuletzt dauerte eine Antwort " + KL.last.sekundenText(mit) + ".";
+      if (mit == null) return "Das erste Wort kommt meist nach wenigen Sekunden, die ganze Antwort kann bis zu einer Minute dauern.";
+      const e = KL.last.ersteMittel();
+      const erst = e == null || e <= 5 ? "nach wenigen Sekunden" : "nach etwa " + (e < 60 ? Math.round(e / 5) * 5 + " Sekunden" : "einer Minute");
+      return "Das erste Wort kam zuletzt " + erst + ", die ganze Antwort dauerte " + KL.last.sekundenText(mit) + ".";
     },
+    /** Zeit bis zum ersten Wort (Sekunden), die letzten fuenf Antworten dieser Sitzung, nur im Speicher. */
+    erste: [],
+    ersteMerken(sek) {
+      if (!(sek >= 0) || !isFinite(sek)) return;
+      KL.last.erste.push(sek);
+      if (KL.last.erste.length > 5) KL.last.erste.shift();
+    },
+    ersteMittel() { const m = KL.last.erste; return m.length ? m.reduce((a, b) => a + b, 0) / m.length : null; },
     /** Satz zur Platznummer mit geschaetzter Wartezeit, z. B. "Du bist Nr. 2 in der Warteschlange. Geschätzte Wartezeit: etwa 40 Sekunden." */
     platzText(info) {
       const n = info && info.position;

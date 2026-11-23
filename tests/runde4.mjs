@@ -117,7 +117,7 @@ const pruefe = (ok, text) => { console.log((ok ? "OK     " : "FEHLER ") + text);
   const w = await page.textContent(".msg.ki .ki-warn");
   pruefe(/Das kleine Modell irrt bei Erklärungen zur KI oft/.test(w) && /Tokens und Sprachmodelle/.test(w), "KI-Frage: Hinweis mit geprüfter Erklärung");
   pruefe(await page.locator('.msg.ki .ki-warn a[href="/tokens-sprachmodelle"]').count() === 1, "Hinweis verlinkt Tokens und Sprachmodelle");
-  pruefe(gesendet && gesendet.rolle === "schule", "Rolle schule wird an den Server gesendet");
+  pruefe(gesendet && gesendet.kurz === true, "Rolle schule: kurz true wird an den Server gesendet (Kurz antworten ist dort Standard)");
   const b = await page.evaluate(() => { const k = document.querySelector(".ki-hinweis").getBoundingClientRect(), v = document.querySelector(".d-chatbox").getBoundingClientRect(); return { k: k.width, v: v.width }; });
   pruefe(b.k >= b.v - 2, "Antwortrahmen in voller Breite des Chat-Bereichs (" + Math.round(b.k) + " von " + Math.round(b.v) + ")");
   await page.fill("textarea[aria-label='Deine Frage']", "Wie viel ist 17 mal 23?");
