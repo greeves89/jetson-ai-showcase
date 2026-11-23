@@ -314,13 +314,22 @@ const begriffe = (s) => [...new Set([...JSON.stringify(s).matchAll(/\[\[([a-z0-9
 const begriffKnoten = (k) => ({ "@type": "DefinedTerm", "@id": BASIS + "/#begriff-" + k, name: INHALT.glossar[k][0] });
 
 /* ---------------------------------------------------------------- Strukturierte Daten (JSON-LD, nur aus vorhandenen Daten) */
+// Google verlangt für uploadDate Datum, Uhrzeit und Zeitzone (ISO 8601). Die Daten stammen aus Git (nur Tag),
+// daher mittags mit dem Versatz von Europe/Berlin an diesem Tag.
+function hochladeZeit(tag) {
+  const t = /^\d{4}-\d{2}-\d{2}/.test(tag || "") ? tag.slice(0, 10) : new Date().toISOString().slice(0, 10);
+  const mittag = new Date(t + "T12:00:00Z");
+  const teile = new Intl.DateTimeFormat("en", { timeZone: "Europe/Berlin", timeZoneName: "longOffset" }).formatToParts(mittag);
+  const off = (teile.find((x) => x.type === "timeZoneName").value.replace("GMT", "") || "+00:00");
+  return t + "T12:00:00" + (off.length === 3 ? off + ":00" : off || "+00:00");
+}
 function videoKnoten(v) {
   const b = BASIS + "/static/videos/" + v.id;
   const kap = v.kapitel || [];
   return mitPerson({
     "@type": "VideoObject", "@id": b + "#video", name: v.titel,
     description: v.untertitel + "." + (kap.length ? " Kapitel: " + kap.map((k) => k.titel).join(", ") + "." : ""),
-    thumbnailUrl: b + ".jpg", uploadDate: v.datum, duration: iso(v.dauer_s), contentUrl: b + ".mp4", encodingFormat: "video/mp4",
+    thumbnailUrl: b + ".jpg", uploadDate: hochladeZeit(v.datum), duration: iso(v.dauer_s), contentUrl: b + ".mp4", encodingFormat: "video/mp4",
     inLanguage: "de", isAccessibleForFree: true, transcript: v.text,
     ...(kap.length ? { hasPart: kap.map((k, i) => ({ "@type": "Clip", name: k.titel, startOffset: Math.floor(k.t), endOffset: Math.ceil(i + 1 < kap.length ? kap[i + 1].t : v.dauer_s), url: b + ".mp4#t=" + Math.floor(k.t) })) } : {}),
   });
