@@ -743,11 +743,13 @@
   function navOffenSchreiben(menge) {
     try { localStorage.setItem("kl-nav-offen", JSON.stringify([...menge])); } catch (e) { /* ohne Speicher */ }
   }
-  function gruppeOeffnen(gr, offen, merken) {
+  function gruppeOeffnen(gr, offen, merken, exklusiv) {
+    // Immer nur ein Bereich ist offen: das Menue bleibt kurz und man behaelt den Ueberblick (exklusiv = true beim Klick und beim Seitenwechsel)
+    if (offen && exklusiv) for (const x of navGruppen) if (x !== gr && x.kopf.getAttribute("aria-expanded") === "true") gruppeOeffnen(x, false, false);
     gr.kopf.setAttribute("aria-expanded", offen ? "true" : "false");
     gr.liste.hidden = !offen;
     if (merken) {
-      const m = navOffenLesen();
+      const m = exklusiv ? new Set() : navOffenLesen();
       if (offen) m.add(gr.name); else m.delete(gr.name);
       navOffenSchreiben(m);
     }
@@ -1100,6 +1102,7 @@
     const s = INHALT.seiten[id];
     // Leerzeichen vor dem Zusatz, damit auch der reine Text "Bilder erzeugen in Arbeit" lautet (nicht "Bilder erzeugenbald")
     const el = h("a", { class: "nav", id: "nav-treffer-" + id, href: adresse(id), dataset: { id } }, icon(s.symbol), h("span", { class: "nav-text" }, s.nav || s.titel, kameraSeiten().has(id) ? [" ", h("small", { class: "kam", hidden: true }, kameraHinweis)] : null),
+      s.demo && s.typ !== "lektion" ? h("span", { class: "nav-labor", title: "Zum Ausprobieren", "aria-label": "Zum Ausprobieren" }, icon("flask-conical")) : null,
       s.anfaenger ? [" ", h("span", { class: "einst" }, "Einsteiger")] : null,
       s.status === "bald" ? [" ", h("span", { class: "bald" }, "in Arbeit")] : h("span", { class: "ok", hidden: true }, icon("check")));
     return { el, id, haystack: ((s.nav || "") + " " + s.titel + " " + (s.kurz || "")).toLowerCase() };
@@ -1197,12 +1200,12 @@
     const bauen = (name, seiten, sammel, nr) => {
       const liste = h("div", { class: "navliste" });
       const zahl = h("span", { class: "gr-zahl", hidden: true });
-      const kopf = h("button", { type: "button", class: "navkopf", "aria-expanded": "true" }, h("span", null, name, zahl), icon("chevron"));
+      const kopf = h("button", { type: "button", class: "navkopf", "aria-expanded": "true" }, h("span", null, name, zahl), h("span", { class: "nav-n", "aria-label": seiten.length + " Seiten" }, String(seiten.length)), icon("chevron"));
       const sec = h("div", { class: "navgruppe" }, h("h2", null, kopf), liste);
       const gr = { name, sec, kopf, liste, eintraege: [], zahl, ids: seiten.filter(zaehlbar), sammel, nr };
       for (const id of seiten) { const e = navEintrag(id); liste.append(e.el); gr.eintraege.push(e); }
-      kopf.addEventListener("click", () => gruppeOeffnen(gr, kopf.getAttribute("aria-expanded") !== "true", true));
-      gruppeOeffnen(gr, gespeichert.has(name), false);     // Voreinstellung: nur die vom Besucher geoeffneten Gruppen; die der aktuellen Seite folgt in navMarkieren
+      kopf.addEventListener("click", () => gruppeOeffnen(gr, kopf.getAttribute("aria-expanded") !== "true", true, true));
+      gruppeOeffnen(gr, gespeichert.has(name) && !navGruppen.some((x) => x.kopf.getAttribute("aria-expanded") === "true"), false);     // Voreinstellung: nur die vom Besucher geoeffneten Gruppen; die der aktuellen Seite folgt in navMarkieren
       navGruppen.push(gr);
     };
     let nr = 0;
@@ -1242,7 +1245,7 @@
     if (id === "start") alleOeffnen(false);
     else if (id && fuerDich && !fuerDich.liste.querySelector('a.nav[data-id="' + id + '"]') && navGruppen.some((g) => !g.sammel && g.eintraege.some((x) => x.id === id)) && !sucht) alleOeffnen(true);
     for (const gr of navGruppen) {
-      if (!gr.sammel && gr.eintraege.some((x) => x.id === id) && !sucht && id !== "start" && alle && !alle.inhalt.hidden) gruppeOeffnen(gr, true, false);
+      if (!gr.sammel && gr.eintraege.some((x) => x.id === id) && !sucht && id !== "start" && alle && !alle.inhalt.hidden) gruppeOeffnen(gr, true, false, true);
     }
     const ak = $('.nav[aria-current="page"]');
     if (ak && ak.scrollIntoView) ak.scrollIntoView({ block: "nearest" });
@@ -1885,15 +1888,27 @@
       h("p", { class: "start-lead" }, "Vier Stufen: Verstehen, Anwenden, Erstellen, Bewerten."),
       stufen.length ? [h("h3", { class: "pfad-gruppe" }, "Nach Stufe"), h("div", { class: "karten karten-2" }, stufen.map(pfadKarte))] : null,
       rollen.length ? [h("h3", { class: "pfad-gruppe" }, "Nach Rolle"), h("div", { class: "karten karten-2" }, rollen.map(pfadKarte))] : null) : null;
-    const kacheln = [];
-    for (const g of INHALT.gruppen) {
-      if (!g.seiten.length || g.name === "Start") continue;
+    /* Alle Bereiche: in vier Gruppen statt dreizehn gleicher Karten; jede Kachel ist ein Link (kein eigener Knopf je Kachel). */
+    const CLUSTER = [["Zum Einstieg", ["Alltag in 15 Minuten", "Grundlagen", "Experimente"]],
+      ["Verstehen und ausprobieren", ["Sehen", "Sprache", "Wissen und RAG", "Agenten", "Daten und Prognosen"]],
+      ["Im Betrieb", ["KI im Betrieb", "Business-Use-Cases", "Der Rechner dahinter"]],
+      ["Schule und Familie", ["Für die Schule", "Medienkompetenz"]]];
+    const bereichKachel = (g) => {
       const b = (seite.bereiche || {})[g.name] || {};
       const ziel = g.seiten[0];
       const satz = b.satz || (g.seiten.length === 1 ? ersterSatz(INHALT.seiten[ziel].kurz || "", 100) : g.seiten.slice(0, 3).map((id) => INHALT.seiten[id].nav || INHALT.seiten[id].titel).join(", "));
-      kacheln.push(karte({ symbol: b.symbol || INHALT.seiten[ziel].symbol, kicker: g.seiten.length + (g.seiten.length === 1 ? " Seite" : " Seiten"), titel: g.name, text: satz, href: "/" + ziel, knopf: "Mehr erfahren" }));
-    }
-    const sBereiche = h("section", { class: "block", id: "bereiche" }, h("h2", null, icon("layers"), "Alle Bereiche"), h("div", { class: "karten karten-3" }, kacheln));
+      return h("a", { class: "bereich-kachel", href: adresse(ziel), dataset: { bereich: g.name } },
+        h("span", { class: "bk-icon", "aria-hidden": "true" }, icon(b.symbol || INHALT.seiten[ziel].symbol)),
+        h("span", { class: "bk-text" }, h("b", null, g.name), h("small", null, satz)),
+        h("span", { class: "bk-zahl" }, g.seiten.length + (g.seiten.length === 1 ? " Seite" : " Seiten")), icon("chevron"));
+    };
+    const alleGruppen = INHALT.gruppen.filter((g) => g.seiten.length && g.name !== "Start");
+    const kacheln = alleGruppen;
+    const verteilt = new Set(CLUSTER.flatMap(([, n]) => n));
+    const cluster = [...CLUSTER, ["Weiteres", alleGruppen.filter((g) => !verteilt.has(g.name)).map((g) => g.name)]]
+      .map(([titel, namen]) => [titel, namen.map((n) => alleGruppen.find((g) => g.name === n)).filter(Boolean)]).filter(([, gs]) => gs.length);
+    const sBereiche = h("section", { class: "block", id: "bereiche" }, h("h2", null, icon("layers"), "Alle Bereiche"),
+      cluster.map(([titel, gs]) => h("div", { class: "bereich-cluster" }, h("h3", { class: "pfad-gruppe" }, titel), h("div", { class: "bereich-raster" }, gs.map(bereichKachel)))));
     const weitere = h("details", { class: "weitere", id: "weitere" },
       h("summary", null, icon("chevron"), h("span", null, "Weitere Wege"), h("small", null, "Rolle wählen, Lernpfade, alle Bereiche")),
       h("div", { class: "weitere-in" }, wegBlock(), sAnfangen, sEntscheider, sPfade, sBereiche));
@@ -1982,6 +1997,22 @@
     return h("section", { class: "block pfad-weiter", dataset: { pfad: pf.id } }, h("h2", null, icon("route"), "Nächste Seite im Pfad"),
       h("div", { class: "weiter" }, h("a", { href: adresse(next, pfadQuery(pf.id)) }, icon(sd.symbol), sd.titel)),
       h("p", { class: "pfad-weiter-info" }, "Pfad „" + pf.name + "“, Schritt " + (i + 1) + " von " + pf.ids.length + "."));
+  }
+  /** Ohne gewaehlten Pfad: vorherige und naechste Seite im Bereich des Menues (gleiche Reihenfolge wie dort). Kamera-Labore bleiben im Weg "Schule" aussen vor. */
+  function bereichWeiterBlock(id) {
+    const gr = navGruppen.find((g) => !g.sammel && g.eintraege.some((x) => x.id === id));
+    if (!gr || id === "start") return null;
+    const w = aktiverWeg();
+    const ids = gr.eintraege.map((x) => x.id).filter((x) => x === id || !(w === "schule" && kameraSeiten().has(x)));
+    const i = ids.indexOf(id);
+    const knopf = (ziel, klasse, symbol, beschriftung) => {
+      if (!ziel) return null;
+      const sd = INHALT.seiten[ziel];
+      return h("a", { class: "bw-knopf " + klasse, href: adresse(ziel) }, h("small", null, beschriftung), h("span", null, icon(symbol), sd.nav || sd.titel));
+    };
+    const zurueck = knopf(ids[i - 1], "bw-zurueck", "arrow-left", "Davor in " + gr.name), vor = knopf(ids[i + 1], "bw-vor", "arrow-right", "Danach in " + gr.name);
+    if (!zurueck && !vor) return null;
+    return h("nav", { class: "bereich-weiter", "aria-label": "Im Bereich " + gr.name }, zurueck || h("span"), vor || h("span"));
   }
   /** Eine Seite gilt als gelesen, wenn das Seitenende im Bild war und mindestens MIN_LESEDAUER seit dem Oeffnen vergangen ist. */
   function lesefortschrittStarten(id) {
@@ -2108,7 +2139,7 @@
     }
     if (seite.rechtslinks) out.append(rechtsBlock());
     const d3 = dreiSchritteBlock(seite.dreiSchritte); if (d3) out.append(d3);
-    const pw = pfadWeiterBlock(id); if (pw) out.append(pw);
+    const pw = pfadWeiterBlock(id); if (pw) out.append(pw); else { const bw = bereichWeiterBlock(id); if (bw) out.append(bw); }
     const w = weiterBlock(seite.weiter); if (w) out.append(w);
     out.append(h("div", { class: "seitenende", "aria-hidden": "true" }));
     return out;
