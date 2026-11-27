@@ -3,7 +3,7 @@
 <h2 class="abs">Ein Agent ist ein Modell mit Werkzeugen</h2>
 <figure class="visual"><figcaption>Übersicht</figcaption><ul><li>rechne (Zahlen, einfache Zeichen)</li><li>uhrzeit (aktuelle Zeit)</li><li>dokumentsuche (in den Dokumenten)</li></ul></figure>
 <p class="kurz">Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet.</p>
-<p>Ein Agent bekommt zusätzlich zur Frage eine Liste von Werkzeugen beschrieben, hier: <strong>rechne</strong>, <strong>uhrzeit</strong> und <strong>dokumentsuche</strong>. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.</p>
+<p>Ein Agent bekommt zusätzlich zur Frage eine Liste von Werkzeugen beschrieben, hier: <strong>rechne</strong>, <strong>uhrzeit</strong> und <strong>dokumentsuche</strong>. Im Szenario „Bestellfragen“ stehen stattdessen vier Bestell-Werkzeuge bereit, siehe <a href="/uc-service-bestellung">Bestellfragen mit Werkzeugen beantworten</a>. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.</p>
 <h2 class="abs">Die Schleife</h2>
 <figure class="visual"><figcaption>Kreislauf</figcaption><ul><li>Modell entscheidet</li><li>Werkzeug läuft</li><li>Ergebnis zurück</li><li>Mitte: max. 5 Runden</li></ul></figure>
 <p class="kurz">Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.</p>

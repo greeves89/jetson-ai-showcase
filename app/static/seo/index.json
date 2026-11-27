@@ -85,19 +85,19 @@
        "courseMode": "online"
       },
       "teaches": [
-       "Alltag in 15 Minuten",
-       "Experimente",
+       "Alltag in 15 Minuten: Fünf kurze Seiten für Berufstätige: KI, Chat, Betrug, gute Fragen, Datenschutz.",
+       "Experimente: Kleine Versuche, die du selbst nachmachst.",
        "Grundlagen: Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.",
-       "Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+       "Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
        "Sprache: Sprachmodelle im Chat, Sprache zu Text und gutes Fragen.",
        "Wissen und RAG: Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung.",
        "Agenten: Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen.",
        "Daten und Prognosen: Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen.",
-       "KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+       "KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
        "Business-Use-Cases: Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit.",
        "Der Rechner dahinter: Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?",
-       "Für die Schule",
-       "Medienkompetenz"
+       "Für die Schule: Unterrichtseinheiten, Handreichungen und Infoblätter für Klassen, Lehrkräfte und Eltern.",
+       "Medienkompetenz: Bilder prüfen, Quellen bewerten, Datenschutz und KI bei Hausaufgaben."
       ],
       "author": {
        "@id": "https://daniel-alisch.site/#person"
@@ -279,7 +279,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-sehen",
       "name": "Sehen",
-      "numberOfItems": 7,
+      "numberOfItems": 11,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -314,12 +314,36 @@
        {
         "@type": "ListItem",
         "position": 6,
+        "name": "Bild schützen: freistellen und verpixeln",
+        "url": "__BASIS__/bild-schuetzen"
+       },
+       {
+        "@type": "ListItem",
+        "position": 7,
+        "name": "Fingeralphabet: Buchstaben mit der Hand",
+        "url": "__BASIS__/fingeralphabet"
+       },
+       {
+        "@type": "ListItem",
+        "position": 8,
+        "name": "Körperhaltung: Skelett im Kamerabild",
+        "url": "__BASIS__/koerperhaltung"
+       },
+       {
+        "@type": "ListItem",
+        "position": 9,
+        "name": "Text auf Papier lesen",
+        "url": "__BASIS__/text-lesen"
+       },
+       {
+        "@type": "ListItem",
+        "position": 10,
         "name": "Objekterkennung",
         "url": "__BASIS__/objekt"
        },
        {
         "@type": "ListItem",
-        "position": 7,
+        "position": 11,
         "name": "Bildmodell anlernen",
         "url": "__BASIS__/anlernen"
        }
@@ -1449,7 +1473,7 @@
         "@id": "__BASIS__/#begriff-personenbezogen",
         "termCode": "personenbezogen",
         "name": "Personenbezogene Daten",
-        "description": "Angaben, die sich auf eine Person beziehen lassen, etwa Name, Foto, Stimme oder eine Kombination von Merkmalen.",
+        "description": "Angaben, mit denen sich eine Person erkennen lässt, etwa Name, Adresse, Kontonummer oder Telefonnummer. Sie stehen auf fast jedem Brief und jeder Rechnung.",
         "inDefinedTermSet": {
          "@id": "__BASIS__/#glossar"
         }
@@ -2046,6 +2070,26 @@
        },
        {
         "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-ctc",
+        "termCode": "ctc",
+        "name": "CTC",
+        "description": "Verfahren, mit dem ein Netz Zeichen aus einer Zeile liest, ohne vorher zu wissen, wo ein Buchstabe anfängt. Wiederholungen und „nichts“ werden am Ende gestrichen.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-entzerren",
+        "termCode": "entzerren",
+        "name": "Entzerren",
+        "description": "Ein schräg fotografiertes Blatt wird so umgerechnet, dass es wie von oben aufgenommen aussieht. Danach sind die Zeilen waagerecht.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
         "@id": "__BASIS__/#begriff-entscheidungsbaum",
         "termCode": "entscheidungsbaum",
         "name": "Entscheidungsbaum",
@@ -2293,6 +2337,86 @@
         "inDefinedTermSet": {
          "@id": "__BASIS__/#glossar"
         }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-gelenkwinkel",
+        "termCode": "gelenkwinkel",
+        "name": "Gelenkwinkel",
+        "description": "Der Winkel zwischen zwei Knochenstrecken an einem Gelenk, aus drei Punkten berechnet, zum Beispiel Hüfte, Knie und Knöchel. 180 Grad heißt gestreckt.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-hysterese",
+        "termCode": "hysterese",
+        "name": "Hysterese",
+        "description": "Eine Schaltschwelle mit zwei Werten, einem zum Einschalten und einem anderen zum Ausschalten. Sie verhindert, dass etwas bei jedem kleinen Wackeln hin und her springt.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-glaetten",
+        "termCode": "glaetten",
+        "name": "Glättungsfilter",
+        "description": "Ein Verfahren, das schwankende Messwerte beruhigt, indem es frühere Werte mit einrechnet. Bei schneller Bewegung rechnet es das Frühere weniger ein, damit nichts hinterherhinkt.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-dgs",
+        "termCode": "dgs",
+        "name": "Deutsche Gebärdensprache (DGS)",
+        "description": "Die Sprache der gehörlosen Gemeinschaft in Deutschland. Sie hat eigenen Wortschatz und eigene Grammatik. Sie ist keine Übertragung des Deutschen in Handzeichen.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-fingeralphabet",
+        "termCode": "fingeralphabet",
+        "name": "Fingeralphabet",
+        "description": "Eine Handform für jeden Buchstaben. Es dient zum Buchstabieren von Namen und Fremdwörtern und ist nicht die Gebärdensprache selbst.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-merkmalsabstand",
+        "termCode": "merkmalsabstand",
+        "name": "Merkmalsabstand",
+        "description": "Eine Zahl dafür, wie weit zwei Handformen auseinanderliegen. Sie entsteht aus Unterschieden in Merkmalen wie der Streckung der Finger. Je kleiner sie ist, desto ähnlicher sind die Formen.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-maske",
+        "termCode": "maske",
+        "name": "Maske",
+        "description": "Ein Graustufenbild in der Größe des Kamerabilds. Jeder Pixel trägt eine Zahl, die sagt, wie sicher das Netz ist, dass er zur Person gehört. Weiß ist Person, Schwarz Hintergrund.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-greenscreen",
+        "termCode": "greenscreen",
+        "name": "Greenscreen",
+        "description": "Eine einfarbig grüne Wand hinter der Person. Eine Software macht alles Grüne durchsichtig und setzt dort einen anderen Hintergrund ein. Das Verfahren heißt Chroma-Key und braucht keine KI.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
        }
       ]
      },
@@ -2375,7 +2499,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -2496,7 +2620,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -2597,7 +2721,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Alltag in 15 Minuten",
-      "abstract": "Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine gefälschte Stimme. Ein Codewort in der Familie hilft.",
+      "abstract": "Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Mit KI lassen sich Stimmen aus kurzen Aufnahmen nachbauen, oft reichen Sekunden bis wenige Minuten. Das BSI warnt vor solchen Anrufen. Ein Codewort in der Familie hilft.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -2605,7 +2729,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -2714,7 +2838,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -2823,7 +2947,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -2932,7 +3056,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4037,7 +4161,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4329,7 +4453,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4596,7 +4720,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -4873,7 +4997,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5135,7 +5259,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5372,7 +5496,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5386,7 +5510,7 @@
       },
       "teaches": [
        "Personenbezogene Daten brauchen eine Rechtsgrundlage, einen Zweck und Sparsamkeit. Dienstleister brauchen einen Auftragsvertrag.",
-       "Die EU-KI-Verordnung ordnet Systeme nach Risiko. Je höher es ist, desto mehr Pflichten gelten. Einzelheiten ändern sich, also immer aktuelle Quellen prüfen.",
+       "Die EU-KI-Verordnung ordnet Systeme nach Risiko. Je höher es ist, desto mehr Pflichten gelten. Hochrisiko-Pflichten gelten nach heutigem Stand ab Dezember 2027 bzw. August 2028. Einzelheiten ändern sich, also immer aktuelle Quellen prüfen.",
        "Urheberrecht bei Trainingsdaten und erzeugten Inhalten ist teils offen. Dokumentation und klare Zuständigkeiten helfen im Betrieb."
       ],
       "about": [
@@ -5567,7 +5691,7 @@
    "typ": "seite",
    "datei": "content-sehen-agenten.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -5831,7 +5955,7 @@
    "typ": "seite",
    "datei": "content-sehen-agenten.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6110,7 +6234,7 @@
    "typ": "seite",
    "datei": "content-sehen-agenten.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6369,7 +6493,7 @@
    "typ": "seite",
    "datei": "content.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6490,7 +6614,7 @@
    "typ": "seite",
    "datei": "content-sehen-agenten.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6640,7 +6764,736 @@
         "name": "Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "In der EU sind sie weitgehend verboten. Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen weitgehend. Das ist ein Überblick, keine Rechtsberatung."
+         "text": "In der EU sind sie seit 2025 verboten, mit engen Ausnahmen. Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen seit dem 02.02.2025, außer für medizinische Zwecke und die Sicherheit. Das ist ein Überblick (Stand 27.11.2026), keine Rechtsberatung."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "bild-schuetzen": {
+   "titel": "Bild schützen: freistellen und verpixeln · KI-Labor",
+   "ueberschrift": "Bild schützen: freistellen und verpixeln",
+   "beschreibung": "Der Jetson trennt dich vom Hintergrund und macht Gesichter unkenntlich. Freistellen trennt Person und Hintergrund. Verpixeln macht Gesichter unkenntlich.",
+   "typ": "seite",
+   "datei": "content-bildschutz.js",
+   "bild": "/static/og/sehen.png",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/bild-schuetzen#artikel",
+      "headline": "Bild schützen: freistellen und verpixeln",
+      "name": "Bild schützen: freistellen und verpixeln",
+      "description": "Der Jetson trennt dich vom Hintergrund und macht Gesichter unkenntlich. Freistellen trennt Person und Hintergrund. Verpixeln macht Gesichter unkenntlich.",
+      "url": "__BASIS__/bild-schuetzen",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/bild-schuetzen"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Sehen",
+      "abstract": "Eine Maske ist ein Graustufenbild mit einer Wahrscheinlichkeit je Pixel. Am Rand, bei Haaren und bei Glas ist sie unsicher. Ein Mosaik und ein Weichzeichner lassen Information im Bild.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/sehen.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/bild-schuetzen#breadcrumb"
+      },
+      "teaches": [
+       "Eine Maske ist ein Graustufenbild mit einer Wahrscheinlichkeit je Pixel. Am Rand, bei Haaren und bei Glas ist sie unsicher.",
+       "Ein Mosaik und ein Weichzeichner lassen Information im Bild. Ein deckender Balken lässt keine übrig. Was der Jetson nicht als Gesicht findet, bleibt sichtbar.",
+       "Fotos von anderen brauchen in der Regel ihre Einwilligung, bei Minderjährigen die der Sorgeberechtigten. Verpixeln ersetzt das nicht. Das ist keine Rechtsberatung."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-maske",
+        "name": "Maske"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-greenscreen",
+        "name": "Greenscreen"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/bild-schuetzen#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Bild schützen: freistellen und verpixeln",
+        "item": "__BASIS__/bild-schuetzen"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/bild-schuetzen#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Was zeigt die Maske, wenn du im Labor „Nur die Maske“ wählst?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Für jeden Pixel, wie sicher das Netz ist, dass er zur Person gehört. Die Maske ist ein Graustufenbild: weiß heißt sicher Person, schwarz Hintergrund, grau unsicher."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum franst das Haar am Rand oft aus?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Netz sieht ein kleines Bild und seine Maske ist grober als ein einzelnes Haar. Die Maske hat nur 192 mal 192 Punkte, ein Haar ist oft dünner als ein Punkt. Feine Strähnen gehen verloren."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Welcher Weg macht ein Gesicht am sichersten unkenntlich?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ein deckender, fest eingebrannter Balken. Beim Balken steht keine Bildinformation mehr im Bild. Mosaik und Weichzeichner lassen vergröberte Information übrig, die sich teils erraten lässt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was unterscheidet einen Greenscreen von der KI-Maske?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Der Greenscreen erkennt an der Farbe der Wand, die KI an der Form der Person. Der Greenscreen macht die Wandfarbe durchsichtig. Die KI-Maske schätzt, welche Pixel zur Person gehören, und braucht keine Wand."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Eine Lehrkraft will ein Klassenfoto auf die öffentliche Schulwebsite stellen. Was ist der vorsichtige Weg?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Vorher die Einwilligung der Sorgeberechtigten einholen oder das Foto nicht veröffentlichen. Bei Minderjährigen holt man in der Regel eine Einwilligung ein. Verpixeln hilft, ersetzt die Frage aber nicht. Keine Rechtsberatung."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Der Jetson findet ein Gesicht im Bild nicht. Was passiert mit ihm?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Es bleibt sichtbar. Verdeckt wird nur, was gefunden wird. Seitlich gedrehte, sehr kleine oder verdeckte Gesichter werden schlechter gefunden. Schau dir das Ergebnis immer selbst an."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "fingeralphabet": {
+   "titel": "Fingeralphabet: Buchstaben mit der Hand · KI-Labor",
+   "ueberschrift": "Fingeralphabet: Buchstaben mit der Hand",
+   "beschreibung": "Zeige der Kamera Buchstaben des deutschen Fingeralphabets, und das Labor baut daraus Wörter. Jeder Buchstabe hat eine Handform.",
+   "typ": "seite",
+   "datei": "content-gebaerde.js",
+   "bild": "/static/og/sehen.png",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/fingeralphabet#artikel",
+      "headline": "Fingeralphabet: Buchstaben mit der Hand",
+      "name": "Fingeralphabet: Buchstaben mit der Hand",
+      "description": "Zeige der Kamera Buchstaben des deutschen Fingeralphabets, und das Labor baut daraus Wörter. Jeder Buchstabe hat eine Handform.",
+      "url": "__BASIS__/fingeralphabet",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/fingeralphabet"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Sehen",
+      "abstract": "Labor zum deutschen Fingeralphabet in beide Richtungen. Erkennen: Die Kamera sieht eine Hand, ein Handmodell liefert 21 Punkte, daraus werden Merkmale gerechnet und mit selbst gebauten Handform-Vorlagen verglichen. Wer eine Form etwa 0,8 Sekunden hält, bestätigt einen Buchstaben. Zeigen: Ein Wort wird Buchstabe für Buchstabe als gezeichnete Hand gezeigt, dazu das ganze Alphabet und eine Übung mit Rückmeldung. Das Fingeralphabet ist nicht die Deutsche Gebärdensprache, und das Labor übersetzt keine Gebärdensprache. J, Z, Ä, Ö, Ü, ß und Sch werden nicht erkannt. Die Vorlagen sind Modelle, an echten Händen wurde die Erkennung nicht gemessen. Bilder bleiben im Arbeitsspeicher, nichts wird gespeichert.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/sehen.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/fingeralphabet#breadcrumb"
+      },
+      "teaches": [
+       "Das Fingeralphabet überträgt Buchstaben auf die Hand. Die Deutsche Gebärdensprache ist eine eigene Sprache, und das Labor übersetzt sie nicht.",
+       "Aus 21 Handpunkten werden Merkmale, die das Labor mit Vorlagen vergleicht. Unter 60 Prozent Sicherheit sagt es „nicht sicher“.",
+       "Die Vorlagen sind aus der Beschreibung nachgebaut, nicht aus Besucherdaten gelernt. Ob echte Hände gut erkannt werden, zeigt nur das Ausprobieren."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-dgs",
+        "name": "Deutsche Gebärdensprache (DGS)"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-handpunkte",
+        "name": "Handpunkte"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-merkmalsabstand",
+        "name": "Merkmalsabstand"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/fingeralphabet#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Fingeralphabet: Buchstaben mit der Hand",
+        "item": "__BASIS__/fingeralphabet"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/fingeralphabet#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Was ist das Fingeralphabet?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Eine Handform für jeden Buchstaben, vor allem für Namen und Fremdwörter. Das Fingeralphabet überträgt Buchstaben auf die Hand. Die Deutsche Gebärdensprache dagegen ist eine eigene Sprache, die das Labor nicht übersetzt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Woher kommen die Handform-Vorlagen im Labor?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Sie sind nach der Beschreibung des Alphabets nachgebaut. Ein einfaches Handmodell ist nach der Beschreibung eingestellt. Besucherbilder dienen nie als Trainingsdaten."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Das Labor zeigt „nicht sicher“. Was ist gemeint?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Die Sicherheit liegt unter der Schwelle, deshalb wird nichts übernommen. Liegt die Sicherheit unter 60 Prozent, übernimmt das Labor keinen Buchstaben. Besser keine Antwort als eine falsche."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum werden J und Z nicht erkannt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Weil sie durch eine Bewegung gezeigt werden und eine einzelne Handform nicht reicht. J und Z entstehen durch die Bewegung der Hand. Das Labor wertet einzelne Handformen aus. Es zeigt die Zeichen aber im Alphabet mit Bewegung."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was passiert mit deinen Kamerabildern im Labor?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Sie werden ausgewertet und verworfen, nichts wird gespeichert. Jedes Bild liegt nur kurz im Arbeitsspeicher des Jetson. Auch das gebaute Wort wird nicht gespeichert."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Du buchstabierst mit der linken Hand. Was gilt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Labor liest beide Hände, und die Zeichnungen lassen sich spiegeln. Die Merkmale ändern sich beim Spiegeln nicht. Für die Zeichnungen gibt es den Schalter für Linkshänder."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "koerperhaltung": {
+   "titel": "Körperhaltung: Skelett im Kamerabild · KI-Labor",
+   "ueberschrift": "Körperhaltung: Skelett im Kamerabild",
+   "beschreibung": "Der Jetson legt ein Skelett aus 33 Punkten über dich: Schultern, Ellbogen, Hände, Hüfte, Knie, Füße. Es sind Schätzungen aus Punkten im Bild und keine Diagnose.",
+   "typ": "seite",
+   "datei": "content-koerper.js",
+   "bild": "/static/og/sehen.png",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/koerperhaltung#artikel",
+      "headline": "Körperhaltung: Skelett im Kamerabild",
+      "name": "Körperhaltung: Skelett im Kamerabild",
+      "description": "Der Jetson legt ein Skelett aus 33 Punkten über dich: Schultern, Ellbogen, Hände, Hüfte, Knie, Füße. Es sind Schätzungen aus Punkten im Bild und keine Diagnose.",
+      "url": "__BASIS__/koerperhaltung",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/koerperhaltung"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Sehen",
+      "abstract": "Das Netz liefert 33 Punkte mit einer Sicherheit je Punkt. Winkel, Zähler und Hinweise sind einfache Regeln über diese Punkte. Ein Skelett ist keine Diagnose und keine Identifikation.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/sehen.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/koerperhaltung#breadcrumb"
+      },
+      "teaches": [
+       "Das Netz liefert 33 Punkte mit einer Sicherheit je Punkt. Winkel, Zähler und Hinweise sind einfache Regeln über diese Punkte.",
+       "Ein Skelett ist keine Diagnose und keine Identifikation. Gang und Haltung können trotzdem personenbezogen sein.",
+       "Von der Seite zeigt das Bild, ob der Kopf vorsteht, von vorn, ob eine Schulter höher steht. Verdeckte Punkte sind unsicher und werden blass gezeichnet."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-pose",
+        "name": "Posenschätzung"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-glaetten",
+        "name": "Glättungsfilter"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-gelenkwinkel",
+        "name": "Gelenkwinkel"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-hysterese",
+        "name": "Hysterese"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/koerperhaltung#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Körperhaltung: Skelett im Kamerabild",
+        "item": "__BASIS__/koerperhaltung"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/koerperhaltung#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Beim Zählen der Kniebeugen gibt es zwei Schwellen: unter 110 Grad und über 160 Grad. Wozu dient die zweite?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Der Zähler springt nicht bei jedem Zittern des Winkels, sondern erst nach einer ganzen Bewegung. Das nennt man Hysterese. Mit einer einzigen Schwelle würde ein Winkel, der um die Grenze wackelt, mehrere Wiederholungen melden."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum kann der Jetson von vorn nicht sicher sagen, ob dein Kopf vor den Schultern steht?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Weil das Bild flach ist und die Tiefe fehlt: Von vorn liegen Nase und Brustbein in einer Linie. Die Punkte liegen in einem flachen Bild. Wie weit der Kopf nach vorn ragt, zeigt erst die Seitenansicht."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Im Bild ist ein Bein blass gezeichnet. Was heißt das?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Modell ist bei diesen Punkten unsicher, zum Beispiel wegen Verdeckung. Blasse Punkte liegen unter der Sicherheitsschwelle. Sie werden in keiner Rechnung benutzt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Ein Betrieb will mit Kameras die Haltung seiner Beschäftigten über Wochen beurteilen. Was stimmt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Haltung und Verhalten können personenbezogen sein, in Deutschland hat der Betriebsrat mitzubestimmen. Ein Skelett ohne Gesicht kann trotzdem ein Verhaltensprofil ergeben. Technik, die Verhalten oder Leistung überwachen kann, ist mitbestimmungspflichtig. Das ist ein Überblick, keine Rechtsberatung."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was sagt die Ähnlichkeit in der Pose-Übung?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Wie nah die Richtungen deiner Arme und Beine an der Zielpose liegen. Der Jetson vergleicht die Richtung von acht Abschnitten mit der Zielpose und mittelt. Mehr sagt die Zahl nicht."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Ein Programm soll Kindern im Sportunterricht eine Haltungsnote aus dem Kamerabild geben. Was ist die beste Antwort?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Besser nicht: Das Modell ist für kindliche Körper nicht belegt, Bewertung von Lernenden gehört in Menschenhand. Ein Skelett kann bei Kindern danebenliegen, und die Bewertung von Lernenden durch KI ist heikel. Eine Beobachtung ersetzt kein Urteil."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "text-lesen": {
+   "titel": "Text auf Papier lesen · KI-Labor",
+   "ueberschrift": "Text auf Papier lesen",
+   "beschreibung": "Halte ein Blatt mit gedrucktem Text in die Kamera. Ein Computer liest nicht wie du. Er sucht Zeilen, rät Zeichen und baut daraus Wörter.",
+   "typ": "seite",
+   "datei": "content-ocr.js",
+   "bild": "/static/og/sehen.png",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/text-lesen#artikel",
+      "headline": "Text auf Papier lesen",
+      "name": "Text auf Papier lesen",
+      "description": "Halte ein Blatt mit gedrucktem Text in die Kamera. Ein Computer liest nicht wie du. Er sucht Zeilen, rät Zeichen und baut daraus Wörter.",
+      "url": "__BASIS__/text-lesen",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/text-lesen"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Sehen",
+      "abstract": "Texterkennung arbeitet in Stufen: Blatt finden, Zeilen finden, Zeichen raten, mit Regeln auswerten. Jede Stufe kann sich irren. Hohe Sicherheit heißt nicht, dass der Text stimmt.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/sehen.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/text-lesen#breadcrumb"
+      },
+      "teaches": [
+       "Texterkennung arbeitet in Stufen: Blatt finden, Zeilen finden, Zeichen raten, mit Regeln auswerten. Jede Stufe kann sich irren.",
+       "Hohe Sicherheit heißt nicht, dass der Text stimmt. Zahlen, Beträge und Termine prüft immer ein Mensch am Papier.",
+       "Dokumente sind sensibel. Frag bei jeder Scanner-App, wohin das Bild geht, und scanne keine Bücher oder Briefe, die dir nicht gehören."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-ocr",
+        "name": "Texterkennung (OCR)"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-entzerren",
+        "name": "Entzerren"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-ctc",
+        "name": "CTC"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-personenbezogen",
+        "name": "Personenbezogene Daten"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/text-lesen#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Text auf Papier lesen",
+        "item": "__BASIS__/text-lesen"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/text-lesen#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Das Labor liest „Gr0ße 42“ statt „Größe 42“. Was ist passiert?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Netz hat die Zeichen 0 und O verwechselt. Null und großes O sehen sich sehr ähnlich. Das Netz liest jede Zeile für sich und hat keinen Zusammenhang, der den Fehler auffängt. Darum sind solche Wörter unterstrichen und tragen ein Fragezeichen."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wofür dient der Schritt „Blatt gerade ziehen“?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Er rechnet die Schräge heraus, damit die Zeilen waagerecht stehen. Aus dem schrägen Viereck wird ein Rechteck. Gerade Zeilen kann der Erkenner viel besser lesen."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wer findet im Labor den Betrag „1.234,56 €“ im Text?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Eine feste Regel, die nach Zahlen mit Komma und Euro-Zeichen sucht. Die Karten kommen aus Regeln. Deshalb sind sie nur so sicher wie der gelesene Text, und ein falsch gelesenes Zeichen kann die Karte verhindern."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum liest das Labor mehrere Bilder nacheinander, bevor es „Text steht stabil“ zeigt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Weil jedes Bild leicht anders ist und die Mehrheit der Lesungen Fehler ausgleicht. Kleine Bewegungen und Rauschen verändern jede Lesung. Wenn mehrere Lesungen denselben Text ergeben, ist er verlässlicher als eine einzelne."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was ist bei Rechnungen und Briefen in Cloud-Scanner-Apps besonders wichtig?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Bild verlässt dein Gerät, du musst wissen, was der Anbieter damit macht. Briefe enthalten persönliche Daten. Wohin das Bild geht und ob es gespeichert wird, steht in den Bedingungen des Anbieters. Im Betrieb braucht es oft einen Vertrag zur Auftragsverarbeitung."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Eine blinde Person nutzt eine App, die Medikamentenpackungen vorliest. Was ist die größte Gefahr?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Ein Lesefehler fällt nicht auf, weil sie den Text nicht prüfen kann. Ein Fehler wie 0,5 statt 5 wird mit vorgelesen. Gute Hilfsmittel sagen an, wenn sie unsicher sind, und es bleibt wichtig, Wichtiges von einem Menschen prüfen zu lassen."
         }
        }
       ]
@@ -6655,7 +7508,7 @@
    "typ": "seite",
    "datei": "content.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6776,7 +7629,7 @@
    "typ": "seite",
    "datei": "content.js",
    "bild": "/static/og/sehen.png",
-   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -6888,7 +7741,7 @@
   "chat": {
    "titel": "Sprachmodell im Chat · KI-Labor",
    "ueberschrift": "Sprachmodell im Chat",
-   "beschreibung": "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token. Was darüber hinausgeht, sieht das Modell nicht.",
+   "beschreibung": "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal, größtenteils auf der GPU. Du siehst jedes Token. Was darüber hinausgeht, sieht das Modell nicht.",
    "typ": "seite",
    "datei": "content.js",
    "bild": "/static/og/sprache.png",
@@ -6930,7 +7783,7 @@
       "@id": "__BASIS__/chat#artikel",
       "headline": "Sprachmodell im Chat",
       "name": "Sprachmodell im Chat",
-      "description": "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token. Was darüber hinausgeht, sieht das Modell nicht.",
+      "description": "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal, größtenteils auf der GPU. Du siehst jedes Token. Was darüber hinausgeht, sieht das Modell nicht.",
       "url": "__BASIS__/chat",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -6941,7 +7794,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sprache",
-      "abstract": "Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen.",
+      "abstract": "Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet es Token für Token, größtenteils auf der GPU. Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -7179,7 +8032,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -7466,7 +8319,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -7756,7 +8609,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -7998,7 +8851,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -8240,7 +9093,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -8497,7 +9350,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -8759,7 +9612,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -9083,7 +9936,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -9335,7 +10188,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -9659,7 +10512,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -9896,7 +10749,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -11366,7 +12219,7 @@
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -11630,7 +12483,7 @@
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -11889,7 +12742,7 @@
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -12136,7 +12989,7 @@
        "__BASIS__/static/og/daten-und-prognosen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -12326,7 +13179,7 @@
    "typ": "seite",
    "datei": "content-prognose-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -12383,7 +13236,7 @@
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -12570,7 +13423,7 @@
    "typ": "seite",
    "datei": "content-prognose-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -12627,7 +13480,7 @@
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -12809,7 +13662,7 @@
    "typ": "seite",
    "datei": "content-prognose-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -12866,7 +13719,7 @@
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -13041,7 +13894,7 @@
    "typ": "seite",
    "datei": "content-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -13098,7 +13951,7 @@
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -13150,7 +14003,7 @@
    "typ": "seite",
    "datei": "content-betrieb.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -13207,7 +14060,7 @@
        "__BASIS__/static/og/ki-im-betrieb.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -13290,7 +14143,7 @@
    "typ": "seite",
    "datei": "content-praxis.js",
    "bild": "/static/og/ki-im-betrieb.png",
-   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.",
+   "bild_alt": "KI-Labor, Bereich KI im Betrieb: Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.",
    "ld": {
     "@context": "https://schema.org",
     "@graph": [
@@ -13487,7 +14340,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -13724,7 +14577,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -13956,7 +14809,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -14191,7 +15044,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -14416,7 +15269,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -14653,7 +15506,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -14900,7 +15753,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -15125,7 +15978,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -15357,7 +16210,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -15609,7 +16462,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -15846,7 +16699,7 @@
        "__BASIS__/static/og/business-use-cases.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16003,7 +16856,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
-      "abstract": "Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.",
+      "abstract": "Der Jetson rechnet das Sprachmodell größtenteils auf einer GPU, andere Modelle laufen auf dem Prozessor. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16024,7 +16877,7 @@
        "@id": "__BASIS__/hardware#breadcrumb"
       },
       "teaches": [
-       "Der Jetson rechnet neuronale Netze effizient auf einer GPU.",
+       "Der Jetson rechnet das Sprachmodell größtenteils auf einer GPU, andere Modelle laufen auf dem Prozessor.",
        "Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.",
        "Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort."
       ],
@@ -16139,7 +16992,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
-      "abstract": "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Server bei IONOS und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
+      "abstract": "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Proxy-Server und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16147,7 +17000,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16376,7 +17229,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16440,7 +17293,7 @@
       },
       "primaryImageOfPage": "__BASIS__/static/og/standard.png",
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "about": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16515,7 +17368,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16706,7 +17559,7 @@
   "architektur": {
    "titel": "Wie das Labor aufgebaut ist · KI-Labor",
    "ueberschrift": "Wie das Labor aufgebaut ist",
-   "beschreibung": "Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
+   "beschreibung": "Ein Diagramm vom Besucher bis zum Sprachmodell: ein nginx-Proxy-Server, Cloudflare, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
    "typ": "seite",
    "datei": "content-architektur.js",
    "bild": "/static/og/standard.png",
@@ -16748,7 +17601,7 @@
       "@id": "__BASIS__/architektur#artikel",
       "headline": "Wie das Labor aufgebaut ist",
       "name": "Wie das Labor aufgebaut ist",
-      "description": "Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
+      "description": "Ein Diagramm vom Besucher bis zum Sprachmodell: ein nginx-Proxy-Server, Cloudflare, der Jetson mit App, Ollama, Whisper und Piper. Ein Satz je Baustein.",
       "url": "__BASIS__/architektur",
       "mainEntityOfPage": {
        "@type": "WebPage",
@@ -16759,7 +17612,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Lektion",
       "articleSection": "Der Rechner dahinter",
-      "abstract": "Architektur des KI-Labors: Der Browser des Besuchers erreicht im öffentlichen Betrieb über Cloudflare und einen nginx-Server bei IONOS den Jetson Orin Nano. Dort läuft die App (FastAPI mit uvicorn auf Port 8443), dahinter Ollama für das Sprachmodell und die Einbettung, faster-whisper für Sprache zu Text und Piper für Text zu Sprache. Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher.",
+      "abstract": "Architektur des KI-Labors: Der Browser des Besuchers erreicht im öffentlichen Betrieb über einen nginx-Proxy-Server und den Tunneldienst von Cloudflare den Jetson Orin Nano. Dort läuft die App (FastAPI mit uvicorn auf Port 8443), dahinter Ollama für das Sprachmodell und die Einbettung, faster-whisper für Sprache zu Text und Piper für Text zu Sprache. Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -16767,7 +17620,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16780,7 +17633,7 @@
        "@id": "__BASIS__/architektur#breadcrumb"
       },
       "teaches": [
-       "Im öffentlichen Betrieb liegen Cloudflare und ein nginx-Server bei IONOS zwischen Browser und Jetson.",
+       "Im öffentlichen Betrieb liegen ein nginx-Proxy-Server und Cloudflare zwischen Browser und Jetson.",
        "Auf dem Jetson arbeiten die App (Port 8443), Ollama (Sprachmodell und Einbettung), Whisper (Sprache zu Text) und Piper (Text zu Sprache).",
        "Sitzungen liegen im Arbeitsspeicher, es gibt keine Datenbank, Aufnahmen und Kamerabilder werden nicht gespeichert."
       ],
@@ -16827,7 +17680,7 @@
         "name": "Was gilt für die Vermittler im öffentlichen Betrieb?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "Die Verschlüsselung endet bei ihnen, der Jetson speichert die Eingaben nicht. Cloudflare und der Server bei IONOS leiten den Verkehr weiter. Im Heimnetz entfallen sie, und der Tunnel verbindet nur ausgehend."
+         "text": "Die Verschlüsselung endet bei ihnen, der Jetson speichert die Eingaben nicht. Der Proxy-Server und Cloudflare leiten den Verkehr weiter. Im Heimnetz entfallen sie, und der Tunnel verbindet nur ausgehend."
         }
        },
        {
@@ -16907,7 +17760,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17023,7 +17876,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17163,7 +18016,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17320,7 +18173,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17472,7 +18325,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17633,7 +18486,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17742,7 +18595,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -17851,7 +18704,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -18081,7 +18934,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -18311,7 +19164,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -18541,7 +19394,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -18771,7 +19624,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19001,7 +19854,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19238,7 +20091,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19378,7 +20231,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19487,7 +20340,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19627,7 +20480,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19767,7 +20620,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -19876,7 +20729,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20114,7 +20967,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20352,7 +21205,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20518,7 +21371,7 @@
         "name": "Was sind Cheap Fakes?",
         "acceptedAnswer": {
          "@type": "Answer",
-         "text": "Einfache Tricks wie falsche Beschriftung oder Zeitlupe. Cheap Fakes sind einfache Tricks, oft aufwändig gar nicht nötig. Sie wirken trotzdem, weil Menschen nicht nachprüfen."
+         "text": "Einfache Tricks wie falsche Beschriftung oder Zeitlupe. Cheap Fakes sind einfache Tricks, für die man keine aufwendige Technik braucht. Sie wirken trotzdem, weil Menschen nicht nachprüfen."
         }
        }
       ]
@@ -20590,7 +21443,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -20828,7 +21681,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -21066,7 +21919,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -21311,7 +22164,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -21459,7 +22312,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -21848,7 +22701,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -21988,7 +22841,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22128,7 +22981,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22268,7 +23121,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-23",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22825,6 +23678,10 @@
   "vision-aufgaben",
   "gesicht",
   "hand-gesicht",
+  "bild-schuetzen",
+  "fingeralphabet",
+  "koerperhaltung",
+  "text-lesen",
   "objekt",
   "anlernen",
   "chat",
@@ -22955,6 +23812,10 @@
     "vision-aufgaben",
     "gesicht",
     "hand-gesicht",
+    "bild-schuetzen",
+    "fingeralphabet",
+    "koerperhaltung",
+    "text-lesen",
     "objekt",
     "anlernen"
    ]
