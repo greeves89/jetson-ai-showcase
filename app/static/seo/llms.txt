@@ -163,6 +163,9 @@ Unterrichtseinheiten, Handreichungen und Infoblätter für Klassen, Lehrkräfte 
 - [KI für Schulen: Was gibt es und wie fange ich an?](__BASIS__/ki-schule-ueberblick): Welche Wege es gibt, KI an einer Schule einzusetzen, was sie grob kosten, wo ihre Grenzen liegen und worauf Sie beim Kauf achten.
 - [KI an der Schule: In 7 Schritten starten](__BASIS__/ki-schule-einstieg): Von der Zielfrage bis zur Entscheidung: sieben Schritte, eine Checkliste und ein Zeitplan als Vorschlag.
 - [Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte](__BASIS__/schule-faecher): Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor.
+- [Klassenmodus: gemeinsam abstimmen, ohne Namen](__BASIS__/klassenmodus): Sie starten eine Sitzung mit Code.
+- [Mitmachen: Code eingeben und abstimmen](__BASIS__/klasse-mitmachen): Gib den Code deiner Lehrkraft ein.
+- [Die Wand für den Beamer](__BASIS__/klasse-wand): Die Wand zeigt Code, wer dabei ist und die Summen der Klasse in großer Schrift.
 
 ## Medienkompetenz
 

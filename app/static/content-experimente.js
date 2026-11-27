@@ -17,6 +17,7 @@ INHALT.experimente = [
   {id: "rag", titel: "RAG-Werkstatt", symbol: "file-search", satz: "Stell Fragen an vier erfundene Dokumente und sieh, woher die Antwort kommt."},
   {id: "agent", titel: "Agent mit Werkzeugen", symbol: "wrench", satz: "Ein Sprachmodell wählt selbst ein Werkzeug und rechnet damit. Du siehst jeden Schritt."},
   {id: "agenten-planung", titel: "Agenten-Spiel", symbol: "route", satz: "Plane die Schritte eines Agenten und sieh, wo er scheitert."},
+  {id: "klassenmodus", titel: "Klassenmodus", symbol: "users", satz: "Eine Lehrkraft startet eine Frage, die Klasse antwortet anonym, die Wand zeigt das Ergebnis.", hinweis: "Für Lehrkräfte"},
 ];
 
 INHALT.registriere({

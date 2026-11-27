@@ -5501,6 +5501,140 @@ Vier Labore beschreiben eine Unterrichtsidee für 45 Minuten. Sie brauchen eine 
 - Die Zuordnung ist ein Vorschlag, kein Lehrplan, und für kein Bundesland geprüft.
 - Die zehn Einheiten (drei KI-Stunden, sieben Medien-Einheiten) liefern Arbeitsblatt, Lösungen und Plan für Einzel- und Doppelstunde.
 
+# Klassenmodus: gemeinsam abstimmen, ohne Namen
+
+Adresse: __BASIS__/klassenmodus
+Bereich: Für die Schule. Stand: 2026-11-27.
+
+Kurz gesagt: Klassenmodus des KI-Labors für Lehrkräfte: eine Sitzung mit Kurzcode ohne Konto, Zufallsnamen statt Namen, Abstimmungen, Skalen, Schätzfragen, Quizfragen aus den Lektionen, Echt oder KI und Prompt-Vergleich, Ergebnis nur als Summe an der Wand, kleine-Zahlen-Schutz, Speicherung nur im Arbeitsspeicher, Löschung nach höchstens zwei Stunden oder per Knopf, signiertes Löschprotokoll, Hinweise für Schulleitung und Eltern, Ablauf einer 45-Minuten-Stunde.
+
+Sie starten eine Sitzung mit Code. Die Klasse macht auf dem eigenen Gerät mit, die Wand zeigt nur Summen. Ohne Konto, ohne Namen, mit Löschprotokoll.
+
+## So läuft eine Sitzung
+
+Fünf Schritte, alle ohne Anmeldung.
+
+Merke: Die Klasse schickt nur Auswahlwerte, nie Text. Darum braucht der Klassenmodus keine Moderation.
+
+## Welche Aufgaben es gibt
+
+Sieben Arten. Fragetexte kommen aus den Lektionen dieses Labors, nicht vom Server.
+
+## Was die Wand zeigt und was nicht
+
+Nur Summen, erst nach Ihrem Knopfdruck, und kleine Zahlen bleiben verborgen.
+
+Merke: Je kleiner die Gruppe, desto weniger Schutz bietet jede Zusammenfassung. Der Klassenmodus ist für Klassen gedacht, nicht für Dreiergruppen.
+
+## Was verarbeitet wird, für Schulleitung und Datenschutzbeauftragte
+
+Auswahlwerte und ein Zufallsname, nur im Arbeitsspeicher. Außerhalb der Anwendung fällt trotzdem etwas an.
+
+Merke: Das Löschprotokoll gilt für die Anwendung. Es löscht keine Zugriffsprotokolle des Webservers und keine Daten bei Cloudflare.
+
+## Muster-Satz für den Elternbrief
+
+Zum Kopieren und Anpassen.
+
+## Eine 45-Minuten-Stunde
+
+Ein Vorschlag, der ohne Vorbereitung auskommt.
+
+## Missbrauch und Grenzen
+
+Was den Dienst schützt, und was er nicht kann.
+
+## Das Löschprotokoll, und was es belegt
+
+Fünf Einzelprüfungen, eine Signatur und eine öffentliche Prüfseite.
+
+Merke: Ein Protokoll ohne Prüfung ist eine Behauptung. Darum können Sie es auf /klasse/nachweis prüfen lassen, auch ohne JavaScript. Dabei wird nichts gespeichert.
+
+## Das nimmst du mit
+
+- Der Klassenmodus braucht kein Konto und keinen Namen. Die Klasse schickt nur Auswahlwerte.
+- Die Wand zeigt erst nach Ihrem Knopfdruck eine Summe, und kleine Felder bleiben verdeckt.
+- Alles liegt nur im Arbeitsspeicher und endet nach höchstens zwei Stunden oder sofort per Knopf.
+- Das Löschprotokoll belegt die Löschung in der Anwendung. IP-Adressen in Zugriffsprotokollen bleiben außen vor und gehören in die Abstimmung mit der Schulleitung.
+
+## Fragen und Antworten
+
+Frage: Was merkt sich der Klassenmodus über die Antwort einer einzelnen Schülerin?
+Antwort: Nichts, was die Antwort mit einer Person verbindet: nur Zähler je Antwort und wer schon geantwortet hat. Der Dienst führt nur einen Zähler je Antwort und eine Liste, wer schon geantwortet hat. Welche Antwort von wem kommt, wird nicht gespeichert.
+
+Frage: Warum zeigt die Wand bei zwei Antworten kein Ergebnis?
+Antwort: Weil sonst leicht zu erraten wäre, wer was gewählt hat. Bei sehr kleinen Zahlen lässt sich eine Person leicht erraten. Darum gibt es erst ab drei Antworten ein Ergebnis, und kleine Felder bleiben verdeckt.
+
+Frage: Wie lange läuft eine Sitzung höchstens?
+Antwort: Zwei Stunden, nach 20 Minuten ohne Aktion schon früher. Nach höchstens zwei Stunden oder 20 Minuten ohne Aktion löscht der Dienst die Sitzung von selbst. Die Lehrkraft kann auch jederzeit sofort löschen.
+
+Frage: Was belegt die Signatur im Löschprotokoll?
+Antwort: Dass der Dienst das Protokoll ausgestellt hat und es nicht verändert wurde. Die Signatur schützt das Protokoll vor Änderungen. Zugriffsprotokolle des Webservers und Daten bei Cloudflare liegen außerhalb der Anwendung und sind davon nicht erfasst.
+
+Frage: Was gehört trotz Klassenmodus in die Abstimmung mit der Schulleitung?
+Antwort: Dass IP-Adressen im Zugriffsprotokoll des Webservers anfallen und wie lange. Der Dienst selbst speichert keine Namen. Die IP-Adresse fällt aber bei jedem Aufruf im Zugriffsprotokoll an. Das gehört ehrlich in die Abstimmung.
+
+# Mitmachen: Code eingeben und abstimmen
+
+Adresse: __BASIS__/klasse-mitmachen
+Bereich: Für die Schule. Stand: 2026-11-27.
+
+Kurz gesagt: Seite für Schülerinnen und Schüler zum Mitmachen im Klassenmodus: Code eingeben, Zufallsname, Antworten per Auswahl, Ergebnis der Klasse, was mit den Antworten passiert, Hilfe bei Problemen.
+
+Gib den Code deiner Lehrkraft ein. Du bekommst einen Zufallsnamen, tippst deine Antwort und siehst, was die Klasse denkt. Ohne Namen.
+
+## So machst du mit
+
+Drei Schritte.
+
+## Was mit deinen Antworten passiert
+
+Nichts, was zu dir führt.
+
+Merke: Gib den Code nicht an Menschen weiter, die nicht in deiner Klasse sind. Wer ihn kennt, kann mitmachen.
+
+## Wenn etwas nicht klappt
+
+Die häufigsten Fälle.
+
+## Das nimmst du mit
+
+- Du brauchst nur den Code. Es gibt keinen Namen und kein Konto.
+- Deine Antwort ist endgültig, und niemand sieht, was du gewählt hast.
+- Nach der Stunde wird alles gelöscht.
+
+## Fragen und Antworten
+
+Frage: Was sieht die Lehrkraft von deiner Antwort?
+Antwort: Nur die Summe aller Antworten. Die Lehrkraft sieht, wie viele geantwortet haben, und später die Verteilung aller Antworten. Wer was gewählt hat, weiß niemand.
+
+Frage: Was tust du, wenn der Code nicht klappt?
+Antwort: Du prüfst die acht Zeichen und fragst im Zweifel deine Lehrkraft. Falsche Eingaben werden gebremst, nach dem ersten Fehler schließt die Verbindung, und ein richtiger Code kommt immer durch. Genaues Hinsehen und Nachfragen geht schneller als Raten.
+
+# Die Wand für den Beamer
+
+Adresse: __BASIS__/klasse-wand
+Bereich: Für die Schule. Stand: 2026-11-27.
+
+Kurz gesagt: Wand-Ansicht des Klassenmodus für den Beamer: Warteansicht mit Code, Fortschritt, Ergebnis als Balken, Vollbild.
+
+Die Wand zeigt Code, wer dabei ist und die Summen der Klasse in großer Schrift. Sie kann nichts steuern und zeigt nie, wer was gewählt hat.
+
+## So benutzen Sie die Wand
+
+Sie öffnet sich mit einem Klick von der Seite des Klassenmodus aus.
+
+## Was die Wand zeigt und was nie
+
+Sicher für den Blick der ganzen Klasse.
+
+Merke: Auch die Zufallsnamen verschwinden von der Wand, sobald die erste Aufgabe läuft.
+
+## Das nimmst du mit
+
+- Die Wand ist nur zum Anschauen. Gesteuert wird auf der Seite des Klassenmodus.
+- Code und Schlüssel stehen nie in der Adresse.
+
 # Echt oder KI? Bilder, Texte und Stimmen prüfen
 
 Adresse: __BASIS__/echt-oder-ki
@@ -6532,3 +6666,5 @@ Antwort: Er nennt seine Gründe, und Sie passen die Regel gemeinsam an. Regeln, 
 - Merkmalsabstand: Eine Zahl dafür, wie weit zwei Handformen auseinanderliegen. Sie entsteht aus Unterschieden in Merkmalen wie der Streckung der Finger. Je kleiner sie ist, desto ähnlicher sind die Formen.
 - Maske: Ein Graustufenbild in der Größe des Kamerabilds. Jeder Pixel trägt eine Zahl, die sagt, wie sicher das Netz ist, dass er zur Person gehört. Weiß ist Person, Schwarz Hintergrund.
 - Greenscreen: Eine einfarbig grüne Wand hinter der Person. Eine Software macht alles Grüne durchsichtig und setzt dort einen anderen Hintergrund ein. Das Verfahren heißt Chroma-Key und braucht keine KI.
+- Pseudonym: Ein Zufallsname wie "Roter Fuchs". Er steht für eine Person, ohne zu verraten, wer es ist. Im Klassenmodus gilt er nur für eine Sitzung.
+- Signatur (HMAC): Ein Siegel aus einer Rechenvorschrift und einem geheimen Schlüssel. Wer das Protokoll ändert, ohne den Schlüssel zu kennen, kann kein passendes Siegel erzeugen.

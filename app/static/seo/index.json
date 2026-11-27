@@ -691,7 +691,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-fuer-die-schule",
       "name": "Für die Schule",
-      "numberOfItems": 18,
+      "numberOfItems": 21,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -800,6 +800,24 @@
         "position": 18,
         "name": "Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte",
         "url": "__BASIS__/schule-faecher"
+       },
+       {
+        "@type": "ListItem",
+        "position": 19,
+        "name": "Klassenmodus: gemeinsam abstimmen, ohne Namen",
+        "url": "__BASIS__/klassenmodus"
+       },
+       {
+        "@type": "ListItem",
+        "position": 20,
+        "name": "Mitmachen: Code eingeben und abstimmen",
+        "url": "__BASIS__/klasse-mitmachen"
+       },
+       {
+        "@type": "ListItem",
+        "position": 21,
+        "name": "Die Wand für den Beamer",
+        "url": "__BASIS__/klasse-wand"
        }
       ]
      },
@@ -2414,6 +2432,26 @@
         "termCode": "greenscreen",
         "name": "Greenscreen",
         "description": "Eine einfarbig grüne Wand hinter der Person. Eine Software macht alles Grüne durchsichtig und setzt dort einen anderen Hintergrund ein. Das Verfahren heißt Chroma-Key und braucht keine KI.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-pseudonym",
+        "termCode": "pseudonym",
+        "name": "Pseudonym",
+        "description": "Ein Zufallsname wie \"Roter Fuchs\". Er steht für eine Person, ohne zu verraten, wer es ist. Im Klassenmodus gilt er nur für eine Sitzung.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-hmac",
+        "termCode": "hmac",
+        "name": "Signatur (HMAC)",
+        "description": "Ein Siegel aus einer Rechenvorschrift und einem geheimen Schlüssel. Wer das Protokoll ändert, ohne den Schlüssel zu kennen, kann kein passendes Siegel erzeugen.",
         "inDefinedTermSet": {
          "@id": "__BASIS__/#glossar"
         }
@@ -20665,6 +20703,403 @@
     ]
    }
   },
+  "klassenmodus": {
+   "titel": "Klassenmodus: gemeinsam abstimmen, ohne Namen · KI-Labor",
+   "ueberschrift": "Klassenmodus: gemeinsam abstimmen, ohne Namen",
+   "beschreibung": "Sie starten eine Sitzung mit Code. Die Klasse macht auf dem eigenen Gerät mit, die Wand zeigt nur Summen. Ohne Konto, ohne Namen, mit Löschprotokoll.",
+   "typ": "seite",
+   "datei": "content-klasse.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/klassenmodus#artikel",
+      "headline": "Klassenmodus: gemeinsam abstimmen, ohne Namen",
+      "name": "Klassenmodus: gemeinsam abstimmen, ohne Namen",
+      "description": "Sie starten eine Sitzung mit Code. Die Klasse macht auf dem eigenen Gerät mit, die Wand zeigt nur Summen. Ohne Konto, ohne Namen, mit Löschprotokoll.",
+      "url": "__BASIS__/klassenmodus",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/klassenmodus"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Für die Schule",
+      "abstract": "Klassenmodus des KI-Labors für Lehrkräfte: eine Sitzung mit Kurzcode ohne Konto, Zufallsnamen statt Namen, Abstimmungen, Skalen, Schätzfragen, Quizfragen aus den Lektionen, Echt oder KI und Prompt-Vergleich, Ergebnis nur als Summe an der Wand, kleine-Zahlen-Schutz, Speicherung nur im Arbeitsspeicher, Löschung nach höchstens zwei Stunden oder per Knopf, signiertes Löschprotokoll, Hinweise für Schulleitung und Eltern, Ablauf einer 45-Minuten-Stunde.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/klassenmodus#breadcrumb"
+      },
+      "teaches": [
+       "Der Klassenmodus braucht kein Konto und keinen Namen. Die Klasse schickt nur Auswahlwerte.",
+       "Die Wand zeigt erst nach Ihrem Knopfdruck eine Summe, und kleine Felder bleiben verdeckt.",
+       "Alles liegt nur im Arbeitsspeicher und endet nach höchstens zwei Stunden oder sofort per Knopf.",
+       "Das Löschprotokoll belegt die Löschung in der Anwendung. IP-Adressen in Zugriffsprotokollen bleiben außen vor und gehören in die Abstimmung mit der Schulleitung."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/klassenmodus#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Klassenmodus: gemeinsam abstimmen, ohne Namen",
+        "item": "__BASIS__/klassenmodus"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/klassenmodus#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Was merkt sich der Klassenmodus über die Antwort einer einzelnen Schülerin?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nichts, was die Antwort mit einer Person verbindet: nur Zähler je Antwort und wer schon geantwortet hat. Der Dienst führt nur einen Zähler je Antwort und eine Liste, wer schon geantwortet hat. Welche Antwort von wem kommt, wird nicht gespeichert."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Warum zeigt die Wand bei zwei Antworten kein Ergebnis?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Weil sonst leicht zu erraten wäre, wer was gewählt hat. Bei sehr kleinen Zahlen lässt sich eine Person leicht erraten. Darum gibt es erst ab drei Antworten ein Ergebnis, und kleine Felder bleiben verdeckt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wie lange läuft eine Sitzung höchstens?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Zwei Stunden, nach 20 Minuten ohne Aktion schon früher. Nach höchstens zwei Stunden oder 20 Minuten ohne Aktion löscht der Dienst die Sitzung von selbst. Die Lehrkraft kann auch jederzeit sofort löschen."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was belegt die Signatur im Löschprotokoll?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Dass der Dienst das Protokoll ausgestellt hat und es nicht verändert wurde. Die Signatur schützt das Protokoll vor Änderungen. Zugriffsprotokolle des Webservers und Daten bei Cloudflare liegen außerhalb der Anwendung und sind davon nicht erfasst."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was gehört trotz Klassenmodus in die Abstimmung mit der Schulleitung?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Dass IP-Adressen im Zugriffsprotokoll des Webservers anfallen und wie lange. Der Dienst selbst speichert keine Namen. Die IP-Adresse fällt aber bei jedem Aufruf im Zugriffsprotokoll an. Das gehört ehrlich in die Abstimmung."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "klasse-mitmachen": {
+   "titel": "Mitmachen: Code eingeben und abstimmen · KI-Labor",
+   "ueberschrift": "Mitmachen: Code eingeben und abstimmen",
+   "beschreibung": "Gib den Code deiner Lehrkraft ein. Du bekommst einen Zufallsnamen, tippst deine Antwort und siehst, was die Klasse denkt. Ohne Namen. Drei Schritte.",
+   "typ": "seite",
+   "datei": "content-klasse.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/klasse-mitmachen#artikel",
+      "headline": "Mitmachen: Code eingeben und abstimmen",
+      "name": "Mitmachen: Code eingeben und abstimmen",
+      "description": "Gib den Code deiner Lehrkraft ein. Du bekommst einen Zufallsnamen, tippst deine Antwort und siehst, was die Klasse denkt. Ohne Namen. Drei Schritte.",
+      "url": "__BASIS__/klasse-mitmachen",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/klasse-mitmachen"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Für die Schule",
+      "abstract": "Seite für Schülerinnen und Schüler zum Mitmachen im Klassenmodus: Code eingeben, Zufallsname, Antworten per Auswahl, Ergebnis der Klasse, was mit den Antworten passiert, Hilfe bei Problemen.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/klasse-mitmachen#breadcrumb"
+      },
+      "teaches": [
+       "Du brauchst nur den Code. Es gibt keinen Namen und kein Konto.",
+       "Deine Antwort ist endgültig, und niemand sieht, was du gewählt hast.",
+       "Nach der Stunde wird alles gelöscht."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/klasse-mitmachen#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Mitmachen: Code eingeben und abstimmen",
+        "item": "__BASIS__/klasse-mitmachen"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/klasse-mitmachen#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Was sieht die Lehrkraft von deiner Antwort?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Nur die Summe aller Antworten. Die Lehrkraft sieht, wie viele geantwortet haben, und später die Verteilung aller Antworten. Wer was gewählt hat, weiß niemand."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was tust du, wenn der Code nicht klappt?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Du prüfst die acht Zeichen und fragst im Zweifel deine Lehrkraft. Falsche Eingaben werden gebremst, nach dem ersten Fehler schließt die Verbindung, und ein richtiger Code kommt immer durch. Genaues Hinsehen und Nachfragen geht schneller als Raten."
+        }
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "klasse-wand": {
+   "titel": "Die Wand für den Beamer · KI-Labor",
+   "ueberschrift": "Die Wand für den Beamer",
+   "beschreibung": "Die Wand zeigt Code, wer dabei ist und die Summen der Klasse in großer Schrift. Sie kann nichts steuern und zeigt nie, wer was gewählt hat.",
+   "typ": "seite",
+   "datei": "content-klasse.js",
+   "bild": "/static/og/standard.png",
+   "bild_alt": "KI-Labor: KI verstehen, indem du sie ausprobierst. Lernpfad, Labore und Erklärvideos zu künstlicher Intelligenz.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/klasse-wand#artikel",
+      "headline": "Die Wand für den Beamer",
+      "name": "Die Wand für den Beamer",
+      "description": "Die Wand zeigt Code, wer dabei ist und die Summen der Klasse in großer Schrift. Sie kann nichts steuern und zeigt nie, wer was gewählt hat.",
+      "url": "__BASIS__/klasse-wand",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/klasse-wand"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Für die Schule",
+      "abstract": "Wand-Ansicht des Klassenmodus für den Beamer: Warteansicht mit Code, Fortschritt, Ergebnis als Balken, Vollbild.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/standard.png"
+      ],
+      "datePublished": "2026-11-27",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/klasse-wand#breadcrumb"
+      },
+      "teaches": [
+       "Die Wand ist nur zum Anschauen. Gesteuert wird auf der Seite des Klassenmodus.",
+       "Code und Schlüssel stehen nie in der Adresse."
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/klasse-wand#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Die Wand für den Beamer",
+        "item": "__BASIS__/klasse-wand"
+       }
+      ]
+     }
+    ]
+   }
+  },
   "echt-oder-ki": {
    "titel": "Echt oder KI? Bilder, Texte und Stimmen prüfen · KI-Labor",
    "ueberschrift": "Echt oder KI? Bilder, Texte und Stimmen prüfen",
@@ -23749,6 +24184,9 @@
   "ki-schule-ueberblick",
   "ki-schule-einstieg",
   "schule-faecher",
+  "klassenmodus",
+  "klasse-mitmachen",
+  "klasse-wand",
   "echt-oder-ki",
   "quellen-pruefen",
   "fake-news-deepfakes",
@@ -23922,7 +24360,10 @@
     "elternabend",
     "ki-schule-ueberblick",
     "ki-schule-einstieg",
-    "schule-faecher"
+    "schule-faecher",
+    "klassenmodus",
+    "klasse-mitmachen",
+    "klasse-wand"
    ]
   },
   {
