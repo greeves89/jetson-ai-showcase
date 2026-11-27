@@ -102,3 +102,13 @@ Alle Namen, Adressen und Inhalte erfunden, Adressen nur auf `example.invalid`.
 **Technik:** Frontend, Regeltabelle je Szenario (Einstellungen auf Ergebnis). Keine echten Modellaufrufe, damit das Ergebnis reproduzierbar bleibt. Hinweis im Baustein: vereinfachtes Modell, echte Angriffe sind vielfältiger.
 
 **Aufwand:** klein bis mittel (etwa ein Tag, plus Zeit für gute Szenarien). Risiko: Regeln so wählen, dass nichts als sicher dargestellt wird, was es nicht ist.
+
+## `koerperhaltung` (Kamera-Labor, Seite `koerperhaltung`)
+
+**Zweck:** Skelett aus 33 Punkten im Live-Kamerabild, Gelenkwinkel, Bewegungs-Spiegel (Kniebeuge, Arme heben, Armkreisen, Seitneigung), Haltung am Schreibtisch, Pose nachmachen.
+
+**Technik:** `app/lab_koerper.py` (Modus `koerper` in `app/kamera_modi.py`), `app/static/demo-koerper.js` und `.css`, Seite in `app/static/content-koerper.js`. Modelle: Personenfinder und Körperpunkte aus dem OpenCV Zoo (Apache-2.0), geholt von `scripts/modelle_laden.sh`. Regeln (Winkel, Zähler mit Hysterese, Haltungshinweise, Ähnlichkeit) sind reiner Python-Code ohne Modell und in `tests/koerper_regeln_test.py` getestet. Browser-Test: `tests/koerper.mjs`.
+
+**Messwerte (Jetson Orin Nano, 3 Rechenkerne, Einzelbilder mit 480 Pixel, Testkopie):** etwa 35 ms je Bild (Personensuche rund 43 ms zusätzlich, nur bei Verlust und alle 15 Bilder), im Labor mit Browser über das Heimnetz 11 bis 15 Bilder pro Sekunde (zwei Läufe, je nach Last), RAM der beiden Netze rund 76 MB (RSS-Differenz), Freigabe nach 120 s ohne Bild.
+
+**Grenzen:** eine Person (die größte); Kniebeuge nur von der Seite sinnvoll; Kopf vor den Schultern nur von der Seite; Schwellen der Haltungshinweise sind Faustregeln dieser Seite; Genauigkeit bei Kindern, Rollstuhl, Prothesen nicht gemessen; Zähler mit echten Bewegungen nur über künstliche Skelette getestet, nicht mit Video einer Kniebeuge.
