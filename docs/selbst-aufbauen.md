@@ -257,6 +257,24 @@ Danach `systemctl --user restart jetson-showcase`. Ein Neustart beendet laufende
 
 Die letzten vier Zeilen sind in `docs/veroeffentlichung.md` beschrieben.
 
+## Klassenmodus (Sitzung mit Code für den Unterricht)
+
+Der Klassenmodus (`app/lab_klasse.py`, Seiten `klassenmodus`, `klasse-mitmachen`, `klasse-wand`) braucht keine Modelle und keine Datenbank. Alles liegt im Arbeitsspeicher des Dienstes, es werden keine Dateien geschrieben.
+
+| Einstellung | Wirkung |
+|---|---|
+| `KL_NACHWEIS_SCHLUESSEL` | Schlüssel (mindestens 16 Zeichen) für die Signatur der Löschprotokolle. Ohne ihn entsteht bei jedem Start ein zufälliger Schlüssel: Protokolle lassen sich dann nur bis zum nächsten Neustart prüfen (steht im Protokoll). Erzeugen: `openssl rand -hex 32`. Nie ins Repo, nur in die Dienstdatei oder `.env`. Wird er geändert, sind ältere Protokolle nicht mehr prüfbar. |
+| `KL_KLASSE_SCANPFADE` | Weitere Ordner (mit `:` getrennt), die die Selbstprüfung beim Löschen nach Code und Sitzungskennung durchsucht, zum Beispiel der Ordner mit Dienstprotokollen. Standard: der Ordner des Dienstes ohne `static`, `models`, `certs`, `.git`. |
+| `KL_KLASSE_MAX_SITZUNGEN`, `KL_KLASSE_MAX_TEILNEHMER`, `KL_KLASSE_MAX_LAUFZEIT_S`, `KL_KLASSE_MAX_RUHE_S` | Obergrenzen. Standard 20 Sitzungen, 40 Personen, 7200 s, 1200 s. |
+
+Grenzen, die du kennen solltest:
+
+- Das Protokoll belegt die Löschung **in der Anwendung**. Zugriffsprotokolle des Webservers (IP-Adresse, Uhrzeit, Adresse) und der Transport über Cloudflare liegen außerhalb. Der Code steht nie in einer Adresse, die Zugriffsprotokolle enthalten ihn also nicht.
+- Die Selbstprüfung durchsucht Dateien, nicht das Systemjournal. Schreibt dein Dienst nach `journald`, prüfe es selbst (`journalctl | grep <Code>`).
+- Der Dienst läuft in einem Prozess (ein uvicorn-Worker). Mehrere Worker würden die Sitzungen nicht teilen.
+- Python kann Arbeitsspeicher nicht garantiert nullen. Geheime Felder werden überschrieben, der Rest wird von der Speicherbereinigung freigegeben.
+- Test: `python3 tests/klasse_test.py` (ohne Jetson), `LABOR_URL=... node tests/klasse.mjs` (Browser).
+
 ## Updates
 
 ```bash

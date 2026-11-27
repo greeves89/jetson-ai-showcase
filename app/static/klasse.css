@@ -1,0 +1,121 @@
+/* KI-Labor: Gestaltung des Klassenmodus (demo-klasse.js). Eigene Klassen beginnen mit kl-.
+   Nutzt die Variablen aus style.css. Farbe traegt nie allein eine Aussage: immer Symbol oder Text dazu. */
+.kl{max-width:760px;margin:0 auto}
+.kl h3{margin:22px 0 8px;font-size:17px}
+.kl .leise,.kl .kl-skala-ende{color:var(--leise)}
+.kl-lead{margin:0 0 12px;font-size:17px;line-height:1.5}
+.kl-hinweis{display:flex;gap:10px;align-items:flex-start;margin:10px 0;padding:10px 14px;border-radius:var(--r2);background:var(--flaeche2);font-size:14.5px;line-height:1.45;color:var(--leise)}
+.kl-hinweis .ic{flex:none;width:18px;height:18px;margin-top:2px;color:var(--akzent)}
+.kl-knoepfe{display:flex;flex-wrap:wrap;gap:10px;margin:12px 0}
+.kl-fehler{margin:8px 0;color:var(--rot);font-weight:600}
+.kl-zaehler,.kl-beitritt,.kl-fortschritt,.kl-beweis,.kl-ich,.kl-warten{display:flex;gap:10px;align-items:center;margin:8px 0;font-size:15px}
+.kl-zaehler .ic,.kl-beitritt .ic,.kl-fortschritt .ic,.kl-beweis .ic,.kl-ich .ic,.kl-warten .ic{flex:none;width:20px;height:20px;color:var(--akzent)}
+.kl-kopf{display:grid;grid-template-columns:auto 1fr;gap:16px 28px;align-items:center;padding:16px 18px;border-radius:var(--r2);background:var(--flaeche2)}
+@media (max-width:620px){.kl-kopf{grid-template-columns:1fr}}
+.kl-code-box{display:flex;flex-direction:column;gap:6px;align-items:flex-start}
+.kl-label{font-size:13px;color:var(--leise);font-weight:600}
+.kl-code{font:700 42px/1.1 var(--mono);letter-spacing:.14em}
+.kl-code.klein{font-size:1em;letter-spacing:.1em}
+.kl-werte p{display:flex;gap:10px;align-items:center;margin:4px 0}
+.kl-werte .ic{width:18px;height:18px;color:var(--akzent)}
+.kl-schluessel{margin:8px 0;padding:12px 14px;border-radius:var(--r2);background:var(--flaeche2)}
+.kl-schluessel code{display:block;font:600 16px var(--mono);word-break:break-all;margin-bottom:6px}
+.kl-schluessel p{margin:0;font-size:14px;color:var(--leise)}
+.kl-namen{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}
+.kl-namen.gross{justify-content:center;margin-top:24px}
+.kl-chip{display:inline-flex;align-items:center;padding:4px 12px;border-radius:99px;background:color-mix(in srgb,var(--akzent) 13%,transparent);font-size:14px;font-weight:600}
+.kl-namen.gross .kl-chip{font-size:20px;padding:6px 16px}
+.kl-arten{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px;margin:10px 0}
+.kl-art{display:flex;flex-direction:column;align-items:flex-start;gap:4px;text-align:left;padding:14px;border:2px solid transparent;border-radius:var(--r2);background:var(--flaeche2);color:var(--text);font:inherit;cursor:pointer;min-height:44px}
+.kl-art:hover{border-color:var(--akzent)}
+.kl-art.aktiv{border-color:var(--akzent);background:color-mix(in srgb,var(--akzent) 10%,var(--flaeche2))}
+.kl-art .ic{width:22px;height:22px;color:var(--akzent)}
+.kl-art span{font-size:13.5px;color:var(--leise);line-height:1.35}
+.kl-art:focus-visible,.kl-wahl-knopf:focus-visible{outline:3px solid var(--akzent);outline-offset:2px}
+.kl-form{display:grid;gap:8px;max-width:520px;margin:10px 0;padding:14px;border-radius:var(--r2);background:var(--flaeche2)}
+.kl-form select,.kl-form input,.kl-code-eingabe,.kl-key-eingabe,.kl-zahl-eingabe,.kl-protokoll-eingabe,.kl-loesung-zeile input{min-height:44px;padding:0 14px;border:1px solid var(--linie);border-radius:12px;background:var(--flaeche);color:var(--text);font:inherit}
+.kl-protokoll-eingabe{width:100%;box-sizing:border-box;padding:12px 14px;font:13px/1.45 var(--mono)}
+.kl-vorschau{padding:10px 12px;border-radius:12px;background:var(--flaeche)}
+.kl-vorschau ol{margin:6px 0 0;padding-left:1.4em}
+.kl-aufgabe{margin:8px 0}
+.kl-frage{margin:0 0 10px;font-size:20px;font-weight:700;line-height:1.35}
+.kl-aufgabe.gross .kl-frage{font-size:clamp(26px,3.4vw,44px)}
+.kl-optionen{margin:6px 0;padding-left:1.6em;font-size:17px;line-height:1.6}
+.kl-aufgabe.gross .kl-optionen{font-size:clamp(20px,2.4vw,32px)}
+.kl-bild{max-width:520px;margin:0 0 12px}
+.kl-aufgabe.gross .kl-bild{max-width:min(640px,60vh * 1.33)}
+.kl-texte{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+.kl-text{padding:12px 14px;border-radius:var(--r2);background:var(--flaeche2)}
+.kl-text p{margin:6px 0 0;line-height:1.5}
+.kl-bereich{font-size:17px}
+.kl-wahl,.kl-skala{display:grid;gap:10px;margin:12px 0}
+.kl-skala{grid-template-columns:repeat(5,1fr)}
+.kl-wahl-knopf{display:flex;align-items:center;gap:12px;min-height:56px;padding:10px 16px;border:2px solid var(--linie);border-radius:var(--r2);background:var(--flaeche);color:var(--text);font:600 18px/1.3 inherit;font-family:inherit;text-align:left;cursor:pointer}
+.kl-skala-knopf{justify-content:center;font-size:24px}
+.kl-wahl-knopf:hover{border-color:var(--akzent)}
+.kl-wahl-knopf.an{border-color:var(--akzent);background:color-mix(in srgb,var(--akzent) 14%,var(--flaeche))}
+.kl-buchst{flex:none;display:grid;place-items:center;width:34px;height:34px;border-radius:50%;background:var(--akzent-fl);color:var(--auf-akzent);font-weight:700}
+.kl-skala-ende{display:flex;justify-content:space-between;margin:0 0 8px;font-size:14px}
+.kl-senden{min-height:52px;font-size:18px;margin-top:6px}
+.kl-zahl-eingabe{width:100%;max-width:260px;font-size:24px;min-height:56px}
+.kl-zeile-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
+.kl-code-eingabe{width:11ch;font:700 30px var(--mono);letter-spacing:.2em;text-transform:uppercase;text-align:center;min-height:60px}
+.kl-loesung-zeile{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
+.kl-ergebnis{margin:12px 0}
+.kl-zeilen{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.kl-zeile{display:grid;grid-template-columns:minmax(110px,24%) 1fr 4.5em;gap:12px;align-items:center;font-size:17px;padding:2px 0}
+.kl-name{display:flex;flex-direction:column;font-weight:600;line-height:1.25}
+.kl-marke{display:inline-flex;align-items:center;gap:4px;font-size:13px;font-weight:600;color:var(--gruen)}
+.kl-marke.leise{color:var(--leise)}
+.kl-marke .ic{width:14px;height:14px}
+.kl-bahn{display:block;height:26px;border-radius:99px;background:var(--fuell);overflow:hidden}
+.kl-bahn.gross{height:32px;margin:10px 0}
+.kl-balken{display:block;height:100%;border-radius:99px;background:var(--akzent-fl);transition:width .35s var(--feder)}
+.kl-balken.klein{background:repeating-linear-gradient(45deg,var(--linie) 0 6px,transparent 6px 12px);border:1px dashed var(--leise)}
+.kl-zeile.richtig .kl-balken{background:var(--gruen)}
+.kl-zeile.richtig .kl-name{color:var(--gruen)}
+.kl-zahl{font-weight:700;text-align:right;font-variant-numeric:tabular-nums}
+.kl-fuss{margin:10px 0 0;color:var(--leise);font-size:15px}
+.kl-gefahr{margin:28px 0 8px;padding:14px 16px;border:1px solid color-mix(in srgb,var(--rot) 40%,transparent);border-radius:var(--r2)}
+.kl-gefahr p{margin:0 0 10px;font-size:14.5px;color:var(--leise)}
+.kl-beenden .ic{color:var(--rot)}
+.kl-beenden.sicher{background:var(--rot);color:#fff}
+.kl-beenden.sicher .ic{color:#fff}
+.kl-ende h3{display:flex;gap:10px;align-items:center;margin-top:0}
+.kl-ende h3 .ic{color:var(--gruen);width:26px;height:26px}
+.kl-protokoll{margin:12px 0;padding:14px;border-radius:var(--r2);background:var(--flaeche2);color:var(--text);font:13px/1.5 var(--mono);white-space:pre-wrap;word-break:break-word;overflow-x:auto}
+.kl-status{min-height:1.4em;color:var(--gruen);font-size:14.5px}
+.kl-pruef-ergebnis{margin:10px 0;padding:12px 14px;border-radius:var(--r2);background:var(--flaeche2)}
+.kl-pruef-ergebnis.ok{background:color-mix(in srgb,var(--gruen) 14%,transparent)}
+.kl-pruef-ergebnis.nein{background:color-mix(in srgb,var(--rot) 12%,transparent)}
+.kl-pruef-kopf{display:flex;gap:8px;align-items:center;margin:0 0 6px}
+.kl-pruef-ergebnis.ok .kl-pruef-kopf .ic{color:var(--gruen)}
+.kl-pruef-ergebnis.nein .kl-pruef-kopf .ic{color:var(--rot)}
+.kl-verlassen{margin:24px 0 0}
+.kl-schueler{max-width:560px}
+.kl-ich{justify-content:space-between;flex-wrap:wrap;padding:10px 14px;border-radius:var(--r2);background:var(--flaeche2)}
+
+/* Wand (Beamer): grosse Schrift, hoher Kontrast */
+.kl-wand{max-width:1100px;padding:8px 4px}
+.kl-wand:fullscreen{max-width:none;padding:3vh 4vw;background:var(--bg,var(--flaeche));overflow:auto}
+.kl-wand-kopf{display:flex;flex-wrap:wrap;gap:16px 28px;align-items:center;margin:0 0 18px;font-size:20px}
+.kl-wand-code{display:inline-flex;gap:10px;align-items:center;font-weight:600}
+.kl-wand-code .ic{width:24px;height:24px;color:var(--akzent)}
+.kl-wand-mitte{text-align:center;padding:4vh 0}
+.kl-wand-mitte h2{display:flex;gap:12px;justify-content:center;align-items:center;font-size:clamp(30px,5vw,60px);margin:0 0 20px}
+.kl-wand-gross{font-size:clamp(22px,3.2vw,40px);margin:8px 0;line-height:1.3}
+.kl-wand .kl-code{font-size:clamp(40px,7vw,96px)}
+.kl-wand .kl-code.klein{font-size:1em}
+.kl-wand .kl-zeile{font-size:clamp(20px,2.6vw,34px);grid-template-columns:minmax(140px,26%) 1fr 4em}
+.kl-wand .kl-bahn{height:clamp(30px,4vw,52px)}
+.kl-wand .kl-fuss{font-size:clamp(17px,2vw,26px)}
+.kl-wand-fortschritt{margin-top:24px}
+
+/* Druck des Loeschprotokolls: nur die Druckflaeche */
+#klasse-druckflaeche{display:none}
+@media print{
+  html.klasse-drucken body>*:not(#klasse-druckflaeche){display:none !important}
+  html.klasse-drucken body>#klasse-druckflaeche{display:block !important;position:static;margin:0;padding:0;color:#000;background:#fff}
+  #klasse-druckflaeche pre{white-space:pre-wrap;font:12pt/1.5 ui-monospace,monospace}
+}
+@media (prefers-reduced-motion:reduce){.kl-balken{transition:none}}

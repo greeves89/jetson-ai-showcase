@@ -170,6 +170,22 @@ INHALT.synonyme = {
   doppelstunde: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "=medien-stunde-3", "stunde"],
   stundenplanung: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "=medien-stunde-1", "doppelstunde"],
   unterrichtsplanung: ["=schule-lehrkraefte", "=schule-stunde-1", "=schule-stunde-2", "=schule-stunde-3", "doppelstunde"],
+  /* Klassenmodus (Sitzung mit Code, Wand, Löschprotokoll) */
+  klasse: ["=klassenmodus", "=klasse-mitmachen", "=schule-lehrkraefte", "=schule-start"],
+  klassenmodus: ["=klassenmodus", "=klasse-mitmachen", "=klasse-wand"],
+  unterricht: ["=klassenmodus", "=schule-lehrkraefte", "=schule-stunde-1", "=medien-stunde-1"],
+  abstimmung: ["=klassenmodus", "=klasse-mitmachen", "=klasse-wand"],
+  abstimmen: ["=klassenmodus", "=klasse-mitmachen"],
+  umfrage: ["=klassenmodus", "=klasse-mitmachen", "=klasse-wand"],
+  beamer: ["=klasse-wand", "=klassenmodus"],
+  wand: ["=klasse-wand", "=klassenmodus"],
+  lehrkraft: ["=klassenmodus", "=schule-lehrkraefte", "=schule-schulleitung"],
+  lehrer: ["=klassenmodus", "=schule-lehrkraefte"],
+  lehrerin: ["=klassenmodus", "=schule-lehrkraefte"],
+  mitmachen: ["=klasse-mitmachen", "=klassenmodus"],
+  loeschprotokoll: ["=klassenmodus", "=datenschutz-im-alltag"],
+  loeschnachweis: ["=klassenmodus", "=datenschutz-im-alltag"],
+  pseudonym: ["=klassenmodus", "=klasse-mitmachen"],
   drucken: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "=zusammen-ausprobieren", "arbeitsblatt", "pdf"],
   druck: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "arbeitsblatt", "pdf"],
   ausdrucken: ["=betrieb-entscheidung", "=schule-lehrkraefte", "=elternabend", "=echt-oder-ki", "=zusammen-ausprobieren", "arbeitsblatt", "pdf"],
@@ -497,7 +513,7 @@ INHALT.lernpfade = [
   {id: "beruf-praxis", rolle: "beruf", name: "KI im Betrieb: Praxis und Entscheidung", kurz: "Beispiele aus Handwerk, Fertigung und Büro, gut fragen, Kosten, Recht und Datenschutz. Am Ende steht deine Entscheidung mit sechs Fragen zum Abhaken.",
    seiten: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "text-lesen", "kamera-grenzen", "praxis-gesundheit", "prompting", "kosten-energie", "recht", "sicherheit-einfach", "betrieb-entscheidung"]},
   {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, drei KI-Stunden, sieben Medien-Einheiten und Informationen für Schulleitung und Eltern.",
-   seiten: ["schule-lehrkraefte", "schule-faecher", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
+   seiten: ["schule-lehrkraefte", "klassenmodus", "schule-faecher", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
 ];
 INHALT.lernpfade.push(
   {id: "alltag-15", rolle: "erwachsene", name: "In 15 Minuten: das Wichtigste", get kurz() { return zahlSeiten("alltag-15") + " kurze Seiten für die Pause, ohne Video und Labor: was KI ist, einen Chat nutzen und prüfen, Betrug erkennen, besser fragen, ist das sicher? Für Berufstätige und alle ohne Vorwissen."; },
@@ -523,7 +539,7 @@ INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "bild-schuetzen", "text-lesen"
 INHALT.menue = {
   fuerDich: {
     schule: ["experimente", "chat", "echt-oder-ki", "ki-hausaufgaben-fair", "prompts-schule", "referat", "prompts-fuer-schueler", "karte"],
-    lehrende: ["schule-lehrkraefte", "schule-faecher", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "elternabend"],
+    lehrende: ["schule-lehrkraefte", "klassenmodus", "schule-faecher", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "elternabend"],
     erwachsene: ["alltag-ki-kurz", "alltag-chat", "alltag-betrug", "prompts-alltag", "alltag-sicher", "falscher-anruf", "chat-irrt", "karte"],
     technik: ["selbst-bauen", "architektur", "betrieb-sicherheit", "hardware", "lizenzen", "rag-ueberblick", "agenten-grundlagen", "neuronale-netze"],
     beruf: ["praxis-gesundheit", "uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "kamera-grenzen", "prompting", "business", "ki-einfuehrung", "kosten-energie", "betrieb-entscheidung", "sicherheit-einfach"],
@@ -577,6 +593,7 @@ INHALT.startRollen = {
       {id: "medien-stunde-6", satz: "Mit der Prompt-Werkstatt bessere Fragen stellen."},
       {id: "medien-stunde-7", satz: "Poster zu KI im eigenen Tag, Beurteilung in der Runde."},
       {id: "schule-lehrkraefte", satz: "Checkliste, Fachbegriffe und Kurzantworten."},
+      {id: "klassenmodus", satz: "Die Klasse stimmt per Code ab, die Wand zeigt nur Summen, am Ende gibt es ein Löschprotokoll."},
       {id: "schule-faecher", satz: "Welche Fächer passen? Anknüpfungen für Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte."},
       {id: "schule-schulleitung", satz: "Daten, Verantwortung und was die Schule entscheidet."},
       {id: "elternabend", satz: "Info-Blatt, Leitfaden und Antworten auf Elternfragen."}]},

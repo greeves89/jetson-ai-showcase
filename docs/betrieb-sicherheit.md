@@ -67,3 +67,17 @@ python3 tests/sicherheitskoepfe_test.py        # alle Betriebsarten, ohne Jetson
 - `proxy_hide_header Server;` bzw. `server_tokens off;` und `more_set_headers "Server: ki-labor";` (falls das Modul vorhanden ist), um `uvicorn` und die nginx-Version nicht zu zeigen.
 - HSTS erst mit `includeSubDomains` und `preload` erweitern, wenn alle Unterdomänen von `daniel-alisch.site` dauerhaft HTTPS sprechen. Bis dahin reicht `max-age=31536000`.
 - Doppelte Köpfe vermeiden: Setzt nginx Köpfe selbst, mit `proxy_hide_header` die des Dienstes ausblenden oder beides gleich lassen.
+
+## Klassenmodus: Zugriffsprotokolle (Stand 27.11.2026, nur gelesen, am Server nichts geändert)
+
+Befund am Proxy-Server für ki-labor.daniel-alisch.site: nginx schreibt `access_log /var/log/nginx/access.log` im Standardformat (kombiniert: vollständige IP-Adresse, Zeit, Anfragezeile, Statuscode, Referer, User-Agent), tägliche Rotation, 14 Archive komprimiert (`/etc/logrotate.d/nginx`). Der Proxy reicht den Verkehr an den Cloudflare-Tunnel weiter, Cloudflare kann die Verbindung technisch einsehen. Der Klassen-Code steht nie in einer Adresse, wohl aber erscheinen `/ws/klasse`, `/klassenmodus`, `/klasse-mitmachen`, `/klasse-wand` samt IP-Adresse und Zeit.
+
+Vorschlag (Entscheidung beim Betreiber), in `location`-Blöcken vor `location /`:
+
+```
+location = /ws/klasse        { access_log off; error_log /dev/null crit; proxy_pass ...; }   # gleiche proxy_set_header wie in location /
+location ^~ /api/klasse/     { access_log off; proxy_pass ...; }
+location = /klasse/nachweis  { access_log off; proxy_pass ...; }
+```
+
+Alternativ ein eigenes `log_format` mit gekürzter IP (`map $remote_addr $ip_kurz { ~(?P<a>\d+\.\d+\.\d+)\.\d+ $a.0; default 0.0.0.0; }`) und sieben Tage Aufbewahrung für diese Pfade. Die Seiten selbst (`/klassenmodus` usw.) sind normale Seitenaufrufe wie alle anderen. Danach die Aussage auf der Seite `klassenmodus` und im Datenschutzentwurf anpassen.
