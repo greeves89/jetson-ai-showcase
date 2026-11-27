@@ -129,15 +129,15 @@ S["schule-start"] = {
       "Hänge `/?weg=schule` an die Adresse des Labors und gib den Link weiter: an die Tafel, in die Lernplattform oder als QR-Code.",
      ]},
     {h: "Technik: so viele Geräte gehen",
-     kurz: "Vierergruppen, höchstens 7 Geräte gleichzeitig, denn der Rechner beantwortet Sprachmodell-Anfragen nacheinander.",
+     kurz: "Vierergruppen, höchstens 7 Geräte gleichzeitig, denn der Rechner beantwortet nur wenige Sprachmodell-Anfragen gleichzeitig.",
      visual: {typ: "zahlen", kacheln: [
       {wert: "4", label: "Personen je Gruppe", icon: "users"},
       {wert: "7", label: "Geräte höchstens", icon: "laptop"},
       {wert: "kurz", label: "Wartezeit bei Chat", icon: "hourglass"}]},
      p: [
-      "Chat und Prompt-Werkstatt brauchen das Sprachmodell. Der kleine Rechner antwortet nacheinander, bei vielen Anfragen erscheint ein Hinweis wie „Du bist Nr. 2“. Darum: Vierergruppen, ein Gerät je Gruppe, höchstens 7 Geräte gleichzeitig (28 Personen passen genau). Punkte-Labor, Netz-Spielplatz und Risiko-Spiel rechnen im Browser.",
+      "Chat und Prompt-Werkstatt brauchen das Sprachmodell. Der kleine Rechner beantwortet höchstens zwei Anfragen gleichzeitig, weitere warten (bis zu 6 Plätze, bis zu 90 Sekunden). Dann erscheint ein Hinweis wie „Du bist Nr. 2“, und wenn alles belegt ist, „Der Rechner ist gerade ausgelastet“. Darum: Vierergruppen, ein Gerät je Gruppe, höchstens 7 Geräte gleichzeitig (28 Personen passen genau). Punkte-Labor, Netz-Spielplatz und Risiko-Spiel rechnen im Browser.",
      ],
-     alltag: "Wie ein Kopierer in der Schule: Er druckt ein Blatt nach dem anderen, wer wartet, kommt trotzdem dran."},
+     alltag: "Wie zwei Kopierer in der Schule: Sie drucken gleichzeitig, wer wartet, kommt trotzdem dran, aber bei zu vielen Wartenden heißt es: später noch einmal versuchen."},
     {h: "Daten: kein Konto, nichts dauerhaft gespeichert",
      kurz: "Kein Konto, keine Abfrage von Name, Alter oder Klasse, keine dauerhafte Speicherung der Eingaben.",
      visual: {typ: "vergleich",
@@ -156,7 +156,7 @@ S["schule-start"] = {
       {icon: "mic", text: "Mikrofon", sub: "nicht nötig"},
       {icon: "scan-face", text: "Gesichtserkennung", sub: "nicht vorgesehen"}]},
      p: [
-      "Alle Aufgaben laufen ohne Kamera und Mikrofon, bitte lasst die Labore dazu im Menü in der Klasse aus. Das Gesichts-Labor ist laut Hinweis erst ab 16 Jahren gedacht, jüngere nur mit Einverständnis der Eltern.",
+      "Alle Aufgaben laufen ohne Kamera und Mikrofon, bitte lasst die Labore dazu im Menü in der Klasse aus. Das Gesichts-Labor ist laut Hinweis erst ab 16 Jahren gedacht, jüngere nur mit Einverständnis der Eltern. Im Chat steht der Hinweis „Unter 16: bitte gemeinsam mit einer erwachsenen Person“. Im Unterricht seid ihr mit der Lehrkraft dabei, sie ist diese erwachsene Person.",
      ]},
   ],
   mitnehmen: [
@@ -740,7 +740,7 @@ S["schule-lehrkraefte"] = {
        ["Merkt sich die KI, was ich schreibe?", "Chat-Fragen werden nicht aufbewahrt, Dokumenten-Texte verfallen nach 30 Minuten. Das Modell lernt nicht aus Eingaben."],
        ["Warum antwortet sie jedes Mal anders?", "Das Modell wählt unter passenden Wörtern, höhere Temperatur macht es bunter."],
        ["Kann die KI lügen?", "Sie erfindet ohne Absicht, falsch kann es trotzdem sein."],
-       ["Warum dauert das so lange?", "Der Rechner ist klein und antwortet nacheinander."],
+       ["Warum dauert das so lange?", "Der Rechner ist klein und beantwortet nur zwei Fragen gleichzeitig, die anderen warten."],
        ["Wie viele Daten braucht man?", "Im Punkte-Labor reichen wenige Dutzend, echte Bilderkennung braucht viel mehr."],
       ],
      }},
@@ -786,6 +786,7 @@ S["schule-lehrkraefte"] = {
      p: [
       "Die Kultusministerkonferenz (KMK) beschreibt in der Strategie „Bildung in der digitalen Welt“ vom 8. Dezember 2016 sechs Kompetenzbereiche: Suchen, Verarbeiten und Aufbewahren; Kommunizieren und Kooperieren; Produzieren und Präsentieren; Schützen und sicher Agieren; Problemlösen und Handeln; Analysieren und Reflektieren.",
       "Die Tabelle ist ein Vorschlag des Labors, wo die Einheiten anknüpfen. Sie ist kein Dokument eines Kultusministeriums. Ob und wo eine Einheit in den Lehrplan Ihres Landes und Faches (Informatik, Medienbildung) passt, prüfen Sie selbst. Quelle: KMK, `kmk.org/aktuelles-1/artikelansicht/strategie-bildung-in-der-digitalen-welt.html`, abgerufen am 22.11.2026.",
+      "Die Bildungsministerkonferenz hat am 16. Oktober 2026 die „Aktualisierung des KMK-Kompetenzrahmens Bildung in der digitalen Welt im Kontext Künstlicher Intelligenz“ beschlossen (kmk.org, Abschnitt „Bildung in der digitalen Welt“, abgerufen am 27.11.2026). Was sich dadurch im Einzelnen ändert, haben wir nicht geprüft. Die Bereichsnamen in der Tabelle stammen aus der Strategie von 2016 und gelten als Vorschlag des Labors. Für das Arbeiten mit KI in der Schule gibt es außerdem die „Handlungsempfehlung für die Bildungsverwaltung zum Umgang mit Künstlicher Intelligenz in schulischen Bildungsprozessen“ der KMK vom 10. Oktober 2024.",
      ],
      tabelle: {
       beschriftung: "Vorschlag zur Zuordnung",
@@ -814,11 +815,11 @@ S["schule-lehrkraefte"] = {
     {h: "Weiterlesen",
      kurz: "Quellen zu Kompetenzrahmen, Datenschutz in der Schule und Sprachmodellen im Unterricht.",
      visual: {typ: "raster", spalten: 3, zellen: [
-      {icon: "book-open", text: "Kompetenzen", sub: "Uni Münster"},
+      {icon: "book-open", text: "Kompetenzen", sub: "KMK"},
       {icon: "shield-check", text: "Datenschutz", sub: "Kultusministerium"},
       {icon: "languages", text: "Sprachmodelle", sub: "Uni Potsdam"}]},
      liste: [
-      "Universität Münster, „KI-Kompetenzen“: `uni-muenster.de/imperia/md/content/ifpol/broschure_ki-kompetenzen.pdf`",
+      "Kultusministerkonferenz, Aktualisierung des Kompetenzrahmens „Bildung in der digitalen Welt“ im Kontext Künstlicher Intelligenz (Beschluss der Bildungsministerkonferenz vom 16.10.2026) und Handlungsempfehlung zum Umgang mit KI (Beschluss vom 10.10.2024): `kmk.org/downloads-dokumente/beschluesse-und-veroeffentlichungen/bildung-in-der-digitalen-welt.html`, abgerufen am 27.11.2026.",
       "Kultusministerkonferenz, Strategie „Bildung in der digitalen Welt“ (8. Dezember 2016): `kmk.org/aktuelles-1/artikelansicht/strategie-bildung-in-der-digitalen-welt.html`, abgerufen am 22.11.2026. Dort stehen die sechs Kompetenzbereiche.",
       "UNESCO, KI-Kompetenzrahmen für Lernende (Titel auf unesco.org suchen).",
       "Bayerisches Kultusministerium, Datenschutz an Schulen: `km.bayern.de/recht/datenschutz-an-schulen` (andere Länder haben eigene Regeln).",
@@ -870,6 +871,7 @@ S["schule-schulleitung"] = {
       {icon: "school", text: "Klasse 8", sub: "drei Stunden"}]},
      p: [
       "Das KI-Labor ist ein Lernprojekt von Daniel Alisch: drei Unterrichtsstunden zu je 45 Minuten für Klasse 8, ohne Kamera und Mikrofon. Diese Seite ist eine Information in einfacher Sprache, kein Rechtsrat. Stand: 22.11.2026.",
+      "Im Chat steht der Hinweis „Unter 16: bitte gemeinsam mit einer erwachsenen Person“. Im Unterricht übernimmt die Lehrkraft diese Rolle, die Gruppen arbeiten unter ihrer Aufsicht.",
      ]},
     {h: "Welche Daten verarbeitet werden",
      kurz: "Wenige technische Daten, kein Konto, keine Namen, keine Abfrage von Alter oder Klasse.",
@@ -1000,7 +1002,7 @@ S["schule-eltern"] = {
       {icon: "network", text: "Netz trainieren", sub: "Fehler sehen"},
       {icon: "search", text: "Antworten prüfen", sub: "Quellen vergleichen", farbe: "gruen"}]},
      p: [
-      "Die Klasse arbeitet in Vierergruppen an einem Gerät. Ihr Kind lernt auch, dass KI Fehler macht und erfindet, und übt, Antworten nicht blind zu glauben.",
+      "Die Klasse arbeitet in Vierergruppen an einem Gerät. Im Chat gilt der Hinweis „Unter 16: gemeinsam mit einer erwachsenen Person“. Im Unterricht ist das die Lehrkraft. Ihr Kind lernt auch, dass KI Fehler macht und erfindet, und übt, Antworten nicht blind zu glauben.",
      ]},
     {h: "Was mit Daten passiert",
      kurz: "Kein Konto, keine Namensabfrage, keine dauerhafte Speicherung der Eingaben.",

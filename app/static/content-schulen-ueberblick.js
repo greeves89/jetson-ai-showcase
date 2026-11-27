@@ -38,7 +38,7 @@ S["ki-schule-ueberblick"] = {
       {icon: "users", text: "Lehrkräfte", sub: "nutzen und geben frei"}]},
      p: [
       "Der KI-Chatbot \"telli\" wurde im Auftrag der Länder vom FWU (Institut für Film und Bild) entwickelt. Seit Mai 2026 heißt er \"AIS.chat\", das FWU nennt markenrechtliche Gründe. Laut Schulministerium NRW ändert sich nur der Name, Funktionen und Nutzerdaten bleiben. Ihre Landesseiten können noch den alten Namen nennen.",
-      "Belegt ist: Baden-Württemberg stellt ihn seit dem 13. Oktober 2025 allen Schulen bereit, Nordrhein-Westfalen seit Dezember 2025, Bayern seit Dezember 2025. Bayern ergänzt KI-Funktionen in der Lernplattform ByCS. Für Schulen ist die Nutzung nach den Angaben von Nordrhein-Westfalen und Bayern kostenfrei.",
+      "Belegt ist: Baden-Württemberg stellt ihn seit dem 13. Oktober 2025 allen Schulen bereit, Nordrhein-Westfalen seit Dezember 2025, Bayern seit Dezember 2025, Berlin seit dem 20. Mai 2026 für alle öffentlichen Schulen. Bayern ergänzt KI-Funktionen in der Lernplattform ByCS. Für Schulen ist die Nutzung nach den Angaben von Nordrhein-Westfalen, Bayern und Berlin kostenfrei.",
       "Zum Datenschutz sagen die Länder: Eingaben werden nicht zum Training der Modelle genutzt. Nordrhein-Westfalen nennt Betrieb der Modelle in der EU und eine pseudonymisierte Anmeldung über den Dienst VIDIS. Personenbezogene Daten gehören trotzdem nicht in die Eingabe. Die Schulleitung muss die Schule registrieren und den Auftragsverarbeitungsvertrag annehmen. Schülerinnen und Schüler nutzen den Dienst erst, wenn die Lehrkraft sie freigeschaltet hat.",
       "Kritik gibt es auch. Ein Verband privater Bildungsanbieter (EdTech-Verband) wirft dem staatlichen Angebot Wettbewerbsverzerrung und fehlende Kostentransparenz vor. Er warnt außerdem vor einem zentralen Dienst als einzigem Ausfallpunkt (Bericht vom 10. Mai 2026). Das ist die Sicht des Verbands, keine Feststellung."
      ],
@@ -48,6 +48,7 @@ S["ki-schule-ueberblick"] = {
        ["Baden-Württemberg", "Chatbot für alle Schulen über SCHULE@BW, Freischaltung durch die Schulleitung, Start 13.10.2025", "Landesregierung, 13.10.2025"],
        ["Nordrhein-Westfalen", "Chatbot für Lehrkräfte, Schüler nach Freischaltung, kostenfrei, Start ab 05.12.2025", "Schulministerium, 04.12.2025"],
        ["Bayern", "KI-Funktionen in ByCS und Chatbot, kostenfrei, ab Dezember 2025", "Kultusministerium, 28.11.2025"],
+       ["Berlin", "AIS.chat für alle öffentlichen Schulen, kostenfrei, Zugang für Lehrkräfte über das Berliner Schulportal, ab 20.05.2026", "Senatsverwaltung, 20.05.2026"],
        ["Andere Länder", "Stand je Land verschieden, Berichte nennen weitere Länder. Bitte beim Land oder Schulträger erfragen.", "Siehe Quellen"]]}},
 
     {h: "Weg 2: Kommerzielle Bildungsangebote",
@@ -106,8 +107,16 @@ S["ki-schule-ueberblick"] = {
      p: [
       "Nach der Meldung des Bundesbildungsministeriums vom 19. August 2026 hat der DigitalPakt 2.0 ein Volumen von 5 Milliarden Euro, je zur Hälfte von Bund und Ländern, über fünf Jahre. Die Vereinbarung gilt rückwirkend ab 1. Januar 2026. Förderfähig sind laut Meldung unter anderem mobile Endgeräte, Schulnetzwerke, WLAN, Schulserver, digitale Ausstattung von Unterrichtsräumen und Lehr- und Lernplattformen.",
       "KI ist dort kein eigener Fördergegenstand. Sie wird nur im Zusammenhang mit der Fortbildung von Lehrkräften genannt. Ob und wie Ihre Schule Mittel abrufen kann, regeln die Länder. Aktuellen Stand beim Schulträger erfragen.",
-      "Beispiel Bayern: Das Medien- und KI-Budget gibt es je Schülerin und Schüler für die Jahre 2024 bis 2026, je nach Schulart in unterschiedlicher Höhe. Antragsberechtigt sind die Schulaufwandsträger. Die Antragsfrist für 2026 lief bis 31. Oktober 2026. Ab 2027 soll das Budget laut Kultusministerium in den Zuschuss zur schulischen IT-Infrastruktur übergehen. Fragen Sie Ihren Schulträger nach dem aktuellen Stand."
+      "Beispiel Bayern: Das Medien- und KI-Budget gibt es je Schülerin und Schüler für die Jahre 2024 bis 2026, je nach Schulart in unterschiedlicher Höhe. Antragsberechtigt sind die Schulaufwandsträger. Die Antragsfrist für 2026 endete am 31. Oktober 2026. Ab 2027 soll das Budget laut Kultusministerium ein Baustein des gesetzlichen Zuschusses zur schulischen IT-Infrastruktur werden (Stand der Quelle am 27.11.2026). Fragen Sie Ihren Schulträger nach dem aktuellen Stand."
      ]},
+
+    {h: "EU-KI-Verordnung in Kürze",
+     kurz: "Die Verordnung gilt stufenweise. Für Schulen zählen vor allem Verbote, Kennzeichnung und Hochrisiko-Systeme. Stand 27.11.2026.",
+     p: [
+      "Verboten sind nach Art. 5 seit dem 2. Februar 2025 unter anderem Systeme zur Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen, mit engen Ausnahmen für Medizin und Sicherheit. Die Transparenzpflichten nach Artikel 50 gelten seit dem 2. August 2026: KI-Inhalte und Deepfakes müssen gekennzeichnet sein, bei Chatbots muss man erfahren, dass man mit KI schreibt. Für Systeme, die schon vor dem 2. August 2026 auf dem Markt waren, gilt für die maschinenlesbare Kennzeichnung nach Art. 50 Abs. 2 eine Übergangsfrist bis 2. Dezember 2026.",
+      "Der \"Digital Omnibus on AI\" (Verordnung (EU) 2026/1744, seit 27. Juli 2026 in Kraft) hat die Fristen für Hochrisiko-Systeme verschoben: Pflichten nach Anhang III gelten ab 2. Dezember 2027, nach Anhang I ab 2. August 2028. Fragen Sie Anbieter, wie sie ihr Produkt nach der Verordnung einordnen. Das ist keine Rechtsberatung."
+     ],
+     merke: "Quelle: eur-lex.europa.eu/eli/reg/2026/1744/oj. Klären Sie Einzelfragen mit Ihrer Datenschutzbeauftragten."},
 
     {h: "Worauf achten beim Kauf",
      kurz: "Neun Fragen, die Sie jedem Anbieter schriftlich stellen. Fehlt eine Antwort, ist das selbst eine Antwort.",
@@ -136,8 +145,10 @@ S["ki-schule-ueberblick"] = {
       "telli in Nordrhein-Westfalen, Schulministerium, 04.12.2025: schulministerium.nrw/04122025-bereitstellung-des-laendergemeinsamen-ki-chatbots-telli (abgerufen 22.11.2026)",
       "Umbenennung in AIS.chat, FWU, Pressemitteilung vom 07.05.2026: fwu.de/wp-content/uploads/2026/05/PM-Aus-tellli-wird-AIS.chat_.pdf, und Schulministerium NRW: schulministerium.nrw/18052026-umbenennung-des-laendergemeinsamen-ki-chatbotstelli-wird-aischat (Schulministerium gelesen, FWU-Meldung nur über Suchergebnis, abgerufen 22.11.2026)",
       "KI für alle in Bayern, Kultusministerium, Pressemitteilung vom 28.11.2025: km.bayern.de/meldung/ki-fuer-alle-bayern-stellt-neue-ki-systeme-fuer-alle-schulen-bereit (abgerufen 22.11.2026)",
-      "Medien- und KI-Budget Bayern: km.bayern.de/gestalten/foerderprogramme/medien-und-ki-budget, Budget 2024 bis 2026, Antragsfrist 2026 bis 31.10.2026, Übergang ab 2027 laut Kultusministerium (gelesen, abgerufen 22.11.2026)",
+      "EU-Verordnung 2026/1744 (Digital Omnibus on AI): eur-lex.europa.eu/eli/reg/2026/1744/oj (Fristen, Stand 27.11.2026)",
+      "Medien- und KI-Budget Bayern: km.bayern.de/gestalten/foerderprogramme/medien-und-ki-budget, Budget 2024 bis 2026, Antragsfrist 2026 bis 31.10.2026, Übergang ab 2027 in den Zuschuss zur schulischen IT-Infrastruktur laut Kultusministerium (gelesen, abgerufen 27.11.2026)",
       "KI-Chatbot für Schulen in Baden-Württemberg, Landesregierung, 13.10.2025: baden-wuerttemberg.de/de/service/presse/pressemitteilung/pid/ki-chatbot-fuer-schulen-geht-an-den-start-1 (abgerufen 22.11.2026)",
+      "AIS.chat in Berlin, Senatsverwaltung für Bildung, Jugend und Familie, Pressemitteilung vom 20.05.2026: berlin.de/sen/bjf/service/presse/pressearchiv-2026/pressemitteilung.1672560.php (abgerufen 27.11.2026)",
       "Kritik des EdTech-Verbands, news4teachers.de, 10.05.2026: news4teachers.de/2026/05/edtech-verband-greift-staatlichen-ki-chatbot-telli-scharf-an-wettbewerbsverzerrung-zu-lasten-der-unternehmen-und-schulen/ (abgerufen 22.11.2026)",
       "Microsoft 365 Copilot Chat für Schüler ab 13, Microsoft Tech Community, 06.08.2025, aktualisiert 21.08.2025: techcommunity.microsoft.com/blog/educationblog/microsoft-365-copilot-chat-for-students-13/4440370 (abgerufen 22.11.2026)",
       "Gemini und NotebookLM für Bildungseinrichtungen, Google-Hilfe: knowledge.workspace.google.com/admin/getting-started/editions/quickstart-guide-to-gemini-and-gemini-notebook-for-education (abgerufen 22.11.2026)",
@@ -205,7 +216,7 @@ S["ki-schule-einstieg"] = {
      p: [
       "**1. Ziel und Fach klären.** Was soll besser werden? Zum Beispiel: Texte überarbeiten in Deutsch, Aufgabenvarianten in Mathematik, Quellenprüfung in Gesellschaftslehre. Schreiben Sie ein Ziel in einem Satz auf. Ein Ziel wie \"wir wollen irgendwas mit KI\" trägt nicht.",
       "**2. Schulleitung, Datenschutzbeauftragte und Schulträger einbinden.** Die Schulleitung verantwortet den Einsatz. Die Datenschutzbeauftragte prüft Dienste und Verträge. Der Schulträger kennt vorhandene Lizenzen und mögliche Förderung. Die Seite {{schule-schulleitung|Info für die Schulleitung}} fasst zusammen, was die Leitung wissen sollte.",
-      "**3. Rechtsgrundlage und Einwilligungen klären.** Für Dienste mit personenbezogenen Daten braucht die Schule eine Rechtsgrundlage nach Art. 6 DSGVO. Bei Einwilligungen Minderjähriger sind die Eltern beteiligt, die Schwelle liegt bei 16 Jahren (Art. 8 DSGVO). Dazu kommen Altersgrenzen der Anbieter und Landesvorgaben. Diese Seite ist keine Rechtsberatung: Entscheiden müssen Schule, Datenschutzbeauftragte und Schulaufsicht. Mehr für Eltern: {{schule-eltern|Info für Eltern}}."
+      "**3. Rechtsgrundlage und Einwilligungen klären.** Für Dienste mit personenbezogenen Daten braucht die Schule eine Rechtsgrundlage nach Art. 6 DSGVO. Ob und von wem eine Einwilligung nötig ist, hängt vom Landesschulrecht, vom Alter und von der Einsichtsfähigkeit des Kindes ab. Die Vorgaben der Länder unterscheiden sich, fragen Sie Datenschutzbeauftragte und Schulaufsicht Ihres Landes. Die Altersgrenze von 16 Jahren in Art. 8 DSGVO betrifft nur Dienste, die sich direkt an Kinder richten, nicht die Datenverarbeitung durch die Schule selbst. Dazu kommen Altersgrenzen der Anbieter. Eine Einwilligung muss freiwillig sein: Wer nicht einwilligt, darf keine Nachteile haben. Diese Seite ist keine Rechtsberatung: Entscheiden müssen Schule, Datenschutzbeauftragte und Schulaufsicht. Mehr für Eltern: {{schule-eltern|Info für Eltern}}."
      ],
      alltag: "Vor einer Klassenfahrt klärt man Ziel, Aufsicht und Einverständniserklärungen, bevor der Bus fährt. Bei KI ist es dasselbe, nur mit Datenschutz statt Busfahrplan."},
 
