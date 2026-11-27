@@ -359,10 +359,13 @@
   function webcam(root, modus, seite) {
     const objekt = modus === "objekt";
     const hg = modus === "hand_gesicht";            // Haende und Gesichter gleichzeitig, mit Eigenschaften-Karten
+    /* Weitere Modi melden sich mit KL.kameraModi[modus] = { dingMehr, suche, klasse, eigenschaften(), treffer(d), gefunden(d),
+       hinweis, statusUrl, statusFehler, beschriftung: [links, rechts], messwert } an (siehe demo-*.js). Der Kanal ist app/kamera_modi.py. */
+    const konf = (!hg && KL.kameraModi && KL.kameraModi[modus]) || null;
     const L = leben();
     const dingEin = objekt ? "Objekt" : "Gesicht";
-    const dingMehr = objekt ? "Objekte" : hg ? "Hände / Gesichter" : "Gesichter";
-    const suche = objekt ? "nach Objekten" : hg ? "nach Händen und Gesichtern" : "nach Gesichtern";
+    const dingMehr = konf ? konf.dingMehr : objekt ? "Objekte" : hg ? "Hände / Gesichter" : "Gesichter";
+    const suche = konf ? konf.suche : objekt ? "nach Objekten" : hg ? "nach Händen und Gesichtern" : "nach Gesichtern";
 
     const video = h("video", { autoplay: true, playsinline: true, "aria-label": "Deine Kamera", hidden: true });
     video.muted = true;
@@ -370,10 +373,10 @@
     const platzR = h("div", { class: "d-platz" }, ic("arrow"), h("span", null, "Hier erscheint das Bild, das der Jetson zurückschickt."));
     let img = null;
     let vorlage = null;      // Beispielbild-Element, nur im Beispielmodus
-    const eigen = hg ? eigenschaften() : null;
-    const kameras = h("div", { class: "kameras" + (hg ? " d-hg" : "") },
-      h("figure", null, h("figcaption", null, "Deine Kamera"), video, platzV),
-      h("figure", null, h("figcaption", null, "Vom Jetson zurück"), platzR),
+    const eigen = hg ? eigenschaften() : konf && konf.eigenschaften ? konf.eigenschaften() : null;
+    const kameras = h("div", { class: "kameras" + (hg ? " d-hg" : "") + (konf && konf.klasse ? " " + konf.klasse : "") },
+      h("figure", null, h("figcaption", null, (konf && konf.beschriftung && konf.beschriftung[0]) || "Deine Kamera"), video, platzV),
+      h("figure", null, h("figcaption", null, (konf && konf.beschriftung && konf.beschriftung[1]) || "Vom Jetson zurück"), platzR),
       eigen ? eigen.el : null);
 
     const btn = h("button", { type: "button", class: "btn primary" }, ic("camera"), "Kamera starten");
@@ -423,7 +426,8 @@
     // regler gibt es nur im Objekt-Modus; Element.append(null) wuerde sonst das Wort "null" in die Seite schreiben
     root.append(...[
       h("div", { class: "zeile d-steuer" }, btn, status),
-      meld.el, kameras, hg ? KL.kiHinweis({ text: "Alles hier sind Schätzungen eines KI-Modells. Gesten, Kopfhaltung und vor allem der Gesichtsausdruck können falsch sein. Es wird nichts gespeichert." }) : null,
+      meld.el, kameras, hg ? KL.kiHinweis({ text: "Alles hier sind Schätzungen eines KI-Modells. Gesten, Kopfhaltung und vor allem der Gesichtsausdruck können falsch sein. Es wird nichts gespeichert." }) : konf && konf.hinweis ? KL.kiHinweis({ text: konf.hinweis }) : null,
+      konf && konf.extra ? konf.extra(L) : null,
       regler, messwerte, live.el].filter(Boolean));
 
     /* Zustand */
@@ -442,7 +446,7 @@
     function zeichne(satzAuch) {
       if (!letzte) return;
       const b = mittel(reihen.b), n = mittel(reihen.n), d = mittel(reihen.d), e = mittel(reihen.e), k = mittel(reihen.k), w = mittel(reihen.w), t = mittel(reihen.t);
-      mTreffer.textContent = hg ? (letzte.haende || []).length + " / " + (letzte.gesichter || []).length : String(letzte.anzahl);
+      mTreffer.textContent = konf && konf.treffer ? konf.treffer(letzte) : hg ? (letzte.haende || []).length + " / " + (letzte.gesichter || []).length : String(letzte.anzahl);
       mRunde.textContent = msText(t);
       let fps = 0;
       if (stempel.length > 1) fps = (stempel.length - 1) / ((stempel[stempel.length - 1] - stempel[0]) / 1000);
@@ -461,7 +465,7 @@
       const werte = { b, n, d, e, k, w };
       const groesster = Object.keys(werte).sort((x, y) => werte[y] - werte[x])[0];
       const nH = (letzte.haende || []).length, nG = (letzte.gesichter || []).length;
-      const wasGefunden = hg ? "Gefunden: " + nH + (nH === 1 ? " Hand" : " Hände") + " und " + nG + (nG === 1 ? " Gesicht." : " Gesichter.") : letzte.anzahl === 0 ? "Gefunden: kein " + dingEin + "." : "Gefunden: " + letzte.anzahl + " " + (letzte.anzahl === 1 ? dingEin : dingMehr) + ".";
+      const wasGefunden = konf && konf.gefunden ? konf.gefunden(letzte) : hg ? "Gefunden: " + nH + (nH === 1 ? " Hand" : " Hände") + " und " + nG + (nG === 1 ? " Gesicht." : " Gesichter.") : letzte.anzahl === 0 ? "Gefunden: kein " + dingEin + "." : "Gefunden: " + letzte.anzahl + " " + (letzte.anzahl === 1 ? dingEin : dingMehr) + ".";
       const teile = [
         "Dein Browser hat ein Bild (" + letzte.breite + " mal " + letzte.hoehe + ", " + kb(letzte.bytes_ein) + ") geschickt. Der Jetson hat es in " + msText(d) + " entpackt und in " + msText(e) + " " + suche + " durchsucht",
         objekt ? " (Schwelle " + Math.round((letzte.schwelle || 0.5) * 100) + " Prozent). " : ". ",
@@ -573,11 +577,13 @@
       if (startet || laeuft) return;
       startet = true; btn.disabled = true; meld.weg(); setStatus("Kamera startet…", false);
       try {
-        if (hg) {                                         // fehlen die Modelle auf dem Jetson, gar nicht erst die Kamera oeffnen
+        const statusUrl = hg ? "/api/hand-gesicht/status" : konf && konf.statusUrl;
+        if (statusUrl) {                                  // fehlen die Modelle auf dem Jetson, gar nicht erst die Kamera oeffnen
           let st = null;
-          try { const r = await fetch("/api/hand-gesicht/status", { cache: "no-store" }); st = r.ok ? await r.json() : null; } catch (e) { st = null; }
+          try { const r = await fetch(statusUrl, { cache: "no-store" }); st = r.ok ? await r.json() : null; } catch (e) { st = null; }
           if (L.weg) return;
-          if (!st || !st.bereit) throw new Error("Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle für Hände und Gesichtsausdruck fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh.");
+          if (!st || !st.bereit) throw new Error(hg ? "Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle für Hände und Gesichtsausdruck fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh."
+            : (konf && konf.statusFehler) || "Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh.");
         }
         const s = await kameraOeffnen();
         if (L.weg) { s.getTracks().forEach((t) => t.stop()); return; }
@@ -1809,4 +1815,6 @@
     "webcam-hand-gesicht": (root, seite) => webcam(root, "hand_gesicht", seite),
     teach, chat, rag, agent,
   });
+  KL.kamera = webcam;                         // Weitere Kamera-Labore: KL.kameraModi[modus] = {...}; KL.demos["webcam-xyz"] = (root, seite) => KL.kamera(root, "modus", seite)
+  KL.kameraModi = KL.kameraModi || {};
 })();
