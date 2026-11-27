@@ -87,3 +87,13 @@ Alternativ ein eigenes `log_format` mit gekürzter IP (`map $remote_addr $ip_kur
 Der Klassenmodus braucht für Sperre und Obergrenzen die echte Besucheradresse. Hinter dem Cloudflare-Tunnel kommt jede Verbindung vom lokalen Tunnelclient, die Adresse der direkten Verbindung ist darum für alle gleich. Der Dienst nutzt deshalb nur Werte, die der eigene nginx setzt und mit dem gemeinsamen Schlüssel ausweist: `proxy_set_header X-Real-IP $remote_addr;` und `proxy_set_header X-KL-Proxy <KL_PROXY_KEY>;` (beides steht in der vorhandenen Konfiguration von `location /`, auch für den neuen Pfad `/ws/klasse`, der denselben Block nutzt). Cloudflare reicht diese eigenen Header zum Dienst durch. `CF-Connecting-IP` bleibt ungenutzt: Der Dienst kann nicht belegen, dass die direkte Verbindung aus den veröffentlichten Cloudflare-Bereichen kommt, denn sie kommt vom lokalen Tunnelclient.
 
 Fehlt `KL_PROXY_KEY` bei `OEFFENTLICH=1`, startet der Klassenmodus mit einer Warnung und lehnt Sitzungen ab ("nicht eingerichtet"). Das ist gewollt: lieber geschlossen als alle Besucher unter einer Adresse. Änderungen am Server (Schlüssel setzen, `access_log` für die Klassen-Pfade) erfolgen erst nach Freigabe durch den Betreiber. In dieser Arbeit wurde am Server nichts geändert.
+
+Prüfzeilen für den Betreiber (nach der Freigabe der Serveränderung, jeder betroffene nginx-Pfad muss den Schlüssel-Header setzen, sonst lehnt der Dienst im öffentlichen Modus ab). Alle drei Aufrufe müssen `"bereit":true` bzw. Status 200 liefern:
+
+```
+curl -s https://ki-labor.daniel-alisch.site/api/klasse/zaehler                       # "bereit":true (Pfad /api/klasse/)
+curl -s -o /dev/null -w "%{http_code}\n" https://ki-labor.daniel-alisch.site/klasse/nachweis   # 200 (Pfad /klasse/nachweis, POST prüft den Schlüssel)
+# WebSocket /ws/klasse: im Browser eine Sitzung starten. Meldet der Dienst "nicht eingerichtet", fehlt dem Block `location /ws/klasse` der Header X-KL-Proxy oder X-Real-IP.
+```
+
+Fehlt der Header in einem Block, sehen alle Besucher die Tunnel-Adresse und teilten sich alle Grenzen. Darum weist der Klassenmodus solche Anfragen im öffentlichen Modus (`OEFFENTLICH=1`) ab.

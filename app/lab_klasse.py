@@ -43,7 +43,7 @@ from fastapi.responses import HTMLResponse, JSONResponse
 
 import ipaddress
 
-from app.sicherheit import _proxy_echt, begrenzt, origin_ok, umgebung_zahl
+from app.sicherheit import _proxy_echt, begrenzt, netzbereich, origin_ok, umgebung_zahl
 
 router = APIRouter()
 
@@ -63,7 +63,8 @@ BEITRITTE_JE_ADRESSE = 3                          # Standard; die Lehrkraft kann
 PREAUTH_JE_IP = 10                                # noch nicht angemeldete Verbindungen je Adresse (eine Klasse hinter einer Adresse tritt oft gleichzeitig bei)
 PREAUTH_GESAMT = 200                              # und insgesamt. Jede kann bis ws-max-size (2,1 MB) Speicher belegen: 200 * 2,1 MB = 420 MB Worst Case, siehe docs
 PREAUTH_ZEIT_S = 10.0                             # so lange hat eine Verbindung Zeit bis zur ersten gueltigen Nachricht
-VERSUCHE_JE_MINUTE = int(umgebung_zahl("KL_KLASSE_VERSUCHE_MINUTE", 20))     # Beitritte und falsche Versuche je Netzbereich und Minute, auch mit richtigem Code
+VERSUCHE_JE_MINUTE = int(umgebung_zahl("KL_KLASSE_VERSUCHE_MINUTE", 20))     # falsche Eingaben je Netzbereich und Minute, danach Bremse
+UEBERLAST_PAUSE_S = 6.0                           # Bremse fuer Code-Eingaben aus einem Netz mit zu vielen falschen Eingaben
 MIN_ANTWORTEN = 3                                 # kleine-Zahlen-Schutz
 MIN_FUER_MITTEL = 5                               # Mittelwert und Median erst ab so vielen Antworten, nie bei verdeckten Feldern
 FEHLVERSUCHE_JE_IP = 15                           # falsche Codes oder Schluessel je 10 Minuten, danach Sperre
@@ -84,7 +85,8 @@ SCAN_ZEIT_S = 4.0
 SCAN_AUSLASSEN = {".git", "node_modules", "__pycache__", "static", "models", "certs", ".venv", "venv", "videos", "ausgabe"}
 FORMAT = "kl-nachweis/1"
 PRUEF_FRIST_S = 30 * 86400                        # so lange bestaetigt der Dienst die Signatur
-ANLAESSE = {"lehrkraft": "Lehrkraft", "zeit": "Höchstdauer 2 Stunden", "ruhe": "Inaktiv (20 Minuten)", "test": "Test"}
+LEER_MAX_S = umgebung_zahl("KL_KLASSE_LEER_S", 300, 2)       # Sitzung ohne Teilnehmende: nach 5 Minuten weg (Plaetze nicht blockieren)
+ANLAESSE = {"leer": "Keine Teilnehmenden (5 Minuten)", "lehrkraft": "Lehrkraft", "zeit": "Höchstdauer 2 Stunden", "ruhe": "Inaktiv (20 Minuten)", "test": "Test"}
 ARTEN = ("wahl", "skala", "schaetzung")
 REF_MUSTER = re.compile(r"[a-z0-9:_-]{0,48}")                       # immer mit fullmatch (kein "$": das liesse "jn\n" durch)
 CODE_MUSTER = re.compile(r"[" + CODE_ZEICHEN + r"]{" + str(CODE_LAENGE) + r"}")
@@ -112,13 +114,19 @@ except OSError:                                                      # pragma: n
     _QUELLTEXT_HASH = "unbekannt"
 DIENSTVERSION = "Klassenmodus 1, Programmstand " + _QUELLTEXT_HASH
 
-_jetzt = time.time                                                   # Tests ersetzen die Uhr
+_jetzt = time.monotonic                                              # Ablauf, Raten, Sperren: Uhrspruenge (NTP, Sommerzeit) stoeren nicht. Tests ersetzen die Uhr.
+_wand = time.time                                                    # Wanduhr nur fuer Anzeige und Protokoll (UTC)
 
 
-def _nicht_eingerichtet() -> bool:
-    """Oeffentlich (OEFFENTLICH=1) ohne KL_PROXY_KEY sieht der Dienst hinter dem Tunnel nur eine Adresse, alle Besucher teilten
-    sich Sperre und Obergrenzen. Dann laeuft der Klassenmodus nicht, statt still falsch zuzuordnen."""
-    return os.environ.get("OEFFENTLICH") == "1" and not os.environ.get("KL_PROXY_KEY", "").strip()
+def _nicht_eingerichtet(headers=None) -> bool:
+    """Oeffentlich (OEFFENTLICH=1) sieht der Dienst hinter dem Tunnel ohne den Proxy-Schluessel nur eine Adresse: alle Besucher
+    teilten sich Sperre und Obergrenzen. Darum laeuft der Klassenmodus dann nicht. Gilt fuer eine fehlende Einstellung
+    KL_PROXY_KEY und, mit `headers`, fuer jede Anfrage OHNE gueltigen X-KL-Proxy (etwa ein nginx-Block ohne den Header)."""
+    if os.environ.get("OEFFENTLICH") != "1":
+        return False
+    if not os.environ.get("KL_PROXY_KEY", "").strip():
+        return True
+    return headers is not None and not _proxy_echt(headers)
 
 
 if _nicht_eingerichtet():
@@ -158,12 +166,13 @@ class Aktivitaet:
 
 
 class Sitzung:
-    __slots__ = ("sid", "start", "zuletzt", "code", "lehrer", "ip", "teilnehmer", "aktivitaeten", "signal", "naechste",
+    __slots__ = ("sid", "start", "start_wand", "zuletzt", "code", "lehrer", "ip", "teilnehmer", "aktivitaeten", "signal", "naechste",
                  "log_treffer", "ip_beitritte", "je_ip_max", "__weakref__")
 
     def __init__(self, sid, code, lehrer, ip):
         t = _jetzt()
         self.sid, self.start, self.zuletzt = sid, t, t
+        self.start_wand = _wand()
         self.code = bytearray(code.encode())          # Klartext nur fuer die Selbstpruefung, wird beim Loeschen ueberschrieben
         self.lehrer = bytearray(lehrer)               # SHA-256 des Lehrer-Schluessels
         self.ip = ip                                  # gesalzener Kurzhash der Adresse (nur fuer die Obergrenze je Adresse)
@@ -180,14 +189,16 @@ _sitz = {}              # Register 1: Sitzungskennung (HMAC des Codes) -> Sitzun
 _ip_sitzungen = {}      # Register 2: Adress-Kurzhash -> Menge von Sitzungskennungen
 _verbindungen = {}      # Register 3: Sitzungskennung -> Zahl offener Verbindungen
 class _Vorab:
-    """Eine noch nicht angemeldete Verbindung. frei() gibt ihren Platz zurueck (einmal): bei Anmeldung, beim Ende und bevor ein
-    Falschversuch gebremst wird, damit schlafende Falschversuche die Vorab-Grenze ehrlicher Besucher nicht fuellen."""
-    __slots__ = ("aktiv", "ip")
+    """Eine noch nicht angemeldete Verbindung. frei() gibt ihren Platz zurueck (einmal): bei Anmeldung oder beim Schliessen.
+    Ist der Gesamtdeckel voll, wird die aelteste Vorab-Verbindung der Adresse mit den meisten Vorab-Verbindungen verdraengt
+    (siehe _vorab_verdraengen), damit stille Verbindungen vieler Adressen ehrliche Besucher nicht aussperren."""
+    __slots__ = ("aktiv", "ip", "ws")
 
-    def __init__(self, ip):
-        self.aktiv, self.ip = True, ip
+    def __init__(self, ip, ws):
+        self.aktiv, self.ip, self.ws = True, ip, ws
         _vorab_gesamt[0] += 1
         _vorab_ip[ip] = _vorab_ip.get(ip, 0) + 1
+        _vorab_reg.setdefault(ip, deque()).append(self)
 
     def frei(self):
         if not self.aktiv:
@@ -199,13 +210,35 @@ class _Vorab:
             _vorab_ip[self.ip] = n
         else:
             _vorab_ip.pop(self.ip, None)
+        d = _vorab_reg.get(self.ip)
+        if d is not None:
+            try:
+                d.remove(self)
+            except ValueError:
+                pass
+            if not d:
+                _vorab_reg.pop(self.ip, None)
 
 
+async def _vorab_verdraengen():
+    """Schliesst die aelteste Vorab-Verbindung der Adresse mit den meisten Vorab-Verbindungen."""
+    if not _vorab_reg:
+        return
+    ip = max(_vorab_reg, key=lambda k: len(_vorab_reg[k]))
+    opfer = _vorab_reg[ip][0]
+    opfer.frei()
+    try:
+        await opfer.ws.close(code=1013)
+    except Exception:                                    # noqa: BLE001  (schon zu)
+        pass
+
+
+_vorab_reg = {}         # Adress-Kurzhash -> Vorab-Verbindungen, aelteste zuerst
 _vorab_gesamt = [0]     # noch nicht angemeldete Verbindungen insgesamt
 _vorab_ip = {}          # und je Adresse
 _fehlerlog = logging.getLogger("uvicorn.error")
 _ip_verbindungen = {}   # Adress-Kurzhash -> offene Verbindungen
-_versuche = {}          # Adress-Kurzhash -> Zeitstempel der Beitritts- und Fehlversuche (gleitendes Fenster, 60 s)
+_versuche = {}          # Adress-Kurzhash -> Zeitstempel der falschen Eingaben (gleitendes Fenster, 60 s)
 _fehlversuche = {}      # Adress-Kurzhash -> deque von Zeitstempeln
 _global_fehl = deque()  # Zeitstempel aller Fehlversuche (ohne Adresse), Obergrenze fuer verteiltes Raten
 _nachweise = {}         # Sitzungskennung -> (Protokolltext, Ablaufzeit). Nur Zahlen, Hash und Prueferergebnisse.
@@ -224,13 +257,7 @@ def _quell_ip(anfrage) -> str:
         roh = anfrage.headers.get("x-real-ip", "").strip()
     if not roh:
         roh = anfrage.client.host if anfrage.client else "?"
-    try:
-        a = ipaddress.ip_address(roh)
-    except ValueError:
-        return roh
-    if a.version == 6:                                 # IPv6: ein Anschluss hat ein ganzes /64, darum zaehlt der Netzbereich
-        return str(ipaddress.ip_network((a, 64), strict=False))
-    return str(a)
+    return netzbereich(roh)                            # IPv4 einzeln, IPv4-in-IPv6 als IPv4, IPv6 als /64 (eine gemeinsame Funktion)
 
 
 def _ip_tag(anfrage) -> str:
@@ -484,7 +511,6 @@ async def loesche(sid: str, anlass: str):
     if sid not in _sitz:
         alt = _nachweise.get(sid)
         return alt[0] if alt else None
-    ende = _jetzt()
     s = _sitz.pop(sid)
     nadeln = [bytes(s.code), sid.encode()]
     code_hash = hashlib.sha256(nadeln[0]).hexdigest()       # steht als "Sitzung" im Protokoll: die Lehrkraft kann es nachrechnen
@@ -492,7 +518,9 @@ async def loesche(sid: str, anlass: str):
     gruppe = nadeln[0][:4] + b"-" + nadeln[0][4:]
     nadeln += [gruppe, gruppe.lower()]
     code_text = nadeln[0].decode()
-    start, zahlen = s.start, (len(s.teilnehmer), sum(sum(a.zaehler.values()) for a in s.aktivitaeten), len(s.aktivitaeten))
+    start = s.start_wand
+    ende = max(_wand(), start)                              # springt die Wanduhr zurueck, bleibt die Reihenfolge im Protokoll gueltig
+    zahlen = (len(s.teilnehmer), sum(sum(a.zaehler.values()) for a in s.aktivitaeten), len(s.aktivitaeten))
     log_treffer, ip, signal = s.log_treffer, s.ip, s.signal
     ueberschrieben = _ueberschreiben(s)
     ref = weakref.ref(s)
@@ -570,6 +598,8 @@ def _faellige():
     for sid, s in list(_sitz.items()):
         if jetzt - s.start > MAX_LAUFZEIT_S:
             out.append((sid, "zeit"))
+        elif not s.teilnehmer and jetzt - s.start > LEER_MAX_S:
+            out.append((sid, "leer"))
         elif jetzt - s.zuletzt > MAX_RUHE_S:
             out.append((sid, "ruhe"))
     return out
@@ -670,7 +700,7 @@ def pruefe_nachweis(roh, code=None) -> dict:
     else:
         fehler.append("Feld ungültig: Signatur")
     format_ok = not fehler
-    abgelaufen = bool(format_ok and felder["Prüfbar bis (UTC)"] < _utc(_jetzt()))
+    abgelaufen = bool(format_ok and felder["Prüfbar bis (UTC)"] < _utc(_wand()))
     antwort = {"format": "gültig" if format_ok else "ungültig", "signatur": "gültig" if sig_ok else "ungültig", "abgelaufen": abgelaufen,
                "fehler": fehler[:8], "alle_bestanden": bool(pruefungen) and all(e == "bestanden" for _, _, e in pruefungen),
                "felder": {k: felder.get(k, "") for k in PROTOKOLL_SCHLUESSEL if k not in ("Format", "Schlüsselkennung")},
@@ -717,7 +747,7 @@ async def zaehler(request: Request):
     if _zu_viele(request, "klasse-zaehler", 120):
         return JSONResponse({"fehler": "zu viele Anfragen"}, status_code=429)
     await aufraeumen()
-    return JSONResponse({"bereit": not _nicht_eingerichtet(), "aktiv": len(_sitz), "max": MAX_SITZUNGEN, "beendet_seit_start": _beendet},
+    return JSONResponse({"bereit": not _nicht_eingerichtet(request.headers), "aktiv": len(_sitz), "max": MAX_SITZUNGEN, "beendet_seit_start": _beendet},
                         headers={"Cache-Control": "no-store"})
 
 
@@ -725,6 +755,8 @@ async def zaehler(request: Request):
 async def nachweis_pruefen(request: Request):
     if not origin_ok(request.headers):
         return JSONResponse({"fehler": "Herkunft nicht erlaubt"}, status_code=403)
+    if _nicht_eingerichtet(request.headers):
+        return JSONResponse({"fehler": "Der Klassenmodus ist auf diesem Dienst nicht eingerichtet."}, status_code=503)
     if _zu_viele(request, "klasse-pruefen", 30):
         return JSONResponse({"fehler": "zu viele Anfragen"}, status_code=429)
     roh = await _koerper(request)
@@ -793,6 +825,8 @@ async def nachweis_seite():
 async def nachweis_pruefen_seite(request: Request):
     if not origin_ok(request.headers):
         return HTMLResponse("Herkunft nicht erlaubt", status_code=403)
+    if _nicht_eingerichtet(request.headers):
+        return HTMLResponse("Der Klassenmodus ist auf diesem Dienst nicht eingerichtet.", status_code=503)
     if _zu_viele(request, "klasse-pruefen", 30):
         return HTMLResponse("Zu viele Anfragen. Warte eine Minute.", status_code=429)
     roh = await _koerper(request)
@@ -821,22 +855,20 @@ def _gesperrt(ip: str) -> bool:
     return len(d) >= FEHLVERSUCHE_JE_IP
 
 
-def _rate_frei(ip: str, verbrauchen: bool = True) -> bool:
-    """Gleitendes Fenster je Netzbereich: hoechstens VERSUCHE_JE_MINUTE Beitritte oder falsche Versuche je Minute, auch bei
-    GUELTIGEM Code. So bleibt das Raten je Adresse auf diese Rate begrenzt, eine Klasse (40 Kinder in wenigen Minuten) geht durch.
-    Lehrer-, Wand- und Wiederverbindungs-Schluessel (128 Bit) sind ausgenommen, solange sie stimmen."""
+def _rate_voll(ip: str) -> bool:
+    """True, wenn dieser Netzbereich in der letzten Minute VERSUCHE_JE_MINUTE falsche Eingaben geschickt hat. Dann wird jede weitere
+    Code-Eingabe aus diesem Netz stark verzoegert (UEBERLAST_PAUSE_S): Das bremst das Raten. Gueltige Beitritte zaehlen nicht mit
+    und werden nicht abgewiesen, sie begrenzt nur die Zahl der Geraete je Adresse und der Platz der Sitzung."""
     jetzt = _jetzt()
-    d = _versuche.setdefault(ip, deque())
+    d = _versuche.get(ip)
+    if not d:
+        return False
     while d and jetzt - d[0] > 60:
         d.popleft()
-    if len(d) >= VERSUCHE_JE_MINUTE:
+    if not d:
+        _versuche.pop(ip, None)
         return False
-    if verbrauchen:
-        d.append(jetzt)
-    if len(_versuche) > 5000:
-        for k in [k for k, v in _versuche.items() if not v or jetzt - v[-1] > 60][:2500]:
-            _versuche.pop(k, None)
-    return True
+    return len(d) >= VERSUCHE_JE_MINUTE
 
 
 def _global_gesperrt() -> bool:
@@ -853,6 +885,10 @@ def _global_gesperrt() -> bool:
 def _fehlversuch(ip: str):
     _global_fehl.append(_jetzt())
     _fehlversuche.setdefault(ip, deque()).append(_jetzt())
+    _versuche.setdefault(ip, deque()).append(_jetzt())
+    if len(_versuche) > 5000:
+        for k in [k for k, v in _versuche.items() if not v or _jetzt() - v[-1] > 60][:2500]:
+            _versuche.pop(k, None)
     if len(_fehlversuche) > 5000:                          # Speicher begrenzen
         for k in list(_fehlversuche)[:2500]:
             if not _gesperrt(k):
@@ -1006,13 +1042,15 @@ async def ws_klasse(ws: WebSocket):
         return
     ip = _ip_tag(ws)
     if (_verb_gesamt >= MAX_VERBINDUNGEN or _ip_verbindungen.get(ip, 0) >= MAX_VERB_JE_IP
-            or _vorab_gesamt[0] >= PREAUTH_GESAMT or _vorab_ip.get(ip, 0) >= PREAUTH_JE_IP):
+            or _vorab_ip.get(ip, 0) >= PREAUTH_JE_IP):
         await ws.close(code=1013)
         return
     await ws.accept()
     _verb_gesamt += 1
     _ip_verbindungen[ip] = _ip_verbindungen.get(ip, 0) + 1
-    vorab = _Vorab(ip)
+    if _vorab_gesamt[0] >= PREAUTH_GESAMT:
+        await _vorab_verdraengen()
+    vorab = _Vorab(ip, ws)
     sid = None
     sender = None
     try:
@@ -1084,8 +1122,7 @@ async def ws_klasse(ws: WebSocket):
                 continue
             s = _sitz.get(sid)
             if s is not None:
-                s.zuletzt = _jetzt()
-                s.signal.wecken()
+                s.signal.wecken()                         # Lehreraktionen halten die Sitzung NICHT am Leben, nur Beitritte und Antworten
             del s
     except (WebSocketDisconnect, asyncio.TimeoutError):
         pass
@@ -1120,7 +1157,7 @@ async def ws_klasse(ws: WebSocket):
 
 async def _anmelden(ws, ip, vorab):
     """Erste Nachricht: neu | lehrer | wand | beitritt | wieder | nachweis. Gibt (sid, rolle, nr, token) oder (None, ..) zurueck."""
-    if _nicht_eingerichtet():
+    if _nicht_eingerichtet(ws.headers):
         await _fehler(ws, "Der Klassenmodus ist auf diesem Dienst nicht eingerichtet (der Proxy-Schlüssel fehlt). Bitte den Betreiber informieren.", True, 1013)
         return None, None, None, None
     await aufraeumen()
@@ -1135,14 +1172,8 @@ async def _anmelden(ws, ip, vorab):
         t = m["t"]
         if t == "neu":
             return await _neu(ws, ip)
-        verbraucht = False
-        if t in ("beitritt", "nachweis"):
-            # Zuerst die Rate, DANN der Code: Auch ein Treffer geht bei zu vielen Versuchen nicht durch.
-            verbraucht = True
-            if not _rate_frei(ip):
-                await asyncio.sleep(GLOBAL_PAUSE_S)
-                await _fehler(ws, "Von diesem Anschluss kommen gerade sehr viele Beitrittsversuche. Warte etwa eine Minute und versuche es dann noch einmal.", True, 1013)
-                return None, None, None, None
+        if t in ("beitritt", "nachweis") and _rate_voll(ip):
+            await asyncio.sleep(UEBERLAST_PAUSE_S)        # Netz mit vielen falschen Eingaben: jede Code-Eingabe wird stark gebremst, nicht abgewiesen
         code = _norm(m.get("code"))
         sid = _finde(code)
         gut = False
@@ -1176,8 +1207,6 @@ async def _anmelden(ws, ip, vorab):
         gesperrt = _gesperrt(ip)
         glob = _global_gesperrt()
         _fehlversuch(ip)
-        if not verbraucht:
-            _rate_frei(ip)                                # falsche Schluessel zaehlen ebenfalls gegen die Rate
         fehler_hier += 1
         # Der Vorab-Platz bleibt belegt, bis die Verbindung geschlossen wird (finally in ws_klasse) oder sich anmeldet.
         if gesperrt or glob:

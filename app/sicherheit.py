@@ -52,8 +52,27 @@ _lock = threading.Lock()
 _fenster = {}   # (schluessel, kennung) -> Liste von Zeitstempeln
 
 
+def netzbereich(roh: str) -> str:
+    """Eine Adresse als Zaehlschluessel: IPv4 einzeln, IPv4-in-IPv6 (::ffff:a.b.c.d) als dieselbe IPv4-Adresse, sonst IPv6 als
+    /64-Netz (ein Anschluss hat ein ganzes /64, wechselnde Adressen darin sind derselbe Absender). Alles andere unveraendert.
+    Wird von client_kennung und vom Klassenmodus gemeinsam genutzt."""
+    try:
+        a = ipaddress.ip_address(roh)
+    except ValueError:
+        return roh
+    if a.version == 6:
+        if a.ipv4_mapped is not None:
+            return str(a.ipv4_mapped)
+        return str(ipaddress.ip_network((a, 64), strict=False))
+    return str(a)
+
+
 def client_kennung(request) -> str:
-    """Kennung des Aufrufers. Hinter Cloudflare steht die echte Adresse in CF-Connecting-IP."""
+    """Kennung des Aufrufers (Netzbereich, siehe netzbereich). Hinter Cloudflare steht die echte Adresse in CF-Connecting-IP."""
+    return netzbereich(_roh_adresse(request))
+
+
+def _roh_adresse(request) -> str:
     h = request.headers
     if _proxy_echt(h):
         # Echte Besucheradresse, vom eigenen Proxy aus der TCP-Verbindung gesetzt (der Proxy ueberschreibt den Header

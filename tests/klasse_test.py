@@ -25,10 +25,10 @@ from starlette.websockets import WebSocketDisconnect  # noqa: E402
 from app import lab_klasse as K  # noqa: E402
 
 K.FEHLVERSUCH_PAUSE_S = 0.0                          # Tests muessen nicht warten
-K.SCAN_MAX_DATEIEN = 400
 K.GLOBAL_FEHLVERSUCHE_MINUTE = K.GLOBAL_FEHLVERSUCHE_STUNDE = 10 ** 6
 K.GLOBAL_PAUSE_S = 0.0
 K.VERSUCHE_JE_MINUTE = 10 ** 6                       # die Rate-Tests stellen 20 selbst ein
+K.UEBERLAST_PAUSE_S = 0.0
 K.BEITRITTE_JE_ADRESSE = 40                          # der Test "Mehrfach-Beitritt" stellt den Standard (3) selbst ein
 FENSTER = K.NACHRICHTEN_FENSTER
 K.NACHRICHTEN_FENSTER = (10_000, 10.0)          # nur der Flut-Test nutzt die echte Grenze
@@ -52,18 +52,25 @@ def zuruecksetzen():
     K._global_fehl.clear()
     K._versuche.clear()
     K._jetzt = _uhr
+    K._wand = _wandzeit
 
 
 import time as _t  # noqa: E402
-_echt = _t.time
-uhr = {"plus": 0.0}
+_echt = _t.monotonic
+uhr = {"plus": 0.0, "wand": 0.0}
 
 
 def _uhr():
     return _echt() + uhr["plus"]
 
 
+def _wandzeit():
+    return _t.time() + uhr["plus"] + uhr["wand"]
+
+
 K._jetzt = _uhr
+K._wand = _wandzeit
+K._scan_wurzeln = lambda: [TMP]                       # nur das eigene temporaere Verzeichnis, nicht den Checkout (.claude, Untracked)
 
 
 def lies(w, bis=lambda m: True, n=40):
@@ -443,7 +450,9 @@ with TestClient(app, base_url="http://testserver") as c:
     uhr["plus"] += K.MAX_RUHE_S - 60
     k.l.send_json({"t": "aktivitaet", "art": "wahl", "n": 2})
     stand(k.l, lambda m: m["aktivitaet"] is not None)
-    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 1, "nach 19 Minuten und einer Lehrer-Aktion: Sitzung lebt")
+    k.s[0].send_json({"t": "antwort", "nr": 1, "wert": 0})                 # nur Antworten und Beitritte der Klasse zaehlen als Aktivitaet
+    lies(k.s[0], lambda m: m.get("t") == "stand" and m["aktivitaet"].get("beantwortet"))
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 1, "nach 19 Minuten und einer Schueler-Antwort: Sitzung lebt")
     uhr["plus"] += K.MAX_RUHE_S - 60
     k.s[0].send_json({"t": "ping"})
     lies(k.s[0], lambda m: m.get("t") == "pong")
@@ -457,12 +466,14 @@ with TestClient(app, base_url="http://testserver") as c:
     uhr["plus"] = 0.0
 
     zuruecksetzen()
-    k = Klasse(c)
-    for _ in range(9):                                   # Aktion alle 15 Minuten haelt die Sitzung wach, aber nicht ueber 2 Stunden
+    k = Klasse(c, schueler=1)
+    for i in range(9):                                   # Antwort alle 15 Minuten haelt die Sitzung wach, aber nicht ueber 2 Stunden
         uhr["plus"] += 900
         k.l.send_json({"t": "aktivitaet", "art": "wahl", "n": 2})
         try:
-            lies(k.l, lambda m: m.get("t") in ("stand", "ende", "fehler"))
+            stand(k.l, lambda m: m["aktivitaet"] is not None and m["aktivitaet"]["nr"] == i + 1)
+            k.s[0].send_json({"t": "antwort", "nr": i + 1, "wert": 0})
+            lies(k.s[0], lambda m: m.get("t") == "ende" or (m.get("t") == "stand" and m["aktivitaet"] and m["aktivitaet"].get("beantwortet")))
         except Exception:
             break
         if c.get("/api/klasse/zaehler").json()["aktiv"] == 0:
@@ -628,6 +639,12 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.5"}, "client": type("C", (), {"host": "10.0.0.1"})()})())
        == K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.6"}, "client": type("C", (), {"host": "10.0.0.1"})()})()),
        "falscher Proxy-Schluessel: X-Real-IP wird ignoriert")
+    # IPv4-in-IPv6: dieselbe Adresse wie die IPv4, nicht ein gemeinsames ::/64
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
+    def anfr0(ip):
+        return type("R", (), {"headers": {"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": ip}, "client": type("C", (), {"host": "10.0.0.1"})()})()
+    ok(K._ip_tag(anfr0("::ffff:203.0.113.5")) != K._ip_tag(anfr0("::ffff:198.51.100.77")), "IPv4-gemappte Adressen verschiedener Besucher teilen sich keinen Zaehler")
+    ok(K._ip_tag(anfr0("::ffff:203.0.113.5")) == K._ip_tag(anfr0("203.0.113.5")), "::ffff:a.b.c.d zaehlt wie die IPv4-Adresse")
     # Netzbereich: IPv6 zaehlt als /64, IPv4 als Einzeladresse
     def anfr(ip):
         return type("R", (), {"headers": {"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": ip}, "client": type("C", (), {"host": "10.0.0.1"})()})()
@@ -678,33 +695,83 @@ with TestClient(app, base_url="http://testserver") as c:
     os.environ.pop("KL_PROXY_KEY", None)
     k.schliesse(); k2.schliesse()
 
-    print("--- Durchsatz je Netzbereich (auch mit richtigem Code)")
+    print("--- Falsche Eingaben bremsen, gueltige Beitritte nicht")
     zuruecksetzen()
     K.VERSUCHE_JE_MINUTE = 20
+    import time as _zeit
     k = Klasse(c)
-    for i in range(20):
+    t0 = _zeit.time()
+    for i in range(40):                                 # 40 gleichzeitige Beitritte einer Adresse, ohne kuenstliche Uhr
         k.schueler()
+    ok(len(k.s) == 40 and len(set(k.namen)) == 40, "40 gueltige Beitritte von einer Adresse klappen hintereinander (%.1f s)" % (_zeit.time() - t0))
+    ok(not K._rate_voll(K._ip_tag(type("R", (), {"headers": {}, "client": type("C", (), {"host": "testclient"})()})())), "gueltige Beitritte zaehlen nicht gegen die Rate falscher Eingaben")
+    k.schliesse()
+    zuruecksetzen()
+    k = Klasse(c)
+    for _ in range(24):                                 # Mitschueler tippt 24 falsche Codes
+        with c.websocket_connect("/ws/klasse", headers=H) as w:
+            w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
+            w.receive_json()
+    ok(K._rate_voll(K._ip_tag(type("R", (), {"headers": {}, "client": type("C", (), {"host": "testclient"})()})())), "24 falsche Eingaben: Netz ist ueber der Rate")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
         w.send_json({"t": "beitritt", "code": k.code})
-        rr = w.receive_json()
-        ok(rr["t"] == "fehler" and "sehr viele Beitrittsversuche" in rr["text"], "21. Beitritt in einer Minute von einer Adresse: abgewiesen, obwohl der Code stimmt")
+        ok(w.receive_json()["t"] == "willkommen", "Falschversuche eines Mitschuelers blockieren den gueltigen Beitritt NICHT")
+    K.UEBERLAST_PAUSE_S = 1.5
+    t0 = _zeit.time()
     with c.websocket_connect("/ws/klasse", headers=H) as w:
-        w.send_json({"t": "lehrer", "code": k.code, "schluessel": k.key})
-        ok(stand(w)["rolle"] == "lehrer", "Rate voll: Lehrkraft mit Schluessel kommt trotzdem durch")
-    with c.websocket_connect("/ws/klasse", headers=H) as w:
-        w.send_json({"t": "wieder", "code": k.code, "token": k.tokens[0]})
-        ok(stand(w)["rolle"] == "schueler", "Rate voll: Wiederverbinden mit Schluessel kommt durch")
-    uhr["plus"] += 65
-    for i in range(20):
-        k.schueler()
-    ok(len(k.s) == 40, "Realistische Klasse: 40 Beitritte von einer Adresse in knapp drei Minuten klappen")
-    ok(len(set(k.namen)) == 40, "40 verschiedene Zufallsnamen")
-    uhr["plus"] = 0.0
+        w.send_json({"t": "beitritt", "code": k.code})
+        w.receive_json()
+    ok(_zeit.time() - t0 >= 1.4, "...wird aber gebremst (Bremse bei zu vielen falschen Eingaben: %.1f s)" % (_zeit.time() - t0))
+    K.UEBERLAST_PAUSE_S = 0.0
     k.schliesse()
     K.VERSUCHE_JE_MINUTE = 10 ** 6
-    # Treffer-Wahrscheinlichkeit bei dem Durchsatz (Rechnung steht im Bericht und auf der Seite)
-    p_stunde = 20 * 60 * (MAX_S := K.MAX_SITZUNGEN) / (len(K.CODE_ZEICHEN) ** K.CODE_LAENGE)
-    ok(p_stunde < 2e-7, "Trefferwahrscheinlichkeit je Netzbereich und Stunde bei vollem Durchsatz: %.2e" % p_stunde)
+    # Treffer-Wahrscheinlichkeit je Netzbereich und Tag bei der Bremse (10 Vorab-Plaetze, 6 s je Eingabe)
+    p_tag = (K.PREAUTH_JE_IP / 6.0) * 86400 * K.MAX_SITZUNGEN / (len(K.CODE_ZEICHEN) ** K.CODE_LAENGE)
+    ok(p_tag < 5e-5, "Trefferwahrscheinlichkeit je Netzbereich und Tag mit Bremse: %.1e" % p_tag)
+
+    print("--- Sitzungen ohne Teilnehmende, Lehreraktionen, Uhrspruenge")
+    zuruecksetzen()
+    k = Klasse(c)
+    uhr["plus"] += K.LEER_MAX_S + 5
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 0, "Sitzung ohne Teilnehmende wird nach 5 Minuten geloescht")
+    e = lies(k.l, lambda m: m.get("t") == "ende")
+    ok("Keine Teilnehmenden" in e.get("nachweis", ""), "...mit Loeschprotokoll (Anlass: Keine Teilnehmenden)")
+    ok(c.post("/api/klasse/nachweis/pruefen", json={"text": e["nachweis"]}, headers=H).json()["signatur"] == "gültig", "...und gueltiger Signatur")
+    k.schliesse()
+    uhr["plus"] = 0.0
+    zuruecksetzen()
+    k = Klasse(c, schueler=1)
+    uhr["plus"] += K.LEER_MAX_S + 5
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 1, "Sitzung MIT Teilnehmenden bleibt nach 5 Minuten bestehen")
+    uhr["plus"] = 0.0
+    k.schliesse()
+    zuruecksetzen()
+    k = Klasse(c, schueler=1)
+    uhr["plus"] += K.MAX_RUHE_S - 120
+    k.l.send_json({"t": "aktivitaet", "art": "wahl", "n": 2})
+    stand(k.l, lambda m: m["aktivitaet"] is not None)
+    k.l.send_json({"t": "verbergen"})
+    lies(k.l, lambda m: m.get("t") in ("fehler", "stand"))
+    uhr["plus"] += 180
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 0, "Lehreraktionen halten die Sitzung nicht am Leben (20 Minuten ohne Beitritt oder Antwort)")
+    uhr["plus"] = 0.0
+    k.schliesse()
+    zuruecksetzen()
+    k = Klasse(c, schueler=1)
+    uhr["wand"] = -7200.0                               # Wanduhr springt waehrend der Sitzung 2 Stunden zurueck
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 1, "Wanduhr springt zurueck: Sitzung laeuft unbeeinflusst weiter")
+    k.l.send_json({"t": "beenden", "code": k.code})
+    pn = lies(k.l, lambda m: m.get("t") == "ende")["nachweis"]
+    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": pn}, headers=H).json()
+    ok(pr["format"] == "gültig" and pr["signatur"] == "gültig", "Protokoll nach Uhrsprung bleibt gueltig (Ende nie vor Start)")
+    uhr["wand"] = 0.0
+    k.schliesse()
+    zuruecksetzen()
+    k = Klasse(c, schueler=1)
+    uhr["plus"] += 3600 * 5                             # Wanduhr springt vor, Sitzung laeuft nach Monotonuhr 5 Stunden: abgelaufen
+    uhr["plus"] = 0.0
+    ok(c.get("/api/klasse/zaehler").json()["aktiv"] == 1, "Monotonuhr bestimmt den Ablauf (kein Ablauf ohne verstrichene Zeit)")
+    k.schliesse()
 
     print("--- Vorab-Verbindungen: Zeitlimit und Falschversuche")
     zuruecksetzen()
@@ -758,6 +825,27 @@ with TestClient(app, base_url="http://testserver") as c:
     K.FEHLVERSUCH_PAUSE_S = alt_pause
     _t.sleep(4.5)
     ok(K.PREAUTH_GESAMT >= 200 and K.PREAUTH_JE_IP >= 10, "Vorab-Grenzen: gesamt %d, je Adresse %d" % (K.PREAUTH_GESAMT, K.PREAUTH_JE_IP))
+
+    print("--- Vorab-Deckel durch viele Adressen: Verdraengung")
+    zuruecksetzen()
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
+    PK = {"x-kl-proxy": "test-proxy-schluessel"}
+    alt_g, alt_j = K.PREAUTH_GESAMT, K.PREAUTH_JE_IP
+    K.PREAUTH_GESAMT, K.PREAUTH_JE_IP = 6, 3
+    es = contextlib.ExitStack()
+    stille = []
+    for adr in ("203.0.113.1", "203.0.113.2"):
+        for _ in range(3):
+            stille.append(es.enter_context(c.websocket_connect("/ws/klasse", headers=dict(H, **PK, **{"x-real-ip": adr}))))
+    ok(K._vorab_gesamt[0] == 6, "Deckel voll: 6 stille Vorab-Verbindungen von 2 Adressen")
+    neu = es.enter_context(c.websocket_connect("/ws/klasse", headers=dict(H, **PK, **{"x-real-ip": "203.0.113.9"})))
+    neu.send_json({"t": "neu"})
+    ok(neu.receive_json()["t"] == "erstellt", "ehrliche Verbindung einer dritten Adresse kommt trotz vollem Deckel durch (aelteste stille wird verdraengt)")
+    ok(K._vorab_gesamt[0] <= 6, "Gesamtzahl der Vorab-Verbindungen bleibt im Deckel (%d)" % K._vorab_gesamt[0])
+    es.close()
+    K.PREAUTH_GESAMT, K.PREAUTH_JE_IP = alt_g, alt_j
+    os.environ.pop("KL_PROXY_KEY", None)
+    zuruecksetzen()
 
     print("--- Mehrfach-Beitritt und Vorab-Verbindungen")
     zuruecksetzen()
@@ -831,7 +919,20 @@ with TestClient(app, base_url="http://testserver") as c:
         ok(r["t"] == "fehler" and "nicht eingerichtet" in r["text"], "Sitzung wird mit Hinweis 'nicht eingerichtet' abgelehnt")
     ok(not K._sitz, "es entsteht keine Sitzung")
     os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
-    ok(c.get("/api/klasse/zaehler").json()["bereit"] is True, "mit KL_PROXY_KEY: bereit=true")
+    P = {"x-kl-proxy": "test-proxy-schluessel"}
+    ok(c.get("/api/klasse/zaehler", headers=P).json()["bereit"] is True, "mit KL_PROXY_KEY und Schluessel-Header: bereit=true")
+    ok(c.get("/api/klasse/zaehler").json()["bereit"] is False, "Aufruf OHNE Schluessel-Header (nginx-Block ohne Header): bereit=false")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "neu"})
+        rr = w.receive_json()
+        ok(rr["t"] == "fehler" and "nicht eingerichtet" in rr["text"], "oeffentlich: WebSocket ohne gueltigen X-KL-Proxy wird abgewiesen")
+    ok(c.post("/api/klasse/nachweis/pruefen", json={"text": "x"}, headers=H).status_code == 503, "oeffentlich: Pruefung ohne X-KL-Proxy: 503")
+    ok(c.post("/klasse/nachweis", content=b"text=x", headers=H).status_code == 503, "oeffentlich: Pruefseite (POST) ohne X-KL-Proxy: 503")
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **P)) as w:
+        w.send_json({"t": "neu"})
+        ok(w.receive_json()["t"] == "erstellt", "oeffentlich: mit gueltigem X-KL-Proxy klappt es")
+    ok(c.post("/api/klasse/nachweis/pruefen", json={"text": "x"}, headers=dict(H, **P)).status_code == 200, "oeffentlich: Pruefung mit Schluessel: 200")
+    zuruecksetzen()
     os.environ.pop("OEFFENTLICH")
     os.environ.pop("KL_PROXY_KEY")
     ok(c.get("/api/klasse/zaehler").json()["bereit"] is True, "lokal ohne OEFFENTLICH: bereit, Adresse der direkten Verbindung")
@@ -886,6 +987,7 @@ with TestClient(app, base_url="http://testserver") as c:
     os.environ["OEFFENTLICH"] = "1"
     os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
     os.environ["KL_KLASSE_NEU_JE_10MIN"] = "2"
+    H["x-kl-proxy"] = "test-proxy-schluessel"
     from app import sicherheit
     sicherheit._fenster.clear()
     a1 = Klasse(c); a2 = Klasse(c)
@@ -904,6 +1006,7 @@ with TestClient(app, base_url="http://testserver") as c:
             n429 += 1
     ok(n429 > 0, "Nachweis-Pruefung: nach 30 Anfragen je Minute gebremst")
     os.environ.pop("OEFFENTLICH"); os.environ.pop("KL_KLASSE_NEU_JE_10MIN"); os.environ.pop("KL_PROXY_KEY", None)
+    H.pop("x-kl-proxy", None)
     sicherheit._fenster.clear()
 
 zuruecksetzen()
