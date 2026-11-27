@@ -2,7 +2,7 @@
    stehen und wo die Quelle liegt. Pflichtangaben: "Built with Llama" und Lizenzhinweis (Llama 3.2 Community License,
    Abschnitt 1.b.i und 1.b.iii), Kennzeichnung KI-erzeugter Inhalte (KI-Verordnung Art. 50).
    Die Tabelle mit anklickbaren Quellen baut der Baustein "lizenzen-tabelle" (widgets.js) aus seite.lizenzen; die
-   Beispielfotos liest er direkt aus beispiele/manifest.json. Lizenzen geprueft am 22.11.2026 an den genannten Quellen.
+   Beispielfotos liest er direkt aus beispiele/manifest.json. Lizenzen geprueft am 22.11.2026 an den genannten Quellen; uvicorn, websockets, httpx, NumPy, onnxruntime und Remotion am 27.11.2026.
    Impressum und Datenschutzerklaerung liegen extern (module.json: seite.impressum_url, seite.datenschutz_url). */
 (function () {
 
@@ -36,7 +36,7 @@ INHALT.registriere({
           {name: "eSpeak NG", zweck: "Wandelt Text in Lautschrift für Piper",
            lizenz: "GPL-3.0 oder neuer", quelle: "github.com/espeak-ng/espeak-ng", url: "https://github.com/espeak-ng/espeak-ng"},
           {name: "Stimme Thorsten (de_DE-thorsten-medium)", zweck: "Männliche Stimme im Labor Text zu Sprache",
-           lizenz: "CC0 (Aufnahmen Thorsten-Voice und Ausgangsmodell laut Modellkarte)", quelle: "Modellkarte", url: PIPER_STIMMEN + "thorsten/medium"},
+           lizenz: "CC0 für die Aufnahmen (Thorsten-Voice) und das Ausgangsmodell laut Modellkarte", quelle: "Modellkarte", url: PIPER_STIMMEN + "thorsten/medium"},
           {name: "YuNet (face_detection_yunet_2023mar)", zweck: "Findet Gesichter im Kamerabild",
            lizenz: "MIT", quelle: "OpenCV Zoo", url: ZOO + "face_detection_yunet"},
           {name: "MediaPipe Handflächen-Erkennung (palm_detection_mediapipe_2023feb)", zweck: "Findet Handflächen im Kamerabild (Labor Hände und Gesichter)",
@@ -55,12 +55,22 @@ INHALT.registriere({
            lizenz: "Apache-2.0 (ab Version 4.5)", quelle: "github.com/opencv/opencv", url: "https://github.com/opencv/opencv"},
           {name: "FastAPI", zweck: "Webserver des Labors",
            lizenz: "MIT", quelle: "github.com/fastapi/fastapi", url: "https://github.com/fastapi/fastapi"},
+          {name: "uvicorn", zweck: "Startet den Webserver des Labors",
+           lizenz: "BSD-3-Clause", quelle: "github.com/encode/uvicorn", url: "https://github.com/encode/uvicorn/blob/master/LICENSE.md"},
+          {name: "websockets", zweck: "Dauerverbindung für die Kamera-Labore",
+           lizenz: "BSD-3-Clause", quelle: "github.com/python-websockets/websockets", url: "https://github.com/python-websockets/websockets/blob/main/LICENSE"},
+          {name: "httpx", zweck: "Spricht aus dem Labor heraus mit Ollama",
+           lizenz: "BSD-3-Clause", quelle: "github.com/encode/httpx", url: "https://github.com/encode/httpx/blob/master/LICENSE.md"},
+          {name: "NumPy", zweck: "Rechnet mit den Zahlenfeldern der Bild- und Tonverarbeitung",
+           lizenz: "BSD-3-Clause", quelle: "github.com/numpy/numpy", url: "https://github.com/numpy/numpy/blob/main/LICENSE.txt"},
+          {name: "onnxruntime", zweck: "Führt die Piper-Stimme aus (Abhängigkeit von Piper)",
+           lizenz: "MIT", quelle: "github.com/microsoft/onnxruntime", url: "https://github.com/microsoft/onnxruntime"},
           {name: "Lucide", zweck: "Symbole der Oberfläche",
            lizenz: "ISC (einige Symbole aus Feather: MIT)", quelle: "Lizenztext", url: "https://github.com/lucide-icons/lucide/blob/main/LICENSE"},
           {name: "ElevenLabs", zweck: "KI-erzeugte Sprecherstimme der Erklärvideos und der Beispielaufnahme im Labor Sprache zu Text",
-           lizenz: "Lizenz: siehe Quelle (Nutzungsbedingungen des Anbieters)", quelle: "Nutzungsbedingungen", url: "https://elevenlabs.io/terms-of-use"},
+           lizenz: "Kein Open-Source-Paket: Die Stimme (Modell Eleven v4, Stimme George) wird über den Dienst erzeugt, es gelten die Nutzungsbedingungen des Anbieters", quelle: "Nutzungsbedingungen", url: "https://elevenlabs.io/terms-of-use"},
           {name: "Remotion", zweck: "Baut die Animationen der Erklärvideos aus Programmcode",
-           lizenz: "Lizenz: siehe Quelle", quelle: "Lizenz", url: "https://www.remotion.dev/docs/license"},
+           lizenz: "Eigene Remotion-Lizenz: kostenlos für Einzelpersonen und Firmen mit bis zu drei Personen, sonst ist eine Company License nötig (Version 4.0.290, Stand 27.11.2026)", quelle: "Lizenzbedingungen", url: "https://www.remotion.dev/docs/license/pricing"},
         ],
       },
       abschnitte: [
