@@ -157,6 +157,7 @@ S["schule-start"] = {
       {icon: "scan-face", text: "Gesichtserkennung", sub: "nicht vorgesehen"}]},
      p: [
       "Alle Aufgaben laufen ohne Kamera und Mikrofon, bitte lasst die Labore dazu im Menü in der Klasse aus. Das Gesichts-Labor ist laut Hinweis erst ab 16 Jahren gedacht, jüngere nur mit Einverständnis der Eltern. Im Chat steht der Hinweis „Unter 16: bitte gemeinsam mit einer erwachsenen Person“. Im Unterricht seid ihr mit der Lehrkraft dabei, sie ist diese erwachsene Person.",
+      "Für eine Vorführung durch die Lehrkraft haben vier Kamera-Labore je eine Unterrichtsidee für 45 Minuten: {{bild-schuetzen|Bild schützen}}, {{koerperhaltung|Körperhaltung}}, {{text-lesen|Text auf Papier lesen}} und {{fingeralphabet|Fingeralphabet}}. Sie gehören nicht zu den drei Stunden. Was dabei zu beachten ist, steht in {{schule-faecher|Welche Fächer passen?}}.",
      ]},
   ],
   mitnehmen: [
@@ -758,7 +759,7 @@ S["schule-lehrkraefte"] = {
        ["Musterlösung im Chat", "Antworten wechseln: die Begründung der Gruppe bewerten, nicht den Wortlaut."],
        ["Geräte", "Mit der Maus am genauesten, Laptop oder Tablet vor Handy."],
        ["Eingaben", "Keine Namen, Adressen oder privaten Dinge tippen lassen."],
-       ["Kamera-Labore", "Nicht für den Unterricht, vorher laut sagen. Die Kamera lässt sich im Browser sperren, siehe Abschnitt Kamera und Mikrofon am Schulgerät sperren."],
+       ["Kamera-Labore", "Nicht für den Unterricht, vorher laut sagen. Die Kamera lässt sich im Browser sperren, siehe Abschnitt Kamera und Mikrofon am Schulgerät sperren. Für eine Vorführung am Lehrergerät beschreiben vier Labore je eine Unterrichtsidee, siehe {{schule-faecher|Welche Fächer passen?}}."],
        ["Lehrplanbezug", "Die Anknüpfung an die KMK-Strategie steht im Abschnitt Lehrplanbezug und auf jeder Einheit. Ein Fachlehrplan wurde für kein Bundesland geprüft, passen Sie es an die Vorgaben der Schule an."],
       ],
      }},

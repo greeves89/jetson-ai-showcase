@@ -38,7 +38,7 @@ S.ueber = {
      kurz: "Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen. Die Zuordnung zu Rollen steht auf der {{start|Startseite}}.",
      liste: [
       "**Lektionen** erklären die Grundlagen von null, mit Beispielen aus dem Alltag, Vergleichstabellen, Merksätzen und einem kurzen Selbsttest.",
-      "**Labore** laufen live auf dem Jetson: Gesichts-, Hand- und Objekterkennung über die eigene Webcam, ein Bildmodell anlernen, ein Sprachmodell befragen, Dokumente durchsuchen (RAG), ein Agent mit Werkzeugen, Sprache zu Text und Text zu Sprache.",
+      "**Labore** laufen live auf dem Jetson: Gesichts-, Hand-, Körperhaltungs- und Objekterkennung über die eigene Webcam, dazu {{bild-schuetzen|Bild schützen}}, {{fingeralphabet|Fingeralphabet}} und {{text-lesen|Text auf Papier lesen}}, ein Bildmodell anlernen, ein Sprachmodell befragen, Dokumente durchsuchen (RAG), ein Agent mit Werkzeugen, Sprache zu Text und Text zu Sprache.",
       "**Interaktive Bausteine** machen Begriffe greifbar, zum Beispiel ein neuronales Netz im Browser oder der Gradientenabstieg.",
       "**Erklärvideos** fassen Themen in gut einer bis zweieinhalb Minuten zusammen, die meisten in 70 bis 100 Sekunden.",
       "**Business-Use-Cases** zeigen Beispiele aus Betrieben, mit fertigen Beispieldaten zum Starten per Klick.",
@@ -52,7 +52,7 @@ S.ueber = {
      kurz: "Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt. Den Aufbau im Überblick zeigt {{architektur|Wie das Labor aufgebaut ist}}.",
      p: [
       "Wenn du ein Labor startest, schickt dein Browser die Eingabe an den Jetson. Dort rechnet das Modell, und das Ergebnis kommt zurück. Das Labor zeigt dir dabei die einzelnen Schritte und wie lange jeder gedauert hat. Auf der Seite {{hardware|Hardware}} siehst du live, wie stark der Rechner gerade ausgelastet ist.",
-      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor und das Labor Hände und Gesichter arbeiten nur mit der Kamera und haben keine Beispielbilder.",
+      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor, Hände und Gesichter, Körperhaltung, Bild schützen und Text auf Papier lesen arbeiten nur mit der Kamera und haben keine Beispielbilder. Das Fingeralphabet hat mit „Wort zeigen“ einen Teil ohne Kamera.",
      ]},
   ],
   mitnehmen: [
@@ -112,7 +112,7 @@ S["selbst-bauen"] = {
       {icon: "clock", text: "Zeit für den Aufbau", sub: "halber bis ganzer Tag"}]},
      p: [
       "Das Labor ist für 8 GB Speicher ausgelegt. Kamera und Mikrofon kommen aus dem Browser deines Rechners oder Handys, nicht vom Jetson. Programmieren musst du nicht.",
-      "Die Einkaufsliste im Einzelnen. Getestet ist der Aufbau auf der Super-Ausführung des Jetson Orin Nano Developer Kit mit 8 GB. Das Netzteil (19 V) gehört laut NVIDIA zum Kit, eine SSD oder SD-Karte nicht. Die Anleitung nutzt eine NVMe-SSD (M.2), die Bauform ist hier nicht belegt, sie steht im Handbuch zum Kit. Eine SD-Karte, das 4-GB-Modell und andere Jetson-Modelle sind ungetestet. Plane mindestens 10 GB freien Platz ein, die Modelle und Pakete belegen rund 3,2 GB. Zum Flashen und Bedienen brauchst du einen zweiten Rechner, die Anleitung im Repo nennt einen Ubuntu-PC. Ein Wort zur Kühlung: Ein höherer Leistungsmodus macht das Gerät wärmer, achte auf Kühlung. Welche Lösung passt, steht nicht belegt hier.",
+      "Die Einkaufsliste im Einzelnen. Getestet ist der Aufbau auf der Super-Ausführung des Jetson Orin Nano Developer Kit mit 8 GB. Das Netzteil (19 V) gehört laut NVIDIA zum Kit, eine SSD oder SD-Karte nicht. Die Anleitung nutzt eine NVMe-SSD (M.2), die Bauform ist hier nicht belegt, sie steht im Handbuch zum Kit. Eine SD-Karte, das 4-GB-Modell und andere Jetson-Modelle sind ungetestet. Plane mindestens 10 GB freien Platz ein, die Modelle und Pakete belegen rund 3,2 GB. Dieser Wert ist nicht neu gemessen, seit `setup.sh` auch die Modelle für Körperhaltung, Text auf Papier lesen und Bild schützen holt. Das Freistell-Modell für Bild schützen hat rund 6 MB, das Fingeralphabet braucht keine eigenen Modelle. Zum Flashen und Bedienen brauchst du einen zweiten Rechner, die Anleitung im Repo nennt einen Ubuntu-PC. Ein Wort zur Kühlung: Ein höherer Leistungsmodus macht das Gerät wärmer, achte auf Kühlung. Welche Lösung passt, steht nicht belegt hier.",
       "Zum Preis: NVIDIA nannte im Blog vom 17. Dezember 2024 für das Developer Kit 249 US-Dollar, gesenkt von 499 (Quelle: developer.nvidia.com/blog/nvidia-jetson-orin-nano-developer-kit-gets-a-super-boost, am 22.11.2026 erneut gelesen). Händlerpreise, Steuer, SSD und Zubehör kommen dazu: Preis beim Händler erfragen. Die Zeitangabe für den Aufbau ist eine Schätzung, keine Messung. Flashen und Downloads machen den größten Teil aus. Die Lesezeit dieser Seite steht oben in der Kopfzeile und ist davon unabhängig.",
      ],
      tabelle: {

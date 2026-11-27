@@ -86,6 +86,17 @@ S["schule-faecher"] = {
       "**Quellenkritik:** Wer hat das wann und mit welchem Interesse veröffentlicht? Dieselben Fragen gelten für historische Quellen und für Meldungen im Netz: {{quellen-pruefen|Quellen prüfen}}.",
       "**Fälschungen:** Fälschungen gibt es nicht erst seit KI. Neu ist, wie schnell und überzeugend sie entstehen. Die Klasse sortiert zwölf Bildkarten in {{medien-stunde-1|Medien 1}} und begründet ihr Urteil.",
      ]},
+    {h: "Vier Kamera-Labore für eine Vorführung",
+     kurz: "Vier Labore beschreiben eine Unterrichtsidee für 45 Minuten. Sie brauchen eine Kamera und gehören nicht zu den zehn Einheiten.",
+     p: [
+      "Die zehn Einheiten kommen ohne Kamera aus. Wer älteren Klassen trotzdem etwas vorführen will, findet in vier Laboren je eine Stunde für 45 Minuten. Die Lehrkraft führt am eigenen Gerät vor, es ist nur eine Person im Bild, die zustimmt. Die Labore sind ab 16 Jahren gedacht, Jüngere nur mit Einverständnis der Eltern. Die Seite prüft das Alter nicht. Ob so ein Einsatz an Ihrer Schule möglich ist, entscheidet die Schule, siehe {{schule-schulleitung|Info für die Schulleitung}}.",
+     ],
+     liste: [
+      "**Bild schützen:** Maske sehen, Verpixeln prüfen, über Einwilligung sprechen. {{bild-schuetzen|Zum Labor}}.",
+      "**Körperhaltung:** Ein freiwilliges Experiment mit Diskussion, ohne Bewertung von Kindern. {{koerperhaltung|Zum Labor}}.",
+      "**Text auf Papier lesen:** Die Lernenden provozieren Fehler selbst und benennen sie, dazu eine Runde Datenschutz. {{text-lesen|Zum Labor}}.",
+      "**Fingeralphabet:** Von der eigenen Hand zur Frage, was Technik hier kann und was nicht. {{fingeralphabet|Zum Labor}}.",
+     ]},
   ],
   mitnehmen: [
     "Zu jedem der sechs Fächer gibt es zwei bis drei Anknüpfungen mit einer passenden Seite im Labor.",

@@ -52,6 +52,7 @@ seiten: {
      p: [
       "KI-Bildmodelle setzen ein Bild aus gelernten Mustern zusammen. Sie wissen aber nicht, wie eine Hand gebaut ist oder woher das Licht kommt. Darum entstehen kleine Brüche: ein Finger zu viel, ein Schild mit Fantasieschrift, ein Schatten, der in die falsche Richtung fällt.",
       "Diese Fehler werden seltener. Bei neueren Bildmodellen sind Hände und Schrift oft schon fehlerfrei, verlass dich deshalb nicht auf diese Liste. Ein sauberes Bild ohne Fehler ist deshalb kein Beweis für echt. Ein Fehler ist ein Hinweis auf KI, aber auch kein Beweis, denn echte Fotos sind manchmal verwackelt, bearbeitet oder verzerrt.",
+      "Auch ausgeschnittene Personen können sich verraten: Haare, Glas und Ränder fransen aus. Wie so ein Schnitt entsteht und wo er scheitert, siehst du im Labor {{bild-schuetzen|Bild schützen}}.",
      ],
      alltag: "Denk an einen Menschen, der ein Gesicht aus dem Gedächtnis zeichnet. Das Gesamtbild stimmt, nur die Details wie Ohren oder Hände wirken komisch. KI zeichnet ähnlich: gut im Gesamteindruck, schwächer bei Details und Logik."},
     {h: "Texte: glatt, allgemein, selbstsicher",
@@ -168,6 +169,7 @@ seiten: {
      p: [
       "Der amerikanische Medienforscher Mike Caulfield hat dafür ein einfaches Vorgehen entwickelt, das unter dem Kürzel SIFT bekannt ist. Hier ist es auf Deutsch.",
       "Stopp: Bemerke deine erste Reaktion. Wut oder Staunen sind Gründe, langsamer zu werden. Urheber: Wer hat das veröffentlicht, und was will er? Andere Berichte: Gibt es dieselbe Meldung bei Quellen, die nichts voneinander abschreiben? Zurückverfolgen: Zitate, Zahlen und Bilder haben meist ein Original. Such es, und lies es im Zusammenhang.",
+      "Steht eine Meldung nur als Foto oder Screenshot eines Textes da, übernimm wichtige Zahlen und Zitate nicht ungeprüft. Texterkennung liest Zeichen manchmal falsch, wie {{text-lesen|Text auf Papier lesen}} zeigt. Prüfe Beträge und Zitate am Original.",
      ],
      alltag: "Ein Screenshot kursiert in der Klassengruppe: Das Schwimmbad schließt angeblich. Du suchst auf der Seite der Stadt und in der Lokalzeitung. Beides sagt nichts davon. Dann ist es wohl Gerede, und du lässt den Screenshot unkommentiert."},
     {h: "Urheber und Interesse",
@@ -324,6 +326,7 @@ seiten: {
      p: [
       "Fälschungen mit echten Personen sind keine Streiche. Wer Bilder, Videos oder Stimmen anderer ohne Einwilligung verändert und verbreitet, verletzt deren Persönlichkeitsrechte, und das kann strafbar sein. Auch das Recht am eigenen Bild gilt (Kunsturhebergesetz). Seit dem 2. August 2026 müssen Deepfakes in der EU außerdem gekennzeichnet werden (Artikel 50 der KI-Verordnung, Stand 27.11.2026). Mach so etwas nicht mit Mitschülern oder Lehrkräften, auch nicht als Spaß.",
       "Wenn du betroffen bist: Das ist nicht deine Schuld. Sichere Beweise, bevor etwas gelöscht wird, am besten mit Screenshots samt Adresse und Datum. Sprich mit einer Person, der du vertraust. Kostenlose und vertrauliche Hilfe gibt es zum Beispiel bei der Nummer gegen Kummer (116 111) und bei JUUUPORT, einer Online-Beratung, in der geschulte Jugendliche anderen Jugendlichen helfen. Plattformen müssen gemeldete Inhalte prüfen.",
+      "Vorbeugen kannst du nur begrenzt. Je weniger erkennbare Fotos von dir öffentlich stehen, desto weniger Material gibt es. Wie viel ein Mosaik oder ein deckender Balken schützt, zeigt {{bild-schuetzen|Bild schützen}}.",
      ]},
     {h: "Weiterlesen",
      kurz: "Quellen zu dieser Seite.",
@@ -534,6 +537,7 @@ seiten: {
      p: [
       "Dein Handy fragt, ob eine App Kamera, Mikrofon oder Standort nutzen darf. Frag dich: Braucht die App das für das, was ich gerade tun will? Eine Taschenlampen-App braucht keinen Zugriff auf deine Kontakte.",
       "Bei Standort gibt es oft die Wahl Nur beim Verwenden der App. Die Freigabe kannst du jederzeit in den Einstellungen zurücknehmen. Prüfe sie ab und zu, denn über die Zeit sammelt sich einiges an.",
+      "Was ein Programm aus einem Kamerabild herausliest, kannst du selbst ausprobieren, ohne dass etwas gespeichert wird: {{bild-schuetzen|Bild schützen}} zeigt, wie Gesichter unkenntlich werden, {{koerperhaltung|Körperhaltung}}, was ein Skelett aus Punkten verrät.",
      ],
      alltag: "Es ist wie der Schlüssel zu deiner Wohnung. Du gibst ihn der Person, die ihn braucht, und holst ihn zurück, wenn sie fertig ist. Du verteilst ihn nicht an jeden, der klingelt."},
     {h: "Was du keinem Chatbot eingibst",

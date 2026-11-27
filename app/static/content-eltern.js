@@ -40,7 +40,7 @@ S["eltern-zuhause"] = {
      p: [
       "Kamera und Mikrofon schalten sich nie von allein ein. Erst fragt die Seite, dann der Browser. Bilder und Aufnahmen werden nicht gespeichert. Bei der Gesichtserkennung entstehen aus Gesichtern Zahlenlisten. Das sind besonders geschützte Daten. Darum gibt es dort ein eigenes Kontrollkästchen.",
       "Die Seite fragt nicht nach dem Alter und prüft es nicht. Jüngere Kinder nutzen diese Labore deshalb nur, wenn Sie einverstanden sind und dabei sind.",
-      "Im öffentlichen Betrieb laufen auch Kamerabilder und Aufnahmen über dieselben Vermittler wie Texte: einen Server bei IONOS und den Tunneldienst von Cloudflare. Der Rechner dahinter speichert sie nicht. Das Gesichts-Labor und das Labor Hände und Gesichter arbeiten nur mit der Kamera, Beispielbilder gibt es dort nicht. Wer keine Kamera will, nimmt die Experimente.",
+      "Im öffentlichen Betrieb laufen auch Kamerabilder und Aufnahmen über dieselben Vermittler wie Texte: einen Server bei IONOS und den Tunneldienst von Cloudflare. Der Rechner dahinter speichert sie nicht. Das Gesichts-Labor, Hände und Gesichter, Körperhaltung, Bild schützen und Text auf Papier lesen arbeiten nur mit der Kamera, Beispielbilder gibt es dort nicht. Beim Fingeralphabet geht ein Teil („Wort zeigen“) ohne Kamera. Wer keine Kamera will, nimmt die Experimente.",
      ],
      merke: "Kein Alterscheck heißt: Sie sind der Alterscheck."},
     {h: "Was das Sprachmodell kann und was nicht",
