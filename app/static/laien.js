@@ -97,6 +97,11 @@
       wozu: "Der Rechner soll dich im Kamerabild vom Hintergrund trennen und Gesichter finden, um sie unkenntlich zu machen. Wiedererkennen oder Namen zuordnen kann er damit nicht.",
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video. Nach der Auswertung eines Bildes ist es weg. Das Bild auf deinem Bildschirm links bleibt in deinem Browser.",
     },
+    fingeralphabet: {
+      titel: "Fingeralphabet: Kamera für deine Hand",
+      wozu: "Der Rechner soll deine Hand in deinem Kamerabild finden und aus der Haltung der Finger einen Buchstaben des Fingeralphabets lesen. Personen erkennt er damit nicht, Gebärdensprache übersetzt er nicht.",
+      speichern: "Es wird nichts gespeichert: kein Foto, kein Video, keine Handdaten, auch nicht das Wort, das du buchstabierst.",
+    },
   };
   const BIO_LABORE = new Set(["gesicht", "hand-gesicht", "koerperhaltung"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
