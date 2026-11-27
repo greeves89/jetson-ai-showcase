@@ -23,6 +23,8 @@ und Gesichtslage) liegt nur im Arbeitsspeicher und endet mit der Verbindung.
 import time
 from pathlib import Path
 
+from app import kamera_modi
+
 import cv2
 import numpy as np
 from fastapi import APIRouter
@@ -430,3 +432,22 @@ def modelle():
 def status():
     m = modelle()
     return {"bereit": m.bereit, "fehlt": m.fehlt}
+
+
+class _HandGesichtModus:
+    """Eintrag im Modus-Register (app/kamera_modi.py): Kanal /ws/vision?modus=hand_gesicht."""
+    name = "hand_gesicht"
+    max_kante = 480
+
+    def bereit(self):
+        return kamera_modi.yunet() is not None and modelle().bereit
+
+    def neu(self):
+        return Verbindung()
+
+    def verarbeite(self, img, schwelle, zustand):
+        erg = analysiere(img, kamera_modi.yunet(), modelle(), zustand)
+        return len(erg["haende"]) + len(erg["gesichter"]), {"haende": erg["haende"], "gesichter": erg["gesichter"], "detail_ms": erg["ms"]}
+
+
+kamera_modi.registriere(_HandGesichtModus())

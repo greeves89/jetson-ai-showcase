@@ -43,6 +43,7 @@ try:                                   # ein Fehler im Labor-Modul darf den Star
 except Exception as _e:                # noqa: BLE001
     lab_hand = None
     print("lab_hand nicht geladen:", repr(_e))
+from app import kamera_modi
 from app.sicherheit import Belegt, sicherheitskoepfe, Sitzungen, Warteschlange, begrenzt, origin_ok, sitzungs_kennung, umgebung_zahl
 
 HIER = Path(__file__).resolve().parent
@@ -186,6 +187,7 @@ for _modul in sorted(_f.stem for _f in HIER.glob("lab_*.py")):
 _yunet_pfad = HIER / "models" / "face_detection_yunet_2023mar.onnx"
 _yunet = (cv2.FaceDetectorYN.create(str(_yunet_pfad), "", (320, 320), 0.7)
           if hasattr(cv2, "FaceDetectorYN") and _yunet_pfad.exists() else None)
+kamera_modi.setze_gemeinsam(yunet=_yunet)         # geteilter Gesichtsfinder fuer die registrierten Kamera-Modi
 _cascade = cv2.CascadeClassifier(str(HIER / "models" / "haarcascade_frontalface_default.xml"))
 
 
@@ -298,16 +300,16 @@ def _verarbeite_frame(roh, modus, schwelle=0.5, zustand=None):
         img = cv2.resize(img, (int(w * s), int(h * s)))
         h, w = img.shape[:2]
     extra = {}
-    if modus == "hand_gesicht":
-        img = lab_hand.verkleinern(img)             # laengste Kante 480 px
+    reg = kamera_modi.MODI.get(modus)               # registrierter Modus (siehe app/kamera_modi.py)
+    if reg is not None:
+        img = kamera_modi.verkleinern(img, getattr(reg, "max_kante", 480))
         h, w = img.shape[:2]
     t1 = time.time()
     with _inferenz_lock:
         t2 = time.time()
-        if modus == "hand_gesicht":
-            erg = lab_hand.analysiere(img, _yunet, lab_hand.modelle(), zustand)
-            anzahl = len(erg["haende"]) + len(erg["gesichter"])
-            extra = {"haende": erg["haende"], "gesichter": erg["gesichter"], "detail_ms": erg["ms"]}
+        if reg is not None:
+            anzahl, extra = reg.verarbeite(img, schwelle, zustand)
+            h, w = img.shape[:2]
         else:
             anzahl = _erkenne_objekte(img, schwelle) if modus == "objekt" else _erkenne_gesichter(img)
     t3 = time.time()
@@ -501,9 +503,10 @@ async def ws_vision(ws: WebSocket):
         await ws.close(code=1008)
         return
     modus = ws.query_params.get("modus", "gesicht")
-    if modus not in ("gesicht", "objekt", "hand_gesicht"):
+    if modus not in ("gesicht", "objekt") and modus not in kamera_modi.MODI:
         modus = "gesicht"
-    if modus == "hand_gesicht" and not (lab_hand is not None and _yunet is not None and lab_hand.modelle().bereit):
+    reg = kamera_modi.MODI.get(modus)
+    if reg is not None and not reg.bereit():
         await ws.close(code=1013)      # Modelle fehlen (scripts/modelle_laden.sh), die Oberflaeche prueft das vorher
         return
     global _ws_aktiv
@@ -513,7 +516,7 @@ async def ws_vision(ws: WebSocket):
     _ws_aktiv += 1
     await ws.accept()
     schwelle = 0.5
-    zustand = lab_hand.Verbindung() if modus == "hand_gesicht" else None
+    zustand = reg.neu() if reg is not None else None
     try:
         while True:
             daten = await ws.receive_text()      # dataURL "data:image/jpeg;base64,..." oder Steuer-JSON
