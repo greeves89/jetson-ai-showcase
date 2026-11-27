@@ -64,3 +64,18 @@ Vor einem Einsatz außerhalb des Labors Lizenz und Einwilligung der Sprecherin o
 - lucide (npm-Paket `lucide-static` 1.77.0, https://lucide.dev), ISC-Lizenz, Copyright Lucide Icons and Contributors.
   `scripts/icons_bauen.mjs` übernimmt eine Auswahl von rund 340 Icons als `app/static/icons.json` (nur der innere SVG-Inhalt).
   Der Lizenztext der ISC-Lizenz steht im Paket (`LICENSE`) und erlaubt Nutzung und Weitergabe unter Beibehaltung des Hinweises.
+
+# Fingeralphabet
+
+Das Labor "Fingeralphabet" (`app/lab_gebaerde.py`, `app/static/demo-gebaerde.js`) nutzt keine neuen Modelle. Es nimmt die beiden
+Handmodelle des Labors "Hände und Gesichter" (MediaPipe Handflächen-Erkennung und Handpunkte über den OpenCV Zoo, Apache-2.0,
+siehe oben und `scripts/modelle_laden.sh`) in eigener Instanz, ohne den Ausdruckserkenner.
+
+Die Handformen der Buchstaben (`app/static/daten/gebaerde-vorlagen.json`) sind eine eigene Arbeit: Ein einfaches Handmodell ist nach
+der Beschreibung des deutschen Einhand-Fingeralphabets eingestellt (`scripts/gebaerde_vorlagen_bauen.py`), daraus entstehen
+21 Punkte je Buchstabe. Es gibt keine Fotos, kein trainiertes Netz und keine Daten von Besuchern. Die Beschreibung der Handformen
+lehnt sich an allgemein bekannte Angaben an (Stand der Prüfung 27.11.2026: Wikipedia, Artikel "Fingeralphabet", Abschnitt
+"Einhand-Fingeralphabet im deutschsprachigen Raum"). Es wird daraus kein Text und kein Bild übernommen.
+
+Verweise auf der Seite (geprüft am 27.11.2026): Deutscher Gehörlosen-Bund (gehoerlosenbund.de) und DGS-Korpus der Universität Hamburg
+(sign-lang.uni-hamburg.de/dgs-korpus).

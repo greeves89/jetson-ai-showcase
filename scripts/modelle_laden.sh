@@ -1,5 +1,5 @@
 #!/bin/bash
-# Laedt die Hand-/Gesichts-, Koerper- und Freistell-Modelle (OpenCV Zoo) nach app/models/. Aufruf aus scripts/setup.sh; einzeln jederzeit wiederholbar.
+# Laedt die Hand-/Gesichts-, Koerper- und Freistell-Modelle (OpenCV Zoo) nach app/models/. Die Handnetze nutzt auch das Labor Fingeralphabet (keine eigenen Modelle). Aufruf aus scripts/setup.sh; einzeln jederzeit wiederholbar.
 # Quellen und Lizenzen: Seite /lizenzen (Apache-2.0, Modelle aus github.com/opencv/opencv_zoo).
 set -e
 cd "$(dirname "$0")/.."
