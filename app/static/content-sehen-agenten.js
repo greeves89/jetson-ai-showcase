@@ -74,6 +74,7 @@ const seiten = {
      visual: {typ: "raster", spalten: 4, zellen: [{icon: "user", text: "Gesichter"}, {icon: "car", text: "Kennzeichen"}, {icon: "monitor", text: "Bildschirmtext"}, {icon: "map-pin", text: "Metadaten", sub: "Zeit, Gerät, Ort"}]}, p: [
       "Ein Bild enthält oft mehr, als du beim Aufnehmen bedenkst. Im Hintergrund stehen Gesichter, Autokennzeichen, ein Bildschirm mit Text oder ein Dokument auf dem Tisch. Sobald eine Person erkennbar ist, handelt es sich um personenbezogene Daten.",
       "Dazu kommen versteckte Angaben in der Datei, die Metadaten: Aufnahmezeit, Gerät und manchmal der genaue Ort. Sie sind für dich unsichtbar, aber auslesbar.",
+      "Wie sich Gesichter in einem Bild unkenntlich machen lassen, probierst du im Labor {{bild-schuetzen|Bild schützen}} aus.",
       "Das Labor hält ein Kamerabild nur im Arbeitsspeicher, solange gerechnet wird, und speichert es nicht. Das Anlern-Labor merkt sich nur Zahlenlisten, keine Bilder, und vergisst sie nach 30 Minuten ohne Aktivität. Im Betrieb solltest du dasselbe anstreben: so wenig Bild wie nötig, so kurz wie möglich, möglichst am Gerät verarbeitet. Dies ist ein Überblick und keine Rechtsberatung. Für einen echten Einsatz brauchst du eine Prüfung durch Fachleute.",
     ]},
   ],
@@ -209,6 +210,7 @@ Object.assign(seiten, {
      p: [
       "Die 21 [[handpunkte|Handpunkte]] sind Zahlenpaare im Bild. Ob ein Finger gestreckt ist, prüft der Jetson mit Geometrie: Liegen die Gelenke eines Fingers fast auf einer Linie und ist die Fingerspitze weiter vom Handgelenk entfernt als das mittlere Gelenk, gilt der Finger als gestreckt. Aus den fünf Ja-Nein-Werten folgt die Geste: offene Hand (alle gestreckt), Faust (keiner), Victory (Zeige- und Mittelfinger), Zeigefinger, Daumen hoch oder runter, sonst die Zahl der gestreckten Finger. Das Labor verfolgt bis zu zwei Hände und drei Gesichter.",
       "Hier wird nichts gelernt. Die Regeln hat ein Mensch aufgeschrieben. Das Netz liefert die Punkte, die Regeln deuten sie. Deshalb ist die Geste nachvollziehbar, aber auch starr: Eine Geste, für die niemand eine Regel geschrieben hat, kennt der Jetson nicht.",
+      "Dieselben 21 Punkte nutzt das Labor {{fingeralphabet|Fingeralphabet}}: Es liest daraus Buchstaben, indem es die Handform mit Vorlagen vergleicht. Für den ganzen Körper statt der Hände gibt es das Labor {{koerperhaltung|Körperhaltung}} mit 33 Punkten.",
     ], alltag: "Stell dir eine Schablone aus Drahtfiguren vor. Jemand hat Fotos mit Punkten beklebt. Wer die Punkte sieht, kann „Faust“ oder „Victory“ ablesen, auch ohne die Hand zu sehen. Der Vergleich hinkt: Der Jetson sieht die Punkte nur als Zahlen und kann Fingerspitzen nicht erkennen, die zur Kamera zeigen."},
     {h: "Gesichter: Ausdruck und Kopfhaltung",
      kurz: "Der Ausdruck kommt aus einem Netz, die Kopfhaltung aus fünf Punkten im Gesicht.",
@@ -259,7 +261,7 @@ Object.assign(seiten, {
     "Der Ausdruck ist eine Schätzung und liegt oft daneben. Für Entscheidungen über Menschen ist er nicht geeignet.",
     "Gesten, für die keine Regel geschrieben wurde, erkennt der Jetson nicht.",
   ],
-  weiter: ["gesicht", "bild-schuetzen", "objekt", "recht", "verzerrung-ethik"],
+  weiter: ["gesicht", "fingeralphabet", "koerperhaltung", "bild-schuetzen", "objekt", "recht", "verzerrung-ethik"],
 },
 
 "vision-aufgaben": {
@@ -292,15 +294,15 @@ Object.assign(seiten, {
     {h: "Segmentierung: Welche Pixel gehören dazu?",
      kurz: "Statt eines groben Rahmens bekommst du die genaue Form, aber die Etiketten kosten viel Zeit.",
      visual: {typ: "vergleich", links: {titel: "Erkennung", icon: "scan", farbe: "akzent", punkte: ["Grober Rahmen", "Ort und Anzahl", "Rahmen einzeichnen"]}, rechts: {titel: "Segmentierung", icon: "pen-line", farbe: "orange", punkte: ["Genaue Form", "Fläche messbar", "Umrisse nachzeichnen"]}}, p: [
-      "Die [[segmentierung|Segmentierung]] färbt jeden Pixel nach seiner Zugehörigkeit: Straße, Himmel, Person, Bauteil. Statt eines Rahmens bekommst du die genaue Form. Das ist wichtig, wenn Umrisse und Flächen zählen, etwa bei der Größe einer Schweißnaht oder der Fläche eines Schadens.",
+      "Die [[segmentierung|Segmentierung]] färbt jeden Pixel nach seiner Zugehörigkeit: Straße, Himmel, Person, Bauteil. Statt eines Rahmens bekommst du die genaue Form. Das ist wichtig, wenn Umrisse und Flächen zählen, etwa bei der Größe einer Schweißnaht oder der Fläche eines Schadens. Eine Maske in Echtzeit siehst du im Labor {{bild-schuetzen|Bild schützen}}.",
       "Die Daten sind am teuersten: Jemand muss die Umrisse sauber nachzeichnen. Das dauert je Bild deutlich länger als ein Rahmen.",
       "Im Betrieb: Flächen von Schäden oder Rissen ausmessen, Produktfotos freistellen, bei Robotern befahrbare von nicht befahrbaren Flächen trennen. Die Grenze: Die Qualität hängt stark davon ab, wie sauber die Umrisse im Training gezeichnet waren.",
     ], alltag: "Ein Ausmalbild: Du malst jede Fläche in der Farbe ihrer Zugehörigkeit aus, Rasen grün, Dach rot, Himmel blau. Am Ende hat jedes Fleckchen eine Farbe."},
     {h: "Pose und Texterkennung",
      kurz: "Pose liest Gelenkpunkte, Texterkennung liest Schrift. Beide liefern nur Wahrscheinlichkeiten.",
      visual: {typ: "vergleich", links: {titel: "Pose", icon: "person-standing", farbe: "akzent", punkte: ["Schultern, Ellbogen, Knie", "Strichmännchen", "Haltung, Heben, Sturz"]}, rechts: {titel: "Texterkennung", icon: "text", farbe: "orange", punkte: ["Schrift wird Text", "Gedruckt klappt gut", "Beträge gegenprüfen"]}}, p: [
-      "Die [[pose|Posenschätzung]] sucht Schlüsselpunkte am Körper: Schultern, Ellbogen, Hüften, Knie. Verbindet man sie, entsteht ein Strichmännchen. Daraus lässt sich lesen, ob sich jemand bückt, hebt oder fällt. Die Gesichter selbst werden dafür nicht gebraucht.",
-      "Die [[ocr|Texterkennung]] (englisch OCR) wandelt Schrift im Bild in Text. Gedruckte Schrift auf geradem, hellem Grund gelingt meist gut. Handschrift, Knicke, Spiegelungen und schlechte Fotos machen sie schwerer.",
+      "Die [[pose|Posenschätzung]] sucht Schlüsselpunkte am Körper: Schultern, Ellbogen, Hüften, Knie. Verbindet man sie, entsteht ein Strichmännchen. Daraus lässt sich lesen, ob sich jemand bückt, hebt oder fällt. Die Gesichter selbst werden dafür nicht gebraucht. Ausprobieren kannst du es im Labor {{koerperhaltung|Körperhaltung}}.",
+      "Die [[ocr|Texterkennung]] (englisch OCR) wandelt Schrift im Bild in Text. Gedruckte Schrift auf geradem, hellem Grund gelingt meist gut. Handschrift, Knicke, Spiegelungen und schlechte Fotos machen sie schwerer. Jeden Schritt zeigt das Labor {{text-lesen|Text auf Papier lesen}}.",
       "Im Betrieb: Haltung am Arbeitsplatz einschätzen, Stürze erkennen, Bewegungen im Sport analysieren. Lieferscheine und Rechnungen einlesen, Kennzeichen am Tor lesen. Die Grenze: Beide Verfahren arbeiten mit Wahrscheinlichkeiten. Eine falsch gelesene Ziffer auf einer Rechnung fällt nicht von selbst auf, darum prüfst du Beträge gegen eine zweite Quelle.",
     ], alltag: "Eine Physiotherapeutin sieht beim Kniebeugen auf Knie, Hüfte und Rücken, nicht auf das Gesicht. Beim Kassenzettel liest du Zeile für Zeile. Beides ist Sehen, aber mit einer ganz anderen Frage."},
     {h: "Alle fünf im Vergleich",
@@ -349,7 +351,7 @@ Object.assign(seiten, {
     {frage: "Eine Firma will prüfen, ob Beschäftigte beim Heben den Rücken gerade halten. Welche Aufgabe liegt nahe?", optionen: ["Texterkennung", "Klassifikation von Kleidung", "Posenschätzung", "Segmentierung des Hintergrunds"], richtig: 2, erklaerung: "Die Haltung steckt in der Lage der Gelenke. Der Einsatz verlangt aber eine saubere Datenschutzprüfung und die Beteiligung der Beschäftigten."},
     {frage: "Warum gilt Datenschutz auch für Texterkennung?", optionen: ["Weil gelesene Texte Namen, Adressen oder Kennzeichen enthalten können", "Weil Schrift immer geheim ist", "Gar nicht, Text ist kein Bild", "Weil das Modell sonst langsamer ist"], richtig: 0, erklaerung: "Die erkannten Texte sind oft personenbezogen. Entscheidend ist, was gelesen und gespeichert wird."},
   ],
-  weiter: ["gesicht", "bild-schuetzen", "objekt", "anlernen"],
+  weiter: ["gesicht", "bild-schuetzen", "koerperhaltung", "text-lesen", "objekt", "anlernen"],
 },
 
 });

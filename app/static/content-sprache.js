@@ -670,7 +670,7 @@ seiten: {
       {icon: "bell-ring", text: "Ansagen", sub: "Warteschleife, Bahnhof"},
       {icon: "video", text: "Erklärvideos", sub: "Sprecherstimme"},
       {icon: "bot", text: "Sprachassistent", sub: "Antwortstimme"}]}, p: [
-      "Typische Einsätze sind Barrierefreiheit (Seiten und Dokumente vorlesen für Menschen mit Sehbehinderung oder Leseschwäche), Ansagen in Warteschleifen und Bahnhöfen, Sprecherstimmen für Erklärvideos und die Antwortstimme von Sprachassistenten. In Verbindung mit Spracherkennung und Sprachmodell entsteht ein Gespräch: Hören, Verstehen, Antworten, Sprechen.",
+      "Typische Einsätze sind Barrierefreiheit (Seiten und Dokumente vorlesen für Menschen mit Sehbehinderung oder Leseschwäche), Ansagen in Warteschleifen und Bahnhöfen, Sprecherstimmen für Erklärvideos und die Antwortstimme von Sprachassistenten. In Verbindung mit Spracherkennung und Sprachmodell entsteht ein Gespräch: Hören, Verstehen, Antworten, Sprechen. Auch Kamera und Sprachausgabe lassen sich verbinden: Das Labor {{text-lesen|Text auf Papier lesen}} liest einen Zettel und spricht ihn mit dieser Stimme vor.",
       "Grenzen gibt es genug. Eigennamen und Fachwörter werden gern falsch ausgesprochen, besonders aus anderen Sprachen. Emotionen wirken schnell aufgesetzt, vor allem bei Ironie oder Trauer. Zahlenfolgen und Abkürzungen müssen geprüft werden. Höre dir wichtige Ausgaben vor dem Einsatz an, und lege bei häufigen Problemwörtern eine eigene Aussprache fest.",
     ], alltag: [
       "Ein Bahnhof sagt zum ersten Mal einen Ortsnamen aus dem Ausland an und stolpert über die Aussprache. Hörer merken es sofort. Die Betreiber tragen die Aussprache nach. Bei eigener Sprachausgabe läuft es genauso.",
@@ -698,7 +698,7 @@ seiten: {
      optionen: ["Sie klingt immer besser als jede Cloud-Stimme", "Der Text verlässt das Haus nicht", "Sie braucht keinen Strom", "Sie spricht jede Sprache perfekt"],
      richtig: 1, erklaerung: "Lokal bleibt der Text im Haus und es fallen keine Gebühren je Zeichen an. Dafür klingt sie meist etwas weniger natürlich als die größten Cloud-Stimmen."},
   ],
-  weiter: ["whisper", "chat", "tokens-sprachmodelle", "llm-grenzen"],
+  weiter: ["whisper", "text-lesen", "chat", "tokens-sprachmodelle", "llm-grenzen"],
 },
 
 },

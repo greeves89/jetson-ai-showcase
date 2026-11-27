@@ -51,7 +51,7 @@ start: {
   ],
   bereiche: {
     "Grundlagen": {symbol: "karte", satz: "Was KI ist, wie Maschinen lernen und wo die Grenzen liegen."},
-    "Sehen": {symbol: "gesicht", satz: "Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle."},
+    "Sehen": {symbol: "gesicht", satz: "Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle."},
     "Alltag in 15 Minuten": {symbol: "alltag-ki-kurz", satz: "Fünf kurze Seiten für Berufstätige: KI, Chat, Betrug, gute Fragen, Datenschutz."},
     "Experimente": {symbol: "experimente", satz: "Kleine Versuche, die du selbst nachmachst."},
     "Für die Schule": {symbol: "schule-start", satz: "Unterrichtseinheiten, Handreichungen und Infoblätter für Klassen, Lehrkräfte und Eltern."},
@@ -113,7 +113,7 @@ karte: {
      p: [
       "Wer wissen will, was eine KI für ihn tun kann, fragt besser nach dem Einsatzbereich als nach dem Verfahren:",
     ], liste: [
-      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{hand-gesicht|Hände und Gesichter}}, {{bild-schuetzen|Bild schützen}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
+      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{hand-gesicht|Hände und Gesichter}}, {{bild-schuetzen|Bild schützen}}, {{fingeralphabet|Fingeralphabet}}, {{koerperhaltung|Körperhaltung}}, {{text-lesen|Text auf Papier lesen}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
       "**Sprache:** Text und Ton verstehen und formulieren. Labor {{chat|Chat}} und {{whisper|Sprache zu Text}}.",
       "**Wissen:** gezielt in eigenen Dokumenten nachschlagen und Quellen nennen. Labor {{rag|RAG}}.",
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
@@ -489,7 +489,7 @@ objekt: {
     "Das Modell kennt nur seine 80 Klassen. Alles andere wird übersehen oder falsch benannt.",
     "Ungewöhnliche Blickwinkel, Verdeckung und Gegenlicht erhöhen Fehler.",
   ],
-  weiter: ["anlernen", "robotik"],
+  weiter: ["anlernen", "koerperhaltung", "text-lesen", "robotik"],
 },
 
 anlernen: {
@@ -705,6 +705,7 @@ whisper: {
       {label: "Rechenzeit", wert: 4, farbe: "gruen"}]},
      p: [
       "Die Anzeige trennt Aufnahmedauer und Rechenzeit. Ist die Rechenzeit kürzer als die Aufnahme, ist das Modell schneller als Echtzeit. Wenn nicht, kann es für Live-Untertitel nicht mithalten.",
+      "Live-Untertitel machen Gesprochenes für Menschen zugänglich, die schlecht hören. Gebärdensprache erkennt das Labor nicht. Was Technik bei Handzeichen leistet und was nicht, zeigt das {{fingeralphabet|Fingeralphabet}}.",
     ]},
   ],
   business: {
@@ -716,7 +717,7 @@ whisper: {
     "Aufnahmen dürfen höchstens 60 Sekunden lang sein. Es läuft das Modell Whisper „base“ auf dem Prozessor, immer nur eine Erkennung zugleich.",
     "Das Modell erkennt nicht, wer spricht.",
   ],
-  weiter: ["chat", "rag"],
+  weiter: ["chat", "rag", "fingeralphabet"],
 },
 
 /* ------------------------------------------------------------------ Labor: Erzeugen */
@@ -960,12 +961,12 @@ bereiche: [
   {name: "Büro und Wissen", aufgabe: "Dokumente befragen, Besprechungen protokollieren, Entwürfe schreiben", f: ["sprache", "wissen", "erzeugen"],
    verfahren: "Sprachmodelle, RAG für eigene Dokumente, Spracherkennung für Protokolle.",
    warum: "Viel Arbeit besteht aus Suchen, Lesen und Formulieren. Das lässt sich unterstützen, wenn Quellen sichtbar bleiben.",
-   labor: ["chat", "rag", "whisper"],
+   labor: ["chat", "rag", "whisper", "text-lesen"],
    frage: "Welche Dokumente dürfen in die Suche, und wer darf was finden?"},
   {name: "Sicherheit und Zutritt", aufgabe: "Anwesenheit feststellen, Bereiche überwachen", f: ["sehen"],
    verfahren: "Gesichts- und Personenerkennung.",
    warum: "Lokale Auswertung hält Videodaten im Haus und reagiert ohne Netzweg.",
-   labor: ["gesicht"],
+   labor: ["gesicht", "bild-schuetzen"],
    frage: "Gibt es eine Rechtsgrundlage, und was wird wie lange gespeichert?"},
   {name: "Kundenservice", aufgabe: "Anfragen beantworten, Tickets vorsortieren", f: ["sprache", "handeln", "wissen"],
    verfahren: "Sprachmodell mit Zugriff auf eine Wissensbasis und Werkzeuge (Agent).",

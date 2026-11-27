@@ -353,7 +353,7 @@ S["rag-chunking"] = {
       "**Listen:** Ein Listenpunkt allein verliert den Satz davor („Folgende Unterlagen bringen Sie mit:“). Die Einleitung gehört zu jedem Punkt oder die Liste bleibt zusammen.",
       "**Code:** Schneide an Funktionen oder Klassen, nicht nach Zeichenzahl. Ein halbierter Funktionsrumpf ist kein Code mehr.",
       "**PDFs:** Der Text hat oft Kopf- und Fußzeilen, die auf jeder Seite stehen, Spalten, die durcheinander gelesen werden, und Silbentrennung. Prüfe vor dem Zerlegen, wie der Text tatsächlich aussieht.",
-      "**Gescannte Dokumente:** Ein Scan ist ein Bild. Der Text muss erst per [[ocr|Texterkennung]] gelesen werden. Fehler dort (aus „rn“ wird „m“) setzen sich in jedem späteren Schritt fort.",
+      "**Gescannte Dokumente:** Ein Scan ist ein Bild. Der Text muss erst per [[ocr|Texterkennung]] gelesen werden. Fehler dort (aus „rn“ wird „m“) setzen sich in jedem späteren Schritt fort. Wie Texterkennung liest und wo sie sich irrt, zeigt {{text-lesen|Text auf Papier lesen}}.",
     ], alltag: [
       "Ein Fahrplan hängt als Tabelle am Bahnhof: Zeilen für Haltestellen, Spalten für Uhrzeiten. Wer nur einen Streifen mit Zeiten ausschneidet, hat Zahlen ohne Haltestellenname. Mit Kopf- und Randspalte wird derselbe Ausschnitt lesbar.",
     ]},
