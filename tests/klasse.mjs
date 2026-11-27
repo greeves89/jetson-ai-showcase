@@ -53,8 +53,10 @@ try {
   await lehrer.screenshot({ path: join(SHOTS, "01-lehrer-start.png"), fullPage: false });
   await lehrer.click(".kl-start-knopf");
   await lehrer.waitForSelector(".kl-code", { timeout: 15000 });
-  const code = (await text(lehrer, ".kl-code-box .kl-code")).replace(/\s/g, "");
-  pruefe(/^[ACDEFGHJKMNPQRTWXYZ346789]{6}$/.test(code), "Code mit 6 Zeichen ohne Verwechselbares: " + code);
+  const codeAnzeige = (await text(lehrer, ".kl-code-box .kl-code")).trim();
+  pruefe(/^[A-Z0-9]{4}-[A-Z0-9]{4}$/.test(codeAnzeige), "Code wird in Vierergruppen angezeigt: " + codeAnzeige);
+  const code = codeAnzeige.replace(/[\s-]/g, "");
+  pruefe(/^[ACDEFGHJKMNPQRTWXYZ346789]{8}$/.test(code), "Code mit 8 Zeichen ohne Verwechselbares: " + code);
   await lehrer.click("button:has-text('Lehrer-Schlüssel zeigen')");
   const schluessel = (await text(lehrer, ".kl-schluessel code")).trim();
   pruefe(/^[0-9a-f]{32}$/.test(schluessel), "Lehrer-Schlüssel (128 Bit) wird angezeigt");
@@ -66,7 +68,7 @@ try {
   for (let i = 0; i < 3; i++) {
     const p = await neueSeite("schueler" + (i + 1));
     await oeffneSeite(p, "klasse-mitmachen");
-    await p.fill("#kl-code", code.toLowerCase());
+    await p.fill("#kl-code", i === 0 ? code.toLowerCase() : codeAnzeige.slice(0, 4) + " - " + codeAnzeige.slice(5));
     await p.click(".kl-zeile-form button");
     await p.waitForSelector(".kl-ich b", { timeout: 15000 });
     namen.push(await text(p, ".kl-ich b"));
@@ -79,7 +81,7 @@ try {
   // falscher Code
   const fremd = await neueSeite("fremd");
   await oeffneSeite(fremd, "klasse-mitmachen");
-  await fremd.fill("#kl-code", "AAAAAA"); await fremd.click(".kl-zeile-form button");
+  await fremd.fill("#kl-code", "AAAAAAAA"); await fremd.click(".kl-zeile-form button");
   pruefe(await warte(fremd, () => /gibt es nicht/.test(document.body.innerText)), "falscher Code: verständliche Meldung");
   await schueler[0].screenshot({ path: join(SHOTS, "02-schueler-warten.png") });
 
@@ -91,7 +93,7 @@ try {
   beobachte(wand);
   await wand.setViewportSize({ width: 1280, height: 720 });
   await wand.waitForSelector(".kl-wand", { timeout: 15000 });
-  pruefe(await warte(wand, (c) => document.body.innerText.includes(c), code, 15000), "Wand zeigt den Code (Sitzungsdaten aus dem Tab der Lehrkraft)");
+  pruefe(await warte(wand, (c) => document.body.innerText.includes(c), codeAnzeige, 15000), "Wand zeigt den Code (Sitzungsdaten aus dem Tab der Lehrkraft)");
   pruefe(await warte(wand, () => /3 dabei/.test(document.body.innerText)), "Wand: 3 dabei");
   const wandText = await text(wand, ".kl-wand");
   pruefe(namen.every((n) => wandText.includes(n)), "Wand zeigt in der Warteansicht die Zufallsnamen");

@@ -28,6 +28,7 @@ K.FEHLVERSUCH_PAUSE_S = 0.0                          # Tests muessen nicht warte
 K.SCAN_MAX_DATEIEN = 400
 K.GLOBAL_FEHLVERSUCHE_MINUTE = K.GLOBAL_FEHLVERSUCHE_STUNDE = 10 ** 6
 K.GLOBAL_PAUSE_S = 0.0
+K.VERSUCHE_JE_MINUTE = 10 ** 6                       # die Rate-Tests stellen 20 selbst ein
 K.BEITRITTE_JE_ADRESSE = 40                          # der Test "Mehrfach-Beitritt" stellt den Standard (3) selbst ein
 FENSTER = K.NACHRICHTEN_FENSTER
 K.NACHRICHTEN_FENSTER = (10_000, 10.0)          # nur der Flut-Test nutzt die echte Grenze
@@ -49,6 +50,7 @@ def zuruecksetzen():
         d.clear()
     K._beendet = 0
     K._global_fehl.clear()
+    K._versuche.clear()
     K._jetzt = _uhr
 
 
@@ -133,13 +135,17 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(ws_oeffnen_abgelehnt(c, {"origin": "https://boese.example.org"}), "fremder Origin: abgelehnt")
     zuruecksetzen()
     k = Klasse(c, schueler=2, wand=True)
-    ok(re.fullmatch(r"[ACDEFGHJKMNPQRTWXYZ346789]{6}", k.code) is not None, "Code: 6 Zeichen ohne Verwechselbares")
+    ok(re.fullmatch(r"[ACDEFGHJKMNPQRTWXYZ346789]{8}", k.code) is not None, "Code: 8 Zeichen ohne Verwechselbares")
     ok(re.fullmatch(r"[0-9a-f]{32}", k.key) is not None, "Lehrer-Schluessel: 128 Bit, hexadezimal")
     ok(k.antwort_erstellt["max_teilnehmer"] == K.MAX_TEILNEHMER, "Sitzung nennt ihre Obergrenze")
     ok(all(re.fullmatch(r"[A-ZÄÖÜ][a-zäöüß]+(er|e|es) [A-ZÄÖÜ][a-zäöüß]+", n) for n in k.namen) and len(set(k.namen)) == 2,
        "Pseudonyme: Farbe plus Tier, verschieden (%s)" % ", ".join(k.namen))
     ok(re.fullmatch(r"[0-9a-f]{32}", k.tokens[0]) is not None, "Wiederverbindungs-Schluessel an den Schueler")
     # Lehrkraft schliesst neu an, Schueler wieder anmelden
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        g = k.code[:4].lower() + " - " + k.code[4:].lower()
+        w.send_json({"t": "beitritt", "code": g})
+        ok(w.receive_json()["t"] == "willkommen", "Eingabe tolerant: 'abcd - efgh' (klein, Leerzeichen, Bindestrich) tritt bei")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
         w.send_json({"t": "lehrer", "code": k.code.lower(), "schluessel": k.key})
         ok(stand(w)["rolle"] == "lehrer", "Lehrkraft meldet sich mit Code (auch kleingeschrieben) und Schluessel erneut an")
@@ -154,7 +160,7 @@ with TestClient(app, base_url="http://testserver") as c:
         w.send_json({"t": "lehrer", "code": k.code, "schluessel": "0" * 32})
         ok(w.receive_json()["t"] == "fehler", "Lehrkraft mit falschem Schluessel: Fehler")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
-        w.send_json({"t": "lehrer", "code": "AAAAAA", "schluessel": k.key})
+        w.send_json({"t": "lehrer", "code": "AAAAAAAA", "schluessel": k.key})
         ok(w.receive_json()["t"] == "fehler", "falscher Code: Fehler")
     for boese in (None, 5, ["A"], {"a": 1}, "", "A" * 5000, "ACDEFG'; DROP TABLE x;--"):
         with c.websocket_connect("/ws/klasse", headers=H) as w:
@@ -180,7 +186,7 @@ with TestClient(app, base_url="http://testserver") as c:
         try:
             with c.websocket_connect("/ws/klasse", headers=H) as w:
                 for _ in range(K.FEHLVERSUCHE_JE_VERBINDUNG + 1):
-                    w.send_json({"t": "beitritt", "code": "AAAAAA"})
+                    w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
                     r = w.receive_json()
                     versuche += 1
                     if "Zu viele falsche" in r.get("text", ""):
@@ -193,7 +199,7 @@ with TestClient(app, base_url="http://testserver") as c:
             break
     ok(gesperrt and versuche <= K.FEHLVERSUCHE_JE_IP + 3, "nach %d Fehlversuchen gesperrt (Grenze %d)" % (versuche, K.FEHLVERSUCHE_JE_IP))
     with c.websocket_connect("/ws/klasse", headers=H) as w:
-        w.send_json({"t": "beitritt", "code": "AAAAAA"})
+        w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
         r = w.receive_json()
         ok(r["t"] == "fehler" and "Zu viele falsche" in r["text"], "gesperrt: falscher Code bleibt abgewiesen")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
@@ -478,7 +484,7 @@ with TestClient(app, base_url="http://testserver") as c:
     k.l.send_json({"t": "aktivitaet", "art": "skala", "ref": "t"})
     stand(k.l, lambda m: m["aktivitaet"] and m["aktivitaet"]["art"] == "skala")
     vorher = c.get("/api/klasse/zaehler").json()["aktiv"]
-    k.l.send_json({"t": "beenden", "code": "AAAAAA"})
+    k.l.send_json({"t": "beenden", "code": "AAAAAAAA"})
     ok(lies(k.l, lambda m: m.get("t") == "fehler")["t"] == "fehler", "Beenden mit falschem Code: Fehler, Sitzung bleibt")
     ok(c.get("/api/klasse/zaehler").json()["aktiv"] == vorher == 1, "Zaehler vor dem Loeschen: 1")
     k.l.send_json({"t": "beenden", "code": k.code})
@@ -537,7 +543,7 @@ with TestClient(app, base_url="http://testserver") as c:
         ok(rr["format"] == "ungültig" or rr["signatur"] != "gültig", "angehaengte oder veraenderte Zeilen (%s): abgelehnt" % name)
     pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach, "code": k.code}, headers=H).json()
     ok(pr.get("code_passt") is True, "Protokoll passt zum Code der Sitzung")
-    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach, "code": "AAAAAA"}, headers=H).json()
+    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach, "code": "AAAAAAAA"}, headers=H).json()
     ok(pr.get("code_passt") is False, "Protokoll mit fremdem Code: passt nicht")
     uhr["plus"] += K.PRUEF_FRIST_S + 3600
     pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach}, headers=H).json()
@@ -602,7 +608,7 @@ with TestClient(app, base_url="http://testserver") as c:
     k = Klasse(c)
     def versuch(kopf):
         with c.websocket_connect("/ws/klasse", headers=dict(H, **kopf)) as w:
-            w.send_json({"t": "beitritt", "code": "AAAAAA"})
+            w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
             return w.receive_json().get("text", "")
     gesperrt = False
     for i in range(K.FEHLVERSUCHE_JE_IP + 2):          # jedes Mal eine andere vorgetaeuschte Adresse
@@ -660,7 +666,7 @@ with TestClient(app, base_url="http://testserver") as c:
         ok(stand(w)["rolle"] == "schueler", "waehrend der globalen Sperre klappt das Wiederverbinden eines Schuelers")
     alt_p = K.GLOBAL_PAUSE_S
     K.GLOBAL_PAUSE_S = 0.0
-    for falsch in ({"t": "beitritt", "code": "AAAAAA"}, {"t": "lehrer", "code": k2.code, "schluessel": "0" * 32}):
+    for falsch in ({"t": "beitritt", "code": "AAAAAAAA"}, {"t": "lehrer", "code": k2.code, "schluessel": "0" * 32}):
         with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.95"})) as w:
             w.send_json(falsch)
             ok("falsche Codes" in w.receive_json().get("text", ""), "waehrend der globalen Sperre bleiben falsche Versuche abgewiesen (%s)" % falsch["t"])
@@ -671,6 +677,53 @@ with TestClient(app, base_url="http://testserver") as c:
     K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP = alt_m, alt_ip
     os.environ.pop("KL_PROXY_KEY", None)
     k.schliesse(); k2.schliesse()
+
+    print("--- Durchsatz je Netzbereich (auch mit richtigem Code)")
+    zuruecksetzen()
+    K.VERSUCHE_JE_MINUTE = 20
+    k = Klasse(c)
+    for i in range(20):
+        k.schueler()
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "beitritt", "code": k.code})
+        rr = w.receive_json()
+        ok(rr["t"] == "fehler" and "sehr viele Beitrittsversuche" in rr["text"], "21. Beitritt in einer Minute von einer Adresse: abgewiesen, obwohl der Code stimmt")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "lehrer", "code": k.code, "schluessel": k.key})
+        ok(stand(w)["rolle"] == "lehrer", "Rate voll: Lehrkraft mit Schluessel kommt trotzdem durch")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "wieder", "code": k.code, "token": k.tokens[0]})
+        ok(stand(w)["rolle"] == "schueler", "Rate voll: Wiederverbinden mit Schluessel kommt durch")
+    uhr["plus"] += 65
+    for i in range(20):
+        k.schueler()
+    ok(len(k.s) == 40, "Realistische Klasse: 40 Beitritte von einer Adresse in knapp drei Minuten klappen")
+    ok(len(set(k.namen)) == 40, "40 verschiedene Zufallsnamen")
+    uhr["plus"] = 0.0
+    k.schliesse()
+    K.VERSUCHE_JE_MINUTE = 10 ** 6
+    # Treffer-Wahrscheinlichkeit bei dem Durchsatz (Rechnung steht im Bericht und auf der Seite)
+    p_stunde = 20 * 60 * (MAX_S := K.MAX_SITZUNGEN) / (len(K.CODE_ZEICHEN) ** K.CODE_LAENGE)
+    ok(p_stunde < 2e-7, "Trefferwahrscheinlichkeit je Netzbereich und Stunde bei vollem Durchsatz: %.2e" % p_stunde)
+
+    print("--- Vorab-Verbindungen: Zeitlimit und Falschversuche")
+    zuruecksetzen()
+    alt_z = K.PREAUTH_ZEIT_S
+    K.PREAUTH_ZEIT_S = 1.0
+    zu = False
+    try:
+        with c.websocket_connect("/ws/klasse", headers=H) as w:
+            for _ in range(5):
+                w.receive_json()
+    except WebSocketDisconnect:
+        zu = True
+    K.PREAUTH_ZEIT_S = alt_z
+    ok(zu, "Verbindung ohne gueltige Nachricht wird nach dem Vorab-Zeitlimit geschlossen")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
+        ok(w.receive_json()["t"] == "fehler", "Falschversuch beantwortet")
+        ok(K._vorab_gesamt[0] == 0 and not K._vorab_ip, "Falschversuch zaehlt nicht mehr gegen die Vorab-Grenze (Verbindung noch offen)")
+    ok(K.PREAUTH_GESAMT >= 200 and K.PREAUTH_JE_IP >= 10, "Vorab-Grenzen: gesamt %d, je Adresse %d" % (K.PREAUTH_GESAMT, K.PREAUTH_JE_IP))
 
     print("--- Mehrfach-Beitritt und Vorab-Verbindungen")
     zuruecksetzen()

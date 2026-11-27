@@ -115,6 +115,7 @@
   }
 
   /* ---------------------------------------------------------------- gemeinsame Teile der Oberflaeche */
+  const gruppiert = (c) => (c && c.length === 8 ? c.slice(0, 4) + "-" + c.slice(4) : c || "");
   const mmss = (s) => { s = Math.max(0, Math.floor(s)); const m = Math.floor(s / 60); return m + ":" + String(s % 60).padStart(2, "0"); };
   const hinweis = (symbol, ...kids) => h("p", { class: "kl-hinweis" }, icon(symbol), h("span", null, ...kids));
 
@@ -315,7 +316,7 @@
         h("span", null, "Aktive Sitzungen im Labor: ", h("b", null, String(zaehlerVorher)), " vor dem Löschen, ", h("b", null, String(zaehlerNachher.aktiv)), " danach.")));
       if (!ende.protokoll) {
         box.append(hinweis("triangle-alert", "Die Sitzung wurde beendet, während du nicht verbunden warst. Ein Protokoll holst du mit dem Code, solange der Dienst es noch hält (eine Stunde)."));
-        const code = h("input", { type: "text", maxlength: "6", autocomplete: "off", "aria-label": "Code der beendeten Sitzung", class: "kl-code-eingabe", placeholder: "Code" });
+        const code = h("input", { type: "text", maxlength: "12", autocomplete: "off", "aria-label": "Code der beendeten Sitzung", class: "kl-code-eingabe", placeholder: "ABCD-EFGH" });
         box.append(h("div", { class: "kl-zeile-form" }, code, h("button", { type: "button", class: "btn", onclick: () => {
           const v = verbindung({ erste: () => ({ t: "nachweis", code: code.value }), bei: (m) => { if (m.nachweis) { ende.protokoll = m.nachweis; zeichnen(); } }, bleibt: false });
           setTimeout(() => v.beenden(), 4000);
@@ -382,8 +383,8 @@
       const teile = [];
       const d = daten || oeffnen() || { code: "", key: "" };
       teile.push(h("div", { class: "kl-kopf" },
-        h("div", { class: "kl-code-box" }, h("span", { class: "kl-label" }, "Code für die Klasse"), h("span", { class: "kl-code", "aria-label": "Code " + d.code.split("").join(" ") }, d.code),
-          h("button", { type: "button", class: "btn klein", onclick: () => KL.kopieren(d.code) }, icon("copy"), "Kopieren")),
+        h("div", { class: "kl-code-box" }, h("span", { class: "kl-label" }, "Code für die Klasse"), h("span", { class: "kl-code", "aria-label": "Code " + d.code.split("").join(" ") }, gruppiert(d.code)),
+          h("button", { type: "button", class: "btn klein", onclick: () => KL.kopieren(gruppiert(d.code)) }, icon("copy"), "Kopieren")),
         h("div", { class: "kl-werte" },
           h("p", null, icon("users"), h("span", null, h("b", null, stand.teilnehmer + " von " + stand.max_teilnehmer), " dabei")),
           h("p", null, icon("clock"), h("span", null, "Noch ", h("b", { class: "kl-rest" }, mmss(stand.rest_s)))),
@@ -542,10 +543,10 @@
           h("button", { type: "button", class: "btn", onclick: () => { ende = false; fehler = ""; gestartet = false; verb = null; zeichnen(); } }, icon("refresh-cw"), "Anderer Code"))];
       }
       if (!st) {
-        const feld = h("input", { type: "text", id: "kl-code", class: "kl-code-eingabe", maxlength: "6", autocomplete: "off", autocapitalize: "characters", spellcheck: "false", "aria-label": "Code der Klasse", placeholder: "CODE" });
+        const feld = h("input", { type: "text", id: "kl-code", class: "kl-code-eingabe", maxlength: "12", autocomplete: "off", autocapitalize: "characters", spellcheck: "false", "aria-label": "Code der Klasse, acht Zeichen", placeholder: "ABCD-EFGH" });
         const los = () => {
-          const c = feld.value.trim().toUpperCase();
-          if (c.length !== 6) { fehler = "Der Code hat sechs Zeichen."; zeichnen(); return; }
+          const c = feld.value.replace(/[\s-]/g, "").toUpperCase();
+          if (c.length !== 8) { fehler = "Der Code hat acht Zeichen, zum Beispiel ABCD-EFGH."; zeichnen(); return; }
           codeAktuell = c; verbinden(c); zeichnen();
         };
         feld.addEventListener("keydown", (e) => { if (e.key === "Enter") los(); });
@@ -606,20 +607,20 @@
         const l = lesen();
         if (l && !gestartet && !fehler) { verbinden(l.code, l.key); return [h("p", null, "Verbinde ...")]; }
         if (gestartet && !fehler) return [h("p", null, "Verbinde ...")];
-        const code = h("input", { type: "text", id: "kw-code", class: "kl-code-eingabe", maxlength: "6", autocomplete: "off", "aria-label": "Code" });
+        const code = h("input", { type: "text", id: "kw-code", class: "kl-code-eingabe", maxlength: "12", autocomplete: "off", "aria-label": "Code" });
         const key = h("input", { type: "password", id: "kw-key", autocomplete: "off", "aria-label": "Lehrer-Schlüssel", maxlength: "64", class: "kl-key-eingabe" });
         return [h("p", { class: "kl-lead" }, "Die Wand zeigt nur Summen. Sie braucht Code und Lehrer-Schlüssel. Wenn du sie über den Knopf auf der Lehrerseite geöffnet hast, kennt sie beides schon."),
           h("div", { class: "kl-zeile-form" }, h("label", { for: "kw-code" }, "Code"), code, h("label", { for: "kw-key" }, "Schlüssel"), key,
-            h("button", { type: "button", class: "btn primary", onclick: () => { fehler = ""; verbinden(code.value.trim().toUpperCase(), key.value.trim()); zeichnen(); } }, icon("presentation"), "Wand starten")),
+            h("button", { type: "button", class: "btn primary", onclick: () => { fehler = ""; verbinden(code.value.replace(/[\s-]/g, "").toUpperCase(), key.value.trim()); zeichnen(); } }, icon("presentation"), "Wand starten")),
           fehler ? h("p", { class: "kl-fehler", role: "alert" }, fehler) : null,
           hinweis("lock", "Code und Schlüssel stehen nie in der Adresse. Die Wand kann nichts steuern.")];
       }
       const a = st.aktivitaet;
       const kopf = h("div", { class: "kl-wand-kopf" },
         h("span", { class: "kl-wand-code" }, icon("users"), h("span", null, st.teilnehmer + " dabei")),
-        h("span", { class: "kl-wand-code" }, icon("key-round"), h("span", null, "Code ", h("b", { class: "kl-code klein" }, codeAnzeige))), voll);
+        h("span", { class: "kl-wand-code" }, icon("key-round"), h("span", null, "Code ", h("b", { class: "kl-code klein" }, gruppiert(codeAnzeige)))), voll);
       if (!a) {
-        return [kopf, h("div", { class: "kl-wand-mitte" }, h("h2", null, "Mach mit"), h("p", { class: "kl-wand-gross" }, "Öffne ", h("b", null, location.host + "/klasse-mitmachen")), h("p", { class: "kl-wand-gross" }, "und gib den Code ", h("b", { class: "kl-code" }, codeAnzeige), " ein."),
+        return [kopf, h("div", { class: "kl-wand-mitte" }, h("h2", null, "Mach mit"), h("p", { class: "kl-wand-gross" }, "Öffne ", h("b", null, location.host + "/klasse-mitmachen")), h("p", { class: "kl-wand-gross" }, "und gib den Code ", h("b", { class: "kl-code" }, gruppiert(codeAnzeige)), " ein."),
           h("div", { class: "kl-namen gross" }, (st.namen || []).map((n) => h("span", { class: "kl-chip" }, n))))];
       }
       const info = anzeige(a);

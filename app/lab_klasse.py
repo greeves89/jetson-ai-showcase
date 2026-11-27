@@ -49,7 +49,7 @@ router = APIRouter()
 
 # ---------------------------------------------------------------------------------------------------- Grenzen
 CODE_ZEICHEN = "ACDEFGHJKMNPQRTWXYZ346789"       # 25 Zeichen ohne Verwechselbares (0/O, 1/I/L, 2/Z gibt es nur als Z, 5/S, 8/B ...)
-CODE_LAENGE = 6                                   # 25^6 = 244 Millionen Codes
+CODE_LAENGE = 8                                   # 25^8 = 1,5 * 10^11 Codes, Anzeige in Vierergruppen (ABCD-EFGH)
 MAX_SITZUNGEN = int(umgebung_zahl("KL_KLASSE_MAX_SITZUNGEN", 20))
 MAX_TEILNEHMER = int(umgebung_zahl("KL_KLASSE_MAX_TEILNEHMER", 40))
 MAX_LAUFZEIT_S = umgebung_zahl("KL_KLASSE_MAX_LAUFZEIT_S", 7200, 5)       # 2 Stunden
@@ -60,8 +60,10 @@ MAX_VERBINDUNGEN = int(umgebung_zahl("KL_KLASSE_MAX_VERBINDUNGEN", 500))
 MAX_VERB_JE_IP = 60                               # eine Klasse hinter einer Schuladresse: 40 plus Lehrkraft und Wand
 MAX_SITZUNGEN_JE_IP = 3
 BEITRITTE_JE_ADRESSE = 3                          # Standard; die Lehrkraft kann fuer ein Schulnetz auf 10 oder 40 erhoehen
-PREAUTH_JE_IP = 5                                 # noch nicht angemeldete Verbindungen je Adresse
-PREAUTH_GESAMT = 40                               # und insgesamt (jede kann bis ws-max-size Speicher belegen, siehe docs)
+PREAUTH_JE_IP = 10                                # noch nicht angemeldete Verbindungen je Adresse (eine Klasse hinter einer Adresse tritt oft gleichzeitig bei)
+PREAUTH_GESAMT = 200                              # und insgesamt. Jede kann bis ws-max-size (2,1 MB) Speicher belegen: 200 * 2,1 MB = 420 MB Worst Case, siehe docs
+PREAUTH_ZEIT_S = 10.0                             # so lange hat eine Verbindung Zeit bis zur ersten gueltigen Nachricht
+VERSUCHE_JE_MINUTE = int(umgebung_zahl("KL_KLASSE_VERSUCHE_MINUTE", 20))     # Beitritte und falsche Versuche je Netzbereich und Minute, auch mit richtigem Code
 MIN_ANTWORTEN = 3                                 # kleine-Zahlen-Schutz
 MIN_FUER_MITTEL = 5                               # Mittelwert und Median erst ab so vielen Antworten, nie bei verdeckten Feldern
 FEHLVERSUCHE_JE_IP = 15                           # falsche Codes oder Schluessel je 10 Minuten, danach Sperre
@@ -71,7 +73,6 @@ FEHLVERSUCHE_JE_VERBINDUNG = 3
 GLOBAL_PAUSE_S = 2.0                              # Bremse fuer falsche Versuche waehrend der globalen Sperre
 GLOBAL_FEHLVERSUCHE_MINUTE = int(umgebung_zahl("KL_KLASSE_GLOBAL_MINUTE", 30))     # alle Adressen zusammen
 GLOBAL_FEHLVERSUCHE_STUNDE = int(umgebung_zahl("KL_KLASSE_GLOBAL_STUNDE", 300))
-ERSTE_NACHRICHT_S = 10.0
 LESE_TIMEOUT_S = 90.0                             # die Oberflaeche schickt alle 25 s ein "ping"
 NACHRICHTEN_FENSTER = (20, 10.0)                  # 20 Nachrichten je 10 s und Verbindung
 NACHWEIS_AUFBEWAHRUNG_S = 3600.0
@@ -178,10 +179,33 @@ class Sitzung:
 _sitz = {}              # Register 1: Sitzungskennung (HMAC des Codes) -> Sitzung
 _ip_sitzungen = {}      # Register 2: Adress-Kurzhash -> Menge von Sitzungskennungen
 _verbindungen = {}      # Register 3: Sitzungskennung -> Zahl offener Verbindungen
+class _Vorab:
+    """Eine noch nicht angemeldete Verbindung. frei() gibt ihren Platz zurueck (einmal): bei Anmeldung, beim Ende und bevor ein
+    Falschversuch gebremst wird, damit schlafende Falschversuche die Vorab-Grenze ehrlicher Besucher nicht fuellen."""
+    __slots__ = ("aktiv", "ip")
+
+    def __init__(self, ip):
+        self.aktiv, self.ip = True, ip
+        _vorab_gesamt[0] += 1
+        _vorab_ip[ip] = _vorab_ip.get(ip, 0) + 1
+
+    def frei(self):
+        if not self.aktiv:
+            return
+        self.aktiv = False
+        _vorab_gesamt[0] -= 1
+        n = _vorab_ip.get(self.ip, 1) - 1
+        if n > 0:
+            _vorab_ip[self.ip] = n
+        else:
+            _vorab_ip.pop(self.ip, None)
+
+
 _vorab_gesamt = [0]     # noch nicht angemeldete Verbindungen insgesamt
 _vorab_ip = {}          # und je Adresse
 _fehlerlog = logging.getLogger("uvicorn.error")
 _ip_verbindungen = {}   # Adress-Kurzhash -> offene Verbindungen
+_versuche = {}          # Adress-Kurzhash -> Zeitstempel der Beitritts- und Fehlversuche (gleitendes Fenster, 60 s)
 _fehlversuche = {}      # Adress-Kurzhash -> deque von Zeitstempeln
 _global_fehl = deque()  # Zeitstempel aller Fehlversuche (ohne Adresse), Obergrenze fuer verteiltes Raten
 _nachweise = {}         # Sitzungskennung -> (Protokolltext, Ablaufzeit). Nur Zahlen, Hash und Prueferergebnisse.
@@ -465,6 +489,8 @@ async def loesche(sid: str, anlass: str):
     nadeln = [bytes(s.code), sid.encode()]
     code_hash = hashlib.sha256(nadeln[0]).hexdigest()       # steht als "Sitzung" im Protokoll: die Lehrkraft kann es nachrechnen
     nadeln.append(nadeln[0].lower())
+    gruppe = nadeln[0][:4] + b"-" + nadeln[0][4:]
+    nadeln += [gruppe, gruppe.lower()]
     code_text = nadeln[0].decode()
     start, zahlen = s.start, (len(s.teilnehmer), sum(sum(a.zaehler.values()) for a in s.aktivitaeten), len(s.aktivitaeten))
     log_treffer, ip, signal = s.log_treffer, s.ip, s.signal
@@ -523,8 +549,10 @@ async def loesche(sid: str, anlass: str):
 
 
 def _norm(code):
-    """Eingabe tolerant (Leerzeichen, Kleinbuchstaben), sonst unveraendert."""
-    return code.strip().upper() if isinstance(code, str) else code
+    """Eingabe tolerant: Leerzeichen, Bindestriche und Kleinbuchstaben (ABCD-efgh), sonst unveraendert."""
+    if isinstance(code, str) and len(code) <= 40:
+        return re.sub(r"[\s-]", "", code).upper()
+    return code
 
 
 def _finde(code: str):
@@ -793,6 +821,24 @@ def _gesperrt(ip: str) -> bool:
     return len(d) >= FEHLVERSUCHE_JE_IP
 
 
+def _rate_frei(ip: str, verbrauchen: bool = True) -> bool:
+    """Gleitendes Fenster je Netzbereich: hoechstens VERSUCHE_JE_MINUTE Beitritte oder falsche Versuche je Minute, auch bei
+    GUELTIGEM Code. So bleibt das Raten je Adresse auf diese Rate begrenzt, eine Klasse (40 Kinder in wenigen Minuten) geht durch.
+    Lehrer-, Wand- und Wiederverbindungs-Schluessel (128 Bit) sind ausgenommen, solange sie stimmen."""
+    jetzt = _jetzt()
+    d = _versuche.setdefault(ip, deque())
+    while d and jetzt - d[0] > 60:
+        d.popleft()
+    if len(d) >= VERSUCHE_JE_MINUTE:
+        return False
+    if verbrauchen:
+        d.append(jetzt)
+    if len(_versuche) > 5000:
+        for k in [k for k, v in _versuche.items() if not v or jetzt - v[-1] > 60][:2500]:
+            _versuche.pop(k, None)
+    return True
+
+
 def _global_gesperrt() -> bool:
     """True, wenn alle Adressen zusammen zu viele falsche Codes oder Schluessel geschickt haben (verteiltes Raten).
     Wirkt nur auf falsche Versuche (Verzoegerung, Abbruch der Verbindung), nie auf richtige Codes oder Schluessel."""
@@ -966,22 +1012,14 @@ async def ws_klasse(ws: WebSocket):
     await ws.accept()
     _verb_gesamt += 1
     _ip_verbindungen[ip] = _ip_verbindungen.get(ip, 0) + 1
-    _vorab_gesamt[0] += 1
-    _vorab_ip[ip] = _vorab_ip.get(ip, 0) + 1
-    vorab = True
+    vorab = _Vorab(ip)
     sid = None
     sender = None
     try:
         try:
-            sid, rolle, nr, token = await _anmelden(ws, ip)
+            sid, rolle, nr, token = await _anmelden(ws, ip, vorab)
         finally:
-            vorab = False
-            _vorab_gesamt[0] -= 1
-            n = _vorab_ip.get(ip, 1) - 1
-            if n > 0:
-                _vorab_ip[ip] = n
-            else:
-                _vorab_ip.pop(ip, None)
+            vorab.frei()
         if sid is None:
             return
         _verbindungen[sid] = _verbindungen.get(sid, 0) + 1
@@ -1059,6 +1097,7 @@ async def ws_klasse(ws: WebSocket):
     except Exception as e:                               # noqa: BLE001
         _fehlerlog.error("Klassenmodus: Programmfehler %s", type(e).__name__)
     finally:
+        vorab.frei()
         if sender is not None:
             sender.cancel()
         if sid is not None:
@@ -1073,9 +1112,13 @@ async def ws_klasse(ws: WebSocket):
             _ip_verbindungen[ip] = n
         else:
             _ip_verbindungen.pop(ip, None)
+        try:
+            await ws.close(code=1001)                    # auch nach Zeitueberschreitung sauber schliessen
+        except Exception:                                # noqa: BLE001  (schon geschlossen)
+            pass
 
 
-async def _anmelden(ws, ip):
+async def _anmelden(ws, ip, vorab):
     """Erste Nachricht: neu | lehrer | wand | beitritt | wieder | nachweis. Gibt (sid, rolle, nr, token) oder (None, ..) zurueck."""
     if _nicht_eingerichtet():
         await _fehler(ws, "Der Klassenmodus ist auf diesem Dienst nicht eingerichtet (der Proxy-Schlüssel fehlt). Bitte den Betreiber informieren.", True, 1013)
@@ -1083,14 +1126,24 @@ async def _anmelden(ws, ip):
     await aufraeumen()
     _reaper_sichern()
     fehler_hier = 0
+    frist = time.monotonic() + PREAUTH_ZEIT_S
     for _ in range(8):                                   # vor der Anmeldung nur wenige Nachrichten, kein Dauerbetrieb
-        m = await _lesen(ws, ERSTE_NACHRICHT_S)
+        m = await _lesen(ws, max(0.5, frist - time.monotonic()))
         if m is None:
             await _fehler(ws, "Ungültige Nachricht.", True)
             return None, None, None, None
         t = m["t"]
         if t == "neu":
             return await _neu(ws, ip)
+        verbraucht = False
+        if t in ("beitritt", "nachweis"):
+            # Zuerst die Rate, DANN der Code: Auch ein Treffer geht bei zu vielen Versuchen nicht durch.
+            verbraucht = True
+            if not _rate_frei(ip):
+                vorab.frei()
+                await asyncio.sleep(GLOBAL_PAUSE_S)
+                await _fehler(ws, "Von diesem Anschluss kommen gerade sehr viele Beitrittsversuche. Warte etwa eine Minute und versuche es dann noch einmal.", True, 1013)
+                return None, None, None, None
         code = _norm(m.get("code"))
         sid = _finde(code)
         gut = False
@@ -1124,7 +1177,10 @@ async def _anmelden(ws, ip):
         gesperrt = _gesperrt(ip)
         glob = _global_gesperrt()
         _fehlversuch(ip)
+        if not verbraucht:
+            _rate_frei(ip)                                # falsche Schluessel zaehlen ebenfalls gegen die Rate
         fehler_hier += 1
+        vorab.frei()                                      # ab hier wartet die Verbindung nur noch auf die Bremse
         if gesperrt or glob:
             await asyncio.sleep(GLOBAL_PAUSE_S)
             await _fehler(ws, ("Zu viele falsche Eingaben von diesem Anschluss. Warte etwa zehn Minuten und versuche es dann noch einmal."

@@ -34,7 +34,7 @@ seiten: {
       {icon: "chart-bar", text: "Wand", sub: "Nur Summen", farbe: "gruen"},
       {icon: "trash-2", text: "Löschen", sub: "Protokoll"}]},
      liste: [
-      "Drücken Sie oben auf \"Sitzung starten\". Es erscheint ein Code mit sechs Zeichen, zum Beispiel für die Tafel.",
+      "Drücken Sie oben auf \"Sitzung starten\". Es erscheint ein Code mit acht Zeichen in zwei Vierergruppen (zum Beispiel ABCD-EFGH), den Sie an die Tafel schreiben.",
       "Die Klasse öffnet {{klasse-mitmachen|die Seite zum Mitmachen}} und gibt den Code ein. Jede Person bekommt einen Zufallsnamen. Der Code steht nie in einer Internetadresse.",
       "Öffnen Sie \"Wand öffnen\" auf dem Beamer. Dort sehen alle, wie viele dabei sind, und später die Summen. Die Wand kann nichts steuern.",
       "Wählen Sie eine Aufgabe und starten Sie sie. Die Klasse tippt auf dem eigenen Gerät. Sie sehen nur, wie viele schon geantwortet haben.",
@@ -106,7 +106,7 @@ seiten: {
     {h: "Missbrauch und Grenzen",
      kurz: "Was den Dienst schützt, und was er nicht kann.",
      p: [
-      "Der Code hat sechs Zeichen aus 25 gut unterscheidbaren, das sind rund 244 Millionen Möglichkeiten. Nach 15 falschen Eingaben in zehn Minuten sperrt der Dienst weitere Versuche von diesem Anschluss. Als Anschluss gilt eine Einzeladresse, bei IPv6 das ganze Netz des Anschlusses (/64), und nur eine Adresse, die der eigene Proxy des Labors meldet. Mitgeschickte Adress-Kopfzeilen zählen nicht. Dazu gibt es eine Obergrenze für alle zusammen: ab 30 falschen Eingaben je Minute oder 300 je Stunde werden falsche Eingaben verzögert und abgewiesen. Ein richtiger Code kommt immer durch, auch dann. Fehlt dem Betreiber die Einrichtung des Proxys, lehnt der Klassenmodus Sitzungen ab, statt alle Besucher einer Adresse zuzuordnen. Jede falsche Eingabe wird zusätzlich gebremst. Eine Sitzung fasst höchstens 40 Personen, der Dienst höchstens 20 Sitzungen gleichzeitig, ein Anschluss höchstens drei. Jede Nachricht wird auf dem Server geprüft: nur erlaubte Zahlen, nur kurze Nachrichten, nur Anfragen von der eigenen Seite. Die Lehrkraft sieht keine IP-Adressen.",
+      "Der Code hat acht Zeichen aus 25 gut unterscheidbaren, das sind rund 150 Milliarden Möglichkeiten. Die Eingabe verzeiht Kleinbuchstaben, Leerzeichen und den Bindestrich. Je Netzbereich nimmt der Dienst höchstens 20 Beitritte oder falsche Eingaben je Minute an, auch mit richtigem Code: Eine Klasse mit 40 Kindern ist in zwei bis drei Minuten drin, ein Angreifer kommt je Netzbereich auf höchstens 1200 Versuche pro Stunde. Bei 20 laufenden Sitzungen trifft er damit je Netzbereich und Stunde mit einer Wahrscheinlichkeit von etwa 1,6 zu 10 Millionen. Wer viele Netzbereiche gleichzeitig nutzt, vervielfacht das, es bleibt aber winzig. Nach 15 falschen Eingaben in zehn Minuten sperrt der Dienst weitere Versuche von diesem Anschluss. Als Anschluss gilt eine Einzeladresse, bei IPv6 das ganze Netz des Anschlusses (/64), und nur eine Adresse, die der eigene Proxy des Labors meldet. Mitgeschickte Adress-Kopfzeilen zählen nicht. Dazu gibt es eine Obergrenze für alle zusammen: ab 30 falschen Eingaben je Minute oder 300 je Stunde werden falsche Eingaben verzögert und abgewiesen. Ein richtiger Code kommt immer durch, auch dann. Fehlt dem Betreiber die Einrichtung des Proxys, lehnt der Klassenmodus Sitzungen ab, statt alle Besucher einer Adresse zuzuordnen. Jede falsche Eingabe wird zusätzlich gebremst. Eine Sitzung fasst höchstens 40 Personen, der Dienst höchstens 20 Sitzungen gleichzeitig, ein Anschluss höchstens drei. Jede Nachricht wird auf dem Server geprüft: nur erlaubte Zahlen, nur kurze Nachrichten, nur Anfragen von der eigenen Seite. Die Lehrkraft sieht keine IP-Adressen.",
       "Grenzen: Wer den Code kennt, kann beitreten. Geben Sie ihn darum erst im Unterricht bekannt und löschen Sie am Ende. Einzelne Teilnehmende lassen sich nicht ausschließen, nur die ganze Sitzung löschen. Mehrfach-Beitritt lässt sich nicht vollständig verhindern: Je Netzwerkadresse nimmt der Dienst höchstens 3 Geräte auf (für ein Schulnetz stellen Sie 10 oder 40 ein), aber wer mehrere Geräte oder Adressen hat, kann mehrfach stimmen. Anonym heißt hier auch: nicht gegen Manipulation gesichert. Wer in der Klasse bewusst Unsinn antwortet, verfälscht die Summe. Bei sehr kleinen Gruppen schützt auch die Verdeckung nur begrenzt. Der Klassenmodus ist ein Lernwerkzeug und kein Prüfungsverfahren.",
      ]},
     {h: "Das Löschprotokoll, und was es belegt",
@@ -143,7 +143,7 @@ seiten: {
     {h: "So machst du mit",
      kurz: "Drei Schritte.",
      liste: [
-      "Gib oben den Code ein, den deine Lehrkraft zeigt. Er hat sechs Zeichen.",
+      "Gib oben den Code ein, den deine Lehrkraft zeigt. Er hat acht Zeichen, zum Beispiel ABCD-EFGH. Groß und klein ist egal.",
       "Du bekommst einen Zufallsnamen, zum Beispiel \"Roter Fuchs\". Das ist nicht dein Name. Er gilt nur für diese Stunde.",
       "Wenn eine Aufgabe erscheint, tippe deine Antwort und drücke \"Antwort abschicken\". Danach ist sie endgültig.",
      ],
@@ -162,7 +162,7 @@ seiten: {
       beschriftung: "Probleme und Lösungen",
       kopf: ["Was du siehst", "Was du tun kannst"],
       zeilen: [
-       ["Diesen Code gibt es nicht", "Prüfe die sechs Zeichen. Es gibt kein O, keine 0, kein I und kein L. Nach drei Fehlversuchen schließt die Verbindung, nach vielen sperrt der Dienst deinen Anschluss kurz."],
+       ["Diesen Code gibt es nicht", "Prüfe die acht Zeichen. Es gibt kein O, keine 0, kein I und kein L. Nach drei Fehlversuchen schließt die Verbindung, nach vielen sperrt der Dienst deinen Anschluss kurz."],
        ["Von deinem Anschluss sind schon 3 Geräte in dieser Sitzung", "Aus Schutz vor Mehrfachstimmen nimmt der Dienst je Netzwerkadresse zunächst nur 3 Geräte auf. Sag es deiner Lehrkraft, sie kann das für ein Schulnetz erhöhen."],
        ["Die Sitzung ist voll", "Es können 40 Personen mitmachen. Frag deine Lehrkraft."],
        ["Die Verbindung ist weg", "Warte einen Moment. Die Seite verbindet sich allein neu und du bleibst \"Roter Fuchs\", solange der Tab offen ist."],
@@ -177,7 +177,7 @@ seiten: {
   ],
   quiz: [
     {frage: "Was sieht die Lehrkraft von deiner Antwort?", optionen: ["Deinen Namen und deine Antwort", "Nur die Summe aller Antworten", "Dein Gerät und deine Antwort", "Nichts, auch keine Summe"], richtig: 1, erklaerung: "Die Lehrkraft sieht, wie viele geantwortet haben, und später die Verteilung aller Antworten. Wer was gewählt hat, weiß niemand."},
-    {frage: "Was tust du, wenn der Code nicht klappt?", optionen: ["Du probierst so lange, bis es klappt", "Du prüfst die sechs Zeichen und fragst im Zweifel deine Lehrkraft", "Du erfindest einen Code", "Du lädst die Seite hundertmal neu"], richtig: 1, erklaerung: "Zu viele falsche Eingaben sperren den Anschluss für einige Minuten. Genaues Hinsehen und Nachfragen geht schneller."},
+    {frage: "Was tust du, wenn der Code nicht klappt?", optionen: ["Du probierst so lange, bis es klappt", "Du prüfst die acht Zeichen und fragst im Zweifel deine Lehrkraft", "Du erfindest einen Code", "Du lädst die Seite hundertmal neu"], richtig: 1, erklaerung: "Zu viele falsche Eingaben sperren den Anschluss für einige Minuten. Genaues Hinsehen und Nachfragen geht schneller."},
   ],
   weiter: ["klassenmodus", "klasse-wand", "echt-oder-ki", "prompts-schule", "datenschutz-im-alltag"],
 },

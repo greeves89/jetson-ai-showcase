@@ -59,7 +59,7 @@
 .kl-senden{min-height:52px;font-size:18px;margin-top:6px}
 .kl-zahl-eingabe{width:100%;max-width:260px;font-size:24px;min-height:56px}
 .kl-zeile-form{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:12px 0}
-.kl-code-eingabe{width:11ch;font:700 30px var(--mono);letter-spacing:.2em;text-transform:uppercase;text-align:center;min-height:60px}
+.kl-code-eingabe{width:12ch;font:700 26px var(--mono);letter-spacing:.2em;text-transform:uppercase;text-align:center;min-height:60px}
 .kl-loesung-zeile{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin:8px 0}
 .kl-ergebnis{margin:12px 0}
 .kl-zeilen{list-style:none;margin:0;padding:0;display:grid;gap:10px}
