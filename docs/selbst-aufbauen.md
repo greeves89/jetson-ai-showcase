@@ -290,7 +290,7 @@ Dateicache großer Modelldateien bleibt nach dem Laden stehen und wird dabei nic
 - Starte keine zusätzlichen großen Programme auf dem Jetson, während das Labor läuft. Ein Desktop mit Browser frisst
   Speicher, den die Modelle brauchen.
 - Auf dem Referenzgerät nutzt Whisper `base` die CPU (CTranslate2 hat auf dem Jetson keine CUDA-Unterstützung),
-  etwa dreimal Echtzeit. Das ist gewollt, nicht kaputt.
+  etwa dreimal schneller als Echtzeit (die Aufnahme dauert dreimal so lange wie die Berechnung). Das ist gewollt, nicht kaputt.
 
 ## Fehlersuche
 
@@ -308,7 +308,7 @@ Dateicache großer Modelldateien bleibt nach dem Laden stehen und wird dabei nic
 | Gesichts- oder Objekterkennung bricht mit Importfehler von `cv2` ab | `numpy` 2 oder neuer überschreibt die Version, die OpenCV aus JetPack erwartet | `python3 -m pip install --user 'numpy<2'`, Dienst neu starten |
 | `pip: command not found` | `pip` ist bei JetPack nicht dabei | normal, `setup.sh` richtet `python3 -m pip` ein. Immer `python3 -m pip` benutzen |
 | Hinweis "Du bist Nr. 2" oder Meldung "ausgelastet" | Es laufen schon zwei Sprachmodell-Antworten | warten, das Labor wiederholt bis zu dreimal selbst |
-| Spracherkennung dauert lange | Whisper rechnet auf der CPU, etwa dreimal Echtzeit | erwartet; `WHISPER_MODELL` kleiner wählen, wenn nötig |
+| Spracherkennung dauert lange | Whisper rechnet auf der CPU, auf dem Referenzgerät etwa dreimal schneller als Echtzeit. Deutlich länger deutet auf Speichermangel oder ein größeres Modell hin | `free -m` und `python3 scripts/cache_leeren.py`, dann `WHISPER_MODELL` prüfen (Standard `base`, `small` ist genauer, aber langsamer) |
 | Dienst läuft nach Neustart nicht | `linger` nicht aktiv | `sudo loginctl enable-linger "$USER"` (**sudo**) |
 | Beim Beenden des Dienstes bricht deine SSH-Sitzung ab | `pkill -f "uvicorn app.app"` trifft die eigene Shell | `pkill -f "[u]vicorn app.app"` (die Klammern sind der Trick) oder besser `systemctl --user stop jetson-showcase` |
 

@@ -26,7 +26,13 @@ Modellquelle: https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE
 
 - Piper (`piper-tts`, Python-Paket der Open Home Foundation, github.com/OHF-Voice/piper1-gpl, Nachfolger von rhasspy/piper), GPL-3.0. Piper bringt
   espeak-ng für die Lautschrift mit, ebenfalls GPL. Das Labor ruft beides nur als Bibliothek auf dem Gerät auf.
-- onnxruntime, MIT.
+- onnxruntime, MIT (PyPI-Metadaten; wird von `piper-tts` als Abhängigkeit gezogen).
+- Webserver und Hilfspakete aus `requirements.txt` (Lizenztexte am 27.11.2026 an den Projekten gelesen): uvicorn, websockets und httpx
+  stehen unter BSD-3-Clause (encode/uvicorn, python-websockets/websockets, encode/httpx auf GitHub),
+  NumPy ebenfalls unter BSD-3-Clause (numpy/numpy). Die Seite `lizenzen` im Labor führt sie in der Komponententabelle.
+- Remotion (nur für die Erklärvideos, nicht im Labor): eigene Lizenz, kostenlos für Einzelpersonen und Firmen mit bis zu drei Personen,
+  sonst Company License (remotion.dev/docs/license/pricing, Stand 27.11.2026). Die Sprecherstimme der Videos kommt von ElevenLabs
+  (Nutzungsbedingungen des Anbieters).
 
 Hinweis: Stimmen sind Aufnahmen echter Menschen. Das Labor erzeugt keine geklonten Stimmen.
 Vor einem Einsatz außerhalb des Labors Lizenz und Einwilligung der Sprecherin oder des Sprechers prüfen.

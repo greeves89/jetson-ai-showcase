@@ -38,9 +38,9 @@ S.ueber = {
      kurz: "Lektionen erklären, Labore lassen dich ausprobieren, Videos und Selbsttests helfen beim Wiederholen. Die Zuordnung zu Rollen steht auf der {{start|Startseite}}.",
      liste: [
       "**Lektionen** erklären die Grundlagen von null, mit Beispielen aus dem Alltag, Vergleichstabellen, Merksätzen und einem kurzen Selbsttest.",
-      "**Labore** laufen live auf dem Jetson: Gesichts- und Objekterkennung über die eigene Webcam, ein Bildmodell anlernen, ein Sprachmodell befragen, Dokumente durchsuchen (RAG), ein Agent mit Werkzeugen, Sprache zu Text und Text zu Sprache.",
+      "**Labore** laufen live auf dem Jetson: Gesichts-, Hand- und Objekterkennung über die eigene Webcam, ein Bildmodell anlernen, ein Sprachmodell befragen, Dokumente durchsuchen (RAG), ein Agent mit Werkzeugen, Sprache zu Text und Text zu Sprache.",
       "**Interaktive Bausteine** machen Begriffe greifbar, zum Beispiel ein neuronales Netz im Browser oder der Gradientenabstieg.",
-      "**Erklärvideos** fassen Themen in 70 bis 100 Sekunden zusammen.",
+      "**Erklärvideos** fassen Themen in gut einer bis zweieinhalb Minuten zusammen, die meisten in 70 bis 100 Sekunden.",
       "**Business-Use-Cases** zeigen Beispiele aus Betrieben, mit fertigen Beispieldaten zum Starten per Klick.",
      ]},
     {h: "Selbst nachbauen",
@@ -52,7 +52,7 @@ S.ueber = {
      kurz: "Jedes Labor zeigt die Verarbeitung in Schritten, mit der Zeit für jeden Schritt. Den Aufbau im Überblick zeigt {{architektur|Wie das Labor aufgebaut ist}}.",
      p: [
       "Wenn du ein Labor startest, schickt dein Browser die Eingabe an den Jetson. Dort rechnet das Modell, und das Ergebnis kommt zurück. Das Labor zeigt dir dabei die einzelnen Schritte und wie lange jeder gedauert hat. Auf der Seite {{hardware|Hardware}} siehst du live, wie stark der Rechner gerade ausgelastet ist.",
-      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor arbeitet nur mit der Kamera und hat keine Beispielbilder.",
+      "Kamera und Mikrofon schalten sich nie von allein ein. Vorher fragt dich die Seite, danach dein Browser. Wer nichts freigeben will, nimmt in den meisten Laboren (Objekte, Anlernen, Sprache zu Text) die mitgelieferten Beispielbilder und Beispieldaten. Das Gesichts-Labor und das Labor Hände und Gesichter arbeiten nur mit der Kamera und haben keine Beispielbilder.",
      ]},
   ],
   mitnehmen: [
@@ -63,7 +63,7 @@ S.ueber = {
   grenzen: [
     "Der Jetson hat 8 GB Speicher für CPU und GPU zusammen. Deshalb laufen hier kleine Modelle, und große Sprachmodelle wie in Cloud-Diensten passen nicht darauf.",
     "Kleine Modelle machen mehr Fehler. Antworten des Sprachmodells können falsch oder erfunden sein, prüfe Wichtiges selbst.",
-    "Es ist ein einzelnes Gerät. Nur zwei Sprachmodell-Antworten laufen gleichzeitig, bei Andrang wartest du in einer Warteschlange.",
+    "Es ist ein einzelnes Gerät. Nur zwei Sprachmodell-Antworten laufen gleichzeitig. Bis zu sechs weitere warten in einer Schlange (bis zu 90 Sekunden), danach meldet das Labor „ausgelastet“. Kameraverbindungen sind auf sechs gleichzeitig begrenzt.",
     "Das Labor ist ein Lernangebot und keine Beratung. Für einen echten Einsatz im Betrieb braucht es eigene Prüfung von Daten, Recht und Sicherheit.",
   ],
   weiter: ["start", "hardware", "architektur", "selbst-bauen", "sicherheit-einfach"],
@@ -181,7 +181,7 @@ S["selbst-bauen"] = {
        ["Gesichts- oder Objekterkennung bricht mit Importfehler von `cv2` ab", "numpy 2 oder neuer überschreibt die Version, die OpenCV aus JetPack erwartet", "`python3 -m pip install --user 'numpy<2'`, Dienst neu starten"],
        ["`pip: command not found`", "pip ist bei JetPack nicht dabei", "Normal, `setup.sh` richtet `python3 -m pip` ein. Immer `python3 -m pip` benutzen"],
        ["Hinweis „Du bist Nr. 2“ oder „ausgelastet“", "Es laufen schon zwei Sprachmodell-Antworten", "Warten, das Labor wiederholt bis zu dreimal selbst"],
-       ["Spracherkennung dauert lange", "Whisper rechnet auf der CPU und braucht etwa dreimal so lange, wie die Aufnahme dauert", "Erwartet, bei Bedarf `WHISPER_MODELL` kleiner wählen"],
+       ["Spracherkennung dauert lange", "Whisper rechnet auf der CPU, auf dem Referenzgerät etwa dreimal schneller, als die Aufnahme dauert. Deutlich länger deutet auf Speichermangel oder ein größeres Modell hin", "Erst `free -m` und `python3 scripts/cache_leeren.py`, dann `WHISPER_MODELL` prüfen (Standard `base`, `small` ist genauer, aber langsamer)"],
        ["Dienst läuft nach Neustart nicht", "`linger` nicht aktiv", "`sudo loginctl enable-linger \"$USER\"` (braucht sudo)"],
        ["Beim Beenden des Dienstes bricht die SSH-Sitzung ab", "`pkill -f \"uvicorn app.app\"` trifft die eigene Shell", "`pkill -f \"[u]vicorn app.app\"` (die Klammern sind der Trick) oder besser `systemctl --user stop jetson-showcase`"],
        ["Dienst läuft, aber die Seite antwortet nicht", "Fehler im Dienst oder Ollama nicht erreichbar", "Log ansehen: `journalctl --user -u jetson-showcase -n 50 --no-pager`. Bleibt die Ausgabe leer: `journalctl _SYSTEMD_USER_UNIT=jetson-showcase.service -n 50 --no-pager`. Ollama prüfen: `sudo systemctl status ollama` (**sudo**)"],
