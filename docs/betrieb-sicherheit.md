@@ -81,3 +81,9 @@ location = /klasse/nachweis  { access_log off; proxy_pass ...; }
 ```
 
 Alternativ ein eigenes `log_format` mit gekürzter IP (`map $remote_addr $ip_kurz { ~(?P<a>\d+\.\d+\.\d+)\.\d+ $a.0; default 0.0.0.0; }`) und sieben Tage Aufbewahrung für diese Pfade. Die Seiten selbst (`/klassenmodus` usw.) sind normale Seitenaufrufe wie alle anderen. Danach die Aussage auf der Seite `klassenmodus` und im Datenschutzentwurf anpassen.
+
+### Klassenmodus: Besucheradresse hinter dem Proxy (Betrieb)
+
+Der Klassenmodus braucht für Sperre und Obergrenzen die echte Besucheradresse. Hinter dem Cloudflare-Tunnel kommt jede Verbindung vom lokalen Tunnelclient, die Adresse der direkten Verbindung ist darum für alle gleich. Der Dienst nutzt deshalb nur Werte, die der eigene nginx setzt und mit dem gemeinsamen Schlüssel ausweist: `proxy_set_header X-Real-IP $remote_addr;` und `proxy_set_header X-KL-Proxy <KL_PROXY_KEY>;` (beides steht in der vorhandenen Konfiguration von `location /`, auch für den neuen Pfad `/ws/klasse`, der denselben Block nutzt). Cloudflare reicht diese eigenen Header zum Dienst durch. `CF-Connecting-IP` bleibt ungenutzt: Der Dienst kann nicht belegen, dass die direkte Verbindung aus den veröffentlichten Cloudflare-Bereichen kommt, denn sie kommt vom lokalen Tunnelclient.
+
+Fehlt `KL_PROXY_KEY` bei `OEFFENTLICH=1`, startet der Klassenmodus mit einer Warnung und lehnt Sitzungen ab ("nicht eingerichtet"). Das ist gewollt: lieber geschlossen als alle Besucher unter einer Adresse. Änderungen am Server (Schlüssel setzen, `access_log` für die Klassen-Pfade) erfolgen erst nach Freigabe durch den Betreiber. In dieser Arbeit wurde am Server nichts geändert.

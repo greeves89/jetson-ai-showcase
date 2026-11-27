@@ -37,5 +37,9 @@ ok(client_kennung(Anfrage({"x-real-ip": "203.0.113.7", "x-kl-proxy": S})) == "20
 ok(client_kennung(Anfrage({"x-real-ip": "203.0.113.7"})) == "10.0.0.1", "X-Real-IP ohne Schluessel wird ignoriert")
 ok(client_kennung(Anfrage({"x-real-ip": "1.2.3.4, 5.6.7.8", "x-kl-proxy": S})) == "10.0.0.1", "Liste statt einer Adresse in X-Real-IP wird verworfen")
 ok(client_kennung(Anfrage({"x-real-ip": "<script>", "x-kl-proxy": S})) == "10.0.0.1", "Unsinn in X-Real-IP wird verworfen")
-ok(client_kennung(Anfrage({"cf-connecting-ip": "198.51.100.2"})) == "198.51.100.2", "ohne Proxy: CF-Connecting-IP")
+ok(client_kennung(Anfrage({"cf-connecting-ip": "198.51.100.2"})) == "10.0.0.1", "mit eingerichtetem Proxy-Schluessel, aber ohne Schluessel in der Anfrage: CF-Connecting-IP wird ignoriert")
+ok(client_kennung(Anfrage({"cf-connecting-ip": "198.51.100.2", "x-kl-proxy": "falsch"})) == "10.0.0.1", "falscher Schluessel: CF-Connecting-IP wird ignoriert")
+_k = os.environ.pop("KL_PROXY_KEY")
+ok(client_kennung(Anfrage({"cf-connecting-ip": "198.51.100.2"})) == "198.51.100.2", "ganz ohne eingerichteten Schluessel (alter Aufbau): Rueckfall auf CF-Connecting-IP")
+os.environ["KL_PROXY_KEY"] = _k
 sys.exit(1 if fehler else 0)

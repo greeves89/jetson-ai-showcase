@@ -267,10 +267,13 @@ Der Klassenmodus (`app/lab_klasse.py`, Seiten `klassenmodus`, `klasse-mitmachen`
 | `KL_KLASSE_SCANPFADE` | Weitere Ordner (mit `:` getrennt), die die Selbstprüfung beim Löschen nach Code und Sitzungskennung durchsucht, zum Beispiel der Ordner mit Dienstprotokollen. Standard: der Ordner des Dienstes ohne `static`, `models`, `certs`, `.git`. |
 | `KL_KLASSE_MAX_SITZUNGEN`, `KL_KLASSE_MAX_TEILNEHMER`, `KL_KLASSE_MAX_LAUFZEIT_S`, `KL_KLASSE_MAX_RUHE_S` | Obergrenzen. Standard 20 Sitzungen, 40 Personen, 7200 s, 1200 s. |
 
+**Öffentlicher Betrieb braucht den Proxy-Schlüssel.** Mit `OEFFENTLICH=1` verlangt der Klassenmodus, dass `KL_PROXY_KEY` gesetzt ist, und liest die Besucheradresse nur aus `X-Real-IP`, wenn die Anfrage den Schlüssel im Header `X-KL-Proxy` trägt (so setzt es der nginx-Proxy, siehe `docs/betrieb-sicherheit.md`). Ohne den Schlüssel sähe der Dienst hinter dem Tunnel nur die Adresse des lokalen Tunnelclients, alle Besucher teilten sich Sperre und Obergrenzen. Darum startet er dann mit einer Warnung (`RuntimeWarning` im Dienstprotokoll), lehnt jede Sitzung mit dem Hinweis "nicht eingerichtet" ab und meldet `bereit: false` unter `/api/klasse/zaehler`. Ohne `OEFFENTLICH` (Heimnetz) gilt die Adresse der direkten Verbindung. `CF-Connecting-IP` wird nie ausgewertet.
+
 Grenzen, die du kennen solltest:
 
 - Das Protokoll belegt die Löschung **in der Anwendung**. Zugriffsprotokolle des Webservers (IP-Adresse, Uhrzeit, Adresse) und der Transport über Cloudflare liegen außerhalb. Der Code steht nie in einer Adresse, die Zugriffsprotokolle enthalten ihn also nicht.
 - Die Selbstprüfung durchsucht Dateien, nicht das Systemjournal. Schreibt dein Dienst nach `journald`, prüfe es selbst (`journalctl | grep <Code>`).
+- **Größe von WebSocket-Nachrichten:** uvicorn nimmt standardmäßig Nachrichten bis 16 MB an, bevor die Anwendung sie sieht. Die Startdateien (`scripts/jetson-showcase.service`, `start.sh`, `start-bg.sh`) setzen darum `--ws-max-size 2100000`. Kleiner geht nicht, weil die Kamera-Labore (`/ws/vision`) Bilder bis 2 000 000 Zeichen als Text schicken. Der Klassenmodus selbst braucht nur 1024. Dazu begrenzt er nicht angemeldete Verbindungen auf 5 je Adresse und 40 insgesamt (Worst Case rund 84 MB). Wer den Dienst anders startet, muss `--ws-max-size` selbst setzen.
 - Der Dienst läuft in einem Prozess (ein uvicorn-Worker). Mehrere Worker würden die Sitzungen nicht teilen.
 - Python kann Arbeitsspeicher nicht garantiert nullen. Geheime Felder werden überschrieben, der Rest wird von der Speicherbereinigung freigegeben.
 - Test: `python3 tests/klasse_test.py` (ohne Jetson), `LABOR_URL=... node tests/klasse.mjs` (Browser).

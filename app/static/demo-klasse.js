@@ -193,7 +193,7 @@
         zaehlerNachher = null;
         zaehlerHolen().then((z) => { zaehlerNachher = z; zeichnen(); });
       } else if (m.t === "fehler") {
-        if (/Diesen Code gibt es nicht|Schlüssel stimmt nicht|beendet/.test(m.text)) { sp.loeschen(LEHRER_SP); daten = null; if (verb) { verb.beenden(); verb = null; } }
+        if (/^Diesen Code gibt es nicht|^Die Sitzung ist beendet/.test(m.text)) { sp.loeschen(LEHRER_SP); daten = null; if (verb) { verb.beenden(); verb = null; } }
         meldung(m.text);
       }
       zeichnen();
@@ -372,7 +372,8 @@
       teile.push(h("p", { class: "kl-lead" }, "Du startest eine Sitzung ohne Konto, ohne E-Mail und ohne Namen. Die Klasse tritt mit einem Code bei. Auf der Wand siehst du nur Summen."));
       teile.push(hinweis("shield-check", "Alles liegt nur im Arbeitsspeicher des Rechners, höchstens zwei Stunden. Du kannst jederzeit löschen und bekommst ein Protokoll."));
       if (fehlertext) teile.push(h("p", { class: "kl-fehler", role: "alert" }, fehlertext));
-      teile.push(h("div", { class: "kl-knoepfe" }, h("button", { type: "button", class: "btn primary kl-start-knopf", onclick: starten }, icon("play"), status === "verbinde" ? "Verbinde ..." : "Sitzung starten")));
+      if (zaehler && zaehler.bereit === false) teile.push(hinweis("triangle-alert", "Der Klassenmodus ist auf diesem Dienst noch nicht eingerichtet. Bitte den Betreiber informieren."));
+      teile.push(h("div", { class: "kl-knoepfe" }, h("button", { type: "button", class: "btn primary kl-start-knopf", disabled: zaehler && zaehler.bereit === false, onclick: starten }, icon("play"), status === "verbinde" ? "Verbinde ..." : "Sitzung starten")));
       if (zaehler) teile.push(h("p", { class: "kl-zaehler", role: "status" }, icon("activity"), h("span", null, "Aktive Sitzungen im Labor: ", h("b", null, String(zaehler.aktiv)), " von höchstens " + zaehler.max)));
       return teile;
     }
@@ -407,6 +408,10 @@
       unten.replaceChildren(
         h("h3", null, "Nächste Aufgabe"),
         hinweis("info", "Teilnehmende schicken nur Auswahlwerte, keinen Text. Die Frage stellst du mündlich oder sie kommt aus einer Lektion."),
+        h("div", { class: "kl-form" }, h("label", { for: "kl-je" }, "Geräte je Netzwerkadresse"),
+          h("select", { id: "kl-je", "aria-label": "Geräte je Netzwerkadresse", onchange: (e) => { if (verb) verb.senden({ t: "je_adresse", n: Number(e.target.value) }); } },
+            [[3, "3 (Standard, schützt vor Mehrfachstimmen)"], [10, "10"], [40, "40 (Schulnetz: alle Geräte hinter einer Adresse)"]].map(([n, text]) => h("option", { value: String(n), selected: n === ((stand && stand.je_adresse) || 3) }, text))),
+          h("p", { class: "leise" }, "Hinter einem Schulnetz teilen sich viele Geräte eine Adresse. Stelle den Wert vor dem Beitritt der Klasse auf 40, sonst weist der Dienst die weiteren Geräte ab.")),
         artWahl(), artFormular() || "",
         h("div", { class: "kl-gefahr" },
           h("p", null, "Mit dem Beenden wird alles gelöscht: Code, Pseudonyme, Antworten. Du bekommst ein Protokoll mit Prüfergebnissen."),

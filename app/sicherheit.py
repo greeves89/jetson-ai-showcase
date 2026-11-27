@@ -62,6 +62,11 @@ def client_kennung(request) -> str:
             return str(ipaddress.ip_address(h.get("x-real-ip", "").strip()))
         except ValueError:
             pass
+    # CF-Connecting-IP darf jeder Aufrufer mitschicken. Ist ein Proxy-Schluessel eingerichtet (KL_PROXY_KEY), gilt der Header nur
+    # nach dem Proxy-Pfad oben, sonst zaehlt die Adresse der direkten Verbindung. Nur ohne eingerichteten Schluessel (alter Aufbau)
+    # bleibt der bisherige Rueckfall auf CF-Connecting-IP.
+    if os.environ.get("KL_PROXY_KEY", "").strip():
+        return request.client.host if request.client else "?"
     return h.get("cf-connecting-ip") or (request.client.host if request.client else "?")
 
 

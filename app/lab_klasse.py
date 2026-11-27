@@ -31,6 +31,7 @@ import os
 import re
 import secrets
 import time
+import warnings
 import weakref
 from collections import deque
 from datetime import datetime, timezone
@@ -58,12 +59,16 @@ MAX_NACHRICHT = 1024                              # Zeichen je WebSocket-Nachric
 MAX_VERBINDUNGEN = int(umgebung_zahl("KL_KLASSE_MAX_VERBINDUNGEN", 500))
 MAX_VERB_JE_IP = 60                               # eine Klasse hinter einer Schuladresse: 40 plus Lehrkraft und Wand
 MAX_SITZUNGEN_JE_IP = 3
+BEITRITTE_JE_ADRESSE = 3                          # Standard; die Lehrkraft kann fuer ein Schulnetz auf 10 oder 40 erhoehen
+PREAUTH_JE_IP = 5                                 # noch nicht angemeldete Verbindungen je Adresse
+PREAUTH_GESAMT = 40                               # und insgesamt (jede kann bis ws-max-size Speicher belegen, siehe docs)
 MIN_ANTWORTEN = 3                                 # kleine-Zahlen-Schutz
 MIN_FUER_MITTEL = 5                               # Mittelwert und Median erst ab so vielen Antworten, nie bei verdeckten Feldern
 FEHLVERSUCHE_JE_IP = 15                           # falsche Codes oder Schluessel je 10 Minuten, danach Sperre
 FEHLVERSUCHE_FENSTER_S = 600.0
 FEHLVERSUCH_PAUSE_S = 0.8                         # jede falsche Eingabe wird um diese Zeit gebremst
 FEHLVERSUCHE_JE_VERBINDUNG = 3
+GLOBAL_PAUSE_S = 2.0                              # Bremse fuer falsche Versuche waehrend der globalen Sperre
 GLOBAL_FEHLVERSUCHE_MINUTE = int(umgebung_zahl("KL_KLASSE_GLOBAL_MINUTE", 30))     # alle Adressen zusammen
 GLOBAL_FEHLVERSUCHE_STUNDE = int(umgebung_zahl("KL_KLASSE_GLOBAL_STUNDE", 300))
 ERSTE_NACHRICHT_S = 10.0
@@ -77,10 +82,11 @@ SCAN_MAX_DATEI = 8_000_000
 SCAN_ZEIT_S = 4.0
 SCAN_AUSLASSEN = {".git", "node_modules", "__pycache__", "static", "models", "certs", ".venv", "venv", "videos", "ausgabe"}
 FORMAT = "kl-nachweis/1"
+PRUEF_FRIST_S = 30 * 86400                        # so lange bestaetigt der Dienst die Signatur
 ANLAESSE = {"lehrkraft": "Lehrkraft", "zeit": "Höchstdauer 2 Stunden", "ruhe": "Inaktiv (20 Minuten)", "test": "Test"}
 ARTEN = ("wahl", "skala", "schaetzung")
-REF_MUSTER = re.compile(r"^[a-z0-9:_-]{0,48}$")
-CODE_MUSTER = re.compile(r"^[" + CODE_ZEICHEN + r"]{" + str(CODE_LAENGE) + r"}$")
+REF_MUSTER = re.compile(r"[a-z0-9:_-]{0,48}")                       # immer mit fullmatch (kein "$": das liesse "jn\n" durch)
+CODE_MUSTER = re.compile(r"[" + CODE_ZEICHEN + r"]{" + str(CODE_LAENGE) + r"}")
 HEX = re.compile(r"^[0-9a-f]+$")
 
 FARBEN = ("Roter", "Blauer", "Grüner", "Gelber", "Oranger", "Violetter", "Türkiser", "Grauer", "Brauner", "Weißer")
@@ -106,6 +112,17 @@ except OSError:                                                      # pragma: n
 DIENSTVERSION = "Klassenmodus 1, Programmstand " + _QUELLTEXT_HASH
 
 _jetzt = time.time                                                   # Tests ersetzen die Uhr
+
+
+def _nicht_eingerichtet() -> bool:
+    """Oeffentlich (OEFFENTLICH=1) ohne KL_PROXY_KEY sieht der Dienst hinter dem Tunnel nur eine Adresse, alle Besucher teilten
+    sich Sperre und Obergrenzen. Dann laeuft der Klassenmodus nicht, statt still falsch zuzuordnen."""
+    return os.environ.get("OEFFENTLICH") == "1" and not os.environ.get("KL_PROXY_KEY", "").strip()
+
+
+if _nicht_eingerichtet():
+    warnings.warn("Klassenmodus nicht eingerichtet: OEFFENTLICH=1, aber KL_PROXY_KEY fehlt. Sitzungen werden abgelehnt. "
+                  "Siehe docs/betrieb-sicherheit.md.", RuntimeWarning)
 
 
 # ---------------------------------------------------------------------------------------------------- Zustand
@@ -141,7 +158,7 @@ class Aktivitaet:
 
 class Sitzung:
     __slots__ = ("sid", "start", "zuletzt", "code", "lehrer", "ip", "teilnehmer", "aktivitaeten", "signal", "naechste",
-                 "log_treffer", "__weakref__")
+                 "log_treffer", "ip_beitritte", "je_ip_max", "__weakref__")
 
     def __init__(self, sid, code, lehrer, ip):
         t = _jetzt()
@@ -154,11 +171,16 @@ class Sitzung:
         self.signal = Signal(sid)
         self.naechste = 1
         self.log_treffer = 0
+        self.ip_beitritte = {}                        # Adress-Kurzhash -> Zahl der Beitritte (nie weniger, auch nach dem Verlassen)
+        self.je_ip_max = BEITRITTE_JE_ADRESSE
 
 
 _sitz = {}              # Register 1: Sitzungskennung (HMAC des Codes) -> Sitzung
 _ip_sitzungen = {}      # Register 2: Adress-Kurzhash -> Menge von Sitzungskennungen
 _verbindungen = {}      # Register 3: Sitzungskennung -> Zahl offener Verbindungen
+_vorab_gesamt = [0]     # noch nicht angemeldete Verbindungen insgesamt
+_vorab_ip = {}          # und je Adresse
+_fehlerlog = logging.getLogger("uvicorn.error")
 _ip_verbindungen = {}   # Adress-Kurzhash -> offene Verbindungen
 _fehlversuche = {}      # Adress-Kurzhash -> deque von Zeitstempeln
 _global_fehl = deque()  # Zeitstempel aller Fehlversuche (ohne Adresse), Obergrenze fuer verteiltes Raten
@@ -166,18 +188,25 @@ _nachweise = {}         # Sitzungskennung -> (Protokolltext, Ablaufzeit). Nur Za
 _beendet = 0            # seit Start des Dienstes gelöschte Sitzungen
 _verb_gesamt = 0
 _reaper = {"task": None, "loop": None}
+_scan_sperre = asyncio.Semaphore(1)
 
 
 def _quell_ip(anfrage) -> str:
     """Adresse des Aufrufers. Forwarded-Header (X-Real-IP) zaehlen NUR, wenn die Anfrage den gemeinsamen Schluessel des eigenen
     Proxys traegt (KL_PROXY_KEY, wie in app/sicherheit.py). Sonst gilt die Adresse der direkten Verbindung. CF-Connecting-IP und
     X-Forwarded-For werden hier nie ausgewertet: ein Besucher koennte sie frei waehlen und so die Sperre umgehen."""
+    roh = None
     if _proxy_echt(anfrage.headers):
-        try:
-            return str(ipaddress.ip_address(anfrage.headers.get("x-real-ip", "").strip()))
-        except ValueError:
-            pass
-    return anfrage.client.host if anfrage.client else "?"
+        roh = anfrage.headers.get("x-real-ip", "").strip()
+    if not roh:
+        roh = anfrage.client.host if anfrage.client else "?"
+    try:
+        a = ipaddress.ip_address(roh)
+    except ValueError:
+        return roh
+    if a.version == 6:                                 # IPv6: ein Anschluss hat ein ganzes /64, darum zaehlt der Netzbereich
+        return str(ipaddress.ip_network((a, 64), strict=False))
+    return str(a)
 
 
 def _ip_tag(anfrage) -> str:
@@ -317,7 +346,7 @@ def _stand(sid: str, rolle: str, nr):
                 akt["antworten"] = len(a.beantwortet)
         if a.zeigen:
             akt["ergebnis"] = _ergebnis(a)
-    d = {"t": "stand", "rolle": rolle, "teilnehmer": len(s.teilnehmer), "max_teilnehmer": MAX_TEILNEHMER,
+    d = {"t": "stand", "rolle": rolle, "teilnehmer": len(s.teilnehmer), "max_teilnehmer": MAX_TEILNEHMER, "je_adresse": s.je_ip_max,
          "rest_s": int(max(0, min(MAX_LAUFZEIT_S - (jetzt - s.start), MAX_RUHE_S - (jetzt - s.zuletzt)))),
          "aktivitaeten": len(s.aktivitaeten), "aktivitaet": akt}
     if rolle == "schueler":
@@ -344,6 +373,7 @@ def _ueberschreiben(s: Sitzung) -> bool:
         a.beantwortet.clear()
     s.teilnehmer.clear()
     s.aktivitaeten.clear()
+    s.ip_beitritte.clear()
     return ok
 
 
@@ -407,8 +437,9 @@ def _signiere(text: str) -> str:
 
 def _protokoll(felder: dict) -> str:
     kopf = ["KI-Labor Klassenmodus: Löschprotokoll", "Format: " + FORMAT,
-            "Sitzung: " + felder["sid"],
+            "Sitzung: " + felder["code_hash"],
             "Start (UTC): " + _utc(felder["start"]), "Ende (UTC): " + _utc(felder["ende"]),
+            "Prüfbar bis (UTC): " + _utc(felder["ende"] + PRUEF_FRIST_S),
             "Anlass: " + felder["anlass"],
             "Teilnehmende gelöscht: %d" % felder["teilnehmende"],
             "Antworten gelöscht: %d" % felder["antworten"],
@@ -432,6 +463,7 @@ async def loesche(sid: str, anlass: str):
     ende = _jetzt()
     s = _sitz.pop(sid)
     nadeln = [bytes(s.code), sid.encode()]
+    code_hash = hashlib.sha256(nadeln[0]).hexdigest()       # steht als "Sitzung" im Protokoll: die Lehrkraft kann es nachrechnen
     nadeln.append(nadeln[0].lower())
     code_text = nadeln[0].decode()
     start, zahlen = s.start, (len(s.teilnehmer), sum(sum(a.zaehler.values()) for a in s.aktivitaeten), len(s.aktivitaeten))
@@ -460,7 +492,8 @@ async def loesche(sid: str, anlass: str):
             if ref() is None:
                 break
         p3 = ueberschrieben and ref() is None
-    treffer, dateien, gelesen, voll = await asyncio.to_thread(_scan, nadeln, _scan_wurzeln())
+    async with _scan_sperre:                              # immer nur ein Durchlauf, sonst koennten viele Loeschungen den Rechner binden
+        treffer, dateien, gelesen, voll = await asyncio.to_thread(_scan, nadeln, _scan_wurzeln())
     del nadeln, code_text
     if treffer:
         p4 = "nicht bestanden"
@@ -468,7 +501,7 @@ async def loesche(sid: str, anlass: str):
         p4 = "bestanden" if voll else "teilweise geprüft"
     p4txt = "Suche nach Code und Sitzungskennung in Dateien und Protokolldateien des Dienstes (%d Dateien, %d KB gelesen)" % (dateien, gelesen // 1024)
     ja = lambda b: "bestanden" if b else "nicht bestanden"           # noqa: E731
-    felder = {"sid": sid, "start": start, "ende": ende, "anlass": ANLAESSE.get(anlass, anlass),
+    felder = {"code_hash": code_hash, "start": start, "ende": ende, "anlass": ANLAESSE.get(anlass, anlass),
               "teilnehmende": zahlen[0], "antworten": zahlen[1], "aktivitaeten": zahlen[2],
               "aktiv_danach": len(_sitz),
               "pruefungen": [("Sitzung nicht mehr abrufbar", ja(p1)),
@@ -497,7 +530,7 @@ def _norm(code):
 def _finde(code: str):
     """Sitzungskennung zu einem Code, falls es die Sitzung gibt (sonst None)."""
     code = _norm(code)
-    if not isinstance(code, str) or not CODE_MUSTER.match(code):
+    if not isinstance(code, str) or not CODE_MUSTER.fullmatch(code):
         return None
     sid = _sid(code)
     return sid if sid in _sitz else None
@@ -537,46 +570,61 @@ def _reaper_sichern():
 
 
 # ---------------------------------------------------------------------------------------------------- Pruefung eines Protokolls
-_ZEIT = re.compile(r"^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ$")
-_PRUEF = re.compile(r"^Prüfung (\d+), (.{1,200}): (bestanden|nicht bestanden|teilweise geprüft|nicht geprüft)$")
+_ZEIT = re.compile(r"\d{4}-\d\d-\d\dT\d\d:\d\d:\d\dZ")
+_PRUEF = re.compile(r"Prüfung (\d+), (.{1,200}): (bestanden|nicht bestanden|teilweise geprüft|nicht geprüft)")
 
 
-def pruefe_nachweis(roh) -> dict:
-    """Prueft Format und Signatur eines Loeschprotokolls. Speichert nichts."""
-    fehler = []
+PROTOKOLL_SCHLUESSEL = ("Format", "Sitzung", "Start (UTC)", "Ende (UTC)", "Prüfbar bis (UTC)", "Anlass", "Teilnehmende gelöscht",
+                        "Antworten gelöscht", "Aktivitäten gelöscht", "Aktive Sitzungen danach", "Dienstversion", "Schlüsselart",
+                        "Schlüsselkennung")
+
+
+def pruefe_nachweis(roh, code=None) -> dict:
+    """Prueft Format und Signatur eines Loeschprotokolls (streng: feste Zeilen, Signatur als letzte Zeile, nichts danach).
+    `code` (optional): der Sitzungscode, dessen SHA-256 im Protokoll stehen muss. Speichert nichts."""
+    leer = {"format": "ungültig", "signatur": "ungültig", "felder": {}, "pruefungen": [], "alle_bestanden": False}
     if not isinstance(roh, str) or len(roh) > 6000:
-        return {"format": "ungültig", "signatur": "ungültig", "fehler": ["Das Protokoll fehlt oder ist zu lang."], "felder": {}}
+        return dict(leer, fehler=["Das Protokoll fehlt oder ist zu lang."])
     text = roh.replace("\r\n", "\n").replace("\r", "\n").strip("\n ") + "\n"
     zeilen = text.split("\n")[:-1]
-    felder, pruefungen = {}, []
+    fehler, felder, pruefungen = [], {}, []
     if not zeilen or zeilen[0] != "KI-Labor Klassenmodus: Löschprotokoll":
         fehler.append("Die erste Zeile stimmt nicht.")
+    sigzeilen = [z for z in zeilen if z.startswith("Signatur: ")]
+    if len(sigzeilen) != 1 or not zeilen or zeilen[-1] != sigzeilen[0]:
+        fehler.append("Die Signatur muss genau einmal und als letzte Zeile stehen.")
     for z in zeilen[1:]:
-        m = _PRUEF.match(z)
+        if z.startswith("Signatur: "):
+            continue
+        m = _PRUEF.fullmatch(z)
         if m:
             pruefungen.append((int(m.group(1)), m.group(2), m.group(3)))
         elif ": " in z:
             k, v = z.split(": ", 1)
+            if k in felder or k not in PROTOKOLL_SCHLUESSEL:
+                fehler.append("Unbekannte oder doppelte Zeile: " + k[:40])
             felder[k] = v
         else:
             fehler.append("Unbekannte Zeile.")
-    def zahl(k):
-        v = felder.get(k, "")
-        if not v.isdigit() or len(v) > 7:
-            fehler.append("Feld ungültig: " + k)
+    # feste Reihenfolge: genau die erwarteten Schluessel, dazwischen die fuenf Pruefungen nach "Aktivitäten gelöscht"
+    gesehen = [z.split(": ", 1)[0] for z in zeilen[1:] if not z.startswith(("Signatur: ", "Prüfung "))]
+    if gesehen != list(PROTOKOLL_SCHLUESSEL):
+        fehler.append("Die Zeilen sind unvollständig oder in falscher Reihenfolge.")
     if felder.get("Format") != FORMAT:
         fehler.append("Unbekanntes Format.")
-    if not re.fullmatch(r"[0-9a-f]{32}", felder.get("Sitzung", "")):
+    if not re.fullmatch(r"[0-9a-f]{64}", felder.get("Sitzung", "")):
         fehler.append("Feld ungültig: Sitzung")
-    for k in ("Start (UTC)", "Ende (UTC)"):
-        if not _ZEIT.match(felder.get(k, "")):
+    for k in ("Start (UTC)", "Ende (UTC)", "Prüfbar bis (UTC)"):
+        if not _ZEIT.fullmatch(felder.get(k, "")):
             fehler.append("Feld ungültig: " + k)
-    if not fehler and felder["Ende (UTC)"] < felder["Start (UTC)"]:
-        fehler.append("Das Ende liegt vor dem Start.")
+    if not fehler and not (felder["Start (UTC)"] <= felder["Ende (UTC)"] <= felder["Prüfbar bis (UTC)"]):
+        fehler.append("Die Zeiten sind nicht in Reihenfolge.")
     if felder.get("Anlass") not in ANLAESSE.values():
         fehler.append("Feld ungültig: Anlass")
     for k in ("Teilnehmende gelöscht", "Antworten gelöscht", "Aktivitäten gelöscht", "Aktive Sitzungen danach"):
-        zahl(k)
+        v = felder.get(k, "")
+        if not (v.isascii() and v.isdigit()) or len(v) > 7:
+            fehler.append("Feld ungültig: " + k)
     if [n for n, _, _ in pruefungen] != list(range(1, len(pruefungen) + 1)) or len(pruefungen) != 5:
         fehler.append("Es müssen genau fünf Prüfungen in Reihenfolge stehen.")
     if not re.fullmatch(r"[0-9a-f]{8}", felder.get("Schlüsselkennung", "")):
@@ -584,31 +632,38 @@ def pruefe_nachweis(roh) -> dict:
     for k in ("Dienstversion", "Schlüsselart"):
         if not felder.get(k) or len(felder[k]) > 120:
             fehler.append("Feld ungültig: " + k)
-    sig = felder.pop("Signatur", "")
-    if not re.fullmatch(r"[0-9a-f]{64}", sig):
-        fehler.append("Feld ungültig: Signatur")
-        sig_ok = False
-        andere_kennung = False
-    else:
-        koerper = text[: text.rindex("Signatur: ")] if "Signatur: " in text else ""
-        sig_ok = bool(koerper) and hmac.compare_digest(_signiere(koerper), sig)
+    sig = sigzeilen[0][len("Signatur: "):] if len(sigzeilen) == 1 else ""
+    sig_ok = False
+    andere_kennung = False
+    if re.fullmatch(r"[0-9a-f]{64}", sig) and text.endswith("Signatur: " + sig + "\n"):
+        koerper = text[: -len("Signatur: " + sig + "\n")]
+        sig_ok = hmac.compare_digest(_signiere(koerper), sig)
         andere_kennung = felder.get("Schlüsselkennung") != SCHLUESSEL_KENNUNG
+    else:
+        fehler.append("Feld ungültig: Signatur")
     format_ok = not fehler
-    antwort = {"format": "gültig" if format_ok else "ungültig", "signatur": "gültig" if sig_ok else "ungültig",
+    abgelaufen = bool(format_ok and felder["Prüfbar bis (UTC)"] < _utc(_jetzt()))
+    antwort = {"format": "gültig" if format_ok else "ungültig", "signatur": "gültig" if sig_ok else "ungültig", "abgelaufen": abgelaufen,
                "fehler": fehler[:8], "alle_bestanden": bool(pruefungen) and all(e == "bestanden" for _, _, e in pruefungen),
-               "felder": {k: felder.get(k, "") for k in ("Sitzung", "Start (UTC)", "Ende (UTC)", "Anlass", "Teilnehmende gelöscht",
-                                                          "Antworten gelöscht", "Aktivitäten gelöscht", "Dienstversion", "Schlüsselart")},
+               "felder": {k: felder.get(k, "") for k in PROTOKOLL_SCHLUESSEL if k not in ("Format", "Schlüsselkennung")},
                "pruefungen": [{"nr": n, "text": t, "ergebnis": e} for n, t, e in pruefungen]}
+    if sig_ok and abgelaufen:
+        antwort["signatur"] = "abgelaufen"
+    if code is not None and code != "":
+        c = _norm(code)
+        passt = isinstance(c, str) and hmac.compare_digest(hashlib.sha256(c.encode()).hexdigest(), felder.get("Sitzung", ""))
+        antwort["code_passt"] = bool(passt)
     if not sig_ok and format_ok and andere_kennung:
         antwort["hinweis"] = ("Das Protokoll wurde mit einem anderen Schlüssel signiert als dem, den dieser Dienst gerade nutzt. "
                               "Der Dienst wurde seitdem neu gestartet, oder das Protokoll stammt von einem anderen Dienst. "
                               "Die Signatur lässt sich hier nicht mehr prüfen.")
     elif not sig_ok and format_ok:
         antwort["hinweis"] = "Das Protokoll wurde nach der Ausstellung verändert oder ist nicht von diesem Dienst."
+    elif abgelaufen:
+        antwort["hinweis"] = "Die Prüffrist von 30 Tagen ist abgelaufen. Eine Signatur wird danach nicht mehr bestätigt."
     return antwort
 
 
-# ---------------------------------------------------------------------------------------------------- HTTP
 async def _koerper(request, grenze=8000):
     """Liest den Body hoechstens bis `grenze` Bytes (auch ohne Content-Length). None, wenn er groesser ist."""
     teile, n = [], 0
@@ -634,7 +689,7 @@ async def zaehler(request: Request):
     if _zu_viele(request, "klasse-zaehler", 120):
         return JSONResponse({"fehler": "zu viele Anfragen"}, status_code=429)
     await aufraeumen()
-    return JSONResponse({"aktiv": len(_sitz), "max": MAX_SITZUNGEN, "beendet_seit_start": _beendet},
+    return JSONResponse({"bereit": not _nicht_eingerichtet(), "aktiv": len(_sitz), "max": MAX_SITZUNGEN, "beendet_seit_start": _beendet},
                         headers={"Cache-Control": "no-store"})
 
 
@@ -652,7 +707,8 @@ async def nachweis_pruefen(request: Request):
     except (ValueError, json.JSONDecodeError):
         return JSONResponse({"fehler": "ungültige Anfrage"}, status_code=400)
     text = daten.get("text") if isinstance(daten, dict) else None
-    return JSONResponse(pruefe_nachweis(text), headers={"Cache-Control": "no-store"})
+    code = daten.get("code") if isinstance(daten, dict) and isinstance(daten.get("code"), str) and len(daten["code"]) <= 20 else None
+    return JSONResponse(pruefe_nachweis(text, code), headers={"Cache-Control": "no-store"})
 
 
 _SEITE = """<!doctype html>
@@ -673,6 +729,7 @@ button{font:inherit;padding:.55rem 1.1rem;border-radius:8px;border:1px solid var
 <p>Füge das Protokoll ein, das die Lehrkraft nach dem Löschen der Sitzung bekommen hat. Der Dienst prüft das Format und die Signatur.
 Das Protokoll wird nicht gespeichert und nicht protokolliert.</p>
 <form method="post" action="/klasse/nachweis"><textarea name="text" maxlength="6000" aria-label="Löschprotokoll" required>%TEXT%</textarea>
+<p><label>Code der Sitzung (freiwillig, prüft, ob das Protokoll zu dieser Sitzung gehört): <input name="code" maxlength="20" autocomplete="off" value="%CODE%"></label></p>
 <p><button type="submit">Prüfen</button></p></form>
 %ERGEBNIS%
 <div class="box"><b>Was die Prüfung aussagt.</b> Die Signatur belegt, dass dieser Dienst das Protokoll ausgestellt hat und dass seitdem nichts daran geändert wurde.
@@ -683,10 +740,12 @@ Außerhalb der Anwendung fallen trotzdem Zugriffsdaten an (siehe die Seite zum K
 
 def _ergebnis_html(a: dict) -> str:
     e = html.escape
-    ok = a["format"] == "gültig" and a["signatur"] == "gültig"
+    ok = a["format"] == "gültig" and a["signatur"] == "gültig" and a.get("code_passt", True)
     teile = ['<div class="box"><b class="%s">%s</b>' % ("ok" if ok else "bad",
              "Format und Signatur sind gültig." if ok else "Das Protokoll ist nicht gültig.")]
     teile.append("<p>Format: %s. Signatur: %s.</p>" % (e(a["format"]), e(a["signatur"])))
+    if "code_passt" in a:
+        teile.append("<p>%s</p>" % ("Der Code gehört zu diesem Protokoll." if a["code_passt"] else "Der Code passt nicht zu diesem Protokoll."))
     for f in a["fehler"]:
         teile.append('<p class="bad">%s</p>' % e(f))
     if a.get("hinweis"):
@@ -699,7 +758,7 @@ def _ergebnis_html(a: dict) -> str:
 
 @router.get("/klasse/nachweis", response_class=HTMLResponse)
 async def nachweis_seite():
-    return HTMLResponse(_SEITE.replace("%TEXT%", "").replace("%ERGEBNIS%", ""), headers={"Cache-Control": "no-store"})
+    return HTMLResponse(_SEITE.replace("%TEXT%", "").replace("%CODE%", "").replace("%ERGEBNIS%", ""), headers={"Cache-Control": "no-store"})
 
 
 @router.post("/klasse/nachweis", response_class=HTMLResponse)
@@ -712,9 +771,11 @@ async def nachweis_pruefen_seite(request: Request):
     if roh is None:
         return HTMLResponse("Zu groß", status_code=413)
     roh = roh.decode("utf-8", "replace")
-    text = (parse_qs(roh).get("text") or [""])[0]
-    antwort = pruefe_nachweis(text)
-    return HTMLResponse(_SEITE.replace("%TEXT%", html.escape(text)).replace("%ERGEBNIS%", _ergebnis_html(antwort)),
+    formular = parse_qs(roh)
+    text = (formular.get("text") or [""])[0]
+    code = (formular.get("code") or [""])[0][:20]
+    antwort = pruefe_nachweis(text, code)
+    return HTMLResponse(_SEITE.replace("%TEXT%", html.escape(text)).replace("%CODE%", html.escape(code, quote=True)).replace("%ERGEBNIS%", _ergebnis_html(antwort)),
                         headers={"Cache-Control": "no-store"})
 
 
@@ -733,7 +794,8 @@ def _gesperrt(ip: str) -> bool:
 
 
 def _global_gesperrt() -> bool:
-    """True, wenn alle Adressen zusammen zu viele falsche Codes oder Schluessel geschickt haben (verteiltes Raten)."""
+    """True, wenn alle Adressen zusammen zu viele falsche Codes oder Schluessel geschickt haben (verteiltes Raten).
+    Wirkt nur auf falsche Versuche (Verzoegerung, Abbruch der Verbindung), nie auf richtige Codes oder Schluessel."""
     jetzt = _jetzt()
     while _global_fehl and jetzt - _global_fehl[0] > 3600:
         _global_fehl.popleft()
@@ -769,7 +831,7 @@ def _aktivitaet_anlegen(sid: str, m: dict):
     if art not in ARTEN:
         return "Unbekannte Art."
     ref = m.get("ref", "")
-    if not isinstance(ref, str) or not REF_MUSTER.match(ref):
+    if not isinstance(ref, str) or not REF_MUSTER.fullmatch(ref):
         return "Ungültiger Verweis."
     n = lo = hi = 0
     if art == "wahl":
@@ -885,7 +947,7 @@ async def _lesen(ws, timeout):
         return None
     try:
         m = json.loads(t)
-    except ValueError:
+    except (ValueError, RecursionError):                  # kaputtes oder tief verschachteltes JSON
         return None
     return m if isinstance(m, dict) and isinstance(m.get("t"), str) else None
 
@@ -897,16 +959,29 @@ async def ws_klasse(ws: WebSocket):
         await ws.close(code=1008)
         return
     ip = _ip_tag(ws)
-    if _verb_gesamt >= MAX_VERBINDUNGEN or _ip_verbindungen.get(ip, 0) >= MAX_VERB_JE_IP:
+    if (_verb_gesamt >= MAX_VERBINDUNGEN or _ip_verbindungen.get(ip, 0) >= MAX_VERB_JE_IP
+            or _vorab_gesamt[0] >= PREAUTH_GESAMT or _vorab_ip.get(ip, 0) >= PREAUTH_JE_IP):
         await ws.close(code=1013)
         return
     await ws.accept()
     _verb_gesamt += 1
     _ip_verbindungen[ip] = _ip_verbindungen.get(ip, 0) + 1
+    _vorab_gesamt[0] += 1
+    _vorab_ip[ip] = _vorab_ip.get(ip, 0) + 1
+    vorab = True
     sid = None
     sender = None
     try:
-        sid, rolle, nr, token = await _anmelden(ws, ip)
+        try:
+            sid, rolle, nr, token = await _anmelden(ws, ip)
+        finally:
+            vorab = False
+            _vorab_gesamt[0] -= 1
+            n = _vorab_ip.get(ip, 1) - 1
+            if n > 0:
+                _vorab_ip[ip] = n
+            else:
+                _vorab_ip.pop(ip, None)
         if sid is None:
             return
         _verbindungen[sid] = _verbindungen.get(sid, 0) + 1
@@ -944,6 +1019,15 @@ async def ws_klasse(ws: WebSocket):
             elif rolle == "lehrer":
                 if t == "aktivitaet":
                     fehler = _aktivitaet_anlegen(sid, m)
+                elif t == "je_adresse":
+                    n = _int(m.get("n"))
+                    if n in (3, 10, 40):
+                        s = _sitz.get(sid)
+                        if s is not None:
+                            s.je_ip_max = n
+                        del s
+                    else:
+                        fehler = "Ungültiger Wert."
                 elif t in ("zeigen", "schliessen", "verbergen", "loesung"):
                     fehler = _steuern(sid, m)
                 elif t == "beenden":
@@ -965,8 +1049,15 @@ async def ws_klasse(ws: WebSocket):
                 s.zuletzt = _jetzt()
                 s.signal.wecken()
             del s
-    except (WebSocketDisconnect, asyncio.TimeoutError, RuntimeError):
+    except (WebSocketDisconnect, asyncio.TimeoutError):
         pass
+    except RuntimeError as e:
+        # Erwartet: Senden oder Empfangen nach dem Schliessen. Alles andere ist ein Programmfehler: nur die Fehlerklasse
+        # ins Dienstprotokoll, nie Inhalte, Codes oder Namen.
+        if not re.search(r"close message|disconnect|not connected", str(e), re.I):
+            _fehlerlog.error("Klassenmodus: Programmfehler %s", type(e).__name__)
+    except Exception as e:                               # noqa: BLE001
+        _fehlerlog.error("Klassenmodus: Programmfehler %s", type(e).__name__)
     finally:
         if sender is not None:
             sender.cancel()
@@ -986,6 +1077,9 @@ async def ws_klasse(ws: WebSocket):
 
 async def _anmelden(ws, ip):
     """Erste Nachricht: neu | lehrer | wand | beitritt | wieder | nachweis. Gibt (sid, rolle, nr, token) oder (None, ..) zurueck."""
+    if _nicht_eingerichtet():
+        await _fehler(ws, "Der Klassenmodus ist auf diesem Dienst nicht eingerichtet (der Proxy-Schlüssel fehlt). Bitte den Betreiber informieren.", True, 1013)
+        return None, None, None, None
     await aufraeumen()
     _reaper_sichern()
     fehler_hier = 0
@@ -997,17 +1091,11 @@ async def _anmelden(ws, ip):
         t = m["t"]
         if t == "neu":
             return await _neu(ws, ip)
-        if _gesperrt(ip):
-            await _fehler(ws, "Zu viele falsche Eingaben von diesem Anschluss. Warte etwa zehn Minuten und versuche es dann noch einmal.", True, 1013)
-            return None, None, None, None
-        if _global_gesperrt():
-            await _fehler(ws, "Gerade sind viele falsche Codes eingegangen. Der Beitritt ist kurz gesperrt. Versuche es in einigen Minuten noch einmal.", True, 1013)
-            return None, None, None, None
         code = _norm(m.get("code"))
         sid = _finde(code)
         gut = False
         if t == "nachweis":
-            nw = _nachweise.get(_sid(code)) if isinstance(code, str) and CODE_MUSTER.match(code) else None
+            nw = _nachweise.get(_sid(code)) if isinstance(code, str) and CODE_MUSTER.fullmatch(code) else None
             if nw and nw[1] > _jetzt():
                 await ws.send_text(json.dumps({"t": "ende", "nachweis": nw[0]}))
                 await ws.close(code=1000)
@@ -1018,7 +1106,7 @@ async def _anmelden(ws, ip):
                 return sid, "lehrer" if t == "lehrer" else "wand", None, None
         elif t == "beitritt":
             if sid is not None:
-                nr, token, text = _beitreten(sid)
+                nr, token, text = _beitreten(sid, ip)
                 if nr is None:
                     await _fehler(ws, text, True, 1013)
                     return None, None, None, None
@@ -1031,8 +1119,19 @@ async def _anmelden(ws, ip):
         else:
             await _fehler(ws, "Unbekannte Nachricht.", True)
             return None, None, None, None
+        # Falscher Versuch. Sperren (je Adresse und global) treffen NUR falsche Versuche: Ein richtiger Code, Schluessel oder
+        # Wiederverbindungs-Schluessel kommt immer durch. Wer gesperrt ist, wird stark gebremst und getrennt.
+        gesperrt = _gesperrt(ip)
+        glob = _global_gesperrt()
         _fehlversuch(ip)
         fehler_hier += 1
+        if gesperrt or glob:
+            await asyncio.sleep(GLOBAL_PAUSE_S)
+            await _fehler(ws, ("Zu viele falsche Eingaben von diesem Anschluss. Warte etwa zehn Minuten und versuche es dann noch einmal."
+                               if gesperrt else
+                               "Gerade sind viele falsche Codes eingegangen. Falsche Eingaben werden kurz abgewiesen. Prüfe den Code und versuche es noch einmal."),
+                          True, 1013)
+            return None, None, None, None
         await asyncio.sleep(FEHLVERSUCH_PAUSE_S)
         if fehler_hier >= FEHLVERSUCHE_JE_VERBINDUNG:
             await _fehler(ws, "Code oder Schlüssel stimmen nicht. Die Verbindung wird beendet.", True)
@@ -1042,13 +1141,16 @@ async def _anmelden(ws, ip):
     return None, None, None, None
 
 
-def _beitreten(sid: str):
+def _beitreten(sid: str, ip: str):
     """Neue Person aufnehmen. Gibt (Nr, Wiederverbindungs-Schluessel, Fehlertext) zurueck."""
     s = _sitz.get(sid)
     if s is None:
         return None, "", "Die Sitzung ist beendet."
     if len(s.teilnehmer) >= MAX_TEILNEHMER:
         return None, "", "Die Sitzung ist voll (höchstens %d Personen)." % MAX_TEILNEHMER
+    if s.ip_beitritte.get(ip, 0) >= s.je_ip_max:
+        return None, "", ("Von deinem Anschluss sind schon %d Geräte in dieser Sitzung. Sag es deiner Lehrkraft: Sie kann das für ein Schulnetz erhöhen." % s.je_ip_max)
+    s.ip_beitritte[ip] = s.ip_beitritte.get(ip, 0) + 1
     nr = max(s.teilnehmer, default=0) + 1
     name = _pseudonym({t.name for t in s.teilnehmer.values()})
     token = secrets.token_hex(16)

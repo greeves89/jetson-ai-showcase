@@ -27,6 +27,8 @@ from app import lab_klasse as K  # noqa: E402
 K.FEHLVERSUCH_PAUSE_S = 0.0                          # Tests muessen nicht warten
 K.SCAN_MAX_DATEIEN = 400
 K.GLOBAL_FEHLVERSUCHE_MINUTE = K.GLOBAL_FEHLVERSUCHE_STUNDE = 10 ** 6
+K.GLOBAL_PAUSE_S = 0.0
+K.BEITRITTE_JE_ADRESSE = 40                          # der Test "Mehrfach-Beitritt" stellt den Standard (3) selbst ein
 FENSTER = K.NACHRICHTEN_FENSTER
 K.NACHRICHTEN_FENSTER = (10_000, 10.0)          # nur der Flut-Test nutzt die echte Grenze
 app = FastAPI()
@@ -191,9 +193,24 @@ with TestClient(app, base_url="http://testserver") as c:
             break
     ok(gesperrt and versuche <= K.FEHLVERSUCHE_JE_IP + 3, "nach %d Fehlversuchen gesperrt (Grenze %d)" % (versuche, K.FEHLVERSUCHE_JE_IP))
     with c.websocket_connect("/ws/klasse", headers=H) as w:
-        w.send_json({"t": "beitritt", "code": k.code})
+        w.send_json({"t": "beitritt", "code": "AAAAAA"})
         r = w.receive_json()
-        ok(r["t"] == "fehler" and "Zu viele falsche" in r["text"], "gesperrt gilt auch fuer den richtigen Code")
+        ok(r["t"] == "fehler" and "Zu viele falsche" in r["text"], "gesperrt: falscher Code bleibt abgewiesen")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "beitritt", "code": k.code})
+        wk = w.receive_json()
+        ok(wk["t"] == "willkommen", "gesperrt: der richtige Code kommt trotzdem durch (Sperre trifft nur falsche Versuche)")
+        tok = wk["token"]
+        stand(w)
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "lehrer", "code": k.code, "schluessel": k.key})
+        ok(stand(w)["rolle"] == "lehrer", "gesperrt: Lehrkraft verbindet sich mit Schluessel neu")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "wieder", "code": k.code, "token": tok})
+        ok(stand(w)["rolle"] == "schueler", "gesperrt: Wiederverbinden mit Schluessel klappt")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "lehrer", "code": k.code, "schluessel": "0" * 32})
+        ok("Zu viele falsche" in w.receive_json().get("text", ""), "gesperrt: falscher Lehrer-Schluessel bleibt abgewiesen")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
         w.send_json({"t": "neu"})
         ok(w.receive_json()["t"] == "erstellt", "Sperre trifft nur Code und Schluessel, nicht das Anlegen einer Sitzung")
@@ -249,6 +266,10 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "Nachricht ohne JSON: abgelehnt")
     k.s[0].send_text('[1,2,3]')
     ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "JSON-Liste statt Objekt: abgelehnt")
+    k.s[0].send_text("[" * 700 + "]" * 700)
+    ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "tief verschachteltes JSON: sauber abgelehnt")
+    k.s[0].send_text('{"t":' + "[" * 400 + "]" * 400 + "}")
+    ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "Nachricht mit verschachteltem Typ: abgelehnt")
     k.s[0].send_bytes(b"\x00\x01")
     ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "Binaerdaten: abgelehnt")
     zu = False
@@ -282,7 +303,7 @@ with TestClient(app, base_url="http://testserver") as c:
     k = Klasse(c, schueler=1)
     schlecht = [
         {"art": "wahl", "n": 1}, {"art": "wahl", "n": 7}, {"art": "wahl", "n": True}, {"art": "wahl", "n": 2.5}, {"art": "wahl", "n": "3"},
-        {"art": "frei"}, {"art": "wahl", "n": 2, "ref": "A B"}, {"art": "wahl", "n": 2, "ref": "x" * 60}, {"art": "wahl", "n": 2, "ref": 5},
+        {"art": "frei"}, {"art": "wahl", "n": 2, "ref": "A B"}, {"art": "wahl", "n": 2, "ref": "jn\n"}, {"art": "wahl", "n": 2, "ref": "x" * 60}, {"art": "wahl", "n": 2, "ref": 5},
         {"art": "schaetzung", "lo": 5, "hi": 5}, {"art": "schaetzung", "lo": 0, "hi": 10 ** 9}, {"art": "schaetzung", "lo": "0", "hi": 10},
         {"art": "schaetzung", "lo": True, "hi": 10}, {"art": "schaetzung"}, {"art": None},
     ]
@@ -345,6 +366,23 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(erg["zellen"] == [3, 0] and erg["gesamt"] == 3 and not erg["unter_drei"], "3 gleiche Antworten: Verteilung [3, 0], Gesamt 3")
     erg, wj, kl = lauf("wahl", [0, 0, 0, 1, 1], n=2)
     ok(erg["zellen"] == [-1, -1] and erg["gesamt"] is None and erg["unter_drei"], "Feld mit 2 Antworten und das kleinste sichtbare Feld werden verdeckt, Gesamtzahl verborgen")
+    erg, wj, kl = lauf("wahl", [0, 0, 0, 0, 1], n=2)
+    ok(erg["zellen"] == [-1, -1] and erg["gesamt"] is None and '"antworten"' not in wj, "PoC Review: Zellen [4,1] mit 5 Antworten bleiben beide verdeckt, keine Zahl der Antwortenden")
+    erg, wj, kl = lauf("skala", [5, 5, 1])
+    ok("mittelwert" not in erg, "PoC Review: Skala {5,5,1}: kein Mittelwert")
+    erg, wj, kl = lauf("schaetzung", [5, 50, 95], lo=0, hi=100)
+    ok("median" not in erg, "PoC Review: Schaetzung [5,50,95]: kein Median")
+    zuruecksetzen()
+    kl = Klasse(c, schueler=3)
+    kl.l.send_json({"t": "aktivitaet", "art": "wahl", "n": 2, "ref": "t"})
+    nr = stand(kl.l, lambda m: m["aktivitaet"] is not None)["aktivitaet"]["nr"]
+    for i in range(3):
+        kl.s[i].send_json({"t": "antwort", "nr": nr, "wert": 0})
+        lies(kl.s[i], lambda m: m.get("t") == "stand" and m["aktivitaet"]["beantwortet"])
+    kl.l.send_json({"t": "zeigen"})
+    rl = stand(kl.l, lambda m: m["aktivitaet"].get("zeigen"))
+    ok("antworten" not in rl["aktivitaet"], "Lehrkraft sieht nach dem Zeigen keine Zahl der Antwortenden")
+    kl.schliesse()
     erg, wj, kl = lauf("wahl", [0, 0, 0, 1, 1, 1, 2], n=3)
     ok(erg["zellen"] == [-1, 3, -1], "Feld mit 1 Antwort plus das kleinste sichtbare Feld verdeckt (Differenz nie unter 4)")
     erg, wj, kl = lauf("wahl", [0, 0, 1, 1, 2], n=3)
@@ -446,7 +484,8 @@ with TestClient(app, base_url="http://testserver") as c:
     k.l.send_json({"t": "beenden", "code": k.code})
     e = lies(k.l, lambda m: m.get("t") == "ende")
     nach = e["nachweis"]
-    ok(c.get("/api/klasse/zaehler").json() == {"aktiv": 0, "max": K.MAX_SITZUNGEN, "beendet_seit_start": 1}, "Zaehler faellt von 1 auf 0")
+    z = c.get("/api/klasse/zaehler").json()
+    ok(z["aktiv"] == 0 and z["beendet_seit_start"] == 1 and set(z) == {"bereit", "aktiv", "max", "beendet_seit_start"}, "Zaehler faellt von 1 auf 0 (nur Zahlen, keine Zeiten)")
     for w in k.s + [k.w]:
         ok(lies(w, lambda m: m.get("t") == "ende")["t"] == "ende", "Schueler und Wand bekommen 'Ende'")
     ok("Teilnehmende gelöscht: 4" in nach and "Antworten gelöscht: 3" in nach and "Aktivitäten gelöscht: 2" in nach, "Protokoll: Anzahl Teilnehmende, Antworten, Aktivitaeten")
@@ -454,7 +493,9 @@ with TestClient(app, base_url="http://testserver") as c:
     ok("Aktive Sitzungen danach: 0" in nach, "Protokoll nennt aktive Sitzungen danach")
     ok(k.code not in nach and k.key not in nach and not any(n in nach for n in k.namen) and not any(t in nach for t in k.tokens),
        "Protokoll enthaelt weder Code noch Schluessel noch Pseudonyme noch Wiederverbindungs-Schluessel")
-    ok(re.search(r"Sitzung: [0-9a-f]{32}\n", nach) is not None and "Start (UTC): 20" in nach and "Ende (UTC): 20" in nach, "Protokoll: Hash und UTC-Zeiten")
+    import hashlib
+    ok(("Sitzung: " + hashlib.sha256(k.code.encode()).hexdigest() + "\n") in nach, "Protokoll: Sitzung = SHA-256 des Codes (nachrechenbar)")
+    ok("Start (UTC): 20" in nach and "Ende (UTC): 20" in nach and "Prüfbar bis (UTC): 20" in nach, "Protokoll: UTC-Zeiten und Pruefbar-bis")
     ok(not K._sitz and not K._ip_sitzungen and not K._verbindungen, "Register leer")
     ok(K._finde(k.code) is None, "Code nicht mehr aufloesbar")
     with c.websocket_connect("/ws/klasse", headers=H) as w:
@@ -480,12 +521,28 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(c.post("/api/klasse/nachweis/pruefen", json={"text": nach.replace("\n", "\r\n")}, headers=H).json()["signatur"] == "gültig", "CRLF-Zeilenenden aendern nichts")
     for name, aend in (("Teilnehmende 4 zu 3", nach.replace("gelöscht: 4", "gelöscht: 3")),
                        ("Ergebnis gefaelscht", nach.replace("Prüfung 3, Geheime Felder überschrieben, Sitzungsobjekt freigegeben: bestanden", "Prüfung 3, Geheime Felder überschrieben, Sitzungsobjekt freigegeben: nicht bestanden")),
-                       ("Sitzungshash getauscht", re.sub(r"Sitzung: [0-9a-f]{32}", "Sitzung: " + "0" * 32, nach)),
+                       ("Sitzungshash getauscht", re.sub(r"Sitzung: [0-9a-f]{64}", "Sitzung: " + "0" * 64, nach)),
                        ("Zeile entfernt", "\n".join(z for z in nach.split("\n") if not z.startswith("Dienstversion"))),
                        ("Signatur getauscht", re.sub(r"Signatur: [0-9a-f]{64}", "Signatur: " + "0" * 64, nach)),
                        ("Zeile angehaengt", nach.replace("Signatur:", "Zusatz: x\nSignatur:"))):
         r = c.post("/api/klasse/nachweis/pruefen", json={"text": aend}, headers=H).json()
         ok(r["signatur"] == "ungültig" or r["format"] == "ungültig", "manipuliert (%s): wird erkannt" % name)
+    for name, aend in (("Anlass angehaengt", nach + "Anlass: Lehrkraft\n"),
+                       ("Teilnehmende angehaengt", nach + "Teilnehmende gelöscht: 0\n"),
+                       ("zweite Signaturzeile", nach + "Signatur: " + "0" * 64 + "\n"),
+                       ("Signatur nicht letzte Zeile", nach.replace("Signatur:", "Zusatz", 1).replace("Zusatz", "Signatur:") + "Aktive Sitzungen danach: 0\n"),
+                       ("doppelte Zeile", nach.replace("Anlass:", "Anlass: Test\nAnlass:", 1)),
+                       ("Zeilen vertauscht", nach.replace("Format: kl-nachweis/1\nSitzung:", "Sitzung:", 1))):
+        rr = c.post("/api/klasse/nachweis/pruefen", json={"text": aend}, headers=H).json()
+        ok(rr["format"] == "ungültig" or rr["signatur"] != "gültig", "angehaengte oder veraenderte Zeilen (%s): abgelehnt" % name)
+    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach, "code": k.code}, headers=H).json()
+    ok(pr.get("code_passt") is True, "Protokoll passt zum Code der Sitzung")
+    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach, "code": "AAAAAA"}, headers=H).json()
+    ok(pr.get("code_passt") is False, "Protokoll mit fremdem Code: passt nicht")
+    uhr["plus"] += K.PRUEF_FRIST_S + 3600
+    pr = c.post("/api/klasse/nachweis/pruefen", json={"text": nach}, headers=H).json()
+    ok(pr["signatur"] == "abgelaufen" and "Prüffrist" in pr.get("hinweis", ""), "nach 30 Tagen: Pruefung abgelaufen (Frist steht im Protokoll)")
+    uhr["plus"] = 0.0
     ok(c.post("/api/klasse/nachweis/pruefen", json={"text": "Hallo"}, headers=H).json()["format"] == "ungültig", "Unsinn: Format ungueltig")
     ok(c.post("/api/klasse/nachweis/pruefen", json={"text": 5}, headers=H).json()["format"] == "ungültig", "Text keine Zeichenkette: ungueltig")
     ok(c.post("/api/klasse/nachweis/pruefen", content=b"{kaputt", headers=dict(H, **{"content-type": "application/json"})).status_code == 400, "kaputtes JSON: 400")
@@ -565,8 +622,16 @@ with TestClient(app, base_url="http://testserver") as c:
     ok(K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.5"}, "client": type("C", (), {"host": "10.0.0.1"})()})())
        == K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.6"}, "client": type("C", (), {"host": "10.0.0.1"})()})()),
        "falscher Proxy-Schluessel: X-Real-IP wird ignoriert")
+    # Netzbereich: IPv6 zaehlt als /64, IPv4 als Einzeladresse
+    def anfr(ip):
+        return type("R", (), {"headers": {"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": ip}, "client": type("C", (), {"host": "10.0.0.1"})()})()
+    ok(K._ip_tag(anfr("2001:db8:1:2::1")) == K._ip_tag(anfr("2001:db8:1:2:ffff::9")), "IPv6: zwei Adressen im selben /64 teilen sich die Sperre")
+    ok(K._ip_tag(anfr("2001:db8:1:2::1")) != K._ip_tag(anfr("2001:db8:1:3::1")), "IPv6: verschiedene /64 sind verschieden")
+    ok(K._ip_tag(anfr("203.0.113.1")) != K._ip_tag(anfr("203.0.113.2")), "IPv4: einzelne Adressen sind verschieden")
+    os.environ.pop("KL_PROXY_KEY", None)
     zuruecksetzen()
     k2 = Klasse(c)
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
     alt_m, alt_ip = K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP
     K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP = 6, 1000
     glob = False
@@ -576,15 +641,113 @@ with TestClient(app, base_url="http://testserver") as c:
             glob = True
             break
     ok(glob and i <= 7, "globaler Deckel greift nach %d verteilten Fehlversuchen" % i)
-    with c.websocket_connect("/ws/klasse", headers=dict(H, **{"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": "203.0.113.99"})) as w:
+    P = {"x-kl-proxy": "test-proxy-schluessel"}
+    ok(K._global_gesperrt(), "globale Sperre ist aktiv")
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.99"})) as w:
         w.send_json({"t": "beitritt", "code": k2.code})
-        ok("viele falsche Codes" in w.receive_json().get("text", ""), "waehrend der globalen Sperre ist auch der richtige Code gesperrt")
+        wk = w.receive_json()
+        ok(wk["t"] == "willkommen", "waehrend der globalen Sperre kommt ein Teilnehmer mit richtigem Code herein")
+        tok = wk["token"]
+        stand(w)
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.98"})) as w:
+        w.send_json({"t": "lehrer", "code": k2.code, "schluessel": k2.key})
+        ok(stand(w)["rolle"] == "lehrer", "waehrend der globalen Sperre verbindet sich die Lehrkraft mit Schluessel neu")
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.97"})) as w:
+        w.send_json({"t": "wand", "code": k2.code, "schluessel": k2.key})
+        ok(stand(w)["rolle"] == "wand", "waehrend der globalen Sperre verbindet sich die Wand mit Schluessel")
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.96"})) as w:
+        w.send_json({"t": "wieder", "code": k2.code, "token": tok})
+        ok(stand(w)["rolle"] == "schueler", "waehrend der globalen Sperre klappt das Wiederverbinden eines Schuelers")
+    alt_p = K.GLOBAL_PAUSE_S
+    K.GLOBAL_PAUSE_S = 0.0
+    for falsch in ({"t": "beitritt", "code": "AAAAAA"}, {"t": "lehrer", "code": k2.code, "schluessel": "0" * 32}):
+        with c.websocket_connect("/ws/klasse", headers=dict(H, **P, **{"x-real-ip": "203.0.113.95"})) as w:
+            w.send_json(falsch)
+            ok("falsche Codes" in w.receive_json().get("text", ""), "waehrend der globalen Sperre bleiben falsche Versuche abgewiesen (%s)" % falsch["t"])
+    K.GLOBAL_PAUSE_S = alt_p
     uhr["plus"] += 3700
     ok(not K._global_gesperrt(), "globale Sperre endet nach der Stunde")
     uhr["plus"] = 0.0
     K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP = alt_m, alt_ip
     os.environ.pop("KL_PROXY_KEY", None)
     k.schliesse(); k2.schliesse()
+
+    print("--- Mehrfach-Beitritt und Vorab-Verbindungen")
+    zuruecksetzen()
+    K.BEITRITTE_JE_ADRESSE = 3
+    k = Klasse(c, schueler=3)
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "beitritt", "code": k.code})
+        rr = w.receive_json()
+        ok(rr["t"] == "fehler" and "Von deinem Anschluss" in rr["text"], "PoC Review: vierter Beitritt von derselben Adresse abgewiesen")
+    k.l.send_json({"t": "je_adresse", "n": 7})
+    ok(lies(k.l, lambda m: m.get("t") == "fehler")["t"] == "fehler", "ungueltiger Wert fuer 'Geraete je Adresse': Fehler")
+    k.l.send_json({"t": "je_adresse", "n": 10})
+    stand(k.l, lambda m: m["je_adresse"] == 10)
+    k.schueler()
+    ok(len(k.s) == 4, "Lehrkraft hat fuer ein Schulnetz auf 10 erhoeht: vierter Beitritt klappt")
+    k.s[0].send_json({"t": "je_adresse", "n": 40})
+    ok(lies(k.s[0], lambda m: m.get("t") == "fehler")["t"] == "fehler", "Schueler kann die Grenze nicht aendern")
+    k.schliesse()
+    K.BEITRITTE_JE_ADRESSE = 40
+    zuruecksetzen()
+    es = contextlib.ExitStack()
+    offen = 0
+    abgelehnt = False
+    for _ in range(K.PREAUTH_JE_IP + 1):
+        try:
+            es.enter_context(c.websocket_connect("/ws/klasse", headers=H))
+            offen += 1
+        except WebSocketDisconnect:
+            abgelehnt = True
+    ok(abgelehnt and offen == K.PREAUTH_JE_IP, "nicht angemeldete Verbindungen je Adresse auf %d begrenzt" % K.PREAUTH_JE_IP)
+    es.close()
+    ok(K._vorab_gesamt[0] == 0 and not K._vorab_ip, "Zaehler der Vorab-Verbindungen laeuft nach dem Schliessen auf 0")
+
+    print("--- Echter Server: ws-max-size und uebergrosse Frames")
+    import subprocess
+    import time as _time
+    mod = os.path.join(TMP, "mini_app.py")
+    open(mod, "w").write("from fastapi import FastAPI\nfrom app import lab_klasse\napp = FastAPI()\napp.include_router(lab_klasse.router)\n")
+    env = dict(os.environ, PYTHONPATH=TMP + os.pathsep + os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    proc = subprocess.Popen([sys.executable, "-m", "uvicorn", "mini_app:app", "--port", "8517", "--ws-max-size", "2100000", "--log-level", "warning"],
+                            env=env, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    try:
+        from websockets.sync.client import connect
+        _time.sleep(2.5)
+        def echt(nutzlast):
+            with connect("ws://127.0.0.1:8517/ws/klasse", origin="http://127.0.0.1:8517", max_size=None) as w:
+                w.send(nutzlast)
+                try:
+                    return w.recv(timeout=5)
+                except Exception as e:                      # noqa: BLE001
+                    return "ZU:" + type(e).__name__ + ":" + str(getattr(getattr(e, "rcvd", None), "code", ""))
+        r1 = echt("x" * 1_500_000)
+        ok("Nachricht." in r1 and "fehler" in r1, "Frame unter dem Limit (1,5 MB) kommt an und wird als ungueltig abgelehnt [%s]" % r1[:80])
+        r2 = echt("x" * 2_500_000)
+        ok(r2.startswith("ZU:") and "1009" in r2, "Frame ueber dem Limit (2,5 MB): uvicorn trennt die Verbindung (1009) [%s]" % r2)
+    finally:
+        proc.terminate()
+        proc.wait(timeout=10)
+    ok(True, "(Hinweis) /ws/vision sendet Bilder bis 2 000 000 Zeichen: das Limit 2 100 000 laesst sie durch")
+
+    print("--- Oeffentlich ohne Proxy-Schluessel")
+    zuruecksetzen()
+    os.environ["OEFFENTLICH"] = "1"
+    os.environ.pop("KL_PROXY_KEY", None)
+    ok(K._nicht_eingerichtet(), "OEFFENTLICH=1 ohne KL_PROXY_KEY: nicht eingerichtet")
+    z = c.get("/api/klasse/zaehler").json()
+    ok(z["bereit"] is False, "/api/klasse/zaehler meldet bereit=false")
+    with c.websocket_connect("/ws/klasse", headers=H) as w:
+        w.send_json({"t": "neu"})
+        r = w.receive_json()
+        ok(r["t"] == "fehler" and "nicht eingerichtet" in r["text"], "Sitzung wird mit Hinweis 'nicht eingerichtet' abgelehnt")
+    ok(not K._sitz, "es entsteht keine Sitzung")
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
+    ok(c.get("/api/klasse/zaehler").json()["bereit"] is True, "mit KL_PROXY_KEY: bereit=true")
+    os.environ.pop("OEFFENTLICH")
+    os.environ.pop("KL_PROXY_KEY")
+    ok(c.get("/api/klasse/zaehler").json()["bereit"] is True, "lokal ohne OEFFENTLICH: bereit, Adresse der direkten Verbindung")
 
     print("--- Angriffe vor der Anmeldung und auf die Pruefung")
     zuruecksetzen()
@@ -609,6 +772,8 @@ with TestClient(app, base_url="http://testserver") as c:
     quelle = open(K.__file__, encoding="utf-8").read()
     code_zeilen = [z for z in quelle.split("\n") if not z.strip().startswith(("#", '"""'))]
     kern = "\n".join(code_zeilen)
+    ok(len(re.findall(r'_fehlerlog\.error\("Klassenmodus: Programmfehler %s", type\(e\)\.__name__\)', kern)) == 2, "einziges Logging: Fehlerklasse ohne Inhalte")
+    kern = re.sub(r'_fehlerlog\.error\("Klassenmodus: Programmfehler %s", type\(e\)\.__name__\)', "", kern)
     ok("print(" not in kern, "Modul ruft kein print auf")
     ok(not re.search(r"logging\.getLogger\([^)]*\)\.(debug|info|warning|error|exception|critical)|\blog(ger)?\.(debug|info|warning|error)", kern), "Modul schreibt nichts ins Log")
     ok(not re.search(r'open\([^)]*["\'](w|a|x|r\+|wb|ab)["\']', kern) and "write_text" not in kern and "write_bytes" not in kern and ".write(" not in kern,
@@ -632,6 +797,7 @@ with TestClient(app, base_url="http://testserver") as c:
     print("--- Ratenbegrenzung (oeffentlicher Modus)")
     zuruecksetzen()
     os.environ["OEFFENTLICH"] = "1"
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
     os.environ["KL_KLASSE_NEU_JE_10MIN"] = "2"
     from app import sicherheit
     sicherheit._fenster.clear()
@@ -650,7 +816,7 @@ with TestClient(app, base_url="http://testserver") as c:
         if c.post("/api/klasse/nachweis/pruefen", json={"text": "x"}, headers=H).status_code == 429:
             n429 += 1
     ok(n429 > 0, "Nachweis-Pruefung: nach 30 Anfragen je Minute gebremst")
-    os.environ.pop("OEFFENTLICH"); os.environ.pop("KL_KLASSE_NEU_JE_10MIN")
+    os.environ.pop("OEFFENTLICH"); os.environ.pop("KL_KLASSE_NEU_JE_10MIN"); os.environ.pop("KL_PROXY_KEY", None)
     sicherheit._fenster.clear()
 
 zuruecksetzen()
