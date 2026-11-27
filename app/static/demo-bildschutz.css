@@ -1,0 +1,22 @@
+/* Labor "Bild schützen": Umschalter, Effekte, Farbwahl, Schieber (demo-bildschutz.js). Farben nur über die Variablen aus style.css. */
+.bs-gruppe .bs-reihe{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 12px}
+.bs-knopf{min-height:44px;padding:0 16px;font-size:15px;cursor:pointer}
+.bs-knopf .ic{width:16px;height:16px}
+.bs-knopf[aria-pressed=true]{background:var(--akzent-fl);color:var(--auf-akzent)}
+.bs-knopf[aria-pressed=true]:hover{background:var(--akzent-h);color:var(--auf-akzent)}
+.bs-funktion{min-height:48px;font-size:16px;font-weight:600}
+.bs-farbe{appearance:none;width:44px;height:44px;border-radius:50%;border:2px solid var(--linie);cursor:pointer;padding:0}
+.bs-farbe[aria-pressed=true]{outline:3px solid var(--akzent);outline-offset:2px}
+.bs-farbe:focus-visible,.bs-knopf:focus-visible{outline:3px solid color-mix(in srgb,var(--akzent) 55%,transparent);outline-offset:2px}
+.bs-reihe[hidden],.bs-gruppe [hidden]{display:none!important}
+.bs-regler{display:grid;gap:4px}
+.bs-erklaerung{margin:12px 0 0;font-size:16px;line-height:1.5}
+.bs-gesichter{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:8px}
+.bs-gesichter li{display:flex;gap:10px;align-items:flex-start;padding:10px 12px;border-radius:12px;background:var(--flaeche2);font-size:15px;line-height:1.45}
+.bs-gesichter .ic{width:20px;height:20px;flex:none;margin-top:1px}
+.bs-vergleich{margin-top:14px;border-radius:12px;background:var(--flaeche2);padding:4px 14px 14px}
+.bs-vergleich summary{display:flex;gap:8px;align-items:center;min-height:44px;cursor:pointer;font-weight:600}
+.bs-vergleich summary .ic{width:18px;height:18px}
+.bs-buehne{position:relative;width:100%;max-width:560px;aspect-ratio:4/3;border-radius:var(--r2);overflow:hidden;background:#000}
+.bs-buehne img,.bs-buehne canvas{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.bs-schieberzeile{display:grid;grid-template-columns:auto 1fr auto;gap:12px;align-items:center;max-width:560px;margin-top:8px;font-size:15px}

@@ -427,7 +427,7 @@
        (Python: steuern()), beiVerbindung(fn) laeuft bei jedem (Wieder-)Verbinden, ladend(fn) bekommt jede Antwort (JSON des Jetson). */
     const beiVerbindung = [], beiAntwort = [];
     const kameraApi = {
-      L,
+      L, video,
       sende(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); },
       beiVerbindung(f) { beiVerbindung.push(f); },
       beiAntwort(f) { beiAntwort.push(f); },

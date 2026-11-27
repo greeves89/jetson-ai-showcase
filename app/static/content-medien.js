@@ -353,7 +353,7 @@ seiten: {
      optionen: ["Besonders schlecht gemachte KI-Videos von Laien", "Einfache Tricks wie falsche Beschriftung oder Zeitlupe", "Fälschungen, die kostenlos im Netz angeboten werden", "Bilder, die von Kindern selbst erstellt wurden"],
      richtig: 1, erklaerung: "Cheap Fakes sind einfache Tricks, für die man keine aufwendige Technik braucht. Sie wirken trotzdem, weil Menschen nicht nachprüfen."},
   ],
-  weiter: ["echt-oder-ki", "falscher-anruf", "quellen-pruefen", "verzerrung-ethik", "recht"],
+  weiter: ["echt-oder-ki", "falscher-anruf", "quellen-pruefen", "verzerrung-ethik", "recht", "bild-schuetzen"],
 },
 
 /* ------------------------------------------------------------------ 4 */
