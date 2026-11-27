@@ -1,4 +1,4 @@
-/* Strang "Business-Use-Cases": zehn Fallstudien. Jede zeigt einen Einsatzfall von der Ausgangslage bis zum Ergebnis
+/* Strang "Business-Use-Cases": zehn Fallstudien und eine Kurzfassung für das Handwerk (uc-handwerk). Jede zeigt einen Einsatzfall von der Ausgangslage bis zum Ergebnis
    und führt zu einem fertigen Beispiel (Daten unter /static/beispiele/, Verzeichnis manifest.json).
    Feste Gliederung: Ausgangslage, Ziel, Daten, Verfahren, Beispiel, Ergebnis, Stolpersteine, Nutzen und Aufwand. */
 (function () {
@@ -526,7 +526,7 @@ S["uc-logistik-zaehlen"] = {
         ],
       },
       p: [
-      "Der Nutzen liegt im aktuellen Überblick ohne Gang über den Hof. Die Torkontrolle sieht auf einen Blick, wie voll es ist, und kann Entscheidungen früher treffen. Der Zähler läuft Tag und Nacht gleich gleichmäßig, wenn Licht und Kamera passen.",
+      "Der Nutzen liegt im aktuellen Überblick ohne Gang über den Hof. Die Torkontrolle sieht auf einen Blick, wie voll es ist, und kann Entscheidungen früher treffen. Der Zähler arbeitet gleichmäßig, auch nachts, wenn Licht und Kamera passen.",
       "Handarbeit bleibt: den Pilot auswerten, die Kamera sauber aufstellen und warten, Fehlalarme prüfen und festlegen, was bei einer abweichenden Zahl passiert. Die Zählung ist eine Hilfe, kein Ersatz für die Sicht der Menschen vor Ort.",
       "Wer prüft, sollte vorher feststehen: Zum Beispiel vergleicht die Torkontrolle ein- oder zweimal je Schicht die Zahl der Kamera mit einer Handzählung.",
     ], liste: [
@@ -1582,7 +1582,7 @@ S["uc-sicherheit-zutritt"] = {
       },
       p: [
       "Das Ziel in einem Satz: Das System soll erkennen, dass ein Gesicht im Bild ist, und sonst nichts.",
-      "Die Eingabe ist ein Kamerabild. Die Ausgabe ist ein Rahmen um jedes gefundene Gesicht. Das nennt man [[detektion|Detektion]]. Eine andere Aufgabe ist die [[identifikation|Identifikation]]: festzustellen, wer die Person ist. Eine dritte, den Ausdruck zu deuten. Das Beispiel macht nur die erste Stufe.",
+      "Die Eingabe ist ein Kamerabild. Die Ausgabe ist ein Rahmen um jedes gefundene Gesicht. Das nennt man [[detektion|Detektion]]. Eine andere Aufgabe ist die [[identifikation|Identifikation]]: festzustellen, wer die Person ist. Eine dritte, den Ausdruck zu deuten; das ist am Arbeitsplatz verboten (siehe unten, Stolpersteine). Das Beispiel macht nur die erste Stufe.",
       "Der Unterschied ist wichtig. Detektion sagt: „Da ist ein Gesicht.“ Identifikation sagt: „Das ist Person X.“ Für das Licht an der Tür genügt die erste Aussage. Die zweite braucht eine Datenbank mit Gesichtern bekannter Menschen, und das ist rechtlich ein ganz anderes Feld.",
     ], alltag: [
       "Beim Zählen von Besuchern an einem Museumseingang zählt ein Sensor, wie viele Menschen hereinkommen. Er speichert keine Namen. Würde er Gesichter mit einer Mitgliederliste abgleichen, würde aus dem Zähler eine Überwachung.",
@@ -1688,6 +1688,7 @@ S["uc-sicherheit-zutritt"] = {
       "**Unbeteiligte im Bild:** Eine Kamera an der Tür filmt auch Vorbeigehende. Gegenmittel: Ausschnitt begrenzen, Hinweis anbringen.",
       "**Fehler und Unterschiede:** Fehlalarme nachts, Aussetzer bei Masken oder Gegenlicht, ungleiche Erkennung. Gegenmittel: Pilot unter allen Bedingungen, Menschen als Rückfallebene.",
       "**Schleichende Ausweitung:** Aus „Licht an“ wird „wer kommt wann?“. Gegenmittel: Zweck schriftlich festlegen und einhalten ([[zweckbindung|Zweckbindung]]).",
+      "**KI-Verordnung (Stand 27.11.2026):** Gefühle aus Gesichtern abzuleiten ist am Arbeitsplatz und in Bildungseinrichtungen seit 02.02.2025 verboten, mit engen Ausnahmen für Medizin und Sicherheit. Systeme, die Personen anhand körperlicher Merkmale identifizieren, gelten als Hochrisiko. Nach dem „Digital Omnibus on AI“ (Verordnung (EU) 2026/1744) gelten deren Pflichten ab 02.12.2027. Dieser Fall erkennt nur, dass ein Gesicht da ist, aber die Grenze liegt dicht daneben.",
     ], alltag: [
       "Ein Schlüssel für die Nachbarin zum Blumengießen ist freundlich. Wird daraus ein Nachschlüssel für alle Zimmer ohne Absprache, ist es etwas anderes. Der Zweck bestimmt, was in Ordnung ist.",
     ]},
@@ -1803,7 +1804,7 @@ S["uc-sicherheit-baustelle"] = {
       p: [
       "Für die reine Personenerkennung brauchst du keine eigenen Beispielbilder. Das Modell kennt Personen. Im fertigen Beispiel liegen drei echte Fotos mit freier Lizenz: eine Straßenbaustelle mit Arbeitern in Warnkleidung, eine Werkhalle bei der Montage eines großen Bauteils (ein Schwarzweißfoto) und eine Großbaustelle am Straßenrand, auf der die Personen weit entfernt sind.",
       "Willst du mehr als „Person“, brauchst du Beispiele für das, was du unterscheiden willst. Für „mit Helm“ und „ohne Helm“ sind das Bilder von Menschen mit und ohne Helm, mit Etikett, in verschiedenen Lagen, Farben und Lichtverhältnissen. Für Nahaufnahmen reicht das Anlernen mit wenigen Beispielen je Klasse, siehe {{anlernen|Bildmodell anlernen}}. Für Personen im Gesamtbild braucht man ein eigens trainiertes Erkennungsmodell.",
-      "Datenschutz und Mitbestimmung stehen am Anfang. Personenerkennung am Arbeitsplatz ist Überwachung von Beschäftigten, wenn sie nicht sorgfältig begrenzt ist. Sie braucht eine Rechtsgrundlage, die Beteiligung von Datenschutz und Betriebsrat, einen klar benannten Zweck (Gefahrenbereich, nicht Leistungskontrolle) und kurze Speicherfristen. Das ist keine Rechtsberatung, siehe {{recht|Recht und Regeln im Überblick}}.",
+      "Datenschutz und Mitbestimmung stehen am Anfang. Personenerkennung am Arbeitsplatz ist Überwachung von Beschäftigten, wenn sie nicht sorgfältig begrenzt ist. Sie braucht eine Rechtsgrundlage, die Beteiligung von Datenschutz und Betriebsrat, einen klar benannten Zweck (Gefahrenbereich, nicht Leistungskontrolle) und kurze Speicherfristen. Gefühle oder Stimmung der Beschäftigten abzuleiten ist nach der KI-Verordnung am Arbeitsplatz seit 02.02.2025 verboten; das Beispiel erkennt nur, dass eine Person im Bild ist. Systeme zur biometrischen Identifizierung gelten als Hochrisiko, ihre Pflichten gelten nach dem „Digital Omnibus on AI“ (Verordnung (EU) 2026/1744) ab 02.12.2027. Das ist keine Rechtsberatung (Stand 27.11.2026), siehe {{recht|Recht und Regeln im Überblick}}.",
     ], alltag: [
       "Ein Rauchmelder in der Werkstatt dient der Sicherheit, nicht der Kontrolle, wer wie lange raucht. Der Zweck bestimmt, was erlaubt ist und was nicht.",
     ]},

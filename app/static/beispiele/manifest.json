@@ -846,7 +846,7 @@
      }
     ]
    },
-   "erwartung": "Der Agent soll für jede Frage das passende Werkzeug aufrufen und die Antwort aus dem Ergebnis ablesen. Kleine Modelle wählen manchmal das falsche Werkzeug oder rechnen selbst falsch. Dann siehst du es im Schrittverlauf. Die Werkzeuge existieren erst, wenn das Backend sie umsetzt.",
+   "erwartung": "Der Agent soll für jede Frage das passende Werkzeug aufrufen und die Antwort aus dem Ergebnis ablesen. Kleine Modelle wählen manchmal das falsche Werkzeug oder rechnen selbst falsch. Dann siehst du es im Schrittverlauf.",
    "hinweis": "Alle Bestellungen, Kundenkürzel, Artikel und Preise sind frei erfunden."
   },
   {
