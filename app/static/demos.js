@@ -423,11 +423,20 @@
       if (bildQuelle && !wartet) aufnehmenUndSenden();      // stehendes Beispielbild: mit neuer Schwelle noch einmal auswerten
     }
 
+    /* Schnittstelle fuer KL.kameraModi[modus].extra(api): L (Aufraeumen), sende(objekt) schickt eine Steuernachricht an den Modus
+       (Python: steuern()), beiVerbindung(fn) laeuft bei jedem (Wieder-)Verbinden, ladend(fn) bekommt jede Antwort (JSON des Jetson). */
+    const beiVerbindung = [], beiAntwort = [];
+    const kameraApi = {
+      L,
+      sende(o) { if (ws && ws.readyState === 1) ws.send(JSON.stringify(o)); },
+      beiVerbindung(f) { beiVerbindung.push(f); },
+      beiAntwort(f) { beiAntwort.push(f); },
+    };
     // regler gibt es nur im Objekt-Modus; Element.append(null) wuerde sonst das Wort "null" in die Seite schreiben
     root.append(...[
       h("div", { class: "zeile d-steuer" }, btn, status),
       meld.el, kameras, hg ? KL.kiHinweis({ text: "Alles hier sind Schätzungen eines KI-Modells. Gesten, Kopfhaltung und vor allem der Gesichtsausdruck können falsch sein. Es wird nichts gespeichert." }) : konf && konf.hinweis ? KL.kiHinweis({ text: konf.hinweis }) : null,
-      konf && konf.extra ? konf.extra(L) : null,
+      konf && konf.extra ? konf.extra(kameraApi) : null,
       regler, messwerte, live.el].filter(Boolean));
 
     /* Zustand */
@@ -505,6 +514,7 @@
         if (ws !== sock) return;
         setStatus("verbunden, Bilder laufen", true);
         schwelleSenden();
+        beiVerbindung.forEach((f) => { try { f(); } catch (e) { /* ein Modus darf die Kamera nicht stoeren */ } });
         aufnehmenUndSenden();
       };
       sock.onmessage = (ev) => {
@@ -534,6 +544,7 @@
         wartet = false;
         if (bildQuelle) { zeichneGedrosselt.jetzt(); setStatus("Beispielbild ausgewertet", true); return; }
         if (eigen) eigen.zeige(d);
+        beiAntwort.forEach((f) => { try { f(d); } catch (e) { /* siehe oben */ } });
         zeichneGedrosselt();
         L.timeout(aufnehmenUndSenden, 0);
       };
