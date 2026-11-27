@@ -16,7 +16,7 @@ S["chat-irrt"] = {
   zusammenfassung: "Drei Lehrfälle zum Prüfen von Chat-Antworten: Lenk- und Ruhezeiten nach der EU-Verordnung 561/2006 (9 Stunden täglich, 45 Minuten Pause nach 4,5 Stunden, 11 Stunden Ruhezeit), der Rat der Polizei beim Enkeltrick und Schockanruf (auflegen, zurückrufen, 110) und eine nachgerechnete Zahl (0,634). Dazu drei Schritte zum Prüfen.",
   abschnitte: [
     {h: "Wo du es im Chat siehst",
-     kurz: "Im Chat steht unter jeder Antwort ein Prüfhinweis. Er führt auf diese Seite. Das Modell ist klein und klingt trotzdem immer gleich sicher.",
+     kurz: "Im Chat steht unter jeder Antwort ein Prüfhinweis mit Link auf die Seite Quellen prüfen. Die Fälle auf dieser Seite zeigen dir, wie das aussieht. Das Modell ist klein und klingt trotzdem immer gleich sicher.",
      p: [
       "Im {{chat|Chat}} läuft ein kleines Sprachmodell auf dem Rechner dieses Labors. Es ist schnell und privat, weiß aber weniger als große Dienste und erfindet öfter. Darum erscheint unter den Antworten ein Hinweis zum Prüfen mit einem Link auf diese Seite.",
       "Die drei Fälle unten sind typische Fehler, die beim Testen des Labors aufgefallen sind. Es sind keine Zitate, sondern die Art des Fehlers. Die richtige Antwort steht jeweils daneben, mit Quelle.",
@@ -39,7 +39,7 @@ S["chat-irrt"] = {
       rechts: {titel: "Das stimmt wirklich", icon: "file-text", farbe: "gruen", punkte: ["9 Stunden Tageslenkzeit", "45 Minuten nach 4,5 Stunden", "11 Stunden Ruhezeit"]}},
      p: [
       "**Das sagte das Modell (typischer Fehler):** Auf die Frage, wie lange ein Berufsfahrer am Stück fahren darf, behauptet das kleine Modell gern, es gebe keine feste Vorgabe, und nennt Organisationen, die eine Pause empfehlen. Die Zeiten weichen von der Regel ab, und die genannten Stellen lassen sich nicht belegen.",
-      "**Das stimmt wirklich:** Die Verordnung (EG) Nr. 561/2006 gilt nach Artikel 2 für die Güterbeförderung mit Fahrzeugen über 3,5 t zulässiger Höchstmasse und für die Personenbeförderung mit Fahrzeugen für mehr als neun Personen einschließlich Fahrer. Sie nennt auch Ausnahmen, prüfe, ob dein Fahrzeug darunter fällt. Für kleinere Fahrzeuge gelten andere Regeln, frag die zuständige Stelle.",
+      "**Das stimmt wirklich:** Die Verordnung (EG) Nr. 561/2006 gilt nach Artikel 2 für die Güterbeförderung mit Fahrzeugen über 3,5 t zulässiger Höchstmasse und für die Personenbeförderung mit Fahrzeugen für mehr als neun Personen einschließlich Fahrer. Für den grenzüberschreitenden Verkehr wurde der Anwendungsbereich zum 1. Juli 2026 erweitert, nach Hinweisen der Industrie- und Handelskammern auch auf leichtere Fahrzeuge (hier nicht im Wortlaut geprüft). Die Verordnung nennt auch Ausnahmen, prüfe, ob dein Fahrzeug darunter fällt. Für andere Fahrzeuge gelten andere Regeln, frag die zuständige Stelle.",
      ],
      tabelle: {
       beschriftung: "Was die Verordnung (EG) Nr. 561/2006 sagt, geprüft am 23.11.2026",
@@ -59,7 +59,7 @@ S["chat-irrt"] = {
      p: [
       "**Das sagte das Modell (typischer Fehler):** Auf die Frage, was zu tun ist, wenn ein angeblicher Enkel am Telefon Geld braucht, hält das Modell es für möglich, dass der Anrufer echt ist, schlägt Fragen zum Weiterreden vor und lässt Auflegen, Zurückrufen und die 110 weg. Das Gespräch geht weiter, und der Druck bleibt.",
       "**Das stimmt wirklich:** Die Polizei rät bei Schockanrufen, sofort aufzulegen. Das sei nicht unhöflich. Sie rät, die Person oder eine Vertrauensperson unter einer bekannten Telefonnummer zu erreichen und nicht unter der Nummer des Anrufs, bei Verdacht sofort die 110 zu wählen und niemals Geld oder Wertgegenstände an Unbekannte zu übergeben. Beim Enkeltrick heißt es: Die jeweilige Person unter der bekannten Nummer anrufen und sich den Sachverhalt bestätigen lassen.",
-      "Die ganze Seite dazu: {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}. Quellen: [Polizei: Schockanruf](https://www.polizei-beratung.de/themen-und-tipps/betrug/schockanrufe/) und [Polizei: Enkeltrick](https://www.polizei-beratung.de/themen-und-tipps/betrug/enkeltrick/), abgerufen am 23.11.2026.",
+      "Zu Betrugsfragen blendet der Chat deshalb vor der Antwort einen festen Hinweis ein: auflegen, selbst zurückrufen, bei Verdacht 110. Er stammt nicht vom Modell. Die ganze Seite dazu: {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}. Quellen: [Polizei: Schockanruf](https://www.polizei-beratung.de/themen-und-tipps/betrug/schockanrufe/) und [Polizei: Enkeltrick](https://www.polizei-beratung.de/themen-und-tipps/betrug/enkeltrick/), abgerufen am 23.11.2026.",
      ],
      merke: "Bei Geldforderungen am Telefon: auflegen, zurückrufen, bei Verdacht 110. Dafür braucht es keinen Chat."},
     {h: "Fall 3: Eine Rechnung",
@@ -87,7 +87,7 @@ S["chat-irrt"] = {
   ],
   grenzen: [
     "Die Fälle beschreiben typische Fehler, keine Zitate. Das Modell kann beim nächsten Mal anders antworten, auch richtig.",
-    "Die Lenkzeit-Tabelle nennt nur die Regeln, die am 23.11.2026 im Wortlaut geprüft wurden. Sie ist keine Rechtsberatung. Für deinen Fall frag die zuständige Stelle.",
+    "Die Lenkzeit-Tabelle nennt nur die Regeln, die am 23.11.2026 im Wortlaut geprüft wurden. Sie gilt für Fahrzeuge im Anwendungsbereich der Verordnung und ist keine Rechtsberatung. Für deinen Fall frag die zuständige Stelle.",
   ],
   quiz: [
     {frage: "Wie lange darf ein Lkw-Fahrer nach der Verordnung (EG) Nr. 561/2006 lenken, bevor eine Pause nötig ist?",

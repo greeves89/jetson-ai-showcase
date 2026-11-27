@@ -71,9 +71,9 @@ S["medien-stunde-1"] = einheit({
   zeitP: ["Vierergruppen, ein ausgedrucktes Kartenset je Gruppe (Download oben). Es braucht kein Gerät, Kamera und Mikrofon bleiben aus. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{echt-oder-ki|Echt oder KI?}}"],
   vorbereitung: "Vorbereitung: Kartenset zweimal ausdrucken und ausschneiden. Die Auflösung steht nur im Lösungsblatt, gib sie erst in der Sicherung bekannt.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Wie sicher bist du bei einem Bild?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Frage: Wie sicher bist du bei einem Bild?",
     visual: {typ: "ablauf", paket: false, schritte: [
-      {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
+      {icon: "video", text: "Video ansehen", sub: "etwa 2,5 Minuten"},
       {icon: "circle-help", text: "Frage", sub: "Wie sicher bist du?"},
       {icon: "hand", text: "Handzeichen", sub: "für die Reflexion", farbe: "gruen"}]},
     p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{echt-oder-ki|Echt oder KI?}}) und frage danach: Wer ist sicher, dass er KI-Bilder erkennt? Merke dir die Handzeichen, die Frage kommt in der Reflexion zurück."]},
@@ -160,9 +160,9 @@ S["medien-stunde-2"] = einheit({
   zeitP: ["Vierergruppen, ein Gerät je Gruppe mit Browser. Die Chat-Frage braucht das Sprachmodell, die Gruppen fragen versetzt. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{quellen-pruefen|Quellen prüfen}}."],
   vorbereitung: "Vorbereitung: Wähle eine Behauptung, die du in einer verlässlichen Quelle belegen kannst, und teste vorher, was der Chat dazu antwortet. Lege einen Beitrag ohne Autor und eine Behörden- oder Fachseite zum Thema bereit.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Eine Meldung im Klassenchat, was tust du zuerst?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Frage: Eine Meldung im Klassenchat, was tust du zuerst?",
     visual: {typ: "ablauf", paket: false, schritte: [
-      {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
+      {icon: "video", text: "Video ansehen", sub: "etwa 2,5 Minuten"},
       {icon: "message-circle", text: "Klassenchat", sub: "Meldung kommt an"},
       {icon: "hand", text: "Stopp", sub: "erst denken", farbe: "gruen"}]},
     p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{quellen-pruefen|Quellen prüfen}}). Frage danach: Wer leitet Meldungen sofort weiter? Das erste Wort der vier Züge ist Stopp."]},
@@ -252,7 +252,7 @@ S["medien-stunde-3"] = einheit({
   zeitP: ["Vierergruppen, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{fake-news-deepfakes|Fake News und Deepfakes}}. Der Fall ist erfunden, es gibt keine Anleitung zum Fälschen."],
   vorbereitung: "Vorbereitung: Lies auf der Seite den Abschnitt „Wenn es dich selbst trifft“. Nenne bei Bedarf Hilfe: Nummer gegen Kummer (116 111), JUUUPORT.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Was ist der Unterschied zwischen Irrtum und Absicht?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Frage: Was ist der Unterschied zwischen Irrtum und Absicht?",
     visual: {typ: "vergleich",
      links: {titel: "Falschinformation", icon: "circle-help", farbe: "akzent", punkte: ["Falsch", "Ohne böse Absicht"]},
      rechts: {titel: "Desinformation", icon: "triangle-alert", farbe: "orange", punkte: ["Falsch", "Mit Absicht verbreitet"]}},
@@ -343,9 +343,9 @@ S["medien-stunde-4"] = einheit({
   zeitP: ["Vierergruppen, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}. Die Regeln der Schule gehen vor: Die Ergebnisse der Klasse sind Vorschläge."],
   vorbereitung: "Vorbereitung: Kläre vorher, was an deiner Schule zu KI bei Hausaufgaben gilt. Was erlaubt ist, entscheidet die Schule oder Lehrkraft, nicht die Technik.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Faustfrage: Hast du danach mehr verstanden, oder nur etwas abgegeben?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Faustfrage: Hast du danach mehr verstanden, oder nur etwas abgegeben?",
     visual: {typ: "ablauf", paket: false, schritte: [
-      {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
+      {icon: "video", text: "Video ansehen", sub: "etwa 2,5 Minuten"},
       {icon: "circle-help", text: "Faustfrage", sub: "mehr verstanden?"},
       {icon: "hand", text: "Handzeichen", sub: "Wer nutzt KI?", farbe: "gruen"}]},
     p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{ki-hausaufgaben-fair|KI bei Hausaufgaben}}). Schreibe die Faustfrage an die Tafel. Frage ohne Vorwurf, wer KI schon für Hausaufgaben nutzt."]},
@@ -430,7 +430,7 @@ S["medien-stunde-5"] = einheit({
   zeitP: ["Einzel- und Partnerarbeit, kein Gerät nötig. Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{datenschutz-im-alltag|Datenschutz im Alltag}}. Niemand muss eigene Einstellungen oder Apps zeigen."],
   vorbereitung: "Vorbereitung: Die Stunde ist ein Überblick und keine Rechtsberatung. Bei der Einwilligung gilt nach der Seite: In Deutschland liegt die Grenze bei 16 Jahren für Online-Dienste, darunter sind die Eltern beteiligt.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Welche Daten entstehen, wenn du eine App öffnest?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Frage: Welche Daten entstehen, wenn du eine App öffnest?",
     visual: {typ: "raster", spalten: 3, zellen: [
       {icon: "clock", text: "Wie lange", sub: "du ein Video siehst"},
       {icon: "map-pin", text: "Wo", sub: "du dich befindest"},
@@ -516,12 +516,12 @@ S["medien-stunde-6"] = einheit({
   ],
   kurz: "45 oder 90 Minuten für Klasse 8, in Einzelarbeit und ohne Kamera: Die Prompt-Werkstatt zeigt, wie eine bessere Frage die Antwort verändert.",
   zusammenfassung: "Medien-Einheit 6 für Klasse 8: Gute Fragen stellen. Alle schreiben zuerst eine Frage auf Papier und verbessern sie mit den fünf Bausteinen. In der Prompt-Werkstatt vergleicht die Gruppe die Antworten auf beide Fassungen. Einzelarbeit, ohne Kamera.",
-  zeitP: ["Einzelarbeit: Jede und jeder schreibt zuerst auf Papier. Gesendet wird in der Prompt-Werkstatt am Gruppengerät, nacheinander und versetzt, denn der Rechner beantwortet Anfragen nacheinander (höchstens 7 Geräte). Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}."],
+  zeitP: ["Einzelarbeit: Jede und jeder schreibt zuerst auf Papier. Gesendet wird in der Prompt-Werkstatt am Gruppengerät, nacheinander und versetzt, denn der Rechner beantwortet höchstens zwei Anfragen gleichzeitig, weitere warten der Reihe nach (bei mehr als etwa sieben Geräten wird es zäh). Das Video steht oben auf dieser Seite, es liegt auch auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}."],
   vorbereitung: "Vorbereitung: Probiere „Beide senden“ in der Prompt-Werkstatt (Seite prompting) mit einer eigenen Frage aus. Gruppen, die warten, schreiben schon die nächste Frage auf Papier.",
   einstieg: {
-    kurz: "Video ansehen, etwa 2 Minuten, dann die Frage: Was bestellst du im Imbiss, wenn du nur „Döner“ sagst?",
+    kurz: "Video ansehen, etwa 2,5 Minuten, dann die Frage: Was bestellst du im Imbiss, wenn du nur „Döner“ sagst?",
     visual: {typ: "ablauf", paket: false, schritte: [
-      {icon: "video", text: "Video ansehen", sub: "etwa 2 Minuten"},
+      {icon: "video", text: "Video ansehen", sub: "etwa 2,5 Minuten"},
       {icon: "message-circle", text: "Döner", sub: "ohne Angaben"},
       {icon: "message-square", text: "Mit Angaben", sub: "ohne Zwiebeln, scharf", farbe: "gruen"}]},
     p: ["Zeige das Video oben auf dieser Seite (es liegt auch auf der Seite {{prompts-fuer-schueler|Gute Fragen an die KI stellen}}). Das Modell ergänzt Fehlendes mit dem Üblichen. Je mehr du sagst, was du willst, desto besser trifft es."]},
