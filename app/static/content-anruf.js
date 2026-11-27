@@ -38,7 +38,7 @@ seiten: {
      p: [
       "Enkeltrick: Jemand gibt sich als Enkel, Verwandter oder Bekannter aus und bittet kurzfristig um Bargeld, zum Beispiel wegen eines Unfalls oder eines Kaufs. Oft kommt Zeitdruck dazu, manchmal rufen die Täter mehrmals an. Inzwischen schreiben sie auch über Messenger wie WhatsApp.",
       "Schockanruf: Eine erfundene dramatische Geschichte soll Sie erschrecken, damit Sie nicht mehr nachdenken. Falscher Polizist: Der Anrufer sagt, er sei von der Polizei, und will Geld oder Wertsachen angeblich in Sicherheit bringen.",
-      "Dazu gilt: Die Polizei wird Sie niemals telefonisch bitten, Wertsachen herauszugeben. Das schreibt die Verbraucherzentrale.",
+      "Dazu gilt: Die Polizei wird Sie niemals telefonisch bitten, Wertsachen herauszugeben. Das schreibt die Verbraucherzentrale. Dasselbe gilt für Gerichte, Behörden, Banken und die Verbraucherzentrale selbst.",
      ],
      tabelle: {
       beschriftung: "Woran Sie das Muster erkennen",
@@ -94,7 +94,7 @@ seiten: {
       "Polizeiliche Kriminalprävention: [Vorsicht Betrug: Bedrohungen durch KI](https://www.polizei-beratung.de/aktuelles/detailansicht/betrug-mit-hilfe-von-kuenstlicher-intelligenz/), abgerufen am 22.11.2026.",
       "Verbraucherzentrale: [Vorsicht: Falsche Polizisten am Telefon](https://www.verbraucherzentrale.de/wissen/vertraege-reklamation/abzocke/vorsicht-falsche-polizisten-am-telefon-12273), abgerufen am 22.11.2026.",
       "Bundesamt für Sicherheit in der Informationstechnik (BSI): [Biometrie: Vom Einloggen per Fingerabdruck bis zu Täuschungen durch Deepfakes](https://www.bsi.bund.de/DE/Themen/Verbraucherinnen-und-Verbraucher/Informationen-und-Empfehlungen/Technologien_sicher_gestalten/Biometrie/biometrie.html), abgerufen am 22.11.2026.",
-      "Wie Sie solche Quellen in einem Referat angeben, steht auf der Seite {{referat|die Seite zum Referat über KI}}. Drei geprüfte Fälle, in denen ein Chat beim Enkeltrick danebenliegt: {{chat-irrt|Wenn der Chat irrt}}.",
+      "Wie Sie solche Quellen in einem Referat angeben, steht auf der Seite {{referat|die Seite zum Referat über KI}}. Drei geprüfte Fälle, in denen ein Chat beim Enkeltrick danebenliegt: {{chat-irrt|Wenn der Chat irrt}}. Bei Fragen zu Anrufen zeigt das Chat-Labor vor der Modellantwort einen festen Hinweis mit denselben drei Schritten.",
      ]},
   ],
   mitnehmen: [

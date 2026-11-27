@@ -51,7 +51,7 @@ seiten: {
       {icon: "eye", text: "Spiegelungen", sub: "passen nicht zum Raum"}]},
      p: [
       "KI-Bildmodelle setzen ein Bild aus gelernten Mustern zusammen. Sie wissen aber nicht, wie eine Hand gebaut ist oder woher das Licht kommt. Darum entstehen kleine Brüche: ein Finger zu viel, ein Schild mit Fantasieschrift, ein Schatten, der in die falsche Richtung fällt.",
-      "Diese Fehler werden seltener. Ein sauberes Bild ohne Fehler ist deshalb kein Beweis für echt. Ein Fehler ist ein Hinweis auf KI, aber auch kein Beweis, denn echte Fotos sind manchmal verwackelt, bearbeitet oder verzerrt.",
+      "Diese Fehler werden seltener. Bei neueren Bildmodellen sind Hände und Schrift oft schon fehlerfrei, verlass dich deshalb nicht auf diese Liste. Ein sauberes Bild ohne Fehler ist deshalb kein Beweis für echt. Ein Fehler ist ein Hinweis auf KI, aber auch kein Beweis, denn echte Fotos sind manchmal verwackelt, bearbeitet oder verzerrt.",
      ],
      alltag: "Denk an einen Menschen, der ein Gesicht aus dem Gedächtnis zeichnet. Das Gesamtbild stimmt, nur die Details wie Ohren oder Hände wirken komisch. KI zeichnet ähnlich: gut im Gesamteindruck, schwächer bei Details und Logik."},
     {h: "Texte: glatt, allgemein, selbstsicher",
@@ -74,7 +74,7 @@ seiten: {
       {icon: "circle-check", text: "Klarheit", sub: "über die bekannte Nummer", farbe: "gruen"}]},
      p: [
       "Stimmen lassen sich mit KI nachbauen. Oft reichen dafür kurze Aufnahmen, etwa aus einem öffentlichen Video. Das wird manchmal für Betrug genutzt: Jemand ruft an und klingt wie ein Familienmitglied, das dringend Geld braucht.",
-      "Warnzeichen sind Zeitdruck, Geheimhaltung und die Bitte um Geld oder Codes. Dazu kommen gleichförmige Betonung, kaum Atemgeräusche oder ein seltsam sauberer Hintergrund. Sicher ist das nicht, deshalb zählt die Rückfrage: auflegen und die Person über die bekannte Nummer zurückrufen.",
+      "Warnzeichen sind Zeitdruck, Geheimhaltung und die Bitte um Geld oder Codes. Dazu kommen laut BSI falsch ausgesprochene Wörter, eine ungewohnte Sprechweise oder Verzögerungen im Gespräch. Sicher ist das nicht, denn auch eine Fälschung ohne diese Fehler ist möglich, deshalb zählt die Rückfrage: auflegen und die Person über die bekannte Nummer zurückrufen.",
       "Viele Familien vereinbaren ein Codewort für Notfälle. Das kostet nichts und hilft gegen jede Fälschung, egal wie gut sie klingt.",
       "Die drei Schritte bei einem verdächtigen Anruf (auflegen, zurückrufen, bei Verdacht 110) und die Maschen Enkeltrick, Schockanruf und falscher Polizist stehen auf der Seite {{falscher-anruf|Falscher Anruf, Enkeltrick, Schockanruf}}.",
      ],
@@ -89,6 +89,7 @@ seiten: {
      p: [
       "Statt auf Pixel zu starren, prüfst du die Herkunft. Erstens: Wer hat das Bild oder den Clip zuerst veröffentlicht, und ist das eine bekannte, überprüfbare Stelle? Zweitens: Die Rückwärtssuche zeigt, wo ein Bild schon früher aufgetaucht ist. Dienste dafür gibt es in Suchmaschinen und auf eigenen Seiten. Drittens: Berichten seriöse Medien oder Faktencheck-Redaktionen darüber?",
       "Manche Kameras und KI-Programme hängen eine Herkunftsangabe an die Datei, die sogenannten Content Credentials (Standard der Initiative C2PA). Wenn sie da sind, hilft das. Wenn sie fehlen, sagt das aber nichts, denn viele Plattformen löschen sie beim Hochladen.",
+      "Rechtlich gilt in der EU seit dem 2. August 2026 die Kennzeichnungspflicht nach Artikel 50 der KI-Verordnung: Täuschend echte KI-Inhalte (Deepfakes) müssen als künstlich erzeugt offengelegt werden, und Anbieter sollen KI-Ausgaben maschinenlesbar kennzeichnen. Für Systeme, die vor dem 2. August 2026 schon am Markt waren, gilt für die maschinenlesbare Kennzeichnung eine Übergangsfrist bis 2. Dezember 2026 (Stand 27.11.2026, keine Rechtsberatung). Das hilft bei ehrlichen Anbietern. Fälscher halten sich nicht daran, darum zählt weiter die Herkunftsprüfung.",
      ],
      alltag: "Ein Gerücht in der Klasse prüfst du ja auch nicht, indem du dem Erzähler ins Gesicht schaust. Du fragst: Wer hat das gesehen? Wer sagt das noch? So geht es auch bei Bildern."},
     {h: "Erkennungsprogramme: Vorsicht",
@@ -321,7 +322,7 @@ seiten: {
       {icon: "flag", text: "Melden", sub: "Plattform, Löschung verlangen"},
       {icon: "scale", text: "Anzeige prüfen", sub: "mit Hilfe von Erwachsenen", farbe: "gruen"}]},
      p: [
-      "Fälschungen mit echten Personen sind keine Streiche. Wer Bilder, Videos oder Stimmen anderer ohne Einwilligung verändert und verbreitet, verletzt deren Persönlichkeitsrechte, und das kann strafbar sein. Auch das Recht am eigenen Bild gilt (Kunsturhebergesetz). Mach so etwas nicht mit Mitschülern oder Lehrkräften, auch nicht als Spaß.",
+      "Fälschungen mit echten Personen sind keine Streiche. Wer Bilder, Videos oder Stimmen anderer ohne Einwilligung verändert und verbreitet, verletzt deren Persönlichkeitsrechte, und das kann strafbar sein. Auch das Recht am eigenen Bild gilt (Kunsturhebergesetz). Seit dem 2. August 2026 müssen Deepfakes in der EU außerdem gekennzeichnet werden (Artikel 50 der KI-Verordnung, Stand 27.11.2026). Mach so etwas nicht mit Mitschülern oder Lehrkräften, auch nicht als Spaß.",
       "Wenn du betroffen bist: Das ist nicht deine Schuld. Sichere Beweise, bevor etwas gelöscht wird, am besten mit Screenshots samt Adresse und Datum. Sprich mit einer Person, der du vertraust. Kostenlose und vertrauliche Hilfe gibt es zum Beispiel bei der Nummer gegen Kummer (116 111) und bei JUUUPORT, einer Online-Beratung, in der geschulte Jugendliche anderen Jugendlichen helfen. Plattformen müssen gemeldete Inhalte prüfen.",
      ]},
     {h: "Weiterlesen",
@@ -350,7 +351,7 @@ seiten: {
      richtig: 2, erklaerung: "Erst sichern, dann Hilfe holen und melden. Ignorieren lässt den Beitrag weiter wachsen, und Drohungen oder Gegenvideos machen es oft schlimmer."},
     {frage: "Was sind Cheap Fakes?",
      optionen: ["Besonders schlecht gemachte KI-Videos von Laien", "Einfache Tricks wie falsche Beschriftung oder Zeitlupe", "Fälschungen, die kostenlos im Netz angeboten werden", "Bilder, die von Kindern selbst erstellt wurden"],
-     richtig: 1, erklaerung: "Cheap Fakes sind einfache Tricks, oft aufwändig gar nicht nötig. Sie wirken trotzdem, weil Menschen nicht nachprüfen."},
+     richtig: 1, erklaerung: "Cheap Fakes sind einfache Tricks, für die man keine aufwendige Technik braucht. Sie wirken trotzdem, weil Menschen nicht nachprüfen."},
   ],
   weiter: ["echt-oder-ki", "falscher-anruf", "quellen-pruefen", "verzerrung-ethik", "recht"],
 },
@@ -422,7 +423,7 @@ seiten: {
       {icon: "clipboard-check", text: "Wie gebe ich es an?", sub: "Form und Ort"},
       {icon: "school", text: "Gilt das für alles?", sub: "Hausaufgabe, Referat, Arbeit"}]},
      p: [
-      "Lehrkräfte sind oft unsicher, wie sie mit KI umgehen sollen. Die Kultusministerkonferenz hat 2024 Handlungsempfehlungen beschlossen, die ein reines Verbot nicht als sinnvollen Weg sehen. Die Umsetzung liegt bei den Ländern und Schulen. Dein Gegenüber ist also oft froh um konkrete Fragen.",
+      "Lehrkräfte sind oft unsicher, wie sie mit KI umgehen sollen. Die Bildungsministerkonferenz (früher Kultusministerkonferenz) hat im Oktober 2024 Handlungsempfehlungen beschlossen. Ein allgemeines Verbot von KI bei Hausaufgaben halten die Länder darin für nicht zielführend und nicht durchhaltbar. Die Umsetzung liegt bei den Ländern und Schulen. Dein Gegenüber ist also oft froh um konkrete Fragen.",
       "Stell sie ruhig und vorab, nicht erst nach einem Verdacht: Welche Aufgaben darf ich mit KI-Hilfe machen? Wie soll ich die Nutzung kennzeichnen? Was passiert, wenn ich etwas übernommen habe? Eine klare Antwort schützt beide Seiten.",
      ]},
     {h: "Für Eltern: nachfragen statt kontrollieren",
@@ -451,7 +452,7 @@ seiten: {
      liste: [
       "klicksafe: [Wie künstliche Intelligenz unser Leben prägt. KI and me.](https://www.klicksafe.de/fileadmin/cms/download/Material/KI-and-me_Material-paed-Praxis_klicksafe.pdf), Material für Schule und Praxis, PDF, abgerufen am 22.11.2026.",
       "Verbraucherzentrale: [KI-Chatbots im Überblick: Was Sie über ChatGPT, Gemini & Copilot wissen sollten](https://www.verbraucherzentrale.de/wissen/digitale-welt/apps-und-software/kichatbots-im-ueberblick-was-sie-ueber-chatgpt-gemini-copilot-wissen-sollten-89125), abgerufen am 22.11.2026.",
-      "Kultusministerkonferenz (Bildungsministerkonferenz): Handlungsempfehlung für die Bildungsverwaltungen der Länder zum Umgang mit Künstlicher Intelligenz in schulischen Bildungsprozessen, Beschluss vom 10. Oktober 2024.",
+      "Kultusministerkonferenz (Bildungsministerkonferenz): Handlungsempfehlung für die Bildungsverwaltung zum Umgang mit Künstlicher Intelligenz in schulischen Bildungsprozessen, Beschluss vom 10. Oktober 2024.",
       "Regeln deiner Schule oder deines Bundeslandes: Sie gehen vor, wenn sie von dieser Seite abweichen.",
       "Für ein Referat siehe {{referat|Für dein Referat über KI}}.",
      ]},
@@ -768,7 +769,7 @@ seiten: {
       {icon: "trash-2", text: "Verlauf löschen", sub: "Neustart für den Feed"}]},
      p: [
       "Du kannst dem Feed beibringen, was du nicht sehen willst. Dafür gibt es meist einen Knopf wie Nicht interessiert oder Weniger davon. Wer bewusst anders klickt, lenkt die Empfehlungen um. Auch den Verlauf kannst du in den Einstellungen zurücksetzen.",
-      "In der EU müssen sehr große Plattformen nach dem Gesetz über digitale Dienste (Digital Services Act) erklären, wie ihre Empfehlungen grob funktionieren, und mindestens eine Variante ohne Profilbildung anbieten. Schau nach, ob deine App so eine Option hat. Das ist ein Überblick und keine Rechtsberatung.",
+      "In der EU müssen Online-Plattformen nach dem Gesetz über digitale Dienste (Digital Services Act) in ihren Nutzungsbedingungen erklären, nach welchen Hauptmerkmalen sie Inhalte empfehlen. Sehr große Plattformen müssen zusätzlich mindestens eine Variante ohne Profilbildung anbieten. Schau nach, ob deine App so eine Option hat. Das ist ein Überblick und keine Rechtsberatung.",
      ],
      merke: "Dein Feed ist kein Schicksal. Du kannst ihn beeinflussen, bewusst oder durch Einstellungen."},
     {h: "Weiterlesen",
