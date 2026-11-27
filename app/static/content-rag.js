@@ -99,7 +99,7 @@ S["rag-ueberblick"] = {
      visual: {typ: "zeitachse", punkte: [{t: "Seite 1", text: "Vektorisieren", icon: "binary"}, {t: "Seite 2", text: "Zerlegen", icon: "scissors"}, {t: "Seite 3", text: "Suchen", icon: "search"}, {t: "Seite 4", text: "Nachsortieren", icon: "list-filter"}, {t: "Seite 5", text: "Messen", icon: "target"}]},
      p: [
       "Die folgenden fünf Seiten folgen der Pipeline: {{rag-embedding|Vektorisieren}}, {{rag-chunking|Zerlegen}}, {{rag-suche|Suchen}}, {{rag-reranking|Nachsortieren}} und {{rag-bewertung|Messen}}. Jede Seite erklärt den Schritt von null, mit einem Alltagsbild und mit den Stolpersteinen, die man aus Erfahrung kennt.",
-      "Wenn du sehen willst, wie das auf dem Jetson abläuft, öffne die {{rag|RAG-Werkstatt}}. Sie zerlegt deinen Text, bettet ihn mit nomic-embed-text ein, sucht und lässt llama3.2:3b antworten. Hintergründe zu Sprachmodellen findest du bei {{genki|Generative KI}}, zum Begriff der Ähnlichkeit bei {{ml|Maschinelles Lernen}}, und ein Modell zum Ausprobieren im {{chat|Chat-Labor}}.",
+      "Wenn du sehen willst, wie das auf dem Jetson abläuft, öffne die {{rag|RAG-Werkstatt}}. Sie zerlegt deinen Text, bettet ihn mit nomic-embed-text ein, sucht und lässt llama3.2:3b antworten. Die Werkstatt gibt die besten vier Stücke an das Modell und nennt sie in der Antwort als [1] bis [4]. Eigene Texte dürfen bis zu 300 000 Zeichen lang sein. Die Embeddings rechnet der Jetson bewusst auf der CPU, weil das Modell auf der GPU bei manchen Sätzen nur Nullen lieferte. Hintergründe zu Sprachmodellen findest du bei {{genki|Generative KI}}, zum Begriff der Ähnlichkeit bei {{ml|Maschinelles Lernen}}, und ein Modell zum Ausprobieren im {{chat|Chat-Labor}}.",
     ]},
     {h: "Weiterlesen",
      kurz: "Quellen zu dieser Seite, geprüft am 22.11.2026, mit Hinweis zum Zitieren.",
@@ -220,7 +220,7 @@ S["rag-embedding"] = {
         ["Modellwechsel", "Der ganze Index passt nicht mehr zur neuen Karte", "Alle Dokumente neu einbetten, Index neu aufbauen"],
         ["Falsche Sprache oder Fachgebiet", "Texte in schwach vertretener Sprache oder Fachjargon landen ungenau", "Mit eigenen Beispielfragen testen, bei gemischten Sprachen ein mehrsprachiges Modell nehmen"],
         ["Text zu lang", "Jedes Modell hat eine Obergrenze. Der Rest wird abgeschnitten oder verwischt", "Vorher in Stücke teilen, siehe {{rag-chunking|Chunking}}"],
-        ["Zusatz vor dem Text", "Manche Modelle erwarten einen Vorsatz wie „Frage“ oder „Dokument“", "In der Beschreibung des Modells nachlesen"],
+        ["Zusatz vor dem Text", "Manche Modelle erwarten einen Vorsatz wie „Frage“ oder „Dokument“", "In der Beschreibung des Modells nachlesen. In der Werkstatt-Bedeutungskarte setzt das Labor für nomic-embed-text die Vorsilben „search_query:“ und „search_document:“ selbst davor."],
       ],
     }},
     {h: "Worauf du achten musst: Schwächen",
@@ -330,7 +330,7 @@ S["rag-chunking"] = {
       "**Zu groß:** Das Stück enthält die Antwort und viel anderes. Der Vektor wird unschärfer, die Treffer werden ungenauer. Außerdem füllt jedes große Stück das Kontextfenster und kostet Rechenzeit, und das Modell muss die Nadel im Heuhaufen selbst finden.",
     ], alltag: [
       "Das Stichwortverzeichnis eines Sachbuchs. Verweist es auf „Seite 5 bis 120“, hilft es nicht. Verweist es auf einzelne Wörter ohne Zusammenhang, auch nicht. Gut ist die Seite oder der Absatz, in dem das Thema erklärt wird.",
-      "Als Anfang nutzt man oft einige hundert Wörter je Stück. In der {{rag|RAG-Werkstatt}} sind es etwa 800 Zeichen. Das ist ein Ausgangspunkt, kein Gesetz. Teste mit echten Fragen, ob die Antwort meist in einem Stück liegt.",
+      "Als Anfang nutzt man oft einige hundert Wörter je Stück. Beim Einlesen eigener Texte in der {{rag|RAG-Werkstatt}} werden Absätze zu Stücken von etwa 800 Zeichen gebündelt, ohne Überlappung. Das Chunk-Labor oben startet mit 300 Zeichen, damit du die Schnitte gut siehst. Das ist ein Ausgangspunkt, kein Gesetz. Teste mit echten Fragen, ob die Antwort meist in einem Stück liegt.",
     ]},
     {h: "Überlappung: Stücke, die sich teilen",
      kurz: "Der Anfang jedes Stücks wiederholt das Ende des vorigen. So steht kein Gedanke nur halb da.",
@@ -378,6 +378,12 @@ S["rag-chunking"] = {
     ], alltag: [
       "Du schlägst im Lexikon einen Begriff nach und findest die Definition am Ende der Seite. Der Satz „Das gilt nur für Kinder unter 12“ steht oben auf der nächsten Seite. Ein guter Leser blättert um. Die Nachbarn-Variante macht genau das für das Modell: Sie legt die nächste Seite gleich daneben.",
     ], merke: "Wer Chunking verbessert, verbessert die Suche, ohne am Modell etwas zu ändern. Es ist oft der günstigste Hebel."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 27.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Lewis et al.: [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401), 2020, abgerufen am 27.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Chunking: Text in sinnvolle Stücke teilen“, abgerufen am 27.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-chunking).",
+     ]},
   ],
   mitnehmen: [
     "Text wird in Stücke geteilt, weil Modelle Längengrenzen haben und ein Vektor für viel Text zu unscharf wird.",
@@ -496,6 +502,13 @@ S["rag-suche"] = {
     ], alltag: [
       "Du fragst am Schalter: „Was kostet die Jahreskarte?“ Die Antwort: „Zwanzig Euro.“ Dann: „Und für Kinder?“ Der Mitarbeiter versteht, weil er das Gespräch kennt. Eine Suchmaschine kennt das Gespräch nicht. Sie braucht die vollständige Frage, die das Modell ihr erst formulieren muss.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 27.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Robertson, Zaragoza: [The Probabilistic Relevance Framework: BM25 and Beyond](https://doi.org/10.1561/1500000019), Foundations and Trends in Information Retrieval 3(4), 2009, abgerufen am 27.11.2026.",
+      "Cormack, Clarke, Buettcher: [Reciprocal Rank Fusion outperforms Condorcet and individual Rank Learning Methods](https://doi.org/10.1145/1571941.1572114), SIGIR 2009, abgerufen am 27.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Suchen: Stichwort, Vektor und Hybrid“, abgerufen am 27.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-suche).",
+     ]},
   ],
   mitnehmen: [
     "Stichwortsuche (BM25) findet Wörter und gewichtet seltene Wörter stärker. Vektorsuche findet Sinn. Jede gewinnt dort, wo die andere verliert.",
@@ -578,9 +591,9 @@ S["rag-reranking"] = {
     ]},
     {h: "Kosten und Wartezeit",
      kurz: "Jeder Kandidat braucht einen eigenen Durchgang. Die Wartezeit wächst mit ihrer Zahl.",
-     visual: {typ: "balken", titel: "Wartezeit bei rund 1 s je Kandidat (Rechenbeispiel, llama3.2:3b)", einheit: "s", zeilen: [{label: "5 Kandidaten", wert: 5, farbe: "gruen"}, {label: "10 Kandidaten", wert: 10, farbe: "orange"}, {label: "30 Kandidaten", wert: 30, farbe: "rot"}]},
+     visual: {typ: "balken", titel: "Wartezeit bei rund 1 s je Kandidat (Rechenbeispiel, llama3.2:3b; im Labor höchstens 12 Kandidaten)", einheit: "s", zeilen: [{label: "5 Kandidaten", wert: 5, farbe: "gruen"}, {label: "10 Kandidaten", wert: 10, farbe: "orange"}, {label: "30 Kandidaten", wert: 30, farbe: "rot"}]},
      p: [
-      "Ein Reranker kostet Zeit. Bei 30 Kandidaten sind das 30 Durchgänge, die jeweils Frage und Text lesen. Auf einem kleinen Gerät wie dem Jetson merkt man das, vor allem, wenn ein Sprachmodell der Bewerter ist. Die Wartezeit steigt mit der Zahl der Kandidaten und der Länge der Stücke.",
+      "Ein Reranker kostet Zeit. Bei 30 Kandidaten (im Labor sind höchstens 12 erlaubt) sind das 30 Durchgänge, die jeweils Frage und Text lesen. Auf einem kleinen Gerät wie dem Jetson merkt man das, vor allem, wenn ein Sprachmodell der Bewerter ist. Die Wartezeit steigt mit der Zahl der Kandidaten und der Länge der Stücke.",
       "Auf dem Jetson steht llama3.2:3b zur Verfügung. Es kann als Bewerter dienen, ist aber ein kleines Modell. Je kleiner das Modell, desto größer die Gefahr, dass es Kandidaten falsch einschätzt oder bei gleicher Eingabe unterschiedliche Zahlen liefert. Ob sich das lohnt, zeigt nur eine Messung an deinen Daten, siehe {{rag-bewertung|RAG messen und verbessern}}.",
       "Drei Hebel halten die Kosten im Rahmen. Erstens weniger Kandidaten, solange die richtige Stelle noch dabei ist. Zweitens kürzere Stücke, denn kurze Texte sind schneller gelesen. Drittens Ergebnisse zwischenspeichern, wenn dieselbe Frage öfter kommt. Und: Miss die Antwortzeit mit und ohne Reranker, bevor du ihn fest einbaust.",
     ], alltag: [
@@ -605,6 +618,12 @@ S["rag-reranking"] = {
     ], alltag: [
       "Vor dem Gespräch schickt die Personalabteilung dem Fragenden eine Zusammenfassung zu jedem Bewerber, aber auch die Lebensläufe als Anhang. Die Zusammenfassung spart Zeit. Der Anhang schützt davor, dass in der Zusammenfassung etwas Wichtiges fehlt.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 27.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Nogueira, Cho: [Passage Re-ranking with BERT](https://arxiv.org/abs/1901.04085), 2019, abgerufen am 27.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „Reranking: erst grob, dann genau“, abgerufen am 27.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-reranking).",
+     ]},
   ],
   mitnehmen: [
     "Die erste Suche vergleicht fertige Vektoren und ist schnell, aber grob. Ein Reranker liest Frage und Text gemeinsam und ist genauer, aber langsam.",
@@ -662,10 +681,10 @@ S["rag-bewertung"] = {
       "Eine Klassenarbeit hat Aufgaben und einen Lösungsschlüssel. Ohne Schlüssel kannst du die Arbeit nicht korrigieren. Das Testset ist der Schlüssel für dein System: Du siehst, ob es die richtige Stelle gefunden hat, und nicht bloß, dass es antwortet.",
     ]},
     {h: "Kennzahlen für die Suche",
-     kurz: "Trefferquote: kommt die Stelle vor? Rang: wie weit oben? Beide hier gemessen in der Werkstatt.",
+     kurz: "Trefferquote: kommt die Stelle vor? Rang: wie weit oben? Beide hier gemessen in der Werkstatt, an einem kleinen Lernkorpus.",
      visual: [{typ: "balken", titel: "Richtige Stelle auf Platz 1 (von 10 Fragen, gemessen)", max: 10, einheit: "von 10", zeilen: [{label: "Stichwort", wert: 5, farbe: "orange"}, {label: "Vektor", wert: 7, farbe: "akzent"}, {label: "Hybrid", wert: 8, farbe: "gruen"}]}, {typ: "balken", titel: "Richtige Stelle unter den ersten 10 (von 10 Fragen, gemessen)", max: 10, einheit: "von 10", zeilen: [{label: "Stichwort", wert: 5, farbe: "orange"}, {label: "Vektor", wert: 10, farbe: "akzent"}, {label: "Hybrid", wert: 10, farbe: "gruen"}]}],
      p: [
-      "Die Suche prüfst du getrennt von der Antwort. Denn wenn schon die falschen Stücke vorliegen, kann das Modell nichts retten. Zwei einfache Kennzahlen reichen für den Anfang. Die [[trefferquote|Trefferquote]] sagt, ob die Stelle überhaupt vorkommt. Der Rang sagt, wie weit oben sie steht. Zusammen zeigen sie, ob die Suche das Wichtige findet und ob ein Reranker etwas verbessern kann, siehe {{rag-reranking|Reranking}}.",
+      "Die Suche prüfst du getrennt von der Antwort. Denn wenn schon die falschen Stücke vorliegen, kann das Modell nichts retten. Zwei einfache Kennzahlen reichen für den Anfang. Die [[trefferquote|Trefferquote]] sagt, ob die Stelle überhaupt vorkommt. Der Rang sagt, wie weit oben sie steht. Zusammen zeigen sie, ob die Suche das Wichtige findet und ob ein Reranker etwas verbessern kann, siehe {{rag-reranking|Reranking}}. Die Messwerte oben stammen aus einem kleinen Beispielkorpus mit 23 Absätzen, der zum Lernen gebaut wurde. Mit deinem Material kommen andere Zahlen heraus.",
     ], tabelle: {
       beschriftung: "Zwei Kennzahlen für die Suche",
       kopf: ["Kennzahl", "Die Frage dahinter", "So rechnest du", "Beispiel"],
@@ -743,6 +762,12 @@ S["rag-bewertung"] = {
     ], alltag: [
       "Eine Bibliothek kauft ständig neue Bücher und sondert alte aus. Die Auskunftsperson muss die Neuzugänge im Katalog finden, und ein Buch von 1990 mit überholten Gesetzen darf nicht mehr im Regal stehen. Pflege heißt hier: Katalog und Regal bleiben deckungsgleich.",
     ], merke: "Messen ist keine einmalige Aktion. Das Testset begleitet jede Änderung, und die Protokolle liefern die nächsten Testfragen."},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 27.11.2026, mit Hinweis zum Zitieren.",
+     liste: [
+      "Lewis et al.: [Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks](https://arxiv.org/abs/2005.11401), 2020, abgerufen am 27.11.2026.",
+      "Diese Seite zitieren: KI-Labor, „RAG messen und verbessern“, abgerufen am 27.11.2026, [Link zur Seite](https://ki-labor.daniel-alisch.site/rag-bewertung).",
+     ]},
   ],
   mitnehmen: [
     "Ein Testset aus echten Fragen mit bekannter Fundstelle zeigt, wo das System steht. Miss Suche (Trefferquote, Rang) und Antwort (Richtigkeit, Antworttreue, Vollständigkeit) getrennt.",
