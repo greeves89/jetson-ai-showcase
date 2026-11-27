@@ -79,7 +79,16 @@
   const ZUSATZ = {
     anlernen: "Beim Anlernen merkt sich der Rechner für etwa 30 Minuten Zahlenwerte aus deinen Bildern, nicht die Bilder selbst. Danach vergisst er sie. Zeige ihm Gegenstände, keine Personen.",
   };
-  const BIO_LABORE = new Set(["gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
+  /* Texte der Einwilligung je Labor, wenn sie vom Gesichts-Labor abweichen (Hände und Gesichter: kein Wiedererkennen, dafür Ausdruck) */
+  const LABOR_TEXT = {
+    "hand-gesicht": {
+      titel: "Hände und Gesichter: ausdrücklich einwilligen",
+      wozu: "Der Rechner soll Hände und Gesichter in deinem Kamerabild finden, die Haltung der Finger deuten und den Gesichtsausdruck schätzen. Personen wiedererkennen kann er damit nicht.",
+      speichern: "Es wird nichts gespeichert: kein Foto, kein Video, keine Zahlenlisten. Nach der Auswertung eines Bildes ist es weg.",
+      box: "Ich willige ein, dass mein Kamerabild zur Erkennung von Händen, Gesichtern und Gesichtsausdruck kurz verarbeitet wird.",
+    },
+  };
+  const BIO_LABORE = new Set(["gesicht", "hand-gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
   /* Alters- und Elternhinweis, steht oben im Dialog. Bewusst ohne Abfrage: Die Seite prueft kein Alter und gibt kein Schutzversprechen. */
   const ALTER_HINWEIS = ["Nutzbar ab 16 Jahren.", "Jüngere nur mit Einverständnis der Eltern. Die Seite prüft dein Alter nicht."];
@@ -100,9 +109,9 @@
     const bio = typ === "biometrisch";
     const haken = !!a.box;               // Gesicht und Mikrofon: ausdrückliches Kästchen, nie vorbelegt
     const punkte = [
-      ["sparkles", "Wozu", a.wozu],
+      ["sparkles", "Wozu", (LABOR_TEXT[lab] || {}).wozu || a.wozu],
       [opt.sendet ? "send" : "lock", "Wohin", opt.sendet ? a.wohinSendet : a.wohinLokal],
-      ["shield-check", "Was bleibt", a.speichern + (ZUSATZ[lab] ? " " + ZUSATZ[lab] : "")],
+      ["shield-check", "Was bleibt", ((LABOR_TEXT[lab] || {}).speichern || a.speichern) + (ZUSATZ[lab] ? " " + ZUSATZ[lab] : "")],
       ["power", "Stoppen und widerrufen", "Du kannst jederzeit stoppen und deine Einwilligung unten auf der Seite oder unter „Ist das sicher?“ widerrufen." + (bio ? " Die gemerkte Zustimmung gilt nur für diese Sitzung." : "")],
     ];
     if (bio) punkte.push(["users", "Wer ins Bild darf", "Nur du selbst oder Personen, die zugestimmt haben."]);
@@ -125,12 +134,12 @@
       dlg.append(...[
         h("div", { class: "einw-kopf" },
           h("div", { class: "einw-icon", "aria-hidden": "true" }, KL.icon(a.icon)),
-          h("h2", { id: id + "-t" }, a.titel)),
+          h("h2", { id: id + "-t" }, (LABOR_TEXT[lab] || {}).titel || a.titel)),
         h("p", { class: "einw-alter" }, h("span", { class: "einw-alter-ic", "aria-hidden": "true" }, KL.icon("users")), h("span", null, h("b", null, ALTER_HINWEIS[0]), " ", ALTER_HINWEIS[1])),
         h("p", { class: "einw-lead", id: id + "-l" }, "Kurz erklärt, was dann passiert:"),
         h("ul", { class: "einw-liste" }, punkte.map(([ic, kopf, text]) =>
           h("li", null, h("span", { class: "einw-ic", "aria-hidden": "true" }, KL.icon(ic)), h("div", null, h("b", null, kopf), h("span", null, text))))),
-        haken ? h("label", { class: "einw-box", for: id + "-ok" }, kaestchen, h("span", null, a.box)) : null,
+        haken ? h("label", { class: "einw-box", for: id + "-ok" }, kaestchen, h("span", null, (LABOR_TEXT[lab] || {}).box || a.box)) : null,
         h("p", { class: "einw-klein" }, "Danach fragt dich noch dein Browser. Das ersetzt deine Einwilligung hier nicht und umgekehrt. ",
           h("a", { href: "/sicherheit-einfach", onclick: () => schliessen(false) }, "Mehr dazu: Ist das sicher?"),
           /^https:\/\//.test(datenschutz) ? [" ", h("a", { href: datenschutz, rel: "noopener", target: "_blank" }, "Datenschutzerklärung")] : null),

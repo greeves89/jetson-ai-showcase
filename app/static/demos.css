@@ -195,3 +195,25 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .betrug-kasten a{display:inline-flex;align-items:center;min-height:44px;font-weight:600;text-decoration:underline;text-underline-offset:3px}
 .d-chatbox .verlauf:empty{display:none}
 .d-chatbox{min-height:0}
+
+/* ---------- Labor Hände und Gesichter: Eigenschaften-Karten neben dem Bild ---------- */
+.kameras.d-hg{grid-template-columns:1fr 1fr minmax(15rem,19rem);align-items:start}
+.d-eigen{min-width:0}
+.d-eigen-titel{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13px;font-weight:600;color:var(--leise)}
+.d-karten{display:grid;gap:10px;align-content:start}
+.d-karte{padding:12px 14px;border-radius:var(--r2);background:var(--flaeche2);border:.5px solid color-mix(in srgb,var(--leise) 25%,transparent);
+  animation:d-karte-ein .28s ease-out;transition:opacity .25s}
+.d-karte.alt{opacity:.45}
+.d-karte-kopf{display:flex;align-items:center;gap:8px;margin-bottom:6px;font-size:15px}
+.d-karte-kopf b{flex:1;min-width:0}
+.d-karte-punkt{width:10px;height:10px;border-radius:50%;flex:none}
+.d-karte-symbol{display:inline-flex;color:var(--leise)}
+.d-karte-symbol .ic{width:20px;height:20px}
+.d-feld{display:flex;justify-content:space-between;gap:10px;padding:4px 0;font-size:14px;line-height:1.35;border-top:.5px solid color-mix(in srgb,var(--leise) 18%,transparent)}
+.d-feld span{color:var(--leise)}
+.d-feld b{font-weight:600;text-align:right;font-variant-numeric:tabular-nums;overflow-wrap:anywhere}
+.d-karten-leer{margin-top:0}
+@keyframes d-karte-ein{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
+@media(prefers-reduced-motion:reduce){.d-karte{animation:none;transition:none}}
+@media(max-width:1100px){.kameras.d-hg{grid-template-columns:1fr 1fr}.kameras.d-hg .d-eigen{grid-column:1 / -1}.kameras.d-hg .d-karten{grid-template-columns:repeat(auto-fill,minmax(14rem,1fr))}}
+@media(max-width:700px){.kameras.d-hg{grid-template-columns:1fr}}

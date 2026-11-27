@@ -242,7 +242,20 @@ INHALT.synonyme = {
   "bilder malen": ["=genki", "=bild-als-zahlen", "=cnn-intuition"],
   "bild erzeugen": ["=genki", "=bild-als-zahlen", "=cnn-intuition"],
   "bilder erzeugen": ["=genki", "=bild-als-zahlen", "=cnn-intuition"],
-  kamera: ["=gesicht", "=objekt", "=bild-als-zahlen", "=sicherheit-einfach"],
+  kamera: ["=gesicht", "=hand-gesicht", "=objekt", "=bild-als-zahlen", "=sicherheit-einfach"],
+  hand: ["=hand-gesicht", "=gesicht", "=bild-als-zahlen"],
+  haende: ["=hand-gesicht", "=gesicht", "=bild-als-zahlen"],
+  geste: ["=hand-gesicht", "=gesicht"],
+  gesten: ["=hand-gesicht", "=gesicht"],
+  gestenerkennung: ["=hand-gesicht", "=gesicht", "=cnn-intuition"],
+  handerkennung: ["=hand-gesicht", "=gesicht", "=cnn-intuition"],
+  handskelett: ["=hand-gesicht", "=bild-als-zahlen"],
+  mimik: ["=hand-gesicht", "=gesicht", "=verzerrung-ethik"],
+  emotionen: ["=hand-gesicht", "=gesicht", "=verzerrung-ethik", "=recht"],
+  emotionserkennung: ["=hand-gesicht", "=gesicht", "=verzerrung-ethik", "=recht"],
+  "gefuehle erkennen": ["=hand-gesicht", "=gesicht", "=verzerrung-ethik", "=recht"],
+  laecheln: ["=hand-gesicht", "=gesicht"],
+  kopfhaltung: ["=hand-gesicht", "=gesicht"],
   video: ["=objekt", "=gesicht", "=uc-logistik-zaehlen"],
   navi: ["=agenten-planung", "=robotik", "=agenten-grundlagen"],
   spiel: ["=experimente", "=ml", "=llm-grenzen", "=agenten-planung", "=robotik"],
@@ -417,7 +430,7 @@ INHALT.lernpfade.push(
    seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen", "referat"],
    vorn: ["schule"]},
 );
-INHALT.kameraSeiten = ["gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
+INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
 /* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
    menue.fuerDich     je Rolle höchstens zwölf Seiten (meist sechs): der Block "Für dich" im Menü, aufgeklappt.
    menue.reihenfolge  je Rolle die Gruppen im zugeklappten Block "Alle Bereiche", die genannten zuerst; "Sicherheit" ist eine Sammelgruppe (menue.sammel).

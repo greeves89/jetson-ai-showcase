@@ -175,7 +175,7 @@ Gib keine echten Namen, Passwörter oder privaten Daten ein. Zum Üben reichen e
 # Was ist KI?
 
 Adresse: __BASIS__/karte
-Bereich: Grundlagen. Stand: 2026-11-23.
+Bereich: Grundlagen. Stand: 2026-11-27.
 
 Kurz gesagt: KI ist ein Sammelbegriff, kein einzelnes Verfahren. Die meiste KI ist auf eine Aufgabe spezialisiert. Sprachmodelle sind breiter, aber keine allgemeine Intelligenz.
 
@@ -212,7 +212,7 @@ Erklärvideo: Was ist KI? (1.4 Minuten), __BASIS__/static/videos/was-ist-ki.mp4,
 # Maschinelles Lernen
 
 Adresse: __BASIS__/ml
-Bereich: Grundlagen. Stand: 2026-11-23.
+Bereich: Grundlagen. Stand: 2026-11-27.
 
 Kurz gesagt: Ein Modell besteht aus Zahlen, die im Training aus Beispielen entstehen. Training passiert einmal und ist teuer, Inferenz passiert ständig und ist günstig. Die Qualität der Beispiele bestimmt die Qualität des Modells.
 
@@ -257,7 +257,7 @@ Erklärvideo: Maschinelles Lernen (1.5 Minuten), __BASIS__/static/videos/maschin
 # Generative KI
 
 Adresse: __BASIS__/genki
-Bereich: Grundlagen. Stand: 2026-11-23.
+Bereich: Grundlagen. Stand: 2026-11-27.
 
 Kurz gesagt: Ein Sprachmodell sagt immer nur das nächste Token voraus. Die Temperatur steuert, wie mutig es wählt. Was nicht im Kontext steht, weiß das Modell nicht.
 
@@ -294,7 +294,7 @@ Erklärvideo: Generative KI (1.4 Minuten), __BASIS__/static/videos/generative-ki
 # Robotik
 
 Adresse: __BASIS__/robotik
-Bereich: Grundlagen. Stand: 2026-11-23.
+Bereich: Grundlagen. Stand: 2026-11-27.
 
 Kurz gesagt: Roboter arbeiten im Kreis aus Wahrnehmen, Entscheiden und Handeln. KI liefert meist die Entscheidung aus Sensordaten. Schnelle Reaktion verlangt Rechenleistung direkt am Gerät.
 
@@ -327,7 +327,7 @@ Erklärvideo: Robotik (1.4 Minuten), __BASIS__/static/videos/robotik.mp4, Untert
 # KI im Business
 
 Adresse: __BASIS__/business
-Bereich: Grundlagen. Stand: 2026-11-23.
+Bereich: Grundlagen. Stand: 2026-11-27.
 
 Kurz gesagt: Gute Einsatzfelder haben klare Aufgaben, genug Daten und einen Menschen, der prüft. Lokal lohnt sich bei sensiblen Daten und schneller Reaktion. Fang klein an und miss gegen den heutigen Ablauf.
 
@@ -796,7 +796,7 @@ Erklärvideo: Recht im Überblick (1.2 Minuten), __BASIS__/static/videos/recht-u
 # Wie ein Computer ein Bild sieht
 
 Adresse: __BASIS__/bild-als-zahlen
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-27.
 
 Kurz gesagt: Ein Bild ist eine Tabelle aus Zahlen: Ein Wert von 0 bis 255 je Pixel und Farbkanal. Auflösung, Belichtung und Rauschen entscheiden, welche Informationen überhaupt beim Modell ankommen. Verkleinern spart Rechenzeit, kostet aber kleine Details.
 
@@ -864,7 +864,7 @@ Erklärvideo: Wie ein Computer ein Bild sieht (1.4 Minuten), __BASIS__/static/vi
 # Wie Netze Bilder verstehen
 
 Adresse: __BASIS__/cnn-intuition
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-27.
 
 Kurz gesagt: Ein Filter ist eine kleine Zahlenschablone. Er wandert über das Bild und meldet, wo sein Muster vorkommt. Die Filter lernt das Netz selbst.
 
@@ -934,7 +934,7 @@ Erklärvideo: Wie Netze Bilder verstehen (1.3 Minuten), __BASIS__/static/videos/
 # Fünf Fragen an ein Bild
 
 Adresse: __BASIS__/vision-aufgaben
-Bereich: Sehen. Stand: 2026-11-22.
+Bereich: Sehen. Stand: 2026-11-27.
 
 Kurz gesagt: Die Frage bestimmt die Aufgabe: Klasse, Rahmen, Pixelmaske, Gelenkpunkte oder Text. Je genauer die Antwort, desto aufwendiger sind Etiketten, Rechenzeit und Pflege. Wähle die einfachste Aufgabe, die dein Problem löst, und prüfe früh den Datenschutz.
 
@@ -1002,9 +1002,9 @@ Erklärvideo: Fünf Fragen an ein Bild (1.4 Minuten), __BASIS__/static/videos/vi
 # Gesichtserkennung
 
 Adresse: __BASIS__/gesicht
-Bereich: Sehen. Stand: 2026-11-23.
+Bereich: Sehen. Stand: 2026-11-27.
 
-Kurz gesagt: Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.
+Kurz gesagt: Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.
 
 Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.
 
@@ -1016,14 +1016,69 @@ Dieses Labor erkennt nur, dass ein Gesicht da ist. Wer es ist, weiß es nicht.
 
 Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück.
 
+## Wenn Hände und Ausdruck dazukommen
+
+Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.
+
 ## Warum Neigen früher Probleme machte
 
 Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.
 
+# Hände und Gesichter gleichzeitig
+
+Adresse: __BASIS__/hand-gesicht
+Bereich: Sehen. Stand: 2026-11-27.
+
+Kurz gesagt: Hand und Gesicht sind getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen. Die Geste entsteht aus Regeln über 21 Handpunkte.
+
+Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts. Alles im selben Bild.
+
+## Zwei Erkenner, ein Bild
+
+Für Hände und Gesichter laufen getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen.
+
+## Hände: 21 Punkte und ein paar Regeln
+
+Das Netz liefert nur Punkte. Die Geste entsteht aus einfachen Regeln über diese Punkte.
+
+## Gesichter: Ausdruck und Kopfhaltung
+
+Der Ausdruck kommt aus einem Netz, die Kopfhaltung aus fünf Punkten im Gesicht.
+
+## Warum der Ausdruck oft danebenliegt
+
+Ein Ausdruckserkenner sieht Gesichtsmuster. Wie sich jemand fühlt, sieht er nicht.
+
+Merke: Ein Ausdruck ist ein Muster im Gesicht. Ein Gefühl ist etwas anderes.
+
+## Schnell genug für Video
+
+Kleine Bilder, nicht jedes Bild neu durchsuchen und wenige Rechenkerne halten das Labor flüssig.
+
+## Das nimmst du mit
+
+- Hand und Gesicht sind getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen.
+- Die Geste entsteht aus Regeln über 21 Handpunkte. Das Netz liefert die Punkte, die Regeln deuten sie.
+- Ein Ausdruck ist eine Schätzung aus Gesichtsmustern und kein Blick in die Gefühle. Sicherheit und Kontext zählen.
+
+## Fragen und Antworten
+
+Frage: Woher kommt im Labor die Geste „Faust“?
+Antwort: Aus einer Regel über die 21 Handpunkte: kein Finger gestreckt. Das Netz liefert Punkte. Eine Regel prüft, ob Finger gestreckt sind. Sind es keine, heißt die Geste Faust.
+
+Frage: Das Labor zeigt „froh“, die Person ist aber gerade genervt und lächelt höflich. Was ist passiert?
+Antwort: Das Netz sieht Gesichtsmuster. Ein höfliches Lächeln sieht aus wie Freude. Ein Ausdruckserkenner misst, wie das Gesicht aussieht, nicht wie sich jemand fühlt.
+
+Frage: Wie bleibt das Labor schnell genug für Video?
+Antwort: Kleine Bilder, Handsuche und Ausdruck nur im Wechsel, drei Rechenkerne. Der Jetson spart Rechenzeit, wo es nicht auffällt, und lässt Platz für den Chat.
+
+Frage: Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?
+Antwort: In der EU sind sie weitgehend verboten. Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen weitgehend. Das ist ein Überblick, keine Rechtsberatung.
+
 # Objekterkennung
 
 Adresse: __BASIS__/objekt
-Bereich: Sehen. Stand: 2026-11-23.
+Bereich: Sehen. Stand: 2026-11-27.
 
 Kurz gesagt: Das Netz betrachtet das ganze Bild einmal und sagt zugleich, wo etwas ist und was es ist. Jedes Objekt bekommt einen Rahmen, eine von 80 Klassen und eine Konfidenz zwischen 0 und 1. Ab welcher Konfidenz ein Rahmen erscheint, bestimmst du.
 
@@ -1056,7 +1111,7 @@ Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Fünf Fragen an ein 
 # Bildmodell anlernen
 
 Adresse: __BASIS__/anlernen
-Bereich: Sehen. Stand: 2026-11-23.
+Bereich: Sehen. Stand: 2026-11-27.
 
 Kurz gesagt: Jedes Beispiel wird zu 1000 Zahlen und mit dem Klassennamen gespeichert. Ein neues Bild wird verglichen, die drei ähnlichsten Beispiele stimmen ab. Das Netz bleibt unverändert.
 
@@ -1077,7 +1132,7 @@ Vielfalt schlägt Menge: wenige Beispiele aus vielen Lagen helfen mehr als viele
 # Sprachmodell im Chat
 
 Adresse: __BASIS__/chat
-Bereich: Sprache. Stand: 2026-11-23.
+Bereich: Sprache. Stand: 2026-11-27.
 
 Kurz gesagt: Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat. Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token. Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen.
 
@@ -1106,7 +1161,7 @@ Teste, was du hier gelernt hast: 5 Quizfragen auf der Seite Wie ein Sprachmodell
 # Sprache zu Text
 
 Adresse: __BASIS__/whisper
-Bereich: Sprache. Stand: 2026-11-23.
+Bereich: Sprache. Stand: 2026-11-27.
 
 Kurz gesagt: Ton wird in kurze Fenster zerlegt, zu einem Frequenzbild und von einem Netz in Text übersetzt. Ist die Rechenzeit kürzer als die Aufnahme, hält das Modell mit Live-Untertiteln mit.
 
@@ -1911,7 +1966,7 @@ Erklärvideo: Gut ist, was du misst (1.4 Minuten), __BASIS__/static/videos/rag-b
 # RAG-Werkstatt: Fragen an eigene Dokumente
 
 Adresse: __BASIS__/rag
-Bereich: Wissen und RAG. Stand: 2026-11-23.
+Bereich: Wissen und RAG. Stand: 2026-11-27.
 
 Kurz gesagt: Deine Dokumente stecken nicht im Modell. Ohne Nachschlagen würde es raten. Zerlegen, einbetten, suchen, antworten.
 
@@ -1932,7 +1987,7 @@ Ein hoher Score heißt ähnlich. Ist die Antwort falsch, standen meist die falsc
 # Was ist ein Agent?
 
 Adresse: __BASIS__/agenten-grundlagen
-Bereich: Agenten. Stand: 2026-11-22.
+Bereich: Agenten. Stand: 2026-11-27.
 
 Kurz gesagt: Ein Agent ist ein Sprachmodell mit Werkzeugen in einer Schleife aus Denken, Aufrufen und Lesen. Das Modell schlägt Aufrufe nur vor, ein Programm führt sie aus. Das Gedächtnis ist der Kontext plus Notizen außerhalb.
 
@@ -2006,7 +2061,7 @@ Erklärvideo: Was ist ein Agent? (1.3 Minuten), __BASIS__/static/videos/agenten-
 # Planen, Schritte, Speicher und Fehler
 
 Adresse: __BASIS__/agenten-planung
-Bereich: Agenten. Stand: 2026-11-22.
+Bereich: Agenten. Stand: 2026-11-27.
 
 Kurz gesagt: Zerlege Aufgaben in kleine, klare Schritte. Das Modell wählt dann sicherer. Der Kontext wächst mit jeder Runde.
 
@@ -2076,7 +2131,7 @@ Erklärvideo: Planen, Schritte und Fehler (1.3 Minuten), __BASIS__/static/videos
 # Agent mit Werkzeugen
 
 Adresse: __BASIS__/agent
-Bereich: Agenten. Stand: 2026-11-23.
+Bereich: Agenten. Stand: 2026-11-27.
 
 Kurz gesagt: Das Modell entscheidet selbst, ob es ein Werkzeug aufruft oder antwortet. Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.
 
@@ -2097,7 +2152,7 @@ Kleine Modelle greifen manchmal daneben. Darum zeigt das Labor jeden Schritt und
 # Rechte, Prompt-Injection und Freigaben
 
 Adresse: __BASIS__/agenten-sicherheit
-Bereich: Agenten. Stand: 2026-11-22.
+Bereich: Agenten. Stand: 2026-11-27.
 
 Kurz gesagt: Gib einem Agenten nur die Rechte, die seine Aufgabe braucht. Sie sind die Obergrenze für den Schaden. Fremde Texte können versteckte Anweisungen enthalten.
 
@@ -2167,7 +2222,7 @@ Erklärvideo: Rechte, Prompt-Injection, Freigaben (1.3 Minuten), __BASIS__/stati
 # Werkzeuge standardisiert anbinden (MCP)
 
 Adresse: __BASIS__/mcp-werkzeuge
-Bereich: Agenten. Stand: 2026-11-22.
+Bereich: Agenten. Stand: 2026-11-27.
 
 Kurz gesagt: MCP ist ein offener Standard: Systeme melden ihre Werkzeuge einheitlich, Assistenten nutzen sie einheitlich. Ein Server beschreibt Werkzeuge mit Name, Beschreibung und Parametern. Der Client reicht sie dem Modell und führt Aufrufe aus.
 
@@ -3609,7 +3664,7 @@ Antwort: Mit einer erfundenen Notiz ohne echte Namen und Preise. Im Labor gehör
 # Der Jetson und seine Hardware
 
 Adresse: __BASIS__/hardware
-Bereich: Der Rechner dahinter. Stand: 2026-11-23.
+Bereich: Der Rechner dahinter. Stand: 2026-11-27.
 
 Kurz gesagt: Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.
 
@@ -3697,7 +3752,7 @@ Repo aktualisieren, setup.sh ausführen, Dienst neu starten. Ein Neustart beende
 # Ist das sicher? Was wird gespeichert?
 
 Adresse: __BASIS__/sicherheit-einfach
-Bereich: Der Rechner dahinter. Stand: 2026-11-23.
+Bereich: Der Rechner dahinter. Stand: 2026-11-27.
 
 Kurz gesagt: Kein Konto, keine Bezahlung, keine Werbung. Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen. Bilder und Aufnahmen werden nicht gespeichert.
 
@@ -3866,7 +3921,7 @@ Antwort: Den sichtbaren Hinweis „Built with Llama“. Der Hinweis steht in der
 # Lizenzen und Quellen
 
 Adresse: __BASIS__/lizenzen
-Bereich: Der Rechner dahinter. Stand: 2026-11-22.
+Bereich: Der Rechner dahinter. Stand: 2026-11-27.
 
 Kurz gesagt: Ein KI-Modell klingt sicher, auch wenn es irrt. Der Hinweis erinnert dich, Wichtiges selbst zu prüfen. Fremde Modelle und Programme dürfen hier laufen, weil ihre Lizenzen das erlauben.
 
@@ -6082,6 +6137,7 @@ Antwort: Er nennt seine Gründe, und Sie passen die Regel gemeinsam an. Regeln, 
 - Prompt-Injection: Ein Angriff, bei dem Anweisungen in einem Text versteckt sind, den das Modell liest. Das Modell kann sie für echte Aufträge halten.
 - Freigabe: Ein Mensch bestätigt eine vorbereitete Aktion, bevor der Agent sie ausführt. Wirksam ist sie nur, wenn der Mensch sieht, was passieren wird.
 - Model Context Protocol (MCP): Ein offener Standard, mit dem Assistenten Werkzeuge und Daten von Servern einheitlich entdecken und aufrufen.
+- Handpunkte: 21 Punkte auf Handgelenk und Fingergelenken, die ein Netz im Bild setzt. Verbindet man sie, entsteht das Skelett der Hand.
 - MCP-Server: Ein Programm, das die Fähigkeiten eines Systems nach dem MCP-Standard anbietet. Ein Assistent (Client) kann sie nutzen.
 - Entscheidungsbaum: Eine Kette von Ja-Nein-Fragen an die Daten, an deren Ende eine Antwort steht. Die Fragen werden aus Beispielen gelernt.
 - Reinheit: Maß dafür, wie einheitlich eine Gruppe von Fällen ist. Eine Gruppe, in der alle dasselbe Ergebnis haben, ist ganz rein.

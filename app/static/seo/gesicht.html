@@ -1,4 +1,4 @@
-<div class="seitenbreite"><p class="ueber">Sehen</p><h1>Gesichtserkennung</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.</p><p class="lead">Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.</p>
+<div class="seitenbreite"><p class="ueber">Sehen</p><h1>Gesichtserkennung</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.</p><p class="lead">Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.</p>
 <div class="text">
 <h2 class="abs">Drei Stufen, die man oft verwechselt</h2>
 <figure class="visual"><figcaption>Ablauf</figcaption><ul><li>Erkennen (Gesicht im Bild)</li><li>Identifizieren (wer ist es)</li><li>Ausdruck deuten</li></ul></figure>
@@ -9,6 +9,9 @@
 <p class="kurz">Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück.</p>
 
 <ul><li>Dein Browser macht ein Bild aus der Kamera, verkleinert es auf 480 mal 360 Pixel und verpackt es als JPEG.</li><li>Das Bild reist über eine WebSocket-Verbindung zum Jetson.</li><li>Der Jetson entpackt es und gibt es an das Modell YuNet, ein kleines neuronales Netz für Gesichter.</li><li>Das Netz liefert Rahmen, eine Konfidenz und fünf Landmarken: beide Augen, die Nase und die Mundwinkel.</li><li>Der Jetson zeichnet das ein und schickt das Bild zurück. Die farbigen Streifen über dem Bild zeigen, wie lange jeder Schritt dauert.</li></ul>
+<h2 class="abs">Wenn Hände und Ausdruck dazukommen</h2>
+<p class="kurz">Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.</p>
+<p>In diesem Labor findet der Jetson nur Gesichter. Im Labor <a href="/hand-gesicht">Hände und Gesichter</a> schätzt er zusätzlich den Ausdruck und die Kopfhaltung und zeichnet das Skelett deiner Hände. Lies dort, warum ein erkannter Ausdruck kein Gefühl ist.</p>
 <h2 class="abs">Warum Neigen früher Probleme machte</h2>
 <figure class="visual"><figcaption>Vergleich</figcaption><ul><li>Links: Ältere Verfahren: Feste Helligkeitsmuster, Nur von vorn</li><li>Rechts: Neuronales Netz: Viele Lagen gelernt, Kopf neigen ist ok</li></ul></figure>
 <p class="kurz">Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.</p>
@@ -16,5 +19,5 @@
 </div>
 <section class="block"><h2>Im Business</h2><div class="text"><p>Zutritt und Anwesenheit ohne Cloud, Personenzählung im Laden oder Foyer, Aufmerksamkeitsmessung an Displays.</p><ul><li>Türsystem, das erkennt, ob jemand davorsteht</li><li>Besucherzählung ohne Identifikation</li></ul></div></section>
 <section class="block"><h2>Grenzen</h2><div class="text"><ul><li>Schlechtes Licht, Masken und sehr kleine Gesichter senken die Trefferquote.</li><li>Gesichter finden ist nicht Personen erkennen. In einem echten Einsatz brauchst du eine Rechtsgrundlage und eine Datenschutzprüfung.</li></ul></div></section>
-<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/objekt">Objekterkennung</a></li><li><a href="/anlernen">Bildmodell anlernen</a></li></ul></section>
+<section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/hand-gesicht">Hände und Gesichter gleichzeitig</a></li><li><a href="/objekt">Objekterkennung</a></li><li><a href="/anlernen">Bildmodell anlernen</a></li></ul></section>
 </div>

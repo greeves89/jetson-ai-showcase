@@ -1,4 +1,4 @@
-/* KI-Labor: Live-Labore (Webcam Gesicht und Objekt, Anlernen, Chat, RAG, Agent).
+/* KI-Labor: Live-Labore (Webcam Gesicht, Hände und Gesichter, Objekt, Anlernen, Chat, RAG, Agent).
    Vertrag siehe app.js. Jedes Labor: KL.demos.<name> = function (root, seite) { ...; return { destroy() {} }; }
    Alle Texte aus dem Netz (Modell, Server, Eingaben) kommen nur per textContent oder h(...) ins DOM. */
 (function () {
@@ -246,8 +246,10 @@
 
   /* Kennzeichnung nach KI-Verordnung (Art. 50) und Llama-Lizenz (Abschnitt 1.b.i): kurzer, sichtbarer Hinweis am
      Ausgabebereich jeder Sprachmodell-Antwort. Gemeinsam fuer Chat, RAG, Agent und die Bausteine mit echtem Modell. */
-  KL.kiHinweis = function () {
+  KL.kiHinweis = function (opt) {
     // Text und Link in einem Satzfluss (ein span): der Rahmen nutzt die ganze Breite des Bereichs, auch bei grosser Schrift; der Link bricht mit dem Text um
+    // opt {text, link}: Kennzeichnung fuer Ergebnisse anderer Modelle (Bildlabore), ohne den Llama-Hinweis
+    if (opt && opt.text) return h("p", { class: "ki-hinweis" }, KL.icon("bot"), h("span", null, opt.text + " ", h("a", { href: "/lizenzen" }, opt.link || "Modelle und Lizenzen")));
     return h("p", { class: "ki-hinweis" }, KL.icon("bot"),
       h("span", null, "Antwort eines KI-Modells. Sie kann falsch sein, prüfe Wichtiges. ", h("a", { href: "/lizenzen" }, "Built with Llama")));
   };
@@ -289,13 +291,78 @@
     return { destroy() { weg = true; } };
   };
 
+  /* Eigenschaften-Karten fuer Haende und Gesichter (Labor Haende und Gesichter). Je erkannter Hand und je erkanntem Gesicht
+     eine kleine Karte; Karten werden aktualisiert statt neu gebaut und verschwinden erst nach einigen Bildern ohne Treffer.
+     Alle Werte kommen vom Server und gelangen nur als Text ins DOM. */
+  const AUSDRUCK_ICON = { froh: "smile", neutral: "meh", traurig: "frown", wütend: "angry", angewidert: "annoyed", überrascht: "zap", ängstlich: "ghost" };
+  const KARTEN_FARBE = { hand: ["#2a8cff", "#ffaa3c"], gesicht: ["#76b900", "#28c8be", "#eb6e50"] };      // wie die Zeichnung im Bild (RGB)
+  const GESTE_ICON = { "Daumen hoch": "thumbs-up", "Daumen runter": "thumbs-down" };
+  const proz = (x) => Math.round((x || 0) * 100) + " %";
+  function eigenschaften() {
+    const liste = h("div", { class: "d-karten", "aria-live": "polite" });
+    const leer = h("p", { class: "d-hinweis d-karten-leer" }, "Halte eine Hand oder dein Gesicht in die Kamera. Für jede erkannte Hand und jedes Gesicht erscheint hier eine Karte.");
+    const el = h("aside", { class: "d-eigen", "aria-label": "Eigenschaften der erkannten Hände und Gesichter" },
+      h("h3", { class: "d-eigen-titel" }, ic("scan-face"), "Das erkennt der Jetson"), liste, leer);
+    const karten = new Map();                   // "hand1" / "gesicht2" -> { el, felder, fehlt }
+    const MAX_FEHLT = 6;
+    function karteBauen(art, nr, titel, symbol) {
+      const farben = KARTEN_FARBE[art];
+      const punkt = h("i", { class: "d-karte-punkt", style: "background:" + farben[(nr - 1) % farben.length], "aria-hidden": "true" });
+      const symbolEl = h("span", { class: "d-karte-symbol" }, KL.icon(symbol));
+      const kopf = h("div", { class: "d-karte-kopf" }, punkt, h("b", null, titel + " " + nr), symbolEl);
+      const felder = {};
+      const zeilen = (art === "hand" ? [["seite", "Seite"], ["geste", "Geste"], ["finger", "Finger gestreckt"], ["sicher", "Sicherheit"]]
+        : [["ausdruck", "Ausdruck"], ["laechelt", "Lächeln"], ["kopf", "Kopfhaltung"]]).map(([k, name]) => {
+        felder[k] = h("b", null, "·");
+        return h("div", { class: "d-feld" }, h("span", null, name), felder[k]);
+      });
+      const e = h("div", { class: "d-karte d-karte-" + art }, kopf, ...zeilen);
+      return { el: e, felder, symbolEl, symbol, fehlt: 0 };
+    }
+    function setze(k, name, wert) { if (k.felder[name].textContent !== wert) k.felder[name].textContent = wert; }
+    function symbolSetzen(k, symbol) { if (k.symbol !== symbol) { k.symbol = symbol; k.symbolEl.replaceChildren(KL.icon(symbol)); } }
+    function zeige(d) {
+      const jetzt = new Set();
+      for (const hd of d.haende || []) {
+        const key = "hand" + hd.nr; jetzt.add(key);
+        let k = karten.get(key);
+        if (!k) { k = karteBauen("hand", hd.nr, "Hand", "hand"); karten.set(key, k); liste.append(k.el); }
+        k.fehlt = 0; k.el.classList.remove("alt");
+        setze(k, "seite", hd.seite === "rechts" ? "rechte Hand" : hd.seite === "links" ? "linke Hand" : "nicht sicher");
+        setze(k, "geste", hd.geste);
+        setze(k, "finger", String(hd.finger));
+        setze(k, "sicher", proz(hd.sicher));
+        symbolSetzen(k, GESTE_ICON[hd.geste] || "hand");
+      }
+      for (const g of d.gesichter || []) {
+        const key = "gesicht" + g.nr; jetzt.add(key);
+        let k = karten.get(key);
+        if (!k) { k = karteBauen("gesicht", g.nr, "Gesicht", "scan-face"); karten.set(key, k); liste.append(k.el); }
+        k.fehlt = 0; k.el.classList.remove("alt");
+        setze(k, "ausdruck", g.ausdruck + " (" + proz(g.sicher) + ")");
+        setze(k, "laechelt", g.laechelt ? "ja" : "nein");
+        setze(k, "kopf", g.kopf);
+        symbolSetzen(k, AUSDRUCK_ICON[g.ausdruck] || "scan-face");
+      }
+      for (const [key, k] of Array.from(karten)) {
+        if (jetzt.has(key)) continue;
+        k.fehlt++;
+        k.el.classList.add("alt");
+        if (k.fehlt >= MAX_FEHLT) { k.el.remove(); karten.delete(key); }
+      }
+      leer.hidden = karten.size > 0;
+    }
+    return { el, zeige };
+  }
+
   /* ============================================================ 1 Webcam: Gesicht und Objekt */
   function webcam(root, modus, seite) {
     const objekt = modus === "objekt";
+    const hg = modus === "hand_gesicht";            // Haende und Gesichter gleichzeitig, mit Eigenschaften-Karten
     const L = leben();
     const dingEin = objekt ? "Objekt" : "Gesicht";
-    const dingMehr = objekt ? "Objekte" : "Gesichter";
-    const suche = objekt ? "nach Objekten" : "nach Gesichtern";
+    const dingMehr = objekt ? "Objekte" : hg ? "Hände / Gesichter" : "Gesichter";
+    const suche = objekt ? "nach Objekten" : hg ? "nach Händen und Gesichtern" : "nach Gesichtern";
 
     const video = h("video", { autoplay: true, playsinline: true, "aria-label": "Deine Kamera", hidden: true });
     video.muted = true;
@@ -303,9 +370,11 @@
     const platzR = h("div", { class: "d-platz" }, ic("arrow"), h("span", null, "Hier erscheint das Bild, das der Jetson zurückschickt."));
     let img = null;
     let vorlage = null;      // Beispielbild-Element, nur im Beispielmodus
-    const kameras = h("div", { class: "kameras" },
+    const eigen = hg ? eigenschaften() : null;
+    const kameras = h("div", { class: "kameras" + (hg ? " d-hg" : "") },
       h("figure", null, h("figcaption", null, "Deine Kamera"), video, platzV),
-      h("figure", null, h("figcaption", null, "Vom Jetson zurück"), platzR));
+      h("figure", null, h("figcaption", null, "Vom Jetson zurück"), platzR),
+      eigen ? eigen.el : null);
 
     const btn = h("button", { type: "button", class: "btn primary" }, ic("camera"), "Kamera starten");
     const status = h("span", { class: "chip", role: "status" }, "Kamera aus");
@@ -354,7 +423,8 @@
     // regler gibt es nur im Objekt-Modus; Element.append(null) wuerde sonst das Wort "null" in die Seite schreiben
     root.append(...[
       h("div", { class: "zeile d-steuer" }, btn, status),
-      meld.el, kameras, regler, messwerte, live.el].filter(Boolean));
+      meld.el, kameras, hg ? KL.kiHinweis({ text: "Alles hier sind Schätzungen eines KI-Modells. Gesten, Kopfhaltung und vor allem der Gesichtsausdruck können falsch sein. Es wird nichts gespeichert." }) : null,
+      regler, messwerte, live.el].filter(Boolean));
 
     /* Zustand */
     let stream = null, ws = null, laeuft = false, startet = false, wartet = false;
@@ -372,7 +442,7 @@
     function zeichne(satzAuch) {
       if (!letzte) return;
       const b = mittel(reihen.b), n = mittel(reihen.n), d = mittel(reihen.d), e = mittel(reihen.e), k = mittel(reihen.k), w = mittel(reihen.w), t = mittel(reihen.t);
-      mTreffer.textContent = String(letzte.anzahl);
+      mTreffer.textContent = hg ? (letzte.haende || []).length + " / " + (letzte.gesichter || []).length : String(letzte.anzahl);
       mRunde.textContent = msText(t);
       let fps = 0;
       if (stempel.length > 1) fps = (stempel.length - 1) / ((stempel[stempel.length - 1] - stempel[0]) / 1000);
@@ -390,13 +460,15 @@
       const namen = { b: "im Browser beim Aufnehmen", n: "im Netz", d: "beim Entpacken", e: "beim Erkennen", k: "beim Zurückpacken", w: "beim Warten" };
       const werte = { b, n, d, e, k, w };
       const groesster = Object.keys(werte).sort((x, y) => werte[y] - werte[x])[0];
-      const wasGefunden = letzte.anzahl === 0 ? "Gefunden: kein " + dingEin + "." : "Gefunden: " + letzte.anzahl + " " + (letzte.anzahl === 1 ? dingEin : dingMehr) + ".";
+      const nH = (letzte.haende || []).length, nG = (letzte.gesichter || []).length;
+      const wasGefunden = hg ? "Gefunden: " + nH + (nH === 1 ? " Hand" : " Hände") + " und " + nG + (nG === 1 ? " Gesicht." : " Gesichter.") : letzte.anzahl === 0 ? "Gefunden: kein " + dingEin + "." : "Gefunden: " + letzte.anzahl + " " + (letzte.anzahl === 1 ? dingEin : dingMehr) + ".";
       const teile = [
         "Dein Browser hat ein Bild (" + letzte.breite + " mal " + letzte.hoehe + ", " + kb(letzte.bytes_ein) + ") geschickt. Der Jetson hat es in " + msText(d) + " entpackt und in " + msText(e) + " " + suche + " durchsucht",
         objekt ? " (Schwelle " + Math.round((letzte.schwelle || 0.5) * 100) + " Prozent). " : ". ",
         fett(wasGefunden),
         " Das Bild mit den Markierungen (" + kb(letzte.bytes_aus) + ") hat er in " + msText(k) + " zurückgepackt. ",
       ];
+      if (hg && letzte.detail_ms) teile.push("Davon gingen " + msText(letzte.detail_ms.gesicht + letzte.detail_ms.ausdruck) + " an die Gesichter und " + msText(letzte.detail_ms.handsuche + letzte.detail_ms.handpunkte) + " an die Hände" + (letzte.detail_ms.neu_gesucht ? ", mit neuer Suche nach Handflächen. " : ", die Hände folgten der letzten Lage. "));
       if (w >= 0.5) teile.push("Vor dem Erkennen musste er " + msText(w) + " warten, weil er noch ein anderes Bild bearbeitete. ");
       teile.push("Eine Runde dauerte " + msText(t) + ", davon " + msText(n) + " im Netz. Am meisten Zeit ging " + namen[groesster] + " drauf.");
       live.text(...teile);
@@ -457,6 +529,7 @@
         versuche = 0;
         wartet = false;
         if (bildQuelle) { zeichneGedrosselt.jetzt(); setStatus("Beispielbild ausgewertet", true); return; }
+        if (eigen) eigen.zeige(d);
         zeichneGedrosselt();
         L.timeout(aufnehmenUndSenden, 0);
       };
@@ -500,6 +573,12 @@
       if (startet || laeuft) return;
       startet = true; btn.disabled = true; meld.weg(); setStatus("Kamera startet…", false);
       try {
+        if (hg) {                                         // fehlen die Modelle auf dem Jetson, gar nicht erst die Kamera oeffnen
+          let st = null;
+          try { const r = await fetch("/api/hand-gesicht/status", { cache: "no-store" }); st = r.ok ? await r.json() : null; } catch (e) { st = null; }
+          if (L.weg) return;
+          if (!st || !st.bereit) throw new Error("Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle für Hände und Gesichtsausdruck fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh.");
+        }
         const s = await kameraOeffnen();
         if (L.weg) { s.getTracks().forEach((t) => t.stop()); return; }
         stream = s;
@@ -1727,6 +1806,7 @@
   Object.assign(KL.demos, {
     "webcam-gesicht": (root, seite) => webcam(root, "gesicht", seite),
     "webcam-objekt": (root, seite) => webcam(root, "objekt", seite),
+    "webcam-hand-gesicht": (root, seite) => webcam(root, "hand_gesicht", seite),
     teach, chat, rag, agent,
   });
 })();

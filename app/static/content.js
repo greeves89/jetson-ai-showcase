@@ -109,7 +109,7 @@ karte: {
      p: [
       "Wer wissen will, was eine KI für ihn tun kann, fragt besser nach dem Einsatzbereich als nach dem Verfahren:",
     ], liste: [
-      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
+      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{hand-gesicht|Hände und Gesichter}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
       "**Sprache:** Text und Ton verstehen und formulieren. Labor {{chat|Chat}} und {{whisper|Sprache zu Text}}.",
       "**Wissen:** gezielt in eigenen Dokumenten nachschlagen und Quellen nennen. Labor {{rag|RAG}}.",
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
@@ -407,6 +407,11 @@ gesicht: {
       "Das Netz liefert Rahmen, eine [[konfidenz|Konfidenz]] und fünf [[landmark|Landmarken]]: beide Augen, die Nase und die Mundwinkel.",
       "Der Jetson zeichnet das ein und schickt das Bild zurück. Die farbigen Streifen über dem Bild zeigen, wie lange jeder Schritt dauert.",
     ]},
+    {h: "Wenn Hände und Ausdruck dazukommen",
+     kurz: "Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.",
+     p: [
+      "In diesem Labor findet der Jetson nur Gesichter. Im Labor {{hand-gesicht|Hände und Gesichter}} schätzt er zusätzlich den Ausdruck und die Kopfhaltung und zeichnet das Skelett deiner Hände. Lies dort, warum ein erkannter Ausdruck kein Gefühl ist.",
+    ]},
     {h: "Warum Neigen früher Probleme machte",
      kurz: "Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.",
      visual: {typ: "vergleich",
@@ -424,7 +429,7 @@ gesicht: {
     "Schlechtes Licht, Masken und sehr kleine Gesichter senken die Trefferquote.",
     "Gesichter finden ist nicht Personen erkennen. In einem echten Einsatz brauchst du eine Rechtsgrundlage und eine Datenschutzprüfung.",
   ],
-  weiter: ["objekt", "anlernen"],
+  weiter: ["hand-gesicht", "objekt", "anlernen"],
 },
 
 objekt: {

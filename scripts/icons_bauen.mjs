@@ -35,6 +35,7 @@ const GRUPPEN = {
   "Waage, Zeit, Mass": "scale clock timer timer-reset hourglass history alarm-clock watch infinity sigma pi divide hash at-sign target crosshair",
   "Diagramme": "chart-bar chart-line chart-pie chart-scatter chart-column chart-area chart-no-axes-column trending-up trending-down",
   "Menschen": "user users user-round user-check user-plus user-cog users-round person-standing contact hand handshake thumbs-up thumbs-down smile",
+  "Hand, Gesicht, Ausdruck": "frown meh angry annoyed laugh ghost zap",
   "Natur, Sonstiges": "leaf sun moon droplets wind flame snowflake dice-5 award trophy medal star rocket",
 };
 

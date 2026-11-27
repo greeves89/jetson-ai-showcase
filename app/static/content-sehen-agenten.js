@@ -176,6 +176,87 @@ Object.assign(seiten, {
   weiter: ["vision-aufgaben", "anlernen", "objekt", "neuronale-netze"],
 },
 
+/* ------------------------------------------------------------------ Labor: Hände und Gesichter */
+
+"hand-gesicht": {
+  nav: "Hände und Gesichter", typ: "labor", gruppe: "Sehen", titel: "Hände und Gesichter gleichzeitig", symbol: "gesicht", demo: "webcam-hand-gesicht",
+  lernziele: ["Du kannst erklären, wie aus 21 Handpunkten eine Geste wird.", "Du kannst sagen, was ein Ausdruckserkenner misst und was nicht.", "Du kannst zwei Tricks nennen, mit denen das Labor schnell genug für Video bleibt."],
+  kurz: "Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts. Alles im selben Bild.",
+  abschnitte: [
+    {h: "Zwei Erkenner, ein Bild",
+     kurz: "Für Hände und Gesichter laufen getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen.",
+     visual: {typ: "ablauf", paket: true, schritte: [
+      {icon: "camera", text: "Kamerabild", sub: "480 mal 360, JPEG"},
+      {icon: "hand", text: "Hände", sub: "Skelett, Geste"},
+      {icon: "scan-face", text: "Gesichter", sub: "Ausdruck, Kopf"},
+      {icon: "layout-dashboard", text: "Ein Bild", sub: "mit Karten", farbe: "gruen"}]},
+     p: [
+      "Ein Netz, das alles kann, gibt es hier nicht. Für Hände läuft ein Paar aus zwei Netzen. Das erste findet Handflächen im Bild. Das zweite bekommt einen Ausschnitt um die Handfläche und setzt 21 Punkte auf Handgelenk und Fingergelenke. Für Gesichter läuft das bekannte Netz [[yunet|YuNet]] und danach ein drittes Netz für den Ausdruck.",
+      "Der Jetson zeichnet alles in dasselbe Bild und schickt es zurück. Daneben erscheint für jede Hand und jedes Gesicht eine kleine Karte mit den Eigenschaften.",
+    ]},
+    {h: "Hände: 21 Punkte und ein paar Regeln",
+     kurz: "Das Netz liefert nur Punkte. Die Geste entsteht aus einfachen Regeln über diese Punkte.",
+     visual: {typ: "ablauf", schritte: [
+      {icon: "scan", text: "Handfläche", sub: "Rahmen im Bild"},
+      {icon: "grid-3x3", text: "21 Punkte", sub: "Gelenke und Spitzen"},
+      {icon: "list-checks", text: "Regeln", sub: "Finger gestreckt?"},
+      {icon: "hand", text: "Geste", sub: "zum Beispiel Faust", farbe: "gruen"}]},
+     p: [
+      "Die 21 [[handpunkte|Handpunkte]] sind Zahlenpaare im Bild. Ob ein Finger gestreckt ist, prüft der Jetson mit Geometrie: Liegen die Gelenke eines Fingers fast auf einer Linie und ist die Fingerspitze weiter vom Handgelenk entfernt als das mittlere Gelenk, gilt der Finger als gestreckt. Aus den fünf Ja-Nein-Werten folgt die Geste. Alle gestreckt ist eine offene Hand, keiner gestreckt eine Faust, nur Zeige- und Mittelfinger ein Victory.",
+      "Hier wird nichts gelernt. Die Regeln hat ein Mensch aufgeschrieben. Das Netz liefert die Punkte, die Regeln deuten sie. Deshalb ist die Geste nachvollziehbar, aber auch starr: Eine Geste, für die niemand eine Regel geschrieben hat, kennt der Jetson nicht.",
+    ], alltag: "Stell dir eine Schablone aus Drahtfiguren vor. Jemand hat Fotos mit Punkten beklebt. Wer die Punkte sieht, kann „Faust“ oder „Victory“ ablesen, auch ohne die Hand zu sehen. Der Vergleich hinkt: Der Jetson sieht die Punkte nur als Zahlen und kann Fingerspitzen nicht erkennen, die zur Kamera zeigen."},
+    {h: "Gesichter: Ausdruck und Kopfhaltung",
+     kurz: "Der Ausdruck kommt aus einem Netz, die Kopfhaltung aus fünf Punkten im Gesicht.",
+     visual: {typ: "vergleich",
+      links: {titel: "Ausdruck", icon: "smile", farbe: "gruen", punkte: ["Netz schaut auf das Gesicht", "Sieben Klassen mit Sicherheit"]},
+      rechts: {titel: "Kopfhaltung", icon: "move-right", farbe: "grau", punkte: ["Nur fünf Punkte", "Rechnung statt Netz"]}},
+     p: [
+      "Für den Ausdruck wird das Gesicht an den fünf [[landmark|Landmarken]] gerade gerichtet und auf 112 mal 112 Pixel verkleinert. Ein Netz ordnet es dann einer von sieben Klassen zu: neutral, froh, traurig, überrascht, ängstlich, angewidert oder wütend. „Lächeln“ zeigt die Karte, wenn die Klasse froh vorn liegt.",
+      "Die Kopfhaltung braucht kein Netz. Liegt die Nase deutlich neben der Mitte zwischen den Augen, ist der Kopf nach links oder rechts gedreht. Steht die Augenlinie schräg, ist er geneigt. Links und rechts gelten, wie sie im Bild zu sehen sind. Das ist grob und kann bei Brillen und Schatten danebenliegen.",
+    ]},
+    {h: "Warum der Ausdruck oft danebenliegt",
+     kurz: "Ein Ausdruckserkenner sieht Gesichtsmuster. Wie sich jemand fühlt, sieht er nicht.",
+     visual: {typ: "vergleich",
+      links: {titel: "Was er misst", icon: "scan-face", farbe: "gruen", punkte: ["Lage von Mund und Brauen", "Muster aus Trainingsbildern"]},
+      rechts: {titel: "Was er nicht weiß", icon: "heart-pulse", farbe: "orange", punkte: ["Das echte Gefühl", "Kultur, Anlass, Höflichkeit"]}},
+     p: [
+      "Das Netz hat Gesichter mit Beschriftungen gesehen und zieht daraus Muster. Viele Trainingsbilder zeigen gestellte, übertriebene Mimik. Ein höfliches Lächeln im Büro sieht darum aus wie Freude, auch wenn niemand froh ist. Und wer ernst schaut, ist nicht automatisch wütend.",
+      "Deshalb zeigt das Labor die Sicherheit mit an und nennt alles eine Schätzung. Für Entscheidungen über Menschen taugt das nicht. In der EU sind Systeme, die Gefühle am Arbeitsplatz oder in Bildungseinrichtungen ableiten, weitgehend verboten. Das ist ein Überblick und keine Rechtsberatung.",
+    ], merke: "Ein Ausdruck ist ein Muster im Gesicht. Ein Gefühl ist etwas anderes."},
+    {h: "Schnell genug für Video",
+     kurz: "Kleine Bilder, nicht jedes Bild neu durchsuchen und wenige Rechenkerne halten das Labor flüssig.",
+     visual: {typ: "ablauf", schritte: [
+      {icon: "image", text: "Klein", sub: "längste Kante 480"},
+      {icon: "repeat", text: "Im Wechsel", sub: "Handsuche, Ausdruck"},
+      {icon: "cpu", text: "Drei Kerne", sub: "der Chat bleibt frei", farbe: "gruen"}]},
+     p: [
+      "Das Bild ist höchstens 480 Pixel breit. Handflächen sucht der Jetson nur in jedem zweiten Bild neu, dazwischen folgt das Skelett der Hand. Den Ausdruck rechnet er ebenfalls nur jedes zweite Bild und glättet ihn über zwei Bilder, damit die Anzeige ruhig bleibt.",
+      "Für diese Rechnung nutzt der Jetson nur drei seiner sechs Prozessorkerne. So bleibt Platz für das Sprachmodell im Chat. Das Ergebnis siehst du an den farbigen Streifen über dem Bild.",
+    ]},
+  ],
+  mitnehmen: [
+    "Hand und Gesicht sind getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen.",
+    "Die Geste entsteht aus Regeln über 21 Handpunkte. Das Netz liefert die Punkte, die Regeln deuten sie.",
+    "Ein Ausdruck ist eine Schätzung aus Gesichtsmustern und kein Blick in die Gefühle. Sicherheit und Kontext zählen.",
+  ],
+  quiz: [
+    {frage: "Woher kommt im Labor die Geste „Faust“?", optionen: ["Aus einem eigenen Netz nur für Fäuste", "Aus einer Regel über die 21 Handpunkte: kein Finger gestreckt", "Aus dem Dateinamen des Bildes", "Aus der Stimme der Person"], richtig: 1, erklaerung: "Das Netz liefert Punkte. Eine Regel prüft, ob Finger gestreckt sind. Sind es keine, heißt die Geste Faust."},
+    {frage: "Das Labor zeigt „froh“, die Person ist aber gerade genervt und lächelt höflich. Was ist passiert?", optionen: ["Das Netz hat Gedanken gelesen", "Das Netz sieht Gesichtsmuster. Ein höfliches Lächeln sieht aus wie Freude", "Die Kamera ist kaputt", "Der Jetson kennt die Person"], richtig: 1, erklaerung: "Ein Ausdruckserkenner misst, wie das Gesicht aussieht, nicht wie sich jemand fühlt."},
+    {frage: "Wie bleibt das Labor schnell genug für Video?", optionen: ["Es zeigt nur jedes zehnte Bild", "Es braucht eine Cloud", "Kleine Bilder, Handsuche und Ausdruck nur im Wechsel, drei Rechenkerne", "Es rechnet nur nachts"], richtig: 2, erklaerung: "Der Jetson spart Rechenzeit, wo es nicht auffällt, und lässt Platz für den Chat."},
+    {frage: "Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?", optionen: ["In der EU sind sie weitgehend verboten", "Sie sind überall Pflicht", "Sie sind genauer als Menschen", "Sie brauchen keine Prüfung"], richtig: 0, erklaerung: "Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen weitgehend. Das ist ein Überblick, keine Rechtsberatung."},
+  ],
+  business: {
+    text: "Berührungslose Bedienung dort, wo Hände schmutzig oder nass sind, Gesten an Kiosken und Terminals, Bewegungsübungen mit Rückmeldung.",
+    beispiele: ["Werkstatt: Seite weiterblättern mit offener Hand", "Übungsanleitung, die die Handhaltung prüft"],
+  },
+  grenzen: [
+    "Kleine Hände weit weg von der Kamera, Handschuhe und Gegenlicht senken die Trefferquote.",
+    "Der Ausdruck ist eine Schätzung und liegt oft daneben. Für Entscheidungen über Menschen ist er nicht geeignet.",
+    "Gesten, für die keine Regel geschrieben wurde, erkennt der Jetson nicht.",
+  ],
+  weiter: ["gesicht", "objekt", "recht", "verzerrung-ethik"],
+},
+
 "vision-aufgaben": {
   nav: "Aufgaben im Vergleich", typ: "lektion", gruppe: "Sehen", titel: "Fünf Fragen an ein Bild", symbol: "anlernen",
   videos: ["vision-aufgaben-ueberblick"],
@@ -646,6 +727,7 @@ const glossar = {
   promptinjection: ["Prompt-Injection", "Ein Angriff, bei dem Anweisungen in einem Text versteckt sind, den das Modell liest. Das Modell kann sie für echte Aufträge halten."],
   freigabe: ["Freigabe", "Ein Mensch bestätigt eine vorbereitete Aktion, bevor der Agent sie ausführt. Wirksam ist sie nur, wenn der Mensch sieht, was passieren wird."],
   mcp: ["Model Context Protocol (MCP)", "Ein offener Standard, mit dem Assistenten Werkzeuge und Daten von Servern einheitlich entdecken und aufrufen."],
+  handpunkte: ["Handpunkte", "21 Punkte auf Handgelenk und Fingergelenken, die ein Netz im Bild setzt. Verbindet man sie, entsteht das Skelett der Hand."],
   mcpserver: ["MCP-Server", "Ein Programm, das die Fähigkeiten eines Systems nach dem MCP-Standard anbietet. Ein Assistent (Client) kann sie nutzen."],
 };
 
@@ -660,7 +742,7 @@ INHALT.registriere({
 
 /* Reihenfolge in der Navigation: die neuen Lektionen stehen vor den Laboren. */
 const gSehen = INHALT.gruppen.find((x) => x.name === "Sehen");
-gSehen.seiten = ["bild-als-zahlen", "cnn-intuition", "vision-aufgaben", "gesicht", "objekt", "anlernen"];
+gSehen.seiten = ["bild-als-zahlen", "cnn-intuition", "vision-aufgaben", "gesicht", "hand-gesicht", "objekt", "anlernen"];
 const gAgenten = INHALT.gruppen.find((x) => x.name === "Agenten");
 gAgenten.seiten = ["agenten-grundlagen", "agenten-planung", "agent", "agenten-sicherheit", "mcp-werkzeuge"];
 
