@@ -524,7 +524,11 @@ async def ws_vision(ws: WebSocket):
                 continue
             if daten.startswith("{"):            # Steuernachricht, z. B. {"schwelle": 0.35}
                 try:
-                    schwelle = max(0.1, min(0.9, float(json.loads(daten).get("schwelle", schwelle))))
+                    ctl = json.loads(daten)
+                    if isinstance(ctl, dict):
+                        schwelle = max(0.1, min(0.9, float(ctl.get("schwelle", schwelle))))
+                        if reg is not None and hasattr(reg, "steuern") and len(daten) < 2000:
+                            reg.steuern(zustand, ctl)      # Modus-eigene Einstellungen (z. B. Effekt), Eingabe selbst pruefen!
                 except Exception:
                     pass
                 continue

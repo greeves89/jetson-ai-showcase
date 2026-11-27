@@ -8,6 +8,7 @@ Jeder Modus (ausser den beiden Urgesteinen "gesicht" und "objekt" in app.py) ist
                            zeichnet in img (BGR, wird danach als JPEG zurueckgeschickt) und liefert die Trefferzahl
                            plus ein Woerterbuch mit Zusatzdaten fuer die Oberflaeche (landet im JSON)
   max_kante                laengste Bildkante vor dem Erkennen (Standard 480; None = unveraendert)
+  steuern(zustand, dict)   optional: Steuernachricht der Oberflaeche ({"effekt": ...} u. a.); Werte gegen eine Liste pruefen
   schwelle_senden          True, wenn die Oberflaeche einen Schwellenregler schickt
 
 Ein Modus meldet sich beim Import seines Moduls mit registriere(...) an. Die Inferenz laeuft unter dem
