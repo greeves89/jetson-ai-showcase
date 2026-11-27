@@ -79,3 +79,22 @@ lehnt sich an allgemein bekannte Angaben an (Stand der Prüfung 27.11.2026: Wiki
 
 Verweise auf der Seite (geprüft am 27.11.2026): Deutscher Gehörlosen-Bund (gehoerlosenbund.de) und DGS-Korpus der Universität Hamburg
 (sign-lang.uni-hamburg.de/dgs-korpus).
+# Text auf Papier lesen (Labor text-lesen)
+
+Das Labor findet ein Blatt im Kamerabild, zieht es gerade, findet die Textzeilen und liest die Zeichen. Alles läuft auf dem
+Prozessor des Geräts. Die Modelle liegen nicht im Repo, `scripts/modelle_laden.sh` lädt sie nach `app/models/`.
+
+| Datei | Aufgabe | Quelle | Lizenz |
+|---|---|---|---|
+| `text_detection_en_ppocrv3_2023may.onnx` | Textzeilen finden (DB-Detektor, PP-OCRv3) | OpenCV Zoo, `models/text_detection_ppocr`, aus PaddleOCR | Apache-2.0 |
+| `ocr_latin_ppocrv5_rec_mobile.onnx` | Zeichen lesen, lateinische Schrift (PP-OCRv5 mobile, `latin_PP-OCRv5_mobile_rec`) | PaddleOCR (PaddlePaddle), ONNX-Umwandlung `monkt/paddleocr-onnx` auf Hugging Face, Stand `7b02d0a`, Lizenz in der Modellkarte Apache-2.0 | Apache-2.0 |
+| `ocr_latin_ppocrv5_dict.txt` | Zeichenliste dazu, 502 Zeichen, darunter ä ö ü Ä Ö Ü ß und das Euro-Zeichen | dieselbe Umwandlung | Apache-2.0 |
+
+- Die Umwandlung stammt nicht vom Urheber des Modells. Deshalb pinnt `scripts/modelle_laden.sh` den Commit der Umwandlung und prüft
+  die SHA-256-Summen der beiden Dateien. Stimmt eine nicht, wird die Datei nicht übernommen und das Labor bleibt aus.
+- Gelesen werden nur gedruckte Schrift und lateinische Zeichen. Handschrift, Fraktur und andere Schriftsysteme sind nicht Ziel.
+- Nicht aufgenommen: Tesseract (auf dem Gerät nicht installiert, ohne Administratorrechte nicht einrichtbar) und die
+  englischen Zoo-Erkenner (`text_recognition_crnn`), die keine deutschen Sonderzeichen kennen.
+- Eine freie deutsche Wortliste für eine Rechtschreibprüfung ist nicht eingebunden, weil Herkunft und Lizenz einer geeigneten Liste nicht
+  geprüft sind. Das Labor korrigiert daher keine Wörter, es markiert nur Unsicheres.
+- Software: OpenCV (Apache-2.0) für Blattsuche, Entzerrung und den Zeilenfinder, onnxruntime (MIT) für den Erkenner.

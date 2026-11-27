@@ -309,7 +309,9 @@ def _verarbeite_frame(roh, modus, schwelle=0.5, zustand=None):
         t2 = time.time()
         if reg is not None:
             anzahl, extra = reg.verarbeite(img, schwelle, zustand)
-            h, w = img.shape[:2]
+            h, w = img.shape[:2]                           # Groesse des gesendeten Bildes (breite/hoehe in der Antwort)
+            if isinstance(extra, dict) and "_bild" in extra:     # ein Modus darf ein anderes Bild zurueckschicken (z. B. das entzerrte Blatt)
+                img = extra.pop("_bild")
         else:
             anzahl = _erkenne_objekte(img, schwelle) if modus == "objekt" else _erkenne_gesichter(img)
     t3 = time.time()

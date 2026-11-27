@@ -96,12 +96,13 @@
   }
 
   /* Kamera */
-  async function kameraOeffnen() {
+  async function kameraOeffnen(opt) {      // opt {breite, hoehe, rueck}: Wunschaufloesung, rueck = lieber die Rueckkamera (Text auf Papier)
     if (!window.isSecureContext) throw new Error("Der Browser erlaubt die Kamera nur über eine HTTPS-Verbindung. Öffne das Labor über die https-Adresse des Jetson und bestätige dort die Zertifikatswarnung.");
     if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) throw new Error("Dieser Browser kann nicht auf die Kamera zugreifen. Probiere einen aktuellen Browser wie Safari, Chrome oder Firefox.");
     await KL.einwilligung.verlangen("kamera", { sendet: true });      // erst erklären, dann den Browser fragen
     try {
-      return await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }, audio: false });
+      const o = opt || {};
+      return await navigator.mediaDevices.getUserMedia({ video: { width: { ideal: o.breite || 640 }, height: { ideal: o.hoehe || 480 }, facingMode: o.rueck ? { ideal: "environment" } : "user" }, audio: false });
     } catch (e) {
       const n = e && e.name;
       if (n === "NotAllowedError" || n === "SecurityError") throw new Error("Der Browser darf die Kamera nicht benutzen. Erlaube den Zugriff über das Kamerasymbol in der Adressleiste und drücke dann noch einmal auf Kamera starten.");
@@ -115,16 +116,16 @@
     if (video) { try { video.pause(); } catch (e) { /* egal */ } video.srcObject = null; }
   }
   /* Ein 4:3-Ausschnitt der Kamera als JPEG-DataURL (480x360, Qualitaet 0,6). */
-  function bildAufnehmen(video, canvas) {
+  function bildAufnehmen(video, canvas, qualitaet) {
     const vw = video.videoWidth || video.naturalWidth, vh = video.videoHeight || video.naturalHeight;   // Video oder Beispielbild
     let sw = vw, sh = vw * 3 / 4, sx = 0, sy = 0;
     if (sh > vh) { sh = vh; sw = vh * 4 / 3; }
     sx = (vw - sw) / 2; sy = (vh - sh) / 2;
     const ctx = canvas.getContext("2d");
     ctx.drawImage(video, sx, sy, sw, sh, 0, 0, canvas.width, canvas.height);
-    return canvas.toDataURL("image/jpeg", 0.6);
+    return canvas.toDataURL("image/jpeg", qualitaet || 0.6);
   }
-  const neuesCanvas = () => { const c = document.createElement("canvas"); c.width = 480; c.height = 360; return c; };
+  const neuesCanvas = (b, hh) => { const c = document.createElement("canvas"); c.width = b || 480; c.height = hh || 360; return c; };
 
   /* Meldungsfeld (Ursache und Ausweg) */
   function meldungBox() {
@@ -443,7 +444,8 @@
     let stream = null, ws = null, laeuft = false, startet = false, wartet = false;
     let tStart = 0, tBrowser = 0, versuche = 0, wachhund = null, neuTimer = null;
     let bildQuelle = null, gesendetFuer = null;      // Beispielbild statt Kamera: ein stehendes Bild, wird einmal je Auswahl gesendet
-    const canvas = neuesCanvas();
+    const aufn = (konf && konf.aufnahme) || null;      // {breite, hoehe, qualitaet, kamera}: groessere Bilder fuer Schrift (Labor Text lesen)
+    const canvas = aufn ? neuesCanvas(aufn.breite, aufn.hoehe) : neuesCanvas();
     const reihen = { b: [], n: [], d: [], e: [], k: [], w: [], t: [] };
     const stempel = [];
     let letzte = null;
@@ -494,7 +496,7 @@
       if (!bildQuelle && (video.readyState < 2 || !video.videoWidth)) { L.timeout(aufnehmenUndSenden, 100); return; }
       const t0 = performance.now();
       let url;
-      try { url = bildAufnehmen(bildQuelle || video, canvas); } catch (e) { L.timeout(aufnehmenUndSenden, 200); return; }
+      try { url = bildAufnehmen(bildQuelle || video, canvas, aufn && aufn.qualitaet); } catch (e) { L.timeout(aufnehmenUndSenden, 200); return; }
       gesendetFuer = bildQuelle;
       tBrowser = performance.now() - t0;
       tStart = t0;
@@ -546,7 +548,7 @@
         if (eigen) eigen.zeige(d);
         beiAntwort.forEach((f) => { try { f(d); } catch (e) { /* siehe oben */ } });
         zeichneGedrosselt();
-        L.timeout(aufnehmenUndSenden, 0);
+        L.timeout(aufnehmenUndSenden, Math.max(0, Math.min(2000, Number(d.takt_ms) || 0) - (performance.now() - tStart)));      // ein Modus darf den Abstand der Bilder selbst bestimmen (takt_ms)
       };
       sock.onclose = () => {
         if (ws !== sock) return;
@@ -596,7 +598,7 @@
           if (!st || !st.bereit) throw new Error(hg ? "Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle für Hände und Gesichtsausdruck fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh."
             : (konf && konf.statusFehler) || "Dieses Labor ist auf diesem Jetson noch nicht eingerichtet: Die Modelle fehlen. Der Betreiber holt sie mit scripts/modelle_laden.sh.");
         }
-        const s = await kameraOeffnen();
+        const s = await kameraOeffnen(aufn && aufn.kamera);
         if (L.weg) { s.getTracks().forEach((t) => t.stop()); return; }
         stream = s;
         video.srcObject = s;

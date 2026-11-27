@@ -185,7 +185,7 @@ Was `setup.sh` ohne Administratorrechte tut:
 - richtet `pip` für deinen Benutzer ein, falls es fehlt (`get-pip.py --user`)
 - installiert die Pakete aus `requirements.txt` mit `pip install --user` (FastAPI, Uvicorn, faster-whisper,
   piper-tts, `numpy<2`)
-- lädt die Bildmodelle (Gesichtserkennung YuNet, Objekterkennung YOLOX, MobileNet für das Anlern-Labor, dazu über `scripts/modelle_laden.sh` Handerkennung und Gesichtsausdruck für das Labor Hände und Gesichter (die Handnetze nutzt auch das Labor Fingeralphabet, es lädt keine eigenen Modelle), Personenfinder plus Körperpunkte für das Labor Körperhaltung sowie das Freistell-Modell PP-HumanSeg für das Labor Bild schützen, rund 6 MB, im Betrieb etwa 40 MB Arbeitsspeicher, 120 Sekunden nach dem letzten Bild wieder freigegeben) nach `app/models/`
+- lädt die Bildmodelle (Gesichtserkennung YuNet, Objekterkennung YOLOX, MobileNet für das Anlern-Labor, dazu über `scripts/modelle_laden.sh` Handerkennung und Gesichtsausdruck für das Labor Hände und Gesichter (die Handnetze nutzt auch das Labor Fingeralphabet, es lädt keine eigenen Modelle), Personenfinder plus Körperpunkte für das Labor Körperhaltung sowie die Text-Lese-Modelle PP-OCR für das Labor Text auf Papier lesen und das Freistell-Modell PP-HumanSeg für das Labor Bild schützen, rund 6 MB, im Betrieb etwa 40 MB Arbeitsspeicher, 120 Sekunden nach dem letzten Bild wieder freigegeben) nach `app/models/`
 - lädt das Whisper-Modell `base` in den Hugging-Face-Cache und die deutsche Piper-Stimme `thorsten-medium` nach
   `~/.local/share/piper-voices`
 - erzeugt ein selbstsigniertes Zertifikat in `certs/` (825 Tage gültig)
@@ -346,6 +346,7 @@ Verbindlich ist immer der Lizenztext an der Quelle.
 | MediaPipe Handflächen und Handpunkte, Gesichtsausdruck (OpenCV Zoo) | Apache-2.0 | siehe Modellkarten im OpenCV Zoo |
 | PP-HumanSeg Personen-Segmentierung (OpenCV Zoo, aus PaddleHub) | Apache-2.0 | siehe Modellkarte und LICENSE im OpenCV Zoo |
 | YOLOX-S (OpenCV Zoo) | Apache-2.0 | siehe Modellkarte im OpenCV Zoo |
+| PP-OCRv3 Zeilenfinder (OpenCV Zoo), PP-OCRv5 Texterkenner für lateinische Schrift (PaddleOCR) | Apache-2.0 | Der Erkenner stammt als ONNX-Umwandlung von monkt (Hugging Face), `scripts/modelle_laden.sh` prüft eine feste Prüfsumme. Details in `docs/lizenzen.md` |
 | Haar-Kaskade (OpenCV) | Intel License Agreement for Open Source Computer Vision Library | siehe Datei |
 | lucide-Icons | ISC | Lizenzhinweis beibehalten |
 

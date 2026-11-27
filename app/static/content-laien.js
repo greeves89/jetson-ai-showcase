@@ -259,6 +259,24 @@ INHALT.synonyme = {
   "gefuehle erkennen": ["=hand-gesicht", "=gesicht", "=verzerrung-ethik", "=recht"],
   laecheln: ["=hand-gesicht", "=gesicht"],
   kopfhaltung: ["=hand-gesicht", "=gesicht"],
+  ocr: ["=text-lesen", "=uc-buero-dokumente", "=rag-ueberblick", "=bild-als-zahlen"],
+  "text erkennen": ["=text-lesen", "=uc-buero-dokumente", "=bild-als-zahlen"],
+  texterkennung: ["=text-lesen", "=uc-buero-dokumente", "=rag-ueberblick"],
+  "text lesen": ["=text-lesen", "=sprachausgabe", "=uc-buero-dokumente"],
+  "text auf papier": ["=text-lesen", "=uc-buero-dokumente"],
+  schrifterkennung: ["=text-lesen", "=uc-buero-dokumente"],
+  "dokument scannen": ["=text-lesen", "=uc-buero-dokumente", "=sicherheit-einfach", "=recht"],
+  dokumentenscan: ["=text-lesen", "=uc-buero-dokumente"],
+  scannen: ["=text-lesen", "=uc-buero-dokumente", "=recht"],
+  scanner: ["=text-lesen", "=uc-buero-dokumente", "=sicherheit-einfach"],
+  beleg: ["=text-lesen", "=uc-buero-dokumente"],
+  belege: ["=text-lesen", "=uc-buero-dokumente"],
+  handschrift: ["=text-lesen", "=cnn-intuition", "=bild-als-zahlen"],
+  speisekarte: ["=text-lesen", "=sprachausgabe"],
+  zettel: ["=text-lesen", "=sprachausgabe"],
+  brief: ["=text-lesen", "=sicherheit-einfach", "=datenschutz-im-alltag"],
+  abfotografieren: ["=text-lesen", "=recht", "=sicherheit-einfach"],
+  sehbehinderung: ["=text-lesen", "=sprachausgabe"],
   freistellen: ["=bild-schuetzen", "=vision-aufgaben", "=cnn-intuition"],
   freisteller: ["=bild-schuetzen", "=vision-aufgaben"],
   hintergrund: ["=bild-schuetzen", "=hand-gesicht"],
@@ -417,7 +435,7 @@ INHALT.synonyme = {
   betrieb: ["=mlops", "=ki-einfuehrung", "=business"],
   handwerk: ["=uc-handwerk", "angebot", "rechnung", "baustelle"],
   angebot: ["=uc-handwerk", "=prompting", "=uc-buero-dokumente"],
-  rechnung: ["=uc-handwerk", "=uc-buero-dokumente", "=rag-ueberblick"],
+  rechnung: ["=uc-handwerk", "=uc-buero-dokumente", "=text-lesen", "=rag-ueberblick"],
   dokumente: ["=uc-buero-dokumente", "=rag-ueberblick", "=rag", "pdf"],
   excel: ["=tabellen-ml", "=daten", "=uc-buero-dokumente"],
   tabelle: ["=tabellen-ml", "=daten"],
@@ -461,7 +479,7 @@ INHALT.lernpfade = [
   {id: "verstehen", stufe: 1, name: "Verstehen", kurz: "Was KI ist, wie sie lernt und woran sie scheitert. Ohne Vorkenntnisse.",
    seiten: ["karte", "ml", "genki", "daten", "neuronale-netze", "training", "tokens-sprachmodelle", "bild-als-zahlen", "cnn-intuition"]},
   {id: "anwenden", stufe: 2, name: "Anwenden", kurz: "KI selbst benutzen: fragen, hören, sehen, nachschlagen, Aufgaben abgeben.",
-   seiten: ["chat", "prompting", "prompts-fuer-schueler", "prompts-schule", "whisper", "objekt", "rag-ueberblick", "agenten-grundlagen", "finetuning-oder-rag", "empfehlungen"]},
+   seiten: ["chat", "prompting", "prompts-fuer-schueler", "prompts-schule", "whisper", "objekt", "text-lesen", "rag-ueberblick", "agenten-grundlagen", "finetuning-oder-rag", "empfehlungen"]},
   {id: "erstellen", stufe: 3, name: "Erstellen", kurz: "Eigene Bausteine bauen: Bildmodell anlernen, Dokumente durchsuchen, Agenten planen.",
    seiten: ["anlernen", "tabellen-ml", "zeitreihen", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "agenten-planung", "mcp-werkzeuge", "mlops"]},
   {id: "bewerten", stufe: 4, name: "Bewerten", kurz: "Grenzen erkennen, Ergebnisse prüfen, Verantwortung tragen.",
@@ -475,7 +493,7 @@ INHALT.lernpfade = [
   {id: "beruf", rolle: "beruf", name: "KI im Betrieb: In 15 Minuten", kurz: "Vier Seiten für alle, die entscheiden müssen: Was ist KI in zwei Minuten, selbst ausprobieren, wo sie im Betrieb hilft und wie du den Einstieg planst. Danach geht es mit der Praxis weiter.",
    seiten: ["alltag-ki-kurz", "chat", "business", "ki-einfuehrung"]},
   {id: "beruf-praxis", rolle: "beruf", name: "KI im Betrieb: Praxis und Entscheidung", kurz: "Beispiele aus Handwerk, Fertigung und Büro, gut fragen, Kosten, Recht und Datenschutz. Am Ende steht deine Entscheidung mit sechs Fragen zum Abhaken.",
-   seiten: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "kamera-grenzen", "praxis-gesundheit", "prompting", "kosten-energie", "recht", "sicherheit-einfach", "betrieb-entscheidung"]},
+   seiten: ["uc-handwerk", "uc-fertigung-sichtpruefung", "uc-buero-dokumente", "text-lesen", "kamera-grenzen", "praxis-gesundheit", "prompting", "kosten-energie", "recht", "sicherheit-einfach", "betrieb-entscheidung"]},
   {id: "lehrende", rolle: "lehrende", name: "Unterricht vorbereiten", kurz: "Handreichung, drei KI-Stunden, sieben Medien-Einheiten und Informationen für Schulleitung und Eltern.",
    seiten: ["schule-lehrkraefte", "schule-faecher", "schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "medien-stunde-2", "medien-stunde-3", "medien-stunde-4", "medien-stunde-5", "medien-stunde-6", "medien-stunde-7", "schule-schulleitung", "schule-eltern", "elternabend", "sicherheit-einfach", "recht"]},
 ];
@@ -494,7 +512,7 @@ INHALT.lernpfade.push(
    seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen", "referat"],
    vorn: ["schule"]},
 );
-INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "bild-schuetzen", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
+INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "bild-schuetzen", "text-lesen", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
 /* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
    menue.fuerDich     je Rolle höchstens zwölf Seiten (meist sechs): der Block "Für dich" im Menü, aufgeklappt.
    menue.reihenfolge  je Rolle die Gruppen im zugeklappten Block "Alle Bereiche", die genannten zuerst; "Sicherheit" ist eine Sammelgruppe (menue.sammel).
