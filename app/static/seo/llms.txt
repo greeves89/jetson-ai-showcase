@@ -14,6 +14,8 @@ Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vo
 
 ## Alltag in 15 Minuten
 
+Fünf kurze Seiten für Berufstätige: KI, Chat, Betrug, gute Fragen, Datenschutz.
+
 - [KI in 2 Minuten: Was ist das?](__BASIS__/alltag-ki-kurz): Was KI ist, wo du ihr täglich begegnest und wo sie danebenliegt.
 - [Einen Chatbot nutzen und die Antwort prüfen](__BASIS__/alltag-chat): Eine Frage stellen, die Antwort prüfen, bevor du ihr traust.
 - [Betrug am Telefon und mit KI: das Wichtigste](__BASIS__/alltag-betrug): Auflegen, selbst zurückrufen, bei Verdacht 110.
@@ -21,6 +23,8 @@ Lizenz der Inhalte: Texte und Grafiken stammen von Daniel Alisch, alle Rechte vo
 - [Ist das sicher? Die Kurzfassung](__BASIS__/alltag-sicher): Was das Labor speichert, was du nirgends eintippen solltest und wo die ganze Antwort steht.
 
 ## Experimente
+
+Kleine Versuche, die du selbst nachmachst.
 
 - [Experimente, leicht erklärt](__BASIS__/experimente): Probiere aus, wie KI arbeitet.
 
@@ -42,13 +46,17 @@ Was KI ist, wie Maschinen lernen und wo die Grenzen liegen.
 
 ## Sehen
 
-Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.
+Wie ein Computer Bilder versteht: Gesichter, Hände, Körperhaltung, Objekte, Text auf Papier und eigene Modelle.
 
 - [Wie ein Computer ein Bild sieht](__BASIS__/bild-als-zahlen): Du siehst ein Foto, ein Computer sieht eine Tabelle voller Zahlen.
 - [Wie Netze Bilder verstehen](__BASIS__/cnn-intuition): Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge.
 - [Fünf Fragen an ein Bild](__BASIS__/vision-aufgaben): Jede Frage ist eine eigene Aufgabe mit eigenem Aufwand.
 - [Gesichtserkennung](__BASIS__/gesicht): Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.
 - [Hände und Gesichter gleichzeitig](__BASIS__/hand-gesicht): Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts.
+- [Bild schützen: freistellen und verpixeln](__BASIS__/bild-schuetzen): Der Jetson trennt dich vom Hintergrund und macht Gesichter unkenntlich.
+- [Fingeralphabet: Buchstaben mit der Hand](__BASIS__/fingeralphabet): Zeige der Kamera Buchstaben des deutschen Fingeralphabets, und das Labor baut daraus Wörter.
+- [Körperhaltung: Skelett im Kamerabild](__BASIS__/koerperhaltung): Der Jetson legt ein Skelett aus 33 Punkten über dich: Schultern, Ellbogen, Hände, Hüfte, Knie, Füße.
+- [Text auf Papier lesen](__BASIS__/text-lesen): Halte ein Blatt mit gedrucktem Text in die Kamera.
 - [Objekterkennung](__BASIS__/objekt): Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.
 - [Bildmodell anlernen](__BASIS__/anlernen): Zeige dem Jetson Beispiele, und er erkennt sie danach selbst.
 
@@ -56,7 +64,7 @@ Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.
 
 Sprachmodelle im Chat, Sprache zu Text und gutes Fragen.
 
-- [Sprachmodell im Chat](__BASIS__/chat): Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU.
+- [Sprachmodell im Chat](__BASIS__/chat): Ein Modell mit etwa drei Milliarden Parametern antwortet lokal, größtenteils auf der GPU.
 - [Sprache zu Text](__BASIS__/whisper): Sprich in dein Mikrofon, und der Jetson schreibt mit.
 - [Wie ein Sprachmodell gebaut ist](__BASIS__/tokens-sprachmodelle): Hier siehst du die Bausteine: Token, Zahlen, Aufmerksamkeit und zwei Lernphasen.
 - [Gut fragen: Prompts schreiben](__BASIS__/prompting): Dasselbe Modell liefert je nach Frage einen Volltreffer oder Unsinn.
@@ -97,7 +105,7 @@ Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen.
 
 ## KI im Betrieb
 
-Vom Prototyp zum Betrieb: Kosten, Energie und Einführung.
+Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis.
 
 - [Vom Prototyp in den Betrieb](__BASIS__/mlops): Ein Modell, das im Versuch funktioniert, ist erst der Anfang.
 - [Kosten und Energie](__BASIS__/kosten-energie): Lokal, Cloud und Edge unterscheiden sich in Anschaffung, laufenden Kosten, Leistung, Datenschutz, Reaktionszeit und Wartung.
@@ -131,9 +139,11 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Ist das sicher? Was wird gespeichert?](__BASIS__/sicherheit-einfach): Zum Ausprobieren ja: kein Konto, keine Werbung, Kamerabilder und Aufnahmen werden nicht gespeichert, getippte Texte bleiben nur kurz auf dem Rechner.
 - [Selbst auf einem Jetson aufbauen](__BASIS__/selbst-bauen): Das KI-Labor ist frei verfügbar.
 - [Lizenzen und Quellen](__BASIS__/lizenzen): Das Labor nutzt fremde Modelle, Programme, Stimmen und Fotos.
-- [Wie das Labor aufgebaut ist](__BASIS__/architektur): Ein Diagramm vom Besucher bis zum Sprachmodell: Cloudflare, ein nginx-Server bei IONOS, der Jetson mit App, Ollama, Whisper und Piper.
+- [Wie das Labor aufgebaut ist](__BASIS__/architektur): Ein Diagramm vom Besucher bis zum Sprachmodell: ein nginx-Proxy-Server, Cloudflare, der Jetson mit App, Ollama, Whisper und Piper.
 
 ## Für die Schule
+
+Unterrichtseinheiten, Handreichungen und Infoblätter für Klassen, Lehrkräfte und Eltern.
 
 - [KI im Unterricht: Einstieg für Klassen und Lehrkräfte](__BASIS__/schule-start): Kostenlos und ohne Konto: drei Stunden für Klasse 8 und die Technik, die dafür nötig ist.
 - [KI 1: Was ist KI? Erkennen, Lernen, Entscheiden](__BASIS__/schule-stunde-1): 45 oder 90 Minuten für Klasse 8, ohne Kamera.
@@ -155,6 +165,8 @@ Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf:
 - [Welche Fächer passen? Einsatz in Mathe, Informatik, Biologie, Deutsch, Ethik und Geschichte](__BASIS__/schule-faecher): Je Fach zwei bis drei Anknüpfungen mit der passenden Seite im Labor.
 
 ## Medienkompetenz
+
+Bilder prüfen, Quellen bewerten, Datenschutz und KI bei Hausaufgaben.
 
 - [Echt oder KI? Bilder, Texte und Stimmen prüfen](__BASIS__/echt-oder-ki): KI macht Bilder, Texte und Stimmen, die echt wirken.
 - [Quellen prüfen: Wem kannst du glauben?](__BASIS__/quellen-pruefen): Mit Seitwärtslesen und Gegenprobe.

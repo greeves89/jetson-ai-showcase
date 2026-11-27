@@ -1,9 +1,9 @@
-<div class="seitenbreite"><p class="ueber">Der Rechner dahinter</p><h1>Der Jetson und seine Hardware</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Der Jetson rechnet neuronale Netze effizient auf einer GPU. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.</p><p class="lead">Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.</p>
+<div class="seitenbreite"><p class="ueber">Der Rechner dahinter</p><h1>Der Jetson und seine Hardware</h1><p class="kurzgesagt"><strong>Kurz gesagt:</strong> Der Jetson rechnet das Sprachmodell größtenteils auf einer GPU, andere Modelle laufen auf dem Prozessor. Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße. Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.</p><p class="lead">Ein kleiner Computer mit GPU, gebaut für KI am Gerät. Hier siehst du live, was er gerade tut.</p>
 <div class="text">
 <h2 class="abs">Was ist ein Jetson</h2>
 <figure class="visual"><figcaption>Kennzahlen</figcaption><ul><li>6 Prozessorkerne</li><li>8 GB gemeinsamer Speicher</li><li>wenige W Stromaufnahme</li></ul></figure>
 <p class="kurz">Ein Computer im Kartenformat mit sechs Kernen und einer GPU, die wenige Watt braucht.</p>
-<p>Der NVIDIA Jetson Orin Nano ist ein Computer im Kartenformat. Er hat einen Prozessor mit sechs Kernen und eine GPU, die viele einfache Rechnungen gleichzeitig ausführt. Genau das brauchen neuronale Netze. Er nimmt dabei nur wenige Watt auf.</p>
+<p>Der NVIDIA Jetson Orin Nano ist ein Computer im Kartenformat. Er hat einen Prozessor mit sechs Kernen und eine GPU, die viele einfache Rechnungen gleichzeitig ausführt. Genau das brauchen neuronale Netze. Er nimmt dabei nur wenige Watt auf.</p><p>Getestet auf dem Jetson Orin Nano Developer Kit in der Super-Ausführung (Modus MAXN_SUPER), 8 GB. Nutzbar sind rund 7,6 GB.</p><p>Nicht alles läuft auf der GPU. Das Sprachmodell nutzt sie größtenteils (24 von 29 Schichten). Spracherkennung, Einbettung, Sprachausgabe und die Kamera-Modelle rechnen auf den sechs Prozessorkernen. Ist der gemeinsame Speicher zerstückelt, lädt das Labor das Sprachmodell mit weniger GPU-Schichten. Das ist langsamer, läuft aber.</p>
 <h2 class="abs">Gemeinsamer Speicher</h2>
 <figure class="visual"><figcaption>Schichten</figcaption><ul><li>Geladenes Modell (bis zu zwei, je nach Größe)</li><li>CPU und GPU (rechnen im selben Speicher)</li><li>Gemeinsamer Speicher (8 GB für alles)</li></ul></figure>
 <p class="kurz">CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.</p>
@@ -22,6 +22,6 @@
 <p class="kurz">Wer Daten am Entstehungsort auswertet, spart Netz und Wartezeit und hält Sensibles vor Ort.</p>
 <p>Wer Kamerabilder, Sprache oder Maschinendaten direkt am Entstehungsort auswertet, spart Netzwerk, Wartezeit und kann sensible Daten vor Ort lassen. Das ist die Idee hinter Edge-Computing.</p>
 </div>
-<section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Der Jetson rechnet neuronale Netze effizient auf einer GPU.</li><li>Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.</li><li>Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.</li></ul></section>
+<section class="block mitnehmen"><h2>Das nimmst du mit</h2><ul><li>Der Jetson rechnet das Sprachmodell größtenteils auf einer GPU, andere Modelle laufen auf dem Prozessor.</li><li>Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.</li><li>Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.</li></ul></section>
 <section class="block"><h2>Weiter geht es</h2><ul class="weiter"><li><a href="/chat">Sprachmodell im Chat</a></li><li><a href="/objekt">Objekterkennung</a></li><li><a href="/business">KI im Business</a></li></ul></section>
 </div>
