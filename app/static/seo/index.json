@@ -56,7 +56,7 @@
        "@id": "__BASIS__/#kurs"
       },
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "abstract": "Das KI-Labor ist ein kostenloses Lernangebot zu künstlicher Intelligenz auf Deutsch, ohne Anmeldung. Es läuft lokal auf einem NVIDIA Jetson Orin Nano und nutzt keine externen KI-Dienste. Zu den Themen gibt es Erklärungen, Versuche zum Ausprobieren, Erklärvideos und kurze Selbsttests.",
       "author": {
        "@id": "https://daniel-alisch.site/#person"
@@ -279,7 +279,7 @@
       "@type": "ItemList",
       "@id": "__BASIS__/#bereich-sehen",
       "name": "Sehen",
-      "numberOfItems": 6,
+      "numberOfItems": 7,
       "itemListElement": [
        {
         "@type": "ListItem",
@@ -308,12 +308,18 @@
        {
         "@type": "ListItem",
         "position": 5,
+        "name": "Hände und Gesichter gleichzeitig",
+        "url": "__BASIS__/hand-gesicht"
+       },
+       {
+        "@type": "ListItem",
+        "position": 6,
         "name": "Objekterkennung",
         "url": "__BASIS__/objekt"
        },
        {
         "@type": "ListItem",
-        "position": 6,
+        "position": 7,
         "name": "Bildmodell anlernen",
         "url": "__BASIS__/anlernen"
        }
@@ -2020,6 +2026,16 @@
        },
        {
         "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-handpunkte",
+        "termCode": "handpunkte",
+        "name": "Handpunkte",
+        "description": "21 Punkte auf Handgelenk und Fingergelenken, die ein Netz im Bild setzt. Verbindet man sie, entsteht das Skelett der Hand.",
+        "inDefinedTermSet": {
+         "@id": "__BASIS__/#glossar"
+        }
+       },
+       {
+        "@type": "DefinedTerm",
         "@id": "__BASIS__/#begriff-mcpserver",
         "termCode": "mcpserver",
         "name": "MCP-Server",
@@ -3025,7 +3041,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -3220,7 +3236,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -3435,7 +3451,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -3657,7 +3673,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -3850,7 +3866,7 @@
        "__BASIS__/static/og/grundlagen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5608,7 +5624,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -5872,7 +5888,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6151,7 +6167,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6402,7 +6418,7 @@
       "educationalLevel": "Einsteiger",
       "learningResourceType": "Interaktives Labor",
       "articleSection": "Sehen",
-      "abstract": "Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Ein neuronales Netz hat Gesichter in vielen Lagen gelernt. Ältere Verfahren kennen nur die Frontalansicht.",
+      "abstract": "Das Bild reist zum Jetson, ein kleines Netz findet Gesichter, das markierte Bild kommt zurück. Stufe drei, den Ausdruck zu deuten, probierst du im Labor Hände und Gesichter aus. Dort ist er eine Schätzung.",
       "copyrightHolder": {
        "@id": "https://daniel-alisch.site/#person"
       },
@@ -6410,7 +6426,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6461,6 +6477,171 @@
         "position": 2,
         "name": "Gesichtserkennung",
         "item": "__BASIS__/gesicht"
+       }
+      ]
+     }
+    ]
+   }
+  },
+  "hand-gesicht": {
+   "titel": "Hände und Gesichter gleichzeitig · KI-Labor",
+   "ueberschrift": "Hände und Gesichter gleichzeitig",
+   "beschreibung": "Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts. Alles im selben Bild.",
+   "typ": "seite",
+   "datei": "content-sehen-agenten.js",
+   "bild": "/static/og/sehen.png",
+   "bild_alt": "KI-Labor, Bereich Sehen: Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.",
+   "ld": {
+    "@context": "https://schema.org",
+    "@graph": [
+     {
+      "@type": "Person",
+      "@id": "https://daniel-alisch.site/#person",
+      "name": "Daniel Alisch",
+      "url": "https://daniel-alisch.site",
+      "sameAs": [
+       "https://www.linkedin.com/in/daniel-alisch-81165a84",
+       "https://github.com/greeves89"
+      ]
+     },
+     {
+      "@type": "WebSite",
+      "@id": "__BASIS__/#website",
+      "name": "KI-Labor",
+      "url": "__BASIS__/",
+      "inLanguage": "de",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": [
+       "Article",
+       "LearningResource"
+      ],
+      "@id": "__BASIS__/hand-gesicht#artikel",
+      "headline": "Hände und Gesichter gleichzeitig",
+      "name": "Hände und Gesichter gleichzeitig",
+      "description": "Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts. Alles im selben Bild.",
+      "url": "__BASIS__/hand-gesicht",
+      "mainEntityOfPage": {
+       "@type": "WebPage",
+       "@id": "__BASIS__/hand-gesicht"
+      },
+      "inLanguage": "de",
+      "isAccessibleForFree": true,
+      "educationalLevel": "Einsteiger",
+      "learningResourceType": "Interaktives Labor",
+      "articleSection": "Sehen",
+      "abstract": "Hand und Gesicht sind getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen. Die Geste entsteht aus Regeln über 21 Handpunkte.",
+      "copyrightHolder": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "image": [
+       "__BASIS__/static/og/sehen.png"
+      ],
+      "datePublished": "2026-11-21",
+      "dateModified": "2026-11-27",
+      "isPartOf": [
+       {
+        "@id": "__BASIS__/#website"
+       },
+       {
+        "@id": "__BASIS__/#kurs"
+       }
+      ],
+      "breadcrumb": {
+       "@id": "__BASIS__/hand-gesicht#breadcrumb"
+      },
+      "teaches": [
+       "Hand und Gesicht sind getrennte Netze. Das Labor setzt ihre Ergebnisse in einem Bild zusammen.",
+       "Die Geste entsteht aus Regeln über 21 Handpunkte. Das Netz liefert die Punkte, die Regeln deuten sie.",
+       "Ein Ausdruck ist eine Schätzung aus Gesichtsmustern und kein Blick in die Gefühle. Sicherheit und Kontext zählen."
+      ],
+      "about": [
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-yunet",
+        "name": "YuNet"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-handpunkte",
+        "name": "Handpunkte"
+       },
+       {
+        "@type": "DefinedTerm",
+        "@id": "__BASIS__/#begriff-landmark",
+        "name": "Landmarke"
+       }
+      ],
+      "author": {
+       "@id": "https://daniel-alisch.site/#person"
+      },
+      "publisher": {
+       "@id": "https://daniel-alisch.site/#person"
+      }
+     },
+     {
+      "@type": "BreadcrumbList",
+      "@id": "__BASIS__/hand-gesicht#breadcrumb",
+      "itemListElement": [
+       {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "KI-Labor",
+        "item": "__BASIS__/"
+       },
+       {
+        "@type": "ListItem",
+        "position": 2,
+        "name": "Hände und Gesichter gleichzeitig",
+        "item": "__BASIS__/hand-gesicht"
+       }
+      ]
+     },
+     {
+      "@type": "FAQPage",
+      "@id": "__BASIS__/hand-gesicht#faq",
+      "inLanguage": "de",
+      "mainEntity": [
+       {
+        "@type": "Question",
+        "name": "Woher kommt im Labor die Geste „Faust“?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Aus einer Regel über die 21 Handpunkte: kein Finger gestreckt. Das Netz liefert Punkte. Eine Regel prüft, ob Finger gestreckt sind. Sind es keine, heißt die Geste Faust."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Das Labor zeigt „froh“, die Person ist aber gerade genervt und lächelt höflich. Was ist passiert?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Das Netz sieht Gesichtsmuster. Ein höfliches Lächeln sieht aus wie Freude. Ein Ausdruckserkenner misst, wie das Gesicht aussieht, nicht wie sich jemand fühlt."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Wie bleibt das Labor schnell genug für Video?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "Kleine Bilder, Handsuche und Ausdruck nur im Wechsel, drei Rechenkerne. Der Jetson spart Rechenzeit, wo es nicht auffällt, und lässt Platz für den Chat."
+        }
+       },
+       {
+        "@type": "Question",
+        "name": "Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?",
+        "acceptedAnswer": {
+         "@type": "Answer",
+         "text": "In der EU sind sie weitgehend verboten. Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen weitgehend. Das ist ein Überblick, keine Rechtsberatung."
+        }
        }
       ]
      }
@@ -6531,7 +6712,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6652,7 +6833,7 @@
        "__BASIS__/static/og/sehen.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6768,7 +6949,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -6894,7 +7075,7 @@
        "__BASIS__/static/og/sprache.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -9952,7 +10133,7 @@
        "__BASIS__/static/og/wissen-und-rag.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -10068,7 +10249,7 @@
        "__BASIS__/static/og/agenten.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -10322,7 +10503,7 @@
        "__BASIS__/static/og/agenten.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -10571,7 +10752,7 @@
        "__BASIS__/static/og/agenten.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -10687,7 +10868,7 @@
        "__BASIS__/static/og/agenten.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -10941,7 +11122,7 @@
        "__BASIS__/static/og/agenten.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -15830,7 +16011,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16075,7 +16256,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -16482,7 +16663,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-22",
-      "dateModified": "2026-11-22",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22366,7 +22547,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22470,7 +22651,7 @@
        "__BASIS__/static/og/standard.png"
       ],
       "datePublished": "2026-11-21",
-      "dateModified": "2026-11-23",
+      "dateModified": "2026-11-27",
       "isPartOf": [
        {
         "@id": "__BASIS__/#website"
@@ -22643,6 +22824,7 @@
   "cnn-intuition",
   "vision-aufgaben",
   "gesicht",
+  "hand-gesicht",
   "objekt",
   "anlernen",
   "chat",
@@ -22772,6 +22954,7 @@
     "cnn-intuition",
     "vision-aufgaben",
     "gesicht",
+    "hand-gesicht",
     "objekt",
     "anlernen"
    ]

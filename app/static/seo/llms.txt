@@ -48,6 +48,7 @@ Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle.
 - [Wie Netze Bilder verstehen](__BASIS__/cnn-intuition): Ein Netz für Bilder sucht erst Kanten, dann Formen, dann Dinge.
 - [Fünf Fragen an ein Bild](__BASIS__/vision-aufgaben): Jede Frage ist eine eigene Aufgabe mit eigenem Aufwand.
 - [Gesichtserkennung](__BASIS__/gesicht): Der Jetson findet Gesichter in deinem Kamerabild, auch wenn du den Kopf neigst.
+- [Hände und Gesichter gleichzeitig](__BASIS__/hand-gesicht): Der Jetson zeichnet das Skelett deiner Hände, nennt die Geste und schätzt Ausdruck und Kopfhaltung deines Gesichts.
 - [Objekterkennung](__BASIS__/objekt): Der Jetson benennt, was er im Bild sieht, und markiert jedes Objekt mit einem Rahmen.
 - [Bildmodell anlernen](__BASIS__/anlernen): Zeige dem Jetson Beispiele, und er erkennt sie danach selbst.
 

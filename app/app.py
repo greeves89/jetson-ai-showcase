@@ -38,6 +38,11 @@ from fastapi.staticfiles import StaticFiles
 from starlette.datastructures import MutableHeaders
 
 from app import agent_werkzeuge, speicher
+try:                                   # ein Fehler im Labor-Modul darf den Start nicht verhindern (siehe Labor-Schleife unten)
+    from app import lab_hand
+except Exception as _e:                # noqa: BLE001
+    lab_hand = None
+    print("lab_hand nicht geladen:", repr(_e))
 from app.sicherheit import Belegt, sicherheitskoepfe, Sitzungen, Warteschlange, begrenzt, origin_ok, sitzungs_kennung, umgebung_zahl
 
 HIER = Path(__file__).resolve().parent
@@ -278,9 +283,10 @@ def _erkenne_objekte(img, schwelle=0.5):
 _inferenz_lock = threading.Lock()
 
 
-def _verarbeite_frame(roh, modus, schwelle=0.5):
+def _verarbeite_frame(roh, modus, schwelle=0.5, zustand=None):
     """Dekodiert, begrenzt die Groesse, erkennt und kodiert zurueck. Laeuft im Threadpool.
-    Misst jeden Schritt einzeln, damit die Oberflaeche zeigen kann, wo die Zeit bleibt."""
+    Misst jeden Schritt einzeln, damit die Oberflaeche zeigen kann, wo die Zeit bleibt.
+    zustand: Verbindungszustand des Modus hand_gesicht (verfolgte Haende, geglaettete Ausdruecke), sonst None."""
     t0 = time.time()
     arr = np.frombuffer(roh, np.uint8)
     img = cv2.imdecode(arr, cv2.IMREAD_COLOR)
@@ -291,14 +297,23 @@ def _verarbeite_frame(roh, modus, schwelle=0.5):
         s = min(1280 / w, 720 / h)
         img = cv2.resize(img, (int(w * s), int(h * s)))
         h, w = img.shape[:2]
+    extra = {}
+    if modus == "hand_gesicht":
+        img = lab_hand.verkleinern(img)             # laengste Kante 480 px
+        h, w = img.shape[:2]
     t1 = time.time()
     with _inferenz_lock:
         t2 = time.time()
-        anzahl = _erkenne_objekte(img, schwelle) if modus == "objekt" else _erkenne_gesichter(img)
+        if modus == "hand_gesicht":
+            erg = lab_hand.analysiere(img, _yunet, lab_hand.modelle(), zustand)
+            anzahl = len(erg["haende"]) + len(erg["gesichter"])
+            extra = {"haende": erg["haende"], "gesichter": erg["gesichter"], "detail_ms": erg["ms"]}
+        else:
+            anzahl = _erkenne_objekte(img, schwelle) if modus == "objekt" else _erkenne_gesichter(img)
     t3 = time.time()
     ok, jpg = cv2.imencode(".jpg", img, [cv2.IMWRITE_JPEG_QUALITY, 70])
     t4 = time.time()
-    return json.dumps({
+    return json.dumps({**extra,
         "bild": "data:image/jpeg;base64," + base64.b64encode(jpg).decode(),
         "anzahl": int(anzahl),
         "ms": round((t4 - t0) * 1000),
@@ -486,8 +501,11 @@ async def ws_vision(ws: WebSocket):
         await ws.close(code=1008)
         return
     modus = ws.query_params.get("modus", "gesicht")
-    if modus not in ("gesicht", "objekt"):
+    if modus not in ("gesicht", "objekt", "hand_gesicht"):
         modus = "gesicht"
+    if modus == "hand_gesicht" and not (lab_hand is not None and _yunet is not None and lab_hand.modelle().bereit):
+        await ws.close(code=1013)      # Modelle fehlen (scripts/modelle_laden.sh), die Oberflaeche prueft das vorher
+        return
     global _ws_aktiv
     if _ws_aktiv >= WS_MAX:
         await ws.close(code=1013)      # Server ausgelastet, spaeter erneut versuchen
@@ -495,6 +513,7 @@ async def ws_vision(ws: WebSocket):
     _ws_aktiv += 1
     await ws.accept()
     schwelle = 0.5
+    zustand = lab_hand.Verbindung() if modus == "hand_gesicht" else None
     try:
         while True:
             daten = await ws.receive_text()      # dataURL "data:image/jpeg;base64,..." oder Steuer-JSON
@@ -509,7 +528,7 @@ async def ws_vision(ws: WebSocket):
             if not _ist_jpeg_dataurl(daten):
                 continue
             roh = base64.b64decode(daten.split(",", 1)[-1])
-            ergebnis = await asyncio.to_thread(_verarbeite_frame, roh, modus, schwelle)
+            ergebnis = await asyncio.to_thread(_verarbeite_frame, roh, modus, schwelle, zustand)
             if ergebnis:
                 await ws.send_text(ergebnis)
     except WebSocketDisconnect:
