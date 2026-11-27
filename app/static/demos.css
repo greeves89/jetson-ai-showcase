@@ -197,7 +197,9 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-chatbox{min-height:0}
 
 /* ---------- Labor Hände und Gesichter: Eigenschaften-Karten neben dem Bild ---------- */
-.kameras.d-hg{grid-template-columns:1fr 1fr minmax(15rem,19rem);align-items:start}
+.kameras.d-hg{grid-template-columns:1fr 1fr;align-items:start}
+.kameras.d-hg .d-eigen{grid-column:1 / -1}
+.kameras.d-hg .d-karten{grid-template-columns:repeat(auto-fill,minmax(15rem,1fr))}
 .d-eigen{min-width:0}
 .d-eigen-titel{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13px;font-weight:600;color:var(--leise)}
 .d-karten{display:grid;gap:10px;align-content:start}
@@ -215,5 +217,4 @@ span.d-frage{font-size:13.5px;display:inline-flex;gap:8px;align-items:center;fle
 .d-karten-leer{margin-top:0}
 @keyframes d-karte-ein{from{opacity:0;transform:translateY(6px) scale(.97)}to{opacity:1;transform:none}}
 @media(prefers-reduced-motion:reduce){.d-karte{animation:none;transition:none}}
-@media(max-width:1100px){.kameras.d-hg{grid-template-columns:1fr 1fr}.kameras.d-hg .d-eigen{grid-column:1 / -1}.kameras.d-hg .d-karten{grid-template-columns:repeat(auto-fill,minmax(14rem,1fr))}}
 @media(max-width:700px){.kameras.d-hg{grid-template-columns:1fr}}
