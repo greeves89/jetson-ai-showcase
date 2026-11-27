@@ -69,7 +69,7 @@ MIN_FUER_MITTEL = 5                               # Mittelwert und Median erst a
 FEHLVERSUCHE_JE_IP = 15                           # falsche Codes oder Schluessel je 10 Minuten, danach Sperre
 FEHLVERSUCHE_FENSTER_S = 600.0
 FEHLVERSUCH_PAUSE_S = 0.8                         # jede falsche Eingabe wird um diese Zeit gebremst
-FEHLVERSUCHE_JE_VERBINDUNG = 3
+FEHLVERSUCHE_JE_VERBINDUNG = 1                  # nach dem ersten Falschversuch: Bremse, Meldung, Verbindung schliessen
 GLOBAL_PAUSE_S = 2.0                              # Bremse fuer falsche Versuche waehrend der globalen Sperre
 GLOBAL_FEHLVERSUCHE_MINUTE = int(umgebung_zahl("KL_KLASSE_GLOBAL_MINUTE", 30))     # alle Adressen zusammen
 GLOBAL_FEHLVERSUCHE_STUNDE = int(umgebung_zahl("KL_KLASSE_GLOBAL_STUNDE", 300))
@@ -1140,7 +1140,6 @@ async def _anmelden(ws, ip, vorab):
             # Zuerst die Rate, DANN der Code: Auch ein Treffer geht bei zu vielen Versuchen nicht durch.
             verbraucht = True
             if not _rate_frei(ip):
-                vorab.frei()
                 await asyncio.sleep(GLOBAL_PAUSE_S)
                 await _fehler(ws, "Von diesem Anschluss kommen gerade sehr viele Beitrittsversuche. Warte etwa eine Minute und versuche es dann noch einmal.", True, 1013)
                 return None, None, None, None
@@ -1180,7 +1179,7 @@ async def _anmelden(ws, ip, vorab):
         if not verbraucht:
             _rate_frei(ip)                                # falsche Schluessel zaehlen ebenfalls gegen die Rate
         fehler_hier += 1
-        vorab.frei()                                      # ab hier wartet die Verbindung nur noch auf die Bremse
+        # Der Vorab-Platz bleibt belegt, bis die Verbindung geschlossen wird (finally in ws_klasse) oder sich anmeldet.
         if gesperrt or glob:
             await asyncio.sleep(GLOBAL_PAUSE_S)
             await _fehler(ws, ("Zu viele falsche Eingaben von diesem Anschluss. Warte etwa zehn Minuten und versuche es dann noch einmal."
@@ -1190,7 +1189,7 @@ async def _anmelden(ws, ip, vorab):
             return None, None, None, None
         await asyncio.sleep(FEHLVERSUCH_PAUSE_S)
         if fehler_hier >= FEHLVERSUCHE_JE_VERBINDUNG:
-            await _fehler(ws, "Code oder Schlüssel stimmen nicht. Die Verbindung wird beendet.", True)
+            await _fehler(ws, "Diesen Code gibt es nicht (mehr) oder der Schlüssel stimmt nicht.", True)
             return None, None, None, None
         await _fehler(ws, "Diesen Code gibt es nicht (mehr) oder der Schlüssel stimmt nicht.")
     await _fehler(ws, "Zu viele Versuche. Die Verbindung wird beendet.", True)

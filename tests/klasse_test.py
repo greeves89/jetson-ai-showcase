@@ -182,16 +182,16 @@ with TestClient(app, base_url="http://testserver") as c:
     k = Klasse(c)
     versuche = 0
     gesperrt = False
-    for _ in range(8):
+    for _ in range(25):
         try:
             with c.websocket_connect("/ws/klasse", headers=H) as w:
-                for _ in range(K.FEHLVERSUCHE_JE_VERBINDUNG + 1):
+                for _ in range(1):
                     w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
                     r = w.receive_json()
                     versuche += 1
                     if "Zu viele falsche" in r.get("text", ""):
                         gesperrt = True
-                    if r.get("text", "").startswith(("Code oder Schlüssel stimmen nicht", "Zu viele falsche")):
+                    if r.get("text", "").startswith(("Diesen Code gibt es nicht", "Zu viele falsche")):
                         break
         except WebSocketDisconnect:
             pass
@@ -722,7 +722,41 @@ with TestClient(app, base_url="http://testserver") as c:
     with c.websocket_connect("/ws/klasse", headers=H) as w:
         w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
         ok(w.receive_json()["t"] == "fehler", "Falschversuch beantwortet")
-        ok(K._vorab_gesamt[0] == 0 and not K._vorab_ip, "Falschversuch zaehlt nicht mehr gegen die Vorab-Grenze (Verbindung noch offen)")
+        w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
+        geschlossen = False
+        try:
+            w.receive_json()
+        except WebSocketDisconnect:
+            geschlossen = True
+        ok(geschlossen, "nach dem Falschversuch ist die Verbindung geschlossen, weiteres Lesen gibt keinen freien Platz")
+    ok(K._vorab_gesamt[0] == 0 and not K._vorab_ip, "nach dem Schliessen ist der Platz wieder frei")
+    # viele Verbindungen mit je einem Falschversuch fuellen den Deckel nicht dauerhaft
+    zuruecksetzen()
+    abgelehnt = 0
+    for _ in range(300):
+        try:
+            with c.websocket_connect("/ws/klasse", headers=H) as w:
+                w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
+                w.receive_json()
+        except WebSocketDisconnect:
+            abgelehnt += 1
+    ok(K._vorab_gesamt[0] == 0 and not K._vorab_ip, "300 Verbindungen mit je einem Falschversuch: danach sind alle Vorab-Plaetze frei (%d abgewiesen)" % abgelehnt)
+    zuruecksetzen()                                       # die 300 Falschversuche oben haben die Adresse gesperrt
+    alt_pause = K.FEHLVERSUCH_PAUSE_S
+    K.FEHLVERSUCH_PAUSE_S = 4.0                           # Bremse: der Server haelt die Verbindung waehrenddessen offen
+    es = contextlib.ExitStack()
+    belegt = 0
+    for _ in range(K.PREAUTH_JE_IP + 3):
+        try:
+            w = es.enter_context(c.websocket_connect("/ws/klasse", headers=H))
+            w.send_json({"t": "beitritt", "code": "AAAAAAAA"})
+            belegt += 1
+        except WebSocketDisconnect:
+            break
+    ok(belegt <= K.PREAUTH_JE_IP, "offene Verbindungen nach Falschversuch (noch nicht gelesen) belegen weiter Plaetze: hoechstens %d (%d)" % (K.PREAUTH_JE_IP, belegt))
+    es.close()
+    K.FEHLVERSUCH_PAUSE_S = alt_pause
+    _t.sleep(4.5)
     ok(K.PREAUTH_GESAMT >= 200 and K.PREAUTH_JE_IP >= 10, "Vorab-Grenzen: gesamt %d, je Adresse %d" % (K.PREAUTH_GESAMT, K.PREAUTH_JE_IP))
 
     print("--- Mehrfach-Beitritt und Vorab-Verbindungen")
