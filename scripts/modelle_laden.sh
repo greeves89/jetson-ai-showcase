@@ -1,5 +1,5 @@
 #!/bin/bash
-# Laedt die Hand-/Gesichts-Modelle und das Freistell-Modell fuer "Bild schuetzen" (OpenCV Zoo) nach app/models/. Aufruf aus scripts/setup.sh; einzeln jederzeit wiederholbar.
+# Laedt die Hand-/Gesichts-, Koerper- und Freistell-Modelle (OpenCV Zoo) nach app/models/. Aufruf aus scripts/setup.sh; einzeln jederzeit wiederholbar.
 # Quellen und Lizenzen: Seite /lizenzen (Apache-2.0, Modelle aus github.com/opencv/opencv_zoo).
 set -e
 cd "$(dirname "$0")/.."
@@ -15,4 +15,6 @@ laden palm_detection_mediapipe palm_detection_mediapipe_2023feb.onnx
 laden handpose_estimation_mediapipe handpose_estimation_mediapipe_2023feb.onnx
 laden facial_expression_recognition facial_expression_recognition_mobilefacenet_2022july.onnx
 laden human_segmentation_pphumanseg human_segmentation_pphumanseg_2023mar.onnx
+laden person_detection_mediapipe person_detection_mediapipe_2023mar.onnx      # Labor Koerperhaltung
+laden pose_estimation_mediapipe pose_estimation_mediapipe_2023mar.onnx
 ls -la app/models/*.onnx

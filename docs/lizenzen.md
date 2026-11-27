@@ -31,6 +31,18 @@ Die Lizenz je Modell steht auf der Seite Lizenzen und Quellen (`app/static/conte
 |---|---|---|---|
 | `human_segmentation_pphumanseg_2023mar.onnx` (PP-HumanSeg, ca. 6 MB) | Bild schützen (Freistellen) | Apache-2.0 (LICENSE-Datei im Zoo-Ordner, Modell aus PaddleHub) | opencv_zoo/models/human_segmentation_pphumanseg |
 | `face_detection_yunet_2023mar.onnx` (YuNet) | Gesichter, Bild schützen (Verpixeln) | MIT | opencv_zoo/models/face_detection_yunet |
+## Körperhaltung (Kamera-Labor)
+
+Das Labor "Körperhaltung" nutzt zwei Modelle aus dem OpenCV Zoo (github.com/opencv/opencv_zoo), beide Apache-2.0, beide aus
+Google MediaPipe (BlazePose) nach ONNX umgewandelt. `scripts/modelle_laden.sh` lädt sie nach `app/models/` (nicht im Repo).
+
+| Datei | Aufgabe | Lizenz |
+|---|---|---|
+| `person_detection_mediapipe_2023mar.onnx` | findet Personen und die Körpermitte | Apache-2.0 |
+| `pose_estimation_mediapipe_2023mar.onnx` | 33 Körperpunkte je Person | Apache-2.0 |
+
+Die Vor- und Nachverarbeitung in `app/lab_koerper.py` folgt dem Ablauf der Referenzcodes des OpenCV Zoo und ist eigenständig neu geschrieben.
+Die Modellkarten nennen keine Zahlen zur Genauigkeit bei Kindern, im Rollstuhl oder bei Prothesen; das Labor sagt das auf der Seite offen.
 
 ## Software
 

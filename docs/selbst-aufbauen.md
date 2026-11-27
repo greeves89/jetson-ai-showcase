@@ -185,7 +185,7 @@ Was `setup.sh` ohne Administratorrechte tut:
 - richtet `pip` für deinen Benutzer ein, falls es fehlt (`get-pip.py --user`)
 - installiert die Pakete aus `requirements.txt` mit `pip install --user` (FastAPI, Uvicorn, faster-whisper,
   piper-tts, `numpy<2`)
-- lädt die Bildmodelle (Gesichtserkennung YuNet, Objekterkennung YOLOX, MobileNet für das Anlern-Labor, dazu über `scripts/modelle_laden.sh` Handerkennung und Gesichtsausdruck für das Labor Hände und Gesichter sowie das Freistell-Modell PP-HumanSeg für das Labor Bild schützen, rund 6 MB, im Betrieb etwa 40 MB Arbeitsspeicher, 120 Sekunden nach dem letzten Bild wieder freigegeben) nach `app/models/`
+- lädt die Bildmodelle (Gesichtserkennung YuNet, Objekterkennung YOLOX, MobileNet für das Anlern-Labor, dazu über `scripts/modelle_laden.sh` Handerkennung und Gesichtsausdruck für das Labor Hände und Gesichter, Personenfinder plus Körperpunkte für das Labor Körperhaltung sowie das Freistell-Modell PP-HumanSeg für das Labor Bild schützen, rund 6 MB, im Betrieb etwa 40 MB Arbeitsspeicher, 120 Sekunden nach dem letzten Bild wieder freigegeben) nach `app/models/`
 - lädt das Whisper-Modell `base` in den Hugging-Face-Cache und die deutsche Piper-Stimme `thorsten-medium` nach
   `~/.local/share/piper-voices`
 - erzeugt ein selbstsigniertes Zertifikat in `certs/` (825 Tage gültig)

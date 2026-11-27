@@ -32,7 +32,7 @@ if [ ! -f app/models/mobilenet_embed.onnx ]; then
   curl -sS -m 90 -L -o app/models/mobilenet_embed.onnx \
     https://github.com/opencv/opencv_zoo/raw/main/models/image_classification_mobilenet/image_classification_mobilenetv2_2022apr.onnx
 fi
-echo "== hand und gesicht, bild schuetzen (Handskelett, Gesichtsausdruck, Freistellen) =="
+echo "== hand und gesicht, bild schuetzen, koerperhaltung (Handskelett, Gesichtsausdruck, Freistellen, Koerperskelett) =="
 bash scripts/modelle_laden.sh
 echo "== whisper (sprache zu text, laedt das Modell vorab in den Huggingface-Cache) =="
 python3 -c "from faster_whisper import WhisperModel; WhisperModel('${WHISPER_MODELL:-base}', device='cpu', compute_type='int8')" \

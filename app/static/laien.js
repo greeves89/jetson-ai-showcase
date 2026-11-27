@@ -81,6 +81,12 @@
   };
   /* Texte der Einwilligung je Labor, wenn sie vom Gesichts-Labor abweichen (Hände und Gesichter: kein Wiedererkennen, dafür Ausdruck) */
   const LABOR_TEXT = {
+    "koerperhaltung": {
+      titel: "Körperhaltung: ausdrücklich einwilligen",
+      wozu: "Der Rechner soll in deinem Kamerabild ein Skelett aus Punkten auf Schultern, Armen, Hüfte und Beinen finden, Winkel berechnen und Übungen zählen. Personen wiedererkennen kann er damit nicht. Haltung und Bewegung können trotzdem persönlich sein.",
+      speichern: "Es wird nichts gespeichert: kein Foto, kein Video, keine Punkte. Nach der Auswertung eines Bildes ist es weg. Der Zähler endet mit der Verbindung.",
+      box: "Ich willige ein, dass mein Kamerabild zur Erkennung meiner Körperhaltung kurz verarbeitet wird.",
+    },
     "hand-gesicht": {
       titel: "Hände und Gesichter: ausdrücklich einwilligen",
       wozu: "Der Rechner soll Hände und Gesichter in deinem Kamerabild finden, die Haltung der Finger deuten und den Gesichtsausdruck schätzen. Personen wiedererkennen kann er damit nicht.",
@@ -92,7 +98,7 @@
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video. Nach der Auswertung eines Bildes ist es weg. Das Bild auf deinem Bildschirm links bleibt in deinem Browser.",
     },
   };
-  const BIO_LABORE = new Set(["gesicht", "hand-gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
+  const BIO_LABORE = new Set(["gesicht", "hand-gesicht", "koerperhaltung"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
   /* Alters- und Elternhinweis, steht oben im Dialog. Bewusst ohne Abfrage: Die Seite prueft kein Alter und gibt kein Schutzversprechen. */
   const ALTER_HINWEIS = ["Nutzbar ab 16 Jahren.", "Jüngere nur mit Einverständnis der Eltern. Die Seite prüft dein Alter nicht."];

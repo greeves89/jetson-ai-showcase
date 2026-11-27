@@ -1,0 +1,50 @@
+/* Labor Körperhaltung (demo-koerper.js): gespiegelte Vorschau, Messwerte-Karte, Bedienung. Farben nur über die Variablen der Seite. */
+.kameras.d-koerper{grid-template-columns:1fr 1fr;align-items:start}
+.kameras.d-koerper video{transform:scaleX(-1)}                 /* Spiegelbild wie im Badezimmer: der Jetson spiegelt das Ergebnis genauso */
+.kameras.d-koerper .d-kh-karte{grid-column:1 / -1}
+.d-kh-karte{display:grid;grid-template-columns:repeat(auto-fill,minmax(15rem,1fr));gap:0 24px}
+.d-kh-karte .d-eigen-titel,.d-kh-karte>.d-hinweis{grid-column:1 / -1}
+.d-kh-feld{flex-wrap:wrap;align-items:center}
+.d-kh-balken{flex:0 0 100%;height:4px;margin:0 0 2px}
+
+.d-kh{display:grid;gap:12px;margin:12px 0}
+.d-kh-modi{display:flex;flex-wrap:wrap;gap:8px}
+.d-kh-modus{appearance:none;border:0;border-radius:99px;min-height:44px;padding:0 18px;display:inline-flex;align-items:center;gap:8px;font:inherit;font-size:15px;font-weight:600;
+  background:var(--flaeche2);color:var(--text);cursor:pointer;transition:background .25s,transform .2s}
+.d-kh-modus .ic{width:18px;height:18px;color:var(--akzent)}
+.d-kh-modus:hover{background:var(--flaeche3)}
+.d-kh-modus[aria-pressed=true]{background:var(--akzent-fl);color:var(--auf-akzent)}
+.d-kh-modus[aria-pressed=true] .ic{color:var(--auf-akzent)}
+.d-kh-satz{margin:0}
+.d-kh-panel{display:grid;gap:12px;padding:14px 16px;border-radius:var(--r2);background:var(--flaeche2)}
+.d-kh-panel[hidden]{display:none}
+.d-kh-panel:empty{display:none}
+.d-kh-chips{display:flex;flex-wrap:wrap;gap:8px}
+.d-kh-chip{appearance:none;border:0;cursor:pointer;min-height:44px;padding:0 16px;font:inherit;font-size:15px;font-weight:600;color:var(--text);background:var(--flaeche3)}
+.d-kh-chip[aria-pressed=true]{background:var(--akzent-fl);color:var(--auf-akzent)}
+.d-kh-zaehler{display:grid;grid-template-columns:auto 1fr;gap:12px 20px;align-items:center}
+.d-kh-zahlbox{display:grid;gap:2px;min-width:7.5rem}
+.d-kh-zahlbox span{font-size:14px;color:var(--leise)}
+.d-kh-zahl{font-size:44px;line-height:1;font-weight:700;letter-spacing:-.03em;font-variant-numeric:tabular-nums}
+.d-kh-seiten{font-size:14px;color:var(--leise);font-variant-numeric:tabular-nums}
+.d-kh-rueck{margin:0;font-size:19px;line-height:1.35;font-weight:600;min-height:2.7em;overflow-wrap:anywhere}
+.d-kh-balken-gross{height:12px;margin:0;border-radius:6px}
+.d-kh-balken-gross>i{border-radius:6px}
+.d-kh-hinweise{margin:0;padding:0;list-style:none;display:grid;gap:8px}
+.d-kh-hinweise li{padding:10px 12px;border-radius:12px;background:var(--flaeche);font-size:16px;line-height:1.4}
+.d-kh-warum summary{cursor:pointer;font-weight:600;min-height:44px;display:flex;align-items:center}
+.d-kh-warum p{margin:6px 0;font-size:15px;line-height:1.45}
+.d-kh-stuecke{margin:0;padding:0;list-style:none;display:grid;grid-template-columns:repeat(auto-fill,minmax(14rem,1fr));gap:6px 16px}
+.d-kh-stueck{display:flex;align-items:center;gap:8px;font-size:14px;line-height:1.3;padding:4px 0;border-top:.5px solid color-mix(in srgb,var(--leise) 18%,transparent)}
+.d-kh-stueck .ic{width:18px;height:18px;flex:none}
+.d-kh-stueck span{flex:1;min-width:0}
+.d-kh-stand{font-style:normal;color:var(--leise);font-size:13px}
+.d-kh-stueck.ok .ic{color:var(--gruen)}
+.d-kh-stueck.offen .ic{color:var(--orange)}
+.d-kh-stueck.unklar{opacity:.6}
+@media(max-width:700px){
+  .kameras.d-koerper{grid-template-columns:1fr}
+  .d-kh-zaehler{grid-template-columns:1fr}
+  .d-kh-modus{flex:1 1 100%;justify-content:flex-start}
+}
+@media(prefers-reduced-motion:reduce){.d-kh-modus{transition:none}}
