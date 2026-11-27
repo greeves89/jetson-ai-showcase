@@ -45,6 +45,8 @@ INHALT.registriere({
            lizenz: "Apache-2.0", quelle: "OpenCV Zoo, Modell von Google MediaPipe", url: ZOO + "handpose_estimation_mediapipe"},
           {name: "Gesichtsausdruck (facial_expression_recognition_mobilefacenet_2022july)", zweck: "Schätzt einen von sieben Gesichtsausdrücken",
            lizenz: "Apache-2.0", quelle: "OpenCV Zoo", url: ZOO + "facial_expression_recognition"},
+          {name: "PP-HumanSeg (human_segmentation_pphumanseg_2023mar)", zweck: "Trennt im Labor Bild schützen die Person vom Hintergrund (Maske je Pixel)",
+           lizenz: "Apache-2.0", quelle: "OpenCV Zoo, Modell von PaddleHub (PaddlePaddle)", url: ZOO + "human_segmentation_pphumanseg"},
           {name: "Haar-Kaskade für Gesichter (OpenCV)", zweck: "Rückfall, falls YuNet fehlt",
            lizenz: "Intel License Agreement for Open Source Computer Vision Library", quelle: "Modelldatei", url: "https://github.com/opencv/opencv/blob/4.8.0/data/haarcascades/haarcascade_frontalface_default.xml"},
           {name: "YOLOX-S (object_detection_yolox_2022nov)", zweck: "Erkennt Gegenstände wie Fahrzeuge, Flaschen und Personen",

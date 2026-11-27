@@ -778,7 +778,7 @@ recht: {
      optionen: ["Sie sind eindeutig geklärt, kein Handlungsbedarf","Alles Erzeugte gehört automatisch dir","Sie sind teils offen: Herkunft und Lizenzen prüfen, Rat einholen, aktuelle Rechtslage beachten","Jede Nutzung ist verboten"],
      richtig: 2, erklaerung: "Rechtslage und Rechtsprechung entwickeln sich. Prüfe Quellen und Lizenzen und lass Wichtiges rechtlich bewerten."},
   ],
-  weiter: ["verzerrung-ethik", "daten", "business"],
+  weiter: ["verzerrung-ethik", "bild-schuetzen", "daten", "business"],
 },
 
 },

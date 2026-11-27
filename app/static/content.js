@@ -109,7 +109,7 @@ karte: {
      p: [
       "Wer wissen will, was eine KI für ihn tun kann, fragt besser nach dem Einsatzbereich als nach dem Verfahren:",
     ], liste: [
-      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{hand-gesicht|Hände und Gesichter}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
+      "**Sehen:** Bilder und Videos auswerten. Labor {{gesicht|Gesichter}}, {{hand-gesicht|Hände und Gesichter}}, {{bild-schuetzen|Bild schützen}}, {{objekt|Objekte}}, {{anlernen|Anlernen}}.",
       "**Sprache:** Text und Ton verstehen und formulieren. Labor {{chat|Chat}} und {{whisper|Sprache zu Text}}.",
       "**Wissen:** gezielt in eigenen Dokumenten nachschlagen und Quellen nennen. Labor {{rag|RAG}}.",
       "**Handeln:** Werkzeuge benutzen und in Schritten vorgehen. Labor {{agent|Agent}} und {{robotik|Robotik}}.",
@@ -429,7 +429,7 @@ gesicht: {
     "Schlechtes Licht, Masken und sehr kleine Gesichter senken die Trefferquote.",
     "Gesichter finden ist nicht Personen erkennen. In einem echten Einsatz brauchst du eine Rechtsgrundlage und eine Datenschutzprüfung.",
   ],
-  weiter: ["hand-gesicht", "objekt", "anlernen"],
+  weiter: ["hand-gesicht", "bild-schuetzen", "objekt", "anlernen"],
 },
 
 objekt: {

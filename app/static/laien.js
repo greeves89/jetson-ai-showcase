@@ -87,6 +87,10 @@
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video, keine Zahlenlisten. Nach der Auswertung eines Bildes ist es weg.",
       box: "Ich willige ein, dass mein Kamerabild zur Erkennung von Händen, Gesichtern und Gesichtsausdruck kurz verarbeitet wird.",
     },
+    "bild-schuetzen": {
+      wozu: "Der Rechner soll dich im Kamerabild vom Hintergrund trennen und Gesichter finden, um sie unkenntlich zu machen. Wiedererkennen oder Namen zuordnen kann er damit nicht.",
+      speichern: "Es wird nichts gespeichert: kein Foto, kein Video. Nach der Auswertung eines Bildes ist es weg. Das Bild auf deinem Bildschirm links bleibt in deinem Browser.",
+    },
   };
   const BIO_LABORE = new Set(["gesicht", "hand-gesicht"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)

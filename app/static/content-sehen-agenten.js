@@ -254,7 +254,7 @@ Object.assign(seiten, {
     "Der Ausdruck ist eine Schätzung und liegt oft daneben. Für Entscheidungen über Menschen ist er nicht geeignet.",
     "Gesten, für die keine Regel geschrieben wurde, erkennt der Jetson nicht.",
   ],
-  weiter: ["gesicht", "objekt", "recht", "verzerrung-ethik"],
+  weiter: ["gesicht", "bild-schuetzen", "objekt", "recht", "verzerrung-ethik"],
 },
 
 "vision-aufgaben": {
@@ -344,7 +344,7 @@ Object.assign(seiten, {
     {frage: "Eine Firma will prüfen, ob Beschäftigte beim Heben den Rücken gerade halten. Welche Aufgabe liegt nahe?", optionen: ["Texterkennung", "Klassifikation von Kleidung", "Posenschätzung", "Segmentierung des Hintergrunds"], richtig: 2, erklaerung: "Die Haltung steckt in der Lage der Gelenke. Der Einsatz verlangt aber eine saubere Datenschutzprüfung und die Beteiligung der Beschäftigten."},
     {frage: "Warum gilt Datenschutz auch für Texterkennung?", optionen: ["Weil gelesene Texte Namen, Adressen oder Kennzeichen enthalten können", "Weil Schrift immer geheim ist", "Gar nicht, Text ist kein Bild", "Weil das Modell sonst langsamer ist"], richtig: 0, erklaerung: "Die erkannten Texte sind oft personenbezogen. Entscheidend ist, was gelesen und gespeichert wird."},
   ],
-  weiter: ["gesicht", "objekt", "anlernen"],
+  weiter: ["gesicht", "bild-schuetzen", "objekt", "anlernen"],
 },
 
 });

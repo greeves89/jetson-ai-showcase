@@ -116,7 +116,7 @@ S["sicherheit-einfach"] = {
     "Kamera und Mikrofon starten nur, wenn du ausdrücklich zustimmst, und lassen sich jederzeit stoppen.",
     "Bilder und Aufnahmen werden nicht gespeichert. Texte verfallen nach 30 Minuten Ruhe.",
   ],
-  weiter: ["start", "recht", "hardware"],
+  weiter: ["start", "recht", "bild-schuetzen", "hardware"],
 };
 
 const glossar = {
@@ -256,6 +256,32 @@ INHALT.synonyme = {
   "gefuehle erkennen": ["=hand-gesicht", "=gesicht", "=verzerrung-ethik", "=recht"],
   laecheln: ["=hand-gesicht", "=gesicht"],
   kopfhaltung: ["=hand-gesicht", "=gesicht"],
+  freistellen: ["=bild-schuetzen", "=vision-aufgaben", "=cnn-intuition"],
+  freisteller: ["=bild-schuetzen", "=vision-aufgaben"],
+  hintergrund: ["=bild-schuetzen", "=hand-gesicht"],
+  "hintergrund unscharf": ["=bild-schuetzen"],
+  "hintergrund ersetzen": ["=bild-schuetzen"],
+  "hintergrund entfernen": ["=bild-schuetzen"],
+  "hintergrund weichzeichnen": ["=bild-schuetzen"],
+  greenscreen: ["=bild-schuetzen", "=fake-news-deepfakes"],
+  "green screen": ["=bild-schuetzen"],
+  "chroma key": ["=bild-schuetzen"],
+  videokonferenz: ["=bild-schuetzen", "=datenschutz-im-alltag"],
+  maske: ["=bild-schuetzen", "=vision-aufgaben"],
+  segmentierung: ["=bild-schuetzen", "=vision-aufgaben", "=cnn-intuition"],
+  "person ausschneiden": ["=bild-schuetzen"],
+  verpixeln: ["=bild-schuetzen", "=recht", "=datenschutz-im-alltag"],
+  pixeln: ["=bild-schuetzen"],
+  unkenntlich: ["=bild-schuetzen", "=recht"],
+  "unkenntlich machen": ["=bild-schuetzen", "=recht"],
+  mosaik: ["=bild-schuetzen", "=bild-als-zahlen"],
+  weichzeichner: ["=bild-schuetzen"],
+  schwaerzen: ["=bild-schuetzen", "=recht"],
+  "datenschutz foto": ["=bild-schuetzen", "=recht", "=datenschutz-im-alltag"],
+  "recht am eigenen bild": ["=bild-schuetzen", "=recht", "=datenschutz-im-alltag"],
+  klassenfoto: ["=bild-schuetzen", "=recht", "=datenschutz-im-alltag"],
+  "foto veroeffentlichen": ["=bild-schuetzen", "=recht", "=datenschutz-im-alltag"],
+  "gesichter verpixeln": ["=bild-schuetzen", "=gesicht", "=recht"],
   video: ["=objekt", "=gesicht", "=uc-logistik-zaehlen"],
   navi: ["=agenten-planung", "=robotik", "=agenten-grundlagen"],
   spiel: ["=experimente", "=ml", "=llm-grenzen", "=agenten-planung", "=robotik"],
@@ -401,7 +427,7 @@ INHALT.lernpfade = [
   {id: "erstellen", stufe: 3, name: "Erstellen", kurz: "Eigene Bausteine bauen: Bildmodell anlernen, Dokumente durchsuchen, Agenten planen.",
    seiten: ["anlernen", "tabellen-ml", "zeitreihen", "rag-embedding", "rag-chunking", "rag-suche", "rag-reranking", "agenten-planung", "mcp-werkzeuge", "mlops"]},
   {id: "bewerten", stufe: 4, name: "Bewerten", kurz: "Grenzen erkennen, Ergebnisse prüfen, Verantwortung tragen.",
-   seiten: ["llm-grenzen", "echt-oder-ki", "falscher-anruf", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "sicherheit-einfach", "kosten-energie"]},
+   seiten: ["llm-grenzen", "echt-oder-ki", "falscher-anruf", "quellen-pruefen", "fake-news-deepfakes", "bewertung", "verzerrung-ethik", "anomalien", "agenten-sicherheit", "rag-bewertung", "recht", "datenschutz-im-alltag", "bild-schuetzen", "sicherheit-einfach", "kosten-energie"]},
   {id: "erwachsene", rolle: "erwachsene", name: "KI verstehen, Schritt für Schritt", kurz: "Zuerst der Schutz vor Betrug am Telefon, dann die Grundlagen: Daten, Lernen, Netze, Sprachmodelle und Dokumentensuche. Danach Fälschungen erkennen und zum Schluss: Ist das sicher? Ohne Vorwissen.",
    seiten: ["falscher-anruf", "karte", "ml", "daten", "neuronale-netze", "training", "tokens-sprachmodelle", "rag-ueberblick", "echt-oder-ki", "fake-news-deepfakes", "sicherheit-einfach"]},
   {id: "schule-einstieg", rolle: "schule", name: "Schule: Einstieg", kurz: "Erst ausprobieren, dann prüfen und fair nutzen. Alles ohne Kamera und Mikrofon.",
@@ -430,7 +456,7 @@ INHALT.lernpfade.push(
    seiten: ["neuronale-netze", "training", "bewertung", "rag-embedding", "tokens-sprachmodelle", "verzerrung-ethik", "quellen-pruefen", "referat"],
    vorn: ["schule"]},
 );
-INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
+INHALT.kameraSeiten = ["gesicht", "hand-gesicht", "bild-schuetzen", "objekt", "anlernen", "whisper", "faceswap", "uc-sicherheit-zutritt"];
 /* Menü und Startseite je Rolle (gelesen von app.js, nur Darstellung im Browser).
    menue.fuerDich     je Rolle höchstens zwölf Seiten (meist sechs): der Block "Für dich" im Menü, aufgeklappt.
    menue.reihenfolge  je Rolle die Gruppen im zugeklappten Block "Alle Bereiche", die genannten zuerst; "Sicherheit" ist eine Sammelgruppe (menue.sammel).

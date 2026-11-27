@@ -22,6 +22,16 @@ Modellquelle: https://huggingface.co/rhasspy/piper-voices/tree/main/de/de_DE
 - `eva_k`, `karlsson`, `ramona`: Die Modellkarte verweist nur auf den M-AILABS-Datensatz ("See URL") und nennt keine
   Lizenz. Ohne eindeutige Angabe in der Karte werden sie nicht verwendet.
 
+## Bildmodelle
+
+Die Bildmodelle liegen nicht im Repo. `scripts/modelle_laden.sh` holt sie aus dem OpenCV Zoo (github.com/opencv/opencv_zoo) nach `app/models/`.
+Die Lizenz je Modell steht auf der Seite Lizenzen und Quellen (`app/static/content-rechtliches.js`) und in der Modellkarte im Zoo.
+
+| Modell | Labor | Lizenz | Quelle |
+|---|---|---|---|
+| `human_segmentation_pphumanseg_2023mar.onnx` (PP-HumanSeg, ca. 6 MB) | Bild schützen (Freistellen) | Apache-2.0 (LICENSE-Datei im Zoo-Ordner, Modell aus PaddleHub) | opencv_zoo/models/human_segmentation_pphumanseg |
+| `face_detection_yunet_2023mar.onnx` (YuNet) | Gesichter, Bild schützen (Verpixeln) | MIT | opencv_zoo/models/face_detection_yunet |
+
 ## Software
 
 - Piper (`piper-tts`, Python-Paket der Open Home Foundation, github.com/OHF-Voice/piper1-gpl, Nachfolger von rhasspy/piper), GPL-3.0. Piper bringt
