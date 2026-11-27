@@ -33,7 +33,7 @@ start: {
   ],
   entscheider: {
     titel: "In 15 Minuten: Was bringt KI meinem Betrieb?",
-    lead: "Vier feste Seiten für alle, die entscheiden müssen und keine Technik lernen wollen. Die angezeigte Gesamtzeit rechnet Lesen, Videos und Labore zusammen und liegt unter 15 Minuten.",
+    lead: "Vier feste Seiten für alle, die entscheiden müssen und keine Technik lernen wollen. Die angezeigte Gesamtzeit rechnet Lesen, Videos und Labore zusammen und beträgt etwa 15 Minuten.",
     schritte: [
       {id: "alltag-ki-kurz", h: "Was ist KI, und was nicht?", min: 2},
       {id: "chat", h: "Ein Sprachmodell selbst befragen", min: 5},
@@ -52,11 +52,15 @@ start: {
   bereiche: {
     "Grundlagen": {symbol: "karte", satz: "Was KI ist, wie Maschinen lernen und wo die Grenzen liegen."},
     "Sehen": {symbol: "gesicht", satz: "Wie ein Computer Bilder versteht: Gesichter, Objekte und eigene Modelle."},
+    "Alltag in 15 Minuten": {symbol: "alltag-ki-kurz", satz: "Fünf kurze Seiten für Berufstätige: KI, Chat, Betrug, gute Fragen, Datenschutz."},
+    "Experimente": {symbol: "experimente", satz: "Kleine Versuche, die du selbst nachmachst."},
+    "Für die Schule": {symbol: "schule-start", satz: "Unterrichtseinheiten, Handreichungen und Infoblätter für Klassen, Lehrkräfte und Eltern."},
+    "Medienkompetenz": {symbol: "echt-oder-ki", satz: "Bilder prüfen, Quellen bewerten, Datenschutz und KI bei Hausaufgaben."},
     "Sprache": {symbol: "chat", satz: "Sprachmodelle im Chat, Sprache zu Text und gutes Fragen."},
     "Wissen und RAG": {symbol: "rag", satz: "Antworten aus eigenen Dokumenten, vom Embedding bis zur Messung."},
     "Agenten": {symbol: "agent", satz: "Modelle, die planen, Werkzeuge nutzen und Aufgaben erledigen."},
     "Daten und Prognosen": {symbol: "trending-up", satz: "Entscheidungsbäume, Zeitreihen und Auffälliges in Zahlen."},
-    "KI im Betrieb": {symbol: "gauge", satz: "Vom Prototyp zum Betrieb: Kosten, Energie und Einführung."},
+    "KI im Betrieb": {symbol: "gauge", satz: "Vom Prototyp zum Betrieb: Entscheidungshilfe, Kosten, Energie, Einführung, Kameraprüfung und Arztpraxis."},
     "Business-Use-Cases": {symbol: "business", satz: "Konkrete Einsätze aus Fertigung, Handel, Büro und Sicherheit."},
     "Der Rechner dahinter": {symbol: "hardware", satz: "Der kleine Rechner hinter allem, mit Messwerten in Echtzeit und der Antwort auf: Ist das sicher?"},
   },
@@ -530,7 +534,7 @@ anlernen: {
   },
   grenzen: [
     "Das Netz wurde für Alltagsobjekte trainiert. Kleine Unterschiede wie Kratzer sieht es oft nicht. Dafür braucht man Fine-Tuning mit mehr Daten.",
-    "Die Beispiele gelten für alle Besucher gemeinsam. Wer „Zurücksetzen“ drückt, löscht sie für alle.",
+    "Die Beispiele gehören nur dir: Sie liegen in deiner Sitzung und verfallen nach 30 Minuten Ruhe. „Zurücksetzen“ löscht nur deine eigenen. Es sind höchstens 10 Klassen mit je 50 Beispielen möglich.",
   ],
   weiter: ["ml", "objekt"],
 },
@@ -540,7 +544,7 @@ anlernen: {
 chat: {
   typ: "labor", gruppe: "Sprache", titel: "Sprachmodell im Chat", symbol: "chat", demo: "chat",
   lernziele: ["Du kannst im Chat Einstellungen wie die Temperatur ändern und die Wirkung beschreiben.", "Du kannst erklären, was auf dem Jetson passiert, wenn du eine Frage stellst.", "Du kannst sagen, warum dieses Modell kleiner ist als bekannte Chatbots."],
-  kurz: "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal auf der GPU. Du siehst jedes Token.",
+  kurz: "Ein Modell mit etwa drei Milliarden Parametern antwortet lokal, größtenteils auf der GPU. Du siehst jedes Token.",
   abschnitte: [
     {h: "Was du hier steuern kannst",
      kurz: "Jedes farbige Stück ist ein Token, das das Modell einzeln gewählt hat.",
@@ -548,16 +552,17 @@ chat: {
      p: [
       "**Tokens zeigen** färbt die Antwort Stück für Stück ein. Wörter bestehen oft aus mehreren Tokens, häufige Wörter aus einem.",
       "Die **Temperatur** wirkt auf die nächste Antwort. Stelle sie auf 0 und stelle dieselbe Frage zweimal: Die Antworten sind fast gleich. Stelle sie auf 1,5, dann weichen sie ab und werden unzuverlässiger.",
+      "**Kurz antworten** begrenzt die Antwort auf höchstens 5 Sätze in einfacher Sprache. Unter jeder Antwort stehen Tokenzahl, Dauer und Tokens pro Sekunde.",
     ]},
     {h: "Was auf dem Jetson passiert",
-     kurz: "Das Modell wird einmal in den Speicher geladen, danach rechnet die GPU jedes Token.",
+     kurz: "Das Modell wird einmal in den Speicher geladen, danach rechnet es Token für Token, größtenteils auf der GPU.",
      visual: {typ: "ablauf", paket: true, schritte: [
       {icon: "hard-drive", text: "SSD", sub: "rund 2 GB"},
       {icon: "memory-stick", text: "Arbeitsspeicher", sub: "beim ersten Start"},
-      {icon: "microchip", text: "GPU", sub: "rechnet Token"},
+      {icon: "microchip", text: "GPU und CPU", sub: "rechnen Token"},
       {icon: "message-square", text: "Antwort", sub: "Stück für Stück", farbe: "gruen"}]},
      p: [
-      "Beim ersten Start wird das [[modell|Modell]] von der SSD in den Arbeitsspeicher geladen. Das Modell hat etwa drei Milliarden [[parameter|Parameter]] und belegt rund 2 GB auf der Platte. Danach rechnet die [[gpu|GPU]] jedes Token. In der Seitenleiste steigen dabei GPU-Last und Leistung.",
+      "Beim ersten Start wird das [[modell|Modell]] von der SSD in den Arbeitsspeicher geladen. Das Modell hat etwa drei Milliarden [[parameter|Parameter]] und belegt rund 2 GB auf der Platte. Danach rechnet das Modell Token für Token. Den größten Teil seiner Schichten (24 von 29) übernimmt die [[gpu|GPU]], den Rest der Prozessor. In der Seitenleiste steigen dabei GPU-Last und Leistung.",
     ]},
     {h: "Wie viel das Modell auf einmal sieht",
      kurz: "Im Labor passen 4096 Token in den Kontext: Frage, Verlauf und Antwort zusammen. Was darüber hinausgeht, sieht das Modell nicht.",
@@ -626,7 +631,7 @@ rag: {
   },
   grenzen: [
     "Die Antwort ist nur so gut wie die gefundenen Abschnitte. Fehlt etwas im Text, kann das Modell es nicht belegen.",
-    "Dieses Labor hält höchstens 300 Abschnitte im Speicher und vergisst alles beim Neustart.",
+    "Pro Sitzung höchstens 300 Abschnitte (Text bis 300 000 Zeichen). Alles verfällt nach 30 Minuten Ruhe oder beim Neustart.",
   ],
   weiter: ["agent", "genki"],
 },
@@ -643,7 +648,7 @@ agent: {
       {icon: "clock", text: "uhrzeit", sub: "aktuelle Zeit"},
       {icon: "file-search", text: "dokumentsuche", sub: "in den Dokumenten"}]},
      p: [
-      "Ein [[agent|Agent]] bekommt zusätzlich zur Frage eine Liste von [[werkzeug|Werkzeugen]] beschrieben, hier: **rechne**, **uhrzeit** und **dokumentsuche**. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.",
+      "Ein [[agent|Agent]] bekommt zusätzlich zur Frage eine Liste von [[werkzeug|Werkzeugen]] beschrieben, hier: **rechne**, **uhrzeit** und **dokumentsuche**. Im Szenario „Bestellfragen“ stehen stattdessen vier Bestell-Werkzeuge bereit, siehe {{uc-service-bestellung|Bestellfragen mit Werkzeugen beantworten}}. Statt sofort zu antworten, kann er einen Werkzeugaufruf ausgeben. Der Jetson führt ihn aus und gibt das Ergebnis zurück. Das Modell entscheidet dann, ob es weiter arbeitet oder antwortet.",
     ]},
     {h: "Die Schleife",
      kurz: "Aufruf, Ergebnis, neue Entscheidung. Nach höchstens fünf Runden endet die Schleife.",
@@ -708,6 +713,7 @@ whisper: {
   },
   grenzen: [
     "Dialekt, Hintergrundlärm und Fachbegriffe erhöhen Fehler. Namen und Zahlen immer prüfen.",
+    "Aufnahmen dürfen höchstens 60 Sekunden lang sein. Es läuft das Modell Whisper „base“ auf dem Prozessor, immer nur eine Erkennung zugleich.",
     "Das Modell erkennt nicht, wer spricht.",
   ],
   weiter: ["chat", "rag"],
@@ -816,6 +822,8 @@ hardware: {
       {wert: "wenige W", label: "Stromaufnahme", icon: "zap"}]},
      p: [
       "Der NVIDIA Jetson Orin Nano ist ein Computer im Kartenformat. Er hat einen Prozessor mit sechs Kernen und eine [[gpu|GPU]], die viele einfache Rechnungen gleichzeitig ausführt. Genau das brauchen neuronale Netze. Er nimmt dabei nur wenige Watt auf.",
+      "Getestet auf dem Jetson Orin Nano Developer Kit in der Super-Ausführung (Modus MAXN_SUPER), 8 GB. Nutzbar sind rund 7,6 GB.",
+      "Nicht alles läuft auf der GPU. Das Sprachmodell nutzt sie größtenteils (24 von 29 Schichten). Spracherkennung, Einbettung, Sprachausgabe und die Kamera-Modelle rechnen auf den sechs Prozessorkernen. Ist der gemeinsame Speicher zerstückelt, lädt das Labor das Sprachmodell mit weniger GPU-Schichten. Das ist langsamer, läuft aber.",
     ]},
     {h: "Gemeinsamer Speicher",
      kurz: "CPU und GPU teilen sich 8 GB. Ein großes Modell lässt dem Betriebssystem kaum Platz.",
@@ -862,7 +870,7 @@ hardware: {
     ]},
   ],
   mitnehmen: [
-    "Der Jetson rechnet neuronale Netze effizient auf einer GPU.",
+    "Der Jetson rechnet das Sprachmodell größtenteils auf einer GPU, andere Modelle laufen auf dem Prozessor.",
     "Der gemeinsame Speicher von 8 GB begrenzt die Modellgröße.",
     "Lokal bedeutet: keine Cloud, kurze Wege, Daten bleiben vor Ort.",
   ],

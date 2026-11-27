@@ -760,7 +760,7 @@
     /* Zuruecksetzen mit Rueckfrage im Text */
     const resetBtn = h("button", { type: "button", class: "btn klein" }, ic("trash"), "Zurücksetzen");
     const resetFrage = h("span", { class: "d-frage", hidden: true },
-      "Das löscht alle gespeicherten Beispiele für alle Besucher. ",
+      "Das löscht alle deine gespeicherten Beispiele. ",
       h("button", { type: "button", class: "btn klein", id: "d-reset-ja" }, "Ja, löschen"),
       h("button", { type: "button", class: "btn klein", id: "d-reset-nein" }, "Abbrechen"));
     resetBtn.addEventListener("click", () => { resetFrage.hidden = false; resetBtn.hidden = true; $1("#d-reset-ja", resetFrage).focus(); });
@@ -775,7 +775,7 @@
         klassen.forEach((k) => { k.bekannt = false; });
         if (klassen.length < 2) klassen = [{ name: "Klasse A" }, { name: "Klasse B" }];
         zeigeLeer(); bauKlassen(); streifen();
-        hinweisKlasse.textContent = "Alle gespeicherten Beispiele sind gelöscht. Das gilt für alle Besucher.";
+        hinweisKlasse.textContent = "Alle deine gespeicherten Beispiele sind gelöscht. Andere Besucher sind nicht betroffen.";
         live.text("Alles gelöscht. Halte den Knopf einer Klasse gedrückt, um neue Beispiele aufzunehmen.");
       } catch (e) { const t = netzFehler(e); if (t) meld.zeige(t); }
     });
