@@ -127,6 +127,7 @@ S["schule-start"] = {
       {icon: "users", text: "Gruppen", sub: "vier Personen", farbe: "gruen"}]},
      p: [
       "Hänge `/?weg=schule` an die Adresse des Labors und gib den Link weiter: an die Tafel, in die Lernplattform oder als QR-Code.",
+      "Wenn die ganze Klasse gleichzeitig abstimmen soll, startest du eine Sitzung im {{klassenmodus|Klassenmodus}}: mit Code, ohne Namen, mit Wand für den Beamer und einem Löschprotokoll am Ende.",
      ]},
     {h: "Technik: so viele Geräte gehen",
      kurz: "Vierergruppen, höchstens 7 Geräte gleichzeitig, denn der Rechner beantwortet nur wenige Sprachmodell-Anfragen gleichzeitig.",
@@ -842,7 +843,7 @@ S["schule-lehrkraefte"] = {
   grenzen: [
     "Das Labor ersetzt keine Datenschutzprüfung der Schule. Siehe {{schule-schulleitung|Info für die Schulleitung}}.",
   ],
-  weiter: ["schule-start", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "elternabend"],
+  weiter: ["schule-start", "klassenmodus", "schule-stunde-1", "schule-stunde-2", "schule-stunde-3", "medien-stunde-1", "elternabend"],
 };
 
 /* ------------------------------------------------------------------ Schulleitung */
@@ -965,7 +966,7 @@ S["schule-schulleitung"] = {
     "Speicherdauer der Server-Protokolle, Verträge mit den Dienstleistern und das Vorgehen bei einer Einstellung des Angebots stehen hier nicht. Fragen Sie den Betreiber.",
     "Eine Prüfung nach dem Recht eines bestimmten Bundeslandes ist nicht erfolgt.",
   ],
-  weiter: ["schule-start", "sicherheit-einfach", "ueber", "lizenzen"],
+  weiter: ["schule-start", "klassenmodus", "sicherheit-einfach", "ueber", "lizenzen"],
 };
 
 /* ------------------------------------------------------------------ Eltern */

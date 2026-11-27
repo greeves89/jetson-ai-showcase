@@ -760,7 +760,7 @@ S["elternabend"] = {
     "Keine Rechtsberatung. Stand 22.11.2026.",
     "Das Labor hat keinen Jugendschutzfilter, auf den man sich verlassen kann. Siehe {{eltern-zuhause|KI zu Hause}}.",
   ],
-  weiter: ["schule-eltern", "eltern-zuhause", "schule-schulleitung", "medien-stunde-1"],
+  weiter: ["schule-eltern", "eltern-zuhause", "schule-schulleitung", "klassenmodus", "medien-stunde-1"],
 };
 
 /* Erklärvideo je Einheit (Medien 7 hat keines) und die gemeinsamen Abschnitte Einzelstunde oder Doppelstunde und Lehrplanbezug (content-schule.js). */

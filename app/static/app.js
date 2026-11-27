@@ -2085,6 +2085,7 @@
     if (widgetZuerst) { out.append(widgetKnoten); if (dlBox) out.append(dlBox); }
     if (vids.length) out.append(videoBlock(vids));
     if (widgetKnoten && !widgetZuerst && !widgetNach) out.append(widgetKnoten);
+    if (id === "echt-oder-ki") out.append(h("p", { class: "kl-hinweis klasse-link" }, icon("users"), h("span", null, h("a", { href: adresse("klassenmodus", "eok=1") }, "Mit der Klasse spielen"), ": Lehrkräfte zeigen eine Karte, alle tippen auf dem eigenen Gerät, die Wand zeigt die Summe. Ohne Namen.")));
     if (seite.demo) out.append(baustein("demos", seite.demo, seite, "Live ausprobieren", "live"));
     out.append(abschnitte(seite));
     if (widgetKnoten && widgetNach) out.append(widgetKnoten);
@@ -2093,6 +2094,7 @@
       const qb = quizBlock(seite.quiz, () => gelesenMerken(id));
       if (seite.typ === "arbeitsblatt" || seite.quizDruck) qb.classList.add("quiz-druck");        // nur ein Arbeitsblatt-Quiz kommt aufs Papier
       out.append(qb);
+      if (!/^klasse/.test(id) && id !== "klassenmodus") out.append(h("p", { class: "kl-hinweis klasse-link" }, icon("users"), h("span", null, h("a", { href: adresse("klassenmodus", "quiz=" + id) }, "Mit der Klasse spielen"), ": Lehrkräfte stellen diese Quizfragen der ganzen Klasse, ohne Namen und ohne Konto.")));
     }
     if (seite.business) {
       const b = seite.business;

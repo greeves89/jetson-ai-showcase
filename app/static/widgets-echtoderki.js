@@ -28,6 +28,8 @@
     { n: 12, ki: true, motiv: "Regentropfen an einer Haltestelle", hinweis: "Tropfen sehr gleichmäßig, Lichter auf der Straße passen nicht ganz.", quelle: KI_QUELLE },
   ];
   const bildUrl = (k) => BASIS + "karte-" + String(k.n).padStart(2, "0") + ".jpg";
+  KL.echtOderKiKarten = KARTEN;        // der Klassenmodus (demo-klasse.js) nutzt dieselben Karten und Bilder
+  KL.echtOderKiBild = bildUrl;
 
   function mischen(feld) {
     const a = feld.slice();
