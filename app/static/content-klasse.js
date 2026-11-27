@@ -60,7 +60,7 @@ seiten: {
     {h: "Was die Wand zeigt und was nicht",
      kurz: "Nur Summen, erst nach Ihrem Knopfdruck, und kleine Zahlen bleiben verborgen.",
      p: [
-      "Vor dem Ergebnis sehen alle nur: \"7 von 23 haben geantwortet\". Nach \"Ergebnis zeigen\" erscheint die Verteilung als Balken. Ein Feld mit einer oder zwei Antworten steht als \"unter 3\" da, und die Gesamtzahl bleibt verborgen. Sonst ließe sich ausrechnen, wer allein anders gewählt hat. Bei weniger als drei Antworten insgesamt zeigt die Wand gar nichts.",
+      "Vor dem Ergebnis sehen alle nur: \"7 von 23 haben geantwortet\". Nach \"Ergebnis zeigen\" erscheint die Verteilung als Balken. Ein Feld mit einer oder zwei Antworten bleibt verdeckt, zusätzlich das kleinste sichtbare Feld, und die Gesamtzahl wird nicht mehr genannt. Sonst ließe sich aus dem Fortschritt (\"7 von 23\") und den sichtbaren Feldern ausrechnen, wer allein anders gewählt hat. Mittelwert und Median gibt es erst ab fünf Antworten und nie, wenn ein Feld verdeckt ist. Bei weniger als drei Antworten insgesamt zeigt die Wand gar nichts.",
       "Der Dienst merkt sich nicht, wer was gewählt hat. Je Aufgabe gibt es einen Zähler pro Antwort und eine Liste, wer schon geantwortet hat, ohne die Antwort. Eine Antwort ist endgültig. Darum gibt es auch nichts, was Sie einsehen oder exportieren könnten.",
      ],
      alltag: "Wie eine Abstimmung mit verdeckten Zetteln in einer Urne: Man sieht, wie viele Zettel drin sind, und zählt am Ende. Welcher Zettel von wem stammt, weiß niemand. Der Vergleich hinkt an einer Stelle: Wenn nur drei Personen abstimmen und alle gleich, wissen alle drei, was die anderen gewählt haben. Das lässt sich bei so kleinen Gruppen nicht vermeiden.",
@@ -106,8 +106,8 @@ seiten: {
     {h: "Missbrauch und Grenzen",
      kurz: "Was den Dienst schützt, und was er nicht kann.",
      p: [
-      "Der Code hat sechs Zeichen aus 25 gut unterscheidbaren, das sind rund 244 Millionen Möglichkeiten. Nach 15 falschen Eingaben in zehn Minuten sperrt der Dienst weitere Versuche von diesem Anschluss. Jede falsche Eingabe wird zusätzlich gebremst. Eine Sitzung fasst höchstens 40 Personen, der Dienst höchstens 20 Sitzungen gleichzeitig, ein Anschluss höchstens drei. Jede Nachricht wird auf dem Server geprüft: nur erlaubte Zahlen, nur kurze Nachrichten, nur Anfragen von der eigenen Seite. Die Lehrkraft sieht keine IP-Adressen.",
-      "Grenzen: Wer den Code kennt, kann beitreten. Geben Sie ihn darum erst im Unterricht bekannt und löschen Sie am Ende. Einzelne Teilnehmende lassen sich nicht ausschließen, nur die ganze Sitzung löschen. Wer in der Klasse bewusst Unsinn antwortet, verfälscht die Summe. Der Klassenmodus ist ein Lernwerkzeug und kein Prüfungsverfahren.",
+      "Der Code hat sechs Zeichen aus 25 gut unterscheidbaren, das sind rund 244 Millionen Möglichkeiten. Nach 15 falschen Eingaben in zehn Minuten sperrt der Dienst weitere Versuche von diesem Anschluss. Als Anschluss gilt nur die Adresse der echten Verbindung, mitgeschickte Adress-Kopfzeilen zählen nicht. Dazu gibt es eine Obergrenze für alle zusammen: höchstens 30 falsche Eingaben je Minute und 300 je Stunde, danach ist der Beitritt für alle kurz gesperrt. Das schützt vor verteiltem Raten, kann aber auch eine Klasse kurz aussperren. Jede falsche Eingabe wird zusätzlich gebremst. Eine Sitzung fasst höchstens 40 Personen, der Dienst höchstens 20 Sitzungen gleichzeitig, ein Anschluss höchstens drei. Jede Nachricht wird auf dem Server geprüft: nur erlaubte Zahlen, nur kurze Nachrichten, nur Anfragen von der eigenen Seite. Die Lehrkraft sieht keine IP-Adressen.",
+      "Grenzen: Wer den Code kennt, kann beitreten. Geben Sie ihn darum erst im Unterricht bekannt und löschen Sie am Ende. Einzelne Teilnehmende lassen sich nicht ausschließen, nur die ganze Sitzung löschen. Wer in der Klasse bewusst Unsinn antwortet, verfälscht die Summe. Bei sehr kleinen Gruppen schützt auch die Verdeckung nur begrenzt. Der Klassenmodus ist ein Lernwerkzeug und kein Prüfungsverfahren.",
      ]},
     {h: "Das Löschprotokoll, und was es belegt",
      kurz: "Fünf Einzelprüfungen, eine Signatur und eine öffentliche Prüfseite.",
@@ -120,13 +120,13 @@ seiten: {
   ],
   mitnehmen: [
     "Der Klassenmodus braucht kein Konto und keinen Namen. Die Klasse schickt nur Auswahlwerte.",
-    "Die Wand zeigt erst nach Ihrem Knopfdruck eine Summe, und Felder unter drei Antworten bleiben verborgen.",
+    "Die Wand zeigt erst nach Ihrem Knopfdruck eine Summe, und kleine Felder bleiben verdeckt.",
     "Alles liegt nur im Arbeitsspeicher und endet nach höchstens zwei Stunden oder sofort per Knopf.",
     "Das Löschprotokoll belegt die Löschung in der Anwendung. IP-Adressen in Zugriffsprotokollen bleiben außen vor und gehören in die Abstimmung mit der Schulleitung.",
   ],
   quiz: [
     {frage: "Was merkt sich der Klassenmodus über die Antwort einer einzelnen Schülerin?", optionen: ["Name und Antwort, damit die Lehrkraft sie sieht", "Nichts, was die Antwort mit einer Person verbindet: nur Zähler je Antwort und wer schon geantwortet hat", "Die Antwort, verbunden mit der IP-Adresse", "Die Antwort, bis das Schuljahr endet"], richtig: 1, erklaerung: "Der Dienst führt nur einen Zähler je Antwort und eine Liste, wer schon geantwortet hat. Welche Antwort von wem kommt, wird nicht gespeichert."},
-    {frage: "Warum zeigt die Wand bei zwei Antworten kein Ergebnis?", optionen: ["Weil zwei Antworten zu wenig Rechenzeit brauchen", "Weil sonst leicht zu erraten wäre, wer was gewählt hat", "Weil der Beamer nur ab drei Balken funktioniert", "Weil die Lehrkraft das Ergebnis vorher prüfen muss"], richtig: 1, erklaerung: "Bei sehr kleinen Zahlen lässt sich eine Person leicht erraten. Darum gibt es erst ab drei Antworten ein Ergebnis, und Felder mit einer oder zwei Antworten heißen \"unter 3\"."},
+    {frage: "Warum zeigt die Wand bei zwei Antworten kein Ergebnis?", optionen: ["Weil zwei Antworten zu wenig Rechenzeit brauchen", "Weil sonst leicht zu erraten wäre, wer was gewählt hat", "Weil der Beamer nur ab drei Balken funktioniert", "Weil die Lehrkraft das Ergebnis vorher prüfen muss"], richtig: 1, erklaerung: "Bei sehr kleinen Zahlen lässt sich eine Person leicht erraten. Darum gibt es erst ab drei Antworten ein Ergebnis, und kleine Felder bleiben verdeckt."},
     {frage: "Wie lange läuft eine Sitzung höchstens?", optionen: ["Eine Woche", "Bis die Lehrkraft den Browser schließt", "Zwei Stunden, nach 20 Minuten ohne Aktion schon früher", "Zehn Minuten"], richtig: 2, erklaerung: "Nach höchstens zwei Stunden oder 20 Minuten ohne Aktion löscht der Dienst die Sitzung von selbst. Die Lehrkraft kann auch jederzeit sofort löschen."},
     {frage: "Was belegt die Signatur im Löschprotokoll?", optionen: ["Dass der Dienst das Protokoll ausgestellt hat und es nicht verändert wurde", "Dass auch Cloudflare nichts mehr gespeichert hat", "Dass kein Zugriffsprotokoll des Webservers mehr existiert", "Dass die Schule rechtlich alles richtig gemacht hat"], richtig: 0, erklaerung: "Die Signatur schützt das Protokoll vor Änderungen. Zugriffsprotokolle des Webservers und Daten bei Cloudflare liegen außerhalb der Anwendung und sind davon nicht erfasst."},
     {frage: "Was gehört trotz Klassenmodus in die Abstimmung mit der Schulleitung?", optionen: ["Nichts, der Klassenmodus ist rechtlich unbedenklich", "Dass IP-Adressen im Zugriffsprotokoll des Webservers anfallen und wie lange", "Der Name jedes Kindes", "Die Farbe der Wand"], richtig: 1, erklaerung: "Der Dienst selbst speichert keine Namen. Die IP-Adresse fällt aber bei jedem Aufruf im Zugriffsprotokoll an. Das gehört ehrlich in die Abstimmung."},
@@ -202,7 +202,7 @@ seiten: {
       zeilen: [
        ["Warten", "Adresse, Code, Zahl der Teilnehmenden, Zufallsnamen", "Wer sich hinter einem Namen verbirgt"],
        ["Aufgabe offen", "Frage, Bild oder Texte, \"7 von 23 haben geantwortet\"", "Zwischenstände der Antworten"],
-       ["Ergebnis", "Balken je Antwort, richtige Antwort, Mittelwert oder Median", "Einzelne Antworten, Felder mit 1 oder 2 Antworten, Namen"],
+       ["Ergebnis", "Balken je Antwort, richtige Antwort, ab 5 Antworten Mittelwert oder Median (nur wenn kein Feld verdeckt ist)", "Einzelne Antworten, verdeckte Felder, Namen"],
       ],
      },
      merke: "Auch die Zufallsnamen verschwinden von der Wand, sobald die erste Aufgabe läuft."},

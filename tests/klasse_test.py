@@ -26,6 +26,7 @@ from app import lab_klasse as K  # noqa: E402
 
 K.FEHLVERSUCH_PAUSE_S = 0.0                          # Tests muessen nicht warten
 K.SCAN_MAX_DATEIEN = 400
+K.GLOBAL_FEHLVERSUCHE_MINUTE = K.GLOBAL_FEHLVERSUCHE_STUNDE = 10 ** 6
 FENSTER = K.NACHRICHTEN_FENSTER
 K.NACHRICHTEN_FENSTER = (10_000, 10.0)          # nur der Flut-Test nutzt die echte Grenze
 app = FastAPI()
@@ -45,6 +46,7 @@ def zuruecksetzen():
     for d in (K._sitz, K._ip_sitzungen, K._verbindungen, K._ip_verbindungen, K._fehlversuche, K._nachweise):
         d.clear()
     K._beendet = 0
+    K._global_fehl.clear()
     K._jetzt = _uhr
 
 
@@ -342,18 +344,27 @@ with TestClient(app, base_url="http://testserver") as c:
     erg, wj, kl = lauf("wahl", [0, 0, 0], n=2)
     ok(erg["zellen"] == [3, 0] and erg["gesamt"] == 3 and not erg["unter_drei"], "3 gleiche Antworten: Verteilung [3, 0], Gesamt 3")
     erg, wj, kl = lauf("wahl", [0, 0, 0, 1, 1], n=2)
-    ok(erg["zellen"] == [3, -1] and erg["gesamt"] is None and erg["unter_drei"], "Feld mit 2 Antworten wird 'unter 3', Gesamtzahl verborgen")
+    ok(erg["zellen"] == [-1, -1] and erg["gesamt"] is None and erg["unter_drei"], "Feld mit 2 Antworten und das kleinste sichtbare Feld werden verdeckt, Gesamtzahl verborgen")
     erg, wj, kl = lauf("wahl", [0, 0, 0, 1, 1, 1, 2], n=3)
-    ok(erg["zellen"] == [3, 3, -1], "ein einzelnes Feld mit 1 Antwort wird 'unter 3'")
+    ok(erg["zellen"] == [-1, 3, -1], "Feld mit 1 Antwort plus das kleinste sichtbare Feld verdeckt (Differenz nie unter 4)")
     erg, wj, kl = lauf("wahl", [0, 0, 1, 1, 2], n=3)
     ok(erg["zellen"] == [-1, -1, -1], "alle Felder unter 3: alle verborgen")
     ok(all(x not in wj for x in kl.namen), "Wand-Nachricht enthaelt kein Pseudonym der Antwortenden")
     erg, wj, kl = lauf("skala", [1, 2, 3, 4, 5, 5, 5, 4, 4], )
-    ok(erg["zellen"] == [-1, -1, -1, 3, 3] and erg["mittelwert"] == 3.7, "Skala: kleine Felder verborgen, Mittelwert 3,7")
+    ok(erg["zellen"] == [-1, -1, -1, -1, 3] and "mittelwert" not in erg, "Skala: kleine Felder verdeckt, dann kein Mittelwert")
+    erg, wj, kl = lauf("skala", [5, 5, 5, 4, 4, 4])
+    ok(erg["zellen"] == [0, 0, 0, 3, 3] and erg["mittelwert"] == 4.5 and erg["gesamt"] == 6, "Skala mit 6 Antworten ohne verdeckte Felder: Mittelwert 4,5")
+    erg, wj, kl = lauf("skala", [5, 5, 5, 4])
+    ok("mittelwert" not in erg, "Skala mit 4 Antworten: kein Mittelwert (unter 5)")
+    erg, wj, kl = lauf("skala", [5, 5, 5, 4, 4])
+    ok("mittelwert" not in erg, "Skala mit verdecktem Feld: kein Mittelwert, auch bei 5 Antworten")
+    ok('"antworten"' not in wj, "nach dem Zeigen sendet die Wand keine Zahl der Antwortenden mehr")
     erg, wj, kl = lauf("schaetzung", [10, 20, 30, 40, 50], lo=0, hi=100)
-    ok(erg["median"] == 30 and len(erg["zellen"]) == 8 and erg["unter_drei"], "Schaetzung: Median 30, 8 Klassen, kleine Felder verborgen")
+    ok("median" not in erg and len(erg["zellen"]) == 8 and erg["unter_drei"], "Schaetzung mit kleinen Feldern: 8 Klassen, kein Median")
+    erg, wj, kl = lauf("schaetzung", [10, 10, 10, 90, 90, 90], lo=0, hi=100)
+    ok(erg["median"] == 50 and not erg["unter_drei"], "Schaetzung ohne verdeckte Felder ab 5 Antworten: Median 50")
     erg, wj, kl = lauf("schaetzung", [5, 5, 5, 5], lo=0, hi=7)
-    ok(erg["zellen"][5] == 4 and erg["median"] == 5, "Schaetzung mit kleinem Bereich: Klassen je Wert")
+    ok(erg["zellen"][5] == 4 and "median" not in erg, "Schaetzung mit kleinem Bereich: Klassen je Wert, 4 Antworten ohne Median")
     zuruecksetzen()
     kl = Klasse(c, schueler=1)
     kl.l.send_json({"t": "aktivitaet", "art": "schaetzung", "lo": 0, "hi": 10})
@@ -527,6 +538,53 @@ with TestClient(app, base_url="http://testserver") as c:
     nach4 = lies(k.l, lambda m: m.get("t") == "ende")["nachweis"]
     ok("freigegeben: bestanden" in nach4, "Sitzungsobjekt nach dem Loeschen von keiner Verbindung mehr gehalten (weakref)")
     k.schliesse()
+
+    print("--- Adresse und globaler Deckel")
+    zuruecksetzen()
+    os.environ.pop("KL_PROXY_KEY", None)
+    k = Klasse(c)
+    def versuch(kopf):
+        with c.websocket_connect("/ws/klasse", headers=dict(H, **kopf)) as w:
+            w.send_json({"t": "beitritt", "code": "AAAAAA"})
+            return w.receive_json().get("text", "")
+    gesperrt = False
+    for i in range(K.FEHLVERSUCHE_JE_IP + 2):          # jedes Mal eine andere vorgetaeuschte Adresse
+        try:
+            txt = versuch({"cf-connecting-ip": "198.51.100.%d" % i, "x-real-ip": "203.0.113.%d" % i, "x-forwarded-for": "192.0.2.%d" % i})
+        except WebSocketDisconnect:
+            txt = "Zu viele falsche"
+        if "Zu viele falsche" in txt:
+            gesperrt = True
+            break
+    ok(gesperrt, "gefaelschte Adress-Kopfzeilen von einer nicht vertrauenswuerdigen Quelle umgehen die Sperre nicht")
+    ok(len(K._fehlversuche) == 1, "alle Versuche landen im selben Zaehler (%d)" % len(K._fehlversuche))
+    os.environ["KL_PROXY_KEY"] = "test-proxy-schluessel"
+    ok(K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": "203.0.113.5"}, "client": type("C", (), {"host": "10.0.0.1"})()})())
+       != K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": "203.0.113.6"}, "client": type("C", (), {"host": "10.0.0.1"})()})()),
+       "vom eigenen Proxy (mit Schluessel) gemeldete Adressen werden unterschieden")
+    ok(K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.5"}, "client": type("C", (), {"host": "10.0.0.1"})()})())
+       == K._ip_tag(type("R", (), {"headers": {"x-kl-proxy": "falsch", "x-real-ip": "203.0.113.6"}, "client": type("C", (), {"host": "10.0.0.1"})()})()),
+       "falscher Proxy-Schluessel: X-Real-IP wird ignoriert")
+    zuruecksetzen()
+    k2 = Klasse(c)
+    alt_m, alt_ip = K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP
+    K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP = 6, 1000
+    glob = False
+    for i in range(10):                                # verteiltes Raten: jede Adresse nur einmal (vertrauenswuerdiger Proxy)
+        txt = versuch({"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": "203.0.113.%d" % (10 + i)})
+        if "viele falsche Codes" in txt:
+            glob = True
+            break
+    ok(glob and i <= 7, "globaler Deckel greift nach %d verteilten Fehlversuchen" % i)
+    with c.websocket_connect("/ws/klasse", headers=dict(H, **{"x-kl-proxy": "test-proxy-schluessel", "x-real-ip": "203.0.113.99"})) as w:
+        w.send_json({"t": "beitritt", "code": k2.code})
+        ok("viele falsche Codes" in w.receive_json().get("text", ""), "waehrend der globalen Sperre ist auch der richtige Code gesperrt")
+    uhr["plus"] += 3700
+    ok(not K._global_gesperrt(), "globale Sperre endet nach der Stunde")
+    uhr["plus"] = 0.0
+    K.GLOBAL_FEHLVERSUCHE_MINUTE, K.FEHLVERSUCHE_JE_IP = alt_m, alt_ip
+    os.environ.pop("KL_PROXY_KEY", None)
+    k.schliesse(); k2.schliesse()
 
     print("--- Angriffe vor der Anmeldung und auf die Pruefung")
     zuruecksetzen()

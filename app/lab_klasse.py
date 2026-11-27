@@ -40,7 +40,9 @@ from urllib.parse import parse_qs
 from fastapi import APIRouter, Request, WebSocket, WebSocketDisconnect
 from fastapi.responses import HTMLResponse, JSONResponse
 
-from app.sicherheit import begrenzt, client_kennung, origin_ok, umgebung_zahl
+import ipaddress
+
+from app.sicherheit import _proxy_echt, begrenzt, origin_ok, umgebung_zahl
 
 router = APIRouter()
 
@@ -57,10 +59,13 @@ MAX_VERBINDUNGEN = int(umgebung_zahl("KL_KLASSE_MAX_VERBINDUNGEN", 500))
 MAX_VERB_JE_IP = 60                               # eine Klasse hinter einer Schuladresse: 40 plus Lehrkraft und Wand
 MAX_SITZUNGEN_JE_IP = 3
 MIN_ANTWORTEN = 3                                 # kleine-Zahlen-Schutz
+MIN_FUER_MITTEL = 5                               # Mittelwert und Median erst ab so vielen Antworten, nie bei verdeckten Feldern
 FEHLVERSUCHE_JE_IP = 15                           # falsche Codes oder Schluessel je 10 Minuten, danach Sperre
 FEHLVERSUCHE_FENSTER_S = 600.0
 FEHLVERSUCH_PAUSE_S = 0.8                         # jede falsche Eingabe wird um diese Zeit gebremst
 FEHLVERSUCHE_JE_VERBINDUNG = 3
+GLOBAL_FEHLVERSUCHE_MINUTE = int(umgebung_zahl("KL_KLASSE_GLOBAL_MINUTE", 30))     # alle Adressen zusammen
+GLOBAL_FEHLVERSUCHE_STUNDE = int(umgebung_zahl("KL_KLASSE_GLOBAL_STUNDE", 300))
 ERSTE_NACHRICHT_S = 10.0
 LESE_TIMEOUT_S = 90.0                             # die Oberflaeche schickt alle 25 s ein "ping"
 NACHRICHTEN_FENSTER = (20, 10.0)                  # 20 Nachrichten je 10 s und Verbindung
@@ -156,14 +161,27 @@ _ip_sitzungen = {}      # Register 2: Adress-Kurzhash -> Menge von Sitzungskennu
 _verbindungen = {}      # Register 3: Sitzungskennung -> Zahl offener Verbindungen
 _ip_verbindungen = {}   # Adress-Kurzhash -> offene Verbindungen
 _fehlversuche = {}      # Adress-Kurzhash -> deque von Zeitstempeln
+_global_fehl = deque()  # Zeitstempel aller Fehlversuche (ohne Adresse), Obergrenze fuer verteiltes Raten
 _nachweise = {}         # Sitzungskennung -> (Protokolltext, Ablaufzeit). Nur Zahlen, Hash und Prueferergebnisse.
 _beendet = 0            # seit Start des Dienstes gelöschte Sitzungen
 _verb_gesamt = 0
 _reaper = {"task": None, "loop": None}
 
 
+def _quell_ip(anfrage) -> str:
+    """Adresse des Aufrufers. Forwarded-Header (X-Real-IP) zaehlen NUR, wenn die Anfrage den gemeinsamen Schluessel des eigenen
+    Proxys traegt (KL_PROXY_KEY, wie in app/sicherheit.py). Sonst gilt die Adresse der direkten Verbindung. CF-Connecting-IP und
+    X-Forwarded-For werden hier nie ausgewertet: ein Besucher koennte sie frei waehlen und so die Sperre umgehen."""
+    if _proxy_echt(anfrage.headers):
+        try:
+            return str(ipaddress.ip_address(anfrage.headers.get("x-real-ip", "").strip()))
+        except ValueError:
+            pass
+    return anfrage.client.host if anfrage.client else "?"
+
+
 def _ip_tag(anfrage) -> str:
-    return hmac.new(_K_IP, client_kennung(anfrage).encode(), hashlib.sha256).hexdigest()[:12]
+    return hmac.new(_K_IP, _quell_ip(anfrage).encode(), hashlib.sha256).hexdigest()[:12]
 
 
 def _sid(code: str) -> str:
@@ -239,6 +257,12 @@ def _verteilung(werte: list, zaehler: dict, ordnen):
             unter = True
         else:
             aus.append(c)
+    if unter:
+        # Ergaenzende Verdeckung: Wer die Gesamtzahl kennt (der Fortschritt war sichtbar), darf ein verdecktes Feld nicht
+        # ausrechnen koennen. Darum wird zusaetzlich das kleinste sichtbare Feld verdeckt: Die Differenz ist dann mindestens 4.
+        sichtbar = [i for i, c in enumerate(aus) if c > 0]
+        if sichtbar:
+            aus[min(sichtbar, key=lambda i: (aus[i], i))] = -1
     return aus, unter
 
 
@@ -252,17 +276,19 @@ def _ergebnis(a: Aktivitaet):
         r = {"zellen": zellen, "loesung": a.loesung}
     elif a.art == "skala":
         zellen, unter = _verteilung(list(range(5)), a.zaehler, lambda w: w - 1)
-        mittel = sum(w * c for w, c in a.zaehler.items()) / gesamt
-        r = {"zellen": zellen, "mittelwert": round(mittel, 1), "loesung": None}
+        r = {"zellen": zellen, "loesung": None}
+        if not unter and gesamt >= MIN_FUER_MITTEL:
+            r["mittelwert"] = round(sum(w * c for w, c in a.zaehler.items()) / gesamt, 1)
     else:
         spanne = a.hi - a.lo + 1
         k = min(8, spanne)
         breite = spanne / k
         zellen, unter = _verteilung(list(range(k)), a.zaehler, lambda w: min(k - 1, int((w - a.lo) / breite)))
-        folge = sorted(w for w, c in a.zaehler.items() for _ in range(c))
-        mitte = folge[len(folge) // 2] if len(folge) % 2 else (folge[len(folge) // 2 - 1] + folge[len(folge) // 2]) / 2
         grenzen = [round(a.lo + i * breite) for i in range(k)] + [a.hi]
-        r = {"zellen": zellen, "grenzen": grenzen, "median": mitte, "loesung": a.loesung}
+        r = {"zellen": zellen, "grenzen": grenzen, "loesung": a.loesung}
+        if not unter and gesamt >= MIN_FUER_MITTEL:
+            folge = sorted(w for w, c in a.zaehler.items() for _ in range(c))
+            r["median"] = folge[len(folge) // 2] if len(folge) % 2 else (folge[len(folge) // 2 - 1] + folge[len(folge) // 2]) / 2
     r["zu_wenige"] = False
     r["gesamt"] = None if unter else gesamt            # sonst liesse sich ein verborgenes Feld ausrechnen
     r["unter_drei"] = unter
@@ -287,7 +313,8 @@ def _stand(sid: str, rolle: str, nr):
         if rolle == "schueler":
             akt["beantwortet"] = nr in a.beantwortet
         else:
-            akt["antworten"] = len(a.beantwortet)          # nur die Zahl, nie wer
+            if not a.zeigen:                               # nur waehrend der Aufgabe, nie neben dem Ergebnis
+                akt["antworten"] = len(a.beantwortet)
         if a.zeigen:
             akt["ergebnis"] = _ergebnis(a)
     d = {"t": "stand", "rolle": rolle, "teilnehmer": len(s.teilnehmer), "max_teilnehmer": MAX_TEILNEHMER,
@@ -705,7 +732,18 @@ def _gesperrt(ip: str) -> bool:
     return len(d) >= FEHLVERSUCHE_JE_IP
 
 
+def _global_gesperrt() -> bool:
+    """True, wenn alle Adressen zusammen zu viele falsche Codes oder Schluessel geschickt haben (verteiltes Raten)."""
+    jetzt = _jetzt()
+    while _global_fehl and jetzt - _global_fehl[0] > 3600:
+        _global_fehl.popleft()
+    if len(_global_fehl) >= GLOBAL_FEHLVERSUCHE_STUNDE:
+        return True
+    return sum(1 for x in _global_fehl if jetzt - x <= 60) >= GLOBAL_FEHLVERSUCHE_MINUTE
+
+
 def _fehlversuch(ip: str):
+    _global_fehl.append(_jetzt())
     _fehlversuche.setdefault(ip, deque()).append(_jetzt())
     if len(_fehlversuche) > 5000:                          # Speicher begrenzen
         for k in list(_fehlversuche)[:2500]:
@@ -961,6 +999,9 @@ async def _anmelden(ws, ip):
             return await _neu(ws, ip)
         if _gesperrt(ip):
             await _fehler(ws, "Zu viele falsche Eingaben von diesem Anschluss. Warte etwa zehn Minuten und versuche es dann noch einmal.", True, 1013)
+            return None, None, None, None
+        if _global_gesperrt():
+            await _fehler(ws, "Gerade sind viele falsche Codes eingegangen. Der Beitritt ist kurz gesperrt. Versuche es in einigen Minuten noch einmal.", True, 1013)
             return None, None, None, None
         code = _norm(m.get("code"))
         sid = _finde(code)

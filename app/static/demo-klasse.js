@@ -152,17 +152,17 @@
       return h("li", { class: "kl-zeile" + (richtig ? " richtig" : "") + (meins ? " meins" : "") },
         h("span", { class: "kl-name" }, name, richtig ? h("span", { class: "kl-marke" }, icon("check"), "richtig") : null, meins ? h("span", { class: "kl-marke leise" }, icon("user-round"), "dein Tipp") : null),
         h("span", { class: "kl-bahn", "aria-hidden": "true" }, h("span", { class: "kl-balken" + (klein ? " klein" : ""), style: "width:" + breite + "%" })),
-        h("span", { class: "kl-zahl" }, klein ? "unter 3" : String(c)));
+        h("span", { class: "kl-zahl" }, klein ? "verdeckt" : String(c)));
     });
     wurzel.append(h("ul", { class: "kl-zeilen" }, zeilen));
     const fuss = [];
     if (erg.gesamt != null) fuss.push(erg.gesamt + " Antworten");
-    else fuss.push("mindestens 3 Antworten");
-    if (a.art === "skala") fuss.push("Mittelwert " + String(erg.mittelwert).replace(".", ","));
-    if (a.art === "schaetzung") fuss.push("Mitte der Schätzungen (Median) " + String(erg.median).replace(".", ","));
+    else fuss.push("Gesamtzahl verdeckt");
+    if (a.art === "skala" && erg.mittelwert != null) fuss.push("Mittelwert " + String(erg.mittelwert).replace(".", ","));
+    if (a.art === "schaetzung" && erg.median != null) fuss.push("Mitte der Schätzungen (Median) " + String(erg.median).replace(".", ","));
     if (a.art === "schaetzung" && erg.loesung != null) fuss.push("richtig: " + erg.loesung);
     wurzel.append(h("p", { class: "kl-fuss" }, fuss.join(", ")));
-    if (erg.unter_drei) wurzel.append(hinweis("shield-check", "Felder mit 1 oder 2 Antworten zeigen wir nicht einzeln und nennen auch keine Gesamtzahl. So lässt sich niemand erraten."));
+    if (erg.unter_drei) wurzel.append(hinweis("shield-check", "Felder mit 1 oder 2 Antworten und das jeweils kleinste sichtbare Feld bleiben verdeckt, die Gesamtzahl auch. So lässt sich niemand erraten."));
     return wurzel;
   }
 
@@ -289,7 +289,7 @@
       const info = anzeige(a);
       const box = h("div", { class: "kl-laufend" });
       box.append(aufgabeKarte(a, info, false));
-      box.append(h("p", { class: "kl-fortschritt", role: "status" }, icon("users"), h("span", null, a.antworten + " von " + stand.teilnehmer + " haben geantwortet.")));
+      if (!a.zeigen) box.append(h("p", { class: "kl-fortschritt", role: "status" }, icon("users"), h("span", null, a.antworten + " von " + stand.teilnehmer + " haben geantwortet.")));
       const knoepfe = h("div", { class: "kl-knoepfe" });
       if (a.offen) knoepfe.append(h("button", { type: "button", class: "btn", onclick: () => verb.senden({ t: "schliessen" }) }, icon("lock"), "Aufgabe schließen"));
       if (!a.zeigen) knoepfe.append(h("button", { type: "button", class: "btn primary", onclick: () => verb.senden({ t: "zeigen" }) }, icon("eye"), "Ergebnis zeigen"));

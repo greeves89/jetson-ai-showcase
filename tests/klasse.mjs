@@ -117,7 +117,9 @@ try {
   await lehrer.click("button:has-text('Ergebnis zeigen')");
   pruefe(await warte(wand, () => document.querySelector(".kl-ergebnis .kl-zeilen")), "Wand zeigt das Ergebnis als Balken");
   const erg = await text(wand, ".kl-ergebnis");
-  pruefe(/unter 3/.test(erg) && /mindestens 3 Antworten/.test(erg) && !/\b3 Antworten\b/.test(erg.replace("mindestens 3 Antworten", "")), "Kleine-Zahlen-Schutz: 'unter 3', Gesamtzahl verborgen");
+  pruefe(/verdeckt/.test(erg) && /Gesamtzahl verdeckt/.test(erg) && !/^\d+ Antworten/m.test(erg), "Kleine-Zahlen-Schutz: Felder verdeckt, Gesamtzahl verborgen");
+  pruefe(!/von 3 haben geantwortet/.test(await text(wand, ".kl-wand")), "Nach dem Zeigen steht keine Zahl der Antwortenden mehr auf der Wand");
+  pruefe(!/von 3 haben geantwortet/.test(await text(lehrer, ".kl-laufend")), "Auch die Lehrkraft sieht nach dem Zeigen keine Zahl der Antwortenden mehr");
   await wand.screenshot({ path: join(SHOTS, "04-wand-ergebnis-klein.png") });
   pruefe(await warte(schueler[2], () => document.querySelector(".kl-ergebnis .kl-zeilen")), "Schüler sieht das Ergebnis der Klasse");
   pruefe(await schueler[2].locator(".kl-zeile.meins").count() === 1, "Schüler sieht seinen eigenen Tipp markiert (nur lokal gemerkt)");
