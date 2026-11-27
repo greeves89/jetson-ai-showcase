@@ -6,7 +6,8 @@ Jeder Modus (ausser den beiden Urgesteinen "gesicht" und "objekt" in app.py) ist
   neu() -> Zustand         pro Verbindung ein frischer Zustand (Glaettung, Verfolgung), darf None sein
   verarbeite(img, schwelle, zustand) -> (anzahl, extra)
                            zeichnet in img (BGR, wird danach als JPEG zurueckgeschickt) und liefert die Trefferzahl
-                           plus ein Woerterbuch mit Zusatzdaten fuer die Oberflaeche (landet im JSON)
+                           plus ein Woerterbuch mit Zusatzdaten fuer die Oberflaeche (landet im JSON).
+                           Steht darin "_bild" (ein BGR-Bild beliebiger Groesse), wird dieses statt img zurueckgeschickt
   max_kante                laengste Bildkante vor dem Erkennen (Standard 480; None = unveraendert)
   steuern(zustand, dict)   optional: Steuernachricht der Oberflaeche ({"effekt": ...} u. a.); Werte gegen eine Liste pruefen
   schwelle_senden          True, wenn die Oberflaeche einen Schwellenregler schickt

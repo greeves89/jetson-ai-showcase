@@ -12,6 +12,7 @@
     "widgets-prognose.css",
     "widgets-sehen.css",
     "widgets-rag.css",
+    "demo-ocr.css",
     "laien.css",
     "echtoderki.css",
     "demo-bildschutz.css"
@@ -21,6 +22,7 @@
     "content-grundlagen.js",
     "content-rag.js",
     "content-sehen-agenten.js",
+    "content-ocr.js",
     "content-prognose-betrieb.js",
     "content-betrieb.js",
     "content-usecases.js",
@@ -53,6 +55,7 @@
     "widgets.js",
     "demos.js",
     "demo-koerper.js",
+    "demo-ocr.js",
     "demo-whisper.js",
     "demo-tts.js",
     "demo-bildschutz.js",

@@ -1,0 +1,40 @@
+/* Labor "Text auf Papier lesen": Bildbereich und Ergebnisbereich (demo-ocr.js). Nur Farbvariablen aus style.css. */
+.kameras.d-ocr{align-items:start}
+.kameras.d-ocr figure:nth-child(2) img{aspect-ratio:auto;max-height:38rem;object-fit:contain;background:var(--flaeche2)}
+
+.ocr-ergebnis{margin-top:16px;padding:16px;border-radius:var(--r2);background:var(--flaeche2)}
+.ocr-kopf{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px;margin-bottom:8px}
+.ocr-kopf h3{display:flex;align-items:center;gap:8px;margin:0;font-size:17px}
+.ocr-zustand.stabil{background:color-mix(in srgb,var(--gruen) 16%,var(--flaeche));color:var(--gruen);font-weight:600}
+.ocr-zahlen{font-size:13px;color:var(--leise)}
+.ocr-hinweis{margin:0 0 12px}
+.ocr-spalten{display:grid;grid-template-columns:minmax(0,3fr) minmax(0,2fr);gap:16px;align-items:start}
+@media(max-width:800px){.ocr-spalten{grid-template-columns:1fr}}
+.ocr-knoepfe{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px}
+.ocr-knoepfe .btn{display:inline-flex;align-items:center;gap:8px}
+.ocr-fliess[aria-pressed="true"]{background:color-mix(in srgb,var(--akzent) 16%,var(--flaeche));color:var(--akzent);box-shadow:inset 0 0 0 1.5px var(--akzent)}
+.ocr-text{max-height:28rem;overflow:auto;padding:14px 16px;border-radius:12px;background:var(--flaeche);font-size:17px;line-height:1.6;overflow-wrap:anywhere;user-select:text}
+.ocr-text[hidden]{display:none}
+.ocr-absatz{margin:0 0 .9em}
+.ocr-absatz:last-child{margin-bottom:0}
+/* Unsichere Woerter: Unterstreichung UND Fragezeichen UND (beim Daraufzeigen) ein Text, nie nur Farbe */
+.ocr-w{border-radius:3px}
+.ocr-w.u1{text-decoration:underline dotted;text-decoration-thickness:2px;text-underline-offset:4px;background:color-mix(in srgb,var(--orange) 14%,transparent)}
+.ocr-w.u1::after{content:"?";font-size:.7em;font-weight:700;vertical-align:super;color:var(--orange);margin-left:1px}
+.ocr-w.u2{text-decoration:underline wavy;text-decoration-thickness:2px;text-underline-offset:4px;background:color-mix(in srgb,var(--rot) 14%,transparent)}
+.ocr-w.u2::after{content:"??";font-size:.7em;font-weight:700;vertical-align:super;color:var(--rot);margin-left:1px}
+.ocr-legende{margin:10px 0 0;font-size:14px;color:var(--leise)}
+.ocr-legende .ocr-w{padding:0 2px}
+.ocr-meld{min-height:1.4em;margin:8px 0 0;font-size:14px;color:var(--leise)}
+.ocr-leer{margin:0}
+.ocr-karten-kopf{display:flex;align-items:center;gap:8px;margin:0 0 8px;font-size:13px;font-weight:600;color:var(--leise)}
+.ocr-karten{display:grid;gap:8px;align-content:start}
+.ocr-karte{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:12px;background:var(--flaeche);border:.5px solid color-mix(in srgb,var(--leise) 25%,transparent);animation:d-karte-ein .28s ease-out}
+.ocr-karte-symbol{display:inline-flex;flex:none;width:36px;height:36px;border-radius:10px;align-items:center;justify-content:center;background:var(--fuell);color:var(--akzent)}
+.ocr-karte-text{display:flex;flex-direction:column;min-width:0;flex:1;line-height:1.3}
+.ocr-karte-art{font-size:12px;color:var(--leise)}
+.ocr-karte-text b{font-size:16px;overflow-wrap:anywhere}
+.ocr-karte-kopie{flex:none;display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:10px;border:0;background:transparent;color:var(--leise);cursor:pointer}
+.ocr-karte-kopie:hover{background:var(--fuell);color:var(--text)}
+.ocr-regelhinweis{margin:10px 0 0;font-size:13px}
+@media(prefers-reduced-motion:reduce){.ocr-karte{animation:none}}

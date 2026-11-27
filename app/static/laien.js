@@ -102,6 +102,11 @@
       wozu: "Der Rechner soll deine Hand in deinem Kamerabild finden und aus der Haltung der Finger einen Buchstaben des Fingeralphabets lesen. Personen erkennt er damit nicht, Gebärdensprache übersetzt er nicht.",
       speichern: "Es wird nichts gespeichert: kein Foto, kein Video, keine Handdaten, auch nicht das Wort, das du buchstabierst.",
     },
+    "text-lesen": {
+      titel: "Text auf Papier lesen: Kamera nutzen?",
+      wozu: "Der Rechner soll Text auf Papier in deinem Kamerabild finden und lesen, zum Beispiel auf einem Zettel, in einem Heft oder auf einer Speisekarte. Halte nur Papier ins Bild, das du lesen darfst. Briefe und Rechnungen anderer Personen gehören nicht in die Kamera.",
+      speichern: "Es wird nichts gespeichert: kein Foto, kein Video, auch nicht der gelesene Text. Nach der Auswertung eines Bildes ist es weg.",
+    },
   };
   const BIO_LABORE = new Set(["gesicht", "hand-gesicht", "koerperhaltung"]);      // nur das Gesichts-Labor bildet Zahlenlisten zur Wiedererkennung; "anlernen" lernt Gegenstände und fragt wie das Objekt-Labor nach der Kamera
   const MIT_BEISPIELEN = new Set(["objekt", "anlernen", "whisper"]);      // Labore, in denen es Beispiele ohne Kamera gibt (Katalog beispiele/manifest.json)
