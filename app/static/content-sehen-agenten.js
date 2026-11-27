@@ -74,7 +74,7 @@ const seiten = {
      visual: {typ: "raster", spalten: 4, zellen: [{icon: "user", text: "Gesichter"}, {icon: "car", text: "Kennzeichen"}, {icon: "monitor", text: "Bildschirmtext"}, {icon: "map-pin", text: "Metadaten", sub: "Zeit, Gerät, Ort"}]}, p: [
       "Ein Bild enthält oft mehr, als du beim Aufnehmen bedenkst. Im Hintergrund stehen Gesichter, Autokennzeichen, ein Bildschirm mit Text oder ein Dokument auf dem Tisch. Sobald eine Person erkennbar ist, handelt es sich um personenbezogene Daten.",
       "Dazu kommen versteckte Angaben in der Datei, die Metadaten: Aufnahmezeit, Gerät und manchmal der genaue Ort. Sie sind für dich unsichtbar, aber auslesbar.",
-      "Das Labor hält ein Kamerabild nur im Arbeitsspeicher, solange gerechnet wird, und speichert es nicht. Im Betrieb solltest du dasselbe anstreben: so wenig Bild wie nötig, so kurz wie möglich, möglichst am Gerät verarbeitet. Dies ist ein Überblick und keine Rechtsberatung. Für einen echten Einsatz brauchst du eine Prüfung durch Fachleute.",
+      "Das Labor hält ein Kamerabild nur im Arbeitsspeicher, solange gerechnet wird, und speichert es nicht. Das Anlern-Labor merkt sich nur Zahlenlisten, keine Bilder, und vergisst sie nach 30 Minuten ohne Aktivität. Im Betrieb solltest du dasselbe anstreben: so wenig Bild wie nötig, so kurz wie möglich, möglichst am Gerät verarbeitet. Dies ist ein Überblick und keine Rechtsberatung. Für einen echten Einsatz brauchst du eine Prüfung durch Fachleute.",
     ]},
   ],
   mitnehmen: [
@@ -149,7 +149,7 @@ Object.assign(seiten, {
      visual: {typ: "vergleich", links: {titel: "Mensch achtet auf", icon: "eye", farbe: "gruen", punkte: ["Umriss und Form", "Das Tier selbst"]}, rechts: {titel: "Netz achtet oft auf", icon: "brain-circuit", farbe: "rot", punkte: ["Oberflächenmuster", "Schnee im Hintergrund"]}, urteil: "Husky im Schnee wird zum Wolf."}, p: [
       "Das Netz lernt, was in den Beispielen mit der Antwort zusammenhängt. Das muss nicht das sein, was du meinst.",
     ], liste: [
-      "**Hintergrund und Kontext:** Ein oft genanntes Beispiel ist ein Netz, das Wölfe und Huskys trennen sollte und stattdessen auf Schnee im Hintergrund achtete. Zeigt man einen Husky im Schnee, kommt „Wolf“.",
+      "**Hintergrund und Kontext:** Ein bekanntes Lehrbeispiel (Ribeiro u. a., 2016): Ein Klassifikator sollte Wölfe und Huskys trennen. Die Forschenden wählten die Trainingsbilder absichtlich so, dass alle Wölfe im Schnee standen, und das Modell achtete auf den Schnee. Zeigt man einen Husky im Schnee, kommt „Wolf“. Das war ein gebautes Experiment und keine Beobachtung aus der Praxis, aber der Fehler ist real: Modelle nutzen oft den Hintergrund statt des Objekts.",
       "**Texturen:** Netze achten oft stärker auf Oberflächenmuster als Menschen auf Umrisse.",
       "**Unscheinbare Störungen:** Winzige, für Menschen kaum sichtbare Änderungen an den Pixeln können ein Netz zu einer völlig falschen Antwort bringen.",
       "**Unbekanntes:** Was in den Trainingsbildern nicht vorkam, wird in eine bekannte Klasse gepresst. Das {{objekt|Objekt-Labor}} kennt nur 80 Klassen.",
@@ -160,6 +160,11 @@ Object.assign(seiten, {
       "Die Gesichtserkennung YuNet, der Objekterkenner YOLOX und das MobileNet im Anlern-Labor sind faltende Netze. Sie unterscheiden sich im Aufbau und in der Aufgabe, nicht im Grundprinzip: Filter, Schichten und gelernte Zahlen. Neuere Netze nutzen teils andere Bausteine, aber auch dort gilt die Idee vom Einfachen zum Zusammengesetzten.",
       "Im Baustein oben probierst du selbst Filter aus. Probiere Kanten, Weichzeichnen und einen eigenen Filter und beobachte, was auf dem Bild hell wird.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quelle zum Husky-Beispiel, geprüft am 27.11.2026.",
+     liste: [
+      "Ribeiro, Singh, Guestrin: [„Why Should I Trust You?“: Explaining the Predictions of Any Classifier](https://arxiv.org/abs/1602.04938), 2016, abgerufen am 27.11.2026. Das Husky-Beispiel steht in Abschnitt 6.4.",
+     ]},
   ],
   mitnehmen: [
     "Ein Filter ist eine kleine Zahlenschablone. Er wandert über das Bild und meldet, wo sein Muster vorkommt.",
@@ -202,7 +207,7 @@ Object.assign(seiten, {
       {icon: "list-checks", text: "Regeln", sub: "Finger gestreckt?"},
       {icon: "hand", text: "Geste", sub: "zum Beispiel Faust", farbe: "gruen"}]},
      p: [
-      "Die 21 [[handpunkte|Handpunkte]] sind Zahlenpaare im Bild. Ob ein Finger gestreckt ist, prüft der Jetson mit Geometrie: Liegen die Gelenke eines Fingers fast auf einer Linie und ist die Fingerspitze weiter vom Handgelenk entfernt als das mittlere Gelenk, gilt der Finger als gestreckt. Aus den fünf Ja-Nein-Werten folgt die Geste. Alle gestreckt ist eine offene Hand, keiner gestreckt eine Faust, nur Zeige- und Mittelfinger ein Victory.",
+      "Die 21 [[handpunkte|Handpunkte]] sind Zahlenpaare im Bild. Ob ein Finger gestreckt ist, prüft der Jetson mit Geometrie: Liegen die Gelenke eines Fingers fast auf einer Linie und ist die Fingerspitze weiter vom Handgelenk entfernt als das mittlere Gelenk, gilt der Finger als gestreckt. Aus den fünf Ja-Nein-Werten folgt die Geste: offene Hand (alle gestreckt), Faust (keiner), Victory (Zeige- und Mittelfinger), Zeigefinger, Daumen hoch oder runter, sonst die Zahl der gestreckten Finger. Das Labor verfolgt bis zu zwei Hände und drei Gesichter.",
       "Hier wird nichts gelernt. Die Regeln hat ein Mensch aufgeschrieben. Das Netz liefert die Punkte, die Regeln deuten sie. Deshalb ist die Geste nachvollziehbar, aber auch starr: Eine Geste, für die niemand eine Regel geschrieben hat, kennt der Jetson nicht.",
     ], alltag: "Stell dir eine Schablone aus Drahtfiguren vor. Jemand hat Fotos mit Punkten beklebt. Wer die Punkte sieht, kann „Faust“ oder „Victory“ ablesen, auch ohne die Hand zu sehen. Der Vergleich hinkt: Der Jetson sieht die Punkte nur als Zahlen und kann Fingerspitzen nicht erkennen, die zur Kamera zeigen."},
     {h: "Gesichter: Ausdruck und Kopfhaltung",
@@ -221,7 +226,7 @@ Object.assign(seiten, {
       rechts: {titel: "Was er nicht weiß", icon: "heart-pulse", farbe: "orange", punkte: ["Das echte Gefühl", "Kultur, Anlass, Höflichkeit"]}},
      p: [
       "Das Netz hat Gesichter mit Beschriftungen gesehen und zieht daraus Muster. Viele Trainingsbilder zeigen gestellte, übertriebene Mimik. Ein höfliches Lächeln im Büro sieht darum aus wie Freude, auch wenn niemand froh ist. Und wer ernst schaut, ist nicht automatisch wütend.",
-      "Deshalb zeigt das Labor die Sicherheit mit an und nennt alles eine Schätzung. Für Entscheidungen über Menschen taugt das nicht. In der EU sind Systeme, die Gefühle am Arbeitsplatz oder in Bildungseinrichtungen ableiten, weitgehend verboten. Das ist ein Überblick und keine Rechtsberatung.",
+      "Deshalb zeigt das Labor die Sicherheit mit an und nennt alles eine Schätzung. Für Entscheidungen über Menschen taugt das nicht. In der EU sind Systeme, die aus Gesichtern Gefühle ableiten, am Arbeitsplatz und in Bildungseinrichtungen seit dem 02.02.2025 verboten, außer aus medizinischen oder Sicherheitsgründen (Art. 5 der KI-Verordnung). Das ist ein Überblick nach dem Stand vom 27.11.2026 und keine Rechtsberatung.",
     ], merke: "Ein Ausdruck ist ein Muster im Gesicht. Ein Gefühl ist etwas anderes."},
     {h: "Schnell genug für Video",
      kurz: "Kleine Bilder, nicht jedes Bild neu durchsuchen und wenige Rechenkerne halten das Labor flüssig.",
@@ -243,7 +248,7 @@ Object.assign(seiten, {
     {frage: "Woher kommt im Labor die Geste „Faust“?", optionen: ["Aus einem eigenen Netz nur für Fäuste", "Aus einer Regel über die 21 Handpunkte: kein Finger gestreckt", "Aus dem Dateinamen des Bildes", "Aus der Stimme der Person"], richtig: 1, erklaerung: "Das Netz liefert Punkte. Eine Regel prüft, ob Finger gestreckt sind. Sind es keine, heißt die Geste Faust."},
     {frage: "Das Labor zeigt „froh“, die Person ist aber gerade genervt und lächelt höflich. Was ist passiert?", optionen: ["Das Netz hat Gedanken gelesen", "Das Netz sieht Gesichtsmuster. Ein höfliches Lächeln sieht aus wie Freude", "Die Kamera ist kaputt", "Der Jetson kennt die Person"], richtig: 1, erklaerung: "Ein Ausdruckserkenner misst, wie das Gesicht aussieht, nicht wie sich jemand fühlt."},
     {frage: "Wie bleibt das Labor schnell genug für Video?", optionen: ["Es zeigt nur jedes zehnte Bild", "Es braucht eine Cloud", "Kleine Bilder, Handsuche und Ausdruck nur im Wechsel, drei Rechenkerne", "Es rechnet nur nachts"], richtig: 2, erklaerung: "Der Jetson spart Rechenzeit, wo es nicht auffällt, und lässt Platz für den Chat."},
-    {frage: "Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?", optionen: ["In der EU sind sie weitgehend verboten", "Sie sind überall Pflicht", "Sie sind genauer als Menschen", "Sie brauchen keine Prüfung"], richtig: 0, erklaerung: "Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen weitgehend. Das ist ein Überblick, keine Rechtsberatung."},
+    {frage: "Was gilt für Systeme, die am Arbeitsplatz Gefühle aus Gesichtern ableiten?", optionen: ["In der EU sind sie seit 2025 verboten, mit engen Ausnahmen", "Sie sind überall Pflicht", "Sie sind genauer als Menschen", "Sie brauchen keine Prüfung"], richtig: 0, erklaerung: "Die KI-Verordnung der EU verbietet Emotionserkennung am Arbeitsplatz und in Bildungseinrichtungen seit dem 02.02.2025, außer für medizinische Zwecke und die Sicherheit. Das ist ein Überblick (Stand 27.11.2026), keine Rechtsberatung."},
   ],
   business: {
     text: "Berührungslose Bedienung dort, wo Hände schmutzig oder nass sind, Gesten an Kiosken und Terminals, Bewegungsübungen mit Rückmeldung.",
@@ -388,7 +393,7 @@ Object.assign(seiten, {
      kurz: "Das Modell behält nichts. Es kennt nur den mitgeschickten Verlauf und Notizen außerhalb.",
      visual: {typ: "schichten", richtung: "stapel", ebenen: [{icon: "notebook-pen", text: "Notizen", sub: "Datei, Datenbank: bleiben"}, {icon: "scroll-text", text: "Kontext", sub: "Verlauf: begrenzt"}, {icon: "brain", text: "Modell", sub: "behält nichts"}]}, p: [
       "Das Modell selbst behält zwischen zwei Aufrufen nichts. Was es „weiß“, steht im Verlauf, der jedes Mal mitgeschickt wird: Aufgabe, bisherige Aufrufe, Ergebnisse. Dieser Verlauf heißt [[kontext|Kontext]] und hat eine Obergrenze.",
-      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Genau so funktioniert die Dokumentsuche im {{rag|RAG-Werkstatt}}.",
+      "Für Dinge, die länger gelten sollen, braucht der Agent Notizen außerhalb des Modells: eine Datei, eine Datenbank oder eine Dokumentensammlung. Er schreibt etwas hinein und liest es später wieder heraus. Im Labor kann er nur lesen: Die dokumentsuche durchsucht den Text, den du vorher im {{rag|RAG-Labor}} eingelesen hast, nach dem genauen Suchwort.",
     ], alltag: "Ein Kollege mit gutem Kurzzeitgedächtnis kann sich auf einem Telefonat alles merken, solange es dauert. Danach ist es weg. Wer es später braucht, schreibt es in die Akte."},
     {h: "Ein Durchlauf an einem Beispiel",
      kurz: "Drei Runden, kein Schritt war vorher festgelegt: rechnen, Uhrzeit holen, antworten.",
@@ -423,8 +428,8 @@ Object.assign(seiten, {
     ]},
     {h: "Dein Weg im Labor",
      kurz: "Das Labor zeigt jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah.",
-     visual: {typ: "zahlen", kacheln: [{wert: "3", label: "Werkzeuge im Labor", icon: "wrench"}, {wert: "etwa 3 Mrd.", label: "Parameter im kleinen Modell", icon: "cpu"}, {wert: "Alle", label: "Aufrufe sichtbar", icon: "eye"}]}, p: [
-      "Das {{agent|Agent-Labor}} verwendet ein kleines Modell mit etwa drei Milliarden Parametern und drei Werkzeugen: **rechne**, **uhrzeit** und **dokumentsuche**. Du siehst jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah. Frage zuerst etwas, das ein Werkzeug braucht, und dann etwas, das keines braucht, und beobachte den Unterschied.",
+     visual: {typ: "zahlen", kacheln: [{wert: "3", label: "Standardwerkzeuge", icon: "wrench"}, {wert: "etwa 3 Mrd.", label: "Parameter im kleinen Modell", icon: "cpu"}, {wert: "Alle", label: "Aufrufe sichtbar", icon: "eye"}]}, p: [
+      "Das {{agent|Agent-Labor}} verwendet ein kleines Modell mit etwa drei Milliarden Parametern und drei Standardwerkzeugen: **rechne**, **uhrzeit** und **dokumentsuche**. Die dokumentsuche findet nur Abschnitte, die das Suchwort wörtlich enthalten. Im Beispielmodus ersetzt ein Szenario aus dem Kundenservice die Standardwerkzeuge durch vier eigene, etwa bestellstatus und stornierung_pruefen. Mehr dazu auf {{uc-service-bestellung|Bestellfragen mit Werkzeugen beantworten}}. Du siehst jeden Aufruf, jedes Ergebnis und die Runde, in der es geschah. Frage zuerst etwas, das ein Werkzeug braucht, und dann etwas, das keines braucht, und beobachte den Unterschied.",
       "Das Modell dahinter ist ein Sprachmodell, wie es die Seite {{genki|Generative KI}} beschreibt. Der Agent ergänzt es um Werkzeuge und die Schleife.",
     ]},
     {h: "Weiterlesen",
@@ -446,7 +451,7 @@ Object.assign(seiten, {
     {frage: "Eine Auftragsbestätigung läuft nach jedem Kauf in denselben vier Schritten. Was passt besser?", optionen: ["Ein Agent, der jedes Mal neu überlegt", "Ein größeres Modell", "Nichts von beidem", "Ein fester Ablauf"], richtig: 3, erklaerung: "Bei bekannten, gleichen Schritten ist ein fester Ablauf günstiger, schneller und leichter zu prüfen."},
     {frage: "Wozu dient die Beschreibung eines Werkzeugs?", optionen: ["Sie ist nur für Menschen gedacht", "Das Modell entscheidet anhand der Beschreibung, wann es das Werkzeug nutzt", "Sie wird automatisch generiert und ist unwichtig", "Sie beschleunigt das Werkzeug"], richtig: 1, erklaerung: "Das Modell kennt die Werkzeuge nur über ihre Beschreibung. Eine klare Beschreibung verbessert die Wahl."},
   ],
-  weiter: ["agenten-planung", "agent", "genki"],
+  weiter: ["agenten-planung", "agent", "genki", "uc-service-bestellung"],
 },
 
 "agenten-planung": {
@@ -640,7 +645,7 @@ Object.assign(seiten, {
     {h: "Die Idee: ein gemeinsamer Stecker",
      kurz: "Wer ein System anbietet, baut einmal einen Anschluss. Jeder Assistent mit dem Standard nutzt ihn.",
      visual: {typ: "netz", knoten: [{id: "a", text: "Assistent A", icon: "bot", x: 8, y: 22}, {id: "b", text: "Assistent B", icon: "bot", x: 8, y: 78}, {id: "m", text: "MCP", icon: "plug", x: 42, y: 50, farbe: "gruen"}, {id: "k", text: "Kalender", icon: "calendar", x: 88, y: 22, farbe: "orange"}, {id: "t", text: "Tickets", icon: "tag", x: 88, y: 78, farbe: "orange"}], kanten: [["a", "m"], ["b", "m"], ["m", "k"], ["m", "t"]]}, p: [
-      "Das [[mcp|Model Context Protocol]], kurz MCP, legt fest, wie ein Assistent ein System nach seinen Fähigkeiten fragt und wie er sie aufruft. Es wurde ursprünglich von Anthropic vorgestellt und ist ein offener Standard, den inzwischen viele Anbieter unterstützen.",
+      "Das [[mcp|Model Context Protocol]], kurz MCP, legt fest, wie ein Assistent ein System nach seinen Fähigkeiten fragt und wie er sie aufruft. Anthropic hat es 2024 vorgestellt und im Dezember 2025 an die Agentic AI Foundation der Linux Foundation übergeben. Es ist ein offener Standard, den viele Anbieter unterstützen.",
       "Wer ein System anbietet, baut einmal einen Anschluss nach diesem Standard. Jeder Assistent, der den Standard spricht, kann ihn nutzen. Aus „jeder mit jedem“ wird „jeder mit dem Standard“.",
     ]},
     {h: "Server und Client",
@@ -686,6 +691,12 @@ Object.assign(seiten, {
       "MCP ist ein Anschluss, kein Agent. Das {{agent|Agent-Labor}} nutzt seine Werkzeuge fest eingebaut. Ginge es nach dem Standard, stünden hinter rechne, uhrzeit und dokumentsuche je ein Server, und das Modell würde dieselbe Schleife durchlaufen.",
       "Ob du MCP brauchst, hängt von deinem Fall ab. Für einen Agenten mit zwei eigenen Funktionen reicht oft ein direkter Aufruf. Für eine Landschaft mit vielen Systemen und wechselnden Assistenten spart der Standard viel Arbeit.",
     ]},
+    {h: "Weiterlesen",
+     kurz: "Quellen zu dieser Seite, geprüft am 27.11.2026.",
+     liste: [
+      "Linux Foundation: [Linux Foundation Announces the Formation of the Agentic AI Foundation](https://www.linuxfoundation.org/press/linux-foundation-announces-the-formation-of-the-agentic-ai-foundation), 09.12.2025, abgerufen am 27.11.2026.",
+      "Model Context Protocol: [MCP joins the Agentic AI Foundation](https://blog.modelcontextprotocol.io/posts/2025-12-09-mcp-joins-agentic-ai-foundation/), 09.12.2025, abgerufen am 27.11.2026.",
+     ]},
   ],
   mitnehmen: [
     "MCP ist ein offener Standard: Systeme melden ihre Werkzeuge einheitlich, Assistenten nutzen sie einheitlich.",
