@@ -130,8 +130,8 @@ S["kamera-grenzen"] = {
     {h: "Datenschutz bei Bildern von Beschäftigten",
      kurz: "Sind Hände, Gesichter oder Namensschilder zu sehen, sind es personenbezogene Daten. Datenschutz und Betriebsrat früh einbinden.",
      p: [
-      "Am besten zeigen die Bilder nur Teile. Sind Beschäftigte erkennbar, sind das personenbezogene Daten im Sinne von Art. 4 Nr. 1 DSGVO. Für Beschäftigtendaten gilt zusätzlich § 26 BDSG. Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen bei der Einführung und Anwendung technischer Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen.",
-      "Ob das auf dein Vorhaben zutrifft, klärst du früh mit der oder dem Datenschutzbeauftragten und dem Betriebsrat. Eine Kamera, die nur Teile prüft, ist etwas anderes als eine, die ein Prüfergebnis einer Person zuordnet. Das ist keine Rechtsberatung.",
+      "Am besten zeigen die Bilder nur Teile. Sind Beschäftigte erkennbar, sind das personenbezogene Daten im Sinne von Art. 4 Nr. 1 DSGVO. Für Beschäftigtendaten gilt § 26 BDSG, dessen Reichweite seit dem EuGH-Urteil vom 30.03.2023 (C-34/21) umstritten ist. Zusätzlich kann Art. 6 DSGVO die Grundlage sein (Stand 27.11.2026). Der Betriebsrat hat nach § 87 Abs. 1 Nr. 6 BetrVG mitzubestimmen bei der Einführung und Anwendung technischer Einrichtungen, die dazu bestimmt sind, das Verhalten oder die Leistung der Arbeitnehmer zu überwachen.",
+      "Ob das auf dein Vorhaben zutrifft, klärst du früh mit der oder dem Datenschutzbeauftragten und dem Betriebsrat, auch die Rechtsgrundlage für Beschäftigtendaten. Eine Kamera, die nur Teile prüft, ist etwas anderes als eine, die ein Prüfergebnis einer Person zuordnet. Das ist keine Rechtsberatung.",
       "Quellen, abgerufen am 22.11.2026: [Art. 4 DSGVO](https://dsgvo-gesetz.de/art-4-dsgvo/), [§ 26 BDSG](https://www.gesetze-im-internet.de/bdsg_2018/__26.html), [§ 87 BetrVG](https://www.gesetze-im-internet.de/betrvg/__87.html).",
      ]},
     {h: "Kosten rechnen", id: "kosten-rechnen",
@@ -170,7 +170,7 @@ S["betrieb-sicherheit"] = {
     "Du kennst die Schutzmaßnahmen der App und was du für den Betrieb im Firmennetz selbst ergänzt.",
   ],
   kurz: "Ports, Datenort, Logs, Aufbewahrung, Schutzmaßnahmen und Updates des Labors, so wie sie am Referenzgerät sind. Mit Befehlen zum Nachprüfen.",
-  zusammenfassung: "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Server bei IONOS und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
+  zusammenfassung: "Betriebshandbuch in Kurzform für den Nachbau auf einem Jetson Orin Nano: Port 8443 für die Oberfläche, Ollama soll nur lokal auf 11434 hören (am Referenzgerät aktuell offen), ausgehender Tunnel nur im öffentlichen Betrieb über einen Proxy-Server und Cloudflare. Alle Daten bleiben auf dem Gerät, Sitzungen im Arbeitsspeicher, keine Datenbank. Zugriffsprotokoll mit Adresse, Pfad und Status im Journal, Aufbewahrung vom Betreiber festzulegen. Origin-Prüfung, Host-Erlaubnisliste, Ratenbegrenzung, Sicherheitsköpfe.",
   abschnitte: [
     {h: "Teststand", offen: true,
      kurz: "Nur ein Gerät getestet: Jetson Orin Nano Developer Kit (Super), 8 GB, Ollama 0.12.3. Ein frischer Jetson ist noch nicht von Dritten getestet.",
@@ -198,10 +198,10 @@ S["betrieb-sicherheit"] = {
        ["Tunnel", "cloudflared, nur öffentlicher Betrieb", "Ausgehende Verbindung, keine Portfreigabe"],
       ]},
      merke: "Prüfe mit ss -tlnp, dass 11434 nur auf 127.0.0.1 hört. Am Referenzgerät tut es das noch nicht."},
-    {h: "Der öffentliche Weg: IONOS und Cloudflare", offen: true,
-     kurz: "Im öffentlichen Betrieb laufen Eingaben über einen Server bei IONOS (nginx) und den Tunnel von Cloudflare. Dort endet die Verschlüsselung. HSTS und Indexierung gibt es nur mit OEFFENTLICH=1.",
+    {h: "Der öffentliche Weg: Proxy-Server und Cloudflare", offen: true,
+     kurz: "Im öffentlichen Betrieb laufen Eingaben über einen Proxy-Server (nginx) und den Tunnel von Cloudflare. Dort endet die Verschlüsselung. HSTS und Indexierung gibt es nur mit OEFFENTLICH=1.",
      p: [
-      "Besucher erreichen das Labor nicht direkt. Der Weg läuft über den Tunneldienst von Cloudflare und einen nginx-Proxy auf einem Server bei IONOS zum Jetson (Skizze: {{architektur|Wie das Labor aufgebaut ist}}). Wie bei jedem Proxy und Tunneldienst endet die Verschlüsselung bei den Vermittlern. Sie sehen den Datenverkehr, der Jetson speichert die Eingaben nicht. Wer das Labor im Firmenbetrieb nutzt, nimmt die beiden Vermittler in seine Risikobewertung auf. Die Seite {{sicherheit-einfach|Ist das sicher?}} nennt sie in einfacher Sprache.",
+      "Besucher erreichen das Labor nicht direkt. Der Weg läuft über einen nginx-Proxy auf einem Server im Netz des Betreibers und den Tunneldienst von Cloudflare zum Jetson (Skizze: {{architektur|Wie das Labor aufgebaut ist}}). Wie bei jedem Proxy und Tunneldienst endet die Verschlüsselung bei den Vermittlern. Sie sehen den Datenverkehr, der Jetson speichert die Eingaben nicht. Wer das Labor im Firmenbetrieb nutzt, nimmt die beiden Vermittler in seine Risikobewertung auf. Die Seite {{sicherheit-einfach|Ist das sicher?}} nennt sie in einfacher Sprache.",
       "**HSTS und Indexierung am Gerät:** Der Dienst setzt `Strict-Transport-Security` und `index, follow` nur im öffentlichen Modus (`OEFFENTLICH=1`). Das Referenzgerät läuft im öffentlichen Modus, deshalb sendet auch der LAN-Port 8443 diese Köpfe. Das schadet im Heimnetz nicht: Browser ignorieren HSTS bei einem Zertifikatsfehler, wie ihn das selbstsignierte Zertifikat auslöst. Ein Nachbau im reinen Heimnetz startet ohne `OEFFENTLICH=1` und sendet beides nicht.",
      ]},
     {h: "Datenort", offen: true,
@@ -235,7 +235,7 @@ S["betrieb-sicherheit"] = {
      liste: [
       "**Origin-Prüfung:** Zustandsändernde Anfragen (POST, WebSocket) verlangen einen Origin, der zum Host passt. Fehlt er, wird abgelehnt.",
       "**Host-Erlaubnisliste:** Nur eigene Adressen und Namen sind zugelassen, weitere über `SHOWCASE_ALLOWED_HOSTS`. Das schützt vor DNS-Rebinding. Andernfalls erscheint „Invalid host header“.",
-      "**Ratenbegrenzung:** Mit `OEFFENTLICH=1` gilt eine Begrenzung je Besucher. Gleichzeitige Chats (2) und Kameraverbindungen (6) sind immer begrenzt, dahinter wartet eine Schlange.",
+      "**Ratenbegrenzung:** Mit `OEFFENTLICH=1` gilt eine Begrenzung je Besucher. Höchstens 2 Sprachmodell-Antworten laufen gleichzeitig (Chat, RAG-Frage, Agent). Dahinter warten bis zu 6 Besucher höchstens 90 Sekunden, weitere bekommen sofort „ausgelastet“. Bei mehr als 6 gleichzeitigen Kameraverbindungen wird die nächste abgewiesen.",
       "**Modell-Erlaubnisliste:** Nur `llama3.2:3b` und `nomic-embed-text` lassen sich über die App laden. Was Ollama auf dem Gerät sonst noch installiert hat, kann in der Modellliste der App auftauchen, laden lässt es sich darüber nicht.",
       "**Einwilligung und keine Speicherung:** Kamera und Mikrofon starten erst nach Zustimmung, Bilder und Aufnahmen werden nicht gespeichert.",
       "**Sicherheitsköpfe:** Jede Antwort trägt `X-Content-Type-Options: nosniff`, `X-Frame-Options: DENY`, eine Content-Security-Policy, `Referrer-Policy` und `Permissions-Policy`. `Strict-Transport-Security` kommt nur im öffentlichen Betrieb (`OEFFENTLICH=1`) über HTTPS dazu, weil es im Heimnetz mit selbstsigniertem Zertifikat Besucher aussperren würde. Am Referenzgerät, das im öffentlichen Modus läuft, ist der Kopf auch im LAN zu sehen.",
@@ -244,7 +244,7 @@ S["betrieb-sicherheit"] = {
     {h: "Was du für den Firmenbetrieb ergänzt", offen: true,
      kurz: "Die App bringt keinen Reverse-Proxy und keine Anmeldung mit. Für ein Firmennetz sind Zugriffsbeschränkung, Anmeldung und eine Aufbewahrungsregel Sache des Betreibers.",
      p: [
-      "Der Dienst bindet selbst an `0.0.0.0:8443` mit selbstsigniertem Zertifikat. Es gibt keinen Reverse-Proxy und keine Nutzerverwaltung. Beschränke den Zugriff im Netz (Firewall, VLAN) oder setze einen Proxy mit Anmeldung davor. Lege Aufbewahrung der Logs, Zuständigkeiten und Updates fest. Wer wie das Referenzgerät öffentlich über IONOS und Cloudflare erreichbar ist, nimmt diese Vermittler in die Risikobewertung auf (siehe „Der öffentliche Weg“). Die Lizenz des Codes ist noch nicht festgelegt, siehe {{selbst-bauen|Selbst aufbauen}}.",
+      "Der Dienst bindet selbst an `0.0.0.0:8443` mit selbstsigniertem Zertifikat. Es gibt keinen Reverse-Proxy und keine Nutzerverwaltung. Beschränke den Zugriff im Netz (Firewall, VLAN) oder setze einen Proxy mit Anmeldung davor. Lege Aufbewahrung der Logs, Zuständigkeiten und Updates fest. Wer wie das Referenzgerät öffentlich über einen Proxy-Server und Cloudflare erreichbar ist, nimmt diese Vermittler in die Risikobewertung auf (siehe „Der öffentliche Weg“). Die Lizenz des Codes ist noch nicht festgelegt, siehe {{selbst-bauen|Selbst aufbauen}}.",
      ]},
     {h: "Updates", offen: true,
      kurz: "Repo aktualisieren, setup.sh ausführen, Dienst neu starten. Ein Neustart beendet laufende Chats.",

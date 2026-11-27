@@ -70,9 +70,9 @@ S["alltag-chat"] = {
      ],
      merke: "Je größer die Folgen, desto weniger reicht ein Chatbot allein."},
     {h: "Mehr dazu",
-     kurz: "Drei geprüfte Fälle: {{chat-irrt|Wenn der Chat irrt}}. Wie du Quellen prüfst: {{quellen-pruefen|Quellen prüfen}}. Warum Modelle erfinden: {{llm-grenzen|Grenzen von Sprachmodellen}}.",
+     kurz: "Drei geprüfte Fälle: {{chat-irrt|Das kleine Modell irrt}}. Wie du Quellen prüfst: {{quellen-pruefen|Quellen prüfen}}. Warum Modelle erfinden: {{llm-grenzen|Grenzen von Sprachmodellen}}.",
      p: [
-      "An drei Fällen, mit richtiger Antwort und Quelle, siehst du auf {{chat-irrt|Wenn der Chat irrt}}, wie ein Chat danebenliegt, zum Beispiel bei Lenkzeiten. Fünf Schritte zum Quellen-Prüfen findest du auf {{quellen-pruefen|Quellen prüfen}}. Warum Sprachmodelle manchmal erfinden, erklärt {{llm-grenzen|Grenzen von Sprachmodellen}}.",
+      "An drei Fällen, mit richtiger Antwort und Quelle, siehst du auf {{chat-irrt|Das kleine Modell irrt}}, wie ein Chat danebenliegt, zum Beispiel bei Lenkzeiten. Fünf Schritte zum Quellen-Prüfen findest du auf {{quellen-pruefen|Quellen prüfen}}. Warum Sprachmodelle manchmal erfinden, erklärt {{llm-grenzen|Grenzen von Sprachmodellen}}.",
      ]},
   ],
   mitnehmen: [
@@ -86,7 +86,7 @@ S["alltag-chat"] = {
 S["alltag-betrug"] = {
   nav: "Betrug erkennen", typ: "lektion", gruppe: "Alltag in 15 Minuten", titel: "Betrug am Telefon und mit KI: das Wichtigste", symbol: "phone-call", rollen: ["erwachsene", "eltern"],
   kurz: "Auflegen, selbst zurückrufen, bei Verdacht 110. Eine bekannte Stimme beweist nichts, denn KI kann Stimmen nachbauen. Das ist die Kurzfassung. Die ganze Seite mit Quiz und Quellen heißt „Falscher Anruf“.",
-  zusammenfassung: "Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Laut BSI reichen mitunter wenige Sekunden Aufnahme für eine gefälschte Stimme. Ein Codewort in der Familie hilft.",
+  zusammenfassung: "Bei einem verdächtigen Anruf mit Geldwunsch: auflegen, unter einer selbst bekannten Nummer zurückrufen, bei Verdacht die 110 wählen. Mit KI lassen sich Stimmen aus kurzen Aufnahmen nachbauen, oft reichen Sekunden bis wenige Minuten. Das BSI warnt vor solchen Anrufen. Ein Codewort in der Familie hilft.",
   abschnitte: [
     {h: "Drei Schritte",
      kurz: "Erstens auflegen. Zweitens selbst zurückrufen. Drittens bei Verdacht die 110 wählen.",
@@ -100,9 +100,9 @@ S["alltag-betrug"] = {
      ],
      merke: "Auflegen. Selbst zurückrufen. Bei Verdacht 110."},
     {h: "Warum KI es schwerer macht",
-     kurz: "Eine Stimme lässt sich nachbauen. Laut BSI reichen mitunter wenige Sekunden Aufnahme.",
+     kurz: "Eine Stimme lässt sich nachbauen. Oft reichen kurze Aufnahmen.",
      p: [
-      "Mit KI lassen sich Stimmen nachbauen. Laut BSI reichen dafür mitunter wenige Sekunden Aufnahme. Eine bekannte Stimme beweist darum nichts. Der Rückruf klärt es.",
+      "Mit KI lassen sich Stimmen aus kurzen Aufnahmen nachbauen, oft reichen Sekunden bis wenige Minuten. Das BSI warnt vor solchen Anrufen. Eine bekannte Stimme beweist darum nichts. Der Rückruf klärt es.",
      ]},
     {h: "Das Codewort",
      kurz: "Vereinbart in der Familie ein Kennwort. Wer in Not anruft und es nicht kennt, ist nicht die Person.",
