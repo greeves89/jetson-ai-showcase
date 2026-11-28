@@ -10,6 +10,8 @@ fuer Dateien, die er lesen kann. Die Dateien bleiben unveraendert und werden bei
     from app import speicher
     speicher.sicherstellen(2800)      # vor dem Laden eines Modells: Cache freigeben, falls zu wenig frei ist
     speicher.waechter()               # Dauerlaeufer (in einem Thread): haelt genug RAM frei
+    await speicher.modell_bereit("llama3.2:3b")   # vor jedem Chat-Aufruf: andere GPU-Modelle entladen, Modell laden, bei Speicherfehler
+                                                  # in derselben Anfrage Cache und GPU leeren und mit weniger GPU-Schichten erneut laden
 """
 import os
 import time
@@ -102,3 +104,82 @@ def waechter(min_frei_mb=1800, takt_s=20):
         except Exception:                                      # noqa: BLE001 - ein Wächter darf nie sterben
             pass
         time.sleep(takt_s)
+
+
+# ---------- Modelle automatisch laden und entladen ----------
+OLLAMA_URL = os.environ.get("KL_OLLAMA", "http://127.0.0.1:11434")
+_lade_sperre = None            # serialisiert Entladen und Laden (pro Ereignisschleife genau eine Sperre)
+
+
+def chat_optionen():
+    """Laufzeit-Optionen eines Chat-Aufrufs. Muessen beim Vorladen und beim echten Aufruf gleich sein, sonst laedt Ollama neu."""
+    return {"num_gpu": gpu_schichten(), "num_batch": LLM_BATCH}
+
+
+async def _geladen(c):
+    """Liste der in Ollama geladenen Modelle ([] bei Fehler)."""
+    try:
+        return (await c.get(f"{OLLAMA_URL}/api/ps")).json().get("models", [])
+    except Exception:                                          # noqa: BLE001
+        return []
+
+
+async def entladen(c, ausser=None, nur_gpu=True, warte_s=10.0):
+    """Entlaedt geladene Modelle (alle ausser `ausser`; mit nur_gpu nur die, die GPU-Speicher belegen) und wartet,
+    bis Ollama sie wirklich losgelassen hat. Gibt die Namen der entladenen Modelle zurueck."""
+    import asyncio
+    weg = [m["name"] for m in await _geladen(c)
+           if m["name"] != ausser and (not nur_gpu or m.get("size_vram", 0) > 0)]
+    for name in weg:
+        try:
+            await c.post(f"{OLLAMA_URL}/api/generate", json={"model": name, "keep_alive": 0})
+        except Exception:                                      # noqa: BLE001
+            pass
+    ende = time.time() + warte_s
+    while weg and time.time() < ende:
+        if not any(m["name"] in weg for m in await _geladen(c)):
+            break
+        await asyncio.sleep(0.25)
+    return weg
+
+
+async def modell_bereit(modell, optionen=None, client=None):
+    """Sorgt dafuer, dass `modell` geladen ist, bevor der eigentliche Aufruf kommt.
+
+    1. Belegt das Modell GPU-Speicher, werden alle anderen GPU-Modelle zuerst entladen (der Speicher ist gemeinsam und knapp).
+    2. Dateicache freigeben, falls zu wenig RAM frei ist.
+    3. Modell mit leerem Prompt vorladen (gleiche Optionen wie der spaetere Aufruf).
+    4. Scheitert das mit einem Speicherfehler: alles entladen, Cache leeren, naechste Stufe (weniger GPU-Schichten, zuletzt CPU)
+       und sofort erneut, in derselben Anfrage. Der Besucher merkt hoechstens eine etwas laengere Wartezeit.
+    Optionen None = Chat-Optionen mit der aktuellen Stufe; Aufrufe ohne GPU (num_gpu 0) entladen nichts.
+    Gibt True zurueck, wenn das Modell geladen ist. Bei False folgt der echte Aufruf trotzdem und meldet den Fehler selbst."""
+    import asyncio
+    import httpx
+    global _lade_sperre
+    if _lade_sperre is None:
+        _lade_sperre = asyncio.Lock()
+    eigener = client is None
+    c = client or httpx.AsyncClient(timeout=httpx.Timeout(180.0, connect=10.0))
+    try:
+        async with _lade_sperre:
+            for _ in range(len(_STUFEN) + 1):
+                opt = dict(optionen) if optionen is not None else chat_optionen()
+                await asyncio.to_thread(sicherstellen, 2800)
+                if opt.get("num_gpu", 1) != 0:
+                    await entladen(c, ausser=modell)
+                try:
+                    r = await c.post(f"{OLLAMA_URL}/api/generate",
+                                     json={"model": modell, "prompt": "", "stream": False, "keep_alive": "5m", "options": opt})
+                    text = r.text
+                    if r.status_code == 200 and not r.json().get("error"):
+                        return True
+                except Exception as e:                         # noqa: BLE001
+                    text = str(e)
+                if optionen is not None or not bei_ladefehler(text):
+                    return False                               # feste Optionen oder kein Speicherfehler: nicht weiter absenken
+                await entladen(c, nur_gpu=False)               # Speicherfehler: alles raus, Cache leeren, tiefere Stufe
+                await asyncio.to_thread(cache_leeren)
+            return False
+    finally:
+        if eigener:
+            await c.aclose()

@@ -165,9 +165,14 @@ def _ollama_fehler(text):
     return "Das Sprachmodell antwortet gerade nicht."
 
 
-async def _speicher_bereit():
-    """Vor dem Laden eines Modells genug freien RAM sicherstellen (Dateicache freigeben, falls noetig)."""
-    await asyncio.to_thread(speicher.sicherstellen, 2800)
+async def _speicher_bereit(modell=None):
+    """Vor dem Laden eines Modells genug freien RAM sicherstellen (Dateicache freigeben, falls noetig).
+    Mit `modell` (Chat-Aufruf auf der GPU): zusaetzlich andere GPU-Modelle entladen und das Modell vorladen, bei
+    Speicherfehler mit weniger GPU-Schichten erneut (speicher.modell_bereit). Ohne `modell` (Embeddings auf der CPU): nur Cache."""
+    if modell:
+        await speicher.modell_bereit(modell)
+    else:
+        await asyncio.to_thread(speicher.sicherstellen, 2800)
 _STATIC_DIR = HIER / "static"
 (_STATIC_DIR / "videos").mkdir(parents=True, exist_ok=True)
 app.mount("/static", StaticFiles(directory=str(_STATIC_DIR)), name="static")
@@ -432,7 +437,7 @@ async def chat(req: Request):
     kurz = daten.get("kurz") is True
 
     async def strom_innen():
-        await _speicher_bereit()
+        await _speicher_bereit(modell)
         start = time.time()
         tokens = 0
         payload = {
@@ -778,6 +783,7 @@ async def rag_ask(req: Request):
     async def strom():
         async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as c:
             await _speicher_bereit()
+            await _speicher_bereit(CHAT_MODELL)
             try:
                 qv = await _embed_async(c, frage)
             except RuntimeError as e:
@@ -904,7 +910,7 @@ async def agent_ask(req: Request):
              "Nutze Werkzeuge, wenn sie helfen, und antworte am Ende knapp auf Deutsch."},
             {"role": "user", "content": frage}]
         async with httpx.AsyncClient(timeout=httpx.Timeout(120.0, connect=10.0)) as c:
-            await _speicher_bereit()
+            await _speicher_bereit(CHAT_MODELL)
             for _ in range(5):
                 r = await c.post(f"{OLLAMA}/api/chat",
                                  json={"model": CHAT_MODELL, "messages": messages, "tools": werkzeuge, "stream": False,

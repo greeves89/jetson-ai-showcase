@@ -308,6 +308,11 @@ Dateicache großer Modelldateien bleibt nach dem Laden stehen und wird dabei nic
 - **Automatisch:** Das Labor prüft alle 20 Sekunden und gibt den Dateicache frei, wenn weniger als 1800 MB frei sind
   (`app/speicher.py`). Vor dem Laden eines Modells prüft es zusätzlich.
 - **Von Hand, ohne sudo:** `python3 scripts/cache_leeren.py`. Das verwirft nur saubere Cache-Seiten (`posix_fadvise`).
+- **Modelle automatisch laden und entladen:** Vor jedem Chat-Aufruf ruft die App `speicher.modell_bereit()` auf. Das entlädt zuerst alle
+  anderen Modelle, die GPU-Speicher belegen (CPU-Modelle wie die Embeddings bleiben), und lädt das gewünschte Modell mit leerem Prompt vor.
+  Scheitert das mit einem Speicherfehler (`cudaMalloc failed`), werden sofort alle Modelle entladen, der Cache geleert und das Modell in
+  derselben Anfrage mit weniger GPU-Schichten erneut geladen (24, 16, 8, zuletzt CPU). Der Besucher wartet dann etwas länger, bekommt aber
+  eine Antwort. Test ohne Jetson: `python3 tests/modellverwaltung_test.py`.
   Deine Dateien bleiben unverändert und werden bei Bedarf neu gelesen.
 - Zahlen ansehen: `free -m`. Entscheidend ist die Spalte `free`, nicht `available`.
 - Starte keine zusätzlichen großen Programme auf dem Jetson, während das Labor läuft. Ein Desktop mit Browser frisst
