@@ -190,7 +190,7 @@ async def rerank_api(request: Request):
     temperatur = daten.get("temperatur", 0)
     if isinstance(temperatur, bool) or not isinstance(temperatur, (int, float)) or not 0 <= temperatur <= 1:
         return JSONResponse({"fehler": "Die Temperatur muss zwischen 0 und 1 liegen."}, status_code=400)
-    await asyncio.to_thread(speicher.sicherstellen, 2800)
+    await speicher.modell_bereit(BEWERTER)
     t0 = time.perf_counter()
     erg = []
     try:
